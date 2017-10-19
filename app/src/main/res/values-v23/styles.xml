@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AppTheme.Transparent" parent="AppTheme">
@@ -16,12 +17,4 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
-
-    <style name="TabView">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">1</item>
-    </style>
-
-    <color name="transparent">#00000000</color>
 </resources>

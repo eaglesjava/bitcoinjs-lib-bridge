@@ -9,30 +9,110 @@
     android:orientation="vertical"
     tools:context="com.bitbill.www.MainActivity">
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary"
+        android:gravity="bottom"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:text="我的资产"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/message"
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/title_home"/>
+            android:layout_height="220dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="20dp"/>
 
-    </FrameLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="20dp"/>
+    </LinearLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+
+    <com.isanwenyu.tabview.TabGroup
+        android:id="@+id/tg_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation"/>
+        android:padding="5dp"
+        app:checkedTab="@+id/tab_asset">
+
+        <com.isanwenyu.tabview.TabView
+            android:id="@id/tab_asset"
+            style="@style/TabView"
+            app:badge_none_show="false"
+            app:imgDimension="20dp"
+            app:imgDrawable="@drawable/ic_asset_selector"
+            app:rv_color="@color/colorAccent"
+            app:tabRippleEnable="false"
+            app:textColor="@color/tab_text_color"
+            app:textSize="10sp"
+            app:textString="@string/title_asset"/>
+
+        <com.isanwenyu.tabview.TabView
+            android:id="@+id/tab_receive"
+            style="@style/TabView"
+            app:badge_none_show="false"
+            app:imgDimension="20dp"
+            app:imgDrawable="@drawable/ic_receive_selector"
+            app:rv_color="@color/colorAccent"
+            app:tabRippleEnable="false"
+            app:textColor="@color/tab_text_color"
+            app:textSize="10sp"
+            app:textString="@string/title_receive"/>
+
+        <com.isanwenyu.tabview.TabView
+            android:id="@+id/tab_send"
+            style="@style/TabView"
+            app:badge_none_show="false"
+            app:imgDimension="20dp"
+            app:imgDrawable="@drawable/ic_send_selector"
+            app:rv_color="@color/colorAccent"
+            app:tabRippleEnable="false"
+            app:textColor="@color/tab_text_color"
+            app:textSize="10sp"
+            app:textString="@string/title_send"/>
+
+        <com.isanwenyu.tabview.TabView
+            android:id="@+id/tab_my"
+            style="@style/TabView"
+            app:badge_none_show="false"
+            app:imgDimension="20dp"
+            app:imgDrawable="@drawable/ic_my_selector"
+            app:rv_color="@color/colorAccent"
+            app:tabRippleEnable="false"
+            app:textColor="@color/tab_text_color"
+            app:textSize="10sp"
+            app:textString="@string/title_my"/>
+    </com.isanwenyu.tabview.TabGroup>
 
 </LinearLayout>
