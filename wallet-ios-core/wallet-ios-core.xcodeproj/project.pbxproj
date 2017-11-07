@@ -14,6 +14,12 @@
 		CCEC67611FB18C3A004CC6C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCEC67601FB18C3A004CC6C5 /* Assets.xcassets */; };
 		CCEC67641FB18C3A004CC6C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEC67621FB18C3A004CC6C5 /* LaunchScreen.storyboard */; };
 		CCEC676F1FB18C3B004CC6C5 /* wallet_ios_coreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC676E1FB18C3B004CC6C5 /* wallet_ios_coreTests.swift */; };
+		CCEC67801FB190EE004CC6C5 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677B1FB190EE004CC6C5 /* index.html */; };
+		CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677C1FB190EE004CC6C5 /* LICENSE */; };
+		CCEC67821FB190EE004CC6C5 /* bitcoinjs-lib-app.js in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677D1FB190EE004CC6C5 /* bitcoinjs-lib-app.js */; };
+		CCEC67831FB190EE004CC6C5 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677E1FB190EE004CC6C5 /* index.js */; };
+		CCEC67841FB190EE004CC6C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677F1FB190EE004CC6C5 /* README.md */; };
+		CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,12 @@
 		CCEC676A1FB18C3B004CC6C5 /* wallet-ios-coreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "wallet-ios-coreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEC676E1FB18C3B004CC6C5 /* wallet_ios_coreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wallet_ios_coreTests.swift; sourceTree = "<group>"; };
 		CCEC67701FB18C3B004CC6C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCEC677B1FB190EE004CC6C5 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		CCEC677C1FB190EE004CC6C5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CCEC677D1FB190EE004CC6C5 /* bitcoinjs-lib-app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "bitcoinjs-lib-app.js"; sourceTree = "<group>"; };
+		CCEC677E1FB190EE004CC6C5 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		CCEC677F1FB190EE004CC6C5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinJSBridge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +91,11 @@
 		CCEC67561FB18C3A004CC6C5 /* wallet-ios-core */ = {
 			isa = PBXGroup;
 			children = (
+				CCEC67791FB190EE004CC6C5 /* components */,
 				CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */,
 				CCEC67591FB18C3A004CC6C5 /* FirstViewController.swift */,
 				CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */,
+				CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */,
 				CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */,
 				CCEC67601FB18C3A004CC6C5 /* Assets.xcassets */,
 				CCEC67621FB18C3A004CC6C5 /* LaunchScreen.storyboard */,
@@ -97,6 +111,26 @@
 				CCEC67701FB18C3B004CC6C5 /* Info.plist */,
 			);
 			path = "wallet-ios-coreTests";
+			sourceTree = "<group>";
+		};
+		CCEC67791FB190EE004CC6C5 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				CCEC677A1FB190EE004CC6C5 /* bitcoinjs-lib-bridge */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		CCEC677A1FB190EE004CC6C5 /* bitcoinjs-lib-bridge */ = {
+			isa = PBXGroup;
+			children = (
+				CCEC677B1FB190EE004CC6C5 /* index.html */,
+				CCEC677C1FB190EE004CC6C5 /* LICENSE */,
+				CCEC677D1FB190EE004CC6C5 /* bitcoinjs-lib-app.js */,
+				CCEC677E1FB190EE004CC6C5 /* index.js */,
+				CCEC677F1FB190EE004CC6C5 /* README.md */,
+			);
+			path = "bitcoinjs-lib-bridge";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,8 +217,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCEC67641FB18C3A004CC6C5 /* LaunchScreen.storyboard in Resources */,
+				CCEC67801FB190EE004CC6C5 /* index.html in Resources */,
+				CCEC67821FB190EE004CC6C5 /* bitcoinjs-lib-app.js in Resources */,
 				CCEC67611FB18C3A004CC6C5 /* Assets.xcassets in Resources */,
+				CCEC67831FB190EE004CC6C5 /* index.js in Resources */,
 				CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */,
+				CCEC67841FB190EE004CC6C5 /* README.md in Resources */,
+				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +243,7 @@
 			files = (
 				CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */,
 				CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */,
+				CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */,
 				CCEC675A1FB18C3A004CC6C5 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
