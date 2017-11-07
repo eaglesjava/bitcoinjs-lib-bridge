@@ -28,5 +28,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 				print(j)
 			}
 		}
+		
+		webview.evaluateJavaScript("bridge.bip39Test()") { (obj, err) in
+			if let j = obj {
+				print(j)
+			}
+		}
 	}
 }
