@@ -1,8 +1,10 @@
-package com.bitbill.www;
+package com.bitbill.www.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import com.bitbill.www.R;
 
 public class MainActivity extends AppCompatActivity {
 
