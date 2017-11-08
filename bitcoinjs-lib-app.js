@@ -13,7 +13,7 @@ function bip39Test () {
 	return mnemonic
 }
 
-function paramsTest (num) {
+function paramsTest (num){
 	return num + 5
 }
 
