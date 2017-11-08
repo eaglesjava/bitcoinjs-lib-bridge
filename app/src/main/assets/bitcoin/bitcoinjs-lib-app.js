@@ -13,9 +13,14 @@ function bip39Test () {
 	return mnemonic
 }
 
+function paramsTest (num) {
+	return num + 5
+}
+
 module.exports = {
 	myFunction,
-	bip39Test
+	bip39Test,
+	paramsTest
 }
 
 },{"bip39":8,"bitcoinjs-lib":27}],2:[function(require,module,exports){
