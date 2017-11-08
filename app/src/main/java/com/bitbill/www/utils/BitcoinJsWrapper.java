@@ -9,16 +9,15 @@ import android.webkit.WebView;
  * Created by zhuyuanbao on 2017/11/7.
  */
 public class BitcoinJsWrapper {
-    private static WebView mWebView;
+    private WebView mWebView;
+    private String mBitcoinKey;
+    private String mResut;
 
-    public static void callGetBitcoinKey() {
-
-        mWebView.loadUrl("javascript:getBitcoinKey()");
+    private BitcoinJsWrapper() {
     }
 
-    public static String getBitcoinKey(String key) {
-
-        return key;
+    public static BitcoinJsWrapper getInstance() {
+        return SingletonHolder.instance;
     }
 
     public void init(Context context) {
@@ -36,6 +35,42 @@ public class BitcoinJsWrapper {
         mWebView.loadUrl("file:///android_asset/bitcoin/index_android.html");
     }
 
+    private void callGetBitcoinKey() {
+
+        mWebView.loadUrl("javascript:getBitcoinKey()");
+    }
+
+    public String getBitcoinKey() {
+        callGetBitcoinKey();
+        return mBitcoinKey;
+    }
+
+    public BitcoinJsWrapper setBitcoinKey(String mBitcoinKey) {
+        this.mBitcoinKey = mBitcoinKey;
+        return this;
+    }
+
+    private void callTestParams(int num) {
+
+        mWebView.loadUrl("javascript:testParams(" + num + ")");
+    }
+
+    public BitcoinJsWrapper setTestParams(String mResut) {
+        this.mResut = mResut;
+        return this;
+    }
+
+    public String getTestParams(int num) {
+        callTestParams(num);
+        return mResut;
+    }
+
+    //静态内部类确保了在首次调用getInstance()的时候才会初始化SingletonHolder，从而导致实例被创建。
+    //并且由JVM保证了线程的安全。
+    private static class SingletonHolder {
+        private static final BitcoinJsWrapper instance = new BitcoinJsWrapper();
+    }
+
     static final class JavaScriptInterface {
 
         private final BitcoinJsWrapper mBitcoinJsWrapper;
@@ -50,7 +85,16 @@ public class BitcoinJsWrapper {
          */
         @JavascriptInterface
         public void getBitcoinKey(final String key) {
-            BitcoinJsWrapper.getBitcoinKey(key);
+            mBitcoinJsWrapper.setBitcoinKey(key);
+        }
+
+        /**
+         * This is not called on the UI thread. Post a runnable to invoke
+         * loadUrl on the UI thread.
+         */
+        @JavascriptInterface
+        public void getResult(final String key) {
+            mBitcoinJsWrapper.setTestParams(key);
         }
     }
 }

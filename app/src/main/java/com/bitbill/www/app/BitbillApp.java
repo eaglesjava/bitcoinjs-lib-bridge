@@ -11,6 +11,6 @@ public class BitbillApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        BitcoinJsWrapper.init(this);
+        BitcoinJsWrapper.getInstance().init(this);
     }
 }
