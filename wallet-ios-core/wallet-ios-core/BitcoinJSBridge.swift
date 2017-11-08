@@ -23,9 +23,9 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	}
 	
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-		webview.evaluateJavaScript("bridge.myFunction()") { (obj, err) in
-			if let j = obj {
-				print(j)
+		webview.evaluateJavaScript("bridge.exceptionTest()") { (obj, err) in
+			if let j = err {
+				print(j.localizedDescription)
 			}
 		}
 		
@@ -41,4 +41,5 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 			}
 		}
 	}
+	
 }
