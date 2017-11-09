@@ -12,21 +12,17 @@ function generateMnemonicRandomCN (entropy) {
 	return generateMnemonicRandom(entropy, bip39.wordlists.chinese_simplified)
 }
 
-function mnemonicToSeedHex (mnemonic, password, wordlist) {
+function mnemonicToSeedHex (mnemonic, password) {
   return bip39.mnemonicToSeedHex(mnemonic, password)
-}
-
-function entropyToMnemonic (entropy, wordlist) {
-	return bip39.entropyToMnemonic(entropy, wordlist)
 }
 
 module.exports = {
 	generateMnemonicRandom,
 	generateMnemonicRandomCN,
 	mnemonicToSeedHex,
-	entropyToMnemonic,
 	bip39: bip39,
 }
+
 },{"bip39":8,"bitcoinjs-lib":27}],2:[function(require,module,exports){
 // base-x encoding
 // Forked from https://github.com/cryptocoinjs/bs58
