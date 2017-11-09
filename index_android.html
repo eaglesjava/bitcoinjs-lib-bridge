@@ -9,7 +9,11 @@
 <script type="text/javascript" src="bitcoinjs-lib-app.js"></script>
 <script type="text/javascript">
     function getMnemonicRandom(){
-       return android.getMnemonic(bridge.generateMnemonicRandom(128, bridge.bip39.wordlists.chinese_simplified));
+       android.getMnemonic(bridge.generateMnemonicRandom(128, bridge.bip39.wordlists.chinese_simplified));
+    }
+
+    function mnemonicToSeedHex(nemonic,pwd){
+       android.getSeedHex(bridge.mnemonicToSeedHex(nemonic, pwd, bridge.bip39.wordlists.chinese_simplified));
     }
 
 </script>
