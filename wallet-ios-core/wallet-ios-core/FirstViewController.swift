@@ -13,6 +13,13 @@ class FirstViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+		DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+			BitcoinJSBridge.shared.generateMnemonic(success: { (obj) in
+				print(obj)
+			}) { (error) in
+				print(error)
+			}
+		}
 	}
 
 	override func didReceiveMemoryWarning() {
