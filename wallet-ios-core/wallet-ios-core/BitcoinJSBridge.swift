@@ -44,7 +44,7 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	}
 	
 	func generateMnemonic(entropy: Int = 128, language: Language = .english, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
-		let method = "bridge.generateMnemonicRandom(128, \(language.languageParameter()))"
+		let method = "bridge.generateMnemonicRandom(\(entropy), \(language.languageParameter()))"
 		callJS(method: method, success: success, failure: failure)
 	}
 	
@@ -65,6 +65,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 		canCallJSFunction = true
+		callJS(method: "bridge.generateMnemonicRandomCN(128)", success: { (obj) in
+			print(obj)
+		}) { (err) in
+			print(err)
+		}
 	}
 	
 }

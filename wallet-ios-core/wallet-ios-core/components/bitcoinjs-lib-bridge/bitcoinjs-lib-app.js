@@ -8,8 +8,13 @@ function generateMnemonicRandom (entropy, wordlist) {
 	return mnemonic
 }
 
+function generateMnemonicRandomCN (entropy) {
+	return generateMnemonicRandom(entropy, bip39.wordlists.chinese_simplified)
+}
+
 module.exports = {
 	generateMnemonicRandom,
+	generateMnemonicRandomCN,
 	bip39: bip39
 }
 
