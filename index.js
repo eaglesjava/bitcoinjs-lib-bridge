@@ -11,7 +11,7 @@ function generateMnemonicRandomCN (entropy) {
 	return generateMnemonicRandom(entropy, bip39.wordlists.chinese_simplified)
 }
 
-function mnemonicToSeedHex (mnemonic, password, wordlist) {
+function mnemonicToSeedHex (mnemonic, password) {
   return bip39.mnemonicToSeedHex(mnemonic, password)
 }
 
