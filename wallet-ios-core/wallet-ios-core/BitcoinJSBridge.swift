@@ -23,20 +23,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	}
 	
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-		webview.evaluateJavaScript("bridge.exceptionTest()") { (obj, err) in
-			if let j = err {
-				print(j.localizedDescription)
-			}
-		}
-		
-		webview.evaluateJavaScript("bridge.bip39Test()") { (obj, err) in
+		webview.evaluateJavaScript("bridge.generateMnemonicRandom(128, bridge.bip39.wordlists.chinese_simplified)") { (obj, err) in
 			if let j = obj {
 				print(j)
 			}
-		}
-		
-		webview.evaluateJavaScript("bridge.paramsTest(5)") { (obj, err) in
-			if let j = obj {
+			if let j = err {
 				print(j)
 			}
 		}
