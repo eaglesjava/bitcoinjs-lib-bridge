@@ -7,7 +7,17 @@ function generateMnemonicRandom (entropy, wordlist) {
 	return mnemonic
 }
 
+function generateMnemonicRandomCN (entropy) {
+	return generateMnemonicRandom(entropy, bip39.wordlists.chinese_simplified)
+}
+
+function mnemonicToSeedHex (mnemonic, password, wordlist) {
+  return bip39.mnemonicToSeedHex(mnemonic, password)
+}
+
 module.exports = {
 	generateMnemonicRandom,
-	bip39: bip39
+	generateMnemonicRandomCN,
+	mnemonicToSeedHex,
+	bip39: bip39,
 }
