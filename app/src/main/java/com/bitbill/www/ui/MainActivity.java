@@ -26,7 +26,17 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTextMessage.setText(BitcoinJsWrapper.getInstance().getTestParams(5));
+                BitcoinJsWrapper.getInstance().getMnemonic(new BitcoinJsWrapper.JsInterface.Callback() {
+                    @Override
+                    public void call(String key, final String jsResult) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mTextMessage.setText(jsResult);
+                            }
+                        });
+                    }
+                });
             }
         });
 

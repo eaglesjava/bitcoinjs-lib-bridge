@@ -5,13 +5,15 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Created by zhuyuanbao on 2017/11/7.
+ * Created by isanwenyu@163.com on 2017/11/7.
  */
 public class BitcoinJsWrapper {
     private WebView mWebView;
-    private String mBitcoinKey;
-    private String mResut;
+    private JsInterface mJsInterface;
 
     private BitcoinJsWrapper() {
     }
@@ -30,39 +32,19 @@ public class BitcoinJsWrapper {
 //        mWebView.setWebViewClient(new WebViewClient());
 //        mWebView.setWebChromeClient(new MyWebChromeClient());
 
-        mWebView.addJavascriptInterface(new JavaScriptInterface(this), "android");
+        mJsInterface = new JsInterface(this);
+        mWebView.addJavascriptInterface(mJsInterface, "android");
 
         mWebView.loadUrl("file:///android_asset/bitcoin/index_android.html");
     }
 
-    private void callGetBitcoinKey() {
-
-        mWebView.loadUrl("javascript:getBitcoinKey()");
+    private void callMnemonicRandom() {
+        mWebView.loadUrl("javascript:getMnemonicRandom()");
     }
 
-    public String getBitcoinKey() {
-        callGetBitcoinKey();
-        return mBitcoinKey;
-    }
-
-    public BitcoinJsWrapper setBitcoinKey(String mBitcoinKey) {
-        this.mBitcoinKey = mBitcoinKey;
-        return this;
-    }
-
-    private void callTestParams(int num) {
-
-        mWebView.loadUrl("javascript:testParams(" + num + ")");
-    }
-
-    public BitcoinJsWrapper setTestParams(String mResut) {
-        this.mResut = mResut;
-        return this;
-    }
-
-    public String getTestParams(int num) {
-        callTestParams(num);
-        return mResut;
+    public void getMnemonic(JsInterface.Callback callback) {
+        mJsInterface.addCallBack(JsInterface.GET_MNEMONIC, callback);
+        callMnemonicRandom();
     }
 
     //静态内部类确保了在首次调用getInstance()的时候才会初始化SingletonHolder，从而导致实例被创建。
@@ -71,12 +53,14 @@ public class BitcoinJsWrapper {
         private static final BitcoinJsWrapper instance = new BitcoinJsWrapper();
     }
 
-    static final class JavaScriptInterface {
-
+    public static final class JsInterface {
+        public static final String GET_MNEMONIC = "getMnemonic";
         private final BitcoinJsWrapper mBitcoinJsWrapper;
+        private Map mCallBackMap;
 
-        JavaScriptInterface(BitcoinJsWrapper bitcoinJsWrapper) {
+        JsInterface(BitcoinJsWrapper bitcoinJsWrapper) {
             mBitcoinJsWrapper = bitcoinJsWrapper;
+            mCallBackMap = new HashMap();
         }
 
         /**
@@ -84,17 +68,22 @@ public class BitcoinJsWrapper {
          * loadUrl on the UI thread.
          */
         @JavascriptInterface
-        public void getBitcoinKey(final String key) {
-            mBitcoinJsWrapper.setBitcoinKey(key);
+        public void getMnemonic(final String mnemonic) {
+            callAndBack(GET_MNEMONIC, mnemonic);
         }
 
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void getResult(final String key) {
-            mBitcoinJsWrapper.setTestParams(key);
+        private void callAndBack(String key, String result) {
+            ((Callback) mCallBackMap.get(key)).call(key, result);
+            mCallBackMap.remove(key);
+        }
+
+        public void addCallBack(String key, Callback callback) {
+            mCallBackMap.put(key, callback);
+        }
+
+        public interface Callback {
+            void call(String key, String jsResult);
         }
     }
+
 }
