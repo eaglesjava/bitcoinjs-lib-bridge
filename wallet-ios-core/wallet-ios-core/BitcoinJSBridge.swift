@@ -48,6 +48,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 		callJS(method: method, success: success, failure: failure)
 	}
 	
+	func mnemonicToSeedHex(mnemonic: String, password: String = "", language: Language = .english, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
+		let method = "bridge.mnemonicToSeedHex('\(mnemonic)', '\(password)', \(language.languageParameter()))"
+		callJS(method: method, success: success, failure: failure)
+	}
+	
 	func callJS(method: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
 		if !canCallJSFunction {
 			failure(JSError.JSDidNotLoaded)
@@ -65,11 +70,6 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 		canCallJSFunction = true
-		callJS(method: "bridge.generateMnemonicRandomCN(128)", success: { (obj) in
-			print(obj)
-		}) { (err) in
-			print(err)
-		}
 	}
 	
 }

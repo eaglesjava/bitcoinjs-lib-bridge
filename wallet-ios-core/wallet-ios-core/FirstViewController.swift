@@ -14,8 +14,13 @@ class FirstViewController: UIViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-			BitcoinJSBridge.shared.generateMnemonic(language: .chinese, success: { (obj) in
+			BitcoinJSBridge.shared.generateMnemonic(language: .english, success: { (obj) in
 				print(obj)
+				BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: obj as! String, language: .chinese, success: { (obj) in
+					print(obj)
+				}, failure: { (error) in
+					print(error)
+				})
 			}) { (error) in
 				print(error)
 			}
