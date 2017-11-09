@@ -29,10 +29,16 @@ public class MainActivity extends AppCompatActivity {
                 BitcoinJsWrapper.getInstance().getMnemonic(new BitcoinJsWrapper.JsInterface.Callback() {
                     @Override
                     public void call(String key, final String jsResult) {
-                        runOnUiThread(new Runnable() {
+                        BitcoinJsWrapper.getInstance().mnemonicToSeedHex(jsResult, "123456", new BitcoinJsWrapper.JsInterface.Callback() {
                             @Override
-                            public void run() {
-                                mTextMessage.setText(jsResult);
+                            public void call(String key, final String jsResult) {
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mTextMessage.setText(jsResult);
+                                    }
+                                });
                             }
                         });
                     }

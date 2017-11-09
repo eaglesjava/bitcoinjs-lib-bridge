@@ -1,6 +1,7 @@
 package com.bitbill.www.utils;
 
 import android.content.Context;
+import android.os.Handler;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -8,12 +9,15 @@ import android.webkit.WebView;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.bitbill.www.utils.BitcoinJsWrapper.JsInterface.MNEMONIC_TO_SEEDHEX;
+
 /**
  * Created by isanwenyu@163.com on 2017/11/7.
  */
 public class BitcoinJsWrapper {
     private WebView mWebView;
     private JsInterface mJsInterface;
+    private Handler mHandler;
 
     private BitcoinJsWrapper() {
     }
@@ -36,15 +40,27 @@ public class BitcoinJsWrapper {
         mWebView.addJavascriptInterface(mJsInterface, "android");
 
         mWebView.loadUrl("file:///android_asset/bitcoin/index_android.html");
+
+        mHandler = new Handler();
     }
 
-    private void callMnemonicRandom() {
-        mWebView.loadUrl("javascript:getMnemonicRandom()");
+    private void executeJS(final String js) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mWebView.loadUrl(js);
+            }
+        });
     }
 
     public void getMnemonic(JsInterface.Callback callback) {
         mJsInterface.addCallBack(JsInterface.GET_MNEMONIC, callback);
-        callMnemonicRandom();
+        executeJS("javascript:getMnemonicRandom()");
+    }
+
+    public void mnemonicToSeedHex(String nemonic, String pwd, JsInterface.Callback callback) {
+        mJsInterface.addCallBack(MNEMONIC_TO_SEEDHEX, callback);
+        executeJS("javascript:mnemonicToSeedHex('" + nemonic + "','" + pwd + "')");
     }
 
     //静态内部类确保了在首次调用getInstance()的时候才会初始化SingletonHolder，从而导致实例被创建。
@@ -55,6 +71,7 @@ public class BitcoinJsWrapper {
 
     public static final class JsInterface {
         public static final String GET_MNEMONIC = "getMnemonic";
+        public static final String MNEMONIC_TO_SEEDHEX = "mnemonicToSeedHex";
         private final BitcoinJsWrapper mBitcoinJsWrapper;
         private Map mCallBackMap;
 
@@ -70,6 +87,15 @@ public class BitcoinJsWrapper {
         @JavascriptInterface
         public void getMnemonic(final String mnemonic) {
             callAndBack(GET_MNEMONIC, mnemonic);
+        }
+
+        /**
+         * This is not called on the UI thread. Post a runnable to invoke
+         * loadUrl on the UI thread.
+         */
+        @JavascriptInterface
+        public void getSeedHex(final String seedHex) {
+            callAndBack(MNEMONIC_TO_SEEDHEX, seedHex);
         }
 
         private void callAndBack(String key, String result) {
