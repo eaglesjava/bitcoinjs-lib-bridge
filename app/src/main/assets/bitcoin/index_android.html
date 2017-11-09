@@ -2,19 +2,15 @@
 <html>
 <head>
     <title>Test</title>
+    <meta charset="UTF-8">
 </head>
 <body>
 
 <script type="text/javascript" src="bitcoinjs-lib-app.js"></script>
 <script type="text/javascript">
-    function testParams(num){
-       return bridge.paramsTest(num);
-    }
-
     function getMnemonicRandom(){
-       return android.getMnemonic(bridge.generateMnemonicRandom());
+       return android.getMnemonic(bridge.generateMnemonicRandom(128, bridge.bip39.wordlists.chinese_simplified));
     }
-
 
 </script>
 </body>
