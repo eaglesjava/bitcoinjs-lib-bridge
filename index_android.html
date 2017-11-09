@@ -8,7 +8,11 @@
 <script type="text/javascript" src="bitcoinjs-lib-app.js"></script>
 <script type="text/javascript">
     function testParams(num){
-       return android.getResult(bridge.paramsTest(num));
+       return bridge.paramsTest(num);
+    }
+
+    function getMnemonicRandom(){
+       return android.getMnemonic(bridge.generateMnemonicRandom());
     }
 
 
