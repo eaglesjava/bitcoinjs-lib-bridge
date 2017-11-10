@@ -22,21 +22,21 @@ class FirstViewController: UIViewController {
 			})
 			
 			BitcoinJSBridge.shared.getAddress(seed: "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", success: { (obj) in
-				print(obj)
+				
 			}, failure: { (error) in
-				print(error)
+				
 			})
 			
-			BitcoinJSBridge.shared.generateMnemonic(language: .english, success: { (obj) in
-				print(obj)
-				BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: obj as! String, success: { (obj) in
-					print(obj)
-				}, failure: { (error) in
-					print(error)
-				})
-			}) { (error) in
-				print(error)
-			}
+//			BitcoinJSBridge.shared.generateMnemonic(language: .english, success: { (obj) in
+//				print(obj)
+//				BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: obj as! String, success: { (obj) in
+//					print(obj)
+//				}, failure: { (error) in
+//					print(error)
+//				})
+//			}) { (error) in
+//				print(error)
+//			}
 		}
 	}
 

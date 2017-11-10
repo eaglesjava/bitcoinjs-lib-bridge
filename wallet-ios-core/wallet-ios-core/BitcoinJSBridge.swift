@@ -54,17 +54,17 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	}
 	
 	func getAddress(seed: String, index: Int = 0, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
-		let method = "bridge.getAddressBySeedHex('\(seed)', \(index))"
+		let method = "bridge.getBitcoinAddressBySeedHex('\(seed)', \(index))"
 		callJS(method: method, success: success, failure: failure)
 	}
 	
 	func getAddress(xpub: String, index: Int = 0, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
-		let method = "bridge.getAddressByMasterXPublicKey('\(xpub)', \(index))"
+		let method = "bridge.getBitcoinAddressByMasterXPublicKey('\(xpub)', \(index))"
 		callJS(method: method, success: success, failure: failure)
 	}
 	
 	func getMasterXPublicKey(seed: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
-		let method = "bridge.getMasterXPublicKey('\(seed)')"
+		let method = "bridge.getBitcoinMasterXPublicKey('\(seed)')"
 		callJS(method: method, success: success, failure: failure)
 	}
 	
