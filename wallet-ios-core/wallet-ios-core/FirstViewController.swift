@@ -15,14 +15,10 @@ class FirstViewController: UIViewController {
 		// Do any additional setup after loading the view, typically from a nib.
 		DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
 			BitcoinJSBridge.shared.getMasterXPublicKey(seed: "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", success: { (obj) in
-				print(obj)
 				BitcoinJSBridge.shared.getAddress(xpub: obj as! String, success: { (obj) in
-					print(obj)
 				}, failure: { (error) in
-					print(error)
 				})
 			}, failure: { (error) in
-				print(error)
 			})
 			
 			BitcoinJSBridge.shared.getAddress(seed: "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", success: { (obj) in
