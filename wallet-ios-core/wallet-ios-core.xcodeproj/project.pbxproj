@@ -9,25 +9,16 @@
 /* Begin PBXBuildFile section */
 		07249FEEB456F1D46BB4C5EE /* Pods_wallet_ios_coreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C97431875E1515DC8A80E75 /* Pods_wallet_ios_coreTests.framework */; };
 		88C04385567FE9A9A6C044CC /* Pods_wallet_ios_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3564F2C66C64F75D2994D638 /* Pods_wallet_ios_core.framework */; };
-		CC94E0111FB58CAA0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0051FB58CAA0098E730 /* .gitkeep */; };
-		CC94E0121FB58CAA0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0071FB58CAA0098E730 /* .gitkeep */; };
-		CC94E0131FB58CAA0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0091FB58CAA0098E730 /* .gitkeep */; };
-		CC94E0141FB58CAA0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E00B1FB58CAA0098E730 /* .gitkeep */; };
-		CC94E0151FB58CAA0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E00D1FB58CAA0098E730 /* .gitkeep */; };
-		CC94E0161FB58CAA0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E00F1FB58CAA0098E730 /* .gitkeep */; };
 		CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0171FB58CDC0098E730 /* NewWallet.storyboard */; };
-		CC94E0281FB58D1F0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E01C1FB58D1F0098E730 /* .gitkeep */; };
-		CC94E0291FB58D1F0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E01E1FB58D1F0098E730 /* .gitkeep */; };
-		CC94E02A1FB58D1F0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0201FB58D1F0098E730 /* .gitkeep */; };
-		CC94E02B1FB58D1F0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0221FB58D1F0098E730 /* .gitkeep */; };
-		CC94E02C1FB58D1F0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0241FB58D1F0098E730 /* .gitkeep */; };
-		CC94E02D1FB58D1F0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0261FB58D1F0098E730 /* .gitkeep */; };
-		CC94E03D1FB58D9D0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0311FB58D9C0098E730 /* .gitkeep */; };
-		CC94E03E1FB58D9D0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0331FB58D9C0098E730 /* .gitkeep */; };
-		CC94E03F1FB58D9D0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0351FB58D9C0098E730 /* .gitkeep */; };
-		CC94E0401FB58D9D0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0371FB58D9C0098E730 /* .gitkeep */; };
-		CC94E0411FB58D9D0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0391FB58D9C0098E730 /* .gitkeep */; };
-		CC94E0421FB58D9D0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E03B1FB58D9C0098E730 /* .gitkeep */; };
+		CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */; };
+		CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0461FB946290098E730 /* UIView+BILGradient.swift */; };
+		CC94E04B1FB946480098E730 /* UIColor+BILHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E04A1FB946480098E730 /* UIColor+BILHex.swift */; };
+		CC94E04D1FB94DAA0098E730 /* BILWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E04C1FB94DAA0098E730 /* BILWelcomeViewController.swift */; };
+		CC94E04F1FB950040098E730 /* BILCreateWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E04E1FB950040098E730 /* BILCreateWalletViewController.swift */; };
+		CC94E0511FB9824B0098E730 /* ASKPlaceHolderColorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0501FB9824B0098E730 /* ASKPlaceHolderColorTextField.swift */; };
+		CC94E0531FB984630098E730 /* BILGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0521FB984630098E730 /* BILGradientButton.swift */; };
+		CC94E0551FB9911E0098E730 /* BILCreateWalletSucessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0541FB9911E0098E730 /* BILCreateWalletSucessView.swift */; };
+		CC94E0571FB998A20098E730 /* BILPasswordStrengthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0561FB998A20098E730 /* BILPasswordStrengthView.swift */; };
 		CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */; };
 		CCEC675A1FB18C3A004CC6C5 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67591FB18C3A004CC6C5 /* FirstViewController.swift */; };
 		CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */; };
@@ -58,25 +49,16 @@
 		536A87918365D6CC5EF0ADF5 /* Pods-wallet-ios-core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-core.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-core/Pods-wallet-ios-core.debug.xcconfig"; sourceTree = "<group>"; };
 		6EA45AA89FC29119CDF416C1 /* Pods-wallet-ios-coreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-coreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-coreTests/Pods-wallet-ios-coreTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C97431875E1515DC8A80E75 /* Pods_wallet_ios_coreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet_ios_coreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC94E0051FB58CAA0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0071FB58CAA0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0091FB58CAA0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E00B1FB58CAA0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E00D1FB58CAA0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E00F1FB58CAA0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		CC94E0171FB58CDC0098E730 /* NewWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewWallet.storyboard; sourceTree = "<group>"; };
-		CC94E01C1FB58D1F0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E01E1FB58D1F0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0201FB58D1F0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0221FB58D1F0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0241FB58D1F0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0261FB58D1F0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0311FB58D9C0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0331FB58D9C0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0351FB58D9C0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0371FB58D9C0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0391FB58D9C0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E03B1FB58D9C0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BIL.swift"; sourceTree = "<group>"; };
+		CC94E0461FB946290098E730 /* UIView+BILGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BILGradient.swift"; sourceTree = "<group>"; };
+		CC94E04A1FB946480098E730 /* UIColor+BILHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BILHex.swift"; sourceTree = "<group>"; };
+		CC94E04C1FB94DAA0098E730 /* BILWelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILWelcomeViewController.swift; sourceTree = "<group>"; };
+		CC94E04E1FB950040098E730 /* BILCreateWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILCreateWalletViewController.swift; sourceTree = "<group>"; };
+		CC94E0501FB9824B0098E730 /* ASKPlaceHolderColorTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASKPlaceHolderColorTextField.swift; sourceTree = "<group>"; };
+		CC94E0521FB984630098E730 /* BILGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGradientButton.swift; sourceTree = "<group>"; };
+		CC94E0541FB9911E0098E730 /* BILCreateWalletSucessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILCreateWalletSucessView.swift; sourceTree = "<group>"; };
+		CC94E0561FB998A20098E730 /* BILPasswordStrengthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILPasswordStrengthView.swift; sourceTree = "<group>"; };
 		CCEC67541FB18C3A004CC6C5 /* wallet-ios-core.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wallet-ios-core.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCEC67591FB18C3A004CC6C5 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -154,7 +136,6 @@
 		CC94E0041FB58CAA0098E730 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0051FB58CAA0098E730 /* .gitkeep */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -162,7 +143,6 @@
 		CC94E0061FB58CAA0098E730 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0071FB58CAA0098E730 /* .gitkeep */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -170,7 +150,8 @@
 		CC94E0081FB58CAA0098E730 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0091FB58CAA0098E730 /* .gitkeep */,
+				CC94E04C1FB94DAA0098E730 /* BILWelcomeViewController.swift */,
+				CC94E04E1FB950040098E730 /* BILCreateWalletViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -178,7 +159,6 @@
 		CC94E00A1FB58CAA0098E730 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E00B1FB58CAA0098E730 /* .gitkeep */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -186,7 +166,6 @@
 		CC94E00C1FB58CAA0098E730 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E00D1FB58CAA0098E730 /* .gitkeep */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,7 +173,8 @@
 		CC94E00E1FB58CAA0098E730 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E00F1FB58CAA0098E730 /* .gitkeep */,
+				CC94E0541FB9911E0098E730 /* BILCreateWalletSucessView.swift */,
+				CC94E0561FB998A20098E730 /* BILPasswordStrengthView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,7 +195,7 @@
 		CC94E01B1FB58D1F0098E730 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E01C1FB58D1F0098E730 /* .gitkeep */,
+				CC94E04A1FB946480098E730 /* UIColor+BILHex.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -223,7 +203,6 @@
 		CC94E01D1FB58D1F0098E730 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E01E1FB58D1F0098E730 /* .gitkeep */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -231,7 +210,7 @@
 		CC94E01F1FB58D1F0098E730 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0201FB58D1F0098E730 /* .gitkeep */,
+				CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -239,7 +218,6 @@
 		CC94E0211FB58D1F0098E730 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0221FB58D1F0098E730 /* .gitkeep */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -247,7 +225,6 @@
 		CC94E0231FB58D1F0098E730 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0241FB58D1F0098E730 /* .gitkeep */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,7 +232,7 @@
 		CC94E0251FB58D1F0098E730 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0261FB58D1F0098E730 /* .gitkeep */,
+				CC94E0461FB946290098E730 /* UIView+BILGradient.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -276,7 +253,6 @@
 		CC94E0301FB58D9C0098E730 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0311FB58D9C0098E730 /* .gitkeep */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -284,7 +260,6 @@
 		CC94E0321FB58D9C0098E730 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0331FB58D9C0098E730 /* .gitkeep */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -292,7 +267,6 @@
 		CC94E0341FB58D9C0098E730 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0351FB58D9C0098E730 /* .gitkeep */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -300,7 +274,6 @@
 		CC94E0361FB58D9C0098E730 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0371FB58D9C0098E730 /* .gitkeep */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -308,7 +281,6 @@
 		CC94E0381FB58D9C0098E730 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0391FB58D9C0098E730 /* .gitkeep */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -316,7 +288,8 @@
 		CC94E03A1FB58D9C0098E730 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E03B1FB58D9C0098E730 /* .gitkeep */,
+				CC94E0501FB9824B0098E730 /* ASKPlaceHolderColorTextField.swift */,
+				CC94E0521FB984630098E730 /* BILGradientButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -449,6 +422,7 @@
 		CCEC674C1FB18C3A004CC6C5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = BIL;
 				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = BitBill;
@@ -490,31 +464,13 @@
 			files = (
 				CCEC67641FB18C3A004CC6C5 /* LaunchScreen.storyboard in Resources */,
 				CCEC67801FB190EE004CC6C5 /* index.html in Resources */,
-				CC94E03F1FB58D9D0098E730 /* .gitkeep in Resources */,
-				CC94E0411FB58D9D0098E730 /* .gitkeep in Resources */,
-				CC94E0121FB58CAA0098E730 /* .gitkeep in Resources */,
-				CC94E0291FB58D1F0098E730 /* .gitkeep in Resources */,
-				CC94E02A1FB58D1F0098E730 /* .gitkeep in Resources */,
-				CC94E0131FB58CAA0098E730 /* .gitkeep in Resources */,
-				CC94E02C1FB58D1F0098E730 /* .gitkeep in Resources */,
 				CCEC67821FB190EE004CC6C5 /* bitcoinjs-lib-app.js in Resources */,
-				CC94E02B1FB58D1F0098E730 /* .gitkeep in Resources */,
 				CCEC67611FB18C3A004CC6C5 /* Assets.xcassets in Resources */,
 				CCEC67831FB190EE004CC6C5 /* index.js in Resources */,
-				CC94E0141FB58CAA0098E730 /* .gitkeep in Resources */,
 				CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */,
-				CC94E02D1FB58D1F0098E730 /* .gitkeep in Resources */,
-				CC94E03E1FB58D9D0098E730 /* .gitkeep in Resources */,
 				CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */,
-				CC94E0111FB58CAA0098E730 /* .gitkeep in Resources */,
-				CC94E03D1FB58D9D0098E730 /* .gitkeep in Resources */,
-				CC94E0281FB58D1F0098E730 /* .gitkeep in Resources */,
-				CC94E0401FB58D9D0098E730 /* .gitkeep in Resources */,
 				CCEC67841FB190EE004CC6C5 /* README.md in Resources */,
-				CC94E0161FB58CAA0098E730 /* .gitkeep in Resources */,
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
-				CC94E0151FB58CAA0098E730 /* .gitkeep in Resources */,
-				CC94E0421FB58D9D0098E730 /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,10 +622,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC94E0531FB984630098E730 /* BILGradientButton.swift in Sources */,
 				CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */,
+				CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */,
+				CC94E04B1FB946480098E730 /* UIColor+BILHex.swift in Sources */,
+				CC94E0551FB9911E0098E730 /* BILCreateWalletSucessView.swift in Sources */,
+				CC94E04D1FB94DAA0098E730 /* BILWelcomeViewController.swift in Sources */,
+				CC94E0571FB998A20098E730 /* BILPasswordStrengthView.swift in Sources */,
+				CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */,
 				CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */,
 				CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */,
+				CC94E04F1FB950040098E730 /* BILCreateWalletViewController.swift in Sources */,
 				CCEC675A1FB18C3A004CC6C5 /* FirstViewController.swift in Sources */,
+				CC94E0511FB9824B0098E730 /* ASKPlaceHolderColorTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
