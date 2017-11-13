@@ -139,9 +139,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dY9-CX-LVD" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="31" width="325" height="24"/>
+                                                            <rect key="frame" x="0.0" y="21" width="325" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="24" id="h7o-AY-cao"/>
+                                                                <constraint firstAttribute="height" constant="44" id="h7o-AY-cao"/>
                                                             </constraints>
                                                             <color key="textColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -163,8 +163,8 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="VB0-f8-dcU" secondAttribute="trailing" id="7xl-df-eyz"/>
-                                                        <constraint firstItem="dY9-CX-LVD" firstAttribute="top" secondItem="90a-9J-7QA" secondAttribute="bottom" constant="10" id="H0x-73-uUE"/>
-                                                        <constraint firstItem="VB0-f8-dcU" firstAttribute="top" secondItem="dY9-CX-LVD" secondAttribute="bottom" constant="10" id="NqZ-5F-ybu"/>
+                                                        <constraint firstItem="dY9-CX-LVD" firstAttribute="top" secondItem="90a-9J-7QA" secondAttribute="bottom" id="H0x-73-uUE"/>
+                                                        <constraint firstItem="VB0-f8-dcU" firstAttribute="top" secondItem="dY9-CX-LVD" secondAttribute="bottom" id="NqZ-5F-ybu"/>
                                                         <constraint firstItem="90a-9J-7QA" firstAttribute="leading" secondItem="biZ-iC-DUT" secondAttribute="leading" id="Oqe-oN-7XW"/>
                                                         <constraint firstAttribute="bottom" secondItem="VB0-f8-dcU" secondAttribute="bottom" id="VXb-cg-xy3"/>
                                                         <constraint firstItem="VB0-f8-dcU" firstAttribute="leading" secondItem="biZ-iC-DUT" secondAttribute="leading" id="XP9-Eo-udI"/>
@@ -186,13 +186,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入6-20位字符" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qJG-8G-NDW" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="39" width="325" height="24"/>
+                                                            <rect key="frame" x="0.0" y="29" width="325" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="24" id="94a-2l-Nvg"/>
+                                                                <constraint firstAttribute="height" constant="44" id="94a-2l-Nvg"/>
                                                             </constraints>
                                                             <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                                     <color key="value" red="1" green="1" blue="1" alpha="0.40012307359999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -266,11 +266,11 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="qJG-8G-NDW" firstAttribute="top" secondItem="oea-rm-aQE" secondAttribute="bottom" constant="10" id="NoR-jx-5xl"/>
+                                                        <constraint firstItem="qJG-8G-NDW" firstAttribute="top" secondItem="oea-rm-aQE" secondAttribute="bottom" id="NoR-jx-5xl"/>
                                                         <constraint firstAttribute="trailing" secondItem="xAV-pk-V5R" secondAttribute="trailing" id="PCB-xd-IbA"/>
                                                         <constraint firstItem="oea-rm-aQE" firstAttribute="leading" secondItem="2w5-Pp-BMb" secondAttribute="leading" id="R9K-op-ecK"/>
                                                         <constraint firstItem="qJG-8G-NDW" firstAttribute="leading" secondItem="2w5-Pp-BMb" secondAttribute="leading" id="Ww1-HB-gyU"/>
-                                                        <constraint firstItem="Ca5-Ov-Pbn" firstAttribute="top" secondItem="qJG-8G-NDW" secondAttribute="bottom" constant="10" id="b15-Dl-P12"/>
+                                                        <constraint firstItem="Ca5-Ov-Pbn" firstAttribute="top" secondItem="qJG-8G-NDW" secondAttribute="bottom" id="b15-Dl-P12"/>
                                                         <constraint firstAttribute="trailing" secondItem="qJG-8G-NDW" secondAttribute="trailing" id="hT5-lx-QFY"/>
                                                         <constraint firstItem="xAV-pk-V5R" firstAttribute="centerY" secondItem="oea-rm-aQE" secondAttribute="centerY" id="kyC-bU-Lb5"/>
                                                         <constraint firstItem="Ca5-Ov-Pbn" firstAttribute="leading" secondItem="2w5-Pp-BMb" secondAttribute="leading" id="pnR-EB-B7e"/>
@@ -293,13 +293,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UvF-Ci-dn1" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="39" width="325" height="24"/>
+                                                            <rect key="frame" x="0.0" y="29" width="325" height="44"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="24" id="VEP-tR-epo"/>
+                                                                <constraint firstAttribute="height" constant="44" id="VEP-tR-epo"/>
                                                             </constraints>
                                                             <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                                     <color key="value" red="1" green="1" blue="1" alpha="0.40012307359999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -320,11 +320,11 @@
                                                         <constraint firstItem="wyO-75-AKa" firstAttribute="leading" secondItem="lGn-kT-hhq" secondAttribute="leading" id="DM5-70-ZsU"/>
                                                         <constraint firstItem="Ije-Ds-cDy" firstAttribute="leading" secondItem="lGn-kT-hhq" secondAttribute="leading" id="EB9-wb-rbd"/>
                                                         <constraint firstItem="Ije-Ds-cDy" firstAttribute="top" secondItem="lGn-kT-hhq" secondAttribute="top" constant="8" id="T9d-2q-kGa"/>
-                                                        <constraint firstItem="wyO-75-AKa" firstAttribute="top" secondItem="UvF-Ci-dn1" secondAttribute="bottom" constant="10" id="TK0-FU-eQG"/>
+                                                        <constraint firstItem="wyO-75-AKa" firstAttribute="top" secondItem="UvF-Ci-dn1" secondAttribute="bottom" id="TK0-FU-eQG"/>
                                                         <constraint firstItem="UvF-Ci-dn1" firstAttribute="leading" secondItem="lGn-kT-hhq" secondAttribute="leading" id="bsg-zq-y6S"/>
                                                         <constraint firstAttribute="trailing" secondItem="UvF-Ci-dn1" secondAttribute="trailing" id="irj-3c-hLJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="wyO-75-AKa" secondAttribute="trailing" id="q8l-4J-FlT"/>
-                                                        <constraint firstItem="UvF-Ci-dn1" firstAttribute="top" secondItem="Ije-Ds-cDy" secondAttribute="bottom" constant="10" id="vZG-vi-U1s"/>
+                                                        <constraint firstItem="UvF-Ci-dn1" firstAttribute="top" secondItem="Ije-Ds-cDy" secondAttribute="bottom" id="vZG-vi-U1s"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请备份好您的密码！比特宝不存储用户密码，无法提供找回或重置的功能（若您已备份助记词，忘记密码的情况下可以通过重新导入助记词恢复钱包并重设密码）" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saA-k4-Xxv">
