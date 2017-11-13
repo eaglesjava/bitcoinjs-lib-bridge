@@ -9,12 +9,15 @@ import android.webkit.WebView;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.bitbill.www.utils.BitcoinJsWrapper.JsInterface.MNEMONIC_TO_SEEDHEX;
-
 /**
  * Created by isanwenyu@163.com on 2017/11/7.
  */
 public class BitcoinJsWrapper {
+    public static final String MNEMONIC_TO_SEED_HEX = "mnemonicToSeedHex";
+    public static final String GENERATE_MNEMONIC_RANDOM_CN = "generateMnemonicRandomCN";
+    public static final String GET_BITCOIN_ADDRESS_BY_SEED_HEX = "getBitcoinAddressBySeedHex";
+    public static final String GET_BITCOIN_ADDRESS_BY_MASTER_XPUBLIC_KEY = "getBitcoinAddressByMasterXPublicKey";
+    public static final String GET_BITCOIN_MASTER_XPUBLIC_KEY = "getBitcoinMasterXPublicKey";
     private WebView mWebView;
     private JsInterface mJsInterface;
     private Handler mHandler;
@@ -53,14 +56,47 @@ public class BitcoinJsWrapper {
         });
     }
 
-    public void getMnemonic(JsInterface.Callback callback) {
-        mJsInterface.addCallBack(JsInterface.GET_MNEMONIC, callback);
-        executeJS("javascript:getMnemonicRandom()");
+    /**
+     * 随机产生中文助记词
+     *
+     * @param callback
+     */
+    public void generateMnemonicRandomCN(JsInterface.Callback callback) {
+        mJsInterface.addCallBack(GENERATE_MNEMONIC_RANDOM_CN, callback);
+        executeJS("javascript:generateMnemonicRandomCN()");
     }
 
+    /**
+     * 助记词生成seed
+     * @param nemonic 助记词字符串，以空格隔开
+     * @param pwd
+     * @param callback 密码
+     */
     public void mnemonicToSeedHex(String nemonic, String pwd, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(MNEMONIC_TO_SEEDHEX, callback);
+        mJsInterface.addCallBack(MNEMONIC_TO_SEED_HEX, callback);
         executeJS("javascript:mnemonicToSeedHex('" + nemonic + "','" + pwd + "')");
+    }
+
+    /**
+     * 根据seed生成指定index的地址
+     *
+     * @param seedHex  seed的十六进制字符串
+     * @param index
+     * @param callback
+     */
+    public void getBitcoinAddressBySeedHex(String seedHex, int index, JsInterface.Callback callback) {
+        mJsInterface.addCallBack(GET_BITCOIN_ADDRESS_BY_SEED_HEX, callback);
+        executeJS("javascript:getBitcoinAddressBySeedHex('" + seedHex + "'," + index + ")");
+    }
+
+    public void getBitcoinAddressByMasterXPublicKey(String xpub, int index, JsInterface.Callback callback) {
+        mJsInterface.addCallBack(GET_BITCOIN_ADDRESS_BY_MASTER_XPUBLIC_KEY, callback);
+        executeJS("javascript:getBitcoinAddressByMasterXPublicKey('" + xpub + "'," + index + ")");
+    }
+
+    public void getBitcoinMasterXPublicKey(String seedHex, JsInterface.Callback callback) {
+        mJsInterface.addCallBack(GET_BITCOIN_MASTER_XPUBLIC_KEY, callback);
+        executeJS("javascript:getBitcoinMasterXPublicKey('" + seedHex + "')");
     }
 
     //静态内部类确保了在首次调用getInstance()的时候才会初始化SingletonHolder，从而导致实例被创建。
@@ -70,8 +106,6 @@ public class BitcoinJsWrapper {
     }
 
     public static final class JsInterface {
-        public static final String GET_MNEMONIC = "getMnemonic";
-        public static final String MNEMONIC_TO_SEEDHEX = "mnemonicToSeedHex";
         private final BitcoinJsWrapper mBitcoinJsWrapper;
         private Map mCallBackMap;
 
@@ -85,8 +119,8 @@ public class BitcoinJsWrapper {
          * loadUrl on the UI thread.
          */
         @JavascriptInterface
-        public void getMnemonic(final String mnemonic) {
-            callAndBack(GET_MNEMONIC, mnemonic);
+        public void generateMnemonicRandomCN(final String mnemonic) {
+            callAndBack(GENERATE_MNEMONIC_RANDOM_CN, mnemonic);
         }
 
         /**
@@ -94,12 +128,42 @@ public class BitcoinJsWrapper {
          * loadUrl on the UI thread.
          */
         @JavascriptInterface
-        public void getSeedHex(final String seedHex) {
-            callAndBack(MNEMONIC_TO_SEEDHEX, seedHex);
+        public void mnemonicToSeedHex(final String seedHex) {
+            callAndBack(MNEMONIC_TO_SEED_HEX, seedHex);
+        }
+
+        /**
+         * This is not called on the UI thread. Post a runnable to invoke
+         * loadUrl on the UI thread.
+         */
+        @JavascriptInterface
+        public void getBitcoinAddressBySeedHex(final String address) {
+            callAndBack(GET_BITCOIN_ADDRESS_BY_SEED_HEX, address);
+        }
+
+        /**
+         * This is not called on the UI thread. Post a runnable to invoke
+         * loadUrl on the UI thread.
+         */
+        @JavascriptInterface
+        public void getBitcoinAddressByMasterXPublicKey(final String address) {
+            callAndBack(GET_BITCOIN_ADDRESS_BY_MASTER_XPUBLIC_KEY, address);
+        }
+
+        /**
+         * This is not called on the UI thread. Post a runnable to invoke
+         * loadUrl on the UI thread.
+         */
+        @JavascriptInterface
+        public void getBitcoinMasterXPublicKey(final String address) {
+            callAndBack(GET_BITCOIN_MASTER_XPUBLIC_KEY, address);
         }
 
         private void callAndBack(String key, String result) {
-            ((Callback) mCallBackMap.get(key)).call(key, result);
+            Callback callback = (Callback) mCallBackMap.get(key);
+            if (callback != null) {
+                callback.call(key, result);
+            }
             mCallBackMap.remove(key);
         }
 
