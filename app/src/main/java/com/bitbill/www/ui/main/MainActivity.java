@@ -1,4 +1,4 @@
-package com.bitbill.www.ui;
+package com.bitbill.www.ui.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mTextMessage = (TextView) findViewById(R.id.message);
 
         mTextMessage.setOnClickListener(new View.OnClickListener() {
