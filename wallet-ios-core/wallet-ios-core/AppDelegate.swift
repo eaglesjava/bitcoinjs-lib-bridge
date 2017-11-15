@@ -25,14 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		do {
 			let context = persistentContainer.viewContext
 			let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
-			let reuslts = try context.fetch(request)
-			print(reuslts)
+			let results = try context.fetch(request)
+			print(results)
 			
-			let window = UIWindow(frame: UIScreen.main.bounds)
-			let cont = UIStoryboard(name: reuslts.count == 0 ? "NewWallet" : "Main", bundle: nil).instantiateInitialViewController()
-			window.rootViewController = cont
-			window.makeKeyAndVisible()
-			self.window = window
+			if results.count == 0 {
+				let cont = UIStoryboard(name: "NewWallet", bundle: nil).instantiateInitialViewController()
+				window?.makeKeyAndVisible()
+				window?.rootViewController?.present(cont!, animated: false, completion: nil)
+			}
 		} catch {
 			print(error)
 		}
