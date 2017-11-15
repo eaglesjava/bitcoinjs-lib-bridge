@@ -9,6 +9,9 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.utils.BitcoinJsWrapper;
 
+/**
+ * Created by isanwenyu@163.com on 2017/11/13.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";

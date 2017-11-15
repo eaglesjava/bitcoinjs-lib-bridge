@@ -9,4 +9,16 @@
     <string name="section_format">引导页 %1$d</string>
     <string name="btn_create_wallet">创建钱包</string>
     <string name="btn_import_wallet">导入钱包</string>
+    <string name="title_activity_import_wallet">导入钱包</string>
+    <string name="title_activity_create_wallet">创建钱包</string>
+    <string name="error_invalid_password">交易密码不正确，请重新输入</string>
+    <string name="hint_input_please">请输入</string>
+    <string name="hint_trade_pwd">请输入6-20位字符</string>
+    <string name="input_wallet_name">钱包名称</string>
+    <string name="input_trade_pwd">创建交易密码</string>
+    <string name="input_trade_pwd_confirm">确认交易密码</string>
+    <string name="btn_start_import">开始导入</string>
+    <string name="error_wallet_name_required">请输入钱包名称</string>
+    <string name="hint_back_up_pwd">请备份好您的密码！比特宝不存储用户密码，无法提供找回或重置的功能（若您已备份助记词，忘记密码的情况下可以通过重新导入助记词恢复钱包并重设密码）</string>
+
 </resources>

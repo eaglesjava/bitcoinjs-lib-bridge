@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 
+/**
+ * 引导页
+ * Created by isanwenyu@163.com on 2017/11/14.
+ */
 public class GuideActivity extends AppCompatActivity {
 
     /**

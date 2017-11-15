@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              tools:context="com.bitbill.www.ui.wallet.CreateOrImportWalletActivity">
+
+    <ScrollView
+        android:id="@+id/wallet_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="25dp">
+
+        <LinearLayout
+            android:id="@+id/create_import_wallet_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.bitbill.www.ui.widget.EditTextWapper
+                android:id="@+id/etw_wallet_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:inputHint="@string/hint_input_please"
+                app:inputPaddingBottom="20dp"
+                app:inputTitle="@string/input_wallet_name"
+                />
+
+            <com.bitbill.www.ui.widget.EditTextWapper
+                android:id="@+id/etw_trade_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:inputHint="@string/hint_trade_pwd"
+                app:inputPaddingBottom="20dp"
+                app:inputTitle="@string/input_trade_pwd"
+                />
+
+            <com.bitbill.www.ui.widget.EditTextWapper
+                android:id="@+id/etw_trade_pwd_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:inputHint="@string/hint_trade_pwd"
+                app:inputPaddingBottom="20dp"
+                app:inputTitle="@string/input_trade_pwd_confirm"
+                />
+
+            <TextView
+                style="@style/Text.Small.Orange"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:text="@string/hint_back_up_pwd"/>
+
+            <Button
+                android:id="@+id/btn_start"
+                style="@style/Button.Blue"
+                android:layout_marginTop="30dp"
+                android:text="@string/btn_start_import"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

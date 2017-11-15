@@ -1,4 +1,4 @@
-package com.bitbill.www.app;
+package com.bitbill.www.common.app;
 
 import android.app.Application;
 

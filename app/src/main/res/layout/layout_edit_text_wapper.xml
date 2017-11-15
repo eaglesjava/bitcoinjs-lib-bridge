@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Text.InputTitle"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        />
+
+    <EditText
+        android:id="@+id/et_text"
+        style="@style/EditText.Normal"
+        android:layout_width="match_parent"/>
+
+</merge>
