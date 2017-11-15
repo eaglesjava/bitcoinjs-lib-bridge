@@ -19,9 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-		BitcoinJSBridge.shared.loadBitcoinJS()
 		
-		IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+		BILAppStartUpManager.shared.startSetup()
 		
 		do {
 			let context = persistentContainer.viewContext

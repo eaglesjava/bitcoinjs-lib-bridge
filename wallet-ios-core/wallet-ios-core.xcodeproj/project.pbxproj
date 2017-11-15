@@ -23,6 +23,9 @@
 		CC94E05E1FBAC2B20098E730 /* WalletModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC94E05C1FBAC2B20098E730 /* WalletModel.xcdatamodeld */; };
 		CC94E0961FBAE1A50098E730 /* Data+CKBitArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0941FBAE1A40098E730 /* Data+CKBitArray.swift */; };
 		CC94E0971FBAE1A50098E730 /* String+MnemonicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */; };
+		CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */; };
+		CC94E09D1FBBE6410098E730 /* BILAppStartUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */; };
+		CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */; };
 		CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */; };
 		CCEC675A1FB18C3A004CC6C5 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67591FB18C3A004CC6C5 /* FirstViewController.swift */; };
 		CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */; };
@@ -67,6 +70,9 @@
 		CC94E05D1FBAC2B20098E730 /* WalletModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WalletModel.xcdatamodel; sourceTree = "<group>"; };
 		CC94E0941FBAE1A40098E730 /* Data+CKBitArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+CKBitArray.swift"; sourceTree = "<group>"; };
 		CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MnemonicData.swift"; sourceTree = "<group>"; };
+		CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewWallet.xcassets; sourceTree = "<group>"; };
+		CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAppStartUpManager.swift; sourceTree = "<group>"; };
+		CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILSupportedCoinsPopupController.xib; sourceTree = "<group>"; };
 		CCEC67541FB18C3A004CC6C5 /* wallet-ios-core.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wallet-ios-core.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCEC67591FB18C3A004CC6C5 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 		CC94E0021FB58CAA0098E730 /* NewWallet */ = {
 			isa = PBXGroup;
 			children = (
+				CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */,
 				CC94E0171FB58CDC0098E730 /* NewWallet.storyboard */,
 				CC94E0041FB58CAA0098E730 /* Other */,
 				CC94E0061FB58CAA0098E730 /* Protocol */,
@@ -160,6 +167,7 @@
 			children = (
 				CC94E04C1FB94DAA0098E730 /* BILWelcomeViewController.swift */,
 				CC94E04E1FB950040098E730 /* BILCreateWalletViewController.swift */,
+				CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -229,6 +237,7 @@
 		CC94E0211FB58D1F0098E730 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -333,7 +342,6 @@
 				CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */,
 				CCEC67591FB18C3A004CC6C5 /* FirstViewController.swift */,
 				CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */,
-				CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */,
 				CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */,
 				CCEC67601FB18C3A004CC6C5 /* Assets.xcassets */,
 				CCEC67621FB18C3A004CC6C5 /* LaunchScreen.storyboard */,
@@ -354,6 +362,7 @@
 		CCEC67791FB190EE004CC6C5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */,
 				CCEC677A1FB190EE004CC6C5 /* bitcoinjs-lib-bridge */,
 				CC94E05C1FBAC2B20098E730 /* WalletModel.xcdatamodeld */,
 			);
@@ -483,6 +492,8 @@
 				CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */,
 				CCEC67841FB190EE004CC6C5 /* README.md in Resources */,
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
+				CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */,
+				CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,6 +650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC94E0531FB984630098E730 /* BILGradientButton.swift in Sources */,
+				CC94E09D1FBBE6410098E730 /* BILAppStartUpManager.swift in Sources */,
 				CC94E0961FBAE1A50098E730 /* Data+CKBitArray.swift in Sources */,
 				CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */,
 				CC94E05E1FBAC2B20098E730 /* WalletModel.xcdatamodeld in Sources */,

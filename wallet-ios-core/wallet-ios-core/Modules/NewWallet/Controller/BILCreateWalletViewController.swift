@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import CoreData
 import CryptoSwift
+import PopupDialog
 
 class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 
@@ -43,6 +44,7 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 		super.viewDidAppear(true)
 		NotificationCenter.default.addObserver(self, selector: #selector(self.textFieldValueDidChange(notification:))
 			, name: .UITextFieldTextDidChange, object: nil)
+		showAlertForSupportedCoins()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
@@ -56,6 +58,26 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
     }
 	
 	// MARK: - UI
+	
+	func showAlertForSupportedCoins() {
+		let buttonTitle = "我知道了"
+//		let popup = PopupDialog(title: title, message: nil, image: nil, buttonAlignment: .horizontal, transitionStyle: .fadeIn, gestureDismissal: true, hideStatusBar: true) {
+//			print("popup")
+//		}
+		let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
+		let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: true, hideStatusBar: true) {
+			print("popup")
+		}
+		
+		let button = DefaultButton(title: buttonTitle, dismissOnTap: true) {
+			
+		}
+		popup.addButton(button)
+		
+		present(popup, animated: true) {
+			print("present")
+		}
+	}
 	
 	func createSuccess() {
 		view.addSubview(sucessView)

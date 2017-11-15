@@ -8,12 +8,6 @@
       location = "group:CoinModel+CoreDataProperties.swift">
    </FileRef>
    <FileRef
-      location = "group:WalletSurpportedCoin+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:WalletSurpportedCoin+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:WalletModel+CoreDataClass.swift">
    </FileRef>
    <FileRef

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIViewController">
+            <connections>
+                <outlet property="view" destination="VoT-9P-wTq" id="xle-C4-TLW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="VoT-9P-wTq">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前支持以下币种" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TB6-tP-74Y">
+                            <rect key="frame" x="121.5" y="35" width="131" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ol-G9-qSU">
+                            <rect key="frame" x="99" y="84.5" width="176" height="42"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_btc" translatesAutoresizingMaskIntoConstraints="NO" id="3tt-XN-rDz">
+                                    <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="42" id="8Dm-5h-ocA"/>
+                                        <constraint firstAttribute="height" constant="42" id="bVu-gY-N7h"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_eth" translatesAutoresizingMaskIntoConstraints="NO" id="hpj-5f-nsI">
+                                    <rect key="frame" x="67" y="0.0" width="42" height="42"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="42" id="AyG-8M-95w"/>
+                                        <constraint firstAttribute="width" constant="42" id="RiX-JM-z1g"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bcc" translatesAutoresizingMaskIntoConstraints="NO" id="mr0-wq-qcZ">
+                                    <rect key="frame" x="134" y="0.0" width="42" height="42"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="42" id="Dmx-f5-PFY"/>
+                                        <constraint firstAttribute="width" constant="42" id="J3P-pV-euO"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="mr0-wq-qcZ" firstAttribute="leading" secondItem="hpj-5f-nsI" secondAttribute="trailing" constant="25" id="7Sg-TQ-p8A"/>
+                                <constraint firstItem="3tt-XN-rDz" firstAttribute="centerY" secondItem="6Ol-G9-qSU" secondAttribute="centerY" id="DGY-Gj-OaZ"/>
+                                <constraint firstItem="hpj-5f-nsI" firstAttribute="leading" secondItem="3tt-XN-rDz" secondAttribute="trailing" constant="25" id="L2z-LV-h9e"/>
+                                <constraint firstItem="3tt-XN-rDz" firstAttribute="leading" secondItem="6Ol-G9-qSU" secondAttribute="leading" id="T6L-y7-671"/>
+                                <constraint firstAttribute="height" constant="42" id="TON-fP-w1x"/>
+                                <constraint firstItem="mr0-wq-qcZ" firstAttribute="centerY" secondItem="hpj-5f-nsI" secondAttribute="centerY" id="cLY-dK-0x2"/>
+                                <constraint firstAttribute="trailing" secondItem="mr0-wq-qcZ" secondAttribute="trailing" id="wcG-G6-P72"/>
+                                <constraint firstItem="hpj-5f-nsI" firstAttribute="centerY" secondItem="3tt-XN-rDz" secondAttribute="centerY" id="wiz-Pa-dZz"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="TB6-tP-74Y" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="35" id="0wa-9I-3C5"/>
+                        <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6Ol-G9-qSU" secondAttribute="bottom" constant="30" id="4Cn-yp-Tkk"/>
+                        <constraint firstItem="6Ol-G9-qSU" firstAttribute="top" secondItem="TB6-tP-74Y" secondAttribute="bottom" constant="30" id="9ZK-rm-QA0"/>
+                        <constraint firstItem="6Ol-G9-qSU" firstAttribute="centerX" secondItem="TB6-tP-74Y" secondAttribute="centerX" id="Qiu-dG-Bco"/>
+                        <constraint firstItem="TB6-tP-74Y" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="l29-H3-v9a"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="iN0-l3-epB" firstAttribute="bottom" secondItem="p4u-LJ-i4P" secondAttribute="bottom" id="P99-lc-a2n"/>
+                <constraint firstItem="iN0-l3-epB" firstAttribute="leading" secondItem="p4u-LJ-i4P" secondAttribute="leading" id="PgA-9h-bXB"/>
+                <constraint firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="p4u-LJ-i4P" secondAttribute="trailing" id="Udh-ZY-YHW"/>
+                <constraint firstItem="iN0-l3-epB" firstAttribute="top" secondItem="p4u-LJ-i4P" secondAttribute="top" id="lyK-yz-1b4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="p4u-LJ-i4P"/>
+            <point key="canvasLocation" x="281" y="-475"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_bcc" width="14" height="25"/>
+        <image name="icon_btc" width="18" height="23"/>
+        <image name="icon_eth" width="17" height="27"/>
+    </resources>
+</document>

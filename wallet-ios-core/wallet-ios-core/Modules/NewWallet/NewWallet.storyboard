@@ -97,7 +97,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isO-pf-mWg">
-                                            <rect key="frame" x="25" y="75" width="325" height="44"/>
+                                            <rect key="frame" x="25" y="75" width="335" height="44"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建钱包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJa-1j-0zM">
                                                     <rect key="frame" x="0.0" y="0.0" width="105.5" height="44"/>
@@ -105,9 +105,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jR2-w7-7TY">
-                                                    <rect key="frame" x="279" y="7.5" width="46" height="30"/>
-                                                    <state key="normal" title="Button"/>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jR2-w7-7TY">
+                                                    <rect key="frame" x="291" y="11.5" width="44" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="f7n-JW-57Y"/>
+                                                    </constraints>
+                                                    <state key="normal" image="btn_close"/>
                                                     <connections>
                                                         <action selector="bil_dismissSelfModalViewController" destination="7rK-Mf-YUl" eventType="touchUpInside" id="YnV-s3-aqp"/>
                                                     </connections>
@@ -393,7 +396,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="isO-pf-mWg" firstAttribute="top" secondItem="Wud-7b-kPv" secondAttribute="top" constant="75" id="3cF-PR-S3O"/>
-                                        <constraint firstAttribute="trailing" secondItem="isO-pf-mWg" secondAttribute="trailing" constant="25" id="7ly-3b-bGI"/>
+                                        <constraint firstAttribute="trailing" secondItem="isO-pf-mWg" secondAttribute="trailing" constant="15" id="7ly-3b-bGI"/>
                                         <constraint firstItem="Zv5-jH-5Yt" firstAttribute="leading" secondItem="Wud-7b-kPv" secondAttribute="leading" constant="25" id="YzA-cN-5wV"/>
                                         <constraint firstItem="Zv5-jH-5Yt" firstAttribute="top" secondItem="isO-pf-mWg" secondAttribute="bottom" constant="25" id="j4l-dH-Vzx"/>
                                         <constraint firstAttribute="trailing" secondItem="Zv5-jH-5Yt" secondAttribute="trailing" constant="25" id="rmg-9s-PyK"/>
@@ -494,4 +497,7 @@
             <point key="canvasLocation" x="933.60000000000002" y="151.57421289355324"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="btn_close" width="12" height="12"/>
+    </resources>
 </document>
