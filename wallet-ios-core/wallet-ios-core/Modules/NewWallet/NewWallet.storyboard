@@ -55,6 +55,9 @@
                                 <state key="normal" title="导入钱包">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="7rK-Mf-YUl" kind="presentation" identifier="BILRecoverWallet" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="jf2-fv-e5c"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313725490194" green="0.22745098039215686" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
@@ -424,6 +427,7 @@
                         <outlet property="passwordStrengthView" destination="xAV-pk-V5R" id="81m-em-Whf"/>
                         <outlet property="passwordTextField" destination="qJG-8G-NDW" id="jZN-xQ-tIl"/>
                         <outlet property="sucessView" destination="Oe5-JV-6Df" id="ChG-OY-hTB"/>
+                        <outlet property="titleLabel" destination="cJa-1j-0zM" id="Le6-z0-YIS"/>
                         <outlet property="walletNameInputView" destination="biZ-iC-DUT" id="kfq-uX-qlW"/>
                         <outlet property="walletNameTextField" destination="dY9-CX-LVD" id="RmA-fb-LBi"/>
                     </connections>
@@ -500,4 +504,7 @@
     <resources>
         <image name="btn_close" width="12" height="12"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="jf2-fv-e5c"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -34,8 +34,9 @@ class BILWelcomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-		if segue.identifier == "BILNewWallet" {
-			
+		if segue.identifier == "BILRecoverWallet" { // For test
+			let vc = segue.destination as! BILCreateWalletViewController
+			vc.mnemonic = "Haha"
 		}
     }
 

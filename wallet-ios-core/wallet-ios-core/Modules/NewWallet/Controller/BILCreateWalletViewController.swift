@@ -13,9 +13,20 @@ import CryptoSwift
 import PopupDialog
 
 class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
+	
+	enum CreateWalletType {
+		case new
+		case recover
+		
+		func titleString() -> String {
+			return self == .new ? "新建" : "导入"
+		}
+		
+	}
 
 	@IBOutlet var sucessView: BILCreateWalletSucessView!
 	
+	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var inputsView: UIView!
 	@IBOutlet weak var passwordStrengthView: BILPasswordStrengthView!
 	@IBOutlet weak var passwordTextField: ASKPlaceHolderColorTextField!
@@ -28,16 +39,20 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var passwordInputView: BILInputView!
 	@IBOutlet weak var confirmPasswordInputView: BILInputView!
 	
-	
-	enum createWalletType {
-		case new
-		case recover
+	var createWalletType: CreateWalletType = .new
+	var mnemonic: String? {
+		didSet {
+			createWalletType = .recover
+		}
 	}
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		let titleString = createWalletType.titleString()
+		titleLabel.text = "\(titleString)钱包"
+		createButton.setTitle("开始\(titleString)", for: .normal)
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -61,9 +76,7 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 	
 	func showAlertForSupportedCoins() {
 		let buttonTitle = "我知道了"
-//		let popup = PopupDialog(title: title, message: nil, image: nil, buttonAlignment: .horizontal, transitionStyle: .fadeIn, gestureDismissal: true, hideStatusBar: true) {
-//			print("popup")
-//		}
+		
 		let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
 		let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: true, hideStatusBar: true) {
 			print("popup")
@@ -125,8 +138,7 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 			return
 		}
 		
-		BitcoinJSBridge.shared.generateMnemonic(language: .chinese, success: { (mnemonic) in
-			let m = mnemonic as! String
+		getMnemonic { (m) in
 			BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
 				let s = seedHex as! String
 				let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -153,11 +165,22 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 				SVProgressHUD.showError(withStatus: error.localizedDescription)
 				print(error)
 			})
-		}) { (error) in
-			SVProgressHUD.showError(withStatus: error.localizedDescription)
-			print(error)
 		}
 		
+	}
+	
+	func getMnemonic(complete: @escaping (_ mnemoic: String) -> Void) {
+		if let m = mnemonic {
+			complete(m)
+		}
+		else {
+			BitcoinJSBridge.shared.generateMnemonic(language: .chinese, success: { (mnemonic) in
+				complete(mnemonic as! String)
+			}) { (error) in
+				SVProgressHUD.showError(withStatus: error.localizedDescription)
+				print(error)
+			}
+		}
 	}
 	
 	// MARK: - Delegates
