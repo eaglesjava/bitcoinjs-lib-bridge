@@ -2,6 +2,24 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:CoinModel+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:CoinModel+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:WalletSurpportedCoin+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:WalletSurpportedCoin+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:WalletModel+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:WalletModel+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:wallet-ios-core.xcodeproj">
    </FileRef>
    <FileRef

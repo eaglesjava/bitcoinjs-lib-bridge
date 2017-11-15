@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import SVProgressHUD
+import CoreData
+import CryptoSwift
 
 class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 
@@ -15,6 +18,15 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var inputsView: UIView!
 	@IBOutlet weak var passwordStrengthView: BILPasswordStrengthView!
 	@IBOutlet weak var passwordTextField: ASKPlaceHolderColorTextField!
+	@IBOutlet weak var walletNameTextField: ASKPlaceHolderColorTextField!
+	@IBOutlet weak var confirmPasswordTextField: ASKPlaceHolderColorTextField!
+	
+	@IBOutlet weak var createButton: BILGradientButton!
+	
+	@IBOutlet weak var walletNameInputView: BILInputView!
+	@IBOutlet weak var passwordInputView: BILInputView!
+	@IBOutlet weak var confirmPasswordInputView: BILInputView!
+	
 	
 	enum createWalletType {
 		case new
@@ -56,24 +68,141 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
+	func checkPassword() -> Bool {
+		if let pwd = passwordTextField.text, pwd.count <= 20 && pwd.count >= 6 {
+			return true
+		}
+		return false
+	}
+	
+	func checkConfirmPassword() -> Bool {
+		if let confirmPwd = confirmPasswordTextField.text, confirmPwd.count <= 20 && confirmPwd.count >= 6, confirmPwd == passwordTextField.text {
+			return true
+		}
+		return false
+	}
+	
+	func checkWalletName() -> Bool {
+		if let walletName = walletNameTextField.text, walletName.count <= 20 && walletName.count >= 1 {
+			return true
+		}
+		return false
+	}
+	
+	func createWallet() {
+		guard checkWalletName() else {
+			walletNameInputView.show(tip: "名称限制在20位以内字符", type: .error)
+			return
+		}
+		guard checkPassword() else {
+			passwordInputView.show(tip: "密码长度限制在6-20位字符", type: .error)
+			return
+		}
+		guard checkConfirmPassword() else {
+			confirmPasswordInputView.show(tip: "密码不一致", type: .error)
+			return
+		}
+		
+		BitcoinJSBridge.shared.generateMnemonic(language: .chinese, success: { (mnemonic) in
+			let m = mnemonic as! String
+			BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
+				let s = seedHex as! String
+				let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+				let wallet = NSEntityDescription.insertNewObject(forEntityName: "WalletModel", into: context) as! WalletModel
+				wallet.name = self.walletNameTextField.text!
+				wallet.createDate = Date()
+				do {
+					let pwd = self.passwordTextField.text!
+					let key = String(pwd.sha256().prefix(32))
+					let aes = try AES(key: key, iv: String(key.reversed().prefix(16)))
+					wallet.encryptedMnemonic = try aes.encrypt(Array(m.bytes)).toHexString()
+					wallet.encryptedSeed = try aes.encrypt(Array(s.bytes)).toHexString()
+					wallet.seedHash = s.md5()
+					
+					if let seed = String(bytes: try aes.decrypt((wallet.encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seed == s {
+						try context.save()
+						self.createSuccess()
+					}
+				} catch {
+					SVProgressHUD.showError(withStatus: error.localizedDescription)
+					print(error)
+				}
+			}, failure: { (error) in
+				SVProgressHUD.showError(withStatus: error.localizedDescription)
+				print(error)
+			})
+		}) { (error) in
+			SVProgressHUD.showError(withStatus: error.localizedDescription)
+			print(error)
+		}
+		
+	}
+	
 	// MARK: - Delegates
 	
-	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		switch textField {
+		case walletNameTextField:
+			if checkWalletName() {
+				passwordTextField.becomeFirstResponder()
+			}
+			else
+			{
+				walletNameInputView.show(tip: "名称限制在20位以内字符", type: .error)
+				return false
+			}
+		case passwordTextField:
+			if checkPassword() {
+				confirmPasswordTextField.becomeFirstResponder()
+			}
+			else
+			{
+				passwordInputView.show(tip: "密码长度限制在6-20位字符", type: .error)
+				return false
+			}
+		case confirmPasswordTextField:
+			if checkConfirmPassword() {
+				createWallet()
+				view.endEditing(true)
+			}
+			else
+			{
+				confirmPasswordInputView.show(tip: "密码不一致", type: .error)
+				return false
+			}
+		default: ()
+		}
+		return true
+	}
 	
 	// MARK: - Actions
 	
 	@IBAction func createWalletAction(_ sender: Any) {
-		createSuccess()
+		createWallet()
 	}
 	
 	@objc func textFieldValueDidChange(notification: Notification) {
 		if let textField: UITextField = notification.object as? UITextField {
 			switch textField {
+			case walletNameTextField:
+				walletNameInputView.show(tip: "钱包名称", type: .normal)
 			case passwordTextField:
-				passwordStrengthView.strength = .medium
+				passwordStrengthView.strength = BILPasswordStrengthView.caculatePasswordStrength(pwd: textField.text ?? "")
+				passwordInputView.show(tip: "创建交易密码", type: .normal)
+			case confirmPasswordTextField:
+				confirmPasswordInputView.show(tip: "确认交易密码", type: .normal)
 			default: ()
 			}
 		}
+//		if checkWalletName() {
+//			walletNameInputView.show(tip: "钱包名称", type: .normal)
+//		}
+//		if checkPassword() {
+//			passwordInputView.show(tip: "创建交易密码", type: .normal)
+//		}
+//		if checkConfirmPassword() {
+//			confirmPasswordInputView.show(tip: "确认交易密码", type: .normal)
+//		}
 	}
 	
     // MARK: - Navigation

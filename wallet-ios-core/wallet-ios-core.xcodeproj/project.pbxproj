@@ -19,6 +19,10 @@
 		CC94E0531FB984630098E730 /* BILGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0521FB984630098E730 /* BILGradientButton.swift */; };
 		CC94E0551FB9911E0098E730 /* BILCreateWalletSucessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0541FB9911E0098E730 /* BILCreateWalletSucessView.swift */; };
 		CC94E0571FB998A20098E730 /* BILPasswordStrengthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0561FB998A20098E730 /* BILPasswordStrengthView.swift */; };
+		CC94E0591FBA99160098E730 /* BILInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0581FBA99160098E730 /* BILInputView.swift */; };
+		CC94E05E1FBAC2B20098E730 /* WalletModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC94E05C1FBAC2B20098E730 /* WalletModel.xcdatamodeld */; };
+		CC94E0961FBAE1A50098E730 /* Data+CKBitArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0941FBAE1A40098E730 /* Data+CKBitArray.swift */; };
+		CC94E0971FBAE1A50098E730 /* String+MnemonicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */; };
 		CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */; };
 		CCEC675A1FB18C3A004CC6C5 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67591FB18C3A004CC6C5 /* FirstViewController.swift */; };
 		CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */; };
@@ -59,6 +63,10 @@
 		CC94E0521FB984630098E730 /* BILGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGradientButton.swift; sourceTree = "<group>"; };
 		CC94E0541FB9911E0098E730 /* BILCreateWalletSucessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILCreateWalletSucessView.swift; sourceTree = "<group>"; };
 		CC94E0561FB998A20098E730 /* BILPasswordStrengthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILPasswordStrengthView.swift; sourceTree = "<group>"; };
+		CC94E0581FBA99160098E730 /* BILInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILInputView.swift; sourceTree = "<group>"; };
+		CC94E05D1FBAC2B20098E730 /* WalletModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WalletModel.xcdatamodel; sourceTree = "<group>"; };
+		CC94E0941FBAE1A40098E730 /* Data+CKBitArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+CKBitArray.swift"; sourceTree = "<group>"; };
+		CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MnemonicData.swift"; sourceTree = "<group>"; };
 		CCEC67541FB18C3A004CC6C5 /* wallet-ios-core.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wallet-ios-core.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCEC67591FB18C3A004CC6C5 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +183,7 @@
 			children = (
 				CC94E0541FB9911E0098E730 /* BILCreateWalletSucessView.swift */,
 				CC94E0561FB998A20098E730 /* BILPasswordStrengthView.swift */,
+				CC94E0581FBA99160098E730 /* BILInputView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -196,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				CC94E04A1FB946480098E730 /* UIColor+BILHex.swift */,
+				CC94E0941FBAE1A40098E730 /* Data+CKBitArray.swift */,
+				CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -344,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				CCEC677A1FB190EE004CC6C5 /* bitcoinjs-lib-bridge */,
+				CC94E05C1FBAC2B20098E730 /* WalletModel.xcdatamodeld */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -569,8 +581,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-wallet-ios-core/Pods-wallet-ios-core-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
@@ -582,8 +596,10 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
@@ -623,12 +639,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC94E0531FB984630098E730 /* BILGradientButton.swift in Sources */,
+				CC94E0961FBAE1A50098E730 /* Data+CKBitArray.swift in Sources */,
 				CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */,
+				CC94E05E1FBAC2B20098E730 /* WalletModel.xcdatamodeld in Sources */,
 				CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */,
 				CC94E04B1FB946480098E730 /* UIColor+BILHex.swift in Sources */,
 				CC94E0551FB9911E0098E730 /* BILCreateWalletSucessView.swift in Sources */,
+				CC94E0591FBA99160098E730 /* BILInputView.swift in Sources */,
 				CC94E04D1FB94DAA0098E730 /* BILWelcomeViewController.swift in Sources */,
 				CC94E0571FB998A20098E730 /* BILPasswordStrengthView.swift in Sources */,
+				CC94E0971FBAE1A50098E730 /* String+MnemonicData.swift in Sources */,
 				CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */,
 				CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */,
 				CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */,
@@ -884,6 +904,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CC94E05C1FBAC2B20098E730 /* WalletModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CC94E05D1FBAC2B20098E730 /* WalletModel.xcdatamodel */,
+			);
+			currentVersion = CC94E05D1FBAC2B20098E730 /* WalletModel.xcdatamodel */;
+			path = WalletModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CCEC674C1FB18C3A004CC6C5 /* Project object */;
 }

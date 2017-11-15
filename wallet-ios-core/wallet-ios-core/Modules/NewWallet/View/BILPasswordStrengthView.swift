@@ -38,6 +38,88 @@ class BILPasswordStrengthView: UIView {
 		}
 	}
 	
+	static func caculatePasswordStrength(pwd: String) -> PasswordStrength{
+		
+		guard !pwd.isEmpty else {
+			return .none
+		}
+		
+		var sum = 0
+		let max = 10000
+		
+		// 长度
+		switch pwd.count {
+		case 0...4:
+			sum += 5
+		case 5...7:
+			sum += 10
+		case 8...max:
+			sum += 25
+		default: ()
+		}
+		
+		func count(string: String, pattern: String) throws -> Int {
+			let exp = try NSRegularExpression(pattern: pattern, options: .allowCommentsAndWhitespace)
+			let count = exp.numberOfMatches(in: string, options: .reportCompletion, range: NSMakeRange(0, string.count))
+			return count
+		}
+		
+		do {
+			
+			let numCount = try count(string: pwd, pattern: "[0-9]")
+			let lowerCount = try count(string: pwd, pattern: "[a-z]")
+			let upperCount = try count(string: pwd, pattern: "[A-Z]")
+			let otherCount = pwd.count - numCount - lowerCount - upperCount
+			
+			// 字母
+			if lowerCount + upperCount != 0 {
+				if lowerCount == 0 || upperCount == 0 {
+					sum += 10
+				}
+				else
+				{
+					sum += 20
+				}
+			}
+			
+			// 数字
+			switch numCount {
+			case 1:
+				sum += 10
+			case 2...max:
+				sum += 20
+			case 0: fallthrough
+			default:
+				sum += 0
+			}
+			
+			// 奖励
+			if numCount != 0 && lowerCount + upperCount != 0 {
+				sum += 2
+				if otherCount != 0 {
+					sum += 1
+					if lowerCount != 0 && upperCount != 0 {
+						sum += 2
+					}
+				}
+			}
+			
+		} catch {
+			print(error)
+		}
+		
+		switch sum {
+		case 0..<50:
+			return .low
+		case 50..<60:
+			return .medium
+		case 60..<max:
+			return .high
+		default:
+			return .none
+		}
+	}
+	
 	private func set(colors: [UIColor]) {
 		guard colors.count == 3 else {
 			return
