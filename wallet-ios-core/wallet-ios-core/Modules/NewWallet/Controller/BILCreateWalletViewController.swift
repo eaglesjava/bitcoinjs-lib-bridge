@@ -26,7 +26,6 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 
 	@IBOutlet var sucessView: BILCreateWalletSucessView!
 	
-	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var inputsView: UIView!
 	@IBOutlet weak var passwordStrengthView: BILPasswordStrengthView!
 	@IBOutlet weak var passwordTextField: ASKPlaceHolderColorTextField!
@@ -51,9 +50,14 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
 		let titleString = createWalletType.titleString()
-		titleLabel.text = "\(titleString)钱包"
+		title = "\(titleString)钱包"
 		createButton.setTitle("开始\(titleString)", for: .normal)
     }
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		bil_setBackgroudColor()
+	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(true)
@@ -78,7 +82,7 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 		let buttonTitle = "我知道了"
 		
 		let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
-		let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: true, hideStatusBar: true) {
+		let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: true, hideStatusBar: false) {
 			print("popup")
 		}
 		

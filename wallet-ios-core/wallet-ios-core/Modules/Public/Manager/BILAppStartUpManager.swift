@@ -11,14 +11,40 @@ import PopupDialog
 import IQKeyboardManagerSwift
 
 class BILAppStartUpManager: NSObject {
+	
 	static let shared = {
 		return BILAppStartUpManager()
 	}()
+	
+	var navBackgroundImage: UIImage?
 	
 	func startSetup() {
 		setupPopupDialog()
 		setupIQKeyboard()
 		loadJS()
+//		snapshotNavBackgroundImage()
+		setupNavigationBarAppearance()
+	}
+	
+	private func snapshotNavBackgroundImage() {
+		let v = UIView(frame: UIScreen.main.bounds)
+		let layer = v.setupGradient(colors: [UIColor.bil_deep_blue_start_bgcolor.cgColor, UIColor.bil_deep_blue_end_bgcolor.cgColor], startPoint: CGPoint(x: 0.5, y: 0), endPoint: CGPoint(x: 0.5, y: 1))
+		UIGraphicsBeginImageContextWithOptions(v.bounds.size, true, UIScreen.main.scale)
+		if let currentContext = UIGraphicsGetCurrentContext() {
+			layer.render(in: currentContext)
+			let image = UIGraphicsGetImageFromCurrentImageContext()
+			navBackgroundImage = image
+		}
+		UIGraphicsEndImageContext()
+		if navBackgroundImage != nil {
+			setupNavigationBarAppearance()
+		}
+	}
+	
+	private func setupNavigationBarAppearance() {
+		let appearance = UINavigationBar.appearance()
+		appearance.setBackgroundImage(UIImage(), for: .default)
+		appearance.shadowImage = UIImage()
 	}
 	
 	private func setupPopupDialog() {
