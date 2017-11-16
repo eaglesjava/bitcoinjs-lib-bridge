@@ -16,14 +16,14 @@ class BILAppStartUpManager: NSObject {
 		return BILAppStartUpManager()
 	}()
 	
-	var navBackgroundImage: UIImage?
+	var navBackgroundImage: UIImage? = UIImage()
 	
 	func startSetup() {
 		setupPopupDialog()
 		setupIQKeyboard()
 		loadJS()
-//		snapshotNavBackgroundImage()
-		setupNavigationBarAppearance()
+		snapshotNavBackgroundImage()
+//		setupNavigationBarAppearance()
 	}
 	
 	private func snapshotNavBackgroundImage() {
