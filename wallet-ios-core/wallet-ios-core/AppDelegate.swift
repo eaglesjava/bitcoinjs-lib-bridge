@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			print(results)
 			
 			if results.count == 0 {
-				let cont = UIStoryboard(name: "NewWallet", bundle: nil).instantiateInitialViewController()
+//				BackupWallet, NewWallet
+				let cont = UIStoryboard(name: "BackupWallet", bundle: nil).instantiateInitialViewController()
 				window?.makeKeyAndVisible()
 				window?.rootViewController?.present(cont!, animated: false, completion: nil)
 			}

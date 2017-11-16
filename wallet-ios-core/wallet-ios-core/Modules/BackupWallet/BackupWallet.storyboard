@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hPR-jq-dbh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--记下助记词-->
+        <scene sceneID="O3b-MQ-mdV">
+            <objects>
+                <viewController storyboardIdentifier="BILBackupWalletMnemonicController" id="8XA-fy-7b1" customClass="BILBackupWalletMnemonicController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L57-qY-nMe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvy-wf-TqK">
+                                <rect key="frame" x="25" y="84" width="325" height="33.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgY-86-Uyz">
+                                <rect key="frame" x="25" y="142.5" width="325" height="50.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截图是不安全的，您的图片可能别憋的应用使用。请准备笔和纸记录下面这句话，并妥善保存，我们会在下个屏幕上确认！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvc-4z-9cT">
+                                        <rect key="frame" x="60" y="0.0" width="265" height="50.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_no_snapshot" translatesAutoresizingMaskIntoConstraints="NO" id="kU6-lA-aP9">
+                                        <rect key="frame" x="0.0" y="1" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="FmF-uJ-ygv"/>
+                                            <constraint firstAttribute="width" constant="50" id="g3K-Zw-rgv"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Vvc-4z-9cT" secondAttribute="bottom" id="1AN-o1-diE"/>
+                                    <constraint firstItem="Vvc-4z-9cT" firstAttribute="top" secondItem="CgY-86-Uyz" secondAttribute="top" id="B1r-yT-WnM"/>
+                                    <constraint firstItem="kU6-lA-aP9" firstAttribute="centerY" secondItem="CgY-86-Uyz" secondAttribute="centerY" id="Fou-O7-xvx"/>
+                                    <constraint firstItem="kU6-lA-aP9" firstAttribute="leading" secondItem="CgY-86-Uyz" secondAttribute="leading" id="RHB-Nz-LS0"/>
+                                    <constraint firstItem="Vvc-4z-9cT" firstAttribute="leading" secondItem="kU6-lA-aP9" secondAttribute="trailing" constant="10" id="bz5-45-H6X"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vvc-4z-9cT" secondAttribute="trailing" id="ctA-cu-XZe"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lhT-aq-ezO" customClass="BILMnemonicView" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="218" width="325" height="125"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="a3v-HR-Z86"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlY-G9-oj8" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="368" width="325" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="lMa-Tj-Ii8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="已按顺序记下助记词">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="iJ2-St-9aK" kind="show" identifier="BILVerifyMnemonic" id="1Lu-iZ-kfz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lhT-aq-ezO" firstAttribute="top" secondItem="CgY-86-Uyz" secondAttribute="bottom" constant="25" id="1R9-Lv-m3H"/>
+                            <constraint firstItem="hvy-wf-TqK" firstAttribute="leading" secondItem="kdu-e2-8cz" secondAttribute="leading" constant="25" id="D8U-xN-TxI"/>
+                            <constraint firstItem="qlY-G9-oj8" firstAttribute="leading" secondItem="kdu-e2-8cz" secondAttribute="leading" constant="25" id="Evx-kq-ALO"/>
+                            <constraint firstItem="kdu-e2-8cz" firstAttribute="trailing" secondItem="hvy-wf-TqK" secondAttribute="trailing" constant="25" id="Fpw-VB-s5g"/>
+                            <constraint firstItem="CgY-86-Uyz" firstAttribute="leading" secondItem="kdu-e2-8cz" secondAttribute="leading" constant="25" id="NXn-Gu-gZg"/>
+                            <constraint firstItem="qlY-G9-oj8" firstAttribute="top" secondItem="lhT-aq-ezO" secondAttribute="bottom" constant="25" id="NZm-ru-fMQ"/>
+                            <constraint firstItem="hvy-wf-TqK" firstAttribute="top" secondItem="kdu-e2-8cz" secondAttribute="top" constant="20" id="ZHT-FP-D28"/>
+                            <constraint firstItem="kdu-e2-8cz" firstAttribute="trailing" secondItem="CgY-86-Uyz" secondAttribute="trailing" constant="25" id="fzF-1h-fEh"/>
+                            <constraint firstItem="lhT-aq-ezO" firstAttribute="leading" secondItem="kdu-e2-8cz" secondAttribute="leading" constant="25" id="iLE-Pm-m3E"/>
+                            <constraint firstItem="kdu-e2-8cz" firstAttribute="trailing" secondItem="qlY-G9-oj8" secondAttribute="trailing" constant="25" id="rxS-BL-M6X"/>
+                            <constraint firstItem="kdu-e2-8cz" firstAttribute="trailing" secondItem="lhT-aq-ezO" secondAttribute="trailing" constant="25" id="y11-Ui-wCS"/>
+                            <constraint firstItem="CgY-86-Uyz" firstAttribute="top" secondItem="hvy-wf-TqK" secondAttribute="bottom" constant="25" id="yP4-7l-2I4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kdu-e2-8cz"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="记下助记词" id="fRA-hf-Rq9">
+                        <barButtonItem key="leftBarButtonItem" id="xaA-ur-hHT">
+                            <connections>
+                                <action selector="bil_pop" destination="8XA-fy-7b1" id="RMr-9N-0KL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mnemonicView" destination="lhT-aq-ezO" id="5ec-VR-F9K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r0U-AR-7Xy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1957.5999999999999" y="147.97601199400302"/>
+        </scene>
+        <!--验证助记词-->
+        <scene sceneID="fZz-NA-sl5">
+            <objects>
+                <viewController id="iJ2-St-9aK" customClass="BILVerifyMnemonicController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JvS-1R-TJT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按顺序点击助记词，确认您的助记词备份正确" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ua5-CA-eV7">
+                                <rect key="frame" x="25" y="89" width="325" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhh-BX-E5a" customClass="BILMnemonicView" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="131" width="325" height="125"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="Vuo-cA-1fX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jhk-cm-Xns" customClass="BILMnemonicView" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="271" width="325" height="125"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="bDd-2j-Dka"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7V-Xw-Pbi" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="421" width="325" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="bWO-tE-ZiF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="确认">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="VWb-8M-TT1" firstAttribute="trailing" secondItem="l7V-Xw-Pbi" secondAttribute="trailing" constant="25" id="4fM-BH-Kmd"/>
+                            <constraint firstItem="ua5-CA-eV7" firstAttribute="leading" secondItem="VWb-8M-TT1" secondAttribute="leading" constant="25" id="79T-WX-ZTe"/>
+                            <constraint firstItem="VWb-8M-TT1" firstAttribute="trailing" secondItem="Jhk-cm-Xns" secondAttribute="trailing" constant="25" id="7tb-gf-4CC"/>
+                            <constraint firstItem="l7V-Xw-Pbi" firstAttribute="top" secondItem="Jhk-cm-Xns" secondAttribute="bottom" constant="25" id="Ael-ZD-Dsl"/>
+                            <constraint firstItem="VWb-8M-TT1" firstAttribute="trailing" secondItem="ua5-CA-eV7" secondAttribute="trailing" constant="25" id="AiP-Nv-mwR"/>
+                            <constraint firstItem="vhh-BX-E5a" firstAttribute="leading" secondItem="VWb-8M-TT1" secondAttribute="leading" constant="25" id="EJT-qH-t4u"/>
+                            <constraint firstItem="VWb-8M-TT1" firstAttribute="trailing" secondItem="vhh-BX-E5a" secondAttribute="trailing" constant="25" id="Joj-RG-TNP"/>
+                            <constraint firstItem="Jhk-cm-Xns" firstAttribute="top" secondItem="vhh-BX-E5a" secondAttribute="bottom" constant="15" id="Lty-Gq-5H1"/>
+                            <constraint firstItem="vhh-BX-E5a" firstAttribute="top" secondItem="ua5-CA-eV7" secondAttribute="bottom" constant="25" id="MbM-6D-V7z"/>
+                            <constraint firstItem="Jhk-cm-Xns" firstAttribute="leading" secondItem="VWb-8M-TT1" secondAttribute="leading" constant="25" id="sSl-NP-kGe"/>
+                            <constraint firstItem="l7V-Xw-Pbi" firstAttribute="leading" secondItem="VWb-8M-TT1" secondAttribute="leading" constant="25" id="t7t-2E-HJ0"/>
+                            <constraint firstItem="ua5-CA-eV7" firstAttribute="top" secondItem="VWb-8M-TT1" secondAttribute="top" constant="25" id="ulE-Uo-SgM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VWb-8M-TT1"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="验证助记词" id="zoM-4O-otz"/>
+                    <connections>
+                        <outlet property="randomMnemonicView" destination="Jhk-cm-Xns" id="ImU-Dd-xZS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ac3-lh-93u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2780" y="148"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TEn-Ez-fIO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hPR-jq-dbh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lWj-rt-Qwv">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8XA-fy-7b1" kind="relationship" relationship="rootViewController" id="RHV-nY-Hsf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xcR-3v-itN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1135" y="148"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pic_no_snapshot" width="50" height="50"/>
+    </resources>
+</document>

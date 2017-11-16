@@ -9,6 +9,7 @@
 import UIKit
 import PopupDialog
 import IQKeyboardManagerSwift
+import Foundation
 
 class BILAppStartUpManager: NSObject {
 	
@@ -23,7 +24,13 @@ class BILAppStartUpManager: NSObject {
 		setupIQKeyboard()
 		loadJS()
 		snapshotNavBackgroundImage()
+		setupTextFieldAppearance()
 //		setupNavigationBarAppearance()
+	}
+	
+	private func setupTextFieldAppearance() {
+		let appearance = UITextField.appearance()
+		appearance.tintColor = UIColor.white
 	}
 	
 	private func snapshotNavBackgroundImage() {
@@ -45,6 +52,12 @@ class BILAppStartUpManager: NSObject {
 		let appearance = UINavigationBar.appearance()
 		appearance.setBackgroundImage(UIImage(), for: .default)
 		appearance.shadowImage = UIImage()
+		appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+		appearance.tintColor = UIColor.white
+		if #available(iOS 11.0, *) {
+			appearance.prefersLargeTitles = true
+			appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+		}
 	}
 	
 	private func setupPopupDialog() {

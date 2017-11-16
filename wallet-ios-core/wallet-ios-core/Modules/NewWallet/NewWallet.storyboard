@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Welcome View Controller-->
+        <!--欢迎-->
         <scene sceneID="Gij-tA-ZH9">
             <objects>
                 <viewController id="Pad-Ft-1oa" customClass="BILWelcomeViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,19 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎使用Bitbill钱包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHI-EC-8qs">
-                                <rect key="frame" x="30" y="164" width="315" height="36"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数字资产 All in one" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHI-EC-8qs">
+                                <rect key="frame" x="30" y="136" width="315" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRB-VO-O9f">
-                                <rect key="frame" x="30" y="230" width="315" height="115"/>
-                                <string key="text">比特宝钱包用以存放你的数字资产。
-创建钱包完成，请抄写、妥善保存你的助记词，只有助记词能恢复账户，一旦丢失，无法找回！
-不要轻易卸载和删除钱包（做此操作前先备份助记词）！</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="0.70176048801369861" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99u-my-xAt" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
@@ -63,21 +54,18 @@
                         <color key="backgroundColor" red="0.20784313725490194" green="0.22745098039215686" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="99u-my-xAt" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" constant="25" id="8c1-kR-RGr"/>
-                            <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="jRB-VO-O9f" secondAttribute="trailing" constant="30" id="9De-gR-jak"/>
                             <constraint firstItem="AWM-gj-7pr" firstAttribute="top" secondItem="99u-my-xAt" secondAttribute="bottom" constant="15" id="A2I-0C-baq"/>
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="AWM-gj-7pr" secondAttribute="trailing" constant="25" id="BiP-SH-8Oq"/>
-                            <constraint firstItem="jRB-VO-O9f" firstAttribute="top" secondItem="dHI-EC-8qs" secondAttribute="bottom" constant="30" id="XpB-0S-CmO"/>
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="99u-my-xAt" secondAttribute="trailing" constant="25" id="Ytd-8P-tcy"/>
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="bottom" secondItem="AWM-gj-7pr" secondAttribute="bottom" constant="30" id="YxG-uj-rTG"/>
-                            <constraint firstItem="dHI-EC-8qs" firstAttribute="top" secondItem="b1d-6s-LV2" secondAttribute="top" constant="100" id="cYI-rz-0fz"/>
-                            <constraint firstItem="jRB-VO-O9f" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" constant="30" id="j87-Mg-uod"/>
+                            <constraint firstItem="dHI-EC-8qs" firstAttribute="top" secondItem="b1d-6s-LV2" secondAttribute="top" constant="20" id="cYI-rz-0fz"/>
                             <constraint firstItem="dHI-EC-8qs" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" constant="30" id="mVo-1G-JBJ"/>
                             <constraint firstItem="AWM-gj-7pr" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" constant="25" id="v94-KO-0zm"/>
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="dHI-EC-8qs" secondAttribute="trailing" constant="30" id="wZ0-ls-jx6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b1d-6s-LV2"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ucR-LZ-9nJ"/>
+                    <navigationItem key="navigationItem" title="欢迎" id="ucR-LZ-9nJ"/>
                     <connections>
                         <outlet property="newWalletButton" destination="99u-my-xAt" id="vIA-6T-GPR"/>
                     </connections>
@@ -95,7 +83,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evy-P9-DcP">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQ0-7J-8kK">
                                         <rect key="frame" x="25" y="24" width="325" height="377"/>
@@ -380,12 +368,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="toO-yT-FMS"/>
                     </view>
-                    <navigationItem key="navigationItem" title="创建钱包" id="IzW-ej-leD">
-                        <barButtonItem key="backBarButtonItem" title="pic_nav_background" id="jPU-Tz-nuE"/>
-                        <barButtonItem key="leftBarButtonItem" image="btn_back" id="pEH-l1-Fgy">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="创建钱包" id="IzW-ej-leD"/>
                     <connections>
                         <outlet property="confirmPasswordInputView" destination="HZ0-VV-HbH" id="kLt-xo-fIJ"/>
                         <outlet property="confirmPasswordTextField" destination="5Hf-Dg-FgH" id="ksT-uJ-03R"/>
@@ -432,6 +415,9 @@
                             <state key="normal" title="备份钱包">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <segue destination="Y21-ob-PSG" kind="show" id="gcb-HK-JvT"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ov8-iQ-hUT">
                             <rect key="frame" x="25" y="293.5" width="325" height="55"/>
@@ -467,18 +453,29 @@
             </objects>
             <point key="canvasLocation" x="1272.8" y="151.57421289355324"/>
         </scene>
+        <!--BILBackupWalletMnemonicController-->
+        <scene sceneID="dzg-St-Mqh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="BackupWallet" referencedIdentifier="BILBackupWalletMnemonicController" id="Y21-ob-PSG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tqo-tD-NAR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2026" y="151"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="dNE-2E-WvW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jpv-SB-IYp" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QKL-vM-9CI">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="QKL-vM-9CI">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
@@ -492,9 +489,6 @@
             <point key="canvasLocation" x="-436" y="152"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="btn_back" width="11" height="18"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7m6-ve-BqF"/>
     </inferredMetricsTieBreakers>

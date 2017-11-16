@@ -14,7 +14,10 @@ class BILGradientButton: UIButton {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		gradientLayer = setupGradient()
+		gradientLayer = setupGradient(startPoint: CGPoint(x: 0, y: 0.5),
+									  endPoint: CGPoint(x: 1, y: 0.5))
+		
+		setTitleColor(UIColor.white, for: .normal)
 	}
 	override func layoutSubviews() {
 		super.layoutSubviews()
