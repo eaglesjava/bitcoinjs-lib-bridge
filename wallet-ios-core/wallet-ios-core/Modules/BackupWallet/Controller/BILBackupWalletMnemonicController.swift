@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import CryptoSwift
 
-class BILBackupWalletMnemonicController: UIViewController {
+class BILBackupWalletMnemonicController: BILBaseViewController {
 
 	@IBOutlet weak var mnemonicView: BILMnemonicView!
 	var wallet: WalletModel?
@@ -28,11 +28,6 @@ class BILBackupWalletMnemonicController: UIViewController {
         // Do any additional setup after loading the view.
 		mnemonicView.emptyTitle = "请输入密码解锁助记词"
     }
-	
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		bil_setBackgroudColor()
-	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)

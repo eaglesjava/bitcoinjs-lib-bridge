@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILVerifyMnemonicController: UIViewController, BILMnemonicViewDelegate {
+class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegate {
 
 	@IBOutlet weak var randomMnemonicView: BILMnemonicView!
 	@IBOutlet weak var verifyMnemonicView: BILMnemonicView!

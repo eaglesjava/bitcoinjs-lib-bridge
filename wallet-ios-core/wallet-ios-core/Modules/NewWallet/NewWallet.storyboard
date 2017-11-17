@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数字资产 All in one" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHI-EC-8qs">
-                                <rect key="frame" x="30" y="136" width="315" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99u-my-xAt" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
                                 <rect key="frame" x="25" y="512" width="325" height="55"/>
                                 <constraints>
@@ -50,18 +44,32 @@
                                     <segue destination="7rK-Mf-YUl" kind="show" identifier="BILRecoverWallet" id="jf2-fv-e5c"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_guide_phone" translatesAutoresizingMaskIntoConstraints="NO" id="JJ3-5k-m9d">
+                                <rect key="frame" x="144" y="290" width="88" height="125"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wv8-kW-7dL">
+                                <rect key="frame" x="0.0" y="136" width="375" height="339"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="CBq-z2-CC0">
+                                <rect key="frame" x="176" y="475" width="23" height="37"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313725490194" green="0.22745098039215686" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="CBq-z2-CC0" firstAttribute="centerX" secondItem="b1d-6s-LV2" secondAttribute="centerX" id="2Ow-yZ-7yl"/>
                             <constraint firstItem="99u-my-xAt" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" constant="25" id="8c1-kR-RGr"/>
                             <constraint firstItem="AWM-gj-7pr" firstAttribute="top" secondItem="99u-my-xAt" secondAttribute="bottom" constant="15" id="A2I-0C-baq"/>
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="AWM-gj-7pr" secondAttribute="trailing" constant="25" id="BiP-SH-8Oq"/>
+                            <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="Wv8-kW-7dL" secondAttribute="trailing" id="EjY-mH-2Sc"/>
+                            <constraint firstItem="99u-my-xAt" firstAttribute="top" secondItem="CBq-z2-CC0" secondAttribute="bottom" id="IgF-HH-0PS"/>
+                            <constraint firstItem="Wv8-kW-7dL" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" id="IuM-RL-SVE"/>
+                            <constraint firstItem="JJ3-5k-m9d" firstAttribute="centerX" secondItem="Iec-ac-KuR" secondAttribute="centerX" id="UrR-N4-o8G"/>
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="99u-my-xAt" secondAttribute="trailing" constant="25" id="Ytd-8P-tcy"/>
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="bottom" secondItem="AWM-gj-7pr" secondAttribute="bottom" constant="30" id="YxG-uj-rTG"/>
-                            <constraint firstItem="dHI-EC-8qs" firstAttribute="top" secondItem="b1d-6s-LV2" secondAttribute="top" constant="20" id="cYI-rz-0fz"/>
-                            <constraint firstItem="dHI-EC-8qs" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" constant="30" id="mVo-1G-JBJ"/>
+                            <constraint firstItem="CBq-z2-CC0" firstAttribute="top" secondItem="Wv8-kW-7dL" secondAttribute="bottom" id="jM3-5p-P4P"/>
+                            <constraint firstItem="CBq-z2-CC0" firstAttribute="top" secondItem="JJ3-5k-m9d" secondAttribute="bottom" constant="60" id="mjf-4T-qD0"/>
+                            <constraint firstItem="Wv8-kW-7dL" firstAttribute="top" secondItem="b1d-6s-LV2" secondAttribute="top" constant="20" id="upx-6W-lAQ"/>
                             <constraint firstItem="AWM-gj-7pr" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" constant="25" id="v94-KO-0zm"/>
-                            <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="dHI-EC-8qs" secondAttribute="trailing" constant="30" id="wZ0-ls-jx6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b1d-6s-LV2"/>
                     </view>
@@ -525,6 +533,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="pic_guide_phone" width="88" height="125"/>
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>

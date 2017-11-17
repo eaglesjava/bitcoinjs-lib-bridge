@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILBackupWalletSuccessController: UIViewController {
+class BILBackupWalletSuccessController: BILBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

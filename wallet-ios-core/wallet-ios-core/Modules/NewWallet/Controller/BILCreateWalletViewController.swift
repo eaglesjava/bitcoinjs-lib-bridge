@@ -12,7 +12,7 @@ import CoreData
 import CryptoSwift
 import PopupDialog
 
-class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
+class BILCreateWalletViewController: BILBaseViewController, UITextFieldDelegate {
 	
 	enum CreateWalletType {
 		case new
@@ -54,11 +54,6 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 		title = "\(titleString)钱包"
 		createButton.setTitle("开始\(titleString)", for: .normal)
     }
-	
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		bil_setBackgroudColor()
-	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(true)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILCreateWalletSuccessController: UIViewController {
+class BILCreateWalletSuccessController: BILBaseViewController {
 
 	var mnemonicHash: String?
 	
