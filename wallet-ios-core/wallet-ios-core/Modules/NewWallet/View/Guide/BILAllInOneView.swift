@@ -10,6 +10,11 @@ import UIKit
 
 class BILAllInOneView: UIView {
 
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		backgroundColor = UIColor.clear
+	}
+	
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

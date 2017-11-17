@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILWelcomeViewController: BILBaseViewController {
+class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
 
 	@IBOutlet weak var newWalletButton: BILGradientButton!
 	override func viewDidLoad() {
@@ -17,16 +17,6 @@ class BILWelcomeViewController: BILBaseViewController {
         // Do any additional setup after loading the view.
 		
     }
-	
-	override func viewWillAppear(_ animated: Bool) {
-//		navigationController?.setNavigationBarHidden(true, animated: animated)
-		super.viewWillAppear(animated)
-	}
-	
-	override func viewWillDisappear(_ animated: Bool) {
-//		navigationController?.setNavigationBarHidden(false, animated: animated)
-		super.viewWillDisappear(animated)
-	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
