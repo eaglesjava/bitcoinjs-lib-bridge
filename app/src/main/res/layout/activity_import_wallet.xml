@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="@dimen/activity_padding"
+              tools:context="com.bitbill.www.ui.wallet.importing.ImportWalletActivity">
+
+
+    <TextView
+        style="@style/Text.InputTitle"
+        android:layout_marginTop="40dp"
+        android:text="@string/text_mnemonic"/>
+
+    <EditText
+        android:id="@+id/et_input_mnemonic"
+        style="@style/Text.InputTitle"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/bg_input_mnemonic"
+        android:gravity="center"
+        android:hint="@string/hint_click_input_please"
+        android:lines="2"
+        android:padding="25dp"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/input_mnemonic"/>
+
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/Button.Blue"
+        android:layout_width="match_parent"
+        android:text="@string/btn_next"/>
+</LinearLayout>

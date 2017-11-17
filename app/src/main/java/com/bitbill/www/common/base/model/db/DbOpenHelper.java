@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
-import com.bitbill.www.model.app.entity.DaoMaster;
+import com.bitbill.www.model.wallet.db.entity.DaoMaster;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -35,8 +35,8 @@ public class DbOpenHelper extends DaoMaster.OpenHelper {
         switch (oldVersion) {
             case 1:
             case 2:
-                //db.execSQL("ALTER TABLE " + AppDao.TABLENAME + " ADD COLUMN "
-                // + AppDao.Properties.Name.columnName + " TEXT DEFAULT 'DEFAULT_VAL'");
+                //db.execSQL("ALTER TABLE " + WalletDao.TABLENAME + " ADD COLUMN "
+                // + WalletDao.Properties.Name.columnName + " TEXT DEFAULT 'DEFAULT_VAL'");
         }
     }
 }

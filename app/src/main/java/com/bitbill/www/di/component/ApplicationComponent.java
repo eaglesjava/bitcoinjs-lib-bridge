@@ -11,6 +11,7 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.di.module.ApplicationModule;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.wallet.WalletModel;
 
 import javax.inject.Singleton;
 
@@ -33,6 +34,8 @@ public interface ApplicationComponent {
     Application application();
 
     AppModel getAppModel();
+
+    WalletModel getWalletModel();
 
     Socket getSocket();
 }

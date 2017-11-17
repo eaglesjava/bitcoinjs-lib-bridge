@@ -17,6 +17,8 @@ import butterknife.ButterKnife;
 public abstract class BaseToolbarActivity<P extends MvpPresenter> extends BaseActivity<P> implements BaseViewControl {
     public static final int CONTENT_VIEW_ID = R.id.content_view;
     private static final int BASE_VIEW_ID = R.layout.activity_base_toolbar;
+    private static final ViewGroup.LayoutParams LAYOUT_PARAMS = new ViewGroup.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
     protected LinearLayout mParentView;
     protected ViewGroup mContentView;
     protected android.support.v7.widget.Toolbar mToolbar;
@@ -41,7 +43,7 @@ public abstract class BaseToolbarActivity<P extends MvpPresenter> extends BaseAc
         super.setContentView(BASE_VIEW_ID);
         initBaseView();
         if (layoutResID != 0) {
-            mContentView.addView(getLayoutInflater().inflate(layoutResID, null), 0);
+            mContentView.addView(getLayoutInflater().inflate(layoutResID, null), 0, LAYOUT_PARAMS);
         }
     }
 
@@ -50,7 +52,7 @@ public abstract class BaseToolbarActivity<P extends MvpPresenter> extends BaseAc
         super.setContentView(getLayoutInflater().inflate(BASE_VIEW_ID, null));
         initBaseView();
         if (view != null) {
-            mContentView.addView(view, 0);
+            mContentView.addView(view, 0, LAYOUT_PARAMS);
         }
     }
 

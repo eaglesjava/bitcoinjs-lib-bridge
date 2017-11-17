@@ -1,6 +1,6 @@
 
 
-package com.bitbill.www.model.app.entity;
+package com.bitbill.www.model.wallet.db.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -11,8 +11,8 @@ import org.greenrobot.greendao.annotation.Property;
  * Created by isanwenyu@163.com on 2017/11/17.
  */
 
-@Entity(nameInDb = "app")
-public class App {
+@Entity(nameInDb = "wallet")
+public class Wallet {
 
     @Id(autoincrement = true)
     private Long id;
@@ -27,16 +27,16 @@ public class App {
     private String updatedAt;
 
 
-    @Generated(hash = 906240480)
-    public App(Long id, String name, String createdAt, String updatedAt) {
+    @Generated(hash = 1870327911)
+    public Wallet(Long id, String name, String createdAt, String updatedAt) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    @Generated(hash = 407064589)
-    public App() {
+    @Generated(hash = 1197745249)
+    public Wallet() {
     }
 
     public Long getId() {

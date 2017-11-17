@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
-import com.bitbill.www.ui.wallet.CreateOrImportWalletActivity;
+import com.bitbill.www.ui.wallet.InitWalletActivity;
 import com.rd.PageIndicatorView;
 
 import butterknife.BindView;
@@ -100,11 +100,11 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
         switch (view.getId()) {
             case R.id.btn_create_wallet:
                 //跳转到创建钱包界面
-                CreateOrImportWalletActivity.start(GuideActivity.this, CreateOrImportWalletActivity.CREATE_WALLET);
+                InitWalletActivity.start(GuideActivity.this, InitWalletActivity.CREATE_WALLET);
                 break;
             case R.id.btn_import_wallet:
                 //跳转到导入钱包界面
-                CreateOrImportWalletActivity.start(GuideActivity.this, CreateOrImportWalletActivity.IMPORT_WALLET);
+                InitWalletActivity.start(GuideActivity.this, InitWalletActivity.IMPORT_WALLET);
                 break;
         }
     }

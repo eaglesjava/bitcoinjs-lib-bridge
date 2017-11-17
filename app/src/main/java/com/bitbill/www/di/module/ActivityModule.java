@@ -13,9 +13,13 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.qualifier.ActivityContext;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.ui.main.MainMvpPresenter;
 import com.bitbill.www.ui.main.MainMvpView;
 import com.bitbill.www.ui.main.MainPresenter;
+import com.bitbill.www.ui.wallet.InitWalletMvpPresenter;
+import com.bitbill.www.ui.wallet.InitWalletMvpView;
+import com.bitbill.www.ui.wallet.InitWalletPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -59,6 +63,13 @@ public class ActivityModule {
     @PerActivity
     MainMvpPresenter<AppModel, MainMvpView> provideMainPresenter(
             MainPresenter<AppModel, MainMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    InitWalletMvpPresenter<WalletModel, InitWalletMvpView> provideInitWalletPresenter(
+            InitWalletPresenter<WalletModel, InitWalletMvpView> presenter) {
         return presenter;
     }
 

@@ -24,6 +24,8 @@ import com.bitbill.www.model.app.network.AppApi;
 import com.bitbill.www.model.app.network.AppApiHelper;
 import com.bitbill.www.model.app.prefs.AppPreferences;
 import com.bitbill.www.model.app.prefs.AppPreferencesHelper;
+import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.WalletModelManager;
 
 import javax.inject.Singleton;
 
@@ -121,6 +123,12 @@ public class ApplicationModule {
     @Singleton
     Socket provideSocketIo(SocketHelper socketHelper) {
         return socketHelper.getSocket();
+    }
+
+    @Provides
+    @Singleton
+    WalletModel provideWalletModuleManager(WalletModelManager walletModelManager) {
+        return walletModelManager;
     }
 
 

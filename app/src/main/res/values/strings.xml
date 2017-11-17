@@ -59,5 +59,12 @@
     <string name="title_security">安全设置</string>
     <string name="title_wallet_manage">钱包集成</string>
     <string name="title_setting">设置</string>
+    <string name="text_mnemonic">助记词</string>
+    <string name="hint_click_input_please">请点击输入</string>
+    <string name="btn_next">下一步</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

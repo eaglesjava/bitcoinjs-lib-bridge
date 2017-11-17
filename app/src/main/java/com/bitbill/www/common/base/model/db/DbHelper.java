@@ -5,8 +5,8 @@
 package com.bitbill.www.common.base.model.db;
 
 
-import com.bitbill.www.model.app.entity.DaoMaster;
-import com.bitbill.www.model.app.entity.DaoSession;
+import com.bitbill.www.model.wallet.db.entity.DaoMaster;
+import com.bitbill.www.model.wallet.db.entity.DaoSession;
 
 import javax.inject.Inject;
 

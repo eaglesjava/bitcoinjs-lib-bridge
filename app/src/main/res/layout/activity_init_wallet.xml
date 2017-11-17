@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               android:gravity="center_horizontal"
               android:orientation="vertical"
-              tools:context="com.bitbill.www.ui.wallet.CreateOrImportWalletActivity">
+              tools:context="com.bitbill.www.ui.wallet.InitWalletActivity">
 
     <ScrollView
         android:id="@+id/wallet_form"
@@ -14,7 +14,7 @@
         android:padding="25dp">
 
         <LinearLayout
-            android:id="@+id/create_import_wallet_form"
+            android:id="@+id/init_wallet_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

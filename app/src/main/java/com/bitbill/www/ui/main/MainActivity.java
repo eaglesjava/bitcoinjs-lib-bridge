@@ -54,6 +54,12 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDetach();
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {

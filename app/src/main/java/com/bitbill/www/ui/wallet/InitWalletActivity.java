@@ -14,6 +14,10 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
+import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,7 +26,7 @@ import butterknife.OnClick;
  * 导入钱包
  * Created by isanwenyu@163.com on 2017/11/14.
  */
-public class CreateOrImportWalletActivity extends BaseToolbarActivity {
+public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresenter> implements InitWalletMvpView {
 
     public static final int CREATE_WALLET = 0;
     public static final int IMPORT_WALLET = 1;
@@ -35,19 +39,33 @@ public class CreateOrImportWalletActivity extends BaseToolbarActivity {
     EditTextWapper etwTradePwdConfirm;
     @BindView(R.id.btn_start)
     Button btnStart;
-    @BindView(R.id.create_import_wallet_form)
-    LinearLayout createImportWalletForm;
+    @BindView(R.id.init_wallet_form)
+    LinearLayout initWalletForm;
     @BindView(R.id.wallet_form)
     ScrollView walletForm;
 
+    @Inject
+    InitWalletMvpPresenter<WalletModel, InitWalletMvpView> initWalletMvpPresenter;
+    private int mCreateOrImportStatus;
+
     public static void start(Context context, int createOrImport) {
-        Intent intent = new Intent(context, CreateOrImportWalletActivity.class);
+        Intent intent = new Intent(context, InitWalletActivity.class);
         intent.putExtra(CREATE_IMPORT_ETRA, createOrImport);
         context.startActivity(intent);
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        initWalletMvpPresenter.onDetach();
+    }
+
+    @Override
     public void onBeforeSetContentLayout() {
+        //inject activity
+        getActivityComponent().inject(this);
+        initWalletMvpPresenter.onAttach(this);
+
 
     }
 
@@ -91,12 +109,12 @@ public class CreateOrImportWalletActivity extends BaseToolbarActivity {
 
     @Override
     public void initData() {
-
+        mCreateOrImportStatus = getIntent().getIntExtra(CREATE_IMPORT_ETRA, 0);
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_create_import_wallet;
+        return R.layout.activity_init_wallet;
     }
 
     @OnClick(R.id.btn_start)
@@ -144,7 +162,16 @@ public class CreateOrImportWalletActivity extends BaseToolbarActivity {
             // perform the wallet create or import attempt.
             showProgress(true);
             // TODO: 2017/11/14 create or import wallet logic
+            initWalletMvpPresenter.initWallet();
+            if (isCreateWallet()) {
+                initWalletMvpPresenter.createMnemonic();
+            }
+
         }
+    }
+
+    private boolean isCreateWallet() {
+        return mCreateOrImportStatus == CREATE_WALLET;
     }
 
     private void showProgress(boolean show) {
@@ -174,6 +201,29 @@ public class CreateOrImportWalletActivity extends BaseToolbarActivity {
 
     public String getConfirmTradePwd() {
         return etwTradePwdConfirm.getText();
+    }
+
+    @Override
+    public void initWalletSuccess() {
+//        if (!isCreateWallet()) {
+        //跳转到导入钱包流程
+        ImportWalletActivity.start(this);
+//        }
+    }
+
+    @Override
+    public void initWalletFail() {
+
+    }
+
+    @Override
+    public void createMnemonicSuccess() {
+
+    }
+
+    @Override
+    public void createMnemonicFail() {
+
     }
 }
 
