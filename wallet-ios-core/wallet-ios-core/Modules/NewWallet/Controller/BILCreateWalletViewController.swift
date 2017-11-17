@@ -23,8 +23,6 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 		}
 		
 	}
-
-	@IBOutlet var sucessView: BILCreateWalletSucessView!
 	
 	@IBOutlet weak var inputsView: UIView!
 	@IBOutlet weak var passwordStrengthView: BILPasswordStrengthView!
@@ -44,6 +42,7 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 			createWalletType = .recover
 		}
 	}
+	var mnemonicHash: String?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,14 +96,7 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 	}
 	
 	func createSuccess() {
-		view.addSubview(sucessView)
-		sucessView.alpha = 0
-		sucessView.frame = inputsView.frame
-		sucessView.backgroundColor = UIColor.clear
-		UIView.animate(withDuration: 0.35) {
-			self.sucessView.alpha = 1
-			self.inputsView.alpha = 0
-		}
+		performSegue(withIdentifier: "BILCreateWalletSuccessSegue", sender: nil)
 	}
 	
 	func checkPassword() -> Bool {
@@ -156,6 +148,8 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 					wallet.encryptedMnemonic = try aes.encrypt(Array(m.bytes)).toHexString()
 					wallet.encryptedSeed = try aes.encrypt(Array(s.bytes)).toHexString()
 					wallet.seedHash = s.md5()
+					wallet.mnemonicHash = m.md5()
+					self.mnemonicHash = wallet.mnemonicHash
 					
 					if let seed = String(bytes: try aes.decrypt((wallet.encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seed == s {
 						try context.save()
@@ -260,7 +254,10 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-		
+		if segue.identifier == "BILCreateWalletSuccessSegue" {
+			let cont = segue.destination as! BILCreateWalletSuccessController
+			cont.mnemonicHash = mnemonicHash
+		}
     }
 
 }

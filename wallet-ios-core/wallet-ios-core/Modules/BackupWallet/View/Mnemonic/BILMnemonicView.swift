@@ -10,15 +10,20 @@ import UIKit
 import SnapKit
 import DZNEmptyDataSet
 
-class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, DZNEmptyDataSetSource {
 	
 	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var delegate: BILMnemonicViewDelegate?
+	
+	var emptyTitle: String?
 	
 	var dataArray = [String]() {
 		didSet {
 			collectionView.reloadData()
 		}
 	}
+	
+	var selectedArray = [String]()
 	
 	var mnemonic = "" {
 		didSet {
@@ -39,6 +44,10 @@ class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			})
 			
 			collectionView.register(UINib(nibName: "BILMnemonicCell", bundle: nil), forCellWithReuseIdentifier: "BILMnemonicCell")
+			collectionView.allowsSelection = false
+			if delegate != nil {
+				collectionView.allowsMultipleSelection = true
+			}
 		}
 		
 		layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
@@ -63,6 +72,29 @@ class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		size.width += 18
 		size.height = 30
 		return size
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		selectedArray.append(dataArray[indexPath.item])
+		if let d = delegate {
+			d.selectedMnemonicArrayDidChange(mnemonicView: self, currentArray: selectedArray)
+		}
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+		if let index = selectedArray.index(of: dataArray[indexPath.item]) {
+			selectedArray.remove(at: index)
+		}
+		if let d = delegate {
+			d.selectedMnemonicArrayDidChange(mnemonicView: self, currentArray: selectedArray)
+		}
+	}
+	
+	func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+		
+		let title = NSAttributedString(string: emptyTitle ?? "", attributes: [NSAttributedStringKey.foregroundColor : UIColor.bil_white_60_color, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 21)])
+		
+		return title
 	}
 
     /*

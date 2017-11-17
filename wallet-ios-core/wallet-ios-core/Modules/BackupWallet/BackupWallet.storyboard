@@ -104,7 +104,7 @@
             </objects>
             <point key="canvasLocation" x="1957.5999999999999" y="147.97601199400302"/>
         </scene>
-        <!--验证助记词-->
+        <!--Delegate-->
         <scene sceneID="fZz-NA-sl5">
             <objects>
                 <viewController id="iJ2-St-9aK" customClass="BILVerifyMnemonicController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
@@ -124,6 +124,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="Vuo-cA-1fX"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="iJ2-St-9aK" id="92S-6I-Kdh"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jhk-cm-Xns" customClass="BILMnemonicView" customModule="wallet_ios_core" customModuleProvider="target">
                                 <rect key="frame" x="25" y="271" width="325" height="125"/>
@@ -131,6 +134,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="bDd-2j-Dka"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="iJ2-St-9aK" id="iWn-Co-dH0"/>
+                                </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7V-Xw-Pbi" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
                                 <rect key="frame" x="25" y="421" width="325" height="55"/>
@@ -141,6 +147,9 @@
                                 <state key="normal" title="确认">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="verifyMnemonicAction:" destination="iJ2-St-9aK" eventType="touchUpInside" id="NXL-Py-QLE"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -163,11 +172,70 @@
                     <navigationItem key="navigationItem" title="验证助记词" id="zoM-4O-otz"/>
                     <connections>
                         <outlet property="randomMnemonicView" destination="Jhk-cm-Xns" id="ImU-Dd-xZS"/>
+                        <outlet property="verifyMnemonicView" destination="vhh-BX-E5a" id="pVX-Zv-CjF"/>
+                        <segue destination="IyX-gE-Y7F" kind="showDetail" identifier="BILBackUpSuccessSugue" action="showViewController:sender:" id="fvx-de-Ubx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ac3-lh-93u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2780" y="148"/>
+        </scene>
+        <!--备份成功-->
+        <scene sceneID="CEx-q3-ioG">
+            <objects>
+                <viewController id="IyX-gE-Y7F" customClass="BILBackupWalletSuccessController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hXN-ez-d8g">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_success" translatesAutoresizingMaskIntoConstraints="NO" id="JU9-oR-f57">
+                                <rect key="frame" x="155.5" y="45" width="63" height="63"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备份成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhF-lJ-FtW">
+                                <rect key="frame" x="150.5" y="128" width="73.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请妥善保管您的助记词" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eak-mz-PIO">
+                                <rect key="frame" x="115.5" y="164" width="143" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fa-hr-uEL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="211" width="325" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="XJu-Dz-Mkr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="完成">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneAction:" destination="IyX-gE-Y7F" eventType="touchUpInside" id="1bp-AD-n8x"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Bbi-qb-RM5" firstAttribute="trailing" secondItem="1fa-hr-uEL" secondAttribute="trailing" constant="25" id="6mi-eC-J4X"/>
+                            <constraint firstItem="JU9-oR-f57" firstAttribute="centerX" secondItem="Bbi-qb-RM5" secondAttribute="centerX" id="Fyl-WH-Do3"/>
+                            <constraint firstItem="IhF-lJ-FtW" firstAttribute="top" secondItem="JU9-oR-f57" secondAttribute="bottom" constant="20" id="Kly-4D-gA9"/>
+                            <constraint firstItem="JU9-oR-f57" firstAttribute="top" secondItem="Bbi-qb-RM5" secondAttribute="top" constant="25" id="Pdy-Mc-BHA"/>
+                            <constraint firstItem="eak-mz-PIO" firstAttribute="top" secondItem="IhF-lJ-FtW" secondAttribute="bottom" constant="15" id="VkH-yt-SwD"/>
+                            <constraint firstItem="1fa-hr-uEL" firstAttribute="leading" secondItem="Bbi-qb-RM5" secondAttribute="leading" constant="25" id="ZUc-Bz-aCg"/>
+                            <constraint firstItem="IhF-lJ-FtW" firstAttribute="centerX" secondItem="JU9-oR-f57" secondAttribute="centerX" id="bUJ-x3-A07"/>
+                            <constraint firstItem="eak-mz-PIO" firstAttribute="centerX" secondItem="IhF-lJ-FtW" secondAttribute="centerX" id="fz7-iH-gzj"/>
+                            <constraint firstItem="1fa-hr-uEL" firstAttribute="top" secondItem="eak-mz-PIO" secondAttribute="bottom" constant="30" id="qfF-Ax-XtP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Bbi-qb-RM5"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="备份成功" id="qgc-Mh-7ji"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LLz-dB-bvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3614" y="148"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TEn-Ez-fIO">
@@ -191,5 +259,6 @@
     </scenes>
     <resources>
         <image name="pic_no_snapshot" width="50" height="50"/>
+        <image name="pic_success" width="63" height="63"/>
     </resources>
 </document>

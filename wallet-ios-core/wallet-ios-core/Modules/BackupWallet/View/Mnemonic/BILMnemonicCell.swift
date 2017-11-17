@@ -12,4 +12,10 @@ class BILMnemonicCell: UICollectionViewCell {
     
 	@IBOutlet weak var title: UILabel!
 	
+	override var isSelected: Bool {
+		didSet {
+			title.textColor = isSelected ? UIColor.bil_white_60_color : UIColor.white
+		}
+	}
+	
 }
