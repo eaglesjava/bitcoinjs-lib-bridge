@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_guide_phone_bg" translatesAutoresizingMaskIntoConstraints="NO" id="QaA-l2-dNc">
-                    <rect key="frame" x="161" y="179" width="53" height="53"/>
+                    <rect key="frame" x="161" y="174" width="53" height="53"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数字资产 All in one" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvj-kQ-byn">
                     <rect key="frame" x="30" y="8" width="234.5" height="34"/>
@@ -28,7 +28,7 @@
             </subviews>
             <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="QaA-l2-dNc" secondAttribute="bottom" constant="95" id="Pmm-Rn-thB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="QaA-l2-dNc" secondAttribute="bottom" constant="100" id="Pmm-Rn-thB"/>
                 <constraint firstItem="Xvj-kQ-byn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="a0y-bI-84f"/>
                 <constraint firstItem="QaA-l2-dNc" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="wNU-TO-lMb"/>
                 <constraint firstItem="Xvj-kQ-byn" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="zaP-cH-Gn9"/>

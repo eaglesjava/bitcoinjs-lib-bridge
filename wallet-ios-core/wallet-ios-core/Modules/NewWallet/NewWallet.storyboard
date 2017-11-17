@@ -45,9 +45,9 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_guide_phone" translatesAutoresizingMaskIntoConstraints="NO" id="JJ3-5k-m9d">
-                                <rect key="frame" x="143.5" y="288" width="88" height="125"/>
+                                <rect key="frame" x="143.5" y="283" width="88" height="125"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wv8-kW-7dL">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wv8-kW-7dL">
                                 <rect key="frame" x="0.0" y="136" width="375" height="327"/>
                                 <connections>
                                     <outlet property="delegate" destination="Pad-Ft-1oa" id="zoV-EF-WDX"/>
@@ -70,7 +70,7 @@
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="trailing" secondItem="99u-my-xAt" secondAttribute="trailing" constant="25" id="Ytd-8P-tcy"/>
                             <constraint firstItem="b1d-6s-LV2" firstAttribute="bottom" secondItem="AWM-gj-7pr" secondAttribute="bottom" constant="30" id="YxG-uj-rTG"/>
                             <constraint firstItem="CBq-z2-CC0" firstAttribute="top" secondItem="Wv8-kW-7dL" secondAttribute="bottom" id="jM3-5p-P4P"/>
-                            <constraint firstItem="CBq-z2-CC0" firstAttribute="top" secondItem="JJ3-5k-m9d" secondAttribute="bottom" constant="50" id="mjf-4T-qD0"/>
+                            <constraint firstItem="CBq-z2-CC0" firstAttribute="top" secondItem="JJ3-5k-m9d" secondAttribute="bottom" constant="55" id="mjf-4T-qD0"/>
                             <constraint firstItem="Wv8-kW-7dL" firstAttribute="top" secondItem="b1d-6s-LV2" secondAttribute="top" constant="20" id="upx-6W-lAQ"/>
                             <constraint firstItem="AWM-gj-7pr" firstAttribute="leading" secondItem="b1d-6s-LV2" secondAttribute="leading" constant="25" id="v94-KO-0zm"/>
                         </constraints>

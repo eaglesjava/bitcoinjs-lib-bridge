@@ -70,6 +70,12 @@ class BILAppStartUpManager: NSObject {
 		let buttonAppearance = DefaultButton.appearance()
 		buttonAppearance.titleColor = UIColor(hex: 0x318AF3)
 		buttonAppearance.titleFont = UIFont.systemFont(ofSize: 16)
+		
+		let blurAppearance = PopupDialogOverlayView.appearance()
+		blurAppearance.blurEnabled = false
+		
+		let containerViewAppearance = PopupDialogContainerView.appearance()
+		containerViewAppearance.cornerRadius = 16
 	}
 	
 	private func setupIQKeyboard() {
