@@ -9,12 +9,12 @@
 import UIKit
 
 class BILControllerManager: NSObject {
-	var mainTabBarController: UITabBarController?
+	weak var mainTabBarController: UITabBarController?
 	static let shared = {
 		return BILControllerManager()
 	}()
 	
 	func showMainTabBarController() {
-		UIApplication.shared.delegate?.window??.rootViewController?.dismiss(animated: true, completion: nil)
+		mainTabBarController?.dismiss(animated: true, completion: nil)
 	}
 }

@@ -44,6 +44,8 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 	}
 	var mnemonicHash: String?
 	
+	var hasShownAlert = false
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,6 +80,10 @@ class BILCreateWalletViewController: UIViewController, UITextFieldDelegate {
 	// MARK: - UI
 	
 	func showAlertForSupportedCoins() {
+		guard !hasShownAlert else {
+			return
+		}
+		hasShownAlert = true
 		let buttonTitle = "我知道了"
 		
 		let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)

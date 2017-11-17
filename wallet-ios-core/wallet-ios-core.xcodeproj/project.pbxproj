@@ -57,6 +57,7 @@
 		CCEC67831FB190EE004CC6C5 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677E1FB190EE004CC6C5 /* index.js */; };
 		CCEC67841FB190EE004CC6C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677F1FB190EE004CC6C5 /* README.md */; };
 		CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */; };
+		CCF634F21FBEC25400840097 /* BILTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634F11FBEC25400840097 /* BILTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 		CCEC677E1FB190EE004CC6C5 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		CCEC677F1FB190EE004CC6C5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinJSBridge.swift; sourceTree = "<group>"; };
+		CCF634F11FBEC25400840097 /* BILTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILTabBarController.swift; sourceTree = "<group>"; };
 		D2BEE8AF9C1E6B3732497728 /* Pods-wallet-ios-core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-core.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-core/Pods-wallet-ios-core.release.xcconfig"; sourceTree = "<group>"; };
 		F76E2A6321F53623A11A5D44 /* Pods-wallet-ios-coreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-coreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-coreTests/Pods-wallet-ios-coreTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */,
+				CCF634F11FBEC25400840097 /* BILTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				CC94E04D1FB94DAA0098E730 /* BILWelcomeViewController.swift in Sources */,
 				CC94E0571FB998A20098E730 /* BILPasswordStrengthView.swift in Sources */,
 				CC94E0971FBAE1A50098E730 /* String+MnemonicData.swift in Sources */,
+				CCF634F21FBEC25400840097 /* BILTabBarController.swift in Sources */,
 				CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */,
 				CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */,
 				CC94E0C51FBD87D70098E730 /* BILMnemonicCell.swift in Sources */,

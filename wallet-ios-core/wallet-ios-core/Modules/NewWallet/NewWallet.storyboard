@@ -380,7 +380,7 @@
                         <outlet property="passwordTextField" destination="kiL-9x-MRJ" id="j9h-4n-AbQ"/>
                         <outlet property="walletNameInputView" destination="DbI-5b-wmo" id="EuY-Yi-2RV"/>
                         <outlet property="walletNameTextField" destination="JqB-aG-3nt" id="BMf-SF-mjq"/>
-                        <segue destination="7zA-bK-tJc" kind="show" identifier="BILCreateWalletSuccessSegue" id="SjI-NU-E14"/>
+                        <segue destination="7zA-bK-tJc" kind="presentation" identifier="BILCreateWalletSuccessSegue" id="SjI-NU-E14"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="liO-gm-o0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -396,29 +396,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Pw-cs-Ql1" customClass="BILCreateWalletSucessView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="378"/>
+                                <rect key="frame" x="0.0" y="83" width="375" height="378"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_success" translatesAutoresizingMaskIntoConstraints="NO" id="23E-Lb-2LD">
-                                        <rect key="frame" x="155" y="40" width="64" height="64"/>
+                                        <rect key="frame" x="155" y="0.0" width="64" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="64" id="Ano-Qk-mVd"/>
                                             <constraint firstAttribute="height" constant="64" id="YwM-OG-fgD"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opq-sQ-nfd">
-                                        <rect key="frame" x="150.5" y="124" width="73.5" height="21"/>
+                                        <rect key="frame" x="150.5" y="84" width="73.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包创建成功，强烈建议您在使用前将助记词储存到安全地方做好钱包备份" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLj-js-I3r">
-                                        <rect key="frame" x="45" y="160" width="285" height="33.5"/>
+                                        <rect key="frame" x="45" y="120" width="285" height="33.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9A-jG-Ijq" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="223.5" width="325" height="55"/>
+                                        <rect key="frame" x="25" y="183.5" width="325" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="GGU-Vf-VhB"/>
                                         </constraints>
@@ -427,11 +427,11 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Y21-ob-PSG" kind="show" identifier="BILToBackupWalletSegue" id="GrO-9y-cu3"/>
+                                            <segue destination="Y21-ob-PSG" kind="presentation" identifier="BILToBackupWalletSegue" id="GrO-9y-cu3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbd-8O-69h">
-                                        <rect key="frame" x="25" y="293.5" width="325" height="55"/>
+                                        <rect key="frame" x="25" y="253.5" width="325" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="vVW-IM-jnM"/>
                                         </constraints>
@@ -461,14 +461,22 @@
                                     <constraint firstItem="ZLj-js-I3r" firstAttribute="centerX" secondItem="JDI-dt-Y5K" secondAttribute="centerX" id="mHM-md-E3H"/>
                                     <constraint firstItem="JDI-dt-Y5K" firstAttribute="trailing" secondItem="ZLj-js-I3r" secondAttribute="trailing" constant="45" id="pES-iy-zGO"/>
                                     <constraint firstItem="m9A-jG-Ijq" firstAttribute="top" secondItem="ZLj-js-I3r" secondAttribute="bottom" constant="30" id="qCt-9a-Tca"/>
-                                    <constraint firstItem="23E-Lb-2LD" firstAttribute="top" secondItem="JDI-dt-Y5K" secondAttribute="top" constant="40" id="wVg-f2-XMg"/>
+                                    <constraint firstItem="23E-Lb-2LD" firstAttribute="top" secondItem="JDI-dt-Y5K" secondAttribute="top" id="wVg-f2-XMg"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="JDI-dt-Y5K"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建钱包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0Z-yS-EMZ">
+                                <rect key="frame" x="152.5" y="32" width="69.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="9Pw-cs-Ql1" firstAttribute="top" secondItem="Nhh-Ag-VD5" secondAttribute="top" id="YNM-zF-FeK"/>
+                            <constraint firstItem="F0Z-yS-EMZ" firstAttribute="centerX" secondItem="Nhh-Ag-VD5" secondAttribute="centerX" id="2pl-yl-Bxy"/>
+                            <constraint firstItem="F0Z-yS-EMZ" firstAttribute="top" secondItem="Nhh-Ag-VD5" secondAttribute="top" constant="12" id="60E-Co-LnC"/>
+                            <constraint firstItem="9Pw-cs-Ql1" firstAttribute="top" secondItem="F0Z-yS-EMZ" secondAttribute="bottom" constant="30" id="Yye-SP-vez"/>
                             <constraint firstItem="9Pw-cs-Ql1" firstAttribute="leading" secondItem="Nhh-Ag-VD5" secondAttribute="leading" id="ZD7-Qv-Ekw"/>
                             <constraint firstItem="9Pw-cs-Ql1" firstAttribute="trailing" secondItem="Nhh-Ag-VD5" secondAttribute="trailing" id="yBz-c9-3Jj"/>
                         </constraints>
@@ -480,10 +488,10 @@
             </objects>
             <point key="canvasLocation" x="2026" y="151"/>
         </scene>
-        <!--BILBackupWalletMnemonicController-->
+        <!--BackupWallet-->
         <scene sceneID="dzg-St-Mqh">
             <objects>
-                <viewControllerPlaceholder storyboardName="BackupWallet" referencedIdentifier="BILBackupWalletMnemonicController" id="Y21-ob-PSG" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="BackupWallet" id="Y21-ob-PSG" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tqo-tD-NAR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2689" y="151"/>
