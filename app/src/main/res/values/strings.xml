@@ -1,17 +1,38 @@
 <resources>
     <string name="app_name">bitbill-wallet-android</string>
+
+    <!--network state tip-->
+    <string name="toast_using_network_type">正在使用 %1$s 网络</string>
+    <string name="toast_switch_network_type">切换为 %1$s 网络</string>
+    <string name="toast_network_available">网络可用</string>
+    <string name="toast_network_no_connection">网络未连接</string>
+
+    <!--App Message-->
+    <string name="api_retry_error">请重试</string>
+    <string name="api_default_error">出错了</string>
+    <string name="some_error">出错了</string>
+    <string name="connection_error">网络连接失败</string>
+
+    <!--socket message-->
+    <string name="connect">已连接</string>
+    <string name="disconnect">断开连接，请检查您的网络连接</string>
+    <string name="error_connect">连接失败</string>
+
+    <!--主页-->
     <string name="title_asset">资产</string>
     <string name="title_receive">接收</string>
     <string name="title_send">发送</string>
     <string name="title_my">我</string>
+
+    <!--引导页-->
     <string name="title_activity_guide">GuideActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">引导页 %1$d</string>
     <string name="btn_create_wallet">创建钱包</string>
     <string name="btn_import_wallet">导入钱包</string>
+
+    <!--创建或导入钱包-->
     <string name="title_activity_import_wallet">导入钱包</string>
     <string name="title_activity_create_wallet">创建钱包</string>
-    <string name="error_invalid_password">交易密码不正确，请重新输入</string>
+    <string name="error_invalid_trade_pwd">交易密码不正确，请重新输入</string>
     <string name="hint_input_please">请输入</string>
     <string name="hint_trade_pwd">请输入6-20位字符</string>
     <string name="input_wallet_name">钱包名称</string>
@@ -19,6 +40,24 @@
     <string name="input_trade_pwd_confirm">确认交易密码</string>
     <string name="btn_start_import">开始导入</string>
     <string name="error_wallet_name_required">请输入钱包名称</string>
+    <string name="error_trade_pwd_required">请输入确认交易密码</string>
+    <string name="error_trade_pwd_inconsistent">密码不一致</string>
     <string name="hint_back_up_pwd">请备份好您的密码！比特宝不存储用户密码，无法提供找回或重置的功能（若您已备份助记词，忘记密码的情况下可以通过重新导入助记词恢复钱包并重设密码）</string>
+    <string name="action_settings">Settings</string>
+    <string name="close">关闭</string>
+    <string name="title_activity_main">首页</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="guide_section_one">数字资产 All in one</string>
+    <string name="guide_section_two">私钥掌握在您自己手里</string>
+    <string name="title_account_info">账户信息</string>
+    <string name="title_contact">联系人</string>
+    <string name="title_transaction_record">交易记录</string>
+    <string name="title_notification">消息提醒</string>
+    <string name="title_security">安全设置</string>
+    <string name="title_wallet_manage">钱包集成</string>
+    <string name="title_setting">设置</string>
 
 </resources>

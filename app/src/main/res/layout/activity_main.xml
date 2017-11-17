@@ -1,80 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewPager"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bitbill.www.ui.main.MainActivity">
+    android:background="@color/dark_bg"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <TextView
-        android:id="@+id/message"
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="bottom"
-        android:paddingBottom="20dp"
-        android:paddingLeft="20dp"
-        android:text="我的资产"
-        android:textColor="@color/white"
-        android:textSize="23sp"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent"/>
 
-    <com.isanwenyu.tabview.TabGroup
-        android:id="@+id/tg_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:padding="5dp"
-        app:checkedTab="@+id/tab_asset">
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@drawable/bg_blue"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/activity_main_drawer"/>
 
-        <com.isanwenyu.tabview.TabView
-            android:id="@id/tab_asset"
-            style="@style/TabView"
-            app:badge_none_show="false"
-            app:imgDimension="20dp"
-            app:imgDrawable="@drawable/ic_asset_selector"
-            app:rv_color="@color/colorAccent"
-            app:tabRippleEnable="false"
-            app:textColor="@color/tab_text_color"
-            app:textSize="10sp"
-            app:textString="@string/title_asset"/>
-
-        <com.isanwenyu.tabview.TabView
-            android:id="@+id/tab_receive"
-            style="@style/TabView"
-            app:badge_none_show="false"
-            app:imgDimension="20dp"
-            app:imgDrawable="@drawable/ic_receive_selector"
-            app:rv_color="@color/colorAccent"
-            app:tabRippleEnable="false"
-            app:textColor="@color/tab_text_color"
-            app:textSize="10sp"
-            app:textString="@string/title_receive"/>
-
-        <com.isanwenyu.tabview.TabView
-            android:id="@+id/tab_send"
-            style="@style/TabView"
-            app:badge_none_show="false"
-            app:imgDimension="20dp"
-            app:imgDrawable="@drawable/ic_send_selector"
-            app:rv_color="@color/colorAccent"
-            app:tabRippleEnable="false"
-            app:textColor="@color/tab_text_color"
-            app:textSize="10sp"
-            app:textString="@string/title_send"/>
-
-        <com.isanwenyu.tabview.TabView
-            android:id="@+id/tab_my"
-            style="@style/TabView"
-            app:badge_none_show="false"
-            app:imgDimension="20dp"
-            app:imgDrawable="@drawable/ic_my_selector"
-            app:rv_color="@color/colorAccent"
-            app:tabRippleEnable="false"
-            app:textColor="@color/tab_text_color"
-            app:textSize="10sp"
-            app:textString="@string/title_my"/>
-    </com.isanwenyu.tabview.TabGroup>
-
-</FrameLayout>
+</android.support.v4.widget.DrawerLayout>

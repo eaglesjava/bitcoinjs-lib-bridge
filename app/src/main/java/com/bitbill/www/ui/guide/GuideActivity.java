@@ -4,28 +4,44 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.view.BaseActivity;
+import com.bitbill.www.common.base.view.BaseViewControl;
+import com.bitbill.www.ui.wallet.CreateOrImportWalletActivity;
+import com.rd.PageIndicatorView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 引导页
  * Created by isanwenyu@163.com on 2017/11/14.
  */
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends BaseActivity implements BaseViewControl {
 
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+    @BindView(R.id.pageIndicatorView)
+    PageIndicatorView pageIndicatorView;
+    @BindView(R.id.main_content)
+    FrameLayout mainContent;
     /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * The {@link PagerAdapter} that will provide
      * fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     * {@link FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -37,8 +53,28 @@ public class GuideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guide);
+        onBeforeSetContentLayout();
+        setContentView(getLayoutId());
+        // 通过注解绑定控件
+        setUnBinder(ButterKnife.bind(this));
+        init(savedInstanceState);
+        initView();
+        initData();
 
+    }
+
+    @Override
+    public void onBeforeSetContentLayout() {
+
+    }
+
+    @Override
+    public void init(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initView() {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -47,6 +83,30 @@ public class GuideActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_guide;
+    }
+
+    @OnClick({R.id.btn_create_wallet, R.id.btn_import_wallet})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_create_wallet:
+                //跳转到创建钱包界面
+                CreateOrImportWalletActivity.start(GuideActivity.this, CreateOrImportWalletActivity.CREATE_WALLET);
+                break;
+            case R.id.btn_import_wallet:
+                //跳转到导入钱包界面
+                CreateOrImportWalletActivity.start(GuideActivity.this, CreateOrImportWalletActivity.IMPORT_WALLET);
+                break;
+        }
     }
 
 
@@ -80,7 +140,7 @@ public class GuideActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_guide, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getArguments().getInt(ARG_SECTION_NUMBER) == 1 ? getString(R.string.guide_section_one) : getString(R.string.guide_section_two));
             return rootView;
         }
     }
@@ -105,7 +165,7 @@ public class GuideActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
     }
 }

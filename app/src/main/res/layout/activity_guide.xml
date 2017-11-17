@@ -5,6 +5,7 @@
              android:id="@+id/main_content"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:background="@color/dark_bg"
              android:fitsSystemWindows="true"
              tools:context="com.bitbill.www.ui.guide.GuideActivity">
 
@@ -26,10 +27,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            app:piv_count="2"
             app:piv_radius="3dp"
             app:piv_viewPager="@+id/viewPager"/>
 
         <Button
+            android:id="@+id/btn_create_wallet"
             style="@style/Button.Blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,6 +42,7 @@
             android:text="@string/btn_create_wallet"/>
 
         <Button
+            android:id="@+id/btn_import_wallet"
             style="@style/Button.Transparent"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="25dp"

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.bitbill.www.ui.widget.EditTextWapper
+            <com.bitbill.www.common.base.view.widget.EditTextWapper
                 android:id="@+id/etw_wallet_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,17 +29,18 @@
                 app:inputTitle="@string/input_wallet_name"
                 />
 
-            <com.bitbill.www.ui.widget.EditTextWapper
+            <com.bitbill.www.common.base.view.widget.EditTextWapper
                 android:id="@+id/etw_trade_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:inputHint="@string/hint_trade_pwd"
                 app:inputPaddingBottom="20dp"
+                app:inputPwdStatusVisible="true"
                 app:inputTitle="@string/input_trade_pwd"
                 />
 
-            <com.bitbill.www.ui.widget.EditTextWapper
+            <com.bitbill.www.common.base.view.widget.EditTextWapper
                 android:id="@+id/etw_trade_pwd_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

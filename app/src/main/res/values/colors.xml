@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/backgroud</color>
-    <color name="colorPrimaryDark">@color/backgroud</color>
+    <color name="colorPrimary">@color/dark_top</color>
+    <color name="colorPrimaryDark">@color/dark_top</color>
     <color name="colorAccent">@color/blue</color>
     <color name="backgroud">#353A46</color>
     <color name="backgroud_dark">#20222B</color>
+    <color name="backgroud_middle">#2B2F39</color>
     <color name="transparent">#00000000</color>
     <color name="white">#fff</color>
     <color name="white_30">#b3ffffff</color>
     <color name="white_40">#99ffffff</color>
+    <color name="white_60">#66ffffff</color>
     <color name="black">#000</color>
     <color name="line">#E6E6E6</color>
     <color name="black_half">#80000000</color>
@@ -18,5 +20,11 @@
     <color name="red_dark">#FF5960</color>
     <color name="edit_line">#F2F2F2</color>
     <color name="error">#FD6D73</color>
-    <color name="orange">#ABE64D</color>
+    <color name="green">#ABE64D</color>
+    <color name="div_gray_bg">#d9dada</color>
+    <color name="txt_gray">#bbb</color>
+    <color name="black_50">#80000000</color>
+    <color name="dark_top">#272A34</color>
+    <color name="dark_bg">#323743</color>
+
 </resources>

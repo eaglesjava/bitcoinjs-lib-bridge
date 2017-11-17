@@ -1,54 +1,85 @@
 package com.bitbill.www.ui.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.bitbill.www.R;
-import com.bitbill.www.utils.BitcoinJsWrapper;
+import com.bitbill.www.common.base.view.BaseActivity;
+import com.bitbill.www.model.app.AppModel;
 
-/**
- * Created by isanwenyu@163.com on 2017/11/13.
- */
-public class MainActivity extends AppCompatActivity {
+import javax.inject.Inject;
 
-    private static final String TAG = "MainActivity";
-    private TextView mTextMessage;
+import butterknife.ButterKnife;
+
+public class MainActivity extends BaseActivity
+        implements NavigationView.OnNavigationItemSelectedListener, MainMvpView {
+
+    @Inject
+    MainMvpPresenter<AppModel, MainMvpView> mPresenter;
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, MainActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTextMessage = (TextView) findViewById(R.id.message);
+        //inject activity
+        getActivityComponent().inject(this);
 
-        mTextMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BitcoinJsWrapper.getInstance().generateMnemonicRandomCN((key, jsResult) -> {
-                    Log.d(TAG, "generateMnemonicRandomCN.call() called with: key = [" + key + "], jsResult = [" + jsResult + "]");
-                    BitcoinJsWrapper.getInstance().mnemonicToSeedHex(jsResult, "123456", (key1, jsResult1) -> {
-                        Log.d(TAG, "mnemonicToSeedHex.call() called with: key = [" + key1 + "], jsResult = [" + jsResult1 + "]");
-                        BitcoinJsWrapper.getInstance().getBitcoinAddressBySeedHex(jsResult1, 0, (key2, jsResult2) -> {
-                            Log.d(TAG, "getBitcoinAddressBySeedHex.call() called with: key = [" + key2 + "], jsResult = [" + jsResult2 + "]");
-                        });
-                        BitcoinJsWrapper.getInstance().getBitcoinMasterXPublicKey(jsResult1, (key3, jsResult3) -> {
-                            Log.d(TAG, "getBitcoinMasterXPublicKey.call() called with: key = [" + key3 + "], jsResult = [" + jsResult3 + "]");
-                            BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(jsResult3, 0, (key4, jsResult4) -> {
-                                Log.d(TAG, "getBitcoinAddressByMasterXPublicKey.call() called with: key = [" + key4 + "], jsResult = [" + jsResult4 + "]");
-                                setResult(jsResult4);
-                            });
-                        });
-                    });
-                });
-            }
-        });
+        setUnBinder(ButterKnife.bind(this));
+
+        mPresenter.onAttach(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
-    private void setResult(final String jsResult) {
-        runOnUiThread(() -> mTextMessage.setText(jsResult));
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_asset) {
+            // Handle the camera action
+        } else if (id == R.id.nav_receive) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+        // TODO: 2017/11/17 add other nav item
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
