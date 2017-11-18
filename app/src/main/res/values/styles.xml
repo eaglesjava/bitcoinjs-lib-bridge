@@ -69,11 +69,21 @@
     <style name="Text" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <style name="Text.White" parent="Text">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="Text.Title" parent="Text">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/title_normal</item>
+    </style>
+
+    <style name="Text.Title.Small" parent="Text.Title">
+        <item name="android:textSize">@dimen/title_small</item>
     </style>
 
     <style name="Text.Title.Big" parent="Text.Title">

@@ -47,9 +47,9 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
-    private MvpPresenter mMvpPresenter;
+    private P mMvpPresenter;
 
-    public abstract MvpPresenter getMvpPresenter();
+    public abstract P getMvpPresenter();
 
     protected abstract void injectActivity();
 

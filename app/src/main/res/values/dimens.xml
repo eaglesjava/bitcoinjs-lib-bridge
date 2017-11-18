@@ -9,14 +9,20 @@
     <dimen name="title_guide">28sp</dimen>
     <dimen name="title_normal">26sp</dimen>
     <dimen name="edit_text_size">16sp</dimen>
+    <!--text size-->
+    <dimen name="text_size_normal">14sp</dimen>
     <!-- edit text wapper-->
     <dimen name="input_title_text_size">14sp</dimen>
     <dimen name="hint_small_green">13sp</dimen>
     <dimen name="spacing_medium">8dp</dimen>
+    <!--main navigation view-->
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
+    <!--import wallet activity-->
     <dimen name="input_mnemonic">21sp</dimen>
     <dimen name="activity_padding">25dp</dimen>
+    <!--create wallet activity-->
+    <dimen name="title_small">18sp</dimen>
 
 
 </resources>

@@ -39,6 +39,10 @@
             android:label="@string/title_activity_import_wallet"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".ui.wallet.create.CreateWalletActivity"
+            android:label="@string/title_activity_create_wallet">
+        </activity>
     </application>
 
 </manifest>

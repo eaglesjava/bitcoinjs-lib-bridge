@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.ui.main.MainActivity;
@@ -78,7 +77,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
+    public ImportWalletMvpPresenter getMvpPresenter() {
         return importWalletMvpPresenter;
     }
 }

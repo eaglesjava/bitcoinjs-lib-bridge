@@ -11,11 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
 import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.ui.wallet.create.CreateWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 
 import javax.inject.Inject;
@@ -168,7 +168,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
             // TODO: 2017/11/14 create or import wallet logic
             initWalletMvpPresenter.initWallet();
             if (isCreateWallet()) {
-                initWalletMvpPresenter.createMnemonic();
+                getMvpPresenter().createMnemonic();
             }
 
         }
@@ -209,10 +209,12 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Override
     public void initWalletSuccess() {
-//        if (!isCreateWallet()) {
-        //跳转到导入钱包流程
-        ImportWalletActivity.start(this);
-//        }
+        if (!isCreateWallet()) {
+            //跳转到导入钱包流程
+            ImportWalletActivity.start(this);
+        } else {
+            getMvpPresenter().createMnemonic();
+        }
     }
 
     @Override
@@ -222,7 +224,10 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Override
     public void createMnemonicSuccess() {
-
+        if (isCreateWallet()) {
+            //跳转到穿件钱包成功界面
+            CreateWalletActivity.start(InitWalletActivity.this);
+        }
     }
 
     @Override
@@ -231,7 +236,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
+    public InitWalletMvpPresenter getMvpPresenter() {
         return initWalletMvpPresenter;
     }
 }

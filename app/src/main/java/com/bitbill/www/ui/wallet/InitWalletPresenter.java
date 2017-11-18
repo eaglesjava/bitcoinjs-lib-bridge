@@ -32,6 +32,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
      */
     @Override
     public void createMnemonic() {
-
+        // TODO: 2017/11/18 add wallet model logic
+        getMvpView().createMnemonicSuccess();
     }
 }

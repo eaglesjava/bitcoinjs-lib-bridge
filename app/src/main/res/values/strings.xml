@@ -66,5 +66,9 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_wallet_create_success">创建成功</string>
+    <string name="hint_create_wallet_success">钱包创建成功，强烈建议您在使用前将助记词储存到安全地方做好钱包备份</string>
+    <string name="btn_backup_wallet">备份钱包</string>
+    <string name="btn_backup_wallet_delay">稍后备份</string>
 
 </resources>
