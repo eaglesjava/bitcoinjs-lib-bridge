@@ -1,5 +1,7 @@
 package com.bitbill.www.ui.guide;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -50,6 +52,10 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, GuideActivity.class));
+    }
 
     @Override
     public MvpPresenter getMvpPresenter() {
@@ -119,7 +125,6 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
                 break;
         }
     }
-
 
     /**
      * A placeholder fragment containing a simple view.
