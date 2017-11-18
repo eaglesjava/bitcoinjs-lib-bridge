@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
@@ -54,18 +55,15 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         context.startActivity(intent);
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        initWalletMvpPresenter.onDetach();
+    public void injectActivity() {
+        //inject activity
+        getActivityComponent().inject(this);
     }
 
     @Override
     public void onBeforeSetContentLayout() {
-        //inject activity
-        getActivityComponent().inject(this);
-        initWalletMvpPresenter.onAttach(this);
-
 
     }
 
@@ -115,6 +113,12 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     public int getLayoutId() {
         return R.layout.activity_init_wallet;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTitle(isCreateWallet() ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet);
     }
 
     @OnClick(R.id.btn_start)
@@ -184,7 +188,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 6 && password.length() < 20;
+        return password.length() >= 6 && password.length() <= 20;
     }
 
     private boolean isPwdConsistent() {
@@ -224,6 +228,11 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     public void createMnemonicFail() {
 
+    }
+
+    @Override
+    public MvpPresenter getMvpPresenter() {
+        return initWalletMvpPresenter;
     }
 }
 

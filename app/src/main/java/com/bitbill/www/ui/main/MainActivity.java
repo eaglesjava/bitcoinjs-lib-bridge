@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.model.app.AppModel;
 
@@ -29,15 +30,22 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    public MvpPresenter getMvpPresenter() {
+        return mPresenter;
+    }
+
+    @Override
+    protected void injectActivity() {
+        //inject activity
+        getActivityComponent().inject(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //inject activity
-        getActivityComponent().inject(this);
 
         setUnBinder(ButterKnife.bind(this));
-
-        mPresenter.onAttach(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,12 +59,6 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.onDetach();
     }
 
     @Override

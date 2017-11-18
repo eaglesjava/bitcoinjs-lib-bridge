@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.ui.wallet.InitWalletActivity;
@@ -51,6 +52,11 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
     private ViewPager mViewPager;
 
     @Override
+    public MvpPresenter getMvpPresenter() {
+        return null;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onBeforeSetContentLayout();
@@ -60,6 +66,11 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
         init(savedInstanceState);
         initView();
         initData();
+
+    }
+
+    @Override
+    public void injectActivity() {
 
     }
 

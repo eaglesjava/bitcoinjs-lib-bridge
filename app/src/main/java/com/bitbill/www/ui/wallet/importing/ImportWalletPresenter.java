@@ -5,6 +5,8 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.wallet.WalletModel;
 
+import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -13,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable;
 
 @PerActivity
 public class ImportWalletPresenter<M extends WalletModel, V extends ImportWalletMvpView> extends ModelPresenter<M, V> implements ImportWalletMvpPresenter<M, V> {
-
+    @Inject
     public ImportWalletPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);
     }

@@ -47,6 +47,11 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
+    private MvpPresenter mMvpPresenter;
+
+    public abstract MvpPresenter getMvpPresenter();
+
+    protected abstract void injectActivity();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,8 +63,14 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         AppManager.get().addActivity(this);
         handleIntent(getIntent());
         mInflater = getLayoutInflater();
+        injectActivity();
+        mMvpPresenter = getMvpPresenter();
+        if (getMvpPresenter() != null) {
+            getMvpPresenter().onAttach(this);
+        }
 
     }
+
 
     public ActivityComponent getActivityComponent() {
         return mActivityComponent;
@@ -194,6 +205,9 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         DialogUtils.close(mProgressDialog);
         AppManager.get().finishActivity(this);
         super.onDestroy();
+        if (getMvpPresenter() != null) {
+            getMvpPresenter().onDetach();
+        }
     }
 
     /**

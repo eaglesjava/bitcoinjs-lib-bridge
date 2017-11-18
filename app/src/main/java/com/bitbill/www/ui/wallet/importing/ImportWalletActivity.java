@@ -7,18 +7,25 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.ui.main.MainActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ImportWalletActivity extends BaseToolbarActivity implements ImportWalletMvpView {
+public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPresenter> implements ImportWalletMvpView {
 
     @BindView(R.id.et_input_mnemonic)
     EditText etInputMnemonic;
     @BindView(R.id.btn_next)
     Button btnNext;
+
+    @Inject
+    ImportWalletMvpPresenter<WalletModel, ImportWalletMvpView> importWalletMvpPresenter;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, ImportWalletActivity.class));
@@ -32,6 +39,11 @@ public class ImportWalletActivity extends BaseToolbarActivity implements ImportW
     @Override
     public void importWalletFail() {
 
+    }
+
+    @Override
+    public void injectActivity() {
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -63,5 +75,10 @@ public class ImportWalletActivity extends BaseToolbarActivity implements ImportW
     public void onViewClicked() {
         //进入主界面
         MainActivity.start(ImportWalletActivity.this);
+    }
+
+    @Override
+    public MvpPresenter getMvpPresenter() {
+        return importWalletMvpPresenter;
     }
 }
