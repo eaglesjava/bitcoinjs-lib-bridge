@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.bitbill.www.ui.wallet.create.CreateWalletActivity">
+    tools:context="com.bitbill.www.ui.wallet.backup.BackupWalletSuccessActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -17,33 +17,23 @@
     <TextView
         style="@style/Text.Title.Small"
         android:layout_marginTop="20dp"
-        android:text="@string/title_wallet_create_success"/>
+        android:text="@string/hint_bak_wallet_success"/>
 
     <TextView
         style="@style/Text.White"
-        android:layout_width="match_parent"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
         android:layout_marginTop="15dp"
-        android:text="@string/hint_create_wallet_success"/>
+        android:text="@string/hint_keep_mnemonic"/>
 
     <Button
-        android:id="@+id/btn_bak_wallet"
+        android:id="@+id/btn_complete"
         style="@style/Button.Blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="30dp"
-        android:text="@string/btn_backup_wallet"/>
+        android:text="@string/btn_complete"/>
 
-    <Button
-        android:id="@+id/btn_bak_wallet_delay"
-        style="@style/Button.Transparent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/btn_backup_wallet_delay"
-        android:textColor="@color/white_60"/>
 </LinearLayout>

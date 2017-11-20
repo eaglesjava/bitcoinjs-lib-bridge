@@ -44,8 +44,20 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".ui.wallet.create.CreateWalletActivity"
+            android:name=".ui.wallet.create.CreateWalletSuccessActivity"
             android:label="@string/title_activity_create_wallet">
+        </activity>
+        <activity
+            android:name=".ui.wallet.backup.BackUpWalletActivity"
+            android:label="@string/title_activity_backup_wallet">
+        </activity>
+        <activity
+            android:name=".ui.wallet.backup.BackupWalletConfirmActivity"
+            android:label="@string/title_activity_backup_wallet">
+        </activity>
+        <activity
+            android:name=".ui.wallet.backup.BackupWalletSuccessActivity"
+            android:label="@string/title_activity_backup_wallet">
         </activity>
     </application>
 

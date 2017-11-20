@@ -10,11 +10,12 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.ui.main.MainActivity;
+import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CreateWalletActivity extends BaseToolbarActivity {
+public class CreateWalletSuccessActivity extends BaseToolbarActivity {
 
     @BindView(R.id.btn_bak_wallet)
     Button btnBakWallet;
@@ -22,7 +23,7 @@ public class CreateWalletActivity extends BaseToolbarActivity {
     Button btnBakWalletDelay;
 
     public static void start(Context context) {
-        context.startActivity(new Intent(context, CreateWalletActivity.class));
+        context.startActivity(new Intent(context, CreateWalletSuccessActivity.class));
     }
 
     @Override
@@ -57,17 +58,19 @@ public class CreateWalletActivity extends BaseToolbarActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_create_wallet;
+        return R.layout.activity_create_wallet_success;
     }
 
     @OnClick({R.id.btn_bak_wallet, R.id.btn_bak_wallet_delay})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_bak_wallet:
+                //跳转到备份钱包界面
+                BackUpWalletActivity.start(CreateWalletSuccessActivity.this);
                 break;
             case R.id.btn_bak_wallet_delay:
                 //跳转到主页
-                MainActivity.start(CreateWalletActivity.this);
+                MainActivity.start(CreateWalletSuccessActivity.this);
                 break;
         }
     }

@@ -15,7 +15,7 @@ import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
 import com.bitbill.www.model.wallet.WalletModel;
-import com.bitbill.www.ui.wallet.create.CreateWalletActivity;
+import com.bitbill.www.ui.wallet.create.CreateWalletSuccessActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 
 import javax.inject.Inject;
@@ -167,9 +167,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
             showProgress(true);
             // TODO: 2017/11/14 create or import wallet logic
             initWalletMvpPresenter.initWallet();
-            if (isCreateWallet()) {
-                getMvpPresenter().createMnemonic();
-            }
 
         }
     }
@@ -226,7 +223,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void createMnemonicSuccess() {
         if (isCreateWallet()) {
             //跳转到穿件钱包成功界面
-            CreateWalletActivity.start(InitWalletActivity.this);
+            CreateWalletSuccessActivity.start(InitWalletActivity.this);
         }
     }
 

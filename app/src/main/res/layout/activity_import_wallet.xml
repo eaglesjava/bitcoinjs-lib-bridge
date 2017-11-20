@@ -14,17 +14,11 @@
 
     <EditText
         android:id="@+id/et_input_mnemonic"
-        style="@style/Text.InputTitle"
+        style="@style/EditText.Mnemonic"
         android:layout_width="match_parent"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/bg_input_mnemonic"
-        android:gravity="center"
-        android:hint="@string/hint_click_input_please"
-        android:lines="2"
-        android:padding="25dp"
-        android:textColorHint="@color/white"
-        android:textSize="@dimen/input_mnemonic"/>
+        android:hint="@string/hint_click_input_please"/>
 
     <Button
         android:id="@+id/btn_next"

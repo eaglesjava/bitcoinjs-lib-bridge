@@ -70,5 +70,15 @@
     <string name="hint_create_wallet_success">钱包创建成功，强烈建议您在使用前将助记词储存到安全地方做好钱包备份</string>
     <string name="btn_backup_wallet">备份钱包</string>
     <string name="btn_backup_wallet_delay">稍后备份</string>
+    <string name="hint_bak_wallet_environment_safe">请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！</string>
+    <string name="hint_bak_wallet_ban_screenshots">截图是不安全的，您的图片可能别憋的应用使用。请准备笔和纸记录下面这句话，并妥善保存，我们会在下个屏幕上确认！</string>
+    <string name="btn_written_mnemonic_in_order">已按顺序记下助记词</string>
+    <string name="btn_confirm">确定</string>
+    <string name="hint_bak_confirm_mnemonic_correct">按顺序点击助记词，确认您的助记词备份正确</string>
+    <string name="hint_bak_wallet_success">备份成功</string>
+    <string name="hint_keep_mnemonic">请妥善保管您的助记词</string>
+    <string name="btn_complete">完成</string>
+    <string name="title_activity_backup_wallet">备份钱包</string>
+    <string name="title_dialog_backup_wallet">备份钱包</string>
 
 </resources>
