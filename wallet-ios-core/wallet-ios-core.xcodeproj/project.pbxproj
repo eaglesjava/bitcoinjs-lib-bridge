@@ -61,6 +61,10 @@
 		CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634F41FBEC63300840097 /* BILAllInOneView.swift */; };
 		CCF634F71FBEC64400840097 /* BILAllInOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF634F61FBEC64400840097 /* BILAllInOneView.xib */; };
 		CCF634F91FBECC0000840097 /* BILBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634F81FBECC0000840097 /* BILBaseViewController.swift */; };
+		CCF634FB1FC2B79900840097 /* BILGuideKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634FA1FC2B79900840097 /* BILGuideKeyView.swift */; };
+		CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF634FE1FC2B82B00840097 /* BILGuideKeyView.xib */; };
+		CCF635011FC2B95100840097 /* BILGuideBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF635001FC2B95100840097 /* BILGuideBaseView.swift */; };
+		CCF635031FC2C5C600840097 /* BILGuideItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF635021FC2C5C600840097 /* BILGuideItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +138,10 @@
 		CCF634F41FBEC63300840097 /* BILAllInOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAllInOneView.swift; sourceTree = "<group>"; };
 		CCF634F61FBEC64400840097 /* BILAllInOneView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILAllInOneView.xib; sourceTree = "<group>"; };
 		CCF634F81FBECC0000840097 /* BILBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILBaseViewController.swift; sourceTree = "<group>"; };
+		CCF634FA1FC2B79900840097 /* BILGuideKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideKeyView.swift; sourceTree = "<group>"; };
+		CCF634FE1FC2B82B00840097 /* BILGuideKeyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideKeyView.xib; sourceTree = "<group>"; };
+		CCF635001FC2B95100840097 /* BILGuideBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideBaseView.swift; sourceTree = "<group>"; };
+		CCF635021FC2C5C600840097 /* BILGuideItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideItem.swift; sourceTree = "<group>"; };
 		D2BEE8AF9C1E6B3732497728 /* Pods-wallet-ios-core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-core.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-core/Pods-wallet-ios-core.release.xcconfig"; sourceTree = "<group>"; };
 		F76E2A6321F53623A11A5D44 /* Pods-wallet-ios-coreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-coreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-coreTests/Pods-wallet-ios-coreTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -481,8 +489,12 @@
 		CCF634F31FBEC60C00840097 /* Guide */ = {
 			isa = PBXGroup;
 			children = (
+				CCF635001FC2B95100840097 /* BILGuideBaseView.swift */,
 				CCF634F41FBEC63300840097 /* BILAllInOneView.swift */,
 				CCF634F61FBEC64400840097 /* BILAllInOneView.xib */,
+				CCF634FA1FC2B79900840097 /* BILGuideKeyView.swift */,
+				CCF634FE1FC2B82B00840097 /* BILGuideKeyView.xib */,
+				CCF635021FC2C5C600840097 /* BILGuideItem.swift */,
 			);
 			path = Guide;
 			sourceTree = "<group>";
@@ -604,6 +616,7 @@
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
 				CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */,
 				CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */,
+				CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */,
 				CC94E0B51FBD6E3B0098E730 /* .gitkeep in Resources */,
 				CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */,
 				CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */,
@@ -777,6 +790,7 @@
 				CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */,
 				CC94E0BF1FBD83E90098E730 /* BILMnemonicView.swift in Sources */,
 				CC94E04B1FB946480098E730 /* UIColor+BILHex.swift in Sources */,
+				CCF635031FC2C5C600840097 /* BILGuideItem.swift in Sources */,
 				CCE9BE821FBE8CA0007A59E7 /* BILMnemonicViewDelegate.swift in Sources */,
 				CC94E0551FB9911E0098E730 /* BILCreateWalletSucessView.swift in Sources */,
 				CC4417031FBEAD8800C4B158 /* BILAESHelper.swift in Sources */,
@@ -786,9 +800,11 @@
 				CC94E0571FB998A20098E730 /* BILPasswordStrengthView.swift in Sources */,
 				CC94E0971FBAE1A50098E730 /* String+MnemonicData.swift in Sources */,
 				CCF634F21FBEC25400840097 /* BILTabBarController.swift in Sources */,
+				CCF635011FC2B95100840097 /* BILGuideBaseView.swift in Sources */,
 				CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */,
 				CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */,
 				CC94E0C51FBD87D70098E730 /* BILMnemonicCell.swift in Sources */,
+				CCF634FB1FC2B79900840097 /* BILGuideKeyView.swift in Sources */,
 				CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */,
 				CC94E04F1FB950040098E730 /* BILCreateWalletViewController.swift in Sources */,
 				CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */,

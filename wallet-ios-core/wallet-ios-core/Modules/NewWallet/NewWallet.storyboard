@@ -13,7 +13,7 @@
         <!--欢迎-->
         <scene sceneID="Gij-tA-ZH9">
             <objects>
-                <viewController id="Pad-Ft-1oa" customClass="BILWelcomeViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Pad-Ft-1oa" customClass="BILWelcomeViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iec-ac-KuR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -78,7 +78,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="欢迎" id="ucR-LZ-9nJ"/>
                     <connections>
+                        <outlet property="guideScrollView" destination="Wv8-kW-7dL" id="2jl-fu-dRU"/>
                         <outlet property="newWalletButton" destination="99u-my-xAt" id="vIA-6T-GPR"/>
+                        <outlet property="pageControl" destination="CBq-z2-CC0" id="WrX-z6-Cwi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XX-AI-801" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -121,11 +123,11 @@
                                                         <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                                <color key="value" red="1" green="1" blue="1" alpha="0.40012307359999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="value" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <outlet property="delegate" destination="7rK-Mf-YUl" id="1nC-7F-hcV"/>
+                                                            <outlet property="delegate" destination="DbI-5b-wmo" id="Nku-B1-rUu"/>
                                                         </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGQ-Xj-3Jd">
@@ -176,11 +178,11 @@
                                                         <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                                <color key="value" red="1" green="1" blue="1" alpha="0.40012307359999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="value" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <outlet property="delegate" destination="7rK-Mf-YUl" id="jGB-mY-ZOp"/>
+                                                            <outlet property="delegate" destination="MF1-H1-K5C" id="V4B-dp-rzK"/>
                                                         </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ta4-2m-kQ0">
@@ -288,11 +290,11 @@
                                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                                <color key="value" red="1" green="1" blue="1" alpha="0.40012307359999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="value" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <outlet property="delegate" destination="7rK-Mf-YUl" id="Gnc-CE-YBH"/>
+                                                            <outlet property="delegate" destination="HZ0-VV-HbH" id="GKw-c4-JjO"/>
                                                         </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrs-0D-oFe">

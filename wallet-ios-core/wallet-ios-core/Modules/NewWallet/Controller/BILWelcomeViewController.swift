@@ -11,12 +11,48 @@ import UIKit
 class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
 
 	@IBOutlet weak var newWalletButton: BILGradientButton!
+	@IBOutlet weak var guideScrollView: UIScrollView!
+	@IBOutlet weak var pageControl: UIPageControl!
+	
+	var guideViews = [BILGuideBaseView]()
+	
 	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		
+		let allInOneView = Bundle.main.loadNibNamed("BILAllInOneView", owner: nil, options: nil)?.first as! BILAllInOneView
+		let keyView = Bundle.main.loadNibNamed("BILGuideKeyView", owner: nil, options: nil)?.first as! BILGuideKeyView
+		guideScrollView.addSubview(allInOneView)
+		guideScrollView.addSubview(keyView)
+		guideViews.append(contentsOf: [allInOneView, keyView])
     }
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		
+		let frame = guideScrollView.bounds
+		for gView in guideViews {
+			gView.adjust(frame: frame, index: guideViews.index(of: gView)!)
+		}
+		
+		guideScrollView.contentSize = CGSize(width: frame.width * CGFloat(guideViews.count), height: frame.height)
+		layoutGuideView()
+	}
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		layoutGuideView()
+	}
+	
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		let index = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+		pageControl.currentPage = index
+	}
+	
+	func layoutGuideView() {
+		for gView in guideViews {
+			gView.adjust(contentOffset: guideScrollView.contentOffset)
+		}
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

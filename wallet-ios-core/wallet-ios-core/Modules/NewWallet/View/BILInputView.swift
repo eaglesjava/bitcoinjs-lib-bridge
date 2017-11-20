@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILInputView: UIView {
+class BILInputView: UIView, UITextFieldDelegate {
 	
 	enum TipType {
 		case normal
@@ -18,6 +18,11 @@ class BILInputView: UIView {
 	@IBOutlet weak var textField: UITextField!
 	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var line: UIView!
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		line.backgroundColor = UIColor.bil_white_60_color
+	}
 
 	func show(tip: String, type: TipType) {
 		title.text = tip
@@ -33,6 +38,14 @@ class BILInputView: UIView {
 		}
 		line.backgroundColor = color
 		title.textColor = lineColor
+	}
+	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		line.backgroundColor = UIColor.white
+	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		line.backgroundColor = UIColor.bil_white_60_color
 	}
 	
     /*

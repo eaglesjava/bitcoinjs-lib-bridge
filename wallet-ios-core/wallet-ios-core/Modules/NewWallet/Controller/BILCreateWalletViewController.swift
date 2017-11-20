@@ -12,7 +12,7 @@ import CoreData
 import CryptoSwift
 import PopupDialog
 
-class BILCreateWalletViewController: BILBaseViewController, UITextFieldDelegate {
+class BILCreateWalletViewController: BILBaseViewController {
 	
 	enum CreateWalletType {
 		case new
