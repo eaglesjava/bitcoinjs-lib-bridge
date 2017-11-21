@@ -16,7 +16,7 @@ import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
 import com.bitbill.www.di.qualifier.PrefersAppInfo;
-import com.bitbill.www.di.qualifier.PrefersUserInfo;
+import com.bitbill.www.di.qualifier.PrefersWalletInfo;
 import com.bitbill.www.di.qualifier.SocketUrlInfo;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.AppModelManager;
@@ -26,6 +26,8 @@ import com.bitbill.www.model.app.prefs.AppPreferences;
 import com.bitbill.www.model.app.prefs.AppPreferencesHelper;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.WalletModelManager;
+import com.bitbill.www.model.wallet.db.WalletDb;
+import com.bitbill.www.model.wallet.db.WalletDbHelper;
 
 import javax.inject.Singleton;
 
@@ -82,9 +84,9 @@ public class ApplicationModule {
     }
 
     @Provides
-    @PrefersUserInfo
-    String provideUserPreferenceName() {
-        return AppConstants.PREF_USER_NAME;
+    @PrefersWalletInfo
+    String provideWalletPreferenceName() {
+        return AppConstants.PREF_WALLET_NAME;
     }
 
     @Provides
@@ -129,6 +131,12 @@ public class ApplicationModule {
     @Singleton
     WalletModel provideWalletModuleManager(WalletModelManager walletModelManager) {
         return walletModelManager;
+    }
+
+    @Provides
+    @Singleton
+    WalletDb provideWalletDbHelper(WalletDbHelper walletDbHelper) {
+        return walletDbHelper;
     }
 
 

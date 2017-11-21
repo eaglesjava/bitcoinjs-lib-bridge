@@ -37,8 +37,16 @@ import io.reactivex.Observable;
 
 public interface WalletDb extends Db {
 
-    Observable<Long> insertUser(final Wallet user);
+    Observable<Long> insertWallet(final Wallet wallet);
 
-    Observable<List<Wallet>> getAllUsers();
+    Observable<Boolean> updateWallet(final Wallet wallet);
+
+    Observable<List<Wallet>> getAllWallets();
+
+    Observable<Wallet> getWalletById(Long walletId);
+
+    Observable<Wallet> getWalletByMnemonicHash(String mnemonicHash);
+
+    Observable<Wallet> getWalletBySeedHash(String seedHash);
 
 }

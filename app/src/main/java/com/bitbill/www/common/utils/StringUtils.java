@@ -8,12 +8,16 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.webkit.URLUtil;
 
+import com.bitbill.www.crypto.utils.EncryptUtils;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -393,7 +397,7 @@ public class StringUtils {
 
     public static int[] getCurrentDate() {
         int[] dateBundle = new int[3];
-        String[] temp = getDataTime("yyyy-MM-dd").split("-");
+        String[] temp = getDateTime("yyyy-MM-dd").split("-");
 
         for (int i = 0; i < 3; i++) {
             try {
@@ -408,22 +412,9 @@ public class StringUtils {
     /**
      * 返回当前系统时间
      */
-    public static String getDataTime(String format) {
+    public static String getDateTime(String format) {
         SimpleDateFormat df = new SimpleDateFormat(format);
         return df.format(new Date());
-    }
-
-    /**
-     * <pre>
-     * 判断是否为一个合法的登录密码(只校验长度是否大于等于六位)
-     * </pre>
-     *
-     * @param password
-     * @return
-     */
-    public static boolean isPasswordValid(String password) {
-        // 登录时密码只验证位数 设置和注册验证密码格式
-        return StringUtils.isNotEmpty(password) && password.length() >= 6;
     }
 
     /**
@@ -938,5 +929,48 @@ public class StringUtils {
             return a.equalsIgnoreCase(b);
         }
         return false;
+    }
+
+    public static boolean isWalletNameValid(String name) {
+        //TODO: Replace this with your own logic
+        return name.length() > 0;
+    }
+
+    public static boolean isPasswordValid(String password) {
+        return password.length() >= 6 && password.length() <= 20;
+    }
+
+
+    /**
+     * 加密助记词并更新wallet
+     *
+     * @param mnemonic 助记词
+     * @param key      密码
+     * @param wallet   钱包实体用于更新相关字段
+     * @return
+     */
+    public static String encryptMnemonic(String mnemonic, String key, Wallet wallet) {
+        byte[] encryptKey = EncryptUtils.encryptSHA256(key.getBytes(Charset.defaultCharset()));
+        String encryptMnemonic = EncryptUtils.encryptAES2HexString(mnemonic.getBytes(Charset.defaultCharset()), encryptKey);
+        String encryptMnemonicHash = EncryptUtils.encryptSHA256ToString(mnemonic.getBytes(Charset.defaultCharset()));
+        if (wallet != null) {
+            wallet.setEncryptMnemonic(encryptMnemonic);
+            wallet.setEncryptMnemonicHash(encryptMnemonicHash);
+            wallet.setUpdatedAt(System.currentTimeMillis());
+        }
+        return encryptMnemonicHash;
+    }
+
+    /**
+     * 解密助记词
+     *
+     * @param encryptMnemonic 加密助记词的十六进制字符串
+     * @param key             密码
+     * @return
+     */
+    private String decryptMnemonic(String encryptMnemonic, String key) {
+        byte[] encryptKey = EncryptUtils.encryptSHA256(key.getBytes(Charset.defaultCharset()));
+        String decryptMnemonic = new String(EncryptUtils.decryptHexStringAES(encryptMnemonic, encryptKey), Charset.defaultCharset());
+        return decryptMnemonic;
     }
 }

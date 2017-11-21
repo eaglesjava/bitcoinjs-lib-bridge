@@ -15,6 +15,7 @@ import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
 import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.create.CreateWalletSuccessActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 
@@ -48,6 +49,9 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Inject
     InitWalletMvpPresenter<WalletModel, InitWalletMvpView> initWalletMvpPresenter;
     private int mCreateOrImportStatus;
+    private EditTextWapper focusView;
+    private boolean cancel;
+    private Wallet mWallet;
 
     public static void start(Context context, int createOrImport) {
         Intent intent = new Intent(context, InitWalletActivity.class);
@@ -132,51 +136,21 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         etwTradePwd.removeError();
         etwTradePwdConfirm.removeError();
 
-        boolean cancel = false;
-        EditTextWapper focusView = null;
+        cancel = false;
+        focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(getConfirmTradePwd()) || !isPasswordValid(getConfirmTradePwd()) || !isPwdConsistent()) {
-            etwTradePwdConfirm.setError(R.string.error_trade_pwd_inconsistent);
-            focusView = etwTradePwdConfirm;
-            cancel = true;
-        }
-
-        // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(getTradePwd()) || !isPasswordValid(getTradePwd())) {
-            etwTradePwd.setError(R.string.error_invalid_trade_pwd);
-            focusView = etwTradePwd;
-            cancel = true;
-        }
-
-        // Check for a valid wallet name.
-        if (TextUtils.isEmpty(getWalletName()) || !isWalletNameValid(getWalletName())) {
-            etwWalletName.setError(R.string.error_wallet_name_required);
-            focusView = etwWalletName;
-            cancel = true;
-        }
-
+        // init wallet logic
+        initWalletMvpPresenter.initWallet();
 
         if (cancel) {
-            // There was an error; don't attempt create or import and focus the first
+            // There was an error; don't attempt init and focus the first
             // form field with an error.
             focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the wallet create or import attempt.
-            showProgress(true);
-            // TODO: 2017/11/14 create or import wallet logic
-            initWalletMvpPresenter.initWallet();
-
         }
     }
 
     private boolean isCreateWallet() {
         return mCreateOrImportStatus == CREATE_WALLET;
-    }
-
-    private void showProgress(boolean show) {
-
     }
 
     private boolean isWalletNameValid(String name) {
@@ -192,6 +166,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         return TextUtils.equals(getTradePwd(), getConfirmTradePwd());
     }
 
+    @Override
     public String getWalletName() {
         return etwWalletName.getText();
     }
@@ -200,27 +175,75 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         return etwTradePwd.getText();
     }
 
+    @Override
+    public void requireTradeConfirmPwd() {
+        etwTradePwdConfirm.setError(R.string.error_confirm_trade_pwd_required);
+        focusView = etwTradePwdConfirm;
+        cancel = true;
+    }
+
+    @Override
+    public void isPwdInConsistent() {
+        etwTradePwdConfirm.setError(R.string.error_trade_pwd_inconsistent);
+        focusView = etwTradePwdConfirm;
+        cancel = true;
+
+    }
+
+    @Override
+    public void requireTradePwd() {
+        etwTradePwd.setError(R.string.error_trade_pwd_required);
+        focusView = etwTradePwd;
+        cancel = true;
+    }
+
+    @Override
+    public void invalidTradePwd() {
+        etwTradePwd.setError(R.string.error_invalid_trade_pwd);
+        focusView = etwTradePwd;
+        cancel = true;
+
+    }
+
+    @Override
+    public void requireWalletName() {
+        etwWalletName.setError(R.string.error_wallet_name_required);
+        focusView = etwWalletName;
+        cancel = true;
+
+    }
+
+    @Override
+    public void invalidWalletName() {
+        etwWalletName.setError(R.string.error_invalid_wallet_name);
+        focusView = etwWalletName;
+        cancel = true;
+
+    }
+
     public String getConfirmTradePwd() {
         return etwTradePwdConfirm.getText();
     }
 
     @Override
-    public void initWalletSuccess() {
+    public void initWalletSuccess(Wallet wallet) {
+        this.mWallet = wallet;
         if (!isCreateWallet()) {
             //跳转到导入钱包流程
-            ImportWalletActivity.start(this);
+            ImportWalletActivity.start(this, mWallet);
         } else {
-            getMvpPresenter().createMnemonic();
+            getMvpPresenter().createMnemonic(mWallet);
         }
     }
 
     @Override
     public void initWalletFail() {
-
+        // TODO: 2017/11/21 弹出创建钱包失败提示
+        showMessage("钱包创建失败，请重试");
     }
 
     @Override
-    public void createMnemonicSuccess() {
+    public void createMnemonicSuccess(String encryptMnemonicHash) {
         if (isCreateWallet()) {
             //跳转到穿件钱包成功界面
             CreateWalletSuccessActivity.start(InitWalletActivity.this);
@@ -229,6 +252,8 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Override
     public void createMnemonicFail() {
+        // TODO: 2017/11/21 弹出创建钱包失败提示
+        showMessage("钱包创建失败，请重试");
 
     }
 

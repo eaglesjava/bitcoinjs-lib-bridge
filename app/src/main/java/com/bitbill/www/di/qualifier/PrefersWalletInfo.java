@@ -15,5 +15,5 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PrefersUserInfo {
+public @interface PrefersWalletInfo {
 }

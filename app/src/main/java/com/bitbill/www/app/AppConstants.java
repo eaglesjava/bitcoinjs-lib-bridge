@@ -14,7 +14,7 @@ public final class AppConstants {
 
     public static final String DB_NAME = "bitbill_database.db";
     public static final String PREF_APP_NAME = "bitbill_app_pref";
-    public static final String PREF_USER_NAME = "bitbill_user_pref";
+    public static final String PREF_WALLET_NAME = "bitbill_wallet_pref";
 
     public static final long NULL_INDEX = -1L;
 

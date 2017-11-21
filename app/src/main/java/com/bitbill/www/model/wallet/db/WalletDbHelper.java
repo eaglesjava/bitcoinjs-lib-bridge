@@ -26,6 +26,7 @@ package com.bitbill.www.model.wallet.db;
 import com.bitbill.www.common.base.model.db.DbHelper;
 import com.bitbill.www.common.base.model.db.DbOpenHelper;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.db.entity.WalletDao;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -43,27 +44,71 @@ import io.reactivex.Observable;
 @Singleton
 public class WalletDbHelper extends DbHelper implements WalletDb {
 
+    private final WalletDao mWalletDao;
+
     @Inject
     public WalletDbHelper(DbOpenHelper dbOpenHelper) {
         super(dbOpenHelper);
+        mWalletDao = mDaoSession.getWalletDao();
     }
 
     @Override
-    public Observable<Long> insertUser(final Wallet user) {
+    public Observable<Long> insertWallet(final Wallet wallet) {
         return Observable.fromCallable(new Callable<Long>() {
             @Override
             public Long call() throws Exception {
-                return mDaoSession.getWalletDao().insert(user);
+                return mWalletDao.insert(wallet);
             }
         });
     }
 
     @Override
-    public Observable<List<Wallet>> getAllUsers() {
+    public Observable<Boolean> updateWallet(Wallet wallet) {
+        return Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                mWalletDao.update(wallet);
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<Wallet>> getAllWallets() {
         return Observable.fromCallable(new Callable<List<Wallet>>() {
             @Override
             public List<Wallet> call() throws Exception {
-                return mDaoSession.getWalletDao().loadAll();
+                return mWalletDao.loadAll();
+            }
+        });
+    }
+
+    @Override
+    public Observable<Wallet> getWalletById(Long walletId) {
+        return Observable.fromCallable(new Callable<Wallet>() {
+            @Override
+            public Wallet call() throws Exception {
+                return mWalletDao.load(walletId);
+            }
+        });
+    }
+
+    @Override
+    public Observable<Wallet> getWalletByMnemonicHash(String mnemonicHash) {
+        return Observable.fromCallable(new Callable<Wallet>() {
+            @Override
+            public Wallet call() throws Exception {
+                return mWalletDao.queryBuilder().where(WalletDao.Properties.EncryptMnemonicHash.eq(mnemonicHash)).unique();
+            }
+        });
+    }
+
+    @Override
+    public Observable<Wallet> getWalletBySeedHash(String seedHash) {
+        return Observable.fromCallable(new Callable<Wallet>() {
+            @Override
+            public Wallet call() throws Exception {
+                return mWalletDao.queryBuilder().where(WalletDao.Properties.EncryptSeedHash.eq(seedHash)).unique();
             }
         });
     }
