@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -151,19 +150,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     private boolean isCreateWallet() {
         return mCreateOrImportStatus == CREATE_WALLET;
-    }
-
-    private boolean isWalletNameValid(String name) {
-        //TODO: Replace this with your own logic
-        return name.length() > 0;
-    }
-
-    private boolean isPasswordValid(String password) {
-        return password.length() >= 6 && password.length() <= 20;
-    }
-
-    private boolean isPwdConsistent() {
-        return TextUtils.equals(getTradePwd(), getConfirmTradePwd());
     }
 
     @Override

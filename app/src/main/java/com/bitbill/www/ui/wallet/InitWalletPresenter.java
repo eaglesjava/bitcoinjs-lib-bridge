@@ -136,9 +136,17 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         BitcoinJsWrapper.getInstance().generateMnemonicRandomCN(new BitcoinJsWrapper.JsInterface.Callback() {
             @Override
             public void call(String key, String jsResult) {
-                Log.d(TAG, "generateMnemonicRandomCN: key = [" + key + "], Mnemonic = [" + jsResult + "]");
-                String encryptMnemonicHash = StringUtils.encryptMnemonic(jsResult, InitWalletPresenter.this.getMvpView().getTradePwd(), wallet);
-                Log.d(TAG, "update walelt: " + wallet.toString());
+                String encryptMnemonicHash = null;
+                try {
+                    Log.d(TAG, "generateMnemonicRandomCN: key = [" + key + "], Mnemonic = [" + jsResult + "]");
+                    encryptMnemonicHash = StringUtils.encryptMnemonic(jsResult, InitWalletPresenter.this.getMvpView().getTradePwd(), wallet);
+                    Log.d(TAG, "update walelt: " + wallet.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    getMvpView().hideLoading();
+                    getMvpView().createMnemonicFail();
+                }
+                String finalEncryptMnemonicHash = encryptMnemonicHash;
                 getCompositeDisposable().add(getModelManager()
                         .updateWallet(wallet)
                         .subscribeOn(getSchedulerProvider().io())
@@ -147,12 +155,12 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                             @Override
                             public void onNext(Boolean aBoolean) {
                                 super.onNext(aBoolean);
-                                Log.d(TAG, "createMnemonicSuccess = [" + encryptMnemonicHash + "]");
+                                Log.d(TAG, "createMnemonicSuccess = [" + finalEncryptMnemonicHash + "]");
                                 if (!isViewAttached()) {
                                     return;
                                 }
-                                if (aBoolean) {
-                                    getMvpView().createMnemonicSuccess(encryptMnemonicHash);
+                                if (aBoolean && finalEncryptMnemonicHash != null) {
+                                    getMvpView().createMnemonicSuccess(finalEncryptMnemonicHash);
                                 } else {
                                     getMvpView().createMnemonicFail();
                                 }
