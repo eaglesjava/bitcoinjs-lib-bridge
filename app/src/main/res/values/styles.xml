@@ -41,6 +41,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/btn_height</item>
         <item name="android:textSize">@dimen/btn_text_size</item>
+        <item name="android:lines">1</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
     </style>
 
@@ -81,6 +82,16 @@
         <item name="android:focusable">false</item>
     </style>
 
+    <style name="EditText.ConfirmPwd" parent="EditText.Normal">
+        <item name="colorControlNormal">@color/line</item>
+        <item name="colorControlActivated">@color/black</item>
+        <item name="android:textColorHint">@color/black_50</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/input_border_bottom</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:lines">1</item>
+    </style>
+
     <style name="Text" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -93,6 +104,7 @@
     </style>
 
     <style name="Text.Title" parent="Text">
+        <item name="android:lines">1</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/title_normal</item>
     </style>
@@ -114,7 +126,7 @@
         <item name="android:textSize">@dimen/input_title_text_size</item>
     </style>
 
-    <style name="Text.Small.Orange">
+    <style name="Text.Small.Green">
         <item name="android:textColor">@color/green</item>
     </style>
 
@@ -128,5 +140,42 @@
     <style name="ExpandedBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowAnimationStyle">@style/Animation.Design.BottomSheetDialog</item>
     </style>
+
+    <style name="ConfirmDialog.Button" parent="Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="ConfirmDialog.Button.Negative" parent="ConfirmDialog.Button">
+        <item name="android:textColor">@color/black_40</item>
+    </style>
+
+    <style name="ConfirmDialog.Button.Positive" parent="ConfirmDialog.Button">
+        <item name="android:textColor">@color/blue_active</item>
+    </style>
+
+    <style name="ConfirmDialog.Title" parent="Text.Title">
+        <item name="android:textColor">@color/black_90</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/text_size_big</item>
+    </style>
+
+    <style name="Line">
+        <item name="android:background">@color/edit_line</item>
+    </style>
+
+    <style name="Line.Horizontal" parent="Line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="Line.Vertical" parent="Line">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
 
 </resources>

@@ -133,10 +133,10 @@ public class DialogUtils {
             builder.setTitle(title);
         if (!TextUtils.isEmpty(message))
             builder.setMessage(message);
-        if (!TextUtils.isEmpty(okStr) && onOkClickListener != null)
+        if (!TextUtils.isEmpty(okStr))
             builder.setPositiveButton(okStr, onOkClickListener);
 
-        if (!TextUtils.isEmpty(cancelStr) && onCancleClickListener != null)
+        if (!TextUtils.isEmpty(cancelStr))
             builder.setNegativeButton(cancelStr, onCancleClickListener);
         return builder;
     }

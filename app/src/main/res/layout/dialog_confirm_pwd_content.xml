@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="42dp"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_confirm_pwd"
+        style="@style/EditText.ConfirmPwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dialog_confirm_padding"
+        android:hint="请输入密码以确认"/>
+</LinearLayout>

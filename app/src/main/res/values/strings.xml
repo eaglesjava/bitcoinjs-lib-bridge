@@ -84,5 +84,6 @@
     <string name="title_activity_backup_wallet">备份钱包</string>
     <string name="title_dialog_backup_wallet">备份钱包</string>
     <string name="error_invalid_wallet_name">请输入正确的钱包名称</string>
+    <string name="title_dialog_bakup_wallet">备份钱包</string>
 
 </resources>

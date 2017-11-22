@@ -51,7 +51,7 @@
                 />
 
             <TextView
-                style="@style/Text.Small.Orange"
+                style="@style/Text.Small.Green"
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
                 android:text="@string/hint_back_up_pwd"/>
