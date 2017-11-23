@@ -8,8 +8,21 @@
 
 <script type="text/javascript" src="bitcoinjs-lib-app.js"></script>
 <script type="text/javascript">
-    function getMnemonicRandom(){
-       return android.getMnemonic(bridge.generateMnemonicRandom(128, bridge.bip39.wordlists.chinese_simplified));
+    function generateMnemonicRandomCN(){
+       android.generateMnemonicRandomCN(bridge.generateMnemonicRandomCN(128));
+    }
+
+    function mnemonicToSeedHex(nemonic,pwd){
+       android.mnemonicToSeedHex(bridge.mnemonicToSeedHex(nemonic, pwd));
+    }
+    function getBitcoinAddressBySeedHex(seedHex,index){
+       android.getBitcoinAddressBySeedHex(bridge.getBitcoinAddressBySeedHex(seedHex, index));
+    }
+    function getBitcoinAddressByMasterXPublicKey(xpub,index){
+       android.getBitcoinAddressByMasterXPublicKey(bridge.getBitcoinAddressByMasterXPublicKey(xpub, index));
+    }
+    function getBitcoinMasterXPublicKey(seedHex){
+       android.getBitcoinMasterXPublicKey(bridge.getBitcoinMasterXPublicKey(seedHex));
     }
 
 </script>
