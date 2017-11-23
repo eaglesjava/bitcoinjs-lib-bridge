@@ -28,7 +28,7 @@ extension UIColor {
 	static var bil_deep_blue_start_bgcolor: UIColor{ get { return UIColor(hex: 0x353A46) } }
 	static var bil_deep_blue_end_bgcolor: UIColor{ get { return UIColor(hex: 0x20222B) } }
 	
-	static var bil_white_60_color: UIColor { get { return UIColor(white: 1.0, alpha: 0.6) } }
+	static var bil_white_40_color: UIColor { get { return UIColor(white: 1.0, alpha: 0.4) } }
 	
 	static func bil_black_color(alpha: CGFloat) -> UIColor {
 		return UIColor(hex: 0x000000, bil_a: alpha)

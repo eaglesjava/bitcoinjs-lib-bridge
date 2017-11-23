@@ -14,7 +14,7 @@ class BILMnemonicCell: UICollectionViewCell {
 	
 	override var isSelected: Bool {
 		didSet {
-			title.textColor = isSelected ? UIColor.bil_white_60_color : UIColor.white
+			title.textColor = isSelected ? UIColor.bil_white_40_color : UIColor.white
 		}
 	}
 	

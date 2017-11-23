@@ -65,6 +65,7 @@
 		CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF634FE1FC2B82B00840097 /* BILGuideKeyView.xib */; };
 		CCF635011FC2B95100840097 /* BILGuideBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF635001FC2B95100840097 /* BILGuideBaseView.swift */; };
 		CCF635031FC2C5C600840097 /* BILGuideItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF635021FC2C5C600840097 /* BILGuideItem.swift */; };
+		CCF635051FC3DA3600840097 /* BILImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF635041FC3DA3600840097 /* BILImportWalletController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		CCF634FE1FC2B82B00840097 /* BILGuideKeyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideKeyView.xib; sourceTree = "<group>"; };
 		CCF635001FC2B95100840097 /* BILGuideBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideBaseView.swift; sourceTree = "<group>"; };
 		CCF635021FC2C5C600840097 /* BILGuideItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideItem.swift; sourceTree = "<group>"; };
+		CCF635041FC3DA3600840097 /* BILImportWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILImportWalletController.swift; sourceTree = "<group>"; };
 		D2BEE8AF9C1E6B3732497728 /* Pods-wallet-ios-core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-core.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-core/Pods-wallet-ios-core.release.xcconfig"; sourceTree = "<group>"; };
 		F76E2A6321F53623A11A5D44 /* Pods-wallet-ios-coreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-coreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-coreTests/Pods-wallet-ios-coreTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +205,7 @@
 				CC94E04C1FB94DAA0098E730 /* BILWelcomeViewController.swift */,
 				CC94E04E1FB950040098E730 /* BILCreateWalletViewController.swift */,
 				CC4660521FBEA67600A87132 /* BILCreateWalletSuccessController.swift */,
+				CCF635041FC3DA3600840097 /* BILImportWalletController.swift */,
 				CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */,
 			);
 			path = Controller;
@@ -785,6 +788,7 @@
 				CC94E0961FBAE1A50098E730 /* Data+CKBitArray.swift in Sources */,
 				CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */,
 				CC94E05E1FBAC2B20098E730 /* WalletModel.xcdatamodeld in Sources */,
+				CCF635051FC3DA3600840097 /* BILImportWalletController.swift in Sources */,
 				CCE9BE801FBD9DF0007A59E7 /* BILVerifyMnemonicController.swift in Sources */,
 				CC4417051FBEB25C00C4B158 /* BILControllerManager.swift in Sources */,
 				CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */,

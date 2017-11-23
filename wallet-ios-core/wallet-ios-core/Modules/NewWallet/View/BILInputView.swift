@@ -21,7 +21,7 @@ class BILInputView: UIView, UITextFieldDelegate {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		line.backgroundColor = UIColor.bil_white_60_color
+		line.backgroundColor = UIColor.bil_white_40_color
 	}
 
 	func show(tip: String, type: TipType) {
@@ -45,7 +45,7 @@ class BILInputView: UIView, UITextFieldDelegate {
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
-		line.backgroundColor = UIColor.bil_white_60_color
+		line.backgroundColor = UIColor.bil_white_40_color
 	}
 	
     /*

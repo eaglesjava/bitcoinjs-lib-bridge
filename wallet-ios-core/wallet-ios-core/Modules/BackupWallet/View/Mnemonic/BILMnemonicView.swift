@@ -92,7 +92,7 @@ class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
 		
-		let title = NSAttributedString(string: emptyTitle ?? "", attributes: [NSAttributedStringKey.foregroundColor : UIColor.bil_white_60_color, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 21)])
+		let title = NSAttributedString(string: emptyTitle ?? "", attributes: [NSAttributedStringKey.foregroundColor : UIColor.bil_white_40_color, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 21)])
 		
 		return title
 	}

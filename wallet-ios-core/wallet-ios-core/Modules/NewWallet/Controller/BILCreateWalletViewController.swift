@@ -82,11 +82,11 @@ class BILCreateWalletViewController: BILBaseViewController {
 		let buttonTitle = "我知道了"
 		
 		let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
-		let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: true, hideStatusBar: false) {
+		let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: false, hideStatusBar: false) {
 			print("popup")
 		}
 		
-		let button = DefaultButton(title: buttonTitle, dismissOnTap: true) {
+		let button = DefaultButton(title: buttonTitle, height: 50, dismissOnTap: true) {
 			
 		}
 		popup.addButton(button)
