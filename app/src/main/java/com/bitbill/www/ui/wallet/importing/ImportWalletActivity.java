@@ -37,7 +37,8 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @Override
     public void importWalletSuccess() {
-
+        //进入主界面
+        MainActivity.start(ImportWalletActivity.this);
     }
 
     @Override
@@ -77,8 +78,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @OnClick(R.id.btn_next)
     public void onViewClicked() {
-        //进入主界面
-        MainActivity.start(ImportWalletActivity.this);
+        getMvpPresenter().importWallet(mWallet);
     }
 
     @Override

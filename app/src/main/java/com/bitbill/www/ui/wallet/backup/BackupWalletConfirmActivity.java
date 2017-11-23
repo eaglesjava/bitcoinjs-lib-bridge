@@ -160,12 +160,12 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity {
     }
 
     /**
-     * // TODO: 2017/11/20 校验助记词是否匹配
+     * 校验助记词是否匹配
      *
      * @return
      */
     private boolean isMnemonicCorrect() {
-        return true;
+        return Arrays.equals(mMnemonicConfirmList.toArray(), mMnemonicArray);
     }
 
     public static class GridViewAdapter extends BaseAdapter {
