@@ -18,6 +18,7 @@ public class BitcoinJsWrapper {
     public static final String GET_BITCOIN_ADDRESS_BY_SEED_HEX = "getBitcoinAddressBySeedHex";
     public static final String GET_BITCOIN_ADDRESS_BY_MASTER_XPUBLIC_KEY = "getBitcoinAddressByMasterXPublicKey";
     public static final String GET_BITCOIN_MASTER_XPUBLIC_KEY = "getBitcoinMasterXPublicKey";
+    public static final String VALIDATEMNEMONIC = "validateMnemonic";
     private WebView mWebView;
     private JsInterface mJsInterface;
     private Handler mHandler;
@@ -99,6 +100,11 @@ public class BitcoinJsWrapper {
         executeJS("javascript:getBitcoinMasterXPublicKey('" + seedHex + "')");
     }
 
+    public void validateMnemonic(String nemonic, JsInterface.Callback callback) {
+        mJsInterface.addCallBack(GET_BITCOIN_MASTER_XPUBLIC_KEY, callback);
+        executeJS("javascript:validateMnemonic('" + nemonic + "')");
+    }
+
     //静态内部类确保了在首次调用getInstance()的时候才会初始化SingletonHolder，从而导致实例被创建。
     //并且由JVM保证了线程的安全。
     private static class SingletonHolder {
@@ -157,6 +163,15 @@ public class BitcoinJsWrapper {
         @JavascriptInterface
         public void getBitcoinMasterXPublicKey(final String address) {
             callAndBack(GET_BITCOIN_MASTER_XPUBLIC_KEY, address);
+        }
+
+        /**
+         * This is not called on the UI thread. Post a runnable to invoke
+         * loadUrl on the UI thread.
+         */
+        @JavascriptInterface
+        public void validateMnemonic(final String result) {
+            callAndBack(VALIDATEMNEMONIC, result);
         }
 
         private void callAndBack(String key, String result) {
