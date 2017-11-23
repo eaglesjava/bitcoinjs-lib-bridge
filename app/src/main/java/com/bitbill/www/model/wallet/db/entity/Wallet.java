@@ -6,6 +6,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * Created by isanwenyu@163.com on 2017/11/17.
@@ -43,13 +44,13 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     @Property(nameInDb = "updated_at")
     private long updatedAt;
-
+    @Transient
+    private String tradePwd;
 
     @Generated(hash = 1251768898)
-    public Wallet(Long id, String name, String encryptMnemonic,
-                  String encryptMnemonicHash, int lastAddressIndex, String encryptSeed,
-                  String encryptSeedHash, boolean isBackup, long createdAt,
-                  long updatedAt) {
+    public Wallet(Long id, String name, String encryptMnemonic, String encryptMnemonicHash,
+                  int lastAddressIndex, String encryptSeed, String encryptSeedHash,
+                  boolean isBackup, long createdAt, long updatedAt) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
@@ -146,4 +147,12 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.updatedAt = updatedAt;
     }
 
+    public String getTradePwd() {
+        return tradePwd;
+    }
+
+    public Wallet setTradePwd(String tradePwd) {
+        this.tradePwd = tradePwd;
+        return this;
+    }
 }

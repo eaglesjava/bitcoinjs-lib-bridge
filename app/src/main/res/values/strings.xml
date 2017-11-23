@@ -89,5 +89,7 @@
     <string name="error_get_wallet_info_fail">获取钱包信息失败,请返回重试</string>
     <string name="error_get_confirm_pwd_fail">获取确认密码失败，请重新输入</string>
     <string name="hint_bak_wallet_click">请按顺序点击下方文字</string>
+    <string name="error_import_wallet_fail">导入钱包失败，请重试</string>
+    <string name="error_input_menemonic_fail">请正确填写助记词</string>
 
 </resources>
