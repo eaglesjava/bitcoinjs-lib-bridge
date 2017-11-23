@@ -25,6 +25,10 @@ function mnemonicToSeedHex (mnemonic, password) {
   	return bip39.mnemonicToSeedHex(mnemonic, password)
 }
 
+function validateMnemonic(mnemonic) {
+	return bip39.validateMnemonic(mnemonic)
+}
+
 function getBitcoinAddressBySeedHex (seedHex, index) {
 	bitcoinKeyChain = bitcoinKeyChain || generateBitcoinMainnetMasterKeychain(seedHex)
 	return bitcoinKeyChain.derive(index).getAddress()
@@ -57,6 +61,7 @@ module.exports = {
 	generateMnemonicRandom,
 	generateMnemonicRandomCN,
 	mnemonicToSeedHex,
+	validateMnemonic,
 	getBitcoinAddressBySeedHex,
 	getBitcoinAddressByMasterXPublicKey,
 	getBitcoinMasterXPublicKey,
