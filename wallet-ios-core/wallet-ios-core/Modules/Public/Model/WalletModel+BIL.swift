@@ -27,6 +27,7 @@ extension WalletModel {
 		}
 		return wallet
 	}
+	
 	func save() {
 		do {
 			let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

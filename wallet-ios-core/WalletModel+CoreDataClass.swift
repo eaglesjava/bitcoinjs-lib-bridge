@@ -11,5 +11,5 @@ import CoreData
 
 @objc(WalletModel)
 public class WalletModel: NSManagedObject {
-
+	
 }

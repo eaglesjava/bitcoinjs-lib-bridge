@@ -15,7 +15,11 @@ class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var delegate: BILMnemonicViewDelegate?
 	
-	var emptyTitle: String?
+	var emptyTitle: String? {
+		didSet {
+			collectionView.reloadData()
+		}
+	}
 	
 	var dataArray = [String]() {
 		didSet {

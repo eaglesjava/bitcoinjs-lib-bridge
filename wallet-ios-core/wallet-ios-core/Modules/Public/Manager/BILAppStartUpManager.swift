@@ -10,6 +10,7 @@ import UIKit
 import PopupDialog
 import IQKeyboardManagerSwift
 import Foundation
+import SVProgressHUD
 
 class BILAppStartUpManager: NSObject {
 	
@@ -25,11 +26,23 @@ class BILAppStartUpManager: NSObject {
 		loadJS()
 		snapshotNavBackgroundImage()
 		setupTextFieldAppearance()
+		setupTextViewAppearance()
+		setupSVProgressHUD()
 //		setupNavigationBarAppearance()
+	}
+	
+	private func setupSVProgressHUD() {
+		SVProgressHUD.setDefaultStyle(.dark)
+		SVProgressHUD.setMinimumDismissTimeInterval(0.5)
 	}
 	
 	private func setupTextFieldAppearance() {
 		let appearance = UITextField.appearance()
+		appearance.tintColor = UIColor.white
+	}
+	
+	private func setupTextViewAppearance() {
+		let appearance = UITextView.appearance()
 		appearance.tintColor = UIColor.white
 	}
 	

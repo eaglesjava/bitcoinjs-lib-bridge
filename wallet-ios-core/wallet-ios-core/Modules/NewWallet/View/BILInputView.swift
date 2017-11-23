@@ -8,6 +8,11 @@
 
 import UIKit
 
+@objc
+protocol BILInputViewDelegate: UITextFieldDelegate {
+	
+}
+
 class BILInputView: UIView, UITextFieldDelegate {
 	
 	enum TipType {
@@ -18,6 +23,8 @@ class BILInputView: UIView, UITextFieldDelegate {
 	@IBOutlet weak var textField: UITextField!
 	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var line: UIView!
+	
+	@IBOutlet weak var delegate: BILInputViewDelegate?
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -46,6 +53,13 @@ class BILInputView: UIView, UITextFieldDelegate {
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		line.backgroundColor = UIColor.bil_white_40_color
+	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		if let r = delegate?.textFieldShouldReturn?(textField) {
+			return r
+		}
+		return true
 	}
 	
     /*

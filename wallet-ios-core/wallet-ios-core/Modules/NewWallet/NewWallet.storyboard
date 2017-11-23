@@ -87,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="359.19999999999999" y="151.57421289355324"/>
         </scene>
-        <!--创建钱包-->
+        <!--Delegate-->
         <scene sceneID="5T6-TZ-Y78">
             <objects>
                 <viewController id="7rK-Mf-YUl" customClass="BILCreateWalletViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
@@ -151,6 +151,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="JqB-aG-3nt" secondAttribute="trailing" id="zgu-JE-Dig"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="delegate" destination="7rK-Mf-YUl" id="FIv-E4-kty"/>
                                                     <outlet property="line" destination="fGQ-Xj-3Jd" id="uq4-Tr-k8E"/>
                                                     <outlet property="textField" destination="JqB-aG-3nt" id="vvT-YK-sf9"/>
                                                     <outlet property="title" destination="FNV-OH-lxp" id="o65-Oo-tg0"/>
@@ -263,6 +264,7 @@
                                                     <constraint firstItem="ta4-2m-kQ0" firstAttribute="leading" secondItem="MF1-H1-K5C" secondAttribute="leading" id="mDT-Lt-8BT"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="delegate" destination="7rK-Mf-YUl" id="uYQ-ju-dm8"/>
                                                     <outlet property="line" destination="ta4-2m-kQ0" id="NDG-mr-fhj"/>
                                                     <outlet property="textField" destination="kiL-9x-MRJ" id="lBh-td-d5s"/>
                                                     <outlet property="title" destination="T6d-DG-zPG" id="2oT-Qo-9Ld"/>
@@ -318,6 +320,7 @@
                                                     <constraint firstItem="jrs-0D-oFe" firstAttribute="leading" secondItem="HZ0-VV-HbH" secondAttribute="leading" id="tmd-gB-NVF"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="delegate" destination="7rK-Mf-YUl" id="mdo-VK-hwc"/>
                                                     <outlet property="line" destination="jrs-0D-oFe" id="6C3-IL-GEn"/>
                                                     <outlet property="textField" destination="5Hf-Dg-FgH" id="IH9-pE-Ixf"/>
                                                     <outlet property="title" destination="48F-7A-au2" id="HBu-lF-Yki"/>
@@ -400,20 +403,74 @@
             </objects>
             <point key="canvasLocation" x="1272.8" y="151.57421289355324"/>
         </scene>
-        <!--View Controller-->
+        <!--输入助记词-->
         <scene sceneID="HoF-aI-ZBC">
             <objects>
-                <viewController id="ACT-yT-QtD" sceneMemberID="viewController">
+                <viewController id="ACT-yT-QtD" customClass="BILImportWalletController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EKX-gC-mLT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRR-r5-8xB">
+                                <rect key="frame" x="25" y="141" width="325" height="124"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86e-aY-GDa" customClass="BILMnemonicView" customModule="wallet_ios_core" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="124"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-78-uyq">
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="124"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ACT-yT-QtD" id="pJv-0n-9st"/>
+                                        </connections>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="124" id="93O-cr-FNo"/>
+                                    <constraint firstAttribute="trailing" secondItem="86e-aY-GDa" secondAttribute="trailing" id="FKo-wh-uJC"/>
+                                    <constraint firstItem="86e-aY-GDa" firstAttribute="leading" secondItem="dRR-r5-8xB" secondAttribute="leading" id="aki-zu-HU3"/>
+                                    <constraint firstItem="86e-aY-GDa" firstAttribute="top" secondItem="dRR-r5-8xB" secondAttribute="top" id="oIS-Vu-7qI"/>
+                                    <constraint firstAttribute="bottom" secondItem="86e-aY-GDa" secondAttribute="bottom" id="pEZ-xO-Jmn"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18p-z0-huL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="295" width="325" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="hw4-hg-UVv"/>
+                                </constraints>
+                                <state key="normal" title="下一步"/>
+                                <connections>
+                                    <action selector="nextAction:" destination="ACT-yT-QtD" eventType="touchUpInside" id="UhI-TB-qvz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="xev-18-wrL" firstAttribute="trailing" secondItem="18p-z0-huL" secondAttribute="trailing" constant="25" id="Bbi-L2-Jhr"/>
+                            <constraint firstItem="18p-z0-huL" firstAttribute="leading" secondItem="xev-18-wrL" secondAttribute="leading" constant="25" id="g4k-PH-1Zr"/>
+                            <constraint firstItem="dRR-r5-8xB" firstAttribute="top" secondItem="xev-18-wrL" secondAttribute="top" constant="25" id="ipK-aM-zHk"/>
+                            <constraint firstItem="xev-18-wrL" firstAttribute="trailing" secondItem="dRR-r5-8xB" secondAttribute="trailing" constant="25" id="ncZ-Ky-4s2"/>
+                            <constraint firstItem="18p-z0-huL" firstAttribute="top" secondItem="dRR-r5-8xB" secondAttribute="bottom" constant="30" id="wox-Zd-MMP"/>
+                            <constraint firstItem="dRR-r5-8xB" firstAttribute="leading" secondItem="xev-18-wrL" secondAttribute="leading" constant="25" id="xKb-JC-deM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xev-18-wrL"/>
                     </view>
+                    <navigationItem key="navigationItem" title="输入助记词" id="cca-Ld-QW8"/>
+                    <connections>
+                        <outlet property="mnemonicView" destination="86e-aY-GDa" id="6bi-4O-idm"/>
+                        <outlet property="textView" destination="pVv-78-uyq" id="lQo-lm-HKQ"/>
+                        <segue destination="7rK-Mf-YUl" kind="show" identifier="BILMnemonicToNewWalletSegue" id="PNN-OT-SBG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gww-79-vqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="359" y="956"/>
+            <point key="canvasLocation" x="357.60000000000002" y="955.77211394302856"/>
         </scene>
         <!--创建成功-->
         <scene sceneID="aXv-Jg-kR0">
@@ -556,4 +613,7 @@
         <image name="pic_guide_phone" width="88" height="125"/>
         <image name="pic_success" width="63" height="63"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="PNN-OT-SBG"/>
+    </inferredMetricsTieBreakers>
 </document>
