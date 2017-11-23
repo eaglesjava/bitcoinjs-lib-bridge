@@ -819,20 +819,6 @@ public class StringUtils {
     }
 
     /**
-     * 校验交易密码
-     *
-     * @param tradePwd 交易密码字符串
-     * @return 交易密码规则暂定 6位数字返回true
-     */
-    public static boolean isValidTradePwd(String tradePwd) {
-        // 交易密码规则 6位数字
-        if (!isNotEmpty(tradePwd)) {
-            return false;
-        }
-        return isNumber(tradePwd) && tradePwd.length() == 6;
-    }
-
-    /**
      * 判断是否是pdf url
      *
      * @param pdfUrl
@@ -952,13 +938,17 @@ public class StringUtils {
     public static String encryptMnemonic(String mnemonic, String key, Wallet wallet) {
         byte[] encryptKey = EncryptUtils.encryptSHA256(key.getBytes(Charset.defaultCharset()));
         String encryptMnemonic = EncryptUtils.encryptAES2HexString(mnemonic.getBytes(Charset.defaultCharset()), encryptKey);
-        String encryptMnemonicHash = EncryptUtils.encryptSHA256ToString(mnemonic.getBytes(Charset.defaultCharset()));
+        String encryptMnemonicHash = getMnemonicHash(mnemonic);
         if (wallet != null) {
             wallet.setEncryptMnemonic(encryptMnemonic);
             wallet.setEncryptMnemonicHash(encryptMnemonicHash);
             wallet.setUpdatedAt(System.currentTimeMillis());
         }
         return encryptMnemonicHash;
+    }
+
+    public static String getMnemonicHash(String mnemonic) {
+        return EncryptUtils.encryptSHA256ToString(mnemonic.getBytes(Charset.defaultCharset()));
     }
 
     /**
@@ -968,7 +958,7 @@ public class StringUtils {
      * @param key             密码
      * @return
      */
-    private String decryptMnemonic(String encryptMnemonic, String key) {
+    public static String decryptMnemonic(String encryptMnemonic, String key) {
         byte[] encryptKey = EncryptUtils.encryptSHA256(key.getBytes(Charset.defaultCharset()));
         String decryptMnemonic = new String(EncryptUtils.decryptHexStringAES(encryptMnemonic, encryptKey), Charset.defaultCharset());
         return decryptMnemonic;

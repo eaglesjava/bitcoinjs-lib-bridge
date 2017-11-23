@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.bitbill.www.common.base.view.widget.FocusedCheckedTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_mnemonic"
+    style="@style/Text.Mnemonic">
+
+</com.bitbill.www.common.base.view.widget.FocusedCheckedTextView>

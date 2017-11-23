@@ -232,7 +232,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void createMnemonicSuccess(String encryptMnemonicHash) {
         if (isCreateWallet()) {
             //跳转到穿件钱包成功界面
-            CreateWalletSuccessActivity.start(InitWalletActivity.this);
+            CreateWalletSuccessActivity.start(InitWalletActivity.this, mWallet);
         }
     }
 

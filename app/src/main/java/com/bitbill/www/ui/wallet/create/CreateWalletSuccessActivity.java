@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 
@@ -21,9 +23,12 @@ public class CreateWalletSuccessActivity extends BaseToolbarActivity {
     Button btnBakWallet;
     @BindView(R.id.btn_bak_wallet_delay)
     Button btnBakWalletDelay;
+    private Wallet mWallet;
 
-    public static void start(Context context) {
-        context.startActivity(new Intent(context, CreateWalletSuccessActivity.class));
+    public static void start(Context context, Wallet wallet) {
+        Intent intent = new Intent(context, CreateWalletSuccessActivity.class);
+        intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
+        context.startActivity(intent);
     }
 
     @Override
@@ -53,7 +58,7 @@ public class CreateWalletSuccessActivity extends BaseToolbarActivity {
 
     @Override
     public void initData() {
-
+        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
     }
 
     @Override
@@ -66,7 +71,7 @@ public class CreateWalletSuccessActivity extends BaseToolbarActivity {
         switch (view.getId()) {
             case R.id.btn_bak_wallet:
                 //跳转到备份钱包界面
-                BackUpWalletActivity.start(CreateWalletSuccessActivity.this);
+                BackUpWalletActivity.start(CreateWalletSuccessActivity.this, mWallet);
                 break;
             case R.id.btn_bak_wallet_delay:
                 //跳转到主页

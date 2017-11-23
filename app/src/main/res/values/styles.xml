@@ -90,6 +90,7 @@
         <item name="android:background">@drawable/input_border_bottom</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="Text" parent="TextAppearance.AppCompat">
@@ -122,12 +123,24 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="Text.InputHint" parent="Text">
+        <item name="android:textSize">@dimen/input_mnemonic</item>
+        <item name="android:textColor">@color/white_60</item>
+    </style>
+
     <style name="Text.Small">
         <item name="android:textSize">@dimen/input_title_text_size</item>
     </style>
 
     <style name="Text.Small.Green">
         <item name="android:textColor">@color/green</item>
+    </style>
+
+    <style name="Text.Mnemonic" parent="Text">
+        <item name="android:textColor">@color/text_mnemonic_color</item>
+        <item name="android:textSize">@dimen/input_mnemonic</item>
+        <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
     </style>
 
     <style name="TransparentDialog">
@@ -175,6 +188,27 @@
     <style name="Line.Vertical" parent="Line">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="GridView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="GridView.Mnemonic" parent="GridView">
+        <item name="android:background">@drawable/bg_input_mnemonic_normal</item>
+        <item name="android:columnWidth">30dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:horizontalSpacing">5dp</item>
+        <item name="android:numColumns">auto_fit</item>
+        <item name="android:padding">25dp</item>
+        <item name="android:stretchMode">columnWidth</item>
+        <item name="android:verticalSpacing">5dp</item>
+        <item name="android:listSelector">@color/transparent</item>
+    </style>
+
+    <style name="GridView.Mnemonic.Noneditable" parent="GridView.Mnemonic">
+        <item name="android:clickable">false</item>
     </style>
 
 

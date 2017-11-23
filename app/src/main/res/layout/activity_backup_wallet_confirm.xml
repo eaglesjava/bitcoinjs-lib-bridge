@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,18 +15,31 @@
         android:layout_marginTop="33dp"
         android:text="@string/hint_bak_confirm_mnemonic_correct"/>
 
-    <EditText
-        android:id="@+id/et_input_mnemonic_confirm"
-        style="@style/EditText.Mnemonic.Noneditable"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="25dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
 
-    <EditText
-        android:id="@+id/et_input_mnemonic"
-        style="@style/EditText.Mnemonic.Noneditable"
-        android:layout_width="match_parent"
+        <GridView
+            android:id="@+id/gv_mnemonic_confirm"
+            style="@style/GridView.Mnemonic"
+            android:layout_width="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_hint_click"
+            style="@style/Text.InputHint"
+            android:layout_gravity="center"
+            android:text="@string/hint_bak_wallet_click"/>
+
+    </FrameLayout>
+
+    <GridView
+        android:id="@+id/gv_mnemonic"
+        style="@style/GridView.Mnemonic"
+        android:layout_width="wrap_content"
         android:layout_marginBottom="25dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:choiceMode="multipleChoice"/>
 
     <Button
         android:id="@+id/btn_confirm"

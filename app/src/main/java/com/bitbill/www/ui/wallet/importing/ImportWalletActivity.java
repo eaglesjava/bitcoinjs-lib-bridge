@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -19,7 +20,6 @@ import butterknife.OnClick;
 
 public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPresenter> implements ImportWalletMvpView {
 
-    public static final String EXTRA_WALLET = "extra_wallet";
     @BindView(R.id.et_input_mnemonic)
     EditText etInputMnemonic;
     @BindView(R.id.btn_next)
@@ -31,7 +31,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     public static void start(Context context, Wallet wallet) {
         Intent intent = new Intent(context, ImportWalletActivity.class);
-        intent.putExtra(EXTRA_WALLET, wallet);
+        intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
         context.startActivity(intent);
     }
 
@@ -67,7 +67,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @Override
     public void initData() {
-        mWallet = ((Wallet) getIntent().getSerializableExtra(EXTRA_WALLET));
+        mWallet = ((Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET));
     }
 
     @Override

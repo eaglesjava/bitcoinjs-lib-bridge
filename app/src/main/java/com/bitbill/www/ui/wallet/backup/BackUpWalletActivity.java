@@ -4,36 +4,46 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseConfirmDialog;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.PwdDialogFragment;
+import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class BackUpWalletActivity extends BaseToolbarActivity {
+public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPresenter> implements BackupWalletMvpView {
 
     private static final String TAG = "BackUpWalletActivity";
     @BindView(R.id.et_input_mnemonic)
     EditText etInputMnemonic;
+    @Inject
+    BackupWalletPresenter<WalletModel, BackupWalletMvpView> mBackupWaleltPresenter;
+    private PwdDialogFragment pwdDialogFragment;
+    private Wallet mWallet;
 
-    public static void start(Context context) {
-        context.startActivity(new Intent(context, BackUpWalletActivity.class));
+    public static void start(Context context, Wallet wallet) {
+        Intent intent = new Intent(context, BackUpWalletActivity.class);
+        intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
+        context.startActivity(intent);
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public BackupWalletMvpPresenter getMvpPresenter() {
+        return mBackupWaleltPresenter;
     }
 
     @Override
     protected void injectActivity() {
+        getActivityComponent().inject(this);
 
     }
 
@@ -49,7 +59,8 @@ public class BackUpWalletActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
-        PwdDialogFragment.newInstance(getString(R.string.title_dialog_bakup_wallet), false).setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
+        pwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.title_dialog_bakup_wallet), false);
+        pwdDialogFragment.setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
             /**
              * This method will be invoked when a button in the dialog is clicked.
              *
@@ -60,20 +71,53 @@ public class BackUpWalletActivity extends BaseToolbarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
-                    // TODO: 2017/11/22  确定
-                    String confirmPwd = ((PwdDialogFragment) dialog).getConfirmPwd();
-                    Log.d(TAG, "confirmPwd: " + confirmPwd);
+                    // 确定加载助记词
+                    getMvpPresenter().loadMnemonic(pwdDialogFragment.getConfirmPwd());
+
                 } else {
-                    // TODO: 2017/11/22  取消
+                    // 取消返回
+                    finish();
                 }
             }
-        }).show(getSupportFragmentManager(), PwdDialogFragment.TAG);
+        });
+        showPwdDialog();
 
+    }
+
+    private void showPwdDialog() {
+        pwdDialogFragment.show(getSupportFragmentManager(), PwdDialogFragment.TAG);
     }
 
     @Override
     public void initData() {
+        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+    }
 
+    @Override
+    public Wallet getWallet() {
+        return mWallet;
+    }
+
+    @Override
+    public void loadMnemonicSuccess(String mnemonic) {
+        //显示助记词
+        etInputMnemonic.setText(mnemonic);
+    }
+
+    @Override
+    public void loadMnemonicFail() {
+        showMessage(R.string.error_load_mnemonic_fail);
+    }
+
+    @Override
+    public void getWalletFail() {
+        showMessage(R.string.error_get_wallet_info_fail);
+    }
+
+    @Override
+    public void getConfirmPwdFail() {
+        showMessage(R.string.error_get_confirm_pwd_fail);
+        showPwdDialog();
     }
 
     @Override
@@ -81,9 +125,13 @@ public class BackUpWalletActivity extends BaseToolbarActivity {
         return R.layout.activity_back_up_wallet;
     }
 
+    public String getMnemonic() {
+        return etInputMnemonic.getText().toString();
+    }
+
     @OnClick(R.id.btn_wirtten_mnemonic)
     public void wirttenMnemonicClick(View view) {
         //跳转到备份确定界面
-        BackupWalletConfirmActivity.start(BackUpWalletActivity.this);
+        BackupWalletConfirmActivity.start(BackUpWalletActivity.this, getMnemonic());
     }
 }

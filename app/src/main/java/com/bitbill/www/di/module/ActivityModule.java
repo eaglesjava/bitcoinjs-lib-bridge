@@ -20,6 +20,9 @@ import com.bitbill.www.ui.main.MainPresenter;
 import com.bitbill.www.ui.wallet.InitWalletMvpPresenter;
 import com.bitbill.www.ui.wallet.InitWalletMvpView;
 import com.bitbill.www.ui.wallet.InitWalletPresenter;
+import com.bitbill.www.ui.wallet.backup.BackupWalletMvpPresenter;
+import com.bitbill.www.ui.wallet.backup.BackupWalletMvpView;
+import com.bitbill.www.ui.wallet.backup.BackupWalletPresenter;
 import com.bitbill.www.ui.wallet.importing.ImportWalletMvpPresenter;
 import com.bitbill.www.ui.wallet.importing.ImportWalletMvpView;
 import com.bitbill.www.ui.wallet.importing.ImportWalletPresenter;
@@ -80,6 +83,13 @@ public class ActivityModule {
     @PerActivity
     ImportWalletMvpPresenter<WalletModel, ImportWalletMvpView> provideImportWalletPresenter(
             ImportWalletPresenter<WalletModel, ImportWalletMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    BackupWalletMvpPresenter<WalletModel, BackupWalletMvpView> provideBackupWalletPresenter(
+            BackupWalletPresenter<WalletModel, BackupWalletMvpView> presenter) {
         return presenter;
     }
 
