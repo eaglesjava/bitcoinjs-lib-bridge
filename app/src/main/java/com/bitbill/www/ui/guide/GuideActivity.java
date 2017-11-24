@@ -117,11 +117,11 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
         switch (view.getId()) {
             case R.id.btn_create_wallet:
                 //跳转到创建钱包界面
-                InitWalletActivity.start(GuideActivity.this, InitWalletActivity.CREATE_WALLET);
+                InitWalletActivity.start(GuideActivity.this, true);
                 break;
             case R.id.btn_import_wallet:
                 //跳转到导入钱包界面
-                InitWalletActivity.start(GuideActivity.this, InitWalletActivity.IMPORT_WALLET);
+                InitWalletActivity.start(GuideActivity.this, false);
                 break;
         }
     }

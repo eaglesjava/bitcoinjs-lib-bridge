@@ -10,13 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.ui.wallet.create.CreateWalletSuccessActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
+import com.bitbill.www.ui.wallet.importing.InitWalletSuccessActivity;
 
 import javax.inject.Inject;
 
@@ -31,7 +32,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     public static final int CREATE_WALLET = 0;
     public static final int IMPORT_WALLET = 1;
-    public static final String CREATE_IMPORT_ETRA = "create_import_etra";
     @BindView(R.id.etw_wallet_name)
     EditTextWapper etwWalletName;
     @BindView(R.id.etw_trade_pwd)
@@ -47,14 +47,14 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Inject
     InitWalletMvpPresenter<WalletModel, InitWalletMvpView> initWalletMvpPresenter;
-    private int mCreateOrImportStatus;
+    private boolean isCreateWallet = true;
     private EditTextWapper focusView;
     private boolean cancel;
     private Wallet mWallet;
 
-    public static void start(Context context, int createOrImport) {
+    public static void start(Context context, boolean isCreateWallet) {
         Intent intent = new Intent(context, InitWalletActivity.class);
-        intent.putExtra(CREATE_IMPORT_ETRA, createOrImport);
+        intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
         context.startActivity(intent);
     }
 
@@ -110,7 +110,8 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Override
     public void initData() {
-        mCreateOrImportStatus = getIntent().getIntExtra(CREATE_IMPORT_ETRA, 0);
+        isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
+        btnStart.setText(isCreateWallet ? R.string.btn_start_create : R.string.btn_start_import);
     }
 
     @Override
@@ -121,7 +122,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     protected void onResume() {
         super.onResume();
-        setTitle(isCreateWallet() ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet);
+        setTitle(isCreateWallet ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet);
     }
 
     @OnClick(R.id.btn_start)
@@ -146,10 +147,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
             // form field with an error.
             focusView.requestFocus();
         }
-    }
-
-    private boolean isCreateWallet() {
-        return mCreateOrImportStatus == CREATE_WALLET;
     }
 
     @Override
@@ -214,7 +211,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     public void initWalletSuccess(Wallet wallet) {
         this.mWallet = wallet;
-        if (!isCreateWallet()) {
+        if (!isCreateWallet) {
             //跳转到导入钱包流程
             ImportWalletActivity.start(this, mWallet);
         } else {
@@ -230,9 +227,9 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Override
     public void createMnemonicSuccess(String encryptMnemonicHash) {
-        if (isCreateWallet()) {
+        if (isCreateWallet) {
             //跳转到穿件钱包成功界面
-            CreateWalletSuccessActivity.start(InitWalletActivity.this, mWallet);
+            InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);
         }
     }
 

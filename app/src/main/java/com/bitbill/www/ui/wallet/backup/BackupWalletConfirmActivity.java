@@ -79,7 +79,9 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity {
     public void initData() {
         mMnemonic = getIntent().getStringExtra(AppConstants.EXTRA_MNEMONIC);
         mMnemonicArray = mMnemonic.split(" ");
-        mMnemonicList = Arrays.asList(mMnemonicArray);
+        //直接赋值 对mMnemonicList排序mMnemonicArray也会受影响
+        mMnemonicList = new ArrayList<>();
+        mMnemonicList.addAll(Arrays.asList(mMnemonicArray));
 
         // 对助记词进行乱序排序
         Collections.sort(mMnemonicList, new Comparator<String>() {
@@ -155,7 +157,8 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity {
             //跳转到备份成功界面
             BackupWalletSuccessActivity.start(BackupWalletConfirmActivity.this);
         } else {
-            // TODO: 2017/11/20 弹出不匹配提示
+            // 弹出不匹配提示
+            showMessage("助记词顺序不正确，请重新点选");
         }
     }
 

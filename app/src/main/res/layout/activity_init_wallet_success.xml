@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.bitbill.www.ui.wallet.create.CreateWalletSuccessActivity">
+    tools:context="com.bitbill.www.ui.wallet.importing.InitWalletSuccessActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -15,11 +15,13 @@
         android:src="@drawable/ic_wallet_create_success"/>
 
     <TextView
+        android:id="@+id/tv_hint_title"
         style="@style/Text.Title.Small"
         android:layout_marginTop="20dp"
         android:text="@string/title_wallet_create_success"/>
 
     <TextView
+        android:id="@+id/tv_hint_content"
         style="@style/Text.White"
         android:layout_width="match_parent"
         android:layout_marginLeft="45dp"

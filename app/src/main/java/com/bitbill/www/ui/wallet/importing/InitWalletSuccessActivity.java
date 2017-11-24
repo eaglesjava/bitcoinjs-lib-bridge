@@ -1,10 +1,11 @@
-package com.bitbill.www.ui.wallet.create;
+package com.bitbill.www.ui.wallet.importing;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
@@ -17,17 +18,23 @@ import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CreateWalletSuccessActivity extends BaseToolbarActivity {
+public class InitWalletSuccessActivity extends BaseToolbarActivity {
 
     @BindView(R.id.btn_bak_wallet)
     Button btnBakWallet;
     @BindView(R.id.btn_bak_wallet_delay)
     Button btnBakWalletDelay;
+    @BindView(R.id.tv_hint_title)
+    TextView tvHintTitle;
+    @BindView(R.id.tv_hint_content)
+    TextView tvHintContent;
     private Wallet mWallet;
+    private boolean isCreateWallet = true;//默认创建钱包成功界面
 
-    public static void start(Context context, Wallet wallet) {
-        Intent intent = new Intent(context, CreateWalletSuccessActivity.class);
+    public static void start(Context context, Wallet wallet, boolean isCreateWallet) {
+        Intent intent = new Intent(context, InitWalletSuccessActivity.class);
         intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
+        intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
         context.startActivity(intent);
     }
 
@@ -59,11 +66,20 @@ public class CreateWalletSuccessActivity extends BaseToolbarActivity {
     @Override
     public void initData() {
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+        isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_WALLET, true);
+        tvHintContent.setText(isCreateWallet ? R.string.hint_create_wallet_success : R.string.hint_import_wallet_success);
+        tvHintTitle.setText(isCreateWallet ? R.string.title_wallet_create_success : R.string.title_wallet_import_success);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTitle(isCreateWallet ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet);
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_create_wallet_success;
+        return R.layout.activity_init_wallet_success;
     }
 
     @OnClick({R.id.btn_bak_wallet, R.id.btn_bak_wallet_delay})
@@ -71,11 +87,11 @@ public class CreateWalletSuccessActivity extends BaseToolbarActivity {
         switch (view.getId()) {
             case R.id.btn_bak_wallet:
                 //跳转到备份钱包界面
-                BackUpWalletActivity.start(CreateWalletSuccessActivity.this, mWallet);
+                BackUpWalletActivity.start(InitWalletSuccessActivity.this, mWallet);
                 break;
             case R.id.btn_bak_wallet_delay:
                 //跳转到主页
-                MainActivity.start(CreateWalletSuccessActivity.this);
+                MainActivity.start(InitWalletSuccessActivity.this);
                 break;
         }
     }

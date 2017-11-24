@@ -19,6 +19,8 @@ public final class AppConstants {
     public static final String TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
     public static final String EXTRA_WALLET = "extra_wallet";
     public static final String EXTRA_MNEMONIC = "etra_mnemonic";
+    public static final String EXTRA_IS_CREATE_WALLET = "is_create_wallet";
+
     private AppConstants() {
         // This utility class is not publicly instantiable
     }

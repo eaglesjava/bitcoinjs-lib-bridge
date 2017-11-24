@@ -96,9 +96,13 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
                 if (mConfirmDialogClickListener != null) {
                     mConfirmDialogClickListener.onClick(this, DIALOG_BTN_POSITIVE);
                 }
-                dismissDialog(this.getClass().getSimpleName());
                 break;
         }
+    }
+
+    @Override
+    public void dismissDialog(String tag) {
+        super.dismissDialog(tag);
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseConfirmDialog;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.PwdDialogFragment;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -71,13 +72,19 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
-                    // 确定加载助记词
-                    getMvpPresenter().loadMnemonic(pwdDialogFragment.getConfirmPwd());
+                    if (StringUtils.equals(getWallet().getTradePwd(), pwdDialogFragment.getConfirmPwd())) {
+                        // 确定加载助记词
+                        getMvpPresenter().loadMnemonic(pwdDialogFragment.getConfirmPwd());
+                    } else {
+                        showMessage("请输入正确的密码");
+                        return;
+                    }
 
                 } else {
                     // 取消返回
                     finish();
                 }
+                hidePwdDialog();
             }
         });
         showPwdDialog();
@@ -86,6 +93,10 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
 
     private void showPwdDialog() {
         pwdDialogFragment.show(getSupportFragmentManager(), PwdDialogFragment.TAG);
+    }
+
+    private void hidePwdDialog() {
+        pwdDialogFragment.dismissDialog(PwdDialogFragment.TAG);
     }
 
     @Override

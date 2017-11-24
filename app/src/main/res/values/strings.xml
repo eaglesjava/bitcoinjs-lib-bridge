@@ -41,6 +41,7 @@
     <string name="input_trade_pwd">创建交易密码</string>
     <string name="input_trade_pwd_confirm">确认交易密码</string>
     <string name="btn_start_import">开始导入</string>
+    <string name="btn_start_create">开始创建</string>
     <string name="error_wallet_name_required">请输入钱包名称</string>
     <string name="error_trade_pwd_required">请输入交易密码</string>
     <string name="error_confirm_trade_pwd_required">请输入确认交易密码</string>
@@ -68,11 +69,15 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <!--backup wallet-->
+    <!--init wallet success-->
     <string name="title_wallet_create_success">创建成功</string>
+    <string name="title_wallet_import_success">导入成功</string>
     <string name="hint_create_wallet_success">钱包创建成功，强烈建议您在使用前将助记词储存到安全地方做好钱包备份</string>
+    <string name="hint_import_wallet_success">钱包导入成功，强烈建议您在使用前将助记词储存到安全地方做好钱包备份</string>
     <string name="btn_backup_wallet">备份钱包</string>
     <string name="btn_backup_wallet_delay">稍后备份</string>
+
+    <!--backup wallet-->
     <string name="hint_bak_wallet_environment_safe">请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！</string>
     <string name="hint_bak_wallet_ban_screenshots">截图是不安全的，您的图片可能别憋的应用使用。请准备笔和纸记录下面这句话，并妥善保存，我们会在下个屏幕上确认！</string>
     <string name="btn_written_mnemonic_in_order">已按顺序记下助记词</string>

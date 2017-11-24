@@ -60,7 +60,7 @@
                 android:id="@+id/btn_start"
                 style="@style/Button.Blue"
                 android:layout_marginTop="30dp"
-                android:text="@string/btn_start_import"/>
+                android:text="@string/btn_start_create"/>
 
         </LinearLayout>
     </ScrollView>
