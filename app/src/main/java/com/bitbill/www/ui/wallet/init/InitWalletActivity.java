@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.base.view.dialog.SupportCoinDialog;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -104,6 +105,8 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
                 }
             }
         });
+        SupportCoinDialog.newInstance("目前支持以下币种", true, "我知道了")
+                .show(getSupportFragmentManager(), SupportCoinDialog.TAG);
 
     }
 

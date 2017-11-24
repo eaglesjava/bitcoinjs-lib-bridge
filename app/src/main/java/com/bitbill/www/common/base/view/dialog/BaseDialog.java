@@ -1,5 +1,5 @@
 
-package com.bitbill.www.common.base.view;
+package com.bitbill.www.common.base.view.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
 
+import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.di.component.ActivityComponent;
 
 import butterknife.Unbinder;

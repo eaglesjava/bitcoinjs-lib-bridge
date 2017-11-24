@@ -96,5 +96,7 @@
     <string name="hint_bak_wallet_click">请按顺序点击下方文字</string>
     <string name="error_import_wallet_fail">导入钱包失败，请重试</string>
     <string name="error_input_menemonic_fail">请正确填写助记词</string>
+    <string name="title_dialog_backup_fail">备份失败</string>
+    <string name="msg_dailog_check_mnemonic">请重新检查您的助记词是否正确</string>
 
 </resources>

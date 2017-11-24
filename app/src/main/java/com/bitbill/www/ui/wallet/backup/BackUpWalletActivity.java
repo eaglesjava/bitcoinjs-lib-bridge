@@ -9,9 +9,9 @@ import android.widget.EditText;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
-import com.bitbill.www.common.base.view.BaseConfirmDialog;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.widget.PwdDialogFragment;
+import com.bitbill.www.common.base.view.dialog.BaseConfirmDialog;
+import com.bitbill.www.common.base.view.dialog.PwdDialogFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -72,11 +72,14 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
              */
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                pwdDialogFragment.setAutoDismiss(true);
                 if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
                     if (StringUtils.equals(getWallet().getTradePwd(), pwdDialogFragment.getConfirmPwd())) {
+
                         // 确定加载助记词
                         getMvpPresenter().loadMnemonic(pwdDialogFragment.getConfirmPwd());
                     } else {
+                        pwdDialogFragment.setAutoDismiss(false);
                         showMessage("请输入正确的密码");
                         return;
                     }
@@ -86,7 +89,6 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
                     finish();
                     MainActivity.start(BackUpWalletActivity.this);
                 }
-                hidePwdDialog();
             }
         });
         showPwdDialog();

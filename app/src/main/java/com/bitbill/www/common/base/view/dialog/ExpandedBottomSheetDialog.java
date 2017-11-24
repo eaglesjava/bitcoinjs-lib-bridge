@@ -2,7 +2,7 @@
  * Copyright (c) 2017 bitbill.com
  */
 
-package com.bitbill.www.common.base.view;
+package com.bitbill.www.common.base.view.dialog;
 
 import android.content.Context;
 import android.content.res.TypedArray;

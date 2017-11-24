@@ -17,6 +17,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.base.view.widget.FocusedCheckedTextView;
 
 import java.util.ArrayList;
@@ -158,7 +159,8 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity {
             BackupWalletSuccessActivity.start(BackupWalletConfirmActivity.this);
         } else {
             // 弹出不匹配提示
-            showMessage("助记词不匹配，请重新点选");
+            MessageConfirmDialog.newInstance(getString(R.string.title_dialog_backup_fail), getString(R.string.msg_dailog_check_mnemonic), false)
+                    .show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
         }
     }
 

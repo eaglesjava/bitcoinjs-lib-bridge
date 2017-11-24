@@ -1,10 +1,9 @@
-package com.bitbill.www.common.base.view;
+package com.bitbill.www.common.base.view.dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.view.BaseViewControl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +29,7 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
     public static final int DIALOG_BTN_POSITIVE = R.id.dialog_btn_positive;
     public static final String CONFIRM_TITLE = "confirm_title";
     public static final String CONFIRM_ONLY_POSITIVE_BTN = "confirm_only_positive_btn";
+    public static final String CONFIRM_POSITIVE_BTN_TEXT = "positive_btn_text";
     @BindView(R.id.dialog_title)
     TextView mDialogTitle;
     @BindView(R.id.dialog_container)
@@ -44,12 +45,15 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
     private LayoutInflater mLayoutInflate;
     private String mTitle;
     private boolean mOnlyPositiveBtn;
+    private boolean autoDismiss = true;
+    private String mPositiveText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLayoutInflate = LayoutInflater.from(getContext());
         mTitle = getArguments().getString(CONFIRM_TITLE, null);
+        mPositiveText = getArguments().getString(CONFIRM_POSITIVE_BTN_TEXT, null);
         mOnlyPositiveBtn = getArguments().getBoolean(CONFIRM_ONLY_POSITIVE_BTN, false);
     }
 
@@ -67,6 +71,10 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
         if (!TextUtils.isEmpty(mTitle)) {
             mDialogTitle.setVisibility(View.VISIBLE);
             mDialogTitle.setText(mTitle);
+        }
+        if (!TextUtils.isEmpty(mPositiveText)) {
+            mDialogBtnPositive.setVisibility(View.VISIBLE);
+            mDialogBtnPositive.setText(mPositiveText);
         }
         if (mOnlyPositiveBtn) {
             mDialogBtnNegative.setVisibility(View.GONE);
@@ -89,20 +97,32 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
                 if (mConfirmDialogClickListener != null) {
                     mConfirmDialogClickListener.onClick(this, DIALOG_BTN_NEGATIVE);
                 }
-                dismissDialog(this.getClass().getSimpleName());
-                Log.d(this.getClass().getSimpleName(), "onViewClicked() called with: view = [" + view + "]");
+                autoDismissDialog();
                 break;
             case R.id.dialog_btn_positive:
                 if (mConfirmDialogClickListener != null) {
                     mConfirmDialogClickListener.onClick(this, DIALOG_BTN_POSITIVE);
                 }
+
+                autoDismissDialog();
                 break;
+        }
+    }
+
+    private void autoDismissDialog() {
+        if (autoDismiss) {
+            dismissDialog(this.getClass().getSimpleName());
         }
     }
 
     @Override
     public void dismissDialog(String tag) {
         super.dismissDialog(tag);
+    }
+
+    public BaseConfirmDialog setAutoDismiss(boolean autoDismiss) {
+        this.autoDismiss = autoDismiss;
+        return this;
     }
 
     @Override

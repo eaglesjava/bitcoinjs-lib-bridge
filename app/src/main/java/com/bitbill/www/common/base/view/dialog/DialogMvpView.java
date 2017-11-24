@@ -1,6 +1,8 @@
 
 
-package com.bitbill.www.common.base.view;
+package com.bitbill.www.common.base.view.dialog;
+
+import com.bitbill.www.common.base.view.MvpView;
 
 /**
  * Created by isanwenyu@163.com on 2017/11/22.

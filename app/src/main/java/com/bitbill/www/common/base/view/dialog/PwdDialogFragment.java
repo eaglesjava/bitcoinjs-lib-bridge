@@ -1,10 +1,9 @@
-package com.bitbill.www.common.base.view.widget;
+package com.bitbill.www.common.base.view.dialog;
 
 import android.os.Bundle;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.view.BaseConfirmDialog;
 
 import butterknife.BindView;
 import butterknife.Unbinder;

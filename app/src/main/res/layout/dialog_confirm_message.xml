@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dialog_message"
+        style="@style/ConfirmDialog.Message"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dialog_confirm_padding"
+        android:layout_marginLeft="@dimen/dialog_confirm_padding"
+        android:layout_marginRight="@dimen/dialog_confirm_padding"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:minLines="1"/>
+</FrameLayout>
