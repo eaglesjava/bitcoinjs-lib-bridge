@@ -21,21 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		
 		BILAppStartUpManager.shared.startSetup()
+		BILWalletManager.shared.appDelegate = self
 		
-		do {
-			let context = persistentContainer.viewContext
-			let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
-			let results = try context.fetch(request)
-			print(results)
-			
-			if results.count == 0 {
-//				BackupWallet, NewWallet
-				let cont = UIStoryboard(name: "NewWallet", bundle: nil).instantiateInitialViewController()
-				window?.makeKeyAndVisible()
-				window?.rootViewController?.present(cont!, animated: false, completion: nil)
-			}
-		} catch {
-			print(error)
+		let results = BILWalletManager.shared.wallets
+		print(results)
+		
+		if results.count == 0 {
+			let cont = UIStoryboard(name: "NewWallet", bundle: nil).instantiateInitialViewController()
+			window?.makeKeyAndVisible()
+			window?.rootViewController?.present(cont!, animated: false, completion: nil)
 		}
 		
 		return true

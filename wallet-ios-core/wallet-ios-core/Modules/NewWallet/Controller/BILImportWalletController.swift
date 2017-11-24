@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 
-class BILImportWalletController: UIViewController, UITextViewDelegate {
+class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 
 	@IBOutlet weak var textView: UITextView!
 	@IBOutlet weak var mnemonicView: BILMnemonicView!
