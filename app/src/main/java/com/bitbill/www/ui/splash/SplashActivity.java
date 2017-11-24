@@ -44,6 +44,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 // TODO: 2017/11/18 根据是否是第一次进入判断跳转到引导页还是首页
                 GuideActivity.start(SplashActivity.this);
+                finish();
 
             }
 

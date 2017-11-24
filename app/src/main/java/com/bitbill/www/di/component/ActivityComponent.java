@@ -7,9 +7,9 @@ package com.bitbill.www.di.component;
 import com.bitbill.www.di.module.ActivityModule;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.ui.main.MainActivity;
-import com.bitbill.www.ui.wallet.InitWalletActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
+import com.bitbill.www.ui.wallet.init.InitWalletActivity;
 
 import dagger.Component;
 

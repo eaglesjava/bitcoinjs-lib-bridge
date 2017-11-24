@@ -30,11 +30,12 @@
             android:label="@string/title_activity_guide"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".ui.wallet.InitWalletActivity">
+        <activity android:name=".ui.wallet.init.InitWalletActivity">
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme">
         </activity>
         <activity
@@ -43,7 +44,7 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".ui.wallet.importing.InitWalletSuccessActivity"
+            android:name=".ui.wallet.init.InitWalletSuccessActivity"
             android:label="@string/title_activity_create_wallet">
         </activity>
         <activity

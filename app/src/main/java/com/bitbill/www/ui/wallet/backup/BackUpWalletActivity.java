@@ -15,6 +15,7 @@ import com.bitbill.www.common.base.view.widget.PwdDialogFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.main.MainActivity;
 
 import javax.inject.Inject;
 
@@ -81,8 +82,9 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
                     }
 
                 } else {
-                    // 取消返回
+                    // 取消返回主页
                     finish();
+                    MainActivity.start(BackUpWalletActivity.this);
                 }
                 hidePwdDialog();
             }

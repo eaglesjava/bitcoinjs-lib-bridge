@@ -19,7 +19,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
-import com.bitbill.www.ui.wallet.InitWalletActivity;
+import com.bitbill.www.ui.wallet.init.InitWalletActivity;
 import com.rd.PageIndicatorView;
 
 import butterknife.BindView;
@@ -118,10 +118,12 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
             case R.id.btn_create_wallet:
                 //跳转到创建钱包界面
                 InitWalletActivity.start(GuideActivity.this, true);
+                finish();
                 break;
             case R.id.btn_import_wallet:
                 //跳转到导入钱包界面
                 InitWalletActivity.start(GuideActivity.this, false);
+                finish();
                 break;
         }
     }

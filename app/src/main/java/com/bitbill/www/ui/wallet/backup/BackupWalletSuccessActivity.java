@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.ui.main.MainActivity;
@@ -56,5 +57,9 @@ public class BackupWalletSuccessActivity extends BaseToolbarActivity {
     public void onViewClicked() {
         //跳转到主页
         MainActivity.start(BackupWalletSuccessActivity.this);
+        //关闭备份流程
+        AppManager.get().finishActivity(BackUpWalletActivity.class);
+        AppManager.get().finishActivity(BackupWalletConfirmActivity.class);
+        finish();
     }
 }

@@ -158,7 +158,7 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity {
             BackupWalletSuccessActivity.start(BackupWalletConfirmActivity.this);
         } else {
             // 弹出不匹配提示
-            showMessage("助记词顺序不正确，请重新点选");
+            showMessage("助记词不匹配，请重新点选");
         }
     }
 

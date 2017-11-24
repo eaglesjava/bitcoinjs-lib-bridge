@@ -1,4 +1,4 @@
-package com.bitbill.www.ui.wallet;
+package com.bitbill.www.ui.wallet.init;
 
 import android.text.TextUtils;
 import android.util.Log;

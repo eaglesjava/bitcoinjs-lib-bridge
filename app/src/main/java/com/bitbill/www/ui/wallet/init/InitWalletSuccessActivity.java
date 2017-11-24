@@ -1,4 +1,4 @@
-package com.bitbill.www.ui.wallet.importing;
+package com.bitbill.www.ui.wallet.init;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +9,13 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
+import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -66,7 +68,7 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity {
     @Override
     public void initData() {
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
-        isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_WALLET, true);
+        isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
         tvHintContent.setText(isCreateWallet ? R.string.hint_create_wallet_success : R.string.hint_import_wallet_success);
         tvHintTitle.setText(isCreateWallet ? R.string.title_wallet_create_success : R.string.title_wallet_import_success);
     }
@@ -94,5 +96,11 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity {
                 MainActivity.start(InitWalletSuccessActivity.this);
                 break;
         }
+        //关闭初始化钱包流程
+        AppManager.get().finishActivity(InitWalletActivity.class);
+        if (!isCreateWallet) {
+            AppManager.get().finishActivity(ImportWalletActivity.class);
+        }
+        finish();
     }
 }

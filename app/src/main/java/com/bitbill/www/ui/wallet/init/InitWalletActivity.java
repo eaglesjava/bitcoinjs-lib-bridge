@@ -1,4 +1,4 @@
-package com.bitbill.www.ui.wallet;
+package com.bitbill.www.ui.wallet.init;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import com.bitbill.www.common.base.view.widget.PwdStatusView;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
-import com.bitbill.www.ui.wallet.importing.InitWalletSuccessActivity;
 
 import javax.inject.Inject;
 

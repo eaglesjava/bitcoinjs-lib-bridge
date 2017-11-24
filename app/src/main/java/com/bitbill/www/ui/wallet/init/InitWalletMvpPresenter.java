@@ -1,4 +1,4 @@
-package com.bitbill.www.ui.wallet;
+package com.bitbill.www.ui.wallet.init;
 
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.di.scope.PerActivity;

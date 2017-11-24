@@ -11,7 +11,7 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.ui.main.MainActivity;
+import com.bitbill.www.ui.wallet.init.InitWalletSuccessActivity;
 
 import javax.inject.Inject;
 
@@ -37,8 +37,8 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @Override
     public void importWalletSuccess() {
-        //进入主界面
-        MainActivity.start(ImportWalletActivity.this);
+        //进入初始化钱包成功界面
+        InitWalletSuccessActivity.start(ImportWalletActivity.this, getWallet(), false);
     }
 
     @Override
