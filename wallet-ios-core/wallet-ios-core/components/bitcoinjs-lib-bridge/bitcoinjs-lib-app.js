@@ -26,7 +26,7 @@ function mnemonicToSeedHex (mnemonic, password) {
 }
 
 function validateMnemonic(mnemonic) {
-	return bip39.validateMnemonic(mnemonic)
+	return bip39.validateMnemonic(mnemonic, bip39.wordlists.chinese_simplified) || bip39.validateMnemonic(mnemonic, bip39.wordlists.english)
 }
 
 function getBitcoinAddressBySeedHex (seedHex, index) {
