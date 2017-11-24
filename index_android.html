@@ -29,6 +29,17 @@
        android.validateMnemonic(bridge.validateMnemonic(mnemonic));
     }
 
+    function validateMnemonicAndReturnSeedHex(mnemonic,pwd){
+       android.validateMnemonicAndReturnSeedHex(bridge.validateMnemonic(mnemonic),bridge.mnemonicToSeedHex(mnemonic, pwd));
+    }
+
+    function generateMnemonicCNandSeedHex(pwd){
+        var mnemonic=bridge.generateMnemonicRandomCN(128)
+        android.generateMnemonicCNandSeedHex(mnemonic,bridge.mnemonicToSeedHex(mnemonic,pwd))
+    }
+
+
+
 </script>
 </body>
 </html>
