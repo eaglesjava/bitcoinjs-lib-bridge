@@ -38,7 +38,7 @@ public class BackupWalletPresenter<W extends WalletModel, V extends BackupWallet
                         String encryptMnemonic = wallet.getEncryptMnemonic();
                         String decryptMnemonic = StringUtils.decryptMnemonic(encryptMnemonic, confirmPwd);
                         //对比助记词hash是否一致
-                        if (StringUtils.equals(StringUtils.getMnemonicHash(decryptMnemonic), wallet.getEncryptMnemonicHash())) {
+                        if (StringUtils.equals(StringUtils.getSHA256Hex(decryptMnemonic), wallet.getMnemonicHash())) {
                             return Observable.just(decryptMnemonic);
                         } else {
                             throw new Exception("the Mnemonic hash is inconsistent.");

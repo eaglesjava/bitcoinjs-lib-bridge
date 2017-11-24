@@ -33,12 +33,12 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
             return;
         }
         // 校验助记词是否正确
-        BitcoinJsWrapper.getInstance().validateMnemonic(getMvpView().getMnemonic(), new BitcoinJsWrapper.JsInterface.Callback() {
+        BitcoinJsWrapper.getInstance().validateMnemonicAndReturnSeedHex(getMvpView().getMnemonic(), wallet.getTradePwd(), new BitcoinJsWrapper.JsInterface.Callback() {
             @Override
-            public void call(String key, String jsResult) {
-                if ("1".equals(jsResult)) {
+            public void call(String key, String... jsResult) {
+                if ("true".equals(jsResult[0])) {
                     //更新wallet对象
-                    StringUtils.encryptMnemonic(getMvpView().getMnemonic(), wallet.getTradePwd(), wallet);
+                    StringUtils.encryptMnemonicAndSeedHex(getMvpView().getMnemonic(), jsResult[1], wallet.getTradePwd(), wallet);
                     getCompositeDisposable().add(getModelManager()
                             .updateWallet(wallet)
                             .compose(applyScheduler())

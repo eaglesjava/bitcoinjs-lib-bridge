@@ -42,6 +42,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         wallet.setCreatedAt(System.currentTimeMillis());
         wallet.setUpdatedAt(System.currentTimeMillis());
         wallet.setName(getMvpView().getWalletName());
+        wallet.setTradePwd(getMvpView().getTradePwd());
 
         getCompositeDisposable().add(getModelManager()
                 .insertWallet(wallet)
@@ -135,11 +136,11 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().generateMnemonicRandomCN(new BitcoinJsWrapper.JsInterface.Callback() {
             @Override
-            public void call(String key, String jsResult) {
+            public void call(String key, String... jsResult) {
                 String encryptMnemonicHash = null;
                 try {
-                    Log.d(TAG, "generateMnemonicRandomCN: key = [" + key + "], Mnemonic = [" + jsResult + "]");
-                    encryptMnemonicHash = StringUtils.encryptMnemonic(jsResult, InitWalletPresenter.this.getMvpView().getTradePwd(), wallet);
+                    Log.d(TAG, "generateMnemonicRandomCN: key = [" + key + "], Mnemonic = [" + jsResult[0] + "]");
+                    encryptMnemonicHash = StringUtils.encryptMnemonicAndSeedHex(jsResult[0], wallet.getTradePwd(), InitWalletPresenter.this.getMvpView().getTradePwd(), wallet);
                     Log.d(TAG, "update walelt: " + wallet.toString());
                 } catch (Exception e) {
                     e.printStackTrace();

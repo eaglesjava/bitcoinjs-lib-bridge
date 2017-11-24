@@ -24,8 +24,8 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "encrypt_mnemonic")
     private String encryptMnemonic;
 
-    @Property(nameInDb = "crypto_mnemonic_hash")
-    private String encryptMnemonicHash;
+    @Property(nameInDb = "mnemonic_hash")
+    private String mnemonicHash;
 
     @Property(nameInDb = "last_address_index")
     private int lastAddressIndex;
@@ -33,8 +33,8 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "encrypt_seed")
     private String encryptSeed;
 
-    @Property(nameInDb = "encrypt_seed_hash")
-    private String encryptSeedHash;
+    @Property(nameInDb = "seedhex_hash")
+    private String seedHexHash;
 
     @Property(nameInDb = "is_backup")
     private boolean isBackup;
@@ -47,17 +47,17 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Transient
     private String tradePwd;
 
-    @Generated(hash = 1251768898)
-    public Wallet(Long id, String name, String encryptMnemonic, String encryptMnemonicHash,
-                  int lastAddressIndex, String encryptSeed, String encryptSeedHash,
-                  boolean isBackup, long createdAt, long updatedAt) {
+    @Generated(hash = 387054013)
+    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash,
+                  int lastAddressIndex, String encryptSeed, String seedHexHash, boolean isBackup,
+                  long createdAt, long updatedAt) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
-        this.encryptMnemonicHash = encryptMnemonicHash;
+        this.mnemonicHash = mnemonicHash;
         this.lastAddressIndex = lastAddressIndex;
         this.encryptSeed = encryptSeed;
-        this.encryptSeedHash = encryptSeedHash;
+        this.seedHexHash = seedHexHash;
         this.isBackup = isBackup;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -91,14 +91,6 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.encryptMnemonic = encryptMnemonic;
     }
 
-    public String getEncryptMnemonicHash() {
-        return this.encryptMnemonicHash;
-    }
-
-    public void setEncryptMnemonicHash(String encryptMnemonicHash) {
-        this.encryptMnemonicHash = encryptMnemonicHash;
-    }
-
     public int getLastAddressIndex() {
         return this.lastAddressIndex;
     }
@@ -113,14 +105,6 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setEncryptSeed(String encryptSeed) {
         this.encryptSeed = encryptSeed;
-    }
-
-    public String getEncryptSeedHash() {
-        return this.encryptSeedHash;
-    }
-
-    public void setEncryptSeedHash(String encryptSeedHash) {
-        this.encryptSeedHash = encryptSeedHash;
     }
 
     public boolean getIsBackup() {
@@ -154,5 +138,21 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     public Wallet setTradePwd(String tradePwd) {
         this.tradePwd = tradePwd;
         return this;
+    }
+
+    public String getMnemonicHash() {
+        return this.mnemonicHash;
+    }
+
+    public void setMnemonicHash(String mnemonicHash) {
+        this.mnemonicHash = mnemonicHash;
+    }
+
+    public String getSeedHexHash() {
+        return this.seedHexHash;
+    }
+
+    public void setSeedHexHash(String seedHexHash) {
+        this.seedHexHash = seedHexHash;
     }
 }

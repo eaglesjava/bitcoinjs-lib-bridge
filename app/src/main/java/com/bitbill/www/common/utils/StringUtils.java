@@ -931,23 +931,28 @@ public class StringUtils {
      * 加密助记词并更新wallet
      *
      * @param mnemonic 助记词
-     * @param key      密码
-     * @param wallet   钱包实体用于更新相关字段
-     * @return
+     * @param seedHex
+     * @param tradePwd 密码
+     * @param wallet   钱包实体用于更新相关字段   @return
      */
-    public static String encryptMnemonic(String mnemonic, String key, Wallet wallet) {
-        byte[] encryptKey = EncryptUtils.encryptSHA256(key.getBytes(Charset.defaultCharset()));
+    public static String encryptMnemonicAndSeedHex(String mnemonic, String seedHex, String tradePwd, Wallet wallet) {
+        byte[] encryptKey = EncryptUtils.encryptSHA256(tradePwd.getBytes(Charset.defaultCharset()));
         String encryptMnemonic = EncryptUtils.encryptAES2HexString(mnemonic.getBytes(Charset.defaultCharset()), encryptKey);
-        String encryptMnemonicHash = getMnemonicHash(mnemonic);
+        String mnemonicHash = getSHA256Hex(mnemonic);
+        String encryptSeedHex = EncryptUtils.encryptAES2HexString(seedHex.getBytes(Charset.defaultCharset()), encryptKey);
+        String seedHexHash = getSHA256Hex(seedHex);
         if (wallet != null) {
             wallet.setEncryptMnemonic(encryptMnemonic);
-            wallet.setEncryptMnemonicHash(encryptMnemonicHash);
+            wallet.setMnemonicHash(mnemonicHash);
+            wallet.setEncryptSeed(encryptSeedHex);
+            wallet.setSeedHexHash(seedHexHash);
             wallet.setUpdatedAt(System.currentTimeMillis());
+            wallet.setTradePwd(tradePwd);
         }
-        return encryptMnemonicHash;
+        return mnemonicHash;
     }
 
-    public static String getMnemonicHash(String mnemonic) {
+    public static String getSHA256Hex(String mnemonic) {
         return EncryptUtils.encryptSHA256ToString(mnemonic.getBytes(Charset.defaultCharset()));
     }
 

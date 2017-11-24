@@ -98,7 +98,7 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
         return Observable.fromCallable(new Callable<Wallet>() {
             @Override
             public Wallet call() throws Exception {
-                return mWalletDao.queryBuilder().where(WalletDao.Properties.EncryptMnemonicHash.eq(mnemonicHash)).unique();
+                return mWalletDao.queryBuilder().where(WalletDao.Properties.MnemonicHash.eq(mnemonicHash)).unique();
             }
         });
     }
@@ -108,7 +108,7 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
         return Observable.fromCallable(new Callable<Wallet>() {
             @Override
             public Wallet call() throws Exception {
-                return mWalletDao.queryBuilder().where(WalletDao.Properties.EncryptSeedHash.eq(seedHash)).unique();
+                return mWalletDao.queryBuilder().where(WalletDao.Properties.SeedHexHash.eq(seedHash)).unique();
             }
         });
     }

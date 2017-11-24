@@ -2,12 +2,14 @@ package com.bitbill.www.crypto;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Created by isanwenyu@163.com on 2017/11/7.
@@ -19,6 +21,9 @@ public class BitcoinJsWrapper {
     public static final String GET_BITCOIN_ADDRESS_BY_MASTER_XPUBLIC_KEY = "getBitcoinAddressByMasterXPublicKey";
     public static final String GET_BITCOIN_MASTER_XPUBLIC_KEY = "getBitcoinMasterXPublicKey";
     public static final String VALIDATEMNEMONIC = "validateMnemonic";
+    public static final String GENERATE_MNEMONIC_CN_AND_SEEDHEX = "generateMnemonicCNandSeedHex";
+    public static final String VALIDATE_MNEMONIC_AND_RETURN_SEEDHEX = "validateMnemonicAndReturnSeedHex";
+    private static final String TAG = "BitcoinJsWrapper";
     private WebView mWebView;
     private JsInterface mJsInterface;
     private Handler mHandler;
@@ -69,7 +74,8 @@ public class BitcoinJsWrapper {
 
     /**
      * 助记词生成seed
-     * @param nemonic 助记词字符串，以空格隔开
+     *
+     * @param nemonic  助记词字符串，以空格隔开
      * @param pwd
      * @param callback 密码
      */
@@ -101,8 +107,18 @@ public class BitcoinJsWrapper {
     }
 
     public void validateMnemonic(String nemonic, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(GET_BITCOIN_MASTER_XPUBLIC_KEY, callback);
+        mJsInterface.addCallBack(VALIDATEMNEMONIC, callback);
         executeJS("javascript:validateMnemonic('" + nemonic + "')");
+    }
+
+    public void validateMnemonicAndReturnSeedHex(String nemonic, String pwd, JsInterface.Callback callback) {
+        mJsInterface.addCallBack(VALIDATE_MNEMONIC_AND_RETURN_SEEDHEX, callback);
+        executeJS("javascript:validateMnemonicAndReturnSeedHex('" + nemonic + "','" + pwd + "')");
+    }
+
+    public void generateMnemonicCNandSeedHex(String pwd, JsInterface.Callback callback) {
+        mJsInterface.addCallBack(GENERATE_MNEMONIC_CN_AND_SEEDHEX, callback);
+        executeJS("javascript:generateMnemonicCNandSeedHex('" + pwd + "')");
     }
 
     //静态内部类确保了在首次调用getInstance()的时候才会初始化SingletonHolder，从而导致实例被创建。
@@ -174,10 +190,30 @@ public class BitcoinJsWrapper {
             callAndBack(VALIDATEMNEMONIC, result);
         }
 
-        private void callAndBack(String key, String result) {
+        /**
+         * This is not called on the UI thread. Post a runnable to invoke
+         * loadUrl on the UI thread.
+         */
+        @JavascriptInterface
+        public void validateMnemonicAndReturnSeedHex(final String result, final String seedHex) {
+            callAndBack(VALIDATE_MNEMONIC_AND_RETURN_SEEDHEX, result, seedHex);
+        }
+
+        /**
+         * This is not called on the UI thread. Post a runnable to invoke
+         * loadUrl on the UI thread.
+         */
+        @JavascriptInterface
+        public void generateMnemonicCNandSeedHex(final String mnemonic, final String seedHex) {
+            callAndBack(GENERATE_MNEMONIC_CN_AND_SEEDHEX, mnemonic, seedHex);
+        }
+
+        private void callAndBack(String key, String... result) {
             Callback callback = (Callback) mCallBackMap.get(key);
             if (callback != null) {
                 callback.call(key, result);
+            } else {
+                Log.e(TAG, "callAndBack: can't find the callback for the key,please check it.");
             }
             mCallBackMap.remove(key);
         }
@@ -187,7 +223,7 @@ public class BitcoinJsWrapper {
         }
 
         public interface Callback {
-            void call(String key, String jsResult);
+            void call(String key, String... jsResult);
         }
     }
 
