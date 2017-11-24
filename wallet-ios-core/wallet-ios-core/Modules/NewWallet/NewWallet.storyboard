@@ -418,12 +418,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="124"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-78-uyq">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="124"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-78-uyq">
+                                        <rect key="frame" x="12" y="0.0" width="301" height="124"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                         <connections>
                                             <outlet property="delegate" destination="ACT-yT-QtD" id="pJv-0n-9st"/>
@@ -433,10 +432,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="124" id="93O-cr-FNo"/>
+                                    <constraint firstAttribute="trailing" secondItem="pVv-78-uyq" secondAttribute="trailing" constant="12" id="Alr-Ls-Y9s"/>
                                     <constraint firstAttribute="trailing" secondItem="86e-aY-GDa" secondAttribute="trailing" id="FKo-wh-uJC"/>
+                                    <constraint firstAttribute="bottom" secondItem="pVv-78-uyq" secondAttribute="bottom" id="O6s-Ds-yoZ"/>
+                                    <constraint firstItem="pVv-78-uyq" firstAttribute="leading" secondItem="dRR-r5-8xB" secondAttribute="leading" constant="12" id="a1h-a1-bcl"/>
                                     <constraint firstItem="86e-aY-GDa" firstAttribute="leading" secondItem="dRR-r5-8xB" secondAttribute="leading" id="aki-zu-HU3"/>
                                     <constraint firstItem="86e-aY-GDa" firstAttribute="top" secondItem="dRR-r5-8xB" secondAttribute="top" id="oIS-Vu-7qI"/>
                                     <constraint firstAttribute="bottom" secondItem="86e-aY-GDa" secondAttribute="bottom" id="pEZ-xO-Jmn"/>
+                                    <constraint firstItem="pVv-78-uyq" firstAttribute="top" secondItem="dRR-r5-8xB" secondAttribute="top" id="x0K-QI-wTe"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18p-z0-huL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
