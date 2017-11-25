@@ -1,19 +1,15 @@
 package com.bitbill.www.ui.guide;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
@@ -32,22 +28,18 @@ import butterknife.OnClick;
  */
 public class GuideActivity extends BaseActivity implements BaseViewControl {
 
+    final float PARALLAX_COEFFICIENT = 1.2f;
+    final float DISTANCE_COEFFICIENT = 0.5f;
+
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     @BindView(R.id.pageIndicatorView)
     PageIndicatorView pageIndicatorView;
     @BindView(R.id.main_content)
     FrameLayout mainContent;
-    /**
-     * The {@link PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    FragmentAdapter mAdapter;
 
+    SparseArray<int[]> mLayoutViewIdsMap = new SparseArray<int[]>();
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -55,6 +47,11 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, GuideActivity.class));
+    }
+
+    private void addGuide(BaseGuideFragment fragment) {
+        mAdapter.addItem(fragment);
+        mLayoutViewIdsMap.put(fragment.getRootViewId(), fragment.getChildViewIds());
     }
 
     @Override
@@ -92,13 +89,17 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
 
     @Override
     public void initView() {
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        mAdapter = new FragmentAdapter(getSupportFragmentManager());
+        addGuide(new FirstGuideFragment());
+        addGuide(new SecondGuideFragment());
+
+        mViewPager.setAdapter(mAdapter);
+
+        mViewPager.setPageTransformer(true, new ParallaxTransformer(PARALLAX_COEFFICIENT, DISTANCE_COEFFICIENT));
 
     }
 
@@ -128,62 +129,55 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
+    class ParallaxTransformer implements ViewPager.PageTransformer {
+
+        float parallaxCoefficient;
+        float distanceCoefficient;
+
+        public ParallaxTransformer(float parallaxCoefficient, float distanceCoefficient) {
+            this.parallaxCoefficient = parallaxCoefficient;
+            this.distanceCoefficient = distanceCoefficient;
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_guide, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getArguments().getInt(ARG_SECTION_NUMBER) == 1 ? getString(R.string.guide_section_one) : getString(R.string.guide_section_two));
-            return rootView;
+        public void transformPage(View page, float position) {
+            float scrollXOffset = page.getWidth() * parallaxCoefficient;
+
+            ViewGroup pageViewWrapper = (ViewGroup) page;
+            @SuppressWarnings("SuspiciousMethodCalls")
+            int[] layer = mLayoutViewIdsMap.get(pageViewWrapper.getId());
+            for (int id : layer) {
+                View view = page.findViewById(id);
+                if (view != null) {
+                    view.setTranslationX(scrollXOffset * position);
+                }
+                scrollXOffset *= distanceCoefficient;
+            }
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    class GuidePageChangeListener implements ViewPager.OnPageChangeListener {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+        public GuidePageChangeListener() {
+
+
+        }
+
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         }
 
         @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+        public void onPageSelected(int position) {
+
         }
 
         @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 2;
+        public void onPageScrollStateChanged(int state) {
         }
     }
 }

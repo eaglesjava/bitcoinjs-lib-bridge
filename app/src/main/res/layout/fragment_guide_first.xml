@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_guide_first"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/guide_label"
+        style="@style/Text.Title.Big"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/guide_section_one"/>
+
+    <RelativeLayout
+        android:id="@+id/guide_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/wallet"
+            android:layout_width="87dp"
+            android:layout_height="125dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:id="@+id/guide_item_xrp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="9dp"
+            android:layout_toStartOf="@+id/wallet"
+            android:src="@drawable/ic_guide_xrp"/>
+
+        <ImageView
+            android:id="@+id/guide_item_btc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/guide_item_xrp"
+            android:layout_alignEnd="@+id/guide_item_xrp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="28dp"
+            android:src="@drawable/ic_guide_btc"/>
+
+        <ImageView
+            android:id="@+id/guide_item_ltc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/guide_item_btc"
+            android:layout_toEndOf="@+id/guide_item_btc"
+            android:src="@drawable/ic_guide_ltc"/>
+
+        <ImageView
+            android:id="@+id/guide_item_eth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/guide_item_eos"
+            android:layout_alignEnd="@+id/guide_item_neo"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/ic_guide_eth"/>
+
+
+        <ImageView
+            android:id="@+id/guide_item_eos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/guide_item_xrp"
+            android:layout_alignStart="@+id/guide_item_neo"
+            android:layout_marginStart="31dp"
+            android:src="@drawable/ic_guide_eos"/>
+
+        <ImageView
+            android:id="@+id/guide_item_neo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/wallet"
+            android:layout_marginBottom="13dp"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@+id/wallet"
+            android:src="@drawable/ic_guide_neo"/>
+    </RelativeLayout>
+
+</FrameLayout>

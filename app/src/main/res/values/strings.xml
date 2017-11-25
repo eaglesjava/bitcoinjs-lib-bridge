@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">bitbill-wallet-android</string>
+    <string name="app_name">bitbill wallet</string>
 
     <!--network state tip-->
     <string name="toast_using_network_type">正在使用 %1$s 网络</string>

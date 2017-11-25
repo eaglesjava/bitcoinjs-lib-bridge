@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/layout_guide_second"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/guide_label"
+        style="@style/Text.Title.Big"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/guide_section_two"/>
+
+    <ImageView
+        android:id="@+id/wallet"
+        android:layout_width="87dp"
+        android:layout_height="125dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <ImageView
+        android:id="@+id/guide_item_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/wallet"
+        android:layout_alignTop="@+id/wallet"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/ic_guide_key"/>
+
+</RelativeLayout>
