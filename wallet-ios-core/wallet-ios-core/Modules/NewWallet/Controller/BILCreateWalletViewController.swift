@@ -55,6 +55,13 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		createButton.setTitle("开始\(titleString)", for: .normal)
     }
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if presentationController == nil {
+			navigationItem.rightBarButtonItem = nil
+		}
+	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(true)
 		NotificationCenter.default.addObserver(self, selector: #selector(self.textFieldValueDidChange(notification:))
@@ -220,6 +227,9 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	
 	// MARK: - Actions
 	
+	@IBAction func cancelAction(_ sender: Any) {
+		dismiss(animated: true, completion: nil)
+	}
 	@IBAction func createWalletAction(_ sender: Any) {
 		createWallet()
 	}

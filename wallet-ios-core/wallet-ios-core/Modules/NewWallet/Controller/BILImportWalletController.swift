@@ -25,6 +25,13 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 //		textView.text = "seed sock milk update focus rotate barely fade car face mechanic mercy"
     }
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if presentationController == nil {
+			navigationItem.rightBarButtonItem = nil
+		}
+	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		textView.text = "两 览 藏 微 储 继 料 叶 历 跳 语 握"

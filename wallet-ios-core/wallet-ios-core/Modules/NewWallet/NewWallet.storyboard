@@ -385,7 +385,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="toO-yT-FMS"/>
                     </view>
-                    <navigationItem key="navigationItem" title="创建钱包" id="IzW-ej-leD"/>
+                    <navigationItem key="navigationItem" title="创建钱包" id="IzW-ej-leD">
+                        <barButtonItem key="rightBarButtonItem" title="取消" id="fIk-2A-9Sb">
+                            <connections>
+                                <action selector="cancelAction:" destination="7rK-Mf-YUl" id="uoY-HV-vnX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="confirmPasswordInputView" destination="HZ0-VV-HbH" id="kLt-xo-fIJ"/>
                         <outlet property="confirmPasswordTextField" destination="5Hf-Dg-FgH" id="ksT-uJ-03R"/>
@@ -464,7 +470,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xev-18-wrL"/>
                     </view>
-                    <navigationItem key="navigationItem" title="输入助记词" id="cca-Ld-QW8"/>
+                    <navigationItem key="navigationItem" title="输入助记词" id="cca-Ld-QW8">
+                        <barButtonItem key="rightBarButtonItem" title="取消" id="ltI-X7-8pX">
+                            <connections>
+                                <action selector="bil_dismissSelfModalViewController" destination="ACT-yT-QtD" id="1GI-JV-ho6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mnemonicView" destination="86e-aY-GDa" id="6bi-4O-idm"/>
                         <outlet property="textView" destination="pVv-78-uyq" id="lQo-lm-HKQ"/>
@@ -617,6 +629,6 @@
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7m6-ve-BqF"/>
+        <segue reference="PNN-OT-SBG"/>
     </inferredMetricsTieBreakers>
 </document>

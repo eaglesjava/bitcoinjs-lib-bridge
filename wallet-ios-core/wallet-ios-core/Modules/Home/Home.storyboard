@@ -13,7 +13,7 @@
         <!--Home View Controller-->
         <scene sceneID="iL2-jl-kB3">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bnG-Vs-ncx" customClass="BILHomeViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bnG-Vs-ncx" customClass="BILHomeViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7oL-eY-xg7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

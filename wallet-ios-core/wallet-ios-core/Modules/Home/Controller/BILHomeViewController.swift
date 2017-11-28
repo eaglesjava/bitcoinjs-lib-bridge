@@ -123,11 +123,19 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.setNavigationBarHidden(true, animated: false)
+		
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		navigationController?.setNavigationBarHidden(false, animated: false)
+		if !isPresenting {
+			navigationController?.setNavigationBarHidden(true, animated: false)
+		}
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		isPresenting = false
 	}
 	
 	// MARK: - Notifications
@@ -144,6 +152,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	}
 	
 	// MARK: - Header view delegate
+	var isPresenting = false
 	func actionButtonTapped(headerView: BILHomeTableHeaderView) {
 		guard let type = BILHomeSectionType(rawValue: headerView.tag) else { return }
 		switch type {
@@ -152,9 +161,11 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		case .wallet:
 			let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 			let createAction = UIAlertAction(title: "创建钱包", style: .default, handler: { (action) in
+				self.isPresenting = true
 				self.performSegue(withIdentifier: "BILHomeToCreateWalletSegue", sender: nil)
 			})
 			let importAction = UIAlertAction(title: "导入钱包", style: .default, handler: { (action) in
+				self.isPresenting = true
 				self.performSegue(withIdentifier: "BILHomeToImportWalletSegue", sender: nil)
 			})
 			let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -242,14 +253,13 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+		
     }
-    */
 
 }
