@@ -22,6 +22,8 @@ extension UIColor {
 extension UIColor {
 	static var bil_gradient_start_color: UIColor { get { return UIColor(hex: 0x4493CD) } }
 	static var bil_gradient_end_color: UIColor { get { return UIColor(hex: 0x3255AC) } }
+	static var bil_gradient_start_red_color: UIColor { get { return UIColor(hex: 0xFF7E87) } }
+	static var bil_gradient_end_red_color: UIColor { get { return UIColor(hex: 0xFF5960) } }
 	static var bil_gradient_shadow_color: UIColor { get { return UIColor(hex: 0xB4EC51) } }
 	static var bil_black_30_color: UIColor { get { return self.bil_black_color(alpha: 0.3) } }
 	static var bil_black_70_color: UIColor { get { return self.bil_black_color(alpha: 0.7) } }
