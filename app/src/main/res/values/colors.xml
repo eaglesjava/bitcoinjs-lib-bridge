@@ -28,5 +28,6 @@
     <color name="txt_gray">#bbb</color>
     <color name="dark_top">#272A34</color>
     <color name="dark_bg">#323743</color>
+    <color name="wallet_menu_text">#2F333E</color>
 
 </resources>

@@ -5,37 +5,48 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
+import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.model.app.AppModel;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity
+public class MainActivity extends BaseActivity<MainMvpPresenter>
         implements NavigationView.OnNavigationItemSelectedListener, MainMvpView {
 
     @Inject
-    MainMvpPresenter<AppModel, MainMvpView> mPresenter;
+    MainMvpPresenter<AppModel, MainMvpView> mMainMvpPresenter;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.nav_view)
+    NavigationView navView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+    private FragmentAdapter mAdapter;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return mPresenter;
+    public MainMvpPresenter getMvpPresenter() {
+        return mMainMvpPresenter;
     }
 
     @Override
-    protected void injectActivity() {
+    public void injectComponent() {
         //inject activity
         getActivityComponent().inject(this);
     }
@@ -44,21 +55,23 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setUnBinder(ButterKnife.bind(this));
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navView.setNavigationItemSelectedListener(this);
 
+        mAdapter = new FragmentAdapter(getSupportFragmentManager());
+        mAdapter.addItem(AssetFragment.newInstance());
+        mAdapter.addItem(ReceiveFragment.newInstance());
+        mAdapter.addItem(SendFragment.newInstance());
+        mAdapter.addItem(MyFragment.newInstance());
+        mViewPager.setAdapter(mAdapter);
     }
 
     @Override
@@ -79,6 +92,7 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_asset) {
             // Handle the camera action
+
         } else if (id == R.id.nav_receive) {
 
         } else if (id == R.id.nav_send) {

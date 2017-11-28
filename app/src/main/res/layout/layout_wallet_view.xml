@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_wallet_label"
+        style="@style/Text.Wallet.Logo"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_wallet_name"
+        style="@style/Text.Wallet.Name"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/tv_wallet_label"/>
+
+    <TextView
+        android:id="@+id/tv_wallet_amount"
+        style="@style/Text.Wallet.Amount"
+        android:layout_alignStart="@+id/tv_wallet_name"
+        android:layout_below="@+id/tv_wallet_name"
+        android:layout_marginTop="1dp"/>
+
+    <Button
+        android:id="@+id/btn_backup_now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@color/transparent"
+        android:text="@string/btn_backup_now"
+        android:textColor="@color/white"
+        android:visibility="gone"/>
+</merge>

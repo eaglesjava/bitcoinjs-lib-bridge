@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="colorControlNormal">@color/white_60</item>
         <item name="colorControlActivated">@color/white</item>
     </style>
@@ -113,10 +112,12 @@
         <item name="android:lines">1</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/title_normal</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text.Title.Small" parent="Text.Title">
         <item name="android:textSize">@dimen/title_small</item>
+
     </style>
 
     <style name="Text.Title.Big" parent="Text.Title">
@@ -126,6 +127,12 @@
     <style name="Text.InputTitle" parent="Text">
         <item name="android:textSize">@dimen/input_title_text_size</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Title.Content" parent="Text.Title">
+        <item name="android:textColor">@color/white_60</item>
+        <item name="android:textSize">@dimen/title_tiny</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="Text.InputHint" parent="Text">
@@ -146,6 +153,46 @@
         <item name="android:textSize">@dimen/input_mnemonic</item>
         <item name="android:gravity">center</item>
         <item name="android:lines">1</item>
+    </style>
+
+    <style name="Text.Crypto" parent="Text.Title.Content">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Text.Asset" parent="Text.Title.Content">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Wallet" parent="Text"></style>
+
+    <style name="Text.Wallet.Logo" parent="Text.Wallet">
+        <item name="android:background">@drawable/bg_white_circle</item>
+        <item name="android:textSize">@dimen/title_small</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Wallet.Name" parent="Text.Wallet">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/title_small</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Wallet.Amount" parent="Text.Wallet">
+        <item name="android:textColor">@color/white_60</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="Text.Wallet.Menu" parent="Text.Wallet">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/wallet_menu_text</item>
+        <item name="android:background">@drawable/bg_wallet_menu</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+
     </style>
 
     <style name="TransparentDialog">
@@ -221,6 +268,13 @@
 
     <style name="GridView.Mnemonic.Noneditable" parent="GridView.Mnemonic">
         <item name="android:clickable">false</item>
+    </style>
+
+    <style name="PopupAnimation">
+
+        <!-- PopupWindow左右弹出的效果 -->
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 
 

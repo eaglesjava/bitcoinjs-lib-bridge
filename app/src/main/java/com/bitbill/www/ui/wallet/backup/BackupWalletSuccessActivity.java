@@ -24,7 +24,7 @@ public class BackupWalletSuccessActivity extends BaseToolbarActivity {
     }
 
     @Override
-    protected void injectActivity() {
+    public void injectComponent() {
 
     }
 

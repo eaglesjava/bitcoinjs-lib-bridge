@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
@@ -73,7 +74,7 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
     }
 
     @Override
-    public void injectActivity() {
+    public void injectComponent() {
 
     }
 

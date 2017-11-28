@@ -31,5 +31,4 @@ public interface MvpView {
     boolean isNetworkConnected();
 
     void hideKeyboard();
-
 }

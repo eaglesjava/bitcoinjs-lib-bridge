@@ -19,16 +19,11 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/AppTheme.Transparent">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.guide.GuideActivity"
             android:label="@string/title_activity_guide"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.Transparent">
         </activity>
         <activity android:name=".ui.wallet.init.InitWalletActivity">
         </activity>
@@ -37,6 +32,11 @@
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.wallet.importing.ImportWalletActivity"

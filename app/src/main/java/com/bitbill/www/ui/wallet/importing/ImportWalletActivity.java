@@ -73,7 +73,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
     }
 
     @Override
-    public void injectActivity() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
     }
 

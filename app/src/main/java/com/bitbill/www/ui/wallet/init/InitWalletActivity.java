@@ -60,7 +60,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
 
     @Override
-    public void injectActivity() {
+    public void injectComponent() {
         //inject activity
         getActivityComponent().inject(this);
     }

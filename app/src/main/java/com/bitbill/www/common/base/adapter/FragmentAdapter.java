@@ -1,4 +1,4 @@
-package com.bitbill.www.ui.guide;
+package com.bitbill.www.common.base.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

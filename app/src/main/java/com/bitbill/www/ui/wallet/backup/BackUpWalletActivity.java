@@ -44,7 +44,7 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
     }
 
     @Override
-    protected void injectActivity() {
+    public void injectComponent() {
         getActivityComponent().inject(this);
 
     }

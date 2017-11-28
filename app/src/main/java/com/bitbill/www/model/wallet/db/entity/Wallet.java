@@ -46,6 +46,8 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private long updatedAt;
     @Transient
     private String tradePwd;
+    @Transient
+    private long btcAmount;//unit Satoshi  1 BTC = 100000000 Satoshi
 
     @Generated(hash = 387054013)
     public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash,
@@ -135,9 +137,8 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         return tradePwd;
     }
 
-    public Wallet setTradePwd(String tradePwd) {
+    public void setTradePwd(String tradePwd) {
         this.tradePwd = tradePwd;
-        return this;
     }
 
     public String getMnemonicHash() {
@@ -154,5 +155,13 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setSeedHexHash(String seedHexHash) {
         this.seedHexHash = seedHexHash;
+    }
+
+    public long getBtcAmount() {
+        return btcAmount;
+    }
+
+    public void setBtcAmount(long btcAmount) {
+        this.btcAmount = btcAmount;
     }
 }

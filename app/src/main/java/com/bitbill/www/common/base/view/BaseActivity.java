@@ -41,17 +41,13 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActivity
-        implements MvpView, BaseFragment.Callback {
+        implements MvpView, BaseFragment.Callback, BaseInjectControl<P> {
 
     protected LayoutInflater mInflater;
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
     private P mMvpPresenter;
-
-    public abstract P getMvpPresenter();
-
-    protected abstract void injectActivity();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,10 +56,10 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((BitbillApp) getApplication()).getComponent())
                 .build();
+        injectComponent();
         AppManager.get().addActivity(this);
         handleIntent(getIntent());
         mInflater = getLayoutInflater();
-        injectActivity();
         mMvpPresenter = getMvpPresenter();
         if (getMvpPresenter() != null) {
             getMvpPresenter().onAttach(this);

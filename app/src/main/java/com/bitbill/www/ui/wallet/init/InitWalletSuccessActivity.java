@@ -46,7 +46,7 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity {
     }
 
     @Override
-    protected void injectActivity() {
+    public void injectComponent() {
 
     }
 

@@ -6,6 +6,7 @@ package com.bitbill.www.di.component;
 
 import com.bitbill.www.di.module.ActivityModule;
 import com.bitbill.www.di.scope.PerActivity;
+import com.bitbill.www.ui.main.AssetFragment;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
@@ -28,4 +29,6 @@ public interface ActivityComponent {
     void inject(ImportWalletActivity importWalletActivity);
 
     void inject(BackUpWalletActivity backUpWalletActivity);
+
+    void inject(AssetFragment assetFragment);
 }

@@ -1,0 +1,12 @@
+<resources>
+    <declare-styleable name="WalletView">
+        <attr name="walletLabel" format="string"/>
+        <attr name="walletName" format="string"/>
+        <attr name="normalColor" format="color|reference"/>
+        <attr name="backupColor" format="color|reference"/>
+        <attr name="normalBackground" format="color|reference"/>
+        <attr name="backupBackground" format="color|reference"/>
+        <attr name="walletAmount" format="string"/>
+        <attr name="isBackup" format="boolean"/>
+    </declare-styleable>
+</resources>

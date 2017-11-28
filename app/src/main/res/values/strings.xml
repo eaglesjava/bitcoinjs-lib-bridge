@@ -52,8 +52,8 @@
     <!--main activity-->
     <string name="title_activity_main">首页</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">打开导航页</string>
+    <string name="navigation_drawer_close">关闭导航页</string>
 
     <string name="title_account_info">账户信息</string>
     <string name="title_contact">联系人</string>
@@ -98,5 +98,17 @@
     <string name="error_input_menemonic_fail">请正确填写助记词</string>
     <string name="title_dialog_backup_fail">备份失败</string>
     <string name="msg_dailog_check_mnemonic">请重新检查您的助记词是否正确</string>
+    <string name="text_current_currency_type">当前币种1个</string>
+    <string name="title_total_assets">总资产</string>
+    <string name="text_asset_btc">BTC</string>
+    <string name="text_default_amount">0</string>
+    <string name="text_asset_eth">eth</string>
+    <string name="text_asset_bch">bch</string>
+    <string name="text_asset_current_wallet">当前钱包%s个</string>
+    <string name="title_asset_my_wallet">我的钱包</string>
+    <string name="btn_backup_now">马上备份</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,11 +1,6 @@
 package com.bitbill.www.common.utils;
 
-import android.graphics.Color;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.webkit.URLUtil;
 
 import com.bitbill.www.crypto.utils.EncryptUtils;
@@ -15,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.Charset;
 import java.text.NumberFormat;
@@ -556,7 +550,7 @@ public class StringUtils {
      * @param damount
      * @return
      */
-    public static String getFormatedAmount(double damount) {
+    public static String getFormatedAmount(long damount) {
         return getFormatedDollers(damount, 2);
     }
 
@@ -567,73 +561,10 @@ public class StringUtils {
      * @param d      保留小数位数
      * @return
      */
-    public static String getFormatedDollers(double amount, int d) {
+    public static String getFormatedDollers(long amount, int d) {
         NumberFormat format = NumberFormat.getInstance();
         //设置截断模式
         format.setRoundingMode(RoundingMode.FLOOR);
-        //设置允许的最大保留小数
-        format.setMaximumFractionDigits(d);
-        format.setMinimumFractionDigits(d);
-        return format.format(amount);
-    }
-
-    /**
-     * 格式化金额字符串，保留指定小数
-     * //todo 保证float转double不会丢失精度
-     *
-     * @param amount float 金额
-     * @param d      保留小数位数
-     * @return
-     */
-    public static String getFormatedDollers(float amount, int d) {
-        BigDecimal b = new BigDecimal(String.valueOf(amount));
-        NumberFormat format = NumberFormat.getInstance();
-        //设置截断模式
-        format.setRoundingMode(RoundingMode.FLOOR);
-        //设置允许的最大保留小数
-        format.setMaximumFractionDigits(d);
-        format.setMinimumFractionDigits(d);
-        return format.format(b.doubleValue());
-    }
-
-    /**
-     * 格式化（截断）金额字符串，指定最大小数
-     *
-     * @param amount 金额
-     * @param d      最大保留小数位数
-     * @return
-     */
-    public static String getFormatedDollersMaxEnd(double amount, int d) {
-        NumberFormat format = NumberFormat.getInstance();
-        //设置截断模式
-        format.setRoundingMode(RoundingMode.FLOOR);
-        //设置允许的最大保留小数
-        format.setMaximumFractionDigits(d);
-        return format.format(amount);
-    }
-
-    /**
-     * 格式化（截断）金额字符串，指定最大2位小数
-     *
-     * @param amount 金额
-     * @return
-     */
-    public static String getFormatedDollersMaxEnd(double amount) {
-        return getFormatedDollersMaxEnd(amount, 2);
-    }
-
-    /**
-     * 格式化金额字符串，保留指定小数
-     * 使用四舍五入方式
-     *
-     * @param amount 金额
-     * @param d      保留小数位数
-     * @return
-     */
-    public static String getFormatedDollersHalfup(double amount, int d) {
-        NumberFormat format = NumberFormat.getInstance();
-        //设置四舍五入模式
-        format.setRoundingMode(RoundingMode.HALF_UP);
         //设置允许的最大保留小数
         format.setMaximumFractionDigits(d);
         format.setMinimumFractionDigits(d);
@@ -659,176 +590,6 @@ public class StringUtils {
         format.setMaximumFractionDigits(d);
         format.setMinimumFractionDigits(d);
         return format.format(amount);
-    }
-
-    /**
-     * 格式化金额字符串，保留指定小数
-     *
-     * @param amount 金额
-     * @param d      保留小数位数
-     * @return
-     */
-    public static String getFormatedDollers(int amount, int d) {
-        NumberFormat format = NumberFormat.getInstance();
-        //设置允许的最大保留小数
-        format.setMaximumFractionDigits(d);
-        format.setMinimumFractionDigits(d);
-        return format.format(amount);
-    }
-
-    /**
-     * 保留两位小数
-     *
-     * @param amount
-     * @return
-     */
-    public static String getRemainTwoNum(double amount) {
-        //保留两位四舍五入
-        return getFormatedAmount(amount);
-    }
-
-    /**
-     * 获取真实字符串 移除空串 null " "等
-     *
-     * @param s
-     * @return
-     */
-    private static String getRealString(String s) {
-        if (!isNotEmpty(s)) {
-            return "";
-        }
-        if (s.trim().equalsIgnoreCase("null")) {
-            return "";
-        }
-        return s.trim();
-    }
-
-    /**
-     * 验证身份证号码是否合法
-     *
-     * @param idNo
-     * @return
-     */
-    public static boolean isValidIdNo(String idNo) {
-        if (!isNotEmpty(idNo)) {
-            return false;
-        }
-        return getRealString(idNo).length() == 18;
-    }
-
-
-    /**
-     * 获取指定字符串部分长度字号缩小到0.75（相对于默认字号）
-     * 例如：+2461.81（小数点后两位缩小）
-     *
-     * @param shrink 缩放比例
-     * @param temp   字符串
-     * @param start  起点
-     * @param end    结束位置
-     * @return
-     */
-    public static SpannableStringBuilder getSelectionShrinkStr(float shrink, String temp, int start, int end) {
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(temp);
-        spannableStringBuilder.setSpan(new RelativeSizeSpan(shrink), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableStringBuilder;
-    }
-
-    /**
-     * 获取指定字符串部分长度字号缩小到0.75（相对于默认字号）
-     * 例如：+2461.81（小数点后两位缩小）
-     *
-     * @param temp  字符串
-     * @param start 起点
-     * @param end   结束位置
-     * @return
-     */
-    public static SpannableStringBuilder getSelectionShrinkStr(String temp, int start, int end) {
-        return getSelectionShrinkStr(0.75f, temp, start, end);
-    }
-
-    /**
-     * 获取指定字符串部分长度字号缩小到0.75（相对于默认字号）
-     * 例如：+2461.81（+、小数点后两位缩小）
-     *
-     * @param temp  字符串
-     * @param start 起点
-     * @param end   结束位置
-     * @return
-     */
-    public static SpannableStringBuilder getFormatSelectionShrinkStr(String temp, int start, int end) {
-        SpannableStringBuilder spannableStringBuilder = getSelectionShrinkStr(temp, start, end);
-        spannableStringBuilder.setSpan(new RelativeSizeSpan(0.75f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableStringBuilder;
-    }
-
-    /**
-     * 设置指定部分字符串颜色
-     *
-     * @param temp  字符串
-     * @param start 起点
-     * @param end   结束位置
-     * @return
-     */
-    public static SpannableStringBuilder getSelectionColorStr(String temp, int start, int end, int colorId) {
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(temp);
-        spannableStringBuilder.setSpan(new ForegroundColorSpan(colorId), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableStringBuilder;
-    }
-
-    /**
-     * 设置指定部分字符串颜色和缩小
-     *
-     * @param temp  字符串
-     * @param start 起点
-     * @param end   结束位置
-     * @return
-     */
-    public static SpannableStringBuilder getSelectionColorAndShrinkStr(String temp, int start, int end, int colorId) {
-        SpannableStringBuilder spannableStringBuilder = getSelectionShrinkStr(temp, start, end);
-        spannableStringBuilder.setSpan(new ForegroundColorSpan(colorId), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableStringBuilder;
-    }
-
-    /**
-     * 设置指定部分字符串颜色
-     *
-     * @param temp  字符串
-     * @param start 起点
-     * @param end   结束位置
-     * @return
-     */
-    public static SpannableStringBuilder getSelectionColorStr(String temp, int start, int end, String color) {
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(temp);
-        spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.parseColor(color)), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableStringBuilder;
-    }
-
-    /**
-     * 设置指定部分字符串颜色
-     *
-     * @param color 颜色值
-     * @param temp  字符串
-     * @param start 起点
-     * @param end   结束位置
-     * @return
-     */
-    public static SpannableStringBuilder getSelectionForegroundStr(int color, String temp, int start, int end) {
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(temp);
-        spannableStringBuilder.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);  //设置前景色
-        return spannableStringBuilder;
-    }
-
-    /**
-     * 判断是否是pdf url
-     *
-     * @param pdfUrl
-     * @return
-     */
-    public static boolean isPdfUrl(String pdfUrl) {
-        if (!isUrl(pdfUrl)) {
-            return false;
-        }
-        return pdfUrl.toLowerCase().endsWith(".pdf");
     }
 
     /**
@@ -967,5 +728,9 @@ public class StringUtils {
         byte[] encryptKey = EncryptUtils.encryptSHA256(key.getBytes(Charset.defaultCharset()));
         String decryptMnemonic = new String(EncryptUtils.decryptHexStringAES(encryptMnemonic, encryptKey), Charset.defaultCharset());
         return decryptMnemonic;
+    }
+
+    public static String formatBtcAmount(long btcAmount) {
+        return getFormatedAmount(btcAmount / 100000000);
     }
 }

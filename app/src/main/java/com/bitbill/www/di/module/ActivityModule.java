@@ -6,7 +6,6 @@ package com.bitbill.www.di.module;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.bitbill.www.common.rx.AppSchedulerProvider;
 import com.bitbill.www.common.rx.SchedulerProvider;
@@ -14,6 +13,9 @@ import com.bitbill.www.di.qualifier.ActivityContext;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.ui.main.AssetMvpPresenter;
+import com.bitbill.www.ui.main.AssetMvpView;
+import com.bitbill.www.ui.main.AssetPresenter;
 import com.bitbill.www.ui.main.MainMvpPresenter;
 import com.bitbill.www.ui.main.MainMvpView;
 import com.bitbill.www.ui.main.MainPresenter;
@@ -94,7 +96,10 @@ public class ActivityModule {
     }
 
     @Provides
-    LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {
-        return new LinearLayoutManager(activity);
+    @PerActivity
+    AssetMvpPresenter<WalletModel, AssetMvpView> provideAssetPresenter(
+            AssetPresenter<WalletModel, AssetMvpView> presenter) {
+        return presenter;
     }
+
 }
