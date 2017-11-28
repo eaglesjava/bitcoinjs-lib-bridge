@@ -33,17 +33,12 @@
 		CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */; };
 		CC94E09D1FBBE6410098E730 /* BILAppStartUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */; };
 		CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */; };
-		CC94E0B11FBD6E3B0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0A51FBD6E3B0098E730 /* .gitkeep */; };
-		CC94E0B41FBD6E3B0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0AB1FBD6E3B0098E730 /* .gitkeep */; };
-		CC94E0B51FBD6E3B0098E730 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0AD1FBD6E3B0098E730 /* .gitkeep */; };
 		CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0B71FBD6E620098E730 /* BackupWallet.storyboard */; };
 		CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0B91FBD7FF30098E730 /* BackupWallet.xcassets */; };
 		CC94E0BF1FBD83E90098E730 /* BILMnemonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0BE1FBD83E90098E730 /* BILMnemonicView.swift */; };
 		CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */; };
 		CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C21FBD86D30098E730 /* BILMnemonicCell.xib */; };
 		CC94E0C51FBD87D70098E730 /* BILMnemonicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0C41FBD87D70098E730 /* BILMnemonicCell.swift */; };
-		CCE5E15A1FC7BEDF00F7555D /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CCE5E14F1FC7BEDE00F7555D /* .gitkeep */; };
-		CCE5E15C1FC7BEDF00F7555D /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = CCE5E1531FC7BEDE00F7555D /* .gitkeep */; };
 		CCE5E1621FC7BFE100F7555D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCE5E1611FC7BFE100F7555D /* Home.storyboard */; };
 		CCE5E1641FC7C1BE00F7555D /* BILHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE5E1631FC7C1BE00F7555D /* BILHomeViewController.swift */; };
 		CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE5E1651FC7FB9400F7555D /* BILHomeTableHeaderView.swift */; };
@@ -709,22 +704,17 @@
 				CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */,
 				CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */,
 				CCF634F71FBEC64400840097 /* BILAllInOneView.xib in Resources */,
-				CC94E0B11FBD6E3B0098E730 /* .gitkeep in Resources */,
 				CCEC67841FB190EE004CC6C5 /* README.md in Resources */,
 				CCE5E1621FC7BFE100F7555D /* Home.storyboard in Resources */,
 				CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */,
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
 				CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */,
-				CCE5E15A1FC7BEDF00F7555D /* .gitkeep in Resources */,
 				CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */,
 				CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */,
-				CC94E0B51FBD6E3B0098E730 /* .gitkeep in Resources */,
-				CCE5E15C1FC7BEDF00F7555D /* .gitkeep in Resources */,
 				CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */,
 				CCFEDEEE1FCC067E00F1A7FC /* BILTransactionCell.xib in Resources */,
 				CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */,
 				CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */,
-				CC94E0B41FBD6E3B0098E730 /* .gitkeep in Resources */,
 				CCE5E1681FC7FB9E00F7555D /* BILHomeTableHeaderView.xib in Resources */,
 				CCE5E1721FC81E3700F7555D /* Home.xcassets in Resources */,
 			);
