@@ -90,7 +90,7 @@
         <!--Delegate-->
         <scene sceneID="5T6-TZ-Y78">
             <objects>
-                <viewController id="7rK-Mf-YUl" customClass="BILCreateWalletViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BILCreateWalletViewController" id="7rK-Mf-YUl" customClass="BILCreateWalletViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4RM-4A-IMn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -406,7 +406,7 @@
         <!--输入助记词-->
         <scene sceneID="HoF-aI-ZBC">
             <objects>
-                <viewController id="ACT-yT-QtD" customClass="BILImportWalletController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BILImportWalletController" id="ACT-yT-QtD" customClass="BILImportWalletController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EKX-gC-mLT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -617,6 +617,6 @@
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PNN-OT-SBG"/>
+        <segue reference="7m6-ve-BqF"/>
     </inferredMetricsTieBreakers>
 </document>

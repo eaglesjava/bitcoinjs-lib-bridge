@@ -16,6 +16,21 @@ class BILWalletManager: NSObject {
 	
 	weak var appDelegate: AppDelegate?
 	
+	func newWallet() -> WalletModel {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		let wallet = NSEntityDescription.insertNewObject(forEntityName: "WalletModel", into: context) as! WalletModel
+		return wallet
+	}
+	
+	func saveWallets() throws {
+		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		guard context.hasChanges else {
+			return
+		}
+		NotificationCenter.default.post(name: .walletDidChanged, object: nil)
+		try context.save()
+	}
+	
 	var wallets: [WalletModel] {
 		get {
 			var results = [WalletModel]()

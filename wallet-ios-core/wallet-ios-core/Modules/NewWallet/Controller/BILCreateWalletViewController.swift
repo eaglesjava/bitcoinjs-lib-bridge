@@ -138,8 +138,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		getMnemonic { (m) in
 			BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
 				let s = seedHex as! String
-				let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-				let wallet = NSEntityDescription.insertNewObject(forEntityName: "WalletModel", into: context) as! WalletModel
+				let wallet = BILWalletManager.shared.newWallet()
 				wallet.name = self.walletNameTextField.text!
 				wallet.createDate = Date()
 				do {
@@ -153,7 +152,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 					self.mnemonicHash = wallet.mnemonicHash
 					
 					if let seed = String(bytes: try aes.decrypt((wallet.encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seed == s {
-						try context.save()
+						try BILWalletManager.shared.saveWallets()
 						self.createSuccess()
 					}
 				} catch {

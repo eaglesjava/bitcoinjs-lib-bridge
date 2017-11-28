@@ -11,6 +11,7 @@ import PopupDialog
 import IQKeyboardManagerSwift
 import Foundation
 import SVProgressHUD
+import CoreGraphics
 
 class BILAppStartUpManager: NSObject {
 	
@@ -29,6 +30,20 @@ class BILAppStartUpManager: NSObject {
 		setupTextViewAppearance()
 		setupSVProgressHUD()
 //		setupNavigationBarAppearance()
+	}
+	
+	func snapshotNavBackgroundImage(rect: CGRect) -> UIImage? {
+		guard let image = navBackgroundImage else {
+			return nil
+		}
+		guard let cgimage = image.cgImage else { return nil }
+		let scale = image.scale
+		let piexlRect = CGRect(x: rect.origin.x * scale, y: rect.origin.y * scale, width: rect.width * scale, height: rect.height * scale)
+		if let imageRef = cgimage.cropping(to: piexlRect) {
+			let toReturn = UIImage(cgImage: imageRef)
+			return toReturn
+		}
+		return nil
 	}
 	
 	private func setupSVProgressHUD() {

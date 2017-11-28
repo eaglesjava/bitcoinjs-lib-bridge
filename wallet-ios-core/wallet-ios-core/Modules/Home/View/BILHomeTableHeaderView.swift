@@ -8,20 +8,33 @@
 
 import UIKit
 
+protocol BILHomeTableHeaderViewDelegate: NSObjectProtocol {
+	func actionButtonTapped(headerView: BILHomeTableHeaderView)
+}
+
 class BILHomeTableHeaderView: UITableViewHeaderFooterView {
 
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var subTitleLabel: UILabel!
 	@IBOutlet weak var actionButton: UIButton!
+	@IBOutlet weak var bgImageView: UIImageView!
 	
-	var buttonImage: UIImage?
+	weak var delegate: BILHomeTableHeaderViewDelegate?
+	
+	var buttonImage: UIImage? {
+		didSet {
+			if let bi = buttonImage {
+				actionButton.setImage(bi, for: .normal)
+			}
+			actionButton.isHidden = buttonImage == nil
+		}
+	}
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		if let bi = buttonImage {
-			actionButton.setImage(bi, for: .normal)
-		}
-		actionButton.isHidden = buttonImage != nil
+	}
+	@IBAction func actionButtonTapped(_ sender: Any) {
+		delegate?.actionButtonTapped(headerView: self)
 	}
 	
 	/*

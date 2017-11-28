@@ -13,11 +13,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BILHomeTableHeaderView" customModule="wallet_ios_core" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oIe-o6-4j0">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hqb-hP-wYu">
-                    <rect key="frame" x="25" y="26" width="79.5" height="56"/>
+                    <rect key="frame" x="25" y="12" width="79.5" height="56"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前币种 1 个" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4M-yG-hVZ">
                             <rect key="frame" x="0.0" y="0.0" width="74" height="14.5"/>
@@ -42,21 +46,33 @@
                         <constraint firstItem="w4M-yG-hVZ" firstAttribute="top" secondItem="Hqb-hP-wYu" secondAttribute="top" id="rA9-Qc-TFR"/>
                     </constraints>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJW-AD-UPA">
-                    <rect key="frame" x="320" y="39" width="30" height="30"/>
+                <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJW-AD-UPA">
+                    <rect key="frame" x="306" y="18" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="GUE-E2-6Xv"/>
+                        <constraint firstAttribute="height" constant="44" id="PsL-Me-FYz"/>
+                    </constraints>
+                    <connections>
+                        <action selector="actionButtonTapped:" destination="-2" eventType="touchUpInside" id="zH1-v6-9NI"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="oIe-o6-4j0" secondAttribute="trailing" id="0Bd-DR-e0H"/>
                 <constraint firstItem="bJW-AD-UPA" firstAttribute="centerY" secondItem="Hqb-hP-wYu" secondAttribute="centerY" id="ABi-oW-XaN"/>
                 <constraint firstItem="Hqb-hP-wYu" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="ZEY-06-X0x"/>
                 <constraint firstItem="Hqb-hP-wYu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="exG-9f-HtT"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bJW-AD-UPA" secondAttribute="trailing" constant="25" id="jhQ-0Y-evP"/>
+                <constraint firstAttribute="bottom" secondItem="oIe-o6-4j0" secondAttribute="bottom" id="t10-Oy-mwx"/>
+                <constraint firstItem="oIe-o6-4j0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="tAO-S3-CVf"/>
+                <constraint firstItem="oIe-o6-4j0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vi7-XK-n6b"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="actionButton" destination="bJW-AD-UPA" id="pcg-gC-Q1i"/>
+                <outlet property="bgImageView" destination="oIe-o6-4j0" id="Ukk-kW-Yko"/>
                 <outlet property="subTitleLabel" destination="w4M-yG-hVZ" id="o8Y-7n-0eC"/>
                 <outlet property="titleLabel" destination="Chg-zs-VzF" id="y2P-xg-3I8"/>
             </connections>

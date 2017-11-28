@@ -22,10 +22,14 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 
         // Do any additional setup after loading the view.
 		self.mnemonicView.emptyTitle = emptyTitle
-		textView.becomeFirstResponder()
 //		textView.text = "seed sock milk update focus rotate barely fade car face mechanic mercy"
-		textView.text = "两 览 藏 微 储 继 料 叶 历 跳 语 握"
     }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		textView.text = "两 览 藏 微 储 继 料 叶 历 跳 语 握"
+		textView.becomeFirstResponder()
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
