@@ -11,6 +11,10 @@ import UIKit
 import CoreData
 
 extension WalletModel {
+	
+}
+
+extension WalletModel {
 	static func fetch(by mnemonicHash: String?) -> WalletModel? {
 		var wallet: WalletModel? = nil
 		guard let hash = mnemonicHash else {
