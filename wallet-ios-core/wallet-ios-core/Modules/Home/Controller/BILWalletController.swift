@@ -1,31 +1,31 @@
 //
-//  BILBaseViewController.swift
+//  BILWalletController.swift
 //  wallet-ios-core
 //
-//  Created by 仇弘扬 on 2017/11/17.
+//  Created by 仇弘扬 on 2017/11/29.
 //  Copyright © 2017年 BitBill. All rights reserved.
 //
 
 import UIKit
 
-class BILBaseViewController: UIViewController {
+class BILWalletController: BILBaseViewController {
 
+	var wallet: WalletModel?
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		title = wallet?.name
     }
 	
-	func bil_setBackgroudColor() {
-		_ = view.setupGradient(colors: [UIColor.bil_deep_blue_start_bgcolor.cgColor, UIColor.bil_deep_blue_end_bgcolor.cgColor], startPoint: CGPoint(x: 0.5, y: 0), endPoint: CGPoint(x: 0.5, y: 1))
+	override func bil_setBackgroudColor() {
+		_ = view.setupGradient(colors: [UIColor.bil_gradient_start_color.cgColor, UIColor.bil_gradient_end_color.cgColor], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
 		view.backgroundColor = UIColor.clear
 	}
-
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		bil_setBackgroudColor()
-	}
 	
+	
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -18,7 +18,7 @@ class BILTransactionManager: NSObject {
 		tt.address = "123456jWebYP9tanj2taQfNvRVMNGjCYAd"
 		tt.date = Date()
 		tt.volume = 10000
-		return [BILTransaction](repeating: tt, count: 10)
+		return [BILTransaction](repeating: tt, count: 2)
 	}
 	
 }

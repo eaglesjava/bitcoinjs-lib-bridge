@@ -114,6 +114,12 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		tableView.register(UINib(nibName: transactionCellID, bundle: nil), forCellReuseIdentifier: transactionCellID)
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
+		
+		if #available(iOS 11.0, *) {
+			navigationController?.navigationBar.prefersLargeTitles = false
+		} else {
+			// Fallback on earlier versions
+		}
     }
 	
 	deinit {
@@ -123,19 +129,11 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.setNavigationBarHidden(true, animated: false)
-		
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if !isPresenting {
-			navigationController?.setNavigationBarHidden(true, animated: false)
-		}
-	}
-	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		isPresenting = false
+		navigationController?.setNavigationBarHidden(false, animated: false)
 	}
 	
 	// MARK: - Notifications
@@ -152,7 +150,6 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	}
 	
 	// MARK: - Header view delegate
-	var isPresenting = false
 	func actionButtonTapped(headerView: BILHomeTableHeaderView) {
 		guard let type = BILHomeSectionType(rawValue: headerView.tag) else { return }
 		switch type {
@@ -161,11 +158,9 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		case .wallet:
 			let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 			let createAction = UIAlertAction(title: "创建钱包", style: .default, handler: { (action) in
-				self.isPresenting = true
 				self.performSegue(withIdentifier: "BILHomeToCreateWalletSegue", sender: nil)
 			})
 			let importAction = UIAlertAction(title: "导入钱包", style: .default, handler: { (action) in
-				self.isPresenting = true
 				self.performSegue(withIdentifier: "BILHomeToImportWalletSegue", sender: nil)
 			})
 			let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -179,12 +174,12 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	// MARK: - ScrollView delegate
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		guard let section = tableView.indexPathsForVisibleRows?.first?.section else { return }
-		var headerHeight: CGFloat = 0
+
 		for i in 0...numberOfSections(in: tableView) {
 			guard let header = tableView.headerView(forSection: i) as? BILHomeTableHeaderView  else { continue }
 			if i == section {
 				let headerRect = view.convert(header.frame, from: tableView)
-				headerHeight = headerRect.height
+				
 				headerBGImage = BILAppStartUpManager.shared.snapshotNavBackgroundImage(rect: headerRect)
 				let image = headerBGImage
 				header.bgImageView.image = image
@@ -262,7 +257,10 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-		
+		if segue.identifier == "BILHomeToWalletSegue" {
+			let cont = segue.destination as! BILWalletController
+			cont.wallet = wallets[(tableView.indexPathForSelectedRow?.row)!]
+		}
     }
 
 }

@@ -13,7 +13,7 @@
         <!--Home View Controller-->
         <scene sceneID="iL2-jl-kB3">
             <objects>
-                <viewController id="bnG-Vs-ncx" customClass="BILHomeViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bnG-Vs-ncx" customClass="BILHomeViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7oL-eY-xg7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -275,6 +275,7 @@
                                             <outlet property="idLabel" destination="3jh-zW-ztf" id="4tU-Gj-06H"/>
                                             <outlet property="needBackupLabel" destination="epR-iz-p7M" id="6Lt-Cn-FQO"/>
                                             <outlet property="subIDLabel" destination="NwA-EF-6cy" id="Xhv-ez-bSf"/>
+                                            <segue destination="EAf-7Q-pFo" kind="show" identifier="BILHomeToWalletSegue" id="uYk-8g-9ar"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -306,6 +307,21 @@
             </objects>
             <point key="canvasLocation" x="146.40000000000001" y="192.05397301349328"/>
         </scene>
+        <!--Wallet Controller-->
+        <scene sceneID="836-Zz-DSN">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="EAf-7Q-pFo" customClass="BILWalletController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="577-aP-Oed">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.26666666666666666" green="0.57647058823529407" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="txk-aK-rko"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f7U-3G-XZ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1030" y="192"/>
+        </scene>
         <!--BILCreateWalletViewController-->
         <scene sceneID="9pz-Tm-E8K">
             <objects>
@@ -314,7 +330,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YzT-KV-ofY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1839" y="-151"/>
+            <point key="canvasLocation" x="834" y="-511"/>
         </scene>
         <!--BILImportWalletController-->
         <scene sceneID="5wD-eV-8nV">
@@ -324,7 +340,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9jV-YS-6k4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1817" y="536"/>
+            <point key="canvasLocation" x="839" y="986"/>
         </scene>
         <!--资产-->
         <scene sceneID="Hdn-X3-w7g">
@@ -362,7 +378,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rxn-pf-lgS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="-151"/>
+            <point key="canvasLocation" x="137" y="-511"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PvQ-55-gHt">
@@ -380,7 +396,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7j-tn-wGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="537"/>
+            <point key="canvasLocation" x="146" y="986"/>
         </scene>
     </scenes>
     <resources>
