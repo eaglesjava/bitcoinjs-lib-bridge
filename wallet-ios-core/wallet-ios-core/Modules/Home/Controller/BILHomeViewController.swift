@@ -179,11 +179,13 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	// MARK: - ScrollView delegate
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		guard let section = tableView.indexPathsForVisibleRows?.first?.section else { return }
-//		guard scrollView.isDragging else { return }
+		var headerHeight: CGFloat = 0
 		for i in 0...numberOfSections(in: tableView) {
-			guard let header = tableView.headerView(forSection: i) as? BILHomeTableHeaderView  else { return }
+			guard let header = tableView.headerView(forSection: i) as? BILHomeTableHeaderView  else { continue }
 			if i == section {
-				headerBGImage = BILAppStartUpManager.shared.snapshotNavBackgroundImage(rect: view.convert(header.frame, from: tableView))
+				let headerRect = view.convert(header.frame, from: tableView)
+				headerHeight = headerRect.height
+				headerBGImage = BILAppStartUpManager.shared.snapshotNavBackgroundImage(rect: headerRect)
 				let image = headerBGImage
 				header.bgImageView.image = image
 			}
@@ -192,6 +194,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 				header.bgImageView.image = nil
 			}
 		}
+		
 	}
 	
 	// MARK: - TableView delegate & dataSource

@@ -77,6 +77,7 @@
 		CCFEDEEE1FCC067E00F1A7FC /* BILTransactionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCFEDEEC1FCC067E00F1A7FC /* BILTransactionCell.xib */; };
 		CCFEDEF01FCD1D8300F1A7FC /* NotificationName+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFEDEEF1FCD1D8300F1A7FC /* NotificationName+BIL.swift */; };
 		CCFEDEF21FCD43CE00F1A7FC /* BILHomeAssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFEDEF11FCD43CE00F1A7FC /* BILHomeAssetCell.swift */; };
+		CCFEDEF51FCE5AAE00F1A7FC /* BILPopMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFEDEF41FCE5AAE00F1A7FC /* BILPopMenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,7 @@
 		CCFEDEEC1FCC067E00F1A7FC /* BILTransactionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILTransactionCell.xib; sourceTree = "<group>"; };
 		CCFEDEEF1FCD1D8300F1A7FC /* NotificationName+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+BIL.swift"; sourceTree = "<group>"; };
 		CCFEDEF11FCD43CE00F1A7FC /* BILHomeAssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeAssetCell.swift; sourceTree = "<group>"; };
+		CCFEDEF41FCE5AAE00F1A7FC /* BILPopMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILPopMenuItem.swift; sourceTree = "<group>"; };
 		D2BEE8AF9C1E6B3732497728 /* Pods-wallet-ios-core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-core.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-core/Pods-wallet-ios-core.release.xcconfig"; sourceTree = "<group>"; };
 		F76E2A6321F53623A11A5D44 /* Pods-wallet-ios-coreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-coreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-coreTests/Pods-wallet-ios-coreTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -561,6 +563,7 @@
 		CCEC67791FB190EE004CC6C5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				CCFEDEF31FCE5A5B00F1A7FC /* BILPopMenu */,
 				CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */,
 				CCEC677A1FB190EE004CC6C5 /* bitcoinjs-lib-bridge */,
 				CC94E05C1FBAC2B20098E730 /* WalletModel.xcdatamodeld */,
@@ -591,6 +594,14 @@
 				CCF635021FC2C5C600840097 /* BILGuideItem.swift */,
 			);
 			path = Guide;
+			sourceTree = "<group>";
+		};
+		CCFEDEF31FCE5A5B00F1A7FC /* BILPopMenu */ = {
+			isa = PBXGroup;
+			children = (
+				CCFEDEF41FCE5AAE00F1A7FC /* BILPopMenuItem.swift */,
+			);
+			path = BILPopMenu;
 			sourceTree = "<group>";
 		};
 		E3E36CCA1613A27EC1FF5BBA /* Pods */ = {
@@ -915,6 +926,7 @@
 				CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */,
 				CCE5E1641FC7C1BE00F7555D /* BILHomeViewController.swift in Sources */,
 				CCEC675A1FB18C3A004CC6C5 /* FirstViewController.swift in Sources */,
+				CCFEDEF51FCE5AAE00F1A7FC /* BILPopMenuItem.swift in Sources */,
 				CCE5E1781FCBC4E100F7555D /* BILTransactionManager.swift in Sources */,
 				CC94E0511FB9824B0098E730 /* ASKPlaceHolderColorTextField.swift in Sources */,
 			);
