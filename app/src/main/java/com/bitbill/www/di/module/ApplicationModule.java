@@ -28,6 +28,8 @@ import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.WalletModelManager;
 import com.bitbill.www.model.wallet.db.WalletDb;
 import com.bitbill.www.model.wallet.db.WalletDbHelper;
+import com.bitbill.www.model.wallet.network.WalletApi;
+import com.bitbill.www.model.wallet.network.WalletApiHelper;
 
 import javax.inject.Singleton;
 
@@ -137,6 +139,12 @@ public class ApplicationModule {
     @Singleton
     WalletDb provideWalletDbHelper(WalletDbHelper walletDbHelper) {
         return walletDbHelper;
+    }
+
+    @Provides
+    @Singleton
+    WalletApi provideWalletApiHelper(WalletApiHelper walletApiHelper) {
+        return walletApiHelper;
     }
 
 

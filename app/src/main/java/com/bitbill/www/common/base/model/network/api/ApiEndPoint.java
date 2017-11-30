@@ -10,7 +10,7 @@ package com.bitbill.www.common.base.model.network.api;
 
 public final class ApiEndPoint {
 
-    public static final String SERVER_VERSION = "server_version";
+    public static final String WALLET_CREATE = "/wallet/create";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

@@ -710,6 +710,8 @@ public class StringUtils {
             wallet.setSeedHexHash(seedHexHash);
             wallet.setUpdatedAt(System.currentTimeMillis());
             wallet.setTradePwd(tradePwd);
+            wallet.setMnemonic(mnemonic);
+            wallet.setSeedHex(seedHex);
         }
         return mnemonicHash;
     }

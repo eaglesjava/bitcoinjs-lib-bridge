@@ -31,6 +31,9 @@ import com.bitbill.www.ui.wallet.importing.ImportWalletPresenter;
 import com.bitbill.www.ui.wallet.init.InitWalletMvpPresenter;
 import com.bitbill.www.ui.wallet.init.InitWalletMvpView;
 import com.bitbill.www.ui.wallet.init.InitWalletPresenter;
+import com.bitbill.www.ui.wallet.init.InitWalletSuccessMvpPresenter;
+import com.bitbill.www.ui.wallet.init.InitWalletSuccessMvpView;
+import com.bitbill.www.ui.wallet.init.InitWalletSuccessPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -81,6 +84,13 @@ public class ActivityModule {
     @PerActivity
     InitWalletMvpPresenter<WalletModel, InitWalletMvpView> provideInitWalletPresenter(
             InitWalletPresenter<WalletModel, InitWalletMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    InitWalletSuccessMvpPresenter<WalletModel, InitWalletSuccessMvpView> provideInitWalletSuccessPresenter(
+            InitWalletSuccessPresenter<WalletModel, InitWalletSuccessMvpView> presenter) {
         return presenter;
     }
 

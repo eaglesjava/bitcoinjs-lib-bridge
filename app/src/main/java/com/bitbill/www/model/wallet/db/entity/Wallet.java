@@ -28,7 +28,7 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private String mnemonicHash;
 
     @Property(nameInDb = "last_address_index")
-    private int lastAddressIndex;
+    private long lastAddressIndex;
 
     @Property(nameInDb = "encrypt_seed")
     private String encryptSeed;
@@ -44,14 +44,19 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     @Property(nameInDb = "updated_at")
     private long updatedAt;
+
+    @Transient
+    private String mnemonic;
+    @Transient
+    private String seedHex;
     @Transient
     private String tradePwd;
     @Transient
     private long btcAmount;//unit Satoshi  1 BTC = 100000000 Satoshi
 
-    @Generated(hash = 387054013)
+    @Generated(hash = 1983236334)
     public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash,
-                  int lastAddressIndex, String encryptSeed, String seedHexHash, boolean isBackup,
+                  long lastAddressIndex, String encryptSeed, String seedHexHash, boolean isBackup,
                   long createdAt, long updatedAt) {
         this.id = id;
         this.name = name;
@@ -93,13 +98,6 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.encryptMnemonic = encryptMnemonic;
     }
 
-    public int getLastAddressIndex() {
-        return this.lastAddressIndex;
-    }
-
-    public void setLastAddressIndex(int lastAddressIndex) {
-        this.lastAddressIndex = lastAddressIndex;
-    }
 
     public String getEncryptSeed() {
         return this.encryptSeed;
@@ -163,5 +161,31 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setBtcAmount(long btcAmount) {
         this.btcAmount = btcAmount;
+    }
+
+    public long getLastAddressIndex() {
+        return this.lastAddressIndex;
+    }
+
+    public void setLastAddressIndex(long lastAddressIndex) {
+        this.lastAddressIndex = lastAddressIndex;
+    }
+
+    public String getMnemonic() {
+        return mnemonic;
+    }
+
+    public Wallet setMnemonic(String mnemonic) {
+        this.mnemonic = mnemonic;
+        return this;
+    }
+
+    public String getSeedHex() {
+        return seedHex;
+    }
+
+    public Wallet setSeedHex(String seedHex) {
+        this.seedHex = seedHex;
+        return this;
     }
 }
