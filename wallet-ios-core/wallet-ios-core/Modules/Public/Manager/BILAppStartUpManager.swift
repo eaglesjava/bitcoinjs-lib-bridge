@@ -63,7 +63,7 @@ class BILAppStartUpManager: NSObject {
 	
 	private func snapshotNavBackgroundImage() {
 		let v = UIView(frame: UIScreen.main.bounds)
-		let layer = v.setupGradient(colors: [UIColor.bil_deep_blue_start_bgcolor.cgColor, UIColor.bil_deep_blue_end_bgcolor.cgColor], startPoint: CGPoint(x: 0.5, y: 0), endPoint: CGPoint(x: 0.5, y: 1))
+		let layer = v.setupGradient(colors: [UIColor.bil_deep_blue_start_bgcolor.cgColor, UIColor.bil_deep_blue_end_bgcolor.cgColor], startPoint: CGPoint(x: 0.3, y: 0), endPoint: CGPoint(x: 0.7, y: 1))
 		UIGraphicsBeginImageContextWithOptions(v.bounds.size, true, UIScreen.main.scale)
 		if let currentContext = UIGraphicsGetCurrentContext() {
 			layer.render(in: currentContext)

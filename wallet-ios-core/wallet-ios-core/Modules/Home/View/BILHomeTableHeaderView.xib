@@ -13,15 +13,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BILHomeTableHeaderView" customModule="wallet_ios_core" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oIe-o6-4j0">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hqb-hP-wYu">
-                    <rect key="frame" x="25" y="12" width="79.5" height="56"/>
+                    <rect key="frame" x="25" y="27" width="79.5" height="56"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前币种 1 个" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4M-yG-hVZ">
                             <rect key="frame" x="0.0" y="0.0" width="74" height="14.5"/>
@@ -47,7 +47,7 @@
                     </constraints>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJW-AD-UPA">
-                    <rect key="frame" x="321" y="18" width="44" height="44"/>
+                    <rect key="frame" x="321" y="33" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="GUE-E2-6Xv"/>
                         <constraint firstAttribute="height" constant="44" id="PsL-Me-FYz"/>
@@ -60,8 +60,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="oIe-o6-4j0" secondAttribute="trailing" id="0Bd-DR-e0H"/>
-                <constraint firstItem="bJW-AD-UPA" firstAttribute="centerY" secondItem="Hqb-hP-wYu" secondAttribute="centerY" id="ABi-oW-XaN"/>
-                <constraint firstItem="Hqb-hP-wYu" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="ZEY-06-X0x"/>
+                <constraint firstItem="bJW-AD-UPA" firstAttribute="centerY" secondItem="Hqb-hP-wYu" secondAttribute="centerY" id="OTG-GB-LVY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Hqb-hP-wYu" secondAttribute="bottom" constant="12" id="Wrr-cp-RbC"/>
                 <constraint firstItem="Hqb-hP-wYu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="exG-9f-HtT"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bJW-AD-UPA" secondAttribute="trailing" constant="10" id="jhQ-0Y-evP"/>
                 <constraint firstAttribute="bottom" secondItem="oIe-o6-4j0" secondAttribute="bottom" id="t10-Oy-mwx"/>

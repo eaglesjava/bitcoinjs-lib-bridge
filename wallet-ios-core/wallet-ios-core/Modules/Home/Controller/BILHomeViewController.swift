@@ -36,7 +36,15 @@ enum BILHomeSectionType: Int {
 	}
 	
 	var sectionViewHeight: CGFloat {
-		return numberOfRows() == 0 ? 0 : 80
+		if numberOfRows() == 0 {
+			return 0
+		}
+		switch self {
+		case .asset:
+			return 80
+		default:
+			return 88
+		}
 	}
 	
 	var rowHeight: CGFloat {

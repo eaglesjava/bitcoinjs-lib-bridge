@@ -65,10 +65,14 @@ class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-		if segue.identifier == "BILRecoverWallet" { // For test
-			let vc = segue.destination as! BILCreateWalletViewController
-			vc.mnemonic = "Haha"
+		if segue.identifier == "BILInputMnemonic" { // For test
+			segue.destination.navigationItem.rightBarButtonItem = nil
 		}
+		
+		if segue.identifier == "BILNewWallet" { // For test
+			segue.destination.navigationItem.rightBarButtonItem = nil
+		}
+		
     }
 
 }

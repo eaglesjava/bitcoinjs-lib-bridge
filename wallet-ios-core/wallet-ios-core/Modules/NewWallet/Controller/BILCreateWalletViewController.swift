@@ -57,9 +57,6 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if presentationController == nil {
-			navigationItem.rightBarButtonItem = nil
-		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {

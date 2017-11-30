@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			window?.rootViewController?.present(cont!, animated: false, completion: nil)
 		}
 		
+		BILNetworkManager.shared.request()
+		
 		return true
 	}
 

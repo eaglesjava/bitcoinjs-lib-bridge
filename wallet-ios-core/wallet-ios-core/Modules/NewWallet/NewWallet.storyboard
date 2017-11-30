@@ -41,7 +41,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ACT-yT-QtD" kind="show" id="yBN-3E-557"/>
+                                    <segue destination="ACT-yT-QtD" kind="show" identifier="BILInputMnemonic" id="yBN-3E-557"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_guide_phone" translatesAutoresizingMaskIntoConstraints="NO" id="JJ3-5k-m9d">
@@ -629,6 +629,6 @@
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PNN-OT-SBG"/>
+        <segue reference="7m6-ve-BqF"/>
     </inferredMetricsTieBreakers>
 </document>

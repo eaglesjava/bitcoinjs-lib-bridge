@@ -22,16 +22,16 @@ extension UIColor {
 extension UIColor {
 	static var bil_gradient_start_color: UIColor { get { return UIColor(hex: 0x4493CD) } }
 	static var bil_gradient_end_color: UIColor { get { return UIColor(hex: 0x3255AC) } }
-	static var bil_gradient_start_red_color: UIColor { get { return UIColor(hex: 0xFF7E87) } }
-	static var bil_gradient_end_red_color: UIColor { get { return UIColor(hex: 0xFF5960) } }
+	static var bil_gradient_start_red_color: UIColor { get { return UIColor(hex: 0xFF626C) } }
+	static var bil_gradient_end_red_color: UIColor { get { return UIColor(hex: 0xFF454D) } }
 	static var bil_gradient_shadow_color: UIColor { get { return UIColor(hex: 0xB4EC51) } }
 	static var bil_black_30_color: UIColor { get { return self.bil_black_color(alpha: 0.3) } }
 	static var bil_black_70_color: UIColor { get { return self.bil_black_color(alpha: 0.7) } }
-	static var bil_deep_blue_start_bgcolor: UIColor{ get { return UIColor(hex: 0x353A46) } }
-	static var bil_deep_blue_end_bgcolor: UIColor{ get { return UIColor(hex: 0x20222B) } }
+	static var bil_deep_blue_start_bgcolor: UIColor{ get { return UIColor(hex: 0x1C1C1C) } }
+	static var bil_deep_blue_end_bgcolor: UIColor{ get { return UIColor(hex: 0x070707) } }
 	
 	static var bil_white_40_color: UIColor { get { return UIColor(white: 1.0, alpha: 0.4) } }
-	static var bil_white_60_color: UIColor { get { return UIColor(white: 1.0, alpha: 0.6) } }
+	static var bil_white_60_color: UIColor { get { return UIColor(white: 1.0, alpha: 0.4) } }
 	
 	static func bil_black_color(alpha: CGFloat) -> UIColor {
 		return UIColor(hex: 0x000000, bil_a: alpha)
