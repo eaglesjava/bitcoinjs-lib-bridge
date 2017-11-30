@@ -16,6 +16,6 @@
         style="@style/Text.Wallet.Menu"
         android:layout_marginTop="10dp"
         android:drawablePadding="10dp"
-        android:drawableStart="@drawable/ic_menu_create"
+        android:drawableStart="@drawable/ic_menu_import"
         android:text="导入钱包"/>
 </LinearLayout>

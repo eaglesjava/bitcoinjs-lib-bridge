@@ -10,6 +10,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
@@ -29,6 +30,7 @@ import butterknife.OnClick;
  */
 public class GuideActivity extends BaseActivity implements BaseViewControl {
 
+    private static final String TAG = "GuideActivity";
     final float PARALLAX_COEFFICIENT = 1.2f;
     final float DISTANCE_COEFFICIENT = 0.5f;
 
@@ -38,6 +40,9 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
     PageIndicatorView pageIndicatorView;
     @BindView(R.id.main_content)
     FrameLayout mainContent;
+    @BindView(R.id.phone_center)
+    ImageView centerView;
+
     FragmentAdapter mAdapter;
 
     SparseArray<int[]> mLayoutViewIdsMap = new SparseArray<int[]>();
@@ -101,7 +106,7 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
         mViewPager.setAdapter(mAdapter);
 
         mViewPager.setPageTransformer(true, new ParallaxTransformer(PARALLAX_COEFFICIENT, DISTANCE_COEFFICIENT));
-
+        mViewPager.setOnPageChangeListener(new GuidePageChangeListener());
     }
 
     @Override
@@ -163,13 +168,14 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
 
         @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         public GuidePageChangeListener() {
-
-
         }
 
         @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            if (position == 0) {
+                centerView.setAlpha(1 - positionOffset);
+            }
         }
 
         @Override

@@ -49,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/guide_item_btc"
+            android:layout_marginBottom="-10dp"
             android:layout_toEndOf="@+id/guide_item_btc"
             android:src="@drawable/ic_guide_ltc"/>
 
