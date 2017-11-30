@@ -11,12 +11,15 @@ import UIKit
 class BILWalletController: BILBaseViewController {
 
 	var wallet: WalletModel?
+	@IBOutlet weak var btcWalletView: BILBTCWalletView!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 		title = wallet?.name
+		
+		btcWalletView.wallet = wallet
     }
 	
 	override func bil_setBackgroudColor() {
