@@ -16,6 +16,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -732,5 +733,19 @@ public class StringUtils {
 
     public static String formatBtcAmount(long btcAmount) {
         return getFormatedAmount(btcAmount / 100000000);
+    }
+
+    public static boolean isEmpty(List<String> list) {
+        if (list == null) {
+            return true;
+        }
+        return list.isEmpty();
+    }
+
+    public static boolean isEmpty(String[] arrays) {
+        if (arrays == null) {
+            return true;
+        }
+        return arrays.length == 0;
     }
 }

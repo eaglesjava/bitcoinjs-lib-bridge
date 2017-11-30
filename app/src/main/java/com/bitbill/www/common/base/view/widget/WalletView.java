@@ -5,11 +5,14 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +44,8 @@ public class WalletView extends RelativeLayout {
     private String mWalletAmount;
     private boolean isBackup;
     private String mWalletLabel;
-    private OnClickListener mOnBackupClickListener;
+    private OnBackupClickListener mOnBackupClickListener;
+    private Wallet mWallet;
 
     public WalletView(Context context) {
         super(context);
@@ -128,20 +132,20 @@ public class WalletView extends RelativeLayout {
     }
 
     public WalletView setBackup(boolean backup) {
-
+        isBackup = backup;
         if (backup) {
-            btnBackupNow.setVisibility(VISIBLE);
-            tvWalletLabel.setTextColor(mBackupColor);
-            setBackground(mBackupBackground);
-        } else {
             btnBackupNow.setVisibility(GONE);
             tvWalletLabel.setTextColor(mNormalColor);
             setBackground(mNormalBackground);
+        } else {
+            btnBackupNow.setVisibility(VISIBLE);
+            tvWalletLabel.setTextColor(mBackupColor);
+            setBackground(mBackupBackground);
         }
         return this;
     }
 
-    public WalletView setOnBackupClickListener(OnClickListener onBackupClickListener) {
+    public WalletView setOnBackupClickListener(OnBackupClickListener onBackupClickListener) {
         mOnBackupClickListener = onBackupClickListener;
         return this;
     }
@@ -149,9 +153,28 @@ public class WalletView extends RelativeLayout {
     @OnClick(R.id.btn_backup_now)
     public void onViewClicked() {
         if (mOnBackupClickListener != null) {
-            mOnBackupClickListener.onClick(btnBackupNow);
+            mOnBackupClickListener.onBackupClick(getWallet(), btnBackupNow);
         }
 
     }
 
+    public Wallet getWallet() {
+        return mWallet;
+    }
+
+    public WalletView setWallet(Wallet wallet) {
+        mWallet = wallet;
+        //填充布局数据
+        this.setWalletName(wallet.getName() + " 的钱包")
+                .setWalletLabel(String.valueOf(wallet.getName().charAt(0)))
+                // TODO: 2017/11/28 从后台获余额
+                .setWalletAmount(StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc")
+                .setBackup(wallet.getIsBackup());
+        return this;
+    }
+
+    public interface OnBackupClickListener {
+
+        void onBackupClick(Wallet wallet, View view);
+    }
 }

@@ -15,10 +15,11 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.base.view.widget.FocusedCheckedTextView;
+import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,11 +27,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BackupWalletConfirmActivity extends BaseToolbarActivity {
+public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalletConfirmMvpPresenter> implements BackupWalletConfirmMvpView {
 
     @BindView(R.id.gv_mnemonic_confirm)
     GridView gvMnemonicConfirm;
@@ -38,27 +41,32 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity {
     GridView gvMnemonic;
     @BindView(R.id.tv_hint_click)
     TextView tvHintClick;
+    @Inject
+    BackupWalletConfirmMvpPresenter<WalletModel, BackupWalletConfirmMvpView> mBackupWalletConfrimMvpPresenter;
+
     private String mMnemonic;
     private String[] mMnemonicArray;
     private List<String> mMnemonicList;
     private List<String> mMnemonicConfirmList;
     private GridViewAdapter mMnemonicAdapter;
     private GridViewAdapter mMnemonicConfrimAdapter;
+    private Wallet mWallet;
 
-    public static void start(Context context, String mnemonic) {
+    public static void start(Context context, String mnemonic, Wallet wallet) {
         Intent intent = new Intent(context, BackupWalletConfirmActivity.class);
         intent.putExtra(AppConstants.EXTRA_MNEMONIC, mnemonic);
+        intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
         context.startActivity(intent);
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public BackupWalletConfirmMvpPresenter getMvpPresenter() {
+        return mBackupWalletConfrimMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -78,6 +86,7 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity {
 
     @Override
     public void initData() {
+        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
         mMnemonic = getIntent().getStringExtra(AppConstants.EXTRA_MNEMONIC);
         mMnemonicArray = mMnemonic.split(" ");
         //直接赋值 对mMnemonicList排序mMnemonicArray也会受影响
@@ -154,23 +163,37 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity {
 
     @OnClick(R.id.btn_confirm)
     public void onViewClicked() {
-        if (isMnemonicCorrect()) {
-            //跳转到备份成功界面
-            BackupWalletSuccessActivity.start(BackupWalletConfirmActivity.this);
-        } else {
-            // 弹出不匹配提示
-            MessageConfirmDialog.newInstance(getString(R.string.title_dialog_backup_fail), getString(R.string.msg_dailog_check_mnemonic), false)
-                    .show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
-        }
+        mBackupWalletConfrimMvpPresenter.checkBackup();
     }
 
-    /**
-     * 校验助记词是否匹配
-     *
-     * @return
-     */
-    private boolean isMnemonicCorrect() {
-        return Arrays.equals(mMnemonicConfirmList.toArray(), mMnemonicArray);
+    public String[] getMnemonicArray() {
+        return mMnemonicArray;
+    }
+
+    public List<String> getMnemonicConfirmList() {
+        return mMnemonicConfirmList;
+    }
+
+    @Override
+    public Wallet getWallet() {
+        return mWallet;
+    }
+
+
+    @Override
+    public void backupSuccess() {
+
+        //跳转到备份成功界面
+        BackupWalletSuccessActivity.start(BackupWalletConfirmActivity.this);
+        finish();
+    }
+
+    @Override
+    public void backupFail() {
+        // 弹出不匹配提示
+        MessageConfirmDialog.newInstance(getString(R.string.title_dialog_backup_fail), getString(R.string.msg_dailog_check_mnemonic), false)
+                .show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
+
     }
 
     public static class GridViewAdapter extends BaseAdapter {

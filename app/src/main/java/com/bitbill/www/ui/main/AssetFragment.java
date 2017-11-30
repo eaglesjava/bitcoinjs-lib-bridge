@@ -13,9 +13,9 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.widget.PopupWalletMenu;
 import com.bitbill.www.common.base.view.widget.WalletView;
-import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.init.InitWalletActivity;
 
 import java.util.List;
@@ -31,7 +31,7 @@ import butterknife.OnClick;
  * Activities that contain this fragment must implement the
  * create an instance of this fragment.
  */
-public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements AssetMvpView {
+public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements AssetMvpView, WalletView.OnBackupClickListener {
 
 
     private static final int BOTTOM_MARGIN = 15;//unit dp
@@ -124,11 +124,8 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
 
         llWalletContainer.addView(
                 new WalletView(getBaseActivity())
-                        .setWalletName(wallet.getName() + " 的钱包")
-                        .setWalletLabel(String.valueOf(wallet.getName().charAt(0)))
-                        // TODO: 2017/11/28 从后台获余额
-                        .setWalletAmount(StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc")
-                        .setBackup(wallet.getIsBackup()), layoutParams);
+                        .setWallet(wallet)
+                        .setOnBackupClickListener(this), layoutParams);
     }
 
     @Override
@@ -143,5 +140,11 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
         } else {
             mWalletMenu.show(view);
         }
+    }
+
+    @Override
+    public void onBackupClick(Wallet wallet, View view) {
+        //跳转到备份界面
+        BackUpWalletActivity.start(getBaseActivity(), wallet);
     }
 }
