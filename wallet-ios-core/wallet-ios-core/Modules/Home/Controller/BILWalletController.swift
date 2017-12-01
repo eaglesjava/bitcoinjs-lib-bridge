@@ -17,7 +17,7 @@ class BILWalletController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		title = wallet?.name
+		title = wallet?.id
 		
 		btcWalletView.wallet = wallet
     }
