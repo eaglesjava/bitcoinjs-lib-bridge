@@ -13,12 +13,18 @@ import com.bitbill.www.di.qualifier.ActivityContext;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.ui.guide.GuideMvpPresenter;
+import com.bitbill.www.ui.guide.GuideMvpView;
+import com.bitbill.www.ui.guide.GuidePresenter;
 import com.bitbill.www.ui.main.AssetMvpPresenter;
 import com.bitbill.www.ui.main.AssetMvpView;
 import com.bitbill.www.ui.main.AssetPresenter;
 import com.bitbill.www.ui.main.MainMvpPresenter;
 import com.bitbill.www.ui.main.MainMvpView;
 import com.bitbill.www.ui.main.MainPresenter;
+import com.bitbill.www.ui.splash.SplashMvpPresenter;
+import com.bitbill.www.ui.splash.SplashMvpView;
+import com.bitbill.www.ui.splash.SplashPresenter;
 import com.bitbill.www.ui.wallet.backup.BackupWalletConfirmMvpPresenter;
 import com.bitbill.www.ui.wallet.backup.BackupWalletConfirmMvpView;
 import com.bitbill.www.ui.wallet.backup.BackupWalletConfirmPresenter;
@@ -71,6 +77,20 @@ public class ActivityModule {
     @Provides
     SchedulerProvider provideSchedulerProvider() {
         return new AppSchedulerProvider();
+    }
+
+    @Provides
+    @PerActivity
+    SplashMvpPresenter<AppModel, SplashMvpView> provideSplashPresenter(
+            SplashPresenter<AppModel, SplashMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    GuideMvpPresenter<AppModel, GuideMvpView> provideGuidePresenter(
+            GuidePresenter<AppModel, GuideMvpView> presenter) {
+        return presenter;
     }
 
     @Provides

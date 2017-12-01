@@ -89,12 +89,18 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
             public void onCreateWallet(View view) {
                 //跳转到创建钱包界面
                 InitWalletActivity.start(getBaseActivity(), true);
+                if (mWalletMenu.isShowing()) {
+                    mWalletMenu.dismiss();
+                }
             }
 
             @Override
             public void onImportWallet(View view) {
                 //跳转到导入钱包界面
                 InitWalletActivity.start(getBaseActivity(), false);
+                if (mWalletMenu.isShowing()) {
+                    mWalletMenu.dismiss();
+                }
 
             }
         });

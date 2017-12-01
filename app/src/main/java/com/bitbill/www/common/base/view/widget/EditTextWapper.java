@@ -47,6 +47,8 @@ public class EditTextWapper extends LinearLayout {
     EditText etText;
     @BindView(R.id.psv_status)
     PwdStatusView psvStatus;
+    @BindView(R.id.tv_etw_bottom_hint)
+    TextView bottomHintTextView;
 
     private String mInputTitle;
     private String mInputHint;
@@ -61,6 +63,7 @@ public class EditTextWapper extends LinearLayout {
     private boolean mInputPwdStatusVisible = false;
     private boolean mErrorState;
     private TextWatcher mTextWatcher;
+    private String mBottomHint;
 
     public EditTextWapper(Context context) {
         super(context);
@@ -117,6 +120,8 @@ public class EditTextWapper extends LinearLayout {
                     R.styleable.EditTextWapper_rightDrawable);
             mRightDrawable.setCallback(this);
         }
+        mBottomHint = a.getString(
+                R.styleable.EditTextWapper_bottomHint);
         a.recycle();
 
         initView();
@@ -160,6 +165,19 @@ public class EditTextWapper extends LinearLayout {
             }
         });
 
+        setBottomHint(mBottomHint);
+
+        getEtText().setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus && !TextUtils.isEmpty(mBottomHint)) {
+                    //弹出底部提示
+                    bottomHintTextView.setVisibility(VISIBLE);
+                } else {
+                    bottomHintTextView.setVisibility(GONE);
+                }
+            }
+        });
     }
 
     private void setInputHint(String inputHint) {
@@ -251,5 +269,11 @@ public class EditTextWapper extends LinearLayout {
 
     public PwdStatusView getPsvStatusView() {
         return psvStatus;
+    }
+
+    public EditTextWapper setBottomHint(String bottomHint) {
+        mBottomHint = bottomHint;
+        bottomHintTextView.setText(mBottomHint);
+        return this;
     }
 }

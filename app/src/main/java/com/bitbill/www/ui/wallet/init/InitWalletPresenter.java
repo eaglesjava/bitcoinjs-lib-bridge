@@ -33,7 +33,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
     @Override
     public void initWallet() {
         //  有效性校验 && 合法性校验
-        if (!isValidWalletName() || !isValidTradePwd() || !isValidConfirmTradePwd()) {
+        if (!isValidWalletId() || !isValidTradePwd() || !isValidConfirmTradePwd()) {
             return;
         }
 
@@ -41,7 +41,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         Wallet wallet = new Wallet();
         wallet.setCreatedAt(System.currentTimeMillis());
         wallet.setUpdatedAt(System.currentTimeMillis());
-        wallet.setName(getMvpView().getWalletName());
+        wallet.setName(getMvpView().getWalletId());
         wallet.setTradePwd(getMvpView().getTradePwd());
 
         getCompositeDisposable().add(getModelManager()
@@ -72,14 +72,19 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
 
     }
 
-    private boolean isValidWalletName() {
-        // Check for a valid wallet name.
-        if (TextUtils.isEmpty(getMvpView().getWalletName())) {
-            getMvpView().requireWalletName();
+    private boolean isValidWalletId() {
+        // Check for a valid wallet id.
+        if (TextUtils.isEmpty(getMvpView().getWalletId())) {
+            getMvpView().requireWalletId();
             return false;
         }
-        if (!StringUtils.isWalletNameValid(getMvpView().getWalletName())) {
-            getMvpView().invalidWalletName();
+
+        if (!StringUtils.isRequiredLength(getMvpView().getWalletId())) {
+            getMvpView().requireWalletIdLength();
+            return false;
+        }
+        if (!StringUtils.isWalletIdValid(getMvpView().getWalletId())) {
+            getMvpView().invalidWalletId();
             return false;
         }
         return true;

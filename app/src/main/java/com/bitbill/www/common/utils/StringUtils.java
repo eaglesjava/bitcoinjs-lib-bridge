@@ -31,8 +31,8 @@ public class StringUtils {
             Pattern.compile("[!@#$%^&*_]*.*[a-zA-Z][!@#$%^&*_]*.*[0-9][!@#$%^&*_]*|[!@#$%^&*_]*.*[0-9][!@#$%^&*_]*.*[a-zA-Z][!@#$%^&*_]*");
     private final static Pattern PHONE_NUM = Pattern
             .compile("\\d{11}");// 手机号码11位
-    private final static Pattern RECOMMEND_CODE = Pattern
-            .compile(".*[a-zA-Z0-9]");// 推荐人推荐码
+    private final static Pattern WALLET_ID = Pattern
+            .compile("^[a-zA-Z]\\w{5,19}$");//6-20位 以字母开头，支持字母、数字和"_”
     private final static Pattern EMAILER = Pattern
             .compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
     private final static Pattern NUMBER_STR = Pattern
@@ -109,21 +109,6 @@ public class StringUtils {
         if (!StringUtils.isNotEmpty(phoneNum))
             return false;
         return PHONE_NUM.matcher(getRealPhone(phoneNum)).matches() && phoneNum.startsWith("1");
-    }
-
-    /**
-     * <pre>
-     * 判断是否是一个合法的推荐码
-     * 规则:6位数字、字母组合
-     * </pre>
-     *
-     * @param jobNum 推荐人推荐码
-     * @return
-     */
-    public static boolean isRecommendCode(String jobNum) {
-        if (!StringUtils.isNotEmpty(jobNum))
-            return false;
-        return RECOMMEND_CODE.matcher(getRealPhone(jobNum)).matches();
     }
 
     /**
@@ -679,9 +664,10 @@ public class StringUtils {
         return false;
     }
 
-    public static boolean isWalletNameValid(String name) {
-        //TODO: Replace this with your own logic
-        return name.length() > 0;
+    public static boolean isWalletIdValid(String id) {
+        //钱包ID支持6-20位 以字母开头，支持字母、数字和"_”
+        if (id == null) return false;
+        return WALLET_ID.matcher(id).matches();
     }
 
     public static boolean isPasswordValid(String password) {
@@ -749,5 +735,10 @@ public class StringUtils {
             return true;
         }
         return arrays.length == 0;
+    }
+
+    public static boolean isRequiredLength(String s) {
+        if (s == null) return false;
+        return s.length() >= 6 && s.length() <= 20;
     }
 }

@@ -25,9 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:inputHint="@string/hint_input_please"
+                app:bottomHint="@string/hint_bottom_wallet_id"
+                app:inputHint="@string/hint_input_wallet_id"
                 app:inputPaddingBottom="20dp"
-                app:inputTitle="@string/input_wallet_name"
+                app:inputTitle="@string/input_wallet_id"
                 />
 
             <com.bitbill.www.common.base.view.widget.EditTextWapper

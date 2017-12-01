@@ -25,4 +25,9 @@
         style="@style/EditText.Normal"
         android:layout_width="match_parent"/>
 
+    <TextView
+        android:id="@+id/tv_etw_bottom_hint"
+        style="@style/Text.Small.Green"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"/>
 </merge>

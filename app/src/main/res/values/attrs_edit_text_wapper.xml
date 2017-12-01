@@ -22,5 +22,6 @@
             <enum name="strong" value="2"/>
             <enum name="nb" value="3"/>
         </attr>
+        <attr name="bottomHint" format="string"/>
     </declare-styleable>
 </resources>

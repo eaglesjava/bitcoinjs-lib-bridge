@@ -34,15 +34,18 @@
     <!--创建或导入钱包-->
     <string name="title_activity_import_wallet">导入钱包</string>
     <string name="title_activity_create_wallet">创建钱包</string>
-    <string name="error_invalid_trade_pwd">交易密码不正确，请重新输入</string>
+    <string name="error_invalid_trade_pwd">密码长度限制在6-20位字符</string>
     <string name="hint_input_please">请输入</string>
+    <string name="hint_input_wallet_id">6-20位，以字母开头</string>
     <string name="hint_trade_pwd">请输入6-20位字符</string>
     <string name="input_wallet_name">钱包名称</string>
+    <string name="input_wallet_id">钱包ID</string>
     <string name="input_trade_pwd">创建交易密码</string>
     <string name="input_trade_pwd_confirm">确认交易密码</string>
     <string name="btn_start_import">开始导入</string>
     <string name="btn_start_create">开始创建</string>
-    <string name="error_wallet_name_required">请输入钱包名称</string>
+    <string name="error_wallet_id_required">请输入钱包ID，6-20位，以字母开头</string>
+    <string name="error_wallet_id_length_required">钱包ID支持6-20位字符</string>
     <string name="error_trade_pwd_required">请输入交易密码</string>
     <string name="error_confirm_trade_pwd_required">请输入确认交易密码</string>
     <string name="error_trade_pwd_inconsistent">密码不一致</string>
@@ -88,7 +91,7 @@
     <string name="btn_complete">完成</string>
     <string name="title_activity_backup_wallet">备份钱包</string>
     <string name="title_dialog_backup_wallet">备份钱包</string>
-    <string name="error_invalid_wallet_name">请输入正确的钱包名称</string>
+    <string name="error_invalid_wallet_id">以字母开头，支持字母、数字和"_"</string>
     <string name="title_dialog_bakup_wallet">备份钱包</string>
     <string name="error_load_mnemonic_fail">加载助记词失败</string>
     <string name="error_get_wallet_info_fail">获取钱包信息失败,请返回重试</string>
@@ -110,5 +113,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_bottom_wallet_id">设定你的钱包ID，他可以关联你的联系人，支持英文和数字，一旦设定不可修改。</string>
 
 </resources>

@@ -16,7 +16,7 @@ public interface InitWalletMvpView extends MvpView {
 
     void createMnemonicFail();
 
-    String getWalletName();
+    String getWalletId();
 
     String getConfirmTradePwd();
 
@@ -30,7 +30,9 @@ public interface InitWalletMvpView extends MvpView {
 
     void invalidTradePwd();
 
-    void requireWalletName();
+    void requireWalletId();
 
-    void invalidWalletName();
+    void invalidWalletId();
+
+    void requireWalletIdLength();
 }

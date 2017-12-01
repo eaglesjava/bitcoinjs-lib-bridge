@@ -39,4 +39,14 @@ public class AppModelManager extends ModelManager implements AppModel {
     public ApiHeader getApiHeader() {
         return mAppApi.getApiHeader();
     }
+
+    @Override
+    public boolean isGuideBrowsed() {
+        return mAppPreferences.isGuideBrowsed();
+    }
+
+    @Override
+    public void setGuideBrowsed() {
+        mAppPreferences.setGuideBrowsed();
+    }
 }

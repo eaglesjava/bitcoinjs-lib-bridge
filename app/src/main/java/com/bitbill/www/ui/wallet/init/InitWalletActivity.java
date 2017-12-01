@@ -152,7 +152,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public String getWalletName() {
+    public String getWalletId() {
         return etwWalletName.getText();
     }
 
@@ -191,19 +191,27 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public void requireWalletName() {
-        etwWalletName.setError(R.string.error_wallet_name_required);
+    public void requireWalletId() {
+        etwWalletName.setError(R.string.error_wallet_id_required);
         focusView = etwWalletName;
         cancel = true;
 
     }
 
     @Override
-    public void invalidWalletName() {
-        etwWalletName.setError(R.string.error_invalid_wallet_name);
+    public void invalidWalletId() {
+        etwWalletName.setError(R.string.error_invalid_wallet_id);
         focusView = etwWalletName;
         cancel = true;
 
+    }
+
+    @Override
+    public void requireWalletIdLength() {
+
+        etwWalletName.setError(R.string.error_wallet_id_length_required);
+        focusView = etwWalletName;
+        cancel = true;
     }
 
     public String getConfirmTradePwd() {

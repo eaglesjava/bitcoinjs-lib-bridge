@@ -1,21 +1,27 @@
 package com.bitbill.www.ui.splash;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.utils.AnimationUtils;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.ui.guide.GuideActivity;
+import com.bitbill.www.ui.main.MainActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView {
 
     @BindView(R.id.fl_content)
     FrameLayout flContent;
+    @Inject
+    SplashMvpPresenter<AppModel, SplashMvpView> mSplashMvpPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +48,8 @@ public class SplashActivity extends AppCompatActivity {
              */
             @Override
             public void onAnimationEnd(Animation animation) {
-                // TODO: 2017/11/18 根据是否是第一次进入判断跳转到引导页还是首页
-                GuideActivity.start(SplashActivity.this);
-                finish();
+                // 根据是否是第一次进入判断跳转到引导页还是首页
+                getMvpPresenter().checkBrowsed();
 
             }
 
@@ -58,5 +63,26 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         }));
+    }
+
+    @Override
+    public SplashMvpPresenter getMvpPresenter() {
+        return mSplashMvpPresenter;
+    }
+
+    @Override
+    public void injectComponent() {
+        getActivityComponent().inject(this);
+    }
+
+    @Override
+    public void isGuideBrowsed(boolean guideBrowsed) {
+        if (guideBrowsed) {
+            //浏览过引导页直接跳转到首页
+            MainActivity.start(SplashActivity.this);
+        } else {
+            GuideActivity.start(SplashActivity.this);
+            finish();
+        }
     }
 }

@@ -19,8 +19,22 @@ import javax.inject.Singleton;
 
 @Singleton
 public class AppPreferencesHelper extends PreferencesHelper implements AppPreferences {
+
+    public static final String IS_GUIDE_BROWSED = "is_guide_browsed";
+
     @Inject
     public AppPreferencesHelper(@ApplicationContext Context context, @PrefersAppInfo String prefFileName) {
         super(context, prefFileName);
+    }
+
+    @Override
+    public boolean isGuideBrowsed() {
+        return mPrefs.getBoolean(IS_GUIDE_BROWSED, false);
+    }
+
+    @Override
+    public void setGuideBrowsed() {
+        mPrefs.edit().putBoolean(IS_GUIDE_BROWSED, true).apply();
+
     }
 }

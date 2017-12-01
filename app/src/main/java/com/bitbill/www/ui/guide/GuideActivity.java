@@ -14,11 +14,13 @@ import android.widget.ImageView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.ui.wallet.init.InitWalletActivity;
 import com.rd.PageIndicatorView;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +30,7 @@ import butterknife.OnClick;
  * 引导页
  * Created by isanwenyu@163.com on 2017/11/14.
  */
-public class GuideActivity extends BaseActivity implements BaseViewControl {
+public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements BaseViewControl {
 
     private static final String TAG = "GuideActivity";
     final float PARALLAX_COEFFICIENT = 1.2f;
@@ -46,6 +48,8 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
     FragmentAdapter mAdapter;
 
     SparseArray<int[]> mLayoutViewIdsMap = new SparseArray<int[]>();
+    @Inject
+    GuideMvpPresenter<AppModel, GuideMvpView> mGuideMvpPresenter;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -61,8 +65,8 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public GuideMvpPresenter getMvpPresenter() {
+        return mGuideMvpPresenter;
     }
 
     @Override
@@ -80,7 +84,7 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -133,6 +137,8 @@ public class GuideActivity extends BaseActivity implements BaseViewControl {
                 finish();
                 break;
         }
+        //设置浏览过了
+        getMvpPresenter().setBrowsed();
     }
 
 
