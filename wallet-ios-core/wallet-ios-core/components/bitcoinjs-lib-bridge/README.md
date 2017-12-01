@@ -1,6 +1,12 @@
 # bitcoinjs-lib-bridge
 
 ## 安装依赖
+`安装Node.js、npm，[Node.js](https://nodejs.org/en/)`
+
+`sudo npm install -g browserify`
+
+`sudo npm install bitcoinjs-lib`
+
 `sudo npm install bip39`
  
 `sudo npm install bip32-utils`
@@ -22,4 +28,4 @@ mnemonicToSeedHex | 助记词生成seed | mnemonic: 助记词字符串，以空�
 getBitcoinAddressBySeedHex | 根据seed生成指定index的地址 | seedHex: seed的十六进制字符串 <br> index：index | 地址
 getBitcoinAddressByMasterXPublicKey | 根据主xpub生成指定index的地址 | xpub: 主扩展公钥 <br> index：index | 地址
 getBitcoinMasterXPublicKey | 获取主扩展公钥 | seedHex: seed的十六进制字符串 | 主扩展公钥
-
+validateMnemonic | 验证助记词是否合法 | mnemonic：助记词字符串 | bool值
