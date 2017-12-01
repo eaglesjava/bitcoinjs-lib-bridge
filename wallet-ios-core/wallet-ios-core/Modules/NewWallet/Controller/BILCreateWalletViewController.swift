@@ -249,9 +249,9 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 				walletNameInputView.show(tip: "钱包ID", type: .normal)
 			case passwordTextField:
 				passwordStrengthView.strength = BILPasswordStrengthView.caculatePasswordStrength(pwd: textField.text ?? "")
-				passwordInputView.show(tip: "创建交易密码", type: .normal)
+				passwordInputView.show(tip: "创建钱包密码", type: .normal)
 			case confirmPasswordTextField:
-				confirmPasswordInputView.show(tip: "确认交易密码", type: .normal)
+				confirmPasswordInputView.show(tip: "确认钱包密码", type: .normal)
 			default: ()
 			}
 		}

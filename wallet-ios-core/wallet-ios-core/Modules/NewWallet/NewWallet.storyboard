@@ -182,7 +182,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MF1-H1-K5C" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="82.5" width="325" height="74"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建交易密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6d-DG-zPG">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建钱包密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6d-DG-zPG">
                                                         <rect key="frame" x="0.0" y="8" width="86" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="Iou-4j-Xvu"/>
@@ -295,7 +295,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZ0-VV-HbH" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="164.5" width="325" height="74"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认交易密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48F-7A-au2">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认钱包密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48F-7A-au2">
                                                         <rect key="frame" x="0.0" y="8" width="86" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="vaK-8L-2VT"/>
