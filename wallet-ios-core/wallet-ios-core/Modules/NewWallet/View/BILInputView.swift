@@ -24,6 +24,7 @@ class BILInputView: UIView, UITextFieldDelegate {
 	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var line: UIView!
 	@IBOutlet weak var functionTipHeight: NSLayoutConstraint?
+    @IBOutlet weak var functionTipBottom: NSLayoutConstraint?
 	
 	@IBOutlet weak var delegate: BILInputViewDelegate?
 	
@@ -35,6 +36,8 @@ class BILInputView: UIView, UITextFieldDelegate {
 	func updateFunctionTipHeight(height: CGFloat, animate: Bool = false) {
 		guard let h = functionTipHeight else { return }
 		h.constant = height
+        guard let b = functionTipBottom else { return }
+        b.constant = height > 0 ? 8 : 0
 		UIView.animate(withDuration: 0.35) {
 			self.superview?.superview?.layoutIfNeeded()
 		}

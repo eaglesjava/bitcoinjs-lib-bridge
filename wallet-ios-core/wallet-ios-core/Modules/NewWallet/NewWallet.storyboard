@@ -99,7 +99,7 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQ0-7J-8kK">
-                                        <rect key="frame" x="25" y="24" width="325" height="370"/>
+                                        <rect key="frame" x="25" y="24" width="325" height="362"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbI-5b-wmo" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="74.5"/>
@@ -173,6 +173,7 @@
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="delegate" destination="7rK-Mf-YUl" id="FIv-E4-kty"/>
+                                                    <outlet property="functionTipBottom" destination="6eQ-b9-FSe" id="gQZ-sh-6q4"/>
                                                     <outlet property="functionTipHeight" destination="vYY-OY-j0t" id="dwY-RA-ebL"/>
                                                     <outlet property="line" destination="fGQ-Xj-3Jd" id="uq4-Tr-k8E"/>
                                                     <outlet property="textField" destination="JqB-aG-3nt" id="vvT-YK-sf9"/>
@@ -180,7 +181,7 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MF1-H1-K5C" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="82.5" width="325" height="74"/>
+                                                <rect key="frame" x="0.0" y="74.5" width="325" height="74"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建钱包密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6d-DG-zPG">
                                                         <rect key="frame" x="0.0" y="8" width="86" height="21"/>
@@ -293,7 +294,7 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZ0-VV-HbH" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="164.5" width="325" height="74"/>
+                                                <rect key="frame" x="0.0" y="156.5" width="325" height="74"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认钱包密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48F-7A-au2">
                                                         <rect key="frame" x="0.0" y="8" width="86" height="21"/>
@@ -349,13 +350,13 @@
                                                 </connections>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请牢记您的密码！比特宝不存储用户密码，无法提供找回或重置功能" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8s-0C-PiF">
-                                                <rect key="frame" x="0.0" y="253.5" width="325" height="31.5"/>
+                                                <rect key="frame" x="0.0" y="245.5" width="325" height="31.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.6705882353" green="0.90196078430000004" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53E-rO-tJL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="315" width="325" height="55"/>
+                                                <rect key="frame" x="0.0" y="307" width="325" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="q3Z-bu-ldf"/>
                                                 </constraints>
@@ -370,7 +371,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="MF1-H1-K5C" firstAttribute="top" secondItem="DbI-5b-wmo" secondAttribute="bottom" constant="8" id="6eQ-b9-FSe"/>
+                                            <constraint firstItem="MF1-H1-K5C" firstAttribute="top" secondItem="DbI-5b-wmo" secondAttribute="bottom" id="6eQ-b9-FSe"/>
                                             <constraint firstItem="h8s-0C-PiF" firstAttribute="leading" secondItem="SQ0-7J-8kK" secondAttribute="leading" id="AzZ-SK-zjK"/>
                                             <constraint firstAttribute="trailing" secondItem="h8s-0C-PiF" secondAttribute="trailing" id="Eok-kv-EDO"/>
                                             <constraint firstAttribute="trailing" secondItem="h8s-0C-PiF" secondAttribute="trailing" id="Lw4-4x-Dzx"/>
