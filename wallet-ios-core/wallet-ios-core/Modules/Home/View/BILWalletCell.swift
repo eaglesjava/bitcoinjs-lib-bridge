@@ -19,8 +19,8 @@ class BILWalletCell: UITableViewCell {
 	var wallet: WalletModel? {
 		didSet {
 			if let w = wallet {
-				idLabel.text = w.name
-				subIDLabel.text = "\(w.name?.first ?? "B")"
+				idLabel.text = w.id
+				subIDLabel.text = "\(w.id?.first ?? "B")"
 				btcBalanceLabel.text = "0.0000 btc"
 				needBackupLabel.isHidden = !w.isNeedBackup
 				if w.isNeedBackup {

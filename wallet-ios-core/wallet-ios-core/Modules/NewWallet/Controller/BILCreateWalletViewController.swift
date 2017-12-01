@@ -114,10 +114,9 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
         switch pwd.count {
         case 0:
             toReturn = "请输入密码"
+        case let i where i > 20: fallthrough
         case 1...5:
-            toReturn = "密码最少6位字符"
-        case let i where i > 20:
-            toReturn = "密码不能超过20位字符"
+            toReturn = "密码支持6-20位字符"
         default: ()
         }
         
@@ -132,18 +131,18 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	}
 	
 	func checkWalletID() -> String? {
+        let emptyTip = "钱包ID"
 		guard let walletID = walletNameTextField.text else {
-			return "请输入钱包ID"
+			return emptyTip
 		}
 		var toReturn: String? = nil
 		switch walletID.count {
 		case 0:
-			toReturn = "请输入钱包ID"
+			toReturn = emptyTip
             return toReturn
-		case 1...5:
-			toReturn = "钱包ID最少6位字符"
-		case let i where i > 20:
-			toReturn = "ID不能超过20位字符"
+		case let i where i > 20: fallthrough
+        case 1...5:
+            toReturn = "钱包ID支持6-20位字符"
 		default: ()
 		}
         
@@ -177,17 +176,20 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		
 		let walletIDError = checkWalletID()
 		guard walletIDError == nil else {
+            walletNameTextField.becomeFirstResponder()
 			walletNameInputView.show(tip: walletIDError!, type: .error)
 			return
 		}
         
         let pwdError = checkPassword()
         guard pwdError == nil else {
+            passwordTextField.becomeFirstResponder()
             passwordInputView.show(tip: pwdError!, type: .error)
             return
         }
 		
 		guard checkConfirmPassword() else {
+            confirmPasswordTextField.becomeFirstResponder()
 			confirmPasswordInputView.show(tip: "密码不一致", type: .error)
 			return
 		}
@@ -196,7 +198,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 			BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
 				let s = seedHex as! String
 				let wallet = BILWalletManager.shared.newWallet()
-				wallet.name = self.walletNameTextField.text!
+				wallet.id = self.walletNameTextField.text!
 				wallet.createDate = Date()
 				do {
 					let pwd = self.passwordTextField.text!
@@ -207,11 +209,34 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 					wallet.seedHash = s.md5()
 					wallet.mnemonicHash = m.md5()
 					self.mnemonicHash = wallet.mnemonicHash
-					
-					if let seed = String(bytes: try aes.decrypt((wallet.encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seed == s {
-						try BILWalletManager.shared.saveWallets()
-						self.createSuccess()
-					}
+                    
+                    BitcoinJSBridge.shared.getMasterXPublicKey(seed: s, success: { (pubKey) in
+                        let extPubKey = pubKey as! String
+                        wallet.mainExtPublicKey = extPubKey
+                        do {
+                            if let seed = String(bytes: try aes.decrypt((wallet.encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seed == s {
+                                SVProgressHUD.show(withStatus: "创建钱包中。。。")
+                                wallet.createWalletInServer(sucess: { (result) in
+                                    do {
+                                        try BILWalletManager.shared.saveWallets()
+                                        self.createSuccess()
+                                        SVProgressHUD.dismiss()
+                                    } catch {
+                                        SVProgressHUD.showError(withStatus: error.localizedDescription)
+                                        print(error)
+                                    }
+                                }, failure: { (msg, code) in
+                                    SVProgressHUD.showError(withStatus: msg)
+                                })
+                            }
+                        } catch {
+                            SVProgressHUD.showError(withStatus: error.localizedDescription)
+                            print(error)
+                        }
+                    }, failure: { (error) in
+                        SVProgressHUD.showError(withStatus: error.localizedDescription)
+                        print(error)
+                    })
 				} catch {
 					SVProgressHUD.showError(withStatus: error.localizedDescription)
 					print(error)
