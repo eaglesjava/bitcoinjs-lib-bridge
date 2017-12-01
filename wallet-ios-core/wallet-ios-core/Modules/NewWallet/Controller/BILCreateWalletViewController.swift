@@ -104,11 +104,24 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		performSegue(withIdentifier: "BILCreateWalletSuccessSegue", sender: nil)
 	}
 	
-	func checkPassword() -> Bool {
-		if let pwd = passwordTextField.text, pwd.count <= 20 && pwd.count >= 6 {
-			return true
-		}
-		return false
+	func checkPassword() -> String? {
+        
+        guard let pwd = passwordTextField.text else {
+            return "请输入密码"
+        }
+        
+        var toReturn: String? = nil
+        switch pwd.count {
+        case 0:
+            toReturn = "请输入密码"
+        case 1...5:
+            toReturn = "密码最少6位字符"
+        case let i where i > 20:
+            toReturn = "密码不能超过20位字符"
+        default: ()
+        }
+        
+		return toReturn
 	}
 	
 	func checkConfirmPassword() -> Bool {
@@ -126,12 +139,37 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		switch walletID.count {
 		case 0:
 			toReturn = "请输入钱包ID"
+            return toReturn
 		case 1...5:
 			toReturn = "钱包ID最少6位字符"
 		case let i where i > 20:
-			toReturn = "ID限制在20位以内字符"
+			toReturn = "ID不能超过20位字符"
 		default: ()
 		}
+        
+        func count(string: String, pattern: String) throws -> Int {
+            let exp = try NSRegularExpression(pattern: pattern, options: .allowCommentsAndWhitespace)
+            let count = exp.numberOfMatches(in: string, options: .reportCompletion, range: NSMakeRange(0, string.count))
+            return count
+        }
+        
+        do {
+            let numCount = try count(string: walletID, pattern: "[0-9]")
+            let lowerCount = try count(string: walletID, pattern: "[a-z]")
+            let upperCount = try count(string: walletID, pattern: "[A-Z]")
+            let underlineCount = try count(string: walletID, pattern: "[_]")
+            let otherCount = walletID.count - numCount - lowerCount - upperCount - underlineCount
+            if otherCount > 0 {
+                toReturn = "ID仅支持字母、数字和下划线"
+            }
+            
+            if try count(string: String(walletID.first!), pattern: "[a-zA-Z]") == 0 {
+                toReturn = "ID仅能以字母开头"
+            }
+        } catch {
+            
+        }
+        
 		return toReturn
 	}
 	
@@ -142,11 +180,13 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 			walletNameInputView.show(tip: walletIDError!, type: .error)
 			return
 		}
+        
+        let pwdError = checkPassword()
+        guard pwdError == nil else {
+            passwordInputView.show(tip: pwdError!, type: .error)
+            return
+        }
 		
-		guard checkPassword() else {
-			passwordInputView.show(tip: "密码长度限制在6-20位字符", type: .error)
-			return
-		}
 		guard checkConfirmPassword() else {
 			confirmPasswordInputView.show(tip: "密码不一致", type: .error)
 			return
@@ -210,14 +250,12 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 			}
 			passwordTextField.becomeFirstResponder()
 		case passwordTextField:
-			if checkPassword() {
-				confirmPasswordTextField.becomeFirstResponder()
-			}
-			else
-			{
-				passwordInputView.show(tip: "密码长度限制在6-20位字符", type: .error)
-				return false
-			}
+            let pwdError = checkPassword()
+            guard pwdError == nil else {
+                passwordInputView.show(tip: pwdError!, type: .error)
+                return false
+            }
+			confirmPasswordTextField.becomeFirstResponder()
 		case confirmPasswordTextField:
 			if checkConfirmPassword() {
 				createWallet()
