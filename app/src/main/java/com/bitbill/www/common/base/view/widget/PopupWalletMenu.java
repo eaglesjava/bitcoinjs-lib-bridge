@@ -1,5 +1,6 @@
 package com.bitbill.www.common.base.view.widget;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.util.TypedValue;
@@ -24,6 +25,8 @@ public class PopupWalletMenu extends PopupWindow implements View.OnClickListener
     private View mWalletView;
     private OnWalletMenuItemClickListener mOnWalletMenuItemClickListener;
     private Context mContext;
+    private View mActionView;
+    private ObjectAnimator mRotation;
 
     /**
      * <p>Create a new empty, non focusable popup window of dimension (0,0).</p>
@@ -82,6 +85,7 @@ public class PopupWalletMenu extends PopupWindow implements View.OnClickListener
     }
 
     public void show(View v) {
+        mActionView = v;
         //获取PopupWindow中View的宽高
         mWalletView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         int measuredWidth = mWalletView.getMeasuredWidth();
@@ -92,13 +96,26 @@ public class PopupWalletMenu extends PopupWindow implements View.OnClickListener
         int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, mContext.getResources().getDisplayMetrics());
         //显示在正上方
         super.showAtLocation(v, Gravity.NO_GRAVITY, (location[0] + v.getWidth() / 2) - measuredWidth, location[1] - measuredHeight - padding);
+        //旋转v
+        roateActionView();
+    }
 
+    private void roateActionView() {
 
+        mRotation = ObjectAnimator.ofFloat(mActionView, "rotation", 45);
+        mRotation.setDuration(200);
+        mRotation.start();
+
+    }
+
+    private void reRoateActionView() {
+        mRotation.reverse();
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
+        reRoateActionView();
     }
 
     public interface OnWalletMenuItemClickListener {
