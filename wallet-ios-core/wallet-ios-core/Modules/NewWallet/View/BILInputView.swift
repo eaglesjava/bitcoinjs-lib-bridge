@@ -63,15 +63,15 @@ class BILInputView: UIView, UITextFieldDelegate {
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
+        show(tip: titleString ?? "", type: .normal)
 		line.backgroundColor = UIColor.white
 		updateFunctionTipHeight(height: 32, animate: true)
-        show(tip: titleString ?? "", type: .normal)
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
+        show(tip: titleString ?? "", type: .normal)
 		line.backgroundColor = UIColor.bil_white_40_color
 		updateFunctionTipHeight(height: 0, animate: true)
-        show(tip: titleString ?? "", type: .normal)
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
