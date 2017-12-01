@@ -118,18 +118,31 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		return false
 	}
 	
-	func checkWalletName() -> Bool {
-		if let walletName = walletNameTextField.text, walletName.count <= 20 && walletName.count >= 1 {
-			return true
+	func checkWalletID() -> String? {
+		guard let walletID = walletNameTextField.text else {
+			return "请输入钱包ID"
 		}
-		return false
+		var toReturn: String? = nil
+		switch walletID.count {
+		case 0:
+			toReturn = "请输入钱包ID"
+		case 1...5:
+			toReturn = "钱包ID最少6位字符"
+		case let i where i > 20:
+			toReturn = "ID限制在20位以内字符"
+		default: ()
+		}
+		return toReturn
 	}
 	
 	func createWallet() {
-		guard checkWalletName() else {
-			walletNameInputView.show(tip: "名称限制在20位以内字符", type: .error)
+		
+		let walletIDError = checkWalletID()
+		guard walletIDError == nil else {
+			walletNameInputView.show(tip: walletIDError!, type: .error)
 			return
 		}
+		
 		guard checkPassword() else {
 			passwordInputView.show(tip: "密码长度限制在6-20位字符", type: .error)
 			return
@@ -190,14 +203,12 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		switch textField {
 		case walletNameTextField:
-			if checkWalletName() {
-				passwordTextField.becomeFirstResponder()
-			}
-			else
-			{
-				walletNameInputView.show(tip: "名称限制在20位以内字符", type: .error)
+			let walletIDError = checkWalletID()
+			guard walletIDError == nil else {
+				walletNameInputView.show(tip: walletIDError!, type: .error)
 				return false
 			}
+			passwordTextField.becomeFirstResponder()
 		case passwordTextField:
 			if checkPassword() {
 				confirmPasswordTextField.becomeFirstResponder()
@@ -235,7 +246,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		if let textField: UITextField = notification.object as? UITextField {
 			switch textField {
 			case walletNameTextField:
-				walletNameInputView.show(tip: "钱包名称", type: .normal)
+				walletNameInputView.show(tip: "钱包ID", type: .normal)
 			case passwordTextField:
 				passwordStrengthView.strength = BILPasswordStrengthView.caculatePasswordStrength(pwd: textField.text ?? "")
 				passwordInputView.show(tip: "创建交易密码", type: .normal)

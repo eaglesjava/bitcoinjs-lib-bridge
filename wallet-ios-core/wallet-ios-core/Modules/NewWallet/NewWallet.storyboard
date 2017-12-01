@@ -99,13 +99,13 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQ0-7J-8kK">
-                                        <rect key="frame" x="25" y="24" width="325" height="377"/>
+                                        <rect key="frame" x="25" y="24" width="325" height="370"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbI-5b-wmo" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="325" height="66"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="325" height="74.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNV-OH-lxp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="57.5" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNV-OH-lxp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="42.5" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="Co1-RI-S54"/>
                                                         </constraints>
@@ -120,7 +120,7 @@
                                                         </constraints>
                                                         <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                                 <color key="value" red="1" green="1" blue="1" alpha="0.39615261130136981" colorSpace="custom" customColorSpace="sRGB"/>
@@ -137,28 +137,50 @@
                                                             <constraint firstAttribute="height" constant="1" id="CVw-H9-97i"/>
                                                         </constraints>
                                                     </view>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppa-QG-G3o">
+                                                        <rect key="frame" x="0.0" y="74" width="325" height="0.0"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设定你的钱包ID，他可以关联你的联系人，支持英文和数字，一旦设定不可修改。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goc-0F-3eD">
+                                                                <rect key="frame" x="0.0" y="0.0" width="325" height="31.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <color key="textColor" red="0.6705882353" green="0.90196078430000004" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="goc-0F-3eD" secondAttribute="trailing" id="CHO-e7-ghy"/>
+                                                            <constraint firstItem="goc-0F-3eD" firstAttribute="top" secondItem="ppa-QG-G3o" secondAttribute="top" id="QaK-YV-I5d"/>
+                                                            <constraint firstItem="goc-0F-3eD" firstAttribute="leading" secondItem="ppa-QG-G3o" secondAttribute="leading" id="eBS-Wa-6Zf"/>
+                                                            <constraint firstAttribute="height" id="vYY-OY-j0t"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="ppa-QG-G3o" secondAttribute="bottom" id="1Xo-Ff-mRC"/>
+                                                    <constraint firstItem="ppa-QG-G3o" firstAttribute="leading" secondItem="DbI-5b-wmo" secondAttribute="leading" id="Bxm-ba-8Zc"/>
                                                     <constraint firstItem="JqB-aG-3nt" firstAttribute="top" secondItem="FNV-OH-lxp" secondAttribute="bottom" id="Cht-YP-fmT"/>
                                                     <constraint firstItem="JqB-aG-3nt" firstAttribute="leading" secondItem="DbI-5b-wmo" secondAttribute="leading" id="HhS-rF-xGC"/>
                                                     <constraint firstAttribute="trailing" secondItem="fGQ-Xj-3Jd" secondAttribute="trailing" id="OwZ-4v-aze"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ppa-QG-G3o" secondAttribute="trailing" id="WDC-Yf-WvK"/>
                                                     <constraint firstItem="fGQ-Xj-3Jd" firstAttribute="leading" secondItem="DbI-5b-wmo" secondAttribute="leading" id="XCH-dZ-jFt"/>
                                                     <constraint firstItem="FNV-OH-lxp" firstAttribute="top" secondItem="DbI-5b-wmo" secondAttribute="top" id="YPh-g3-CIw"/>
+                                                    <constraint firstItem="ppa-QG-G3o" firstAttribute="top" secondItem="fGQ-Xj-3Jd" secondAttribute="bottom" constant="8" id="eff-y2-9wQ"/>
                                                     <constraint firstItem="FNV-OH-lxp" firstAttribute="leading" secondItem="DbI-5b-wmo" secondAttribute="leading" id="mVc-fb-nBT"/>
                                                     <constraint firstItem="fGQ-Xj-3Jd" firstAttribute="top" secondItem="JqB-aG-3nt" secondAttribute="bottom" id="qtL-Ir-gGN"/>
-                                                    <constraint firstAttribute="bottom" secondItem="fGQ-Xj-3Jd" secondAttribute="bottom" id="yaM-Gx-ZsR"/>
                                                     <constraint firstAttribute="trailing" secondItem="JqB-aG-3nt" secondAttribute="trailing" id="zgu-JE-Dig"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="delegate" destination="7rK-Mf-YUl" id="FIv-E4-kty"/>
+                                                    <outlet property="functionTipHeight" destination="vYY-OY-j0t" id="dwY-RA-ebL"/>
                                                     <outlet property="line" destination="fGQ-Xj-3Jd" id="uq4-Tr-k8E"/>
                                                     <outlet property="textField" destination="JqB-aG-3nt" id="vvT-YK-sf9"/>
                                                     <outlet property="title" destination="FNV-OH-lxp" id="o65-Oo-tg0"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MF1-H1-K5C" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="74" width="325" height="74"/>
+                                                <rect key="frame" x="0.0" y="82.5" width="325" height="74"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建交易密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6d-DG-zPG">
                                                         <rect key="frame" x="0.0" y="8" width="86" height="21"/>
@@ -271,7 +293,7 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZ0-VV-HbH" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="156" width="325" height="74"/>
+                                                <rect key="frame" x="0.0" y="164.5" width="325" height="74"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认交易密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48F-7A-au2">
                                                         <rect key="frame" x="0.0" y="8" width="86" height="21"/>
@@ -326,14 +348,14 @@
                                                     <outlet property="title" destination="48F-7A-au2" id="HBu-lF-Yki"/>
                                                 </connections>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请备份好您的密码！比特宝不存储用户密码，无法提供找回或重置的功能（若您已备份助记词，忘记密码的情况下可以通过重新导入助记词恢复钱包并重设密码）" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8s-0C-PiF">
-                                                <rect key="frame" x="0.0" y="245" width="325" height="47"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请牢记您的密码！比特宝不存储用户密码，无法提供找回或重置功能" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8s-0C-PiF">
+                                                <rect key="frame" x="0.0" y="253.5" width="325" height="31.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.6705882353" green="0.90196078430000004" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53E-rO-tJL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="322" width="325" height="55"/>
+                                                <rect key="frame" x="0.0" y="315" width="325" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="q3Z-bu-ldf"/>
                                                 </constraints>

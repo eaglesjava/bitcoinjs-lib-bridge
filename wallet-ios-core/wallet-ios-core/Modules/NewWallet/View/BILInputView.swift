@@ -23,12 +23,21 @@ class BILInputView: UIView, UITextFieldDelegate {
 	@IBOutlet weak var textField: UITextField!
 	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var line: UIView!
+	@IBOutlet weak var functionTipHeight: NSLayoutConstraint?
 	
 	@IBOutlet weak var delegate: BILInputViewDelegate?
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		line.backgroundColor = UIColor.bil_white_40_color
+	}
+	
+	func updateFunctionTipHeight(height: CGFloat, animate: Bool = false) {
+		guard let h = functionTipHeight else { return }
+		h.constant = height
+		UIView.animate(withDuration: 0.35) {
+			self.superview?.superview?.layoutIfNeeded()
+		}
 	}
 
 	func show(tip: String, type: TipType) {
@@ -49,10 +58,12 @@ class BILInputView: UIView, UITextFieldDelegate {
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		line.backgroundColor = UIColor.white
+		updateFunctionTipHeight(height: 32, animate: true)
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		line.backgroundColor = UIColor.bil_white_40_color
+		updateFunctionTipHeight(height: 0, animate: true)
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
