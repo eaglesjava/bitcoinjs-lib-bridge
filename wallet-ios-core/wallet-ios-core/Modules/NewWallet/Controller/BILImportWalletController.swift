@@ -34,7 +34,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		textView.text = "两 览 藏 微 储 继 料 叶 历 跳 语 握"
+//        textView.text = "两 览 藏 微 储 继 料 叶 历 跳 语 握"
 		textView.becomeFirstResponder()
 	}
 
