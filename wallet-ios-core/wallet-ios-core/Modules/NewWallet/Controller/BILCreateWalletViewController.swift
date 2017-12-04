@@ -221,23 +221,19 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                     BitcoinJSBridge.shared.getMasterXPublicKey(seed: s, success: { (pubKey) in
                         let extPubKey = pubKey as! String
                         wallet.mainExtPublicKey = extPubKey
-                        do {
-                            if let seed = String(bytes: try aes.decrypt((wallet.encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seed == s {
-                                SVProgressHUD.show(withStatus: "创建钱包中。。。")
-                                wallet.createWalletInServer(sucess: { (result) in
-                                    do {
-                                        try BILWalletManager.shared.saveWallets()
-                                        self.createSuccess()
-                                        SVProgressHUD.dismiss()
-                                    } catch {
-                                        cleanUp(wallet: wallet, error: error.localizedDescription)
-                                    }
-                                }, failure: { (msg, code) in
-                                    cleanUp(wallet: wallet, error: msg)
-                                })
-                            }
-                        } catch {
-                            cleanUp(wallet: wallet, error: error.localizedDescription)
+                        if wallet.checkPassword(pwd: pwd) {
+                            SVProgressHUD.show(withStatus: "创建钱包中。。。")
+                            wallet.createWalletInServer(sucess: { (result) in
+                                do {
+                                    try BILWalletManager.shared.saveWallets()
+                                    self.createSuccess()
+                                    SVProgressHUD.dismiss()
+                                } catch {
+                                    cleanUp(wallet: wallet, error: error.localizedDescription)
+                                }
+                            }, failure: { (msg, code) in
+                                cleanUp(wallet: wallet, error: msg)
+                            })
                         }
                     }, failure: { (error) in
                         cleanUp(wallet: wallet, error: error.localizedDescription)

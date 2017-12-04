@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import SwiftyJSON
+import CryptoSwift
 
 extension WalletModel {
     func createWalletInServer(sucess: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
@@ -22,6 +23,26 @@ extension WalletModel {
             return
         }
         BILNetworkManager.request(request: .createWallet(walletID: walletID, extendedKey: extKey), sucess: sucess, failure: failure)
+    }
+}
+
+extension WalletModel {
+    func checkPassword(pwd: String) -> Bool {
+        var toReturn = false
+        
+        let key = String(pwd.sha256().prefix(32))
+        
+        do {
+            let aes = try AES(key: key, iv: String(key.reversed().prefix(16)))
+            
+            if let s = String(bytes: try aes.decrypt((encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seedHash == s.md5() {
+                toReturn = true
+            }
+        } catch {
+            print(error)
+        }
+        
+        return toReturn
     }
 }
 
