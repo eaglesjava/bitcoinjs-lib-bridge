@@ -13,7 +13,8 @@ class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
 	@IBOutlet weak var newWalletButton: BILGradientButton!
 	@IBOutlet weak var guideScrollView: UIScrollView!
 	@IBOutlet weak var pageControl: UIPageControl!
-	
+    @IBOutlet weak var phoneImageViewBottomSpace: NSLayoutConstraint!
+    
 	var guideViews = [BILGuideBaseView]()
 	
 	override func viewDidLoad() {
@@ -34,6 +35,7 @@ class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
 		for gView in guideViews {
 			gView.adjust(frame: frame, index: guideViews.index(of: gView)!)
 		}
+        phoneImageViewBottomSpace.constant = BILAppStartUpManager.shared.isSmallScreen ? 20 : 55
 		
 		guideScrollView.contentSize = CGSize(width: frame.width * CGFloat(guideViews.count), height: frame.height)
 		layoutGuideView()

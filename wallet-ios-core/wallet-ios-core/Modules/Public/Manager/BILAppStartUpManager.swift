@@ -20,6 +20,10 @@ class BILAppStartUpManager: NSObject {
 	}()
 	
 	var navBackgroundImage: UIImage? = UIImage()
+    lazy var isSmallScreen: Bool = {
+        return UIScreen.main.bounds.height <= 568
+    }()
+    
 	
 	func startSetup() {
 		setupPopupDialog()
@@ -83,7 +87,7 @@ class BILAppStartUpManager: NSObject {
 		appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
 		appearance.tintColor = UIColor.white
 		if #available(iOS 11.0, *) {
-			appearance.prefersLargeTitles = true
+			appearance.prefersLargeTitles = !isSmallScreen
 			appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 		}
 	}

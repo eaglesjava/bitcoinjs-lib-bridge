@@ -10,6 +10,13 @@ import UIKit
 
 class BILGuideKeyView: BILGuideBaseView {
 
+    @IBOutlet weak var keyImageViewBottomSpace: NSLayoutConstraint!
+    
+    override func adjust(frame: CGRect, index: Int) {
+        super.adjust(frame: frame, index: index)
+        keyImageViewBottomSpace.constant = BILAppStartUpManager.shared.isSmallScreen ? 80 : 100
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

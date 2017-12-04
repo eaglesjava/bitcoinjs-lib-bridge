@@ -81,6 +81,7 @@
                         <outlet property="guideScrollView" destination="Wv8-kW-7dL" id="2jl-fu-dRU"/>
                         <outlet property="newWalletButton" destination="99u-my-xAt" id="vIA-6T-GPR"/>
                         <outlet property="pageControl" destination="CBq-z2-CC0" id="WrX-z6-Cwi"/>
+                        <outlet property="phoneImageViewBottomSpace" destination="mjf-4T-qD0" id="NQ2-3U-xBj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XX-AI-801" userLabel="First Responder" sceneMemberID="firstResponder"/>
