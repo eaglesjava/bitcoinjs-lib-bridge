@@ -87,7 +87,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		
 		let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
 		let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: false, hideStatusBar: false) {
-			print("popup")
+			
 		}
 		
 		let button = DefaultButton(title: buttonTitle, height: 50, dismissOnTap: true) {
@@ -96,7 +96,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		popup.addButton(button)
 		
 		present(popup, animated: true) {
-			print("present")
+			
 		}
 	}
 	
@@ -195,7 +195,13 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		}
 		
 		getMnemonic { (m) in
+            
 			BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
+                
+                func cleanUp(error: String) {
+                    
+                }
+                
 				let s = seedHex as! String
 				let wallet = BILWalletManager.shared.newWallet()
 				wallet.id = self.walletNameTextField.text!
@@ -223,27 +229,28 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                                         SVProgressHUD.dismiss()
                                     } catch {
                                         SVProgressHUD.showError(withStatus: error.localizedDescription)
-                                        print(error)
+                                        debugPrint(error)
                                     }
                                 }, failure: { (msg, code) in
                                     SVProgressHUD.showError(withStatus: msg)
+                                    SVProgressHUD.dismiss(withDelay: 1.2)
                                 })
                             }
                         } catch {
                             SVProgressHUD.showError(withStatus: error.localizedDescription)
-                            print(error)
+                            debugPrint(error)
                         }
                     }, failure: { (error) in
                         SVProgressHUD.showError(withStatus: error.localizedDescription)
-                        print(error)
+                        debugPrint(error)
                     })
 				} catch {
 					SVProgressHUD.showError(withStatus: error.localizedDescription)
-					print(error)
+					debugPrint(error)
 				}
 			}, failure: { (error) in
 				SVProgressHUD.showError(withStatus: error.localizedDescription)
-				print(error)
+				debugPrint(error)
 			})
 		}
 		
@@ -255,10 +262,12 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		}
 		else {
 			BitcoinJSBridge.shared.generateMnemonic(language: .chinese, success: { (mnemonic) in
-				complete(mnemonic as! String)
+                let str = mnemonic as! String
+                self.mnemonic = str
+				complete(str)
 			}) { (error) in
 				SVProgressHUD.showError(withStatus: error.localizedDescription)
-				print(error)
+				debugPrint(error)
 			}
 		}
 	}

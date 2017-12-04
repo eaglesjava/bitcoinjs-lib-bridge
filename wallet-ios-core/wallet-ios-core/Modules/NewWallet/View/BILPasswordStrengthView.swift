@@ -105,7 +105,7 @@ class BILPasswordStrengthView: UIView {
 			}
 			
 		} catch {
-			print(error)
+			debugPrint(error)
 		}
 		
 		switch sum {

@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 import CoreData
+import SwiftyJSON
 
 extension WalletModel {
-    func createWalletInServer(sucess: @escaping ([String: Any]?) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func createWalletInServer(sucess: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let walletID = id else {
             failure("ID不能为空", -1)
             return
@@ -47,7 +48,7 @@ extension WalletModel {
 			let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 			try context.save()
 		} catch {
-			print(error)
+			debugPrint(error)
 		}
 	}
 }

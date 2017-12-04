@@ -8,17 +8,34 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class BILNetworkManager: NSObject {
-    static func request(request: Router, sucess: @escaping ([String: Any]?) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    static func request(request: Router, sucess: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         Alamofire.request(request).responseJSON { (response) in
-            print(response)
-            sucess(nil)
+            debugPrint(response)
+            if let json = response.result.value as? [String : Any] {
+                debugPrint("JSON: \(json)") // serialized json response
+                let j = JSON(json)
+                let status = j["status"].intValue
+                if status < 0 {
+                    failure(j["message"].stringValue, j["status"].intValue)
+                }
+                else
+                {
+                    sucess(j["data"].dictionaryValue)
+                }
+            }
+            else
+            {
+                failure("数据解析失败，\(response)", -1)
+            }
         }
     }
 	static func request() {
-		Alamofire.request("http://192.168.1.10:8086/bitbill/bitcoin/wallet/create", method: .post, parameters: ["walletId": "Tesat", "extendedKeys": "xpub6EvXuejgrwbSQAk3YaaMfmXsoMEx7CgSLw4P7UjYKd8hbbZ2n4jp1LrVrbNMEK1qBzbmb6FeJVEHUXzDqYSPucHu5Yqc95r7YuasYyyB91N", "clientId": "abcdefghijklmn"], encoding: JSONEncoding.default).responseJSON(queue: nil, options: .allowFragments) { (response) in
-//            print(response.result.value)
+		Alamofire.request("http://192.168.1.10:8086/bitbill/bitcoin/wallet/create", method: .post, parameters: ["walletId": "Tesata", "extendedKeys": "xpub6EvXuejgrwbSQAk3YaaMfmXsoMEx7CgSLw4P7UjYKd8hbbZ2n4jp1LrVrbNMEK1qBzbmb6FeJVEHUXzDqYSPucHu5Yqc95r7YuasYyyB91N", "clientId": "abcdefghijklmn"], encoding: JSONEncoding.default).responseJSON(queue: nil, options: .allowFragments) { (response) in
+            debugPrint(response.request ?? "request is nil")
+            debugPrint(response)
 		}
 	}
 	

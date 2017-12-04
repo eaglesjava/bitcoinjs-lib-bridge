@@ -80,11 +80,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 		}
 		webview.evaluateJavaScript(method) { (object, error) in
 			if let obj = object {
-				print("call js method succeed: \(method), \(obj)")
+				debugPrint("call js method succeed: \(method), \(obj)")
 				success(obj)
 			}
 			if let err = error {
-				print("call js method failed: \(method), \(err)")
+				debugPrint("call js method failed: \(method), \(err)")
 				failure(err)
 			}
 		}

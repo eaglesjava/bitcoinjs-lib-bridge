@@ -53,7 +53,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 			_ = regex.replaceMatches(in: str, options: .reportCompletion, range: NSMakeRange(0, trimmedString.count), withTemplate: " ")
 			trimmedString = String(str)
 		} catch {
-			print(error)
+			debugPrint(error)
 		}
 		let words = trimmedString.components(separatedBy: " ")
 		let lengths = [12, 15, 18, 21, 24]

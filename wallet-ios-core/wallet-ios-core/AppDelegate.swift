@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		BILWalletManager.shared.appDelegate = self
 		
 		let results = BILWalletManager.shared.wallets
-		print(results)
+		debugPrint(results)
 		
 		if results.count == 0 {
 			let cont = UIStoryboard(name: "NewWallet", bundle: nil).instantiateInitialViewController()
@@ -64,10 +64,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Push
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print(error)
+        debugPrint(error)
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print(deviceToken.toHexString())
+        let token = deviceToken.toHexString()
+        BILAppStartUpManager.shared.deviceToken = token
+        debugPrint(token)
     }
     
 	// MARK: - Core Data stack
@@ -86,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				// fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
 				
 				/*
-				Typical reasons for an error here include:
+				Typical reasons for an er ror here include:
 				* The parent directory does not exist, cannot be created, or disallows writing.
 				* The persistent store is not accessible, due to permissions or data protection when the device is locked.
 				* The device is out of space.

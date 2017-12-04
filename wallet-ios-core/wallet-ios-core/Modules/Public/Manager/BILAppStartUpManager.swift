@@ -42,12 +42,12 @@ class BILAppStartUpManager: NSObject {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
-                print("success")
+                debugPrint("success")
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
             } else if error == nil {
-                print("failed")
+                debugPrint("failed")
             }
         }
     }
@@ -69,6 +69,7 @@ class BILAppStartUpManager: NSObject {
 	private func setupSVProgressHUD() {
 		SVProgressHUD.setDefaultStyle(.dark)
 		SVProgressHUD.setMinimumDismissTimeInterval(0.5)
+        SVProgressHUD.setDefaultMaskType(.black)
 	}
 	
 	private func setupTextFieldAppearance() {
