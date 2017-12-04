@@ -25,6 +25,7 @@ import butterknife.OnClick;
 public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPresenter> implements BackupWalletMvpView {
 
     private static final String TAG = "BackUpWalletActivity";
+    private static final int RESULT_BACKUP_WALLET = 0x10;
     @BindView(R.id.et_input_mnemonic)
     EditText etInputMnemonic;
     @Inject
@@ -74,7 +75,7 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
             public void onClick(DialogInterface dialog, int which) {
                 pwdDialogFragment.setAutoDismiss(true);
                 if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
-                    if (StringUtils.equals(getWallet().getTradePwd(), pwdDialogFragment.getConfirmPwd())) {
+                    if (StringUtils.checkUserPwd(pwdDialogFragment.getConfirmPwd(), mWallet)) {
 
                         // 确定加载助记词
                         getMvpPresenter().loadMnemonic(pwdDialogFragment.getConfirmPwd());

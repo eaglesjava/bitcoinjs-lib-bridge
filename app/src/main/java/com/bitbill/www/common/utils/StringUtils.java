@@ -32,7 +32,7 @@ public class StringUtils {
     private final static Pattern PHONE_NUM = Pattern
             .compile("\\d{11}");// 手机号码11位
     private final static Pattern WALLET_ID = Pattern
-            .compile("^[a-zA-Z]\\w{5,19}$");//6-20位 以字母开头，支持字母、数字和"_”
+            .compile("^[a-zA-Z][0-9a-zA-Z_]{5,19}$");//6-20位 以字母开头，支持字母、数字和"_”
     private final static Pattern EMAILER = Pattern
             .compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
     private final static Pattern NUMBER_STR = Pattern
@@ -702,21 +702,47 @@ public class StringUtils {
         return mnemonicHash;
     }
 
-    public static String getSHA256Hex(String mnemonic) {
-        return EncryptUtils.encryptSHA256ToString(mnemonic.getBytes(Charset.defaultCharset()));
+    /**
+     * 校验用户输入的密码
+     *
+     * @param pwd    密码
+     * @param wallet 钱包实体用于更新相关字段   @return
+     */
+    public static boolean checkUserPwd(String pwd, Wallet wallet) {
+        if (wallet == null) {
+            return false;
+        }
+        String encryptSeed = wallet.getEncryptSeed();
+        if (encryptSeed == null) {
+            return false;
+        }
+        String decryptSeedHex = decryptByPwd(encryptSeed, pwd);
+        if (decryptSeedHex == null) {
+            return false;
+        }
+        String seedHexHash = getSHA256Hex(decryptSeedHex);
+        return equals(seedHexHash, wallet.getSeedHexHash());
+    }
+
+    public static String getSHA256Hex(String original) {
+        return EncryptUtils.encryptSHA256ToString(original.getBytes(Charset.defaultCharset()));
     }
 
     /**
-     * 解密助记词
+     * 解密助记词或seed
      *
-     * @param encryptMnemonic 加密助记词的十六进制字符串
-     * @param key             密码
+     * @param encrypt 加密十六进制字符串
+     * @param pwd     密码
      * @return
      */
-    public static String decryptMnemonic(String encryptMnemonic, String key) {
-        byte[] encryptKey = EncryptUtils.encryptSHA256(key.getBytes(Charset.defaultCharset()));
-        String decryptMnemonic = new String(EncryptUtils.decryptHexStringAES(encryptMnemonic, encryptKey), Charset.defaultCharset());
-        return decryptMnemonic;
+    public static String decryptByPwd(String encrypt, String pwd) {
+        byte[] encryptKey = EncryptUtils.encryptSHA256(pwd.getBytes(Charset.defaultCharset()));
+        byte[] decryptBytes = EncryptUtils.decryptHexStringAES(encrypt, encryptKey);
+        if (decryptBytes == null) {
+            return null;
+        }
+        String decrypt = new String(decryptBytes, Charset.defaultCharset());
+        return decrypt;
     }
 
     public static String formatBtcAmount(long btcAmount) {

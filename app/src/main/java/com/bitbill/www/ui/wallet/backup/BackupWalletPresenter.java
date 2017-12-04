@@ -36,7 +36,7 @@ public class BackupWalletPresenter<W extends WalletModel, V extends BackupWallet
                     public ObservableSource<String> apply(Wallet wallet) throws Exception {
                         //解密助记词
                         String encryptMnemonic = wallet.getEncryptMnemonic();
-                        String decryptMnemonic = StringUtils.decryptMnemonic(encryptMnemonic, confirmPwd);
+                        String decryptMnemonic = StringUtils.decryptByPwd(encryptMnemonic, confirmPwd);
                         //对比助记词hash是否一致
                         if (StringUtils.equals(StringUtils.getSHA256Hex(decryptMnemonic), wallet.getMnemonicHash())) {
                             return Observable.just(decryptMnemonic);

@@ -82,7 +82,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
             MainActivity.start(SplashActivity.this);
         } else {
             GuideActivity.start(SplashActivity.this);
-            finish();
         }
+        finish();
     }
 }

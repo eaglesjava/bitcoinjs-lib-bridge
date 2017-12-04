@@ -72,6 +72,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mAdapter.addItem(SendFragment.newInstance());
         mAdapter.addItem(MyFragment.newInstance());
         mViewPager.setAdapter(mAdapter);
+        mViewPager.setOffscreenPageLimit(3);
     }
 
     @Override
@@ -91,12 +92,24 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         int id = item.getItemId();
 
         if (id == R.id.nav_asset) {
-            // Handle the camera action
+            // 切换到资产界面
+            mViewPager.setCurrentItem(0, false);
+            setTitle(R.string.title_asset);
 
         } else if (id == R.id.nav_receive) {
+            // 切换到接收界面
+            mViewPager.setCurrentItem(1, false);
+            setTitle(R.string.title_receive);
 
         } else if (id == R.id.nav_send) {
+            // 切换到发送界面
+            mViewPager.setCurrentItem(2, false);
+            setTitle(R.string.title_send);
 
+        } else if (id == R.id.nav_contact) {
+            // 切换到联系人界面
+            mViewPager.setCurrentItem(3, false);
+            setTitle(R.string.title_contact);
         }
         // TODO: 2017/11/17 add other nav item
 

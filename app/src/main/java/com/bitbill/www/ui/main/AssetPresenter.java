@@ -29,6 +29,11 @@ public class AssetPresenter<M extends WalletModel, V extends AssetMvpView> exten
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<List<Wallet>>(getMvpView()) {
                     @Override
+                    protected void onStart() {
+                        super.onStart();
+                    }
+
+                    @Override
                     public void onNext(List<Wallet> wallets) {
                         super.onNext(wallets);
                         if (!isValidMvpView()) {
