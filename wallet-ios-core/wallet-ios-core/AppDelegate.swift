@@ -61,6 +61,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.saveContext()
 	}
 	
+    // MARK: - Push
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error)
+    }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print(deviceToken.toHexString())
+    }
+    
 	// MARK: - Core Data stack
 	
 	lazy var persistentContainer: NSPersistentContainer = {

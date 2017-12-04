@@ -12,6 +12,7 @@ import IQKeyboardManagerSwift
 import Foundation
 import SVProgressHUD
 import CoreGraphics
+import UserNotifications
 
 class BILAppStartUpManager: NSObject {
 	
@@ -24,7 +25,8 @@ class BILAppStartUpManager: NSObject {
         return UIScreen.main.bounds.height <= 568
     }()
     
-	
+    var deviceToken: String?
+    
 	func startSetup() {
 		setupPopupDialog()
 		setupIQKeyboard()
@@ -33,8 +35,22 @@ class BILAppStartUpManager: NSObject {
 		setupTextFieldAppearance()
 		setupTextViewAppearance()
 		setupSVProgressHUD()
-//		setupNavigationBarAppearance()
+        setupPushService()
 	}
+    
+    func setupPushService() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("success")
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            } else if error == nil {
+                print("failed")
+            }
+        }
+    }
 	
 	func snapshotNavBackgroundImage(rect: CGRect) -> UIImage? {
 		guard let image = navBackgroundImage else {
