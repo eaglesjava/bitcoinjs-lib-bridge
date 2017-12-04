@@ -33,10 +33,14 @@ class BILNetworkManager: NSObject {
         }
     }
 	static func request() {
-		Alamofire.request("http://192.168.1.10:8086/bitbill/bitcoin/wallet/create", method: .post, parameters: ["walletId": "Tesata", "extendedKeys": "xpub6EvXuejgrwbSQAk3YaaMfmXsoMEx7CgSLw4P7UjYKd8hbbZ2n4jp1LrVrbNMEK1qBzbmb6FeJVEHUXzDqYSPucHu5Yqc95r7YuasYyyB91N", "clientId": "abcdefghijklmn"], encoding: JSONEncoding.default).responseJSON(queue: nil, options: .allowFragments) { (response) in
+//        Alamofire.request("http://192.168.1.11:8086/a", method: .post, parameters: ["walletId": "Tesata", "extendedKeys": "xpub6EvXuejgrwbSQAk3YaaMfmXsoMEx7CgSLw4P7UjYKd8hbbZ2n4jp1LrVrbNMEK1qBzbmb6FeJVEHUXzDqYSPucHu5Yqc95r7YuasYyyB91N", "clientId": "abcdefghijklmn"], encoding: JSONEncoding.default).responseJSON(queue: nil, options: .allowFragments) { (response) in
+//            debugPrint(response.request ?? "request is nil")
+//            debugPrint(response)
+//        }
+        Alamofire.request("http://192.168.1.10:8086/bitbill/bitcoin/wallet/create", method: .post, parameters: ["walletId": "Tesata", "extendedKeys": "xpub6EvXuejgrwbSQAk3YaaMfmXsoMEx7CgSLw4P7UjYKd8hbbZ2n4jp1LrVrbNMEK1qBzbmb6FeJVEHUXzDqYSPucHu5Yqc95r7YuasYyyB91N", "clientId": "abcdefghijklmn"], encoding: JSONEncoding.default).responseJSON(queue: nil, options: .allowFragments) { (response) in
             debugPrint(response.request ?? "request is nil")
             debugPrint(response)
-		}
+        }
 	}
 	
 }

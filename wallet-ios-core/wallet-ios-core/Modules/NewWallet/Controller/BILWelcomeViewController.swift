@@ -23,9 +23,11 @@ class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
 		let allInOneView = Bundle.main.loadNibNamed("BILAllInOneView", owner: nil, options: nil)?.first as! BILAllInOneView
 		let keyView = Bundle.main.loadNibNamed("BILGuideKeyView", owner: nil, options: nil)?.first as! BILGuideKeyView
+        let contactView = Bundle.main.loadNibNamed("BILGuideContactView", owner: nil, options: nil)?.first as! BILGuideContactView
 		guideScrollView.addSubview(allInOneView)
 		guideScrollView.addSubview(keyView)
-		guideViews.append(contentsOf: [allInOneView, keyView])
+        guideScrollView.addSubview(contactView)
+		guideViews.append(contentsOf: [allInOneView, keyView, contactView])
     }
 	
 	override func viewDidLayoutSubviews() {
