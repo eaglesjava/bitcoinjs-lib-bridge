@@ -65,6 +65,8 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 		
 		let mnemonic = words.joined(separator: " ")
 		
+        // TODO: 本地校验是否存在该助记词，服务器校验
+        
 		BitcoinJSBridge.shared.validateMnemonic(mnemonic: mnemonic, success: { (result) in
 			let isValidate = result as! Bool
 			if isValidate {
