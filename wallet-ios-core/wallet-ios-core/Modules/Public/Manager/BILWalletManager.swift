@@ -15,15 +15,25 @@ class BILWalletManager: NSObject {
 	}()
 	
 	weak var appDelegate: AppDelegate?
+    
+    var coreDataContext = {
+        (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }()
+    
 	
 	func newWallet() -> WalletModel {
-		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		let context = coreDataContext
 		let wallet = NSEntityDescription.insertNewObject(forEntityName: "WalletModel", into: context) as! WalletModel
 		return wallet
 	}
+    
+    func remove(wallet: WalletModel) {
+        let context = coreDataContext
+        context.delete(wallet)
+    }
 	
 	func saveWallets() throws {
-		let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+		let context = coreDataContext
 		guard context.hasChanges else {
 			return
 		}

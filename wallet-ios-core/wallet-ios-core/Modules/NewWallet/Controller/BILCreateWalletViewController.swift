@@ -195,13 +195,15 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		}
 		
 		getMnemonic { (m) in
-            
-			BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
-                
-                func cleanUp(error: String) {
-                    
+            func cleanUp(wallet: WalletModel?, error: String) {
+                SVProgressHUD.showError(withStatus: error)
+                SVProgressHUD.dismiss(withDelay: 1.2)
+                debugPrint(error)
+                if let w = wallet {
+                    BILWalletManager.shared.remove(wallet: w)
                 }
-                
+            }
+			BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
 				let s = seedHex as! String
 				let wallet = BILWalletManager.shared.newWallet()
 				wallet.id = self.walletNameTextField.text!
@@ -228,29 +230,23 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                                         self.createSuccess()
                                         SVProgressHUD.dismiss()
                                     } catch {
-                                        SVProgressHUD.showError(withStatus: error.localizedDescription)
-                                        debugPrint(error)
+                                        cleanUp(wallet: wallet, error: error.localizedDescription)
                                     }
                                 }, failure: { (msg, code) in
-                                    SVProgressHUD.showError(withStatus: msg)
-                                    SVProgressHUD.dismiss(withDelay: 1.2)
+                                    cleanUp(wallet: wallet, error: msg)
                                 })
                             }
                         } catch {
-                            SVProgressHUD.showError(withStatus: error.localizedDescription)
-                            debugPrint(error)
+                            cleanUp(wallet: wallet, error: error.localizedDescription)
                         }
                     }, failure: { (error) in
-                        SVProgressHUD.showError(withStatus: error.localizedDescription)
-                        debugPrint(error)
+                        cleanUp(wallet: wallet, error: error.localizedDescription)
                     })
 				} catch {
-					SVProgressHUD.showError(withStatus: error.localizedDescription)
-					debugPrint(error)
+					cleanUp(wallet: wallet, error: error.localizedDescription)
 				}
 			}, failure: { (error) in
-				SVProgressHUD.showError(withStatus: error.localizedDescription)
-				debugPrint(error)
+				cleanUp(wallet: nil, error: error.localizedDescription)
 			})
 		}
 		
