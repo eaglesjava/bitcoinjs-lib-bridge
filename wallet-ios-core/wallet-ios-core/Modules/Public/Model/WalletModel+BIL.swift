@@ -9,46 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
-import SwiftyJSON
 import CryptoSwift
-
-extension WalletModel {
-    func createWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        guard let walletID = id else {
-            failure("ID不能为空", -1)
-            return
-        }
-        guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
-            return
-        }
-        BILNetworkManager.request(request: .createWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
-    }
-    
-    func importWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        guard let walletID = id else {
-            failure("ID不能为空", -1)
-            return
-        }
-        guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
-            return
-        }
-        BILNetworkManager.request(request: .importWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
-    }
-    
-    static func getWalletIDFromSever(mainExtPublicKey: String, success: @escaping (_ id: String) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        BILNetworkManager.request(request: .getWalletID(extendedKey: mainExtPublicKey.md5()), success: { (result) in
-            debugPrint(result)
-            let json = JSON(result)
-            guard let id = json["walletId"].string else {
-                failure("获取到错误的数据", -1)
-                return
-            }
-            success(id)
-        }, failure: failure)
-    }
-}
 
 extension WalletModel {
     static func generateAES(pwd: String) -> AES? {

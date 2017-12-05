@@ -23,10 +23,14 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	
 	weak var wallet: WalletModel? {
 		didSet {
-			heightOfBalanceView.constant = wallet?.btcUnconfirmBalance == 0 ? 108 : 142
-			
-			balanceLabel.text = "\(wallet?.btcBalance ?? 0)"
-			unconfirmBalanceLabel.text = "\(wallet?.btcUnconfirmBalance ?? 0)btc"
+            guard let w = wallet else { return }
+            w.getBalanceFromServer(success: { (wallet) in
+                self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 108 : 142
+                self.balanceLabel.text = w.btc_balanceString
+                self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + "btc"
+            }) { (msg, code) in
+                debugPrint(msg)
+            }
 		}
 	}
 	

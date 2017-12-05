@@ -12,6 +12,8 @@
 		BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */; };
 		BA1142391FD53CC80025BF80 /* BILGuideContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */; };
 		BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */; };
+		BA11423D1FD676540025BF80 /* WalletModel+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423C1FD676540025BF80 /* WalletModel+Network.swift */; };
+		BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */; };
 		BAA371181FD1430C00E757A6 /* String+BILURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA371171FD1430C00E757A6 /* String+BILURL.swift */; };
 		CC4417011FBEAC7F00C4B158 /* WalletModel+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4417001FBEAC7F00C4B158 /* WalletModel+BIL.swift */; };
 		CC4417031FBEAD8800C4B158 /* BILAESHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4417021FBEAD8800C4B158 /* BILAESHelper.swift */; };
@@ -106,6 +108,8 @@
 		BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILDeviceManager.swift; sourceTree = "<group>"; };
 		BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideContactView.swift; sourceTree = "<group>"; };
 		BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideContactView.xib; sourceTree = "<group>"; };
+		BA11423C1FD676540025BF80 /* WalletModel+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+Network.swift"; sourceTree = "<group>"; };
+		BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BTC.swift"; sourceTree = "<group>"; };
 		BAA371171FD1430C00E757A6 /* String+BILURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BILURL.swift"; sourceTree = "<group>"; };
 		BAA371191FD1556E00E757A6 /* wallet-ios-core.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "wallet-ios-core.entitlements"; sourceTree = "<group>"; };
 		CC4417001FBEAC7F00C4B158 /* WalletModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BIL.swift"; sourceTree = "<group>"; };
@@ -336,6 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				CC4417001FBEAC7F00C4B158 /* WalletModel+BIL.swift */,
+				BA11423C1FD676540025BF80 /* WalletModel+Network.swift */,
+				BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */,
 				CCE5E1751FCBC4B000F7555D /* BILTransaction.swift */,
 			);
 			path = Model;
@@ -967,6 +973,7 @@
 				CCE9BE801FBD9DF0007A59E7 /* BILVerifyMnemonicController.swift in Sources */,
 				CC4417051FBEB25C00C4B158 /* BILControllerManager.swift in Sources */,
 				CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */,
+				BA11423D1FD676540025BF80 /* WalletModel+Network.swift in Sources */,
 				CC94E0BF1FBD83E90098E730 /* BILMnemonicView.swift in Sources */,
 				CC94E04B1FB946480098E730 /* UIColor+BILHex.swift in Sources */,
 				CCF635031FC2C5C600840097 /* BILGuideItem.swift in Sources */,
@@ -986,6 +993,7 @@
 				CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */,
 				CC94E0C51FBD87D70098E730 /* BILMnemonicCell.swift in Sources */,
 				CCF634FB1FC2B79900840097 /* BILGuideKeyView.swift in Sources */,
+				BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */,
 				CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */,
 				CC94E04F1FB950040098E730 /* BILCreateWalletViewController.swift in Sources */,
 				CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */,
