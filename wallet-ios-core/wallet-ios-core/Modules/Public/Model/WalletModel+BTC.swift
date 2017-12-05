@@ -8,15 +8,17 @@
 
 import Foundation
 
+let BTC_SATOSH = 100000000
+
 extension WalletModel {
     var btc_balanceString: String {
         get {
-            return String(format: "%.6f", Double(btcBalance) / 100000000.0)
+            return String(format: "%.6f", Double(btcBalance) / Double(BTC_SATOSH))
         }
     }
     var btc_unconfirm_balanceString: String {
         get {
-            return String(format: "%.6f", Double(btcUnconfirmBalance) / 100000000.0)
+            return String(format: "%.6f", Double(btcUnconfirmBalance) / Double(BTC_SATOSH))
         }
     }
 }
