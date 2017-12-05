@@ -37,7 +37,23 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		tableView.register(UINib(nibName: "BILTransactionCell", bundle: nil), forCellReuseIdentifier: "BILTransactionCell")
+        
+        setupRefresh()
 	}
+    
+    func setupRefresh() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc
+    func refresh(sender: Any?) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return transactions.count
