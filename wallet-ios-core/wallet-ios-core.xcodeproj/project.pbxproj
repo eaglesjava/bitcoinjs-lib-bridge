@@ -14,6 +14,10 @@
 		BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */; };
 		BA11423D1FD676540025BF80 /* WalletModel+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423C1FD676540025BF80 /* WalletModel+Network.swift */; };
 		BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */; };
+		BA20A5FC1FD68DC800EC2147 /* Recieve.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FB1FD68DC800EC2147 /* Recieve.storyboard */; };
+		BA20A5FE1FD68DDA00EC2147 /* Send.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FD1FD68DDA00EC2147 /* Send.storyboard */; };
+		BA20A6001FD68DE400EC2147 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FF1FD68DE400EC2147 /* Me.storyboard */; };
+		BA20A6111FD68F5200EC2147 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A6101FD68F5100EC2147 /* Contact.storyboard */; };
 		BAA371181FD1430C00E757A6 /* String+BILURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA371171FD1430C00E757A6 /* String+BILURL.swift */; };
 		CC4417011FBEAC7F00C4B158 /* WalletModel+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4417001FBEAC7F00C4B158 /* WalletModel+BIL.swift */; };
 		CC4417031FBEAD8800C4B158 /* BILAESHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4417021FBEAD8800C4B158 /* BILAESHelper.swift */; };
@@ -110,6 +114,10 @@
 		BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideContactView.xib; sourceTree = "<group>"; };
 		BA11423C1FD676540025BF80 /* WalletModel+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+Network.swift"; sourceTree = "<group>"; };
 		BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BTC.swift"; sourceTree = "<group>"; };
+		BA20A5FB1FD68DC800EC2147 /* Recieve.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recieve.storyboard; sourceTree = "<group>"; };
+		BA20A5FD1FD68DDA00EC2147 /* Send.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Send.storyboard; sourceTree = "<group>"; };
+		BA20A5FF1FD68DE400EC2147 /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
+		BA20A6101FD68F5100EC2147 /* Contact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
 		BAA371171FD1430C00E757A6 /* String+BILURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BILURL.swift"; sourceTree = "<group>"; };
 		BAA371191FD1556E00E757A6 /* wallet-ios-core.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "wallet-ios-core.entitlements"; sourceTree = "<group>"; };
 		CC4417001FBEAC7F00C4B158 /* WalletModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BIL.swift"; sourceTree = "<group>"; };
@@ -136,17 +144,12 @@
 		CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewWallet.xcassets; sourceTree = "<group>"; };
 		CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAppStartUpManager.swift; sourceTree = "<group>"; };
 		CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILSupportedCoinsPopupController.xib; sourceTree = "<group>"; };
-		CC94E0A51FBD6E3B0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0AB1FBD6E3B0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CC94E0AD1FBD6E3B0098E730 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		CC94E0B71FBD6E620098E730 /* BackupWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupWallet.storyboard; sourceTree = "<group>"; };
 		CC94E0B91FBD7FF30098E730 /* BackupWallet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BackupWallet.xcassets; sourceTree = "<group>"; };
 		CC94E0BE1FBD83E90098E730 /* BILMnemonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BILMnemonicView.swift; sourceTree = "<group>"; };
 		CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicView.xib; sourceTree = "<group>"; };
 		CC94E0C21FBD86D30098E730 /* BILMnemonicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicCell.xib; sourceTree = "<group>"; };
 		CC94E0C41FBD87D70098E730 /* BILMnemonicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMnemonicCell.swift; sourceTree = "<group>"; };
-		CCE5E14F1FC7BEDE00F7555D /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		CCE5E1531FC7BEDE00F7555D /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		CCE5E1611FC7BFE100F7555D /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		CCE5E1631FC7C1BE00F7555D /* BILHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeViewController.swift; sourceTree = "<group>"; };
 		CCE5E1651FC7FB9400F7555D /* BILHomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeTableHeaderView.swift; sourceTree = "<group>"; };
@@ -227,6 +230,166 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BA20A5D41FD68D4E00EC2147 /* Recieve */ = {
+			isa = PBXGroup;
+			children = (
+				BA20A5FB1FD68DC800EC2147 /* Recieve.storyboard */,
+				BA20A5D51FD68D4E00EC2147 /* Other */,
+				BA20A5D71FD68D4E00EC2147 /* Controller */,
+				BA20A5D91FD68D4E00EC2147 /* Model */,
+				BA20A5DB1FD68D4E00EC2147 /* View */,
+			);
+			path = Recieve;
+			sourceTree = "<group>";
+		};
+		BA20A5D51FD68D4E00EC2147 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		BA20A5D71FD68D4E00EC2147 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BA20A5D91FD68D4E00EC2147 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA20A5DB1FD68D4E00EC2147 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA20A5DD1FD68D4F00EC2147 /* Send */ = {
+			isa = PBXGroup;
+			children = (
+				BA20A5FD1FD68DDA00EC2147 /* Send.storyboard */,
+				BA20A5DE1FD68D4F00EC2147 /* Other */,
+				BA20A5E01FD68D4F00EC2147 /* Controller */,
+				BA20A5E21FD68D4F00EC2147 /* Model */,
+				BA20A5E41FD68D4F00EC2147 /* View */,
+			);
+			path = Send;
+			sourceTree = "<group>";
+		};
+		BA20A5DE1FD68D4F00EC2147 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		BA20A5E01FD68D4F00EC2147 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BA20A5E21FD68D4F00EC2147 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA20A5E41FD68D4F00EC2147 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA20A5EE1FD68D6500EC2147 /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				BA20A5FF1FD68DE400EC2147 /* Me.storyboard */,
+				BA20A5EF1FD68D6500EC2147 /* Other */,
+				BA20A5F11FD68D6500EC2147 /* Controller */,
+				BA20A5F31FD68D6500EC2147 /* Model */,
+				BA20A5F51FD68D6500EC2147 /* View */,
+			);
+			path = Me;
+			sourceTree = "<group>";
+		};
+		BA20A5EF1FD68D6500EC2147 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		BA20A5F11FD68D6500EC2147 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BA20A5F31FD68D6500EC2147 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA20A5F51FD68D6500EC2147 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA20A6011FD68F0600EC2147 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				BA20A6101FD68F5100EC2147 /* Contact.storyboard */,
+				BA20A6021FD68F0600EC2147 /* Other */,
+				BA20A6041FD68F0600EC2147 /* Controller */,
+				BA20A6061FD68F0600EC2147 /* Model */,
+				BA20A6081FD68F0600EC2147 /* View */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		BA20A6021FD68F0600EC2147 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		BA20A6041FD68F0600EC2147 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BA20A6061FD68F0600EC2147 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA20A6081FD68F0600EC2147 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BAA371161FD142BE00E757A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +403,10 @@
 				CC94E02E1FB58D9C0098E730 /* Base */,
 				CC94E0191FB58D1F0098E730 /* Public */,
 				CCE5E14A1FC7BEDE00F7555D /* Home */,
+				BA20A5D41FD68D4E00EC2147 /* Recieve */,
+				BA20A6011FD68F0600EC2147 /* Contact */,
+				BA20A5DD1FD68D4F00EC2147 /* Send */,
+				BA20A5EE1FD68D6500EC2147 /* Me */,
 				CC94E0021FB58CAA0098E730 /* NewWallet */,
 				CC94E0A21FBD6E3B0098E730 /* BackupWallet */,
 			);
@@ -432,7 +599,6 @@
 		CC94E0A41FBD6E3B0098E730 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0A51FBD6E3B0098E730 /* .gitkeep */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -458,7 +624,6 @@
 		CC94E0AA1FBD6E3B0098E730 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0AB1FBD6E3B0098E730 /* .gitkeep */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -466,7 +631,6 @@
 		CC94E0AC1FBD6E3B0098E730 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0AD1FBD6E3B0098E730 /* .gitkeep */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -495,21 +659,11 @@
 			children = (
 				CCE5E1611FC7BFE100F7555D /* Home.storyboard */,
 				CCE5E1711FC81E3600F7555D /* Home.xcassets */,
-				CCE5E14E1FC7BEDE00F7555D /* Protocol */,
 				CCE5E1501FC7BEDE00F7555D /* Controller */,
-				CCE5E1521FC7BEDE00F7555D /* Manager */,
 				BAA371161FD142BE00E757A6 /* Model */,
 				CCE5E1561FC7BEDE00F7555D /* View */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		CCE5E14E1FC7BEDE00F7555D /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				CCE5E14F1FC7BEDE00F7555D /* .gitkeep */,
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 		CCE5E1501FC7BEDE00F7555D /* Controller */ = {
@@ -519,14 +673,6 @@
 				CCFEDEF91FCE672D00F1A7FC /* BILWalletController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		CCE5E1521FC7BEDE00F7555D /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				CCE5E1531FC7BEDE00F7555D /* .gitkeep */,
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		CCE5E1561FC7BEDE00F7555D /* View */ = {
@@ -775,6 +921,7 @@
 				CCEC67821FB190EE004CC6C5 /* bitcoinjs-lib-app.js in Resources */,
 				CCEC67611FB18C3A004CC6C5 /* Assets.xcassets in Resources */,
 				CC4660491FBE96E600A87132 /* Public.xcassets in Resources */,
+				BA20A6001FD68DE400EC2147 /* Me.storyboard in Resources */,
 				CCEC67831FB190EE004CC6C5 /* index.js in Resources */,
 				CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */,
 				CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */,
@@ -782,13 +929,16 @@
 				CCEC67841FB190EE004CC6C5 /* README.md in Resources */,
 				CCFEDEF81FCE62D400F1A7FC /* FF_DIN_Condensed_Bold.otf in Resources */,
 				CCE5E1621FC7BFE100F7555D /* Home.storyboard in Resources */,
+				BA20A6111FD68F5200EC2147 /* Contact.storyboard in Resources */,
 				CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */,
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
 				CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */,
 				CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */,
 				CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */,
 				CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */,
+				BA20A5FE1FD68DDA00EC2147 /* Send.storyboard in Resources */,
 				CCFEDEEE1FCC067E00F1A7FC /* BILTransactionCell.xib in Resources */,
+				BA20A5FC1FD68DC800EC2147 /* Recieve.storyboard in Resources */,
 				CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */,
 				BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */,
 				CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */,
