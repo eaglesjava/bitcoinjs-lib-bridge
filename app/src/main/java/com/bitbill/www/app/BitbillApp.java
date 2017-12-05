@@ -13,6 +13,7 @@ import com.bitbill.www.di.module.ApplicationModule;
 import javax.inject.Inject;
 
 import io.socket.client.Socket;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by isanwenyu@163.com on 2017/11/7.
@@ -21,6 +22,8 @@ public class BitbillApp extends Application {
     private static BitbillApp sInstance = new BitbillApp();
     @Inject
     Socket mSocket;
+    @Inject
+    OkHttpClient mOkhttpClient;
     private ApplicationComponent mApplicationComponent;
 
     public static BitbillApp get() {
@@ -40,9 +43,10 @@ public class BitbillApp extends Application {
 
         BitcoinJsWrapper.getInstance().init(this);
 
-        AndroidNetworking.initialize(getApplicationContext());
+        AndroidNetworking.initialize(getApplicationContext(), mOkhttpClient);
         if (BuildConfig.DEBUG) {
             AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
+
         }
     }
 

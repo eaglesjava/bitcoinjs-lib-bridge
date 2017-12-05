@@ -46,7 +46,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         mWallet.setUpdatedAt(System.currentTimeMillis());
         mWallet.setName(getMvpView().getWalletId());
         mWallet.setTradePwd(getMvpView().getTradePwd());
-
+        // TODO: 2017/12/5 插入操作只有创建成功后
         getCompositeDisposable().add(getModelManager()
                 .insertWallet(mWallet)
                 .compose(this.applyScheduler())
@@ -154,37 +154,39 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                 }
                 String finalEncryptMnemonicHash = encryptMnemonicHash;
                 getCompositeDisposable().add(getModelManager()
-                        .updateWallet(wallet)
-                        .subscribeOn(getSchedulerProvider().io())
-                        .observeOn(getSchedulerProvider().ui())
-                        .subscribeWith(new BaseSubcriber<Boolean>() {
-                            @Override
-                            public void onNext(Boolean aBoolean) {
-                                super.onNext(aBoolean);
-                                Log.d(TAG, "createWalletSuccess = [" + finalEncryptMnemonicHash + "]");
-                                if (!isViewAttached()) {
-                                    return;
-                                }
-                                if (aBoolean && finalEncryptMnemonicHash != null) {
-                                    //后台请求创建钱包
-                                    createWallet();
-                                } else {
-                                    getMvpView().createWalletFail();
-                                }
-                                getMvpView().hideLoading();
-                            }
+                                .updateWallet(wallet)
+                                .subscribeOn(getSchedulerProvider().io())
+                                .observeOn(getSchedulerProvider().ui())
+                                .subscribeWith(new BaseSubcriber<Boolean>() {
+                                    @Override
+                                    public void onNext(Boolean aBoolean) {
+                                        super.onNext(aBoolean);
+                                        Log.d(TAG, "createWalletSuccess = [" + finalEncryptMnemonicHash + "]");
+                                        if (!isViewAttached()) {
+                                            return;
+                                        }
+                                        if (aBoolean && finalEncryptMnemonicHash != null) {
+                                            //后台请求创建钱包
+//                                    createWallet();
+                                            // TODO: 2017/12/5 just for test
+                                            getMvpView().createWalletSuccess();
+                                        } else {
+                                            getMvpView().createWalletFail();
+                                        }
+                                        getMvpView().hideLoading();
+                                    }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                super.onError(e);
-                                Log.e(TAG, "createWalletFail ", e);
-                                if (!isViewAttached()) {
-                                    return;
-                                }
-                                getMvpView().createWalletFail();
-                                getMvpView().hideLoading();
-                            }
-                        })
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        super.onError(e);
+                                        Log.e(TAG, "createWalletFail ", e);
+                                        if (!isViewAttached()) {
+                                            return;
+                                        }
+                                        getMvpView().createWalletFail();
+                                        getMvpView().hideLoading();
+                                    }
+                                })
                 );
             }
         });

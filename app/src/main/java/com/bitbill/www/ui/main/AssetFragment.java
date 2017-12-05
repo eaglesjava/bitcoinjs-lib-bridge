@@ -13,16 +13,11 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.widget.PopupWalletMenu;
 import com.bitbill.www.common.base.view.widget.WalletView;
-import com.bitbill.www.model.entity.eventbus.WalletBackupSuccess;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.info.WalletInfoActivity;
 import com.bitbill.www.ui.wallet.init.InitWalletActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -117,6 +112,7 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
 
     @Override
     public void initData() {
+        llWalletContainer.removeAllViews();
         getMvpPresenter().loadWallet();
 
     }
@@ -171,14 +167,5 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
     public void onBackupClick(Wallet wallet, View view) {
         //跳转到备份界面
         BackUpWalletActivity.start(getBaseActivity(), wallet);
-    }
-
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onWalletBackupSuccess() {
-        WalletBackupSuccess stickyEvent = EventBus.getDefault().removeStickyEvent(WalletBackupSuccess.class);
-        //重新加载钱包信息
-        llWalletContainer.removeAllViews();
-        mAssetMvpPresenter.loadWallet();
-
     }
 }

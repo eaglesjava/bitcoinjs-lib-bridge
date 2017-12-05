@@ -6,10 +6,10 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 /**
  * Created by isanwenyu@163.com on 2017/12/5.
  */
-public class WalletBackupSuccess extends MessageEvent {
+public class BackupSuccessEvent extends MessageEvent {
     private Wallet mWallet;
 
-    public WalletBackupSuccess(Wallet wallet) {
+    public BackupSuccessEvent(Wallet wallet) {
         mWallet = wallet;
     }
 

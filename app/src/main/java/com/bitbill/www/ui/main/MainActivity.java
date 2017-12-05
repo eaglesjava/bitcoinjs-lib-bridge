@@ -15,8 +15,14 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.entity.eventbus.BackupSuccessEvent;
+import com.bitbill.www.model.entity.eventbus.CreateSuccessEvent;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -37,6 +43,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
     private FragmentAdapter mAdapter;
+    private AssetFragment mAssetFragment;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -69,7 +76,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         navView.setNavigationItemSelectedListener(this);
 
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
-        mAdapter.addItem(AssetFragment.newInstance());
+        mAssetFragment = AssetFragment.newInstance();
+        mAdapter.addItem(mAssetFragment);
         mAdapter.addItem(ReceiveFragment.newInstance());
         mAdapter.addItem(SendFragment.newInstance());
         mAdapter.addItem(MyFragment.newInstance());
@@ -123,5 +131,23 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void OnTransactionRecordItemClick(TransactionRecord item) {
 
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onWalletBackupSuccess(BackupSuccessEvent walletBackupSuccess) {
+        BackupSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(BackupSuccessEvent.class);
+        //重新加载钱包信息
+        if (mAssetFragment != null) {
+            mAssetFragment.initData();
+        }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onWalletBackupSuccess(CreateSuccessEvent createSuccessEvent) {
+        CreateSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(CreateSuccessEvent.class);
+        //重新加载钱包信息
+        if (mAssetFragment != null) {
+            mAssetFragment.initData();
+        }
     }
 }

@@ -43,11 +43,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="23dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:scaleType="center"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_asset_btc"/>
 
                 <LinearLayout
@@ -80,11 +80,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="23dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:scaleType="center"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_asset_eth"/>
 
                 <LinearLayout
@@ -117,11 +117,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="23dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:scaleType="center"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_asset_bch"/>
 
                 <LinearLayout

@@ -15,9 +15,12 @@ import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.dialog.SupportCoinDialog;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
+import com.bitbill.www.model.entity.eventbus.CreateSuccessEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -245,6 +248,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         if (isCreateWallet) {
             //跳转到穿件钱包成功界面
             InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);
+            EventBus.getDefault().postSticky(new CreateSuccessEvent());
         }
     }
 
@@ -252,7 +256,8 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void createWalletFail() {
         // TODO: 2017/11/21 弹出创建钱包失败提示
         showMessage("钱包创建失败，请重试");
-
+        // TODO: 2017/12/5 just for test
+        finish();
     }
 
     @Override

@@ -31,11 +31,14 @@ import com.bitbill.www.model.wallet.db.WalletDbHelper;
 import com.bitbill.www.model.wallet.network.WalletApi;
 import com.bitbill.www.model.wallet.network.WalletApiHelper;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import io.socket.client.Socket;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by isanwenyu@163.com on 2017/07/17.
@@ -127,6 +130,14 @@ public class ApplicationModule {
     @Singleton
     Socket provideSocketIo(SocketHelper socketHelper) {
         return socketHelper.getSocket();
+    }
+
+    @Provides
+    @Singleton
+    OkHttpClient provideOkhttpClient() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(10, TimeUnit.SECONDS);
+        return builder.build();
     }
 
     @Provides
