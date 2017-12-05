@@ -49,6 +49,11 @@ extension WalletModel {
         WalletModel.getBalanceFromServer(mainExtPublicKey: extKey, success: { (satoshBalance, unconfirmBalance) in
             self.btcBalance = Int64(satoshBalance)
             self.btcUnconfirmBalance = Int64(unconfirmBalance)
+            do {
+                try BILWalletManager.shared.saveWallets()
+            } catch {
+                debugPrint(error)
+            }
             success(self)
         }, failure: failure)
     }
