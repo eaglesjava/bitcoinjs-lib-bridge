@@ -120,6 +120,8 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         // Do any additional setup after loading the view.
 		tableView.register(UINib(nibName: headerViewID, bundle: nil), forHeaderFooterViewReuseIdentifier: headerViewID)
 		tableView.register(UINib(nibName: transactionCellID, bundle: nil), forCellReuseIdentifier: transactionCellID)
+        
+        setupRefresh()
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
 		
@@ -128,6 +130,13 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		} else {
 			// Fallback on earlier versions
 		}
+    }
+    
+    func setupRefresh() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        tableView.refreshControl = refreshControl
     }
 	
 	deinit {
@@ -145,6 +154,13 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	}
 	
 	// MARK: - Notifications
+    @objc
+    func refresh(sender: Any?) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
+    
 	func balanceDidChanged(notification: Notification) {
 		var sum: Int64 = 0
 		for wallet in wallets {

@@ -13,6 +13,11 @@ class BILWalletManager: NSObject {
 	static let shared = {
 		return BILWalletManager()
 	}()
+    
+    override init() {
+        super.init()
+        loadWalletBalancesFromServer()
+    }
 	
 	weak var appDelegate: AppDelegate?
     
@@ -20,7 +25,21 @@ class BILWalletManager: NSObject {
         (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }()
     
-	
+    var wallets: [WalletModel] {
+        get {
+            var results = [WalletModel]()
+            guard let delegate = appDelegate else { return results }
+            do {
+                let context = delegate.persistentContainer.viewContext
+                let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
+                results.append(contentsOf: try context.fetch(request))
+            } catch {
+                
+            }
+            return results
+        }
+    }
+    
 	func newWallet() -> WalletModel {
 		let context = coreDataContext
 		let wallet = NSEntityDescription.insertNewObject(forEntityName: "WalletModel", into: context) as! WalletModel
@@ -41,19 +60,14 @@ class BILWalletManager: NSObject {
 		try context.save()
 	}
 	
-	var wallets: [WalletModel] {
-		get {
-			var results = [WalletModel]()
-			guard let delegate = appDelegate else { return results }
-			do {
-				let context = delegate.persistentContainer.viewContext
-				let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
-				results.append(contentsOf: try context.fetch(request))
-			} catch {
-				
-			}
-			return results
-		}
-	}
+    func loadWalletBalancesFromServer() {
+        for wallet in wallets {
+            wallet.getBalanceFromServer(success: { (w) in
+                
+            }, failure: { (msg, code) in
+                
+            })
+        }
+    }
 	
 }
