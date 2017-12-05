@@ -77,7 +77,7 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     }
 
     @Override
-    public Observable<ApiResponse<String>> createWallet(String walletId, String extendedKeys, String clientId, String deviceToken, long indexNo) {
-        return mWalletApi.createWallet(walletId, extendedKeys, clientId, deviceToken, indexNo);
+    public Observable<ApiResponse<String>> createWallet(String walletId, String extendedKeys, String clientId, String deviceToken) {
+        return mWalletApi.createWallet(walletId, extendedKeys, clientId, deviceToken);
     }
 }

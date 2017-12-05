@@ -106,12 +106,12 @@
     <string name="text_default_amount">0</string>
     <string name="text_asset_eth">eth</string>
     <string name="text_asset_bch">bch</string>
-    <string name="text_asset_current_wallet">当前钱包%s个</string>
+    <string name="text_asset_current_wallet">当前钱包 %1$d个</string>
     <string name="title_asset_my_wallet">我的钱包</string>
     <string name="btn_backup_now">马上备份</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_bottom_wallet_id">设定你的钱包ID，他可以关联你的联系人，支持英文和数字，一旦设定不可修改。</string>
-
+    <string name="title_activity_wallet_info">钱包信息</string>
 </resources>

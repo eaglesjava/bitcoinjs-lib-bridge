@@ -12,9 +12,9 @@ public interface InitWalletMvpView extends MvpView {
 
     void initWalletFail();
 
-    void createMnemonicSuccess(String encryptMnemonicHash);
+    void createWalletSuccess();
 
-    void createMnemonicFail();
+    void createWalletFail();
 
     String getWalletId();
 
@@ -35,4 +35,6 @@ public interface InitWalletMvpView extends MvpView {
     void invalidWalletId();
 
     void requireWalletIdLength();
+
+    Wallet getWallet();
 }

@@ -3,14 +3,18 @@
     <color name="colorPrimary">@color/dark_top</color>
     <color name="colorPrimaryDark">@color/dark_top</color>
     <color name="colorAccent">@color/blue</color>
+    <color name="windowBackground">@color/dark_bg</color>
     <color name="backgroud">#353A46</color>
     <color name="backgroud_dark">#20222B</color>
     <color name="backgroud_middle">#2B2F39</color>
     <color name="transparent">#00000000</color>
     <color name="white">#fff</color>
+    <color name="white_10">#1affffff</color>
     <color name="white_30">#4dffffff</color>
     <color name="white_40">#66ffffff</color>
+    <color name="white_50">#80ffffff</color>
     <color name="white_60">#99ffffff</color>
+    <color name="white_70">#b3ffffff</color>
     <color name="black">#000</color>
     <color name="black_40">#66000000</color>
     <color name="black_50">#80000000</color>
@@ -19,6 +23,7 @@
     <color name="blue">#4493CD</color>
     <color name="blue_dark">#3255AC</color>
     <color name="blue_active">#318AF3</color>
+    <color name="blue_tab">#396EB9</color>
     <color name="red">#FF7E87</color>
     <color name="red_dark">#FF5960</color>
     <color name="edit_line">#F2F2F2</color>

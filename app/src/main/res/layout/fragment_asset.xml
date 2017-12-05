@@ -8,14 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/activity_padding">
+        android:orientation="vertical">
 
 
         <TextView
             style="@style/Text.Title.Content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"
             android:layout_marginTop="30dp"
             android:text="@string/text_current_currency_type"/>
 
@@ -23,12 +24,16 @@
             style="@style/Text.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"
             android:layout_marginTop="5dp"
             android:text="@string/title_total_assets"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
@@ -143,18 +148,53 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_in_progress"
+                style="@style/Text.Title.Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_padding"
+                android:layout_marginRight="@dimen/activity_padding"
+                android:text="正在进行中 %s个"/>
+
+            <TextView
+                style="@style/Text.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_padding"
+                android:layout_marginRight="@dimen/activity_padding"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="未确认的交易"/>
+
+            <fragment
+                android:id="@+id/frg_btc_record"
+                class="com.bitbill.www.ui.wallet.info.BtcRecordFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"
+            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_current_wallet_count"
                 style="@style/Text.Title.Content"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="@string/text_asset_current_wallet"/>
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -178,11 +218,12 @@
                     android:src="@drawable/ic_asset_plus"/>
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/ll_wallet_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"
             android:orientation="vertical">
 
         </LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.bitbill.www.ui.wallet.info.WalletInfoActivity">
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:layout_marginTop="15dp"
+        app:tabBackground="@drawable/bg_tab_selector"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/blue_tab"
+        app:tabTextAppearance="@style/TabText"
+        app:tabTextColor="@color/white_50"
+        />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+            <include
+                layout="@layout/header_btc_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"/>
+
+            <TextView
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="@color/white_10"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_padding"
+                android:text="交易记录"
+                android:textColor="@color/white_60"
+                android:textSize="12sp"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

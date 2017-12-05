@@ -13,6 +13,7 @@ import java.util.List;
 public class FragmentAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments = new ArrayList<Fragment>();
+    private List<String> titles = new ArrayList<>();
 
     public FragmentAdapter(FragmentManager fm) {
         super(fm);
@@ -20,6 +21,11 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     public void addItem(Fragment fragment) {
         fragments.add(fragment);
+    }
+
+    public void addItem(String title, Fragment fragment) {
+        fragments.add(fragment);
+        titles.add(title);
     }
 
     @Override
@@ -30,5 +36,14 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if (titles != null && position < titles.size()) {
+            return titles.get(position);
+        } else {
+            return null;
+        }
     }
 }

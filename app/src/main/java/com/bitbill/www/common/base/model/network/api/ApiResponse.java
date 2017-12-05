@@ -5,6 +5,7 @@ package com.bitbill.www.common.base.model.network.api;
  */
 public class ApiResponse<T> {
 
+    public static final int STATUS_CODE_SUCCESS = 0;
     /**
      * data : null
      * errorLog : null

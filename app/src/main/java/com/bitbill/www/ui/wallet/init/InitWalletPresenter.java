@@ -3,9 +3,11 @@ package com.bitbill.www.ui.wallet.init;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
+import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -21,6 +23,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpView> extends ModelPresenter<W, V> implements InitWalletMvpPresenter<W, V> {
 
     private static final String TAG = "InitWalletPresenter";
+    private Wallet mWallet;
 
     @Inject
     public InitWalletPresenter(W model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
@@ -38,14 +41,14 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         }
 
         // 初始化钱包实体
-        Wallet wallet = new Wallet();
-        wallet.setCreatedAt(System.currentTimeMillis());
-        wallet.setUpdatedAt(System.currentTimeMillis());
-        wallet.setName(getMvpView().getWalletId());
-        wallet.setTradePwd(getMvpView().getTradePwd());
+        mWallet = new Wallet();
+        mWallet.setCreatedAt(System.currentTimeMillis());
+        mWallet.setUpdatedAt(System.currentTimeMillis());
+        mWallet.setName(getMvpView().getWalletId());
+        mWallet.setTradePwd(getMvpView().getTradePwd());
 
         getCompositeDisposable().add(getModelManager()
-                .insertWallet(wallet)
+                .insertWallet(mWallet)
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Long>(getMvpView()) {
                     @Override
@@ -55,7 +58,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                         if (!isValidMvpView()) {
                             return;
                         }
-                        getMvpView().initWalletSuccess(wallet);
+                        getMvpView().initWalletSuccess(mWallet);
                     }
 
                     @Override
@@ -133,10 +136,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         if (!isValidTradePwd()) {
             return;
         }
-        if (wallet == null) {
-            getMvpView().initWalletFail();
-            return;
-        }
+        if (!isValidWallet()) return;
         //  create mnemonic in js thread
         getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().generateMnemonicCNandSeedHex(getMvpView().getTradePwd(), new BitcoinJsWrapper.JsInterface.Callback() {
@@ -150,7 +150,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                 } catch (Exception e) {
                     e.printStackTrace();
                     getMvpView().hideLoading();
-                    getMvpView().createMnemonicFail();
+                    getMvpView().createWalletFail();
                 }
                 String finalEncryptMnemonicHash = encryptMnemonicHash;
                 getCompositeDisposable().add(getModelManager()
@@ -161,14 +161,15 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                             @Override
                             public void onNext(Boolean aBoolean) {
                                 super.onNext(aBoolean);
-                                Log.d(TAG, "createMnemonicSuccess = [" + finalEncryptMnemonicHash + "]");
+                                Log.d(TAG, "createWalletSuccess = [" + finalEncryptMnemonicHash + "]");
                                 if (!isViewAttached()) {
                                     return;
                                 }
                                 if (aBoolean && finalEncryptMnemonicHash != null) {
-                                    getMvpView().createMnemonicSuccess(finalEncryptMnemonicHash);
+                                    //后台请求创建钱包
+                                    createWallet();
                                 } else {
-                                    getMvpView().createMnemonicFail();
+                                    getMvpView().createWalletFail();
                                 }
                                 getMvpView().hideLoading();
                             }
@@ -176,11 +177,11 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                             @Override
                             public void onError(Throwable e) {
                                 super.onError(e);
-                                Log.e(TAG, "createMnemonicFail ", e);
+                                Log.e(TAG, "createWalletFail ", e);
                                 if (!isViewAttached()) {
                                     return;
                                 }
-                                getMvpView().createMnemonicFail();
+                                getMvpView().createWalletFail();
                                 getMvpView().hideLoading();
                             }
                         })
@@ -190,4 +191,60 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
 
     }
 
+    private boolean isValidWallet() {
+        if (getMvpView().getWallet() == null) {
+            getMvpView().initWalletFail();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void createWallet() {
+
+        if (!isValidWallet()) return;
+
+        mWallet = getMvpView().getWallet();
+        BitcoinJsWrapper.getInstance().getBitcoinMasterXPublicKey(mWallet.getSeedHex(), new BitcoinJsWrapper.JsInterface.Callback() {
+            @Override
+            public void call(String key, String... jsResult) {
+                getCompositeDisposable().add(getModelManager().createWallet(mWallet.getName(), jsResult[0], DeviceUtil.getDeviceId(), getDeviceToken())
+                        .compose(applyScheduler())
+                        .subscribeWith(new BaseSubcriber<ApiResponse<String>>(getMvpView()) {
+                            @Override
+                            public void onNext(ApiResponse<String> stringApiResponse) {
+                                super.onNext(stringApiResponse);
+                                if (!isValidMvpView()) {
+                                    return;
+                                }
+                                Log.d(TAG, "onNext() called with: stringApiResponse = [" + stringApiResponse + "]");
+                                if (stringApiResponse != null && stringApiResponse.getStatus() == ApiResponse.STATUS_CODE_SUCCESS) {
+                                    getMvpView().createWalletSuccess();
+                                } else {
+                                    getMvpView().createWalletFail();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                super.onError(e);
+                                if (!isValidMvpView()) {
+                                    return;
+                                }
+                                Log.e(TAG, "onError: ", e);
+                                getMvpView().createWalletFail();
+
+                            }
+                        }));
+            }
+        });
+
+    }
+
+    /**
+     * @return todo 使用能够极光唯一标识
+     */
+    public String getDeviceToken() {
+        return "";
+    }
 }

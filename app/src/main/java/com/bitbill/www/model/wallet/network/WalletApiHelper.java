@@ -1,9 +1,11 @@
 package com.bitbill.www.model.wallet.network;
 
+import com.bitbill.www.common.base.model.network.api.ApiEndPoint;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiHelper;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
+import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.google.gson.reflect.TypeToken;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -24,14 +26,12 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
     }
 
     @Override
-    public Observable<ApiResponse<String>> createWallet(String walletId, String extendedKeys, String clientId, String deviceToken, long indexNo) {
-        return Rx2AndroidNetworking.post(mBaseUrl)
+    public Observable<ApiResponse<String>> createWallet(String walletId, String extendedKeys, String clientId, String deviceToken) {
+        CreateWalletRequest request = new CreateWalletRequest(walletId, extendedKeys, clientId, deviceToken);
+
+        return Rx2AndroidNetworking.post(ApiEndPoint.WALLET_CREATE)
                 .addHeaders(mApiHeader.getPublicApiHeader())
-                .addBodyParameter("walletId", walletId)
-                .addBodyParameter("extendedKeys", extendedKeys)
-                .addBodyParameter("clientId", clientId)
-                .addBodyParameter("deviceToken", deviceToken)
-                .addBodyParameter("indexNo", String.valueOf(indexNo))
+                .addApplicationJsonBody(request)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<String>>() {
                 });

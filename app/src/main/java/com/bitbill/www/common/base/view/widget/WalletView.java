@@ -21,7 +21,7 @@ import butterknife.OnClick;
 /**
  * Wallet view
  */
-public class WalletView extends RelativeLayout {
+public class WalletView extends RelativeLayout implements View.OnClickListener {
     public static final int NORMAL_COLOR_ID = R.color.blue;
     public static final int BACKUP_COLOR_ID = R.color.red;
     public static final int NORMAL_BG_ID = R.drawable.bg_blue_corner;
@@ -44,7 +44,7 @@ public class WalletView extends RelativeLayout {
     private String mWalletAmount;
     private boolean isBackup;
     private String mWalletLabel;
-    private OnBackupClickListener mOnBackupClickListener;
+    private OnWalletClickListener mOnWalletClickListener;
     private Wallet mWallet;
 
     public WalletView(Context context) {
@@ -110,7 +110,7 @@ public class WalletView extends RelativeLayout {
                 .setWalletAmount(mWalletAmount);
         int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_PADDING, getResources().getDisplayMetrics());
         setPadding(padding, padding, padding, padding);
-
+        setOnClickListener(this);
     }
 
     public WalletView setWalletName(String walletName) {
@@ -145,15 +145,10 @@ public class WalletView extends RelativeLayout {
         return this;
     }
 
-    public WalletView setOnBackupClickListener(OnBackupClickListener onBackupClickListener) {
-        mOnBackupClickListener = onBackupClickListener;
-        return this;
-    }
-
     @OnClick(R.id.btn_backup_now)
     public void onViewClicked() {
-        if (mOnBackupClickListener != null) {
-            mOnBackupClickListener.onBackupClick(getWallet(), btnBackupNow);
+        if (mOnWalletClickListener != null) {
+            mOnWalletClickListener.onBackupClick(getWallet(), btnBackupNow);
         }
 
     }
@@ -173,7 +168,30 @@ public class WalletView extends RelativeLayout {
         return this;
     }
 
+    public WalletView setOnWalletClickListener(OnWalletClickListener onWalletClickListener) {
+        mOnWalletClickListener = onWalletClickListener;
+        return this;
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        if (mOnWalletClickListener != null) {
+            mOnWalletClickListener.onWalletClick(getWallet(), v);
+        }
+    }
+
     public interface OnBackupClickListener {
+
+    }
+
+    public interface OnWalletClickListener {
+
+        void onWalletClick(Wallet wallet, View view);
 
         void onBackupClick(Wallet wallet, View view);
     }

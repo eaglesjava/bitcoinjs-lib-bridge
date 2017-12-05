@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rl_item_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="17dp"
+                android:paddingLeft="@dimen/activity_padding"
+                android:paddingRight="@dimen/activity_padding"
+                android:paddingTop="17dp"
+    >
+
+    <ImageView
+        android:id="@+id/iv_status"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_item_send"/>
+
+
+    <TextView
+        android:id="@+id/tv_address"
+        style="@style/Text.White"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/iv_status"
+        android:text="1PN9ET1..sRaqfPN"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        style="@style/Text.White"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tv_address"
+        android:layout_below="@+id/tv_address"
+        android:text="2017.11.10 15:32   0确认"
+        android:textColor="@color/white_60"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="+2.35 btc"
+        android:textSize="15sp"/>
+
+</RelativeLayout>

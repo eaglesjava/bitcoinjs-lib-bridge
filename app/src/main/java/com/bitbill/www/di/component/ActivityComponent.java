@@ -14,7 +14,6 @@ import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.backup.BackupWalletConfirmActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import com.bitbill.www.ui.wallet.init.InitWalletActivity;
-import com.bitbill.www.ui.wallet.init.InitWalletSuccessActivity;
 
 import dagger.Component;
 
@@ -37,8 +36,6 @@ public interface ActivityComponent {
     void inject(BackupWalletConfirmActivity backupWalletConfirmActivity);
 
     void inject(AssetFragment assetFragment);
-
-    void inject(InitWalletSuccessActivity initWalletSuccessActivity);
 
     void inject(GuideActivity guideActivity);
 

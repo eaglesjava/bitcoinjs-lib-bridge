@@ -4,13 +4,17 @@
 
 package com.bitbill.www.common.base.model.network.api;
 
+import com.bitbill.www.BuildConfig;
+
 /**
  * Created by isanwenyu@163.com on 2017/07/17.
  */
 
 public final class ApiEndPoint {
-
-    public static final String WALLET_CREATE = "/wallet/create";
+    public static final String A = "http://192.168.1.11:8086/a";
+    private static final String BITBILL_BITCOIN = "/bitbill/bitcoin";
+    public static final String WALLET_CREATE = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/create";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

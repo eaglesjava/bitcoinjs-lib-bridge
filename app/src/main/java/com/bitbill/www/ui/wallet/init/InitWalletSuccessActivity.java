@@ -10,19 +10,17 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.app.AppManager;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class InitWalletSuccessActivity extends BaseToolbarActivity<InitWalletSuccessMvpPresenter> implements InitWalletSuccessMvpView {
+public class InitWalletSuccessActivity extends BaseToolbarActivity {
 
     @BindView(R.id.btn_bak_wallet)
     Button btnBakWallet;
@@ -32,8 +30,6 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity<InitWalletSuc
     TextView tvHintTitle;
     @BindView(R.id.tv_hint_content)
     TextView tvHintContent;
-    @Inject
-    InitWalletSuccessMvpPresenter<WalletModel, InitWalletSuccessMvpView> mInitWalletSuccessMvpPresenter;
     private Wallet mWallet;
     private boolean isCreateWallet = true;//默认创建钱包成功界面
 
@@ -45,13 +41,13 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity<InitWalletSuc
     }
 
     @Override
-    public InitWalletSuccessMvpPresenter getMvpPresenter() {
-        return mInitWalletSuccessMvpPresenter;
+    public MvpPresenter getMvpPresenter() {
+        return null;
     }
 
     @Override
     public void injectComponent() {
-        getActivityComponent().inject(this);
+
     }
 
     @Override
@@ -81,7 +77,6 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity<InitWalletSuc
     protected void onResume() {
         super.onResume();
         setTitle(isCreateWallet ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet);
-        getMvpPresenter().createWallet();
     }
 
     @Override
@@ -107,10 +102,5 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity<InitWalletSuc
             AppManager.get().finishActivity(ImportWalletActivity.class);
         }
         finish();
-    }
-
-    @Override
-    public Wallet getWallet() {
-        return mWallet;
     }
 }

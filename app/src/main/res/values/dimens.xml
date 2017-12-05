@@ -28,5 +28,7 @@
     <dimen name="activity_padding">25dp</dimen>
     <!--create wallet activity-->
     <dimen name="dialog_confirm_padding">25dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
 
 </resources>

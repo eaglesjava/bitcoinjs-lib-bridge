@@ -13,10 +13,16 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.widget.PopupWalletMenu;
 import com.bitbill.www.common.base.view.widget.WalletView;
+import com.bitbill.www.model.entity.eventbus.WalletBackupSuccess;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
+import com.bitbill.www.ui.wallet.info.WalletInfoActivity;
 import com.bitbill.www.ui.wallet.init.InitWalletActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -31,7 +37,7 @@ import butterknife.OnClick;
  * Activities that contain this fragment must implement the
  * create an instance of this fragment.
  */
-public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements AssetMvpView, WalletView.OnBackupClickListener {
+public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements AssetMvpView, WalletView.OnWalletClickListener {
 
 
     private static final int BOTTOM_MARGIN = 15;//unit dp
@@ -39,10 +45,13 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
     TextView tvBtcAmount;
     @BindView(R.id.ll_wallet_container)
     LinearLayout llWalletContainer;
+    @BindView(R.id.tv_current_wallet_count)
+    TextView mWalletCountView;
 
     @Inject
     AssetMvpPresenter<WalletModel, AssetMvpView> mAssetMvpPresenter;
     private PopupWalletMenu mWalletMenu;
+    private int mWalletCount;
 
     public AssetFragment() {
         // Required empty public constructor
@@ -119,6 +128,10 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
 
     @Override
     public void loadWalletsSuccess(List<Wallet> wallets) {
+        if (wallets == null) {
+            return;
+        }
+        mWalletCountView.setText(String.format(getString(R.string.text_asset_current_wallet), wallets.size()));
         for (Wallet wallet : wallets) {
             addWalletView(wallet);
         }
@@ -131,7 +144,7 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
         llWalletContainer.addView(
                 new WalletView(getBaseActivity())
                         .setWallet(wallet)
-                        .setOnBackupClickListener(this), layoutParams);
+                        .setOnWalletClickListener(this), layoutParams);
     }
 
     @Override
@@ -149,8 +162,23 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
     }
 
     @Override
+    public void onWalletClick(Wallet wallet, View view) {
+        //跳转到钱包详情页
+        WalletInfoActivity.start(getBaseActivity(), wallet);
+    }
+
+    @Override
     public void onBackupClick(Wallet wallet, View view) {
         //跳转到备份界面
         BackUpWalletActivity.start(getBaseActivity(), wallet);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onWalletBackupSuccess() {
+        WalletBackupSuccess stickyEvent = EventBus.getDefault().removeStickyEvent(WalletBackupSuccess.class);
+        //重新加载钱包信息
+        llWalletContainer.removeAllViews();
+        mAssetMvpPresenter.loadWallet();
+
     }
 }

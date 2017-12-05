@@ -214,6 +214,11 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         cancel = true;
     }
 
+    @Override
+    public Wallet getWallet() {
+        return mWallet;
+    }
+
     public String getConfirmTradePwd() {
         return etwTradePwdConfirm.getText();
     }
@@ -236,7 +241,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public void createMnemonicSuccess(String encryptMnemonicHash) {
+    public void createWalletSuccess() {
         if (isCreateWallet) {
             //跳转到穿件钱包成功界面
             InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);
@@ -244,7 +249,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public void createMnemonicFail() {
+    public void createWalletFail() {
         // TODO: 2017/11/21 弹出创建钱包失败提示
         showMessage("钱包创建失败，请重试");
 

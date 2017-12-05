@@ -9,5 +9,6 @@ import io.reactivex.Observable;
  * Created by isanwenyu@163.com on 2017/11/30.
  */
 public interface WalletApi extends Api {
-    Observable<ApiResponse<String>> createWallet(String walletId, String extendedKeys, String clientId, String deviceToken, long indexNo);
+
+    Observable<ApiResponse<String>> createWallet(String walletId, String extendedKeys, String clientId, String deviceToken);
 }

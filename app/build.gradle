@@ -37,6 +37,7 @@ android {
 
 dependencies {
     implementation 'com.android.support:support-v4:25.4.0'
+    implementation 'com.android.support:recyclerview-v7:25.4.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //support
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -91,4 +92,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
 
     compile 'de.hdodenhof:circleimageview:2.2.0'
+    //tab
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+    //adapter
+    compile 'com.zhy:base-rvadapter:3.0.3'
+
 }

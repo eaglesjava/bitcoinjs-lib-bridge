@@ -19,4 +19,10 @@ public interface InitWalletMvpPresenter<W extends WalletModel, V extends InitWal
      * 获取助记词
      */
     void createMnemonic(Wallet wallet);
+
+
+    /**
+     * 创建钱包
+     */
+    void createWallet();
 }

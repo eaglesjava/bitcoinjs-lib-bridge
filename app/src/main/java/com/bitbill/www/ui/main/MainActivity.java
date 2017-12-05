@@ -15,6 +15,8 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
+import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
 
 import javax.inject.Inject;
 
@@ -22,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements NavigationView.OnNavigationItemSelectedListener, MainMvpView {
+        implements NavigationView.OnNavigationItemSelectedListener, MainMvpView, BtcRecordFragment.OnTransactionRecordItemClickListener {
 
     @Inject
     MainMvpPresenter<AppModel, MainMvpView> mMainMvpPresenter;
@@ -116,5 +118,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void OnTransactionRecordItemClick(TransactionRecord item) {
+
     }
 }
