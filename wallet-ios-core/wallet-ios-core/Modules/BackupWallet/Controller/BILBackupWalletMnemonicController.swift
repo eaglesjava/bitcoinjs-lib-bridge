@@ -16,7 +16,7 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 	var wallet: WalletModel?
 	var mnemonicHash: String? {
 		didSet {
-			wallet = WalletModel.fetch(by: mnemonicHash)
+			wallet = WalletModel.fetch(mnemonicHash: mnemonicHash)
 		}
 	}
 	

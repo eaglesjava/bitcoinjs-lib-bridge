@@ -43,47 +43,83 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-	@IBAction func nextAction(_ sender: Any) {
-		
-		guard let input = textView.text else { return }
-		var trimmedString = input.trimmingCharacters(in: .whitespaces)
-		do {
-			let regex = try NSRegularExpression(pattern: "  +", options: .caseInsensitive)
-			let str = NSMutableString(string: trimmedString)
-			_ = regex.replaceMatches(in: str, options: .reportCompletion, range: NSMakeRange(0, trimmedString.count), withTemplate: " ")
-			trimmedString = String(str)
-		} catch {
-			debugPrint(error)
-		}
-		let words = trimmedString.components(separatedBy: " ")
-		let lengths = [12, 15, 18, 21, 24]
-		guard lengths.contains(words.count) else {
-			print("长度不符合")
-			SVProgressHUD.showError(withStatus: "长度不符合")
-			return
-		}
-		
-		let mnemonic = words.joined(separator: " ")
-		
-        // TODO: 本地校验是否存在该助记词，服务器校验
+    func normalized(mnemonic: String) -> String? {
+        guard let input = textView.text else { return nil }
+        var trimmedString = input.trimmingCharacters(in: .whitespaces)
+        do {
+            let regex = try NSRegularExpression(pattern: "  +", options: .caseInsensitive)
+            let str = NSMutableString(string: trimmedString)
+            _ = regex.replaceMatches(in: str, options: .reportCompletion, range: NSMakeRange(0, trimmedString.count), withTemplate: " ")
+            trimmedString = String(str)
+        } catch {
+            debugPrint(error)
+        }
+        let words = trimmedString.components(separatedBy: " ")
+        let lengths = [12, 15, 18, 21, 24]
+        guard lengths.contains(words.count) else {
+            print("长度不符合")
+            SVProgressHUD.showError(withStatus: "长度不符合")
+            return nil
+        }
         
-		BitcoinJSBridge.shared.validateMnemonic(mnemonic: mnemonic, success: { (result) in
-			let isValidate = result as! Bool
-			if isValidate {
-//				self.textView.isHidden = true
-//				self.mnemonicView.mnemonic = mnemonic
-				self.performSegue(withIdentifier: self.sugueID, sender: mnemonic)
-			}
-			else
-			{
-				print("不是合法的助记词")
-				SVProgressHUD.showError(withStatus: "不是合法的助记词")
-			}
-		}) { (error) in
-			print("校验助记词失败")
-			SVProgressHUD.showError(withStatus: "校验助记词失败")
-		}
-		
+        return words.joined(separator: " ")
+    }
+    
+	@IBAction func nextAction(_ sender: Any) {
+		view.endEditing(true)
+        guard let mnemonic = normalized(mnemonic: textView.text) else {
+            SVProgressHUD.showError(withStatus: "助记词格式化失败")
+            return
+        }
+        
+        func segueSender(mnemonic: String, walletID: String?) -> (mnemonic: String, walletID: String?) {
+            return (mnemonic, walletID)
+        }
+        SVProgressHUD.show(withStatus: "校验助记词。。。")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
+            // TODO: 本地校验是否存在该助记词，服务器校验
+            BitcoinJSBridge.shared.validateMnemonic(mnemonic: mnemonic, success: { (result) in
+                let isValidate = result as! Bool
+                if isValidate {
+                    if let wallet = WalletModel.fetch(mnemonicHash: mnemonic.md5()) {
+                        debugPrint("钱包已存在在本地")
+                        let alert = UIAlertController(title: "钱包已存在", message: "是否重置密码", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+                            self.bil_dismissSelfModalViewController()
+                        }))
+                        alert.addAction(UIAlertAction(title: "重置", style: .destructive, handler: { (action) in
+                            self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: wallet.id))
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        SVProgressHUD.dismiss()
+                    }
+                    else
+                    {
+                        BitcoinJSBridge.shared.getMasterXPublicKey(mnemonic: mnemonic, success: { (pubKey) in
+                            WalletModel.getWalletIDFromSever(mainExtPublicKey: pubKey as! String, success: { (id) in
+                                self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: id))
+                                SVProgressHUD.dismiss()
+                            }, failure: { (errorMsg, code) in
+                                SVProgressHUD.showError(withStatus: "请求失败，请稍后再试")
+                            })
+                        }, failure: { (error) in
+                            SVProgressHUD.dismiss()
+                            self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: nil))
+                        })
+                    }
+                }
+                else
+                {
+                    print("不是合法的助记词")
+                    SVProgressHUD.showError(withStatus: "不是合法的助记词")
+                }
+            }) { (error) in
+                print("校验助记词失败")
+                SVProgressHUD.showError(withStatus: "校验助记词失败")
+            }
+        }
+        
 	}
 	
 	public func textViewDidBeginEditing(_ textView: UITextView) {
@@ -105,7 +141,12 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         // Pass the selected object to the new view controller.
 		if segue.identifier == sugueID {
 			let cont = segue.destination as! BILCreateWalletViewController
-			cont.mnemonic = sender as? String
+            cont.navigationItem.rightBarButtonItem = nil
+            guard let s = sender as? (mnemonic: String, walletID: String?) else {
+                return
+            }
+			cont.mnemonic = s.mnemonic
+            cont.walletID = s.walletID
 		}
     }
 

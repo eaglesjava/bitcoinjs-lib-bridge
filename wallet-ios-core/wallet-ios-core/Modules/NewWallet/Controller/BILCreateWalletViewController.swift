@@ -43,6 +43,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		}
 	}
 	var mnemonicHash: String?
+    var walletID: String?
 	
 	var hasShownAlert = false
 	
@@ -57,6 +58,11 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+        if let w = walletID, !w.isEmpty {
+            walletNameTextField.isEnabled = false
+            walletNameTextField.text = w
+            walletNameTextField.textColor = UIColor.bil_white_60_color
+        }
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -169,6 +175,10 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
             
         }
         
+        if WalletModel.checkIDIsExists(id: walletID) {
+            toReturn = "钱包ID已存在"
+        }
+        
 		return toReturn
 	}
 	
@@ -203,47 +213,21 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                     BILWalletManager.shared.remove(wallet: w)
                 }
             }
-			BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
-				let s = seedHex as! String
-				let wallet = BILWalletManager.shared.newWallet()
-				wallet.id = self.walletNameTextField.text!
-				wallet.createDate = Date()
-				do {
-					let pwd = self.passwordTextField.text!
-					let key = String(pwd.sha256().prefix(32))
-					let aes = try AES(key: key, iv: String(key.reversed().prefix(16)))
-					wallet.encryptedMnemonic = try aes.encrypt(Array(m.bytes)).toHexString()
-					wallet.encryptedSeed = try aes.encrypt(Array(s.bytes)).toHexString()
-					wallet.seedHash = s.md5()
-					wallet.mnemonicHash = m.md5()
-					self.mnemonicHash = wallet.mnemonicHash
-                    
-                    BitcoinJSBridge.shared.getMasterXPublicKey(seed: s, success: { (pubKey) in
-                        let extPubKey = pubKey as! String
-                        wallet.mainExtPublicKey = extPubKey
-                        if wallet.checkPassword(pwd: pwd) {
-                            SVProgressHUD.show(withStatus: "创建钱包中。。。")
-                            wallet.createWalletInServer(sucess: { (result) in
-                                do {
-                                    try BILWalletManager.shared.saveWallets()
-                                    self.createSuccess()
-                                    SVProgressHUD.dismiss()
-                                } catch {
-                                    cleanUp(wallet: wallet, error: error.localizedDescription)
-                                }
-                            }, failure: { (msg, code) in
-                                cleanUp(wallet: wallet, error: msg)
-                            })
-                        }
-                    }, failure: { (error) in
-                        cleanUp(wallet: wallet, error: error.localizedDescription)
-                    })
-				} catch {
-					cleanUp(wallet: wallet, error: error.localizedDescription)
-				}
-			}, failure: { (error) in
-				cleanUp(wallet: nil, error: error.localizedDescription)
-			})
+            guard let pwd = self.passwordTextField.text else {
+                SVProgressHUD.showError(withStatus: "密码不能为空")
+                SVProgressHUD.dismiss(withDelay: 1.2)
+                return
+            }
+            SVProgressHUD.show(withStatus: "创建钱包中。。。")
+            let wallet = BILWalletManager.shared.newWallet()
+            wallet.id = self.walletNameTextField.text!
+            wallet.resetProperties(m: m, pwd: pwd, success: { (w) in
+                self.createSuccess()
+                SVProgressHUD.dismiss()
+            }, failure: { (errorMsg) in
+                SVProgressHUD.showError(withStatus: errorMsg)
+                SVProgressHUD.dismiss(withDelay: 1.2)
+            })
 		}
 		
 	}

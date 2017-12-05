@@ -13,7 +13,7 @@ import SwiftyJSON
 import CryptoSwift
 
 extension WalletModel {
-    func createWalletInServer(sucess: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func createWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let walletID = id else {
             failure("ID不能为空", -1)
             return
@@ -22,18 +22,50 @@ extension WalletModel {
             failure("extKey不能为空", -1)
             return
         }
-        BILNetworkManager.request(request: .createWallet(walletID: walletID, extendedKey: extKey), sucess: sucess, failure: failure)
+        BILNetworkManager.request(request: .createWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
+    }
+    
+    func importWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        guard let walletID = id else {
+            failure("ID不能为空", -1)
+            return
+        }
+        guard let extKey = mainExtPublicKey else {
+            failure("extKey不能为空", -1)
+            return
+        }
+        BILNetworkManager.request(request: .importWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
+    }
+    
+    static func getWalletIDFromSever(mainExtPublicKey: String, success: @escaping (_ id: String) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        BILNetworkManager.request(request: .getWalletID(extendedKey: mainExtPublicKey.md5()), success: { (result) in
+            debugPrint(result)
+            let json = JSON(result)
+            guard let id = json["walletId"].string else {
+                failure("获取到错误的数据", -1)
+                return
+            }
+            success(id)
+        }, failure: failure)
     }
 }
 
 extension WalletModel {
+    static func generateAES(pwd: String) -> AES? {
+        do {
+            let key = String(pwd.sha256().prefix(32))
+            let aes = try AES(key: key, iv: String(key.reversed().prefix(16)))
+            return aes
+        } catch {
+            print(error)
+            return nil
+        }
+    }
     func checkPassword(pwd: String) -> Bool {
         var toReturn = false
         
-        let key = String(pwd.sha256().prefix(32))
-        
         do {
-            let aes = try AES(key: key, iv: String(key.reversed().prefix(16)))
+            guard let aes = WalletModel.generateAES(pwd: pwd) else { return false }
             
             if let s = String(bytes: try aes.decrypt((encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seedHash == s.md5() {
                 toReturn = true
@@ -44,10 +76,70 @@ extension WalletModel {
         
         return toReturn
     }
+    
+    static func checkMnemonicIsExists (m: String) -> Bool {
+        var toReturn = false
+        
+        toReturn = fetch(mnemonicHash: m.md5()) != nil
+        
+        return toReturn
+    }
+    
+    static func checkIDIsExists (id: String) -> Bool {
+        var toReturn = false
+        
+        toReturn = fetch(id: id) != nil
+        
+        return toReturn
+    }
 }
 
 extension WalletModel {
-	static func fetch(by mnemonicHash: String?) -> WalletModel? {
+    func resetProperties(m: String, pwd: String, success: @escaping (_ wallet: WalletModel) -> Void, failure: @escaping (_ message: String) -> Void) {
+        func cleanUp(wallet: WalletModel?, error: String) {
+            debugPrint(error)
+            if let w = wallet {
+                BILWalletManager.shared.remove(wallet: w)
+            }
+            failure(error)
+        }
+        BitcoinJSBridge.shared.mnemonicToSeedHex(mnemonic: m, password: "", success: { (seedHex) in
+            let s = seedHex as! String
+            let wallet = self
+            wallet.createDate = Date()
+            do {
+                guard let aes = WalletModel.generateAES(pwd: pwd) else { return }
+                wallet.encryptedMnemonic = try aes.encrypt(Array(m.bytes)).toHexString()
+                wallet.encryptedSeed = try aes.encrypt(Array(s.bytes)).toHexString()
+                wallet.seedHash = s.md5()
+                wallet.mnemonicHash = m.md5()
+                
+                BitcoinJSBridge.shared.getMasterXPublicKey(seed: s, success: { (pubKey) in
+                    let extPubKey = pubKey as! String
+                    wallet.mainExtPublicKey = extPubKey
+                    if wallet.checkPassword(pwd: pwd) {
+                        wallet.createWalletToServer(success: { (result) in
+                            do {
+                                try BILWalletManager.shared.saveWallets()
+                                success(self)
+                            } catch {
+                                cleanUp(wallet: wallet, error: error.localizedDescription)
+                            }
+                        }, failure: { (msg, code) in
+                            cleanUp(wallet: wallet, error: msg)
+                        })
+                    }
+                }, failure: { (error) in
+                    cleanUp(wallet: wallet, error: error.localizedDescription)
+                })
+            } catch {
+                cleanUp(wallet: wallet, error: error.localizedDescription)
+            }
+        }, failure: { (error) in
+            cleanUp(wallet: nil, error: error.localizedDescription)
+        })
+    }
+	static func fetch(mnemonicHash: String?) -> WalletModel? {
 		var wallet: WalletModel? = nil
 		guard let hash = mnemonicHash else {
 			return wallet
@@ -63,6 +155,23 @@ extension WalletModel {
 		}
 		return wallet
 	}
+    
+    static func fetch(id: String?) -> WalletModel? {
+        var wallet: WalletModel? = nil
+        guard let idStr = id else {
+            return wallet
+        }
+        do {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
+            request.predicate = NSPredicate(format: "id=%@", idStr)
+            let results = try context.fetch(request)
+            wallet = results.first
+        } catch {
+            return wallet
+        }
+        return wallet
+    }
 	
 	func save() {
 		do {
