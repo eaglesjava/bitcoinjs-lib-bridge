@@ -276,14 +276,19 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     
 
     // MARK: - Navigation
-
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "BILHomeToWalletSegue" {
+            return sender is UITableViewCell
+        }
+        return true
+    }
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
 		if segue.identifier == "BILHomeToWalletSegue" {
 			let cont = segue.destination as! BILWalletController
-			cont.wallet = wallets[(tableView.indexPathForSelectedRow?.row)!]
+			cont.wallet = wallets[(tableView.indexPath(for: sender as! UITableViewCell))!.row]
 		}
     }
 

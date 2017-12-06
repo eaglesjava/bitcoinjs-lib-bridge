@@ -42,12 +42,12 @@ class BILAppStartUpManager: NSObject {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
-                debugPrint("success")
+                debugPrint("UNUserNotificationCenter success")
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
             } else if error == nil {
-                debugPrint("failed")
+                debugPrint("UNUserNotificationCenter failed")
             }
         }
     }

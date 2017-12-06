@@ -23,11 +23,12 @@ class BILWalletController: BILBaseViewController {
     }
 	
 	override func bil_setBackgroudColor() {
-		_ = view.setupGradient(colors: [UIColor.bil_gradient_start_color.cgColor, UIColor.bil_gradient_end_color.cgColor], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
+        if gradientLayer == nil {
+            gradientLayer = view.setupGradient(colors: [UIColor.bil_gradient_start_color.cgColor, UIColor.bil_gradient_end_color.cgColor], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
+        }
+        gradientLayer?.frame = UIScreen.main.bounds
 		view.backgroundColor = UIColor.clear
 	}
-	
-	
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
