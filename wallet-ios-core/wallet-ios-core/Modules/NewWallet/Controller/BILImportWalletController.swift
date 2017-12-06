@@ -52,6 +52,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
             trimmedString = String(str)
         } catch {
             debugPrint(error)
+            return nil
         }
         let words = trimmedString.components(separatedBy: " ")
         let lengths = [12, 15, 18, 21, 24]
