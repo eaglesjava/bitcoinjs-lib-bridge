@@ -30,7 +30,7 @@
         <scene sceneID="K4I-Pn-CzS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wp5-hk-BhU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="发送" id="5MS-kJ-Ypl"/>
+                    <tabBarItem key="tabBarItem" title="发送" image="icon_send" selectedImage="icon_send_h" id="5MS-kJ-Ypl"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="H6r-O6-Djn">
@@ -47,4 +47,8 @@
             <point key="canvasLocation" x="-94" y="114"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_send" width="23" height="20"/>
+        <image name="icon_send_h" width="23" height="20"/>
+    </resources>
 </document>

@@ -16,9 +16,9 @@ enum Router: URLRequestConvertible {
             case .root:
                 return (.bil_base_url, nil)
             case .createWallet(let walletID, let extendedKey):
-                return (.bil_wallet_create, ["walletId": walletID, "extendedKeys": extendedKey, "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? "asdf"])
+                return (.bil_wallet_create, ["walletId": walletID, "extendedKeys": extendedKey, "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? ""])
             case .importWallet(let walletID, let extendedKey):
-                return (.bil_wallet_import, ["walletId": walletID, "extendedKeys": extendedKey, "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? "asdf"])
+                return (.bil_wallet_import, ["walletId": walletID, "extendedKeys": extendedKey, "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? ""])
             case .checkWalletID(let walletID):
                 return (.bil_wallet_check_id, ["walletId": walletID])
             case .getWalletID(let extendedKeyHash):

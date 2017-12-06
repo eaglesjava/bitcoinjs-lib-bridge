@@ -30,7 +30,7 @@
         <scene sceneID="pj1-mt-ETC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FHp-J5-Gub" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" id="dFI-W1-AfE"/>
+                    <tabBarItem key="tabBarItem" title="我" image="icon_me" selectedImage="icon_me_h" id="dFI-W1-AfE"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0xA-JJ-HPR">
@@ -47,4 +47,8 @@
             <point key="canvasLocation" x="-94" y="114"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_me" width="17" height="19"/>
+        <image name="icon_me_h" width="17" height="19"/>
+    </resources>
 </document>
