@@ -44,8 +44,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     }
     
     func normalized(mnemonic: String) -> String? {
-        guard let input = textView.text else { return nil }
-        var trimmedString = input.trimmingCharacters(in: .whitespaces)
+        var trimmedString = mnemonic.trimmingCharacters(in: .whitespaces)
         do {
             let regex = try NSRegularExpression(pattern: "  +", options: .caseInsensitive)
             let str = NSMutableString(string: trimmedString)
@@ -57,8 +56,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         let words = trimmedString.components(separatedBy: " ")
         let lengths = [12, 15, 18, 21, 24]
         guard lengths.contains(words.count) else {
-            print("长度不符合")
-            SVProgressHUD.showError(withStatus: "长度不符合")
+            debugPrint("长度不符合")
             return nil
         }
         
@@ -67,17 +65,26 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     
 	@IBAction func nextAction(_ sender: Any) {
 		view.endEditing(true)
+        
+        guard let text = textView.text, !text.isEmpty else {
+            SVProgressHUD.showInfo(withStatus: "请输入助记词")
+            SVProgressHUD.dismiss(withDelay: 1.2, completion: {
+                self.textView.becomeFirstResponder()
+            })
+            return
+        }
         guard let mnemonic = normalized(mnemonic: textView.text) else {
             SVProgressHUD.showError(withStatus: "助记词格式化失败")
             return
         }
         
-        func segueSender(mnemonic: String, walletID: String?) -> (mnemonic: String, walletID: String?) {
-            return (mnemonic, walletID)
-        }
         SVProgressHUD.show(withStatus: "校验助记词。。。")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
+            
+            func segueSender(mnemonic: String, walletID: String?) -> (mnemonic: String, walletID: String?) {
+                return (mnemonic, walletID)
+            }
             // TODO: 本地校验是否存在该助记词，服务器校验
             BitcoinJSBridge.shared.validateMnemonic(mnemonic: mnemonic, success: { (result) in
                 let isValidate = result as! Bool
