@@ -180,18 +180,39 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		case .asset: ()
 		case .recentRecord: ()
 		case .wallet:
-			let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-			let createAction = UIAlertAction(title: "创建钱包", style: .default, handler: { (action) in
-				self.performSegue(withIdentifier: "BILHomeToCreateWalletSegue", sender: nil)
-			})
-			let importAction = UIAlertAction(title: "导入钱包", style: .default, handler: { (action) in
-				self.performSegue(withIdentifier: "BILHomeToImportWalletSegue", sender: nil)
-			})
-			let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-			alert.addAction(createAction)
-			alert.addAction(importAction)
-			alert.addAction(cancelAction)
-			present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//            let createAction = UIAlertAction(title: "创建钱包", style: .default, handler: { (action) in
+//                self.performSegue(withIdentifier: "BILHomeToCreateWalletSegue", sender: nil)
+//            })
+//            let importAction = UIAlertAction(title: "导入钱包", style: .default, handler: { (action) in
+//                self.performSegue(withIdentifier: "BILHomeToImportWalletSegue", sender: nil)
+//            })
+//            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+//            alert.addAction(createAction)
+//            alert.addAction(importAction)
+//            alert.addAction(cancelAction)
+//            present(alert, animated: true, completion: nil)
+            
+            let button = headerView.actionButton!
+            var point = view.window!.convert(button.center, from: headerView)
+            point.x += 8
+            
+            UIView.animate(withDuration: 0.35, animations: {
+                button.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 4))
+            })
+            
+            let menu = BILPopMenu()
+            menu.addItem(item: BILPopMenuItem(title: "创建钱包", tapped: {
+                self.performSegue(withIdentifier: "BILHomeToCreateWalletSegue", sender: nil)
+            }))
+            menu.addItem(item: BILPopMenuItem(title: "导入钱包", tapped: {
+                self.performSegue(withIdentifier: "BILHomeToImportWalletSegue", sender: nil)
+            }))
+            menu.show(in: view.window!, focusPoint: point, willDismiss: {
+                UIView.animate(withDuration: 0.35, animations: {
+                    button.transform = CGAffineTransform(rotationAngle: 0)
+                })
+            })
 		}
 	}
 	

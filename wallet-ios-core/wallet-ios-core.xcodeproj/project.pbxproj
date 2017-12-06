@@ -14,6 +14,9 @@
 		BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */; };
 		BA11423D1FD676540025BF80 /* WalletModel+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423C1FD676540025BF80 /* WalletModel+Network.swift */; };
 		BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */; };
+		BA1918EE1FD7DCE500B6F568 /* BILPopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1918ED1FD7DCE500B6F568 /* BILPopMenu.swift */; };
+		BA1918F01FD7E67600B6F568 /* BILPopMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1918EF1FD7E67600B6F568 /* BILPopMenuItemView.swift */; };
+		BA1918F21FD7E7BA00B6F568 /* BILPopMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1918F11FD7E7BA00B6F568 /* BILPopMenuItemView.xib */; };
 		BA20A5FC1FD68DC800EC2147 /* Recieve.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FB1FD68DC800EC2147 /* Recieve.storyboard */; };
 		BA20A5FE1FD68DDA00EC2147 /* Send.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FD1FD68DDA00EC2147 /* Send.storyboard */; };
 		BA20A6001FD68DE400EC2147 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FF1FD68DE400EC2147 /* Me.storyboard */; };
@@ -118,6 +121,9 @@
 		BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideContactView.xib; sourceTree = "<group>"; };
 		BA11423C1FD676540025BF80 /* WalletModel+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+Network.swift"; sourceTree = "<group>"; };
 		BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BTC.swift"; sourceTree = "<group>"; };
+		BA1918ED1FD7DCE500B6F568 /* BILPopMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILPopMenu.swift; sourceTree = "<group>"; };
+		BA1918EF1FD7E67600B6F568 /* BILPopMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILPopMenuItemView.swift; sourceTree = "<group>"; };
+		BA1918F11FD7E7BA00B6F568 /* BILPopMenuItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILPopMenuItemView.xib; sourceTree = "<group>"; };
 		BA20A5FB1FD68DC800EC2147 /* Recieve.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recieve.storyboard; sourceTree = "<group>"; };
 		BA20A5FD1FD68DDA00EC2147 /* Send.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Send.storyboard; sourceTree = "<group>"; };
 		BA20A5FF1FD68DE400EC2147 /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
@@ -790,6 +796,9 @@
 			isa = PBXGroup;
 			children = (
 				CCFEDEF41FCE5AAE00F1A7FC /* BILPopMenuItem.swift */,
+				BA1918EF1FD7E67600B6F568 /* BILPopMenuItemView.swift */,
+				BA1918F11FD7E7BA00B6F568 /* BILPopMenuItemView.xib */,
+				BA1918ED1FD7DCE500B6F568 /* BILPopMenu.swift */,
 			);
 			path = BILPopMenu;
 			sourceTree = "<group>";
@@ -960,6 +969,7 @@
 				BA4646191FD78FB500680D33 /* Recieve.xcassets in Resources */,
 				CCE5E1681FC7FB9E00F7555D /* BILHomeTableHeaderView.xib in Resources */,
 				CCE5E1721FC81E3700F7555D /* Home.xcassets in Resources */,
+				BA1918F21FD7E7BA00B6F568 /* BILPopMenuItemView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,6 +1141,7 @@
 				CCFEDF001FCEA1AA00F1A7FC /* BILBTCWalletView.swift in Sources */,
 				CC94E0961FBAE1A50098E730 /* Data+CKBitArray.swift in Sources */,
 				BAA371181FD1430C00E757A6 /* String+BILURL.swift in Sources */,
+				BA1918F01FD7E67600B6F568 /* BILPopMenuItemView.swift in Sources */,
 				CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */,
 				CC94E05E1FBAC2B20098E730 /* WalletModel.xcdatamodeld in Sources */,
 				CCE5E16A1FC80A3000F7555D /* BILWalletCell.swift in Sources */,
@@ -1165,6 +1176,7 @@
 				CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */,
 				CC4417011FBEAC7F00C4B158 /* WalletModel+BIL.swift in Sources */,
 				CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */,
+				BA1918EE1FD7DCE500B6F568 /* BILPopMenu.swift in Sources */,
 				CCE5E1641FC7C1BE00F7555D /* BILHomeViewController.swift in Sources */,
 				CCFEDEF51FCE5AAE00F1A7FC /* BILPopMenuItem.swift in Sources */,
 				CCE5E1781FCBC4E100F7555D /* BILTransactionManager.swift in Sources */,

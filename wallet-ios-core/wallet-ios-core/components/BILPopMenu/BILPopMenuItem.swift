@@ -9,5 +9,13 @@
 import UIKit
 
 class BILPopMenuItem: NSObject {
-
+    typealias BILPopMenuItemTappedClosure = () -> Void
+    var title = ""
+    var imageName = ""
+    var tappedClosure: BILPopMenuItemTappedClosure?
+    init(title: String, imageName: String = "", tapped: @escaping BILPopMenuItemTappedClosure) {
+        self.title = title
+        self.imageName = imageName
+        tappedClosure = tapped
+    }
 }
