@@ -38,8 +38,22 @@ class BILAllInOneView: BILGuideBaseView {
 		let item = BILGuideImageItem(startPoint: screenCenterPoint, endPoint: CGPoint(x: screenCenterPoint.x + screenWidth, y: screenCenterPoint.y), image: UIImage(named: "icon_guide_phone_bg")!)
 		item.endAlpha = 0.0
 		items.append(item)
-		
 	}
+    
+    override func didMoveToWindow() {
+        if window != nil {
+            for index in 0..<(items.count - 1) {
+                let item = items[index]
+                if item is BILGuideImageItem {
+                    let i = item as! BILGuideImageItem
+                    i.imageView.transform = CGAffineTransform(scaleX: 0, y: 0)
+                    UIView.animate(withDuration: 0.25, delay: 0.08 * Double(index), options: .curveEaseInOut, animations: {
+                        i.imageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                    }, completion: nil)
+                }
+            }
+        }
+    }
 	
     /*
     // Only override draw() if you perform custom drawing.
