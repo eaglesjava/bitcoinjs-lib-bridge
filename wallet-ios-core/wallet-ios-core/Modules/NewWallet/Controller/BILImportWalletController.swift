@@ -65,7 +65,6 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     }
     
 	@IBAction func nextAction(_ sender: Any) {
-		view.endEditing(true)
         
         guard let text = textView.text, !text.isEmpty else {
             SVProgressHUD.showInfo(withStatus: "请输入助记词")

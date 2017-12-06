@@ -67,8 +67,7 @@ class BILAppStartUpManager: NSObject {
 	}
 	
 	private func setupSVProgressHUD() {
-		SVProgressHUD.setDefaultStyle(.light)
-        SVProgressHUD.setBackgroundColor(.white)
+		SVProgressHUD.setDefaultStyle(.dark)
 		SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(.black)
         SVProgressHUD.setMinimumSize(.init(width: 280, height: 128))

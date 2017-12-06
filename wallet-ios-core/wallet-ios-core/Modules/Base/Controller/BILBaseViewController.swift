@@ -23,12 +23,12 @@ class BILBaseViewController: UIViewController {
             gradientLayer = view.setupGradient(colors: [UIColor.bil_deep_blue_start_bgcolor.cgColor, UIColor.bil_deep_blue_end_bgcolor.cgColor], startPoint: CGPoint(x: 0.3, y: 0), endPoint: CGPoint(x: 0.7, y: 1))
         }
         gradientLayer?.frame = view.bounds
-		view.backgroundColor = UIColor.clear
+        view.backgroundColor = UIColor.clear
 	}
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		bil_setBackgroudColor()
+        bil_setBackgroudColor()
 	}
 	
     override func didReceiveMemoryWarning() {

@@ -70,7 +70,7 @@ extension WalletModel {
         }, failure: failure)
     }
     
-    static func getWalletIDFromSever(mainExtPublicKey: String, success: @escaping (_ id: String) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    static func getWalletIDFromSever(mainExtPublicKey: String, success: @escaping (_ id: String?) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         BILNetworkManager.request(request: .getWalletID(extendedKey: mainExtPublicKey.md5()), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
@@ -78,7 +78,7 @@ extension WalletModel {
                 failure("获取到错误的数据", -1)
                 return
             }
-            success(id)
+            success(id.isEmpty ? nil : id)
         }, failure: failure)
     }
 }
