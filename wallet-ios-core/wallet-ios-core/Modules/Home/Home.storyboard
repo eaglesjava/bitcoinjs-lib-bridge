@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YFK-rB-t1O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YFK-rB-t1O">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,17 +39,16 @@
                                                     <rect key="frame" x="25" y="8" width="325" height="50"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lab-5x-NIw">
-                                                            <rect key="frame" x="0.0" y="0.0" width="116" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="50"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_btc" translatesAutoresizingMaskIntoConstraints="NO" id="QXe-TQ-SgB">
-                                                                    <rect key="frame" x="0.0" y="1" width="24" height="48"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="36" height="48"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="24" id="Ut1-y5-F3X"/>
                                                                         <constraint firstAttribute="height" constant="48" id="nJS-x9-pJV"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mzq-57-qKB">
-                                                                    <rect key="frame" x="32" y="5" width="80" height="40"/>
+                                                                    <rect key="frame" x="44" y="5" width="80" height="40"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Elz-Nn-Vnf">
                                                                             <rect key="frame" x="0.0" y="18.5" width="80" height="21.5"/>
@@ -85,17 +84,16 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBS-S2-Gy7">
-                                                            <rect key="frame" x="134" y="0.0" width="60" height="50"/>
+                                                            <rect key="frame" x="140" y="0.0" width="72" height="50"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_eth" translatesAutoresizingMaskIntoConstraints="NO" id="KcN-dh-481">
-                                                                    <rect key="frame" x="0.0" y="1" width="24" height="48"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="36" height="48"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="24" id="Ix1-Up-bIe"/>
                                                                         <constraint firstAttribute="height" constant="48" id="xRY-ZB-yR8"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hW-Hm-BY4">
-                                                                    <rect key="frame" x="32" y="5.5" width="24" height="39.5"/>
+                                                                    <rect key="frame" x="44" y="5.5" width="24" height="39.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JN2-bM-Ppa">
                                                                             <rect key="frame" x="0.0" y="18.5" width="11" height="21.5"/>
@@ -131,17 +129,16 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APM-f9-UrQ">
-                                                            <rect key="frame" x="212" y="0.0" width="47" height="50"/>
+                                                            <rect key="frame" x="224" y="0.0" width="59" height="50"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_bch" translatesAutoresizingMaskIntoConstraints="NO" id="AKa-lY-Pgo">
-                                                                    <rect key="frame" x="0.0" y="1" width="24" height="48"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="36" height="48"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="24" id="AvA-za-2BY"/>
                                                                         <constraint firstAttribute="height" constant="48" id="Wnm-EW-7Se"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJ6-Dd-EK3">
-                                                                    <rect key="frame" x="32" y="5" width="11" height="40"/>
+                                                                    <rect key="frame" x="44" y="5" width="11" height="40"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMP-II-XdY">
                                                                             <rect key="frame" x="0.0" y="18.5" width="11" height="21.5"/>
@@ -149,7 +146,7 @@
                                                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJr-DZ-SE9">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJr-DZ-SE9">
                                                                             <rect key="frame" x="0.0" y="0.0" width="25.5" height="14.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
@@ -182,11 +179,11 @@
                                                         <constraint firstItem="Lab-5x-NIw" firstAttribute="top" secondItem="eCh-N9-0qw" secondAttribute="top" id="6Hd-8g-S2N"/>
                                                         <constraint firstItem="sBS-S2-Gy7" firstAttribute="top" secondItem="eCh-N9-0qw" secondAttribute="top" id="CGH-ft-6zS"/>
                                                         <constraint firstAttribute="bottom" secondItem="APM-f9-UrQ" secondAttribute="bottom" id="Nkz-pX-Efn"/>
-                                                        <constraint firstItem="sBS-S2-Gy7" firstAttribute="leading" secondItem="Lab-5x-NIw" secondAttribute="trailing" constant="18" id="VSW-bN-dcr"/>
+                                                        <constraint firstItem="sBS-S2-Gy7" firstAttribute="leading" secondItem="Lab-5x-NIw" secondAttribute="trailing" constant="12" id="VSW-bN-dcr"/>
                                                         <constraint firstAttribute="bottom" secondItem="Lab-5x-NIw" secondAttribute="bottom" id="W8B-fI-PMw"/>
                                                         <constraint firstAttribute="bottom" secondItem="sBS-S2-Gy7" secondAttribute="bottom" id="ZOn-oD-PWv"/>
                                                         <constraint firstItem="Lab-5x-NIw" firstAttribute="leading" secondItem="eCh-N9-0qw" secondAttribute="leading" id="g7A-jO-vsd"/>
-                                                        <constraint firstItem="APM-f9-UrQ" firstAttribute="leading" secondItem="sBS-S2-Gy7" secondAttribute="trailing" constant="18" id="oUx-7U-zHy"/>
+                                                        <constraint firstItem="APM-f9-UrQ" firstAttribute="leading" secondItem="sBS-S2-Gy7" secondAttribute="trailing" constant="12" id="oUx-7U-zHy"/>
                                                         <constraint firstItem="APM-f9-UrQ" firstAttribute="top" secondItem="eCh-N9-0qw" secondAttribute="top" id="vGU-MN-w1u"/>
                                                         <constraint firstAttribute="height" constant="50" id="zkU-k1-HSI"/>
                                                     </constraints>
@@ -345,14 +342,8 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  B2X  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRM-yN-6cG">
-                                        <rect key="frame" x="116" y="0.0" width="44.5" height="32"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  ETH  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSB-1e-QBo">
-                                        <rect key="frame" x="168.5" y="0.0" width="45" height="32"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  ETH  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRM-yN-6cG">
+                                        <rect key="frame" x="116" y="0.0" width="45" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -362,7 +353,6 @@
                                 <constraints>
                                     <constraint firstItem="bqZ-ZL-T8C" firstAttribute="top" secondItem="bAz-d0-tdZ" secondAttribute="top" id="2Jv-Bm-sQY"/>
                                     <constraint firstAttribute="bottom" secondItem="HRM-yN-6cG" secondAttribute="bottom" id="LWA-NY-k7j"/>
-                                    <constraint firstAttribute="bottom" secondItem="TSB-1e-QBo" secondAttribute="bottom" id="MoW-ey-nbi"/>
                                     <constraint firstItem="HRM-yN-6cG" firstAttribute="top" secondItem="bAz-d0-tdZ" secondAttribute="top" id="N6M-14-40v"/>
                                     <constraint firstAttribute="bottom" secondItem="bqZ-ZL-T8C" secondAttribute="bottom" id="OgZ-Hx-M0C"/>
                                     <constraint firstItem="HyH-em-rLE" firstAttribute="leading" secondItem="bqZ-ZL-T8C" secondAttribute="trailing" constant="8" id="Qe6-qu-fiD"/>
@@ -370,9 +360,7 @@
                                     <constraint firstItem="bqZ-ZL-T8C" firstAttribute="leading" secondItem="bAz-d0-tdZ" secondAttribute="leading" id="Xre-kN-dlx"/>
                                     <constraint firstItem="HyH-em-rLE" firstAttribute="top" secondItem="bAz-d0-tdZ" secondAttribute="top" id="cgb-1u-b5d"/>
                                     <constraint firstAttribute="height" constant="32" id="eF8-jb-sGh"/>
-                                    <constraint firstItem="TSB-1e-QBo" firstAttribute="leading" secondItem="HRM-yN-6cG" secondAttribute="trailing" constant="8" id="ep9-FL-4aN"/>
                                     <constraint firstAttribute="bottom" secondItem="HyH-em-rLE" secondAttribute="bottom" id="ftT-cP-obi"/>
-                                    <constraint firstItem="TSB-1e-QBo" firstAttribute="top" secondItem="bAz-d0-tdZ" secondAttribute="top" id="q4y-v5-Tvo"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p94-Cl-lLs" customClass="BILBTCWalletView" customModule="wallet_ios_core" customModuleProvider="target">
@@ -583,9 +571,9 @@
     </scenes>
     <resources>
         <image name="icon_home" width="19" height="19"/>
-        <image name="icon_home_bch" width="14" height="25"/>
-        <image name="icon_home_btc" width="18" height="23"/>
-        <image name="icon_home_eth" width="17" height="27"/>
+        <image name="icon_home_bch" width="36" height="36"/>
+        <image name="icon_home_btc" width="36" height="36"/>
+        <image name="icon_home_eth" width="36" height="36"/>
         <image name="icon_home_h" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
