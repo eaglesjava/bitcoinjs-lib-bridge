@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:animateLayoutChanges="true"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,12 +26,17 @@
 
     <EditText
         android:id="@+id/et_text"
-        style="@style/EditText.Normal"
+        style="@style/EditText.Wapper"
         android:layout_width="match_parent"/>
+
+    <View
+        android:id="@+id/et_line"
+        style="@style/Line.Horizontal"
+        android:layout_marginTop="-5dp"/>
 
     <TextView
         android:id="@+id/tv_etw_bottom_hint"
         style="@style/Text.Small.Green"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:visibility="gone"/>
-</merge>
+</LinearLayout>

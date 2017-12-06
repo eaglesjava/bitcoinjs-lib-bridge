@@ -13,7 +13,7 @@ import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * 输入框包装类
  */
-public class EditTextWapper extends LinearLayout {
+public class EditTextWapper extends FrameLayout {
     public static final int INPUT_PWD_VISIBLE = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;//密码显示输入方式
     public static final int INPUT_PWD_HIDE = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;//密码隐藏输入方式
     //input type constants
@@ -32,6 +32,7 @@ public class EditTextWapper extends LinearLayout {
     private static final int INPUT_NUMBER = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL;//数字输入方式
     private static final int NOARMAL_TEXT_COLOR = R.color.white;
     private static final int ERROR_TEXT_COLOR = R.color.error;
+    private static final int EDIT_LINE_COLOR = R.color.edit_line;
     private static SparseArray<Integer> INPUT_TYPE_ARRAY = new SparseArray<>();
 
     static {
@@ -49,6 +50,8 @@ public class EditTextWapper extends LinearLayout {
     PwdStatusView psvStatus;
     @BindView(R.id.tv_etw_bottom_hint)
     TextView bottomHintTextView;
+    @BindView(R.id.et_line)
+    View lineView;
 
     private String mInputTitle;
     private String mInputHint;
@@ -130,7 +133,6 @@ public class EditTextWapper extends LinearLayout {
     private void initView() {
         inflate(getContext(), R.layout.layout_edit_text_wapper, this);
         ButterKnife.bind(this);
-        setOrientation(VERTICAL);
         setHintTitle(mInputTitle);
         setInputHint(mInputHint);
         setInputPadding();
@@ -176,8 +178,17 @@ public class EditTextWapper extends LinearLayout {
                 } else {
                     bottomHintTextView.setVisibility(GONE);
                 }
+
+                if (isError()) {
+                    lineView.setBackgroundColor(getResources().getColor(ERROR_TEXT_COLOR));
+                } else if (hasFocus) {
+                    lineView.setBackgroundColor(getResources().getColor(NOARMAL_TEXT_COLOR));
+                } else {
+                    lineView.setBackgroundColor(getResources().getColor(EDIT_LINE_COLOR));
+                }
             }
         });
+        getEtText().clearFocus();
     }
 
     private void setInputHint(String inputHint) {
@@ -226,6 +237,7 @@ public class EditTextWapper extends LinearLayout {
         getTvTitle().setTextColor(getResources().getColor(NOARMAL_TEXT_COLOR));
         getTvTitle().setText(mInputTitle);
         setErrorState(false);
+        lineView.setBackgroundColor(getResources().getColor(EDIT_LINE_COLOR));
     }
 
     public void setErrorState(boolean errorState) {

@@ -13,30 +13,34 @@
         android:id="@+id/iv_status"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:layout_centerVertical="true"
         android:src="@drawable/ic_item_send"/>
 
-
-    <TextView
-        android:id="@+id/tv_address"
-        style="@style/Text.White"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_marginStart="15dp"
         android:layout_toEndOf="@+id/iv_status"
-        android:text="1PN9ET1..sRaqfPN"
-        android:textSize="15sp"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_date"
-        style="@style/Text.White"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tv_address"
-        android:layout_below="@+id/tv_address"
-        android:text="2017.11.10 15:32   0确认"
-        android:textColor="@color/white_60"
-        android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/tv_address"
+            style="@style/Text.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1PN9ET1..sRaqfPN"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/Text.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017.11.10 15:32   0确认"
+            android:textColor="@color/white_60"
+            android:textSize="12sp"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_amount"

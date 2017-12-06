@@ -54,8 +54,6 @@ public class WalletInfoActivity extends BaseToolbarActivity implements BtcRecord
 
     @Override
     public void onBeforeSetContentLayout() {
-
-        setTheme(mWallet.getIsBackup() ? R.style.AppTheme_Blue : R.style.AppTheme_Red);
     }
 
     @Override
@@ -73,7 +71,7 @@ public class WalletInfoActivity extends BaseToolbarActivity implements BtcRecord
      */
     private void setUpViewPager() {
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
-        mFragmentAdapter.addItem("btc", BtcRecordFragment.newInstance());
+        mFragmentAdapter.addItem("btc", BtcRecordFragment.newInstance(true));
         mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
         mViewPager.setAdapter(mFragmentAdapter);

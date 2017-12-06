@@ -7,17 +7,13 @@
     <TextView
         android:id="@+id/tv_menu_create_wallet"
         style="@style/Text.Wallet.Menu"
-        android:layout_marginRight="25dp"
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/ic_menu_create"
+        android:elevation="10dp"
         android:text="创建钱包"/>
 
     <TextView
         android:id="@+id/tv_menu_import_wallet"
         style="@style/Text.Wallet.Menu"
-        android:layout_marginRight="25dp"
         android:layout_marginTop="10dp"
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/ic_menu_import"
+        android:elevation="10dp"
         android:text="导入钱包"/>
 </LinearLayout>

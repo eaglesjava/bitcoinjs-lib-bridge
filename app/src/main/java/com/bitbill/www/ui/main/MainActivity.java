@@ -18,6 +18,7 @@ import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.entity.eventbus.BackupSuccessEvent;
 import com.bitbill.www.model.entity.eventbus.CreateSuccessEvent;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
+import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -120,6 +121,11 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             // 切换到联系人界面
             mViewPager.setCurrentItem(3, false);
             setTitle(R.string.title_contact);
+        }
+        // TODO: 2017/12/6 for test
+        else if (id == R.id.nav_guide) {
+            GuideActivity.start(MainActivity.this);
+
         }
         // TODO: 2017/11/17 add other nav item
 

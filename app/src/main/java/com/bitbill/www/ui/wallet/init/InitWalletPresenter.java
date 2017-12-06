@@ -167,8 +167,8 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                                         }
                                         if (aBoolean && finalEncryptMnemonicHash != null) {
                                             //后台请求创建钱包
-//                                    createWallet();
-                                            // TODO: 2017/12/5 just for test
+//                                            createWallet();
+//                                            // TODO: 2017/12/5 just for test
                                             getMvpView().createWalletSuccess();
                                         } else {
                                             getMvpView().createWalletFail();

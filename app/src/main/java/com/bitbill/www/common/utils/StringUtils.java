@@ -1,7 +1,10 @@
 package com.bitbill.www.common.utils;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.webkit.URLUtil;
+import android.widget.TextView;
 
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -766,5 +769,16 @@ public class StringUtils {
     public static boolean isRequiredLength(String s) {
         if (s == null) return false;
         return s.length() >= 6 && s.length() <= 20;
+    }
+
+    /**
+     * set amount type face
+     *
+     * @param context
+     * @param amountTextView
+     */
+    public static void setAmountTypeface(Context context, TextView amountTextView) {
+        amountTextView.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/FF_DIN_Condensed_Bold.otf"));
+
     }
 }

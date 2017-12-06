@@ -2,6 +2,7 @@ package com.bitbill.www.ui.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,8 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
 
 
     private static final int BOTTOM_MARGIN = 15;//unit dp
+    @BindView(R.id.refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.tv_btc_amount)
     TextView tvBtcAmount;
     @BindView(R.id.ll_wallet_container)
@@ -87,6 +90,18 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
 
     @Override
     public void initView() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // TODO: 2017/12/6 for test sleep
+                mSwipeRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        initData();
+                    }
+                }, 5000);
+            }
+        });
         mWalletMenu = new PopupWalletMenu(getBaseActivity());
         mWalletMenu.setOnWalletMenuItemClickListener(new PopupWalletMenu.OnWalletMenuItemClickListener() {
             @Override
@@ -112,9 +127,18 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
 
     @Override
     public void initData() {
-        llWalletContainer.removeAllViews();
         getMvpPresenter().loadWallet();
 
+    }
+
+    @Override
+    public void showLoading() {
+        mSwipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -127,10 +151,13 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
         if (wallets == null) {
             return;
         }
+        llWalletContainer.removeAllViews();
         mWalletCountView.setText(String.format(getString(R.string.text_asset_current_wallet), wallets.size()));
         for (Wallet wallet : wallets) {
             addWalletView(wallet);
         }
+
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     private void addWalletView(Wallet wallet) {

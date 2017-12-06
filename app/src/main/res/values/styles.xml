@@ -13,9 +13,10 @@
 
     <style name="AppTheme.Blue" parent="AppTheme">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="android:windowBackground">@color/blue</item>
+        <item name="colorPrimary">@color/transparent</item>
+        <item name="colorPrimaryDark">@color/transparent</item>
+        <item name="android:windowBackground">@drawable/bg_blue</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="AppTheme.Red" parent="AppTheme">
@@ -78,6 +79,14 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/white_40</item>
         <item name="android:textSize">@dimen/edit_text_size</item>
+
+    </style>
+
+    <style name="EditText.Wapper" parent="EditText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white_40</item>
+        <item name="android:textSize">@dimen/edit_text_size</item>
+        <item name="android:background">@color/transparent</item>
 
     </style>
 

@@ -1,12 +1,10 @@
 package com.bitbill.www.ui.splash;
 
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.widget.FrameLayout;
+import android.view.View;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseActivity;
-import com.bitbill.www.common.utils.AnimationUtils;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.MainActivity;
@@ -19,7 +17,7 @@ import butterknife.ButterKnife;
 public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView {
 
     @BindView(R.id.fl_content)
-    FrameLayout flContent;
+    View flContent;
     @Inject
     SplashMvpPresenter<AppModel, SplashMvpView> mSplashMvpPresenter;
 
@@ -28,41 +26,14 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
-
-        flContent.startAnimation(AnimationUtils.getAlphaAnimation(0.8f, 1.0f, 2000, new Animation.AnimationListener() {
-            /**
-             * <p>Notifies the start of the animation.</p>
-             *
-             * @param animation The started animation.
-             */
+        flContent.postDelayed(new Runnable() {
             @Override
-            public void onAnimationStart(Animation animation) {
+            public void run() {
 
-            }
-
-            /**
-             * <p>Notifies the end of the animation. This callback is not invoked
-             * for animations with repeat count set to INFINITE.</p>
-             *
-             * @param animation The animation which reached its end.
-             */
-            @Override
-            public void onAnimationEnd(Animation animation) {
                 // 根据是否是第一次进入判断跳转到引导页还是首页
                 getMvpPresenter().checkBrowsed();
-
             }
-
-            /**
-             * <p>Notifies the repetition of the animation.</p>
-             *
-             * @param animation The animation which was repeated.
-             */
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        }));
+        }, 2000);
     }
 
     @Override

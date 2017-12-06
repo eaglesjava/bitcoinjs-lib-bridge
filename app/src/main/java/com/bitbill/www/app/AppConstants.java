@@ -20,6 +20,7 @@ public final class AppConstants {
     public static final String EXTRA_WALLET = "extra_wallet";
     public static final String EXTRA_MNEMONIC = "etra_mnemonic";
     public static final String EXTRA_IS_CREATE_WALLET = "is_create_wallet";
+    public static final String IS_BTC_RECOD = "is_btc_record";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

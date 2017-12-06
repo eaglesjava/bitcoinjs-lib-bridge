@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_padding"
-    android:paddingRight="@dimen/activity_padding">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
 
     <TextView
         style="@style/Text.White"
         android:layout_marginTop="10dp"
+        android:paddingLeft="@dimen/activity_padding"
+        android:paddingRight="@dimen/activity_padding"
         android:text="余额"
         android:textSize="@dimen/text_size_big"/>
 
     <TextView
+        android:id="@+id/tv_amount"
         style="@style/Text.Wallet.Amount.Big"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="15dp"
+        android:paddingLeft="@dimen/activity_padding"
+        android:paddingRight="@dimen/activity_padding"
         android:text="22.770128"/>
 
     <TextView
         style="@style/Text"
         android:layout_marginBottom="20dp"
+        android:paddingLeft="@dimen/activity_padding"
+        android:paddingRight="@dimen/activity_padding"
         android:text="22.770128 btc 未确认"
         android:textColor="@color/white_70"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
+    <TextView
+        style="@style/Text"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/white_10"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_padding"
+        android:text="交易记录"
+        android:textColor="@color/white_60"
+        android:textSize="12sp"/>
 
 </LinearLayout>
