@@ -67,9 +67,11 @@ class BILAppStartUpManager: NSObject {
 	}
 	
 	private func setupSVProgressHUD() {
-		SVProgressHUD.setDefaultStyle(.dark)
+		SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.setBackgroundColor(.white)
 		SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.setMinimumSize(.init(width: 280, height: 128))
 	}
 	
 	private func setupTextFieldAppearance() {
