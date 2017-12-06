@@ -19,7 +19,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		case recover
 		
 		func titleString() -> String {
-			return self == .new ? "新建" : "导入"
+			return self == .new ? "创建" : "导入"
 		}
 		
 	}

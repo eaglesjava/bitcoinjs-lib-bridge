@@ -21,7 +21,7 @@ class BILTransaction: NSObject {
 	var type = BILTransactionType.recieve
 	var volume = 0
 	lazy var volumeString: String = {
-		return String(format: "\(type == .recieve ? "+" : "-")%.6f btc", Double(volume) / 100000000.0)
+		return String(format: "\(type == .recieve ? "+" : "-")\(BTCFormatString(btc: volume)) btc")
 	}()
 	
 	var date: Date?

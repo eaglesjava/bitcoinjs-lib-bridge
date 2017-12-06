@@ -20,6 +20,7 @@ class BILTabBarController: UITabBarController {
 		tabBar.backgroundImage = UIImage()
 		tabBar.shadowImage = UIImage()
 		tabBar.tintColor = UIColor.white
+        tabBar.unselectedItemTintColor = UIColor(white: 1.0, alpha: 0.3)
     }
 
     override func didReceiveMemoryWarning() {

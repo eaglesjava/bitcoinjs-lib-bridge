@@ -10,15 +10,19 @@ import Foundation
 
 let BTC_SATOSH = 100000000
 
+func BTCFormatString(btc: Int) -> String {
+    return String(format: "%.6f", Double(btc) / Double(BTC_SATOSH))
+}
+
 extension WalletModel {
     var btc_balanceString: String {
         get {
-            return String(format: "%.6f", Double(btcBalance) / Double(BTC_SATOSH))
+            return BTCFormatString(btc: Int(btcBalance))
         }
     }
     var btc_unconfirm_balanceString: String {
         get {
-            return String(format: "%.6f", Double(btcUnconfirmBalance) / Double(BTC_SATOSH))
+            return BTCFormatString(btc: Int(btcUnconfirmBalance))
         }
     }
 }
