@@ -222,8 +222,12 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
             let wallet = BILWalletManager.shared.newWallet()
             wallet.id = self.walletNameTextField.text!
             wallet.resetProperties(m: m, pwd: pwd, success: { (w) in
-                self.mnemonicHash = wallet.mnemonicHash
-                self.createSuccess()
+                wallet.createWalletToServer(success: { (result) in
+                    self.mnemonicHash = wallet.mnemonicHash
+                    self.createSuccess()
+                }, failure: { (msg, code) in
+                    cleanUp(wallet: wallet, error: msg)
+                })
                 SVProgressHUD.dismiss()
             }, failure: { (errorMsg) in
                 SVProgressHUD.showError(withStatus: errorMsg)

@@ -239,7 +239,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNm-pR-Y3T">
-                                                            <rect key="frame" x="248" y="22" width="62" height="30"/>
+                                                            <rect key="frame" x="243" y="22" width="62" height="30"/>
                                                             <state key="normal" title="马上备份">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
@@ -258,7 +258,7 @@
                                                         <constraint firstItem="6ap-fE-eNJ" firstAttribute="leading" secondItem="3jh-zW-ztf" secondAttribute="leading" id="kwq-gw-fnd"/>
                                                         <constraint firstItem="NwA-EF-6cy" firstAttribute="leading" secondItem="WZH-mv-CjK" secondAttribute="leading" constant="15" id="wL3-9O-jJz"/>
                                                         <constraint firstItem="3jh-zW-ztf" firstAttribute="top" secondItem="WZH-mv-CjK" secondAttribute="top" constant="12" id="xAs-5n-Op7"/>
-                                                        <constraint firstAttribute="trailing" secondItem="MNm-pR-Y3T" secondAttribute="trailing" constant="15" id="ydd-Fv-arq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="MNm-pR-Y3T" secondAttribute="trailing" constant="20" id="ydd-Fv-arq"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

@@ -26,9 +26,12 @@ class BILTransaction: NSObject {
 	
 	var date: Date?
 	lazy var dateSring: String = {
-		guard let d = self.date else { return "" }
-		let formatter = DateFormatter()
-		formatter.dateFormat = "MM.dd.yyyy"
-		return formatter.string(from: d)
+//        guard let d = self.date else { return "" }
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MM.dd.yyyy"
+//        return formatter.string(from: d)
+        guard let d: Date = self.date else { return "" }
+        
+        return d.stringIn(dateStyle: .medium, timeStyle: .medium)
 	}()
 }

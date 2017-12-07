@@ -67,10 +67,8 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 	@IBAction func nextAction(_ sender: Any) {
         
         guard let text = textView.text, !text.isEmpty else {
-            SVProgressHUD.showInfo(withStatus: "请输入助记词")
-            SVProgressHUD.dismiss(withDelay: 1.2, completion: {
-                self.textView.becomeFirstResponder()
-            })
+            self.textView.becomeFirstResponder()
+            self.mnemonicView.layer.borderColor = UIColor(hex: 0xFD6D73).cgColor
             return
         }
         guard let mnemonic = normalized(mnemonic: textView.text) else {
@@ -129,6 +127,11 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         
 	}
 	
+    func textViewDidChange(_ textView: UITextView) {
+        mnemonicView.layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
+        resetMnemonicViewBorderColor()
+    }
+    
 	public func textViewDidBeginEditing(_ textView: UITextView) {
 		mnemonicView.emptyTitle = nil
 	}
@@ -138,8 +141,13 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 			return
 		}
 		mnemonicView.emptyTitle = emptyTitle
+        resetMnemonicViewBorderColor()
 	}
 	
+    func resetMnemonicViewBorderColor() {
+        mnemonicView.layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

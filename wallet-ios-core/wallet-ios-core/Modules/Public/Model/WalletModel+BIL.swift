@@ -97,16 +97,12 @@ extension WalletModel {
                     let extPubKey = pubKey as! String
                     wallet.mainExtPublicKey = extPubKey
                     if wallet.checkPassword(pwd: pwd) {
-                        wallet.createWalletToServer(success: { (result) in
-                            do {
-                                try BILWalletManager.shared.saveWallets()
-                                success(self)
-                            } catch {
-                                cleanUp(wallet: wallet, error: error.localizedDescription)
-                            }
-                        }, failure: { (msg, code) in
-                            cleanUp(wallet: wallet, error: msg)
-                        })
+                        do {
+                            try BILWalletManager.shared.saveWallets()
+                            success(self)
+                        } catch {
+                            cleanUp(wallet: wallet, error: error.localizedDescription)
+                        }
                     }
                 }, failure: { (error) in
                     cleanUp(wallet: wallet, error: error.localizedDescription)

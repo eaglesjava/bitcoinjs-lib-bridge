@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FHp-J5-Gub">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FHp-J5-Gub">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,22 @@
                     <view key="view" contentMode="scaleToFill" id="oXh-0m-1Mn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQB-7P-6ZC">
+                                <rect key="frame" x="164" y="318" width="46" height="30"/>
+                                <state key="normal" title="欢迎页">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="sMl-zy-fhR" kind="presentation" id="fii-Ke-AK9"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oQB-7P-6ZC" firstAttribute="centerX" secondItem="oXh-0m-1Mn" secondAttribute="centerX" id="0VW-oE-0eg"/>
+                            <constraint firstItem="oQB-7P-6ZC" firstAttribute="centerY" secondItem="oXh-0m-1Mn" secondAttribute="centerY" id="AoA-NN-KGH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uS5-kp-cde"/>
                     </view>
                     <navigationItem key="navigationItem" id="Zie-9v-0sR"/>
@@ -25,6 +40,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K70-6f-Hxa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="788" y="113.79310344827587"/>
+        </scene>
+        <!--NewWallet-->
+        <scene sceneID="GJj-0k-0Hp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewWallet" id="sMl-zy-fhR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wKm-X5-UGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1462" y="113"/>
         </scene>
         <!--我-->
         <scene sceneID="pj1-mt-ETC">
