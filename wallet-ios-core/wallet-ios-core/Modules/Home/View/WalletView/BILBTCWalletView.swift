@@ -27,7 +27,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 		didSet {
             guard let w = wallet else { return }
             w.getBalanceFromServer(success: { (wallet) in
-                self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 118 : 195
+                self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 122 : 213
                 self.balanceLabel.text = w.btc_balanceString
                 self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + " BTC "
                 self.cnyLabel.text = w.btc_cnyString + " CNY"
@@ -44,7 +44,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         setupRefresh()
         
         unconfirmContainerView.layer.borderWidth = 1
-        unconfirmContainerView.layer.borderColor = UIColor(white: 1.0, alpha: 0.5).cgColor
+        unconfirmContainerView.layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
         unconfirmContainerView.layer.cornerRadius = 5
 	}
     

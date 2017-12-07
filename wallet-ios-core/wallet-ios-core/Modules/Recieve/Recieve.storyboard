@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOg-D8-DqC">
-                                <rect key="frame" x="25" y="72" width="325" height="32"/>
+                                <rect key="frame" x="25" y="89" width="325" height="32"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   BTC   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbc-mO-Bu1">
                                         <rect key="frame" x="0.0" y="0.0" width="53" height="32"/>
@@ -63,7 +63,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="UOg-D8-DqC" firstAttribute="top" secondItem="P9o-SL-rSo" secondAttribute="top" constant="8" id="2hk-6i-nfk"/>
+                            <constraint firstItem="UOg-D8-DqC" firstAttribute="top" secondItem="P9o-SL-rSo" secondAttribute="top" constant="25" id="2hk-6i-nfk"/>
                             <constraint firstItem="UOg-D8-DqC" firstAttribute="leading" secondItem="P9o-SL-rSo" secondAttribute="leading" constant="25" id="Ae0-OW-HSs"/>
                             <constraint firstItem="P9o-SL-rSo" firstAttribute="trailing" secondItem="UOg-D8-DqC" secondAttribute="trailing" constant="25" id="nHW-6l-fA4"/>
                         </constraints>

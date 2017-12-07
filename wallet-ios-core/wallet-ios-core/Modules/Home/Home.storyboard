@@ -404,13 +404,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="195"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pcd-Bi-NdR">
-                                                <rect key="frame" x="22" y="12" width="24.5" height="70"/>
+                                                <rect key="frame" x="22" y="10" width="24.5" height="70"/>
                                                 <fontDescription key="fontDescription" name="DINCond-Bold" family="DINCond-Bold" pointSize="60"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PG4-eO-E5r">
-                                                <rect key="frame" x="25" y="120" width="325" height="61"/>
+                                                <rect key="frame" x="25" y="125" width="325" height="61"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YpS-A2-L2U">
                                                         <rect key="frame" x="130.5" y="22" width="64" height="18"/>
@@ -447,7 +447,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 CNY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIi-ue-mEd">
-                                                <rect key="frame" x="22" y="90" width="66" height="18"/>
+                                                <rect key="frame" x="24" y="82" width="66" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -455,14 +455,14 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="PG4-eO-E5r" firstAttribute="top" secondItem="kIi-ue-mEd" secondAttribute="bottom" constant="12" id="1Wr-cL-3AL"/>
-                                            <constraint firstItem="Pcd-Bi-NdR" firstAttribute="top" secondItem="v9b-ms-gAN" secondAttribute="top" constant="12" id="QTK-7b-nfq"/>
+                                            <constraint firstItem="PG4-eO-E5r" firstAttribute="top" secondItem="kIi-ue-mEd" secondAttribute="bottom" constant="25" id="1Wr-cL-3AL"/>
+                                            <constraint firstItem="Pcd-Bi-NdR" firstAttribute="top" secondItem="v9b-ms-gAN" secondAttribute="top" constant="10" id="QTK-7b-nfq"/>
                                             <constraint firstAttribute="trailing" secondItem="PG4-eO-E5r" secondAttribute="trailing" constant="25" id="VNU-PX-CWL"/>
                                             <constraint firstItem="PG4-eO-E5r" firstAttribute="leading" secondItem="v9b-ms-gAN" secondAttribute="leading" constant="25" id="b1I-Te-crZ"/>
                                             <constraint firstItem="Pcd-Bi-NdR" firstAttribute="leading" secondItem="v9b-ms-gAN" secondAttribute="leading" constant="22" id="l8m-l0-TyY"/>
                                             <constraint firstAttribute="height" constant="195" id="olm-fc-DMG"/>
-                                            <constraint firstItem="kIi-ue-mEd" firstAttribute="leading" secondItem="Pcd-Bi-NdR" secondAttribute="leading" id="p1u-pX-1E1"/>
-                                            <constraint firstItem="kIi-ue-mEd" firstAttribute="top" secondItem="Pcd-Bi-NdR" secondAttribute="bottom" constant="8" id="sIG-DV-JH7"/>
+                                            <constraint firstItem="kIi-ue-mEd" firstAttribute="leading" secondItem="Pcd-Bi-NdR" secondAttribute="leading" constant="2" id="p1u-pX-1E1"/>
+                                            <constraint firstItem="kIi-ue-mEd" firstAttribute="top" secondItem="Pcd-Bi-NdR" secondAttribute="bottom" constant="2" id="sIG-DV-JH7"/>
                                         </constraints>
                                     </view>
                                 </subviews>
