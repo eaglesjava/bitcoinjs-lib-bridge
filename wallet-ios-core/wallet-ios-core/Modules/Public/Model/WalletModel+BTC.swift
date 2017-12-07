@@ -25,4 +25,9 @@ extension WalletModel {
             return BTCFormatString(btc: Int(btcUnconfirmBalance))
         }
     }
+    var btc_cnyString: String {
+        get {
+            return "0.00"
+        }
+    }
 }

@@ -12,8 +12,10 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var cnyLabel: UILabel!
 	@IBOutlet weak var unconfirmBalanceLabel: UILabel!
 	@IBOutlet weak var heightOfBalanceView: NSLayoutConstraint!
+    @IBOutlet weak var unconfirmContainerView: UIView!
 	
 	var transactions: [BILTransaction] {
 		get {
@@ -25,9 +27,10 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 		didSet {
             guard let w = wallet else { return }
             w.getBalanceFromServer(success: { (wallet) in
-                self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 112 : 142
+                self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 118 : 195
                 self.balanceLabel.text = w.btc_balanceString
-                self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + "btc"
+                self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + " BTC "
+                self.cnyLabel.text = w.btc_cnyString + " CNY"
             }) { (msg, code) in
                 debugPrint(msg)
             }
@@ -39,6 +42,10 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 		tableView.register(UINib(nibName: "BILTransactionCell", bundle: nil), forCellReuseIdentifier: "BILTransactionCell")
         
         setupRefresh()
+        
+        unconfirmContainerView.layer.borderWidth = 1
+        unconfirmContainerView.layer.borderColor = UIColor(white: 1.0, alpha: 0.5).cgColor
+        unconfirmContainerView.layer.cornerRadius = 5
 	}
     
     func setupRefresh() {
