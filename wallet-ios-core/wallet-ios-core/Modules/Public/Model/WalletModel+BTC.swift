@@ -15,6 +15,22 @@ func BTCFormatString(btc: Int) -> String {
 }
 
 extension WalletModel {
+    func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
+        guard let xpub = mainExtPublicKey else {
+            failure("主扩展公钥为空")
+            return
+        }
+        let index = lastAddressIndex
+        BitcoinJSBridge.shared.getAddress(xpub: xpub, index: Int(index), success: { (address) in
+            if address is String {
+                success(address as! String)
+            } else {
+                failure("获取地址失败")
+            }
+        }) { (error) in
+            failure(error.localizedDescription)
+        }
+    }
     var btc_balanceString: String {
         get {
             return BTCFormatString(btc: Int(btcBalance))
