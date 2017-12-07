@@ -22,6 +22,25 @@ extension WalletModel {
             return nil
         }
     }
+    
+    func decryptMnemonic(pwd: String) -> String? {
+        do {
+            let key = String(pwd.sha256().prefix(32))
+            let aes = try AES(key: key, iv: String(key.reversed().prefix(16)))
+            
+            if let mnemonic = String(bytes: try aes.decrypt((encryptedMnemonic?.ck_mnemonicData().bytes)!), encoding: .utf8), mnemonic.md5() == self.mnemonicHash {
+                return mnemonic
+            }
+            else
+            {
+                return nil
+            }
+        } catch {
+            debugPrint(error)
+            return nil
+        }
+    }
+    
     func checkPassword(pwd: String) -> Bool {
         var toReturn = false
         
@@ -136,8 +155,7 @@ extension WalletModel {
 	
 	func save() {
 		do {
-			let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-			try context.save()
+			try BILWalletManager.shared.saveWallets()
 		} catch {
 			debugPrint(error)
 		}

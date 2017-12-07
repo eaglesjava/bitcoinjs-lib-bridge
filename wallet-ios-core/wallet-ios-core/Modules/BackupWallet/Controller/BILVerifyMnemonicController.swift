@@ -33,6 +33,7 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
         // Do any additional setup after loading the view.
 		randomMnemonicView.dataArray = randomArray
 		verifyMnemonicView.emptyTitle = "请按顺序点击下方文字"
+        verifyMnemonicView.collectionView.allowsSelection = false
     }
 
     override func didReceiveMemoryWarning() {

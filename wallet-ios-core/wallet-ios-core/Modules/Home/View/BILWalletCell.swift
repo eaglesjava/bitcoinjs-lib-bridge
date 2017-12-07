@@ -14,7 +14,7 @@ class BILWalletCell: UITableViewCell {
 	@IBOutlet weak var idLabel: UILabel!
 	@IBOutlet weak var subIDLabel: UILabel!
 	@IBOutlet weak var btcBalanceLabel: UILabel!
-	@IBOutlet weak var needBackupLabel: UILabel!
+	@IBOutlet weak var needBackupButton: UIButton!
 	
 	var wallet: WalletModel? {
 		didSet {
@@ -22,7 +22,7 @@ class BILWalletCell: UITableViewCell {
 				idLabel.text = w.id
 				subIDLabel.text = "\(w.id?.first ?? "B")"
 				btcBalanceLabel.text = "0.0000 btc"
-				needBackupLabel.isHidden = !w.isNeedBackup
+				needBackupButton.isHidden = !w.isNeedBackup
 				if w.isNeedBackup {
 					bil_contentView.gradientLayer?.colors = [UIColor.bil_gradient_start_red_color.cgColor, UIColor.bil_gradient_end_red_color.cgColor]
 					subIDLabel.textColor = UIColor(hex: 0xFF636B)

@@ -1,26 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oZT-mc-NTx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oZT-mc-NTx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Base View Controller-->
+        <!--接收-->
         <scene sceneID="lC4-PI-8dc">
             <objects>
                 <viewController id="2Xo-Eg-YUe" customClass="BILBaseViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dSw-7j-pfN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOg-D8-DqC">
+                                <rect key="frame" x="25" y="72" width="325" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   BTC   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbc-mO-Bu1">
+                                        <rect key="frame" x="0.0" y="0.0" width="53" height="32"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.027450980392156862" green="0.027450980392156862" blue="0.027450980392156862" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  BCC  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFJ-ZR-qQm">
+                                        <rect key="frame" x="61" y="0.0" width="47" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  ETH  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeF-SM-Qmy">
+                                        <rect key="frame" x="116" y="0.0" width="45" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="DeF-SM-Qmy" secondAttribute="bottom" id="1R3-oo-D6W"/>
+                                    <constraint firstItem="Vbc-mO-Bu1" firstAttribute="top" secondItem="UOg-D8-DqC" secondAttribute="top" id="DSe-B7-R3D"/>
+                                    <constraint firstItem="DeF-SM-Qmy" firstAttribute="leading" secondItem="KFJ-ZR-qQm" secondAttribute="trailing" constant="8" id="FMC-SY-DfC"/>
+                                    <constraint firstItem="KFJ-ZR-qQm" firstAttribute="top" secondItem="UOg-D8-DqC" secondAttribute="top" id="M5U-0t-3vv"/>
+                                    <constraint firstItem="Vbc-mO-Bu1" firstAttribute="leading" secondItem="UOg-D8-DqC" secondAttribute="leading" id="O3F-A2-R4b"/>
+                                    <constraint firstAttribute="height" constant="32" id="Yyu-C2-YTP"/>
+                                    <constraint firstItem="KFJ-ZR-qQm" firstAttribute="leading" secondItem="Vbc-mO-Bu1" secondAttribute="trailing" constant="8" id="eY9-W9-rgw"/>
+                                    <constraint firstAttribute="bottom" secondItem="KFJ-ZR-qQm" secondAttribute="bottom" id="liT-2a-Cm4"/>
+                                    <constraint firstItem="DeF-SM-Qmy" firstAttribute="top" secondItem="UOg-D8-DqC" secondAttribute="top" id="oks-N2-enF"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vbc-mO-Bu1" secondAttribute="bottom" id="xvx-Es-Nwq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="UOg-D8-DqC" firstAttribute="top" secondItem="P9o-SL-rSo" secondAttribute="top" constant="8" id="2hk-6i-nfk"/>
+                            <constraint firstItem="UOg-D8-DqC" firstAttribute="leading" secondItem="P9o-SL-rSo" secondAttribute="leading" constant="25" id="Ae0-OW-HSs"/>
+                            <constraint firstItem="P9o-SL-rSo" firstAttribute="trailing" secondItem="UOg-D8-DqC" secondAttribute="trailing" constant="25" id="nHW-6l-fA4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="P9o-SL-rSo"/>
                     </view>
-                    <navigationItem key="navigationItem" id="nyY-9Y-U6O"/>
+                    <navigationItem key="navigationItem" title="接收" id="nyY-9Y-U6O"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJj-1m-aWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -180,18 +180,6 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		case .asset: ()
 		case .recentRecord: ()
 		case .wallet:
-//            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//            let createAction = UIAlertAction(title: "创建钱包", style: .default, handler: { (action) in
-//                self.performSegue(withIdentifier: "BILHomeToCreateWalletSegue", sender: nil)
-//            })
-//            let importAction = UIAlertAction(title: "导入钱包", style: .default, handler: { (action) in
-//                self.performSegue(withIdentifier: "BILHomeToImportWalletSegue", sender: nil)
-//            })
-//            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-//            alert.addAction(createAction)
-//            alert.addAction(importAction)
-//            alert.addAction(cancelAction)
-//            present(alert, animated: true, completion: nil)
             
             let button = headerView.actionButton!
             var point = view.window!.convert(button.center, from: headerView)
@@ -285,6 +273,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 			c.transaction = type.dataArray()[indexPath.row] as? BILTransaction
 		case .wallet:
 			let c = cell as! BILWalletCell
+            c.needBackupButton.tag = indexPath.row
 			c.wallet = type.dataArray()[indexPath.row] as? WalletModel
 		}
 		return cell!
@@ -308,9 +297,27 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
 		if segue.identifier == "BILHomeToWalletSegue" {
-			let cont = segue.destination as! BILWalletController
-			cont.wallet = wallets[(tableView.indexPath(for: sender as! UITableViewCell))!.row]
+			
 		}
+        
+        guard let id = segue.identifier else { return }
+        
+        switch id {
+        case "BILHomeToWalletSegue":
+            let cont = segue.destination as! BILWalletController
+            cont.wallet = wallets[(tableView.indexPath(for: sender as! UITableViewCell))!.row]
+        case "BILHomeToBackUpWallet":
+            if let cont = (segue.destination as? UINavigationController)?.viewControllers.first as? BILBackupWalletMnemonicController {
+                let wallet = wallets[(sender as! UIView).tag]
+                cont.mnemonicHash = wallet.mnemonicHash
+            }
+        default:
+            ()
+        }
+        
+        if segue.identifier == "BILHomeToBackUpWallet" {
+            
+        }
     }
 
 }

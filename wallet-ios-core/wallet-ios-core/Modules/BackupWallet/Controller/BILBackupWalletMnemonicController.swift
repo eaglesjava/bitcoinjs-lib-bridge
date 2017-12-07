@@ -20,7 +20,11 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 		}
 	}
 	
-	var mnemonic = ""
+    var mnemonic = "" {
+        didSet {
+            mnemonicView.mnemonic = mnemonic
+        }
+    }
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +41,8 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 		}
 	}
 	
-	func showAlertForFail() {
-		let alert = UIAlertController(title: "备份失败", message: "请稍后再试", preferredStyle: .alert)
+    func showAlertForFail(_ msg: String = "请稍后再试") {
+		let alert = UIAlertController(title: "备份失败", message: msg, preferredStyle: .alert)
 		
 		let ok = UIAlertAction(title: "确认", style: .default) { (action) in
 			BILControllerManager.shared.showMainTabBarController()
@@ -73,26 +77,15 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 	}
 	
 	func decryptMnemonic(pwd: String) {
-		do {
-			guard let w = self.wallet else {
-				self.showAlertForFail()
-				return
-			}
-			let key = String(pwd.sha256().prefix(32))
-			let aes = try AES(key: key, iv: String(key.reversed().prefix(16)))
-			
-			if let mnemonic = String(bytes: try aes.decrypt((w.encryptedMnemonic?.ck_mnemonicData().bytes)!), encoding: .utf8), mnemonic.md5() == self.mnemonicHash {
-				self.mnemonic = mnemonic
-				self.mnemonicView.mnemonic = mnemonic
-			}
-			else
-			{
-				self.showAlertForFail()
-			}
-		} catch {
-			print(error)
-			self.showAlertForFail()
-		}
+        guard let w = self.wallet else {
+            self.showAlertForFail("获取钱包数据失败")
+            return
+        }
+        guard let m = w.decryptMnemonic(pwd: pwd) else {
+            self.showAlertForFail("解密钱包数据失败")
+            return
+        }
+        mnemonic = m
 	}
 
     override func didReceiveMemoryWarning() {
@@ -112,6 +105,7 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 			let cont = segue.destination as! BILVerifyMnemonicController
 			cont.dataArray = mnemonicView.dataArray
 			cont.wallet = wallet
+            mnemonic = ""
 		}
     }
 	

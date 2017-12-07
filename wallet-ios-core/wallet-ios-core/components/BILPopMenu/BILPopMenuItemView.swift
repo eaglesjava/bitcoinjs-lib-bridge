@@ -31,13 +31,25 @@ class BILPopMenuItemView: UIView {
         addGestureRecognizer(tap)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        titleLabel.alpha = 0.5
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        titleLabel.alpha = 1
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        titleLabel.alpha = 1
+    }
+    
     @objc
     func tapped(sender: UITapGestureRecognizer) {
+        print(sender.state)
         switch sender.state {
         case .ended:
             delegate?.itemDidTapped(itemView: self)
-        default:
-            ()
+        default: ()
         }
     }
     

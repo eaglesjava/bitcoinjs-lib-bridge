@@ -25,7 +25,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 		didSet {
             guard let w = wallet else { return }
             w.getBalanceFromServer(success: { (wallet) in
-                self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 108 : 142
+                self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 116 : 142
                 self.balanceLabel.text = w.btc_balanceString
                 self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + "btc"
             }) { (msg, code) in

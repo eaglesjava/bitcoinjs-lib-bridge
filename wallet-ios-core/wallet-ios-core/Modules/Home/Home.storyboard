@@ -84,7 +84,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBS-S2-Gy7">
-                                                            <rect key="frame" x="140" y="0.0" width="72" height="50"/>
+                                                            <rect key="frame" x="140" y="0.0" width="74" height="50"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_eth" translatesAutoresizingMaskIntoConstraints="NO" id="KcN-dh-481">
                                                                     <rect key="frame" x="0.0" y="1" width="36" height="48"/>
@@ -93,7 +93,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hW-Hm-BY4">
-                                                                    <rect key="frame" x="44" y="5.5" width="24" height="39.5"/>
+                                                                    <rect key="frame" x="44" y="5.5" width="26" height="39.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JN2-bM-Ppa">
                                                                             <rect key="frame" x="0.0" y="18.5" width="11" height="21.5"/>
@@ -101,8 +101,8 @@
                                                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y45-qI-hSi">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="14.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y45-qI-hSi">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="26" height="15"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -129,7 +129,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APM-f9-UrQ">
-                                                            <rect key="frame" x="224" y="0.0" width="59" height="50"/>
+                                                            <rect key="frame" x="226" y="0.0" width="59" height="50"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_bch" translatesAutoresizingMaskIntoConstraints="NO" id="AKa-lY-Pgo">
                                                                     <rect key="frame" x="0.0" y="1" width="36" height="48"/>
@@ -146,8 +146,8 @@
                                                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJr-DZ-SE9">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="25.5" height="14.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJr-DZ-SE9">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="15"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -238,24 +238,27 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="马上备份" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epR-iz-p7M">
-                                                            <rect key="frame" x="252.5" y="29" width="57.5" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNm-pR-Y3T">
+                                                            <rect key="frame" x="248" y="22" width="62" height="30"/>
+                                                            <state key="normal" title="马上备份">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
+                                                            <connections>
+                                                                <segue destination="yjm-jP-ujT" kind="show" identifier="BILHomeToBackUpWallet" id="OmP-a1-tkO"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="MNm-pR-Y3T" firstAttribute="centerY" secondItem="WZH-mv-CjK" secondAttribute="centerY" id="2jj-Gk-fIb"/>
                                                         <constraint firstItem="6ap-fE-eNJ" firstAttribute="top" secondItem="3jh-zW-ztf" secondAttribute="bottom" constant="8" id="9am-Qj-faD"/>
-                                                        <constraint firstItem="epR-iz-p7M" firstAttribute="centerY" secondItem="WZH-mv-CjK" secondAttribute="centerY" id="D32-8b-N9A"/>
-                                                        <constraint firstItem="epR-iz-p7M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3jh-zW-ztf" secondAttribute="trailing" constant="12" id="DYv-xc-Axy"/>
-                                                        <constraint firstAttribute="trailing" secondItem="epR-iz-p7M" secondAttribute="trailing" constant="15" id="Ilc-5i-R7d"/>
                                                         <constraint firstItem="NwA-EF-6cy" firstAttribute="centerY" secondItem="WZH-mv-CjK" secondAttribute="centerY" id="RA5-fx-WlR"/>
+                                                        <constraint firstItem="MNm-pR-Y3T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3jh-zW-ztf" secondAttribute="trailing" constant="20" id="Vxa-U6-wmZ"/>
                                                         <constraint firstItem="3jh-zW-ztf" firstAttribute="leading" secondItem="NwA-EF-6cy" secondAttribute="trailing" constant="15" id="hu0-pL-3p0"/>
                                                         <constraint firstItem="6ap-fE-eNJ" firstAttribute="leading" secondItem="3jh-zW-ztf" secondAttribute="leading" id="kwq-gw-fnd"/>
                                                         <constraint firstItem="NwA-EF-6cy" firstAttribute="leading" secondItem="WZH-mv-CjK" secondAttribute="leading" constant="15" id="wL3-9O-jJz"/>
                                                         <constraint firstItem="3jh-zW-ztf" firstAttribute="top" secondItem="WZH-mv-CjK" secondAttribute="top" constant="12" id="xAs-5n-Op7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="MNm-pR-Y3T" secondAttribute="trailing" constant="15" id="ydd-Fv-arq"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -276,7 +279,7 @@
                                             <outlet property="bil_contentView" destination="WZH-mv-CjK" id="baL-Eo-ce9"/>
                                             <outlet property="btcBalanceLabel" destination="6ap-fE-eNJ" id="ZrB-Ag-qzq"/>
                                             <outlet property="idLabel" destination="3jh-zW-ztf" id="4tU-Gj-06H"/>
-                                            <outlet property="needBackupLabel" destination="epR-iz-p7M" id="6Lt-Cn-FQO"/>
+                                            <outlet property="needBackupButton" destination="MNm-pR-Y3T" id="Fl1-Wc-kiN"/>
                                             <outlet property="subIDLabel" destination="NwA-EF-6cy" id="Xhv-ez-bSf"/>
                                             <segue destination="EAf-7Q-pFo" kind="show" identifier="BILHomeToWalletSegue" id="uYk-8g-9ar">
                                                 <segue key="commit" inheritsFrom="parent" id="Iig-Co-6xr"/>
@@ -501,6 +504,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YzT-KV-ofY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="834" y="-511"/>
+        </scene>
+        <!--BackupWallet-->
+        <scene sceneID="Pcv-iL-Dd4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="BackupWallet" id="yjm-jP-ujT" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JkR-CN-slX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="790" y="577"/>
         </scene>
         <!--BILImportWalletController-->
         <scene sceneID="5wD-eV-8nV">
