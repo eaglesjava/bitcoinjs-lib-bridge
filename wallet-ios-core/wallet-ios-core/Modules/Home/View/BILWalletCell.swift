@@ -24,12 +24,12 @@ class BILWalletCell: UITableViewCell {
 				btcBalanceLabel.text = "0.0000 btc"
 				needBackupButton.isHidden = !w.isNeedBackup
 				if w.isNeedBackup {
-					bil_contentView.gradientLayer?.colors = [UIColor.bil_gradient_start_red_color.cgColor, UIColor.bil_gradient_end_red_color.cgColor]
+					// bil_contentView.gradientLayer?.colors = [UIColor.bil_gradient_start_red_color.cgColor, UIColor.bil_gradient_end_red_color.cgColor]
 					subIDLabel.textColor = UIColor(hex: 0xFF636B)
 				}
 				else
 				{
-					bil_contentView.gradientLayer?.colors = [UIColor.bil_gradient_start_color.cgColor, UIColor.bil_gradient_end_color.cgColor]
+					// bil_contentView.gradientLayer?.colors = [UIColor.bil_gradient_start_color.cgColor, UIColor.bil_gradient_end_color.cgColor]
 					subIDLabel.textColor = UIColor(hex: 0x428DCA)
 				}
 			}
