@@ -66,63 +66,62 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     
 	@IBAction func nextAction(_ sender: Any) {
         
+        let alertTitle = "备份失败"
+        let alertMsg = "请重新检查您的助记词是否正确"
+        
         guard let text = textView.text, !text.isEmpty else {
             self.textView.becomeFirstResponder()
             self.mnemonicView.layer.borderColor = UIColor(hex: 0xFD6D73).cgColor
             return
         }
         guard let mnemonic = normalized(mnemonic: textView.text) else {
-            SVProgressHUD.showError(withStatus: "助记词格式化失败")
+            showTipAlert(title: alertTitle, msg: alertMsg, dismissed: nil)
             return
         }
         
-        SVProgressHUD.show(withStatus: "校验助记词。。。")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
-            
-            func segueSender(mnemonic: String, walletID: String?) -> (mnemonic: String, walletID: String?) {
-                return (mnemonic, walletID)
-            }
-            // TODO: 本地校验是否存在该助记词，服务器校验
-            BitcoinJSBridge.shared.validateMnemonic(mnemonic: mnemonic, success: { (result) in
-                let isValidate = result as! Bool
-                if isValidate {
-                    if let wallet = WalletModel.fetch(mnemonicHash: mnemonic.md5()) {
-                        debugPrint("钱包已存在在本地")
-                        let alert = UIAlertController(title: "钱包已存在", message: "是否重置密码", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
-                            self.bil_dismissSelfModalViewController()
-                        }))
-                        alert.addAction(UIAlertAction(title: "重置", style: .destructive, handler: { (action) in
-                            self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: wallet.id))
-                        }))
-                        self.present(alert, animated: true, completion: nil)
-                        SVProgressHUD.dismiss()
-                    }
-                    else
-                    {
-                        BitcoinJSBridge.shared.getMasterXPublicKey(mnemonic: mnemonic, success: { (pubKey) in
-                            WalletModel.getWalletIDFromSever(mainExtPublicKey: pubKey as! String, success: { (id) in
-                                self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: id))
-                                SVProgressHUD.dismiss()
-                            }, failure: { (errorMsg, code) in
-                                SVProgressHUD.showError(withStatus: "请求失败，请稍后再试")
-                            })
-                        }, failure: { (error) in
-                            SVProgressHUD.dismiss()
-                            self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: nil))
-                        })
-                    }
+        func segueSender(mnemonic: String, walletID: String?) -> (mnemonic: String, walletID: String?) {
+            return (mnemonic, walletID)
+        }
+        // TODO: 本地校验是否存在该助记词，服务器校验
+        BitcoinJSBridge.shared.validateMnemonic(mnemonic: mnemonic, success: { (result) in
+            let isValidate = result as! Bool
+            if isValidate {
+                if let wallet = WalletModel.fetch(mnemonicHash: mnemonic.md5()) {
+                    debugPrint("钱包已存在在本地")
+                    let alert = UIAlertController(title: "钱包已存在", message: "是否重置密码", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+                        self.bil_dismissSelfModalViewController()
+                    }))
+                    alert.addAction(UIAlertAction(title: "重置", style: .destructive, handler: { (action) in
+                        self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: wallet.id))
+                    }))
+                    self.present(alert, animated: true)
                 }
                 else
                 {
-                    print("不是合法的助记词")
-                    SVProgressHUD.showError(withStatus: "不是合法的助记词")
+                    SVProgressHUD.show(withStatus: "请求数据中。。。")
+                    BitcoinJSBridge.shared.getMasterXPublicKey(mnemonic: mnemonic, success: { (pubKey) in
+                        WalletModel.getWalletIDFromSever(mainExtPublicKey: pubKey as! String, success: { (id) in
+                            self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: id))
+                            SVProgressHUD.dismiss()
+                        }, failure: { (errorMsg, code) in
+                            SVProgressHUD.dismiss()
+                            self.showTipAlert(title: alertTitle, msg: errorMsg)
+                        })
+                    }, failure: { (error) in
+                        SVProgressHUD.dismiss()
+                        self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: nil))
+                    })
                 }
-            }) { (error) in
-                print("校验助记词失败")
-                SVProgressHUD.showError(withStatus: "校验助记词失败")
             }
+            else
+            {
+                print("不是合法的助记词")
+                self.showTipAlert(title: alertTitle, msg: alertMsg)
+            }
+        }) { (error) in
+            print("校验助记词失败")
+            self.showTipAlert(title: alertTitle, msg: alertMsg)
         }
         
 	}
