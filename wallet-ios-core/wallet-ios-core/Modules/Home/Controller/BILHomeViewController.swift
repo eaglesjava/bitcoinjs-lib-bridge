@@ -157,7 +157,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     @objc
     func refresh(sender: Any?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
-            tableView.reloadData()
+            self.tableView.reloadData()
             self.tableView.refreshControl?.endRefreshing()
         }
     }
