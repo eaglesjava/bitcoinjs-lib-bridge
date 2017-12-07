@@ -25,8 +25,7 @@ extension WalletModel {
     
     func decryptMnemonic(pwd: String) -> String? {
         do {
-            let key = String(pwd.sha256().prefix(32))
-            let aes = try AES(key: key, iv: String(key.reversed().prefix(16)))
+            guard let aes = WalletModel.generateAES(pwd: pwd) else { return nil }
             
             if let mnemonic = String(bytes: try aes.decrypt((encryptedMnemonic?.ck_mnemonicData().bytes)!), encoding: .utf8), mnemonic.md5() == self.mnemonicHash {
                 return mnemonic
