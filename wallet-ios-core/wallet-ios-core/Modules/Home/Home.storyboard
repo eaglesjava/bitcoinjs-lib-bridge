@@ -416,7 +416,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YpS-A2-L2U">
-                                                <rect key="frame" x="25" y="105.5" width="67" height="24"/>
+                                                <rect key="frame" x="25" y="109.5" width="67" height="24"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xa1-Vm-H3E">
                                                         <rect key="frame" x="0.0" y="0.0" width="13" height="24"/>
@@ -444,7 +444,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="YpS-A2-L2U" firstAttribute="top" secondItem="Pcd-Bi-NdR" secondAttribute="bottom" id="2uH-Er-X3b"/>
+                                            <constraint firstItem="YpS-A2-L2U" firstAttribute="top" secondItem="Pcd-Bi-NdR" secondAttribute="bottom" constant="4" id="2uH-Er-X3b"/>
                                             <constraint firstItem="jpe-z4-VDV" firstAttribute="top" secondItem="v9b-ms-gAN" secondAttribute="top" constant="16" id="8UZ-jQ-pd7"/>
                                             <constraint firstItem="YpS-A2-L2U" firstAttribute="leading" secondItem="v9b-ms-gAN" secondAttribute="leading" constant="25" id="CmG-qE-Kbm"/>
                                             <constraint firstItem="jpe-z4-VDV" firstAttribute="leading" secondItem="v9b-ms-gAN" secondAttribute="leading" constant="25" id="Zx5-tM-g95"/>
