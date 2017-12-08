@@ -19,6 +19,7 @@ import com.bitbill.www.model.entity.eventbus.BackupSuccessEvent;
 import com.bitbill.www.model.entity.eventbus.CreateSuccessEvent;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.bitbill.www.ui.guide.GuideActivity;
+import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     ViewPager mViewPager;
     private FragmentAdapter mAdapter;
     private AssetFragment mAssetFragment;
+    private ReceiveFragment mReceiveFragment;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -79,11 +81,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
         mAssetFragment = AssetFragment.newInstance();
         mAdapter.addItem(mAssetFragment);
-        mAdapter.addItem(ReceiveFragment.newInstance());
+        mReceiveFragment = ReceiveFragment.newInstance();
+        mAdapter.addItem(mReceiveFragment);
         mAdapter.addItem(SendFragment.newInstance());
         mAdapter.addItem(MyFragment.newInstance());
         mViewPager.setAdapter(mAdapter);
-        mViewPager.setOffscreenPageLimit(3);
+//        mViewPager.setOffscreenPageLimit(3);
     }
 
     @Override
@@ -144,7 +147,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         BackupSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(BackupSuccessEvent.class);
         //重新加载钱包信息
         if (mAssetFragment != null) {
-            mAssetFragment.initData();
+            mAssetFragment.lazyData();
         }
     }
 
@@ -153,7 +156,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         CreateSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(CreateSuccessEvent.class);
         //重新加载钱包信息
         if (mAssetFragment != null) {
-            mAssetFragment.initData();
+            mAssetFragment.lazyData();
         }
     }
 }

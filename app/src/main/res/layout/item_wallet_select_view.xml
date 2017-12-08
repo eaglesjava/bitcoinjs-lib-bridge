@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_wallet_select_container"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:background="@drawable/btn_blue"
+    >
+
+    <TextView
+        android:id="@+id/tv_wallet_label"
+        style="@style/Text.Wallet.Logo"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/tv_wallet_label"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_wallet_name"
+            style="@style/Text.Wallet.Name"/>
+
+        <TextView
+            android:id="@+id/tv_wallet_amount"
+            style="@style/Text.Wallet.Amount"
+            android:layout_marginTop="1dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_backup_now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:background="@color/transparent"
+        android:textColor="@color/white"
+        android:visibility="gone"/>
+</RelativeLayout>

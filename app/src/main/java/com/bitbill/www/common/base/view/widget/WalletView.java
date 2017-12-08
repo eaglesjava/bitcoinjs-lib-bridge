@@ -134,15 +134,23 @@ public class WalletView extends RelativeLayout implements View.OnClickListener {
     public WalletView setBackup(boolean backup) {
         isBackup = backup;
         if (backup) {
-            btnBackupNow.setVisibility(GONE);
-            tvWalletLabel.setTextColor(mNormalColor);
-            setBackground(mNormalBackground);
+            refreshNormalView();
         } else {
-            btnBackupNow.setVisibility(VISIBLE);
-            tvWalletLabel.setTextColor(mBackupColor);
-            setBackground(mBackupBackground);
+            refreshBackupView();
         }
         return this;
+    }
+
+    private void refreshNormalView() {
+        btnBackupNow.setVisibility(GONE);
+        tvWalletLabel.setTextColor(mNormalColor);
+        setBackground(mNormalBackground);
+    }
+
+    private void refreshBackupView() {
+        btnBackupNow.setVisibility(VISIBLE);
+        tvWalletLabel.setTextColor(mNormalColor);
+        setBackground(mNormalBackground);
     }
 
     @OnClick(R.id.btn_backup_now)

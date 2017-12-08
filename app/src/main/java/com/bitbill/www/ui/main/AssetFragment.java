@@ -11,7 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.view.BaseFragment;
+import com.bitbill.www.app.BitbillApp;
+import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.base.view.widget.PopupWalletMenu;
 import com.bitbill.www.common.base.view.widget.WalletView;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -33,7 +34,7 @@ import butterknife.OnClick;
  * Activities that contain this fragment must implement the
  * create an instance of this fragment.
  */
-public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements AssetMvpView, WalletView.OnWalletClickListener {
+public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implements AssetMvpView, WalletView.OnWalletClickListener {
 
 
     private static final int BOTTOM_MARGIN = 15;//unit dp
@@ -97,9 +98,9 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
                 mSwipeRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        initData();
+                        lazyData();
                     }
-                }, 5000);
+                }, 3000);
             }
         });
         mWalletMenu = new PopupWalletMenu(getBaseActivity());
@@ -127,7 +128,6 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
 
     @Override
     public void initData() {
-        getMvpPresenter().loadWallet();
 
     }
 
@@ -151,6 +151,8 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
         if (wallets == null) {
             return;
         }
+        //设置全局钱包列表对象
+        BitbillApp.get().setWallets(wallets);
         llWalletContainer.removeAllViews();
         mWalletCountView.setText(String.format(getString(R.string.text_asset_current_wallet), wallets.size()));
         for (Wallet wallet : wallets) {
@@ -194,5 +196,14 @@ public class AssetFragment extends BaseFragment<AssetMvpPresenter> implements As
     public void onBackupClick(Wallet wallet, View view) {
         //跳转到备份界面
         BackUpWalletActivity.start(getBaseActivity(), wallet);
+    }
+
+    /**
+     * 懒加载数据
+     * 在onFirstUserVisible之后
+     */
+    @Override
+    public void lazyData() {
+        getMvpPresenter().loadWallet();
     }
 }

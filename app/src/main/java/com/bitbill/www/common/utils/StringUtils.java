@@ -752,7 +752,7 @@ public class StringUtils {
         return getFormatedAmount(btcAmount / 100000000);
     }
 
-    public static boolean isEmpty(List<String> list) {
+    public static boolean isEmpty(List list) {
         if (list == null) {
             return true;
         }

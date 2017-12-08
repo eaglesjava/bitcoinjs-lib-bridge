@@ -1,13 +1,41 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.bitbill.www.ui.main.ReceiveFragment">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bitbill.www.ui.main.receive.BtcReceiveFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:orientation="vertical"
+        tools:context="com.bitbill.www.ui.main.receive.ReceiveFragment">
 
-</FrameLayout>
+        <include
+            layout="@layout/layout_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v4.view.ViewPager>
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.bitbill.www.ui.main.receive.BtcReceiveFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_peekHeight="85dp"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        tools:context="com.bitbill.www.ui.main.receive.BtcReceiveFragment"
+        tools:listitem="@layout/item_wallet_select_view"
+        />
+</android.support.design.widget.CoordinatorLayout>

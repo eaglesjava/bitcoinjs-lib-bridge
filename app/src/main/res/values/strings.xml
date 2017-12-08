@@ -113,5 +113,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_bottom_wallet_id">设定你的钱包ID，他可以关联你的联系人，支持英文和数字，一旦设定不可修改。</string>
+    <!--wallet info -->
     <string name="title_activity_wallet_info">钱包信息</string>
+    <string name="text_in_progress_count">正在进行中 %d个</string>
+    <string name="text_unconfirm_transaction">未确认的交易</string>
+    <string name="text_receive_specific_amount"><![CDATA[<u>特定金额接收</u>]]></string>
 </resources>

@@ -2,18 +2,17 @@ package com.bitbill.www.ui.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
+import com.bitbill.www.common.base.view.BaseLazyFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SendFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SendFragment extends Fragment {
+public class SendFragment extends BaseLazyFragment {
 
     public SendFragment() {
         // Required empty public constructor
@@ -25,7 +24,6 @@ public class SendFragment extends Fragment {
      *
      * @return A new instance of fragment SendFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static SendFragment newInstance() {
         SendFragment fragment = new SendFragment();
         Bundle args = new Bundle();
@@ -33,15 +31,48 @@ public class SendFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public MvpPresenter getMvpPresenter() {
+        return null;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_send, container, false);
+    public void injectComponent() {
+
+    }
+
+    @Override
+    public void onBeforeSetContentLayout() {
+
+    }
+
+    @Override
+    public void init(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_send;
+    }
+
+    /**
+     * 懒加载数据
+     * 在onFirstUserVisible之后
+     */
+    @Override
+    public void lazyData() {
+
     }
 }

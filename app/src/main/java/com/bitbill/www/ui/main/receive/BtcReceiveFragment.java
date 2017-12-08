@@ -1,21 +1,33 @@
-package com.bitbill.www.ui.main;
+package com.bitbill.www.ui.main.receive;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
 
+import butterknife.BindView;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MyFragment#newInstance} factory method to
+ * Use the {@link BtcReceiveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyFragment extends BaseLazyFragment {
+public class BtcReceiveFragment extends BaseLazyFragment {
 
 
-    public MyFragment() {
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
+    @BindView(R.id.iv_qrcode)
+    ImageView ivQrcode;
+    @BindView(R.id.tv_receive_amount)
+    TextView tvReceiveAmount;
+
+    public BtcReceiveFragment() {
         // Required empty public constructor
     }
 
@@ -23,15 +35,21 @@ public class MyFragment extends BaseLazyFragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment MyFragment.
+     * @return A new instance of fragment BtcReceiveFragment.
      */
-    public static MyFragment newInstance() {
-        MyFragment fragment = new MyFragment();
+    public static BtcReceiveFragment newInstance() {
+        BtcReceiveFragment fragment = new BtcReceiveFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+        }
+    }
 
     @Override
     public MvpPresenter getMvpPresenter() {
@@ -55,7 +73,7 @@ public class MyFragment extends BaseLazyFragment {
 
     @Override
     public void initView() {
-
+        tvReceiveAmount.setText(Html.fromHtml(getString(R.string.text_receive_specific_amount)));
     }
 
     @Override
@@ -65,7 +83,7 @@ public class MyFragment extends BaseLazyFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_my;
+        return R.layout.fragment_btc_receive;
     }
 
     /**
@@ -74,6 +92,6 @@ public class MyFragment extends BaseLazyFragment {
      */
     @Override
     public void lazyData() {
-
     }
+
 }

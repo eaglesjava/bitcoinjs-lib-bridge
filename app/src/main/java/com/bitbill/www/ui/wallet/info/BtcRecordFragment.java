@@ -36,6 +36,7 @@ public class BtcRecordFragment extends BaseFragment {
     private List<TransactionRecord> mRecordList;
     private boolean isBtcRecod;
     private HeaderAndFooterWrapper mHeaderAndFooterWrapper;
+    private CommonAdapter<TransactionRecord> mAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -109,7 +110,7 @@ public class BtcRecordFragment extends BaseFragment {
     public void initView() {
         // Set the adapter
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
-        CommonAdapter<TransactionRecord> adapter = new CommonAdapter<TransactionRecord>(getBaseActivity(), R.layout.item_btc_record, mRecordList) {
+        mAdapter = new CommonAdapter<TransactionRecord>(getBaseActivity(), R.layout.item_btc_record, mRecordList) {
 
             @Override
             protected void convert(ViewHolder holder, TransactionRecord transactionRecord, int position) {
@@ -127,19 +128,24 @@ public class BtcRecordFragment extends BaseFragment {
                 });
             }
         };
-        mHeaderAndFooterWrapper = new HeaderAndFooterWrapper(adapter);
         View header = null;
         if (isBtcRecod) {
             //必须加上parent 否则显示不全
             header = mInflater.inflate(R.layout.header_btc_info, mRecyclerView, false);
             StringUtils.setAmountTypeface(getBaseActivity(), (TextView) header.findViewById(R.id.tv_amount));
-        } else {
+        } else if (!StringUtils.isEmpty(mRecordList)) {
             header = mInflater.inflate(R.layout.header_in_progress_transaction, mRecyclerView, false);
+            ((TextView) header.findViewById(R.id.tv_in_progress)).setText(String.format(getString(R.string.text_in_progress_count), mRecordList.size()));
         }
-        mHeaderAndFooterWrapper.addHeaderView(header);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(mHeaderAndFooterWrapper);
-        mHeaderAndFooterWrapper.notifyDataSetChanged();
+        if (header != null) {
+
+            mHeaderAndFooterWrapper = new HeaderAndFooterWrapper(mAdapter);
+            mHeaderAndFooterWrapper.addHeaderView(header);
+            mRecyclerView.setAdapter(mHeaderAndFooterWrapper);
+            mHeaderAndFooterWrapper.notifyDataSetChanged();
+        } else {
+            mRecyclerView.setAdapter(mAdapter);
+        }
     }
 
     @Override
