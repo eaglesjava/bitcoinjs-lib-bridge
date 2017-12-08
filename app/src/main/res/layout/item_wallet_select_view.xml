@@ -35,14 +35,23 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_backup_now"
+    <ImageView
+        android:id="@+id/iv_right_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/activity_padding"
-        android:background="@color/transparent"
-        android:textColor="@color/white"
+        android:padding="5dp"
+        android:src="@drawable/ic_receive_right_arrow"
         android:visibility="gone"/>
+
+    <CheckBox
+        android:id="@+id/cb_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:button="@drawable/cb_wallet_select"/>
 </RelativeLayout>

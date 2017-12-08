@@ -220,6 +220,10 @@
 
     </style>
 
+    <style name="Text.Address" parent="Text.White">
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="TransparentDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>

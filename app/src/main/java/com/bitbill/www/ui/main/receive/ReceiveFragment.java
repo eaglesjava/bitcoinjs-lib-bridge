@@ -6,13 +6,19 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.common.base.view.widget.DividerDecoration;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.info.BchInfoFragment;
@@ -76,6 +82,7 @@ public class ReceiveFragment extends BaseLazyFragment {
 
     @Override
     public void onBeforeSetContentLayout() {
+        setHasOptionsMenu(true);
         mWalletList = new ArrayList<>();
 
     }
@@ -94,22 +101,39 @@ public class ReceiveFragment extends BaseLazyFragment {
     private void initBottomSheetView() {
 
         mBehavior = BottomSheetBehavior.from(mRecyclerView);
+        mBehavior.setState(BottomSheetBehavior.STATE_SETTLING);
+        DividerDecoration decor = new DividerDecoration(getBaseActivity(), DividerDecoration.VERTICAL);
+        decor.setDrawable(getResources().getDrawable(R.drawable.list_divider));
+        mRecyclerView.addItemDecoration(decor);
 
         mAdapter = new CommonAdapter<Wallet>(getBaseActivity(), R.layout.item_wallet_select_view, mWalletList) {
 
             @Override
             protected void convert(ViewHolder holder, Wallet wallet, int position) {
+                if (position == 0) {
+                    holder.setVisible(R.id.cb_selector, false);
+                    holder.setVisible(R.id.iv_right_arrow, true);
+                }
                 holder.setText(R.id.tv_wallet_name, wallet.getName() + " 的钱包");
                 holder.setText(R.id.tv_wallet_amount, StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc");
                 holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
-                holder.setOnClickListener(R.id.item_wallet_select_container, new View.OnClickListener() {
+                holder.setOnClickListener(R.id.iv_right_arrow, new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
 
                         mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                        holder.setVisible(R.id.cb_selector, true);
+                        holder.setVisible(R.id.iv_right_arrow, false);
                     }
                 });
+                ((CheckBox) holder.getView(R.id.cb_selector)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        wallet.setIsSelected(isChecked);
+                    }
+                });
+                ((CheckBox) holder.getView(R.id.cb_selector)).setChecked(wallet.getIsSelected());
             }
         };
         mRecyclerView.setAdapter(mAdapter);
@@ -152,8 +176,31 @@ public class ReceiveFragment extends BaseLazyFragment {
             if (StringUtils.isEmpty(wallets)) return;
             mWalletList.clear();
             mWalletList.addAll(wallets);
+            mWalletList.get(0).setIsSelected(true);
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.receive_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_refresh) {
+            // TODO: 2017/12/8 刷新接收地址
+            showMessage("刷新地址");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

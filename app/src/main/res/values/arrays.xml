@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="coin_tabs">
+        <item>btc</item>
+        <item>eth</item>
+        <item>bch</item>
+    </string-array>
+</resources>

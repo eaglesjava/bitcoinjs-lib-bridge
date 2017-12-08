@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_input_specifi_amount"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical">
+
+    <EditText
+        android:id="@+id/et_input_amount"
+        style="@style/EditText.Normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_input_please"
+        android:paddingBottom="20dp"
+        android:singleLine="true"
+        android:textSize="21sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/et_input_amount"
+        android:layout_alignParentRight="true"
+        android:text="BTC"
+        android:textSize="21sp"/>
+
+    <Button
+        android:id="@+id/btn_ok"
+        style="@style/Button.Blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_input_amount"
+        android:layout_marginTop="30dp"
+        android:text="@string/btn_confirm"/>
+</RelativeLayout>

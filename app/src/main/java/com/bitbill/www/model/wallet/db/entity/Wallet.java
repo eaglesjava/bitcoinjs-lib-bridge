@@ -53,6 +53,8 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private String tradePwd;
     @Transient
     private long btcAmount;//unit Satoshi  1 BTC = 100000000 Satoshi
+    @Transient
+    private boolean isSelected;
 
     @Generated(hash = 1983236334)
     public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash,
@@ -186,6 +188,15 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     public Wallet setSeedHex(String seedHex) {
         this.seedHex = seedHex;
+        return this;
+    }
+
+    public boolean getIsSelected() {
+        return isSelected;
+    }
+
+    public Wallet setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
         return this;
     }
 }

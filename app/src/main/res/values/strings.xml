@@ -118,4 +118,9 @@
     <string name="text_in_progress_count">正在进行中 %d个</string>
     <string name="text_unconfirm_transaction">未确认的交易</string>
     <string name="text_receive_specific_amount"><![CDATA[<u>特定金额接收</u>]]></string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="title_receive_address_refresh">刷新地址</string>
+    <string name="title_activity_specific_receive">特定金额接收</string>
 </resources>
