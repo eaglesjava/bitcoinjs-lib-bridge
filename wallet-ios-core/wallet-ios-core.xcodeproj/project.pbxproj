@@ -82,6 +82,9 @@
 		CCEC67831FB190EE004CC6C5 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677E1FB190EE004CC6C5 /* index.js */; };
 		CCEC67841FB190EE004CC6C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677F1FB190EE004CC6C5 /* README.md */; };
 		CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */; };
+		CCED055C1FDA6D2E00689498 /* BILSpecificVolumeRecieveInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED055B1FDA6D2E00689498 /* BILSpecificVolumeRecieveInputController.swift */; };
+		CCED055E1FDA9B4C00689498 /* BILRecieveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED055D1FDA9B4C00689498 /* BILRecieveModel.swift */; };
+		CCED05601FDAA42000689498 /* BILSpecificVolumeRecieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED055F1FDAA42000689498 /* BILSpecificVolumeRecieveController.swift */; };
 		CCF634F21FBEC25400840097 /* BILTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634F11FBEC25400840097 /* BILTabBarController.swift */; };
 		CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634F41FBEC63300840097 /* BILAllInOneView.swift */; };
 		CCF634F71FBEC64400840097 /* BILAllInOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF634F61FBEC64400840097 /* BILAllInOneView.xib */; };
@@ -196,6 +199,9 @@
 		CCEC677E1FB190EE004CC6C5 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		CCEC677F1FB190EE004CC6C5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinJSBridge.swift; sourceTree = "<group>"; };
+		CCED055B1FDA6D2E00689498 /* BILSpecificVolumeRecieveInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSpecificVolumeRecieveInputController.swift; sourceTree = "<group>"; };
+		CCED055D1FDA9B4C00689498 /* BILRecieveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILRecieveModel.swift; sourceTree = "<group>"; };
+		CCED055F1FDAA42000689498 /* BILSpecificVolumeRecieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSpecificVolumeRecieveController.swift; sourceTree = "<group>"; };
 		CCF634F11FBEC25400840097 /* BILTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILTabBarController.swift; sourceTree = "<group>"; };
 		CCF634F41FBEC63300840097 /* BILAllInOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAllInOneView.swift; sourceTree = "<group>"; };
 		CCF634F61FBEC64400840097 /* BILAllInOneView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILAllInOneView.xib; sourceTree = "<group>"; };
@@ -272,6 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				BA284D101FD946B000A1C9F6 /* BILRecieveController.swift */,
+				CCED055B1FDA6D2E00689498 /* BILSpecificVolumeRecieveInputController.swift */,
+				CCED055F1FDAA42000689498 /* BILSpecificVolumeRecieveController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -279,6 +287,7 @@
 		BA20A5D91FD68D4E00EC2147 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCED055D1FDA9B4C00689498 /* BILRecieveModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1142,6 +1151,7 @@
 				BA1142391FD53CC80025BF80 /* BILGuideContactView.swift in Sources */,
 				CCE5E1701FC8165A00F7555D /* BILGradientView.swift in Sources */,
 				CC8E4C381FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift in Sources */,
+				CCED055E1FDA9B4C00689498 /* BILRecieveModel.swift in Sources */,
 				CC94E0531FB984630098E730 /* BILGradientButton.swift in Sources */,
 				BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */,
 				CCFEDEF21FCD43CE00F1A7FC /* BILHomeAssetCell.swift in Sources */,
@@ -1174,6 +1184,7 @@
 				CC94E0551FB9911E0098E730 /* BILCreateWalletSucessView.swift in Sources */,
 				CC4417031FBEAD8800C4B158 /* BILAESHelper.swift in Sources */,
 				CC94E0591FBA99160098E730 /* BILInputView.swift in Sources */,
+				CCED055C1FDA6D2E00689498 /* BILSpecificVolumeRecieveInputController.swift in Sources */,
 				BA284D111FD946B000A1C9F6 /* BILRecieveController.swift in Sources */,
 				CCE5E1761FCBC4B000F7555D /* BILTransaction.swift in Sources */,
 				CC4417071FBEB47C00C4B158 /* BILBackupWalletSuccessController.swift in Sources */,
@@ -1189,6 +1200,7 @@
 				BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */,
 				CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */,
 				CC94E04F1FB950040098E730 /* BILCreateWalletViewController.swift in Sources */,
+				CCED05601FDAA42000689498 /* BILSpecificVolumeRecieveController.swift in Sources */,
 				CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */,
 				CC4417011FBEAC7F00C4B158 /* WalletModel+BIL.swift in Sources */,
 				CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */,

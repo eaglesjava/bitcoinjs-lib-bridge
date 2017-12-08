@@ -315,10 +315,6 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         default:
             ()
         }
-        
-        if segue.identifier == "BILHomeToBackUpWallet" {
-            
-        }
     }
 
 }

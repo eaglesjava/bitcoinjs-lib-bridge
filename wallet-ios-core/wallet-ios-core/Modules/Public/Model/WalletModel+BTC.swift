@@ -31,6 +31,12 @@ extension WalletModel {
             failure(error.localizedDescription)
         }
     }
+	
+	func getNewBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
+		lastAddressIndex += 1
+		lastBTCAddress(success: success, failure: failure)
+	}
+	
     var btc_balanceString: String {
         get {
             return BTCFormatString(btc: Int(btcBalance))

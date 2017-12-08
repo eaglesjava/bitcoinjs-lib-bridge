@@ -225,10 +225,10 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 wallet.createWalletToServer(success: { (result) in
                     self.mnemonicHash = wallet.mnemonicHash
                     self.createSuccess()
+					SVProgressHUD.dismiss()
                 }, failure: { (msg, code) in
                     cleanUp(wallet: wallet, error: msg)
                 })
-                SVProgressHUD.dismiss()
             }, failure: { (errorMsg) in
                 SVProgressHUD.showError(withStatus: errorMsg)
                 SVProgressHUD.dismiss(withDelay: 1.2)
