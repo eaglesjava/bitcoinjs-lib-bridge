@@ -120,7 +120,7 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
         if (parent.getClipToPadding()) {
             left = parent.getPaddingLeft();
             right = parent.getWidth() - parent.getPaddingRight();
-            canvas.clipRect(left - mDefaultPadding, parent.getPaddingTop(), right,
+            canvas.clipRect(left, parent.getPaddingTop(), right,
                     parent.getHeight() - parent.getPaddingBottom());
         } else {
             left = 0;

@@ -108,8 +108,10 @@ public class BtcRecordFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        // Set the adapter
+//        DividerDecoration decor = new DividerDecoration(getBaseActivity(), DividerDecoration.VERTICAL);
+//        mRecyclerView.addItemDecoration(decor);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+        // Set the adapter
         mAdapter = new CommonAdapter<TransactionRecord>(getBaseActivity(), R.layout.item_btc_record, mRecordList) {
 
             @Override

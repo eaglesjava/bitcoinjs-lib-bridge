@@ -1,36 +1,30 @@
 package com.bitbill.www.ui.main.receive;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
-import com.bitbill.www.common.base.view.widget.DividerDecoration;
+import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
+import com.bitbill.www.common.base.view.widget.WalletView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.info.BchInfoFragment;
 import com.bitbill.www.ui.wallet.info.EthInfoFragment;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,14 +38,11 @@ public class ReceiveFragment extends BaseLazyFragment {
     TabLayout tabs;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
-    Unbinder unbinder;
-    @BindView(R.id.list)
-    RecyclerView mRecyclerView;
+    @BindView(R.id.wv_select)
+    WalletView selectWalletView;
     private FragmentAdapter mFragmentAdapter;
     private BtcReceiveFragment mBtcReceiveFragment;
-    private BottomSheetBehavior<View> mBehavior;
     private List<Wallet> mWalletList;
-    private CommonAdapter<Wallet> mAdapter;
 
     public ReceiveFragment() {
         // Required empty public constructor
@@ -95,49 +86,15 @@ public class ReceiveFragment extends BaseLazyFragment {
     @Override
     public void initView() {
         setupViewPager();
-        initBottomSheetView();
-    }
-
-    private void initBottomSheetView() {
-
-        mBehavior = BottomSheetBehavior.from(mRecyclerView);
-        mBehavior.setState(BottomSheetBehavior.STATE_SETTLING);
-        DividerDecoration decor = new DividerDecoration(getBaseActivity(), DividerDecoration.VERTICAL);
-        decor.setDrawable(getResources().getDrawable(R.drawable.list_divider));
-        mRecyclerView.addItemDecoration(decor);
-
-        mAdapter = new CommonAdapter<Wallet>(getBaseActivity(), R.layout.item_wallet_select_view, mWalletList) {
-
+        selectWalletView.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected void convert(ViewHolder holder, Wallet wallet, int position) {
-                if (position == 0) {
-                    holder.setVisible(R.id.cb_selector, false);
-                    holder.setVisible(R.id.iv_right_arrow, true);
-                }
-                holder.setText(R.id.tv_wallet_name, wallet.getName() + " 的钱包");
-                holder.setText(R.id.tv_wallet_amount, StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc");
-                holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
-                holder.setOnClickListener(R.id.iv_right_arrow, new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                        holder.setVisible(R.id.cb_selector, true);
-                        holder.setVisible(R.id.iv_right_arrow, false);
-                    }
-                });
-                ((CheckBox) holder.getView(R.id.cb_selector)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        wallet.setIsSelected(isChecked);
-                    }
-                });
-                ((CheckBox) holder.getView(R.id.cb_selector)).setChecked(wallet.getIsSelected());
+            public void onClick(View v) {
+                //弹出钱包选择界面
+                WalletSelectDialog.newInstance().show(getChildFragmentManager(), WalletSelectDialog.TAG);
             }
-        };
-        mRecyclerView.setAdapter(mAdapter);
+        });
     }
+
 
     private void setupViewPager() {
         mFragmentAdapter = new FragmentAdapter(getChildFragmentManager());
@@ -173,11 +130,13 @@ public class ReceiveFragment extends BaseLazyFragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             List<Wallet> wallets = BitbillApp.get().getWallets();
-            if (StringUtils.isEmpty(wallets)) return;
-            mWalletList.clear();
-            mWalletList.addAll(wallets);
-            mWalletList.get(0).setIsSelected(true);
-            mAdapter.notifyDataSetChanged();
+            if (!StringUtils.isEmpty(wallets)) {
+                selectWalletView.setWallet(wallets.get(0));
+            } else {
+                selectWalletView.setVisibility(View.GONE);
+            }
+            MessageConfirmDialog.newInstance("友情提醒", "为保护您的隐私，每次转入操作时，都将使用新地址，已使用的旧地址仍然可用", false)
+                    .show(getChildFragmentManager(), MessageConfirmDialog.TAG);
         }
     }
 

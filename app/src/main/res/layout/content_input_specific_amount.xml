@@ -17,8 +17,7 @@
         android:textSize="21sp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Text.White.Action"
         android:layout_alignBaseline="@id/et_input_amount"
         android:layout_alignParentRight="true"
         android:text="BTC"

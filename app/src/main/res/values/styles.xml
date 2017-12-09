@@ -56,6 +56,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/btn_height</item>
         <item name="android:textSize">@dimen/btn_text_size</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:lines">1</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
     </style>
@@ -68,6 +69,11 @@
     <style name="Button.Transparent" parent="Button">
         <item name="android:background">@drawable/btn_transparent_corner</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Button.White" parent="Button">
+        <item name="android:textColor">@color/btn_blue_text</item>
+        <item name="android:background">@drawable/btn_white_corner</item>
     </style>
 
     <style name="EditText" parent="Widget.AppCompat.EditText">
@@ -126,6 +132,10 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="Text.White.Action" parent="Text.White">
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="Text.Title" parent="Text">
         <item name="android:lines">1</item>
         <item name="android:textColor">@color/white</item>
@@ -158,11 +168,15 @@
         <item name="android:textColor">@color/white_60</item>
     </style>
 
-    <style name="Text.Small">
+    <style name="Text.Small" parent="Text">
         <item name="android:textSize">@dimen/input_title_text_size</item>
     </style>
 
-    <style name="Text.Small.Green">
+    <style name="Text.Small.White" parent="Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Small.Green" parent="Text.Small">
         <item name="android:textColor">@color/green</item>
     </style>
 
@@ -299,7 +313,7 @@
         <item name="android:clickable">false</item>
     </style>
 
-    <style name="PopupAnimation">
+    <style name="PopupAnimation" parent="Animation.AppCompat.Dialog">
 
         <!-- PopupWindow左右弹出的效果 -->
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
@@ -311,5 +325,9 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="DialogWalletSelect">
+        <item name="android:windowEnterAnimation">@anim/slide_left</item>
+        <item name="android:windowExitAnimation">@anim/slide_right</item>
+    </style>
 
 </resources>

@@ -1,4 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,15 +27,11 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
-        android:name="com.bitbill.www.ui.main.receive.BtcReceiveFragment"
+    <com.bitbill.www.common.base.view.widget.WalletView
+        android:id="@+id/wv_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:behavior_peekHeight="85dp"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_behavior="@string/bottom_sheet_behavior"
-        tools:context="com.bitbill.www.ui.main.receive.BtcReceiveFragment"
-        tools:listitem="@layout/item_wallet_select_view"
-        />
-</android.support.design.widget.CoordinatorLayout>
+        android:layout_gravity="bottom"
+        app:isSelectView="true"/>
+
+</FrameLayout>

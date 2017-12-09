@@ -40,7 +40,6 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
     Button mDialogBtnPositive;
     @BindView(R.id.dialog_btn_container)
     LinearLayout mDialogBtnContainer;
-    Unbinder unbinder;
     ConfirmDialogClickListener mConfirmDialogClickListener;
     private LayoutInflater mLayoutInflate;
     private String mTitle;
@@ -65,7 +64,7 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
         if (getLayoutId() != 0) {
             ((FrameLayout) view.findViewById(R.id.dialog_container)).addView(mLayoutInflate.inflate(getLayoutId(), null));
         }
-        unbinder = ButterKnife.bind(this, view);
+        setUnBinder(ButterKnife.bind(this, view));
         init(savedInstanceState);
         //init view
         if (!TextUtils.isEmpty(mTitle)) {
@@ -82,12 +81,6 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
         initView();
         initData();
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     @OnClick({R.id.dialog_btn_negative, R.id.dialog_btn_positive})

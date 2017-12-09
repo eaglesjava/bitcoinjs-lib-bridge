@@ -6,7 +6,9 @@
         <attr name="backupColor" format="color|reference"/>
         <attr name="normalBackground" format="color|reference"/>
         <attr name="backupBackground" format="color|reference"/>
+        <attr name="selectBackground" format="color|reference"/>
         <attr name="walletAmount" format="string"/>
         <attr name="isBackup" format="boolean"/>
+        <attr name="isSelectView" format="boolean"/>
     </declare-styleable>
 </resources>

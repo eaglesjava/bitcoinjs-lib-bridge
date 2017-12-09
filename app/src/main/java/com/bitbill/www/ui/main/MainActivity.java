@@ -20,6 +20,7 @@ import com.bitbill.www.model.entity.eventbus.CreateSuccessEvent;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
+import com.bitbill.www.ui.main.send.SendFragment;
 import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -86,7 +87,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mAdapter.addItem(SendFragment.newInstance());
         mAdapter.addItem(MyFragment.newInstance());
         mViewPager.setAdapter(mAdapter);
-//        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setOffscreenPageLimit(3);
     }
 
     @Override

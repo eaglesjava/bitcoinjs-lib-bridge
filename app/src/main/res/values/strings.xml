@@ -117,10 +117,15 @@
     <string name="title_activity_wallet_info">钱包信息</string>
     <string name="text_in_progress_count">正在进行中 %d个</string>
     <string name="text_unconfirm_transaction">未确认的交易</string>
-    <string name="text_receive_specific_amount"><![CDATA[<u>特定金额接收</u>]]></string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_activity_settings">Settings</string>
 
+    <!--receive fragment-->
+    <string name="text_receive_specific_amount"><![CDATA[<u>特定金额接收</u>]]></string>
     <string name="title_receive_address_refresh">刷新地址</string>
     <string name="title_activity_specific_receive">特定金额接收</string>
+    <!--send fragment-->
+    <string name="title_activity_send_success">发送成功</string>
+    <string name="btn_create_contact_now">快速创建联系人</string>
+    <string name="hint_send_success">推荐您添加该地址到新联系人以便下次交易</string>
+    <string name="btn_confirm_send">确定发送</string>
+    <string name="action_send_scan">扫码</string>
 </resources>

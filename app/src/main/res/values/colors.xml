@@ -20,10 +20,11 @@
     <color name="black_50">#80000000</color>
     <color name="black_90">#e6000000</color>
     <color name="line">#E6E6E6</color>
-    <color name="blue">#4493CD</color>
-    <color name="blue_dark">#3255AC</color>
+    <color name="blue">#309BEA</color>
+    <color name="blue_dark">#1F44A0</color>
     <color name="blue_active">#318AF3</color>
     <color name="blue_tab">#396EB9</color>
+    <color name="btn_blue_text">#3C76BE</color>
     <color name="red">#FF626C</color>
     <color name="red_dark">#FF454D</color>
     <color name="edit_line">#80F2F2F2</color>

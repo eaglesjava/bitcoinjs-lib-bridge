@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/activity_padding"
+              android:paddingRight="@dimen/activity_padding"
+              tools:context="com.bitbill.www.ui.main.send.BtcSendFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_send_address"
+            style="@style/EditText.Normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="接收方地址"
+            android:paddingBottom="20dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_send_address"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_send_amount"
+            style="@style/EditText.Normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="发送金额"
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            style="@style/Text.White.Action"
+            android:layout_alignBaseline="@id/et_send_amount"
+            android:layout_alignParentRight="true"
+            android:text="选择全部"/>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_send_mark"
+        style="@style/EditText.Normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="备注（20字内）"
+        android:paddingBottom="20dp"/>
+
+    <TextView
+        style="@style/Text.White.Action"
+        android:layout_marginTop="30dp"
+        android:text="推荐手续费"/>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:progressTint="@color/white"
+        />
+
+    <TextView
+        style="@style/Text.Small.White"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="平均出块时间30分钟，需耗费0.002BTC"/>
+</LinearLayout>
