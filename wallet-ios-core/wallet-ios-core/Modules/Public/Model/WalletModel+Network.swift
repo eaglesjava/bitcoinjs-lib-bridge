@@ -19,6 +19,7 @@ extension WalletModel {
             failure("extKey不能为空", -1)
             return
         }
+//		success([:])
         BILNetworkManager.request(request: .createWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
     }
     

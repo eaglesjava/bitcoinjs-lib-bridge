@@ -10,10 +10,26 @@ import UIKit
 
 class BILRecieveController: BILBaseViewController {
 
+	@IBOutlet var chooseWalletContainerView: UIView!
 	@IBOutlet weak var backupViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var qrCodeImageView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
-    var currentWallet: WalletModel?
+	var currentWallet: WalletModel? {
+		didSet {
+			if let w = currentWallet {
+				currentWalletIDLabel.text = w.id
+				currentWalletBalanceLabel.text = w.btc_balanceString + " btc"
+				currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")"
+				
+				backupViewHeight.constant = w.isNeedBackup ? 40 : 0
+				w.lastBTCAddress(success: { (address) in
+					self.setAddress(address: address)
+				}, failure: { (errorMsg) in
+					debugPrint(errorMsg)
+				})
+			}
+		}
+	}
     @IBOutlet weak var currentWalletIDLabel: UILabel!
     @IBOutlet weak var currentWalletBalanceLabel: UILabel!
     @IBOutlet weak var currentWalletShortIDLabel: UILabel!
@@ -25,19 +41,10 @@ class BILRecieveController: BILBaseViewController {
 
         // Do any additional setup after loading the view.
         currentWallet = BILWalletManager.shared.wallets.first
-        
-        if let w = currentWallet {
-            currentWalletIDLabel.text = w.id
-            currentWalletBalanceLabel.text = w.btc_balanceString + " btc"
-            currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")"
-			
-			backupViewHeight.constant = w.isNeedBackup ? 40 : 0
-            w.lastBTCAddress(success: { (address) in
-                self.setAddress(address: address)
-            }, failure: { (errorMsg) in
-                debugPrint(errorMsg)
-            })
-        }
+		performSegue(withIdentifier: "BILRecieveChooseWalletSegue", sender: nil)
+		
+		let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(sender:)))
+		bgView.addGestureRecognizer(tap)
     }
 	
 	func setAddress(address: String) {
@@ -50,13 +57,86 @@ class BILRecieveController: BILBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showTipAlert(title: "友情提醒", msg: "为保护您的隐私，每次转入操作时，都将使用新地址，已使用的旧地址仍然可用")
+		
+		let key = "BILShowTipForWalletNewAddress"
+		let shown = UserDefaults.standard.bool(forKey: key)
+		if !shown {
+			showTipAlert(title: "友情提醒", msg: "为保护您的隐私，每次转入操作时，都将使用新地址，已使用的旧地址仍然可用")
+			UserDefaults.standard.set(true, forKey: key)
+		}
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	@objc
+	func tapped(sender: UITapGestureRecognizer) {
+		print(sender.state)
+		switch sender.state {
+		case .ended:
+			hideChooseWalletView()
+		default: ()
+		}
+	}
+	
+	@IBAction func currentWalletViewTapped(_ sender: Any) {
+		showChooseWalletView()
+	}
+	
+	private let container = UIView(frame: UIScreen.main.bounds)
+	private let bgView = UIView(frame: UIScreen.main.bounds)
+	
+	func showChooseWalletView() {
+		
+		let screenSize = UIScreen.main.bounds.size
+		
+		var bottom: CGFloat = 49.0
+		if #available(iOS 11.0, *) {
+			bottom = view.safeAreaInsets.bottom
+		}
+		container.frame.size.height = screenSize.height - bottom
+		container.clipsToBounds = true
+		
+		bgView.backgroundColor = UIColor(white: 0, alpha: 0.7)
+		bgView.alpha = 0
+		bgView.frame = container.bounds
+		container.addSubview(bgView)
+		
+		let height = min(BILWalletManager.shared.wallets.count, 3) * 85 + 50
+		chooseWalletContainerView.frame = CGRect(x: 0, y: Int(container.bounds.height), width: Int(screenSize.width), height: height)
+		container.addSubview(chooseWalletContainerView)
+		view.addSubview(container)
+		
+		var targetFrame = chooseWalletContainerView.frame
+		if #available(iOS 11.0, *) {
+			targetFrame.origin.y = screenSize.height - targetFrame.height - view.safeAreaInsets.bottom
+		} else {
+			// Fallback on earlier versions
+			targetFrame.origin.y = screenSize.height - targetFrame.height
+		}
+		
+		UIView.animate(withDuration: 0.25) {
+			self.chooseWalletContainerView.frame = targetFrame
+			self.bgView.alpha = 1
+		}
+	}
+	
+	func hideChooseWalletView() {
+		let screenSize = UIScreen.main.bounds.size
+		var targetFrame = chooseWalletContainerView.frame
+		targetFrame.origin.y = screenSize.height
+		UIView.animate(withDuration: 0.25, animations: {
+			self.chooseWalletContainerView.frame = targetFrame
+			self.bgView.alpha = 0
+		}) { (finished) in
+			self.container.subviews.first?.removeFromSuperview()
+			self.container.removeFromSuperview()
+			self.bgView.removeFromSuperview()
+			self.container.removeFromSuperview()
+		}
+	}
 	
 	@IBAction func generateNewAddress(_ sender: Any) {
 		currentWallet?.getNewBTCAddress(success: { (address) in
@@ -76,9 +156,6 @@ class BILRecieveController: BILBaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-		if segue.identifier == "BILRecieveToBackUpWallet" {
-			
-		}
 		guard let id = segue.identifier else { return }
 		switch id {
 		case "BILRecieveToBackUpWallet":
@@ -90,6 +167,13 @@ class BILRecieveController: BILBaseViewController {
 		case "BILToSpecificRecieveSegue":
 			let cont = segue.destination as! BILSpecificVolumeRecieveInputController
 			cont.recieveModel = recieveModel
+		case "BILRecieveChooseWalletSegue":
+			let cont = segue.destination as! BILChooseWalletController
+			unowned let s = self
+			cont.setDidSelecteWalletClosure(onSelected: { (wallet) in
+				s.currentWallet = wallet
+				s.hideChooseWalletView()
+			})
 		default:
 			()
 		}

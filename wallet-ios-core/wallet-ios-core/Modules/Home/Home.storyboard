@@ -86,7 +86,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBS-S2-Gy7">
                                                             <rect key="frame" x="140" y="0.0" width="74" height="50"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_eth" translatesAutoresizingMaskIntoConstraints="NO" id="KcN-dh-481">
+                                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_bch" translatesAutoresizingMaskIntoConstraints="NO" id="KcN-dh-481">
                                                                     <rect key="frame" x="0.0" y="1" width="36" height="48"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="48" id="xRY-ZB-yR8"/>
@@ -101,7 +101,7 @@
                                                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y45-qI-hSi">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y45-qI-hSi">
                                                                             <rect key="frame" x="0.0" y="0.0" width="26" height="15"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
@@ -131,7 +131,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APM-f9-UrQ">
                                                             <rect key="frame" x="226" y="0.0" width="59" height="50"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_bch" translatesAutoresizingMaskIntoConstraints="NO" id="AKa-lY-Pgo">
+                                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_eth" translatesAutoresizingMaskIntoConstraints="NO" id="AKa-lY-Pgo">
                                                                     <rect key="frame" x="0.0" y="1" width="36" height="48"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="48" id="Wnm-EW-7Se"/>
@@ -339,7 +339,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  BCC  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HyH-em-rLE">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  BCH  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HyH-em-rLE">
                                         <rect key="frame" x="61" y="0.0" width="47" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
