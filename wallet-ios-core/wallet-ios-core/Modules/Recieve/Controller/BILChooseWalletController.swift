@@ -38,6 +38,10 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! BILChooseWalletCell
 		cell.wallet = wallets[indexPath.row]
+		if indexPath.row == wallets.count - 1 {
+			cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, UIScreen.main.bounds.width)
+		}
+		
 		return cell
 	}
 	
