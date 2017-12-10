@@ -22,6 +22,11 @@ class BILWalletController: BILBaseViewController {
 		btcWalletView.wallet = wallet
     }
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		navigationController?.setNavigationBarHidden(false, animated: false)
+	}
+	
 	override func bil_setBackgroudColor() {
         if gradientLayer == nil {
             gradientLayer = view.setupGradient(colors: [UIColor.bil_gradient_start_color.cgColor, UIColor.bil_gradient_end_color.cgColor], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))

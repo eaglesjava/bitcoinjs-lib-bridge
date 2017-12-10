@@ -146,11 +146,12 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.setNavigationBarHidden(true, animated: false)
+		tableView.reloadData()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		navigationController?.setNavigationBarHidden(false, animated: false)
+//		navigationController?.setNavigationBarHidden(false, animated: false)
 	}
 	
 	// MARK: - Notifications

@@ -49,6 +49,12 @@ class BILWalletManager: NSObject {
     func remove(wallet: WalletModel) {
         let context = coreDataContext
         context.delete(wallet)
+		do {
+			try context.save()
+			NotificationCenter.default.post(name: .walletDidChanged, object: nil)
+		} catch {
+			debugPrint(error)
+		}
     }
 	
 	func saveWallets() throws {
