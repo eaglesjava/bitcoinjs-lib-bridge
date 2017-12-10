@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_padding"
-    tools:context="com.bitbill.www.ui.wallet.backup.BackupWalletConfirmActivity">
+    tools:context="com.bitbill.www.ui.wallet.backuped.BackupWalletConfirmActivity">
 
     <TextView
         style="@style/Text.White"

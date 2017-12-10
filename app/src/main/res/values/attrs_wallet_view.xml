@@ -8,7 +8,7 @@
         <attr name="backupBackground" format="color|reference"/>
         <attr name="selectBackground" format="color|reference"/>
         <attr name="walletAmount" format="string"/>
-        <attr name="isBackup" format="boolean"/>
+        <attr name="backuped" format="boolean"/>
         <attr name="isSelectView" format="boolean"/>
     </declare-styleable>
 </resources>

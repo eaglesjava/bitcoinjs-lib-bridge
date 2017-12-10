@@ -49,15 +49,15 @@
             android:label="@string/title_activity_create_wallet">
         </activity>
         <activity
-            android:name=".ui.wallet.backup.BackUpWalletActivity"
+            android:name=".ui.wallet.backuped.BackUpWalletActivity"
             android:label="@string/title_activity_backup_wallet">
         </activity>
         <activity
-            android:name=".ui.wallet.backup.BackupWalletConfirmActivity"
+            android:name=".ui.wallet.backuped.BackupWalletConfirmActivity"
             android:label="@string/title_activity_backup_wallet">
         </activity>
         <activity
-            android:name=".ui.wallet.backup.BackupWalletSuccessActivity"
+            android:name=".ui.wallet.backuped.BackupWalletSuccessActivity"
             android:label="@string/title_activity_backup_wallet">
         </activity>
         <activity

@@ -8,7 +8,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -22,10 +22,10 @@ import butterknife.OnClick;
 /**
  * Wallet view
  */
-public class WalletView extends RelativeLayout implements View.OnClickListener {
+public class WalletView extends LinearLayout implements View.OnClickListener {
     public static final int NORMAL_COLOR_ID = R.color.blue;
     public static final int BACKUP_COLOR_ID = R.color.red;
-    public static final int NORMAL_BG_ID = R.drawable.btn_blue_corner;
+    public static final int NORMAL_BG_ID = R.drawable.bg_blue_corner;
     public static final int BACKUP_BG_ID = R.drawable.bg_red_corner;
     public static final int SELECT_BG_ID = R.drawable.btn_blue;
     private static final int DEFAULT_PADDING = 15;//unit dp
@@ -47,7 +47,7 @@ public class WalletView extends RelativeLayout implements View.OnClickListener {
 
     private String mWalletName;
     private String mWalletAmount;
-    private boolean isBackup;
+    private boolean backuped;
     private String mWalletLabel;
     private OnWalletClickListener mOnWalletClickListener;
     private Wallet mWallet;
@@ -85,8 +85,8 @@ public class WalletView extends RelativeLayout implements View.OnClickListener {
                 getResources().getColor(BACKUP_COLOR_ID));
         mWalletAmount = a.getString(
                 R.styleable.WalletView_walletAmount);
-        isBackup = a.getBoolean(
-                R.styleable.WalletView_isBackup, isBackup);
+        backuped = a.getBoolean(
+                R.styleable.WalletView_backuped, backuped);
         isSelectView = a.getBoolean(
                 R.styleable.WalletView_isSelectView, isSelectView);
         if (a.hasValue(R.styleable.WalletView_normalBackground)) {
@@ -116,10 +116,10 @@ public class WalletView extends RelativeLayout implements View.OnClickListener {
     }
 
     private void initView() {
-
+        setOrientation(HORIZONTAL);
         inflate(getContext(), R.layout.layout_wallet_view, this);
         ButterKnife.bind(this);
-        setBackup(isBackup)
+        setBackuped(backuped)
                 .setWalletName(mWalletName)
                 .setWalletLabel(mWalletLabel)
                 .setWalletAmount(mWalletAmount)
@@ -147,8 +147,8 @@ public class WalletView extends RelativeLayout implements View.OnClickListener {
         return this;
     }
 
-    public WalletView setBackup(boolean backup) {
-        isBackup = backup;
+    public WalletView setBackuped(boolean backuped) {
+        this.backuped = backuped;
         refreshLayout();
         return this;
     }
@@ -164,7 +164,7 @@ public class WalletView extends RelativeLayout implements View.OnClickListener {
             ivRightArrow.setVisibility(VISIBLE);
             btnBackupNow.setVisibility(GONE);
             setBackground(mSelectBackground);
-        } else if (isBackup) {
+        } else if (!backuped) {
             ivRightArrow.setVisibility(GONE);
             btnBackupNow.setVisibility(VISIBLE);
             setBackground(mNormalBackground);
@@ -192,11 +192,11 @@ public class WalletView extends RelativeLayout implements View.OnClickListener {
     public WalletView setWallet(Wallet wallet) {
         mWallet = wallet;
         //填充布局数据
-        this.setWalletName(wallet.getName() + " 的钱包")
+        this.setWalletName(StringUtils.cutWalletName(wallet.getName()) + " 的钱包")
                 .setWalletLabel(String.valueOf(wallet.getName().charAt(0)))
                 // TODO: 2017/11/28 从后台获余额
                 .setWalletAmount(StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc")
-                .setBackup(wallet.getIsBackup());
+                .setBackuped(wallet.getIsBackuped());
         return this;
     }
 

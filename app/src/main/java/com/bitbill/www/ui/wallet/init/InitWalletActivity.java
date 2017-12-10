@@ -54,10 +54,12 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     private EditTextWapper focusView;
     private boolean cancel;
     private Wallet mWallet;
+    private boolean isFromGuide;
 
-    public static void start(Context context, boolean isCreateWallet) {
+    public static void start(Context context, boolean isCreateWallet, boolean isFromGuide) {
         Intent intent = new Intent(context, InitWalletActivity.class);
         intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
+        intent.putExtra(AppConstants.EXTRA_IS_FROM_GUIDE, isFromGuide);
         context.startActivity(intent);
     }
 
@@ -110,13 +112,19 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         });
         SupportCoinDialog.newInstance("目前支持以下币种", true, "我知道了")
                 .show(getSupportFragmentManager(), SupportCoinDialog.TAG);
+        btnStart.setText(isCreateWallet ? R.string.btn_start_create : R.string.btn_start_import);
 
     }
 
     @Override
-    public void initData() {
+    protected void handleIntent(Intent intent) {
+
         isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
-        btnStart.setText(isCreateWallet ? R.string.btn_start_create : R.string.btn_start_import);
+        isFromGuide = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_GUIDE, false);
+    }
+
+    @Override
+    public void initData() {
     }
 
     @Override
@@ -263,6 +271,11 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     public InitWalletMvpPresenter getMvpPresenter() {
         return initWalletMvpPresenter;
+    }
+
+    @Override
+    public boolean isFromGuide() {
+        return isFromGuide;
     }
 }
 

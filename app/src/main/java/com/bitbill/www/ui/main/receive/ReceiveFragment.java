@@ -1,6 +1,7 @@
 package com.bitbill.www.ui.main.receive;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -43,6 +44,8 @@ public class ReceiveFragment extends BaseLazyFragment {
     private FragmentAdapter mFragmentAdapter;
     private BtcReceiveFragment mBtcReceiveFragment;
     private List<Wallet> mWalletList;
+    private WalletSelectDialog mWalletSelectDialog;
+    private Wallet mSelectedWallet;
 
     public ReceiveFragment() {
         // Required empty public constructor
@@ -86,11 +89,22 @@ public class ReceiveFragment extends BaseLazyFragment {
     @Override
     public void initView() {
         setupViewPager();
+
+        mWalletSelectDialog = WalletSelectDialog.newInstance();
+        mWalletSelectDialog.setOnWalletSelectItemClickListener(new WalletSelectDialog.OnWalletSelectItemClickListener() {
+            @Override
+            public void onItemSelected(Wallet selectedWallet, int position) {
+                mSelectedWallet = selectedWallet;
+                //刷新选择布局
+                selectWalletView.setWallet(selectedWallet);
+            }
+        });
+
         selectWalletView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //弹出钱包选择界面
-                WalletSelectDialog.newInstance().show(getChildFragmentManager(), WalletSelectDialog.TAG);
+                mWalletSelectDialog.show(getChildFragmentManager(), WalletSelectDialog.TAG);
             }
         });
     }
@@ -129,15 +143,34 @@ public class ReceiveFragment extends BaseLazyFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            List<Wallet> wallets = BitbillApp.get().getWallets();
-            if (!StringUtils.isEmpty(wallets)) {
-                selectWalletView.setWallet(wallets.get(0));
+
+            mWalletList = BitbillApp.get().getWallets();
+            // 选择默认的钱包对象作为选中的
+            mSelectedWallet = getDefaultWallet();
+            if (mSelectedWallet != null) {
+                mSelectedWallet.setSelected(true);
+                selectWalletView.setWallet(mSelectedWallet);
             } else {
                 selectWalletView.setVisibility(View.GONE);
             }
             MessageConfirmDialog.newInstance("友情提醒", "为保护您的隐私，每次转入操作时，都将使用新地址，已使用的旧地址仍然可用", false)
                     .show(getChildFragmentManager(), MessageConfirmDialog.TAG);
         }
+
+
+    }
+
+    @Nullable
+    private Wallet getDefaultWallet() {
+        if (StringUtils.isEmpty(mWalletList)) return null;
+        Wallet defaultWallet = null;
+        for (Wallet wallet : mWalletList) {
+            if (wallet.isDefault()) {
+                defaultWallet = wallet;
+                return defaultWallet;
+            }
+        }
+        return defaultWallet;
     }
 
     @Override
@@ -162,4 +195,7 @@ public class ReceiveFragment extends BaseLazyFragment {
         return super.onOptionsItemSelected(item);
     }
 
+    public Wallet getSelectedWallet() {
+        return mSelectedWallet;
+    }
 }

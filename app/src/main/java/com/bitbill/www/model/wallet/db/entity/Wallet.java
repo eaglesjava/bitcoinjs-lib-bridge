@@ -36,14 +36,17 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "seedhex_hash")
     private String seedHexHash;
 
-    @Property(nameInDb = "is_backup")
-    private boolean isBackup;
+    @Property(nameInDb = "is_backuped")
+    private boolean isBackuped;
 
     @Property(nameInDb = "created_at")
     private long createdAt;
 
     @Property(nameInDb = "updated_at")
     private long updatedAt;
+
+    @Property(nameInDb = "is_default")
+    private boolean isDefault;
 
     @Transient
     private String mnemonic;
@@ -56,10 +59,10 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Transient
     private boolean selected;
 
-    @Generated(hash = 1983236334)
+    @Generated(hash = 2135389848)
     public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash,
-                  long lastAddressIndex, String encryptSeed, String seedHexHash, boolean isBackup,
-                  long createdAt, long updatedAt) {
+                  long lastAddressIndex, String encryptSeed, String seedHexHash, boolean isBackuped,
+                  long createdAt, long updatedAt, boolean isDefault) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
@@ -67,9 +70,10 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.lastAddressIndex = lastAddressIndex;
         this.encryptSeed = encryptSeed;
         this.seedHexHash = seedHexHash;
-        this.isBackup = isBackup;
+        this.isBackuped = isBackuped;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.isDefault = isDefault;
     }
 
     @Generated(hash = 1197745249)
@@ -107,14 +111,6 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setEncryptSeed(String encryptSeed) {
         this.encryptSeed = encryptSeed;
-    }
-
-    public boolean getIsBackup() {
-        return this.isBackup;
-    }
-
-    public void setIsBackup(boolean isBackup) {
-        this.isBackup = isBackup;
     }
 
     public long getCreatedAt() {
@@ -198,5 +194,31 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     public Wallet setSelected(boolean selected) {
         this.selected = selected;
         return this;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public Wallet setDefault(boolean aDefault) {
+        isDefault = aDefault;
+        return this;
+    }
+
+
+    public boolean getIsDefault() {
+        return this.isDefault;
+    }
+
+    public void setIsDefault(boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    public boolean getIsBackuped() {
+        return this.isBackuped;
+    }
+
+    public void setIsBackuped(boolean isBackuped) {
+        this.isBackuped = isBackuped;
     }
 }

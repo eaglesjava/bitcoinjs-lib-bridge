@@ -37,4 +37,6 @@ public interface InitWalletMvpView extends MvpView {
     void requireWalletIdLength();
 
     Wallet getWallet();
+
+    boolean isFromGuide();
 }

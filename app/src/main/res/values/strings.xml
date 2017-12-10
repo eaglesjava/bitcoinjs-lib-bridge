@@ -79,7 +79,7 @@
     <string name="btn_backup_wallet">备份钱包</string>
     <string name="btn_backup_wallet_delay">稍后备份</string>
 
-    <!--backup wallet-->
+    backupedckup wallet-->
     <string name="hint_bak_wallet_environment_safe">请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！</string>
     <string name="hint_bak_wallet_ban_screenshots">截图是不安全的，您的图片可能别憋的应用使用。请准备笔和纸记录下面这句话，并妥善保存，我们会在下个屏幕上确认！</string>
     <string name="btn_written_mnemonic_in_order">已按顺序记下助记词</string>
@@ -128,4 +128,5 @@
     <string name="hint_send_success">推荐您添加该地址到新联系人以便下次交易</string>
     <string name="btn_confirm_send">确定发送</string>
     <string name="action_send_scan">扫码</string>
+    <string name="R.string.toast_copy_address_success">复制地址成功</string>
 </resources>

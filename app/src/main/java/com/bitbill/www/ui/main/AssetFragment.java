@@ -108,7 +108,7 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
             @Override
             public void onCreateWallet(View view) {
                 //跳转到创建钱包界面
-                InitWalletActivity.start(getBaseActivity(), true);
+                InitWalletActivity.start(getBaseActivity(), true, false);
                 if (mWalletMenu.isShowing()) {
                     mWalletMenu.dismiss();
                 }
@@ -117,7 +117,7 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
             @Override
             public void onImportWallet(View view) {
                 //跳转到导入钱包界面
-                InitWalletActivity.start(getBaseActivity(), false);
+                InitWalletActivity.start(getBaseActivity(), false, false);
                 if (mWalletMenu.isShowing()) {
                     mWalletMenu.dismiss();
                 }

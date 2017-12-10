@@ -46,6 +46,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         mWallet.setUpdatedAt(System.currentTimeMillis());
         mWallet.setName(getMvpView().getWalletId());
         mWallet.setTradePwd(getMvpView().getTradePwd());
+        mWallet.setDefault(getMvpView().isFromGuide());
         // TODO: 2017/12/5 插入操作只有创建成功后
         getCompositeDisposable().add(getModelManager()
                 .insertWallet(mWallet)

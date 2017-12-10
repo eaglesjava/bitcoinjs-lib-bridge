@@ -24,7 +24,6 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,11 +38,13 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
     RecyclerView mRecyclerView;
     private CommonAdapter<Wallet> mAdapter;
     private List<Wallet> mWalletList;
+    private int mSelectedPos = -1;
+    private OnWalletSelectItemClickListener mOnWalletSelectItemClickListener;
+    private Wallet mSelectedWallet;
 
     public static WalletSelectDialog newInstance() {
 
         Bundle args = new Bundle();
-
         WalletSelectDialog fragment = new WalletSelectDialog();
         fragment.setArguments(args);
         return fragment;
@@ -89,13 +90,26 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
 
     @Override
     public void onBeforeSetContentLayout() {
-        mWalletList = new ArrayList<>();
-        List<Wallet> wallets = BitbillApp.get().getWallets();
-        if (StringUtils.isEmpty(wallets)) return;
-        mWalletList.clear();
-        mWalletList.addAll(wallets);
-        mWalletList.get(0).setSelected(true);
+        mWalletList = BitbillApp.get().getWallets();
+        if (StringUtils.isEmpty(mWalletList)) return;
 
+        //  通过钱包对象设置选择后的当前位置
+        mSelectedPos = mWalletList.indexOf(getSelectedWallet());
+
+
+    }
+
+    @Nullable
+    private Wallet getSelectedWallet() {
+        if (StringUtils.isEmpty(mWalletList)) return null;
+        Wallet selectedWallet = null;
+        for (Wallet wallet : mWalletList) {
+            if (wallet.isSelected()) {
+                selectedWallet = wallet;
+                return selectedWallet;
+            }
+        }
+        return selectedWallet;
     }
 
     @Override
@@ -110,12 +124,11 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
         mRecyclerView.addItemDecoration(decor);
 
         mAdapter = new CommonAdapter<Wallet>(getBaseActivity(), R.layout.item_wallet_select_view, mWalletList) {
-            private int mSelectedPos = 0;
 
             @Override
             protected void convert(ViewHolder holder, Wallet wallet, final int position) {
 
-                holder.setText(R.id.tv_wallet_name, wallet.getName() + " 的钱包");
+                holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()) + " 的钱包");
                 holder.setText(R.id.tv_wallet_amount, StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc");
                 holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
 
@@ -126,9 +139,8 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
                     public void onClick(View v) {
                         //实现单选方法三： RecyclerView另一种定向刷新方法：不会有白光一闪动画 也不会重复onBindVIewHolder
                         //如果勾选的不是已经勾选状态的Item
-                        if (mSelectedPos != position) {
+                        if (mSelectedPos != position && mSelectedPos != -1) {
                             //先取消上个item的勾选状态
-                            mDatas.get(mSelectedPos).setSelected(false);//不管在不在屏幕里 都需要改变数据
                             ViewHolder commonHolder = ((ViewHolder) mRecyclerView.findViewHolderForAdapterPosition(mSelectedPos));
                             if (commonHolder != null) {//还在屏幕里
                                 commonHolder.setChecked(R.id.rb_selector, false);
@@ -137,11 +149,17 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
                                 //此时拿不到ViewHolder，但是也不会回调onBindViewHolder方法。所以add一个异常处理
                                 notifyItemChanged(mSelectedPos);
                             }
+                            mWalletList.get(mSelectedPos).setSelected(false);//不管在不在屏幕里 都需要改变数据
                             //设置新Item的勾选状态
                             mSelectedPos = position;
-                            mDatas.get(mSelectedPos).setSelected(true);
+                            mWalletList.get(mSelectedPos).setSelected(true);
                             holder.setChecked(R.id.rb_selector, wallet.isSelected());
+                            if (mOnWalletSelectItemClickListener != null) {
+                                mOnWalletSelectItemClickListener.onItemSelected(wallet, position);
+                            }
                         }
+                        dismissDialog(TAG);
+
                     }
                 });
 
@@ -159,4 +177,13 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
         return R.layout.dialog_wallet_select;
     }
 
+
+    public WalletSelectDialog setOnWalletSelectItemClickListener(OnWalletSelectItemClickListener onWalletSelectItemClickListener) {
+        mOnWalletSelectItemClickListener = onWalletSelectItemClickListener;
+        return this;
+    }
+
+    public interface OnWalletSelectItemClickListener {
+        void onItemSelected(Wallet selectedWallet, int position);
+    }
 }

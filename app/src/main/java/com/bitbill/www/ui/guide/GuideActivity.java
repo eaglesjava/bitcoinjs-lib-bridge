@@ -128,12 +128,12 @@ public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements Ba
         switch (view.getId()) {
             case R.id.btn_create_wallet:
                 //跳转到创建钱包界面
-                InitWalletActivity.start(GuideActivity.this, true);
+                InitWalletActivity.start(GuideActivity.this, true, true);
                 finish();
                 break;
             case R.id.btn_import_wallet:
                 //跳转到导入钱包界面
-                InitWalletActivity.start(GuideActivity.this, false);
+                InitWalletActivity.start(GuideActivity.this, false, true);
                 finish();
                 break;
         }

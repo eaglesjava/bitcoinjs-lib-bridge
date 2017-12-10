@@ -6,29 +6,35 @@
         style="@style/Text.Wallet.Logo"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
         android:gravity="center"/>
 
-    <TextView
-        android:id="@+id/tv_wallet_name"
-        style="@style/Text.Wallet.Name"
-        android:layout_alignParentTop="true"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
         android:layout_marginStart="15dp"
-        android:layout_toEndOf="@+id/tv_wallet_label"/>
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_wallet_amount"
-        style="@style/Text.Wallet.Amount"
-        android:layout_alignStart="@+id/tv_wallet_name"
-        android:layout_below="@+id/tv_wallet_name"
-        android:layout_marginTop="1dp"/>
+        <TextView
+            android:id="@+id/tv_wallet_name"
+            style="@style/Text.Wallet.Name"
+            android:lines="1"/>
+
+        <TextView
+            android:id="@+id/tv_wallet_amount"
+            style="@style/Text.Wallet.Amount"
+            android:layout_marginTop="1dp"/>
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/iv_right_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
         android:padding="5dp"
         android:src="@drawable/ic_receive_right_arrow"
         android:visibility="gone"/>
@@ -37,10 +43,9 @@
         android:id="@+id/btn_backup_now"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
         android:background="@color/transparent"
         android:text="@string/btn_backup_now"
         android:textColor="@color/white"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 </merge>

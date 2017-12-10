@@ -27,7 +27,7 @@ public class BackupWalletConfirmPresenter<M extends WalletModel, V extends Backu
         if (!isMnemonicCorrect()) {
             return;
         }
-        getMvpView().getWallet().setIsBackup(true);
+        getMvpView().getWallet().setIsBackuped(true);
         getCompositeDisposable().add(getModelManager().updateWallet(getMvpView().getWallet())
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {

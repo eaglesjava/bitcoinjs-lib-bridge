@@ -1,5 +1,6 @@
 package com.bitbill.www.common.utils;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.TextUtils;
@@ -780,5 +781,32 @@ public class StringUtils {
     public static void setAmountTypeface(Context context, TextView amountTextView) {
         amountTextView.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/FF_DIN_Condensed_Bold.otf"));
 
+    }
+
+    /**
+     * 剪切钱包名称
+     *
+     * @param name
+     * @return
+     */
+    public static String cutWalletName(String name) {
+        if (isEmpty(name)) return "";
+        if (name.length() <= 10) return name;
+        return name.substring(0, 11) + "...";
+    }
+
+    /**
+     * 复制粘贴文本
+     *
+     * @param content
+     * @param context
+     */
+    public static void copy(String content, Context context) {
+        if (isEmpty(content)) {
+            return;
+        }
+        // 得到剪贴板管理器
+        ClipboardManager cmb = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        cmb.setText(content.trim());
     }
 }

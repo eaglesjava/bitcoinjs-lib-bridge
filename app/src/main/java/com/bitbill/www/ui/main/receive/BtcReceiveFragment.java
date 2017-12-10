@@ -10,8 +10,10 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.common.utils.StringUtils;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -100,6 +102,13 @@ public class BtcReceiveFragment extends BaseLazyFragment {
      */
     @Override
     public void lazyData() {
+    }
+
+    @OnClick(value = {R.id.tv_address, R.id.iv_qrcode})
+    public void copyClick(View v) {
+        //复制地址到剪切板
+        StringUtils.copy(tvAddress.getText().toString(), getBaseActivity());
+        showMessage(R.string.R_string_toast_copy_address_success);
     }
 
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.bitbill.www.ui.wallet.backup.BackupWalletSuccessActivity">
+    tools:context="com.bitbill.www.ui.wallet.backuped.BackupWalletSuccessActivity">
 
     <ImageView
         android:layout_width="wrap_content"

@@ -42,6 +42,7 @@
                 app:inputPaddingBottom="20dp"
                 app:inputPwdStatusVisible="true"
                 app:inputTitle="@string/input_trade_pwd"
+                app:inputType="inputPasswordHide"
                 />
 
             <com.bitbill.www.common.base.view.widget.EditTextWapper
@@ -52,6 +53,7 @@
                 app:inputHint="@string/hint_trade_pwd"
                 app:inputPaddingBottom="20dp"
                 app:inputTitle="@string/input_trade_pwd_confirm"
+                app:inputType="inputPasswordHide"
                 />
 
             <TextView
