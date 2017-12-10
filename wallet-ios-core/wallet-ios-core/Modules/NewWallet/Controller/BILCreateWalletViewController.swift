@@ -272,15 +272,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
             }
 			confirmPasswordTextField.becomeFirstResponder()
 		case confirmPasswordTextField:
-			if checkConfirmPassword() {
-				createWallet()
-				view.endEditing(true)
-			}
-			else
-			{
-				confirmPasswordInputView.show(tip: "密码不一致", type: .error)
-				return false
-			}
+			createWallet()
 		default: ()
 		}
 		return true
