@@ -24,6 +24,7 @@ class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	var dataArray = [String]() {
 		didSet {
 			collectionView.reloadData()
+            selectedArray.removeAll()
 		}
 	}
 	

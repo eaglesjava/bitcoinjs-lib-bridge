@@ -169,7 +169,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VWb-8M-TT1"/>
                     </view>
-                    <navigationItem key="navigationItem" title="验证助记词" id="zoM-4O-otz"/>
+                    <navigationItem key="navigationItem" title="验证助记词" id="zoM-4O-otz">
+                        <barButtonItem key="rightBarButtonItem" title="清空" id="8pf-tL-nj2">
+                            <connections>
+                                <action selector="clearAction:" destination="iJ2-St-9aK" id="hFp-sB-0HH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="randomMnemonicView" destination="Jhk-cm-Xns" id="ImU-Dd-xZS"/>
                         <outlet property="verifyMnemonicView" destination="vhh-BX-E5a" id="pVX-Zv-CjF"/>
