@@ -62,14 +62,17 @@
                                     <constraint firstAttribute="bottom" secondItem="Vbc-mO-Bu1" secondAttribute="bottom" id="xvx-Es-Nwq"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fp0-9U-s6x" customClass="BILCopyLabel" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="146" width="325" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fp0-9U-s6x" customClass="BILCopyLabel" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="146" width="325" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="E20-5F-RkD"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eI9-zD-BLC">
-                                <rect key="frame" x="97.5" y="197" width="180" height="180"/>
+                                <rect key="frame" x="97.5" y="218" width="180" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="i7l-8s-L5B"/>
                                     <constraint firstAttribute="width" secondItem="eI9-zD-BLC" secondAttribute="height" multiplier="1:1" id="xKA-Ci-iW4"/>
@@ -81,7 +84,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="77y-FX-QbG">
-                                <rect key="frame" x="142.5" y="407" width="90" height="33"/>
+                                <rect key="frame" x="142.5" y="428" width="90" height="33"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="特定金额接收">
