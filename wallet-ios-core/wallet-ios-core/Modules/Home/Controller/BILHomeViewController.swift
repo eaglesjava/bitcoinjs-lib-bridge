@@ -257,6 +257,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		if section == 0 && headerBGImage == nil {
 			headerBGImage = BILAppStartUpManager.shared.snapshotNavBackgroundImage(rect: view.convert(header.frame, from: tableView))
 		}
+        header.bgImageView.image = nil
 		
 		return header
 	}

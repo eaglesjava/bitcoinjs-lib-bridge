@@ -70,7 +70,9 @@ class BILQRCodeScanViewController: BILBaseViewController {
     
     func setupLayers() {
         let maskLayer = CALayer()
-        maskLayer.frame = containerView.bounds
+        var frame = containerView.bounds
+        frame.size.height += 200
+        maskLayer.frame = frame
         maskLayer.backgroundColor = UIColor.bil_black_color(alpha: 0.7).cgColor
         
         debugPrint(scanFrame.frame)
@@ -81,7 +83,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
         
         let maskShapeLayer = CAShapeLayer()
         let path = UIBezierPath(rect: scanFrameRect)
-        let p = UIBezierPath(rect: containerView.bounds)
+        let p = UIBezierPath(rect: maskLayer.bounds)
         p.append(path.reversing())
         maskShapeLayer.path = p.cgPath
         maskLayer.mask = maskShapeLayer
@@ -188,9 +190,9 @@ extension BILQRCodeScanViewController : AVCaptureMetadataOutputObjectsDelegate
                 if let qrStr = resultObj.stringValue {
                     self.scanSession!.stopRunning()
                     DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
                         self.resultClosure?(qrStr)
                         self.resultClosure = nil
-                        self.navigationController?.popViewController(animated: true)
                     }
                 }
             }
