@@ -41,9 +41,11 @@ enum BILHomeSectionType: Int {
 		}
 		switch self {
 		case .asset:
-			return 80
+			return 95
+        case .wallet:
+            return 101
 		default:
-			return 88
+			return 95
 		}
 	}
 	
@@ -54,7 +56,7 @@ enum BILHomeSectionType: Int {
 		case .recentRecord:
 			return 56
 		case .wallet:
-			return 91
+			return 89
 		}
 	}
 	

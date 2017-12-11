@@ -10,6 +10,10 @@
 		07249FEEB456F1D46BB4C5EE /* Pods_wallet_ios_coreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C97431875E1515DC8A80E75 /* Pods_wallet_ios_coreTests.framework */; };
 		88C04385567FE9A9A6C044CC /* Pods_wallet_ios_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3564F2C66C64F75D2994D638 /* Pods_wallet_ios_core.framework */; };
 		BA04570D1FDE345100070CCA /* BILCopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04570C1FDE345100070CCA /* BILCopyLabel.swift */; };
+		BA0457111FDE68C700070CCA /* BILQRCodeScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04570F1FDE68C700070CCA /* BILQRCodeScanViewController.swift */; };
+		BA0457141FDE6A7A00070CCA /* BILQRCodeScanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0457131FDE6A7A00070CCA /* BILQRCodeScanViewController.xib */; };
+		BA0457181FDE6CE600070CCA /* QRCodeResource.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA0457171FDE6CE600070CCA /* QRCodeResource.xcassets */; };
+		BA04571A1FDE6DC500070CCA /* BILSendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0457191FDE6DC500070CCA /* BILSendController.swift */; };
 		BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */; };
 		BA1142391FD53CC80025BF80 /* BILGuideContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */; };
 		BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */; };
@@ -125,6 +129,10 @@
 		6EA45AA89FC29119CDF416C1 /* Pods-wallet-ios-coreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-coreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-coreTests/Pods-wallet-ios-coreTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C97431875E1515DC8A80E75 /* Pods_wallet_ios_coreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet_ios_coreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA04570C1FDE345100070CCA /* BILCopyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILCopyLabel.swift; sourceTree = "<group>"; };
+		BA04570F1FDE68C700070CCA /* BILQRCodeScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILQRCodeScanViewController.swift; sourceTree = "<group>"; };
+		BA0457131FDE6A7A00070CCA /* BILQRCodeScanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BILQRCodeScanViewController.xib; sourceTree = "<group>"; };
+		BA0457171FDE6CE600070CCA /* QRCodeResource.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = QRCodeResource.xcassets; sourceTree = "<group>"; };
+		BA0457191FDE6DC500070CCA /* BILSendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSendController.swift; sourceTree = "<group>"; };
 		BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILDeviceManager.swift; sourceTree = "<group>"; };
 		BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideContactView.swift; sourceTree = "<group>"; };
 		BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideContactView.xib; sourceTree = "<group>"; };
@@ -268,6 +276,16 @@
 			path = CKCopyLabel;
 			sourceTree = "<group>";
 		};
+		BA04570E1FDE68B800070CCA /* CKQRCodeScan */ = {
+			isa = PBXGroup;
+			children = (
+				BA0457171FDE6CE600070CCA /* QRCodeResource.xcassets */,
+				BA04570F1FDE68C700070CCA /* BILQRCodeScanViewController.swift */,
+				BA0457131FDE6A7A00070CCA /* BILQRCodeScanViewController.xib */,
+			);
+			path = CKQRCodeScan;
+			sourceTree = "<group>";
+		};
 		BA20A5D41FD68D4E00EC2147 /* Recieve */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +356,7 @@
 		BA20A5E01FD68D4F00EC2147 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BA0457191FDE6DC500070CCA /* BILSendController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -794,6 +813,7 @@
 		CCEC67791FB190EE004CC6C5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				BA04570E1FDE68B800070CCA /* CKQRCodeScan */,
 				BA04570B1FDE343A00070CCA /* CKCopyLabel */,
 				CCFEDEFB1FCE8D2D00F1A7FC /* CKSegmentedView */,
 				CCFEDEF61FCE62D300F1A7FC /* Fonts */,
@@ -988,6 +1008,7 @@
 				CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */,
 				CCF634F71FBEC64400840097 /* BILAllInOneView.xib in Resources */,
 				CCEC67841FB190EE004CC6C5 /* README.md in Resources */,
+				BA0457181FDE6CE600070CCA /* QRCodeResource.xcassets in Resources */,
 				CCFEDEF81FCE62D400F1A7FC /* FF_DIN_Condensed_Bold.otf in Resources */,
 				CCE5E1621FC7BFE100F7555D /* Home.storyboard in Resources */,
 				BA20A6111FD68F5200EC2147 /* Contact.storyboard in Resources */,
@@ -1010,6 +1031,7 @@
 				CCE5E1681FC7FB9E00F7555D /* BILHomeTableHeaderView.xib in Resources */,
 				CCE5E1721FC81E3700F7555D /* Home.xcassets in Resources */,
 				BA1918F21FD7E7BA00B6F568 /* BILPopMenuItemView.xib in Resources */,
+				BA0457141FDE6A7A00070CCA /* BILQRCodeScanViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1178,6 +1200,7 @@
 				CCFEDEFD1FCE8DE300F1A7FC /* CKSegmentedView.swift in Sources */,
 				CC4660531FBEA67600A87132 /* BILCreateWalletSuccessController.swift in Sources */,
 				CCF634F91FBECC0000840097 /* BILBaseViewController.swift in Sources */,
+				BA04571A1FDE6DC500070CCA /* BILSendController.swift in Sources */,
 				CCFEDEFA1FCE672D00F1A7FC /* BILWalletController.swift in Sources */,
 				CC94E09D1FBBE6410098E730 /* BILAppStartUpManager.swift in Sources */,
 				CCFEDF021FCFDF5400F1A7FC /* BILNetworkManager.swift in Sources */,
@@ -1224,6 +1247,7 @@
 				CCED05601FDAA42000689498 /* BILSpecificVolumeRecieveController.swift in Sources */,
 				CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */,
 				CC4417011FBEAC7F00C4B158 /* WalletModel+BIL.swift in Sources */,
+				BA0457111FDE68C700070CCA /* BILQRCodeScanViewController.swift in Sources */,
 				CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */,
 				BA1918EE1FD7DCE500B6F568 /* BILPopMenu.swift in Sources */,
 				CCE5E1641FC7C1BE00F7555D /* BILHomeViewController.swift in Sources */,

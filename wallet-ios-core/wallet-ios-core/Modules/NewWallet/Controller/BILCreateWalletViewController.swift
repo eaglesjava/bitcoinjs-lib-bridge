@@ -181,7 +181,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
         
 		return toReturn
 	}
-	
+    
 	func createWallet() {
 		
 		let walletIDError = checkWalletID()
@@ -218,17 +218,29 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 SVProgressHUD.dismiss(withDelay: 1.2)
                 return
             }
-            SVProgressHUD.show(withStatus: "创建钱包中。。。")
+            SVProgressHUD.show(withStatus: "创建钱包中...")
             let wallet = BILWalletManager.shared.newWallet()
             wallet.id = self.walletNameTextField.text!
             wallet.resetProperties(m: m, pwd: pwd, success: { (w) in
-                wallet.createWalletToServer(success: { (result) in
+                func successFromSever(result: [String: Any]) {
                     self.mnemonicHash = wallet.mnemonicHash
                     self.createSuccess()
-					SVProgressHUD.dismiss()
-                }, failure: { (msg, code) in
-                    cleanUp(wallet: wallet, error: msg)
-                })
+                    SVProgressHUD.dismiss()
+                }
+                switch self.createWalletType {
+                case .new:
+                    wallet.createWalletToServer(success: { (result) in
+                        successFromSever(result: result)
+                    }, failure: { (msg, code) in
+                        cleanUp(wallet: wallet, error: msg)
+                    })
+                case .recover:
+                    wallet.importWalletToServer(success: { (result) in
+                        successFromSever(result: result)
+                    }, failure: { (msg, code) in
+                        cleanUp(wallet: wallet, error: msg)
+                    })
+                }
             }, failure: { (errorMsg) in
                 SVProgressHUD.showError(withStatus: errorMsg)
                 SVProgressHUD.dismiss(withDelay: 1.2)

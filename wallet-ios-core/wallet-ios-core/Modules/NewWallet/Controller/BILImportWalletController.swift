@@ -82,7 +82,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         func segueSender(mnemonic: String, walletID: String?) -> (mnemonic: String, walletID: String?) {
             return (mnemonic, walletID)
         }
-        // TODO: 本地校验是否存在该助记词，服务器校验
+        
         BitcoinJSBridge.shared.validateMnemonic(mnemonic: mnemonic, success: { (result) in
             let isValidate = result as! Bool
             if isValidate {
@@ -99,7 +99,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
                 }
                 else
                 {
-                    SVProgressHUD.show(withStatus: "请求数据中。。。")
+                    SVProgressHUD.show(withStatus: "请求数据中...")
                     BitcoinJSBridge.shared.getMasterXPublicKey(mnemonic: mnemonic, success: { (pubKey) in
                         WalletModel.getWalletIDFromSever(mainExtPublicKey: pubKey as! String, success: { (id) in
                             self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: id))
