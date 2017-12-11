@@ -74,7 +74,7 @@ extension WalletModel {
 }
 
 extension WalletModel {
-    func resetProperties(m: String, pwd: String, success: @escaping (_ wallet: WalletModel) -> Void, failure: @escaping (_ message: String) -> Void) {
+    func resetProperties(m: String, pwd: String, needSave: Bool = true, success: @escaping (_ wallet: WalletModel) -> Void, failure: @escaping (_ message: String) -> Void) {
         func cleanUp(wallet: WalletModel?, error: String) {
             debugPrint(error)
             if let w = wallet {
@@ -98,7 +98,9 @@ extension WalletModel {
                     wallet.mainExtPublicKey = extPubKey
                     if wallet.checkPassword(pwd: pwd) {
                         do {
-                            try BILWalletManager.shared.saveWallets()
+                            if needSave {
+                                try BILWalletManager.shared.saveWallets()
+                            }
                             success(self)
                         } catch {
                             cleanUp(wallet: wallet, error: error.localizedDescription)

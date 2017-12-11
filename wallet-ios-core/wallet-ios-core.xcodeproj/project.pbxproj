@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		07249FEEB456F1D46BB4C5EE /* Pods_wallet_ios_coreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C97431875E1515DC8A80E75 /* Pods_wallet_ios_coreTests.framework */; };
 		88C04385567FE9A9A6C044CC /* Pods_wallet_ios_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3564F2C66C64F75D2994D638 /* Pods_wallet_ios_core.framework */; };
+		BA04570D1FDE345100070CCA /* BILCopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04570C1FDE345100070CCA /* BILCopyLabel.swift */; };
 		BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */; };
 		BA1142391FD53CC80025BF80 /* BILGuideContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */; };
 		BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */; };
@@ -123,6 +124,7 @@
 		536A87918365D6CC5EF0ADF5 /* Pods-wallet-ios-core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-core.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-core/Pods-wallet-ios-core.debug.xcconfig"; sourceTree = "<group>"; };
 		6EA45AA89FC29119CDF416C1 /* Pods-wallet-ios-coreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-ios-coreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wallet-ios-coreTests/Pods-wallet-ios-coreTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C97431875E1515DC8A80E75 /* Pods_wallet_ios_coreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet_ios_coreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA04570C1FDE345100070CCA /* BILCopyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILCopyLabel.swift; sourceTree = "<group>"; };
 		BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILDeviceManager.swift; sourceTree = "<group>"; };
 		BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideContactView.swift; sourceTree = "<group>"; };
 		BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideContactView.xib; sourceTree = "<group>"; };
@@ -256,6 +258,14 @@
 				9C97431875E1515DC8A80E75 /* Pods_wallet_ios_coreTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA04570B1FDE343A00070CCA /* CKCopyLabel */ = {
+			isa = PBXGroup;
+			children = (
+				BA04570C1FDE345100070CCA /* BILCopyLabel.swift */,
+			);
+			path = CKCopyLabel;
 			sourceTree = "<group>";
 		};
 		BA20A5D41FD68D4E00EC2147 /* Recieve */ = {
@@ -784,6 +794,7 @@
 		CCEC67791FB190EE004CC6C5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				BA04570B1FDE343A00070CCA /* CKCopyLabel */,
 				CCFEDEFB1FCE8D2D00F1A7FC /* CKSegmentedView */,
 				CCFEDEF61FCE62D300F1A7FC /* Fonts */,
 				CCFEDEF31FCE5A5B00F1A7FC /* BILPopMenu */,
@@ -1108,6 +1119,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 				"${BUILT_PRODUCTS_DIR}/Timepiece/Timepiece.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1123,6 +1135,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Timepiece.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1217,6 +1230,7 @@
 				CCFEDEF51FCE5AAE00F1A7FC /* BILPopMenuItem.swift in Sources */,
 				CCE5E1781FCBC4E100F7555D /* BILTransactionManager.swift in Sources */,
 				CC94E0511FB9824B0098E730 /* ASKPlaceHolderColorTextField.swift in Sources */,
+				BA04570D1FDE345100070CCA /* BILCopyLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

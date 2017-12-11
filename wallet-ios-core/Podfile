@@ -17,6 +17,7 @@ target 'wallet-ios-core' do
   pod 'Socket.IO-Client-Swift'
   pod 'CryptoSwift'
   pod 'PopupDialog'
+  pod 'Toast-Swift'
 
   target 'wallet-ios-coreTests' do
     inherit! :search_paths

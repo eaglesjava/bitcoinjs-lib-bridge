@@ -13,6 +13,7 @@ import Foundation
 import SVProgressHUD
 import CoreGraphics
 import UserNotifications
+import Toast_Swift
 
 class BILAppStartUpManager: NSObject {
 	
@@ -36,7 +37,23 @@ class BILAppStartUpManager: NSObject {
 		setupTextViewAppearance()
 		setupSVProgressHUD()
         setupPushService()
+        setupToast()
 	}
+    
+    func setupToast() {
+        var style = ToastStyle()
+        style.backgroundColor = UIColor.white
+        style.messageFont = UIFont.systemFont(ofSize: 15)
+        style.cornerRadius = 20
+        style.messageColor = UIColor.black
+        style.horizontalPadding = 20
+        style.verticalPadding = 11
+        style.displayShadow = true
+        style.shadowOffset = CGSize(width: 0, height: 0)
+        style.shadowOpacity = 0.3
+        ToastManager.shared.style = style
+        ToastManager.shared.position = .bottom
+    }
     
     func setupPushService() {
         let center = UNUserNotificationCenter.current()

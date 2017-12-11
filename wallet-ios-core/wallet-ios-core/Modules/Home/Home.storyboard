@@ -452,13 +452,21 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FwR-Ox-99O">
+                                                <rect key="frame" x="54.5" y="53.5" width="29" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="PG4-eO-E5r" firstAttribute="top" secondItem="kIi-ue-mEd" secondAttribute="bottom" constant="25" id="1Wr-cL-3AL"/>
+                                            <constraint firstItem="FwR-Ox-99O" firstAttribute="leading" secondItem="Pcd-Bi-NdR" secondAttribute="trailing" constant="8" id="JWj-3l-WYn"/>
                                             <constraint firstItem="Pcd-Bi-NdR" firstAttribute="top" secondItem="v9b-ms-gAN" secondAttribute="top" constant="10" id="QTK-7b-nfq"/>
                                             <constraint firstAttribute="trailing" secondItem="PG4-eO-E5r" secondAttribute="trailing" constant="25" id="VNU-PX-CWL"/>
                                             <constraint firstItem="PG4-eO-E5r" firstAttribute="leading" secondItem="v9b-ms-gAN" secondAttribute="leading" constant="25" id="b1I-Te-crZ"/>
+                                            <constraint firstItem="FwR-Ox-99O" firstAttribute="baseline" secondItem="Pcd-Bi-NdR" secondAttribute="baseline" id="iPW-Jt-h6U"/>
                                             <constraint firstItem="Pcd-Bi-NdR" firstAttribute="leading" secondItem="v9b-ms-gAN" secondAttribute="leading" constant="22" id="l8m-l0-TyY"/>
                                             <constraint firstAttribute="height" constant="195" id="olm-fc-DMG"/>
                                             <constraint firstItem="kIi-ue-mEd" firstAttribute="leading" secondItem="Pcd-Bi-NdR" secondAttribute="leading" constant="2" id="p1u-pX-1E1"/>

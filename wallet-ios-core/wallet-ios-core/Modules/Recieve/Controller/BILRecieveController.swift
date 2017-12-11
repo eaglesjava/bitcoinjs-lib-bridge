@@ -9,32 +9,38 @@
 import UIKit
 
 class BILRecieveController: BILBaseViewController {
-
+    @IBOutlet weak var qrCodeImageViewHeight: NSLayoutConstraint!
+    
 	@IBOutlet var chooseWalletContainerView: UIView!
 	@IBOutlet weak var backupViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var qrCodeImageView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
-	var currentWallet: WalletModel? {
-		didSet {
-			if let w = currentWallet {
-				currentWalletIDLabel.text = w.id
-				currentWalletBalanceLabel.text = w.btc_balanceString + " btc"
-				currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")"
-				
-				backupViewHeight.constant = w.isNeedBackup ? 40 : 0
-				w.lastBTCAddress(success: { (address) in
-					self.setAddress(address: address)
-				}, failure: { (errorMsg) in
-					debugPrint(errorMsg)
-				})
-			}
-		}
-	}
     @IBOutlet weak var currentWalletIDLabel: UILabel!
     @IBOutlet weak var currentWalletBalanceLabel: UILabel!
     @IBOutlet weak var currentWalletShortIDLabel: UILabel!
+    
+    var currentWallet: WalletModel? {
+        didSet {
+            if let w = currentWallet {
+                currentWalletIDLabel.text = w.id
+                currentWalletBalanceLabel.text = w.btc_balanceString + " btc"
+                currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")"
+                
+                backupViewHeight.constant = w.isNeedBackup ? 40 : 0
+                w.lastBTCAddress(success: { (address) in
+                    self.setAddress(address: address)
+                }, failure: { (errorMsg) in
+                    debugPrint(errorMsg)
+                })
+            }
+        }
+    }
 	
 	var recieveModel: BILRecieveModel?
+    
+    lazy var qrCodeHeight: CGFloat = {
+        return min(180, UIScreen.main.bounds.height - 388 - 88)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +51,14 @@ class BILRecieveController: BILBaseViewController {
 		
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(sender:)))
 		bgView.addGestureRecognizer(tap)
+        
+        qrCodeImageViewHeight.constant = min(160, UIScreen.main.bounds.height - 388 - 88)
     }
 	
 	func setAddress(address: String) {
 		recieveModel = BILRecieveModel(address: address, volume: "")
 		let scale = UIScreen.main.scale
-		let size = qrCodeImageView.frame.size.applying(CGAffineTransform(scaleX: scale, y: scale))
+		let size = CGSize(width: qrCodeHeight, height: qrCodeHeight).applying(CGAffineTransform(scaleX: scale, y: scale))
 		qrCodeImageView.image = BILQRCodeHelper.generateQRCode(msg: "bitcoin:\(address)", targetSize: size)
 		addressLabel.text = address
 	}
@@ -61,7 +69,7 @@ class BILRecieveController: BILBaseViewController {
 		let key = "BILShowTipForWalletNewAddress"
 		let shown = UserDefaults.standard.bool(forKey: key)
 		if !shown {
-			showTipAlert(title: "友情提醒", msg: "为保护您的隐私，每次转入操作时，都将使用新地址，已使用的旧地址仍然可用")
+			showTipAlert(title: "友情提醒", msg: "为保护您的隐私，每次接收操作时，都将使用新地址，已使用的旧地址仍然可用")
 			UserDefaults.standard.set(true, forKey: key)
 		}
     }
@@ -104,18 +112,13 @@ class BILRecieveController: BILBaseViewController {
 		bgView.frame = container.bounds
 		container.addSubview(bgView)
 		
-		let height = min(BILWalletManager.shared.wallets.count, 3) * 85 + 50
+		let height = min(BILWalletManager.shared.wallets.count, 3) * 85 + 50 - 1
 		chooseWalletContainerView.frame = CGRect(x: 0, y: Int(container.bounds.height), width: Int(screenSize.width), height: height)
 		container.addSubview(chooseWalletContainerView)
 		view.addSubview(container)
 		
 		var targetFrame = chooseWalletContainerView.frame
-		if #available(iOS 11.0, *) {
-			targetFrame.origin.y = screenSize.height - targetFrame.height - view.safeAreaInsets.bottom
-		} else {
-			// Fallback on earlier versions
-			targetFrame.origin.y = screenSize.height - targetFrame.height
-		}
+		targetFrame.origin.y = screenSize.height - targetFrame.height - bottom
 		
 		UIView.animate(withDuration: 0.25) {
 			self.chooseWalletContainerView.frame = targetFrame

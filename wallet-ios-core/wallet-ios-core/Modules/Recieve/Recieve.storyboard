@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,7 +62,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Vbc-mO-Bu1" secondAttribute="bottom" id="xvx-Es-Nwq"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fp0-9U-s6x">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fp0-9U-s6x" customClass="BILCopyLabel" customModule="wallet_ios_core" customModuleProvider="target">
                                 <rect key="frame" x="25" y="146" width="325" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -70,8 +71,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eI9-zD-BLC">
                                 <rect key="frame" x="97.5" y="197" width="180" height="180"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="TMw-8q-QRj"/>
                                     <constraint firstAttribute="height" constant="180" id="i7l-8s-L5B"/>
+                                    <constraint firstAttribute="width" secondItem="eI9-zD-BLC" secondAttribute="height" multiplier="1:1" id="xKA-Ci-iW4"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -80,7 +81,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="77y-FX-QbG">
-                                <rect key="frame" x="142" y="407" width="90" height="33"/>
+                                <rect key="frame" x="142.5" y="407" width="90" height="33"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="特定金额接收">
@@ -196,7 +197,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.99215686274509807" green="0.40392156862745099" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.96470588235294119" green="0.25098039215686274" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Lla-QY-BHV" firstAttribute="centerY" secondItem="JlX-0g-CmX" secondAttribute="centerY" id="YEy-LW-hSN"/>
                                             <constraint firstItem="Lla-QY-BHV" firstAttribute="centerX" secondItem="JlX-0g-CmX" secondAttribute="centerX" id="kY7-4Y-voZ"/>
@@ -250,6 +251,7 @@
                         <outlet property="currentWalletIDLabel" destination="xOj-Rc-rYE" id="5Dd-0d-qSI"/>
                         <outlet property="currentWalletShortIDLabel" destination="rdY-VJ-rcF" id="EmP-tn-SQ3"/>
                         <outlet property="qrCodeImageView" destination="eI9-zD-BLC" id="fxo-if-Dqb"/>
+                        <outlet property="qrCodeImageViewHeight" destination="i7l-8s-L5B" id="QxN-c6-isa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJj-1m-aWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -382,7 +384,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lwc-Am-58G">
-                                <rect key="frame" x="97" y="202" width="180" height="180"/>
+                                <rect key="frame" x="97.5" y="202" width="180" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="Xmq-BL-zng"/>
                                     <constraint firstAttribute="width" constant="180" id="oYC-qg-6rw"/>
@@ -580,6 +582,7 @@
                             <constraint firstItem="WMV-CO-xm8" firstAttribute="leading" secondItem="Z91-AX-HzF" secondAttribute="leading" id="ezX-vF-24L"/>
                             <constraint firstAttribute="trailing" secondItem="g8R-UX-fFt" secondAttribute="trailing" id="l1h-wn-2h8"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="hGH-Yx-BCh"/>
                     </view>
                     <size key="freeformSize" width="360" height="256"/>
                     <connections>
