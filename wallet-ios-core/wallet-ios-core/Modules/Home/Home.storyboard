@@ -208,7 +208,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZH-mv-CjK" customClass="BILGradientView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                    <rect key="frame" x="25" y="8" width="325" height="74.5"/>
+                                                    <rect key="frame" x="25" y="8" width="325" height="75"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jh-zW-ztf">
                                                             <rect key="frame" x="75" y="12" width="45" height="22"/>
@@ -252,6 +252,7 @@
                                                     <constraints>
                                                         <constraint firstItem="MNm-pR-Y3T" firstAttribute="centerY" secondItem="WZH-mv-CjK" secondAttribute="centerY" id="2jj-Gk-fIb"/>
                                                         <constraint firstItem="6ap-fE-eNJ" firstAttribute="top" secondItem="3jh-zW-ztf" secondAttribute="bottom" constant="8" id="9am-Qj-faD"/>
+                                                        <constraint firstAttribute="height" constant="75" id="Ed5-36-ww1"/>
                                                         <constraint firstItem="NwA-EF-6cy" firstAttribute="centerY" secondItem="WZH-mv-CjK" secondAttribute="centerY" id="RA5-fx-WlR"/>
                                                         <constraint firstItem="MNm-pR-Y3T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3jh-zW-ztf" secondAttribute="trailing" constant="20" id="Vxa-U6-wmZ"/>
                                                         <constraint firstItem="3jh-zW-ztf" firstAttribute="leading" secondItem="NwA-EF-6cy" secondAttribute="trailing" constant="15" id="hu0-pL-3p0"/>
@@ -268,9 +269,8 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="WZH-mv-CjK" firstAttribute="centerY" secondItem="KfW-wv-TGA" secondAttribute="centerY" id="3u8-tt-kbl"/>
                                                 <constraint firstAttribute="trailing" secondItem="WZH-mv-CjK" secondAttribute="trailing" constant="25" id="A57-Ue-lC5"/>
-                                                <constraint firstAttribute="bottom" secondItem="WZH-mv-CjK" secondAttribute="bottom" constant="8" id="Jue-FW-Ljz"/>
-                                                <constraint firstItem="WZH-mv-CjK" firstAttribute="top" secondItem="KfW-wv-TGA" secondAttribute="top" constant="8" id="imv-B1-58I"/>
                                                 <constraint firstItem="WZH-mv-CjK" firstAttribute="leading" secondItem="KfW-wv-TGA" secondAttribute="leading" constant="25" id="vy6-uQ-s1B"/>
                                             </constraints>
                                         </tableViewCellContentView>
