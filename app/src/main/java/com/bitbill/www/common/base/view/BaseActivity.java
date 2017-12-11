@@ -17,12 +17,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
+import com.bitbill.www.common.base.view.widget.SingleToast;
 import com.bitbill.www.common.utils.DialogUtils;
 import com.bitbill.www.common.utils.NetworkUtils;
 import com.bitbill.www.di.component.ActivityComponent;
@@ -148,9 +148,9 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     @Override
     public void showMessage(String message) {
         if (message != null) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            SingleToast.show(message, this);
         } else {
-            Toast.makeText(this, getString(R.string.some_error), Toast.LENGTH_SHORT).show();
+            SingleToast.show(getString(R.string.some_error), this);
         }
     }
 
@@ -204,6 +204,7 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         if (getMvpPresenter() != null) {
             getMvpPresenter().onDetach();
         }
+        SingleToast.clear();
     }
 
     /**

@@ -122,11 +122,14 @@
     <string name="text_receive_specific_amount"><![CDATA[<u>特定金额接收</u>]]></string>
     <string name="title_receive_address_refresh">刷新地址</string>
     <string name="title_activity_specific_receive">特定金额接收</string>
+    <string name="dialog_title_friendly_remind">友情提醒</string>
+    <string name="dialog_msg_change_address">为保护您的隐私，每次转入操作时，都将使用新地址，已使用的旧地址仍然可用</string>
+    <string name="dialog_btn_known">我知道了</string>
     <!--send fragment-->
     <string name="title_activity_send_success">发送成功</string>
     <string name="btn_create_contact_now">快速创建联系人</string>
     <string name="hint_send_success">推荐您添加该地址到新联系人以便下次交易</string>
     <string name="btn_confirm_send">确定发送</string>
     <string name="action_send_scan">扫码</string>
-    <string name="R.string.toast_copy_address_success">复制地址成功</string>
+    <string name="R.string.toast_copy_address_success">已复制地址</string>
 </resources>

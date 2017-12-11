@@ -27,6 +27,18 @@ public class MessageConfirmDialog extends BaseConfirmDialog {
         return fragment;
     }
 
+    public static MessageConfirmDialog newInstance(String title, String msg, String positiveText, boolean isOnlyPositiveBtn) {
+
+        Bundle args = new Bundle();
+        args.putString(CONFIRM_TITLE, title);
+        args.putString(CONFIRM_MESSAGE, msg);
+        args.putString(CONFIRM_POSITIVE_BTN_TEXT, positiveText);
+        args.putBoolean(CONFIRM_ONLY_POSITIVE_BTN, isOnlyPositiveBtn);
+        MessageConfirmDialog fragment = new MessageConfirmDialog();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public static MessageConfirmDialog newInstance(String msg, boolean isOnlyPositiveBtn) {
 
         Bundle args = new Bundle();

@@ -33,5 +33,6 @@
     <color name="div_gray_bg">#d9dada</color>
     <color name="txt_gray">#bbb</color>
     <color name="wallet_menu_text">#2F333E</color>
+    <color name="toast">#262933</color>
 
 </resources>

@@ -167,7 +167,10 @@ public class ReceiveFragment extends BaseLazyFragment {
             } else {
                 selectWalletView.setVisibility(View.GONE);
             }
-            MessageConfirmDialog.newInstance("友情提醒", "为保护您的隐私，每次转入操作时，都将使用新地址，已使用的旧地址仍然可用", false)
+            MessageConfirmDialog.newInstance(getString(R.string.dialog_title_friendly_remind),
+                    getString(R.string.dialog_msg_change_address),
+                    getString(R.string.dialog_btn_known),
+                    true)
                     .show(getChildFragmentManager(), MessageConfirmDialog.TAG);
         }
 
@@ -196,7 +199,4 @@ public class ReceiveFragment extends BaseLazyFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public Wallet getSelectedWallet() {
-        return mSelectedWallet;
-    }
 }
