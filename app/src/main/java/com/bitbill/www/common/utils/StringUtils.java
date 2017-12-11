@@ -791,8 +791,8 @@ public class StringUtils {
      */
     public static String cutWalletName(String name) {
         if (isEmpty(name)) return "";
-        if (name.length() <= 10) return name;
-        return name.substring(0, 11) + "...";
+        if (name.length() <= 16) return name;
+        return name.substring(0, 16) + "...";
     }
 
     /**

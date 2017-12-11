@@ -29,16 +29,6 @@
             android:layout_marginTop="1dp"/>
     </LinearLayout>
 
-
-    <ImageView
-        android:id="@+id/iv_right_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="5dp"
-        android:src="@drawable/ic_receive_right_arrow"
-        android:visibility="gone"/>
-
     <Button
         android:id="@+id/btn_backup_now"
         android:layout_width="wrap_content"

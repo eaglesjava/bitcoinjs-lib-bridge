@@ -1,10 +1,12 @@
 package com.bitbill.www.app;
 
 import android.app.Application;
+import android.support.annotation.Nullable;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.bitbill.www.BuildConfig;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.di.component.ApplicationComponent;
 import com.bitbill.www.di.component.DaggerApplicationComponent;
@@ -78,5 +80,20 @@ public class BitbillApp extends Application {
         mWallets.clear();
         mWallets.addAll(wallets);
     }
+
+
+    @Nullable
+    public Wallet getDefaultWallet() {
+        if (StringUtils.isEmpty(mWallets)) return null;
+        Wallet defaultWallet = null;
+        for (Wallet wallet : mWallets) {
+            if (wallet.isDefault()) {
+                defaultWallet = wallet;
+                return defaultWallet;
+            }
+        }
+        return defaultWallet;
+    }
+
 }
 

@@ -9,6 +9,5 @@
         <attr name="selectBackground" format="color|reference"/>
         <attr name="walletAmount" format="string"/>
         <attr name="backuped" format="boolean"/>
-        <attr name="isSelectView" format="boolean"/>
     </declare-styleable>
 </resources>

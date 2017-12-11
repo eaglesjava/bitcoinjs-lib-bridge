@@ -37,7 +37,8 @@
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".ui.wallet.importing.ImportWalletActivity"
@@ -49,15 +50,15 @@
             android:label="@string/title_activity_create_wallet">
         </activity>
         <activity
-            android:name=".ui.wallet.backuped.BackUpWalletActivity"
+            android:name=".ui.wallet.backup.BackUpWalletActivity"
             android:label="@string/title_activity_backup_wallet">
         </activity>
         <activity
-            android:name=".ui.wallet.backuped.BackupWalletConfirmActivity"
+            android:name=".ui.wallet.backup.BackupWalletConfirmActivity"
             android:label="@string/title_activity_backup_wallet">
         </activity>
         <activity
-            android:name=".ui.wallet.backuped.BackupWalletSuccessActivity"
+            android:name=".ui.wallet.backup.BackupWalletSuccessActivity"
             android:label="@string/title_activity_backup_wallet">
         </activity>
         <activity

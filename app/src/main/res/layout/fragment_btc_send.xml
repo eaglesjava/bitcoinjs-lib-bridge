@@ -17,8 +17,8 @@
             style="@style/EditText.Normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="接收方地址"
-            android:paddingBottom="20dp"/>
+            android:layout_marginTop="10dp"
+            android:hint="接收方地址"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -31,15 +31,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
         <EditText
             android:id="@+id/et_send_amount"
             style="@style/EditText.Normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="发送金额"
-            android:paddingBottom="20dp"/>
+            android:hint="发送金额"/>
 
         <TextView
             style="@style/Text.White.Action"
@@ -53,8 +53,8 @@
         style="@style/EditText.Normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="备注（20字内）"
-        android:paddingBottom="20dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="备注（20字内）"/>
 
     <TextView
         style="@style/Text.White.Action"

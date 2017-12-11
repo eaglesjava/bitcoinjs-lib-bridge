@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_unbackuped"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="当前钱包未备份，马上备份"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_padding"
+        android:paddingLeft="@dimen/activity_padding"
+        android:paddingRight="@dimen/activity_padding"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_wallet_label"
+            style="@style/Text.Wallet.Logo"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_wallet_name"
+                style="@style/Text.Wallet.Name"
+                android:lines="1"/>
+
+            <TextView
+                android:id="@+id/tv_wallet_amount"
+                style="@style/Text.Wallet.Amount"
+                android:layout_marginTop="1dp"/>
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="5dp"
+            android:src="@drawable/ic_receive_right_arrow"/>
+    </LinearLayout>
+</LinearLayout>
