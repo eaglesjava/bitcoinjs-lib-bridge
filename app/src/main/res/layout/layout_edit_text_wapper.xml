@@ -27,12 +27,12 @@
     <EditText
         android:id="@+id/et_text"
         style="@style/EditText.Wapper"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        android:hint="@string/hint_input_please"/>
 
     <View
         android:id="@+id/et_line"
-        style="@style/Line.Horizontal"
-        android:layout_marginTop="-5dp"/>
+        style="@style/Line.Horizontal"/>
 
     <TextView
         android:id="@+id/tv_etw_bottom_hint"

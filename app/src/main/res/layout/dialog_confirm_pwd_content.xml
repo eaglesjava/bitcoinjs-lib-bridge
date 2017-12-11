@@ -13,5 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dialog_confirm_padding"
         android:hint="请输入密码以确认"
+        android:inputType="textPassword"
         android:theme="@style/AppTheme.ConfrimEditText"/>
 </LinearLayout>

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
@@ -75,7 +77,14 @@ public class WalletInfoActivity extends BaseToolbarActivity implements BtcRecord
         mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
         mViewPager.setAdapter(mFragmentAdapter);
-        tabs.setupWithViewPager(mViewPager);
+        tabs.setupWithViewPager(mViewPager);  //禁止tab选择
+        LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
+        for (int i = 0; i < tabStrip.getChildCount(); i++) {
+            View tabView = tabStrip.getChildAt(i);
+            if (tabView != null) {
+                tabView.setClickable(false);
+            }
+        }
     }
 
 

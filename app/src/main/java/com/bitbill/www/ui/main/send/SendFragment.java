@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
@@ -147,6 +148,14 @@ public class SendFragment extends BaseLazyFragment {
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
         viewPager.setAdapter(mFragmentAdapter);
         tabs.setupWithViewPager(viewPager);
+        //禁止tab选择
+        LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
+        for (int i = 0; i < tabStrip.getChildCount(); i++) {
+            View tabView = tabStrip.getChildAt(i);
+            if (tabView != null) {
+                tabView.setClickable(false);
+            }
+        }
     }
 
     @Override

@@ -29,7 +29,7 @@
                 android:layout_marginTop="20dp"
                 app:bottomHint="@string/hint_bottom_wallet_id"
                 app:inputHint="@string/hint_input_wallet_id"
-                app:inputPaddingBottom="20dp"
+                app:inputPaddingBottom="10dp"
                 app:inputTitle="@string/input_wallet_id"
                 />
 
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:inputHint="@string/hint_trade_pwd"
-                app:inputPaddingBottom="20dp"
+                app:inputPaddingBottom="10dp"
                 app:inputPwdStatusVisible="true"
                 app:inputTitle="@string/input_trade_pwd"
                 app:inputType="inputPasswordHide"
@@ -50,8 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:inputHint="@string/hint_trade_pwd"
-                app:inputPaddingBottom="20dp"
+                app:inputHint="@string/hint_input_please"
+                app:inputPaddingBottom="10dp"
                 app:inputTitle="@string/input_trade_pwd_confirm"
                 app:inputType="inputPasswordHide"
                 />

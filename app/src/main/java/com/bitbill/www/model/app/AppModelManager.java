@@ -41,12 +41,12 @@ public class AppModelManager extends ModelManager implements AppModel {
     }
 
     @Override
-    public boolean isGuideBrowsed() {
-        return mAppPreferences.isGuideBrowsed();
+    public void setReceiveRemindDialogShown() {
+        mAppPreferences.setReceiveRemindDialogShown();
     }
 
     @Override
-    public void setGuideBrowsed() {
-        mAppPreferences.setGuideBrowsed();
+    public boolean isReceiveRemindDialogShown() {
+        return mAppPreferences.isReceiveRemindDialogShown();
     }
 }

@@ -19,9 +19,4 @@ public class GuidePresenter<M extends AppModel, V extends GuideMvpView> extends 
         super(model, schedulerProvider, compositeDisposable);
     }
 
-
-    @Override
-    public void setBrowsed() {
-        getModelManager().setGuideBrowsed();
-    }
 }

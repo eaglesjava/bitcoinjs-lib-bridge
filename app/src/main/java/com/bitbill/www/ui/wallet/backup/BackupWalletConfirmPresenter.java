@@ -34,7 +34,7 @@ public class BackupWalletConfirmPresenter<M extends WalletModel, V extends Backu
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);
-                        if (!isValidMvpView()) {
+                        if (!isViewAttached()) {
                             return;
                         }
                         if (aBoolean) {
@@ -49,7 +49,7 @@ public class BackupWalletConfirmPresenter<M extends WalletModel, V extends Backu
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        if (!isValidMvpView()) {
+                        if (!isViewAttached()) {
                             return;
                         }
                         getMvpView().backupFail();

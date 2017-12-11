@@ -94,13 +94,7 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // TODO: 2017/12/6 for test sleep
-                mSwipeRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        lazyData();
-                    }
-                }, 3000);
+                lazyData();
             }
         });
         mWalletMenu = new PopupWalletMenu(getBaseActivity());

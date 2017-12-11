@@ -9,6 +9,7 @@ import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.AssetFragment;
 import com.bitbill.www.ui.main.MainActivity;
+import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.splash.SplashActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.backup.BackupWalletConfirmActivity;
@@ -40,4 +41,6 @@ public interface ActivityComponent {
     void inject(GuideActivity guideActivity);
 
     void inject(SplashActivity splashActivity);
+
+    void inject(ReceiveFragment receiveFragment);
 }

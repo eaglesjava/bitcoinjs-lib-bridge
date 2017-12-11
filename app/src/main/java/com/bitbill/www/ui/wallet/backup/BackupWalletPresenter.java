@@ -49,7 +49,7 @@ public class BackupWalletPresenter<W extends WalletModel, V extends BackupWallet
                     @Override
                     public void onNext(String s) {
                         super.onNext(s);
-                        if (!isValidMvpView()) {
+                        if (!isViewAttached()) {
                             return;
                         }
                         getMvpView().loadMnemonicSuccess(s);
@@ -59,7 +59,7 @@ public class BackupWalletPresenter<W extends WalletModel, V extends BackupWallet
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        if (!isValidMvpView()) {
+                        if (!isViewAttached()) {
                             return;
                         }
                         getMvpView().loadMnemonicFail();

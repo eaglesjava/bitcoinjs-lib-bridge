@@ -12,7 +12,7 @@ import com.bitbill.www.common.base.model.prefs.Prefs;
  */
 public interface AppPreferences extends Prefs {
 
-    boolean isGuideBrowsed();
+    void setReceiveRemindDialogShown();
 
-    void setGuideBrowsed();
+    boolean isReceiveRemindDialogShown();
 }

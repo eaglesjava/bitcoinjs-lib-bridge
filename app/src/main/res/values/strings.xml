@@ -36,7 +36,7 @@
     <string name="title_activity_create_wallet">创建钱包</string>
     <string name="error_invalid_trade_pwd">密码长度限制在6-20位字符</string>
     <string name="hint_input_please">请输入</string>
-    <string name="hint_input_wallet_id">6-20位，以字母开头</string>
+    <string name="hint_input_wallet_id">请输入6-20位，以字母开头</string>
     <string name="hint_trade_pwd">请输入6-20位字符</string>
     <string name="input_wallet_name">钱包名称</string>
     <string name="input_wallet_id">钱包ID</string>
@@ -49,7 +49,7 @@
     <string name="error_trade_pwd_required">请输入交易密码</string>
     <string name="error_confirm_trade_pwd_required">请输入确认交易密码</string>
     <string name="error_trade_pwd_inconsistent">密码不一致</string>
-    <string name="hint_back_up_pwd">请备份好您的密码！比特宝不存储用户密码，无法提供找回或重置的功能（若您已备份助记词，忘记密码的情况下可以通过重新导入助记词恢复钱包并重设密码）</string>
+    <string name="hint_back_up_pwd">请备份好您的密码！比特宝不存储用户密码，无法提供找回或重置的功能</string>
     <string name="action_settings">Settings</string>
     <string name="close">关闭</string>
     <!--main activity-->
@@ -79,9 +79,9 @@
     <string name="btn_backup_wallet">备份钱包</string>
     <string name="btn_backup_wallet_delay">稍后备份</string>
 
-    backupedckup wallet-->
+    <!--backup wallet-->
     <string name="hint_bak_wallet_environment_safe">请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！</string>
-    <string name="hint_bak_wallet_ban_screenshots">截图是不安全的，您的图片可能被别的应用使用。请准备笔和纸记录下面这句话，并妥善保存，我们会在下个屏幕上确认！</string>
+    <string name="hint_bak_wallet_ban_screenshots">截图是不安全的，您的图片可能被别的应用使用。请抄写如下助记词，并妥善保存，我们会在下个屏幕上确认！</string>
     <string name="btn_written_mnemonic_in_order">已按顺序记下助记词</string>
     <string name="btn_confirm">确定</string>
     <string name="hint_bak_confirm_mnemonic_correct">按顺序点击助记词，确认您的助记词备份正确</string>
@@ -112,7 +112,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hint_bottom_wallet_id">设定你的钱包ID，他可以关联你的联系人，支持英文和数字，一旦设定不可修改。</string>
+    <string name="hint_bottom_wallet_id">设定您的钱包ID，他可以关联您的联系人，支持英文和数字，一旦设定不可修改。</string>
     <!--wallet info -->
     <string name="title_activity_wallet_info">钱包信息</string>
     <string name="text_in_progress_count">正在进行中 %d个</string>
@@ -132,4 +132,5 @@
     <string name="btn_confirm_send">确定发送</string>
     <string name="action_send_scan">扫码</string>
     <string name="R.string.toast_copy_address_success">已复制地址</string>
+    <string name="guide_section_three">添加联系人 一键转账</string>
 </resources>

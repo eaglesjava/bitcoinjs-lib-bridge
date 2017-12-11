@@ -12,16 +12,16 @@
         tools:context="com.bitbill.www.ui.main.receive.ReceiveFragment">
 
         <include
-            layout="@layout/layout_tabs"
+            layout="@layout/layout_tabs_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <android.support.v4.view.ViewPager
+        <com.bitbill.www.common.base.view.widget.NoScrollViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </android.support.v4.view.ViewPager>
+        </com.bitbill.www.common.base.view.widget.NoScrollViewPager>
 
 
     </LinearLayout>

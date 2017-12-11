@@ -8,14 +8,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.base.view.widget.SelectWalletView;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.info.BchInfoFragment;
@@ -24,6 +25,8 @@ import com.bitbill.www.ui.wallet.info.EthInfoFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
 /**
@@ -31,7 +34,7 @@ import butterknife.BindView;
  * Use the {@link ReceiveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReceiveFragment extends BaseLazyFragment {
+public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
 
     private static final String TAG = "ReceiveFragment";
     @BindView(R.id.tabs)
@@ -40,6 +43,8 @@ public class ReceiveFragment extends BaseLazyFragment {
     ViewPager viewPager;
     @BindView(R.id.wv_select)
     SelectWalletView selectWalletView;
+    @Inject
+    ReceiveMvpPresenter<AppModel, ReceiveMvpView> mReceiveMvpPresenter;
     private FragmentAdapter mFragmentAdapter;
     private BtcReceiveFragment mBtcReceiveFragment;
     private List<Wallet> mWalletList;
@@ -64,13 +69,13 @@ public class ReceiveFragment extends BaseLazyFragment {
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public ReceiveMvpPresenter getMvpPresenter() {
+        return mReceiveMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -124,6 +129,14 @@ public class ReceiveFragment extends BaseLazyFragment {
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
         viewPager.setAdapter(mFragmentAdapter);
         tabs.setupWithViewPager(viewPager);
+        //禁止tab选择
+        LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
+        for (int i = 0; i < tabStrip.getChildCount(); i++) {
+            View tabView = tabStrip.getChildAt(i);
+            if (tabView != null) {
+                tabView.setClickable(false);
+            }
+        }
     }
 
     @Override
@@ -167,11 +180,15 @@ public class ReceiveFragment extends BaseLazyFragment {
             } else {
                 selectWalletView.setVisibility(View.GONE);
             }
-            MessageConfirmDialog.newInstance(getString(R.string.dialog_title_friendly_remind),
-                    getString(R.string.dialog_msg_change_address),
-                    getString(R.string.dialog_btn_known),
-                    true)
-                    .show(getChildFragmentManager(), MessageConfirmDialog.TAG);
+
+            if (!getMvpPresenter().isRemindDialogShown()) {
+                MessageConfirmDialog.newInstance(getString(R.string.dialog_title_friendly_remind),
+                        getString(R.string.dialog_msg_change_address),
+                        getString(R.string.dialog_btn_known),
+                        true)
+                        .show(getChildFragmentManager(), MessageConfirmDialog.TAG);
+                getMvpPresenter().setRemindDialogShown();
+            }
         }
 
 

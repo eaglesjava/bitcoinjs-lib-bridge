@@ -20,7 +20,7 @@ import javax.inject.Singleton;
 @Singleton
 public class AppPreferencesHelper extends PreferencesHelper implements AppPreferences {
 
-    public static final String IS_GUIDE_BROWSED = "is_guide_browsed";
+    public static final String IS_RECEIVE_REMIND_DIALOG_SHOWN = "is_remind_dialog_shown";
 
     @Inject
     public AppPreferencesHelper(@ApplicationContext Context context, @PrefersAppInfo String prefFileName) {
@@ -28,13 +28,14 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     }
 
     @Override
-    public boolean isGuideBrowsed() {
-        return mPrefs.getBoolean(IS_GUIDE_BROWSED, false);
+    public void setReceiveRemindDialogShown() {
+
+        mPrefs.edit().putBoolean(IS_RECEIVE_REMIND_DIALOG_SHOWN, true).apply();
     }
 
     @Override
-    public void setGuideBrowsed() {
-        mPrefs.edit().putBoolean(IS_GUIDE_BROWSED, true).apply();
+    public boolean isReceiveRemindDialogShown() {
 
+        return mPrefs.getBoolean(IS_RECEIVE_REMIND_DIALOG_SHOWN, false);
     }
 }

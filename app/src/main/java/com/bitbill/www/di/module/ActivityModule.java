@@ -22,6 +22,9 @@ import com.bitbill.www.ui.main.AssetPresenter;
 import com.bitbill.www.ui.main.MainMvpPresenter;
 import com.bitbill.www.ui.main.MainMvpView;
 import com.bitbill.www.ui.main.MainPresenter;
+import com.bitbill.www.ui.main.receive.ReceiveMvpPresenter;
+import com.bitbill.www.ui.main.receive.ReceiveMvpView;
+import com.bitbill.www.ui.main.receive.ReceivePresenter;
 import com.bitbill.www.ui.splash.SplashMvpPresenter;
 import com.bitbill.www.ui.splash.SplashMvpView;
 import com.bitbill.www.ui.splash.SplashPresenter;
@@ -78,8 +81,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    SplashMvpPresenter<AppModel, SplashMvpView> provideSplashPresenter(
-            SplashPresenter<AppModel, SplashMvpView> presenter) {
+    SplashMvpPresenter<WalletModel, SplashMvpView> provideSplashPresenter(
+            SplashPresenter<WalletModel, SplashMvpView> presenter) {
         return presenter;
     }
 
@@ -129,6 +132,13 @@ public class ActivityModule {
     @PerActivity
     AssetMvpPresenter<WalletModel, AssetMvpView> provideAssetPresenter(
             AssetPresenter<WalletModel, AssetMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ReceiveMvpPresenter<AppModel, ReceiveMvpView> provideReceivePresenter(
+            ReceivePresenter<AppModel, ReceiveMvpView> presenter) {
         return presenter;
     }
 

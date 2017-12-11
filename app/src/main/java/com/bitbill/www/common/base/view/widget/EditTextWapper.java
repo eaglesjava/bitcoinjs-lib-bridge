@@ -60,9 +60,9 @@ public class EditTextWapper extends FrameLayout {
     private int mInputType = INPUT_DEFAULT;
     private int mMaxLines = 1;
     private float mInputPaddingBottom = mInputPadding;
-    private float mInputPaddingRight = mInputPadding;
+    private float mInputPaddingRight;
     private float mInputPaddingTop = mInputPadding;
-    private float mInputPaddingLeft = mInputPadding;
+    private float mInputPaddingLeft;
     private boolean mInputPwdStatusVisible = false;
     private boolean mErrorState;
     private TextWatcher mTextWatcher;
@@ -99,16 +99,16 @@ public class EditTextWapper extends FrameLayout {
                 mInputPadding);
         mInputPaddingLeft = a.getDimension(
                 R.styleable.EditTextWapper_inputPaddingLeft,
-                mInputPadding);
+                mInputPaddingLeft);
         mInputPaddingTop = a.getDimension(
                 R.styleable.EditTextWapper_inputPaddingTop,
-                mInputPadding);
+                mInputPaddingTop);
         mInputPaddingRight = a.getDimension(
                 R.styleable.EditTextWapper_inputPaddingRight,
-                mInputPadding);
+                mInputPaddingRight);
         mInputPaddingBottom = a.getDimension(
                 R.styleable.EditTextWapper_inputPaddingBottom,
-                mInputPadding);
+                mInputPaddingBottom);
         mMaxLines = a.getInt(
                 R.styleable.EditTextWapper_maxLines,
                 mMaxLines);

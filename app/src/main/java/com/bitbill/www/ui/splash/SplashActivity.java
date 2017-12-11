@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseActivity;
-import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.MainActivity;
 
@@ -19,7 +19,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
-    SplashMvpPresenter<AppModel, SplashMvpView> mSplashMvpPresenter;
+    SplashMvpPresenter<WalletModel, SplashMvpView> mSplashMvpPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
             public void run() {
 
                 // 根据是否是第一次进入判断跳转到引导页还是首页
-                getMvpPresenter().checkBrowsed();
+                getMvpPresenter().hasWallet();
             }
         }, 2000);
     }
@@ -47,9 +47,9 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     }
 
     @Override
-    public void isGuideBrowsed(boolean guideBrowsed) {
-        if (guideBrowsed) {
-            //浏览过引导页直接跳转到首页
+    public void hasWallet(boolean hasWallet) {
+        if (hasWallet) {
+            //本地有钱包直接跳转到首页
             MainActivity.start(SplashActivity.this);
         } else {
             GuideActivity.start(SplashActivity.this);

@@ -8,5 +8,4 @@ import com.bitbill.www.model.app.AppModel;
  */
 public interface GuideMvpPresenter<M extends AppModel, V extends GuideMvpView> extends MvpPresenter<V> {
 
-    void setBrowsed();
 }

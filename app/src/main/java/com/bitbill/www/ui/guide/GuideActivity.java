@@ -66,7 +66,7 @@ public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements Ba
 
     @Override
     public GuideMvpPresenter getMvpPresenter() {
-        return mGuideMvpPresenter;
+        return null;
     }
 
     @Override
@@ -106,6 +106,7 @@ public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements Ba
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
         addGuide(new FirstGuideFragment());
         addGuide(new SecondGuideFragment());
+        addGuide(new ThirdGuideFragment());
 
         mViewPager.setAdapter(mAdapter);
 
@@ -137,8 +138,6 @@ public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements Ba
                 finish();
                 break;
         }
-        //设置浏览过了
-        getMvpPresenter().setBrowsed();
     }
 
 

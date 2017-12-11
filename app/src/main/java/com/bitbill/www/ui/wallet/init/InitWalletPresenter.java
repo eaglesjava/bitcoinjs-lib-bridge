@@ -56,7 +56,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     public void onNext(Long aLong) {
                         super.onNext(aLong);
                         Log.d(TAG, "initWalletSuccess walletid = [" + aLong + "]");
-                        if (!isValidMvpView()) {
+                        if (!isViewAttached()) {
                             return;
                         }
                         getMvpView().initWalletSuccess(mWallet);
@@ -66,7 +66,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     public void onError(Throwable e) {
                         super.onError(e);
                         Log.e(TAG, "initWalletFail ", e);
-                        if (!isValidMvpView()) {
+                        if (!isViewAttached()) {
                             return;
                         }
                         getMvpView().initWalletFail();
@@ -217,7 +217,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                             @Override
                             public void onNext(ApiResponse<String> stringApiResponse) {
                                 super.onNext(stringApiResponse);
-                                if (!isValidMvpView()) {
+                                if (!isViewAttached()) {
                                     return;
                                 }
                                 Log.d(TAG, "onNext() called with: stringApiResponse = [" + stringApiResponse + "]");
@@ -231,7 +231,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                             @Override
                             public void onError(Throwable e) {
                                 super.onError(e);
-                                if (!isValidMvpView()) {
+                                if (!isViewAttached()) {
                                     return;
                                 }
                                 Log.e(TAG, "onError: ", e);

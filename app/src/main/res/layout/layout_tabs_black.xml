@@ -11,7 +11,7 @@
         app:tabBackground="@drawable/bg_tab_selector"
         app:tabIndicatorHeight="0dp"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/black"
+        app:tabSelectedTextColor="@color/blue_tab"
         app:tabTextAppearance="@style/TabText"
         app:tabTextColor="@color/white_50"/>
 
