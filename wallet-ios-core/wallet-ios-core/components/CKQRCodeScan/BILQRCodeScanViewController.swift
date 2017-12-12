@@ -73,7 +73,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
         var frame = containerView.bounds
         frame.size.height += 200
         maskLayer.frame = frame
-        maskLayer.backgroundColor = UIColor.bil_black_color(alpha: 0.7).cgColor
+        maskLayer.backgroundColor = UIColor.bil_black_color(alpha: 0.5).cgColor
         
         debugPrint(scanFrame.frame)
         
@@ -94,9 +94,9 @@ class BILQRCodeScanViewController: BILBaseViewController {
     
     func setupSession() {
         do {
-            let device = AVCaptureDevice.default(for: .video)
+            guard let device = AVCaptureDevice.default(for: .video) else { return }
             
-            let input = try AVCaptureDeviceInput(device: device!)
+            let input = try AVCaptureDeviceInput(device: device)
             
             let output = AVCaptureMetadataOutput()
             output.setMetadataObjectsDelegate(self, queue: .main)
