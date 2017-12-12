@@ -21,7 +21,7 @@ class BILSendController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addressInputView.textField.text = "17XLRQJX97DZajzH7kZBrFzs7qHYBvWV1F"
+//        addressInputView.textField.text = "17XLRQJX97DZajzH7kZBrFzs7qHYBvWV1F"
     }
 
     override func didReceiveMemoryWarning() {

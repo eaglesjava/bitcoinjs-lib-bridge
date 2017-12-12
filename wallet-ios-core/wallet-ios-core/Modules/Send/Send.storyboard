@@ -122,7 +122,6 @@
                                 <rect key="frame" x="25" y="533" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="iCX-dj-nSc"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="rSO-bg-J3q"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
@@ -164,7 +163,7 @@
         <!--扫描结果-->
         <scene sceneID="uJy-R9-Zwz">
             <objects>
-                <viewController id="jHS-Ph-MGA" customClass="BILScanQRCodeResultController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="jHS-Ph-MGA" customClass="BILScanQRCodeResultController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hUg-ff-d8M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -214,6 +213,17 @@
                                     <constraint firstAttribute="bottom" secondItem="nB8-vV-4XD" secondAttribute="bottom" id="qai-N8-d23"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohd-e8-95F" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="582" width="325" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="9HR-PO-jzt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="下一步"/>
+                                <connections>
+                                    <segue destination="baX-2R-0kn" kind="show" identifier="BILScanResultToChooseWallet" id="OJD-0X-kpj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -224,7 +234,10 @@
                             <constraint firstItem="glj-9L-kHX" firstAttribute="leading" secondItem="vAK-Z2-Y1X" secondAttribute="leading" constant="25" id="Tzv-ET-jiZ"/>
                             <constraint firstItem="vAK-Z2-Y1X" firstAttribute="trailing" secondItem="bnC-I7-ml0" secondAttribute="trailing" constant="25" id="ULM-AD-5mL"/>
                             <constraint firstItem="glj-9L-kHX" firstAttribute="top" secondItem="vAK-Z2-Y1X" secondAttribute="top" constant="30" id="UsI-9f-NBx"/>
+                            <constraint firstItem="vAK-Z2-Y1X" firstAttribute="trailing" secondItem="ohd-e8-95F" secondAttribute="trailing" constant="25" id="c2s-vV-hdR"/>
                             <constraint firstItem="jUa-cr-pb8" firstAttribute="baseline" secondItem="glj-9L-kHX" secondAttribute="baseline" id="gX1-jr-TP6"/>
+                            <constraint firstItem="vAK-Z2-Y1X" firstAttribute="bottom" secondItem="ohd-e8-95F" secondAttribute="bottom" constant="30" id="hfM-f9-uBi"/>
+                            <constraint firstItem="ohd-e8-95F" firstAttribute="leading" secondItem="vAK-Z2-Y1X" secondAttribute="leading" constant="25" id="jVu-zP-B9n"/>
                             <constraint firstItem="bnC-I7-ml0" firstAttribute="leading" secondItem="vAK-Z2-Y1X" secondAttribute="leading" constant="25" id="juD-Ly-m71"/>
                             <constraint firstItem="vAK-Z2-Y1X" firstAttribute="trailing" secondItem="jUa-cr-pb8" secondAttribute="trailing" constant="25" id="v19-d9-YEk"/>
                         </constraints>
@@ -272,7 +285,6 @@
                                 <rect key="frame" x="25" y="582" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="0FU-c6-uMV"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="MaL-oY-yTY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
@@ -327,7 +339,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrl-VK-cpH" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
                                 <rect key="frame" x="25" y="582" width="325" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="tcz-0q-Egy"/>
                                     <constraint firstAttribute="height" constant="55" id="w6q-jI-UW1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -680,4 +691,7 @@
         <image name="icon_send" width="23" height="20"/>
         <image name="icon_send_h" width="23" height="20"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="OJD-0X-kpj"/>
+    </inferredMetricsTieBreakers>
 </document>
