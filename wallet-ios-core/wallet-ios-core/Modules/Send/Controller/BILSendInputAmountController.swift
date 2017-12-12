@@ -37,6 +37,11 @@ class BILSendInputAmountController: BILBaseViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == chooseWalletSegue {
             guard let amount = amountTextField.text, !(amount.isEmpty) else {
+                bil_makeToast(msg: "金额不能为空")
+                return false
+            }
+            guard let amountD = Double(amount), amountD > 0 else {
+                bil_makeToast(msg: "金额必须大于 0")
                 return false
             }
             sendModel?.amount = amount
