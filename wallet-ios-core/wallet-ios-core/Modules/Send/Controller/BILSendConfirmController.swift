@@ -1,29 +1,27 @@
 //
-//  BILSpecificVolumeRecieveController.swift
+//  BILSendConfirmController.swift
 //  wallet-ios-core
 //
-//  Created by 仇弘扬 on 2017/12/8.
+//  Created by 仇弘扬 on 2017/12/12.
 //  Copyright © 2017年 BitBill. All rights reserved.
 //
 
 import UIKit
 
-class BILSpecificVolumeRecieveController: BILBaseViewController {
-
-	var recieveModel: BILRecieveModel?
-	
-	@IBOutlet weak var addressLabel: UILabel!
-	@IBOutlet weak var qrCodeImageView: UIImageView!
-	@IBOutlet weak var amountLabel: UILabel!
-	override func viewDidLoad() {
+class BILSendConfirmController: BILBaseViewController {
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var walletIDLabel: UILabel!
+    
+    var sendModel: BILSendModel?
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		if let r = recieveModel {
-			addressLabel.text = r.address
-			qrCodeImageView.image = BILQRCodeHelper.generateQRCode(msg: r.urlString)
-			amountLabel.text = "\(r.amount) \(r.coinType.name)"
-		}
+        walletIDLabel.text = sendModel?.wallet?.id
+        addressLabel.text = sendModel?.address
+        amountLabel.text = "\(sendModel?.amount ?? "0") BTC"
     }
 
     override func didReceiveMemoryWarning() {

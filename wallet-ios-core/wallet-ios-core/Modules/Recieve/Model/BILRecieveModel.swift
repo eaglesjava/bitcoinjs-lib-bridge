@@ -8,43 +8,43 @@
 
 import UIKit
 
-struct BILRecieveModel {
-	enum CoinType {
-		case btc
-		
-		var name: String {
-			get {
-				switch self {
-				case .btc:
-					return "BTC"
-				}
-			}
-		}
-		
-		var scheme: String {
-			get {
-				switch self {
-				case .btc:
-					return "bitcoin"
-				}
-			}
-		}
-		
-	}
+enum CoinType {
+    case btc
+    
+    var name: String {
+        get {
+            switch self {
+            case .btc:
+                return "BTC"
+            }
+        }
+    }
+    
+    var scheme: String {
+        get {
+            switch self {
+            case .btc:
+                return "bitcoin"
+            }
+        }
+    }
+}
+
+class BILRecieveModel: NSObject {
 	
 	var address: String
-	var volume: String
+	var amount: String
 	var coinType: CoinType
 	
-	init(address: String, volume: String, coinType: CoinType = .btc) {
+	init(address: String, amount: String, coinType: CoinType = .btc) {
 		self.address = address
-		self.volume = volume
+		self.amount = amount
 		self.coinType = coinType
 	}
 	
-	var schemeString: String {
+	var urlString: String {
 		get {
-			return "\(coinType.scheme):\(address)" + (volume.isEmpty ? "" : "?amount=\(volume)")
+			return "\(coinType.scheme):\(address)" + (amount.isEmpty ? "" : "?amount=\(amount)")
 		}
 	}
 }

@@ -56,7 +56,7 @@ class BILRecieveController: BILBaseViewController {
     }
 	
 	func setAddress(address: String) {
-		recieveModel = BILRecieveModel(address: address, volume: "")
+		recieveModel = BILRecieveModel(address: address, amount: "")
 		let scale = UIScreen.main.scale
 		let size = CGSize(width: qrCodeHeight, height: qrCodeHeight).applying(CGAffineTransform(scaleX: scale, y: scale))
 		qrCodeImageView.image = BILQRCodeHelper.generateQRCode(msg: "bitcoin:\(address)", targetSize: size)

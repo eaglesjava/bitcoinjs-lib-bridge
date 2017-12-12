@@ -190,7 +190,6 @@ extension BILQRCodeScanViewController : AVCaptureMetadataOutputObjectsDelegate
                 if let qrStr = resultObj.stringValue {
                     self.scanSession!.stopRunning()
                     DispatchQueue.main.async {
-                        self.navigationController?.popViewController(animated: true)
                         self.resultClosure?(qrStr)
                         self.resultClosure = nil
                     }

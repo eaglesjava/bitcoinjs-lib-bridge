@@ -567,6 +567,19 @@
                                             <action selector="backupLaterAction:" destination="7zA-bK-tJc" eventType="touchUpInside" id="xzZ-1x-9eo"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQP-jQ-EWn" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                        <rect key="frame" x="25" y="184" width="325" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="04o-fU-TUp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <state key="normal" title="确定">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backupLaterAction:" destination="7zA-bK-tJc" eventType="touchUpInside" id="wZl-S9-YvE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -579,12 +592,15 @@
                                     <constraint firstItem="gbd-8O-69h" firstAttribute="top" secondItem="m9A-jG-Ijq" secondAttribute="bottom" constant="15" id="NcW-dH-a5G"/>
                                     <constraint firstItem="opq-sQ-nfd" firstAttribute="top" secondItem="23E-Lb-2LD" secondAttribute="bottom" constant="20" id="OjV-15-acU"/>
                                     <constraint firstItem="ZLj-js-I3r" firstAttribute="top" secondItem="opq-sQ-nfd" secondAttribute="bottom" constant="15" id="aP2-Ef-u2h"/>
+                                    <constraint firstItem="JDI-dt-Y5K" firstAttribute="trailing" secondItem="aQP-jQ-EWn" secondAttribute="trailing" constant="25" id="bEs-b4-cjz"/>
                                     <constraint firstItem="JDI-dt-Y5K" firstAttribute="trailing" secondItem="m9A-jG-Ijq" secondAttribute="trailing" constant="25" id="f7K-zK-ZTu"/>
                                     <constraint firstItem="m9A-jG-Ijq" firstAttribute="centerX" secondItem="JDI-dt-Y5K" secondAttribute="centerX" id="klv-wy-krv"/>
                                     <constraint firstItem="ZLj-js-I3r" firstAttribute="leading" secondItem="JDI-dt-Y5K" secondAttribute="leading" constant="45" id="mCh-xQ-k3v"/>
                                     <constraint firstItem="ZLj-js-I3r" firstAttribute="centerX" secondItem="JDI-dt-Y5K" secondAttribute="centerX" id="mHM-md-E3H"/>
                                     <constraint firstItem="JDI-dt-Y5K" firstAttribute="trailing" secondItem="ZLj-js-I3r" secondAttribute="trailing" constant="45" id="pES-iy-zGO"/>
                                     <constraint firstItem="m9A-jG-Ijq" firstAttribute="top" secondItem="ZLj-js-I3r" secondAttribute="bottom" constant="30" id="qCt-9a-Tca"/>
+                                    <constraint firstItem="aQP-jQ-EWn" firstAttribute="top" secondItem="ZLj-js-I3r" secondAttribute="bottom" constant="30" id="t0H-UU-jD5"/>
+                                    <constraint firstItem="aQP-jQ-EWn" firstAttribute="leading" secondItem="JDI-dt-Y5K" secondAttribute="leading" constant="25" id="uRP-e7-M7r"/>
                                     <constraint firstItem="23E-Lb-2LD" firstAttribute="top" secondItem="JDI-dt-Y5K" secondAttribute="top" id="wVg-f2-XMg"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="JDI-dt-Y5K"/>
@@ -607,6 +623,14 @@
                         <viewLayoutGuide key="safeArea" id="Nhh-Ag-VD5"/>
                     </view>
                     <navigationItem key="navigationItem" title="创建成功" largeTitleDisplayMode="never" id="AtS-3T-a0r"/>
+                    <connections>
+                        <outlet property="backupButton" destination="m9A-jG-Ijq" id="Tt4-Ay-6OI"/>
+                        <outlet property="backupLaterButton" destination="gbd-8O-69h" id="XwU-9U-M2b"/>
+                        <outlet property="msgLabel" destination="ZLj-js-I3r" id="XUM-gN-WLe"/>
+                        <outlet property="okButton" destination="aQP-jQ-EWn" id="g45-sU-GC7"/>
+                        <outlet property="resultTitleLabel" destination="opq-sQ-nfd" id="Gsl-Zj-36k"/>
+                        <outlet property="titleLabel" destination="F0Z-yS-EMZ" id="lic-Pn-yVC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KyM-ev-XZP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

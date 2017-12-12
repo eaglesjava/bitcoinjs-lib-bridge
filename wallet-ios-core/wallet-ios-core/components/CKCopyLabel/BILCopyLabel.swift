@@ -9,6 +9,12 @@
 import UIKit
 import Toast_Swift
 
+extension UIViewController {
+    func bil_makeToast(msg: String?) {
+        view.makeToast(msg)
+    }
+}
+
 extension UIView {
     func bil_makeToast(msg: String?) {
         window?.makeToast(msg)

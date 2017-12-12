@@ -17,9 +17,17 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	enum CreateWalletType {
 		case new
 		case recover
+        case resetPassword
 		
 		func titleString() -> String {
-			return self == .new ? "创建" : "导入"
+            switch self {
+            case .new:
+                return "创建"
+            case .recover:
+                return "导入"
+            case .resetPassword:
+                return "重置"
+            }
 		}
 		
 	}
@@ -39,7 +47,8 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	var createWalletType: CreateWalletType = .new
 	var mnemonic: String? {
 		didSet {
-			createWalletType = .recover
+            guard let m = mnemonic else { return }
+            createWalletType = WalletModel.checkMnemonicIsExists(m: m) ? .resetPassword : .recover
 		}
 	}
 	var mnemonicHash: String?
@@ -175,7 +184,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
             
         }
         
-        if WalletModel.checkIDIsExists(id: walletID) {
+        if createWalletType == .new, WalletModel.checkIDIsExists(id: walletID) {
             toReturn = "钱包ID已存在"
         }
         
@@ -218,10 +227,10 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 SVProgressHUD.dismiss(withDelay: 1.2)
                 return
             }
-            SVProgressHUD.show(withStatus: "创建钱包中...")
+            SVProgressHUD.show(withStatus: "处理中...")
             let wallet = BILWalletManager.shared.newWallet()
             wallet.id = self.walletNameTextField.text!
-            wallet.resetProperties(m: m, pwd: pwd, success: { (w) in
+            wallet.resetProperties(m: m, pwd: pwd, needSave:false, success: { (w) in
                 func successFromSever(result: [String: Any]) {
                     self.mnemonicHash = wallet.mnemonicHash
                     self.createSuccess()
@@ -236,10 +245,14 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                     })
                 case .recover:
                     wallet.importWalletToServer(success: { (result) in
+                        wallet.isNeedBackup = false
                         successFromSever(result: result)
                     }, failure: { (msg, code) in
                         cleanUp(wallet: wallet, error: msg)
                     })
+                case .resetPassword:
+                    self.createSuccess()
+                    SVProgressHUD.dismiss()
                 }
             }, failure: { (errorMsg) in
                 SVProgressHUD.showError(withStatus: errorMsg)
@@ -257,6 +270,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 			BitcoinJSBridge.shared.generateMnemonic(language: .chinese, success: { (mnemonic) in
                 let str = mnemonic as! String
                 self.mnemonic = str
+                self.createWalletType = .new
 				complete(str)
 			}) { (error) in
 				SVProgressHUD.showError(withStatus: error.localizedDescription)
@@ -331,6 +345,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
         // Pass the selected object to the new view controller.
 		if segue.identifier == "BILCreateWalletSuccessSegue" {
 			let cont = segue.destination as! BILCreateWalletSuccessController
+            cont.createWalletType = createWalletType
 			cont.mnemonicHash = mnemonicHash
 		}
     }

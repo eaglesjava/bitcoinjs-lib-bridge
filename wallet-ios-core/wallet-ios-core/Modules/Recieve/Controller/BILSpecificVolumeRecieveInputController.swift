@@ -51,7 +51,7 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController {
 				showTipAlert(title: "提示", msg: "请输入大于 0 的金额")
 				return false
 			}
-			recieveModel?.volume = text
+			recieveModel?.amount = text
 			return true
 		default:
 			return true
