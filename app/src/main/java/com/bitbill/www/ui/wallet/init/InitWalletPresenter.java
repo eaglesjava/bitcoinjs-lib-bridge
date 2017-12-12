@@ -12,6 +12,7 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 
 import javax.inject.Inject;
 
@@ -211,7 +212,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         BitcoinJsWrapper.getInstance().getBitcoinMasterXPublicKey(mWallet.getSeedHex(), new BitcoinJsWrapper.JsInterface.Callback() {
             @Override
             public void call(String key, String... jsResult) {
-                getCompositeDisposable().add(getModelManager().createWallet(mWallet.getName(), jsResult[0], DeviceUtil.getDeviceId(), getDeviceToken())
+                getCompositeDisposable().add(getModelManager().createWallet(new CreateWalletRequest(mWallet.getName(), jsResult[0], DeviceUtil.getDeviceId(), getDeviceToken()))
                         .compose(applyScheduler())
                         .subscribeWith(new BaseSubcriber<ApiResponse<String>>(getMvpView()) {
                             @Override

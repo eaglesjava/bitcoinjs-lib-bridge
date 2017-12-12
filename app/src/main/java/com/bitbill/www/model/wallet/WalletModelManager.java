@@ -14,6 +14,9 @@ import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.wallet.db.WalletDb;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.WalletApi;
+import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
+import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 
 import java.util.List;
 
@@ -76,8 +79,56 @@ public class WalletModelManager extends ModelManager implements WalletModel {
         return mWalletApi.getApiHeader();
     }
 
+    /**
+     * @param createWalletRequest
+     * @return
+     */
     @Override
-    public Observable<ApiResponse<String>> createWallet(String walletId, String extendedKeys, String clientId, String deviceToken) {
-        return mWalletApi.createWallet(walletId, extendedKeys, clientId, deviceToken);
+    public Observable<ApiResponse<String>> createWallet(CreateWalletRequest createWalletRequest) {
+        return mWalletApi.createWallet(createWalletRequest);
+    }
+
+    /**
+     * 导入钱包
+     *
+     * @param importWalletRequest
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<String>> importWallet(ImportWalletRequest importWalletRequest) {
+        return mWalletApi.importWallet(importWalletRequest);
+    }
+
+    /**
+     * 检查WalletId
+     *
+     * @param walletId 钱包名称
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<String>> checkWalletId(String walletId) {
+        return mWalletApi.checkWalletId(walletId);
+    }
+
+    /**
+     * 获取walletId
+     *
+     * @param extendedKeysHash 扩展公钥MD5
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<GetWalletIdResponse>> getWalletId(String extendedKeysHash) {
+        return mWalletApi.getWalletId(extendedKeysHash);
+    }
+
+    /**
+     * 查询余额
+     *
+     * @param extendedKeysHash 扩展公钥MD5
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<String>> getBalance(String extendedKeysHash) {
+        return mWalletApi.getBalance(extendedKeysHash);
     }
 }
