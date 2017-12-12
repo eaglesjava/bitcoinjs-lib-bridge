@@ -66,8 +66,8 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     
 	@IBAction func nextAction(_ sender: Any) {
         
-        let alertTitle = "备份失败"
-        let alertMsg = "请重新检查您的助记词是否正确"
+        let alertTitle = NSLocalizedString("导入失败", comment: "")
+        let alertMsg = NSLocalizedString("请重新检查您的助记词是否正确", comment: "")
         
         guard let text = textView.text, !text.isEmpty else {
             self.textView.becomeFirstResponder()
