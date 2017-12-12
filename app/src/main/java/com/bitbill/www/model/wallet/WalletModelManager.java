@@ -14,7 +14,11 @@ import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.wallet.db.WalletDb;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.WalletApi;
+import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
+import com.bitbill.www.model.wallet.network.entity.GetBalanceResponse;
+import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 
@@ -102,33 +106,33 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     /**
      * 检查WalletId
      *
-     * @param walletId 钱包名称
+     * @param checkWalletIdRequest
      * @return
      */
     @Override
-    public Observable<ApiResponse<String>> checkWalletId(String walletId) {
-        return mWalletApi.checkWalletId(walletId);
+    public Observable<ApiResponse<String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest) {
+        return mWalletApi.checkWalletId(checkWalletIdRequest);
     }
 
     /**
      * 获取walletId
      *
-     * @param extendedKeysHash 扩展公钥MD5
+     * @param getWalletIdRequest 扩展公钥MD5
      * @return
      */
     @Override
-    public Observable<ApiResponse<GetWalletIdResponse>> getWalletId(String extendedKeysHash) {
-        return mWalletApi.getWalletId(extendedKeysHash);
+    public Observable<ApiResponse<GetWalletIdResponse>> getWalletId(GetWalletIdRequest getWalletIdRequest) {
+        return mWalletApi.getWalletId(getWalletIdRequest);
     }
 
     /**
      * 查询余额
      *
-     * @param extendedKeysHash 扩展公钥MD5
+     * @param getBalanceRequest
      * @return
      */
     @Override
-    public Observable<ApiResponse<String>> getBalance(String extendedKeysHash) {
-        return mWalletApi.getBalance(extendedKeysHash);
+    public Observable<ApiResponse<GetBalanceResponse>> getBalance(GetBalanceRequest getBalanceRequest) {
+        return mWalletApi.getBalance(getBalanceRequest);
     }
 }

@@ -1,17 +1,20 @@
 package com.bitbill.www.ui.wallet.importing;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
-import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.base.view.dialog.BaseConfirmDialog;
+import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.ui.wallet.init.InitWalletSuccessActivity;
+import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
+import com.bitbill.www.ui.wallet.init.ResetPwdActivity;
 
 import javax.inject.Inject;
 
@@ -27,18 +30,16 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @Inject
     ImportWalletMvpPresenter<WalletModel, ImportWalletMvpView> importWalletMvpPresenter;
-    private Wallet mWallet;//传递过来的钱包对象
 
-    public static void start(Context context, Wallet wallet) {
+    public static void start(Context context) {
         Intent intent = new Intent(context, ImportWalletActivity.class);
-        intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
         context.startActivity(intent);
     }
 
     @Override
-    public void importWalletSuccess() {
+    public void importWalletSuccess(Wallet wallet) {
         //进入初始化钱包成功界面
-        InitWalletSuccessActivity.start(ImportWalletActivity.this, getWallet(), false);
+        CreateWalletIdActivity.start(ImportWalletActivity.this, wallet, false);
     }
 
     @Override
@@ -48,18 +49,8 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
     }
 
     @Override
-    public Wallet getWallet() {
-        return mWallet;
-    }
-
-    @Override
     public String getMnemonic() {
-        return etInputMnemonic.getText().toString();
-    }
-
-    @Override
-    public void getWalletInfoFail() {
-        showMessage(R.string.error_get_wallet_info_fail);
+        return etInputMnemonic.getText().toString().trim();
     }
 
     @Override
@@ -70,6 +61,24 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
     @Override
     public void inputMnemonicError() {
         showMessage(R.string.error_input_menemonic_fail);
+    }
+
+    @Override
+    public void hasExsistMnemonic(Wallet wallet) {
+        //弹出对话框
+        MessageConfirmDialog.newInstance("钱包已存在", "是否重置密码", false).setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
+                    //传递过去
+                    ResetPwdActivity.start(ImportWalletActivity.this, wallet);
+                    finish();
+                } else {
+                    //取消
+                    finish();
+                }
+            }
+        }).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
     }
 
     @Override
@@ -94,7 +103,6 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @Override
     public void initData() {
-        mWallet = ((Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET));
     }
 
     @Override
@@ -104,7 +112,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @OnClick(R.id.btn_next)
     public void onViewClicked() {
-        getMvpPresenter().importWallet(mWallet);
+        getMvpPresenter().checkMnemonic();
     }
 
     @Override

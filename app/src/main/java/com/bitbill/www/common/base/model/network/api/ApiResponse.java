@@ -5,7 +5,8 @@ package com.bitbill.www.common.base.model.network.api;
  */
 public class ApiResponse<T> {
 
-    public static final int STATUS_CODE_SUCCESS = 0;
+    public static final int STATUS_CODE_SUCCESS = 0;//成功
+    public static final int STATUS_WALLET_ID_EXSIST = -40;//钱包id已存在
     /**
      * data : null
      * errorLog : null
@@ -48,5 +49,13 @@ public class ApiResponse<T> {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public boolean isSuccess() {
+        return status == STATUS_CODE_SUCCESS;
+    }
+
+    public boolean isWalletIdExsist() {
+        return status == STATUS_WALLET_ID_EXSIST;
     }
 }

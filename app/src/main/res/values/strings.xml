@@ -133,4 +133,11 @@
     <string name="action_send_scan">扫码</string>
     <string name="R.string.toast_copy_address_success">已复制地址</string>
     <string name="guide_section_three">添加联系人 一键转账</string>
+    <string name="error_wallet_id_exsist">钱包id已存在</string>
+    <string name="title_activity_create_wallet_id">创建钱包ID</string>
+    <string name="title_activity_wallet_init">创建钱包密码</string>
+    <string name="error_wallet_id_check_fail">检查钱包ID失败</string>
+    <string name="title_activity_reset_pwd">重置密码</string>
+    <string name="input_trade_pwd_before">请输入原交易密码</string>
+    <string name="btn_reset_pwd">重置密码</string>
 </resources>

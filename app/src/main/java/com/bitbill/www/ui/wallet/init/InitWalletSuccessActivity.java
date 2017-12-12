@@ -97,6 +97,7 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity {
                 break;
         }
         //关闭初始化钱包流程
+        AppManager.get().finishActivity(CreateWalletIdActivity.class);
         AppManager.get().finishActivity(InitWalletActivity.class);
         if (!isCreateWallet) {
             AppManager.get().finishActivity(ImportWalletActivity.class);

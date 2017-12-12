@@ -13,7 +13,7 @@ public class ImportWalletRequest {
      */
 
     private String walletId;
-    private String extendedKeys;
+    private String extendedKeys;//扩展公钥
     private String clientId;
     private String deviceToken;
 

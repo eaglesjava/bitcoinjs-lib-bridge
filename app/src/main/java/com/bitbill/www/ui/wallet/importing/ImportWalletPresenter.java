@@ -1,12 +1,17 @@
 package com.bitbill.www.ui.wallet.importing;
 
+import com.androidnetworking.error.ANError;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
+import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
+import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 
 import javax.inject.Inject;
 
@@ -22,63 +27,118 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
         super(model, schedulerProvider, compositeDisposable);
     }
 
+    @Override
+    public void checkMnemonic() {
+        if (!isValidMnemonic()) {
+            return;
+        }
+        getMvpView().hideLoading();
+        String mnemonicHash = StringUtils.getSHA256Hex(getMvpView().getMnemonic());
+        getCompositeDisposable().add(getModelManager().getWalletByMnemonicHash(mnemonicHash)
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<Wallet>() {
+                    @Override
+                    public void onNext(Wallet wallet) {
+                        super.onNext(wallet);
+                        if (wallet != null) {
+                            //助记词已存在
+                            getMvpView().hasExsistMnemonic(wallet);
+                            getMvpView().hideLoading();
+                        } else {
+                            importWallet();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (e instanceof NullPointerException) {
+                            // Callable returned null
+                            importWallet();
+                        } else {
+                            getMvpView().importWalletFail();
+                            getMvpView().hideLoading();
+                        }
+
+                    }
+                }));
+    }
+
     /**
      * import a wallet by the mnemonic
-     *
-     * @param wallet
      */
     @Override
-    public void importWallet(Wallet wallet) {
-        if (!isValidWallet() || !isValidMnemonic()) {
+    public void importWallet() {
+        if (!isValidMnemonic()) {
+            getMvpView().hideLoading();
             return;
         }
         // 校验助记词是否正确
-        BitcoinJsWrapper.getInstance().validateMnemonicAndReturnSeedHex(getMvpView().getMnemonic(), wallet.getTradePwd(), new BitcoinJsWrapper.JsInterface.Callback() {
-            @Override
-            public void call(String key, String... jsResult) {
-                if ("true".equals(jsResult[0])) {
-                    //更新wallet对象
-                    StringUtils.encryptMnemonicAndSeedHex(getMvpView().getMnemonic(), jsResult[1], wallet.getTradePwd(), wallet);
-                    getCompositeDisposable().add(getModelManager()
-                            .updateWallet(wallet)
-                            .compose(applyScheduler())
-                            .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {
-                                @Override
-                                public void onNext(Boolean aBoolean) {
-                                    super.onNext(aBoolean);
-                                    if (!isViewAttached()) {
-                                        return;
-                                    }
-                                    if (aBoolean) {
-                                        getMvpView().importWalletSuccess();
-                                    } else {
-                                        getMvpView().importWalletFail();
-                                    }
-                                }
+        try {
+            BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(getMvpView().getMnemonic(), new BitcoinJsWrapper.JsInterface.Callback() {
+                @Override
+                public void call(String key, String... jsResult) {
+                    if (jsResult != null && "true".equals(jsResult[0]) && jsResult.length > 2) {
+                        //更新wallet对象
+                        String XPublicKey = jsResult[2];
+                        String extendedKeysHash = EncryptUtils.encryptMD5ToString(XPublicKey);
+                        Wallet wallet = new Wallet();
+                        wallet.setXPublicKey(XPublicKey);
+                        getCompositeDisposable().add(getModelManager()
+                                .getWalletId(new GetWalletIdRequest(extendedKeysHash))
+                                .compose(applyScheduler())
+                                .subscribeWith(new BaseSubcriber<ApiResponse<GetWalletIdResponse>>() {
+                                    @Override
+                                    public void onNext(ApiResponse<GetWalletIdResponse> apiResponse) {
+                                        super.onNext(apiResponse);
+                                        if (!isViewAttached()) {
+                                            return;
+                                        }
+                                        if (apiResponse != null) {
+                                            if (apiResponse.getStatus() == ApiResponse.STATUS_CODE_SUCCESS) {
+                                                if (apiResponse.getData() != null && StringUtils.isNotEmpty(apiResponse.getData().getWalletId())) {
+                                                    wallet.setName(apiResponse.getData().getWalletId());
+                                                }
+                                                getMvpView().importWalletSuccess(wallet);
+                                            } else {
+                                                getMvpView().importWalletFail();
+                                            }
 
-                                @Override
-                                public void onError(Throwable e) {
-                                    super.onError(e);
-                                    if (!isViewAttached()) {
-                                        return;
+                                        }
+                                        getMvpView().hideLoading();
                                     }
-                                }
-                            })
-                    );
-                } else {
-                    getMvpView().inputMnemonicError();
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        super.onError(e);
+                                        if (!isViewAttached()) {
+                                            return;
+                                        }
+                                        getMvpView().hideLoading();
+
+                                        // handle error here
+                                        if (e instanceof ANError) {
+                                            ANError anError = (ANError) e;
+                                            handleApiError(anError);
+                                        }
+                                    }
+                                })
+                        );
+                    } else {
+                        getMvpView().inputMnemonicError();
+                        getMvpView().hideLoading();
+                    }
                 }
-            }
-        });
-
-    }
-
-    public boolean isValidWallet() {
-        if (getMvpView().getWallet() == null) {
-            getMvpView().getWalletInfoFail();
-            return false;
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            getMvpView().inputMnemonicError();
+            getMvpView().hideLoading();
         }
-        return true;
+
     }
 
     public boolean isValidMnemonic() {

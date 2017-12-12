@@ -8,10 +8,6 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
  */
 public interface InitWalletMvpView extends MvpView {
 
-    void initWalletSuccess(Wallet wallet);
-
-    void initWalletFail();
-
     void createWalletSuccess();
 
     void createWalletFail();
@@ -30,13 +26,13 @@ public interface InitWalletMvpView extends MvpView {
 
     void invalidTradePwd();
 
-    void requireWalletId();
+    Wallet getWallet();
+
+    boolean isCreateWallet();
+
+    void initWalletInfoFail();
 
     void invalidWalletId();
 
-    void requireWalletIdLength();
-
-    Wallet getWallet();
-
-    boolean isFromGuide();
+    boolean isResetPwd();
 }

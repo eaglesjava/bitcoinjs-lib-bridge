@@ -18,8 +18,9 @@ import com.bitbill.www.common.base.view.widget.WalletView;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
+import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import com.bitbill.www.ui.wallet.info.WalletInfoActivity;
-import com.bitbill.www.ui.wallet.init.InitWalletActivity;
+import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
 
 import java.util.List;
 
@@ -102,7 +103,7 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
             @Override
             public void onCreateWallet(View view) {
                 //跳转到创建钱包界面
-                InitWalletActivity.start(getBaseActivity(), true, false);
+                CreateWalletIdActivity.start(getBaseActivity(), null, true);
                 if (mWalletMenu.isShowing()) {
                     mWalletMenu.dismiss();
                 }
@@ -111,7 +112,7 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
             @Override
             public void onImportWallet(View view) {
                 //跳转到导入钱包界面
-                InitWalletActivity.start(getBaseActivity(), false, false);
+                ImportWalletActivity.start(getBaseActivity());
                 if (mWalletMenu.isShowing()) {
                     mWalletMenu.dismiss();
                 }

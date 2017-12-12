@@ -18,7 +18,7 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.base.view.widget.FocusedCheckedTextView;
-import com.bitbill.www.model.entity.eventbus.BackupSuccessEvent;
+import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -188,7 +188,7 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
 
         //跳转到备份成功界面
         BackupWalletSuccessActivity.start(BackupWalletConfirmActivity.this);
-        EventBus.getDefault().postSticky(new BackupSuccessEvent(getWallet()));
+        EventBus.getDefault().postSticky(new WalletUpdateEvent(getWallet()));
         finish();
     }
 

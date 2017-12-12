@@ -23,6 +23,7 @@ public final class AppConstants {
     public static final String IS_BTC_RECOD = "is_btc_record";
     public static final String ARG_WALLET = "arg_wallet";
     public static final String EXTRA_IS_FROM_GUIDE = "extra_is_from_guide";
+    public static final String EXTRA_IS_RESET_PWD = "is_reset_pwd";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

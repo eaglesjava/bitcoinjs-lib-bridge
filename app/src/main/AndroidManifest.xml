@@ -76,6 +76,15 @@
             android:label="@string/title_activity_send_success"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".ui.wallet.init.CreateWalletIdActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".ui.wallet.init.ResetPwdActivity"
+            android:label="@string/title_activity_reset_pwd"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

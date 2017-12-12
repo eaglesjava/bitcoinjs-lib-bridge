@@ -8,17 +8,15 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
  */
 public interface ImportWalletMvpView extends MvpView {
 
-    void importWalletSuccess();
+    void importWalletSuccess(Wallet wallet);
 
     void importWalletFail();
 
-    Wallet getWallet();
-
     String getMnemonic();
-
-    void getWalletInfoFail();
 
     void getMnemonicFail();
 
     void inputMnemonicError();
+
+    void hasExsistMnemonic(Wallet wallet);
 }

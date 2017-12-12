@@ -15,8 +15,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.model.app.AppModel;
-import com.bitbill.www.model.entity.eventbus.BackupSuccessEvent;
-import com.bitbill.www.model.entity.eventbus.CreateSuccessEvent;
+import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
@@ -143,18 +142,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     }
 
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onWalletBackupSuccess(BackupSuccessEvent walletBackupSuccess) {
-        BackupSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(BackupSuccessEvent.class);
-        //重新加载钱包信息
-        if (mAssetFragment != null) {
-            mAssetFragment.lazyData();
-        }
-    }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onWalletBackupSuccess(CreateSuccessEvent createSuccessEvent) {
-        CreateSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(CreateSuccessEvent.class);
+    public void onWalletBackupSuccess(WalletUpdateEvent walletUpdateEvent) {
+        WalletUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletUpdateEvent.class);
         //重新加载钱包信息
         if (mAssetFragment != null) {
             mAssetFragment.lazyData();

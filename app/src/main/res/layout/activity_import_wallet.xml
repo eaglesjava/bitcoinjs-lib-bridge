@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="25dp"
+        android:focusable="true"
         android:hint="@string/hint_click_input_please"/>
 
     <Button

@@ -17,7 +17,8 @@ import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.model.app.AppModel;
-import com.bitbill.www.ui.wallet.init.InitWalletActivity;
+import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
+import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
 import com.rd.PageIndicatorView;
 
 import javax.inject.Inject;
@@ -129,12 +130,12 @@ public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements Ba
         switch (view.getId()) {
             case R.id.btn_create_wallet:
                 //跳转到创建钱包界面
-                InitWalletActivity.start(GuideActivity.this, true, true);
+                CreateWalletIdActivity.start(GuideActivity.this, null, true);
                 finish();
                 break;
             case R.id.btn_import_wallet:
                 //跳转到导入钱包界面
-                InitWalletActivity.start(GuideActivity.this, false, true);
+                ImportWalletActivity.start(GuideActivity.this);
                 finish();
                 break;
         }

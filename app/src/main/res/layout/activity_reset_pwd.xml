@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +10,7 @@
               android:focusableInTouchMode="true"
               android:gravity="center_horizontal"
               android:orientation="vertical"
-              tools:context="com.bitbill.www.ui.wallet.init.InitWalletActivity">
+              tools:context="com.bitbill.www.ui.wallet.init.ResetPwdActivity">
 
     <ScrollView
         android:id="@+id/wallet_form"
@@ -22,6 +25,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <com.bitbill.www.common.base.view.widget.EditTextWapper
+                android:id="@+id/etw_trade_pwd_before"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:inputHint="@string/hint_trade_pwd"
+                app:inputPaddingBottom="10dp"
+                app:inputTitle="@string/input_trade_pwd_before"
+                app:inputType="inputPasswordHide"
+                />
 
             <com.bitbill.www.common.base.view.widget.EditTextWapper
                 android:id="@+id/etw_trade_pwd"
@@ -53,10 +67,10 @@
                 android:text="@string/hint_back_up_pwd"/>
 
             <Button
-                android:id="@+id/btn_start"
+                android:id="@+id/btn_reset_pwd"
                 style="@style/Button.Blue"
                 android:layout_marginTop="30dp"
-                android:text="@string/btn_start_create"/>
+                android:text="@string/btn_reset_pwd"/>
 
         </LinearLayout>
     </ScrollView>

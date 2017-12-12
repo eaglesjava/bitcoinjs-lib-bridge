@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.utils.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -172,13 +173,6 @@ public class EditTextWapper extends FrameLayout {
         getEtText().setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus && !TextUtils.isEmpty(mBottomHint)) {
-                    //弹出底部提示
-                    bottomHintTextView.setVisibility(VISIBLE);
-                } else {
-                    bottomHintTextView.setVisibility(GONE);
-                }
-
                 if (isError()) {
                     lineView.setBackgroundColor(getResources().getColor(ERROR_TEXT_COLOR));
                 } else if (hasFocus) {
@@ -263,6 +257,11 @@ public class EditTextWapper extends FrameLayout {
         return getEtText().getText().toString();
     }
 
+    public EditTextWapper setText(String text) {
+        getEtText().setText(text);
+        return this;
+    }
+
     public void setInputPwdStatusVisible(boolean inputPwdStatusVisible) {
         mInputPwdStatusVisible = inputPwdStatusVisible;
         psvStatus.setVisibility(inputPwdStatusVisible ? View.VISIBLE : View.GONE);
@@ -285,7 +284,15 @@ public class EditTextWapper extends FrameLayout {
 
     public EditTextWapper setBottomHint(String bottomHint) {
         mBottomHint = bottomHint;
+        bottomHintTextView.setVisibility(StringUtils.isNotEmpty(bottomHint) ? VISIBLE : GONE);
         bottomHintTextView.setText(mBottomHint);
         return this;
+    }
+
+    public void setEditable(boolean editable) {
+        getEtText().setFocusable(editable);
+        getEtText().setFocusableInTouchMode(editable);
+        getEtText().setLongClickable(editable);
+        getEtText().setInputType(editable ? InputType.TYPE_CLASS_TEXT : InputType.TYPE_NULL);
     }
 }

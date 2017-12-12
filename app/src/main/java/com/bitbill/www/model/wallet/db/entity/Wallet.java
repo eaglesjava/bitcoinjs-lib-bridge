@@ -48,6 +48,9 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "is_default")
     private boolean isDefault;
 
+    @Property(nameInDb = "xpublic_key")
+    private String XPublicKey;//十六进制字符串
+
     @Transient
     private String mnemonic;
     @Transient
@@ -59,10 +62,10 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Transient
     private boolean selected;
 
-    @Generated(hash = 2135389848)
+    @Generated(hash = 425995326)
     public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash,
                   long lastAddressIndex, String encryptSeed, String seedHexHash, boolean isBackuped,
-                  long createdAt, long updatedAt, boolean isDefault) {
+                  long createdAt, long updatedAt, boolean isDefault, String XPublicKey) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
@@ -74,6 +77,7 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.isDefault = isDefault;
+        this.XPublicKey = XPublicKey;
     }
 
     @Generated(hash = 1197745249)
@@ -221,4 +225,14 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     public void setIsBackuped(boolean isBackuped) {
         this.isBackuped = isBackuped;
     }
+
+    public String getXPublicKey() {
+        return XPublicKey;
+    }
+
+    public Wallet setXPublicKey(String XPublicKey) {
+        this.XPublicKey = XPublicKey;
+        return this;
+    }
+
 }

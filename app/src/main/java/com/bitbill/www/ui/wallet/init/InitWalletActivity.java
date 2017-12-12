@@ -12,13 +12,11 @@ import android.widget.ScrollView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.dialog.SupportCoinDialog;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
-import com.bitbill.www.model.entity.eventbus.CreateSuccessEvent;
+import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -33,10 +31,6 @@ import butterknife.OnClick;
  */
 public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresenter> implements InitWalletMvpView {
 
-    public static final int CREATE_WALLET = 0;
-    public static final int IMPORT_WALLET = 1;
-    @BindView(R.id.etw_wallet_name)
-    EditTextWapper etwWalletName;
     @BindView(R.id.etw_trade_pwd)
     EditTextWapper etwTradePwd;
     @BindView(R.id.etw_trade_pwd_confirm)
@@ -54,15 +48,14 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     private EditTextWapper focusView;
     private boolean cancel;
     private Wallet mWallet;
-    private boolean isFromGuide;
+    private boolean isResetPwd;
 
-    public static void start(Context context, boolean isCreateWallet, boolean isFromGuide) {
+    public static void start(Context context, Wallet wallet, boolean isCreateWallet) {
         Intent intent = new Intent(context, InitWalletActivity.class);
         intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
-        intent.putExtra(AppConstants.EXTRA_IS_FROM_GUIDE, isFromGuide);
+        intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
         context.startActivity(intent);
     }
-
 
     @Override
     public void injectComponent() {
@@ -110,8 +103,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
                 }
             }
         });
-        SupportCoinDialog.newInstance("目前支持以下币种", true, "我知道了")
-                .show(getSupportFragmentManager(), SupportCoinDialog.TAG);
         btnStart.setText(isCreateWallet ? R.string.btn_start_create : R.string.btn_start_import);
 
     }
@@ -120,7 +111,8 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     protected void handleIntent(Intent intent) {
 
         isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
-        isFromGuide = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_GUIDE, false);
+        isResetPwd = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_RESET_PWD, false);
+        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
     }
 
     @Override
@@ -144,8 +136,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     private void attemptCreateOrImportWallet() {
-        // Reset errors.
-        etwWalletName.removeError();
+
         etwTradePwd.removeError();
         etwTradePwdConfirm.removeError();
 
@@ -164,7 +155,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Override
     public String getWalletId() {
-        return etwWalletName.getText();
+        return mWallet.getName();
     }
 
     public String getTradePwd() {
@@ -202,30 +193,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public void requireWalletId() {
-        etwWalletName.setError(R.string.error_wallet_id_required);
-        focusView = etwWalletName;
-        cancel = true;
-
-    }
-
-    @Override
-    public void invalidWalletId() {
-        etwWalletName.setError(R.string.error_invalid_wallet_id);
-        focusView = etwWalletName;
-        cancel = true;
-
-    }
-
-    @Override
-    public void requireWalletIdLength() {
-
-        etwWalletName.setError(R.string.error_wallet_id_length_required);
-        focusView = etwWalletName;
-        cancel = true;
-    }
-
-    @Override
     public Wallet getWallet() {
         return mWallet;
     }
@@ -235,37 +202,16 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public void initWalletSuccess(Wallet wallet) {
-        this.mWallet = wallet;
-        if (!isCreateWallet) {
-            //跳转到导入钱包流程
-            ImportWalletActivity.start(this, mWallet);
-        } else {
-            getMvpPresenter().createMnemonic(mWallet);
-        }
-    }
-
-    @Override
-    public void initWalletFail() {
-        // TODO: 2017/11/21 弹出创建钱包失败提示
-        showMessage("钱包创建失败，请重试");
-    }
-
-    @Override
     public void createWalletSuccess() {
-        if (isCreateWallet) {
-            //跳转到穿件钱包成功界面
-            InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);
-            EventBus.getDefault().postSticky(new CreateSuccessEvent());
-        }
+        //跳转到穿件钱包成功界面
+        InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);
+        EventBus.getDefault().postSticky(new WalletUpdateEvent());
     }
 
     @Override
     public void createWalletFail() {
         // TODO: 2017/11/21 弹出创建钱包失败提示
         showMessage("钱包创建失败，请重试");
-        // TODO: 2017/12/5 just for test
-        finish();
     }
 
     @Override
@@ -274,8 +220,25 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public boolean isFromGuide() {
-        return isFromGuide;
+    public boolean isCreateWallet() {
+        return isCreateWallet;
+    }
+
+    @Override
+    public void initWalletInfoFail() {
+
+        showMessage("初始化钱包失败，请重试");
+    }
+
+    @Override
+    public void invalidWalletId() {
+
+        showMessage("获取钱包信息失败，请重试");
+    }
+
+    @Override
+    public boolean isResetPwd() {
+        return isResetPwd;
     }
 }
 
