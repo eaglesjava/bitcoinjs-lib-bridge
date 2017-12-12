@@ -13,7 +13,9 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 	@IBOutlet weak var tableView: UITableView!
 	fileprivate let cellID = "BILChooseWalletCell"
 	
-	fileprivate var wallets = [WalletModel]()
+    fileprivate var wallets: [WalletModel] = {
+        return BILWalletManager.shared.wallets
+    }()
 	fileprivate var currentSelectedIndex = 0
 	
 	fileprivate var didSelectClosure: ((WalletModel) -> Void)?
@@ -22,7 +24,6 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		wallets = BILWalletManager.shared.wallets
 		tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
     }
 
