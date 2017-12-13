@@ -228,13 +228,28 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 return
             }
             SVProgressHUD.show(withStatus: "处理中...")
-            let wallet = BILWalletManager.shared.newWallet()
+            
+            var localWallet = WalletModel.fetch(mnemonicHash: m.md5())
+            
+            if localWallet == nil {
+                localWallet = BILWalletManager.shared.newWallet()
+            }
+            
+            guard let wallet = localWallet else {
+                return
+            }
+            
             wallet.id = self.walletNameTextField.text!
             wallet.resetProperties(m: m, pwd: pwd, needSave:false, success: { (w) in
                 func successFromSever(result: [String: Any]) {
-                    self.mnemonicHash = wallet.mnemonicHash
-                    self.createSuccess()
-                    SVProgressHUD.dismiss()
+                    do {
+                        try BILWalletManager.shared.saveWallets()
+                        self.mnemonicHash = wallet.mnemonicHash
+                        self.createSuccess()
+                        SVProgressHUD.dismiss()
+                    } catch {
+                        cleanUp(wallet: wallet, error: error.localizedDescription)
+                    }
                 }
                 switch self.createWalletType {
                 case .new:
@@ -251,8 +266,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                         cleanUp(wallet: wallet, error: msg)
                     })
                 case .resetPassword:
-                    self.createSuccess()
-                    SVProgressHUD.dismiss()
+                    successFromSever(result: [:])
                 }
             }, failure: { (errorMsg) in
                 SVProgressHUD.showError(withStatus: errorMsg)
