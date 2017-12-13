@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILSendInputAmountController: BILBaseViewController {
+class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
     
     let chooseWalletSegue = "BILInputToChooseWalletSegue"
     
@@ -31,6 +31,29 @@ class BILSendInputAmountController: BILBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard var text = textField.text else { return true }
+        print(text)
+        let rangeLocation =  text.index(text.startIndex, offsetBy: range.location)
+        if range.length == 0 {
+            text.insert(contentsOf: string, at:rangeLocation)
+        } else {
+            let upperLocation = text.index(rangeLocation, offsetBy: range.length)
+            text.removeSubrange(rangeLocation..<upperLocation)
+        }
+        print("\(text)  \(range)    \(string)")
+        
+        if text.contains(".") {
+            let array = text.components(separatedBy: ".")
+            if array.count > 2 {
+                return false
+            }
+            let decimalPlace = array[1]
+            return decimalPlace.count <= "\(BTC_SATOSH)".count - 1
+        }
+        
+        return true
+    }
 
     // MARK: - Navigation
 

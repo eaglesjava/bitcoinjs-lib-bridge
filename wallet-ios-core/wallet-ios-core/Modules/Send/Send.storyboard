@@ -15,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--发送-->
+        <!--Send-->
         <scene sceneID="B0x-1l-HpE">
             <objects>
-                <viewController title="发送" id="1bf-2n-T7s" customClass="BILSendController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="发送" id="1bf-2n-T7s" userLabel="Send" customClass="BILSendController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i4h-D8-kkA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <outlet property="delegate" destination="Wgi-wN-8Lj" id="Epz-sL-xSw"/>
+                                            <outlet property="delegate" destination="Wgi-wN-8Lj" id="a98-jz-uuL"/>
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFg-wi-GIZ">
@@ -114,6 +114,7 @@
                                     <constraint firstItem="VFg-wi-GIZ" firstAttribute="leading" secondItem="Wgi-wN-8Lj" secondAttribute="leading" id="xYL-Sg-HUB"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="delegate" destination="1bf-2n-T7s" id="l46-Lp-bhY"/>
                                     <outlet property="line" destination="VFg-wi-GIZ" id="hXQ-OE-BAs"/>
                                     <outlet property="textField" destination="FtQ-ul-LSb" id="Z7W-Du-d9t"/>
                                 </connections>
@@ -168,7 +169,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="glj-9L-kHX">
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="60" translatesAutoresizingMaskIntoConstraints="NO" id="glj-9L-kHX">
                                 <rect key="frame" x="25" y="94" width="234" height="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="DINCond-Bold" family="DINCond-Bold" pointSize="60"/>
@@ -176,6 +177,9 @@
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUa-cr-pb8">
                                 <rect key="frame" x="278.5" y="137.5" width="71.5" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="sV8-FW-uWB"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -263,14 +267,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UEb-zw-ief">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UEb-zw-ief">
                                 <rect key="frame" x="25" y="94" width="233.5" height="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="DINCond-Bold" family="DINCond-Bold" pointSize="60"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="UGK-9K-l5J" id="v05-iU-4zU"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeR-cH-OoK">
                                 <rect key="frame" x="278.5" y="137.5" width="71.5" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="vzE-fQ-maf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -692,6 +702,6 @@
         <image name="icon_send_h" width="23" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OJD-0X-kpj"/>
+        <segue reference="wL4-ft-O7m"/>
     </inferredMetricsTieBreakers>
 </document>
