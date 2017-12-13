@@ -144,8 +144,8 @@ public class SendFragment extends BaseLazyFragment {
         mFragmentAdapter = new FragmentAdapter(getChildFragmentManager());
         mBtcSendFrg = BtcSendFragment.newInstance();
         mFragmentAdapter.addItem("btc", mBtcSendFrg);
-        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
+        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         viewPager.setAdapter(mFragmentAdapter);
         tabs.setupWithViewPager(viewPager);
         //禁止tab选择

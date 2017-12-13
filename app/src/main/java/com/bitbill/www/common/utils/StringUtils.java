@@ -37,6 +37,8 @@ public class StringUtils {
             .compile("\\d{11}");// 手机号码11位
     private final static Pattern WALLET_ID = Pattern
             .compile("^[a-zA-Z][0-9a-zA-Z_]{5,19}$");//6-20位 以字母开头，支持字母、数字和"_”
+    private final static Pattern MNEMONIC = Pattern
+            .compile(" +");//空格分隔
     private final static Pattern EMAILER = Pattern
             .compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
     private final static Pattern NUMBER_STR = Pattern
@@ -793,8 +795,8 @@ public class StringUtils {
      */
     public static String cutWalletName(String name) {
         if (isEmpty(name)) return "";
-        if (name.length() <= 16) return name;
-        return name.substring(0, 16) + "...";
+        if (name.length() <= 12) return name;
+        return name.substring(0, 12) + "..";
     }
 
     /**
@@ -810,5 +812,9 @@ public class StringUtils {
         // 得到剪贴板管理器
         ClipboardManager cmb = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         cmb.setText(content.trim());
+    }
+
+    public static boolean isValidMnemonic(String mnemonic) {
+        return !isEmpty(mnemonic);
     }
 }

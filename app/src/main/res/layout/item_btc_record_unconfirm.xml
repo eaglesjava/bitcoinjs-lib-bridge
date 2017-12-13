@@ -3,8 +3,11 @@
                 android:id="@+id/rl_item_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp">
+                android:paddingBottom="8dp"
+                android:paddingLeft="@dimen/activity_padding"
+                android:paddingRight="@dimen/activity_padding"
+                android:paddingTop="8dp"
+    >
 
     <ImageView
         android:id="@+id/iv_status"

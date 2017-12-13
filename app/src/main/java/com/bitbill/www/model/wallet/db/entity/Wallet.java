@@ -200,16 +200,6 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         return this;
     }
 
-    public boolean isDefault() {
-        return isDefault;
-    }
-
-    public Wallet setDefault(boolean aDefault) {
-        isDefault = aDefault;
-        return this;
-    }
-
-
     public boolean getIsDefault() {
         return this.isDefault;
     }

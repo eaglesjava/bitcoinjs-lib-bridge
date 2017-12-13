@@ -73,9 +73,9 @@ public class WalletInfoActivity extends BaseToolbarActivity implements BtcRecord
      */
     private void setUpViewPager() {
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
-        mFragmentAdapter.addItem("btc", BtcRecordFragment.newInstance(true));
-        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
+        mFragmentAdapter.addItem("btc", BtcRecordFragment.newInstance());
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
+        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         mViewPager.setAdapter(mFragmentAdapter);
         tabs.setupWithViewPager(mViewPager);  //禁止tab选择
         LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
@@ -90,7 +90,7 @@ public class WalletInfoActivity extends BaseToolbarActivity implements BtcRecord
 
     @Override
     public void initData() {
-        setTitle(mWallet.getName() + "的钱包");
+        setTitle(mWallet.getName() + " 的钱包");
     }
 
     @Override

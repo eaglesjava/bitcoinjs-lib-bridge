@@ -1,14 +1,14 @@
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                              xmlns:tools="http://schemas.android.com/tools"
-                                              android:id="@+id/refresh_layout"
-                                              android:layout_width="match_parent"
-                                              android:layout_height="match_parent">
+<com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
+                                                              xmlns:tools="http://schemas.android.com/tools"
+                                                              android:id="@+id/refresh_layout"
+                                                              android:layout_width="match_parent"
+                                                              android:layout_height="match_parent">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        tools:context="com.bitbill.www.ui.main.AssetFragment">
+        tools:context="com.bitbill.www.ui.main.asset.AssetFragment">
 
 
         <LinearLayout
@@ -79,43 +79,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_asset_eth"/>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/Text.Crypto"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/text_asset_eth"
-                            android:textAllCaps="true"
-                            android:textColor="@color/white_30"/>
-
-                        <TextView
-                            style="@style/Text.Asset"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/text_default_amount"
-                            android:textColor="@color/white_30"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -154,12 +117,49 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_asset_eth"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Text.Crypto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_asset_eth"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white_30"/>
+
+                        <TextView
+                            style="@style/Text.Asset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_default_amount"
+                            android:textColor="@color/white_30"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
 
             <fragment
                 android:id="@+id/frg_btc_record"
-                class="com.bitbill.www.ui.wallet.info.BtcRecordFragment"
+                class="com.bitbill.www.ui.main.asset.BtcUnconfirmFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -217,4 +217,4 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-</android.support.v4.widget.SwipeRefreshLayout>
+</com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh>

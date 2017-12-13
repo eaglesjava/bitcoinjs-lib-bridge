@@ -18,9 +18,10 @@ import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.bitbill.www.ui.guide.GuideActivity;
+import com.bitbill.www.ui.main.asset.AssetFragment;
+import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
-import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements NavigationView.OnNavigationItemSelectedListener, MainMvpView, BtcRecordFragment.OnTransactionRecordItemClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MainMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener {
 
     @Inject
     MainMvpPresenter<AppModel, MainMvpView> mMainMvpPresenter;

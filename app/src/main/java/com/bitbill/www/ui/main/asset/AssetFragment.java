@@ -1,4 +1,4 @@
-package com.bitbill.www.ui.main;
+package com.bitbill.www.ui.main.asset;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

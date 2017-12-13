@@ -1,5 +1,7 @@
 package com.bitbill.www.ui.wallet.init;
 
+import android.text.TextUtils;
+
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
@@ -24,6 +26,10 @@ public class ResetPwdPresenter<M extends WalletModel, V extends ResetPwdMvpView>
 
     @Override
     public void checkOldPwd() {
+        //  有效性校验 && 合法性校验
+        if (!isValidOldPwd() || !isValidNewPwd() || !isValidConfirmPwd()) {
+            return;
+        }
         getMvpView().getOldPwd();
         if (StringUtils.checkUserPwd(getMvpView().getOldPwd(), getMvpView().getWallet())) {
             resetPwd();
@@ -66,4 +72,53 @@ public class ResetPwdPresenter<M extends WalletModel, V extends ResetPwdMvpView>
                     }
                 }));
     }
+
+    private boolean isValidNewPwd() {
+        // Check for a valid password, if the user entered one.
+        if (TextUtils.isEmpty(getMvpView().getNewPwd())) {
+            getMvpView().requireTradePwd();
+            return false;
+        }
+        if (!StringUtils.isPasswordValid(getMvpView().getNewPwd())) {
+            getMvpView().invalidTradePwd();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidOldPwd() {
+        // Check for a valid password, if the user entered one.
+        if (TextUtils.isEmpty(getMvpView().getOldPwd())) {
+            getMvpView().requireOldPwd();
+            return false;
+        }
+        if (!StringUtils.isPasswordValid(getMvpView().getOldPwd())) {
+            getMvpView().invalidOldPwd();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidConfirmPwd() {
+        // Check for a valid password, if the user entered one.
+        if (TextUtils.isEmpty(getMvpView().getConfirmPwd())) {
+            getMvpView().requireTradeConfirmPwd();
+            return false;
+        }
+        if (!StringUtils.isPasswordValid(getMvpView().getConfirmPwd())) {
+            getMvpView().isPwdInConsistent();
+            return false;
+        }
+        if (!isPwdConsistent()) {
+            getMvpView().isPwdInConsistent();
+            return false;
+        }
+        return true;
+    }
+
+
+    private boolean isPwdConsistent() {
+        return TextUtils.equals(getMvpView().getNewPwd(), getMvpView().getConfirmPwd());
+    }
+
 }

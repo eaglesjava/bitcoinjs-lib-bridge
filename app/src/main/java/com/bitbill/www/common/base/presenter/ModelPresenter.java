@@ -41,7 +41,7 @@ public class ModelPresenter<M extends Model, V extends MvpView> extends BasePres
 
     public void handleApiError(ANError error) {
 
-        if (error == null || error.getErrorBody() == null) {
+        if (error == null || error.getErrorDetail() == null) {
             getMvpView().onError(R.string.api_default_error);
             return;
         }

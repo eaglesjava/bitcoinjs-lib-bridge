@@ -82,7 +82,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     try {
                         if (jsResult != null && jsResult.length > 1) {
 
-                            Log.d(TAG, "generateMnemonicCNandSeedHex: key = [" + key + "], Mnemonic = [" + jsResult[0] + "], seedhex = [" + jsResult[1] + "]");
+                            Log.d(TAG, "generateMnemonicCNRetrunSeedHexAndXPublicKey: key = [" + key + "], Mnemonic = [" + jsResult[0] + "], seedhex = [" + jsResult[1] + "]");
                             StringUtils.encryptMnemonicAndSeedHex(jsResult[0], jsResult[1], jsResult[2], getMvpView().getTradePwd(), mWallet);
                             //调用后台创建钱包接口
                             createWallet();
@@ -162,7 +162,8 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             getMvpView().hideLoading();
             return;
         }
-        getCompositeDisposable().add(getModelManager().importWallet(new ImportWalletRequest(mWallet.getName(), mWallet.getXPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
+        getCompositeDisposable().add(getModelManager()
+                .importWallet(new ImportWalletRequest(mWallet.getName(), mWallet.getXPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
                 .compose(applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<String>>(getMvpView()) {
                     @Override
@@ -173,6 +174,8 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                         }
                         Log.d(TAG, "onNext() called with: stringApiResponse = [" + stringApiResponse + "]");
                         if (stringApiResponse != null && stringApiResponse.getStatus() == ApiResponse.STATUS_CODE_SUCCESS) {
+                            //完善wallet相关属性
+                            StringUtils.encryptMnemonicAndSeedHex(mWallet.getMnemonic(), mWallet.getSeedHex(), mWallet.getXPublicKey(), getMvpView().getTradePwd(), mWallet);
                             insertWallet();
                         } else {
                             getMvpView().createWalletFail();
@@ -212,7 +215,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     @Override
                     public ObservableSource<Boolean> apply(Long aLong) throws Exception {
                         //第一个钱包自动设置为默认钱包
-                        mWallet.setDefault(aLong == 0l);
+                        mWallet.setIsDefault(aLong == 1l);
                         Log.d(TAG, "initWalletSuccess id = [" + aLong + "]");
                         return getModelManager().updateWallet(mWallet);
                     }
@@ -241,6 +244,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                             return;
                         }
                         getMvpView().hideLoading();
+                        getMvpView().createWalletFail();
 
 
                     }

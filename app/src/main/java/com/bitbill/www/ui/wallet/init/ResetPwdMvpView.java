@@ -20,4 +20,16 @@ public interface ResetPwdMvpView extends MvpView {
     void resetPwdFail();
 
     void resetPwdSuccess();
+
+    void requireTradeConfirmPwd();
+
+    void isPwdInConsistent();
+
+    void requireTradePwd();
+
+    void invalidTradePwd();
+
+    void requireOldPwd();
+
+    void invalidOldPwd();
 }

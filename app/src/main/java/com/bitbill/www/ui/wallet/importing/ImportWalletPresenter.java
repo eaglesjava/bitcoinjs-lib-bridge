@@ -83,10 +83,13 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
                 public void call(String key, String... jsResult) {
                     if (jsResult != null && "true".equals(jsResult[0]) && jsResult.length > 2) {
                         //更新wallet对象
+                        String seedHex = jsResult[1];
                         String XPublicKey = jsResult[2];
                         String extendedKeysHash = EncryptUtils.encryptMD5ToString(XPublicKey);
                         Wallet wallet = new Wallet();
                         wallet.setXPublicKey(XPublicKey);
+                        wallet.setMnemonic(getMvpView().getMnemonic());
+                        wallet.setSeedHex(seedHex);
                         getCompositeDisposable().add(getModelManager()
                                 .getWalletId(new GetWalletIdRequest(extendedKeysHash))
                                 .compose(applyScheduler())
@@ -142,8 +145,8 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
     }
 
     public boolean isValidMnemonic() {
-        // TODO: 2017/11/23 判断助记词格式是否正确
-        if (StringUtils.isEmpty(getMvpView().getMnemonic())) {
+        // 判断助记词格式是否正确
+        if (!StringUtils.isValidMnemonic(getMvpView().getMnemonic())) {
             getMvpView().getMnemonicFail();
             return false;
         }

@@ -56,6 +56,8 @@ public class BitbillApp extends Application {
 
         }
         mWallets = new ArrayList<>();
+        //load bitcoin js wapper
+        BitcoinJsWrapper.getInstance();
     }
 
     public ApplicationComponent getComponent() {
@@ -87,7 +89,7 @@ public class BitbillApp extends Application {
         if (StringUtils.isEmpty(mWallets)) return null;
         Wallet defaultWallet = null;
         for (Wallet wallet : mWallets) {
-            if (wallet.isDefault()) {
+            if (wallet.getIsDefault()) {
                 defaultWallet = wallet;
                 return defaultWallet;
             }

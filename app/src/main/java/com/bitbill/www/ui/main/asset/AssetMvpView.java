@@ -1,4 +1,4 @@
-package com.bitbill.www.ui.main;
+package com.bitbill.www.ui.main.asset;
 
 import com.bitbill.www.common.base.view.MvpView;
 import com.bitbill.www.model.wallet.db.entity.Wallet;

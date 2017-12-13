@@ -19,6 +19,7 @@
         style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:layout_marginLeft="@dimen/activity_padding"
         android:layout_marginRight="@dimen/activity_padding"
         android:layout_marginTop="5dp"

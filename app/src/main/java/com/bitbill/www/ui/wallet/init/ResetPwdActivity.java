@@ -9,8 +9,11 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
+import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -31,6 +34,8 @@ public class ResetPwdActivity extends BaseToolbarActivity<ResetPwdMvpPresenter> 
     @Inject
     ResetPwdMvpPresenter<WalletModel, ResetPwdMvpView> mResetPwdMvpPresenter;
     private Wallet mWallet;
+    private EditTextWapper focusView;
+    private boolean cancel;
 
     public static void start(Context context, Wallet wallet) {
         Intent intent = new Intent(context, ResetPwdActivity.class);
@@ -85,7 +90,16 @@ public class ResetPwdActivity extends BaseToolbarActivity<ResetPwdMvpPresenter> 
     }
 
     private void resetPwd() {
+        cancel = false;
+        focusView = null;
+
         getMvpPresenter().checkOldPwd();
+
+        if (cancel) {
+            // There was an error; don't attempt init and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        }
     }
 
     @Override
@@ -110,7 +124,9 @@ public class ResetPwdActivity extends BaseToolbarActivity<ResetPwdMvpPresenter> 
 
     @Override
     public void oldPwdError() {
-        showMessage("原密码错误，请重新输入");
+        etwTradePwdBefore.setError(R.string.error_old_pwd_retry);
+        focusView = etwTradePwdBefore;
+        cancel = true;
     }
 
     @Override
@@ -120,8 +136,57 @@ public class ResetPwdActivity extends BaseToolbarActivity<ResetPwdMvpPresenter> 
 
     @Override
     public void resetPwdSuccess() {
+        //发送钱包更新事件 其他重新加载数据
+        EventBus.getDefault().postSticky(new WalletUpdateEvent());
+        showMessage("重置密码成功");
         //关闭相关流程
         finish();
+
+    }
+
+    @Override
+    public void requireOldPwd() {
+
+        etwTradePwdBefore.setError(R.string.error_old_pwd_required);
+        focusView = etwTradePwdBefore;
+        cancel = true;
+    }
+
+    @Override
+    public void invalidOldPwd() {
+        etwTradePwdBefore.setError(R.string.error_invalid_trade_pwd);
+        focusView = etwTradePwdBefore;
+        cancel = true;
+
+    }
+
+    @Override
+    public void requireTradeConfirmPwd() {
+        etwTradePwdConfirm.setError(R.string.error_confirm_trade_pwd_required);
+        focusView = etwTradePwdConfirm;
+        cancel = true;
+    }
+
+    @Override
+    public void isPwdInConsistent() {
+        etwTradePwdConfirm.setError(R.string.error_trade_pwd_inconsistent);
+        focusView = etwTradePwdConfirm;
+        cancel = true;
+
+    }
+
+    @Override
+    public void requireTradePwd() {
+        etwTradePwd.setError(R.string.error_trade_pwd_required);
+        focusView = etwTradePwd;
+        cancel = true;
+    }
+
+    @Override
+    public void invalidTradePwd() {
+        etwTradePwd.setError(R.string.error_invalid_trade_pwd);
+        focusView = etwTradePwd;
+        cancel = true;
 
     }
 }

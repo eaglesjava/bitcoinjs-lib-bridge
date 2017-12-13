@@ -125,8 +125,8 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
         mFragmentAdapter = new FragmentAdapter(getChildFragmentManager());
         mBtcReceiveFragment = BtcReceiveFragment.newInstance();
         mFragmentAdapter.addItem("btc", mBtcReceiveFragment);
-        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
+        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         viewPager.setAdapter(mFragmentAdapter);
         tabs.setupWithViewPager(viewPager);
         //禁止tab选择
