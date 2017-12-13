@@ -57,6 +57,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 		let method = "bridge.validateMnemonic('\(mnemonic)')"
 		callJS(method: method, success: success, failure: failure)
 	}
+    
+    func validateAddress(address: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
+        let method = "bridge.validateAddress('\(address)')"
+        callJS(method: method, success: success, failure: failure)
+    }
 	
 	func getAddress(seed: String, index: Int = 0, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
 		let method = "bridge.getBitcoinAddressBySeedHex('\(seed)', \(index))"

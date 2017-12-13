@@ -21,7 +21,7 @@ class BILSendController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addressInputView.textField.text = "17XLRQJX97DZajzH7kZBrFzs7qHYBvWV1F"
+//        addressInputView.textField.text = "34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK"
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +30,17 @@ class BILSendController: BILBaseViewController {
     }
     
     func setAddress(address: String) {
-        addressInputView.textField.text = address
+        BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
+            debugPrint(result)
+            let isValidate = result as! Bool
+            if isValidate {
+                self.addressInputView.textField.text = address
+            } else {
+                self.showTipAlert(title: nil, msg: "不是合法的地址")
+            }
+        }) { (error) in
+            debugPrint(error)
+        }
     }
     
     // MARK: - Actions
@@ -53,18 +63,28 @@ class BILSendController: BILBaseViewController {
         show(cont, sender: sender)
     }
     
-    // MARK: - Navigation
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == addressToAmountSegue {
-            guard let address = addressInputView.textField.text, !(address.isEmpty) else {
-                bil_makeToast(msg: NSLocalizedString("地址不能为空", comment: ""))
-                return false
-            }
-            sendModel = BILSendModel(address: address)
+    @IBAction func nextAction(_ sender: Any) {
+        guard let address = addressInputView.textField.text, !(address.isEmpty) else {
+            bil_makeToast(msg: NSLocalizedString("地址不能为空", comment: ""))
+            return
         }
-        return true
+        
+        BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
+            let isValidate = result as! Bool
+            if isValidate {
+                self.sendModel = BILSendModel(address: address)
+                self.performSegue(withIdentifier: self.addressToAmountSegue, sender: nil)
+            }
+            else
+            {
+                self.showTipAlert(title: "出现了错误", msg: "不是合法的地址")
+            }
+        }) { (error) in
+            self.showTipAlert(title: "出现了错误", msg: error.localizedDescription)
+        }
+        
     }
+    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

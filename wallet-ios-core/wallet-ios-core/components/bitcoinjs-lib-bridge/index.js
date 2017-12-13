@@ -27,6 +27,16 @@ function validateMnemonic(mnemonic) {
 	return bip39.validateMnemonic(mnemonic, bip39.wordlists.chinese_simplified) || bip39.validateMnemonic(mnemonic, bip39.wordlists.english)
 }
 
+function validateAddress(address) {
+    try {
+        bitcoin.address.toOutputScript(address)
+        return true
+    } catch (e) {
+        return false
+    }
+}
+
+
 function getBitcoinAddressBySeedHex (seedHex, index) {
 	bitcoinKeyChain = bitcoinKeyChain || generateBitcoinMainnetMasterKeychain(seedHex)
 	return bitcoinKeyChain.derive(index).getAddress()
@@ -60,6 +70,7 @@ module.exports = {
 	generateMnemonicRandomCN,
 	mnemonicToSeedHex,
 	validateMnemonic,
+    validateAddress,
 	getBitcoinAddressBySeedHex,
 	getBitcoinAddressByMasterXPublicKey,
 	getBitcoinMasterXPublicKey,

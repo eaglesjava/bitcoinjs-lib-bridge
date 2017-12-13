@@ -127,7 +127,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
                                 <connections>
-                                    <segue destination="UGK-9K-l5J" kind="show" identifier="BILAddressToAmountSegue" id="YX7-UY-Sra"/>
+                                    <action selector="nextAction:" destination="1bf-2n-T7s" eventType="touchUpInside" id="DKJ-Wx-82v"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -155,6 +155,7 @@
                     <connections>
                         <outlet property="addressInputView" destination="Wgi-wN-8Lj" id="A0d-8R-hrq"/>
                         <segue destination="jHS-Ph-MGA" kind="show" identifier="BILSendToScanResult" id="Am0-0V-zae"/>
+                        <segue destination="UGK-9K-l5J" kind="show" identifier="BILAddressToAmountSegue" id="bBg-iP-77h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8jR-l7-Wsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -277,7 +278,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeR-cH-OoK">
-                                <rect key="frame" x="278.5" y="137.5" width="71.5" height="18"/>
+                                <rect key="frame" x="278.5" y="136.5" width="71.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="vzE-fQ-maf"/>
                                 </constraints>
