@@ -12,6 +12,20 @@ class BILSendModel: BILRecieveModel {
     
     var wallet: WalletModel?
     
+    var isSendAll = false
+    
+    var bitcoinAmount: String {
+        get {
+            guard let amount = Double(self.amount) else {
+                return "0.00"
+            }
+            guard let w = wallet else {
+                return "0.00"
+            }
+            return isSendAll ? (w.btc_balanceString) : String(amount)
+        }
+    }
+    
     var bitcoinSatoshiAmount: Int {
         get {
             guard let amount = Double(self.amount) else { return 0 }

@@ -15,15 +15,82 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var cnyLabel: UILabel!
     @IBOutlet weak var coinNameLabel: UILabel!
+    @IBOutlet weak var nextButtonBottomSpace: NSLayoutConstraint!
     
     var sendModel: BILSendModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        
         // Do any additional setup after loading the view.
         coinNameLabel.text = sendModel?.coinType.name
         amountTextField.becomeFirstResponder()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
+    @objc internal func keyboardWillShow(_ notification : Notification?) {
+        guard let info = notification?.userInfo else { return }
+        var animationCurve = UIViewAnimationOptions.curveEaseOut
+        if let curve = info[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
+            animationCurve = UIViewAnimationOptions(rawValue: curve)
+        }
+        
+        var animationDuration = 0.25
+        //  Getting keyboard animation duration
+        if let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval {
+            //Saving animation duration
+            if duration != 0.0 {
+                animationDuration = duration
+            }
+        }
+        
+        if let kbFrame = info[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+            UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
+                self.nextButtonBottomSpace.constant = kbFrame.height + 30
+            }, completion: { (finished) in
+                
+            })
+        }
+        
+    }
+    
+    @objc internal func keyboardWillHide(_ notification : Notification?) {
+        guard let info = notification?.userInfo else { return }
+        var animationCurve = UIViewAnimationOptions.curveEaseOut
+        if let curve = info[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
+            animationCurve = UIViewAnimationOptions(rawValue: curve)
+        }
+        
+        var animationDuration = 0.25
+        //  Getting keyboard animation duration
+        if let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval {
+            //Saving animation duration
+            if duration != 0.0 {
+                animationDuration = duration
+            }
+        }
+        
+        UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
+            self.nextButtonBottomSpace.constant = 30
+        }, completion: { (finished) in
+            
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,17 +121,21 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
         
         return true
     }
-
+    @IBAction func sendAllBalance(_ sender: Any) {
+        sendModel?.isSendAll = true
+        performSegue(withIdentifier: chooseWalletSegue, sender: nil)
+    }
+    
     // MARK: - Navigation
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == chooseWalletSegue {
             guard let amount = amountTextField.text, !(amount.isEmpty) else {
-                bil_makeToast(msg: "金额不能为空")
+                showTipAlert(title: nil, msg: "金额不能为空")
                 return false
             }
             guard let amountD = Double(amount), amountD > 0 else {
-                bil_makeToast(msg: "金额必须大于 0")
+                showTipAlert(title: nil, msg: "金额必须大于 0")
                 return false
             }
             sendModel?.amount = amount

@@ -61,7 +61,7 @@ class BILSendController: BILBaseViewController {
                 bil_makeToast(msg: NSLocalizedString("地址不能为空", comment: ""))
                 return false
             }
-            sendModel = BILSendModel(address: address, amount: "")
+            sendModel = BILSendModel(address: address)
         }
         return true
     }

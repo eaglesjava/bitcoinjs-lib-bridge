@@ -19,9 +19,11 @@ class BILSendConfirmController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        walletIDLabel.text = sendModel?.wallet?.id
-        addressLabel.text = sendModel?.address
-        amountLabel.text = "\(sendModel?.amount ?? "0") BTC"
+        if let model = sendModel {
+            walletIDLabel.text = model.wallet?.id
+            addressLabel.text = model.address
+            amountLabel.text = "\(model.bitcoinAmount) BTC"
+        }
     }
 
     override func didReceiveMemoryWarning() {

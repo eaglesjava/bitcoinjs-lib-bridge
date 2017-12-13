@@ -319,12 +319,17 @@
                         <viewLayoutGuide key="safeArea" id="XgU-ZX-Ebi"/>
                     </view>
                     <navigationItem key="navigationItem" title="发送金额" id="bed-TV-fGp">
-                        <barButtonItem key="rightBarButtonItem" title="选择全部余额" id="yYV-Yz-7JL"/>
+                        <barButtonItem key="rightBarButtonItem" title="选择全部余额" id="yYV-Yz-7JL">
+                            <connections>
+                                <action selector="sendAllBalance:" destination="UGK-9K-l5J" id="GY3-Ak-c5T"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="amountTextField" destination="UEb-zw-ief" id="xtg-k6-Phc"/>
                         <outlet property="cnyLabel" destination="ood-C6-emK" id="eff-WW-1z4"/>
                         <outlet property="coinNameLabel" destination="AeR-cH-OoK" id="uCB-eJ-A9g"/>
+                        <outlet property="nextButtonBottomSpace" destination="Wjp-TN-niL" id="NRU-1S-oll"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vc6-da-d2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
