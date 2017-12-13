@@ -13,9 +13,11 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 	@IBOutlet weak var tableView: UITableView!
 	fileprivate let cellID = "BILChooseWalletCell"
 	
-    fileprivate var wallets: [WalletModel] = {
-        return BILWalletManager.shared.wallets
-    }()
+    fileprivate var wallets: [WalletModel] {
+        get {
+            return BILWalletManager.shared.wallets
+        }
+    }
 	fileprivate var currentSelectedIndex = 0
 	
 	fileprivate var didSelectClosure: ((WalletModel) -> Void)?
@@ -25,6 +27,17 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 
         // Do any additional setup after loading the view.
 		tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
+        NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
+    }
+    
+    @objc
+    func walletDidChanged(notification: Notification) {
+        tableView.reloadData()
+        tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +55,10 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 		if indexPath.row == wallets.count - 1 {
 			cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, UIScreen.main.bounds.width)
 		}
+        else
+        {
+            cell.separatorInset = UIEdgeInsetsMake(0, 25, 0, 25)
+        }
 		
 		return cell
 	}
@@ -52,6 +69,7 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		didSelectClosure?(wallets[indexPath.row])
+        currentSelectedIndex = indexPath.row
 	}
 	
 	func setDidSelecteWalletClosure(currentSelectedIndex: Int = 0, onSelected: @escaping (WalletModel) -> Void) {

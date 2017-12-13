@@ -22,6 +22,7 @@ class BILInputView: UIView, UITextFieldDelegate {
 	
 	@IBOutlet weak var textField: UITextField!
 	@IBOutlet weak var title: UILabel?
+    @IBOutlet weak var tipLabel: UILabel?
 	@IBOutlet weak var line: UIView!
 	@IBOutlet weak var functionTipHeight: NSLayoutConstraint?
     @IBOutlet weak var functionTipBottom: NSLayoutConstraint?
@@ -65,7 +66,10 @@ class BILInputView: UIView, UITextFieldDelegate {
 	func textFieldDidBeginEditing(_ textField: UITextField) {
         show(tip: titleString ?? "", type: .normal)
 		line.backgroundColor = UIColor.white
-		updateFunctionTipHeight(height: 32, animate: true)
+        guard let l = tipLabel else {
+            return
+        }
+        updateFunctionTipHeight(height: l.bounds.height, animate: true)
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
