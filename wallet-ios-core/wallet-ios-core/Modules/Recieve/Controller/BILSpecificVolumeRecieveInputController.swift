@@ -8,11 +8,13 @@
 
 import UIKit
 
-class BILSpecificVolumeRecieveInputController: BILBaseViewController {
+class BILSpecificVolumeRecieveInputController: BILBaseViewController, UITextFieldDelegate {
 	
 	var recieveModel: BILRecieveModel?
-	@IBOutlet weak var coinNameLabel: UILabel!
-	@IBOutlet weak var textField: ASKPlaceHolderColorTextField!
+    @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var cnyLabel: UILabel!
+    @IBOutlet weak var coinNameLabel: UILabel!
+    @IBOutlet weak var nextButtonBottomSpace: NSLayoutConstraint!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +23,84 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController {
 		if let r = recieveModel {
 			coinNameLabel.text  = r.coinType.name
 		}
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        amountTextField.becomeFirstResponder()
+    }
+    
+    @objc internal func keyboardWillShow(_ notification : Notification?) {
+        guard let info = notification?.userInfo else { return }
+        var animationCurve = UIViewAnimationOptions.curveEaseOut
+        if let curve = info[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
+            animationCurve = UIViewAnimationOptions(rawValue: curve)
+        }
+        
+        var animationDuration = 0.25
+        //  Getting keyboard animation duration
+        if let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval {
+            //Saving animation duration
+            if duration != 0.0 {
+                animationDuration = duration
+            }
+        }
+        
+        if let kbFrame = info[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+            UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
+                self.nextButtonBottomSpace.constant = kbFrame.height + 30
+            }, completion: { (finished) in
+                
+            })
+        }
+        
+    }
+    
+    @objc internal func keyboardWillHide(_ notification : Notification?) {
+        guard let info = notification?.userInfo else { return }
+        var animationCurve = UIViewAnimationOptions.curveEaseOut
+        if let curve = info[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
+            animationCurve = UIViewAnimationOptions(rawValue: curve)
+        }
+        
+        var animationDuration = 0.25
+        //  Getting keyboard animation duration
+        if let duration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval {
+            //Saving animation duration
+            if duration != 0.0 {
+                animationDuration = duration
+            }
+        }
+        
+        UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
+            self.nextButtonBottomSpace.constant = 30
+        }, completion: { (finished) in
+            
+        })
     }
 	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		textField.becomeFirstResponder()
-	}
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard var text = textField.text else { return true }
+        print(text)
+        let rangeLocation =  text.index(text.startIndex, offsetBy: range.location)
+        if range.length == 0 {
+            text.insert(contentsOf: string, at:rangeLocation)
+        } else {
+            let upperLocation = text.index(rangeLocation, offsetBy: range.length)
+            text.removeSubrange(rangeLocation..<upperLocation)
+        }
+        debugPrint("\(text)  \(range)    \(string)")
+        
+        if text.contains(".") {
+            let array = text.components(separatedBy: ".")
+            if array.count > 2 {
+                return false
+            }
+            let decimalPlace = array[1]
+            return decimalPlace.count <= "\(BTC_SATOSH)".count - 1
+        }
+        
+        return true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -42,7 +116,7 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController {
 			guard let _ = recieveModel else {
 				return false
 			}
-			guard let text = textField.text, !text.isEmpty else {
+			guard let text = amountTextField.text, !text.isEmpty else {
 				showTipAlert(title: "提示", msg: "请输入金额")
 				return false
 			}

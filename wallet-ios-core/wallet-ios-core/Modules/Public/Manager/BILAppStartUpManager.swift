@@ -149,6 +149,12 @@ class BILAppStartUpManager: NSObject {
 		IQKeyboardManager.sharedManager().enable = true
 		IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
 		IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "收起键盘"
+        
+        IQKeyboardManager.sharedManager().disabledToolbarClasses.append(BILSendInputAmountController.self)
+        IQKeyboardManager.sharedManager().disabledToolbarClasses.append(BILSpecificVolumeRecieveInputController.self)
+        
+        IQKeyboardManager.sharedManager().disabledTouchResignedClasses.append(BILSendInputAmountController.self)
+        IQKeyboardManager.sharedManager().disabledTouchResignedClasses.append(BILSpecificVolumeRecieveInputController.self)
 	}
 	
 	private func loadJS() {

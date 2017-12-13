@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
     
@@ -33,15 +34,6 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
     }
     
     @objc internal func keyboardWillShow(_ notification : Notification?) {
@@ -108,7 +100,7 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
             let upperLocation = text.index(rangeLocation, offsetBy: range.length)
             text.removeSubrange(rangeLocation..<upperLocation)
         }
-        print("\(text)  \(range)    \(string)")
+        debugPrint("\(text)  \(range)    \(string)")
         
         if text.contains(".") {
             let array = text.components(separatedBy: ".")

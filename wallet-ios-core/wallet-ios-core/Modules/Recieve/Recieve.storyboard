@@ -7,10 +7,14 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="FF_DIN_Condensed_Bold.otf">
+            <string>DINCond-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--接收-->
         <scene sceneID="lC4-PI-8dc">
@@ -289,92 +293,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kEl-HU-1ce">
-                                <rect key="frame" x="25" y="179" width="325" height="129"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBs-fx-B4J" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="74" width="325" height="55"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="79C-tU-xdi"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="确认"/>
-                                        <connections>
-                                            <segue destination="z6H-Hj-0bh" kind="show" identifier="BILVolumeToQRCodeSegue" id="j6I-cl-VVI"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsS-Gg-Pac">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="44"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-Up-xVh">
-                                                <rect key="frame" x="0.0" y="43" width="325" height="1"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="PQj-aG-gFy"/>
-                                                </constraints>
-                                            </view>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="BnI-EV-b3B" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="6" width="260.5" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="ZBj-ON-LDI"/>
-                                                </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kl3-5C-Vuh">
-                                                <rect key="frame" x="285.5" y="9.5" width="39.5" height="25.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="0Tz-qE-EP5"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Kl3-5C-Vuh" secondAttribute="trailing" id="0L4-tu-U9X"/>
-                                            <constraint firstItem="BnI-EV-b3B" firstAttribute="leading" secondItem="jsS-Gg-Pac" secondAttribute="leading" id="48j-Od-8qR"/>
-                                            <constraint firstItem="BnI-EV-b3B" firstAttribute="centerY" secondItem="jsS-Gg-Pac" secondAttribute="centerY" id="DDA-hm-bWf"/>
-                                            <constraint firstAttribute="trailing" secondItem="7aE-Up-xVh" secondAttribute="trailing" id="KWy-LP-047"/>
-                                            <constraint firstItem="Kl3-5C-Vuh" firstAttribute="centerY" secondItem="jsS-Gg-Pac" secondAttribute="centerY" id="SRP-F7-fMo"/>
-                                            <constraint firstAttribute="bottom" secondItem="7aE-Up-xVh" secondAttribute="bottom" id="Xq2-Hz-zQt"/>
-                                            <constraint firstItem="Kl3-5C-Vuh" firstAttribute="leading" secondItem="BnI-EV-b3B" secondAttribute="trailing" constant="25" id="qBi-af-FBC"/>
-                                            <constraint firstAttribute="height" constant="44" id="qOC-bh-nbb"/>
-                                            <constraint firstItem="7aE-Up-xVh" firstAttribute="leading" secondItem="jsS-Gg-Pac" secondAttribute="leading" id="svk-6U-axV"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbP-wN-eFm" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="582" width="325" height="55"/>
                                 <constraints>
-                                    <constraint firstItem="jsS-Gg-Pac" firstAttribute="leading" secondItem="kEl-HU-1ce" secondAttribute="leading" id="4N9-DB-fbZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="PBs-fx-B4J" secondAttribute="trailing" id="6Ec-5W-BiL"/>
-                                    <constraint firstAttribute="trailing" secondItem="jsS-Gg-Pac" secondAttribute="trailing" id="AL7-m3-3U7"/>
-                                    <constraint firstItem="jsS-Gg-Pac" firstAttribute="top" secondItem="kEl-HU-1ce" secondAttribute="top" id="CvE-Ia-o1J"/>
-                                    <constraint firstAttribute="bottom" secondItem="PBs-fx-B4J" secondAttribute="bottom" id="G9g-AK-gKA"/>
-                                    <constraint firstItem="PBs-fx-B4J" firstAttribute="leading" secondItem="kEl-HU-1ce" secondAttribute="leading" id="TBD-D9-rX2"/>
-                                    <constraint firstItem="PBs-fx-B4J" firstAttribute="top" secondItem="jsS-Gg-Pac" secondAttribute="bottom" constant="30" id="wcK-w0-efL"/>
+                                    <constraint firstAttribute="height" constant="55" id="ppK-i7-fS1"/>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="下一步"/>
+                                <connections>
+                                    <segue destination="z6H-Hj-0bh" kind="show" identifier="BILVolumeToQRCodeSegue" id="3L5-os-RKe"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uu-Ed-8Ox">
+                                <rect key="frame" x="278.5" y="138" width="71.5" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="Sf2-SS-KF4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tpP-M5-rrb">
+                                <rect key="frame" x="25" y="94" width="233" height="70"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="DINCond-Bold" family="DINCond-Bold" pointSize="60"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cY8-4Y-AaO" id="dAS-E0-8pk"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 CNY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q37-vr-w7f">
+                                <rect key="frame" x="28" y="178" width="44.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="kEl-HU-1ce" firstAttribute="leading" secondItem="kXr-BQ-agJ" secondAttribute="leading" constant="25" id="R4V-sr-Xyb"/>
-                            <constraint firstItem="kXr-BQ-agJ" firstAttribute="trailing" secondItem="kEl-HU-1ce" secondAttribute="trailing" constant="25" id="gFB-jb-bFO"/>
-                            <constraint firstItem="kEl-HU-1ce" firstAttribute="centerY" secondItem="kXr-BQ-agJ" secondAttribute="centerY" multiplier="2:3" id="pMF-EM-pbR"/>
+                            <constraint firstItem="Q37-vr-w7f" firstAttribute="top" secondItem="tpP-M5-rrb" secondAttribute="bottom" constant="14" id="4ha-zK-H1R"/>
+                            <constraint firstItem="Q37-vr-w7f" firstAttribute="leading" secondItem="tpP-M5-rrb" secondAttribute="leading" constant="3" id="9WY-gm-sxB"/>
+                            <constraint firstItem="kXr-BQ-agJ" firstAttribute="trailing" secondItem="4uu-Ed-8Ox" secondAttribute="trailing" constant="25" id="J1x-tn-Xlf"/>
+                            <constraint firstItem="4uu-Ed-8Ox" firstAttribute="baseline" secondItem="tpP-M5-rrb" secondAttribute="baseline" id="PkG-ey-BH5"/>
+                            <constraint firstItem="MbP-wN-eFm" firstAttribute="leading" secondItem="kXr-BQ-agJ" secondAttribute="leading" constant="25" id="c5M-e4-cRP"/>
+                            <constraint firstItem="tpP-M5-rrb" firstAttribute="leading" secondItem="kXr-BQ-agJ" secondAttribute="leading" constant="25" id="d7u-J3-jy3"/>
+                            <constraint firstItem="kXr-BQ-agJ" firstAttribute="trailing" secondItem="MbP-wN-eFm" secondAttribute="trailing" constant="25" id="dp8-KC-xam"/>
+                            <constraint firstItem="tpP-M5-rrb" firstAttribute="top" secondItem="kXr-BQ-agJ" secondAttribute="top" constant="30" id="pQr-7S-fXS"/>
+                            <constraint firstItem="4uu-Ed-8Ox" firstAttribute="leading" secondItem="tpP-M5-rrb" secondAttribute="trailing" constant="20" id="q8f-TF-k4e"/>
+                            <constraint firstItem="kXr-BQ-agJ" firstAttribute="bottom" secondItem="MbP-wN-eFm" secondAttribute="bottom" constant="30" id="u0p-gM-1TP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kXr-BQ-agJ"/>
                     </view>
                     <navigationItem key="navigationItem" title="接收数量" largeTitleDisplayMode="never" id="WWw-Bm-kvr"/>
                     <connections>
-                        <outlet property="coinNameLabel" destination="Kl3-5C-Vuh" id="A6H-dA-T6T"/>
-                        <outlet property="textField" destination="BnI-EV-b3B" id="b2W-9Q-WQt"/>
+                        <outlet property="amountTextField" destination="tpP-M5-rrb" id="Pq5-bC-g6x"/>
+                        <outlet property="cnyLabel" destination="Q37-vr-w7f" id="ujw-Ar-EbB"/>
+                        <outlet property="coinNameLabel" destination="4uu-Ed-8Ox" id="GYq-Ny-02a"/>
+                        <outlet property="nextButtonBottomSpace" destination="u0p-gM-1TP" id="nBi-wI-6Yn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2eX-bx-oRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
