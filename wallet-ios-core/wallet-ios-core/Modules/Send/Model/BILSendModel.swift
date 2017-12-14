@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class BILSendModel: BILRecieveModel {
     
@@ -32,5 +33,9 @@ class BILSendModel: BILRecieveModel {
             let satoshi = Int(amount * Double(BTC_SATOSH))
             return satoshi
         }
+    }
+    
+    func sendTransactionr(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        
     }
 }

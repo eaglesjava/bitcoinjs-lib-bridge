@@ -64,6 +64,7 @@ class BILSendConfirmController: BILBaseViewController {
     }
     
     func sendSuccess() {
+        NotificationCenter.default.post(name: .transactionSended, object: nil)
         guard let cont = storyboard?.instantiateViewController(withIdentifier: "BILSendResultController") as? BILSendResultController else { return }
         cont.sendModel = sendModel
         present(cont, animated: true) {

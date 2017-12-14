@@ -22,6 +22,9 @@ extension UIView {
 }
 
 class BILCopyLabel: UILabel {
+    
+    @IBInspectable
+    var valueTitle: String?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,7 +51,7 @@ class BILCopyLabel: UILabel {
     @objc
     func tapAction(gesture: UITapGestureRecognizer) {
         UIPasteboard.general.string = text
-        bil_makeToast(msg: "已复制")
+        bil_makeToast(msg: "\(valueTitle ?? "")已复制")
     }
     
     /*
@@ -59,4 +62,22 @@ class BILCopyLabel: UILabel {
     }
     */
 
+}
+
+final class BILAddressLabel: BILCopyLabel {
+    override var valueTitle: String? {
+        get {
+            return "地址"
+        }
+        set {}
+    }
+}
+
+final class BILTXHashLabel: BILCopyLabel {
+    override var valueTitle: String? {
+        get {
+            return "交易 hash "
+        }
+        set {}
+    }
 }

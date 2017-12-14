@@ -13,6 +13,7 @@ class BILSendResultController: BILBaseViewController {
 
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var txHashLabel: BILCopyLabel!
     
     var sendModel: BILSendModel?
     
@@ -24,6 +25,7 @@ class BILSendResultController: BILBaseViewController {
         if let model = sendModel {
             addressLabel.text = model.address
             amountLabel.text = "\(model.bitcoinAmount) BTC"
+            txHashLabel.text = "tx".md5()
         }
     }
 

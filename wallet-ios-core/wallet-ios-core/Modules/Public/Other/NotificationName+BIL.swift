@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
 	static var walletDidChanged: Notification.Name { get { return NSNotification.Name("walletDidChanged") } }
+    static var transactionSended: Notification.Name { get { return NSNotification.Name("transactionSended") } }
 }

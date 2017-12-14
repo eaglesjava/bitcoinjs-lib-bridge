@@ -21,18 +21,7 @@ class BILRecieveController: BILBaseViewController {
     
     var currentWallet: WalletModel? {
         didSet {
-            if let w = currentWallet {
-                currentWalletIDLabel.text = w.id
-                currentWalletBalanceLabel.text = w.btc_balanceString + " BTC"
-                currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")"
-                
-                backupViewHeight.constant = w.isNeedBackup ? 40 : 0
-                w.lastBTCAddress(success: { (address) in
-                    self.setAddress(address: address)
-                }, failure: { (errorMsg) in
-                    debugPrint(errorMsg)
-                })
-            }
+            refreshUI()
         }
     }
 	
@@ -53,6 +42,32 @@ class BILRecieveController: BILBaseViewController {
 		bgView.addGestureRecognizer(tap)
         
         qrCodeImageViewHeight.constant = min(160, UIScreen.main.bounds.height - 388 - 88)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
+    }
+    
+    @objc
+    func walletDidChanged(notification: Notification) {
+        refreshUI()
+    }
+    
+    func refreshUI() {
+        if let w = currentWallet {
+            currentWalletIDLabel.text = w.id
+            currentWalletBalanceLabel.text = w.btc_balanceString + " BTC"
+            currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")"
+            
+            backupViewHeight.constant = w.isNeedBackup ? 40 : 0
+            w.lastBTCAddress(success: { (address) in
+                self.setAddress(address: address)
+            }, failure: { (errorMsg) in
+                debugPrint(errorMsg)
+            })
+        }
     }
 	
 	func setAddress(address: String) {

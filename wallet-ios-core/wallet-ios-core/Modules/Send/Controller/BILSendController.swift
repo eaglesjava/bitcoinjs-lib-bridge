@@ -22,6 +22,16 @@ class BILSendController: BILBaseViewController {
 
         // Do any additional setup after loading the view.
 //        addressInputView.textField.text = "34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK"
+        NotificationCenter.default.addObserver(self, selector: #selector(transactionDidSend(notification:)), name: .transactionSended, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .transactionSended, object: nil)
+    }
+    
+    @objc
+    func transactionDidSend(notification: Notification) {
+        addressInputView.textField.text = ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +87,7 @@ class BILSendController: BILBaseViewController {
             }
             else
             {
-                self.showTipAlert(title: "出现了错误", msg: "不是合法的地址")
+                self.showTipAlert(title: "地址不正确", msg: "您输入的不是合法的地址")
             }
         }) { (error) in
             self.showTipAlert(title: "出现了错误", msg: error.localizedDescription)
