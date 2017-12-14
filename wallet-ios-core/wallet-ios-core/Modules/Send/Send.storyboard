@@ -538,7 +538,7 @@
                                                         </constraints>
                                                         <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                                 <color key="value" red="1" green="1" blue="1" alpha="0.40112906679999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -867,7 +867,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWY-Pv-TVt" customClass="BILGradientView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                    <rect key="frame" x="25" y="8" width="325" height="68.5"/>
+                                                    <rect key="frame" x="25" y="8" width="270" height="68.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxN-Ff-T7C">
                                                             <rect key="frame" x="75" y="12" width="45" height="22"/>
@@ -898,7 +898,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Veo-se-otj">
-                                                            <rect key="frame" x="280" y="12.5" width="20" height="44"/>
+                                                            <rect key="frame" x="225" y="12.5" width="20" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="qr5-xu-pDy"/>
                                                             </constraints>

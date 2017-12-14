@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILSendController: BILBaseViewController {
+class BILSendController: BILBaseViewController, UITextFieldDelegate {
 
     @IBOutlet weak var addressInputView: BILInputView!
     
@@ -71,6 +71,11 @@ class BILSendController: BILBaseViewController {
             }
         }
         show(cont, sender: sender)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nextAction(textField)
+        return true
     }
     
     @IBAction func nextAction(_ sender: Any) {
