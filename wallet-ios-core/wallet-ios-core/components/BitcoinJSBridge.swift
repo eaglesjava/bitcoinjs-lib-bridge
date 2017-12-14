@@ -83,6 +83,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
             self.getMasterXPublicKey(seed: seedHex as! String, success: success, failure: failure)
         }, failure: failure)
     }
+    
+    func buildTransaction(seedHex: String, inputsOutputs: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
+        let method = "bridge.buildTransaction('\(seedHex)', '\(inputsOutputs)')"
+        callJS(method: method, success: success, failure: failure)
+    }
 	
 	func callJS(method: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
 		if !canCallJSFunction {

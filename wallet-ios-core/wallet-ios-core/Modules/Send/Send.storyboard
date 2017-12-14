@@ -360,7 +360,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
                                 <connections>
-                                    <segue destination="OMj-P2-5SR" kind="show" identifier="BILChooseWalletToConfirmSegue" id="XWx-hs-ef8"/>
+                                    <action selector="nextAction:" destination="baX-2R-0kn" eventType="touchUpInside" id="rMN-9P-crU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -377,6 +377,9 @@
                         <viewLayoutGuide key="safeArea" id="LZD-xM-WBb"/>
                     </view>
                     <navigationItem key="navigationItem" title="选择钱包" largeTitleDisplayMode="never" id="3w2-Ub-f5o"/>
+                    <connections>
+                        <segue destination="OMj-P2-5SR" kind="show" identifier="BILChooseWalletToConfirmSegue" id="wqX-WW-msH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MDF-cR-4q2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

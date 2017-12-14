@@ -21,7 +21,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        addressInputView.textField.text = "34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK"
+        addressInputView.textField.text = "3KdUg5mZP1MtA52av7xng6vrb3YKBbfeL1"
         NotificationCenter.default.addObserver(self, selector: #selector(transactionDidSend(notification:)), name: .transactionSended, object: nil)
     }
     

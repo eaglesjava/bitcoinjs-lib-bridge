@@ -47,19 +47,37 @@ extension WalletModel {
             return
         }
         success(self)
-        WalletModel.getBalanceFromServer(mainExtPublicKey: extKey, success: { (satoshBalance, unconfirmBalance) in
-            self.btcBalance = Int64(satoshBalance)
+        WalletModel.getBalanceFromServer(mainExtPublicKey: extKey, success: { (satoshiBalance, unconfirmBalance) in
+            self.btcBalance = Int64(satoshiBalance)
             self.btcUnconfirmBalance = Int64(unconfirmBalance)
             do {
                 try BILWalletManager.shared.saveWallets()
+                success(self)
             } catch {
                 debugPrint(error)
+                failure(error.localizedDescription, -1)
             }
-            success(self)
         }, failure: failure)
     }
     
-    static func getBalanceFromServer(mainExtPublicKey: String, success: @escaping (_ satoshBalance: Int, _ unconfirmBalance: Int) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func getUTXOFromServer(success: @escaping (_ utxo: [BitcoinUTXOModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        guard let extKey = mainExtPublicKey else {
+            failure("extKey不能为空", -1)
+            return
+        }
+        BILNetworkManager.request(request: .getUTXO(extendedKey: extKey.md5()), success: { (result) in
+            print(result)
+            let json = JSON(result)
+            let utxoDatas = json["uxto"].arrayValue
+            var utxoModels = [BitcoinUTXOModel]()
+            for json in utxoDatas {
+                utxoModels.append(BitcoinUTXOModel(jsonData: json))
+            }
+            success(utxoModels)
+        }, failure: failure)
+    }
+    
+    static func getBalanceFromServer(mainExtPublicKey: String, success: @escaping (_ satoshiBalance: Int, _ unconfirmBalance: Int) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         BILNetworkManager.request(request: .getWalletID(extendedKey: mainExtPublicKey.md5()), success: { (result) in
             debugPrint(result)
             let json = JSON(result)

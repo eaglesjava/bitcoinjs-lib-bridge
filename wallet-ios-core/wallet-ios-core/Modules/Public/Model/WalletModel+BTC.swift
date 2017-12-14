@@ -8,10 +8,10 @@
 
 import Foundation
 
-let BTC_SATOSH = 100000000
+let BTC_SATOSHI = 100000000
 
 func BTCFormatString(btc: Int) -> String {
-    return String(format: "%.6f", Double(btc) / Double(BTC_SATOSH))
+    return String(format: "%.6f", Double(btc) / Double(BTC_SATOSHI))
 }
 
 extension WalletModel {

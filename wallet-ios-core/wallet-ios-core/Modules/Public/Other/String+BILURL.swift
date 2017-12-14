@@ -23,6 +23,8 @@ enum Router: URLRequestConvertible {
                 return (.bil_wallet_check_id, ["walletId": walletID])
             case .getWalletID(let extendedKeyHash):
                 return (.bil_wallet_get_id, ["extendedKeysHash": extendedKeyHash])
+            case .getUTXO(let extendedKeyHash):
+                return (.bil_wallet_get_UTXO, ["extendedKeysHash": extendedKeyHash])
             }
         }()
         
@@ -39,14 +41,17 @@ enum Router: URLRequestConvertible {
     case importWallet(walletID: String, extendedKey: String)
     case checkWalletID(walletID: String)
     case getWalletID(extendedKey: String)
+    case getUTXO(extendedKey: String)
     
 }
 
 extension String {
-//    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
-    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
-    static var bil_wallet_create: String { get { return "bitbill/bitcoin/wallet/create" } }
-    static var bil_wallet_import: String { get { return "bitbill/bitcoin/wallet/import" } }
-    static var bil_wallet_check_id:  String { get { return "bitbill/bitcoin/wallet/checkWalletId" } }
-    static var bil_wallet_get_id:  String { get { return "bitbill/bitcoin/wallet/getWalletId" } }
+    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
+//    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
+    static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
+    static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
+    static var bil_wallet_import: String { get { return bil_wallet_path + "import" } }
+    static var bil_wallet_check_id:  String { get { return bil_wallet_path + "checkWalletId" } }
+    static var bil_wallet_get_id:  String { get { return bil_wallet_path + "getWalletId" } }
+    static var bil_wallet_get_UTXO:  String { get { return bil_wallet_path + "listUnspent" } }
 }

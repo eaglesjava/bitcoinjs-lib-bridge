@@ -30,7 +30,7 @@ class BILSendModel: BILRecieveModel {
     var bitcoinSatoshiAmount: Int {
         get {
             guard let amount = Double(self.amount) else { return 0 }
-            let satoshi = Int(amount * Double(BTC_SATOSH))
+            let satoshi = Int(amount * Double(BTC_SATOSHI))
             return satoshi
         }
     }

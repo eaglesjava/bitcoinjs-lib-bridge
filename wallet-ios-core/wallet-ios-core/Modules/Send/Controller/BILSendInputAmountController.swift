@@ -108,7 +108,7 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
                 return false
             }
             let decimalPlace = array[1]
-            return decimalPlace.count <= "\(BTC_SATOSH)".count - 1
+            return decimalPlace.count <= "\(BTC_SATOSHI)".count - 1
         }
         
         return true
