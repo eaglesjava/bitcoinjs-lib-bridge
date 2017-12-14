@@ -6,8 +6,6 @@ let bip32utils = require('bip32-utils')
 let BITCOIN_MAINNET_PATH = "m/44'/0'/0'/0"
 let BITCOIN_TESTNET_PATH = "m/44'/1'/0'/0"
 
-var bitcoinKeyChain = null
-
 // 随机生成中文助记词，entropy： 长度， wordlist：
 function generateMnemonicRandom (entropy, wordlist) {
 	// Generate a random mnemonic (uses crypto.randomBytes under the hood), defaults to 128-bits of entropy
@@ -37,9 +35,8 @@ function validateAddress(address) {
     }
 }
 
-
 function getBitcoinAddressBySeedHex (seedHex, index) {
-	bitcoinKeyChain = bitcoinKeyChain || generateBitcoinMainnetMasterKeychain(seedHex)
+	var bitcoinKeyChain = generateBitcoinMainnetMasterKeychain(seedHex)
 	return bitcoinKeyChain.derive(index).getAddress()
 }
 
@@ -66,6 +63,33 @@ function generateBitcoinTestnetMasterKeychain (seedHex) {
 	return generateMainnetMasterKeychain(seedHex).derivePath(BITCOIN_TESTNET_PATH)
 }
 
+function buildTransaction(seedHex, datas) {
+	var keychain = generateBitcoinMainnetMasterKeychain(seedHex)
+	var data = JSON.parse(datas)
+
+	var txb = new bitcoin.TransactionBuilder()
+
+	var inputs = data["inputs"]
+	var ecPairs = new Array()
+	for (var i = 0; i < inputs.length; i++) {
+		var input = inputs[i]
+		txb.addInput(input["txHash"], input["index"])
+		ecPairs[i] = keychain.derive(input["bip39Index"])
+	}
+
+	var outputs = data["outputs"]
+	for (var i = 0; i < outputs.length; i++) {
+		var output = outputs[i]
+		txb.addOutput(output["address"], output["amount"])
+	}
+
+	for (var i = ecPairs.length - 1; i >= 0; i--) {
+		txb.sign(i, ecPairs[i])
+	}
+
+	return txb.build().toHex()
+}
+
 module.exports = {
 	generateMnemonicRandom,
 	generateMnemonicRandomCN,
@@ -75,6 +99,7 @@ module.exports = {
 	getBitcoinAddressBySeedHex,
 	getBitcoinAddressByMasterXPublicKey,
 	getBitcoinMasterXPublicKey,
+	buildTransaction,
 	bip39: bip39,
 }
 
