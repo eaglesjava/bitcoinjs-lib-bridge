@@ -38,7 +38,7 @@
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
         </activity>
         <activity
             android:name=".ui.wallet.importing.ImportWalletActivity"
@@ -69,7 +69,8 @@
         <activity
             android:name=".ui.main.receive.SpecificReceiveActivity"
             android:label="@string/title_activity_specific_receive"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize">
         </activity>
         <activity
             android:name=".ui.main.send.SendSuccessActivity"
@@ -83,6 +84,25 @@
         <activity
             android:name=".ui.wallet.init.ResetPwdActivity"
             android:label="@string/title_activity_reset_pwd"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".ui.main.send.SendConfirmActivity"
+            android:label="@string/title_activity_send_confirm"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".ui.main.send.SelectWalletActivity"
+            android:label="@string/title_activity_select_wallet">
+        </activity>
+        <activity
+            android:name=".ui.main.send.SendAmountActivity"
+            android:label="@string/title_activity_send_amount"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize">
+        </activity>
+        <activity
+            android:name=".ui.main.receive.ScanPayActivity"
+            android:label="@string/title_activity_scan_pay"
             android:theme="@style/AppTheme">
         </activity>
     </application>

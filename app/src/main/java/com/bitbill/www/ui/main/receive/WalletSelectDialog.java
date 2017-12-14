@@ -128,7 +128,7 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
             @Override
             protected void convert(ViewHolder holder, Wallet wallet, final int position) {
 
-                holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()) + " 的钱包");
+                holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()));
                 holder.setText(R.id.tv_wallet_amount, StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc");
                 holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
 

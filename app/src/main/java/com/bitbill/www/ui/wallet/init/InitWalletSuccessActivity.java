@@ -13,6 +13,7 @@ import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
@@ -97,6 +98,7 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity {
                 break;
         }
         //关闭初始化钱包流程
+        AppManager.get().finishActivity(GuideActivity.class);
         AppManager.get().finishActivity(CreateWalletIdActivity.class);
         AppManager.get().finishActivity(InitWalletActivity.class);
         if (!isCreateWallet) {

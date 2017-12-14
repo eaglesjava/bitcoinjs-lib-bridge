@@ -1,7 +1,6 @@
 package com.bitbill.www.ui.wallet.backup;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,9 +9,7 @@ import android.widget.EditText;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.base.view.dialog.PwdDialogFragment;
-import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.main.MainActivity;
@@ -40,6 +37,12 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
     }
 
     @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+    }
+
+    @Override
     public BackupWalletMvpPresenter getMvpPresenter() {
         return mBackupWaleltPresenter;
     }
@@ -62,34 +65,20 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
 
     @Override
     public void initView() {
-        pwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.title_dialog_bakup_wallet), false);
-        pwdDialogFragment.setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
-            /**
-             * This method will be invoked when a button in the dialog is clicked.
-             *
-             * @param dialog The dialog that received the click.
-             * @param which  The button that was clicked (e.g.
-             *               {@link BaseConfirmDialog#DIALOG_BTN_POSITIVE}) or the position
-             */
+        pwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.title_dialog_bakup_wallet), getWallet(), false);
+        pwdDialogFragment.setOnPwdValidatedListener(new PwdDialogFragment.OnPwdValidatedListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                pwdDialogFragment.setAutoDismiss(true);
-                if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
-                    if (StringUtils.checkUserPwd(pwdDialogFragment.getConfirmPwd(), mWallet)) {
+            public void onPwdCnfirmed() {
 
-                        // 确定加载助记词
-                        getMvpPresenter().loadMnemonic(pwdDialogFragment.getConfirmPwd());
-                    } else {
-                        pwdDialogFragment.setAutoDismiss(false);
-                        showMessage("请输入正确的密码");
-                        return;
-                    }
+                // 确定加载助记词
+                getMvpPresenter().loadMnemonic(pwdDialogFragment.getConfirmPwd());
+            }
 
-                } else {
-                    // 取消返回主页
-                    finish();
-                    MainActivity.start(BackUpWalletActivity.this);
-                }
+            @Override
+            public void onDialogCanceled() {
+                // 取消返回主页
+                onBackPressed();
+
             }
         });
         showPwdDialog();
@@ -106,7 +95,6 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
 
     @Override
     public void initData() {
-        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
     }
 
     @Override
@@ -149,5 +137,13 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
     public void wirttenMnemonicClick(View view) {
         //跳转到备份确定界面
         BackupWalletConfirmActivity.start(BackUpWalletActivity.this, getMnemonic(), getWallet());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //返回首页
+        MainActivity.start(BackUpWalletActivity.this);
+
     }
 }

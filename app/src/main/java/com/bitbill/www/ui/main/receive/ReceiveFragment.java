@@ -209,7 +209,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
             // TODO: 2017/12/8 刷新接收地址
-            showMessage("刷新地址");
+            showMessage("地址刷新了");
             return true;
         }
 

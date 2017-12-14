@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
@@ -28,6 +29,8 @@ public class BtcUnconfirmFragment extends BaseFragment {
 
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
+    @BindView(R.id.tv_in_progress)
+    TextView tvInProgress;
     private OnTransactionRecordItemClickListener mListener;
     private List<TransactionRecord> mRecordList;
     private CommonAdapter<TransactionRecord> mAdapter;
@@ -44,18 +47,6 @@ public class BtcUnconfirmFragment extends BaseFragment {
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // TODO: 2017/12/5 获取列表数据
-        mRecordList = new ArrayList();
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-
     }
 
 
@@ -88,6 +79,9 @@ public class BtcUnconfirmFragment extends BaseFragment {
 
     @Override
     public void onBeforeSetContentLayout() {
+        if (mRecordList == null) {
+            mRecordList = new ArrayList();
+        }
 
     }
 
@@ -123,14 +117,18 @@ public class BtcUnconfirmFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        // TODO: 2017/12/5 获取列表数据
+        mRecordList.clear();
+        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        tvInProgress.setText(String.format(getString(R.string.text_in_progress_count), mRecordList.size()));
     }
 
     @Override
     public int getLayoutId() {
         return R.layout.fragment_btc_unconfirm_list;
     }
-
 
     /**
      * This interface must be implemented by activities that contain this

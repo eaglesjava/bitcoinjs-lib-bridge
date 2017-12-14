@@ -18,6 +18,8 @@ public interface MvpView {
 
     void hideLoading();
 
+    void showKeyboard();
+
     void onTokenExpire();
 
     void onError(@StringRes int resId);

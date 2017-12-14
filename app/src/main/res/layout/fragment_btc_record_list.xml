@@ -11,16 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
-        android:name="com.bitbill.www.ui.wallet.info.BtcRecordFragment"
-        style="@style/RecyclerView"
+    <com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/activity_padding"
-        android:layout_marginRight="@dimen/activity_padding"
-        android:background="@color/transparent"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="com.bitbill.www.ui.wallet.info.BtcRecordFragment"
-        tools:listitem="@layout/item_btc_record"/>
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_padding"
+        android:paddingRight="@dimen/activity_padding"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:name="com.bitbill.www.ui.wallet.info.BtcRecordFragment"
+            style="@style/RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="com.bitbill.www.ui.wallet.info.BtcRecordFragment"
+            tools:listitem="@layout/item_btc_record"/>
+    </com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh>
 </LinearLayout>

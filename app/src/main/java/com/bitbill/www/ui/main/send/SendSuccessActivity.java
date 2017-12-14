@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 
@@ -18,16 +19,28 @@ public class SendSuccessActivity extends BaseToolbarActivity {
     TextView tvHintTitle;
     @BindView(R.id.tv_send_address)
     TextView tvSendAddress;
-    @BindView(R.id.tv_send_amount)
+    @BindView(R.id.et_send_amount)
     TextView tvSendAmount;
     @BindView(R.id.tv_hint_content)
     TextView tvHintContent;
     @BindView(R.id.btn_create_contact)
     Button btnCreateContact;
+    private String mSendAddress;
+    private String mSendAmount;
 
-    public static void start(Context context) {
+    public static void start(Context context, String address, String sendAmount) {
         Intent starter = new Intent(context, SendSuccessActivity.class);
+        starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
+        starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, sendAmount);
         context.startActivity(starter);
+    }
+
+
+    @Override
+    protected void handleIntent(Intent intent) {
+
+        mSendAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
+        mSendAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
     }
 
     @Override
@@ -52,6 +65,8 @@ public class SendSuccessActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
+        tvSendAddress.setText(mSendAddress);
+        tvSendAmount.setText(mSendAmount + " BTC");
 
     }
 

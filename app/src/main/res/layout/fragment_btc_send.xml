@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingLeft="@dimen/activity_padding"
-              android:paddingRight="@dimen/activity_padding"
-              tools:context="com.bitbill.www.ui.main.send.BtcSendFragment">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:focusable="true"
+             android:focusableInTouchMode="true"
+             android:paddingLeft="@dimen/activity_padding"
+             android:paddingRight="@dimen/activity_padding"
+             tools:context="com.bitbill.www.ui.main.send.BtcSendFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,61 +19,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="接收方地址"/>
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/inset_send_contact"
+            android:hint="接收方地址"
+            android:singleLine="true"/>
 
         <ImageView
+            android:id="@+id/iv_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/et_send_address"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
             android:paddingRight="10dp"
-            android:src="@drawable/ic_send_address"/>
+            android:src="@drawable/ic_send_address"
+            android:visibility="gone"/>
     </RelativeLayout>
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/Button.Blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
-        <EditText
-            android:id="@+id/et_send_amount"
-            style="@style/EditText.Normal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="发送金额"/>
-
-        <TextView
-            style="@style/Text.White.Action"
-            android:layout_alignBaseline="@id/et_send_amount"
-            android:layout_alignParentRight="true"
-            android:text="选择全部"/>
-    </RelativeLayout>
-
-    <EditText
-        android:id="@+id/et_send_mark"
-        style="@style/EditText.Normal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="备注（20字内）"/>
-
-    <TextView
-        style="@style/Text.White.Action"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
-        android:text="推荐手续费"/>
+        android:text="@string/btn_next"/>
 
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:progressTint="@color/white"
-        />
-
-    <TextView
-        style="@style/Text.Small.White"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="平均出块时间30分钟，需耗费0.002BTC"/>
-</LinearLayout>
+</FrameLayout>

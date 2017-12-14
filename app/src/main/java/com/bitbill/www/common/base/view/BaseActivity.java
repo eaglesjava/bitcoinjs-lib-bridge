@@ -184,6 +184,16 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     }
 
     @Override
+    public void showKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, 0);
+        }
+    }
+
+    @Override
     public void onTokenExpire() {
         finish();
     }

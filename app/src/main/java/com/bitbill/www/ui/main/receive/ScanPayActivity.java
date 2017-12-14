@@ -3,24 +3,26 @@ package com.bitbill.www.ui.main.receive;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.utils.StringUtils;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
-public class SpecificReceiveActivity extends BaseToolbarActivity {
-
-    @BindView(R.id.et_input_amount)
-    EditText etInputAmount;
+public class ScanPayActivity extends BaseToolbarActivity {
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
+    @BindView(R.id.iv_qrcode)
+    ImageView ivQrcode;
+    @BindView(R.id.tv_receive_amount)
+    TextView tvReceiveAmount;
 
     public static void start(Context context) {
-        context.startActivity(new Intent(context, SpecificReceiveActivity.class));
+        Intent starter = new Intent(context, ScanPayActivity.class);
+        context.startActivity(starter);
     }
 
     @Override
@@ -55,16 +57,6 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_specific_receive;
-    }
-
-    @OnClick(value = R.id.btn_next)
-    public void inputConfirmClick(View view) {
-        // TODO: 2017/12/8 check输入金额 切换到扫码支付界面
-        if (StringUtils.isEmpty(etInputAmount.getText())) {
-            showMessage("请输入特定金额");
-            return;
-        }
-        ScanPayActivity.start(SpecificReceiveActivity.this);
+        return R.layout.activity_scan_pay;
     }
 }

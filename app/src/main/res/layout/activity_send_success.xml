@@ -32,7 +32,7 @@
         android:textColor="@color/white_60"/>
 
     <TextView
-        android:id="@+id/tv_send_amount"
+        android:id="@+id/et_send_amount"
         style="@style/Text.White"
         android:layout_marginTop="5dp"
         android:text="0.221 BTC"

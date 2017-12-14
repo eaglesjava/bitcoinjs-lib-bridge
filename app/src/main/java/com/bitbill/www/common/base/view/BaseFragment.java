@@ -66,13 +66,13 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
             }
         }
         setUnBinder(ButterKnife.bind(this, mView));
-        initData();
         //缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         ViewGroup parent = (ViewGroup) mView.getParent();
         if (parent != null) {
             parent.removeView(mView);
         }
         initView();
+        initData();
         return mView;
     }
 
@@ -154,6 +154,13 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
     public void hideKeyboard() {
         if (mActivity != null) {
             mActivity.hideKeyboard();
+        }
+    }
+
+    @Override
+    public void showKeyboard() {
+        if (mActivity != null) {
+            mActivity.showKeyboard();
         }
     }
 

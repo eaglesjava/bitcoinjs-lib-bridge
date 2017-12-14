@@ -131,12 +131,10 @@ public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements Ba
             case R.id.btn_create_wallet:
                 //跳转到创建钱包界面
                 CreateWalletIdActivity.start(GuideActivity.this, null, true);
-                finish();
                 break;
             case R.id.btn_import_wallet:
                 //跳转到导入钱包界面
                 ImportWalletActivity.start(GuideActivity.this);
-                finish();
                 break;
         }
     }

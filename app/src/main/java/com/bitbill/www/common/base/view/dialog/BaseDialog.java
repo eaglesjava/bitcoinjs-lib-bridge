@@ -106,6 +106,13 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
     }
 
     @Override
+    public void showKeyboard() {
+        if (mActivity != null) {
+            mActivity.hideKeyboard();
+        }
+    }
+
+    @Override
     public void onTokenExpire() {
         if (mActivity != null) {
             mActivity.onTokenExpire();

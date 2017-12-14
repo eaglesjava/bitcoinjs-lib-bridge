@@ -117,11 +117,21 @@
     <style name="EditText.ConfirmPwd" parent="EditText.Normal">
         <item name="android:textColorHint">@color/black_50</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:background">@drawable/input_border_bottom</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:singleLine">true</item>
         <item name="android:lines">1</item>
         <item name="android:maxLines">1</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
+
+    <style name="EditText.Amount" parent="EditText">
+        <item name="android:singleLine">true</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:background">@color/transparent</item>
+
     </style>
 
     <style name="Text" parent="TextAppearance.AppCompat">
@@ -164,6 +174,11 @@
         <item name="android:textColor">@color/white_60</item>
         <item name="android:textSize">@dimen/title_tiny</item>
         <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Text.Title.Confirm" parent="Text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white_80</item>
     </style>
 
     <style name="Text.InputHint" parent="Text">
@@ -346,5 +361,6 @@
     <style name="RecyclerView">
         <item name="android:overScrollMode">never</item>
     </style>
+
 
 </resources>

@@ -52,6 +52,7 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
     AssetMvpPresenter<WalletModel, AssetMvpView> mAssetMvpPresenter;
     private PopupWalletMenu mWalletMenu;
     private int mWalletCount;
+    private boolean isFirstLoading = true;//第一次加载
 
     public AssetFragment() {
         // Required empty public constructor
@@ -128,6 +129,10 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
 
     @Override
     public void showLoading() {
+        if (isFirstLoading) {
+            isFirstLoading = false;
+            return;
+        }
         mSwipeRefreshLayout.setRefreshing(true);
     }
 

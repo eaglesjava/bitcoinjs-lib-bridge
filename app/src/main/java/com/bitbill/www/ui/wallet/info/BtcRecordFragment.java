@@ -2,15 +2,16 @@ package com.bitbill.www.ui.wallet.info;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
-import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseFragment;
+import com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh;
 import com.bitbill.www.common.base.view.widget.DividerDecoration;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * A fragment representing a list of Items.
@@ -37,10 +37,10 @@ public class BtcRecordFragment extends BaseFragment {
     TextView tvAmount;
     @BindView(R.id.tv_amount_label)
     TextView tvAmountLabel;
-    Unbinder unbinder;
+    @BindView(R.id.refresh_layout)
+    CustomSwipeToRefresh refreshLayout;
     private OnTransactionRecordItemClickListener mListener;
     private List<TransactionRecord> mRecordList;
-    private boolean isBtcRecod;
     private CommonAdapter<TransactionRecord> mAdapter;
 
     /**
@@ -56,28 +56,6 @@ public class BtcRecordFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            isBtcRecod = getArguments().getBoolean(AppConstants.IS_BTC_RECOD);
-        }
-        // TODO: 2017/12/5 获取列表数据
-        mRecordList = new ArrayList();
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-
-    }
-
 
     @Override
     public void onAttach(Context context) {
@@ -109,6 +87,10 @@ public class BtcRecordFragment extends BaseFragment {
     @Override
     public void onBeforeSetContentLayout() {
 
+        if (mRecordList == null) {
+            mRecordList = new ArrayList();
+        }
+
     }
 
     @Override
@@ -118,6 +100,19 @@ public class BtcRecordFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        initData();
+                    }
+                }, 2000);
+            }
+        });
+        refreshLayout.setColorSchemeResources(R.color.blue);
         DividerDecoration decor = new DividerDecoration(getBaseActivity(), DividerDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(decor);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
@@ -147,13 +142,24 @@ public class BtcRecordFragment extends BaseFragment {
     @Override
     public void initData() {
 
+        // TODO: 2017/12/5 获取列表数据
+        mRecordList.clear();
+        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
+        refreshLayout.setRefreshing(false);
     }
 
     @Override
     public int getLayoutId() {
         return R.layout.fragment_btc_record_list;
     }
-
 
     /**
      * This interface must be implemented by activities that contain this

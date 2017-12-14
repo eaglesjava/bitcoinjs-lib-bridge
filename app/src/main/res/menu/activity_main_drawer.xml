@@ -44,10 +44,6 @@
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_menu_setting"
                 android:title="@string/title_setting"/>
-            <item
-                android:id="@+id/nav_guide"
-                android:icon="@drawable/ic_guide_phone"
-                android:title="引导页（for test)"/>
 
         </menu>
     </item>

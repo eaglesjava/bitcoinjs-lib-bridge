@@ -2,6 +2,7 @@ package com.bitbill.www.common.utils;
 
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.webkit.URLUtil;
@@ -537,17 +538,18 @@ public class StringUtils {
     }
 
     /**
-     * 获取格式化的金额字符串 格式:10.00 -> 10
+     * 获取格式化的金额字符串
      *
      * @param damount
      * @return
      */
     public static String getFormatedAmount(long damount) {
-        return getFormatedDollers(damount, 2);
+        return getFormatedDollers(damount, 8);
     }
 
     /**
      * 格式化金额字符串，保留指定小数
+     * 不显示千分位
      *
      * @param amount 金额
      * @param d      保留小数位数
@@ -555,29 +557,10 @@ public class StringUtils {
      */
     public static String getFormatedDollers(long amount, int d) {
         NumberFormat format = NumberFormat.getInstance();
-        //设置截断模式
-        format.setRoundingMode(RoundingMode.FLOOR);
-        //设置允许的最大保留小数
-        format.setMaximumFractionDigits(d);
-        format.setMinimumFractionDigits(d);
-        return format.format(amount);
-    }
-
-    /**
-     * 格式化金额字符串，保留指定小数
-     * 使用四舍五入方式
-     * 不显示千分位
-     *
-     * @param amount 金额
-     * @param d      保留小数位数
-     * @return
-     */
-    public static String getFormatedDollersHalfupNoGroup(double amount, int d) {
-        NumberFormat format = NumberFormat.getInstance();
         //不显示千分位逗号
         format.setGroupingUsed(false);
-        //设置四舍五入模式
-        format.setRoundingMode(RoundingMode.HALF_UP);
+        //设置截断模式
+        format.setRoundingMode(RoundingMode.FLOOR);
         //设置允许的最大保留小数
         format.setMaximumFractionDigits(d);
         format.setMinimumFractionDigits(d);
@@ -817,4 +800,19 @@ public class StringUtils {
     public static boolean isValidMnemonic(String mnemonic) {
         return !isEmpty(mnemonic);
     }
+
+
+    /**
+     * 复制粘贴文本
+     *
+     * @param textView
+     */
+    public static void setTextViewUnLine(TextView textView) {
+        if (textView == null) {
+            return;
+        }
+        textView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
+        textView.getPaint().setAntiAlias(true);//抗锯齿
+    }
+
 }

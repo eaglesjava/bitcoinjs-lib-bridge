@@ -24,6 +24,8 @@ public final class AppConstants {
     public static final String ARG_WALLET = "arg_wallet";
     public static final String EXTRA_IS_FROM_GUIDE = "extra_is_from_guide";
     public static final String EXTRA_IS_RESET_PWD = "is_reset_pwd";
+    public static final String EXTRA_SEND_ADDRESS = "send_address";
+    public static final String EXTRA_SEND_AMOUNT = "send_amount";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

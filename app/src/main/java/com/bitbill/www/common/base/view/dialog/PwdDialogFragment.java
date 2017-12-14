@@ -1,12 +1,15 @@
 package com.bitbill.www.common.base.view.dialog;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * Created by isanwenyu@163.com on 2017/11/22.
@@ -14,14 +17,17 @@ import butterknife.Unbinder;
 public class PwdDialogFragment extends BaseConfirmDialog {
 
     public static final String TAG = "InputDialogFragment";
+    private static final String CONFIRM_WALLET = "confirm_wallet";
     @BindView(R.id.et_confirm_pwd)
     EditText etConfirmPwd;
-    Unbinder unbinder;
+    private Wallet mWallet;
+    private OnPwdValidatedListener mOnPwdValidatedListener;
 
-    public static PwdDialogFragment newInstance(String title, boolean isOnlyPositiveBtn) {
+    public static PwdDialogFragment newInstance(String title, Wallet wallet, boolean isOnlyPositiveBtn) {
 
         Bundle args = new Bundle();
         args.putString(CONFIRM_TITLE, title);
+        args.putSerializable(CONFIRM_WALLET, wallet);
         args.putBoolean(CONFIRM_ONLY_POSITIVE_BTN, isOnlyPositiveBtn);
         PwdDialogFragment fragment = new PwdDialogFragment();
         fragment.setArguments(args);
@@ -30,7 +36,7 @@ public class PwdDialogFragment extends BaseConfirmDialog {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        mWallet = (Wallet) getArguments().getSerializable(CONFIRM_WALLET);
     }
 
     @Override
@@ -40,8 +46,44 @@ public class PwdDialogFragment extends BaseConfirmDialog {
 
     @Override
     public void initView() {
+        setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
+            /**
+             * This method will be invoked when a button in the dialog is clicked.
+             *
+             * @param dialog The dialog that received the click.
+             * @param which  The button that was clicked (e.g.
+             *               {@link BaseConfirmDialog#DIALOG_BTN_POSITIVE}) or the position
+             */
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setAutoDismiss(true);
+                if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
+                    if (StringUtils.checkUserPwd(getConfirmPwd(), mWallet)) {
+                        // 确定密码验证正确
+                        if (mOnPwdValidatedListener != null) {
+                            mOnPwdValidatedListener.onPwdCnfirmed();
+                        }
+                    } else {
+                        setAutoDismiss(false);
+                        showMessage("请输入正确的密码");
+                        return;
+                    }
+
+                } else {
+                    // 取消
+                    if (mOnPwdValidatedListener != null) {
+                        mOnPwdValidatedListener.onDialogCanceled();
+                    }
+
+                }
+            }
+        });
+
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
 
     }
+
 
     @Override
     public void initData() {
@@ -55,6 +97,18 @@ public class PwdDialogFragment extends BaseConfirmDialog {
 
     public String getConfirmPwd() {
         return etConfirmPwd.getText().toString();
+    }
+
+    public PwdDialogFragment setOnPwdValidatedListener(OnPwdValidatedListener onPwdValidatedListener) {
+        mOnPwdValidatedListener = onPwdValidatedListener;
+        return this;
+    }
+
+    public interface OnPwdValidatedListener {
+
+        void onPwdCnfirmed();
+
+        void onDialogCanceled();
     }
 
 }
