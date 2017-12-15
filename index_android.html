@@ -8,45 +8,21 @@
 
 <script type="text/javascript" src="bitcoinjs-lib-app.js"></script>
 <script type="text/javascript">
-    function generateMnemonicRandomCN(){
-       android.generateMnemonicRandomCN(bridge.generateMnemonicRandomCN(128))
-    }
 
-    function mnemonicToSeedHex(nemonic){
-       android.mnemonicToSeedHex(bridge.mnemonicToSeedHex(nemonic, ''))
-    }
-    function getBitcoinAddressBySeedHex(seedHex,index){
-       android.getBitcoinAddressBySeedHex(bridge.getBitcoinAddressBySeedHex(seedHex, index))
-    }
-    function getBitcoinAddressByMasterXPublicKey(xpub,index){
-       android.getBitcoinAddressByMasterXPublicKey(bridge.getBitcoinAddressByMasterXPublicKey(xpub, index))
-    }
-    function getBitcoinMasterXPublicKey(seedHex){
-       android.getBitcoinMasterXPublicKey(bridge.getBitcoinMasterXPublicKey(seedHex))
-    }
-
-    function validateMnemonic(mnemonic){
-       android.validateMnemonic(bridge.validateMnemonic(mnemonic))
-    }
-
-    function validateMnemonicReturnSeedHex(mnemonic){
-       android.validateMnemonicReturnSeedHex(bridge.validateMnemonic(mnemonic),bridge.mnemonicToSeedHex(mnemonic, pwd))
-    }
     function validateMnemonicReturnSeedHexAndXPublicKey(mnemonic){
+       var validate=bridge.validateMnemonic(mnemonic)
        var seedHex = bridge.mnemonicToSeedHex(mnemonic, '')
-       android.validateMnemonicReturnSeedHexAndXPublicKey(bridge.validateMnemonic(mnemonic),seedHex ,bridge.getBitcoinMasterXPublicKey(seedHex))
+       var XPublicKey = bridge.getBitcoinMasterXPublicKey(seedHex)
+       return [validate,seedHex,XPublicKey]
     }
 
-    function generateMnemonicCNandSeedHex(){
-        var mnemonic = bridge.generateMnemonicRandomCN(128)
-        android.generateMnemonicCNandSeedHex(mnemonic,bridge.mnemonicToSeedHex(mnemonic,''))
-    }
     function generateMnemonicCNRetrunSeedHexAndXPublicKey(){
         var mnemonic = bridge.generateMnemonicRandomCN(128)
         var seedHex = bridge.mnemonicToSeedHex(mnemonic,'')
         var XPublicKey = bridge.getBitcoinMasterXPublicKey(seedHex)
-        android.generateMnemonicCNRetrunSeedHexAndXPublicKey(mnemonic,seedHex,XPublicKey)
+        return [mnemonic,seedHex,XPublicKey]
     }
+
 
 
 
