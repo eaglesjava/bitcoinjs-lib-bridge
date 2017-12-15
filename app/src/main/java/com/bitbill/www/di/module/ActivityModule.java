@@ -22,6 +22,9 @@ import com.bitbill.www.ui.main.MainPresenter;
 import com.bitbill.www.ui.main.asset.AssetMvpPresenter;
 import com.bitbill.www.ui.main.asset.AssetMvpView;
 import com.bitbill.www.ui.main.asset.AssetPresenter;
+import com.bitbill.www.ui.main.receive.BtcReceiveMvpPresenter;
+import com.bitbill.www.ui.main.receive.BtcReceiveMvpView;
+import com.bitbill.www.ui.main.receive.BtcReceivePresenter;
 import com.bitbill.www.ui.main.receive.ReceiveMvpPresenter;
 import com.bitbill.www.ui.main.receive.ReceiveMvpView;
 import com.bitbill.www.ui.main.receive.ReceivePresenter;
@@ -159,6 +162,13 @@ public class ActivityModule {
     @PerActivity
     ResetPwdMvpPresenter<WalletModel, ResetPwdMvpView> provideRestPwdPresenter(
             ResetPwdPresenter<WalletModel, ResetPwdMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    BtcReceiveMvpPresenter<WalletModel, BtcReceiveMvpView> provideBtcReceivePresenter(
+            BtcReceivePresenter<WalletModel, BtcReceiveMvpView> presenter) {
         return presenter;
     }
 

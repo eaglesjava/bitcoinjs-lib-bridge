@@ -204,6 +204,9 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
      */
     @Override
     public void lazyData() {
-        getMvpPresenter().loadWallet();
+        if (getMvpPresenter() != null) {
+            getMvpPresenter().loadWallet();
+
+        }
     }
 }

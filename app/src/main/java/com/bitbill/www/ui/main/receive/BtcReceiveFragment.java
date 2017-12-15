@@ -1,5 +1,6 @@
 package com.bitbill.www.ui.main.receive;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -7,9 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -19,7 +23,7 @@ import butterknife.OnClick;
  * Use the {@link BtcReceiveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BtcReceiveFragment extends BaseLazyFragment {
+public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter> implements BtcReceiveMvpView {
 
 
     @BindView(R.id.tv_address)
@@ -28,6 +32,9 @@ public class BtcReceiveFragment extends BaseLazyFragment {
     ImageView ivQrcode;
     @BindView(R.id.tv_receive_amount)
     TextView tvReceiveAmount;
+    @Inject
+    BtcReceiveMvpPresenter<WalletModel, BtcReceiveMvpView> mReceiveMvpPresenter;
+    private String mSendAddress;
 
     public BtcReceiveFragment() {
         // Required empty public constructor
@@ -54,13 +61,13 @@ public class BtcReceiveFragment extends BaseLazyFragment {
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public BtcReceiveMvpPresenter getMvpPresenter() {
+        return mReceiveMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -109,4 +116,30 @@ public class BtcReceiveFragment extends BaseLazyFragment {
         showMessage(R.string.R_string_toast_copy_address_success);
     }
 
+    public void refreshAddress(Wallet selectedWallet) {
+        mReceiveMvpPresenter.reloadAddress(selectedWallet);
+
+    }
+
+    public void setSendAddress(String sendAddress) {
+        mSendAddress = sendAddress;
+        tvAddress.setText(sendAddress);
+    }
+
+    @Override
+    public void createAddressQrcodeSuccess(Bitmap qrcodeBitmap) {
+        ivQrcode.setImageBitmap(qrcodeBitmap);
+    }
+
+    @Override
+    public void createAddressQrcodeFail() {
+        showMessage(R.string.error_create_address_qrcode);
+
+    }
+
+    @Override
+    public void refreshAddressFail() {
+
+        showMessage(R.string.error_refresh_address);
+    }
 }

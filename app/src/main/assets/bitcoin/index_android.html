@@ -23,6 +23,13 @@
         return [mnemonic,seedHex,XPublicKey]
     }
 
+    function getBitcoinAddressByMasterXPublicKey(xpub,index){
+        var address=bridge.getBitcoinAddressByMasterXPublicKey(xpub,index)
+        return [address]
+    }
+
+
+
 
 
 

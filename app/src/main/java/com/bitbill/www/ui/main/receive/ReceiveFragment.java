@@ -92,8 +92,6 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
 
     @Override
     public void initView() {
-        setupViewPager();
-
         mWalletSelectDialog = WalletSelectDialog.newInstance();
         mWalletSelectDialog.setOnWalletSelectItemClickListener(new WalletSelectDialog.OnWalletSelectItemClickListener() {
             @Override
@@ -101,6 +99,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                 mSelectedWallet = selectedWallet;
                 //刷新选择布局
                 selectWalletView.setWallet(selectedWallet);
+                refreshBtcAddress();
             }
         });
 
@@ -118,6 +117,8 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                 BackUpWalletActivity.start(getBaseActivity(), wallet);
             }
         });
+        setupViewPager();
+
     }
 
 
@@ -177,6 +178,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                     }
                 }
                 selectWalletView.setWallet(mSelectedWallet);
+                refreshBtcAddress();
             } else {
                 selectWalletView.setVisibility(View.GONE);
             }
@@ -210,10 +212,17 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
         if (id == R.id.action_refresh) {
             // TODO: 2017/12/8 刷新接收地址
             showMessage("地址刷新了");
+            refreshBtcAddress();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refreshBtcAddress() {
+        if (mBtcReceiveFragment != null) {
+            mBtcReceiveFragment.refreshAddress(mSelectedWallet);
+        }
     }
 
 }

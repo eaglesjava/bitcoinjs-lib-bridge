@@ -40,7 +40,7 @@ public class BitcoinJsWrapper {
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
                 // TODO Auto-generated method stub
-                if (consoleMessage.message().contains("Uncaught ReferenceError")) {
+                if (consoleMessage.message().matches("Uncaught \\w*Error")) {
                     // do something...
                     Log.d(TAG, "onConsoleMessage() called with: consoleMessage = [" + consoleMessage + "]");
                 }
@@ -57,7 +57,7 @@ public class BitcoinJsWrapper {
         }
         String excuteJs = "javascript:" + jsFunction;
         String functionName = jsFunction.substring(0, jsFunction.indexOf("("));
-
+        Log.d(TAG, "executeJS() called with: jsFunction = [" + jsFunction + "], callback = [" + callback + "]");
         mWebView.evaluateJavascript(jsFunction, new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String value) {
@@ -83,6 +83,10 @@ public class BitcoinJsWrapper {
 
     public void validateMnemonicReturnSeedHexAndXPublicKey(String nemonic, Callback callback) {
         executeJS("validateMnemonicReturnSeedHexAndXPublicKey('" + nemonic + "')", callback);
+    }
+
+    public void getBitcoinAddressByMasterXPublicKey(String xpub, long index, Callback callback) {
+        executeJS("getBitcoinAddressByMasterXPublicKey('" + xpub + "'," + index + ")", callback);
     }
 
     public interface Callback {

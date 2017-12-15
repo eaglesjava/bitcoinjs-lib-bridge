@@ -11,15 +11,13 @@
         android:layout_marginLeft="@dimen/activity_padding"
         android:layout_marginRight="@dimen/activity_padding"
         android:layout_marginTop="10dp"
-        android:text="1He7s5V6CNEQRJMVAVdWfHCoJFM5CwrvPP"
         android:textSize="15sp"/>
 
     <ImageView
         android:id="@+id/iv_qrcode"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_receive_qrcode"/>
+        android:layout_gravity="center_horizontal"/>
 
     <TextView
         android:id="@+id/tv_receive_amount"

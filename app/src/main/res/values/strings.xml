@@ -149,4 +149,6 @@
     <string name="title_activity_send_amount">发送金额</string>
     <string name="title_activity_scan_pay">特定金额接收</string>
     <string name="title_activity_scan_qrcode">扫一扫</string>
+    <string name="error_create_address_qrcode">生成地址二维码失败</string>
+    <string name="error_refresh_address">刷新地址失败</string>
 </resources>
