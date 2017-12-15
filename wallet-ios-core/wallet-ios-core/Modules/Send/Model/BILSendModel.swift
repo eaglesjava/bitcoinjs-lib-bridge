@@ -15,6 +15,8 @@ class BILSendModel: BILRecieveModel {
     
     var isSendAll = false
     
+    var transaction: Transaction?
+    
     var bitcoinAmount: String {
         get {
             guard let amount = Double(self.amount) else {
@@ -33,9 +35,5 @@ class BILSendModel: BILRecieveModel {
             let satoshi = Int(amount * Double(BTC_SATOSHI))
             return satoshi
         }
-    }
-    
-    func sendTransactionr(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        
     }
 }

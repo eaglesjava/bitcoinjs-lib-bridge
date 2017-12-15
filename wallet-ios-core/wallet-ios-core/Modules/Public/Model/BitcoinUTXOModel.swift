@@ -20,7 +20,7 @@ class BitcoinUTXOModel: NSObject {
     init(jsonData: JSON) {
         txHash = jsonData["txHash"].stringValue
         txOutputIndex = jsonData["vIndex"].intValue
-        bip39Index = jsonData["index"].intValue
+        bip39Index = jsonData["addressIndex"].intValue
         requiredSignatureCount = jsonData["reqSings"].intValue
         satoshiAmount = jsonData["sumOutAmount"].intValue
         amount = Double(satoshiAmount) / Double(BTC_SATOSHI)
@@ -28,6 +28,6 @@ class BitcoinUTXOModel: NSObject {
     }
     
     func toInput() -> BTCInput {
-        return BTCInput(txHash: txHash, index: txOutputIndex, bip39Index: bip39Index)
+        return BTCInput(txHash: txHash, index: txOutputIndex, bip39Index: bip39Index, satoshi: satoshiAmount)
     }
 }

@@ -469,6 +469,9 @@
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MUh-ay-4Fk">
                                                         <rect key="frame" x="-2" y="34" width="273" height="31"/>
+                                                        <connections>
+                                                            <action selector="sliderValueChanged:" destination="OMj-P2-5SR" eventType="valueChanged" id="yjb-vA-3vP"/>
+                                                        </connections>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平均确认时间30分钟，需耗费0.0002BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4RA-bO-hKB">
                                                         <rect key="frame" x="0.0" y="80" width="269" height="18"/>
@@ -635,6 +638,8 @@
                     <connections>
                         <outlet property="addressLabel" destination="3oK-wN-dDO" id="to3-F1-mrc"/>
                         <outlet property="amountLabel" destination="Erz-zk-b10" id="3dw-UK-BRG"/>
+                        <outlet property="feeSlider" destination="MUh-ay-4Fk" id="KhV-0B-nBa"/>
+                        <outlet property="feeTipeLabel" destination="4RA-bO-hKB" id="tPN-S0-ti7"/>
                         <outlet property="walletIDLabel" destination="k3E-gX-6yP" id="GQd-8b-30l"/>
                         <segue destination="gQ4-lN-Jcy" kind="presentation" identifier="BILSendConfirmToResultSegue" id="EbY-my-Ag0"/>
                     </connections>
@@ -742,46 +747,7 @@
                                             <attributes>
                                                 <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <font key="NSFont" size="15" name="PingFangSC-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                    <tabStops>
-                                                        <textTab alignment="left" location="28">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="56">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="84">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="112">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="140">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="168">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="196">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="224">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="252">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="280">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="308">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="336">
-                                                            <options/>
-                                                        </textTab>
-                                                    </tabStops>
-                                                </paragraphStyle>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 <integer key="NSUnderline" value="1"/>
                                                 <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             </attributes>
@@ -958,6 +924,7 @@
                             <constraint firstAttribute="bottom" secondItem="Tts-CG-0UP" secondAttribute="bottom" id="XNB-n6-4Ip"/>
                             <constraint firstItem="Tts-CG-0UP" firstAttribute="leading" secondItem="cZO-gj-KQw" secondAttribute="leading" id="eUH-5F-Opq"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="rAe-4H-V0O"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Tts-CG-0UP" id="anX-IF-9eu"/>

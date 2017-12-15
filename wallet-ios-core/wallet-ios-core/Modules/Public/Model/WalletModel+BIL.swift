@@ -40,6 +40,23 @@ extension WalletModel {
         }
     }
     
+    func decryptSeed(pwd: String) -> String? {
+        do {
+            guard let aes = WalletModel.generateAES(pwd: pwd) else { return nil }
+            
+            if let seed = String(bytes: try aes.decrypt((encryptedSeed?.ck_mnemonicData().bytes)!), encoding: .utf8), seed.md5() == self.seedHash {
+                return seed
+            }
+            else
+            {
+                return nil
+            }
+        } catch {
+            debugPrint(error)
+            return nil
+        }
+    }
+    
     func checkPassword(pwd: String) -> Bool {
         var toReturn = false
         

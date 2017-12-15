@@ -10,7 +10,7 @@ import Foundation
 
 let BTC_SATOSHI = 100000000
 
-func BTCFormatString(btc: Int) -> String {
+func BTCFormatString(btc: Int64) -> String {
     return String(format: "%.6f", Double(btc) / Double(BTC_SATOSHI))
 }
 
@@ -33,11 +33,20 @@ extension WalletModel {
     }
 	
 	func getNewBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
+        guard let extPub = mainExtPublicKey else {
+            failure("主扩展公钥为空")
+            return
+        }
 		lastAddressIndex += 1
 		lastBTCAddress(success: { (address) in
 			do {
 				try BILWalletManager.shared.saveWallets()
-				success(address)
+                success(address)
+                BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: self.lastAddressIndex), success: { (result) in
+                    debugPrint(result)
+                }, failure: { (msg, code) in
+                    debugPrint(msg)
+                })
 			} catch {
 				self.lastAddressIndex -= 1
 				failure("新地址保存失败")
@@ -50,12 +59,12 @@ extension WalletModel {
 	
     var btc_balanceString: String {
         get {
-            return BTCFormatString(btc: Int(btcBalance))
+            return BTCFormatString(btc: btcBalance)
         }
     }
     var btc_unconfirm_balanceString: String {
         get {
-            return BTCFormatString(btc: Int(btcUnconfirmBalance))
+            return BTCFormatString(btc: btcUnconfirmBalance)
         }
     }
     var btc_cnyString: String {

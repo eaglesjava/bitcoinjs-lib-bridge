@@ -7,13 +7,55 @@
 //
 
 import UIKit
+import SwiftyJSON
+
+struct BTCFee {
+    var isBest = false
+    var fee = 0
+    var timeInMinute = 0
+    init(jsonData: JSON) {
+        self.fee = jsonData["fee"].intValue
+        self.timeInMinute = jsonData["time"].intValue
+        self.isBest = jsonData["best"].boolValue
+    }
+    init(fee: Int, timeInMinute: Int, isBest: Bool = false) {
+        self.fee = fee
+        self.timeInMinute = timeInMinute
+        self.isBest = isBest
+    }
+    
+    var timeString: String {
+        get {
+            if timeInMinute < 60 {
+                return " \(timeInMinute) 分钟"
+            }
+            let minuteInDay = 60 * 24
+            if timeInMinute < minuteInDay {
+                return " \(timeInMinute / 60) 小时"
+            }
+            
+            return " \(timeInMinute / minuteInDay) 天"
+        }
+    }
+}
 
 class BILSendConfirmController: BILBaseViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var walletIDLabel: UILabel!
+    @IBOutlet weak var feeTipeLabel: UILabel!
+    @IBOutlet weak var feeSlider: UISlider!
     
     var sendModel: BILSendModel?
+    var txBuilder: TransactionBuilder? {
+        didSet {
+            sliderValueChanged(feeSlider)
+        }
+    }
+    
+    var fees = [BTCFee]()
+    var maxFeePerByte = 0
+    var bestFee = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +65,81 @@ class BILSendConfirmController: BILBaseViewController {
             walletIDLabel.text = model.wallet?.id
             addressLabel.text = model.address
             amountLabel.text = "\(model.bitcoinAmount) BTC"
+        }
+        
+        loadTransactionBuildConfiguration()
+    }
+    
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        print(sender.value)
+        let currentFee = Int(sender.value)
+        guard var nearFee = fees.last else { return }
+        for i in 0..<fees.count - 1 {
+            let bigFee = fees[i]
+            let smallFee = fees[i + 1]
+            print("\(sender.value), \(smallFee.fee), \(bigFee.fee)")
+            if smallFee.fee <= currentFee, bigFee.fee >= currentFee {
+                if (currentFee - smallFee.fee) >= (bigFee.fee - currentFee) {
+                    nearFee = bigFee
+                }
+                else
+                {
+                    nearFee = smallFee
+                }
+                break
+            }
+        }
+        guard let builder = txBuilder else { return }
+        builder.feePerByte = currentFee
+        feeTipeLabel.text = "平均确认时间\(nearFee.timeString)，需耗费 \(BTCFormatString(btc: Int64(builder.fee(perByte: currentFee)))) BTC"
+    }
+    
+    func setFees(fees: [BTCFee], best:BTCFee?) {
+        self.fees = fees
+        guard let minFee = fees.last else { return }
+        guard let maxFee = fees.first else { return }
+        guard let bFee = best else { return }
+        feeSlider.minimumValue = Float(minFee.fee)
+        feeSlider.maximumValue = Float(maxFee.fee)
+        feeSlider.value = Float(bFee.fee)
+        maxFeePerByte = maxFee.fee
+        bestFee = bFee.fee
+        sliderValueChanged(feeSlider)
+    }
+    
+    func loadTransactionBuildConfiguration() {
+        guard let model = sendModel else { return }
+        guard let wallet = model.wallet else { return }
+        
+        func errorHandler(msg: String) {
+            self.showTipAlert(title: nil, msg: msg)
+            self.bil_dismissHUD()
+        }
+        
+        func buildTx(address: String?) {
+            wallet.getTXBuildConfigurationFromServer(success: { (utxos, fees, bestFee)  in
+                self.setFees(fees: fees, best: bestFee)
+                let builder = TransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte)
+                builder.addTargetOutput(output: BTCOutput(address: model.address, amount: model.bitcoinSatoshiAmount))
+                self.txBuilder = builder
+                self.bil_dismissHUD()
+            }) { (msg, code) in
+                errorHandler(msg: msg)
+            }
+        }
+        
+        bil_showLoading(status: "处理中...")
+        
+        if model.isSendAll {
+            buildTx(address: nil)
+        }
+        else
+        {
+            wallet.getNewBTCAddress(success: { (address) in
+                buildTx(address: address)
+            }) { (msg) in
+                errorHandler(msg: msg)
+            }
         }
     }
 
@@ -60,13 +177,45 @@ class BILSendConfirmController: BILBaseViewController {
     }
     
     func send(password: String) {
-        sendSuccess()
+        func errorHandler(msg: String) {
+            self.showTipAlert(title: nil, msg: msg)
+            self.bil_dismissHUD()
+        }
+        guard let builder = txBuilder else {
+            errorHandler(msg: "创建交易失败")
+            return
+        }
+        guard let wallet = sendModel?.wallet else { return }
+        
+        guard let seed = wallet.decryptSeed(pwd: password) else {
+            errorHandler(msg: "解密 Seed 失败")
+            return
+        }
+        
+        builder.seedHex = seed
+        builder.build(success: { (tx) in
+            debugPrint(tx.bytesCount)
+            debugPrint(tx.hexString)
+        
+            wallet.send(transaction: tx, success: { (result) in
+                debugPrint(result)
+                self.sendSuccess(tx: tx)
+            }, failure: { (msg, code) in
+                debugPrint(msg)
+                self.showTipAlert(title: "发送失败", msg: "\(msg), code = \(code)")
+            })
+            
+        }, failure: { (error) in
+            errorHandler(msg: error.localizedDescription)
+        })
     }
     
-    func sendSuccess() {
+    func sendSuccess(tx: Transaction) {
         NotificationCenter.default.post(name: .transactionSended, object: nil)
         guard let cont = storyboard?.instantiateViewController(withIdentifier: "BILSendResultController") as? BILSendResultController else { return }
+        sendModel?.transaction = tx
         cont.sendModel = sendModel
+        self.bil_dismissHUD()
         present(cont, animated: true) {
             self.navigationController?.popToRootViewController(animated: false)
         }

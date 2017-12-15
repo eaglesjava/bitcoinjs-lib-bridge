@@ -115,6 +115,8 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	let transactionCellID = BILHomeSectionType.recentRecord.cellID()
 	
 	var headerBGImage: UIImage?
+    
+    var totalBTCBalance = "0.00"
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,12 +128,14 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         setupRefresh()
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(balanceDidChanged(notification:)), name: .walletDidChanged, object: nil)
 		
 		if #available(iOS 11.0, *) {
 			navigationController?.navigationBar.prefersLargeTitles = false
 		} else {
 			// Fallback on earlier versions
 		}
+        refresh(sender: nil)
     }
     
     func setupRefresh() {
@@ -159,17 +163,29 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	// MARK: - Notifications
     @objc
     func refresh(sender: Any?) {
+        for wallet in wallets {
+            debugPrint(wallet.id ?? "", wallet.mainExtPublicKey?.md5() ?? "")
+            wallet.getBalanceFromServer(success: { (wallet) in
+                
+            }, failure: { (msg, code) in
+                
+            })
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
             self.tableView.reloadData()
             self.tableView.refreshControl?.endRefreshing()
         }
     }
     
+    @objc
 	func balanceDidChanged(notification: Notification) {
 		var sum: Int64 = 0
 		for wallet in wallets {
 			sum += wallet.btcBalance
+            sum += wallet.btcUnconfirmBalance
 		}
+        totalBTCBalance = BTCFormatString(btc: sum)
+        tableView.reloadData()
 	}
 	
 	@objc
@@ -276,7 +292,8 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		let cell = tableView.dequeueReusableCell(withIdentifier: type.cellID())
 		switch type {
 		case .asset:
-			()
+            let c = cell as! BILHomeAssetCell
+            c.btcBanlanceLabel.text = totalBTCBalance
 		case .recentRecord:
 			let c = cell as! BILTransactionCell
 			c.transaction = type.dataArray()[indexPath.row] as? BILTransaction

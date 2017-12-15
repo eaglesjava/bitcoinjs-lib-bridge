@@ -12,6 +12,8 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 
 	@IBOutlet weak var tableView: UITableView!
 	fileprivate let cellID = "BILChooseWalletCell"
+    
+    var targetAmount = 0
 	
     fileprivate var wallets: [WalletModel] {
         get {

@@ -52,6 +52,7 @@ extension WalletModel {
             self.btcUnconfirmBalance = Int64(unconfirmBalance)
             do {
                 try BILWalletManager.shared.saveWallets()
+                NotificationCenter.default.post(name: .balanceDidChanged, object: nil)
                 success(self)
             } catch {
                 debugPrint(error)
@@ -65,10 +66,10 @@ extension WalletModel {
             failure("extKey不能为空", -1)
             return
         }
-        BILNetworkManager.request(request: .getUTXO(extendedKey: extKey.md5()), success: { (result) in
+        BILNetworkManager.request(request: .getUTXO(extendedKeyHash: extKey.md5()), success: { (result) in
             print(result)
             let json = JSON(result)
-            let utxoDatas = json["uxto"].arrayValue
+            let utxoDatas = json["utxo"].arrayValue
             var utxoModels = [BitcoinUTXOModel]()
             for json in utxoDatas {
                 utxoModels.append(BitcoinUTXOModel(jsonData: json))
@@ -77,11 +78,62 @@ extension WalletModel {
         }, failure: failure)
     }
     
+    func getTXBuildConfigurationFromServer(success: @escaping (_ utxo: [BitcoinUTXOModel], _ fee: [BTCFee], _ bestFee: BTCFee?) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        guard let extKey = mainExtPublicKey else {
+            failure("extKey不能为空", -1)
+            return
+        }
+        BILNetworkManager.request(request: .getTransactionBuildConfig(extendedKeyHash: extKey.md5()), success: { (result) in
+            print(result)
+            let json = JSON(result)
+            let utxoDatas = json["utxo"].arrayValue
+            var utxoModels = [BitcoinUTXOModel]()
+            for json in utxoDatas {
+                utxoModels.append(BitcoinUTXOModel(jsonData: json))
+            }
+            
+            let feeDatas = json["fees"].arrayValue
+            var fees = [BTCFee]()
+            var bestFee: BTCFee? = nil
+            for json in feeDatas {
+                let fee = BTCFee(jsonData: json)
+                if fee.isBest {
+                    bestFee = fee
+                }
+                fees.append(fee)
+            }
+            
+            success(utxoModels, fees, bestFee)
+        }, failure: failure)
+    }
+    
+    func send(transaction: Transaction, success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        guard let extKey = mainExtPublicKey else {
+            failure("extKey不能为空", -1)
+            return
+        }
+        let tx = transaction
+        BILNetworkManager.request(request: .sendTransaction(extendedKeyHash: extKey.md5(), address: tx.address, amount: tx.amount, txHash: tx.txHash, txHex: tx.hexString), success: { (result) in
+            let json = JSON(result)
+            guard let status = json["status"].int else {
+                failure("解析数据失败", -1)
+                return
+            }
+            if status == 0 {
+                success(result)
+            }
+            else
+            {
+                failure(json["message"].stringValue, status)
+            }
+        }, failure: failure)
+    }
+    
     static func getBalanceFromServer(mainExtPublicKey: String, success: @escaping (_ satoshiBalance: Int, _ unconfirmBalance: Int) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        BILNetworkManager.request(request: .getWalletID(extendedKey: mainExtPublicKey.md5()), success: { (result) in
+        BILNetworkManager.request(request: .getBalance(extendedKeyHash: mainExtPublicKey.md5()), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
-            guard let balance = json["balance"].int, let unconfirm = json["balance"].int else {
+            guard let balance = json["balance"].int, let unconfirm = json["unconfirm"].int else {
                 failure("获取到错误的数据", -1)
                 return
             }
@@ -90,7 +142,7 @@ extension WalletModel {
     }
     
     static func getWalletIDFromSever(mainExtPublicKey: String, success: @escaping (_ id: String?) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        BILNetworkManager.request(request: .getWalletID(extendedKey: mainExtPublicKey.md5()), success: { (result) in
+        BILNetworkManager.request(request: .getWalletID(extendedKeyHash: mainExtPublicKey.md5()), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
             guard let id = json["walletId"].string else {

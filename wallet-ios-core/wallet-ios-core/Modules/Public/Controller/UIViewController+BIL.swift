@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 extension UIViewController {
 	
@@ -20,6 +21,14 @@ extension UIViewController {
 	func bil_addBackButton() {
 		
 	}
+    
+    func bil_showLoading(status: String) {
+        SVProgressHUD.show(withStatus: status)
+    }
+    
+    func bil_dismissHUD(delay: Double = 0) {
+        SVProgressHUD.dismiss(withDelay: delay)
+    }
     
     func showTipAlert(title: String?, msg: String?, actionTitle: String = "我知道了", dismissed: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)

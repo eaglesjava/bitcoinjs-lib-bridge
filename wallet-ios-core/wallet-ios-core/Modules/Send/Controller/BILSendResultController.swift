@@ -22,10 +22,10 @@ class BILSendResultController: BILBaseViewController {
 
         // Do any additional setup after loading the view.
         
-        if let model = sendModel {
-            addressLabel.text = model.address
-            amountLabel.text = "\(model.bitcoinAmount) BTC"
-            txHashLabel.text = "tx".md5()
+        if let tx = sendModel?.transaction {
+            addressLabel.text = tx.address
+            amountLabel.text = "\(BTCFormatString(btc: Int64(tx.amount))) BTC"
+            txHashLabel.text = tx.txHash
         }
     }
 

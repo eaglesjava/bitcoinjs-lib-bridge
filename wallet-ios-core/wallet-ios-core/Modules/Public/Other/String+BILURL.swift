@@ -23,8 +23,20 @@ enum Router: URLRequestConvertible {
                 return (.bil_wallet_check_id, ["walletId": walletID])
             case .getWalletID(let extendedKeyHash):
                 return (.bil_wallet_get_id, ["extendedKeysHash": extendedKeyHash])
+            case .getBalance(let extendedKeyHash):
+                return (.bil_wallet_get_balance, ["extendedKeysHash": extendedKeyHash])
             case .getUTXO(let extendedKeyHash):
                 return (.bil_wallet_get_UTXO, ["extendedKeysHash": extendedKeyHash])
+            case .getTransactionBuildConfig(let extendedKeyHash):
+                return (.bil_wallet_get_transaction_build_config, ["extendedKeysHash": extendedKeyHash])
+            case .refreshAddress(let extendedKeyHash, let indexNum):
+                return (.bil_wallet_refresh_address, ["extendedKeysHash": extendedKeyHash, "indexNo": indexNum])
+            case .sendTransaction(let extendedKeyHash, let address, let amount, let txHash, let txHex):
+                return (.bil_wallet_send_transaction, ["extendedKeysHash" : extendedKeyHash,
+                                                      "outAddress" : address,
+                                                      "outAmount" : amount,
+                                                      "txHash" : txHash,
+                                                      "hexTx" : txHex])
             }
         }()
         
@@ -33,6 +45,7 @@ enum Router: URLRequestConvertible {
         let encoding = JSONEncoding()
         
         request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("iOS", forHTTPHeaderField: "platform")
         return try encoding.encode(request, with: result.parameters)
     }
     
@@ -40,8 +53,12 @@ enum Router: URLRequestConvertible {
     case createWallet(walletID: String, extendedKey: String)
     case importWallet(walletID: String, extendedKey: String)
     case checkWalletID(walletID: String)
-    case getWalletID(extendedKey: String)
-    case getUTXO(extendedKey: String)
+    case getWalletID(extendedKeyHash: String)
+    case getBalance(extendedKeyHash: String)
+    case getUTXO(extendedKeyHash: String)
+    case getTransactionBuildConfig(extendedKeyHash: String)
+    case refreshAddress(extendedKeyHash: String, index: Int64)
+    case sendTransaction(extendedKeyHash: String, address: String, amount: Int, txHash: String, txHex: String)
     
 }
 
@@ -53,5 +70,9 @@ extension String {
     static var bil_wallet_import: String { get { return bil_wallet_path + "import" } }
     static var bil_wallet_check_id:  String { get { return bil_wallet_path + "checkWalletId" } }
     static var bil_wallet_get_id:  String { get { return bil_wallet_path + "getWalletId" } }
+    static var bil_wallet_get_balance:  String { get { return bil_wallet_path + "getBalance" } }
     static var bil_wallet_get_UTXO:  String { get { return bil_wallet_path + "listUnspent" } }
+    static var bil_wallet_get_transaction_build_config:  String { get { return bil_wallet_path + "getTxElement" } }
+    static var bil_wallet_refresh_address: String { get { return bil_wallet_path + "refreshAddress" } }
+    static var bil_wallet_send_transaction: String { get { return bil_wallet_path + "sendTransaction" } }
 }
