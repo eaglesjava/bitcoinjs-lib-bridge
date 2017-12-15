@@ -148,4 +148,5 @@
     <string name="title_activity_select_wallet">选择钱包</string>
     <string name="title_activity_send_amount">发送金额</string>
     <string name="title_activity_scan_pay">特定金额接收</string>
+    <string name="title_activity_scan_qrcode">扫一扫</string>
 </resources>

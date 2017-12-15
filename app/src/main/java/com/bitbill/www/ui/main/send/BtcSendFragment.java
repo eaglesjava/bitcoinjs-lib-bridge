@@ -22,7 +22,6 @@ public class BtcSendFragment extends BaseFragment {
     EditText etSendAddress;
     @BindView(R.id.btn_next)
     Button btnNext;
-    private String mSendAddress;
 
     public static BtcSendFragment newInstance() {
 
@@ -86,6 +85,10 @@ public class BtcSendFragment extends BaseFragment {
 
     public String getSendAddress() {
         return etSendAddress.getText().toString();
+    }
+
+    public void setSendAddress(String sendAddress) {
+        etSendAddress.setText(sendAddress);
     }
 
     public boolean isValidAddress() {
