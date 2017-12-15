@@ -78,7 +78,7 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
         }
         // 校验助记词是否正确
         try {
-            BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(getMvpView().getMnemonic(), new BitcoinJsWrapper.JsInterface.Callback() {
+            BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(getMvpView().getMnemonic(), new BitcoinJsWrapper.Callback() {
                 @Override
                 public void call(String key, String... jsResult) {
                     if (jsResult != null && "true".equals(jsResult[0]) && jsResult.length > 2) {

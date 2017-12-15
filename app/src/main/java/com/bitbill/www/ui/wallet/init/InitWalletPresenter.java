@@ -76,7 +76,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             return;
         }
         try {
-            BitcoinJsWrapper.getInstance().generateMnemonicCNRetrunSeedHexAndXPublicKey(new BitcoinJsWrapper.JsInterface.Callback() {
+            BitcoinJsWrapper.getInstance().generateMnemonicCNRetrunSeedHexAndXPublicKey(new BitcoinJsWrapper.Callback() {
                 @Override
                 public void call(String key, String... jsResult) {
                     try {

@@ -1,38 +1,24 @@
 package com.bitbill.www.crypto;
 
 import android.content.Context;
-import android.os.Handler;
 import android.util.Log;
 import android.webkit.ConsoleMessage;
-import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.bitbill.www.common.utils.JsonUtils;
+import com.google.gson.JsonSyntaxException;
 
 
 /**
  * Created by isanwenyu@163.com on 2017/11/7.
  */
 public class BitcoinJsWrapper {
-    public static final String MNEMONIC_TO_SEED_HEX = "mnemonicToSeedHex";
-    public static final String GENERATE_MNEMONIC_RANDOM_CN = "generateMnemonicRandomCN";
-    public static final String GET_BITCOIN_ADDRESS_BY_SEED_HEX = "getBitcoinAddressBySeedHex";
-    public static final String GET_BITCOIN_ADDRESS_BY_MASTER_XPUBLIC_KEY = "getBitcoinAddressByMasterXPublicKey";
-    public static final String GET_BITCOIN_MASTER_XPUBLIC_KEY = "getBitcoinMasterXPublicKey";
-    public static final String VALIDATEMNEMONIC = "validateMnemonic";
-    public static final String GENERATE_MNEMONIC_CN_AND_SEEDHEX = "generateMnemonicCNandSeedHex";
-    public static final String VALIDATE_MNEMONIC_RETURN_SEEDHEX = "validateMnemonicAndReturnSeedHex";
     private static final String TAG = "BitcoinJsWrapper";
-    private static final String VALIDATE_MNEMONIC_RETURN_SEEDHEX_AND_XPUBLICKEY = "validateMnemonicReturnSeedHexAndXPublicKey";
-    private static final String GENERATE_MNEMONICCN_RETRUN_SEEDHEX_AND_XPUBLICKEY = "generateMnemonicCNRetrunSeedHexAndXPublicKey";
     private static WebView mWebView;
-    private JsInterface mJsInterface;
-    private Handler mHandler;
 
     private BitcoinJsWrapper() {
     }
@@ -42,6 +28,7 @@ public class BitcoinJsWrapper {
     }
 
     public void init(Context context) {
+
         mWebView = new WebView(context);
 
         WebSettings webSettings = mWebView.getSettings();
@@ -55,225 +42,57 @@ public class BitcoinJsWrapper {
                 // TODO Auto-generated method stub
                 if (consoleMessage.message().contains("Uncaught ReferenceError")) {
                     // do something...
+                    Log.d(TAG, "onConsoleMessage() called with: consoleMessage = [" + consoleMessage + "]");
                 }
                 return super.onConsoleMessage(consoleMessage);
             }
         });
 
-        mJsInterface = new JsInterface(this);
-        mWebView.addJavascriptInterface(mJsInterface, "android");
         mWebView.loadUrl("file:///android_asset/bitcoin/index_android.html");
-
-        mHandler = new Handler();
     }
 
-    private void executeJS(final String js) {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                mWebView.loadUrl(js);
+    private void executeJS(final String jsFunction, Callback callback) {
+        if (jsFunction == null) {
+            throw new NullPointerException("jsFuction is null");
+        }
+        String excuteJs = "javascript:" + jsFunction;
+        String functionName = jsFunction.substring(0, jsFunction.indexOf("("));
 
-                mWebView.evaluateJavascript(js, new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String value) {
-                        Log.d(TAG, "onReceiveValue() called with: value = [" + value + "]");
+        mWebView.evaluateJavascript(jsFunction, new ValueCallback<String>() {
+            @Override
+            public void onReceiveValue(String value) {
+                Log.d(TAG, "onReceiveValue() called with: value = [" + value + "]");
+                if (callback != null) {
+                    String[] values = new String[0];
+                    try {
+                        values = JsonUtils.deserialize(value, String[].class);
+                    } catch (JsonSyntaxException e) {
+                        e.printStackTrace();
                     }
-                });
+                    callback.call(functionName, values);
+                }
 
             }
         });
+
     }
 
-    /**
-     * 随机产生中文助记词
-     *
-     * @param callback
-     */
-    public void generateMnemonicRandomCN(JsInterface.Callback callback) {
-        mJsInterface.addCallBack(GENERATE_MNEMONIC_RANDOM_CN, callback);
-        executeJS("javascript:generateMnemonicRandomCN()");
+    public void generateMnemonicCNRetrunSeedHexAndXPublicKey(Callback callback) {
+        executeJS("generateMnemonicCNRetrunSeedHexAndXPublicKey()", callback);
     }
 
-    /**
-     * 助记词生成seed
-     *
-     * @param nemonic  助记词字符串，以空格隔开
-     * @param callback 密码
-     */
-    public void mnemonicToSeedHex(String nemonic, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(MNEMONIC_TO_SEED_HEX, callback);
-        executeJS("javascript:mnemonicToSeedHex('" + nemonic + "')");
+    public void validateMnemonicReturnSeedHexAndXPublicKey(String nemonic, Callback callback) {
+        executeJS("validateMnemonicReturnSeedHexAndXPublicKey('" + nemonic + "')", callback);
     }
 
-    /**
-     * 根据seed生成指定index的地址
-     *
-     * @param seedHex  seed的十六进制字符串
-     * @param index
-     * @param callback
-     */
-    public void getBitcoinAddressBySeedHex(String seedHex, int index, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(GET_BITCOIN_ADDRESS_BY_SEED_HEX, callback);
-        executeJS("javascript:getBitcoinAddressBySeedHex('" + seedHex + "'," + index + ")");
-    }
-
-    public void getBitcoinAddressByMasterXPublicKey(String xpub, int index, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(GET_BITCOIN_ADDRESS_BY_MASTER_XPUBLIC_KEY, callback);
-        executeJS("javascript:getBitcoinAddressByMasterXPublicKey('" + xpub + "'," + index + ")");
-    }
-
-    public void getBitcoinMasterXPublicKey(String seedHex, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(GET_BITCOIN_MASTER_XPUBLIC_KEY, callback);
-        executeJS("javascript:getBitcoinMasterXPublicKey('" + seedHex + "')");
-    }
-
-    public void validateMnemonic(String nemonic, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(VALIDATEMNEMONIC, callback);
-        executeJS("javascript:validateMnemonic('" + nemonic + "')");
-    }
-
-    public void validateMnemonicReturnSeedHex(String nemonic, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(VALIDATE_MNEMONIC_RETURN_SEEDHEX, callback);
-        executeJS("javascript:validateMnemonicReturnSeedHex('" + nemonic + "')");
-    }
-
-    public void validateMnemonicReturnSeedHexAndXPublicKey(String nemonic, JsInterface.Callback callback) {
-        mJsInterface.addCallBack(VALIDATE_MNEMONIC_RETURN_SEEDHEX_AND_XPUBLICKEY, callback);
-        executeJS("javascript:validateMnemonicReturnSeedHexAndXPublicKey('" + nemonic + "')");
-    }
-
-    public void generateMnemonicCNandSeedHex(JsInterface.Callback callback) {
-        mJsInterface.addCallBack(GENERATE_MNEMONIC_CN_AND_SEEDHEX, callback);
-        executeJS("javascript:generateMnemonicCNandSeedHex()");
-    }
-
-    public void generateMnemonicCNRetrunSeedHexAndXPublicKey(JsInterface.Callback callback) {
-        mJsInterface.addCallBack(GENERATE_MNEMONICCN_RETRUN_SEEDHEX_AND_XPUBLICKEY, callback);
-        executeJS("javascript:generateMnemonicCNRetrunSeedHexAndXPublicKey()");
+    public interface Callback {
+        void call(String key, String... jsResult);
     }
 
     //静态内部类确保了在首次调用getInstance()的时候才会初始化SingletonHolder，从而导致实例被创建。
     //并且由JVM保证了线程的安全。
     private static class SingletonHolder {
         private static final BitcoinJsWrapper instance = new BitcoinJsWrapper();
-    }
-
-    public static final class JsInterface {
-        private final BitcoinJsWrapper mBitcoinJsWrapper;
-        private Map mCallBackMap;
-
-        JsInterface(BitcoinJsWrapper bitcoinJsWrapper) {
-            mBitcoinJsWrapper = bitcoinJsWrapper;
-            mCallBackMap = new HashMap();
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void generateMnemonicRandomCN(final String mnemonic) {
-            callAndBack(GENERATE_MNEMONIC_RANDOM_CN, mnemonic);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void mnemonicToSeedHex(final String seedHex) {
-            callAndBack(MNEMONIC_TO_SEED_HEX, seedHex);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void getBitcoinAddressBySeedHex(final String address) {
-            callAndBack(GET_BITCOIN_ADDRESS_BY_SEED_HEX, address);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void getBitcoinAddressByMasterXPublicKey(final String address) {
-            callAndBack(GET_BITCOIN_ADDRESS_BY_MASTER_XPUBLIC_KEY, address);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void getBitcoinMasterXPublicKey(final String address) {
-            callAndBack(GET_BITCOIN_MASTER_XPUBLIC_KEY, address);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void validateMnemonic(final String result) {
-            callAndBack(VALIDATEMNEMONIC, result);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void validateMnemonicReturnSeedHex(final String result, final String seedHex) {
-            callAndBack(VALIDATE_MNEMONIC_RETURN_SEEDHEX, result, seedHex);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void validateMnemonicReturnSeedHexAndXPublicKey(final String result, final String seedHex, final String XPublicKey) {
-            callAndBack(VALIDATE_MNEMONIC_RETURN_SEEDHEX_AND_XPUBLICKEY, result, seedHex, XPublicKey);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void generateMnemonicCNandSeedHex(final String mnemonic, final String seedHex) {
-            callAndBack(GENERATE_MNEMONIC_CN_AND_SEEDHEX, mnemonic, seedHex);
-        }
-
-        /**
-         * This is not called on the UI thread. Post a runnable to invoke
-         * loadUrl on the UI thread.
-         */
-        @JavascriptInterface
-        public void generateMnemonicCNRetrunSeedHexAndXPublicKey(final String mnemonic, final String seedHex, final String XPublicKey) {
-            callAndBack(GENERATE_MNEMONICCN_RETRUN_SEEDHEX_AND_XPUBLICKEY, mnemonic, seedHex, XPublicKey);
-        }
-
-        private void callAndBack(String key, String... result) {
-            Callback callback = (Callback) mCallBackMap.get(key);
-            if (callback != null) {
-                callback.call(key, result);
-            } else {
-                Log.e(TAG, "callAndBack: can't find the callback for the key,please check it.");
-            }
-            mCallBackMap.remove(key);
-        }
-
-        public void addCallBack(String key, Callback callback) {
-            mCallBackMap.put(key, callback);
-        }
-
-        public interface Callback {
-            void call(String key, String... jsResult);
-        }
     }
 
 }
