@@ -2,7 +2,6 @@ package com.bitbill.www.ui.main.receive;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -76,7 +75,6 @@ public class BtcReceiveFragment extends BaseLazyFragment {
 
     @Override
     public void initView() {
-        tvReceiveAmount.setText(Html.fromHtml(getString(R.string.text_receive_specific_amount)));
         tvReceiveAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

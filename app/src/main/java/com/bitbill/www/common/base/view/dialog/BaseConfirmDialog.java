@@ -18,7 +18,6 @@ import com.bitbill.www.common.base.view.BaseViewControl;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by isanwenyu@163.com on 2017/11/22.
@@ -93,11 +92,11 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
                 autoDismissDialog();
                 break;
             case R.id.dialog_btn_positive:
+                autoDismissDialog();
                 if (mConfirmDialogClickListener != null) {
                     mConfirmDialogClickListener.onClick(this, DIALOG_BTN_POSITIVE);
                 }
 
-                autoDismissDialog();
                 break;
         }
     }

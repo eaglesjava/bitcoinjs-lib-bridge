@@ -3,9 +3,13 @@ package com.bitbill.www.crypto;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +30,7 @@ public class BitcoinJsWrapper {
     private static final String TAG = "BitcoinJsWrapper";
     private static final String VALIDATE_MNEMONIC_RETURN_SEEDHEX_AND_XPUBLICKEY = "validateMnemonicReturnSeedHexAndXPublicKey";
     private static final String GENERATE_MNEMONICCN_RETRUN_SEEDHEX_AND_XPUBLICKEY = "generateMnemonicCNRetrunSeedHexAndXPublicKey";
-    private WebView mWebView;
+    private static WebView mWebView;
     private JsInterface mJsInterface;
     private Handler mHandler;
 
@@ -44,12 +48,20 @@ public class BitcoinJsWrapper {
         webSettings.setJavaScriptEnabled(true);
 
 //        // 限制在WebView中打开网页，而不用默认浏览器
-//        mWebView.setWebViewClient(new WebViewClient());
-//        mWebView.setWebChromeClient(new MyWebChromeClient());
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+                // TODO Auto-generated method stub
+                if (consoleMessage.message().contains("Uncaught ReferenceError")) {
+                    // do something...
+                }
+                return super.onConsoleMessage(consoleMessage);
+            }
+        });
 
         mJsInterface = new JsInterface(this);
         mWebView.addJavascriptInterface(mJsInterface, "android");
-
         mWebView.loadUrl("file:///android_asset/bitcoin/index_android.html");
 
         mHandler = new Handler();
@@ -60,6 +72,14 @@ public class BitcoinJsWrapper {
             @Override
             public void run() {
                 mWebView.loadUrl(js);
+
+                mWebView.evaluateJavascript(js, new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String value) {
+                        Log.d(TAG, "onReceiveValue() called with: value = [" + value + "]");
+                    }
+                });
+
             }
         });
     }

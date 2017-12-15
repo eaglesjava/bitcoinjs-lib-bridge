@@ -56,8 +56,6 @@ public class BitbillApp extends Application {
 
         }
         mWallets = new ArrayList<>();
-        //load bitcoin js wapper
-        BitcoinJsWrapper.getInstance();
     }
 
     public ApplicationComponent getComponent() {

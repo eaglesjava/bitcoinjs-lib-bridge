@@ -119,7 +119,7 @@
     <string name="text_unconfirm_transaction">未确认的交易</string>
 
     <!--receive fragment-->
-    <string name="text_receive_specific_amount"><![CDATA[<u>特定金额接收</u>]]></string>
+    <string name="text_receive_specific_amount"><u>特定金额接收</u></string>
     <string name="title_receive_address_refresh">刷新地址</string>
     <string name="title_activity_specific_receive">特定金额接收</string>
     <string name="dialog_title_friendly_remind">友情提醒</string>
