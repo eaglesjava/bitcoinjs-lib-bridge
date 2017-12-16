@@ -141,7 +141,7 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        finish();
         //返回首页
         MainActivity.start(BackUpWalletActivity.this);
 

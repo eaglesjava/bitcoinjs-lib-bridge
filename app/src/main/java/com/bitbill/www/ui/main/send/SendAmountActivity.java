@@ -3,10 +3,11 @@ package com.bitbill.www.ui.main.send;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
@@ -21,8 +22,6 @@ public class SendAmountActivity extends BaseToolbarActivity {
 
     @BindView(R.id.et_send_amount)
     EditText etSendAmount;
-    @BindView(R.id.tv_send_all_amount)
-    TextView tvSendAllAmount;
     @BindView(R.id.btn_next)
     Button btnNext;
     private String mAddress;
@@ -37,6 +36,22 @@ public class SendAmountActivity extends BaseToolbarActivity {
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         mAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.send_amount_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_send_all_amount:
+                sendAllAmount();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -61,7 +76,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
-        StringUtils.setTextViewUnLine(tvSendAllAmount);
+
     }
 
     @Override
@@ -75,12 +90,9 @@ public class SendAmountActivity extends BaseToolbarActivity {
     }
 
 
-    @OnClick({R.id.tv_send_all_amount, R.id.btn_next})
+    @OnClick({R.id.btn_next})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_send_all_amount:
-                sendAllAmount();
-                break;
             case R.id.btn_next:
                 if (!isValidAmount()) {
                     return;
@@ -103,7 +115,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
      * 发送全部余额
      */
     private void sendAllAmount() {
-
+        // TODO: 2017/12/16 发送全部余额
     }
 
     public String getSendAmount() {

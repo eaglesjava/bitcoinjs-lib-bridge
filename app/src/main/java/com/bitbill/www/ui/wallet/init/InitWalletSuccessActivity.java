@@ -11,7 +11,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.base.view.BaseCompleteActivity;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.MainActivity;
@@ -21,7 +21,7 @@ import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class InitWalletSuccessActivity extends BaseToolbarActivity {
+public class InitWalletSuccessActivity extends BaseCompleteActivity {
 
     @BindView(R.id.btn_bak_wallet)
     Button btnBakWallet;
@@ -97,6 +97,21 @@ public class InitWalletSuccessActivity extends BaseToolbarActivity {
                 MainActivity.start(InitWalletSuccessActivity.this);
                 break;
         }
+        finishAbout();
+    }
+
+    /**
+     * 完成动作
+     */
+    @Override
+    protected void completeAction() {
+        //跳转到主页
+        MainActivity.start(InitWalletSuccessActivity.this);
+        finishAbout();
+
+    }
+
+    private void finishAbout() {
         //关闭初始化钱包流程
         AppManager.get().finishActivity(GuideActivity.class);
         AppManager.get().finishActivity(CreateWalletIdActivity.class);

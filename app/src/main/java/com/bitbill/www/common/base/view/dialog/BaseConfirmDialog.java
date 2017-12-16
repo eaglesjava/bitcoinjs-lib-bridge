@@ -92,11 +92,10 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
                 autoDismissDialog();
                 break;
             case R.id.dialog_btn_positive:
-                autoDismissDialog();
                 if (mConfirmDialogClickListener != null) {
                     mConfirmDialogClickListener.onClick(this, DIALOG_BTN_POSITIVE);
                 }
-
+                autoDismissDialog();
                 break;
         }
     }

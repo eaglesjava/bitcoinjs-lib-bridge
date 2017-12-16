@@ -112,7 +112,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hint_bottom_wallet_id">设定您的钱包ID，他可以关联您的联系人，支持英文和数字，一旦设定不可修改。</string>
+    <string name="hint_bottom_wallet_id">设定您的钱包ID，它可以关联您的联系人，支持字母、数字和下划线，仅能以字母开头，一旦设定不可修改。</string>
     <!--wallet info -->
     <string name="title_activity_wallet_info">钱包信息</string>
     <string name="text_in_progress_count">正在进行中 %d个</string>
@@ -152,4 +152,6 @@
     <string name="error_create_address_qrcode">生成地址二维码失败</string>
     <string name="error_refresh_address">刷新地址失败</string>
     <string name="success_refresh_address">地址已刷新</string>
+    <string name="action_complete">完成</string>
+    <string name="action_send_all_amount">发送全部余额</string>
 </resources>

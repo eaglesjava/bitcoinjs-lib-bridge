@@ -99,7 +99,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                 mSelectedWallet = selectedWallet;
                 //刷新选择布局
                 selectWalletView.setWallet(selectedWallet);
-                refreshBtcAddress();
+                loadBtcAddress();
             }
         });
 

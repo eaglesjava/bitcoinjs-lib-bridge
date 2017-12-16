@@ -9,11 +9,11 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.base.view.BaseCompleteActivity;
 
 import butterknife.BindView;
 
-public class SendSuccessActivity extends BaseToolbarActivity {
+public class SendSuccessActivity extends BaseCompleteActivity {
 
     @BindView(R.id.tv_hint_title)
     TextView tvHintTitle;
@@ -78,5 +78,14 @@ public class SendSuccessActivity extends BaseToolbarActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_send_success;
+    }
+
+    /**
+     * 完成动作
+     */
+    @Override
+    protected void completeAction() {
+        // TODO: 2017/12/16 关闭相关流程
+        finish();
     }
 }

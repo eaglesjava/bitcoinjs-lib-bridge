@@ -7,12 +7,12 @@ import android.os.Bundle;
 import com.bitbill.www.R;
 import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.base.view.BaseCompleteActivity;
 import com.bitbill.www.ui.main.MainActivity;
 
 import butterknife.OnClick;
 
-public class BackupWalletSuccessActivity extends BaseToolbarActivity {
+public class BackupWalletSuccessActivity extends BaseCompleteActivity {
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, BackupWalletSuccessActivity.class));
@@ -55,11 +55,20 @@ public class BackupWalletSuccessActivity extends BaseToolbarActivity {
 
     @OnClick(R.id.btn_complete)
     public void onViewClicked() {
+        completeAction();
+    }
+
+    /**
+     * 完成动作
+     */
+    @Override
+    protected void completeAction() {
         //跳转到主页
         MainActivity.start(BackupWalletSuccessActivity.this);
         //关闭备份流程
         AppManager.get().finishActivity(BackUpWalletActivity.class);
         AppManager.get().finishActivity(BackupWalletConfirmActivity.class);
         finish();
+
     }
 }

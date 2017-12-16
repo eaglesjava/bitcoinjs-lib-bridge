@@ -76,11 +76,22 @@ public abstract class BaseToolbarActivity<P extends MvpPresenter> extends BaseAc
      * 初始化titleBar
      */
     public void initTitleBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //返回按钮监听事件
-        mToolbar.setNavigationOnClickListener(v -> {
-            onBackPressed();
-        });
+        if (hasHomeAsUpEnabled()) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(hasHomeAsUpEnabled());
+            //返回按钮监听事件
+            mToolbar.setNavigationOnClickListener(v -> {
+                onBackPressed();
+            });
+        }
+    }
+
+    /**
+     * 是否有返回
+     *
+     * @return
+     */
+    protected boolean hasHomeAsUpEnabled() {
+        return true;
     }
 
     /**
@@ -88,7 +99,7 @@ public abstract class BaseToolbarActivity<P extends MvpPresenter> extends BaseAc
      *
      * @return
      */
-    public boolean hasTitleBar() {
+    protected boolean hasTitleBar() {
         return true;
     }
 
