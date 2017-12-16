@@ -61,6 +61,8 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private long btcAmount;//unit Satoshi  1 BTC = 100000000 Satoshi
     @Transient
     private boolean selected;
+    @Transient
+    private String lastAddress;
 
     @Generated(hash = 425995326)
     public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash,
@@ -225,4 +227,12 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         return this;
     }
 
+    public String getLastAddress() {
+        return lastAddress;
+    }
+
+    public Wallet setLastAddress(String lastAddress) {
+        this.lastAddress = lastAddress;
+        return this;
+    }
 }

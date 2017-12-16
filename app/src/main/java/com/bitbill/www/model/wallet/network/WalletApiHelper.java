@@ -12,6 +12,8 @@ import com.bitbill.www.model.wallet.network.entity.GetBalanceResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
+import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
 import com.google.gson.reflect.TypeToken;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -103,6 +105,22 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
                 .addApplicationJsonBody(getBalanceRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<GetBalanceResponse>>() {
+                });
+    }
+
+    /**
+     * 扫描地址
+     *
+     * @param refreshAddressRequest
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<RefreshAddressResponse>> refreshAddress(RefreshAddressRequest refreshAddressRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.REFRESH_ADDRESS)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addApplicationJsonBody(refreshAddressRequest)
+                .build()
+                .getParseObservable(new TypeToken<ApiResponse<RefreshAddressResponse>>() {
                 });
     }
 }

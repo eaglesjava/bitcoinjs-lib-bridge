@@ -8,6 +8,7 @@ import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setScreenOrientation();
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((BitbillApp) getApplication()).getComponent())
@@ -65,6 +67,10 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
             getMvpPresenter().onAttach(this);
         }
 
+    }
+
+    private void setScreenOrientation() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
 

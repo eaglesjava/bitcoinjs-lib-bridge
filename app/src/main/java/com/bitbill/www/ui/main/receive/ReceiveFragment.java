@@ -178,7 +178,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                     }
                 }
                 selectWalletView.setWallet(mSelectedWallet);
-                refreshBtcAddress();
+                loadBtcAddress();
             } else {
                 selectWalletView.setVisibility(View.GONE);
             }
@@ -210,8 +210,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
-            // TODO: 2017/12/8 刷新接收地址
-            showMessage("地址刷新了");
+            // 刷新接收地址
             refreshBtcAddress();
             return true;
         }
@@ -222,6 +221,12 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     private void refreshBtcAddress() {
         if (mBtcReceiveFragment != null) {
             mBtcReceiveFragment.refreshAddress(mSelectedWallet);
+        }
+    }
+
+    private void loadBtcAddress() {
+        if (mBtcReceiveFragment != null) {
+            mBtcReceiveFragment.loadAddress(mSelectedWallet);
         }
     }
 

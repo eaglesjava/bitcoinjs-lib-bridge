@@ -38,12 +38,16 @@ public class ApiHeader {
     public static final class PublicApiHeader {
 
         @Expose
+        @SerializedName("platform")
+        private String mPlatform;
+        @Expose
         @SerializedName("api_key")
         private String mApiKey;
 
         @Inject
         public PublicApiHeader(@ApiInfo String apiKey) {
             mApiKey = apiKey;
+            mPlatform = "Android";
         }
 
         public String getApiKey() {
@@ -52,6 +56,15 @@ public class ApiHeader {
 
         public void setApiKey(String apiKey) {
             mApiKey = apiKey;
+        }
+
+        public String getPlatform() {
+            return mPlatform;
+        }
+
+        public PublicApiHeader setPlatform(String platform) {
+            mPlatform = platform;
+            return this;
         }
     }
 

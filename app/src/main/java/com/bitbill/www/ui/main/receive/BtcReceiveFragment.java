@@ -34,7 +34,6 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     TextView tvReceiveAmount;
     @Inject
     BtcReceiveMvpPresenter<WalletModel, BtcReceiveMvpView> mReceiveMvpPresenter;
-    private String mSendAddress;
 
     public BtcReceiveFragment() {
         // Required empty public constructor
@@ -113,16 +112,19 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void copyClick(View v) {
         //复制地址到剪切板
         StringUtils.copy(tvAddress.getText().toString(), getBaseActivity());
-        showMessage(R.string.R_string_toast_copy_address_success);
+        showMessage(R.string.toast_copy_address_success);
     }
 
+    public void loadAddress(Wallet selectedWallet) {
+        mReceiveMvpPresenter.loadAddress(selectedWallet);
+
+    }
     public void refreshAddress(Wallet selectedWallet) {
-        mReceiveMvpPresenter.reloadAddress(selectedWallet);
+        mReceiveMvpPresenter.refreshAddress(selectedWallet);
 
     }
 
     public void setSendAddress(String sendAddress) {
-        mSendAddress = sendAddress;
         tvAddress.setText(sendAddress);
     }
 
@@ -141,5 +143,17 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void refreshAddressFail() {
 
         showMessage(R.string.error_refresh_address);
+    }
+
+    @Override
+    public void getSelectedWalletFail() {
+
+        showMessage(R.string.error_get_wallet_info_fail);
+    }
+
+    @Override
+    public void refreshAddressSuccess() {
+        showMessage(R.string.success_refresh_address);
+
     }
 }

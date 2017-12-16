@@ -131,7 +131,7 @@
     <string name="hint_send_success">推荐您添加该地址到新联系人以便下次交易</string>
     <string name="btn_confirm_send">确认发送</string>
     <string name="action_send_scan">扫码</string>
-    <string name="R.string.toast_copy_address_success">已复制地址</string>
+    <string name="toast_copy_address_success">已复制地址</string>
     <string name="guide_section_three">添加联系人 一键转账</string>
     <string name="error_wallet_id_exsist">钱包id已存在</string>
     <string name="title_activity_create_wallet_id">创建钱包ID</string>
@@ -151,4 +151,5 @@
     <string name="title_activity_scan_qrcode">扫一扫</string>
     <string name="error_create_address_qrcode">生成地址二维码失败</string>
     <string name="error_refresh_address">刷新地址失败</string>
+    <string name="success_refresh_address">地址已刷新</string>
 </resources>

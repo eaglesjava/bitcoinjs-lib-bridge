@@ -9,6 +9,8 @@ import com.bitbill.www.model.wallet.network.entity.GetBalanceResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
+import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
 
 import io.reactivex.Observable;
 
@@ -56,6 +58,14 @@ public interface WalletApi extends Api {
      * @return
      */
     Observable<ApiResponse<GetBalanceResponse>> getBalance(GetBalanceRequest getBalanceRequest);
+
+    /**
+     * 扫描地址
+     *
+     * @param refreshAddressRequest
+     * @return
+     */
+    Observable<ApiResponse<RefreshAddressResponse>> refreshAddress(RefreshAddressRequest refreshAddressRequest);
 
 
 }
