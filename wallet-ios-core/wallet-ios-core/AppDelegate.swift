@@ -32,8 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			window?.rootViewController?.present(cont!, animated: false, completion: nil)
 		}
 		
-		BILNetworkManager.request()
-		
 		return true
 	}
 

@@ -13,12 +13,12 @@ class BILTransactionManager: NSObject {
 		return BILTransactionManager()
 	}()
 	
-	var recnetRecords: [BILTransaction] {
-		let tt = BILTransaction()
+	var recnetRecords: [BILTransactionHistoryModel] {
+		let tt = BILTransactionHistoryModel()
 		tt.address = "123456jWebYP9tanj2taQfNvRVMNGjCYAd"
 		tt.date = Date()
 		tt.volume = 10000
-		return [BILTransaction](repeating: tt, count: 2)
+		return [BILTransactionHistoryModel](repeating: tt, count: 2)
 	}
 	
 }

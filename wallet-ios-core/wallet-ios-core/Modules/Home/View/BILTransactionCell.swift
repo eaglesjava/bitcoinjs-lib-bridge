@@ -14,7 +14,7 @@ class BILTransactionCell: UITableViewCell {
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var volumeLabel: UILabel!
 	
-	var transaction: BILTransaction? {
+	var transaction: BILTransactionHistoryModel? {
 		didSet {
 			if let t = transaction {
 				typeImageView.image = UIImage(named: t.type == .recieve ? "icon_record_recieve" : "icon_record_send")

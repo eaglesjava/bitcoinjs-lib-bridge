@@ -24,12 +24,14 @@ class Transaction: NSObject {
     var hexString: String
     var amount: Int
     var txHash: String
+    var inputAddressString: String
     
-    init(hex: String, address: String, amount: Int) {
+    init(hex: String, address: String, inputAddressString: String, amount: Int) {
         self.hexString = hex
         let data = hex.ck_mnemonicData()
         bytesCount = data.count
         self.address = address
+        self.inputAddressString = inputAddressString
         self.amount = amount
         let bytes = hexString.ck_mnemonicData().bytes
         
@@ -44,11 +46,13 @@ struct BTCInput {
     var index: Int
     var bip39Index: Int
     var satoshi: Int
-    init(txHash: String, index: Int, bip39Index: Int, satoshi: Int) {
+    var address: String
+    init(txHash: String, index: Int, bip39Index: Int, satoshi: Int, address: String) {
         self.txHash = txHash
         self.index = index
         self.bip39Index = bip39Index
         self.satoshi = satoshi
+        self.address = address
     }
     
     func toDictionary() -> [String: Any] {
@@ -115,7 +119,11 @@ class TransactionBuilder: NSObject {
     }
     
     func addInput(input: BTCInput) {
-        inputs.append(input)
+        guard let first = inputs.first, input.satoshi < first.satoshi else {
+            inputs.append(input)
+            return
+        }
+        inputs.insert(input, at: 0)
     }
     
     func addOutput(output: BTCOutput) {
@@ -170,14 +178,18 @@ class TransactionBuilder: NSObject {
         return feeFor(inCount:inCount, outCount:outCount, feePerByte: maxFeePerByte)
     }
     
+    private var outputCount: Int {
+        get {
+            return outputs.count + (hasChangeOutput() ? 1 : 0)
+        }
+    }
+    
     private func chooseInput() {
         
         var outputSatoshiSum = 0
         for output in outputs {
             outputSatoshiSum += output.amount
         }
-        
-        let outputCount = outputs.count + (hasChangeOutput() ? 1 : 0)
         
         switch bulidTactics {
         case .clearSmallBalance:
@@ -214,9 +226,11 @@ class TransactionBuilder: NSObject {
         
         var inputsJ = [[String: Any]]()
         var inputSatoshiSum = 0
+        var inputAddresses = [String]()
         for input in inputs {
             inputsJ.append(input.toDictionary())
             inputSatoshiSum += input.satoshi
+            inputAddresses.append(input.address)
         }
         txDatas["inputs"] = inputsJ
         
@@ -247,7 +261,7 @@ class TransactionBuilder: NSObject {
                 guard let targetOutput = self.outputs.first else {
                     return
                 }
-                let tx = Transaction(hex: str, address:targetOutput.address, amount: targetOutput.amount)
+                let tx = Transaction(hex: str, address:targetOutput.address, inputAddressString: inputAddresses.joined(separator: "|"), amount: targetOutput.amount)
                 success(tx)
                 
             }, failure: { (error) in

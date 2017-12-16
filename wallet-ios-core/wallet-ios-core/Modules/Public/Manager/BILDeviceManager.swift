@@ -13,11 +13,12 @@ class BILDeviceManager: NSObject {
     var deviceID: String
     
     override init() {
-        
-        if let uuid = UserDefaults.standard.string(forKey: "bitbill.deviceID") {
+        let key = "bitbill.deviceID"
+        if let uuid = UserDefaults.standard.string(forKey: key) {
             deviceID = uuid
         } else {
             deviceID = UUID().uuidString
+            UserDefaults.standard.setValue(deviceID, forKey: key)
         }
         
     }

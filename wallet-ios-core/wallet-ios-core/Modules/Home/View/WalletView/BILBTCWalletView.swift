@@ -16,12 +16,13 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet weak var unconfirmBalanceLabel: UILabel!
 	@IBOutlet weak var heightOfBalanceView: NSLayoutConstraint!
     @IBOutlet weak var unconfirmContainerView: UIView!
+    
+    private var page: Int = 0
+    private var size: Int = 20
+    var isLoading = false
+    var isLoadingMore = false
 	
-	var transactions: [BILTransaction] {
-		get {
-			return BILTransactionManager.shared.recnetRecords
-		}
-	}
+	var transactions = [BILTransactionHistoryModel]()
 	
 	weak var wallet: WalletModel? {
 		didSet {
@@ -34,6 +35,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
             }) { (msg, code) in
                 debugPrint(msg)
             }
+            reloadData()
 		}
 	}
 	
@@ -47,6 +49,42 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         unconfirmContainerView.layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
         unconfirmContainerView.layer.cornerRadius = 5
 	}
+    
+    func reloadData() {
+        page = 0
+        loadTransactionHistory()
+    }
+    
+    func loadMore() {
+        guard !isLoading, !isLoadingMore else { return }
+        page += 1
+        isLoadingMore = true
+        loadTransactionHistory()
+    }
+    
+    func loadEnd() {
+        self.isLoading = false
+        self.isLoadingMore = false
+        self.tableView.reloadData()
+    }
+    
+    func loadTransactionHistory() {
+        guard let w = wallet else { return }
+        guard !isLoading else { return }
+        isLoading = true
+        w.getTransactionHistoryFromSever(page: page, size: size, success: { (txs) in
+            if !self.isLoadingMore {
+                self.transactions.removeAll()
+            }
+            self.transactions.append(contentsOf: txs)
+            self.loadEnd()
+        }) { (msg, code) in
+            self.loadEnd()
+            if self.isLoadingMore {
+                self.page -= 1
+            }
+        }
+    }
     
     func setupRefresh() {
         let refreshControl = UIRefreshControl()

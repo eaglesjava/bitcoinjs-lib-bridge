@@ -23,6 +23,8 @@ enum Router: URLRequestConvertible {
                 return (.bil_wallet_check_id, ["walletId": walletID])
             case .getWalletID(let extendedKeyHash):
                 return (.bil_wallet_get_id, ["extendedKeysHash": extendedKeyHash])
+            case .getTransactionHistory(let extendedKeyHash, let page, let size):
+                return (.bil_wallet_transaction_history, ["extendedKeysHash": extendedKeyHash, "page": page, "size": size])
             case .getBalance(let extendedKeyHash):
                 return (.bil_wallet_get_balance, ["extendedKeysHash": extendedKeyHash])
             case .getUTXO(let extendedKeyHash):
@@ -31,12 +33,13 @@ enum Router: URLRequestConvertible {
                 return (.bil_wallet_get_transaction_build_config, ["extendedKeysHash": extendedKeyHash])
             case .refreshAddress(let extendedKeyHash, let indexNum):
                 return (.bil_wallet_refresh_address, ["extendedKeysHash": extendedKeyHash, "indexNo": indexNum])
-            case .sendTransaction(let extendedKeyHash, let address, let amount, let txHash, let txHex):
+            case .sendTransaction(let extendedKeyHash, let address, let inAddress, let amount, let txHash, let txHex):
                 return (.bil_wallet_send_transaction, ["extendedKeysHash" : extendedKeyHash,
-                                                      "outAddress" : address,
-                                                      "outAmount" : amount,
-                                                      "txHash" : txHash,
-                                                      "hexTx" : txHex])
+                                                       "inAddress": inAddress,
+                                                       "outAddress" : address,
+                                                       "outAmount" : amount,
+                                                       "txHash" : txHash,
+                                                       "hexTx" : txHex])
             }
         }()
         
@@ -56,9 +59,10 @@ enum Router: URLRequestConvertible {
     case getWalletID(extendedKeyHash: String)
     case getBalance(extendedKeyHash: String)
     case getUTXO(extendedKeyHash: String)
+    case getTransactionHistory(extendedKeyHash: String, page: Int, size: Int)
     case getTransactionBuildConfig(extendedKeyHash: String)
     case refreshAddress(extendedKeyHash: String, index: Int64)
-    case sendTransaction(extendedKeyHash: String, address: String, amount: Int, txHash: String, txHex: String)
+    case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int, txHash: String, txHex: String)
     
 }
 
@@ -75,4 +79,10 @@ extension String {
     static var bil_wallet_get_transaction_build_config:  String { get { return bil_wallet_path + "getTxElement" } }
     static var bil_wallet_refresh_address: String { get { return bil_wallet_path + "refreshAddress" } }
     static var bil_wallet_send_transaction: String { get { return bil_wallet_path + "sendTransaction" } }
+    static var bil_wallet_transaction_history: String { get { return bil_wallet_path + "getTxHistory" } }
 }
+
+extension String {
+    static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
+}
+

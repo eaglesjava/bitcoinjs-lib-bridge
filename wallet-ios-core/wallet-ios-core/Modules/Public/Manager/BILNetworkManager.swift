@@ -32,15 +32,5 @@ class BILNetworkManager: NSObject {
             }
         }
     }
-	static func request() {
-//        Alamofire.request("http://192.168.1.11:8086/bitbill/bitcoin/cli", method: .post, parameters: ["walletId": "Tesata", "extendedKeys": "xpub6EvXuejgrwbSQAk3YaaMfmXsoMEx7CgSLw4P7UjYKd8hbbZ2n4jp1LrVrbNMEK1qBzbmb6FeJVEHUXzDqYSPucHu5Yqc95r7YuasYyyB91N", "clientId": "abcdefghijklmn"], encoding: JSONEncoding.default).responseJSON(queue: nil, options: .allowFragments) { (response) in
-//            debugPrint(response.request ?? "request is nil")
-//            debugPrint(response)
-//        }
-//        Alamofire.request("http://192.168.1.10:8086/bitbill/bitcoin/wallet/create", method: .post, parameters: ["walletId": "qwerqwer", "extendedKeys": "xpub6Dcfk6kxvgD7kP1T5eZk53GJQbFJxz2PBozNvMTeCSancKfgwpUrCkye5rbTfufBPRgQcqNc6yuBPpYo3siYfhbe1UCF7gNRknUSrhpbScS", "clientId": "61D568B3-8254-467C-A76C-320459C6BCDF"], encoding: JSONEncoding.default).responseJSON(queue: nil, options: .allowFragments) { (response) in
-//            debugPrint(response.request ?? "request is nil")
-//            debugPrint(response)
-//        }
-	}
 	
 }

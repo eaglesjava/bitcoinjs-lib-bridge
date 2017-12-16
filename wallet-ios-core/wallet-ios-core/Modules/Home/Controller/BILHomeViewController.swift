@@ -296,7 +296,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
             c.btcBanlanceLabel.text = totalBTCBalance
 		case .recentRecord:
 			let c = cell as! BILTransactionCell
-			c.transaction = type.dataArray()[indexPath.row] as? BILTransaction
+			c.transaction = type.dataArray()[indexPath.row] as? BILTransactionHistoryModel
 		case .wallet:
 			let c = cell as! BILWalletCell
             c.needBackupButton.tag = indexPath.row

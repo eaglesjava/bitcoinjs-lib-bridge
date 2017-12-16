@@ -7,6 +7,7 @@ target 'wallet-ios-core' do
 
   # Pods for wallet-ios-core
   pod 'Alamofire'
+  pod 'DateToolsSwift'
   pod 'Timepiece'
   pod 'TextFieldEffects'
   pod 'IQKeyboardManagerSwift'

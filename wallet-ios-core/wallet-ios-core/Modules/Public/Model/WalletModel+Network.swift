@@ -61,6 +61,23 @@ extension WalletModel {
         }, failure: failure)
     }
     
+    func getTransactionHistoryFromSever(page: Int, size: Int, success: @escaping (_ txs: [BILTransactionHistoryModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        guard let extKey = mainExtPublicKey else {
+            failure("extKey不能为空", -1)
+            return
+        }
+        BILNetworkManager.request(request: .getTransactionHistory(extendedKeyHash: extKey.md5(), page: page, size: size), success: { (result) in
+            print(result)
+            let json = JSON(result)
+            let datas = json["history"].arrayValue
+            var models = [BILTransactionHistoryModel]()
+            for json in datas {
+                models.append(BILTransactionHistoryModel(jsonData: json))
+            }
+            success(models)
+        }, failure: failure)
+    }
+    
     func getUTXOFromServer(success: @escaping (_ utxo: [BitcoinUTXOModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
             failure("extKey不能为空", -1)
@@ -77,6 +94,8 @@ extension WalletModel {
             success(utxoModels)
         }, failure: failure)
     }
+    
+    
     
     func getTXBuildConfigurationFromServer(success: @escaping (_ utxo: [BitcoinUTXOModel], _ fee: [BTCFee], _ bestFee: BTCFee?) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
@@ -113,19 +132,8 @@ extension WalletModel {
             return
         }
         let tx = transaction
-        BILNetworkManager.request(request: .sendTransaction(extendedKeyHash: extKey.md5(), address: tx.address, amount: tx.amount, txHash: tx.txHash, txHex: tx.hexString), success: { (result) in
-            let json = JSON(result)
-            guard let status = json["status"].int else {
-                failure("解析数据失败", -1)
-                return
-            }
-            if status == 0 {
-                success(result)
-            }
-            else
-            {
-                failure(json["message"].stringValue, status)
-            }
+        BILNetworkManager.request(request: .sendTransaction(extendedKeyHash: extKey.md5(), address: tx.address, inAddress: tx.inputAddressString, amount: tx.amount, txHash: tx.txHash, txHex: tx.hexString), success: { (result) in
+            success(result)
         }, failure: failure)
     }
     
