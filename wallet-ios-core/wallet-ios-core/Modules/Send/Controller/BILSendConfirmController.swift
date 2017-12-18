@@ -46,6 +46,8 @@ class BILSendConfirmController: BILBaseViewController {
     @IBOutlet weak var feeTipeLabel: UILabel!
     @IBOutlet weak var feeSlider: UISlider!
     
+    @IBOutlet weak var remarkInputView: BILInputView!
+    
     var sendModel: BILSendModel?
     var txBuilder: BTCTransactionBuilder? {
         didSet {
@@ -144,8 +146,12 @@ class BILSendConfirmController: BILBaseViewController {
     }
 
     @IBAction func nextAction(_ sender: Any) {
+        guard (remarkInputView.textField.text ?? "").count <= 20 else {
+            showTipAlert(title: nil, msg: "备注不能超过20个字")
+            return
+        }
         guard let wallet = sendModel?.wallet else {
-            showTipAlert(title: "发送失败", msg: "内部数据错误")
+            showTipAlert(title: "发送失败", msg: "请稍后再试")
             return
         }
         
@@ -196,7 +202,7 @@ class BILSendConfirmController: BILBaseViewController {
         builder.build(success: { (tx) in
             debugPrint(tx.bytesCount)
             debugPrint(tx.hexString)
-        
+            tx.remark = self.remarkInputView.textField.text
             wallet.send(transaction: tx, success: { (result) in
                 debugPrint(result)
                 self.sendSuccess(tx: tx)

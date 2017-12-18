@@ -132,7 +132,7 @@ extension WalletModel {
             return
         }
         let tx = transaction
-        BILNetworkManager.request(request: .sendTransaction(extendedKeyHash: extKey.md5(), address: tx.address, inAddress: tx.inputAddressString, amount: tx.amount, txHash: tx.txHash, txHex: tx.hexString), success: { (result) in
+        BILNetworkManager.request(request: .sendTransaction(extendedKeyHash: extKey.md5(), address: tx.address, inAddress: tx.inputAddressString, amount: tx.amount, txHash: tx.txHash, txHex: tx.hexString, remark: tx.remark ?? ""), success: { (result) in
             success(result)
         }, failure: failure)
     }

@@ -640,6 +640,7 @@
                         <outlet property="amountLabel" destination="Erz-zk-b10" id="3dw-UK-BRG"/>
                         <outlet property="feeSlider" destination="MUh-ay-4Fk" id="KhV-0B-nBa"/>
                         <outlet property="feeTipeLabel" destination="4RA-bO-hKB" id="tPN-S0-ti7"/>
+                        <outlet property="remarkInputView" destination="2XN-FN-VbS" id="81r-Md-HGD"/>
                         <outlet property="walletIDLabel" destination="k3E-gX-6yP" id="GQd-8b-30l"/>
                         <segue destination="gQ4-lN-Jcy" kind="presentation" identifier="BILSendConfirmToResultSegue" id="EbY-my-Ag0"/>
                     </connections>

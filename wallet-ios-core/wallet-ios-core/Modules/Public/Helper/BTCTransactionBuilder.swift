@@ -26,6 +26,8 @@ class BTCTransaction: NSObject {
     var txHash: String
     var inputAddressString: String
     
+    var remark: String?
+    
     init(hex: String, address: String, inputAddressString: String, amount: Int) {
         self.hexString = hex
         let data = hex.ck_mnemonicData()

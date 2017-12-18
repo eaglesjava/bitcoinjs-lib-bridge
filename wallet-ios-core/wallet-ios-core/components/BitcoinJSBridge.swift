@@ -109,5 +109,9 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 		canCallJSFunction = true
 	}
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        canCallJSFunction = false
+    }
 	
 }

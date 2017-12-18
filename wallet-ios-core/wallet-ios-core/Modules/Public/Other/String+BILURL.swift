@@ -33,13 +33,14 @@ enum Router: URLRequestConvertible {
                 return (.bil_wallet_get_transaction_build_config, ["extendedKeysHash": extendedKeyHash])
             case .refreshAddress(let extendedKeyHash, let indexNum):
                 return (.bil_wallet_refresh_address, ["extendedKeysHash": extendedKeyHash, "indexNo": indexNum])
-            case .sendTransaction(let extendedKeyHash, let address, let inAddress, let amount, let txHash, let txHex):
+            case .sendTransaction(let extendedKeyHash, let address, let inAddress, let amount, let txHash, let txHex, let remark):
                 return (.bil_wallet_send_transaction, ["extendedKeysHash" : extendedKeyHash,
                                                        "inAddress": inAddress,
                                                        "outAddress" : address,
                                                        "outAmount" : amount,
                                                        "txHash" : txHash,
-                                                       "hexTx" : txHex])
+                                                       "hexTx" : txHex,
+                                                       "remark": remark])
             }
         }()
         
@@ -62,7 +63,7 @@ enum Router: URLRequestConvertible {
     case getTransactionHistory(extendedKeyHash: String, page: Int, size: Int)
     case getTransactionBuildConfig(extendedKeyHash: String)
     case refreshAddress(extendedKeyHash: String, index: Int64)
-    case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int, txHash: String, txHex: String)
+    case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int, txHash: String, txHex: String, remark: String)
     
 }
 
