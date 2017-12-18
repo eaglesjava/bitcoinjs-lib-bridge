@@ -116,11 +116,11 @@ class BILSendConfirmController: BILBaseViewController {
             self.bil_dismissHUD()
         }
         
-        func buildTx(address: String?) {
+        func createTXBuilder(address: String?) {
             wallet.getTXBuildConfigurationFromServer(success: { (utxos, fees, bestFee)  in
                 self.setFees(fees: fees, best: bestFee)
-                let builder = TransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte)
-                builder.addTargetOutput(output: BTCOutput(address: model.address, amount: model.bitcoinSatoshiAmount))
+                let builder = TransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte, isSendAll: model.isSendAll)
+                _ = builder.addTargetOutput(output: BTCOutput(address: model.address, amount: model.bitcoinSatoshiAmount))
                 self.txBuilder = builder
                 self.bil_dismissHUD()
             }) { (msg, code) in
@@ -131,12 +131,12 @@ class BILSendConfirmController: BILBaseViewController {
         bil_showLoading(status: "处理中...")
         
         if model.isSendAll {
-            buildTx(address: nil)
+            createTXBuilder(address: nil)
         }
         else
         {
             wallet.getNewBTCAddress(success: { (address) in
-                buildTx(address: address)
+                createTXBuilder(address: address)
             }) { (msg) in
                 errorHandler(msg: msg)
             }

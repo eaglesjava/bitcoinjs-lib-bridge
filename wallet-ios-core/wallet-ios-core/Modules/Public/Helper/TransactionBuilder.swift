@@ -101,19 +101,24 @@ class TransactionBuilder: NSObject {
     var outputs = [BTCOutput]()
     
     private var changeOutput: BTCOutput?
+    private var targetOutput: BTCOutput?
+    
+    var isSendAll: Bool
     
     init(seedHex: String = "",
          bulidTactics: TransactionBuildTactics = .clearSmallBalance,
          utxos: [BitcoinUTXOModel],
          changeAddress: String? = nil,
          feePerByte: Int,
-         maxFeePerByte: Int = 0) {
+         maxFeePerByte: Int = 0,
+         isSendAll: Bool = false) {
         self.seedHex = seedHex
         self.bulidTactics = bulidTactics
         self.utxos = utxos
         self.changeAddress = changeAddress
         self.feePerByte = feePerByte
         self.maxFeePerByte = maxFeePerByte
+        self.isSendAll = isSendAll
         super.init()
         self.addChangeOutput()
     }
@@ -130,8 +135,18 @@ class TransactionBuilder: NSObject {
         outputs.append(output)
     }
     
-    func addTargetOutput(output: BTCOutput) {
+    func addTargetOutput(output: BTCOutput) -> Bool {
+        if isSendAll {
+            if outputs.count > 1 {
+                return false
+            }
+            else
+            {
+                targetOutput = output
+            }
+        }
         outputs.append(output)
+        return true
     }
     
     private func addChangeOutput() {
@@ -159,7 +174,6 @@ class TransactionBuilder: NSObject {
         for output in outputs {
             outputSatoshiSum += output.amount
         }
-        let outputCount = outputs.count + (hasChangeOutput() ? 1 : 0)
         
         var inputSatoshiSum = 0
         var inputCount = 0
@@ -184,12 +198,24 @@ class TransactionBuilder: NSObject {
         }
     }
     
-    private func chooseInput() {
-        
+    private var outputSatoshiWithoutChange: Int {
         var outputSatoshiSum = 0
         for output in outputs {
             outputSatoshiSum += output.amount
         }
+        return outputSatoshiSum
+    }
+    
+    private func chooseInput() {
+        
+        if isSendAll {
+            for utxo in utxos {
+                addInput(input: utxo.toInput())
+            }
+            return
+        }
+        
+        let outputSatoshiSum = outputSatoshiWithoutChange
         
         switch bulidTactics {
         case .clearSmallBalance:
@@ -222,6 +248,8 @@ class TransactionBuilder: NSObject {
             return
         }
         
+        let totalFee = fee(perByte: feePerByte)
+        
         var txDatas = [String: Any]()
         
         var inputsJ = [[String: Any]]()
@@ -235,15 +263,26 @@ class TransactionBuilder: NSObject {
         txDatas["inputs"] = inputsJ
         
         var outputsJ = [[String: Any]]()
-        var outputSatoshiSum = 0
-        for output in outputs {
-            outputsJ.append(output.toDictionary())
-            outputSatoshiSum += output.amount
+        if isSendAll {
+            guard var target = targetOutput else {
+                failure(TransactionBuildError.noOutput)
+                return
+            }
+            target.amount = inputSatoshiSum - totalFee
+            outputsJ.append(target.toDictionary())
         }
-        
-        if var cOutput = changeOutput {
-            cOutput.amount = inputSatoshiSum - outputSatoshiSum - fee(perByte: feePerByte)
-            outputsJ.append(cOutput.toDictionary())
+        else
+        {
+            var outputSatoshiSum = 0
+            for output in outputs {
+                outputsJ.append(output.toDictionary())
+                outputSatoshiSum += output.amount
+            }
+            
+            if var cOutput = changeOutput {
+                cOutput.amount = inputSatoshiSum - outputSatoshiSum - totalFee
+                outputsJ.append(cOutput.toDictionary())
+            }
         }
         txDatas["outputs"] = outputsJ
         
