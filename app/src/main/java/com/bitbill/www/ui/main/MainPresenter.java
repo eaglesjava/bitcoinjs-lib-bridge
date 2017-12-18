@@ -24,8 +24,12 @@ package com.bitbill.www.ui.main;
 
 
 import com.bitbill.www.common.base.presenter.ModelPresenter;
+import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,7 +39,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2017/07/17.
  */
 
-public class MainPresenter<M extends AppModel, V extends MainMvpView> extends ModelPresenter<M, V>
+public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends ModelPresenter<M, V>
         implements MainMvpPresenter<M, V> {
 
     private static final String TAG = "MainPresenter";
@@ -45,15 +49,33 @@ public class MainPresenter<M extends AppModel, V extends MainMvpView> extends Mo
                          CompositeDisposable compositeDisposable) {
         super(appModel, schedulerProvider, compositeDisposable);
     }
-
-
     @Override
-    public void onAttach(V mvpView) {
-        super.onAttach(mvpView);
-    }
+    public void loadWallet() {
+        getCompositeDisposable().add(getModelManager().getAllWallets()
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<List<Wallet>>(getMvpView()) {
+                    @Override
+                    protected void onStart() {
+                        super.onStart();
+                    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
+                    @Override
+                    public void onNext(List<Wallet> wallets) {
+                        super.onNext(wallets);
+                        if (!isValidMvpView()) {
+                            return;
+                        }
+                        getMvpView().loadWalletsSuccess(wallets);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isValidMvpView()) {
+                            return;
+                        }
+                        getMvpView().loadWalletsFail();
+                    }
+                }));
     }
 }

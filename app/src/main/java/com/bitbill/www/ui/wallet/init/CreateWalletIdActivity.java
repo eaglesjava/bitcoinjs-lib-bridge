@@ -146,6 +146,11 @@ public class CreateWalletIdActivity extends BaseToolbarActivity<CreateWalletIdMv
 
     }
 
+    @Override
+    public void isValidIdStart() {
+        etwWalletName.setError(R.string.error_invalid_wallet_id_start);
+    }
+
     private void next() {
         // Reset errors.
         etwWalletName.removeError();

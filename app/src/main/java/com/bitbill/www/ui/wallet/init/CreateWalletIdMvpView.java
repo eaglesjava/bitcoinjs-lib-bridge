@@ -19,4 +19,6 @@ public interface CreateWalletIdMvpView extends MvpView {
     void hasWalletIdExsist();
 
     void checkWalletIdFail();
+
+    void isValidIdStart();
 }

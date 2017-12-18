@@ -79,6 +79,10 @@ public class CreateWalletIdPresenter<M extends WalletModel, V extends CreateWall
             return false;
         }
 
+        if (!StringUtils.isValidIdStart(getMvpView().getWalletId())) {
+            getMvpView().isValidIdStart();
+            return false;
+        }
         if (!StringUtils.isRequiredLength(getMvpView().getWalletId())) {
             getMvpView().requireWalletIdLength();
             return false;

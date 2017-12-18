@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -60,6 +62,34 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
         intent.putExtra(AppConstants.EXTRA_MNEMONIC, mnemonic);
         intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
         context.startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cancel_mnemonic, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_cancel_mnemonic) {
+            //清空助记词
+            mMnemonicConfirmList.clear();
+            mMnemonicConfrimAdapter.notifyDataSetChanged();
+            //重置提示布局
+            tvHintClick.setVisibility(mMnemonicConfirmList.size() > 0 ? View.GONE : View.VISIBLE);
+            mMnemonicAdapter.notifyDataSetChanged();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

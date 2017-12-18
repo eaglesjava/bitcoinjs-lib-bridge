@@ -25,13 +25,14 @@ package com.bitbill.www.ui.main;
 
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.wallet.WalletModel;
 
 /**
  * Created by isanwenyu@163.com on 2017/07/17.
  */
 
 @PerActivity
-public interface MainMvpPresenter<M extends AppModel, V extends MainMvpView> extends MvpPresenter<V> {
+public interface MainMvpPresenter<M extends WalletModel, V extends MainMvpView> extends MvpPresenter<V> {
 
+    void loadWallet();
 }

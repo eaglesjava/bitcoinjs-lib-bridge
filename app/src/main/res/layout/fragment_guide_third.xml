@@ -17,7 +17,7 @@
         android:layout_width="87dp"
         android:layout_height="125dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true" />
 
     <ImageView
         android:id="@+id/guide_item_contact"
@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/wallet"
         android:layout_alignStart="@+id/wallet"
-        android:layout_marginBottom="25dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="18dp"
         android:src="@drawable/ic_guide_contact"/>
 
 </RelativeLayout>

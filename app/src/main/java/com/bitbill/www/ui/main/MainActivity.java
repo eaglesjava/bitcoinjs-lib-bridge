@@ -14,11 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
-import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.model.entity.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
+import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
@@ -39,11 +42,11 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements NavigationView.OnNavigationItemSelectedListener, MainMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
 
     @Inject
-    MainMvpPresenter<AppModel, MainMvpView> mMainMvpPresenter;
+    MainMvpPresenter<WalletModel, MainMvpView> mMainMvpPresenter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.nav_view)
@@ -75,34 +78,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        onBeforeSetContentLayout();
+        setContentView(getLayoutId());
         setUnBinder(ButterKnife.bind(this));
-
-        setSupportActionBar(toolbar);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                hideKeyboard();
-            }
-        });
-        navView.setNavigationItemSelectedListener(this);
-
-        mAdapter = new FragmentAdapter(getSupportFragmentManager());
-        mAssetFragment = AssetFragment.newInstance();
-        mAdapter.addItem(mAssetFragment);
-        mReceiveFragment = ReceiveFragment.newInstance();
-        mAdapter.addItem(mReceiveFragment);
-        mSendFragment = SendFragment.newInstance();
-        mAdapter.addItem(mSendFragment);
-        mAdapter.addItem(MyFragment.newInstance());
-        mViewPager.setAdapter(mAdapter);
-        mViewPager.setOffscreenPageLimit(3);
+        init(savedInstanceState);
+        initView();
+        initData();
     }
 
     @Override
@@ -154,14 +135,34 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     }
 
+    @Override
+    public void loadWalletsSuccess(List<Wallet> wallets) {
+
+        if (wallets == null) {
+            return;
+        }
+        //设置全局钱包列表对象
+        BitbillApp.get().setWallets(wallets);
+
+        //重新加载钱包信息
+        if (mAssetFragment != null) {
+            mAssetFragment.initData();
+        }
+        if (mReceiveFragment != null) {
+            mReceiveFragment.initData();
+        }
+    }
+
+    @Override
+    public void loadWalletsFail() {
+        showMessage("加载钱包信息失败，请退出重试");
+    }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onWalletUpdateSuccess(WalletUpdateEvent walletUpdateEvent) {
         WalletUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletUpdateEvent.class);
         //重新加载钱包信息
-        if (mAssetFragment != null) {
-            mAssetFragment.lazyData();
-        }
+        getMvpPresenter().loadWallet();
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -198,5 +199,55 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (!EasyPermissions.hasPermissions(this, perms)) {
             EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", REQUEST_CODE_QRCODE_PERMISSIONS, perms);
         }
+    }
+
+    @Override
+    public void onBeforeSetContentLayout() {
+
+    }
+
+    @Override
+    public void init(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initView() {
+
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                hideKeyboard();
+            }
+        });
+        navView.setNavigationItemSelectedListener(this);
+
+        mAdapter = new FragmentAdapter(getSupportFragmentManager());
+        mAssetFragment = AssetFragment.newInstance();
+        mAdapter.addItem(mAssetFragment);
+        mReceiveFragment = ReceiveFragment.newInstance();
+        mAdapter.addItem(mReceiveFragment);
+        mSendFragment = SendFragment.newInstance();
+        mAdapter.addItem(mSendFragment);
+        mAdapter.addItem(MyFragment.newInstance());
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setOffscreenPageLimit(3);
+    }
+
+    @Override
+    public void initData() {
+        getMvpPresenter().loadWallet();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 }

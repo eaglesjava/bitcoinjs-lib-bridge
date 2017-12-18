@@ -153,7 +153,7 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
         }
-        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCanceledOnTouchOutside(false);
 
         return dialog;
     }

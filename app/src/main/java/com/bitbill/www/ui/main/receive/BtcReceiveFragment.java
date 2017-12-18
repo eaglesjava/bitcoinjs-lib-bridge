@@ -3,6 +3,7 @@ package com.bitbill.www.ui.main.receive;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     TextView tvReceiveAmount;
     @Inject
     BtcReceiveMvpPresenter<WalletModel, BtcReceiveMvpView> mReceiveMvpPresenter;
+    private MenuItem mRefreshItem;
 
     public BtcReceiveFragment() {
         // Required empty public constructor
@@ -88,6 +90,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
                 SpecificReceiveActivity.start(getBaseActivity());
             }
         });
+        mRefreshItem = (MenuItem) getBaseActivity().findViewById(R.id.action_refresh);
     }
 
     @Override

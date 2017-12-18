@@ -38,6 +38,8 @@ public class StringUtils {
             .compile("\\d{11}");// 手机号码11位
     private final static Pattern WALLET_ID = Pattern
             .compile("^[a-zA-Z][0-9a-zA-Z_]{5,19}$");//6-20位 以字母开头，支持字母、数字和"_”
+    private final static Pattern WALLET_ID_START = Pattern
+            .compile("^[a-zA-Z]\\w*");//以字母开头”
     private final static Pattern MNEMONIC = Pattern
             .compile(" +");//空格分隔
     private final static Pattern EMAILER = Pattern
@@ -815,4 +817,13 @@ public class StringUtils {
         textView.getPaint().setAntiAlias(true);//抗锯齿
     }
 
+    /**
+     * 以字母开头
+     *
+     * @param walletId
+     * @return
+     */
+    public static boolean isValidIdStart(String walletId) {
+        return WALLET_ID_START.matcher(String.valueOf(walletId.charAt(0))).matches();
+    }
 }

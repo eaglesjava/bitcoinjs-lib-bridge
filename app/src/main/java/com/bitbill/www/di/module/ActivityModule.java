@@ -19,9 +19,6 @@ import com.bitbill.www.ui.guide.GuidePresenter;
 import com.bitbill.www.ui.main.MainMvpPresenter;
 import com.bitbill.www.ui.main.MainMvpView;
 import com.bitbill.www.ui.main.MainPresenter;
-import com.bitbill.www.ui.main.asset.AssetMvpPresenter;
-import com.bitbill.www.ui.main.asset.AssetMvpView;
-import com.bitbill.www.ui.main.asset.AssetPresenter;
 import com.bitbill.www.ui.main.receive.BtcReceiveMvpPresenter;
 import com.bitbill.www.ui.main.receive.BtcReceiveMvpView;
 import com.bitbill.www.ui.main.receive.BtcReceivePresenter;
@@ -104,8 +101,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    MainMvpPresenter<AppModel, MainMvpView> provideMainPresenter(
-            MainPresenter<AppModel, MainMvpView> presenter) {
+    MainMvpPresenter<WalletModel, MainMvpView> provideMainPresenter(
+            MainPresenter<WalletModel, MainMvpView> presenter) {
         return presenter;
     }
 
@@ -134,13 +131,6 @@ public class ActivityModule {
     @PerActivity
     BackupWalletConfirmMvpPresenter<WalletModel, BackupWalletConfirmMvpView> provideBackupWalletConfirmPresenter(
             BackupWalletConfirmPresenter<WalletModel, BackupWalletConfirmMvpView> presenter) {
-        return presenter;
-    }
-
-    @Provides
-    @PerActivity
-    AssetMvpPresenter<WalletModel, AssetMvpView> provideAssetPresenter(
-            AssetPresenter<WalletModel, AssetMvpView> presenter) {
         return presenter;
     }
 

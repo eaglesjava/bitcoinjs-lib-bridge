@@ -50,6 +50,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     private List<Wallet> mWalletList;
     private WalletSelectDialog mWalletSelectDialog;
     private Wallet mSelectedWallet;
+    private int mSelectedPosition = -1;
 
     public ReceiveFragment() {
         // Required empty public constructor
@@ -97,6 +98,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
             @Override
             public void onItemSelected(Wallet selectedWallet, int position) {
                 mSelectedWallet = selectedWallet;
+                mSelectedPosition = position;
                 //刷新选择布局
                 selectWalletView.setWallet(selectedWallet);
                 loadBtcAddress();
@@ -143,6 +145,30 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     @Override
     public void initData() {
 
+        mWalletList.clear();
+        mWalletList.addAll(BitbillApp.get().getWallets());
+        //重置选中的钱包对象
+        if (mSelectedPosition == -1 || mSelectedPosition > mWalletList.size() - 1) {
+            // 选择默认的钱包对象作为选中的
+            mSelectedWallet = BitbillApp.get().getDefaultWallet();
+        } else {
+            mSelectedWallet = mWalletList.get(mSelectedPosition);
+        }
+
+        if (mSelectedWallet != null) {
+            //重置单选select对象
+            for (Wallet wallet : mWalletList) {
+                if (wallet.equals(mSelectedWallet)) {
+                    wallet.setSelected(true);
+                } else {
+                    wallet.setSelected(false);
+                }
+            }
+            selectWalletView.setWallet(mSelectedWallet);
+            loadBtcAddress();
+        } else {
+            selectWalletView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -150,39 +176,10 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
         return R.layout.fragment_receive;
     }
 
-    /**
-     * 懒加载数据
-     * 在onFirstUserVisible之后
-     */
-    @Override
-    public void lazyData() {
-
-    }
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-
-            mWalletList.clear();
-            mWalletList.addAll(BitbillApp.get().getWallets());
-            // 选择默认的钱包对象作为选中的
-            mSelectedWallet = BitbillApp.get().getDefaultWallet();
-            if (mSelectedWallet != null) {
-                //重置单选select对象
-                for (Wallet wallet : mWalletList) {
-                    if (wallet.equals(mSelectedWallet)) {
-                        wallet.setSelected(true);
-                    } else {
-                        wallet.setSelected(false);
-                    }
-                }
-                selectWalletView.setWallet(mSelectedWallet);
-                loadBtcAddress();
-            } else {
-                selectWalletView.setVisibility(View.GONE);
-            }
-
             if (!getMvpPresenter().isRemindDialogShown()) {
                 MessageConfirmDialog.newInstance(getString(R.string.dialog_title_friendly_remind),
                         getString(R.string.dialog_msg_change_address),
@@ -192,6 +189,14 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                 getMvpPresenter().setRemindDialogShown();
             }
         }
+    }
+
+    /**
+     * 懒加载数据
+     * 在onFirstUserVisible之后
+     */
+    @Override
+    public void lazyData() {
 
 
     }

@@ -99,6 +99,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
     @Override
     public void initView() {
 
+
     }
 
     @Override

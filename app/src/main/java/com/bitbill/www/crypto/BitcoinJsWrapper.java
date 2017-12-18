@@ -35,7 +35,13 @@ public class BitcoinJsWrapper {
         webSettings.setJavaScriptEnabled(true);
 
 //        // 限制在WebView中打开网页，而不用默认浏览器
-        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);// 当打开新链接时，使用当前的 WebView，不会使用系统其他浏览器
+                return true;
+            }
+        });
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {

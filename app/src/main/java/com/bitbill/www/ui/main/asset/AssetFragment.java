@@ -12,19 +12,18 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.base.view.widget.PopupWalletMenu;
 import com.bitbill.www.common.base.view.widget.WalletView;
-import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import com.bitbill.www.ui.wallet.info.WalletInfoActivity;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,7 +34,7 @@ import butterknife.OnClick;
  * Activities that contain this fragment must implement the
  * create an instance of this fragment.
  */
-public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implements AssetMvpView, WalletView.OnWalletClickListener {
+public class AssetFragment extends BaseLazyFragment implements WalletView.OnWalletClickListener {
 
 
     private static final int BOTTOM_MARGIN = 15;//unit dp
@@ -48,11 +47,10 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
     @BindView(R.id.tv_current_wallet_count)
     TextView mWalletCountView;
 
-    @Inject
-    AssetMvpPresenter<WalletModel, AssetMvpView> mAssetMvpPresenter;
     private PopupWalletMenu mWalletMenu;
     private int mWalletCount;
     private boolean isFirstLoading = true;//第一次加载
+    private List<Wallet> mWalletList;
 
     public AssetFragment() {
         // Required empty public constructor
@@ -72,8 +70,8 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
     }
 
     @Override
-    public AssetMvpPresenter getMvpPresenter() {
-        return mAssetMvpPresenter;
+    public MvpPresenter getMvpPresenter() {
+        return null;
     }
 
     @Override
@@ -124,7 +122,18 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
 
     @Override
     public void initData() {
+        if (mWalletList == null) {
+            mWalletList = new ArrayList<>();
+        }
+        mWalletList.clear();
+        mWalletList.addAll(BitbillApp.get().getWallets());
+        llWalletContainer.removeAllViews();
+        mWalletCountView.setText(String.format(getString(R.string.text_asset_current_wallet), mWalletList.size()));
+        for (Wallet wallet : mWalletList) {
+            addWalletView(wallet);
+        }
 
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -146,22 +155,6 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
         return R.layout.fragment_asset;
     }
 
-    @Override
-    public void loadWalletsSuccess(List<Wallet> wallets) {
-        if (wallets == null) {
-            return;
-        }
-        //设置全局钱包列表对象
-        BitbillApp.get().setWallets(wallets);
-        llWalletContainer.removeAllViews();
-        mWalletCountView.setText(String.format(getString(R.string.text_asset_current_wallet), wallets.size()));
-        for (Wallet wallet : wallets) {
-            addWalletView(wallet);
-        }
-
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
-
     private void addWalletView(Wallet wallet) {
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.bottomMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, BOTTOM_MARGIN, getResources().getDisplayMetrics());
@@ -172,10 +165,6 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
                         .setOnWalletClickListener(this), layoutParams);
     }
 
-    @Override
-    public void loadWalletsFail() {
-        showMessage("加载钱包信息失败，请退出重试");
-    }
 
     @OnClick(R.id.iv_plus)
     public void plusClick(View view) {
@@ -204,9 +193,7 @@ public class AssetFragment extends BaseLazyFragment<AssetMvpPresenter> implement
      */
     @Override
     public void lazyData() {
-        if (getMvpPresenter() != null) {
-            getMvpPresenter().loadWallet();
 
-        }
+
     }
 }

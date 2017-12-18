@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bitbill Wallet</string>
+    <string name="app_name">BitBill</string>
 
     <!--network state tip-->
     <string name="toast_using_network_type">正在使用 %1$s 网络</string>
@@ -154,4 +154,6 @@
     <string name="success_refresh_address">地址已刷新</string>
     <string name="action_complete">完成</string>
     <string name="action_send_all_amount">发送全部余额</string>
+    <string name="action_empty_mnemonic">清空</string>
+    <string name="error_invalid_wallet_id_start">以字母开头</string>
 </resources>
