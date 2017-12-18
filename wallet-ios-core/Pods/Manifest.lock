@@ -1,14 +1,14 @@
 PODS:
-  - Alamofire (4.5.1)
+  - Alamofire (4.6.0)
   - CryptoSwift (0.8.0)
   - DateToolsSwift (2.0.3)
   - DZNEmptyDataSet (1.8.1)
-  - IQKeyboardManagerSwift (5.0.6)
-  - PopupDialog (0.6.1)
+  - IQKeyboardManagerSwift (5.0.7)
+  - PopupDialog (0.6.2)
   - SnapKit (4.0.0)
-  - Socket.IO-Client-Swift (13.0.1):
+  - Socket.IO-Client-Swift (13.1.0):
     - Starscream (~> 3.0.2)
-  - Starscream (3.0.2)
+  - Starscream (3.0.3)
   - SVProgressHUD (2.2.2)
   - SwiftyJSON (4.0.0)
   - TextFieldEffects (1.4.0)
@@ -31,15 +31,15 @@ DEPENDENCIES:
   - Toast-Swift
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
-  PopupDialog: 1bdd1efbfb49eb619a280faa9a3bbaac76f94120
+  IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
+  PopupDialog: d4336d7274a6aa3af4cb26d8b6691510eba90cc3
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  Socket.IO-Client-Swift: 7055c89b7a9926b343194c4cac75998329c4a95a
-  Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
+  Socket.IO-Client-Swift: b67a96d6a9e5f271bceb93e99779d2cf77c74868
+  Starscream: dfb1b3f39506717ee52b67fb48de0c8269504cbc
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f

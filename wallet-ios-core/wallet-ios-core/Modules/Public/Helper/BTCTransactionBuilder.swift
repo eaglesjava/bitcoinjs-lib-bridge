@@ -293,7 +293,6 @@ class BTCTransactionBuilder: NSObject {
             debugPrint(jsonString)
             let noWhiteSpaceJson = jsonString.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
             BitcoinJSBridge.shared.buildTransaction(seedHex: seedHex, inputsOutputs: noWhiteSpaceJson, success: { (result) in
-                debugPrint(result)
                 guard let str = result as? String else {
                     return
                 }
