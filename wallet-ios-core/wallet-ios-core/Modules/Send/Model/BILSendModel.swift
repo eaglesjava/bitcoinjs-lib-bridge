@@ -15,7 +15,7 @@ class BILSendModel: BILRecieveModel {
     
     var isSendAll = false
     
-    var transaction: Transaction?
+    var transaction: BTCTransaction?
     
     var bitcoinAmount: String {
         get {

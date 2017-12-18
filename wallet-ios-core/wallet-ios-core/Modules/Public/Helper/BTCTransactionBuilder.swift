@@ -18,7 +18,7 @@ enum TransactionBuildTactics {
     case clearSmallBalance
 }
 
-class Transaction: NSObject {
+class BTCTransaction: NSObject {
     var address: String
     var bytesCount: Int = 0
     var hexString: String
@@ -80,7 +80,7 @@ struct BTCOutput {
     }
 }
 
-class TransactionBuilder: NSObject {
+class BTCTransactionBuilder: NSObject {
     
     enum TransactionBuildError: Error {
         case noInput
@@ -234,7 +234,7 @@ class TransactionBuilder: NSObject {
         
     }
     
-    func build(success: @escaping (_ tx: Transaction) -> Void, failure: @escaping (_ error: Error) -> Void) {
+    func build(success: @escaping (_ tx: BTCTransaction) -> Void, failure: @escaping (_ error: Error) -> Void) {
         
         guard outputs.count > 0 else {
             failure(TransactionBuildError.noOutput)
@@ -300,7 +300,7 @@ class TransactionBuilder: NSObject {
                 guard let targetOutput = self.outputs.first else {
                     return
                 }
-                let tx = Transaction(hex: str, address:targetOutput.address, inputAddressString: inputAddresses.joined(separator: "|"), amount: targetOutput.amount)
+                let tx = BTCTransaction(hex: str, address:targetOutput.address, inputAddressString: inputAddresses.joined(separator: "|"), amount: targetOutput.amount)
                 success(tx)
                 
             }, failure: { (error) in

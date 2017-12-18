@@ -47,7 +47,7 @@ class BILSendConfirmController: BILBaseViewController {
     @IBOutlet weak var feeSlider: UISlider!
     
     var sendModel: BILSendModel?
-    var txBuilder: TransactionBuilder? {
+    var txBuilder: BTCTransactionBuilder? {
         didSet {
             sliderValueChanged(feeSlider)
         }
@@ -119,7 +119,7 @@ class BILSendConfirmController: BILBaseViewController {
         func createTXBuilder(address: String?) {
             wallet.getTXBuildConfigurationFromServer(success: { (utxos, fees, bestFee)  in
                 self.setFees(fees: fees, best: bestFee)
-                let builder = TransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte, isSendAll: model.isSendAll)
+                let builder = BTCTransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte, isSendAll: model.isSendAll)
                 _ = builder.addTargetOutput(output: BTCOutput(address: model.address, amount: model.bitcoinSatoshiAmount))
                 self.txBuilder = builder
                 self.bil_dismissHUD()
@@ -210,7 +210,7 @@ class BILSendConfirmController: BILBaseViewController {
         })
     }
     
-    func sendSuccess(tx: Transaction) {
+    func sendSuccess(tx: BTCTransaction) {
         NotificationCenter.default.post(name: .transactionSended, object: nil)
         guard let cont = storyboard?.instantiateViewController(withIdentifier: "BILSendResultController") as? BILSendResultController else { return }
         sendModel?.transaction = tx

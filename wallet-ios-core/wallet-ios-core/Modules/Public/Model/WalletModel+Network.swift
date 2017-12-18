@@ -126,7 +126,7 @@ extension WalletModel {
         }, failure: failure)
     }
     
-    func send(transaction: Transaction, success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func send(transaction: BTCTransaction, success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
             failure("extKey不能为空", -1)
             return
