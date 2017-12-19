@@ -18,7 +18,7 @@ class BILTransactionCell: UITableViewCell {
 		didSet {
 			if let t = transaction {
 				typeImageView.image = UIImage(named: t.type == .recieve ? "icon_record_recieve" : "icon_record_send")
-				addressLabel.text = t.address
+				addressLabel.text = t.firstAddress
 				dateLabel.text = t.dateSring
 				volumeLabel.text = t.volumeString
 			}

@@ -84,10 +84,28 @@ struct BTCOutput {
 
 class BTCTransactionBuilder: NSObject {
     
-    enum TransactionBuildError: Error {
+    enum TransactionBuildError: LocalizedError {
         case noInput
         case noOutput
         case jsonError
+        case notEnoughBalance
+        case jsBuildTransactionFailed
+        
+        var localizedDescription: String {
+            switch self {
+            case .noInput:
+                return NSLocalizedString("TransactionBuildError.noInput", comment: "")
+            case .noOutput:
+                return NSLocalizedString("TransactionBuildError.noOutput", comment: "")
+            case .jsonError:
+                return NSLocalizedString("TransactionBuildError.jsonError", comment: "")
+            case .notEnoughBalance:
+                return NSLocalizedString("TransactionBuildError.notEnoughBalance", comment: "")
+            case .jsBuildTransactionFailed:
+                return NSLocalizedString("TransactionBuildError.jsBuildTransactionFailed", comment: "")
+            }
+        }
+        
     }
     
     var seedHex: String
@@ -208,7 +226,18 @@ class BTCTransactionBuilder: NSObject {
         return outputSatoshiSum
     }
     
-    private func chooseInput() {
+    func canFeedOutpus() -> Bool {
+        do {
+            try chooseInput()
+        } catch {
+            return false
+        }
+        return true
+    }
+    
+    private func chooseInput() throws {
+        
+        inputs.removeAll()
         
         if isSendAll {
             for utxo in utxos {
@@ -222,13 +251,18 @@ class BTCTransactionBuilder: NSObject {
         switch bulidTactics {
         case .clearSmallBalance:
             var inputSatoshiSum = 0
+            var enough = false
             for utxo in utxos {
                 inputSatoshiSum += utxo.satoshiAmount
                 addInput(input: utxo.toInput())
                 if (inputSatoshiSum < outputSatoshiSum + maxFeeFor(inCount: inputs.count, outCount: outputCount)) {
                     continue
                 }
+                enough = true
                 break
+            }
+            if !enough {
+                throw TransactionBuildError.notEnoughBalance
             }
         default:
             ()
@@ -236,14 +270,19 @@ class BTCTransactionBuilder: NSObject {
         
     }
     
-    func build(success: @escaping (_ tx: BTCTransaction) -> Void, failure: @escaping (_ error: Error) -> Void) {
+    func build(success: @escaping (_ tx: BTCTransaction) -> Void, failure: @escaping (_ error: TransactionBuildError) -> Void) {
         
         guard outputs.count > 0 else {
             failure(TransactionBuildError.noOutput)
             return
         }
         
-        chooseInput()
+        do {
+            try chooseInput()
+        } catch {
+            failure(TransactionBuildError.notEnoughBalance)
+            return
+        }
         
         guard inputs.count > 0 else {
             failure(TransactionBuildError.noInput)
@@ -305,10 +344,10 @@ class BTCTransactionBuilder: NSObject {
                 success(tx)
                 
             }, failure: { (error) in
-                failure(error)
+                failure(TransactionBuildError.jsBuildTransactionFailed)
             })
         } catch {
-            failure(error)
+            failure(TransactionBuildError.jsonError)
         }
     }
 }

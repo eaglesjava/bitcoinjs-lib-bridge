@@ -67,7 +67,7 @@ extension WalletModel {
             return
         }
         BILNetworkManager.request(request: .getTransactionHistory(extendedKeyHash: extKey.md5(), page: page, size: size), success: { (result) in
-            print(result)
+            debugPrint(result)
             let json = JSON(result)
             let datas = json["history"].arrayValue
             var models = [BILTransactionHistoryModel]()
@@ -84,7 +84,7 @@ extension WalletModel {
             return
         }
         BILNetworkManager.request(request: .getUTXO(extendedKeyHash: extKey.md5()), success: { (result) in
-            print(result)
+            debugPrint(result)
             let json = JSON(result)
             let utxoDatas = json["utxo"].arrayValue
             var utxoModels = [BitcoinUTXOModel]()
@@ -103,7 +103,7 @@ extension WalletModel {
             return
         }
         BILNetworkManager.request(request: .getTransactionBuildConfig(extendedKeyHash: extKey.md5()), success: { (result) in
-            print(result)
+            debugPrint(result)
             let json = JSON(result)
             let utxoDatas = json["utxo"].arrayValue
             var utxoModels = [BitcoinUTXOModel]()
@@ -134,6 +134,23 @@ extension WalletModel {
         let tx = transaction
         BILNetworkManager.request(request: .sendTransaction(extendedKeyHash: extKey.md5(), address: tx.address, inAddress: tx.inputAddressString, amount: tx.amount, txHash: tx.txHash, txHex: tx.hexString, remark: tx.remark ?? ""), success: { (result) in
             success(result)
+        }, failure: failure)
+    }
+    
+    static func getHomeInformationFromSever(wallets: [WalletModel], success: @escaping (_ txs: [BILTransactionHistoryModel], _ balances: [String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        guard wallets.count > 0 else {
+            failure("数据错误", -1)
+            return
+        }
+        BILNetworkManager.request(request: .getHomeInformation(wallets: wallets), success: { (result) in
+            debugPrint(result)
+            let json = JSON(result)
+            let datas = json["unconfirm"].arrayValue
+            var models = [BILTransactionHistoryModel]()
+            for json in datas {
+                models.append(BILTransactionHistoryModel(jsonData: json))
+            }
+            success(models, [:])
         }, failure: failure)
     }
     

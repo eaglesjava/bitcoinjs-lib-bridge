@@ -28,6 +28,8 @@
 		BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */; };
 		BA11423D1FD676540025BF80 /* WalletModel+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423C1FD676540025BF80 /* WalletModel+Network.swift */; };
 		BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */; };
+		BA12AC351FE8C22100812F38 /* BILContactDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC341FE8C22100812F38 /* BILContactDetailController.swift */; };
+		BA12AC371FE8C92D00812F38 /* BILWhiteBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC361FE8C92D00812F38 /* BILWhiteBorderButton.swift */; };
 		BA1746F41FDFB89D000615CF /* BILURLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1746F31FDFB89D000615CF /* BILURLHelper.swift */; };
 		BA1746F61FDFC868000615CF /* BILSendInputAmountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1746F51FDFC868000615CF /* BILSendInputAmountController.swift */; };
 		BA1746F81FDFC8CD000615CF /* BILSendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1746F71FDFC8CD000615CF /* BILSendModel.swift */; };
@@ -167,6 +169,8 @@
 		BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideContactView.xib; sourceTree = "<group>"; };
 		BA11423C1FD676540025BF80 /* WalletModel+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+Network.swift"; sourceTree = "<group>"; };
 		BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BTC.swift"; sourceTree = "<group>"; };
+		BA12AC341FE8C22100812F38 /* BILContactDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILContactDetailController.swift; sourceTree = "<group>"; };
+		BA12AC361FE8C92D00812F38 /* BILWhiteBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILWhiteBorderButton.swift; sourceTree = "<group>"; };
 		BA1746F31FDFB89D000615CF /* BILURLHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILURLHelper.swift; sourceTree = "<group>"; };
 		BA1746F51FDFC868000615CF /* BILSendInputAmountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSendInputAmountController.swift; sourceTree = "<group>"; };
 		BA1746F71FDFC8CD000615CF /* BILSendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSendModel.swift; sourceTree = "<group>"; };
@@ -487,6 +491,7 @@
 			isa = PBXGroup;
 			children = (
 				BA6E95F21FE1433C0085F7B5 /* BILContactController.swift */,
+				BA12AC341FE8C22100812F38 /* BILContactDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -506,6 +511,7 @@
 				BA05EAE91FE7A14100B43B95 /* BILContactCell.xib */,
 				BA05EAF41FE7D35900B43B95 /* BILTableViewHeaderFooterView.swift */,
 				BA05EAF61FE7D38D00B43B95 /* BILTableViewHeaderFooterView.xib */,
+				BA12AC361FE8C92D00812F38 /* BILWhiteBorderButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1264,6 +1270,7 @@
 				BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */,
 				CCFEDEF21FCD43CE00F1A7FC /* BILHomeAssetCell.swift in Sources */,
 				CCE5E16E1FC80E0600F7555D /* BILWalletManager.swift in Sources */,
+				BA12AC351FE8C22100812F38 /* BILContactDetailController.swift in Sources */,
 				BA6E95F51FE2506A0085F7B5 /* BitcoinUTXOModel.swift in Sources */,
 				CCFEDEFD1FCE8DE300F1A7FC /* CKSegmentedView.swift in Sources */,
 				BA1746F61FDFC868000615CF /* BILSendInputAmountController.swift in Sources */,
@@ -1291,6 +1298,7 @@
 				BA05EAF31FE7D1D700B43B95 /* UIImage+Snapshot.swift in Sources */,
 				CCE9BE801FBD9DF0007A59E7 /* BILVerifyMnemonicController.swift in Sources */,
 				CC4417051FBEB25C00C4B158 /* BILControllerManager.swift in Sources */,
+				BA12AC371FE8C92D00812F38 /* BILWhiteBorderButton.swift in Sources */,
 				CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */,
 				BA6E95EF1FE0CD790085F7B5 /* BILBitCoinInputView.swift in Sources */,
 				BA11423D1FD676540025BF80 /* WalletModel+Network.swift in Sources */,

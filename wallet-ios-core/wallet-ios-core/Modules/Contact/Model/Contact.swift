@@ -22,6 +22,7 @@ class Contact: NSObject, Comparable {
     var name: String
     var walletID: String
     var address: String
+    var remark: String
     
     var additionType: ContactAdditionType = .address
     
@@ -31,26 +32,34 @@ class Contact: NSObject, Comparable {
     
     lazy var firstNameLetter: String = {
         guard let letter = name.firstUpperLetter().first else {
-            return "*"
+            return "★"
         }
-        return (letter <= "Z" && letter >= "A") ? String(letter) : "*"
+        return (letter <= "Z" && letter >= "A") ? String(letter) : "★"
     }()
     
     lazy var detail: String = {
         return additionType == .address ? address : walletID
     }()
     
+    var remarkString: String {
+        get {
+            return remark.isEmpty ? "无" : remark
+        }
+    }
+    
     init(jsonData: JSON) {
         name = jsonData["name"].stringValue
         walletID = jsonData["walletID"].stringValue
         address = jsonData["address"].stringValue
+        remark = jsonData["remark"].stringValue
     }
     
-    init(name: String, walletID: String = "", address: String = "", additionType: ContactAdditionType = .address) {
+    init(name: String, walletID: String = "", address: String = "", additionType: ContactAdditionType = .address, remark: String = "") {
         self.name = name
         self.walletID = walletID
         self.address = address
         self.additionType = additionType
+        self.remark = remark
     }
     
 }

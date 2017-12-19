@@ -129,6 +129,8 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(balanceDidChanged(notification:)), name: .walletDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(uncofirmTransactionDidChanged(notification:)), name: .recievedUnconfirmTransaction, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(uncofirmTransactionDidChanged(notification:)), name: .unconfirmTransactionBeenConfirmed, object: nil)
 		
 		if #available(iOS 11.0, *) {
 			navigationController?.navigationBar.prefersLargeTitles = false
@@ -147,6 +149,8 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .recievedUnconfirmTransaction, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .unconfirmTransactionBeenConfirmed, object: nil)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -163,6 +167,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	// MARK: - Notifications
     @objc
     func refresh(sender: Any?) {
+        uncofirmTransactionDidChanged(notification: nil)
         for wallet in wallets {
             debugPrint(wallet.id ?? "", wallet.mainExtPublicKey?.md5() ?? "")
             wallet.getBalanceFromServer(success: { (wallet) in
@@ -187,6 +192,17 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         totalBTCBalance = BTCFormatString(btc: sum)
         tableView.reloadData()
 	}
+    
+    @objc
+    func uncofirmTransactionDidChanged(notification: Notification?) {
+        WalletModel.getHomeInformationFromSever(wallets: BILWalletManager.shared.wallets, success: { (txs, balances)  in
+            BILTransactionManager.shared.recnetRecords = txs
+            self.tableView.reloadData()
+        }) { (msg, code) in
+            self.bil_makeToast(msg: msg)
+            self.tableView.reloadData()
+        }
+    }
 	
 	@objc
 	func walletDidChanged(notification: Notification) {

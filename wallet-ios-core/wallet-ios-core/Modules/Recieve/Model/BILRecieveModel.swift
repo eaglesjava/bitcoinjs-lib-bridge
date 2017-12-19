@@ -36,7 +36,7 @@ class BILRecieveModel: NSObject {
 	var amount: String
 	var coinType: CoinType
 	
-	init(address: String, amount: String = "0", coinType: CoinType = .btc) {
+	init(address: String = "", amount: String = "0", coinType: CoinType = .btc) {
 		self.address = address
 		self.amount = amount
 		self.coinType = coinType

@@ -24,8 +24,8 @@ class BILTransactionHistoryModel: NSObject {
 	var type = BILTransactionType.recieve
 	var volume = 0
     var txHash: String
-    lazy var address: String = {
-        guard let add = type == .recieve ? inAddress.first : outAddress.first else {
+    lazy var firstAddress: String = {
+        guard let add = outAddress.first else {
             return ""
         }
         return add

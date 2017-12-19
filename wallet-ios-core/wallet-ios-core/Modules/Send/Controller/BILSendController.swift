@@ -14,24 +14,37 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     
     let addressToAmountSegue = "BILAddressToAmountSegue"
     let scanResultSegue = "BILSendToScanResult"
+    let showSelectContactController = "BILShowSelectContactController"
     
     var sendModel: BILSendModel?
+    var contact: Contact?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addressInputView.textField.text = "17fLtpDmu7GhMgFyVBCrNySSanodr3toXP"
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         NotificationCenter.default.addObserver(self, selector: #selector(transactionDidSend(notification:)), name: .transactionSended, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sendBTCToContact(notification:)), name: .sendBTCToContact, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .transactionSended, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .sendBTCToContact, object: nil)
     }
     
     @objc
     func transactionDidSend(notification: Notification) {
         addressInputView.textField.text = ""
+    }
+    
+    @objc
+    func sendBTCToContact(notification: Notification) {
+        guard let contact = notification.object as? Contact else { return }
+        didChooseContact(contact: contact)
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +64,12 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         }) { (error) in
             debugPrint(error)
         }
+    }
+    
+    func didChooseContact(contact: Contact) {
+        loadViewIfNeeded()
+        self.contact = contact
+        addressInputView.textField.text = "\(contact.name)( \(contact.detail) )"
     }
     
     // MARK: - Actions
@@ -78,7 +97,17 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+        sendModel = nil
+    }
+    
     @IBAction func nextAction(_ sender: Any) {
+        if let c = contact {
+            debugPrint(c.name)
+            bil_makeToast(msg: "获取联系人地址失败")
+            return
+        }
         guard let address = addressInputView.textField.text, !(address.isEmpty) else {
             bil_makeToast(msg: NSLocalizedString("地址不能为空", comment: ""))
             return
@@ -105,6 +134,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        view.endEditing(true)
         guard let id = segue.identifier else { return }
         switch id {
         case addressToAmountSegue:
@@ -113,6 +143,11 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         case scanResultSegue:
             let cont = segue.destination as! BILScanQRCodeResultController
             cont.sendModel = sendModel
+        case showSelectContactController:
+            let cont = segue.destination as! BILContactController
+            cont.didSelectContactClosure = { (contact) in
+                self.didChooseContact(contact: contact)
+            }
         default:
             ()
         }

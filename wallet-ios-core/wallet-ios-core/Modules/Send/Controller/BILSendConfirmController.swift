@@ -114,7 +114,9 @@ class BILSendConfirmController: BILBaseViewController {
         guard let wallet = model.wallet else { return }
         
         func errorHandler(msg: String) {
-            self.showTipAlert(title: nil, msg: msg)
+            self.showTipAlert(title: nil, msg: msg, dismissed: {
+                self.navigationController?.popViewController(animated: true)
+            })
             self.bil_dismissHUD()
         }
         
@@ -123,8 +125,19 @@ class BILSendConfirmController: BILBaseViewController {
                 self.setFees(fees: fees, best: bestFee)
                 let builder = BTCTransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte, isSendAll: model.isSendAll)
                 _ = builder.addTargetOutput(output: BTCOutput(address: model.address, amount: model.bitcoinSatoshiAmount))
-                self.txBuilder = builder
                 self.bil_dismissHUD()
+                if builder.canFeedOutpus() {
+                    self.txBuilder = builder
+                    
+                }
+                else
+                {
+                    self.showTipAlert(title: "提示", msg: "余额不足以支付手续费", dismissed: {
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                }
+                
+                
             }) { (msg, code) in
                 errorHandler(msg: msg)
             }
@@ -197,7 +210,7 @@ class BILSendConfirmController: BILBaseViewController {
             errorHandler(msg: "解密 Seed 失败")
             return
         }
-        
+        bil_showLoading(status: "发送中...")
         builder.seedHex = seed
         builder.build(success: { (tx) in
             debugPrint(tx.bytesCount)

@@ -64,6 +64,7 @@ class BILInputView: UIView, UITextFieldDelegate {
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.textFieldDidBeginEditing?(textField)
         show(tip: titleString ?? "", type: .normal)
 		line.backgroundColor = UIColor.white
         guard let l = tipLabel else {

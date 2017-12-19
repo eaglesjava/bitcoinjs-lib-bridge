@@ -13,6 +13,7 @@ import SwiftyJSON
 class BILNetworkManager: NSObject {
     static func request(request: Router, success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         Alamofire.request(request).responseJSON { (response) in
+            debugPrint(request)
             debugPrint(response)
             if let json = response.result.value as? [String : Any] {
                 debugPrint("JSON: \(json)") // serialized json response

@@ -13,6 +13,7 @@ class BILContactCell: UITableViewCell {
     @IBOutlet weak var firstWordLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var seletedButton: UIButton!
     
     var contact: Contact? {
         didSet {
@@ -31,7 +32,7 @@ class BILContactCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        seletedButton.isSelected = selected
         // Configure the view for the selected state
     }
     

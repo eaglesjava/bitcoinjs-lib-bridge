@@ -58,9 +58,11 @@ class BILSokectManager: NSObject {
         }
         socket.on(.bil_socket_event_unconfirom) { (data, emitter) in
             debugPrint(data)
+            NotificationCenter.default.post(name: .recievedUnconfirmTransaction, object: nil)
         }
         socket.on(.bil_socket_event_confirom) { (data, emitter) in
             debugPrint(data)
+            NotificationCenter.default.post(name: .unconfirmTransactionBeenConfirmed, object: nil)
         }
     }
     

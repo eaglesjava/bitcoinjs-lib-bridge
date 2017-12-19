@@ -10,9 +10,13 @@ import UIKit
 
 class BILContactController: BILLightBlueBaseController {
 
+    typealias DidSelectContactClosure = (Contact) -> Void
+    
     @IBOutlet weak var tableView: UITableView!
     var contacts = [String: [Contact]]()
     var firstLetters = [String]()
+    
+    var didSelectContactClosure: DidSelectContactClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,15 +49,33 @@ class BILContactController: BILLightBlueBaseController {
         }))
         present(sheet, animated: true, completion: nil)
     }
-    /*
+    
     // MARK: - Navigation
 
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "BILShowContactDetailSegue" {
+            guard (sender as? Contact) != nil else { return false }
+        }
+        return true
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        guard let id = segue.identifier else {
+            return
+        }
+        switch id {
+        case "BILShowContactDetailSegue":
+            let cont = segue.destination as! BILContactDetailController
+            if let contact = sender as? Contact {
+                cont.contact = contact
+            }
+        default:
+            ()
+        }
     }
-    */
 
 }
 
@@ -166,6 +188,7 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
     // MARK: - TableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return firstLetters.count
@@ -179,9 +202,23 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
         return firstLetters
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let contact = contacts[letter(of: indexPath.section)]?[indexPath.row] else { return  }
+        if let closure = didSelectContactClosure {
+            closure(contact)
+            didSelectContactClosure = nil
+            navigationController?.popViewController(animated: true)
+        }
+        else
+        {
+            performSegue(withIdentifier: "BILShowContactDetailSegue", sender: contact)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BILContactCell", for: indexPath) as! BILContactCell
         cell.contact = contacts[letter(of: indexPath.section)]![indexPath.row]
+        cell.seletedButton.isHidden = didSelectContactClosure == nil
         return cell
     }
     

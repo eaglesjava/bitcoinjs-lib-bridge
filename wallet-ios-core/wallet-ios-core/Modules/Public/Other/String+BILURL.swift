@@ -41,6 +41,15 @@ enum Router: URLRequestConvertible {
                                                        "txHash" : txHash,
                                                        "hexTx" : txHex,
                                                        "remark": remark])
+            case .getHomeInformation(let wallets):
+                var pubKeys = [String]()
+                for wallet in wallets {
+                    guard let pubkey = wallet.mainExtPublicKey else {
+                        continue
+                    }
+                    pubKeys.append(pubkey.md5())
+                }
+                return (.bil_wallet_get_home_information, ["extendedKeysHash": pubKeys.joined(separator: "|")])
             }
         }()
         
@@ -64,6 +73,7 @@ enum Router: URLRequestConvertible {
     case getTransactionBuildConfig(extendedKeyHash: String)
     case refreshAddress(extendedKeyHash: String, index: Int64)
     case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int, txHash: String, txHex: String, remark: String)
+    case getHomeInformation(wallets: [WalletModel])
     
 }
 
@@ -81,6 +91,7 @@ extension String {
     static var bil_wallet_refresh_address: String { get { return bil_wallet_path + "refreshAddress" } }
     static var bil_wallet_send_transaction: String { get { return bil_wallet_path + "sendTransaction" } }
     static var bil_wallet_transaction_history: String { get { return bil_wallet_path + "getTxHistory" } }
+    static var bil_wallet_get_home_information: String { get { return bil_wallet_path + "listUnconfirm" } }
 }
 
 extension String {

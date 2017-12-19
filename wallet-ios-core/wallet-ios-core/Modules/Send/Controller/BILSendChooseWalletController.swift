@@ -15,6 +15,8 @@ class BILSendChooseWalletController: BILBaseViewController {
     var sendModel: BILSendModel?
     var wallet: WalletModel?
     
+    var targetAmount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

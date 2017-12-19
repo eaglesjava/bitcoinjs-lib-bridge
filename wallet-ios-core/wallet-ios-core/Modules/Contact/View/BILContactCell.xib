@@ -58,6 +58,7 @@
                                 <state key="normal" image="btn_circle_unselected">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="selected" image="btn_circle_selected"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -89,10 +90,12 @@
                 <outlet property="detailLabel" destination="8ct-4t-ff2" id="M9D-eJ-DtA"/>
                 <outlet property="firstWordLabel" destination="lcq-YJ-rGN" id="eRJ-84-pPh"/>
                 <outlet property="nameLabel" destination="4Gj-Jm-9x4" id="wu0-6i-EtJ"/>
+                <outlet property="seletedButton" destination="aSh-2I-U8c" id="Qlz-z3-OwN"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="btn_circle_selected" width="20" height="20"/>
         <image name="btn_circle_unselected" width="20" height="20"/>
     </resources>
 </document>
