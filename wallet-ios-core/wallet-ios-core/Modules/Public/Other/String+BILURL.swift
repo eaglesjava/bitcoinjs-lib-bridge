@@ -78,8 +78,8 @@ enum Router: URLRequestConvertible {
 }
 
 extension String {
-    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
-//    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
+//    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
+    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
     static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
     static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
     static var bil_wallet_import: String { get { return bil_wallet_path + "import" } }

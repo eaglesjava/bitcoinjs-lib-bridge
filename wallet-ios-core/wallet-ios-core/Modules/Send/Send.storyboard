@@ -157,7 +157,7 @@
                         <viewLayoutGuide key="safeArea" id="puP-yV-LDj"/>
                     </view>
                     <navigationItem key="navigationItem" title="发送" largeTitleDisplayMode="always" id="LlB-ZE-aT8">
-                        <barButtonItem key="rightBarButtonItem" title="扫一扫" id="jOK-o3-08X">
+                        <barButtonItem key="rightBarButtonItem" image="btc_send_scan" id="jOK-o3-08X">
                             <connections>
                                 <action selector="scanQRCodeAction:" destination="1bf-2n-T7s" id="Ana-8e-DKM"/>
                             </connections>
@@ -948,6 +948,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="btc_send_scan" width="23" height="23"/>
         <image name="btn_circle_unselected" width="20" height="20"/>
         <image name="icon_contact_h" width="22" height="18"/>
         <image name="icon_send" width="23" height="20"/>

@@ -45,7 +45,7 @@
                         <viewLayoutGuide key="safeArea" id="P9o-SL-rSo"/>
                     </view>
                     <navigationItem key="navigationItem" title="联系人" id="nyY-9Y-U6O">
-                        <barButtonItem key="rightBarButtonItem" title="新建" id="VKD-sb-acM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="VKD-sb-acM">
                             <connections>
                                 <action selector="newContactAction:" destination="2Xo-Eg-YUe" id="xgI-dr-pIW"/>
                             </connections>
