@@ -436,6 +436,27 @@ public class ConvertUtils {
     }
 
     /**
+     * 数组反转
+     *
+     * @param array
+     */
+    public static void reverse(byte[] array) {
+        if (array == null) {
+            return;
+        }
+        int i = 0;
+        int j = array.length - 1;
+        byte tmp;
+        while (j > i) {
+            tmp = array[j];
+            array[j] = array[i];
+            array[i] = tmp;
+            j--;
+            i++;
+        }
+    }
+
+    /**
      * outputStream转inputStream
      *
      * @param out 输出流
@@ -445,5 +466,4 @@ public class ConvertUtils {
         if (out == null) return null;
         return new ByteArrayInputStream(((ByteArrayOutputStream) out).toByteArray());
     }
-
 }

@@ -12,6 +12,7 @@ public final class AppConstants {
 
 
     public static final int API_STATUS_CODE_LOCAL_ERROR = 0;
+    public static final int API_STATUS_CODE_SERVER_ERROR = 500;
     public static final String DB_NAME = "bitbill_database.db";
     public static final String PREF_APP_NAME = "bitbill_app_pref";
     public static final String PREF_WALLET_NAME = "bitbill_wallet_pref";
@@ -26,6 +27,8 @@ public final class AppConstants {
     public static final String EXTRA_IS_RESET_PWD = "is_reset_pwd";
     public static final String EXTRA_SEND_ADDRESS = "send_address";
     public static final String EXTRA_SEND_AMOUNT = "send_amount";
+    public static final String EXTRA_IS_SEND_ALL = "is_send_all";
+    public static final long SATOSHI = 10000000;
 
     private AppConstants() {
         // This utility class is not publicly instantiable

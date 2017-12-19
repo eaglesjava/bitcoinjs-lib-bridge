@@ -9,11 +9,15 @@ import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceResponse;
+import com.bitbill.www.model.wallet.network.entity.GetTxElement;
+import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
+import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
+import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 import com.google.gson.reflect.TypeToken;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -121,6 +125,26 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
                 .addApplicationJsonBody(refreshAddressRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<RefreshAddressResponse>>() {
+                });
+    }
+
+    @Override
+    public Observable<ApiResponse<GetTxElementResponse>> getTxElement(GetTxElement getTxElement) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.GET_TX_ELEMENT)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addApplicationJsonBody(getTxElement)
+                .build()
+                .getParseObservable(new TypeToken<ApiResponse<GetTxElementResponse>>() {
+                });
+    }
+
+    @Override
+    public Observable<ApiResponse<SendTransactionResponse>> sendTransaction(SendTransactionRequest sendTransactionRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.SEND_TRANSACTION)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addApplicationJsonBody(sendTransactionRequest)
+                .build()
+                .getParseObservable(new TypeToken<ApiResponse<SendTransactionResponse>>() {
                 });
     }
 }

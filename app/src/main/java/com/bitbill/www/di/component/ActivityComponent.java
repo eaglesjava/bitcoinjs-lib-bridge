@@ -11,6 +11,7 @@ import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.receive.BtcReceiveFragment;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
+import com.bitbill.www.ui.main.send.SendConfirmActivity;
 import com.bitbill.www.ui.splash.SplashActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.backup.BackupWalletConfirmActivity;
@@ -52,4 +53,6 @@ public interface ActivityComponent {
     void inject(ResetPwdActivity resetPwdActivity);
 
     void inject(BtcReceiveFragment btcReceiveFragment);
+
+    void inject(SendConfirmActivity sendConfirmActivity);
 }

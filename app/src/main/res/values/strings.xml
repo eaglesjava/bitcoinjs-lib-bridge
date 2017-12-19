@@ -12,6 +12,7 @@
     <string name="api_default_error">出错了</string>
     <string name="some_error">出错了</string>
     <string name="connection_error">网络连接失败</string>
+    <string name="api_server_error">请求失败</string>
 
     <!--socket message-->
     <string name="connect">已连接</string>

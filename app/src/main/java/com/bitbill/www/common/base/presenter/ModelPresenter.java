@@ -58,6 +58,12 @@ public class ModelPresenter<M extends Model, V extends MvpView> extends BasePres
             return;
         }
 
+        if (error.getErrorCode() == AppConstants.API_STATUS_CODE_SERVER_ERROR
+                && error.getErrorDetail().equals(ANConstants.RESPONSE_FROM_SERVER_ERROR)) {
+            getMvpView().onError(R.string.api_server_error);
+            return;
+        }
+
         final GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
         final Gson gson = builder.create();
 

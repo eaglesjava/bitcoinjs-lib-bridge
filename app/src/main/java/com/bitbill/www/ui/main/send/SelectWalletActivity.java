@@ -31,11 +31,13 @@ public class SelectWalletActivity extends BaseToolbarActivity {
     private Wallet mSelectedWallet;
     private String mSendAddress;
     private String mSendAmount;
+    private boolean isSendAll;
 
-    public static void start(Context context, String address, String sendAmount) {
+    public static void start(Context context, String address, String sendAmount, boolean isSendAll) {
         Intent starter = new Intent(context, SelectWalletActivity.class);
         starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
         starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, sendAmount);
+        starter.putExtra(AppConstants.EXTRA_IS_SEND_ALL, isSendAll);
         context.startActivity(starter);
     }
 
@@ -44,6 +46,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
 
         mSendAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
         mSendAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
+        isSendAll = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_SEND_ALL, false);
     }
 
     @Override
@@ -149,7 +152,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
             return;
         }
         //跳转到确认发送界面
-        SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, mSendAmount, mSelectedWallet);
+        SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, mSendAmount, isSendAll, mSelectedWallet);
     }
 
     private boolean validSelectedWallet() {

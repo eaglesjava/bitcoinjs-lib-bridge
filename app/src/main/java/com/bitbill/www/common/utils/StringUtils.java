@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.webkit.URLUtil;
 import android.widget.TextView;
 
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -15,8 +16,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.Charset;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -825,5 +828,19 @@ public class StringUtils {
      */
     public static boolean isValidIdStart(String walletId) {
         return WALLET_ID_START.matcher(String.valueOf(walletId.charAt(0))).matches();
+    }
+
+    /**
+     * btc -> satoshi
+     *
+     * @param sendAmount
+     * @return
+     */
+    public static long btc2Satoshi(String sendAmount) {
+        //8位小数
+        DecimalFormat df = new DecimalFormat("#.########");
+        BigDecimal amount = new BigDecimal(df.format(sendAmount));
+        BigDecimal satoshi = new BigDecimal(AppConstants.SATOSHI);
+        return amount.multiply(satoshi).longValue();
     }
 }

@@ -23,6 +23,11 @@ public final class ApiEndPoint {
             + "/wallet/getWalletId";
     public static final String REFRESH_ADDRESS = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/refreshAddress";
+    public static final String GET_TX_ELEMENT = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/getTxElementFail";
+
+    public static final String SEND_TRANSACTION = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/sendTransaction";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

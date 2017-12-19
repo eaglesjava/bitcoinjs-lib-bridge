@@ -98,7 +98,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
                     return;
                 }
                 //跳转到发送确认界面
-                SelectWalletActivity.start(SendAmountActivity.this, mAddress, getSendAmount());
+                SelectWalletActivity.start(SendAmountActivity.this, mAddress, getSendAmount(), false);
                 break;
         }
     }
@@ -115,7 +115,8 @@ public class SendAmountActivity extends BaseToolbarActivity {
      * 发送全部余额
      */
     private void sendAllAmount() {
-        // TODO: 2017/12/16 发送全部余额
+        //跳转到发送确认界面
+        SelectWalletActivity.start(SendAmountActivity.this, mAddress, null, true);
     }
 
     public String getSendAmount() {

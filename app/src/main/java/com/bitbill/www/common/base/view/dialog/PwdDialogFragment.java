@@ -61,7 +61,7 @@ public class PwdDialogFragment extends BaseConfirmDialog {
                     if (StringUtils.checkUserPwd(getConfirmPwd(), mWallet)) {
                         // 确定密码验证正确
                         if (mOnPwdValidatedListener != null) {
-                            mOnPwdValidatedListener.onPwdCnfirmed();
+                            mOnPwdValidatedListener.onPwdCnfirmed(getConfirmPwd());
                         }
                     } else {
                         setAutoDismiss(false);
@@ -106,7 +106,7 @@ public class PwdDialogFragment extends BaseConfirmDialog {
 
     public interface OnPwdValidatedListener {
 
-        void onPwdCnfirmed();
+        void onPwdCnfirmed(String confirmPwd);
 
         void onDialogCanceled();
     }

@@ -68,7 +68,7 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
         pwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.title_dialog_bakup_wallet), getWallet(), false);
         pwdDialogFragment.setOnPwdValidatedListener(new PwdDialogFragment.OnPwdValidatedListener() {
             @Override
-            public void onPwdCnfirmed() {
+            public void onPwdCnfirmed(String confirmPwd) {
 
                 // 确定加载助记词
                 getMvpPresenter().loadMnemonic(pwdDialogFragment.getConfirmPwd());

@@ -95,6 +95,10 @@ public class BitcoinJsWrapper {
         executeJS("getBitcoinAddressByMasterXPublicKey('" + xpub + "'," + index + ")", callback);
     }
 
+    public void buildTransaction(String seedHex, String datas, Callback callback) {
+        executeJS("buildTransaction('" + seedHex + "','" + datas + "')", callback);
+    }
+
     public interface Callback {
         void call(String key, String... jsResult);
     }

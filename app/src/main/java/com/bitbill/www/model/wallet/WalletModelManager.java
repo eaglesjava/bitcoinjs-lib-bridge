@@ -18,11 +18,15 @@ import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceResponse;
+import com.bitbill.www.model.wallet.network.entity.GetTxElement;
+import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
+import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
+import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 
 import java.util.List;
 
@@ -147,5 +151,15 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     @Override
     public Observable<ApiResponse<RefreshAddressResponse>> refreshAddress(RefreshAddressRequest refreshAddressRequest) {
         return mWalletApi.refreshAddress(refreshAddressRequest);
+    }
+
+    @Override
+    public Observable<ApiResponse<GetTxElementResponse>> getTxElement(GetTxElement getTxElement) {
+        return mWalletApi.getTxElement(getTxElement);
+    }
+
+    @Override
+    public Observable<ApiResponse<SendTransactionResponse>> sendTransaction(SendTransactionRequest sendTransactionRequest) {
+        return mWalletApi.sendTransaction(sendTransactionRequest);
     }
 }
