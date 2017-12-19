@@ -75,14 +75,7 @@ class BILAppStartUpManager: NSObject {
 		guard let image = navBackgroundImage else {
 			return nil
 		}
-		guard let cgimage = image.cgImage else { return nil }
-		let scale = image.scale
-		let piexlRect = CGRect(x: rect.origin.x * scale, y: rect.origin.y * scale, width: rect.width * scale, height: rect.height * scale)
-		if let imageRef = cgimage.cropping(to: piexlRect) {
-			let toReturn = UIImage(cgImage: imageRef)
-			return toReturn
-		}
-		return nil
+		return image.snapshotSubImage(rect: rect)
 	}
 	
 	private func setupSVProgressHUD() {

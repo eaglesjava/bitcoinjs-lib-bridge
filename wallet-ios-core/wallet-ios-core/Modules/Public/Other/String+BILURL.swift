@@ -87,3 +87,8 @@ extension String {
     static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
 }
 
+extension String {
+    static var bil_socket_event_register: String { get { return "register" } }
+    static var bil_socket_event_unconfirom: String { get { return "unconfirom" } }
+    static var bil_socket_event_confirom: String { get { return "confirom" } }
+}

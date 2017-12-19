@@ -10,17 +10,49 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Contact Controller-->
+        <!--联系人-->
         <scene sceneID="lC4-PI-8dc">
             <objects>
                 <viewController id="2Xo-Eg-YUe" customClass="BILContactController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dSw-7j-pfN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yi3-qS-A5a">
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="qSl-tx-ZG6">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="2Xo-Eg-YUe" id="cBF-fi-qkc"/>
+                                    <outlet property="delegate" destination="2Xo-Eg-YUe" id="qIG-N3-lri"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yi3-qS-A5a" firstAttribute="bottom" secondItem="P9o-SL-rSo" secondAttribute="bottom" id="4zJ-i9-lKw"/>
+                            <constraint firstItem="yi3-qS-A5a" firstAttribute="leading" secondItem="P9o-SL-rSo" secondAttribute="leading" id="Pdg-2x-vCl"/>
+                            <constraint firstItem="yi3-qS-A5a" firstAttribute="trailing" secondItem="P9o-SL-rSo" secondAttribute="trailing" id="cTR-Tn-BtK"/>
+                            <constraint firstItem="yi3-qS-A5a" firstAttribute="top" secondItem="P9o-SL-rSo" secondAttribute="top" id="pGV-oL-aE3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="P9o-SL-rSo"/>
                     </view>
-                    <navigationItem key="navigationItem" id="nyY-9Y-U6O"/>
+                    <navigationItem key="navigationItem" title="联系人" id="nyY-9Y-U6O">
+                        <barButtonItem key="rightBarButtonItem" title="新建" id="VKD-sb-acM">
+                            <connections>
+                                <action selector="newContactAction:" destination="2Xo-Eg-YUe" id="xgI-dr-pIW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="yi3-qS-A5a" id="StA-RV-yBq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJj-1m-aWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -33,8 +65,8 @@
                     <tabBarItem key="tabBarItem" title="联系人" image="icon_contact" selectedImage="icon_contact_h" id="ic5-jT-iGX"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jLe-d4-iH5">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="jLe-d4-iH5">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -9,7 +9,11 @@
 import UIKit
 import SwiftyJSON
 
-class BitcoinUTXOModel: NSObject {
+class BitcoinUTXOModel: NSObject, Comparable {
+    static func <(lhs: BitcoinUTXOModel, rhs: BitcoinUTXOModel) -> Bool {
+        return lhs.amount < rhs.amount
+    }
+    
     var txHash: String
     var txOutputIndex: Int
     var bip39Index: Int

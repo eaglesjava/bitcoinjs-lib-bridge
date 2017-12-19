@@ -19,6 +19,15 @@ class BILSokectManager: NSObject {
         return BILSokectManager()
     }()
     
+    override init() {
+        super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(postWallets), name: NSNotification.Name.walletDidChanged, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.walletDidChanged, object: nil)
+    }
+    
     func startConnect() {
         connect()
         socket?.connect()
@@ -39,11 +48,6 @@ class BILSokectManager: NSObject {
         self.socket = socket
         socket.on(clientEvent: .connect) { (data, ack) in
             debugPrint(data)
-//            var ids = [String]()
-//            for wallet in BILWalletManager.shared.wallets {
-//                ids.append(wallet.id!)
-//            }
-//            ack.with(["clientID": BILDeviceManager.shared.deviceID, "walletID": ids.joined(separator: "|")])
             self.postWallets()
         }
         socket.on(clientEvent: .reconnect) { (data, ack) in
@@ -52,16 +56,28 @@ class BILSokectManager: NSObject {
         socket.on("message") { (data, emitter) in
             debugPrint(data)
         }
+        socket.on(.bil_socket_event_unconfirom) { (data, emitter) in
+            debugPrint(data)
+        }
+        socket.on(.bil_socket_event_confirom) { (data, emitter) in
+            debugPrint(data)
+        }
     }
     
+    @objc
     func postWallets() {
         var ids = [String]()
         for wallet in BILWalletManager.shared.wallets {
             ids.append(wallet.id!)
         }
         
-        guard let jsonString = JSON(["clientID": BILDeviceManager.shared.deviceID, "walletID": ids.joined(separator: "|")]).rawString() else { return }
-        socket?.emitWithAck("message", jsonString).timingOut(after: 3, callback: { (data) in
+        let data = ["clientId": BILDeviceManager.shared.deviceID,
+                    "walletId": ids.joined(separator: "|"),
+                    "deviceToken": BILAppStartUpManager.shared.deviceToken ?? "",
+                    "platform": "iOS"]
+        
+        guard let jsonString = JSON(data).rawString() else { return }
+        socket?.emitWithAck(.bil_socket_event_register, jsonString).timingOut(after: 3, callback: { (data) in
             debugPrint(data)
         })
         

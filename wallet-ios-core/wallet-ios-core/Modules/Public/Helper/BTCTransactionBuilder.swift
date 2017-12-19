@@ -35,8 +35,8 @@ class BTCTransaction: NSObject {
         self.address = address
         self.inputAddressString = inputAddressString
         self.amount = amount
-        let bytes = hexString.ck_mnemonicData().bytes
         
+        let bytes = hexString.ck_mnemonicData().bytes
         let hashData = Data(bytes.sha256().sha256())
         let reverseData = Data(hashData.bytes.reversed())
         self.txHash = reverseData.toHexString()
@@ -116,7 +116,7 @@ class BTCTransactionBuilder: NSObject {
          isSendAll: Bool = false) {
         self.seedHex = seedHex
         self.bulidTactics = bulidTactics
-        self.utxos = utxos
+        self.utxos = utxos.sorted()
         self.changeAddress = changeAddress
         self.feePerByte = feePerByte
         self.maxFeePerByte = maxFeePerByte
@@ -182,7 +182,7 @@ class BTCTransactionBuilder: NSObject {
         for utxo in utxos {
             inputSatoshiSum += utxo.satoshiAmount
             inputCount += 1
-            if (inputSatoshiSum < outputSatoshiSum + maxFeeFor(inCount: inputs.count, outCount: outputCount)) {
+            if (inputSatoshiSum < outputSatoshiSum + maxFeeFor(inCount: inputCount, outCount: outputCount)) {
                 continue
             }
             break

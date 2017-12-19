@@ -533,7 +533,7 @@
                 <viewControllerPlaceholder storyboardName="BackupWallet" id="yjm-jP-ujT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JkR-CN-slX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="790" y="577"/>
+            <point key="canvasLocation" x="749" y="698"/>
         </scene>
         <!--BILImportWalletController-->
         <scene sceneID="5wD-eV-8nV">
