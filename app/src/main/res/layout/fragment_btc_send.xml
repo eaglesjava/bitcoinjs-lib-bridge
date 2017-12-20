@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:focusable="true"
-             android:focusableInTouchMode="true"
-             android:paddingLeft="@dimen/activity_padding"
-             android:paddingRight="@dimen/activity_padding"
-             tools:context="com.bitbill.www.ui.main.send.BtcSendFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingLeft="@dimen/activity_padding"
+    android:paddingRight="@dimen/activity_padding"
+    tools:context="com.bitbill.www.ui.main.send.BtcSendFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,18 +22,17 @@
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/inset_send_contact"
             android:hint="接收方地址"
-            android:singleLine="true"/>
+            android:singleLine="true" />
 
         <ImageView
             android:id="@+id/iv_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
             android:layout_alignBottom="@id/et_send_address"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
             android:paddingRight="10dp"
-            android:src="@drawable/ic_send_address"
-            android:visibility="gone"/>
+            android:visibility="visible" />
     </RelativeLayout>
 
     <Button
@@ -44,6 +43,6 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
-        android:text="@string/btn_next"/>
+        android:text="@string/btn_next" />
 
 </FrameLayout>

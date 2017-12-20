@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '27.0.2'
     defaultConfig {
         applicationId "com.bitbill.www"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -30,58 +30,48 @@ android {
         abortOnError false
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:25.4.0'
-    implementation 'com.android.support:recyclerview-v7:25.4.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //support
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     //test
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'org.robolectric:robolectric:3.5.1'
     testCompile 'junit:junit:4.12'
-
     // network
-    compile "com.amitshekhar.android:rx2-android-networking:1.0.0"
-
+    compile 'com.amitshekhar.android:rx2-android-networking:1.0.0'
     //tabview
     compile 'com.isanwenyu.tabview:tabview:1.2.2'
-
     //ViewPager indicator view
     compile 'com.romandanylyk:pageindicatorview:0.2.0'
-
     //butterknife
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     //gson
     implementation 'com.google.code.gson:gson:2.2.4'
-
     //dagger
     compile 'com.google.dagger:dagger:2.13'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'javax.inject:javax.inject:1'
-
     //rxandroid
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.5'
-
     //geendao
     compile 'org.greenrobot:greendao:3.2.2'
-
     //event
     compile 'org.greenrobot:eventbus:3.1.1'
-
     //socket io
     compile('io.socket:socket.io-client:1.0.0') {
         // excluding org.json which is provided by Android
@@ -90,7 +80,6 @@ dependencies {
     //bitmap
     compile 'com.github.bumptech.glide:glide:4.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
-
     compile 'de.hdodenhof:circleimageview:2.2.0'
     //tab
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
@@ -100,7 +89,7 @@ dependencies {
     compile 'com.google.zxing:core:3.3.0'
     compile 'cn.bingoogolapple:bga-qrcodecore:1.1.9@aar'
     compile 'cn.bingoogolapple:bga-zxing:1.1.9@aar'
-
+    //permission
     compile 'pub.devrel:easypermissions:1.0.0'
-
+    implementation project(':indexlib')
 }

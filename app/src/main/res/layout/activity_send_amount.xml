@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,21 +15,22 @@
             android:id="@+id/et_send_amount"
             style="@style/EditText.Amount"
             android:layout_width="match_parent"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp" />
 
         <TextView
             style="@style/Text.Crypto"
             android:layout_alignBottom="@id/et_send_amount"
             android:layout_alignParentRight="true"
             android:text="btc"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tv_btc_cny"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_send_amount"
             android:layout_marginTop="22dp"
-            android:text="@string/text_btc_cny_value"/>
+            android:text="@string/text_btc_cny_value" />
     </RelativeLayout>
 
     <LinearLayout
@@ -47,6 +47,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
-            android:text="@string/btn_next"/>
+            android:text="@string/btn_next" />
     </LinearLayout>
 </FrameLayout>

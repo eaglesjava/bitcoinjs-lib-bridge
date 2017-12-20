@@ -843,4 +843,19 @@ public class StringUtils {
         BigDecimal satoshi = new BigDecimal(AppConstants.SATOSHI);
         return amount.multiply(satoshi).longValue();
     }
+
+    public static String multiplyCnyValue(double btcCny, String sendAmount) {
+        try {
+            //8位小数
+            DecimalFormat df = new DecimalFormat("#.##");
+            BigDecimal btcCnyDecimal = new BigDecimal(btcCny);
+            BigDecimal amountDecimal = new BigDecimal(sendAmount);
+
+            BigDecimal multiply = btcCnyDecimal.multiply(amountDecimal);
+            multiply.setScale(2, RoundingMode.FLOOR);
+            return df.format(multiply);
+        } catch (Exception e) {
+            return "0.0";
+        }
+    }
 }

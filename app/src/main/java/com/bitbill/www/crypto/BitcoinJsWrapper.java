@@ -99,6 +99,10 @@ public class BitcoinJsWrapper {
         executeJS("buildTransaction('" + seedHex + "','" + datas + "')", callback);
     }
 
+    public void validateAddress(String address, Callback callback) {
+        executeJS("validateAddress('" + address + "')", callback);
+    }
+
     public interface Callback {
         void call(String key, String... jsResult);
     }

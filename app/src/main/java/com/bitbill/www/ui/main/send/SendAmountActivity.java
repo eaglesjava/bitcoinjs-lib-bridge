@@ -3,11 +3,14 @@ package com.bitbill.www.ui.main.send;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
@@ -24,7 +27,11 @@ public class SendAmountActivity extends BaseToolbarActivity {
     EditText etSendAmount;
     @BindView(R.id.btn_next)
     Button btnNext;
+    @BindView(R.id.tv_btc_cny)
+    TextView tvBtcCny;
+
     private String mAddress;
+    private double mBtcCny;
 
     public static void start(Context context, String address) {
         Intent starter = new Intent(context, SendAmountActivity.class);
@@ -76,12 +83,33 @@ public class SendAmountActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
+        etSendAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                updateCnyValue();
+            }
+        });
     }
 
     @Override
     public void initData() {
+        // TODO: 2017/12/20 for test
+        mBtcCny = 10000;
+        updateCnyValue();
+    }
 
+    private void updateCnyValue() {
+        tvBtcCny.setText(String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyCnyValue(mBtcCny, getSendAmount())));
     }
 
     @Override

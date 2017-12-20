@@ -6,9 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseFragment;
-import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.wallet.WalletModel;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -16,12 +17,14 @@ import butterknife.OnClick;
 /**
  * Created by isanwenyu@163.com on 2017/12/9.
  */
-public class BtcSendFragment extends BaseFragment {
+public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implements BtcSendMvpView {
 
     @BindView(R.id.et_send_address)
     EditText etSendAddress;
     @BindView(R.id.btn_next)
     Button btnNext;
+    @Inject
+    BtcSendMvpPresenter<WalletModel, BtcSendMvpView> mBtcSendMvpPresenter;
 
     public static BtcSendFragment newInstance() {
 
@@ -33,13 +36,13 @@ public class BtcSendFragment extends BaseFragment {
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public BtcSendMvpPresenter getMvpPresenter() {
+        return mBtcSendMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -77,12 +80,12 @@ public class BtcSendFragment extends BaseFragment {
                 break;
             case R.id.btn_next:
                 //跳转到发送金额界面
-                if (!isValidAddress()) return;
-                SendAmountActivity.start(getBaseActivity(), getSendAddress());
+                getMvpPresenter().validateBtcAddress();
                 break;
         }
     }
 
+    @Override
     public String getSendAddress() {
         return etSendAddress.getText().toString();
     }
@@ -91,15 +94,23 @@ public class BtcSendFragment extends BaseFragment {
         etSendAddress.setText(sendAddress);
     }
 
-    public boolean isValidAddress() {
-        if (StringUtils.isEmpty(getSendAddress())) {
-            showMessage("请输入或扫描地址");
-            return false;
-        }
-        return true;
-    }
 
     public void sendSuccess() {
         etSendAddress.setText("");
+    }
+
+    @Override
+    public void validateAddress(boolean validate) {
+        if (validate) {
+            SendAmountActivity.start(getBaseActivity(), getSendAddress());
+        } else {
+            showMessage("请输入合法的地址");
+        }
+    }
+
+    @Override
+    public void requireAddress() {
+        showMessage("请输入或扫描地址");
+
     }
 }
