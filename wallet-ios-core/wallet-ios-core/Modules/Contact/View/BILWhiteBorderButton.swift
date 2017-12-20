@@ -16,7 +16,6 @@ class BILWhiteBorderButton: UIButton {
         layer.borderWidth = 1
         layer.cornerRadius = frame.height / 2
         setTitleColor(UIColor.white, for: .normal)
-        titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
     
     /*

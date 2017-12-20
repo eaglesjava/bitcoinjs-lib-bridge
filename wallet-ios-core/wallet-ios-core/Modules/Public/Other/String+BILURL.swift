@@ -41,7 +41,7 @@ enum Router: URLRequestConvertible {
                                                        "txHash" : txHash,
                                                        "hexTx" : txHex,
                                                        "remark": remark])
-            case .getHomeInformation(let wallets):
+            case .getUnconfirmTransaction(let wallets):
                 var pubKeys = [String]()
                 for wallet in wallets {
                     guard let pubkey = wallet.mainExtPublicKey else {
@@ -49,13 +49,23 @@ enum Router: URLRequestConvertible {
                     }
                     pubKeys.append(pubkey.md5())
                 }
-                return (.bil_wallet_get_home_information, ["extendedKeysHash": pubKeys.joined(separator: "|")])
+                return (.bil_wallet_get_unconfirm_transaction, ["extendedKeysHash": pubKeys.joined(separator: "|")])
+            case .getContactLastAddress(let walletID):
+                return (.bil_contact_get_last_address, ["walletId": walletID])
+            case .getContacts:
+                return (.bil_contact_get_all, ["walletKey": BILDeviceManager.shared.contactKey])
+            case .searchWalletID(let walletID):
+                return (.bil_contact_search_id, ["walletId": walletID])
+            case .addContact(let walletID, let name, let remark, let address):
+                return (.bil_contact_add, ["walletKey": BILDeviceManager.shared.contactKey, "contactName": name, "remark": remark, "walletId": walletID, "address": address])
             }
         }()
         
         let url = NSURL(string: .bil_base_url)
         var request = URLRequest(url: url!.appendingPathComponent(result.path)!)
         let encoding = JSONEncoding()
+        
+        debugPrint("load \(result.path) with \(result.parameters ?? [:])")
         
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("iOS", forHTTPHeaderField: "platform")
@@ -73,13 +83,18 @@ enum Router: URLRequestConvertible {
     case getTransactionBuildConfig(extendedKeyHash: String)
     case refreshAddress(extendedKeyHash: String, index: Int64)
     case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int, txHash: String, txHex: String, remark: String)
-    case getHomeInformation(wallets: [WalletModel])
+    case getUnconfirmTransaction(wallets: [WalletModel])
+
+    case getContactLastAddress(walletID: String)
+    case getContacts
+    case searchWalletID(walletID: String)
+    case addContact(walletID: String, name: String, remark: String, address: String)
     
 }
 
 extension String {
-//    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
-    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
+    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
+//    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
     static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
     static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
     static var bil_wallet_import: String { get { return bil_wallet_path + "import" } }
@@ -91,7 +106,14 @@ extension String {
     static var bil_wallet_refresh_address: String { get { return bil_wallet_path + "refreshAddress" } }
     static var bil_wallet_send_transaction: String { get { return bil_wallet_path + "sendTransaction" } }
     static var bil_wallet_transaction_history: String { get { return bil_wallet_path + "getTxHistory" } }
-    static var bil_wallet_get_home_information: String { get { return bil_wallet_path + "listUnconfirm" } }
+    static var bil_wallet_get_unconfirm_transaction: String { get { return bil_wallet_path + "listUnconfirm" } }
+    
+    static var bil_contact_get_all: String { get { return bil_wallet_path + "getContacts" } }
+    static var bil_contact_get_last_address: String { get { return bil_wallet_path + "getLastAddress" } }
+    static var bil_contact_search_id: String { get { return bil_wallet_path + "searchWalletId" } }
+    static var bil_contact_add: String { get { return bil_wallet_path + "addContacts" } }
+    
+    
 }
 
 extension String {

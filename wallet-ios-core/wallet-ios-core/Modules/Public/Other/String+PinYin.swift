@@ -31,7 +31,7 @@ extension String {
     
     func firstUpperLetter() -> String {
         let pinyin = transformToPinyin().uppercased()
-        guard let c = pinyin.first else { return "★" }
+        guard let c = pinyin.first else { return "#" }
         return String(c)
     }
 }

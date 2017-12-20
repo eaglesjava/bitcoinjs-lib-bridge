@@ -100,11 +100,12 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text = ""
         sendModel = nil
+        contact = nil
     }
     
     @IBAction func nextAction(_ sender: Any) {
         if let c = contact {
-            debugPrint(c.name)
+            debugPrint(c.walletID)
             bil_makeToast(msg: "获取联系人地址失败")
             return
         }

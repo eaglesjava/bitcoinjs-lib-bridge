@@ -7,6 +7,13 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
+
+extension String {
+    static var bil_contactsToAddByIDSegue: String { return "BILContactsToAddByIDSegue" }
+    static var bil_showContactDetailSegue: String { return "BILShowContactDetailSegue" }
+    static var bil_contactsToAddByAddressSegue: String { return "bil_contactsToAddByAddressSegue" }
+}
 
 class BILContactController: BILLightBlueBaseController {
 
@@ -15,6 +22,7 @@ class BILContactController: BILLightBlueBaseController {
     @IBOutlet weak var tableView: UITableView!
     var contacts = [String: [Contact]]()
     var firstLetters = [String]()
+    var showTableViewIndexes: Bool = false
     
     var didSelectContactClosure: DidSelectContactClosure?
     
@@ -24,7 +32,25 @@ class BILContactController: BILLightBlueBaseController {
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: "BILContactCell", bundle: nil), forCellReuseIdentifier: "BILContactCell")
         tableView.register(UINib(nibName: "BILTableViewHeaderFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "BILTableViewHeaderFooterView")
+        tableView.emptyDataSetSource = self
         loadContacts()
+        
+        setupRefresh()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadContacts), name: .contactDidChanged, object: nil)
+        
+        firstLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".map{ String($0) }
+    }
+    
+    func setupRefresh() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(loadContacts), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        tableView.refreshControl = refreshControl
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .contactDidChanged, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,10 +61,10 @@ class BILContactController: BILLightBlueBaseController {
     @IBAction func newContactAction(_ sender: Any) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         sheet.addAction(UIAlertAction(title: "通过 ID 添加", style: .default, handler: { (action) in
-            
+            self.performSegue(withIdentifier: .bil_contactsToAddByIDSegue, sender: sender)
         }))
         sheet.addAction(UIAlertAction(title: "通过 地址 添加", style: .default, handler: { (action) in
-            
+            self.performSegue(withIdentifier: .bil_contactsToAddByAddressSegue, sender: sender)
         }))
         sheet.addAction(UIAlertAction(title: "扫码添加", style: .default, handler: { (action) in
             
@@ -53,7 +79,7 @@ class BILContactController: BILLightBlueBaseController {
     // MARK: - Navigation
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "BILShowContactDetailSegue" {
+        if identifier == .bil_showContactDetailSegue {
             guard (sender as? Contact) != nil else { return false }
         }
         return true
@@ -67,7 +93,7 @@ class BILContactController: BILLightBlueBaseController {
             return
         }
         switch id {
-        case "BILShowContactDetailSegue":
+        case String.bil_showContactDetailSegue:
             let cont = segue.destination as! BILContactDetailController
             if let contact = sender as? Contact {
                 cont.contact = contact
@@ -80,74 +106,25 @@ class BILContactController: BILLightBlueBaseController {
 }
 
 extension BILContactController {
+    @objc
     func loadContacts() {
-        var datas = [Contact]()
-        datas.append(Contact(name: "Asdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "Asdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "谷歌", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "Asdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "bsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "bsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "苹果", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "bsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "iMac", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "bsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "今天不想吃饭", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "dsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "肉夹馍", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "dsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "大吉大利", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "gsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "凉皮", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "gggsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "HHsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "iisdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "jjjsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "油泼面", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "jjjsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "kkksdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "今晚吃鸡", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "dghjsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "dfghsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "*sdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "/sdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "-sdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "!@sdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "bdrtbsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "e5tjy7sdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "vbmsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "xzcvbsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "cvbnsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "cmnsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "gh,jusdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "vbmnsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "xcvbsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "rtnyrtsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "cvbndrsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "reyjsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "iurtuisdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "rtykjrtmsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "mrtmsdf", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "阿猫", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "大咪", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "虎子", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "小橘子", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "咪宝", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "豆浆", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        datas.append(Contact(name: "油条", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "饭团", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .address))
-        datas.append(Contact(name: "花卷", walletID: "asdfjkrhgewkjrg", address: "143D88FBFCTVMM1iF9TWmrhPDjKK5aBAKK", additionType: .walletID))
-        handleContacts(datas: datas)
+        func loadEnd() {
+            self.tableView.reloadData()
+        }
+        Contact.getContactsFromServer(success: { (contacts) in
+            self.handleContacts(datas: contacts)
+            loadEnd()
+        }) { (msg, code) in
+            self.bil_makeToast(msg: msg)
+            loadEnd()
+        }
     }
     
     func handleContacts(datas: [Contact]) {
-        
+        contacts.removeAll()
         for contact in datas {
             let firstLetter = contact.firstNameLetter
             debugPrint("\(firstLetter), \(contact.name)")
-            if !firstLetters.contains(firstLetter) {
-                firstLetters.append(firstLetter)
-            }
             var array = contacts[firstLetter]
             if array == nil {
                 array = [Contact]()
@@ -158,8 +135,7 @@ extension BILContactController {
         for letter in firstLetters {
             contacts[letter] = contacts[letter]?.sorted()
         }
-        firstLetters = firstLetters.sorted()
-        tableView.reloadData()
+        showTableViewIndexes = datas.count > 0
     }
     
     func letter(of section: Int) -> String {
@@ -189,6 +165,10 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.tableView.refreshControl?.endRefreshing()
+    }
+    
     // MARK: - TableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return firstLetters.count
@@ -199,7 +179,7 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return firstLetters
+        return showTableViewIndexes ? firstLetters : nil
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -211,7 +191,7 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
         }
         else
         {
-            performSegue(withIdentifier: "BILShowContactDetailSegue", sender: contact)
+            performSegue(withIdentifier: .bil_showContactDetailSegue, sender: contact)
         }
     }
     
@@ -223,6 +203,9 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let count = contacts[letter(of: section)]?.count, count > 0 else {
+            return nil
+        }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BILTableViewHeaderFooterView") as! BILTableViewHeaderFooterView
         headerView.titleLabel.text = letter(of: section)
         headerView.bgImageView.image = backgroundImage?.snapshotSubImage(rect: view.convert(headerView.frame, from: tableView))
@@ -230,10 +213,23 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 32
+        guard let count = contacts[letter(of: section)]?.count, count > 0 else {
+            return 0.0
+        }
+        return 32.0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
+        return 72.0
+    }
+}
+
+extension BILContactController: DZNEmptyDataSetSource {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "您还没有联系人", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 18)])
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "可以点击右上角添加联系人", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 14)])
     }
 }

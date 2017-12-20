@@ -29,7 +29,11 @@ class BILNetworkManager: NSObject {
             }
             else
             {
-                failure("数据解析失败，\(response)", -1)
+                guard let error = response.error else {
+                    failure("连接服务器失败", -1)
+                    return
+                }
+                failure("\(error.localizedDescription)", -1)
             }
         }
     }

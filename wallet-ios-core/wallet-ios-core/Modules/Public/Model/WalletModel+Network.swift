@@ -42,22 +42,9 @@ extension WalletModel {
     ///   - success: 可能会有两次调用，第一次为当前余额，第二次为服务器返回
     ///   - failure: 失败
     func getBalanceFromServer(success: @escaping (_ wallet: WalletModel) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
-            return
-        }
         success(self)
-        WalletModel.getBalanceFromServer(mainExtPublicKey: extKey, success: { (satoshiBalance, unconfirmBalance) in
-            self.btcBalance = Int64(satoshiBalance)
-            self.btcUnconfirmBalance = Int64(unconfirmBalance)
-            do {
-                try BILWalletManager.shared.saveWallets()
-                NotificationCenter.default.post(name: .balanceDidChanged, object: nil)
-                success(self)
-            } catch {
-                debugPrint(error)
-                failure(error.localizedDescription, -1)
-            }
+        WalletModel.getBalanceFromServer(wallets: [self], success: { () in
+            success(self)
         }, failure: failure)
     }
     
@@ -137,32 +124,55 @@ extension WalletModel {
         }, failure: failure)
     }
     
-    static func getHomeInformationFromSever(wallets: [WalletModel], success: @escaping (_ txs: [BILTransactionHistoryModel], _ balances: [String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    static func getUnconfirmTransactionFromSever(wallets: [WalletModel], success: @escaping (_ txs: [BILTransactionHistoryModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard wallets.count > 0 else {
             failure("数据错误", -1)
             return
         }
-        BILNetworkManager.request(request: .getHomeInformation(wallets: wallets), success: { (result) in
+        BILNetworkManager.request(request: .getUnconfirmTransaction(wallets: wallets), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
-            let datas = json["unconfirm"].arrayValue
+            let txDatas = json["unconfirm"].arrayValue
             var models = [BILTransactionHistoryModel]()
-            for json in datas {
-                models.append(BILTransactionHistoryModel(jsonData: json))
+            for json in txDatas {
+                models.append(BILTransactionHistoryModel(forHome: json))
             }
-            success(models, [:])
+            
+            success(models)
+            
         }, failure: failure)
     }
     
-    static func getBalanceFromServer(mainExtPublicKey: String, success: @escaping (_ satoshiBalance: Int, _ unconfirmBalance: Int) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        BILNetworkManager.request(request: .getBalance(extendedKeyHash: mainExtPublicKey.md5()), success: { (result) in
+    static func getKeyHash(wallets: [WalletModel]) -> String {
+        var keys = [String]()
+        for wallet in wallets {
+            guard let key = wallet.mainExtPublicKey else{ continue }
+            keys.append(key.md5())
+        }
+        return keys.joined(separator: "|")
+    }
+    
+    static func getBalanceFromServer(wallets: [WalletModel], success: @escaping () -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        let hashes = getKeyHash(wallets: wallets)
+        BILNetworkManager.request(request: .getBalance(extendedKeyHash: hashes), success: { (result) in
             debugPrint(result)
+            
             let json = JSON(result)
-            guard let balance = json["balance"].int, let unconfirm = json["unconfirm"].int else {
-                failure("获取到错误的数据", -1)
-                return
+            for wallet in wallets {
+                guard let id = wallet.id else { continue }
+                let subJson = json[id]
+                wallet.btcBalance = subJson["balance"].int64Value
+                wallet.btcUnconfirmBalance = subJson["unconfirm"].int64Value
+                debugPrint(subJson)
             }
-            success(balance, unconfirm)
+            do {
+                try BILWalletManager.shared.saveWallets()
+                NotificationCenter.default.post(name: .balanceDidChanged, object: nil)
+                success()
+            } catch {
+                debugPrint(error)
+                failure(error.localizedDescription, -1)
+            }
         }, failure: failure)
     }
     

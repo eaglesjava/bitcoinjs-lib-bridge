@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.toHexString()
         BILAppStartUpManager.shared.deviceToken = token
-        debugPrint(token)
+        debugPrint("push token = \(token)")
     }
     
 	// MARK: - Core Data stack

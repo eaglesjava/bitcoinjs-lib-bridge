@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--比特宝-->
+        <!--Bitbill-->
         <scene sceneID="Gij-tA-ZH9">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Pad-Ft-1oa" customClass="BILWelcomeViewController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
@@ -76,7 +76,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b1d-6s-LV2"/>
                     </view>
-                    <navigationItem key="navigationItem" title="比特宝" id="ucR-LZ-9nJ"/>
+                    <navigationItem key="navigationItem" title="Bitbill" id="ucR-LZ-9nJ"/>
                     <connections>
                         <outlet property="guideScrollView" destination="Wv8-kW-7dL" id="2jl-fu-dRU"/>
                         <outlet property="newWalletButton" destination="99u-my-xAt" id="vIA-6T-GPR"/>
@@ -351,7 +351,7 @@
                                                     <outlet property="title" destination="48F-7A-au2" id="HBu-lF-Yki"/>
                                                 </connections>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请牢记您的密码！比特宝不存储用户密码，无法提供找回或重置功能" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8s-0C-PiF">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请牢记您的密码！Bitbill 不存储用户密码，无法提供找回或重置功能" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8s-0C-PiF">
                                                 <rect key="frame" x="0.0" y="245.5" width="325" height="31.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.6705882353" green="0.90196078430000004" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -678,6 +678,6 @@
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PNN-OT-SBG"/>
+        <segue reference="7m6-ve-BqF"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,7 +18,7 @@ enum BILHomeSectionType: Int {
 		case .asset:
 			return "总资产"
 		case .recentRecord:
-			return "进行中的交易"
+			return "未确认交易"
 		case .wallet:
 			return "我的钱包"
 		}
@@ -168,17 +168,10 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     @objc
     func refresh(sender: Any?) {
         uncofirmTransactionDidChanged(notification: nil)
-        for wallet in wallets {
-            debugPrint(wallet.id ?? "", wallet.mainExtPublicKey?.md5() ?? "")
-            wallet.getBalanceFromServer(success: { (wallet) in
-                
-            }, failure: { (msg, code) in
-                
-            })
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
-            self.tableView.reloadData()
-            self.tableView.refreshControl?.endRefreshing()
+        WalletModel.getBalanceFromServer(wallets: wallets, success: {
+            
+        }) { (msg, code) in
+            
         }
     }
     
@@ -195,12 +188,16 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     
     @objc
     func uncofirmTransactionDidChanged(notification: Notification?) {
-        WalletModel.getHomeInformationFromSever(wallets: BILWalletManager.shared.wallets, success: { (txs, balances)  in
-            BILTransactionManager.shared.recnetRecords = txs
+        func loadEnd() {
             self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+        }
+        WalletModel.getUnconfirmTransactionFromSever(wallets: wallets, success: { (txs)  in
+            BILTransactionManager.shared.recnetRecords = txs
+            loadEnd()
         }) { (msg, code) in
             self.bil_makeToast(msg: msg)
-            self.tableView.reloadData()
+            loadEnd()
         }
     }
 	

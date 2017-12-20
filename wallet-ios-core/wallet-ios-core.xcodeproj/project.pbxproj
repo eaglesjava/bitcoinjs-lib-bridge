@@ -30,6 +30,13 @@
 		BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */; };
 		BA12AC351FE8C22100812F38 /* BILContactDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC341FE8C22100812F38 /* BILContactDetailController.swift */; };
 		BA12AC371FE8C92D00812F38 /* BILWhiteBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC361FE8C92D00812F38 /* BILWhiteBorderButton.swift */; };
+		BA12AC391FEA1FB200812F38 /* Contact+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC381FEA1FB200812F38 /* Contact+Network.swift */; };
+		BA12AC3B1FEA3A2A00812F38 /* BILSearchWalletIDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC3A1FEA3A2A00812F38 /* BILSearchWalletIDController.swift */; };
+		BA12AC3F1FEA5D2B00812F38 /* BILSearchWalletIDResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC3E1FEA5D2B00812F38 /* BILSearchWalletIDResultController.swift */; };
+		BA12AC421FEA66BB00812F38 /* Home.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA12AC441FEA66BB00812F38 /* Home.strings */; };
+		BA12AC481FEA67B300812F38 /* Send.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA12AC4A1FEA67B300812F38 /* Send.storyboard */; };
+		BA12AC4E1FEA6FBE00812F38 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA12AC501FEA6FBE00812F38 /* Home.storyboard */; };
+		BA12AC5B1FEA73D700812F38 /* BILAddContactByAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC5A1FEA73D700812F38 /* BILAddContactByAddressController.swift */; };
 		BA1746F41FDFB89D000615CF /* BILURLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1746F31FDFB89D000615CF /* BILURLHelper.swift */; };
 		BA1746F61FDFC868000615CF /* BILSendInputAmountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1746F51FDFC868000615CF /* BILSendInputAmountController.swift */; };
 		BA1746F81FDFC8CD000615CF /* BILSendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1746F71FDFC8CD000615CF /* BILSendModel.swift */; };
@@ -38,7 +45,6 @@
 		BA1918F01FD7E67600B6F568 /* BILPopMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1918EF1FD7E67600B6F568 /* BILPopMenuItemView.swift */; };
 		BA1918F21FD7E7BA00B6F568 /* BILPopMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1918F11FD7E7BA00B6F568 /* BILPopMenuItemView.xib */; };
 		BA20A5FC1FD68DC800EC2147 /* Recieve.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FB1FD68DC800EC2147 /* Recieve.storyboard */; };
-		BA20A5FE1FD68DDA00EC2147 /* Send.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FD1FD68DDA00EC2147 /* Send.storyboard */; };
 		BA20A6001FD68DE400EC2147 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A5FF1FD68DE400EC2147 /* Me.storyboard */; };
 		BA20A6111FD68F5200EC2147 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A6101FD68F5100EC2147 /* Contact.storyboard */; };
 		BA284D111FD946B000A1C9F6 /* BILRecieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA284D101FD946B000A1C9F6 /* BILRecieveController.swift */; };
@@ -85,7 +91,6 @@
 		CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */; };
 		CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C21FBD86D30098E730 /* BILMnemonicCell.xib */; };
 		CC94E0C51FBD87D70098E730 /* BILMnemonicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0C41FBD87D70098E730 /* BILMnemonicCell.swift */; };
-		CCE5E1621FC7BFE100F7555D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCE5E1611FC7BFE100F7555D /* Home.storyboard */; };
 		CCE5E1641FC7C1BE00F7555D /* BILHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE5E1631FC7C1BE00F7555D /* BILHomeViewController.swift */; };
 		CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE5E1651FC7FB9400F7555D /* BILHomeTableHeaderView.swift */; };
 		CCE5E1681FC7FB9E00F7555D /* BILHomeTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE5E1671FC7FB9E00F7555D /* BILHomeTableHeaderView.xib */; };
@@ -171,6 +176,21 @@
 		BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BTC.swift"; sourceTree = "<group>"; };
 		BA12AC341FE8C22100812F38 /* BILContactDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILContactDetailController.swift; sourceTree = "<group>"; };
 		BA12AC361FE8C92D00812F38 /* BILWhiteBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILWhiteBorderButton.swift; sourceTree = "<group>"; };
+		BA12AC381FEA1FB200812F38 /* Contact+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contact+Network.swift"; sourceTree = "<group>"; };
+		BA12AC3A1FEA3A2A00812F38 /* BILSearchWalletIDController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSearchWalletIDController.swift; sourceTree = "<group>"; };
+		BA12AC3E1FEA5D2B00812F38 /* BILSearchWalletIDResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BILSearchWalletIDResultController.swift; sourceTree = "<group>"; };
+		BA12AC431FEA66BB00812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Home.strings; sourceTree = "<group>"; };
+		BA12AC461FEA672600812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BA12AC471FEA672600812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Home.strings"; sourceTree = "<group>"; };
+		BA12AC491FEA67B300812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Send.storyboard"; sourceTree = "<group>"; };
+		BA12AC4C1FEA67B900812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Send.strings; sourceTree = "<group>"; };
+		BA12AC4D1FEA67BC00812F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Send.storyboard; sourceTree = "<group>"; };
+		BA12AC4F1FEA6FBE00812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Home.storyboard"; sourceTree = "<group>"; };
+		BA12AC541FEA6FFA00812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Home.strings; sourceTree = "<group>"; };
+		BA12AC571FEA712500812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		BA12AC581FEA712500812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BA12AC591FEA715C00812F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
+		BA12AC5A1FEA73D700812F38 /* BILAddContactByAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAddContactByAddressController.swift; sourceTree = "<group>"; };
 		BA1746F31FDFB89D000615CF /* BILURLHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILURLHelper.swift; sourceTree = "<group>"; };
 		BA1746F51FDFC868000615CF /* BILSendInputAmountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSendInputAmountController.swift; sourceTree = "<group>"; };
 		BA1746F71FDFC8CD000615CF /* BILSendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSendModel.swift; sourceTree = "<group>"; };
@@ -179,7 +199,6 @@
 		BA1918EF1FD7E67600B6F568 /* BILPopMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILPopMenuItemView.swift; sourceTree = "<group>"; };
 		BA1918F11FD7E7BA00B6F568 /* BILPopMenuItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILPopMenuItemView.xib; sourceTree = "<group>"; };
 		BA20A5FB1FD68DC800EC2147 /* Recieve.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recieve.storyboard; sourceTree = "<group>"; };
-		BA20A5FD1FD68DDA00EC2147 /* Send.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Send.storyboard; sourceTree = "<group>"; };
 		BA20A5FF1FD68DE400EC2147 /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		BA20A6101FD68F5100EC2147 /* Contact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
 		BA284D101FD946B000A1C9F6 /* BILRecieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILRecieveController.swift; sourceTree = "<group>"; };
@@ -227,7 +246,6 @@
 		CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicView.xib; sourceTree = "<group>"; };
 		CC94E0C21FBD86D30098E730 /* BILMnemonicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicCell.xib; sourceTree = "<group>"; };
 		CC94E0C41FBD87D70098E730 /* BILMnemonicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMnemonicCell.swift; sourceTree = "<group>"; };
-		CCE5E1611FC7BFE100F7555D /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		CCE5E1631FC7C1BE00F7555D /* BILHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeViewController.swift; sourceTree = "<group>"; };
 		CCE5E1651FC7FB9400F7555D /* BILHomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeTableHeaderView.swift; sourceTree = "<group>"; };
 		CCE5E1671FC7FB9E00F7555D /* BILHomeTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILHomeTableHeaderView.xib; sourceTree = "<group>"; };
@@ -242,7 +260,6 @@
 		CCEC67541FB18C3A004CC6C5 /* wallet-ios-core.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wallet-ios-core.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		CCEC675E1FB18C3A004CC6C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CCEC67601FB18C3A004CC6C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCEC67631FB18C3A004CC6C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCEC67651FB18C3A004CC6C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -380,7 +397,7 @@
 		BA20A5DD1FD68D4F00EC2147 /* Send */ = {
 			isa = PBXGroup;
 			children = (
-				BA20A5FD1FD68DDA00EC2147 /* Send.storyboard */,
+				BA12AC4A1FEA67B300812F38 /* Send.storyboard */,
 				BA46461C1FD78FCF00680D33 /* Send.xcassets */,
 				BA20A5DE1FD68D4F00EC2147 /* Other */,
 				BA20A5E01FD68D4F00EC2147 /* Controller */,
@@ -492,6 +509,9 @@
 			children = (
 				BA6E95F21FE1433C0085F7B5 /* BILContactController.swift */,
 				BA12AC341FE8C22100812F38 /* BILContactDetailController.swift */,
+				BA12AC3A1FEA3A2A00812F38 /* BILSearchWalletIDController.swift */,
+				BA12AC3E1FEA5D2B00812F38 /* BILSearchWalletIDResultController.swift */,
+				BA12AC5A1FEA73D700812F38 /* BILAddContactByAddressController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -500,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				BA05EAEE1FE7AB7A00B43B95 /* Contact.swift */,
+				BA12AC381FEA1FB200812F38 /* Contact+Network.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -799,8 +820,9 @@
 		CCE5E14A1FC7BEDE00F7555D /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				CCE5E1611FC7BFE100F7555D /* Home.storyboard */,
+				BA12AC501FEA6FBE00812F38 /* Home.storyboard */,
 				CCE5E1711FC81E3600F7555D /* Home.xcassets */,
+				BA12AC441FEA66BB00812F38 /* Home.strings */,
 				CCE5E1501FC7BEDE00F7555D /* Controller */,
 				BAA371161FD142BE00E757A6 /* Model */,
 				CCE5E1561FC7BEDE00F7555D /* View */,
@@ -1046,6 +1068,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = CCEC674B1FB18C3A004CC6C5;
 			productRefGroup = CCEC67551FB18C3A004CC6C5 /* Products */;
@@ -1077,7 +1100,7 @@
 				CCEC67841FB190EE004CC6C5 /* README.md in Resources */,
 				BA0457181FDE6CE600070CCA /* QRCodeResource.xcassets in Resources */,
 				CCFEDEF81FCE62D400F1A7FC /* FF_DIN_Condensed_Bold.otf in Resources */,
-				CCE5E1621FC7BFE100F7555D /* Home.storyboard in Resources */,
+				BA12AC4E1FEA6FBE00812F38 /* Home.storyboard in Resources */,
 				BA20A6111FD68F5200EC2147 /* Contact.storyboard in Resources */,
 				CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */,
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
@@ -1086,8 +1109,9 @@
 				CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */,
 				BA46461D1FD78FCF00680D33 /* Send.xcassets in Resources */,
 				CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */,
+				BA12AC421FEA66BB00812F38 /* Home.strings in Resources */,
 				BA46461B1FD78FC400680D33 /* Contact.xcassets in Resources */,
-				BA20A5FE1FD68DDA00EC2147 /* Send.storyboard in Resources */,
+				BA12AC481FEA67B300812F38 /* Send.storyboard in Resources */,
 				CCFEDEEE1FCC067E00F1A7FC /* BILTransactionCell.xib in Resources */,
 				BA20A5FC1FD68DC800EC2147 /* Recieve.storyboard in Resources */,
 				BA46461F1FD78FDB00680D33 /* Me.xcassets in Resources */,
@@ -1291,6 +1315,7 @@
 				BA6E95F31FE1433C0085F7B5 /* BILContactController.swift in Sources */,
 				BA6E95F11FE12F300085F7B5 /* BILSendResultController.swift in Sources */,
 				CC94E05E1FBAC2B20098E730 /* WalletModel.xcdatamodeld in Sources */,
+				BA12AC391FEA1FB200812F38 /* Contact+Network.swift in Sources */,
 				CCE5E16A1FC80A3000F7555D /* BILWalletCell.swift in Sources */,
 				BA6E95F71FE272570085F7B5 /* BTCTransactionBuilder.swift in Sources */,
 				CCFEDEF01FCD1D8300F1A7FC /* NotificationName+BIL.swift in Sources */,
@@ -1314,6 +1339,7 @@
 				CCED05621FDBAA4000689498 /* BILChooseWalletController.swift in Sources */,
 				BA05EAE71FE4F85800B43B95 /* BILSokectManager.swift in Sources */,
 				CC94E0591FBA99160098E730 /* BILInputView.swift in Sources */,
+				BA12AC5B1FEA73D700812F38 /* BILAddContactByAddressController.swift in Sources */,
 				CCED055C1FDA6D2E00689498 /* BILSpecificVolumeRecieveInputController.swift in Sources */,
 				BA284D111FD946B000A1C9F6 /* BILRecieveController.swift in Sources */,
 				CCE5E1761FCBC4B000F7555D /* BILTransactionHistoryModel.swift in Sources */,
@@ -1337,8 +1363,10 @@
 				CC4417011FBEAC7F00C4B158 /* WalletModel+BIL.swift in Sources */,
 				BA0457111FDE68C700070CCA /* BILQRCodeScanViewController.swift in Sources */,
 				BA6E95EB1FDFE5AF0085F7B5 /* BILSendChooseWalletController.swift in Sources */,
+				BA12AC3F1FEA5D2B00812F38 /* BILSearchWalletIDResultController.swift in Sources */,
 				CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */,
 				BA1918EE1FD7DCE500B6F568 /* BILPopMenu.swift in Sources */,
+				BA12AC3B1FEA3A2A00812F38 /* BILSearchWalletIDController.swift in Sources */,
 				CCE5E1641FC7C1BE00F7555D /* BILHomeViewController.swift in Sources */,
 				CCFEDEF51FCE5AAE00F1A7FC /* BILPopMenuItem.swift in Sources */,
 				BA6E95ED1FDFF0EE0085F7B5 /* BILSendConfirmController.swift in Sources */,
@@ -1367,10 +1395,40 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		BA12AC441FEA66BB00812F38 /* Home.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA12AC431FEA66BB00812F38 /* en */,
+				BA12AC471FEA672600812F38 /* zh-Hans */,
+			);
+			name = Home.strings;
+			sourceTree = "<group>";
+		};
+		BA12AC4A1FEA67B300812F38 /* Send.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA12AC491FEA67B300812F38 /* zh-Hans */,
+				BA12AC4C1FEA67B900812F38 /* en */,
+				BA12AC4D1FEA67BC00812F38 /* Base */,
+			);
+			name = Send.storyboard;
+			sourceTree = "<group>";
+		};
+		BA12AC501FEA6FBE00812F38 /* Home.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA12AC4F1FEA6FBE00812F38 /* zh-Hans */,
+				BA12AC541FEA6FFA00812F38 /* en */,
+				BA12AC591FEA715C00812F38 /* Base */,
+			);
+			name = Home.storyboard;
+			sourceTree = "<group>";
+		};
 		CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CCEC675E1FB18C3A004CC6C5 /* Base */,
+				BA12AC571FEA712500812F38 /* zh-Hans */,
+				BA12AC581FEA712500812F38 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1379,6 +1437,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CCEC67631FB18C3A004CC6C5 /* Base */,
+				BA12AC461FEA672600812F38 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1390,6 +1449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1447,6 +1507,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

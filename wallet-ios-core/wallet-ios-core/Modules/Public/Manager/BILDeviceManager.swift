@@ -12,6 +12,10 @@ class BILDeviceManager: NSObject {
     
     var deviceID: String
     
+    lazy var contactKey: String = {
+        return String(deviceID.md5().prefix(10))
+    }()
+    
     override init() {
         let key = "bitbill.deviceID"
         if let uuid = UserDefaults.standard.string(forKey: key) {

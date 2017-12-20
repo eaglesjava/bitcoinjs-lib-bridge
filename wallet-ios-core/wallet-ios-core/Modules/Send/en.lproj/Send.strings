@@ -1,0 +1,129 @@
+
+/* Class = "UILabel"; text = "推荐您添加该地址到新联系人以便下次交易"; ObjectID = "0g2-RI-9zC"; */
+"0g2-RI-9zC.text" = "推荐您添加该地址到新联系人以便下次交易";
+
+/* Class = "UIViewController"; title = "发送"; ObjectID = "1bf-2n-T7s"; */
+"1bf-2n-T7s.title" = "Send";
+
+/* Class = "UILabel"; text = "address"; ObjectID = "3oK-wN-dDO"; */
+"3oK-wN-dDO.text" = "address";
+
+/* Class = "UINavigationItem"; title = "选择钱包"; ObjectID = "3w2-Ub-f5o"; */
+"3w2-Ub-f5o.title" = "选择钱包";
+
+/* Class = "UILabel"; text = "平均确认时间30分钟，需耗费0.0002BTC"; ObjectID = "4RA-bO-hKB"; */
+"4RA-bO-hKB.text" = "平均确认时间30分钟，需耗费0.0002BTC";
+
+/* Class = "UITabBarItem"; title = "发送"; ObjectID = "5MS-kJ-Ypl"; */
+"5MS-kJ-Ypl.title" = "Send";
+
+/* Class = "UIButton"; normalTitle = "完成"; ObjectID = "6nF-hb-Mn0"; */
+"6nF-hb-Mn0.normalTitle" = "Done";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "7dV-Wt-9E5"; */
+"7dV-Wt-9E5.normalTitle" = "Next";
+
+/* Class = "UILabel"; text = "0 CNY"; ObjectID = "AZE-8B-09r"; */
+"AZE-8B-09r.text" = "0 CNY";
+
+/* Class = "UILabel"; text = "CoinName"; ObjectID = "AeR-cH-OoK"; */
+"AeR-cH-OoK.text" = "CoinName";
+
+/* Class = "UIButton"; normalTitle = "快速创建联系人"; ObjectID = "D0h-tY-xJB"; */
+"D0h-tY-xJB.normalTitle" = "快速创建联系人";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "DxN-Ff-T7C"; */
+"DxN-Ff-T7C.text" = "Label";
+
+/* Class = "UILabel"; text = "发送金额"; ObjectID = "EJd-yd-ypz"; */
+"EJd-yd-ypz.text" = "发送金额";
+
+/* Class = "UILabel"; text = "amount"; ObjectID = "Erz-zk-b10"; */
+"Erz-zk-b10.text" = "amount";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "Fio-ZW-1aj"; */
+"Fio-ZW-1aj.normalTitle" = "Next";
+
+/* Class = "UITextField"; placeholder = "接收方地址"; ObjectID = "FtQ-ul-LSb"; */
+"FtQ-ul-LSb.placeholder" = "Address";
+
+/* Class = "UILabel"; text = "发送成功"; ObjectID = "GcY-Ih-Dbp"; */
+"GcY-Ih-Dbp.text" = "发送成功";
+
+/* Class = "UILabel"; text = "接收方地址"; ObjectID = "H0V-Re-jp2"; */
+"H0V-Re-jp2.text" = "Address";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "IEb-Gs-FlA"; */
+"IEb-Gs-FlA.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "发送"; ObjectID = "LlB-ZE-aT8"; */
+"LlB-ZE-aT8.title" = "Send";
+
+/* Class = "UINavigationItem"; title = "确认"; ObjectID = "Pjz-b4-hnz"; */
+"Pjz-b4-hnz.title" = "Confirm";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "R8m-SG-IX7"; */
+"R8m-SG-IX7.normalTitle" = "Next";
+
+/* Class = "UILabel"; text = "接收方"; ObjectID = "T3Y-an-Yus"; */
+"T3Y-an-Yus.text" = "接收方";
+
+/* Class = "UILabel"; text = "  BCH  "; ObjectID = "UXO-wd-COs"; */
+"UXO-wd-COs.text" = "  BCH  ";
+
+/* Class = "UINavigationItem"; title = "扫描结果"; ObjectID = "UYV-Bh-eJo"; */
+"UYV-Bh-eJo.title" = "扫描结果";
+
+/* Class = "UILabel"; text = "备注"; ObjectID = "WJZ-AI-aCJ"; */
+"WJZ-AI-aCJ.text" = "备注";
+
+/* Class = "UILabel"; text = "B"; ObjectID = "baX-6Q-L8p"; */
+"baX-6Q-L8p.text" = "B";
+
+/* Class = "UINavigationItem"; title = "发送金额"; ObjectID = "bed-TV-fGp"; */
+"bed-TV-fGp.title" = "发送金额";
+
+/* Class = "UILabel"; text = "CoinName"; ObjectID = "jUa-cr-pb8"; */
+"jUa-cr-pb8.text" = "CoinName";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "jrl-VK-cpH"; */
+"jrl-VK-cpH.normalTitle" = "下一步";
+
+/* Class = "UILabel"; text = "walletID"; ObjectID = "k3E-gX-6yP"; */
+"k3E-gX-6yP.text" = "walletID";
+
+/* Class = "UILabel"; text = "发出钱包"; ObjectID = "lcc-2b-hNg"; */
+"lcc-2b-hNg.text" = "发出钱包";
+
+/* Class = "UILabel"; text = "手续费"; ObjectID = "lzV-m8-TsC"; */
+"lzV-m8-TsC.text" = "手续费";
+
+/* Class = "UILabel"; text = "amount"; ObjectID = "mxM-WT-G4P"; */
+"mxM-WT-G4P.text" = "amount";
+
+/* Class = "UILabel"; text = "detail"; ObjectID = "nB8-vV-4XD"; */
+"nB8-vV-4XD.text" = "detail";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "ohd-e8-95F"; */
+"ohd-e8-95F.normalTitle" = "下一步";
+
+/* Class = "UILabel"; text = "0 CNY"; ObjectID = "ood-C6-emK"; */
+"ood-C6-emK.text" = "0 CNY";
+
+/* Class = "UILabel"; text = "   BTC   "; ObjectID = "psK-vY-Miv"; */
+"psK-vY-Miv.text" = "   BTC   ";
+
+/* Class = "UILabel"; text = "txHash"; ObjectID = "quC-Gd-rV2"; */
+"quC-Gd-rV2.text" = "txHash";
+
+/* Class = "UILabel"; text = "address"; ObjectID = "sUF-cQ-IYF"; */
+"sUF-cQ-IYF.text" = "address";
+
+/* Class = "UITextField"; placeholder = "20字以内"; ObjectID = "tAE-ee-pat"; */
+"tAE-ee-pat.placeholder" = "20字以内";
+
+/* Class = "UIBarButtonItem"; title = "选择全部余额"; ObjectID = "yYV-Yz-7JL"; */
+"yYV-Yz-7JL.title" = "Send All";
+
+/* Class = "UILabel"; text = "  ETH  "; ObjectID = "zdY-hz-j0J"; */
+"zdY-hz-j0J.text" = "  ETH  ";

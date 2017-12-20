@@ -327,7 +327,8 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		createWallet()
 	}
 	
-	@objc func textFieldValueDidChange(notification: Notification) {
+	@objc
+    func textFieldValueDidChange(notification: Notification) {
 		if let textField: UITextField = notification.object as? UITextField {
 			switch textField {
 			case walletNameTextField:
@@ -340,15 +341,6 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 			default: ()
 			}
 		}
-//		if checkWalletName() {
-//			walletNameInputView.show(tip: "钱包名称", type: .normal)
-//		}
-//		if checkPassword() {
-//			passwordInputView.show(tip: "创建交易密码", type: .normal)
-//		}
-//		if checkConfirmPassword() {
-//			confirmPasswordInputView.show(tip: "确认交易密码", type: .normal)
-//		}
 	}
 	
     // MARK: - Navigation

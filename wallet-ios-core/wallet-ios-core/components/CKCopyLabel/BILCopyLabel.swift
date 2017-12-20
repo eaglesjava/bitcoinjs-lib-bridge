@@ -10,14 +10,14 @@ import UIKit
 import Toast_Swift
 
 extension UIViewController {
-    func bil_makeToast(msg: String?) {
-        view.makeToast(msg)
+    func bil_makeToast(msg: String?, completion: ((_ didTap: Bool) -> Void)? = nil) {
+        view.makeToast(msg, completion: completion)
     }
 }
 
 extension UIView {
-    func bil_makeToast(msg: String?) {
-        window?.makeToast(msg)
+    func bil_makeToast(msg: String?, completion: ((_ didTap: Bool) -> Void)? = nil) {
+        window?.makeToast(msg, completion: completion)
     }
 }
 
