@@ -22,9 +22,7 @@ extension Contact {
             let contact = Contact(name: name, walletID: id, address: address, remark: remark)
             success(contact)
             NotificationCenter.default.post(name: .contactDidChanged, object: contact)
-        }) { (msg, code) in
-            
-        }
+        }, failure: failure)
     }
     static func getContactFromServer(by id: String, success: @escaping (String) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         BILNetworkManager.request(request: .searchWalletID(walletID: id), success: { (data) in

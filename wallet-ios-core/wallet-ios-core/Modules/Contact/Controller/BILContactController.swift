@@ -26,6 +26,9 @@ class BILContactController: BILLightBlueBaseController {
     
     var didSelectContactClosure: DidSelectContactClosure?
     
+    var emptyTitle: String?
+    var emptyDescription: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -111,12 +114,15 @@ extension BILContactController {
         func loadEnd() {
             self.tableView.reloadData()
         }
+        
         Contact.getContactsFromServer(success: { (contacts) in
             self.handleContacts(datas: contacts)
             loadEnd()
         }) { (msg, code) in
             self.bil_makeToast(msg: msg)
             loadEnd()
+            self.emptyTitle = "获取联系人失败"
+            self.emptyDescription = "请检查您的网络，或稍后再试"
         }
     }
     
@@ -226,10 +232,10 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
 
 extension BILContactController: DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: "您还没有联系人", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 18)])
+        return NSAttributedString(string: emptyTitle ?? "您还没有联系人", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 18)])
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: "可以点击右上角添加联系人", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 14)])
+        return NSAttributedString(string: emptyDescription ?? "可以点击右上角添加联系人", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 14)])
     }
 }

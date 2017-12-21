@@ -29,8 +29,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOy-b0-JKy">
-                        <rect key="frame" x="257" y="28" width="38" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="254.5" y="28" width="40.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,12 +45,12 @@
                     <constraint firstAttribute="trailing" secondItem="OOy-b0-JKy" secondAttribute="trailing" constant="25" id="Avq-hP-8KY"/>
                     <constraint firstItem="xE4-2c-TWj" firstAttribute="top" secondItem="GQK-db-WkR" secondAttribute="top" id="BYv-BG-WZC"/>
                     <constraint firstItem="GQK-db-WkR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DLl-8k-PpH"/>
-                    <constraint firstItem="OOy-b0-JKy" firstAttribute="top" secondItem="xE4-2c-TWj" secondAttribute="top" id="M86-IF-nEv"/>
                     <constraint firstItem="mu6-Tn-zKB" firstAttribute="bottom" secondItem="GQK-db-WkR" secondAttribute="bottom" id="bdu-uC-rRZ"/>
-                    <constraint firstItem="OOy-b0-JKy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xE4-2c-TWj" secondAttribute="trailing" constant="28" id="f4O-Ec-Flw"/>
+                    <constraint firstItem="OOy-b0-JKy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xE4-2c-TWj" secondAttribute="trailing" constant="36" id="f4O-Ec-Flw"/>
                     <constraint firstItem="mu6-Tn-zKB" firstAttribute="leading" secondItem="xE4-2c-TWj" secondAttribute="leading" id="oc7-Ex-SmN"/>
                     <constraint firstItem="xE4-2c-TWj" firstAttribute="leading" secondItem="GQK-db-WkR" secondAttribute="trailing" constant="15" id="pWb-7E-qnM"/>
                     <constraint firstItem="GQK-db-WkR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="whO-cQ-8tw"/>
+                    <constraint firstItem="OOy-b0-JKy" firstAttribute="top" secondItem="xE4-2c-TWj" secondAttribute="top" id="xsr-H3-sMN"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

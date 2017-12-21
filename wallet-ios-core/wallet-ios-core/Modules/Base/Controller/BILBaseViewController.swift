@@ -12,6 +12,20 @@ class BILBaseViewController: UIViewController {
     
     var gradientLayer: CAGradientLayer?
     
+    lazy var backgroundImage: UIImage? = {
+        guard let v = view else {
+            return nil
+        }
+        var toReturn: UIImage? = nil
+        UIGraphicsBeginImageContextWithOptions(v.bounds.size, true, UIScreen.main.scale)
+        if let currentContext = UIGraphicsGetCurrentContext() {
+            gradientLayer?.render(in: currentContext)
+            toReturn = UIGraphicsGetImageFromCurrentImageContext()
+        }
+        UIGraphicsEndImageContext()
+        return toReturn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
