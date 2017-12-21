@@ -8,12 +8,14 @@
 
 import UIKit
 import SafariServices
+import SVProgressHUD
 
 class BILSendResultController: BILBaseViewController {
 
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var txHashLabel: BILCopyLabel!
+    @IBOutlet weak var addContactButton: BILGradientButton!
     
     var sendModel: BILSendModel?
     
@@ -27,8 +29,49 @@ class BILSendResultController: BILBaseViewController {
             amountLabel.text = "\(BTCFormatString(btc: Int64(tx.amount))) BTC"
             txHashLabel.text = tx.txHash
         }
+        
+        if let model = sendModel {
+            addContactButton.isHidden = model.isContactAddress
+        }
     }
-
+    @IBAction func addContactAction(_ sender: Any) {
+        if let tx = sendModel?.transaction {
+            showAddContactAlert(address: tx.address)
+        }
+    }
+    
+    func showAddContactAlert(address: String) {
+        let alert = UIAlertController(title: "输入 \(address) 的名称", message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (action) in
+            guard let name = alert.textFields?.first?.text else {
+                return
+            }
+            self.addContact(address: address, name: name)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+            
+        }))
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "请输入联系人名称"
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func addContact(address: String, name: String) {
+        Contact.addContactToServer(address: address, name: name, success: { (contact) in
+            SVProgressHUD.showSuccess(withStatus: "添加成功")
+            SVProgressHUD.dismiss(withDelay: 1.5, completion: {
+                self.dismiss(animated: true, completion: nil)
+            })
+        }) { (msg, code) in
+            self.bil_makeToast(msg: msg)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

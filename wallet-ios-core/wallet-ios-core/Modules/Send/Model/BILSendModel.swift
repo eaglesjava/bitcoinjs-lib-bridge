@@ -14,6 +14,7 @@ class BILSendModel: BILRecieveModel {
     var wallet: WalletModel?
     
     var isSendAll = false
+    var isContactAddress = false
     
     var transaction: BTCTransaction?
     

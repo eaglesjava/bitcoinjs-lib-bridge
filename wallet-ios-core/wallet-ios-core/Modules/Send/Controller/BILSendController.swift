@@ -104,30 +104,52 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextAction(_ sender: Any) {
-        if let c = contact {
-            debugPrint(c.walletID)
-            bil_makeToast(msg: "获取联系人地址失败")
-            return
-        }
-        guard let address = addressInputView.textField.text, !(address.isEmpty) else {
-            bil_makeToast(msg: NSLocalizedString("地址不能为空", comment: ""))
-            return
+        
+        func next(address: String, isContact: Bool = false) {
+            guard !(address.isEmpty) else {
+                bil_makeToast(msg: NSLocalizedString("地址不能为空", comment: ""))
+                return
+            }
+            BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
+                let isValidate = result as! Bool
+                if isValidate {
+                    let model = BILSendModel(address: address)
+                    model.isContactAddress = isContact
+                    self.sendModel = model
+                    self.performSegue(withIdentifier: self.addressToAmountSegue, sender: nil)
+                }
+                else
+                {
+                    self.showTipAlert(title: "地址不正确", msg: "您输入的不是合法的地址")
+                }
+            }) { (error) in
+                self.showTipAlert(title: "出现了错误", msg: error.localizedDescription)
+            }
         }
         
-        BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
-            let isValidate = result as! Bool
-            if isValidate {
-                self.sendModel = BILSendModel(address: address)
-                self.performSegue(withIdentifier: self.addressToAmountSegue, sender: nil)
+        if let c = contact {
+            debugPrint(c.walletID)
+            if c.additionType == .walletID {
+                c.getContactAddressFromServer(success: { (address) in
+                    next(address: address, isContact: true)
+                }, failure: { (msg, code) in
+                    self.showTipAlert(title: "出现了错误", msg: msg)
+                })
             }
             else
             {
-                self.showTipAlert(title: "地址不正确", msg: "您输入的不是合法的地址")
+                let address = c.address
+                next(address: address, isContact: true)
             }
-        }) { (error) in
-            self.showTipAlert(title: "出现了错误", msg: error.localizedDescription)
         }
-        
+        else
+        {
+            guard let add = addressInputView.textField.text, !(add.isEmpty) else {
+                showTipAlert(msg: "地址不能为空")
+                return
+            }
+            next(address: add)
+        }
     }
     // MARK: - Navigation
 

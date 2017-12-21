@@ -67,7 +67,7 @@ class BILContactController: BILLightBlueBaseController {
             self.performSegue(withIdentifier: .bil_contactsToAddByAddressSegue, sender: sender)
         }))
         sheet.addAction(UIAlertAction(title: "扫码添加", style: .default, handler: { (action) in
-            
+            self.bil_makeToast(msg: "还未实现")
         }))
         
         sheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in

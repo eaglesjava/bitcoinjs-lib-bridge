@@ -10,11 +10,13 @@ import Foundation
 import SwiftyJSON
 
 extension Contact {
-    func getContactsFromServer(success: @escaping ([Contact]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func getContactAddressFromServer(success: @escaping (String) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         BILNetworkManager.request(request: .getContactLastAddress(walletID: walletID), success: { (data) in
-            
+            let json = JSON(data)
+            success(json["address"].stringValue)
         }, failure: failure)
     }
+    
     static func addContactToServer(id: String = "", address: String = "", name: String, remark: String = "", success: @escaping (Contact) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         BILNetworkManager.request(request: .addContact(walletID: id, name: name, remark: remark, address: address), success: { (data) in
             let contact = Contact(name: name, walletID: id, address: address, remark: remark)
