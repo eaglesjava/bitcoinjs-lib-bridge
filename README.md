@@ -1,12 +1,10 @@
 # bitcoinjs-lib-bridge
 
 ## 安装依赖
-`sudo npm install bip39`
- 
-`sudo npm install bip32-utils`
+`npm install`
 
 ## 转译命令
-`browserify index.js --standalone bridge > bitcoinjs-lib-app.js`
+`npm start`
 
 ## 函数调用格式
 ```
