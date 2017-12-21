@@ -1,7 +1,9 @@
 package com.bitbill.www.ui.main.send;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -177,7 +179,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void sendTransactionFail() {
-        showMessage("发送交易失败");
+        showMessage(R.string.msg_send_transaction_fail);
     }
 
     @Override
@@ -250,12 +252,16 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
             getTxElementFail();
         }
         mFees = txElement.getFees();
-        //正序排列
-        Collections.sort(mFees, (o1, o2) -> o1.getTime() - o2.getTime());
-
-        refreshSeekBar();
+        if (!StringUtils.isEmpty(mFees)) {
+            //正序排列
+            Collections.sort(mFees, (o1, o2) -> o1.getTime() - o2.getTime());
+            refreshSeekBar();
+            //估算手续费
+            getMvpPresenter().computeFee();
+        }
     }
 
+    @TargetApi(Build.VERSION_CODES.O)
     private void refreshSeekBar() {
         sbSendFee.setMax(getMaxTime());
         sbSendFee.setMin(getMinTime());
@@ -291,7 +297,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
             int nextTime = mFees.get(i).getTime();
             if (progress > currentTime && progress < nextTime) {
 
-                if (progress < currentTime + nextTime / 2) {
+                if (progress < (currentTime + nextTime) / 2) {
                     index = i;
                 } else {
                     index = i + 1;
@@ -327,6 +333,10 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
         if (StringUtils.isEmpty(mFees)) {
             return;
         }
+        refreshFeeHintLayout(feeBtc, index);
+    }
+
+    private void refreshFeeHintLayout(String feeBtc, int index) {
         tvFeeHint.setText("平均出块时间" + mFees.get(index).getTime() + "分钟，需耗费" + feeBtc + "BTC");
     }
 

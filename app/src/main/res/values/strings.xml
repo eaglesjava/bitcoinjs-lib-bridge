@@ -161,4 +161,5 @@
     <string name="title_activity_contact_detail">联系人详情</string>
     <string name="action_contact_edit">编辑</string>
     <string name="action_contact_create">新建</string>
+    <string name="msg_send_transaction_fail">发送交易失败</string>
 </resources>
