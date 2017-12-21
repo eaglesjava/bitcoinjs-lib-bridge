@@ -683,8 +683,8 @@
                                             <constraint firstAttribute="height" constant="64" id="QMa-Ck-uCq"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-Ih-Dbp">
-                                        <rect key="frame" x="123" y="84" width="73.5" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送成功" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-Ih-Dbp">
+                                        <rect key="frame" x="25" y="84" width="270" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <color key="textColor" red="0.6705882352941176" green="0.90196078431372551" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -723,10 +723,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="GcY-Ih-Dbp" firstAttribute="leading" secondItem="kGN-gP-o7f" secondAttribute="leading" constant="25" id="1bT-rg-5HD"/>
                                     <constraint firstItem="GcY-Ih-Dbp" firstAttribute="top" secondItem="GsO-vo-IWL" secondAttribute="bottom" constant="20" id="4nW-6h-4Fk"/>
                                     <constraint firstItem="GcY-Ih-Dbp" firstAttribute="centerX" secondItem="kGN-gP-o7f" secondAttribute="centerX" id="7gU-1Y-DkZ"/>
                                     <constraint firstItem="GsO-vo-IWL" firstAttribute="top" secondItem="kGN-gP-o7f" secondAttribute="top" id="8MA-7m-JQs"/>
                                     <constraint firstItem="D0h-tY-xJB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kGN-gP-o7f" secondAttribute="leading" id="9F6-Km-Hdv"/>
+                                    <constraint firstItem="kGN-gP-o7f" firstAttribute="trailing" secondItem="GcY-Ih-Dbp" secondAttribute="trailing" constant="25" id="Cze-6b-xPD"/>
                                     <constraint firstItem="0g2-RI-9zC" firstAttribute="top" secondItem="mxM-WT-G4P" secondAttribute="bottom" constant="40" id="GEW-we-25s"/>
                                     <constraint firstItem="kGN-gP-o7f" firstAttribute="trailing" secondItem="D0h-tY-xJB" secondAttribute="trailing" constant="25" id="IWw-IG-Rnw"/>
                                     <constraint firstItem="mxM-WT-G4P" firstAttribute="leading" secondItem="kGN-gP-o7f" secondAttribute="leading" constant="25" id="KyX-yI-w82"/>
@@ -807,6 +809,7 @@
                         <outlet property="addContactButton" destination="D0h-tY-xJB" id="SHi-Dh-si2"/>
                         <outlet property="addressLabel" destination="sUF-cQ-IYF" id="JUd-Wf-5ZZ"/>
                         <outlet property="amountLabel" destination="mxM-WT-G4P" id="Rg5-ub-vCV"/>
+                        <outlet property="contactRecommendLabel" destination="0g2-RI-9zC" id="r18-8v-VtW"/>
                         <outlet property="txHashLabel" destination="quC-Gd-rV2" id="bZC-ag-z4C"/>
                     </connections>
                 </viewController>

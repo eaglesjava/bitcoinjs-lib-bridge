@@ -16,6 +16,7 @@ class BILSendResultController: BILBaseViewController {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var txHashLabel: BILCopyLabel!
     @IBOutlet weak var addContactButton: BILGradientButton!
+    @IBOutlet weak var contactRecommendLabel: UILabel!
     
     var sendModel: BILSendModel?
     
@@ -32,6 +33,7 @@ class BILSendResultController: BILBaseViewController {
         
         if let model = sendModel {
             addContactButton.isHidden = model.isContactAddress
+            contactRecommendLabel.isHidden = model.isContactAddress
         }
     }
     @IBAction func addContactAction(_ sender: Any) {
