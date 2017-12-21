@@ -21,6 +21,7 @@ public final class AppConstants {
     public static final String EXTRA_WALLET = "extra_wallet";
     public static final String EXTRA_MNEMONIC = "etra_mnemonic";
     public static final String EXTRA_IS_CREATE_WALLET = "is_create_wallet";
+    public static final String EXTRA_IS_FROM_ASSET = "is_from_asset";
     public static final String IS_BTC_RECOD = "is_btc_record";
     public static final String ARG_WALLET = "arg_wallet";
     public static final String EXTRA_IS_FROM_GUIDE = "extra_is_from_guide";
@@ -29,6 +30,8 @@ public final class AppConstants {
     public static final String EXTRA_SEND_AMOUNT = "send_amount";
     public static final String EXTRA_IS_SEND_ALL = "is_send_all";
     public static final long SATOSHI = 10000000;
+    public static final String EXTRA_CONTACT = "extra_contact";
+    public static final String ARG_DATAS = "args_datas";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

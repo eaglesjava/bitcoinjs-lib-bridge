@@ -64,12 +64,8 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
                         if (listUnspentResponseApiResponse != null && listUnspentResponseApiResponse.isSuccess()) {
                             GetTxElementResponse data = listUnspentResponseApiResponse.getData();
                             if (data != null) {
-                                List<GetTxElementResponse.UtxoBean> unspentList = data.getUtxo();
-                                if (!StringUtils.isEmpty(unspentList)) {
-                                    getMvpView().getTxElementSuccess(unspentList);
-                                } else {
-                                    getMvpView().getTxElementFail();
-                                }
+                                getMvpView().getTxElementSuccess(data);
+
                             } else {
                                 getMvpView().getTxElementFail();
                             }
@@ -151,7 +147,9 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         //check pwd
         String pwd = wallet.getTradePwd();
         String seedHex = StringUtils.decryptByPwd(wallet.getEncryptSeed(), pwd);
-        List<GetTxElementResponse.UtxoBean> unspentList = getMvpView().getUnspentList();
+        List<GetTxElementResponse.UtxoBean> unspentList = new ArrayList<>();
+        unspentList.clear();
+        unspentList.addAll(getMvpView().getUnspentList());
         //计算手续费 余额从小大排列
         Collections.sort(unspentList, (o1, o2) -> {
             //倒序排列
@@ -161,8 +159,6 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         //发送全部不需要计算找零地址
         boolean isSendAll = getMvpView().isSendAll();
         long feeByte = getMvpView().getFeeByte();
-        long minFeeByte = getMvpView().getMinFeeByte();
-        long maxFeeByte = getMvpView().getMaxFeeByte();
         long sendAmount = getMvpView().getSendAmount();
         String sendAddress = getMvpView().getSendAddress();
         long amount = 0;
@@ -180,7 +176,7 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         }
         //check amount
         if (amount <= 0 || index == -1 || fee == 0) {
-            getMvpView().sendTransactionFail();
+            getMvpView().amountNoEnough();
         }
         //组装交易
         List<Transaction.Input> inputs = new ArrayList<>();
@@ -224,6 +220,44 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
 
             }
         });
+
+    }
+
+    @Override
+    public void computeFee() {
+        List<GetTxElementResponse.UtxoBean> unspentList = new ArrayList<>();
+        unspentList.clear();
+        unspentList.addAll(getMvpView().getUnspentList());
+        //计算手续费 余额从小大排列
+        Collections.sort(unspentList, (o1, o2) -> {
+            //倒序排列
+            return (int) (o2.getSumOutAmount() - o1.getSumOutAmount());
+        });
+
+        long feeByte = getMvpView().getFeeByte();
+        long maxFeeByte = getMvpView().getMaxFeeByte();
+        boolean isSendAll = getMvpView().isSendAll();
+        long sendAmount = getMvpView().getSendAmount();
+
+        long amount = 0;
+        int index = -1;
+        long fee = 0;
+        for (int i = 0; i < unspentList.size(); i++) {
+            GetTxElementResponse.UtxoBean unspent = unspentList.get(i);
+            fee = (CryptoConstants.INPUT_SIZE * (i + 1) + CryptoConstants.OUTPUT_SIZE * (isSendAll ? 1 : 2)) * feeByte;
+            amount += unspent.getSumOutAmount();
+            if (amount - fee >= sendAmount) {
+                index = i;
+                break;
+            }
+
+        }
+        //check amount
+        if (amount <= 0 || index == -1 || fee == 0) {
+            getMvpView().amountNoEnough();
+        }
+
+        getMvpView().compteFeeBtc(StringUtils.satoshi2btc(fee), index);
 
     }
 

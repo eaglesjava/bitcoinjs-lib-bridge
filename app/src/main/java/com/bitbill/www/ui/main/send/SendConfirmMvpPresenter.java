@@ -26,4 +26,9 @@ public interface SendConfirmMvpPresenter<M extends WalletModel, V extends SendCo
      * 组装交易
      */
     void buildTransaction();
+
+    /**
+     * 估算手续费
+     */
+    void computeFee();
 }

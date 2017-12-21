@@ -22,6 +22,7 @@ import com.bitbill.www.ui.common.BtcAddressMvpView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,6 +37,8 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     TextView tvSendAmount;
     @BindView(R.id.sb_send_fee)
     SeekBar sbSendFee;
+    @BindView(R.id.tv_fee_hint)
+    TextView tvFeeHint;
     @BindView(R.id.tv_send_address)
     TextView tvSendAddress;
     @BindView(R.id.tv_send_contact)
@@ -54,6 +57,11 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     private boolean isSendAll;
     private String mTradePwd;
     private List<GetTxElementResponse.UtxoBean> mUnspentList;
+    private List<GetTxElementResponse.FeesBean> mFees;
+    private int mMinTime;
+    private int mBestTime;
+    private long mFeeByte;
+    private long mBestFeeByte;
 
     public static void start(Context context, String address, String sendAmount, boolean isSendAll, Wallet wallet) {
 
@@ -179,22 +187,24 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public long getFeeByte() {
-        return 0;
+        return mFeeByte;
     }
 
     @Override
     public long getSendAmount() {
-        return isSendAll ? getWallet().getBtcAmount() : StringUtils.btc2Satoshi(mSendAmount);
+        return isSendAll ? getWallet().getBtcBalance() : StringUtils.btc2Satoshi(mSendAmount);
     }
 
     @Override
     public long getMaxFeeByte() {
-        return 0;
+        if (StringUtils.isEmpty(mFees)) return 0;
+        return mFees.get(mFees.size() - 1).getFee();
     }
 
     @Override
     public long getMinFeeByte() {
-        return 0;
+        if (StringUtils.isEmpty(mFees)) return 0;
+        return mFees.get(0).getFee();
     }
 
     @Override
@@ -231,9 +241,75 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     @Override
-    public void getTxElementSuccess(List<GetTxElementResponse.UtxoBean> unspentList) {
-        //获取utxo成功
-        mUnspentList = unspentList;
+    public void getTxElementSuccess(GetTxElementResponse txElement) {
+        List<GetTxElementResponse.UtxoBean> unspentList = txElement.getUtxo();
+        if (!StringUtils.isEmpty(unspentList)) {
+            //获取utxo成功
+            mUnspentList = unspentList;
+        } else {
+            getTxElementFail();
+        }
+        mFees = txElement.getFees();
+        //正序排列
+        Collections.sort(mFees, (o1, o2) -> o1.getTime() - o2.getTime());
+
+        refreshSeekBar();
+    }
+
+    private void refreshSeekBar() {
+        sbSendFee.setMax(getMaxTime());
+        sbSendFee.setMin(getMinTime());
+        sbSendFee.setProgress(getBestTime());
+        sbSendFee.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                updateFeeLayout(i);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+    private void updateFeeLayout(int progress) {
+        int index = -1;
+        for (int i = 0; i < mFees.size() - 1; i++) {
+            if (progress == mFees.get(i).getTime()) {
+                index = i;
+                break;
+            }
+            int currentTime = mFees.get(i).getTime();
+            int nextTime = mFees.get(i).getTime();
+            if (progress > currentTime && progress < nextTime) {
+
+                if (progress < currentTime + nextTime / 2) {
+                    index = i;
+                } else {
+                    index = i + 1;
+                }
+                break;
+            } else {
+                continue;
+            }
+        }
+        if (index == -1) {
+            //取最好的手续费
+            mFeeByte = getBestFeeByte();
+        } else {
+            mFeeByte = mFees.get(index).getFee();
+        }
+
+        //估算手续费
+        getMvpPresenter().computeFee();
     }
 
     @Override
@@ -247,6 +323,19 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     @Override
+    public void compteFeeBtc(String feeBtc, int index) {
+        if (StringUtils.isEmpty(mFees)) {
+            return;
+        }
+        tvFeeHint.setText("平均出块时间" + mFees.get(index).getTime() + "分钟，需耗费" + feeBtc + "BTC");
+    }
+
+    @Override
+    public void amountNoEnough() {
+        showMessage("余额不足，请返回重新重试");
+    }
+
+    @Override
     public void newAddressFail() {
         sendTransactionFail();
     }
@@ -255,5 +344,31 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     public void newAddressSuccess(String lastAddress) {
         mLastAddress = lastAddress;
         getMvpPresenter().buildTransaction();
+    }
+
+    public int getMinTime() {
+        return mFees.get(0).getTime();
+    }
+
+    public int getMaxTime() {
+        return mFees.get(mFees.size() - 1).getTime();
+    }
+
+    public int getBestTime() {
+        for (GetTxElementResponse.FeesBean fee : mFees) {
+            if (fee.isBest()) {
+                return fee.getTime();
+            }
+        }
+        return 0;
+    }
+
+    public long getBestFeeByte() {
+        for (GetTxElementResponse.FeesBean fee : mFees) {
+            if (fee.isBest()) {
+                return fee.getFee();
+            }
+        }
+        return 0;
     }
 }

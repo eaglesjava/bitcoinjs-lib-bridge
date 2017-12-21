@@ -102,7 +102,7 @@ public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements Ba
     public void initView() {
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        mViewPager = findViewById(R.id.viewPager);
 
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
         addGuide(new FirstGuideFragment());
@@ -130,11 +130,11 @@ public class GuideActivity extends BaseActivity<GuideMvpPresenter> implements Ba
         switch (view.getId()) {
             case R.id.btn_create_wallet:
                 //跳转到创建钱包界面
-                CreateWalletIdActivity.start(GuideActivity.this, null, true);
+                CreateWalletIdActivity.start(GuideActivity.this, null, true, false);
                 break;
             case R.id.btn_import_wallet:
                 //跳转到导入钱包界面
-                ImportWalletActivity.start(GuideActivity.this);
+                ImportWalletActivity.start(GuideActivity.this, false);
                 break;
         }
     }

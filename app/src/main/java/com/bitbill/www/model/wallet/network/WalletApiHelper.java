@@ -8,7 +8,6 @@ import com.bitbill.www.di.qualifier.BaseUrlInfo;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
-import com.bitbill.www.model.wallet.network.entity.GetBalanceResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
@@ -33,18 +32,18 @@ import io.reactivex.Observable;
 public class WalletApiHelper extends ApiHelper implements WalletApi {
 
     @Inject
-    public WalletApiHelper(ApiHeader apiHeader, @BaseUrlInfo String baseUrl) {
+    public WalletApiHelper(ApiHeader apiHeader, @BaseUrlInfo java.lang.String baseUrl) {
         super(apiHeader, baseUrl);
     }
 
     @Override
-    public Observable<ApiResponse<String>> createWallet(CreateWalletRequest createWalletRequest) {
+    public Observable<ApiResponse<java.lang.String>> createWallet(CreateWalletRequest createWalletRequest) {
 
         return Rx2AndroidNetworking.post(ApiEndPoint.WALLET_CREATE)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .addApplicationJsonBody(createWalletRequest)
                 .build()
-                .getParseObservable(new TypeToken<ApiResponse<String>>() {
+                .getParseObservable(new TypeToken<ApiResponse<java.lang.String>>() {
                 });
     }
 
@@ -55,12 +54,12 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
      * @return
      */
     @Override
-    public Observable<ApiResponse<String>> importWallet(ImportWalletRequest importWalletRequest) {
+    public Observable<ApiResponse<java.lang.String>> importWallet(ImportWalletRequest importWalletRequest) {
         return Rx2AndroidNetworking.post(ApiEndPoint.WALLET_IMPORT)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .addApplicationJsonBody(importWalletRequest)
                 .build()
-                .getParseObservable(new TypeToken<ApiResponse<String>>() {
+                .getParseObservable(new TypeToken<ApiResponse<java.lang.String>>() {
                 });
     }
 
@@ -71,12 +70,12 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
      * @return
      */
     @Override
-    public Observable<ApiResponse<String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest) {
+    public Observable<ApiResponse<java.lang.String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest) {
         return Rx2AndroidNetworking.post(ApiEndPoint.CHECK_WALLETID)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .addApplicationJsonBody(checkWalletIdRequest)
                 .build()
-                .getParseObservable(new TypeToken<ApiResponse<String>>() {
+                .getParseObservable(new TypeToken<ApiResponse<java.lang.String>>() {
                 });
     }
 
@@ -103,12 +102,12 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
      * @return
      */
     @Override
-    public Observable<ApiResponse<GetBalanceResponse>> getBalance(GetBalanceRequest getBalanceRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_WALLETID)
+    public Observable<ApiResponse> getBalance(GetBalanceRequest getBalanceRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.GET_BALANCE)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .addApplicationJsonBody(getBalanceRequest)
                 .build()
-                .getParseObservable(new TypeToken<ApiResponse<GetBalanceResponse>>() {
+                .getParseObservable(new TypeToken<ApiResponse>() {
                 });
     }
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_wallet_select_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal"
+    android:paddingBottom="15dp"
+    android:paddingLeft="@dimen/activity_padding"
+    android:paddingRight="@dimen/activity_padding"
+    android:paddingTop="15dp">
+
+    <TextView
+        android:id="@+id/tv_contact_label"
+        style="@style/Text.Contact.Logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="15dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_contact_name"
+            style="@style/Text.Contact.Name"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/tv_contact_address"
+            style="@style/Text.Contact.Address"
+            android:layout_marginTop="1dp"
+            android:ellipsize="middle"
+            android:singleLine="true" />
+    </LinearLayout>
+
+
+</LinearLayout>

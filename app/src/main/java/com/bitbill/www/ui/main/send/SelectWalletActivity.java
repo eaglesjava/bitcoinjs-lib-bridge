@@ -81,7 +81,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
             protected void convert(ViewHolder holder, Wallet wallet, final int position) {
 
                 holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()));
-                holder.setText(R.id.tv_wallet_amount, StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc");
+                holder.setText(R.id.tv_wallet_amount, StringUtils.satoshi2btc(wallet.getBtcBalance()) + " btc");
                 holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
 
                 holder.setChecked(R.id.rb_selector, wallet.isSelected());

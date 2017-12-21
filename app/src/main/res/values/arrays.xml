@@ -2,7 +2,13 @@
 <resources>
     <string-array name="coin_tabs">
         <item>btc</item>
-        <item>eth</item>
         <item>bch</item>
+        <item>eth</item>
+    </string-array>
+
+    <string-array name="dialog_create_contact">
+        <item>通过ID添加</item>
+        <item>通过地址添加</item>
+        <item>扫码添加</item>
     </string-array>
 </resources>

@@ -35,7 +35,7 @@ public class GetTxElementResponse {
          */
 
         private boolean best;
-        private double fee;
+        private long fee;
         private int time;
 
         public boolean isBest() {
@@ -46,11 +46,11 @@ public class GetTxElementResponse {
             this.best = best;
         }
 
-        public double getFee() {
+        public long getFee() {
             return fee;
         }
 
-        public void setFee(double fee) {
+        public void setFee(long fee) {
             this.fee = fee;
         }
 

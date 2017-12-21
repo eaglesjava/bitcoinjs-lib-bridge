@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
@@ -27,19 +28,27 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
     EditText etInputMnemonic;
     @BindView(R.id.btn_next)
     Button btnNext;
-
     @Inject
     ImportWalletMvpPresenter<WalletModel, ImportWalletMvpView> importWalletMvpPresenter;
+    private boolean isFromAsset;
 
-    public static void start(Context context) {
+    public static void start(Context context, boolean isFromAsset) {
         Intent intent = new Intent(context, ImportWalletActivity.class);
+        intent.putExtra(AppConstants.EXTRA_IS_FROM_ASSET, isFromAsset);
         context.startActivity(intent);
     }
 
     @Override
     public void importWalletSuccess(Wallet wallet) {
         //进入初始化钱包成功界面
-        CreateWalletIdActivity.start(ImportWalletActivity.this, wallet, false);
+        CreateWalletIdActivity.start(ImportWalletActivity.this, wallet, false, isFromAsset);
+    }
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+
+        isFromAsset = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_ASSET, false);
     }
 
     @Override

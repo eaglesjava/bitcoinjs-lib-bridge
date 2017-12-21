@@ -165,6 +165,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                 }
             }
             selectWalletView.setWallet(mSelectedWallet);
+            selectWalletView.setVisibility(View.VISIBLE);
             loadBtcAddress();
         } else {
             selectWalletView.setVisibility(View.GONE);

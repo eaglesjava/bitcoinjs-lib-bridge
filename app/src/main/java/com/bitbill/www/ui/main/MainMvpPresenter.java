@@ -35,4 +35,6 @@ import com.bitbill.www.model.wallet.WalletModel;
 public interface MainMvpPresenter<M extends WalletModel, V extends MainMvpView> extends MvpPresenter<V> {
 
     void loadWallet();
+
+    void getBalance();
 }

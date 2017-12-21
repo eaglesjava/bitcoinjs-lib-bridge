@@ -26,11 +26,14 @@ public class CreateWalletIdActivity extends BaseToolbarActivity<CreateWalletIdMv
     CreateWalletIdMvpPresenter<WalletModel, CreateWalletIdMvpView> mCreateWalletIdMvpPresenter;
     private Wallet mWallet;
     private boolean isCreateWallet;
+    private boolean isFromAsset;
 
-    public static void start(Context context, Wallet wallet, boolean isCreateWallet) {
+    public static void start(Context context, Wallet wallet, boolean isCreateWallet, boolean isFromAsset) {
+
         Intent starter = new Intent(context, CreateWalletIdActivity.class);
         starter.putExtra(AppConstants.EXTRA_WALLET, wallet);
         starter.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
+        starter.putExtra(AppConstants.EXTRA_IS_FROM_ASSET, isFromAsset);
         context.startActivity(starter);
     }
 
@@ -45,6 +48,7 @@ public class CreateWalletIdActivity extends BaseToolbarActivity<CreateWalletIdMv
         super.handleIntent(intent);
         mWallet = ((Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET));
         isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
+        isFromAsset = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_ASSET, false);
     }
 
     @Override
@@ -137,7 +141,7 @@ public class CreateWalletIdActivity extends BaseToolbarActivity<CreateWalletIdMv
             mWallet = new Wallet();
         mWallet.setName(getWalletId());
         //跳转到创建钱包界面
-        InitWalletActivity.start(CreateWalletIdActivity.this, mWallet, isCreateWallet);
+        InitWalletActivity.start(CreateWalletIdActivity.this, mWallet, isCreateWallet, isFromAsset);
     }
 
     @Override
@@ -159,6 +163,5 @@ public class CreateWalletIdActivity extends BaseToolbarActivity<CreateWalletIdMv
 
 
     }
-
 
 }

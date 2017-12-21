@@ -23,16 +23,23 @@
 package com.bitbill.www.ui.main;
 
 
+import com.androidnetworking.error.ANError;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
+import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -49,6 +56,7 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                          CompositeDisposable compositeDisposable) {
         super(appModel, schedulerProvider, compositeDisposable);
     }
+
     @Override
     public void loadWallet() {
         getCompositeDisposable().add(getModelManager().getAllWallets()
@@ -62,20 +70,102 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                     @Override
                     public void onNext(List<Wallet> wallets) {
                         super.onNext(wallets);
-                        if (!isValidMvpView()) {
+                        if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().loadWalletsSuccess(wallets);
+                        if (!StringUtils.isEmpty(wallets)) {
+
+                            getMvpView().loadWalletsSuccess(wallets);
+                        } else {
+
+                            getMvpView().loadWalletsFail();
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        if (!isValidMvpView()) {
+                        if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().loadWalletsFail();
+                        if (e instanceof ANError) {
+                            handleApiError((ANError) e);
+                        }
                     }
                 }));
     }
+
+    @Override
+    public void getBalance() {
+        if (!isValidWallets()) {
+            return;
+        }
+        List<Wallet> wallets = getMvpView().getWallets();
+        String extendedKeysHash = "";
+        for (int i = 0; i < wallets.size(); i++) {
+            // TODO: 2017/12/21 check xpubkey
+            extendedKeysHash += EncryptUtils.encryptMD5ToString(wallets.get(i).getXPublicKey());
+            if (i < wallets.size() - 1) {
+                extendedKeysHash += "|";
+            }
+        }
+        getCompositeDisposable().add(getModelManager()
+                .getBalance(new GetBalanceRequest(extendedKeysHash))
+                .concatMap(stringApiResponse -> {
+                    boolean check = false;
+                    if (stringApiResponse.isSuccess()) {
+                        JSONObject dataJsonObj = new JSONObject(String.valueOf(stringApiResponse.getData()));
+                        //设置钱包余额
+                        for (Wallet wallet : wallets) {
+                            JSONObject amountJsonObj = dataJsonObj.getJSONObject(wallet.getName());
+                            wallet.setBtcBalance(amountJsonObj.getLong("balance"));
+                            wallet.setBtcUnconfirm(amountJsonObj.getLong("unconfirm"));
+                            //更新钱包
+                            getModelManager().updateWallet(wallet);
+                        }
+                        check = true;
+                    }
+                    return Observable.just(check);
+                })
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<Boolean>() {
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        super.onNext(aBoolean);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (aBoolean) {
+                            getMvpView().getBalanceSuccess(wallets);
+                        } else {
+                            getMvpView().getBalanceFail();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (e instanceof ANError) {
+                            handleApiError(((ANError) e));
+                        } else {
+                            getMvpView().getBalanceFail();
+                        }
+
+                    }
+                })
+        );
+    }
+
+    public boolean isValidWallets() {
+        if (StringUtils.isEmpty(getMvpView().getWallets())) {
+            getMvpView().getWalletsFail();
+            return false;
+        }
+        return true;
+    }
 }
+

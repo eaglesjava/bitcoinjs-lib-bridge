@@ -49,11 +49,21 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     private boolean cancel;
     private Wallet mWallet;
     private boolean isResetPwd;
+    private boolean isFromAsset;
 
     public static void start(Context context, Wallet wallet, boolean isCreateWallet) {
         Intent intent = new Intent(context, InitWalletActivity.class);
         intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
         intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
+        context.startActivity(intent);
+    }
+
+    public static void start(Context context, Wallet wallet, boolean isCreateWallet, boolean isFromAsset) {
+
+        Intent intent = new Intent(context, InitWalletActivity.class);
+        intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
+        intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
+        intent.putExtra(AppConstants.EXTRA_IS_FROM_ASSET, isFromAsset);
         context.startActivity(intent);
     }
 
@@ -113,6 +123,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
         isResetPwd = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_RESET_PWD, false);
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+        isFromAsset = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_ASSET, false);
     }
 
     @Override
@@ -205,7 +216,10 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void createWalletSuccess() {
         //跳转到穿件钱包成功界面
         InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);
-        EventBus.getDefault().postSticky(new WalletUpdateEvent());
+        if (isFromAsset) {
+            //从主页进入才通知钱包刷新
+            EventBus.getDefault().postSticky(new WalletUpdateEvent());
+        }
     }
 
     @Override
@@ -240,5 +254,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public boolean isResetPwd() {
         return isResetPwd;
     }
+
 }
 

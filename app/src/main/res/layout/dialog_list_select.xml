@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.bitbill.www.common.base.view.dialog.ListSelectDialog"
+        style="@style/RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:background="@color/white"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.bitbill.www.common.base.view.dialog.ListSelectDialog"
+        tools:listitem="@layout/item_dialog_list" />
+</android.support.constraint.ConstraintLayout>

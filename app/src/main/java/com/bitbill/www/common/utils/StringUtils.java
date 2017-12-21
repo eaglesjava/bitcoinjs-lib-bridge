@@ -741,10 +741,6 @@ public class StringUtils {
         return decrypt;
     }
 
-    public static String formatBtcAmount(long btcAmount) {
-        return getFormatedAmount(btcAmount / 100000000);
-    }
-
     public static boolean isEmpty(List list) {
         if (list == null) {
             return true;
@@ -857,5 +853,12 @@ public class StringUtils {
         } catch (Exception e) {
             return "0.0";
         }
+    }
+
+    public static String satoshi2btc(long fee) {
+        BigDecimal feeDecimal = new BigDecimal(fee);
+        //8位小数
+        DecimalFormat df = new DecimalFormat("#.########");
+        return df.format(feeDecimal.divide(new BigDecimal(AppConstants.SATOSHI)));
     }
 }

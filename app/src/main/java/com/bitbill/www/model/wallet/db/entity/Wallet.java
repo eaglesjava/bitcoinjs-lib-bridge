@@ -51,6 +51,10 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "xpublic_key")
     private String XPublicKey;//十六进制字符串
 
+    @Property(nameInDb = "btc_balance")
+    private long btcBalance;//unit Satoshi  1 BTC = 100000000 Satoshi
+    @Property(nameInDb = "btc_unconfirm")
+    private long btcUnconfirm;//unit Satoshi  1 BTC = 100000000 Satoshi
     @Transient
     private String mnemonic;
     @Transient
@@ -58,16 +62,14 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Transient
     private String tradePwd;
     @Transient
-    private long btcAmount;//unit Satoshi  1 BTC = 100000000 Satoshi
-    @Transient
     private boolean selected;
     @Transient
     private String lastAddress;
 
-    @Generated(hash = 425995326)
-    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash,
-                  long lastAddressIndex, String encryptSeed, String seedHexHash, boolean isBackuped,
-                  long createdAt, long updatedAt, boolean isDefault, String XPublicKey) {
+    @Generated(hash = 1054506043)
+    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash, long lastAddressIndex,
+                  String encryptSeed, String seedHexHash, boolean isBackuped, long createdAt, long updatedAt,
+                  boolean isDefault, String XPublicKey, long btcBalance, long btcUnconfirm) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
@@ -80,6 +82,8 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.updatedAt = updatedAt;
         this.isDefault = isDefault;
         this.XPublicKey = XPublicKey;
+        this.btcBalance = btcBalance;
+        this.btcUnconfirm = btcUnconfirm;
     }
 
     @Generated(hash = 1197745249)
@@ -159,12 +163,12 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.seedHexHash = seedHexHash;
     }
 
-    public long getBtcAmount() {
-        return btcAmount;
+    public long getBtcBalance() {
+        return btcBalance;
     }
 
-    public void setBtcAmount(long btcAmount) {
-        this.btcAmount = btcAmount;
+    public void setBtcBalance(long btcBalance) {
+        this.btcBalance = btcBalance;
     }
 
     public long getLastAddressIndex() {
@@ -234,5 +238,13 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     public Wallet setLastAddress(String lastAddress) {
         this.lastAddress = lastAddress;
         return this;
+    }
+
+    public long getBtcUnconfirm() {
+        return this.btcUnconfirm;
+    }
+
+    public void setBtcUnconfirm(long btcUnconfirm) {
+        this.btcUnconfirm = btcUnconfirm;
     }
 }

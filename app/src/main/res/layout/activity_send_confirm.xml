@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:focusable="true"
-             android:focusableInTouchMode="true">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,39 +21,39 @@
             <TextView
                 style="@style/Text.Title.Confirm"
                 android:layout_marginTop="30dp"
-                android:text="发送金额"/>
+                android:text="发送金额" />
 
             <TextView
                 android:id="@+id/et_send_amount"
                 style="@style/Text.White"
                 android:layout_marginTop="10dp"
                 android:text="1.12012 BTC"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 style="@style/Text.White.Action"
                 android:layout_marginTop="40dp"
-                android:text="推荐手续费"/>
+                android:text="推荐手续费" />
 
             <SeekBar
                 android:id="@+id/sb_send_fee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:progressTint="@color/white"
-                />
+                android:progressTint="@color/white" />
 
             <TextView
+                android:id="@+id/tv_fee_hint"
                 style="@style/Text.Small.White"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="平均出块时间30分钟，需耗费0.002BTC"/>
+                android:text="平均出块时间30分钟，需耗费0.002BTC" />
 
             <TextView
                 style="@style/Text.Title.Confirm"
                 android:layout_marginTop="30dp"
-                android:text="接收方地址"/>
+                android:text="接收方地址" />
 
             <TextView
                 android:id="@+id/tv_send_address"
@@ -61,19 +61,19 @@
                 android:layout_marginTop="10dp"
                 android:minLines="2"
                 android:text="ac1qpd8dc42nrefsvwx7udf5km34905hv8354yvdrj"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 style="@style/Text.Title.Confirm"
                 android:layout_marginTop="30dp"
-                android:text="发出钱包"/>
+                android:text="发出钱包" />
 
             <TextView
                 android:id="@+id/tv_send_contact"
                 style="@style/Text.White"
                 android:layout_marginTop="10dp"
                 android:text="王涵洋"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/et_send_mark"
@@ -81,8 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:hint="备注（20字内）"
-                />
+                android:hint="备注（20字内）" />
 
             <Button
                 android:id="@+id/btn_next"
@@ -90,8 +89,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:layout_marginBottom="48dp"
                 android:layout_marginTop="48dp"
-                android:text="@string/btn_confirm_send"/>
+                android:text="@string/btn_confirm_send" />
         </LinearLayout>
 
     </ScrollView>

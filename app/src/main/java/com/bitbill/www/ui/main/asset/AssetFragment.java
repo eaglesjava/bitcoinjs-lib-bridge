@@ -17,6 +17,7 @@ import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.base.view.widget.PopupWalletMenu;
 import com.bitbill.www.common.base.view.widget.WalletView;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import com.bitbill.www.ui.wallet.info.WalletInfoActivity;
@@ -94,7 +95,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                lazyData();
+                ((MainActivity) getBaseActivity()).initData();
             }
         });
         mWalletMenu = new PopupWalletMenu(getBaseActivity());
@@ -102,7 +103,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
             @Override
             public void onCreateWallet(View view) {
                 //跳转到创建钱包界面
-                CreateWalletIdActivity.start(getBaseActivity(), null, true);
+                CreateWalletIdActivity.start(getBaseActivity(), null, true, true);
                 if (mWalletMenu.isShowing()) {
                     mWalletMenu.dismiss();
                 }
@@ -111,7 +112,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
             @Override
             public void onImportWallet(View view) {
                 //跳转到导入钱包界面
-                ImportWalletActivity.start(getBaseActivity());
+                ImportWalletActivity.start(getBaseActivity(), true);
                 if (mWalletMenu.isShowing()) {
                     mWalletMenu.dismiss();
                 }

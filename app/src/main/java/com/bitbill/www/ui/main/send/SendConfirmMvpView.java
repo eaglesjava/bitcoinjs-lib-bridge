@@ -39,9 +39,16 @@ public interface SendConfirmMvpView extends MvpView {
 
     void getTxElementFail();
 
-    void getTxElementSuccess(List<GetTxElementResponse.UtxoBean> unspentList);
+    void getTxElementSuccess(GetTxElementResponse txElement);
 
     String getNewAddress();
 
     List<GetTxElementResponse.UtxoBean> getUnspentList();
+
+    void compteFeeBtc(String feeBtc, int index);
+
+    /**
+     * 余额不足
+     */
+    void amountNoEnough();
 }

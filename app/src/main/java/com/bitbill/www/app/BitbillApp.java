@@ -77,8 +77,7 @@ public class BitbillApp extends Application {
     }
 
     public void setWallets(List<Wallet> wallets) {
-        mWallets.clear();
-        mWallets.addAll(wallets);
+        mWallets = wallets;
     }
 
 

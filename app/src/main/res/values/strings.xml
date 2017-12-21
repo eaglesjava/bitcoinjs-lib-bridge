@@ -157,4 +157,8 @@
     <string name="action_send_all_amount">发送全部余额</string>
     <string name="action_empty_mnemonic">清空</string>
     <string name="error_invalid_wallet_id_start">以字母开头</string>
+    <string name="title_activity_contact">联系人</string>
+    <string name="title_activity_contact_detail">联系人详情</string>
+    <string name="action_contact_edit">编辑</string>
+    <string name="action_contact_create">新建</string>
 </resources>

@@ -157,7 +157,7 @@ public class SelectWalletView extends FrameLayout implements View.OnClickListene
         this.setWalletName(StringUtils.cutWalletName(wallet.getName()))
                 .setWalletLabel(String.valueOf(wallet.getName().charAt(0)))
                 // TODO: 2017/11/28 从后台获余额
-                .setWalletAmount(StringUtils.formatBtcAmount(wallet.getBtcAmount()) + " btc")
+                .setWalletAmount(StringUtils.satoshi2btc(wallet.getBtcBalance()) + " btc")
                 .setBackuped(wallet.getIsBackuped());
         return this;
     }

@@ -35,4 +35,12 @@ public interface MainMvpView extends MvpView {
     void loadWalletsSuccess(List<Wallet> wallets);
 
     void loadWalletsFail();
+
+    List<Wallet> getWallets();
+
+    void getWalletsFail();
+
+    void getBalanceFail();
+
+    void getBalanceSuccess(List<Wallet> wallets);
 }

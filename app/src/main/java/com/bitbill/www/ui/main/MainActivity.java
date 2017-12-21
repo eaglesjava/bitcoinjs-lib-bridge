@@ -25,6 +25,7 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
+import com.bitbill.www.ui.main.contact.ContactActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
 
@@ -88,7 +89,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -119,13 +120,13 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
         } else if (id == R.id.nav_contact) {
             // 切换到联系人界面
-            mViewPager.setCurrentItem(3, false);
-            setTitle(R.string.title_contact);
+
+            ContactActivity.start(this);
         }
 
         // TODO: 2017/11/17 add other nav item
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -143,7 +144,11 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
         //设置全局钱包列表对象
         BitbillApp.get().setWallets(wallets);
+        reloadWalletInfo();
+        getMvpPresenter().getBalance();
+    }
 
+    private void reloadWalletInfo() {
         //重新加载钱包信息
         if (mAssetFragment != null) {
             mAssetFragment.initData();
@@ -155,7 +160,28 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void loadWalletsFail() {
-        showMessage("加载钱包信息失败，请退出重试");
+        showMessage("加载钱包信息失败");
+    }
+
+    @Override
+    public List<Wallet> getWallets() {
+        return BitbillApp.get().getWallets();
+    }
+
+    @Override
+    public void getWalletsFail() {
+        showMessage("加载钱包信息失败");
+    }
+
+    @Override
+    public void getBalanceFail() {
+        showMessage("获取钱包余额失败");
+    }
+
+    @Override
+    public void getBalanceSuccess(List<Wallet> wallets) {
+        BitbillApp.get().setWallets(wallets);
+        reloadWalletInfo();
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -236,7 +262,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mAdapter.addItem(mReceiveFragment);
         mSendFragment = SendFragment.newInstance();
         mAdapter.addItem(mSendFragment);
-        mAdapter.addItem(MyFragment.newInstance());
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(3);
     }

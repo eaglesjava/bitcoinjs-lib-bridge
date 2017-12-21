@@ -5,7 +5,6 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
-import com.bitbill.www.model.wallet.network.entity.GetBalanceResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
@@ -29,7 +28,7 @@ public interface WalletApi extends Api {
      * @param createWalletRequest
      * @return
      */
-    Observable<ApiResponse<String>> createWallet(CreateWalletRequest createWalletRequest);
+    Observable<ApiResponse<java.lang.String>> createWallet(CreateWalletRequest createWalletRequest);
 
     /**
      * 导入钱包
@@ -37,7 +36,7 @@ public interface WalletApi extends Api {
      * @param importWalletRequest
      * @return
      */
-    Observable<ApiResponse<String>> importWallet(ImportWalletRequest importWalletRequest);
+    Observable<ApiResponse<java.lang.String>> importWallet(ImportWalletRequest importWalletRequest);
 
     /**
      * 检查WalletId
@@ -45,7 +44,7 @@ public interface WalletApi extends Api {
      * @param checkWalletIdRequest
      * @return
      */
-    Observable<ApiResponse<String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest);
+    Observable<ApiResponse<java.lang.String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest);
 
     /**
      * 获取walletId
@@ -61,7 +60,7 @@ public interface WalletApi extends Api {
      * @param getBalanceRequest
      * @return
      */
-    Observable<ApiResponse<GetBalanceResponse>> getBalance(GetBalanceRequest getBalanceRequest);
+    Observable<ApiResponse> getBalance(GetBalanceRequest getBalanceRequest);
 
     /**
      * 扫描地址

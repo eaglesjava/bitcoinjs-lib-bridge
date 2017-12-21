@@ -17,7 +17,6 @@ import com.bitbill.www.model.wallet.network.WalletApi;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
-import com.bitbill.www.model.wallet.network.entity.GetBalanceResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
@@ -75,12 +74,12 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     }
 
     @Override
-    public Observable<Wallet> getWalletByMnemonicHash(String mnemonicHash) {
+    public Observable<Wallet> getWalletByMnemonicHash(java.lang.String mnemonicHash) {
         return mWalletDb.getWalletByMnemonicHash(mnemonicHash);
     }
 
     @Override
-    public Observable<Wallet> getWalletBySeedHash(String seedHash) {
+    public Observable<Wallet> getWalletBySeedHash(java.lang.String seedHash) {
         return mWalletDb.getWalletBySeedHash(seedHash);
     }
 
@@ -94,7 +93,7 @@ public class WalletModelManager extends ModelManager implements WalletModel {
      * @return
      */
     @Override
-    public Observable<ApiResponse<String>> createWallet(CreateWalletRequest createWalletRequest) {
+    public Observable<ApiResponse<java.lang.String>> createWallet(CreateWalletRequest createWalletRequest) {
         return mWalletApi.createWallet(createWalletRequest);
     }
 
@@ -105,7 +104,7 @@ public class WalletModelManager extends ModelManager implements WalletModel {
      * @return
      */
     @Override
-    public Observable<ApiResponse<String>> importWallet(ImportWalletRequest importWalletRequest) {
+    public Observable<ApiResponse<java.lang.String>> importWallet(ImportWalletRequest importWalletRequest) {
         return mWalletApi.importWallet(importWalletRequest);
     }
 
@@ -116,7 +115,7 @@ public class WalletModelManager extends ModelManager implements WalletModel {
      * @return
      */
     @Override
-    public Observable<ApiResponse<String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest) {
+    public Observable<ApiResponse<java.lang.String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest) {
         return mWalletApi.checkWalletId(checkWalletIdRequest);
     }
 
@@ -138,7 +137,7 @@ public class WalletModelManager extends ModelManager implements WalletModel {
      * @return
      */
     @Override
-    public Observable<ApiResponse<GetBalanceResponse>> getBalance(GetBalanceRequest getBalanceRequest) {
+    public Observable<ApiResponse> getBalance(GetBalanceRequest getBalanceRequest) {
         return mWalletApi.getBalance(getBalanceRequest);
     }
 
