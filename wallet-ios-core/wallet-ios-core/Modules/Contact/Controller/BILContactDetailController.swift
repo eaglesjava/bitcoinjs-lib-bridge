@@ -13,7 +13,7 @@ class BILContactDetailController: BILLightBlueBaseController {
     @IBOutlet weak var nameFirstWordLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var contactTypeLabel: UILabel!
-    @IBOutlet weak var contactTypeStringLabel: UILabel!
+    @IBOutlet weak var contactTypeStringLabel: BILCopyLabel!
     @IBOutlet weak var remarkLabel: UILabel!
     
     var contact: Contact?
@@ -26,6 +26,7 @@ class BILContactDetailController: BILLightBlueBaseController {
         nameFirstWordLabel.text = c.firstNameWord
         nameLabel.text = c.name
         contactTypeLabel.text = c.additionType == .walletID ? "钱包ID" : "钱包地址"
+        contactTypeStringLabel.valueTitle = c.additionType == .walletID ? "ID" : "地址"
         contactTypeStringLabel.text = c.detail
         remarkLabel.text = c.remarkString
     }
@@ -42,6 +43,7 @@ class BILContactDetailController: BILLightBlueBaseController {
         }
         tabBarController?.selectedIndex = 3
         NotificationCenter.default.post(name: .sendBTCToContact, object: c)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     /*

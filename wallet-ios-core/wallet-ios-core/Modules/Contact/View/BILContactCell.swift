@@ -12,7 +12,7 @@ class BILContactCell: UITableViewCell {
 
     @IBOutlet weak var firstWordLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var detailLabel: BILCopyLabel!
     @IBOutlet weak var seletedButton: UIButton!
     
     var contact: Contact? {
@@ -21,6 +21,7 @@ class BILContactCell: UITableViewCell {
             nameLabel.text = c.name
             firstWordLabel.text = c.firstNameWord
             detailLabel.text = c.detail
+            detailLabel.valueTitle = (c.additionType == .walletID ? "ID" : "地址")
         }
     }
     

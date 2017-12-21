@@ -93,7 +93,11 @@ class BILSendConfirmController: BILBaseViewController {
         }
         guard let builder = txBuilder else { return }
         builder.feePerByte = currentFee
-        feeTipeLabel.text = "平均确认时间\(nearFee.timeString)，需耗费 \(BTCFormatString(btc: Int64(builder.fee(perByte: currentFee)))) BTC"
+        do {
+            feeTipeLabel.text = "平均确认时间\(nearFee.timeString)，需耗费 \(BTCFormatString(btc: Int64(try builder.fee(perByte: currentFee)))) BTC"
+        } catch {
+            feeTipeLabel.text = "手续费计算失败"
+        }
     }
     
     func setFees(fees: [BTCFee], best:BTCFee?) {

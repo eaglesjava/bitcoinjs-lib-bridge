@@ -47,20 +47,19 @@ class Contact: NSObject, Comparable {
         }
     }
     
-    init(jsonData: JSON) {
-        name = jsonData["contactName"].stringValue
-        walletID = jsonData["walletContact"].stringValue
-        address = jsonData["walletAddress"].stringValue
-        remark = jsonData["remark"].stringValue
-        additionType = walletID.isEmpty ? .address : .walletID
+    convenience init(jsonData: JSON) {
+        self.init(name: jsonData["contactName"].stringValue,
+                  walletID: jsonData["walletContact"].stringValue,
+                  address: jsonData["walletAddress"].stringValue,
+                  remark: jsonData["remark"].stringValue)
     }
     
     init(name: String, walletID: String = "", address: String = "", remark: String = "") {
         self.name = name
         self.walletID = walletID
         self.address = address
-        additionType = walletID.isEmpty ? .address : .walletID
         self.remark = remark
+        additionType = !walletID.isEmpty ? .walletID : .address
     }
     
 }

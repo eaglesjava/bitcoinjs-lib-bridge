@@ -169,14 +169,14 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     func refresh(sender: Any?) {
         uncofirmTransactionDidChanged(notification: nil)
         WalletModel.getBalanceFromServer(wallets: wallets, success: {
-            
+            self.balanceDidChanged(notification: nil)
         }) { (msg, code) in
             
         }
     }
     
     @objc
-	func balanceDidChanged(notification: Notification) {
+	func balanceDidChanged(notification: Notification?) {
 		var sum: Int64 = 0
 		for wallet in wallets {
 			sum += wallet.btcBalance

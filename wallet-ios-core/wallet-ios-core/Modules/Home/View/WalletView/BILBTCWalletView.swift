@@ -83,6 +83,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
             if self.isLoadingMore {
                 self.page -= 1
             }
+            self.bil_makeToast(msg: msg)
         }
     }
     

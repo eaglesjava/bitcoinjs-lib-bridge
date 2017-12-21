@@ -90,6 +90,7 @@ class BTCTransactionBuilder: NSObject {
         case jsonError
         case notEnoughBalance
         case jsBuildTransactionFailed
+        case buildError
         
         var localizedDescription: String {
             switch self {
@@ -103,6 +104,8 @@ class BTCTransactionBuilder: NSObject {
                 return NSLocalizedString("TransactionBuildError.notEnoughBalance", comment: "")
             case .jsBuildTransactionFailed:
                 return NSLocalizedString("TransactionBuildError.jsBuildTransactionFailed", comment: "")
+            case .buildError:
+                return NSLocalizedString("TransactionBuildError.buildError", comment: "")
             }
         }
         
@@ -188,7 +191,7 @@ class BTCTransactionBuilder: NSObject {
         return byteCountFor(inCount:inCount, outCount:outCount) * feePerByte
     }
     
-    func fee(perByte: Int) -> Int {
+    func fee(perByte: Int) throws -> Int {
         
         var outputSatoshiSum = 0
         for output in outputs {
@@ -197,13 +200,18 @@ class BTCTransactionBuilder: NSObject {
         
         var inputSatoshiSum = 0
         var inputCount = 0
+        var enough = false
         for utxo in utxos {
             inputSatoshiSum += utxo.satoshiAmount
             inputCount += 1
-            if (inputSatoshiSum < outputSatoshiSum + maxFeeFor(inCount: inputCount, outCount: outputCount)) {
+            if (inputSatoshiSum < outputSatoshiSum + feeFor(inCount: inputCount, outCount: outputCount, feePerByte: perByte)) {
                 continue
             }
+            enough = true
             break
+        }
+        if !enough {
+            throw TransactionBuildError.notEnoughBalance
         }
         return byteCountFor(inCount:inputCount, outCount: outputCount) * perByte
     }
@@ -289,7 +297,19 @@ class BTCTransactionBuilder: NSObject {
             return
         }
         
-        let totalFee = fee(perByte: feePerByte)
+        var totalFee = 0
+        do {
+            totalFee = try fee(perByte: feePerByte)
+        } catch {
+            failure(TransactionBuildError.notEnoughBalance)
+            return
+        }
+        
+        
+        guard totalFee > 0 else {
+            failure(BTCTransactionBuilder.TransactionBuildError.jsBuildTransactionFailed)
+            return
+        }
         
         var txDatas = [String: Any]()
         
