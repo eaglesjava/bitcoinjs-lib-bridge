@@ -860,4 +860,42 @@ public class StringUtils {
         DecimalFormat df = new DecimalFormat("#.########");
         return df.format(feeDecimal.divide(new BigDecimal(AppConstants.SATOSHI)));
     }
+
+    public static String formatTime(int time) {
+        if (time > 24 * 60) {
+            return time / (24 * 60) + "天";
+        } else if (time > 60) {
+            return time / 60 + "小时";
+        } else {
+            return time + "分钟";
+        }
+
+    }
+
+    public static String[] parseScanResult(String result) {
+        if (isEmpty(result)) {
+            return null;
+        }
+        //解析协议
+        if (result.toLowerCase().startsWith(AppConstants.SCHEME_BITCOIN) && result.contains(":")) {
+            String address = null;
+            String amount = null;
+            int askIndex = result.indexOf("?");
+            if (askIndex != -1) {
+                String amountString = result.substring(askIndex);
+                if (amountString.contains("amount=")) {
+                    amount = amountString.replace("amount=", "");
+                }
+                address = result.substring(result.indexOf(":") + 1, askIndex);
+
+            } else {
+                address = result.substring(result.indexOf(":") + 1);
+            }
+
+            return new String[]{address, amount};
+
+        } else {
+            return new String[]{result};
+        }
+    }
 }

@@ -12,17 +12,21 @@ package com.bitbill.www.model.wallet.network.entity;
 public class SendTransactionRequest {
 
     private String extendedKeysHash;
+    private String inAddress;
     private String outAddress;
     private long outAmount;
     private String txHash;
     private String hexTx;
+    private String remark;
 
-    public SendTransactionRequest(String extendedKeysHash, String outAddress, long outAmount, String txHash, String hexTx) {
+    public SendTransactionRequest(String extendedKeysHash, String inAddress, String outAddress, long outAmount, String txHash, String hexTx, String remark) {
         this.extendedKeysHash = extendedKeysHash;
+        this.inAddress = inAddress;
         this.outAddress = outAddress;
         this.outAmount = outAmount;
         this.txHash = txHash;
         this.hexTx = hexTx;
+        this.remark = remark;
     }
 
     public String getExtendedKeysHash() {

@@ -96,55 +96,6 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
     }
 
     @Override
-    public void sendTransaction(String txHash, String hexTx) {
-
-
-        if (!isValidWallet() || !isValidXPublicKey() || !isValidBtcAddress()) return;
-
-        Wallet wallet = getMvpView().getWallet();
-        String extendedKeysHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
-        String outAddress = getMvpView().getSendAddress();
-        long outAmount = getMvpView().getSendAmount();
-
-        getCompositeDisposable().add(getModelManager()
-                .sendTransaction(new SendTransactionRequest(extendedKeysHash, outAddress, outAmount, txHash, hexTx))
-                .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<SendTransactionResponse>>() {
-                    @Override
-                    public void onNext(ApiResponse<SendTransactionResponse> sendTransactionResponseApiResponse) {
-                        super.onNext(sendTransactionResponseApiResponse);
-                        if (!isViewAttached()) {
-                            return;
-                        }
-                        if (sendTransactionResponseApiResponse != null && sendTransactionResponseApiResponse.isSuccess()) {
-                            SendTransactionResponse data = sendTransactionResponseApiResponse.getData();
-                            if (data != null) {
-                                getMvpView().sendTransactionSuccess();
-                            } else {
-                                getMvpView().sendTransactionFail();
-                            }
-
-                        } else {
-                            getMvpView().sendTransactionFail();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        if (!isViewAttached()) {
-                            return;
-                        }
-                        // handle error here
-                        if (e instanceof ANError) {
-                            ANError anError = (ANError) e;
-                            handleApiError(anError);
-                        }
-                    }
-                }));
-    }
-
-    @Override
     public void buildTransaction() {
         // TODO: 2017/12/19 check valid params
         if (!isValidWallet() || !isValidTradePwd() || !isValidUnspendList()) return;
@@ -173,60 +124,115 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
             GetTxElementResponse.UtxoBean unspent = unspentList.get(i);
             fee = (CryptoConstants.INPUT_SIZE * (i + 1) + CryptoConstants.OUTPUT_SIZE * (isSendAll ? 1 : 2)) * feeByte;
             amount += unspent.getSumOutAmount();
-            if (amount - fee >= sendAmount) {
+            if (!isSendAll && amount - fee >= sendAmount) {
                 index = i;
                 break;
             }
-
+        }
+        if (isSendAll) {
+            index = unspentList.size() - 1;
         }
         //check amount
         if (amount <= 0 || index == -1 || fee == 0) {
             getMvpView().amountNoEnough();
             return;
         }
+
         //组装交易
         List<Transaction.Input> inputs = new ArrayList<>();
+        String inAddress = "";
         for (int i = 0; i <= index; i++) {
             GetTxElementResponse.UtxoBean unspent = unspentList.get(i);
             inputs.add(new Transaction.Input(unspent.getTxHash(), unspent.getVIndex(), unspent.getAddressIndex()));
+            inAddress += unspent.getAddressTxt();
+            if (i < index - 1) inAddress += "|";
         }
         //组装outputs
         List<Transaction.Output> outputs = new ArrayList<>();
+        String outAddress = "";
         outputs.add(new Transaction.Output(sendAddress, sendAmount));
+        outAddress += sendAddress;
         if (!isSendAll) {
             // TODO: 2017/12/19   找零逻辑优化
             long moreAmount = amount - fee - sendAmount;
             if (moreAmount > 0) {
                 String newAddress = getMvpView().getNewAddress();
                 outputs.add(new Transaction.Output(newAddress, moreAmount));
+                outAddress += ("|" + newAddress);
             }
 
         }
         //js调用构建交易
         Transaction transaction = new Transaction(inputs, outputs);
         String txJson = JsonUtils.serialize(transaction);
+        Log.d(TAG, "buildTransaction() called with :seedHex=[" + transaction + "], jsResult = [" + txJson + "]");
+        String finalInAddress = inAddress;
+        String finalOutAddress = outAddress;
         BitcoinJsWrapper.getInstance().buildTransaction(seedHex, txJson, new BitcoinJsWrapper.Callback() {
             @Override
             public void call(String key, String... jsResult) {
                 if (jsResult != null && jsResult.length > 0) {
                     String txHex = jsResult[0];
                     Log.d(TAG, "buildTransaction() called with: key = [" + key + "], jsResult = [" + jsResult + "]");
-                    byte[] hashData = EncryptUtils.encryptSHA256(EncryptUtils.encryptSHA256(txHex.getBytes()));
+                    byte[] hashData = EncryptUtils.encryptSHA256(EncryptUtils.encryptSHA256(ConvertUtils.hexString2Bytes(txHex)));
                     //反转字节数组
                     ConvertUtils.reverse(hashData);
                     String txHash = ConvertUtils.bytes2HexString(hashData);
                     Log.d(TAG, "buildTransaction() called with: reverseHex = [" + txHash + "]");
-                    sendTransaction(txHash, txHex);
+                    sendTransaction(txHash, txHex, finalInAddress, finalOutAddress);
                 } else {
                     if (!isViewAttached()) {
                         return;
                     }
-                    getMvpView().sendTransactionFail();
+                    getMvpView().sendTransactionFail(null);
                 }
 
             }
         });
 
+    }
+
+    @Override
+    public void sendTransaction(String txHash, String txHex, String inAddress, String outAddress) {
+
+
+        if (!isValidWallet() || !isValidXPublicKey() || !isValidBtcAddress()) return;
+
+        Wallet wallet = getMvpView().getWallet();
+        String extendedKeysHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
+        long outAmount = getMvpView().getSendAmount();
+
+        getCompositeDisposable().add(getModelManager()
+                .sendTransaction(new SendTransactionRequest(extendedKeysHash, inAddress, outAddress, outAmount, txHash, txHex, getMvpView().getRemark()))
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<ApiResponse<SendTransactionResponse>>() {
+                    @Override
+                    public void onNext(ApiResponse<SendTransactionResponse> sendTransactionResponseApiResponse) {
+                        super.onNext(sendTransactionResponseApiResponse);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (sendTransactionResponseApiResponse != null && sendTransactionResponseApiResponse.isSuccess()) {
+                            getMvpView().sendTransactionSuccess();
+                        } else {
+                            getMvpView().sendTransactionFail(sendTransactionResponseApiResponse.getMessage());
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        // handle error here
+                        if (e instanceof ANError) {
+                            ANError anError = (ANError) e;
+                            handleApiError(anError);
+                        }
+                    }
+                }));
     }
 
     @Override
@@ -241,9 +247,9 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         });
 
         long feeByte = getMvpView().getFeeByte();
-        long maxFeeByte = getMvpView().getMaxFeeByte();
         boolean isSendAll = getMvpView().isSendAll();
         long sendAmount = getMvpView().getSendAmount();
+        Wallet wallet = getMvpView().getWallet();
 
         long amount = 0;
         int index = -1;
@@ -252,19 +258,23 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
             GetTxElementResponse.UtxoBean unspent = unspentList.get(i);
             fee = (CryptoConstants.INPUT_SIZE * (i + 1) + CryptoConstants.OUTPUT_SIZE * (isSendAll ? 1 : 2)) * feeByte;
             amount += unspent.getSumOutAmount();
-            if (amount - fee >= sendAmount) {
+            if (!isSendAll && amount - fee >= sendAmount) {
                 index = i;
                 break;
             }
-
+        }
+        if (isSendAll) {
+            index = unspentList.size() - 1;
+            //通过utxo设置余额
+            wallet.setBtcBalance(amount);
         }
         //check amount
-        if (amount <= 0 || index == -1 || fee == 0) {
+        if (amount <= 0 || index == -1 || fee <= 0) {
             getMvpView().amountNoEnough();
             return;
         }
 
-        getMvpView().compteFeeBtc(StringUtils.satoshi2btc(fee), index);
+        getMvpView().compteFee(fee);
 
     }
 
@@ -299,7 +309,7 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
 
     private boolean isValidBtcAddress() {
         if (StringUtils.isEmpty(getMvpView().getSendAddress())) {
-            getMvpView().sendTransactionFail();
+            getMvpView().sendTransactionFail(null);
             return false;
         }
         return true;

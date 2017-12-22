@@ -23,12 +23,23 @@
                 android:layout_marginTop="30dp"
                 android:text="发送金额" />
 
-            <TextView
-                android:id="@+id/et_send_amount"
-                style="@style/Text.White"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="1.12012 BTC"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/et_send_amount"
+                    style="@style/Text.White"
+                    android:text="0.00"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/Text.White"
+                    android:text=" BTC"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <TextView
                 style="@style/Text.White.Action"

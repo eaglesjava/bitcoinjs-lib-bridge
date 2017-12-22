@@ -29,9 +29,10 @@ public final class AppConstants {
     public static final String EXTRA_SEND_ADDRESS = "send_address";
     public static final String EXTRA_SEND_AMOUNT = "send_amount";
     public static final String EXTRA_IS_SEND_ALL = "is_send_all";
-    public static final long SATOSHI = 10000000;
+    public static final long SATOSHI = 100000000;
     public static final String EXTRA_CONTACT = "extra_contact";
     public static final String ARG_DATAS = "args_datas";
+    public static final String SCHEME_BITCOIN = "bitcoin";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

@@ -14,9 +14,9 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.43.236:8086\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.1.10:8086\"")
             buildConfigField("String", "API_KEY", "\"TEST\"")
-            buildConfigField("String", "SOCKET_URL", "\"http://192.168.43.236:8088\"")
+            buildConfigField("String", "SOCKET_URL", "\"http://192.168.1.10:8088\"")
         }
         release {
             minifyEnabled true

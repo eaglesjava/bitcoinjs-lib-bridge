@@ -17,10 +17,10 @@ public interface SendConfirmMvpPresenter<M extends WalletModel, V extends SendCo
     /**
      * 发送交易
      *
-     * @param txHash 交易hash
-     * @param hexTx  交易数据
+     * @param hash
+     * @param txHex
      */
-    void sendTransaction(String txHash, String hexTx);
+    void sendTransaction(String hash, String txHex, String inaddress, String outaddress);
 
     /**
      * 组装交易

@@ -241,7 +241,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
             @Override
             public void call(Object... args) {
-                mSocket.emit("register", "{\"walletId\":\"BitbillTest\",\"deviceToken\":\"\",\"platform\":\"iOS\",\"clientId\":\"C03CEAA2-9498-4201-9AD2-04A3C01C8F51\"}");
+//                mSocket.emit("register", "{\"walletId\":\"BitbillTest\",\"deviceToken\":\"\",\"platform\":\"iOS\",\"clientId\":\"C03CEAA2-9498-4201-9AD2-04A3C01C8F51\"}");
                 Log.d(TAG, "EVENT_CONNECT() called with: args = [" + args + "]");
             }
 

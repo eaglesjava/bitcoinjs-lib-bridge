@@ -104,7 +104,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
     @Override
     public void initData() {
         // TODO: 2017/12/20 for test
-        mBtcCny = 10000;
+        mBtcCny = 100000;
         updateCnyValue();
     }
 

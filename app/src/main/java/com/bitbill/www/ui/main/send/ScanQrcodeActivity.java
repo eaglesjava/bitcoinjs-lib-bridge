@@ -9,6 +9,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.utils.StringUtils;
 
 import butterknife.BindView;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
@@ -107,7 +108,8 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
         vibrate();
         mQRCodeView.startSpot();
         Intent data = new Intent();
-        data.putExtra(EXTRA_SCAN_QRCODE_RESULT, result);
+        String[] resultArray = StringUtils.parseScanResult(result);
+        data.putExtra(EXTRA_SCAN_QRCODE_RESULT, resultArray != null ? resultArray[0] : result);
 
         setResult(RESULT_CODE_SCAN_QRCODE_SUCCESS, data);
         finish();

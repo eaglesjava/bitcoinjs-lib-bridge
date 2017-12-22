@@ -13,7 +13,7 @@ import java.util.List;
 public interface SendConfirmMvpView extends MvpView {
     Wallet getWallet();
 
-    void sendTransactionFail();
+    void sendTransactionFail(String message);
 
     void sendTransactionSuccess();
 
@@ -22,10 +22,6 @@ public interface SendConfirmMvpView extends MvpView {
     long getFeeByte();
 
     long getSendAmount();
-
-    long getMaxFeeByte();
-
-    long getMinFeeByte();
 
     String getSendAddress();
 
@@ -46,10 +42,12 @@ public interface SendConfirmMvpView extends MvpView {
 
     List<GetTxElementResponse.UtxoBean> getUnspentList();
 
-    void compteFeeBtc(String feeBtc, int index);
+    void compteFee(long fee);
 
     /**
      * 余额不足
      */
     void amountNoEnough();
+
+    String getRemark();
 }
