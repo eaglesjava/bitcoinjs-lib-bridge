@@ -14,8 +14,7 @@ import java.io.Serializable;
  */
 public abstract class Entity implements Serializable {
 
-    @Override
-    public String toString() {
-        return "{" + this.getClass().getSimpleName() + ":" + JsonUtils.serialize(this) + "}";
+    public String jsonString() {
+        return JsonUtils.serialize(this);
     }
 }

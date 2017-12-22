@@ -1,10 +1,12 @@
 package com.bitbill.www.model.wallet.network.socket;
 
+import com.bitbill.www.common.base.model.entity.Entity;
+
 /**
  * Created by isanwenyu on 2017/12/21.
  */
 
-public class Register {
+public class Register extends Entity {
     private String walletId;
     private String deviceToken;
     private String clientId;
@@ -48,4 +50,5 @@ public class Register {
     public void setPlatform(String platform) {
         this.platform = platform;
     }
+
 }

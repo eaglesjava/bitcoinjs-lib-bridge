@@ -2,6 +2,7 @@ package com.bitbill.www.app;
 
 import android.app.Application;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
@@ -12,6 +13,7 @@ import com.bitbill.www.di.component.ApplicationComponent;
 import com.bitbill.www.di.component.DaggerApplicationComponent;
 import com.bitbill.www.di.module.ApplicationModule;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.socket.Register;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +21,18 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import okhttp3.OkHttpClient;
+
+import static com.bitbill.www.app.AppConstants.EVENT_CONFIRM;
+import static com.bitbill.www.app.AppConstants.EVENT_REGISTER;
+import static com.bitbill.www.app.AppConstants.EVENT_UNCONFIRM;
 
 /**
  * Created by isanwenyu@163.com on 2017/11/7.
  */
 public class BitbillApp extends Application {
+    private static final String TAG = "BitbillApp";
     private static BitbillApp sInstance;
     @Inject
     Socket mSocket;
@@ -56,6 +64,8 @@ public class BitbillApp extends Application {
 
         }
         mWallets = new ArrayList<>();
+
+        initSocket();
     }
 
     public ApplicationComponent getComponent() {
@@ -66,6 +76,49 @@ public class BitbillApp extends Application {
     // Needed to replace the component with a test specific one
     public void setComponent(ApplicationComponent applicationComponent) {
         mApplicationComponent = applicationComponent;
+    }
+
+    private void initSocket() {
+
+        mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+
+            @Override
+            public void call(Object... args) {
+                Log.d(TAG, "EVENT_CONNECT called with: args = [" + args + "]");
+            }
+
+        }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+
+            @Override
+            public void call(Object... args) {
+
+                Log.d(TAG, "EVENT_DISCONNECT called with: args = [" + args + "]");
+            }
+
+        }).on(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.d(TAG, "EVENT_CONNECT_TIMEOUT called with: args = [" + args + "]");
+            }
+        }).on(EVENT_REGISTER, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.d(TAG, "EVENT_REGISTER called with: args = [" + args + "]");
+            }
+        }).on(EVENT_CONFIRM, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.d(TAG, "EVENT_CONFIRM called with: args = [" + args + "]");
+                // TODO: 2017/12/22 播放声音
+            }
+        }).on(EVENT_UNCONFIRM, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+
+                Log.d(TAG, "EVENT_UNCONFIRM called with: args = [" + args + "]");
+            }
+        });
+        mSocket.connect();
     }
 
     public Socket getSocket() {
@@ -94,5 +147,9 @@ public class BitbillApp extends Application {
         return defaultWallet;
     }
 
+
+    public void registerWallet(Register register) {
+        mSocket.emit(EVENT_REGISTER, register.jsonString());
+    }
 }
 

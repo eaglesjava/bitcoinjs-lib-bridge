@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -41,7 +40,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -235,43 +233,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void onBeforeSetContentLayout() {
-        mSocket = BitbillApp.get().getSocket();
-
-        mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {
-//                mSocket.emit("register", "{\"walletId\":\"BitbillTest\",\"deviceToken\":\"\",\"platform\":\"iOS\",\"clientId\":\"C03CEAA2-9498-4201-9AD2-04A3C01C8F51\"}");
-                Log.d(TAG, "EVENT_CONNECT() called with: args = [" + args + "]");
-            }
-
-        }).on("event", new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {
-            }
-
-        }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {
-
-                Log.d(TAG, "EVENT_DISCONNECT() called with: args = [" + args + "]");
-            }
-
-        }).on("confirm", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                Log.d(TAG, "confirm called with: args = [" + args + "]");
-            }
-        }).on("unconfirm", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-
-                Log.d(TAG, "unconfirm called with: args = [" + args + "]");
-            }
-        });
-        mSocket.connect();
     }
 
     @Override
