@@ -262,6 +262,11 @@ public class EditTextWapper extends FrameLayout {
         return this;
     }
 
+    public EditTextWapper setTextColor(int textColor) {
+        getEtText().setTextColor(textColor);
+        return this;
+    }
+
     public void setInputPwdStatusVisible(boolean inputPwdStatusVisible) {
         mInputPwdStatusVisible = inputPwdStatusVisible;
         psvStatus.setVisibility(inputPwdStatusVisible ? View.VISIBLE : View.GONE);

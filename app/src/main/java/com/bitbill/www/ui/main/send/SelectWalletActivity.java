@@ -152,7 +152,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
             return;
         }
         //跳转到确认发送界面
-        SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, mSendAmount, isSendAll, mSelectedWallet);
+        SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, isSendAll ? StringUtils.satoshi2btc(mSelectedWallet.getBtcBalance()) : mSendAmount, isSendAll, mSelectedWallet);
     }
 
     private boolean validSelectedWallet() {

@@ -64,8 +64,13 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
                         if (listUnspentResponseApiResponse != null && listUnspentResponseApiResponse.isSuccess()) {
                             GetTxElementResponse data = listUnspentResponseApiResponse.getData();
                             if (data != null) {
-                                getMvpView().getTxElementSuccess(data);
-
+                                List<GetTxElementResponse.UtxoBean> unspentList = data.getUtxo();
+                                if (!StringUtils.isEmpty(unspentList)) {
+                                    //获取utxo成功
+                                    getMvpView().getTxElementSuccess(unspentList, data.getFees());
+                                } else {
+                                    getMvpView().amountNoEnough();
+                                }
                             } else {
                                 getMvpView().getTxElementFail();
                             }
@@ -142,10 +147,10 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
     @Override
     public void buildTransaction() {
         // TODO: 2017/12/19 check valid params
-        if (!isValidWallet() || !isValidTradePwd()) return;
+        if (!isValidWallet() || !isValidTradePwd() || !isValidUnspendList()) return;
         Wallet wallet = getMvpView().getWallet();
         //check pwd
-        String pwd = wallet.getTradePwd();
+        String pwd = getMvpView().getTradePwd();
         String seedHex = StringUtils.decryptByPwd(wallet.getEncryptSeed(), pwd);
         List<GetTxElementResponse.UtxoBean> unspentList = new ArrayList<>();
         unspentList.clear();
@@ -153,7 +158,7 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         //计算手续费 余额从小大排列
         Collections.sort(unspentList, (o1, o2) -> {
             //倒序排列
-            return (int) (o2.getSumOutAmount() - o1.getSumOutAmount());
+            return o2.getSumOutAmount() - o1.getSumOutAmount();
         });
 
         //发送全部不需要计算找零地址
@@ -177,6 +182,7 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         //check amount
         if (amount <= 0 || index == -1 || fee == 0) {
             getMvpView().amountNoEnough();
+            return;
         }
         //组装交易
         List<Transaction.Input> inputs = new ArrayList<>();
@@ -231,7 +237,7 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         //计算手续费 余额从小大排列
         Collections.sort(unspentList, (o1, o2) -> {
             //倒序排列
-            return (int) (o2.getSumOutAmount() - o1.getSumOutAmount());
+            return o2.getSumOutAmount() - o1.getSumOutAmount();
         });
 
         long feeByte = getMvpView().getFeeByte();
@@ -255,6 +261,7 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         //check amount
         if (amount <= 0 || index == -1 || fee == 0) {
             getMvpView().amountNoEnough();
+            return;
         }
 
         getMvpView().compteFeeBtc(StringUtils.satoshi2btc(fee), index);
@@ -293,6 +300,14 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
     private boolean isValidBtcAddress() {
         if (StringUtils.isEmpty(getMvpView().getSendAddress())) {
             getMvpView().sendTransactionFail();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidUnspendList() {
+        if (StringUtils.isEmpty(getMvpView().getUnspentList())) {
+            getMvpView().getTxElementFail();
             return false;
         }
         return true;

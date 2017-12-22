@@ -1,16 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:padding="@dimen/activity_padding"
-              tools:context="com.bitbill.www.ui.wallet.importing.ImportWalletActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_padding"
+    tools:context="com.bitbill.www.ui.wallet.importing.ImportWalletActivity">
 
 
     <TextView
         style="@style/Text.InputTitle"
         android:layout_marginTop="40dp"
-        android:text="@string/text_mnemonic"/>
+        android:text="@string/text_mnemonic" />
 
     <EditText
         android:id="@+id/et_input_mnemonic"
@@ -18,11 +18,17 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="25dp"
-        android:hint="@string/hint_click_input_please"/>
+        android:hint="@string/hint_click_input_please" />
+
+    <TextView
+        style="@style/Text.Small.Green"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        android:text="支持BIP39格式的助记词" />
 
     <Button
         android:id="@+id/btn_next"
         style="@style/Button.Blue"
         android:layout_width="match_parent"
-        android:text="@string/btn_next"/>
+        android:text="@string/btn_next" />
 </LinearLayout>

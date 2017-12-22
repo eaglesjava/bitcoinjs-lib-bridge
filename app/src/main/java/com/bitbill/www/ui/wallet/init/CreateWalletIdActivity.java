@@ -84,6 +84,7 @@ public class CreateWalletIdActivity extends BaseToolbarActivity<CreateWalletIdMv
             etwWalletName.setText(mWallet.getName());
             //设置钱包id输入框不可用
             etwWalletName.setEditable(false);
+            etwWalletName.setTextColor(getResources().getColor(R.color.white_60));
         }
 
     }

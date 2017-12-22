@@ -834,8 +834,7 @@ public class StringUtils {
      */
     public static long btc2Satoshi(String sendAmount) {
         //8位小数
-        DecimalFormat df = new DecimalFormat("#.########");
-        BigDecimal amount = new BigDecimal(df.format(sendAmount));
+        BigDecimal amount = new BigDecimal(sendAmount);
         BigDecimal satoshi = new BigDecimal(AppConstants.SATOSHI);
         return amount.multiply(satoshi).longValue();
     }

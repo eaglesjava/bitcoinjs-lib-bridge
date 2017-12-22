@@ -7,17 +7,8 @@ import java.util.List;
  */
 
 public class GetTxElementResponse {
-
-    private List<FeesBean> fees;
     private List<UtxoBean> utxo;
-
-    public List<FeesBean> getFees() {
-        return fees;
-    }
-
-    public void setFees(List<FeesBean> fees) {
-        this.fees = fees;
-    }
+    private List<FeesBean> fees;
 
     public List<UtxoBean> getUtxo() {
         return utxo;
@@ -27,80 +18,62 @@ public class GetTxElementResponse {
         this.utxo = utxo;
     }
 
-    public static class FeesBean {
-        /**
-         * best : false
-         * fee : 59999.99999999999
-         * time : 10
-         */
+    public List<FeesBean> getFees() {
+        return fees;
+    }
 
-        private boolean best;
-        private long fee;
-        private int time;
-
-        public boolean isBest() {
-            return best;
-        }
-
-        public void setBest(boolean best) {
-            this.best = best;
-        }
-
-        public long getFee() {
-            return fee;
-        }
-
-        public void setFee(long fee) {
-            this.fee = fee;
-        }
-
-        public int getTime() {
-            return time;
-        }
-
-        public void setTime(int time) {
-            this.time = time;
-        }
+    public void setFees(List<FeesBean> fees) {
+        this.fees = fees;
     }
 
     public static class UtxoBean {
         /**
-         * addressTxt : 1DJkjSqW9cX9XWdU71WX3Aw6s6Mk4C3TtN
+         * addressIndex : 4
+         * addressTxt : 17fLtpDmu7GhMgFyVBCrNySSanodr3toXP
          * availableforspending : true
-         * createdTime : 1512028522000
-         * hashAddress : 1549104517
-         * id : 1079
+         * createdTime : 2017-12-16 14:14:23
+         * hashAddress : 1126050813
+         * id : 30946
+         * indexNo : 49
          * isDeleted : false
-         * outTransactionHashcode : 1715890813
-         * outValue : 50
+         * outTransactionHashcode : 953885679
+         * outValue : 10000
          * reqSings : 1
-         * spentby : null
-         * sumOutAmount : 50.2
-         * txId : 1075
-         * updatedTime : 1512028522000
+         * sumOutAmount : 10000
+         * txHash : d2f3501936f9a57ec2a3aac14b01bb693c376bf4978f13eba61dba3f5bb9d54d
+         * txId : 12102
+         * updatedTime : 2017-12-16 14:14:23
          * vIndex : 0
-         * vType : pubkey
-         * walletId : 12
+         * vType : pubkeyhash
+         * walletId : 105
          */
 
+        private int addressIndex;
         private String addressTxt;
         private boolean availableforspending;
-        private long createdTime;
+        private String createdTime;
         private int hashAddress;
         private int id;
+        private int indexNo;
         private boolean isDeleted;
         private int outTransactionHashcode;
         private String outValue;
         private int reqSings;
-        private Object spentby;
-        private double sumOutAmount;
+        private int sumOutAmount;
+        private String txHash;
         private int txId;
-        private long updatedTime;
+        private String updatedTime;
         private int vIndex;
         private String vType;
-        private String walletId;
-        private String txHash;
-        private int addressIndex;
+        private int walletId;
+
+        public int getAddressIndex() {
+            return addressIndex;
+        }
+
+        public void setAddressIndex(int addressIndex) {
+            this.addressIndex = addressIndex;
+        }
 
         public String getAddressTxt() {
             return addressTxt;
@@ -118,11 +91,11 @@ public class GetTxElementResponse {
             this.availableforspending = availableforspending;
         }
 
-        public long getCreatedTime() {
+        public String getCreatedTime() {
             return createdTime;
         }
 
-        public void setCreatedTime(long createdTime) {
+        public void setCreatedTime(String createdTime) {
             this.createdTime = createdTime;
         }
 
@@ -140,6 +113,14 @@ public class GetTxElementResponse {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        public int getIndexNo() {
+            return indexNo;
+        }
+
+        public void setIndexNo(int indexNo) {
+            this.indexNo = indexNo;
         }
 
         public boolean isIsDeleted() {
@@ -174,20 +155,20 @@ public class GetTxElementResponse {
             this.reqSings = reqSings;
         }
 
-        public Object getSpentby() {
-            return spentby;
-        }
-
-        public void setSpentby(Object spentby) {
-            this.spentby = spentby;
-        }
-
-        public double getSumOutAmount() {
+        public int getSumOutAmount() {
             return sumOutAmount;
         }
 
-        public void setSumOutAmount(double sumOutAmount) {
+        public void setSumOutAmount(int sumOutAmount) {
             this.sumOutAmount = sumOutAmount;
+        }
+
+        public String getTxHash() {
+            return txHash;
+        }
+
+        public void setTxHash(String txHash) {
+            this.txHash = txHash;
         }
 
         public int getTxId() {
@@ -198,11 +179,11 @@ public class GetTxElementResponse {
             this.txId = txId;
         }
 
-        public long getUpdatedTime() {
+        public String getUpdatedTime() {
             return updatedTime;
         }
 
-        public void setUpdatedTime(long updatedTime) {
+        public void setUpdatedTime(String updatedTime) {
             this.updatedTime = updatedTime;
         }
 
@@ -222,28 +203,48 @@ public class GetTxElementResponse {
             this.vType = vType;
         }
 
-        public String getWalletId() {
+        public int getWalletId() {
             return walletId;
         }
 
-        public void setWalletId(String walletId) {
+        public void setWalletId(int walletId) {
             this.walletId = walletId;
         }
+    }
 
-        public String getTxHash() {
-            return txHash;
+    public static class FeesBean {
+        /**
+         * best : false
+         * fee : 420
+         * time : 10
+         */
+
+        private boolean best;
+        private int fee;
+        private int time;
+
+        public boolean isBest() {
+            return best;
         }
 
-        public void setTxHash(String txHash) {
-            this.txHash = txHash;
+        public void setBest(boolean best) {
+            this.best = best;
         }
 
-        public int getAddressIndex() {
-            return addressIndex;
+        public int getFee() {
+            return fee;
         }
 
-        public void setAddressIndex(int addressIndex) {
-            this.addressIndex = addressIndex;
+        public void setFee(int fee) {
+            this.fee = fee;
+        }
+
+        public int getTime() {
+            return time;
+        }
+
+        public void setTime(int time) {
+            this.time = time;
         }
     }
 }

@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh;
 import com.bitbill.www.common.base.view.widget.DividerDecoration;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -39,9 +41,14 @@ public class BtcRecordFragment extends BaseFragment {
     TextView tvAmountLabel;
     @BindView(R.id.refresh_layout)
     CustomSwipeToRefresh refreshLayout;
+    @BindView(R.id.tv_btc_cny)
+    TextView tvBtcCny;
+    @BindView(R.id.tv_btc_unconfirm)
+    TextView tvBtcUnconfirm;
     private OnTransactionRecordItemClickListener mListener;
     private List<TransactionRecord> mRecordList;
     private CommonAdapter<TransactionRecord> mAdapter;
+    private Wallet mWalelt;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -50,9 +57,10 @@ public class BtcRecordFragment extends BaseFragment {
     public BtcRecordFragment() {
     }
 
-    public static BtcRecordFragment newInstance() {
+    public static BtcRecordFragment newInstance(Wallet wallet) {
         BtcRecordFragment fragment = new BtcRecordFragment();
         Bundle args = new Bundle();
+        args.putSerializable(AppConstants.ARG_WALLET, wallet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -86,7 +94,7 @@ public class BtcRecordFragment extends BaseFragment {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        mWalelt = (Wallet) getArguments().getSerializable(AppConstants.ARG_WALLET);
         if (mRecordList == null) {
             mRecordList = new ArrayList();
         }
@@ -154,6 +162,13 @@ public class BtcRecordFragment extends BaseFragment {
         mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
         mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
         refreshLayout.setRefreshing(false);
+
+        if (mWalelt != null) {
+            tvAmount.setText(StringUtils.satoshi2btc(mWalelt.getBtcBalance()));
+            tvBtcUnconfirm.setText(String.format(getString(R.string.text_btc_unconfirm), StringUtils.satoshi2btc(mWalelt.getBtcUnconfirm())));
+
+        }
+
     }
 
     @Override
@@ -163,7 +178,7 @@ public class BtcRecordFragment extends BaseFragment {
 
     /**
      * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
+     * fragment to allow an interaction in this fragme.nt to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
      * <p/>

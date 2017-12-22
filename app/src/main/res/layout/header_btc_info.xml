@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -18,34 +17,36 @@
             android:id="@+id/tv_amount"
             style="@style/Text.Wallet.Amount.Big"
             android:paddingRight="10dp"
-            android:text="22.770128"/>
+            android:text="22.770128" />
 
         <TextView
             android:id="@+id/tv_amount_label"
             style="@style/Text.Crypto"
             android:text="btc"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_btc_cny"
         style="@style/Text"
         android:paddingLeft="@dimen/activity_padding"
         android:paddingRight="@dimen/activity_padding"
-        android:text="4000.56 CNY"
+        android:text="@string/text_btc_cny_value"
         android:textColor="@color/white"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 
     <TextView
+        android:id="@+id/tv_btc_unconfirm"
         style="@style/Text"
         android:layout_width="match_parent"
         android:layout_margin="@dimen/activity_padding"
         android:background="@drawable/bg_white_30_corner"
         android:gravity="center"
         android:padding="20dp"
-        android:text="2.35 BTC 未确认"
+        android:text="@string/text_btc_unconfirm"
         android:textColor="@color/white"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 
     <TextView
         style="@style/Text"
@@ -56,6 +57,6 @@
         android:paddingLeft="@dimen/activity_padding"
         android:text="交易记录"
         android:textColor="@color/white_60"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
 </LinearLayout>

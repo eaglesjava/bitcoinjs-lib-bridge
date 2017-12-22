@@ -81,9 +81,13 @@ public class PwdDialogFragment extends BaseConfirmDialog {
 
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
-
     }
 
+    @Override
+    public void dismissDialog(String tag) {
+        etConfirmPwd.setText("");
+        super.dismissDialog(tag);
+    }
 
     @Override
     public void initData() {

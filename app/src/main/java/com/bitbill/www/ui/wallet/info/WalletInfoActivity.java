@@ -73,7 +73,7 @@ public class WalletInfoActivity extends BaseToolbarActivity implements BtcRecord
      */
     private void setUpViewPager() {
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
-        mFragmentAdapter.addItem("btc", BtcRecordFragment.newInstance());
+        mFragmentAdapter.addItem("btc", BtcRecordFragment.newInstance(mWallet));
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
         mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         mViewPager.setAdapter(mFragmentAdapter);
