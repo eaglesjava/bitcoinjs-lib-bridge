@@ -137,6 +137,8 @@ class BILSendConfirmController: BILBaseViewController {
         func createTXBuilder(address: String?) {
             wallet.getTXBuildConfigurationFromServer(success: { (utxos, fees, bestFee)  in
                 self.setFees(fees: fees, best: bestFee)
+                self.amountLabel.text = wallet.btc_balanceString
+                self.sendModel?.amount = wallet.btc_balanceString
                 let builder = BTCTransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte, isSendAll: model.isSendAll)
                 _ = builder.addTargetOutput(output: BTCOutput(address: model.address, amount: model.bitcoinSatoshiAmount))
                 self.bil_dismissHUD()
@@ -145,6 +147,7 @@ class BILSendConfirmController: BILBaseViewController {
                 }
                 else
                 {
+                    self.isNotEnougnBalance = true
                     self.showTipAlert(title: "提示", msg: "余额不足以支付手续费", dismissed: {
                         self.navigationController?.popViewController(animated: true)
                     })

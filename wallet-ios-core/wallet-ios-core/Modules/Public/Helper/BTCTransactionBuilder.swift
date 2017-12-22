@@ -37,8 +37,8 @@ class BTCTransaction: NSObject {
         self.amount = amount
         
         let bytes = hexString.ck_mnemonicData().bytes
-        let hashData = Data(bytes.sha256().sha256())
-        let reverseData = Data(hashData.bytes.reversed())
+        let hashBytes = bytes.sha256().sha256()
+        let reverseData = Data(hashBytes.reversed())
         self.txHash = reverseData.toHexString()
     }
 }
@@ -197,7 +197,6 @@ class BTCTransactionBuilder: NSObject {
 			var totalSatoshis: Int64 = 0
 			for utxo in utxos {
 				totalSatoshis += utxo.satoshiAmount
-				break
 			}
 			let fee = feeFor(inCount: utxos.count, outCount: 1, feePerByte: perByte)
 			if fee >= totalSatoshis

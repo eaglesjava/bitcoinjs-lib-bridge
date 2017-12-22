@@ -97,8 +97,17 @@ extension WalletModel {
 			var satoshisSum: Int64 = 0
             for json in utxoDatas {
 				let utxo = BitcoinUTXOModel(jsonData: json)
-				satoshisSum += utxo.satoshiAmount
-                utxoModels.append(utxo)
+                var isContain = false
+                for u in utxoModels {
+                    if u == utxo {
+                        isContain = true
+                        break
+                    }
+                }
+                if !isContain {
+                    satoshisSum += utxo.satoshiAmount
+                    utxoModels.append(utxo)
+                }
             }
             self.btcBalance = satoshisSum
             let feeDatas = json["fees"].arrayValue

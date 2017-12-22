@@ -14,6 +14,14 @@ class BitcoinUTXOModel: NSObject, Comparable {
         return lhs.amount < rhs.amount
     }
     
+    static func ==(lhs: BitcoinUTXOModel, rhs: BitcoinUTXOModel) -> Bool {
+        return lhs.amount == rhs.amount && lhs.txHash == rhs.txHash && lhs.txOutputIndex == rhs.txOutputIndex
+    }
+    
+    override var hashValue : Int {
+        return (amount.hashValue + txHash.hashValue + txOutputIndex.hashValue).hashValue
+    }
+    
     var txHash: String
     var txOutputIndex: Int
     var bip39Index: Int
