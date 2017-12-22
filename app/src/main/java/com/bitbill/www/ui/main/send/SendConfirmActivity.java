@@ -1,8 +1,9 @@
 package com.bitbill.www.ui.main.send;
 
+import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -12,8 +13,6 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.dialog.BaseConfirmDialog;
-import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.base.view.dialog.PwdDialogFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.entity.eventbus.SendSuccessEvent;
@@ -188,7 +187,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void sendTransactionFail() {
-        showMessage("发送交易失败");
+        showMessage(R.string.msg_send_transaction_fail);
     }
 
     @Override
@@ -256,12 +255,17 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
         mUnspentList = unspentList;
         mFees = fees;
         mFeeByte = getBestFeeByte();
-        //正序排列
-        Collections.sort(mFees, (o1, o2) -> o1.getTime() - o2.getTime());
-        refreshSeekBar();
+        if (!StringUtils.isEmpty(mFees)) {
+            //正序排列
+            Collections.sort(mFees, (o1, o2) -> o1.getTime() - o2.getTime());
+            refreshSeekBar();
+            //估算手续费
+            getMvpPresenter().computeFee();
+        }
 
     }
 
+    @TargetApi(Build.VERSION_CODES.O)
     private void refreshSeekBar() {
         sbSendFee.setMax(getMaxTime());
         sbSendFee.setMin(getMinTime());
@@ -297,7 +301,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
             int nextTime = mFees.get(i).getTime();
             if (progress > currentTime && progress < nextTime) {
 
-                if (progress < currentTime + nextTime / 2) {
+                if (progress < (currentTime + nextTime) / 2) {
                     index = i;
                 } else {
                     index = i + 1;
@@ -333,15 +337,15 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
         if (StringUtils.isEmpty(mFees)) {
             return;
         }
-        int time;
-        if (index == -1) {
-            time = getBestTime();
-        } else {
-            time = mFees.get(index).getTime();
-        }
-        tvFeeHint.setText("平均出块时间" + time + "分钟，需耗费" + feeBtc + "BTC");
+
+        refreshFeeHintLayout(feeBtc, index);
     }
 
+    private void refreshFeeHintLayout(String feeBtc, int index) {
+        // TODO: 2017/12/22 index=-1的情况
+        int time = mFees.get(index).getTime();
+        tvFeeHint.setText("平均出块时间" + time + "分钟，需耗费" + feeBtc + "BTC");
+    }
     @Override
     public void amountNoEnough() {
         MessageConfirmDialog.newInstance("余额不足，请返回重新选择", true)
