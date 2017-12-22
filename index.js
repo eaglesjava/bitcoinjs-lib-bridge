@@ -61,9 +61,9 @@ function generateBitcoinTestnetMasterKeychain (seedHex) {
 	return generateMainnetMasterKeychain(seedHex).derivePath(BITCOIN_TESTNET_PATH)
 }
 
-function buildTransaction(seedHex, datas) {
+function buildTransaction(seedHex, data) {
+    data = JSON.parse(data)
 	let keychain = generateBitcoinMainnetMasterKeychain(seedHex)
-	let data = JSON.parse(datas)
 
 	let txb = new bitcoin.TransactionBuilder()
 
