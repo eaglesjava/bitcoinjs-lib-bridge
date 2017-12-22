@@ -1,7 +1,63 @@
-/* 
-  Home.strings
-  wallet-ios-core
 
-  Created by 仇弘扬 on 2017/12/20.
-  Copyright © 2017年 BitBill. All rights reserved.
-*/
+/* Class = "UILabel"; text = "Label"; ObjectID = "3jh-zW-ztf"; */
+"3jh-zW-ztf.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6ap-fE-eNJ"; */
+"6ap-fE-eNJ.text" = "Label";
+
+/* Class = "UILabel"; text = "BTC"; ObjectID = "9mQ-5p-ITN"; */
+"9mQ-5p-ITN.text" = "BTC";
+
+/* Class = "UILabel"; text = "0.000000"; ObjectID = "Elz-Nn-Vnf"; */
+"Elz-Nn-Vnf.text" = "0.000000";
+
+/* Class = "UILabel"; text = "BTC"; ObjectID = "FwR-Ox-99O"; */
+"FwR-Ox-99O.text" = "BTC";
+
+/* Class = "UILabel"; text = "  ETH  "; ObjectID = "HRM-yN-6cG"; */
+"HRM-yN-6cG.text" = "  ETH  ";
+
+/* Class = "UILabel"; text = "  BCH  "; ObjectID = "HyH-em-rLE"; */
+"HyH-em-rLE.text" = "  BCH  ";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "JN2-bM-Ppa"; */
+"JN2-bM-Ppa.text" = "0";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "MMP-II-XdY"; */
+"MMP-II-XdY.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "马上备份"; ObjectID = "MNm-pR-Y3T"; */
+"MNm-pR-Y3T.normalTitle" = "马上备份";
+
+/* Class = "UILabel"; text = "B"; ObjectID = "NwA-EF-6cy"; */
+"NwA-EF-6cy.text" = "B";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Pcd-Bi-NdR"; */
+"Pcd-Bi-NdR.text" = "0";
+
+/* Class = "UILabel"; text = "BCH"; ObjectID = "Y45-qI-hSi"; */
+"Y45-qI-hSi.text" = "BCH";
+
+/* Class = "UILabel"; text = "   BTC   "; ObjectID = "bqZ-ZL-T8C"; */
+"bqZ-ZL-T8C.text" = "   BTC   ";
+
+/* Class = "UILabel"; text = "ETH"; ObjectID = "iJr-DZ-SE9"; */
+"iJr-DZ-SE9.text" = "ETH";
+
+/* Class = "UILabel"; text = "0.00 CNY"; ObjectID = "kIi-ue-mEd"; */
+"kIi-ue-mEd.text" = "0.00 CNY";
+
+/* Class = "UILabel"; text = "未确认"; ObjectID = "rm9-o8-4xS"; */
+"rm9-o8-4xS.text" = "未确认";
+
+/* Class = "UITabBarItem"; title = "资产"; ObjectID = "skP-T0-JsY"; */
+"skP-T0-JsY.title" = "资产";
+
+/* Class = "UIBarButtonItem"; title = "总资产"; ObjectID = "wqZ-hg-Heu"; */
+"wqZ-hg-Heu.title" = "总资产";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "xa1-Vm-H3E"; */
+"xa1-Vm-H3E.text" = "0";
+
+/* Class = "UILabel"; text = "交易记录"; ObjectID = "z7d-Rg-cIr"; */
+"z7d-Rg-cIr.text" = "交易记录";

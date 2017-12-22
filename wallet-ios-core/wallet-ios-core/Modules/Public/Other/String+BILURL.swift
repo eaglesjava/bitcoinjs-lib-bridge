@@ -93,7 +93,7 @@ enum Router: URLRequestConvertible {
 }
 
 extension String {
-    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
+    static var bil_base_url: String { get { return "http://192.168.4.236:8086/" } }
 //    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
     static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
     static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
@@ -117,11 +117,12 @@ extension String {
 }
 
 extension String {
-    static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
+//    static var bil_socket_base_url: String { get { return "http://walletservice.bitbill.com:8088/" } }
+    static var bil_socket_base_url: String { get { return "http://192.168.4.236:8088/" } }
 }
 
 extension String {
     static var bil_socket_event_register: String { get { return "register" } }
-    static var bil_socket_event_unconfirom: String { get { return "unconfirom" } }
-    static var bil_socket_event_confirom: String { get { return "confirom" } }
+    static var bil_socket_event_unconfirm: String { get { return "unconfirm" } }
+    static var bil_socket_event_confirm: String { get { return "confirm" } }
 }

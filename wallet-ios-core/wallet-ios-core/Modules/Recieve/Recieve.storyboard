@@ -243,7 +243,7 @@
                         <viewLayoutGuide key="safeArea" id="P9o-SL-rSo"/>
                     </view>
                     <navigationItem key="navigationItem" title="接收" id="nyY-9Y-U6O">
-                        <barButtonItem key="rightBarButtonItem" title="生成新地址" id="3l4-sG-DnM">
+                        <barButtonItem key="rightBarButtonItem" title="刷新地址" id="3l4-sG-DnM" userLabel="刷新地址">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="generateNewAddress:" destination="2Xo-Eg-YUe" id="mfQ-Pd-nCn"/>

@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension String {
+    static var bil_meToBackupWalletSegue: String { return "BILMeToBackupWalletSegue" }
+}
+
 class BILMeController: BILBaseViewController {
     
     enum BILMeSectionType: Int {
@@ -53,7 +57,12 @@ class BILMeController: BILBaseViewController {
         }
         
         func cellID() -> String {
-            return "BILMeCell"
+            switch self {
+            case .wallet:
+                return "BILMeWalletCell"
+            default:
+                return "BILMeCell"
+            }
         }
         
     }
@@ -78,15 +87,23 @@ class BILMeController: BILBaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        guard let id = segue.identifier else { return }
+        switch id {
+        case String.bil_meToBackupWalletSegue:
+            guard let wallet = sender as? WalletModel else { return }
+            if let cont = (segue.destination as? UINavigationController)?.viewControllers.first as? BILBackupWalletMnemonicController {
+                cont.mnemonicHash = wallet.mnemonicHash
+            }
+        default:
+            ()
+        }
     }
-    */
 
 }
 
@@ -120,12 +137,12 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionType = sections[indexPath.section]
-        let cell = tableView.dequeueReusableCell(withIdentifier: sectionType.cellID(), for: indexPath) as! BILMeCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: sectionType.cellID(), for: indexPath)
         switch sectionType {
         case .wallet:
+            let c = cell as! BILMeWalletCell
             let wallet = sectionType.dataArray()[indexPath.row] as? WalletModel
-            cell.titleLabel.text = wallet?.id
-            cell.subTitleLabel.text = "立即备份"
+            c.wallet = wallet
         default:
             ()
         }

@@ -63,6 +63,11 @@
 		BA6E95F71FE272570085F7B5 /* BTCTransactionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E95F61FE272570085F7B5 /* BTCTransactionBuilder.swift */; };
 		BAA371181FD1430C00E757A6 /* String+BILURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA371171FD1430C00E757A6 /* String+BILURL.swift */; };
 		BAEFFD3F1FEB9E0C00C6EAB3 /* BILMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFFD3E1FEB9E0C00C6EAB3 /* BILMeCell.swift */; };
+		BAEFFD411FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js in Resources */ = {isa = PBXBuildFile; fileRef = BAEFFD401FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js */; };
+		BAEFFD441FEBB7BD00C6EAB3 /* diaoluo_da.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BAEFFD421FEBB7BC00C6EAB3 /* diaoluo_da.mp3 */; };
+		BAEFFD451FEBB7BD00C6EAB3 /* diaoluo_xiao.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BAEFFD431FEBB7BD00C6EAB3 /* diaoluo_xiao.mp3 */; };
+		BAEFFD471FEBB7F700C6EAB3 /* BILAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFFD461FEBB7F700C6EAB3 /* BILAudioPlayer.swift */; };
+		BAEFFD491FEBC69800C6EAB3 /* BILMeWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFFD481FEBC69800C6EAB3 /* BILMeWalletCell.swift */; };
 		CC4417011FBEAC7F00C4B158 /* WalletModel+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4417001FBEAC7F00C4B158 /* WalletModel+BIL.swift */; };
 		CC4417031FBEAD8800C4B158 /* BILAESHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4417021FBEAD8800C4B158 /* BILAESHelper.swift */; };
 		CC4417051FBEB25C00C4B158 /* BILControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4417041FBEB25C00C4B158 /* BILControllerManager.swift */; };
@@ -112,7 +117,6 @@
 		CCEC676F1FB18C3B004CC6C5 /* wallet_ios_coreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC676E1FB18C3B004CC6C5 /* wallet_ios_coreTests.swift */; };
 		CCEC67801FB190EE004CC6C5 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677B1FB190EE004CC6C5 /* index.html */; };
 		CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677C1FB190EE004CC6C5 /* LICENSE */; };
-		CCEC67821FB190EE004CC6C5 /* bitcoinjs-lib-app.js in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677D1FB190EE004CC6C5 /* bitcoinjs-lib-app.js */; };
 		CCEC67831FB190EE004CC6C5 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677E1FB190EE004CC6C5 /* index.js */; };
 		CCEC67841FB190EE004CC6C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CCEC677F1FB190EE004CC6C5 /* README.md */; };
 		CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */; };
@@ -187,10 +191,7 @@
 		BA12AC491FEA67B300812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Send.storyboard"; sourceTree = "<group>"; };
 		BA12AC4C1FEA67B900812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Send.strings; sourceTree = "<group>"; };
 		BA12AC4D1FEA67BC00812F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Send.storyboard; sourceTree = "<group>"; };
-		BA12AC4F1FEA6FBE00812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Home.storyboard"; sourceTree = "<group>"; };
 		BA12AC541FEA6FFA00812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Home.strings; sourceTree = "<group>"; };
-		BA12AC571FEA712500812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
-		BA12AC581FEA712500812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BA12AC591FEA715C00812F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		BA12AC5A1FEA73D700812F38 /* BILAddContactByAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAddContactByAddressController.swift; sourceTree = "<group>"; };
 		BA12AC981FEB932900812F38 /* BILMeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeController.swift; sourceTree = "<group>"; };
@@ -220,6 +221,15 @@
 		BAA371171FD1430C00E757A6 /* String+BILURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BILURL.swift"; sourceTree = "<group>"; };
 		BAA371191FD1556E00E757A6 /* wallet-ios-core.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "wallet-ios-core.entitlements"; sourceTree = "<group>"; };
 		BAEFFD3E1FEB9E0C00C6EAB3 /* BILMeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeCell.swift; sourceTree = "<group>"; };
+		BAEFFD401FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "bitcoinjs-lib-app.js"; sourceTree = "<group>"; };
+		BAEFFD421FEBB7BC00C6EAB3 /* diaoluo_da.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diaoluo_da.mp3; sourceTree = "<group>"; };
+		BAEFFD431FEBB7BD00C6EAB3 /* diaoluo_xiao.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diaoluo_xiao.mp3; sourceTree = "<group>"; };
+		BAEFFD461FEBB7F700C6EAB3 /* BILAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAudioPlayer.swift; sourceTree = "<group>"; };
+		BAEFFD481FEBC69800C6EAB3 /* BILMeWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeWalletCell.swift; sourceTree = "<group>"; };
+		BAEFFD4A1FEBCD0B00C6EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Home.strings"; sourceTree = "<group>"; };
+		BAEFFD4B1FEBCE9F00C6EAB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BAEFFD4C1FEBCEC000C6EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		BAEFFD4D1FEBCEC400C6EAB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		CC4417001FBEAC7F00C4B158 /* WalletModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BIL.swift"; sourceTree = "<group>"; };
 		CC4417021FBEAD8800C4B158 /* BILAESHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAESHelper.swift; sourceTree = "<group>"; };
 		CC4417041FBEB25C00C4B158 /* BILControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILControllerManager.swift; sourceTree = "<group>"; };
@@ -272,7 +282,6 @@
 		CCEC67701FB18C3B004CC6C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCEC677B1FB190EE004CC6C5 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		CCEC677C1FB190EE004CC6C5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		CCEC677D1FB190EE004CC6C5 /* bitcoinjs-lib-app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "bitcoinjs-lib-app.js"; sourceTree = "<group>"; };
 		CCEC677E1FB190EE004CC6C5 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		CCEC677F1FB190EE004CC6C5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CCEC67851FB193B0004CC6C5 /* BitcoinJSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinJSBridge.swift; sourceTree = "<group>"; };
@@ -367,6 +376,8 @@
 		BA20A5D51FD68D4E00EC2147 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				BAEFFD421FEBB7BC00C6EAB3 /* diaoluo_da.mp3 */,
+				BAEFFD431FEBB7BD00C6EAB3 /* diaoluo_xiao.mp3 */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -486,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				BAEFFD3E1FEB9E0C00C6EAB3 /* BILMeCell.swift */,
+				BAEFFD481FEBC69800C6EAB3 /* BILMeWalletCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -666,6 +678,7 @@
 				CCE5E1771FCBC4E100F7555D /* BILTransactionManager.swift */,
 				CCFEDF011FCFDF5400F1A7FC /* BILNetworkManager.swift */,
 				BA05EAE61FE4F85800B43B95 /* BILSokectManager.swift */,
+				BAEFFD461FEBB7F700C6EAB3 /* BILAudioPlayer.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -922,9 +935,9 @@
 		CCEC677A1FB190EE004CC6C5 /* bitcoinjs-lib-bridge */ = {
 			isa = PBXGroup;
 			children = (
+				BAEFFD401FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js */,
 				CCEC677B1FB190EE004CC6C5 /* index.html */,
 				CCEC677C1FB190EE004CC6C5 /* LICENSE */,
-				CCEC677D1FB190EE004CC6C5 /* bitcoinjs-lib-app.js */,
 				CCEC677E1FB190EE004CC6C5 /* index.js */,
 				CCEC677F1FB190EE004CC6C5 /* README.md */,
 			);
@@ -1005,7 +1018,6 @@
 				CCEC67521FB18C3A004CC6C5 /* Resources */,
 				D70E0595125B6DC7DB121DA1 /* [CP] Embed Pods Frameworks */,
 				70B945D87F6C2A8FB982FA28 /* [CP] Copy Pods Resources */,
-				CC94E0431FB5B0230098E730 /* Build JS */,
 			);
 			buildRules = (
 			);
@@ -1094,7 +1106,6 @@
 			files = (
 				CCEC67641FB18C3A004CC6C5 /* LaunchScreen.storyboard in Resources */,
 				CCEC67801FB190EE004CC6C5 /* index.html in Resources */,
-				CCEC67821FB190EE004CC6C5 /* bitcoinjs-lib-app.js in Resources */,
 				CCEC67611FB18C3A004CC6C5 /* Assets.xcassets in Resources */,
 				CC4660491FBE96E600A87132 /* Public.xcassets in Resources */,
 				BA20A6001FD68DE400EC2147 /* Me.storyboard in Resources */,
@@ -1110,6 +1121,7 @@
 				BA20A6111FD68F5200EC2147 /* Contact.storyboard in Resources */,
 				CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */,
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
+				BAEFFD441FEBB7BD00C6EAB3 /* diaoluo_da.mp3 in Resources */,
 				CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */,
 				CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */,
 				CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */,
@@ -1119,8 +1131,10 @@
 				BA46461B1FD78FC400680D33 /* Contact.xcassets in Resources */,
 				BA12AC481FEA67B300812F38 /* Send.storyboard in Resources */,
 				CCFEDEEE1FCC067E00F1A7FC /* BILTransactionCell.xib in Resources */,
+				BAEFFD451FEBB7BD00C6EAB3 /* diaoluo_xiao.mp3 in Resources */,
 				BA20A5FC1FD68DC800EC2147 /* Recieve.storyboard in Resources */,
 				BA46461F1FD78FDB00680D33 /* Me.xcassets in Resources */,
+				BAEFFD411FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js in Resources */,
 				CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */,
 				BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */,
 				CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */,
@@ -1206,20 +1220,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CC94E0431FB5B0230098E730 /* Build JS */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Build JS";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd ${SRCROOT}/wallet-ios-core/components/bitcoinjs-lib-bridge\nbrowserify index.js --standalone bridge > bitcoinjs-lib-app.js";
-		};
 		D70E0595125B6DC7DB121DA1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1303,9 +1303,11 @@
 				BA12AC351FE8C22100812F38 /* BILContactDetailController.swift in Sources */,
 				BA6E95F51FE2506A0085F7B5 /* BitcoinUTXOModel.swift in Sources */,
 				CCFEDEFD1FCE8DE300F1A7FC /* CKSegmentedView.swift in Sources */,
+				BAEFFD491FEBC69800C6EAB3 /* BILMeWalletCell.swift in Sources */,
 				BA1746F61FDFC868000615CF /* BILSendInputAmountController.swift in Sources */,
 				CC4660531FBEA67600A87132 /* BILCreateWalletSuccessController.swift in Sources */,
 				CCF634F91FBECC0000840097 /* BILBaseViewController.swift in Sources */,
+				BAEFFD471FEBB7F700C6EAB3 /* BILAudioPlayer.swift in Sources */,
 				BA04571A1FDE6DC500070CCA /* BILSendController.swift in Sources */,
 				CCFEDEFA1FCE672D00F1A7FC /* BILWalletController.swift in Sources */,
 				BA05EAED1FE7A24300B43B95 /* BILLightBlueBaseController.swift in Sources */,
@@ -1425,9 +1427,9 @@
 		BA12AC501FEA6FBE00812F38 /* Home.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BA12AC4F1FEA6FBE00812F38 /* zh-Hans */,
 				BA12AC541FEA6FFA00812F38 /* en */,
 				BA12AC591FEA715C00812F38 /* Base */,
+				BAEFFD4A1FEBCD0B00C6EAB3 /* zh-Hans */,
 			);
 			name = Home.storyboard;
 			sourceTree = "<group>";
@@ -1435,8 +1437,9 @@
 		CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BA12AC571FEA712500812F38 /* zh-Hans */,
-				BA12AC581FEA712500812F38 /* en */,
+				BAEFFD4B1FEBCE9F00C6EAB3 /* Base */,
+				BAEFFD4C1FEBCEC000C6EAB3 /* zh-Hans */,
+				BAEFFD4D1FEBCEC400C6EAB3 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

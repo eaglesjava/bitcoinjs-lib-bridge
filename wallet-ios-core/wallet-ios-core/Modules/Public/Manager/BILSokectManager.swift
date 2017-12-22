@@ -49,6 +49,10 @@ class BILSokectManager: NSObject {
         socket.on(clientEvent: .connect) { (data, ack) in
             debugPrint(data)
             self.postWallets()
+            self.perform(#selector(self.postWallets), with: nil, afterDelay: 10.0)
+        }
+        socket.on(clientEvent: .disconnect) { (data, ack) in
+            debugPrint("socket disconnect")
         }
         socket.on(clientEvent: .reconnect) { (data, ack) in
             self.postWallets()
@@ -56,11 +60,12 @@ class BILSokectManager: NSObject {
         socket.on("message") { (data, emitter) in
             debugPrint(data)
         }
-        socket.on(.bil_socket_event_unconfirom) { (data, emitter) in
+        socket.on(.bil_socket_event_unconfirm) { (data, emitter) in
             debugPrint(data)
+            BILAudioPlayer.playRecieveMoney()
             NotificationCenter.default.post(name: .recievedUnconfirmTransaction, object: nil)
         }
-        socket.on(.bil_socket_event_confirom) { (data, emitter) in
+        socket.on(.bil_socket_event_confirm) { (data, emitter) in
             debugPrint(data)
             NotificationCenter.default.post(name: .unconfirmTransactionBeenConfirmed, object: nil)
         }
@@ -78,11 +83,11 @@ class BILSokectManager: NSObject {
                     "deviceToken": BILAppStartUpManager.shared.deviceToken ?? "",
                     "platform": "iOS"]
         
-        guard let jsonString = JSON(data).rawString() else { return }
+        guard let jsonString = JSON(data).rawString()?.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "") else { return }
+        debugPrint("json : \(jsonString)")
         socket?.emitWithAck(.bil_socket_event_register, jsonString).timingOut(after: 3, callback: { (data) in
             debugPrint(data)
         })
-        
     }
     
 }

@@ -119,10 +119,10 @@ extension BILContactController {
             self.handleContacts(datas: contacts)
             loadEnd()
         }) { (msg, code) in
-            self.bil_makeToast(msg: msg)
-            loadEnd()
             self.emptyTitle = "获取联系人失败"
             self.emptyDescription = "请检查您的网络，或稍后再试"
+            self.bil_makeToast(msg: msg)
+            loadEnd()
         }
     }
     

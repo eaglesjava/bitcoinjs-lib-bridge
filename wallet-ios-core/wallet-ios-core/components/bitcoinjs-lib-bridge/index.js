@@ -1,8 +1,5 @@
-'use strict'
-
 let bitcoin = require('bitcoinjs-lib')
 let bip39 = require('bip39')
-let bip32utils = require('bip32-utils')
 
 let BITCOIN_MAINNET_PATH = "m/44'/0'/0'/0"
 let BITCOIN_TESTNET_PATH = "m/44'/1'/0'/0"
@@ -10,7 +7,7 @@ let BITCOIN_TESTNET_PATH = "m/44'/1'/0'/0"
 // 随机生成中文助记词，entropy： 长度， wordlist：
 function generateMnemonicRandom (entropy, wordlist) {
 	// Generate a random mnemonic (uses crypto.randomBytes under the hood), defaults to 128-bits of entropy
-	var mnemonic = bip39.generateMnemonic(entropy, null, wordlist)
+	let mnemonic = bip39.generateMnemonic(entropy, null, wordlist)
 	return mnemonic
 }
 
@@ -32,27 +29,27 @@ function validateAddress(address) {
         bitcoin.address.toOutputScript(address)
         return true
     } catch (e) {
-        return false
+        return falseR
     }
 }
 
 function getBitcoinAddressBySeedHex (seedHex, index) {
-	var bitcoinKeyChain = generateBitcoinMainnetMasterKeychain(seedHex)
+	let bitcoinKeyChain = generateBitcoinMainnetMasterKeychain(seedHex)
 	return bitcoinKeyChain.derive(index).getAddress()
 }
 
 function getBitcoinMasterXPublicKey (seedHex) {
-	var keychain = generateBitcoinMainnetMasterKeychain(seedHex)
+	let keychain = generateBitcoinMainnetMasterKeychain(seedHex)
 	return keychain.neutered().toBase58()
 }
 
 function getBitcoinAddressByMasterXPublicKey (xpub, index) {
-	var node = bitcoin.HDNode.fromBase58(xpub)
+	let node = bitcoin.HDNode.fromBase58(xpub)
 	return node.derive(index).getAddress()
 }
 
 function generateMainnetMasterKeychain (seedHex) {
-	var m = bitcoin.HDNode.fromSeedHex(seedHex)
+	let m = bitcoin.HDNode.fromSeedHex(seedHex)
 	return m
 }
 
@@ -65,26 +62,26 @@ function generateBitcoinTestnetMasterKeychain (seedHex) {
 }
 
 function buildTransaction(seedHex, datas) {
-	var keychain = generateBitcoinMainnetMasterKeychain(seedHex)
-	var data = JSON.parse(datas)
+	let keychain = generateBitcoinMainnetMasterKeychain(seedHex)
+	let data = JSON.parse(datas)
 
-	var txb = new bitcoin.TransactionBuilder()
+	let txb = new bitcoin.TransactionBuilder()
 
-	var inputs = data["inputs"]
-	var ecPairs = new Array()
-	for (var i = 0; i < inputs.length; i++) {
-		var input = inputs[i]
+	let inputs = data["inputs"]
+	let ecPairs = new Array()
+	for (let i = 0; i < inputs.length; i++) {
+		let input = inputs[i]
 		txb.addInput(input["txHash"], input["index"])
 		ecPairs[i] = keychain.derive(input["bip39Index"])
 	}
 
-	var outputs = data["outputs"]
-	for (var i = 0; i < outputs.length; i++) {
-		var output = outputs[i]
+	let outputs = data["outputs"]
+	for (let i = 0; i < outputs.length; i++) {
+		let output = outputs[i]
 		txb.addOutput(output["address"], output["amount"])
 	}
 
-	for (var i = ecPairs.length - 1; i >= 0; i--) {
+	for (let i = ecPairs.length - 1; i >= 0; i--) {
 		txb.sign(i, ecPairs[i])
 	}
 
