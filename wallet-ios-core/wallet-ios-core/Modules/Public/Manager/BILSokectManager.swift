@@ -49,13 +49,12 @@ class BILSokectManager: NSObject {
         socket.on(clientEvent: .connect) { (data, ack) in
             debugPrint(data)
             self.postWallets()
-            self.perform(#selector(self.postWallets), with: nil, afterDelay: 10.0)
         }
         socket.on(clientEvent: .disconnect) { (data, ack) in
             debugPrint("socket disconnect")
         }
         socket.on(clientEvent: .reconnect) { (data, ack) in
-            self.postWallets()
+            debugPrint("socket disconnect, will try reconnect")
         }
         socket.on("message") { (data, emitter) in
             debugPrint(data)

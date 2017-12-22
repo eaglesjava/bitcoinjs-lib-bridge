@@ -168,6 +168,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
             cont.sendModel = sendModel
         case showSelectContactController:
             let cont = segue.destination as! BILContactController
+            cont.hidesBottomBarWhenPushed = true
             cont.didSelectContactClosure = { (contact) in
                 self.didChooseContact(contact: contact)
             }

@@ -138,6 +138,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 			// Fallback on earlier versions
 		}
         refresh(sender: nil)
+        balanceDidChanged(notification: nil)
     }
     
     func setupRefresh() {

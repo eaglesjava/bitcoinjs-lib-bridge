@@ -23,6 +23,7 @@
 		BA05EAF31FE7D1D700B43B95 /* UIImage+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05EAF21FE7D1D700B43B95 /* UIImage+Snapshot.swift */; };
 		BA05EAF51FE7D35900B43B95 /* BILTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05EAF41FE7D35900B43B95 /* BILTableViewHeaderFooterView.swift */; };
 		BA05EAF71FE7D38D00B43B95 /* BILTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA05EAF61FE7D38D00B43B95 /* BILTableViewHeaderFooterView.xib */; };
+		BA0C22381FECAFC90063A882 /* BILWalletDetailSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C22371FECAFC90063A882 /* BILWalletDetailSettingController.swift */; };
 		BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */; };
 		BA1142391FD53CC80025BF80 /* BILGuideContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */; };
 		BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */; };
@@ -175,6 +176,7 @@
 		BA05EAF21FE7D1D700B43B95 /* UIImage+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Snapshot.swift"; sourceTree = "<group>"; };
 		BA05EAF41FE7D35900B43B95 /* BILTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		BA05EAF61FE7D38D00B43B95 /* BILTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
+		BA0C22371FECAFC90063A882 /* BILWalletDetailSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILWalletDetailSettingController.swift; sourceTree = "<group>"; };
 		BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILDeviceManager.swift; sourceTree = "<group>"; };
 		BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideContactView.swift; sourceTree = "<group>"; };
 		BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideContactView.xib; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				BA12AC981FEB932900812F38 /* BILMeController.swift */,
+				BA0C22371FECAFC90063A882 /* BILWalletDetailSettingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1298,6 +1301,7 @@
 				BA1746F81FDFC8CD000615CF /* BILSendModel.swift in Sources */,
 				BA05EAEA1FE7A14100B43B95 /* BILContactCell.swift in Sources */,
 				BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */,
+				BA0C22381FECAFC90063A882 /* BILWalletDetailSettingController.swift in Sources */,
 				CCFEDEF21FCD43CE00F1A7FC /* BILHomeAssetCell.swift in Sources */,
 				CCE5E16E1FC80E0600F7555D /* BILWalletManager.swift in Sources */,
 				BA12AC351FE8C22100812F38 /* BILContactDetailController.swift in Sources */,

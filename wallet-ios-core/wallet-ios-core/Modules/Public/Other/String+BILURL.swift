@@ -69,6 +69,7 @@ enum Router: URLRequestConvertible {
         
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("iOS", forHTTPHeaderField: "platform")
+        request.timeoutInterval = 5.0
         return try encoding.encode(request, with: result.parameters)
     }
     
@@ -93,7 +94,7 @@ enum Router: URLRequestConvertible {
 }
 
 extension String {
-    static var bil_base_url: String { get { return "http://192.168.4.236:8086/" } }
+    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
 //    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
     static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
     static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
@@ -118,7 +119,7 @@ extension String {
 
 extension String {
 //    static var bil_socket_base_url: String { get { return "http://walletservice.bitbill.com:8088/" } }
-    static var bil_socket_base_url: String { get { return "http://192.168.4.236:8088/" } }
+    static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
 }
 
 extension String {

@@ -94,9 +94,15 @@ class BILSendConfirmController: BILBaseViewController {
         guard let builder = txBuilder else { return }
         builder.feePerByte = currentFee
         do {
-            feeTipeLabel.text = "平均确认时间\(nearFee.timeString)，需耗费 \(BTCFormatString(btc: Int64(try builder.fee(perByte: currentFee)))) BTC"
+            let fee = Int64(try builder.fee(perByte: currentFee))
+            
+            if let model = sendModel, model.isSendAll {
+                let remainAmount = Int64(model.bitcoinSatoshiAmount) - fee
+                amountLabel.text = "\(BTCFormatString(btc: remainAmount)) BTC"
+            }
+            feeTipeLabel.text = "平均确认时间\(nearFee.timeString)，需耗费 \(BTCFormatString(btc: fee)) BTC"
         } catch {
-            feeTipeLabel.text = "手续费计算失败"
+            feeTipeLabel.text = "余额不足以支付手续费"
         }
     }
     

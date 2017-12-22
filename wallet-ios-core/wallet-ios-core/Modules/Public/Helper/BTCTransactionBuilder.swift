@@ -193,6 +193,10 @@ class BTCTransactionBuilder: NSObject {
     
     func fee(perByte: Int) throws -> Int {
         
+        if isSendAll {
+            return feeFor(inCount: utxos.count, outCount: 1, feePerByte: perByte)
+        }
+        
         var outputSatoshiSum = 0
         for output in outputs {
             outputSatoshiSum += output.amount
