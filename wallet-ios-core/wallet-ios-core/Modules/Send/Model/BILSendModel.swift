@@ -23,17 +23,14 @@ class BILSendModel: BILRecieveModel {
             guard let amount = Double(self.amount) else {
                 return "0.00"
             }
-            guard let w = wallet else {
-                return "0.00"
-            }
-            return isSendAll ? (w.btc_balanceString) : String(amount)
+            return String(amount)
         }
     }
     
-    var bitcoinSatoshiAmount: Int {
+    var bitcoinSatoshiAmount: Int64 {
         get {
             guard let amount = Double(self.bitcoinAmount) else { return 0 }
-            let satoshi = Int(amount * Double(BTC_SATOSHI))
+            let satoshi = Int64(amount * Double(BTC_SATOSHI))
             return satoshi
         }
     }

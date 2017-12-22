@@ -64,7 +64,7 @@ class BILSendChooseWalletController: BILBaseViewController {
             unowned let s = self
             cont.setDidSelecteWalletClosure(onSelected: { (wallet) in
                 s.wallet = wallet
-//                s.sendModel?.amount = BTCFormatString(btc: wallet.btcBalance)
+                s.sendModel?.amount = BTCFormatString(btc: wallet.btcBalance)
             })
         case confirmSegue:
             let cont = segue.destination as! BILSendConfirmController

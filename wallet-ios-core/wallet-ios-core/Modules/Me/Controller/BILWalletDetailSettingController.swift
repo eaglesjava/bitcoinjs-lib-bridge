@@ -7,13 +7,27 @@
 //
 
 import UIKit
+import DateToolsSwift
 
-class BILWalletDetailSettingController: UIViewController {
+class BILWalletDetailSettingController: BILLightBlueBaseController {
 
-    override func viewDidLoad() {
+	var wallet: WalletModel?
+	
+	@IBOutlet weak var idLabel: UILabel!
+	@IBOutlet weak var dateLabel: UILabel!
+	@IBOutlet weak var qrImageView: UIImageView!
+	
+	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		if let w = wallet {
+			navigationItem.title = w.id
+			idLabel.text = w.id
+			dateLabel.text = w.createDate?.format(with: "yyyy.MM.dd")
+			let width = qrImageView.frame.width
+			qrImageView.image = w.id_qrString.qrCodeImage(targetSize: CGSize(width: width, height: width))
+		}
     }
 
     override func didReceiveMemoryWarning() {

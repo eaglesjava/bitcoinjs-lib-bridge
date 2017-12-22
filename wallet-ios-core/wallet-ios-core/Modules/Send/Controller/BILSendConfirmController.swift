@@ -58,6 +58,8 @@ class BILSendConfirmController: BILBaseViewController {
     var fees = [BTCFee]()
     var maxFeePerByte = 0
     var bestFee = 0
+	
+	var isNotEnougnBalance = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +103,10 @@ class BILSendConfirmController: BILBaseViewController {
                 amountLabel.text = "\(BTCFormatString(btc: remainAmount)) BTC"
             }
             feeTipeLabel.text = "平均确认时间\(nearFee.timeString)，需耗费 \(BTCFormatString(btc: fee)) BTC"
+			isNotEnougnBalance = false
         } catch {
             feeTipeLabel.text = "余额不足以支付手续费"
+			isNotEnougnBalance = true
         }
     }
     
@@ -136,9 +140,8 @@ class BILSendConfirmController: BILBaseViewController {
                 let builder = BTCTransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte, isSendAll: model.isSendAll)
                 _ = builder.addTargetOutput(output: BTCOutput(address: model.address, amount: model.bitcoinSatoshiAmount))
                 self.bil_dismissHUD()
-                if builder.canFeedOutpus() {
+                if builder.canFeedOutputs() {
                     self.txBuilder = builder
-                    
                 }
                 else
                 {
@@ -169,6 +172,10 @@ class BILSendConfirmController: BILBaseViewController {
     }
 
     @IBAction func nextAction(_ sender: Any) {
+		guard !isNotEnougnBalance else {
+			showTipAlert(msg: "余额不足")
+			return
+		}
         guard (remarkInputView.textField.text ?? "").count <= 20 else {
             showTipAlert(title: nil, msg: "备注不能超过20个字")
             return

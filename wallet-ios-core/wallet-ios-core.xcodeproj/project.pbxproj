@@ -99,6 +99,7 @@
 		CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */; };
 		CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C21FBD86D30098E730 /* BILMnemonicCell.xib */; };
 		CC94E0C51FBD87D70098E730 /* BILMnemonicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0C41FBD87D70098E730 /* BILMnemonicCell.swift */; };
+		CCC6B7701FECF74300EE7A32 /* String+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B76F1FECF74300EE7A32 /* String+QRCode.swift */; };
 		CCE5E1641FC7C1BE00F7555D /* BILHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE5E1631FC7C1BE00F7555D /* BILHomeViewController.swift */; };
 		CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE5E1651FC7FB9400F7555D /* BILHomeTableHeaderView.swift */; };
 		CCE5E1681FC7FB9E00F7555D /* BILHomeTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE5E1671FC7FB9E00F7555D /* BILHomeTableHeaderView.xib */; };
@@ -262,6 +263,7 @@
 		CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicView.xib; sourceTree = "<group>"; };
 		CC94E0C21FBD86D30098E730 /* BILMnemonicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicCell.xib; sourceTree = "<group>"; };
 		CC94E0C41FBD87D70098E730 /* BILMnemonicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMnemonicCell.swift; sourceTree = "<group>"; };
+		CCC6B76F1FECF74300EE7A32 /* String+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+QRCode.swift"; sourceTree = "<group>"; };
 		CCE5E1631FC7C1BE00F7555D /* BILHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeViewController.swift; sourceTree = "<group>"; };
 		CCE5E1651FC7FB9400F7555D /* BILHomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeTableHeaderView.swift; sourceTree = "<group>"; };
 		CCE5E1671FC7FB9E00F7555D /* BILHomeTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILHomeTableHeaderView.xib; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 				CCFEDEEF1FCD1D8300F1A7FC /* NotificationName+BIL.swift */,
 				BAA371171FD1430C00E757A6 /* String+BILURL.swift */,
 				BA05EAF01FE7BA6B00B43B95 /* String+PinYin.swift */,
+				CCC6B76F1FECF74300EE7A32 /* String+QRCode.swift */,
 				BA05EAF21FE7D1D700B43B95 /* UIImage+Snapshot.swift */,
 			);
 			path = Other;
@@ -1370,6 +1373,7 @@
 				BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */,
 				CCEC67861FB193B0004CC6C5 /* BitcoinJSBridge.swift in Sources */,
 				CC94E04F1FB950040098E730 /* BILCreateWalletViewController.swift in Sources */,
+				CCC6B7701FECF74300EE7A32 /* String+QRCode.swift in Sources */,
 				CCED05601FDAA42000689498 /* BILSpecificVolumeRecieveController.swift in Sources */,
 				BA12AC991FEB932900812F38 /* BILMeController.swift in Sources */,
 				CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */,

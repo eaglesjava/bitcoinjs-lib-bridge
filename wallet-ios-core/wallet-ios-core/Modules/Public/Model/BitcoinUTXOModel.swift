@@ -18,7 +18,7 @@ class BitcoinUTXOModel: NSObject, Comparable {
     var txOutputIndex: Int
     var bip39Index: Int
     var requiredSignatureCount: Int
-    var satoshiAmount: Int
+    var satoshiAmount: Int64
     var amount: Double
     var availableforspending: Bool
     var address: String
@@ -27,7 +27,7 @@ class BitcoinUTXOModel: NSObject, Comparable {
         txOutputIndex = jsonData["vIndex"].intValue
         bip39Index = jsonData["addressIndex"].intValue
         requiredSignatureCount = jsonData["reqSings"].intValue
-        satoshiAmount = jsonData["sumOutAmount"].intValue
+        satoshiAmount = jsonData["sumOutAmount"].int64Value
         amount = Double(satoshiAmount) / Double(BTC_SATOSHI)
         availableforspending = jsonData["availableforspending"].boolValue
         address = jsonData["addressTxt"].stringValue

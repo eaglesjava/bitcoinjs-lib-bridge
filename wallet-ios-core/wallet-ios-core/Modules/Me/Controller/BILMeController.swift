@@ -10,6 +10,7 @@ import UIKit
 
 extension String {
     static var bil_meToBackupWalletSegue: String { return "BILMeToBackupWalletSegue" }
+	static var bil_meToWalletDetailSegue: String { return "BILMeToWalletDetailSegue" }
 }
 
 class BILMeController: BILBaseViewController {
@@ -80,7 +81,18 @@ class BILMeController: BILBaseViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.register(UINib(nibName: "BILTableViewHeaderFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "BILTableViewHeaderFooterView")
         tableView.reloadData()
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
     }
+	
+	deinit {
+		NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
+	}
+	
+	@objc
+	func walletDidChanged(notification: Notification) {
+		tableView.reloadData()
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -100,6 +112,10 @@ class BILMeController: BILBaseViewController {
             if let cont = (segue.destination as? UINavigationController)?.viewControllers.first as? BILBackupWalletMnemonicController {
                 cont.mnemonicHash = wallet.mnemonicHash
             }
+		case String.bil_meToWalletDetailSegue:
+			guard let wallet = sender as? WalletModel else { return }
+			let cont = segue.destination as! BILWalletDetailSettingController
+			cont.wallet = wallet
         default:
             ()
         }
@@ -166,6 +182,17 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
         headerView.bgImageView.image = backgroundImage?.snapshotSubImage(rect: view.convert(headerView.frame, from: tableView))
         return headerView
     }
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let sectionType = sections[indexPath.section]
+		switch sectionType {
+		case .wallet:
+			guard let wallet = sectionType.dataArray()[indexPath.row] as? WalletModel else { return }
+			performSegue(withIdentifier: .bil_meToWalletDetailSegue, sender: wallet)
+		default:
+			()
+		}
+	}
     
     /*
      // Override to support conditional editing of the table view.

@@ -94,10 +94,13 @@ extension WalletModel {
             let json = JSON(result)
             let utxoDatas = json["utxo"].arrayValue
             var utxoModels = [BitcoinUTXOModel]()
+			var satoshisSum: Int64 = 0
             for json in utxoDatas {
-                utxoModels.append(BitcoinUTXOModel(jsonData: json))
+				let utxo = BitcoinUTXOModel(jsonData: json)
+				satoshisSum += utxo.satoshiAmount
+                utxoModels.append(utxo)
             }
-            
+            self.btcBalance = satoshisSum
             let feeDatas = json["fees"].arrayValue
             var fees = [BTCFee]()
             var bestFee: BTCFee? = nil

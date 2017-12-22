@@ -12,6 +12,14 @@ import CoreData
 import CryptoSwift
 
 extension WalletModel {
+	var id_qrString: String {
+		get {
+			return "bitbill://wallet.bitbill.com?id=\(id ?? "")"
+		}
+	}
+}
+
+extension WalletModel {
     static func generateAES(pwd: String) -> AES? {
         do {
             let key = String(pwd.sha256().prefix(32))

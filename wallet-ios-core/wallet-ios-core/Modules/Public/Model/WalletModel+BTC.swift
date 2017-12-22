@@ -39,18 +39,19 @@ extension WalletModel {
         }
 		lastAddressIndex += 1
 		lastBTCAddress(success: { (address) in
-			do {
-				try BILWalletManager.shared.saveWallets()
-                success(address)
-                BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: self.lastAddressIndex), success: { (result) in
-                    debugPrint(result)
-                }, failure: { (msg, code) in
-                    debugPrint(msg)
-                })
-			} catch {
-				self.lastAddressIndex -= 1
-				failure("新地址保存失败")
-			}
+			BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: self.lastAddressIndex), success: { (result) in
+				debugPrint(result)
+				do {
+					try BILWalletManager.shared.saveWallets()
+					success(address)
+				} catch {
+					self.lastAddressIndex -= 1
+					failure("新地址保存失败")
+				}
+			}, failure: { (msg, code) in
+				debugPrint(msg)
+				failure(msg)
+			})
 		}) { (msg) in
 			self.lastAddressIndex -= 1
 			failure(msg)

@@ -22,13 +22,13 @@ class BTCTransaction: NSObject {
     var address: String
     var bytesCount: Int = 0
     var hexString: String
-    var amount: Int
+    var amount: Int64
     var txHash: String
     var inputAddressString: String
     
     var remark: String?
     
-    init(hex: String, address: String, inputAddressString: String, amount: Int) {
+    init(hex: String, address: String, inputAddressString: String, amount: Int64) {
         self.hexString = hex
         let data = hex.ck_mnemonicData()
         bytesCount = data.count
@@ -47,9 +47,9 @@ struct BTCInput {
     var txHash: String
     var index: Int
     var bip39Index: Int
-    var satoshi: Int
+    var satoshi: Int64
     var address: String
-    init(txHash: String, index: Int, bip39Index: Int, satoshi: Int, address: String) {
+    init(txHash: String, index: Int, bip39Index: Int, satoshi: Int64, address: String) {
         self.txHash = txHash
         self.index = index
         self.bip39Index = bip39Index
@@ -68,8 +68,8 @@ struct BTCInput {
 
 struct BTCOutput {
     var address: String
-    var amount: Int
-    init(address: String, amount: Int) {
+    var amount: Int64
+    init(address: String, amount: Int64) {
         self.address = address
         self.amount = amount
     }
@@ -183,26 +183,36 @@ class BTCTransactionBuilder: NSObject {
         return changeOutput != nil
     }
     
-    private func byteCountFor(inCount: Int, outCount: Int) -> Int {
-        return (inCount * TX_INPUT_SIZE + outCount * TX_OUTPUT_SIZE)
+    private func byteCountFor(inCount: Int, outCount: Int) -> Int64 {
+        return Int64(inCount * TX_INPUT_SIZE + outCount * TX_OUTPUT_SIZE)
     }
     
-    private func feeFor(inCount: Int, outCount: Int, feePerByte: Int = 0) -> Int {
-        return byteCountFor(inCount:inCount, outCount:outCount) * feePerByte
+    private func feeFor(inCount: Int, outCount: Int, feePerByte: Int = 0) -> Int64 {
+        return byteCountFor(inCount:inCount, outCount:outCount) * Int64(feePerByte)
     }
     
-    func fee(perByte: Int) throws -> Int {
+    func fee(perByte: Int) throws -> Int64 {
         
         if isSendAll {
-            return feeFor(inCount: utxos.count, outCount: 1, feePerByte: perByte)
+			var totalSatoshis: Int64 = 0
+			for utxo in utxos {
+				totalSatoshis += utxo.satoshiAmount
+				break
+			}
+			let fee = feeFor(inCount: utxos.count, outCount: 1, feePerByte: perByte)
+			if fee >= totalSatoshis
+			{
+				throw TransactionBuildError.notEnoughBalance
+			}
+            return fee
         }
         
-        var outputSatoshiSum = 0
+		var outputSatoshiSum: Int64 = 0
         for output in outputs {
             outputSatoshiSum += output.amount
         }
         
-        var inputSatoshiSum = 0
+		var inputSatoshiSum: Int64 = 0
         var inputCount = 0
         var enough = false
         for utxo in utxos {
@@ -217,11 +227,11 @@ class BTCTransactionBuilder: NSObject {
         if !enough {
             throw TransactionBuildError.notEnoughBalance
         }
-        return byteCountFor(inCount:inputCount, outCount: outputCount) * perByte
+        return feeFor(inCount: inputCount, outCount: outputCount, feePerByte: perByte)
     }
     
-    private func maxFeeFor(inCount: Int, outCount: Int) -> Int {
-        return feeFor(inCount:inCount, outCount:outCount, feePerByte: maxFeePerByte)
+    private func maxFeeFor(inCount: Int, outCount: Int) -> Int64 {
+		return feeFor(inCount:inCount, outCount:outCount, feePerByte: maxFeePerByte)
     }
     
     private var outputCount: Int {
@@ -230,15 +240,15 @@ class BTCTransactionBuilder: NSObject {
         }
     }
     
-    private var outputSatoshiWithoutChange: Int {
-        var outputSatoshiSum = 0
+    private var outputSatoshiWithoutChange: Int64 {
+		var outputSatoshiSum: Int64 = 0
         for output in outputs {
             outputSatoshiSum += output.amount
         }
         return outputSatoshiSum
     }
     
-    func canFeedOutpus() -> Bool {
+    func canFeedOutputs() -> Bool {
         do {
             try chooseInput()
         } catch {
@@ -262,7 +272,7 @@ class BTCTransactionBuilder: NSObject {
         
         switch bulidTactics {
         case .clearSmallBalance:
-            var inputSatoshiSum = 0
+			var inputSatoshiSum: Int64 = 0
             var enough = false
             for utxo in utxos {
                 inputSatoshiSum += utxo.satoshiAmount
@@ -301,7 +311,7 @@ class BTCTransactionBuilder: NSObject {
             return
         }
         
-        var totalFee = 0
+		var totalFee: Int64 = 0
         do {
             totalFee = try fee(perByte: feePerByte)
         } catch {
@@ -318,7 +328,7 @@ class BTCTransactionBuilder: NSObject {
         var txDatas = [String: Any]()
         
         var inputsJ = [[String: Any]]()
-        var inputSatoshiSum = 0
+		var inputSatoshiSum: Int64 = 0
         var inputAddresses = [String]()
         for input in inputs {
             inputsJ.append(input.toDictionary())
@@ -334,11 +344,15 @@ class BTCTransactionBuilder: NSObject {
                 return
             }
             target.amount = inputSatoshiSum - totalFee
+			if target.amount <= 0 {
+				failure(TransactionBuildError.notEnoughBalance)
+				return
+			}
             outputsJ.append(target.toDictionary())
         }
         else
         {
-            var outputSatoshiSum = 0
+			var outputSatoshiSum: Int64 = 0
             for output in outputs {
                 outputsJ.append(output.toDictionary())
                 outputSatoshiSum += output.amount
