@@ -62,30 +62,30 @@ function generateBitcoinTestnetMasterKeychain (seedHex) {
 }
 
 function buildTransaction(seedHex, data) {
-    data = JSON.parse(data)
-	let keychain = generateBitcoinMainnetMasterKeychain(seedHex)
+    data = JSON.parse(data);
+    var inputs = data["inputs"];
+    var outputs = data["outputs"];
 
-	let txb = new bitcoin.TransactionBuilder()
+    var keychain = generateBitcoinMainnetMasterKeychain(seedHex);
+    var txb = new bitcoin.TransactionBuilder();
+    var ecPairs = [];
 
-	let inputs = data["inputs"]
-	let ecPairs = new Array()
-	for (let i = 0; i < inputs.length; i++) {
-		let input = inputs[i]
-		txb.addInput(input["txHash"], input["index"])
-		ecPairs[i] = keychain.derive(input["bip39Index"])
-	}
+    for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        txb.addInput(input["txHash"], input["index"]);
+        ecPairs[i] = keychain.derive(input["bip39Index"]);
+    }
 
-	let outputs = data["outputs"]
-	for (let i = 0; i < outputs.length; i++) {
-		let output = outputs[i]
-		txb.addOutput(output["address"], output["amount"])
-	}
+    for (var _i = 0; _i < outputs.length; _i++) {
+        var output = outputs[_i];
+        txb.addOutput(output["address"], output["amount"]);
+    }
 
-	for (let i = ecPairs.length - 1; i >= 0; i--) {
-		txb.sign(i, ecPairs[i])
-	}
+    for (var _i2 = ecPairs.length - 1; _i2 >= 0; _i2--) {
+        txb.sign(_i2, ecPairs[_i2]);
+    }
 
-	return txb.build().toHex()
+    return txb.build().toHex();
 }
 
 module.exports = {
