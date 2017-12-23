@@ -13,10 +13,15 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.wallet.db.WalletDb;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.WalletApi;
+import com.bitbill.www.model.wallet.network.entity.AddContactsRequest;
+import com.bitbill.www.model.wallet.network.entity.AddContactsResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
+import com.bitbill.www.model.wallet.network.entity.GetContactsResponse;
+import com.bitbill.www.model.wallet.network.entity.GetLastAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
@@ -24,8 +29,11 @@ import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
+import com.bitbill.www.model.wallet.network.entity.SearchWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
+import com.bitbill.www.model.wallet.network.entity.TxHistory;
+import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 
 import java.util.List;
 
@@ -160,5 +168,81 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     @Override
     public Observable<ApiResponse<SendTransactionResponse>> sendTransaction(SendTransactionRequest sendTransactionRequest) {
         return mWalletApi.sendTransaction(sendTransactionRequest);
+    }
+
+    /**
+     * 交易记录
+     *
+     * @param extendedKeysHash
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<List<TxHistory>>> getTxHistory(String extendedKeysHash) {
+        return mWalletApi.getTxHistory(extendedKeysHash);
+    }
+
+    /**
+     * 未确认交易列表
+     *
+     * @param extendedKeysHash
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<List<Unconfirm>>> listUnconfirm(String extendedKeysHash) {
+        return mWalletApi.listUnconfirm(extendedKeysHash);
+    }
+
+    /**
+     * 获取配置信息
+     *
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<GetConfigResponse>> getConfig() {
+        return mWalletApi.getConfig();
+    }
+
+    /**
+     * 搜索WalletId
+     *
+     * @param walletId
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<SearchWalletIdResponse>> searchWalletId(String walletId) {
+        return mWalletApi.searchWalletId(walletId);
+    }
+
+    /**
+     * 增加联系人
+     *
+     * @param addContactsRequest
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<AddContactsResponse>> addContacts(AddContactsRequest addContactsRequest) {
+        return mWalletApi.addContacts(addContactsRequest);
+    }
+
+    /**
+     * 获取联系人
+     *
+     * @param walletKey
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<GetContactsResponse>> getContacts(String walletKey) {
+        return mWalletApi.getContacts(walletKey);
+    }
+
+    /**
+     * 获取联系人最新地址
+     *
+     * @param walletId
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<GetLastAddressResponse>> getLastAddress(String walletId) {
+        return mWalletApi.getLastAddress(walletId);
     }
 }
