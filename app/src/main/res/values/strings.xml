@@ -163,4 +163,5 @@
     <string name="action_contact_create">新建</string>
     <string name="text_btc_unconfirm">%s BTC 未确认</string>
     <string name="msg_send_transaction_fail">发送交易失败</string>
+    <string name="msg_balance_not_enough">余额不足</string>
 </resources>

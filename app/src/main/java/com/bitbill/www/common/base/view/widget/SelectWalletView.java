@@ -184,10 +184,6 @@ public class SelectWalletView extends FrameLayout implements View.OnClickListene
         }
     }
 
-    public interface OnBackupClickListener {
-
-    }
-
     public interface OnWalletClickListener {
 
         void onWalletClick(Wallet wallet, View view);

@@ -12,15 +12,11 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 
-import butterknife.BindView;
-
 /**
  * Created by isanwenyu@163.com on 2017/11/28.
  */
 public class PopupWalletMenu extends PopupWindow implements View.OnClickListener {
-    @BindView(R.id.tv_menu_create_wallet)
-    TextView tvMenuCreateWallet;
-    @BindView(R.id.tv_menu_import_wallet)
+
     TextView tvMenuImportWallet;
     private View mWalletView;
     private OnWalletMenuItemClickListener mOnWalletMenuItemClickListener;

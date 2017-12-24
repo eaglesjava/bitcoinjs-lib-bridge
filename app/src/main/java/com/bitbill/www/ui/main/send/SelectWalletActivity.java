@@ -11,6 +11,7 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -151,6 +152,9 @@ public class SelectWalletActivity extends BaseToolbarActivity {
         if (!validSelectedWallet()) {
             return;
         }
+        if (!isValidBtcBalance()) {
+            return;
+        }
         //跳转到确认发送界面
         SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, isSendAll ? StringUtils.satoshi2btc(mSelectedWallet.getBtcBalance()) : mSendAmount, isSendAll, mSelectedWallet);
     }
@@ -166,5 +170,14 @@ public class SelectWalletActivity extends BaseToolbarActivity {
 
     public Wallet getSelectedWallet() {
         return mSelectedWallet;
+    }
+
+    public boolean isValidBtcBalance() {
+
+        if (getSelectedWallet().getBtcBalance() < StringUtils.btc2Satoshi(mSendAmount)) {
+            MessageConfirmDialog.newInstance(getString(R.string.msg_balance_not_enough), true).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
+            return false;
+        }
+        return true;
     }
 }

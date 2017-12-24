@@ -90,7 +90,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
                 SpecificReceiveActivity.start(getBaseActivity());
             }
         });
-        mRefreshItem = (MenuItem) getBaseActivity().findViewById(R.id.action_refresh);
+        mRefreshItem = getBaseActivity().findViewById(R.id.action_refresh);
     }
 
     @Override
@@ -119,11 +119,18 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     }
 
     public void loadAddress(Wallet selectedWallet) {
-        mReceiveMvpPresenter.loadAddress(selectedWallet);
+        if (mReceiveMvpPresenter != null) {
+            mReceiveMvpPresenter.loadAddress(selectedWallet);
+
+        }
 
     }
+
     public void refreshAddress(Wallet selectedWallet) {
-        mReceiveMvpPresenter.refreshAddress(selectedWallet);
+        if (mReceiveMvpPresenter != null) {
+            mReceiveMvpPresenter.refreshAddress(selectedWallet);
+
+        }
 
     }
 
