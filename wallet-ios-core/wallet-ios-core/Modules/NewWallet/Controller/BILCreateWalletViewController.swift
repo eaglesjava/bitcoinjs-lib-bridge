@@ -219,7 +219,12 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 SVProgressHUD.dismiss(withDelay: 1.2)
                 debugPrint(error)
                 if let w = wallet {
-                    BILWalletManager.shared.remove(wallet: w)
+                    do {
+                        try BILWalletManager.shared.remove(wallet: w)
+                    } catch {
+                        SVProgressHUD.showError(withStatus: "操作失败")
+                        SVProgressHUD.dismiss(withDelay: 1.2)
+                    }
                 }
             }
             guard let pwd = self.passwordTextField.text else {

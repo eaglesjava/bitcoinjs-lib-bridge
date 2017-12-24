@@ -29,7 +29,7 @@
         <!--Wallet Detail Setting Controller-->
         <scene sceneID="l4W-BV-4W7">
             <objects>
-                <viewController id="l6X-KQ-GhR" customClass="BILWalletDetailSettingController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="l6X-KQ-GhR" customClass="BILWalletDetailSettingController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CBp-52-sRl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,29 +77,80 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRb-iU-ttO" customClass="BILWhiteBorderButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                <rect key="frame" x="25" y="517" width="325" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="0aU-Wh-Aff"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="钱包地址"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9E-N3-fyw">
+                                <rect key="frame" x="25" y="587" width="325" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="3OW-Um-V0U"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="删除钱包">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeWalletAction:" destination="l6X-KQ-GhR" eventType="touchUpInside" id="AQC-u8-YSo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8I-VI-SFJ">
+                                <rect key="frame" x="25" y="447" width="325" height="55"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="Dp3-Nx-byP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="备份钱包">
+                                    <color key="titleColor" red="0.23529411764705882" green="0.46274509803921571" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <real key="value" value="27.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="1VE-Xt-S1m" kind="presentation" identifier="BILMeWalletDetailToBackupSegue" id="ibQ-sv-EQr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="m9E-N3-fyw" firstAttribute="top" secondItem="cRb-iU-ttO" secondAttribute="bottom" constant="15" id="3Bg-KL-CB9"/>
+                            <constraint firstItem="m9E-N3-fyw" firstAttribute="leading" secondItem="R9m-A8-J9e" secondAttribute="leading" constant="25" id="8LN-Tx-2br"/>
                             <constraint firstItem="hal-wb-t1D" firstAttribute="leading" secondItem="aWP-ji-LN2" secondAttribute="leading" id="FEq-mi-0xN"/>
                             <constraint firstItem="Mtd-FW-skP" firstAttribute="top" secondItem="Zcu-Bh-rZz" secondAttribute="bottom" constant="10" id="JtJ-G8-eoL"/>
                             <constraint firstItem="aWP-ji-LN2" firstAttribute="leading" secondItem="ha7-lL-iwI" secondAttribute="trailing" constant="25" id="M6m-QH-piF"/>
                             <constraint firstItem="Zcu-Bh-rZz" firstAttribute="leading" secondItem="aWP-ji-LN2" secondAttribute="leading" id="Oxe-1f-hpn"/>
+                            <constraint firstItem="R9m-A8-J9e" firstAttribute="bottom" secondItem="m9E-N3-fyw" secondAttribute="bottom" constant="25" id="P4d-Ta-fZc"/>
                             <constraint firstItem="aWP-ji-LN2" firstAttribute="top" secondItem="ha7-lL-iwI" secondAttribute="top" id="Q5K-4w-uFd"/>
                             <constraint firstItem="Zcu-Bh-rZz" firstAttribute="top" secondItem="aWP-ji-LN2" secondAttribute="bottom" constant="5" id="S1V-yK-ZUH"/>
+                            <constraint firstItem="cRb-iU-ttO" firstAttribute="top" secondItem="M8I-VI-SFJ" secondAttribute="bottom" constant="15" id="T2L-47-RRK"/>
+                            <constraint firstItem="R9m-A8-J9e" firstAttribute="trailing" secondItem="M8I-VI-SFJ" secondAttribute="trailing" constant="25" id="ZQR-PH-acS"/>
+                            <constraint firstItem="M8I-VI-SFJ" firstAttribute="leading" secondItem="R9m-A8-J9e" secondAttribute="leading" constant="25" id="Znl-JG-zDo"/>
                             <constraint firstItem="ha7-lL-iwI" firstAttribute="top" secondItem="R9m-A8-J9e" secondAttribute="top" constant="25" id="bsc-J1-aCM"/>
                             <constraint firstItem="359-rW-M42" firstAttribute="leading" secondItem="hal-wb-t1D" secondAttribute="leading" id="cYy-ta-AAE"/>
                             <constraint firstItem="hal-wb-t1D" firstAttribute="top" secondItem="Mtd-FW-skP" secondAttribute="bottom" constant="20" id="cha-W9-re0"/>
                             <constraint firstItem="359-rW-M42" firstAttribute="top" secondItem="hal-wb-t1D" secondAttribute="bottom" constant="5" id="fOj-8b-6N2"/>
+                            <constraint firstItem="R9m-A8-J9e" firstAttribute="trailing" secondItem="m9E-N3-fyw" secondAttribute="trailing" constant="25" id="hC5-BR-U7k"/>
                             <constraint firstItem="ha7-lL-iwI" firstAttribute="leading" secondItem="R9m-A8-J9e" secondAttribute="leading" constant="25" id="iaf-DU-WXX"/>
+                            <constraint firstItem="R9m-A8-J9e" firstAttribute="trailing" secondItem="cRb-iU-ttO" secondAttribute="trailing" constant="25" id="lkS-iX-Ka2"/>
+                            <constraint firstItem="cRb-iU-ttO" firstAttribute="leading" secondItem="R9m-A8-J9e" secondAttribute="leading" constant="25" id="m8w-FO-2qU"/>
                             <constraint firstItem="Mtd-FW-skP" firstAttribute="leading" secondItem="Zcu-Bh-rZz" secondAttribute="leading" id="sXE-Tr-iqd"/>
                             <constraint firstAttribute="trailing" secondItem="Mtd-FW-skP" secondAttribute="trailing" constant="25" id="zsJ-fX-Kgv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="R9m-A8-J9e"/>
                     </view>
                     <connections>
+                        <outlet property="backupButton" destination="M8I-VI-SFJ" id="cQQ-VT-eaR"/>
                         <outlet property="dateLabel" destination="359-rW-M42" id="bKe-uX-n5K"/>
                         <outlet property="idLabel" destination="Zcu-Bh-rZz" id="VPX-3N-qH6"/>
                         <outlet property="qrImageView" destination="ha7-lL-iwI" id="1mq-m3-RY6"/>
+                        <outlet property="walletAddressButton" destination="cRb-iU-ttO" id="75u-94-ObA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qGy-dg-Rmj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -259,4 +310,7 @@
         <image name="icon_me" width="17" height="19"/>
         <image name="icon_me_h" width="17" height="19"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ibQ-sv-EQr"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -53,7 +53,7 @@ class BILTransactionHistoryModel: NSObject {
         self.outAddress = jsonData["gatherAddressOut"].stringValue.components(separatedBy: "|")
         type = jsonData["inOut"].intValue == 1 ? .send : .recieve
         volume = jsonData["amount"].intValue
-        date = Date(dateString: jsonData["createdTime"].stringValue, format: "yyyy-MM-dd hh:mm:ss")
+        date = Date(dateString: jsonData["createdTime"].stringValue, format: "yyyy-MM-dd HH:mm:ss")
         self.txHash = jsonData["txHash"].stringValue
     }
     
@@ -62,7 +62,7 @@ class BILTransactionHistoryModel: NSObject {
         self.outAddress = jsonData["gatherAddressOut"].stringValue.components(separatedBy: "|")
         type = jsonData["inOut"].intValue == 1 ? .send : .recieve
         volume = jsonData["amount"].intValue
-        date = Date(dateString: jsonData["createdTime"].stringValue, format: "yyyy-MM-dd hh:mm:ss")
+        date = Date(dateString: jsonData["createdTime"].stringValue, format: "yyyy-MM-dd HH:mm:ss")
         self.txHash = jsonData["memoryTx"].stringValue
     }
     

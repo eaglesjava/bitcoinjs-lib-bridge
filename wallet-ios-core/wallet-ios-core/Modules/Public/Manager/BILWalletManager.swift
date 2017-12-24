@@ -34,7 +34,8 @@ class BILWalletManager: NSObject {
                 let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
                 results.append(contentsOf: try context.fetch(request))
             } catch {
-                
+                debugPrint("查询钱包失败")
+                UIApplication.shared.keyWindow?.makeToast("查询钱包失败")
             }
             return results
         }
@@ -46,14 +47,14 @@ class BILWalletManager: NSObject {
 		return wallet
 	}
     
-    func remove(wallet: WalletModel) {
+    func remove(wallet: WalletModel) throws {
         let context = coreDataContext
         context.delete(wallet)
 		do {
 			try context.save()
 			NotificationCenter.default.post(name: .walletDidChanged, object: nil)
 		} catch {
-			debugPrint(error)
+			throw error
 		}
     }
 	

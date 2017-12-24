@@ -103,7 +103,11 @@ extension WalletModel {
         func cleanUp(wallet: WalletModel?, error: String) {
             debugPrint(error)
             if let w = wallet {
-                BILWalletManager.shared.remove(wallet: w)
+                do {
+                    try BILWalletManager.shared.remove(wallet: w)
+                } catch {
+                    failure(error.localizedDescription)
+                }
             }
             failure(error)
         }

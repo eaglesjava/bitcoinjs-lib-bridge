@@ -197,7 +197,6 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
             BILTransactionManager.shared.recnetRecords = txs
             loadEnd()
         }) { (msg, code) in
-            self.bil_makeToast(msg: msg)
             loadEnd()
         }
     }

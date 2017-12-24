@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.toHexString()
         BILAppStartUpManager.shared.deviceToken = token
+        BILSokectManager.manager.postWallets()
         debugPrint("push token = \(token)")
     }
     

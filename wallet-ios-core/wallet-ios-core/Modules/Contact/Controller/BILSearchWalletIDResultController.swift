@@ -37,7 +37,8 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
         let alert = UIAlertController(title: "输入 \(id) 的名称", message: nil, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (action) in
-            guard let name = alert.textFields?.first?.text else {
+            guard let name = alert.textFields?.first?.text, !name.isEmpty else {
+                self.showTipAlert(msg: "不能为空")
                 return
             }
             self.addContact(id: id, name: name)

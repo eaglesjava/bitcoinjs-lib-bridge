@@ -19,8 +19,15 @@ extension WalletModel {
             failure("extKey不能为空", -1)
             return
         }
-//		success([:])
         BILNetworkManager.request(request: .createWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
+    }
+    
+    func deleteWalletInSever(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        do {
+            try BILWalletManager.shared.remove(wallet: self)
+        } catch {
+            failure(error.localizedDescription, -1)
+        }
     }
     
     func importWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
