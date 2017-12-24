@@ -152,6 +152,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: .recievedUnconfirmTransaction, object: nil)
         NotificationCenter.default.removeObserver(self, name: .unconfirmTransactionBeenConfirmed, object: nil)
+        
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -282,6 +283,14 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		header.titleLabel.text = type.sectionTitle
 		header.buttonImage = type.headerActionButtonImage
 		header.delegate = self
+        
+        if section == BILHomeSectionType.asset.rawValue {
+            header.showNetworkIndicator()
+        }
+        else
+        {
+            header.hideNetworkIndicator()
+        }
 		
 		if section == 0 && headerBGImage == nil {
 			headerBGImage = BILAppStartUpManager.shared.snapshotNavBackgroundImage(rect: view.convert(header.frame, from: tableView))

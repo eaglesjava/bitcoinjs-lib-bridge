@@ -157,10 +157,10 @@
             </objects>
             <point key="canvasLocation" x="1612" y="113.79310344827587"/>
         </scene>
-        <!--Me-->
+        <!--我-->
         <scene sceneID="sIc-Du-SFW">
             <objects>
-                <viewController id="ici-KD-dZV" customClass="BILMeController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ici-KD-dZV" customClass="BILMeController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pKz-sz-hEa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -272,7 +272,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aWb-MM-PkB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Me" id="eKr-Bz-A3s"/>
+                    <navigationItem key="navigationItem" title="我" id="eKr-Bz-A3s"/>
                     <connections>
                         <outlet property="tableView" destination="qyA-df-S4D" id="N5y-kt-dTM"/>
                         <segue destination="sMl-zy-fhR" kind="show" identifier="BILShouWelcomSegue" id="9ba-p6-r6o"/>
@@ -311,6 +311,6 @@
         <image name="icon_me_h" width="17" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ibQ-sv-EQr"/>
+        <segue reference="WfD-od-GeW"/>
     </inferredMetricsTieBreakers>
 </document>

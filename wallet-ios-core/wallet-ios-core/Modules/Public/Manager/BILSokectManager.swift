@@ -29,15 +29,17 @@ class BILSokectManager: NSObject {
     }
     
     func startConnect() {
+        if let s = socket {
+            guard s.status != .connected else { return }
+        }
         connect()
         socket?.connect()
     }
     
     func stopConnect() {
+        guard let s = socket else { return }
+        guard s.status == .connected else { return }
         socket?.disconnect()
-    }
-    func reconnect() {
-        manager?.reconnect()
     }
     
     func connect(urlString: String = .bil_socket_base_url) {
@@ -49,12 +51,15 @@ class BILSokectManager: NSObject {
         socket.on(clientEvent: .connect) { (data, ack) in
             debugPrint(data)
             self.postWallets()
+            NotificationCenter.default.post(name: .networkStatusDidChanged, object: nil)
         }
         socket.on(clientEvent: .disconnect) { (data, ack) in
             debugPrint("socket disconnect")
+            NotificationCenter.default.post(name: .networkStatusDidChanged, object: nil)
         }
         socket.on(clientEvent: .reconnect) { (data, ack) in
             debugPrint("socket disconnect, will try reconnect")
+            NotificationCenter.default.post(name: .networkStatusDidChanged, object: nil)
         }
         socket.on("message") { (data, emitter) in
             debugPrint(data)

@@ -38,7 +38,6 @@ class BILAppStartUpManager: NSObject {
 		setupSVProgressHUD()
         setupPushService()
         setupToast()
-        BILSokectManager.manager.startConnect()
         debugPrint(BILDeviceManager.shared.deviceID)
 	}
     
