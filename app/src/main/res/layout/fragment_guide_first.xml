@@ -80,7 +80,7 @@
             android:layout_marginBottom="13dp"
             android:layout_marginStart="14dp"
             android:layout_toEndOf="@+id/wallet"
-            android:src="@drawable/ic_guide_neo"/>
+            android:src="@drawable/ic_guide_dcr" />
     </RelativeLayout>
 
 </FrameLayout>

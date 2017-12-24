@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -17,6 +18,7 @@ import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.base.view.widget.PopupWalletMenu;
 import com.bitbill.www.common.base.view.widget.WalletView;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
@@ -47,6 +49,8 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     LinearLayout llWalletContainer;
     @BindView(R.id.tv_current_wallet_count)
     TextView mWalletCountView;
+    @BindView(R.id.rb_socket_status)
+    RadioButton ivSocketStatus;
 
     private PopupWalletMenu mWalletMenu;
     private int mWalletCount;
@@ -123,18 +127,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
     @Override
     public void initData() {
-        if (mWalletList == null) {
-            mWalletList = new ArrayList<>();
-        }
-        mWalletList.clear();
-        mWalletList.addAll(BitbillApp.get().getWallets());
-        llWalletContainer.removeAllViews();
-        mWalletCountView.setText(String.format(getString(R.string.text_asset_current_wallet), mWalletList.size()));
-        for (Wallet wallet : mWalletList) {
-            addWalletView(wallet);
-        }
-
-        mSwipeRefreshLayout.setRefreshing(false);
+        ivSocketStatus.setChecked(BitbillApp.get().getSocketConnected());
     }
 
     @Override
@@ -194,7 +187,26 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
      */
     @Override
     public void lazyData() {
+        if (mWalletList == null) {
+            mWalletList = new ArrayList<>();
+        }
+        mWalletList.clear();
+        mWalletList.addAll(BitbillApp.get().getWallets());
+        if (llWalletContainer != null) {
 
+            llWalletContainer.removeAllViews();
+            mWalletCountView.setText(String.format(getString(R.string.text_asset_current_wallet), mWalletList.size()));
+            for (Wallet wallet : mWalletList) {
+                addWalletView(wallet);
+            }
+        }
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
 
+    }
+
+    public void loadUnconfirm(List<Unconfirm> data) {
+        getChildFragmentManager().beginTransaction().replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<Unconfirm>) data)).commit();
     }
 }

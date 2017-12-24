@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseFragment;
-import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
+import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -27,13 +27,14 @@ import butterknife.BindView;
  */
 public class BtcUnconfirmFragment extends BaseFragment {
 
+    private static final String ARG_UNCONFIRM_LIST = "arg_unconfirm_list";
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
     @BindView(R.id.tv_in_progress)
     TextView tvInProgress;
     private OnTransactionRecordItemClickListener mListener;
-    private List<TransactionRecord> mRecordList;
-    private CommonAdapter<TransactionRecord> mAdapter;
+    private List<Unconfirm> mUnconfirmList;
+    private CommonAdapter<Unconfirm> mAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -42,9 +43,10 @@ public class BtcUnconfirmFragment extends BaseFragment {
     public BtcUnconfirmFragment() {
     }
 
-    public static BtcUnconfirmFragment newInstance() {
+    public static BtcUnconfirmFragment newInstance(ArrayList<Unconfirm> unconfirmList) {
         BtcUnconfirmFragment fragment = new BtcUnconfirmFragment();
         Bundle args = new Bundle();
+        args.putSerializable(ARG_UNCONFIRM_LIST, unconfirmList);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,8 +81,9 @@ public class BtcUnconfirmFragment extends BaseFragment {
 
     @Override
     public void onBeforeSetContentLayout() {
-        if (mRecordList == null) {
-            mRecordList = new ArrayList();
+        mUnconfirmList = (List<Unconfirm>) getArguments().getSerializable(ARG_UNCONFIRM_LIST);
+        if (mUnconfirmList == null) {
+            mUnconfirmList = new ArrayList();
         }
 
     }
@@ -94,19 +97,19 @@ public class BtcUnconfirmFragment extends BaseFragment {
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
         // Set the adapter
-        mAdapter = new CommonAdapter<TransactionRecord>(getBaseActivity(), R.layout.item_btc_record_unconfirm, mRecordList) {
+        mAdapter = new CommonAdapter<Unconfirm>(getBaseActivity(), R.layout.item_btc_record_unconfirm, mUnconfirmList) {
 
             @Override
-            protected void convert(ViewHolder holder, TransactionRecord transactionRecord, int position) {
-                holder.setText(R.id.tv_address, transactionRecord.getAddress());
-                holder.setText(R.id.tv_amount, (transactionRecord.getStatus() == 0 ? "+" : "-") + transactionRecord.getAmount() + " btc");
-                holder.setText(R.id.tv_date, transactionRecord.getDate());
-                holder.setImageResource(R.id.iv_status, transactionRecord.getStatus() == 0 ? R.drawable.ic_item_receive : R.drawable.ic_item_send);
+            protected void convert(ViewHolder holder, Unconfirm unconfirm, int position) {
+                holder.setText(R.id.tv_address, unconfirm.getGatherAddressOut());
+                holder.setText(R.id.tv_amount, (unconfirm.getInOut() == 2 ? "+" : "-") + unconfirm.getSumAmount() + " btc");
+                holder.setText(R.id.tv_date, unconfirm.getCreatedTime());
+                holder.setImageResource(R.id.iv_status, unconfirm.getInOut() == 2 ? R.drawable.ic_item_receive : R.drawable.ic_item_send);
                 holder.setOnClickListener(R.id.rl_item_container, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (mListener != null) {
-                            mListener.OnTransactionRecordItemClick(transactionRecord);
+                            mListener.OnTransactionRecordItemClick(unconfirm);
                         }
                     }
                 });
@@ -117,12 +120,12 @@ public class BtcUnconfirmFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        // TODO: 2017/12/5 获取列表数据
-        mRecordList.clear();
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        tvInProgress.setText(String.format(getString(R.string.text_in_progress_count), mRecordList.size()));
+    }
+
+    void loadData(List<Unconfirm> unconfirmList) {
+        mUnconfirmList = unconfirmList;
+        tvInProgress.setText(String.format(getString(R.string.text_in_progress_count), mUnconfirmList.size()));
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -142,6 +145,6 @@ public class BtcUnconfirmFragment extends BaseFragment {
      */
     public interface OnTransactionRecordItemClickListener {
         // TODO: Update argument type and name
-        void OnTransactionRecordItemClick(TransactionRecord item);
+        void OnTransactionRecordItemClick(Unconfirm item);
     }
 }

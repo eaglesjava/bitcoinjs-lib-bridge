@@ -22,7 +22,7 @@ import com.bitbill.www.model.entity.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
+import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactActivity;
@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void OnTransactionRecordItemClick(TransactionRecord item) {
+    public void OnTransactionRecordItemClick(Unconfirm item) {
 
     }
 
@@ -155,10 +155,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private void reloadWalletInfo() {
         //重新加载钱包信息
         if (mAssetFragment != null) {
-            mAssetFragment.initData();
+            mAssetFragment.lazyData();
         }
         if (mReceiveFragment != null) {
-            mReceiveFragment.initData();
+            mReceiveFragment.lazyData();
         }
     }
 
@@ -186,6 +186,18 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void getBalanceSuccess(List<Wallet> wallets) {
         BitbillApp.get().setWallets(wallets);
         reloadWalletInfo();
+    }
+
+    @Override
+    public void listUnconfirmSuccess(List<Unconfirm> data) {
+        if (mAssetFragment != null) {
+            mAssetFragment.loadUnconfirm(data);
+        }
+    }
+
+    @Override
+    public void listUnconfirmFail() {
+        showMessage("获取未确认交易失败");
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import butterknife.BindView;
  */
 public class SendFragment extends BaseLazyFragment {
 
+    private static final String TAG = SendFragment.class.getSimpleName();
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.viewPager)
@@ -150,6 +152,7 @@ public class SendFragment extends BaseLazyFragment {
     @Override
     public void lazyData() {
 
+        Log.d(TAG, "lazyData() called");
     }
 
     public void sendSuccess() {

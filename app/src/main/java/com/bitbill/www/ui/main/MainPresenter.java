@@ -24,6 +24,7 @@ package com.bitbill.www.ui.main;
 
 
 import com.androidnetworking.error.ANError;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
@@ -32,6 +33,7 @@ import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
+import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 
 import org.json.JSONObject;
 
@@ -158,6 +160,62 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                     }
                 })
         );
+    }
+
+    @Override
+    public void listUnconfirm() {
+
+        if (!isValidWallets()) {
+            return;
+        }
+        List<Wallet> wallets = getMvpView().getWallets();
+        String extendedKeysHash = "";
+        for (int i = 0; i < wallets.size(); i++) {
+            // TODO: 2017/12/21 check xpubkey
+            extendedKeysHash += EncryptUtils.encryptMD5ToString(wallets.get(i).getXPublicKey());
+            if (i < wallets.size() - 1) {
+                extendedKeysHash += "|";
+            }
+        }
+        getCompositeDisposable().add(getModelManager()
+                .listUnconfirm(extendedKeysHash)
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<ApiResponse<List<Unconfirm>>>() {
+                    @Override
+                    public void onNext(ApiResponse<List<Unconfirm>> listApiResponse) {
+                        super.onNext(listApiResponse);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (listApiResponse != null && listApiResponse.isSuccess()) {
+
+                            List<Unconfirm> data = listApiResponse.getData();
+                            if (StringUtils.isEmpty(data)) {
+                                getMvpView().listUnconfirmSuccess(data);
+                            } else {
+                                getMvpView().listUnconfirmFail();
+                            }
+                        } else {
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (e instanceof ANError) {
+                            handleApiError(((ANError) e));
+                        } else {
+                            getMvpView().listUnconfirmFail();
+                        }
+
+                    }
+                })
+        );
+
     }
 
     public boolean isValidWallets() {

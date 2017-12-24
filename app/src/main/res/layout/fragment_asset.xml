@@ -1,8 +1,8 @@
 <com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
-                                                              xmlns:tools="http://schemas.android.com/tools"
-                                                              android:id="@+id/refresh_layout"
-                                                              android:layout_width="match_parent"
-                                                              android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,24 +16,41 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/Text.Title.Content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_padding"
-                android:layout_marginRight="@dimen/activity_padding"
-                android:layout_marginTop="30dp"
-                android:text="@string/text_current_currency_type"/>
+                <TextView
+                    android:id="@+id/tv_coin_count"
+                    style="@style/Text.Title.Content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_padding"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/text_current_currency_type" />
 
-            <TextView
-                style="@style/Text.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_padding"
-                android:layout_marginRight="@dimen/activity_padding"
-                android:layout_marginTop="5dp"
-                android:text="@string/title_total_assets"/>
+                <TextView
+                    android:id="@+id/tv_total_asset"
+                    style="@style/Text.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_coin_count"
+                    android:layout_marginLeft="@dimen/activity_padding"
+                    android:layout_marginRight="@dimen/activity_padding"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/title_total_assets" />
+
+
+                <RadioButton
+                    android:id="@+id/rb_socket_status"
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/tv_total_asset"
+                    android:layout_marginRight="@dimen/activity_padding"
+                    android:background="@drawable/socket_status_green_corner"
+                    android:button="@color/transparent" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,7 +71,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_asset_btc"/>
+                        android:src="@drawable/ic_asset_btc" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -66,14 +83,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/text_asset_btc"
-                            android:textAllCaps="true"/>
+                            android:textAllCaps="true" />
 
                         <TextView
                             android:id="@+id/tv_btc_amount"
                             style="@style/Text.Asset"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/text_default_amount"/>
+                            android:text="@string/text_default_amount" />
 
                     </LinearLayout>
 
@@ -92,7 +109,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_asset_bch"/>
+                        android:src="@drawable/ic_asset_bch" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -105,18 +122,19 @@
                             android:layout_height="wrap_content"
                             android:text="@string/text_asset_bch"
                             android:textAllCaps="true"
-                            android:textColor="@color/white_30"/>
+                            android:textColor="@color/white_30" />
 
                         <TextView
                             style="@style/Text.Asset"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/text_default_amount"
-                            android:textColor="@color/white_30"/>
+                            android:textColor="@color/white_30" />
 
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -129,7 +147,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_asset_eth"/>
+                        android:src="@drawable/ic_asset_eth" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -142,14 +160,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/text_asset_eth"
                             android:textAllCaps="true"
-                            android:textColor="@color/white_30"/>
+                            android:textColor="@color/white_30" />
 
                         <TextView
                             style="@style/Text.Asset"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/text_default_amount"
-                            android:textColor="@color/white_30"/>
+                            android:textColor="@color/white_30" />
 
                     </LinearLayout>
 
@@ -157,12 +175,10 @@
             </LinearLayout>
 
 
-            <fragment
-                android:id="@+id/frg_btc_record"
-                class="com.bitbill.www.ui.main.asset.BtcUnconfirmFragment"
+            <FrameLayout
+                android:id="@+id/fl_btc_unconfirm"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,7 +193,7 @@
                     android:id="@+id/tv_current_wallet_count"
                     style="@style/Text.Title.Content"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -191,14 +207,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/title_asset_my_wallet"/>
+                        android:text="@string/title_asset_my_wallet" />
 
                     <ImageView
                         android:id="@+id/iv_plus"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:padding="5dp"
-                        android:src="@drawable/ic_asset_plus"/>
+                        android:src="@drawable/ic_asset_plus" />
                 </LinearLayout>
             </LinearLayout>
 

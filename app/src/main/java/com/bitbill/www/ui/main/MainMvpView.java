@@ -24,6 +24,7 @@ package com.bitbill.www.ui.main;
 
 import com.bitbill.www.common.base.view.MvpView;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 
 import java.util.List;
 
@@ -43,4 +44,8 @@ public interface MainMvpView extends MvpView {
     void getBalanceFail();
 
     void getBalanceSuccess(List<Wallet> wallets);
+
+    void listUnconfirmSuccess(List<Unconfirm> data);
+
+    void listUnconfirmFail();
 }

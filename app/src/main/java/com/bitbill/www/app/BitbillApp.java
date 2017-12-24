@@ -7,6 +7,8 @@ import android.util.Log;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.bitbill.www.BuildConfig;
+import com.bitbill.www.R;
+import com.bitbill.www.common.utils.SoundUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.di.component.ApplicationComponent;
@@ -109,13 +111,15 @@ public class BitbillApp extends Application {
             @Override
             public void call(Object... args) {
                 Log.d(TAG, "EVENT_CONFIRM called with: args = [" + args + "]");
-                // TODO: 2017/12/22 播放声音
             }
         }).on(EVENT_UNCONFIRM, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
 
                 Log.d(TAG, "EVENT_UNCONFIRM called with: args = [" + args + "]");
+                // 播放声音
+                SoundUtils.playSound(R.raw.diaoluo_da);
+
             }
         });
         mSocket.connect();
@@ -150,6 +154,14 @@ public class BitbillApp extends Application {
 
     public void registerWallet(Register register) {
         mSocket.emit(EVENT_REGISTER, register.jsonString());
+        Log.d(TAG, "registerWallet() called with: register = [" + register.jsonString() + "]");
+    }
+
+    public boolean getSocketConnected() {
+        if (mSocket == null) {
+            return false;
+        }
+        return mSocket.connected();
     }
 }
 

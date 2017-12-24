@@ -17,7 +17,6 @@ import com.bitbill.www.common.base.view.decoration.DividerDecoration;
 import com.bitbill.www.common.base.view.dialog.ListSelectDialog;
 import com.bitbill.www.model.contact.network.entity.Contact;
 import com.mcxtzhang.indexlib.IndexBar.widget.IndexBar;
-import com.mcxtzhang.indexlib.suspension.SuspensionDecoration;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -45,7 +44,6 @@ public class ContactActivity extends BaseToolbarActivity {
     CommonAdapter<Contact> mAdapter;
     LinearLayoutManager mManager;
     List<Contact> mDatas;
-    private SuspensionDecoration mDecoration;
     private ListSelectDialog mListSelectDialog;
 
     public static void start(Context context) {
@@ -114,7 +112,6 @@ public class ContactActivity extends BaseToolbarActivity {
         });
 
         mRv.setAdapter(mAdapter);
-        mRv.addItemDecoration(mDecoration = new SuspensionDecoration(this, mDatas).setColorTitleBg(getResources().getColor(R.color.white_10)).setColorTitleFont(getResources().getColor(R.color.white_60)));
 
         //如果add两个，那么按照先后顺序，依次渲染。
         mRv.addItemDecoration(new DividerDecoration(this, DividerDecoration.VERTICAL_LIST));
@@ -124,7 +121,6 @@ public class ContactActivity extends BaseToolbarActivity {
                 .setmLayoutManager(mManager)
                 .setmSourceDatas(mDatas)//设置数据
                 .invalidate();//设置RecyclerView的LayoutManager
-        mDecoration.setmDatas(mDatas);
 
         mListSelectDialog = ListSelectDialog.newInstance(getResources().getStringArray(R.array.dialog_create_contact));
         mListSelectDialog.setOnListSelectItemClickListener(position -> {
