@@ -52,6 +52,7 @@ class BILRecieveController: BILBaseViewController {
     
     @objc
     func walletDidChanged(notification: Notification) {
+        currentWallet = BILWalletManager.shared.wallets.first
         refreshUI()
     }
     

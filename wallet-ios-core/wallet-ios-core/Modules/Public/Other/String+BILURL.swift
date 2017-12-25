@@ -19,6 +19,8 @@ enum Router: URLRequestConvertible {
                 return (.bil_wallet_create, ["walletId": walletID, "extendedKeys": extendedKey, "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? ""])
             case .importWallet(let walletID, let extendedKey):
                 return (.bil_wallet_import, ["walletId": walletID, "extendedKeys": extendedKey, "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? ""])
+            case .deleteWallet(let extendedKeyHash):
+                return (.bil_wallet_delete, ["extendedKeysHash": extendedKeyHash, "clientId": BILDeviceManager.shared.deviceID])
             case .checkWalletID(let walletID):
                 return (.bil_wallet_check_id, ["walletId": walletID])
             case .getWalletID(let extendedKeyHash):
@@ -76,6 +78,7 @@ enum Router: URLRequestConvertible {
     case root
     case createWallet(walletID: String, extendedKey: String)
     case importWallet(walletID: String, extendedKey: String)
+    case deleteWallet(extendedKeyHash: String)
     case checkWalletID(walletID: String)
     case getWalletID(extendedKeyHash: String)
     case getBalance(extendedKeyHash: String)
@@ -98,6 +101,7 @@ extension String {
     static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
     static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
     static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
+    static var bil_wallet_delete: String { get { return bil_wallet_path + "deleteWallet" } }
     static var bil_wallet_import: String { get { return bil_wallet_path + "import" } }
     static var bil_wallet_check_id:  String { get { return bil_wallet_path + "checkWalletId" } }
     static var bil_wallet_get_id:  String { get { return bil_wallet_path + "getWalletId" } }
@@ -126,4 +130,8 @@ extension String {
     static var bil_socket_event_register: String { get { return "register" } }
     static var bil_socket_event_unconfirm: String { get { return "unconfirm" } }
     static var bil_socket_event_confirm: String { get { return "confirm" } }
+}
+
+extension String {
+    static var bil_extenal_blockchain_transaction: String { get { return "https://blockchain.info/tx/" } }
 }

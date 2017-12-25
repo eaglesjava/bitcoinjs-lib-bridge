@@ -35,7 +35,9 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
     @objc
     func walletDidChanged(notification: Notification) {
         tableView.reloadData()
-        tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
+        if wallets.count > 0 {
+            tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
+        }
     }
     
     deinit {

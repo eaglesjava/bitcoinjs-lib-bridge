@@ -55,8 +55,8 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
     
     func deleteWallet() {
         guard let wallet = self.wallet else { return }
-        wallet.deleteWalletInSever(success: { (result) in
-            
+        wallet.deleteWalletInSever(success: {
+            self.navigationController?.popViewController(animated: true)
         }) { (msg, code) in
             self.showTipAlert(msg: "删除钱包失败")
         }
@@ -92,7 +92,7 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
     }
     
     func showAlertForFail(_ msg: String = "请稍后再试") {
-        let alert = UIAlertController(title: "发送失败", message: msg, preferredStyle: .alert)
+        let alert = UIAlertController(title: "操作失败", message: msg, preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "确认", style: .default) { (action) in
             BILControllerManager.shared.showMainTabBarController()

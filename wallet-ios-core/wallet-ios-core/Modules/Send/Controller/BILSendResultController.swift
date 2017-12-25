@@ -84,8 +84,10 @@ class BILSendResultController: BILBaseViewController {
     }
     
     @IBAction func checkTransaction(_ sender: Any) {
-        let cont = SFSafariViewController(url: URL(string: "https://blockchain.info")!)
-        present(cont, animated: true, completion: nil)
+        if let tx = sendModel?.transaction {
+            let cont = SFSafariViewController(url: URL(string: "\(String.bil_extenal_blockchain_transaction)\(tx.txHash)")!)
+                present(cont, animated: true, completion: nil)
+        }
     }
     /*
     // MARK: - Navigation

@@ -205,6 +205,14 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	@objc
 	func walletDidChanged(notification: Notification) {
 		tableView.reloadData()
+        if wallets.count == 0 {
+            guard let cont = UIStoryboard(name: "NewWallet", bundle: nil).instantiateInitialViewController(), let mainCont = BILControllerManager.shared.mainTabBarController else {
+                return
+            }
+            mainCont.present(cont, animated: true, completion: {
+                mainCont.selectedIndex = 0
+            })
+        }
 	}
 	
 	// MARK: - Header view delegate
