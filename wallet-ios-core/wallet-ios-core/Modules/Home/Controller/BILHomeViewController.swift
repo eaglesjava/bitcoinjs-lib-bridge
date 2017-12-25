@@ -127,6 +127,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         
         setupRefresh()
 		
+        NotificationCenter.default.addObserver(self, selector: #selector(walletCountDidChanged(notification:)), name: .walletCountDidChanged, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(balanceDidChanged(notification:)), name: .walletDidChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(uncofirmTransactionDidChanged(notification:)), name: .recievedUnconfirmTransaction, object: nil)
@@ -152,6 +153,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: .recievedUnconfirmTransaction, object: nil)
         NotificationCenter.default.removeObserver(self, name: .unconfirmTransactionBeenConfirmed, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .walletCountDidChanged, object: nil)
         
 	}
 
@@ -200,6 +202,12 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         }) { (msg, code) in
             loadEnd()
         }
+    }
+    
+    @objc
+    func walletCountDidChanged(notification: Notification) {
+        tableView.reloadData()
+        refresh(sender: nil)
     }
 	
 	@objc

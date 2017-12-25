@@ -30,6 +30,7 @@ extension WalletModel {
         BILNetworkManager.request(request: .deleteWallet(extendedKeyHash: extKey.md5()), success: { (result) in
             do {
                 try BILWalletManager.shared.remove(wallet: self)
+                NotificationCenter.default.post(name: .walletCountDidChanged, object: nil)
                 success()
             } catch {
                 failure(error.localizedDescription, -1)
@@ -87,16 +88,29 @@ extension WalletModel {
         BILNetworkManager.request(request: .getUTXO(extendedKeyHash: extKey.md5()), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
-            let utxoDatas = json["utxo"].arrayValue
+            var utxoDatas = json["utxo"].arrayValue
+            if utxoDatas.count == 0 {
+                utxoDatas = json["uxto"].arrayValue
+            }
             var utxoModels = [BitcoinUTXOModel]()
+            var satoshisSum: Int64 = 0
             for json in utxoDatas {
-                utxoModels.append(BitcoinUTXOModel(jsonData: json))
+                let utxo = BitcoinUTXOModel(jsonData: json)
+                var isContain = false
+                for u in utxoModels {
+                    if u == utxo {
+                        isContain = true
+                        break
+                    }
+                }
+                if !isContain {
+                    satoshisSum += utxo.satoshiAmount
+                    utxoModels.append(utxo)
+                }
             }
             success(utxoModels)
         }, failure: failure)
     }
-    
-    
     
     func getTXBuildConfigurationFromServer(success: @escaping (_ utxo: [BitcoinUTXOModel], _ fee: [BTCFee], _ bestFee: BTCFee?) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {

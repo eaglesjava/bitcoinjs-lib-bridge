@@ -35,12 +35,12 @@ extension WalletModel {
         }
     }
 	
-	func getNewBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
+    func getNewBTCAddress(step: Int64 = 1, success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         guard let extPub = mainExtPublicKey else {
             failure("主扩展公钥为空")
             return
         }
-		lastAddressIndex += 1
+		lastAddressIndex += step
 		lastBTCAddress(success: { (address) in
 			BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: self.lastAddressIndex), success: { (result) in
 				debugPrint(result)
@@ -48,7 +48,7 @@ extension WalletModel {
 					try BILWalletManager.shared.saveWallets()
 					success(address)
 				} catch {
-					self.lastAddressIndex -= 1
+					self.lastAddressIndex -= step
 					failure("新地址保存失败")
 				}
 			}, failure: { (msg, code) in

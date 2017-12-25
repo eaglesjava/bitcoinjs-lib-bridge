@@ -21,11 +21,11 @@ class BILSokectManager: NSObject {
     
     override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(postWallets), name: NSNotification.Name.walletDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(postWallets), name: .walletCountDidChanged, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.walletDidChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .walletCountDidChanged, object: nil)
     }
     
     func startConnect() {

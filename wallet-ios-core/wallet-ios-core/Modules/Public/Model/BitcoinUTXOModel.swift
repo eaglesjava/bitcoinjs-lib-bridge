@@ -44,4 +44,8 @@ class BitcoinUTXOModel: NSObject, Comparable {
     func toInput() -> BTCInput {
         return BTCInput(txHash: txHash, index: txOutputIndex, bip39Index: bip39Index, satoshi: satoshiAmount, address: address)
     }
+    
+    var amoutString: String {
+        return "\(BTCFormatString(btc: satoshiAmount))"
+    }
 }
