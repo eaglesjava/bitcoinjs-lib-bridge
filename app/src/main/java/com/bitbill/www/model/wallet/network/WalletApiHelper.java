@@ -5,20 +5,21 @@ import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiHelper;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
-import com.bitbill.www.model.wallet.network.entity.AddContactsRequest;
-import com.bitbill.www.model.wallet.network.entity.AddContactsResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
-import com.bitbill.www.model.wallet.network.entity.GetContactsResponse;
+import com.bitbill.www.model.wallet.network.entity.GetLastAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.GetLastAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.wallet.network.entity.GetTxHistoryRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
+import com.bitbill.www.model.wallet.network.entity.SearchWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.SearchWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
@@ -159,14 +160,13 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
     /**
      * 交易记录
      *
-     * @param extendedKeysHash
      * @return
      */
     @Override
-    public Observable<ApiResponse<List<TxHistory>>> getTxHistory(String extendedKeysHash) {
+    public Observable<ApiResponse<List<TxHistory>>> getTxHistory(GetTxHistoryRequest getTxHistoryRequest) {
         return Rx2AndroidNetworking.post(ApiEndPoint.GET_TX_HISTORY)
                 .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(extendedKeysHash)
+                .addApplicationJsonBody(getTxHistoryRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<List<TxHistory>>>() {
                 });
@@ -175,14 +175,13 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
     /**
      * 未确认交易列表
      *
-     * @param extendedKeysHash
      * @return
      */
     @Override
-    public Observable<ApiResponse<List<Unconfirm>>> listUnconfirm(String extendedKeysHash) {
+    public Observable<ApiResponse<List<Unconfirm>>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest) {
         return Rx2AndroidNetworking.post(ApiEndPoint.LIST_UNCONFIRM)
                 .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(extendedKeysHash)
+                .addApplicationJsonBody(listUnconfirmRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<List<Unconfirm>>>() {
                 });
@@ -205,62 +204,29 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
     /**
      * 搜索WalletId
      *
-     * @param walletId
      * @return
      */
     @Override
-    public Observable<ApiResponse<SearchWalletIdResponse>> searchWalletId(String walletId) {
+    public Observable<ApiResponse<SearchWalletIdResponse>> searchWalletId(SearchWalletIdRequest searchWalletIdRequest) {
         return Rx2AndroidNetworking.post(ApiEndPoint.SEARCH_WALLETID)
                 .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(walletId)
+                .addApplicationJsonBody(searchWalletIdRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<SearchWalletIdResponse>>() {
                 });
     }
 
     /**
-     * 增加联系人
-     *
-     * @param addContactsRequest
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<AddContactsResponse>> addContacts(AddContactsRequest addContactsRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ADD_CONTACTS)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(addContactsRequest)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<AddContactsResponse>>() {
-                });
-    }
-
-    /**
-     * 获取联系人
-     *
-     * @param walletKey
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<GetContactsResponse>> getContacts(String walletKey) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_CONTACTS)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(walletKey)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<GetContactsResponse>>() {
-                });
-    }
-
-    /**
      * 获取联系人最新地址
      *
-     * @param walletId
+     * @param getLastAddressRequest
      * @return
      */
     @Override
-    public Observable<ApiResponse<GetLastAddressResponse>> getLastAddress(String walletId) {
+    public Observable<ApiResponse<GetLastAddressResponse>> getLastAddress(GetLastAddressRequest getLastAddressRequest) {
         return Rx2AndroidNetworking.post(ApiEndPoint.GET_LAST_ADDRESS)
                 .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(walletId)
+                .addApplicationJsonBody(getLastAddressRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<GetLastAddressResponse>>() {
                 });

@@ -17,6 +17,7 @@ import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.base.view.widget.PopupWalletMenu;
 import com.bitbill.www.common.base.view.widget.WalletView;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.bitbill.www.ui.main.MainActivity;
@@ -207,6 +208,17 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     }
 
     public void loadUnconfirm(List<Unconfirm> data) {
-        getChildFragmentManager().beginTransaction().replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<Unconfirm>) data)).commit();
+        if (StringUtils.isEmpty(data)) {
+            //如果加载不到未确认列表 移除BtcUnconfirmFragment
+            Fragment fragment = getChildFragmentManager().findFragmentByTag(BtcUnconfirmFragment.TAG);
+            if (fragment != null) {
+                getChildFragmentManager().beginTransaction().remove(fragment);
+            }
+        } else {
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<Unconfirm>) data), BtcUnconfirmFragment.TAG)
+                    .commit();
+        }
     }
 }

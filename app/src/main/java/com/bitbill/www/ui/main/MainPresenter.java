@@ -33,6 +33,7 @@ import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
+import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 
 import org.json.JSONObject;
@@ -178,7 +179,7 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
             }
         }
         getCompositeDisposable().add(getModelManager()
-                .listUnconfirm(extendedKeysHash)
+                .listUnconfirm(new ListUnconfirmRequest(extendedKeysHash))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<List<Unconfirm>>>() {
                     @Override
@@ -190,12 +191,10 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                         if (listApiResponse != null && listApiResponse.isSuccess()) {
 
                             List<Unconfirm> data = listApiResponse.getData();
-                            if (StringUtils.isEmpty(data)) {
-                                getMvpView().listUnconfirmSuccess(data);
-                            } else {
-                                getMvpView().listUnconfirmFail();
-                            }
+                            getMvpView().listUnconfirmSuccess(data);
+
                         } else {
+                            getMvpView().listUnconfirmFail();
                         }
 
                     }

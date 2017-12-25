@@ -199,7 +199,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void listUnconfirmFail() {
-        showMessage("获取未确认交易失败");
+        if (mAssetFragment != null) {
+            mAssetFragment.loadUnconfirm(null);
+        }
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -293,6 +295,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void initData() {
         getMvpPresenter().loadWallet();
+        //加载未确认交易
+        getMvpPresenter().listUnconfirm();
     }
 
     @Override

@@ -27,6 +27,7 @@ import butterknife.BindView;
  */
 public class BtcUnconfirmFragment extends BaseFragment {
 
+    public static final String TAG = BtcUnconfirmFragment.class.getSimpleName();
     private static final String ARG_UNCONFIRM_LIST = "arg_unconfirm_list";
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
