@@ -55,6 +55,7 @@ class BILHomeTableHeaderView: UITableViewHeaderFooterView {
     
     func showNetworkIndicator() {
         networkIndicator.isHidden = false
+        loadNetworkIndicator()
     }
     
     func loadNetworkIndicator() {
