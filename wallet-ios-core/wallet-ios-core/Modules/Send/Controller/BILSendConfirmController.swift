@@ -137,8 +137,7 @@ class BILSendConfirmController: BILBaseViewController {
         func createTXBuilder(address: String?) {
             wallet.getTXBuildConfigurationFromServer(success: { (utxos, fees, bestFee)  in
                 self.setFees(fees: fees, best: bestFee)
-                self.amountLabel.text = wallet.btc_balanceString
-                self.sendModel?.amount = wallet.btc_balanceString
+                self.amountLabel.text = model.bitcoinAmount
                 let builder = BTCTransactionBuilder(utxos: utxos, changeAddress: address, feePerByte: self.bestFee, maxFeePerByte: self.maxFeePerByte, isSendAll: model.isSendAll)
                 _ = builder.addTargetOutput(output: BTCOutput(address: model.address, amount: model.bitcoinSatoshiAmount))
                 self.bil_dismissHUD()
@@ -234,7 +233,6 @@ class BILSendConfirmController: BILBaseViewController {
         builder.seedHex = seed
         builder.build(success: { (tx) in
             debugPrint(tx.bytesCount)
-            debugPrint(tx.hexString)
             tx.remark = self.remarkInputView.textField.text
             wallet.send(transaction: tx, success: { (result) in
                 debugPrint(result)

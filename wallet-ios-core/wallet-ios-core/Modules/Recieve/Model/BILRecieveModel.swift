@@ -33,7 +33,7 @@ enum CoinType {
 class BILRecieveModel: NSObject {
 	
 	var address: String
-	var amount: String
+    var amount: String
 	var coinType: CoinType
 	
 	init(address: String = "", amount: String = "0", coinType: CoinType = .btc) {

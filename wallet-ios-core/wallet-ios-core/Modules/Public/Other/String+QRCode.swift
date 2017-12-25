@@ -11,6 +11,20 @@ import UIKit
 
 extension String {
 	func qrCodeImage(targetSize: CGSize) -> UIImage? {
-		return BILQRCodeHelper.generateQRCode(msg: self, targetSize: targetSize)
+        guard let filter = CIFilter(name: "CIQRCodeGenerator") else {
+            return nil
+        }
+        
+        let data = self.data(using: .utf8)
+        
+        filter.setValue(data, forKey: "inputMessage")
+        
+        guard let ciImage = filter.outputImage else {
+            return nil
+        }
+        let scale = targetSize.width / ciImage.extent.size.width
+        let magnifiedImage = ciImage.transformed(by: CGAffineTransform(scaleX: scale, y: scale))
+        
+        return UIImage(ciImage: magnifiedImage)
 	}
 }

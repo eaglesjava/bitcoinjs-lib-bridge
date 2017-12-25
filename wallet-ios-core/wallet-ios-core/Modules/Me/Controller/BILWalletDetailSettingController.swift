@@ -11,6 +11,7 @@ import DateToolsSwift
 
 extension String {
     static var bil_meWalletDetailToBackupWalletSegue: String { return "BILMeWalletDetailToBackupSegue" }
+    static var bil_meWalletDetailToAddressSegue: String { return "BILMeWalletDetailToAddressSegue" }
 }
 
 class BILWalletDetailSettingController: BILLightBlueBaseController {
@@ -113,6 +114,11 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
             guard let wallet = self.wallet else { return }
             if let cont = (segue.destination as? UINavigationController)?.viewControllers.first as? BILBackupWalletMnemonicController {
                 cont.mnemonicHash = wallet.mnemonicHash
+            }
+        case .bil_meWalletDetailToAddressSegue:
+            guard let wallet = self.wallet else { return }
+            if let cont = segue.destination as? BILWalletAddressController {
+                cont.wallet = wallet
             }
         default:
             ()

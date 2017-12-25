@@ -84,6 +84,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="钱包地址"/>
+                                <connections>
+                                    <segue destination="3kH-l4-Wmq" kind="show" identifier="BILMeWalletDetailToAddressSegue" id="qEa-Lr-OJc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9E-N3-fyw">
                                 <rect key="frame" x="25" y="587" width="325" height="55"/>
@@ -126,7 +129,7 @@
                             <constraint firstItem="Mtd-FW-skP" firstAttribute="top" secondItem="Zcu-Bh-rZz" secondAttribute="bottom" constant="10" id="JtJ-G8-eoL"/>
                             <constraint firstItem="aWP-ji-LN2" firstAttribute="leading" secondItem="ha7-lL-iwI" secondAttribute="trailing" constant="25" id="M6m-QH-piF"/>
                             <constraint firstItem="Zcu-Bh-rZz" firstAttribute="leading" secondItem="aWP-ji-LN2" secondAttribute="leading" id="Oxe-1f-hpn"/>
-                            <constraint firstItem="R9m-A8-J9e" firstAttribute="bottom" secondItem="m9E-N3-fyw" secondAttribute="bottom" constant="25" id="P4d-Ta-fZc"/>
+                            <constraint firstAttribute="bottom" secondItem="m9E-N3-fyw" secondAttribute="bottom" constant="25" id="P4d-Ta-fZc"/>
                             <constraint firstItem="aWP-ji-LN2" firstAttribute="top" secondItem="ha7-lL-iwI" secondAttribute="top" id="Q5K-4w-uFd"/>
                             <constraint firstItem="Zcu-Bh-rZz" firstAttribute="top" secondItem="aWP-ji-LN2" secondAttribute="bottom" constant="5" id="S1V-yK-ZUH"/>
                             <constraint firstItem="cRb-iU-ttO" firstAttribute="top" secondItem="M8I-VI-SFJ" secondAttribute="bottom" constant="15" id="T2L-47-RRK"/>
@@ -156,6 +159,73 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qGy-dg-Rmj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1612" y="113.79310344827587"/>
+        </scene>
+        <!--钱包地址-->
+        <scene sceneID="3l3-Wz-bl1">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="3kH-l4-Wmq" customClass="BILLightBlueBaseController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zxY-bf-4a1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xxe-84-g6U">
+                                <rect key="frame" x="25" y="141" width="325" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   BTC   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRc-fZ-w8T">
+                                        <rect key="frame" x="0.0" y="0.0" width="53" height="32"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.22352941179999999" green="0.43137254899999999" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  BCH  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hau-eU-XiZ">
+                                        <rect key="frame" x="61" y="0.0" width="47" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  ETH  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6u-E7-qtj">
+                                        <rect key="frame" x="116" y="0.0" width="45" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="H6u-E7-qtj" secondAttribute="bottom" id="5LU-qb-Tp1"/>
+                                    <constraint firstItem="yRc-fZ-w8T" firstAttribute="top" secondItem="Xxe-84-g6U" secondAttribute="top" id="JbT-uh-JFw"/>
+                                    <constraint firstItem="Hau-eU-XiZ" firstAttribute="leading" secondItem="yRc-fZ-w8T" secondAttribute="trailing" constant="8" id="QCV-Zp-BRS"/>
+                                    <constraint firstAttribute="height" constant="32" id="UIx-yV-ocK"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hau-eU-XiZ" secondAttribute="bottom" id="WWj-s6-qVs"/>
+                                    <constraint firstItem="Hau-eU-XiZ" firstAttribute="top" secondItem="Xxe-84-g6U" secondAttribute="top" id="XZl-hu-rvX"/>
+                                    <constraint firstItem="H6u-E7-qtj" firstAttribute="top" secondItem="Xxe-84-g6U" secondAttribute="top" id="Xik-V7-MQH"/>
+                                    <constraint firstAttribute="bottom" secondItem="yRc-fZ-w8T" secondAttribute="bottom" id="iLJ-Zy-TEG"/>
+                                    <constraint firstItem="H6u-E7-qtj" firstAttribute="leading" secondItem="Hau-eU-XiZ" secondAttribute="trailing" constant="8" id="ioP-4Z-6da"/>
+                                    <constraint firstItem="yRc-fZ-w8T" firstAttribute="leading" secondItem="Xxe-84-g6U" secondAttribute="leading" id="lP6-Bc-IMb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Xxe-84-g6U" firstAttribute="leading" secondItem="vTF-ro-rZU" secondAttribute="leading" constant="25" id="ZlV-d9-zzY"/>
+                            <constraint firstItem="Xxe-84-g6U" firstAttribute="top" secondItem="vTF-ro-rZU" secondAttribute="top" constant="25" id="sR3-hM-eks"/>
+                            <constraint firstItem="vTF-ro-rZU" firstAttribute="trailing" secondItem="Xxe-84-g6U" secondAttribute="trailing" constant="25" id="sr4-uu-UUu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vTF-ro-rZU"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="钱包地址" id="1ew-17-gnL">
+                        <barButtonItem key="rightBarButtonItem" title="扫描地址" id="ybf-0m-aS9"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bH3-qq-sNN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2431" y="114"/>
         </scene>
         <!--我-->
         <scene sceneID="sIc-Du-SFW">
@@ -311,6 +381,6 @@
         <image name="icon_me_h" width="17" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WfD-od-GeW"/>
+        <segue reference="ibQ-sv-EQr"/>
     </inferredMetricsTieBreakers>
 </document>
