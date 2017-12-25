@@ -29,10 +29,12 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = new int[]{
             android.R.attr.listDivider
     };
-    private final int mDividerPadding;
-
     protected Drawable mDivider;
-
+    private int mDividerPadding;
+    private int mDividerLeftPadding;
+    private int mDividerRightPadding;
+    private int mDividerTopPadding;
+    private int mDividerBottomPadding;
     private int mOrientation;
 
     public DividerDecoration(Context context, int orientation) {
@@ -40,7 +42,15 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
         mDivider = a.getDrawable(0);
         a.recycle();
         setOrientation(orientation);
+        initDividerPadding(context);
+    }
+
+    private void initDividerPadding(Context context) {
         mDividerPadding = context.getResources().getDimensionPixelOffset(R.dimen.activity_padding);
+        mDividerLeftPadding = mDividerPadding;
+        mDividerRightPadding = mDividerPadding;
+        mDividerTopPadding = mDividerPadding;
+        mDividerBottomPadding = mDividerPadding;
     }
 
     public void setOrientation(int orientation) {
@@ -63,8 +73,8 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
 
 
     public void drawVertical(Canvas c, RecyclerView parent) {
-        final int left = parent.getPaddingLeft() + mDividerPadding;
-        final int right = parent.getWidth() - parent.getPaddingRight() - mDividerPadding;
+        final int left = parent.getPaddingLeft() + mDividerLeftPadding;
+        final int right = parent.getWidth() - parent.getPaddingRight() - mDividerRightPadding;
 
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -80,8 +90,8 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
     }
 
     public void drawHorizontal(Canvas c, RecyclerView parent) {
-        final int top = parent.getPaddingTop() + mDividerPadding;
-        final int bottom = parent.getHeight() - parent.getPaddingBottom() - mDividerPadding;
+        final int top = parent.getPaddingTop() + mDividerTopPadding;
+        final int bottom = parent.getHeight() - parent.getPaddingBottom() - mDividerBottomPadding;
 
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -102,5 +112,39 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
         } else {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
         }
+    }
+
+    public DividerDecoration setDividerPadding(int dividerPadding) {
+        mDividerPadding = dividerPadding;
+        mDividerLeftPadding = dividerPadding;
+        mDividerRightPadding = dividerPadding;
+        mDividerTopPadding = dividerPadding;
+        mDividerBottomPadding = dividerPadding;
+        return this;
+    }
+
+    public DividerDecoration setDividerLeftPadding(int dividerLeftPadding) {
+        mDividerLeftPadding = dividerLeftPadding;
+        return this;
+    }
+
+    public DividerDecoration setDividerRightPadding(int dividerRightPadding) {
+        mDividerRightPadding = dividerRightPadding;
+        return this;
+    }
+
+    public DividerDecoration setDividerTopPadding(int dividerTopPadding) {
+        mDividerTopPadding = dividerTopPadding;
+        return this;
+    }
+
+    public DividerDecoration setDividerBottomPadding(int dividerBottomPadding) {
+        mDividerBottomPadding = dividerBottomPadding;
+        return this;
+    }
+
+    public DividerDecoration setDivider(Drawable divider) {
+        mDivider = divider;
+        return this;
     }
 }

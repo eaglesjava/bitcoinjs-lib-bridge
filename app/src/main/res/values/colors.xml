@@ -29,6 +29,7 @@
     <color name="red">#FF626C</color>
     <color name="red_dark">#FF454D</color>
     <color name="edit_line">#80F2F2F2</color>
+    <color name="item_line">#F2F2F2</color>
     <color name="error">#FD6D73</color>
     <color name="green">#ABE64D</color>
     <color name="div_gray_bg">#d9dada</color>

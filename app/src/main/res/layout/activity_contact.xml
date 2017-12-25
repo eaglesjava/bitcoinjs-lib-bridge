@@ -17,24 +17,6 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <com.mcxtzhang.indexlib.IndexBar.widget.IndexBar
-        android:id="@+id/indexBar"
-        android:layout_width="24dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        app:indexBarPressBackground="@color/white_10"
-        app:indexBarTextSize="16sp" />
-
-    <TextView
-        android:id="@+id/tvSideBarHint"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:background="@color/white_60"
-        android:gravity="center"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
-        android:visibility="gone" />
 
 
 </FrameLayout>

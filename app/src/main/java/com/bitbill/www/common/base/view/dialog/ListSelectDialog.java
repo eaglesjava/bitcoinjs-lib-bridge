@@ -19,7 +19,6 @@ import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by isanwenyu on 2017/12/20.
@@ -30,7 +29,6 @@ public class ListSelectDialog extends BaseDialog implements BaseViewControl {
     public static final String TAG = "ListSelectDialog";
     @BindView(R.id.list)
     RecyclerView mList;
-    Unbinder unbinder;
     private String[] datas;
     private CommonAdapter<String> mAdapter;
     private OnListSelectItemClickListener mOnListSelectItemClickListener;
@@ -50,17 +48,11 @@ public class ListSelectDialog extends BaseDialog implements BaseViewControl {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         onBeforeSetContentLayout();
         View view = inflater.inflate(getLayoutId(), container);
-        setUnBinder(unbinder = ButterKnife.bind(this, view));
+        setUnBinder(ButterKnife.bind(this, view));
         init(savedInstanceState);
         initView();
         initData();
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override
@@ -89,6 +81,7 @@ public class ListSelectDialog extends BaseDialog implements BaseViewControl {
                 if (mOnListSelectItemClickListener != null) {
                     mOnListSelectItemClickListener.onSelectItemClick(position);
                 }
+                dismissDialog(TAG);
             }
 
             @Override
@@ -97,7 +90,7 @@ public class ListSelectDialog extends BaseDialog implements BaseViewControl {
             }
         });
         mList.setAdapter(mAdapter);
-        mList.addItemDecoration(new com.bitbill.www.common.base.view.widget.DividerDecoration(getBaseActivity(), DividerDecoration.VERTICAL_LIST));
+        mList.addItemDecoration(new DividerDecoration(getBaseActivity(), DividerDecoration.VERTICAL_LIST).setDividerPadding(0).setDivider(getResources().getDrawable(R.color.item_line)));
 
 
     }

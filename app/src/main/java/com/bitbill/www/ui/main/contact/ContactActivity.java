@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
@@ -16,7 +16,7 @@ import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.decoration.DividerDecoration;
 import com.bitbill.www.common.base.view.dialog.ListSelectDialog;
 import com.bitbill.www.model.contact.network.entity.Contact;
-import com.mcxtzhang.indexlib.IndexBar.widget.IndexBar;
+import com.mcxtzhang.indexlib.IndexBar.utils.IndexHelper;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -29,16 +29,6 @@ import butterknife.BindView;
 public class ContactActivity extends BaseToolbarActivity {
     @BindView(R.id.rv)
     RecyclerView mRv;
-    /**
-     * 显示指示器DialogText
-     */
-    @BindView(R.id.tvSideBarHint)
-    TextView mTvSideBarHint;
-    /**
-     * 右侧边栏导航区域
-     */
-    @BindView(R.id.indexBar)
-    IndexBar mIndexBar;
 
 
     CommonAdapter<Contact> mAdapter;
@@ -96,6 +86,18 @@ public class ContactActivity extends BaseToolbarActivity {
                 holder.setText(R.id.tv_contact_name, contact.getName());
                 holder.setText(R.id.tv_contact_address, contact.getAddress());
                 holder.setText(R.id.tv_contact_label, String.valueOf(contact.getName().charAt(0)));
+                if (position == 0) {//等于0肯定要有title的
+                    holder.setText(R.id.tv_label_title, mDatas.get(position).getBaseIndexTag());
+
+                } else {//其他的通过判断
+                    if (null != mDatas.get(position).getSuspensionTag() && !mDatas.get(position).getSuspensionTag().equals(mDatas.get(position - 1).getSuspensionTag())) {
+                        //不为空 且跟前一个tag不一样了，说明是新的分类，也要title
+                        holder.setText(R.id.tv_label_title, mDatas.get(position).getBaseIndexTag());
+                    } else {
+                        //none
+                        holder.setText(R.id.tv_label_title, "");
+                    }
+                }
             }
         };
         mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
@@ -114,13 +116,11 @@ public class ContactActivity extends BaseToolbarActivity {
         mRv.setAdapter(mAdapter);
 
         //如果add两个，那么按照先后顺序，依次渲染。
-        mRv.addItemDecoration(new DividerDecoration(this, DividerDecoration.VERTICAL_LIST));
+        int dividerLeftPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 55, getResources().getDisplayMetrics());
+        mRv.addItemDecoration(new DividerDecoration(this, DividerDecoration.VERTICAL_LIST).setDividerLeftPadding(dividerLeftPadding));
 
-        mIndexBar.setmPressedShowTextView(mTvSideBarHint)//设置HintTextView
-                .setNeedRealIndex(true)//设置需要真实的索引
-                .setmLayoutManager(mManager)
-                .setmSourceDatas(mDatas)//设置数据
-                .invalidate();//设置RecyclerView的LayoutManager
+        //对已有数据进行排序 创建索引
+        new IndexHelper(mDatas);
 
         mListSelectDialog = ListSelectDialog.newInstance(getResources().getStringArray(R.array.dialog_create_contact));
         mListSelectDialog.setOnListSelectItemClickListener(position -> {
@@ -153,18 +153,6 @@ public class ContactActivity extends BaseToolbarActivity {
         return R.layout.activity_contact;
     }
 
-    /**
-     * 更新数据源
-     *
-     * @param view
-     */
-    public void updateDatas(View view) {
-        // TODO: 2017/12/20 更新数据
-        mIndexBar.setmSourceDatas(mDatas)
-                .invalidate();
-        mAdapter.notifyDataSetChanged();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.contact_menu, menu);
@@ -182,7 +170,7 @@ public class ContactActivity extends BaseToolbarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_contact_create) {
             // 跳出选择对话框
-//            mListSelectDialog.show(getSupportFragmentManager(), ListSelectDialog.TAG);
+            mListSelectDialog.show(getSupportFragmentManager(), ListSelectDialog.TAG);
             return true;
         }
 
