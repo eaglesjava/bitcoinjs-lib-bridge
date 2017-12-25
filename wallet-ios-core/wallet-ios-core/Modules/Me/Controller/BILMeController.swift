@@ -16,12 +16,15 @@ extension String {
 class BILMeController: BILBaseViewController {
     
     enum BILMeSectionType: Int {
-        case wallet = 0
+		case contacts = 0
+        case wallet
         case preference
         case other
         
         var sectionTitle: String {
             switch self {
+			case .contacts:
+				return "联系人设置"
             case .wallet:
                 return "钱包"
             case .preference:
@@ -48,6 +51,8 @@ class BILMeController: BILBaseViewController {
         
         func dataArray() -> [Any] {
             switch self {
+			case .contacts:
+				return ["备份联系人", "恢复联系人"]
             case .wallet:
                 return BILWalletManager.shared.wallets
             case .preference:
@@ -69,7 +74,7 @@ class BILMeController: BILBaseViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
-    var sections: [BILMeSectionType] = [.wallet, .preference, .other]
+    var sections: [BILMeSectionType] = [.contacts, .wallet, .preference, .other]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +96,32 @@ class BILMeController: BILBaseViewController {
 	@objc
 	func walletDidChanged(notification: Notification) {
 		tableView.reloadData()
+	}
+	
+	func backupContacts() {
+		let key = BILDeviceManager.shared.contactKey
+		showTipAlert(title: "您的联系人密钥", msg: key, actionTitle: "复制密钥") {
+			UIPasteboard.general.string = key
+			self.bil_makeToast(msg: "密钥已复制")
+		}
+	}
+	
+	func recoverContacts() {
+		let alert = UIAlertController(title: "恢复联系人", message: nil, preferredStyle: .alert)
+		
+		alert.addTextField { (textField) in
+			textField.placeholder = "请输入密钥以确认"
+		}
+		
+		alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (action) in
+			
+		}))
+		
+		alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+			
+		}))
+		
+		present(alert, animated: true, completion: nil)
 	}
 
     override func didReceiveMemoryWarning() {
@@ -153,10 +184,14 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionType = sections[indexPath.section]
         let cell = tableView.dequeueReusableCell(withIdentifier: sectionType.cellID(), for: indexPath)
+		let model = sectionType.dataArray()[indexPath.row]
         switch sectionType {
+		case .contacts:
+			let c = cell as! BILMeCell
+			c.titleLabel.text = model as? String
         case .wallet:
             let c = cell as! BILMeWalletCell
-            let wallet = sectionType.dataArray()[indexPath.row] as? WalletModel
+            let wallet = model as? WalletModel
             c.wallet = wallet
         default:
             ()
@@ -185,6 +220,15 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let sectionType = sections[indexPath.section]
 		switch sectionType {
+		case .contacts:
+			switch indexPath.row {
+			case 0:
+				backupContacts()
+			case 1:
+				recoverContacts()
+			default:
+				()
+			}
 		case .wallet:
 			guard let wallet = sectionType.dataArray()[indexPath.row] as? WalletModel else { return }
 			performSegue(withIdentifier: .bil_meToWalletDetailSegue, sender: wallet)

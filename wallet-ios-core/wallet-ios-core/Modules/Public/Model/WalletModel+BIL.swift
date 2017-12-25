@@ -14,7 +14,7 @@ import CryptoSwift
 extension WalletModel {
 	var id_qrString: String {
 		get {
-			return "bitbill://wallet.bitbill.com?id=\(id ?? "")"
+			return "bitbill://www.bitbill.com/contact?id=\(id ?? "")"
 		}
 	}
 }

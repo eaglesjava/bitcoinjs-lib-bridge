@@ -70,7 +70,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
     
     func setupLayers() {
         let maskLayer = CALayer()
-        var frame = containerView.bounds
+        var frame = UIScreen.main.bounds
         frame.size.height += 200
         maskLayer.frame = frame
         maskLayer.backgroundColor = UIColor.bil_black_color(alpha: 0.5).cgColor
@@ -89,7 +89,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
         maskLayer.mask = maskShapeLayer
         
         containerView.layer.insertSublayer(maskLayer, above: previewLayer)
-        previewLayer?.frame = containerView.bounds
+        previewLayer?.frame = UIScreen.main.bounds
     }
     
     func setupSession() {

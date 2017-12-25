@@ -47,7 +47,7 @@
                         <viewLayoutGuide key="safeArea" id="P9o-SL-rSo"/>
                     </view>
                     <navigationItem key="navigationItem" title="联系人" largeTitleDisplayMode="always" id="nyY-9Y-U6O">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="VKD-sb-acM">
+                        <barButtonItem key="rightBarButtonItem" title="新建" id="VKD-sb-acM">
                             <connections>
                                 <action selector="newContactAction:" destination="2Xo-Eg-YUe" id="xgI-dr-pIW"/>
                             </connections>
@@ -58,6 +58,7 @@
                         <segue destination="vgU-MN-TiQ" kind="show" identifier="BILShowContactDetailSegue" id="DNF-VY-lcM"/>
                         <segue destination="MRb-dt-iPo" kind="show" identifier="BILContactsToAddByIDSegue" id="MFj-WI-7HB"/>
                         <segue destination="QiL-YC-s9A" kind="show" identifier="bil_contactsToAddByAddressSegue" id="BpC-Yy-Z3i"/>
+                        <segue destination="iat-7s-W7J" kind="show" identifier="BILContactsToResultSegue" id="CcC-n5-YSv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJj-1m-aWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -565,4 +566,7 @@
         <image name="icon_contact" width="22" height="18"/>
         <image name="icon_contact_h" width="22" height="18"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CcC-n5-YSv"/>
+    </inferredMetricsTieBreakers>
 </document>

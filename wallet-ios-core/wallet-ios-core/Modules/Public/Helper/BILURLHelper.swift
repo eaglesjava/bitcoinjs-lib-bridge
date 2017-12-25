@@ -9,6 +9,27 @@
 import UIKit
 
 class BILURLHelper: NSObject {
+	static func transferContactURL(urlString: String) -> String? {
+		guard let url = URL(string: urlString) else {
+			return nil
+		}
+		
+		guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+			return nil
+		}
+		guard components.scheme == "bitbill", components.host == "www.bitbill.com", components.path == "/contact", let items = components.queryItems else {
+			return nil
+		}
+		
+		for item in items {
+			debugPrint(item)
+			if item.name == "id" {
+				return item.value
+			}
+		}
+		
+		return nil
+	}
     static func transferBitCoinURL(urlString: String) -> (address: String, amount: Double)? {
         let coinType = CoinType.btc
         if urlString.lowercased().starts(with: coinType.scheme) {

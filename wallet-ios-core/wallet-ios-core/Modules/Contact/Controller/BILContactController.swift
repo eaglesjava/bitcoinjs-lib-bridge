@@ -8,11 +8,13 @@
 
 import UIKit
 import DZNEmptyDataSet
+import SVProgressHUD
 
 extension String {
     static var bil_contactsToAddByIDSegue: String { return "BILContactsToAddByIDSegue" }
     static var bil_showContactDetailSegue: String { return "BILShowContactDetailSegue" }
     static var bil_contactsToAddByAddressSegue: String { return "bil_contactsToAddByAddressSegue" }
+	static var bil_contactsToResultSegue: String { return "BILContactsToResultSegue" }
 }
 
 class BILContactController: BILLightBlueBaseController {
@@ -70,7 +72,7 @@ class BILContactController: BILLightBlueBaseController {
             self.performSegue(withIdentifier: .bil_contactsToAddByAddressSegue, sender: sender)
         }))
         sheet.addAction(UIAlertAction(title: "扫码添加", style: .default, handler: { (action) in
-            self.bil_makeToast(msg: "还未实现")
+			self.addContactByScanQRCode()
         }))
         
         sheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
@@ -78,7 +80,36 @@ class BILContactController: BILLightBlueBaseController {
         }))
         present(sheet, animated: true, completion: nil)
     }
-    
+	
+	func addContactByScanQRCode() {
+		unowned let unownedSelf = self
+		let cont = BILQRCodeScanViewController.controller { (qrString) in
+			if let result = BILURLHelper.transferContactURL(urlString: qrString) {
+				unownedSelf.navigationController?.popViewController(animated: true)
+				unownedSelf.checkID(id: result)
+			}
+		}
+		show(cont, sender: nil)
+	}
+	
+	func checkID(id: String) {
+		SVProgressHUD.show()
+		Contact.getContactFromServer(by: id, success: { (id) in
+			DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(350), execute: {
+				SVProgressHUD.dismiss()
+				self.showResult(id: id)
+			})
+		}) { (msg, code) in
+			self.bil_makeToast(msg: msg)
+			SVProgressHUD.dismiss()
+		}
+		
+	}
+	
+	func showResult(id: String) {
+		performSegue(withIdentifier: .bil_contactsToResultSegue, sender: id)
+	}
+	
     // MARK: - Navigation
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -101,6 +132,10 @@ class BILContactController: BILLightBlueBaseController {
             if let contact = sender as? Contact {
                 cont.contact = contact
             }
+		case String.bil_contactsToResultSegue:
+			guard let walletID = sender as? String else { return }
+			let cont = segue.destination as! BILSearchWalletIDResultController
+			cont.walletID = walletID
         default:
             ()
         }
