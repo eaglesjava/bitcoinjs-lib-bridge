@@ -14,7 +14,7 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.base.view.widget.PwdStatusView;
-import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
+import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 

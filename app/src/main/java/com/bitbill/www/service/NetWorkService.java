@@ -16,7 +16,7 @@ import android.util.Log;
 import com.bitbill.www.R;
 import com.bitbill.www.common.utils.NetworkUtils;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.model.entity.eventbus.NetWorkChangedEvent;
+import com.bitbill.www.model.eventbus.NetWorkChangedEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

@@ -87,7 +87,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
             @Override
             public void onClick(View v) {
                 //跳转到特定金额接收界面
-                SpecificReceiveActivity.start(getBaseActivity());
+                SpecificReceiveActivity.start(getBaseActivity(), getCurrentAddress());
             }
         });
         mRefreshItem = getBaseActivity().findViewById(R.id.action_refresh);
@@ -165,5 +165,9 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void refreshAddressSuccess() {
         showMessage(R.string.success_refresh_address);
 
+    }
+
+    public String getCurrentAddress() {
+        return tvAddress.getText().toString();
     }
 }

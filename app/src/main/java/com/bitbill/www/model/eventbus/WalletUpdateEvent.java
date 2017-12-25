@@ -1,4 +1,4 @@
-package com.bitbill.www.model.entity.eventbus;
+package com.bitbill.www.model.eventbus;
 
 import com.bitbill.www.common.base.model.entity.eventbus.MessageEvent;
 import com.bitbill.www.model.wallet.db.entity.Wallet;

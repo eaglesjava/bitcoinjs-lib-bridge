@@ -295,9 +295,6 @@ public class EditTextWapper extends FrameLayout {
     }
 
     public void setEditable(boolean editable) {
-        getEtText().setFocusable(editable);
-        getEtText().setFocusableInTouchMode(editable);
-        getEtText().setLongClickable(editable);
-        getEtText().setInputType(editable ? InputType.TYPE_CLASS_TEXT : InputType.TYPE_NULL);
+        StringUtils.setEditable(getEtText(), editable);
     }
 }

@@ -102,7 +102,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     @Override
     public void validateAddress(boolean validate) {
         if (validate) {
-            SendAmountActivity.start(getBaseActivity(), getSendAddress());
+            SendAmountActivity.start(getBaseActivity(), getSendAddress(), null);
         } else {
             showMessage("请输入合法的地址");
         }

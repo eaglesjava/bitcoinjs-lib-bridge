@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
@@ -31,11 +32,12 @@ public class SendAmountActivity extends BaseToolbarActivity {
     TextView tvBtcCny;
 
     private String mAddress;
-    private double mBtcCny;
+    private String mAmount;
 
-    public static void start(Context context, String address) {
+    public static void start(Context context, String address, String amount) {
         Intent starter = new Intent(context, SendAmountActivity.class);
         starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
+        starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, amount);
         context.startActivity(starter);
     }
 
@@ -43,11 +45,14 @@ public class SendAmountActivity extends BaseToolbarActivity {
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         mAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
+        mAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.send_amount_menu, menu);
+        if (!hasAmount()) {
+            getMenuInflater().inflate(R.menu.send_amount_menu, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -83,6 +88,8 @@ public class SendAmountActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
+        etSendAmount.setText(mAmount);
+        StringUtils.setEditable(etSendAmount, !hasAmount());
         etSendAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -101,15 +108,25 @@ public class SendAmountActivity extends BaseToolbarActivity {
         });
     }
 
+    private boolean hasAmount() {
+        return !StringUtils.isEmpty(mAmount);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (hasAmount()) {
+            setTitle(getString(R.string.title_activity_scan_result));
+        }
+    }
+
     @Override
     public void initData() {
-        // TODO: 2017/12/20 for test
-        mBtcCny = 100000;
         updateCnyValue();
     }
 
     private void updateCnyValue() {
-        tvBtcCny.setText(String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyCnyValue(mBtcCny, getSendAmount())));
+        tvBtcCny.setText(String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyCnyValue(BitbillApp.get().getBtcValue(), getSendAmount())));
     }
 
     @Override

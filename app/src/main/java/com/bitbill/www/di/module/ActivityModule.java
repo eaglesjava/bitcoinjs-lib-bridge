@@ -28,6 +28,9 @@ import com.bitbill.www.ui.main.receive.BtcReceivePresenter;
 import com.bitbill.www.ui.main.receive.ReceiveMvpPresenter;
 import com.bitbill.www.ui.main.receive.ReceiveMvpView;
 import com.bitbill.www.ui.main.receive.ReceivePresenter;
+import com.bitbill.www.ui.main.receive.ScanPayMvpPresenter;
+import com.bitbill.www.ui.main.receive.ScanPayMvpView;
+import com.bitbill.www.ui.main.receive.ScanPayPresenter;
 import com.bitbill.www.ui.main.send.BtcSendMvpPresenter;
 import com.bitbill.www.ui.main.send.BtcSendMvpView;
 import com.bitbill.www.ui.main.send.BtcSendPresenter;
@@ -189,6 +192,13 @@ public class ActivityModule {
     @PerActivity
     BtcSendMvpPresenter<WalletModel, BtcSendMvpView> provideBtcSendPresenter(
             BtcSendPresenter<WalletModel, BtcSendMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ScanPayMvpPresenter<ScanPayMvpView> provideScanPayPresenter(
+            ScanPayPresenter<ScanPayMvpView> presenter) {
         return presenter;
     }
 

@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.base.view.BaseFragment;
+import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh;
 import com.bitbill.www.common.base.view.widget.DividerDecoration;
 import com.bitbill.www.common.utils.StringUtils;
@@ -31,7 +32,7 @@ import butterknife.BindView;
  * Activities containing this fragment MUST implement the {@link OnTransactionRecordItemClickListener}
  * interface.
  */
-public class BtcRecordFragment extends BaseFragment {
+public class BtcRecordFragment extends BaseLazyFragment {
 
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
@@ -111,13 +112,7 @@ public class BtcRecordFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        initData();
-                    }
-                }, 2000);
+                lazyData();
             }
         });
         refreshLayout.setColorSchemeResources(R.color.blue);
@@ -131,7 +126,7 @@ public class BtcRecordFragment extends BaseFragment {
             protected void convert(ViewHolder holder, TransactionRecord transactionRecord, int position) {
                 holder.setText(R.id.tv_address, transactionRecord.getAddress());
                 holder.setText(R.id.tv_amount, (transactionRecord.getStatus() == 0 ? "+" : "-") + transactionRecord.getAmount() + " btc");
-                holder.setText(R.id.tv_date, transactionRecord.getDate() + "  " + transactionRecord.getConfirmCount() + "确认");
+                holder.setText(R.id.tv_date, StringUtils.formatDate(transactionRecord.getDate()) + "  " + (transactionRecord.getConfirmCount() == 0 ? "未确认" : transactionRecord.getConfirmCount() + " 确认"));
                 holder.setImageResource(R.id.iv_status, transactionRecord.getConfirmCount() == 0 ? R.drawable.ic_item_unconfirm : (transactionRecord.getStatus() == 0 ? R.drawable.ic_item_receive : R.drawable.ic_item_send));
                 holder.setOnClickListener(R.id.rl_item_container, new View.OnClickListener() {
                     @Override
@@ -149,6 +144,17 @@ public class BtcRecordFragment extends BaseFragment {
 
     @Override
     public void initData() {
+
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_btc_record_list;
+    }
+
+    @Override
+    public void lazyData() {
 
         // TODO: 2017/12/5 获取列表数据
         mRecordList.clear();
@@ -168,12 +174,7 @@ public class BtcRecordFragment extends BaseFragment {
             tvBtcUnconfirm.setText(String.format(getString(R.string.text_btc_unconfirm), StringUtils.satoshi2btc(mWalelt.getBtcUnconfirm())));
 
         }
-
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_btc_record_list;
+        tvBtcCny.setText(String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyCnyValue(BitbillApp.get().getBtcValue(), StringUtils.satoshi2btc(mWalelt.getBtcBalance()))));
     }
 
     /**

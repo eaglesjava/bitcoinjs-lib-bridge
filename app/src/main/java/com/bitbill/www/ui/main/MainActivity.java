@@ -18,8 +18,9 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
-import com.bitbill.www.model.entity.eventbus.SendSuccessEvent;
-import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
+import com.bitbill.www.model.eventbus.SendSuccessEvent;
+import com.bitbill.www.model.eventbus.UnConfirmEvent;
+import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.Unconfirm;
@@ -137,6 +138,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void OnTransactionRecordItemClick(Unconfirm item) {
+        //跳转到确认交易详情
 
     }
 
@@ -214,6 +216,13 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (mSendFragment != null) {
             mSendFragment.sendSuccess();
         }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onUnConfirmReceive(UnConfirmEvent unConfirmEvent) {
+        UnConfirmEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
+        //加载未确认交易
+        getMvpPresenter().listUnconfirm();
     }
 
     @Override

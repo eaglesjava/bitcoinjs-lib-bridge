@@ -4,8 +4,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.webkit.URLUtil;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bitbill.www.app.AppConstants;
@@ -843,6 +845,7 @@ public class StringUtils {
         try {
             //8位小数
             DecimalFormat df = new DecimalFormat("#.##");
+            df.setMinimumFractionDigits(2);
             BigDecimal btcCnyDecimal = new BigDecimal(btcCny);
             BigDecimal amountDecimal = new BigDecimal(sendAmount);
 
@@ -850,7 +853,7 @@ public class StringUtils {
             multiply.setScale(2, RoundingMode.FLOOR);
             return df.format(multiply);
         } catch (Exception e) {
-            return "0.0";
+            return "0.00";
         }
     }
 
@@ -881,8 +884,8 @@ public class StringUtils {
             String address = null;
             String amount = null;
             int askIndex = result.indexOf("?");
-            if (askIndex != -1) {
-                String amountString = result.substring(askIndex);
+            if (askIndex != -1 & askIndex + 1 < result.length()) {
+                String amountString = result.substring(askIndex + 1);
                 if (amountString.contains("amount=")) {
                     amount = amountString.replace("amount=", "");
                 }
@@ -897,5 +900,20 @@ public class StringUtils {
         } else {
             return new String[]{result};
         }
+    }
+
+    public static String formatDate(String date) {
+        // TODO: 2017/12/25 format  date
+        return date;
+    }
+
+    public static void setEditable(EditText etText, boolean editable) {
+        if (etText == null) {
+            return;
+        }
+        etText.setFocusable(editable);
+        etText.setFocusableInTouchMode(editable);
+        etText.setLongClickable(editable);
+        etText.setInputType(editable ? InputType.TYPE_CLASS_TEXT : InputType.TYPE_NULL);
     }
 }

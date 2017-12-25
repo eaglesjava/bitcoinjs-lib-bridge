@@ -109,9 +109,21 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
         mQRCodeView.startSpot();
         Intent data = new Intent();
         String[] resultArray = StringUtils.parseScanResult(result);
-        data.putExtra(EXTRA_SCAN_QRCODE_RESULT, resultArray != null ? resultArray[0] : result);
-
-        setResult(RESULT_CODE_SCAN_QRCODE_SUCCESS, data);
+        if (StringUtils.isEmpty(resultArray)) {
+            showMessage("解析扫码地址失败");
+            return;
+        }
+        String address = resultArray[0];
+        String amount = null;
+        if (resultArray.length > 1) {
+            amount = resultArray[1];
+        }
+        if (StringUtils.isEmpty(amount)) {
+            data.putExtra(EXTRA_SCAN_QRCODE_RESULT, resultArray != null ? address : result);
+            setResult(RESULT_CODE_SCAN_QRCODE_SUCCESS, data);
+        } else {
+            SendAmountActivity.start(ScanQrcodeActivity.this, address, amount);
+        }
         finish();
     }
 

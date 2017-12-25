@@ -14,8 +14,11 @@ import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.di.component.ApplicationComponent;
 import com.bitbill.www.di.component.DaggerApplicationComponent;
 import com.bitbill.www.di.module.ApplicationModule;
+import com.bitbill.www.model.eventbus.UnConfirmEvent;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.socket.Register;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,7 @@ public class BitbillApp extends Application {
     OkHttpClient mOkhttpClient;
     private ApplicationComponent mApplicationComponent;
     private List<Wallet> mWallets;
+    private double mBtcValue = 100000;// TODO: 2017/12/25 for test
 
     public static BitbillApp get() {
         return sInstance;
@@ -119,7 +123,8 @@ public class BitbillApp extends Application {
                 Log.d(TAG, "EVENT_UNCONFIRM called with: args = [" + args + "]");
                 // 播放声音
                 SoundUtils.playSound(R.raw.diaoluo_da);
-
+                //  获取未确认列表
+                EventBus.getDefault().postSticky(new UnConfirmEvent());
             }
         });
         mSocket.connect();
@@ -162,6 +167,14 @@ public class BitbillApp extends Application {
             return false;
         }
         return mSocket.connected();
+    }
+
+    public double getBtcValue() {
+        return mBtcValue;
+    }
+
+    public void setBtcValue(double btcValue) {
+        mBtcValue = btcValue;
     }
 }
 

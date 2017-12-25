@@ -18,7 +18,7 @@ import com.bitbill.www.common.base.view.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.base.view.dialog.PwdDialogFragment;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.model.entity.eventbus.SendSuccessEvent;
+import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;

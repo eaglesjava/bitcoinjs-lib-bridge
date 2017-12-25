@@ -20,7 +20,7 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.base.view.widget.FocusedCheckedTextView;
-import com.bitbill.www.model.entity.eventbus.WalletUpdateEvent;
+import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 

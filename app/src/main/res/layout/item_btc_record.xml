@@ -41,8 +41,7 @@
 
     <TextView
         android:id="@+id/tv_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Text.White"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="+2.35 btc"

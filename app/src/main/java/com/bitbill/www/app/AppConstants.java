@@ -27,6 +27,9 @@ public final class AppConstants {
     public static final String EXTRA_SEND_AMOUNT = "send_amount";
     public static final String EXTRA_IS_SEND_ALL = "is_send_all";
     public static final String EXTRA_CONTACT = "extra_contact";
+    public static final String EXTRA_RECEIVE_ADDRESS = "receive_address";
+    public static final String EXTRA_RECEIVE_AMOUNT = "receive_amount";
+
     public static final String ARG_DATAS = "args_datas";
     public static final String ARG_WALLET = "arg_wallet";
     /**

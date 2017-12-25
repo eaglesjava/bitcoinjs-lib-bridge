@@ -86,7 +86,14 @@ public class SelectWalletActivity extends BaseToolbarActivity {
                 holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
 
                 holder.setChecked(R.id.rb_selector, wallet.isSelected());
-
+                if (wallet.getBtcBalance() > StringUtils.btc2Satoshi(mSendAmount)) {
+                    //余额可用
+                    holder.setVisible(R.id.rb_selector, true);
+                    holder.itemView.setAlpha(1.0f);
+                } else {
+                    holder.setVisible(R.id.rb_selector, false);
+                    holder.itemView.setAlpha(0.3f);
+                }
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

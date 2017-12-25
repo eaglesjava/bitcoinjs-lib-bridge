@@ -116,16 +116,11 @@ public class BtcUnconfirmFragment extends BaseFragment {
             }
         };
         mRecyclerView.setAdapter(mAdapter);
+        tvInProgress.setText(String.format(getString(R.string.text_in_progress_count), mUnconfirmList.size()));
     }
 
     @Override
     public void initData() {
-    }
-
-    void loadData(List<Unconfirm> unconfirmList) {
-        mUnconfirmList = unconfirmList;
-        tvInProgress.setText(String.format(getString(R.string.text_in_progress_count), mUnconfirmList.size()));
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override

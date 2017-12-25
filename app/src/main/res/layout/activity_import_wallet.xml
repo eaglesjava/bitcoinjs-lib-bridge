@@ -16,14 +16,14 @@
         android:id="@+id/et_input_mnemonic"
         style="@style/EditText.Mnemonic"
         android:layout_width="match_parent"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginTop="25dp"
         android:hint="@string/hint_click_input_please" />
 
     <TextView
-        style="@style/Text.Small.Green"
+        style="@style/Text.Small"
         android:layout_width="match_parent"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="25dp"
         android:text="支持BIP39格式的助记词" />
 
     <Button

@@ -29,7 +29,7 @@ import com.bitbill.www.common.utils.NetworkUtils;
 import com.bitbill.www.di.component.ActivityComponent;
 import com.bitbill.www.di.component.DaggerActivityComponent;
 import com.bitbill.www.di.module.ActivityModule;
-import com.bitbill.www.model.entity.eventbus.NetWorkChangedEvent;
+import com.bitbill.www.model.eventbus.NetWorkChangedEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
