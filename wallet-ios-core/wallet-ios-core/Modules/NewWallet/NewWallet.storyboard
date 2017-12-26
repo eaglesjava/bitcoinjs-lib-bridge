@@ -100,7 +100,7 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQ0-7J-8kK">
-                                        <rect key="frame" x="25" y="24" width="325" height="362"/>
+                                        <rect key="frame" x="25" y="24" width="325" height="277"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbI-5b-wmo" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="74.5"/>
@@ -357,19 +357,6 @@
                                                 <color key="textColor" red="0.6705882353" green="0.90196078430000004" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53E-rO-tJL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="307" width="325" height="55"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="55" id="q3Z-bu-ldf"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <state key="normal" title="开始创建">
-                                                    <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="createWalletAction:" destination="7rK-Mf-YUl" eventType="touchUpInside" id="LcO-Ny-QVE"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -377,7 +364,6 @@
                                             <constraint firstItem="h8s-0C-PiF" firstAttribute="leading" secondItem="SQ0-7J-8kK" secondAttribute="leading" id="AzZ-SK-zjK"/>
                                             <constraint firstAttribute="trailing" secondItem="h8s-0C-PiF" secondAttribute="trailing" id="Eok-kv-EDO"/>
                                             <constraint firstAttribute="trailing" secondItem="h8s-0C-PiF" secondAttribute="trailing" id="Lw4-4x-Dzx"/>
-                                            <constraint firstItem="53E-rO-tJL" firstAttribute="leading" secondItem="SQ0-7J-8kK" secondAttribute="leading" id="OeV-SP-7c0"/>
                                             <constraint firstAttribute="trailing" secondItem="DbI-5b-wmo" secondAttribute="trailing" id="PSg-6x-OOo"/>
                                             <constraint firstItem="HZ0-VV-HbH" firstAttribute="leading" secondItem="SQ0-7J-8kK" secondAttribute="leading" id="Qsh-LT-QCH"/>
                                             <constraint firstItem="DbI-5b-wmo" firstAttribute="top" secondItem="SQ0-7J-8kK" secondAttribute="top" id="TtM-K6-RPb"/>
@@ -387,17 +373,138 @@
                                             <constraint firstItem="HZ0-VV-HbH" firstAttribute="top" secondItem="MF1-H1-K5C" secondAttribute="bottom" constant="8" id="bQR-aL-2ip"/>
                                             <constraint firstItem="DbI-5b-wmo" firstAttribute="leading" secondItem="SQ0-7J-8kK" secondAttribute="leading" id="cSs-R2-skU"/>
                                             <constraint firstAttribute="trailing" secondItem="MF1-H1-K5C" secondAttribute="trailing" id="d3w-1w-hLP"/>
-                                            <constraint firstItem="53E-rO-tJL" firstAttribute="top" secondItem="h8s-0C-PiF" secondAttribute="bottom" constant="30" id="dIn-pq-7dj"/>
                                             <constraint firstItem="h8s-0C-PiF" firstAttribute="top" secondItem="HZ0-VV-HbH" secondAttribute="bottom" constant="15" id="kD1-a1-FXE"/>
-                                            <constraint firstAttribute="bottom" secondItem="53E-rO-tJL" secondAttribute="bottom" id="lms-Gg-0MB"/>
-                                            <constraint firstAttribute="trailing" secondItem="53E-rO-tJL" secondAttribute="trailing" id="v5g-a6-otQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="h8s-0C-PiF" secondAttribute="bottom" id="lXl-ub-str"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53E-rO-tJL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                        <rect key="frame" x="25" y="466" width="325" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="q3Z-bu-ldf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="完成">
+                                            <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="createWalletAction:" destination="7rK-Mf-YUl" eventType="touchUpInside" id="LcO-Ny-QVE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBF-o4-3Ym">
+                                        <rect key="frame" x="63" y="419.5" width="248" height="31.5"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="完成即表示您已同意">
+                                                    <attributes>
+                                                        <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Medium"/>
+                                                        <real key="NSKern" value="0.0"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                            <tabStops>
+                                                                <textTab alignment="left" location="28">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="56">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="84">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="112">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="140">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="168">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="196">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="224">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="252">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="280">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="308">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="336">
+                                                                    <options/>
+                                                                </textTab>
+                                                            </tabStops>
+                                                        </paragraphStyle>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="《Bitbill服务条款》">
+                                                    <attributes>
+                                                        <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <font key="NSFont" size="14" name="PingFangSC-Medium"/>
+                                                        <real key="NSKern" value="0.0"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                            <tabStops>
+                                                                <textTab alignment="left" location="28">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="56">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="84">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="112">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="140">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="168">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="196">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="224">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="252">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="280">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="308">
+                                                                    <options/>
+                                                                </textTab>
+                                                                <textTab alignment="left" location="336">
+                                                                    <options/>
+                                                                </textTab>
+                                                            </tabStops>
+                                                        </paragraphStyle>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <segue destination="6DN-vu-ykS" kind="show" id="4tz-Ly-npd"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="SQ0-7J-8kK" firstAttribute="top" secondItem="evy-P9-DcP" secondAttribute="top" constant="24" id="0dk-gN-v9M"/>
+                                    <constraint firstItem="53E-rO-tJL" firstAttribute="top" secondItem="SBF-o4-3Ym" secondAttribute="bottom" constant="15" id="4G9-ln-i4r"/>
                                     <constraint firstAttribute="trailing" secondItem="SQ0-7J-8kK" secondAttribute="trailing" constant="25" id="PIU-6C-v5l"/>
+                                    <constraint firstAttribute="bottom" secondItem="53E-rO-tJL" secondAttribute="bottom" constant="30" id="Xo1-8U-eUb"/>
+                                    <constraint firstItem="53E-rO-tJL" firstAttribute="leading" secondItem="evy-P9-DcP" secondAttribute="leading" constant="25" id="c5z-Ry-Hdf"/>
                                     <constraint firstItem="SQ0-7J-8kK" firstAttribute="leading" secondItem="evy-P9-DcP" secondAttribute="leading" constant="25" id="ddF-Hy-KJz"/>
+                                    <constraint firstAttribute="trailing" secondItem="53E-rO-tJL" secondAttribute="trailing" constant="25" id="kaj-6F-v5f"/>
+                                    <constraint firstItem="SBF-o4-3Ym" firstAttribute="centerX" secondItem="53E-rO-tJL" secondAttribute="centerX" id="uGp-Xl-Bu9"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -433,6 +540,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="liO-gm-o0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1272.8" y="151.57421289355324"/>
+        </scene>
+        <!--BILAgreementController-->
+        <scene sceneID="SET-Jd-a5M">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Me" referencedIdentifier="BILAgreementController" id="6DN-vu-ykS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kms-6f-vfB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1273" y="668"/>
         </scene>
         <!--输入助记词-->
         <scene sceneID="HoF-aI-ZBC">

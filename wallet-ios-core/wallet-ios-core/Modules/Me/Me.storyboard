@@ -295,7 +295,7 @@
         <!--使用条款-->
         <scene sceneID="35T-UU-YiI">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="po9-Ut-ykE" customClass="BILAgreementController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BILAgreementController" hidesBottomBarWhenPushed="YES" id="po9-Ut-ykE" customClass="BILAgreementController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eZ0-hq-bSr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
