@@ -115,6 +115,8 @@ public class BitbillApp extends Application {
             @Override
             public void call(Object... args) {
                 Log.d(TAG, "EVENT_CONFIRM called with: args = [" + args + "]");
+                //  获取未确认列表
+                EventBus.getDefault().postSticky(new UnConfirmEvent());
             }
         }).on(EVENT_UNCONFIRM, new Emitter.Listener() {
             @Override

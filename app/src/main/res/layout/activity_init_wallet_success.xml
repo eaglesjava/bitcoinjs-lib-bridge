@@ -1,51 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="com.bitbill.www.ui.wallet.init.InitWalletSuccessActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:src="@drawable/ic_wallet_create_success"/>
-
-    <TextView
-        android:id="@+id/tv_hint_title"
-        style="@style/Text.Title.Small"
-        android:layout_marginTop="20dp"
-        android:text="@string/title_wallet_create_success"/>
-
-    <TextView
-        android:id="@+id/tv_hint_content"
-        style="@style/Text.White"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/hint_create_wallet_success"/>
-
-    <Button
-        android:id="@+id/btn_bak_wallet"
-        style="@style/Button.Blue"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/btn_backup_wallet"/>
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_bak_wallet_delay"
-        style="@style/Button.Transparent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/btn_backup_wallet_delay"
-        android:textColor="@color/white_60"/>
-</LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:src="@drawable/ic_wallet_create_success" />
+
+        <TextView
+            android:id="@+id/tv_hint_title"
+            style="@style/Text.Title.Small"
+            android:layout_marginTop="20dp"
+            android:text="@string/title_wallet_create_success" />
+
+        <TextView
+            android:id="@+id/tv_hint_content"
+            style="@style/Text.White"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/hint_create_wallet_success" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_btns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_bak_wallet"
+            style="@style/Button.Blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/btn_backup_wallet" />
+
+        <Button
+            android:id="@+id/btn_bak_wallet_delay"
+            style="@style/Button.Transparent"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/btn_backup_wallet_delay"
+            android:textColor="@color/white_60" />
+    </LinearLayout>
+</FrameLayout>

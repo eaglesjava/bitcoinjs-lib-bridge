@@ -32,7 +32,7 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
         if (!isValidMnemonic()) {
             return;
         }
-        getMvpView().hideLoading();
+        getMvpView().showLoading();
         String mnemonicHash = StringUtils.getSHA256Hex(getMvpView().getMnemonic());
         getCompositeDisposable().add(getModelManager().getWalletByMnemonicHash(mnemonicHash)
                 .compose(this.applyScheduler())
@@ -86,9 +86,12 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
                         String seedHex = jsResult[1];
                         String XPublicKey = jsResult[2];
                         String extendedKeysHash = EncryptUtils.encryptMD5ToString(XPublicKey);
+                        String mnemonicHash = EncryptUtils.encryptMD5ToString(getMvpView().getMnemonic());
                         Wallet wallet = new Wallet();
                         wallet.setXPublicKey(XPublicKey);
-                        wallet.setMnemonic(getMvpView().getMnemonic());
+                        wallet.setMnemonicHash(mnemonicHash);
+                        //不需要备份
+                        wallet.setIsBackuped(true);
                         wallet.setSeedHex(seedHex);
                         getCompositeDisposable().add(getModelManager()
                                 .getWalletId(new GetWalletIdRequest(extendedKeysHash))

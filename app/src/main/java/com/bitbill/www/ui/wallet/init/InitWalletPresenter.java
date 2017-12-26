@@ -178,7 +178,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                         Log.d(TAG, "onNext() called with: stringApiResponse = [" + stringApiResponse + "]");
                         if (stringApiResponse != null && stringApiResponse.getStatus() == ApiResponse.STATUS_CODE_SUCCESS) {
                             //完善wallet相关属性
-                            StringUtils.encryptMnemonicAndSeedHex(mWallet.getMnemonic(), mWallet.getSeedHex(), mWallet.getXPublicKey(), getMvpView().getTradePwd(), mWallet);
+                            StringUtils.encryptSeedHex(mWallet.getSeedHex(), mWallet.getXPublicKey(), getMvpView().getTradePwd(), mWallet);
                             insertWallet();
                         } else {
                             getMvpView().createWalletFail();

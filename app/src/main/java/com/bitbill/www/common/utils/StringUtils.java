@@ -678,7 +678,7 @@ public class StringUtils {
      * @param seedHex
      * @param tradePwd   密码
      * @param XPublicKey 拓展公钥md5十进制
-     * @param wallet     钱包实体用于更新相关字段   @return
+     * @param wallet     钱包实体用于更新相关字段
      */
     public static String encryptMnemonicAndSeedHex(String mnemonic, String seedHex, String XPublicKey, String tradePwd, Wallet wallet) {
         byte[] encryptKey = EncryptUtils.encryptSHA256(tradePwd.getBytes(Charset.defaultCharset()));
@@ -698,6 +698,30 @@ public class StringUtils {
             wallet.setXPublicKey(XPublicKey);
         }
         return mnemonicHash;
+    }
+
+    /**
+     * 加密seedHex并更新wallet
+     *
+     * @param seedHex
+     * @param XPublicKey 拓展公钥md5十进制
+     * @param tradePwd   密码
+     * @param wallet     钱包实体用于更新相关字段
+     * @return seedHexHash
+     */
+    public static String encryptSeedHex(String seedHex, String XPublicKey, String tradePwd, Wallet wallet) {
+        byte[] encryptKey = EncryptUtils.encryptSHA256(tradePwd.getBytes(Charset.defaultCharset()));
+        String encryptSeedHex = EncryptUtils.encryptAES2HexString(seedHex.getBytes(Charset.defaultCharset()), encryptKey);
+        String seedHexHash = getSHA256Hex(seedHex);
+        if (wallet != null) {
+            wallet.setEncryptSeed(encryptSeedHex);
+            wallet.setSeedHexHash(seedHexHash);
+            wallet.setUpdatedAt(System.currentTimeMillis());
+            wallet.setTradePwd(tradePwd);
+            wallet.setSeedHex(seedHex);
+            wallet.setXPublicKey(XPublicKey);
+        }
+        return seedHexHash;
     }
 
     /**

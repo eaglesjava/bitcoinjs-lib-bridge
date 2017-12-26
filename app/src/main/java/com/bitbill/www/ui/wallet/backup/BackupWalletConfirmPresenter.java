@@ -5,6 +5,7 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.Arrays;
 
@@ -27,8 +28,11 @@ public class BackupWalletConfirmPresenter<M extends WalletModel, V extends Backu
         if (!isMnemonicCorrect()) {
             return;
         }
-        getMvpView().getWallet().setIsBackuped(true);
-        getCompositeDisposable().add(getModelManager().updateWallet(getMvpView().getWallet())
+        Wallet wallet = getMvpView().getWallet();
+        wallet.setIsBackuped(true);
+        String mnemonic = wallet.getMnemonic();
+        wallet.setMnemonic("");
+        getCompositeDisposable().add(getModelManager().updateWallet(wallet)
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {
                     @Override
@@ -42,6 +46,9 @@ public class BackupWalletConfirmPresenter<M extends WalletModel, V extends Backu
                             getMvpView().backupSuccess();
                         } else {
                             getMvpView().backupFail();
+                            //reset backup status
+                            wallet.setIsBackuped(false);
+                            wallet.setMnemonic(mnemonic);
                         }
 
                     }
@@ -53,6 +60,9 @@ public class BackupWalletConfirmPresenter<M extends WalletModel, V extends Backu
                             return;
                         }
                         getMvpView().backupFail();
+                        //reset backup status
+                        wallet.setIsBackuped(false);
+                        wallet.setMnemonic(mnemonic);
                     }
                 }));
 

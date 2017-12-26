@@ -31,6 +31,8 @@ public class InitWalletSuccessActivity extends BaseCompleteActivity {
     TextView tvHintTitle;
     @BindView(R.id.tv_hint_content)
     TextView tvHintContent;
+    @BindView(R.id.ll_bottom_btns)
+    View llBottonBtns;
     private Wallet mWallet;
     private boolean isCreateWallet = true;//默认创建钱包成功界面
 
@@ -39,6 +41,13 @@ public class InitWalletSuccessActivity extends BaseCompleteActivity {
         intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
         intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+        isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
     }
 
     @Override
@@ -64,14 +73,13 @@ public class InitWalletSuccessActivity extends BaseCompleteActivity {
     @Override
     public void initView() {
 
+        tvHintContent.setText(isCreateWallet ? R.string.hint_create_wallet_success : R.string.hint_import_wallet_success);
+        tvHintTitle.setText(isCreateWallet ? R.string.title_wallet_create_success : R.string.title_wallet_import_success);
+        llBottonBtns.setVisibility(isCreateWallet ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void initData() {
-        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
-        isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
-        tvHintContent.setText(isCreateWallet ? R.string.hint_create_wallet_success : R.string.hint_import_wallet_success);
-        tvHintTitle.setText(isCreateWallet ? R.string.title_wallet_create_success : R.string.title_wallet_import_success);
     }
 
     @Override

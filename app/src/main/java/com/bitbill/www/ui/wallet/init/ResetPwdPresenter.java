@@ -41,9 +41,8 @@ public class ResetPwdPresenter<M extends WalletModel, V extends ResetPwdMvpView>
     @Override
     public void resetPwd() {
         Wallet wallet = getMvpView().getWallet();
-        String mnemonic = StringUtils.decryptByPwd(wallet.getEncryptMnemonic(), getMvpView().getOldPwd());
         String seedHex = StringUtils.decryptByPwd(wallet.getEncryptSeed(), getMvpView().getOldPwd());
-        StringUtils.encryptMnemonicAndSeedHex(mnemonic, seedHex, wallet.getXPublicKey(), getMvpView().getNewPwd(), wallet);
+        StringUtils.encryptSeedHex(seedHex, wallet.getXPublicKey(), getMvpView().getNewPwd(), wallet);
         //更新数据库
         getCompositeDisposable().add(getModelManager()
                 .updateWallet(wallet)
