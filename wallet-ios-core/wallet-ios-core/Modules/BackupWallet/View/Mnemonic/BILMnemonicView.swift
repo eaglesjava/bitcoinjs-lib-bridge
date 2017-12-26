@@ -8,8 +8,9 @@
 
 import UIKit
 import SnapKit
+import DZNEmptyDataSet
 
-class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, DZNEmptyDataSetSource {
 	
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var delegate: BILMnemonicViewDelegate?

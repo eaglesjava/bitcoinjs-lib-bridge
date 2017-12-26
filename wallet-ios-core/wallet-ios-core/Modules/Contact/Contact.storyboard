@@ -19,6 +19,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fh5-y6-Z9m">
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还没有联系人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71u-E6-dkJ">
+                                        <rect key="frame" x="25" y="25" width="261" height="45"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6b-ur-m6B" customClass="BILWhiteBorderButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                        <rect key="frame" x="25" y="417" width="325" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="vv6-Y1-xxH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="立即添加"/>
+                                        <connections>
+                                            <action selector="newContactAction:" destination="2Xo-Eg-YUe" eventType="touchUpInside" id="SjM-Pr-Vpq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Z6b-ur-m6B" firstAttribute="leading" secondItem="fh5-y6-Z9m" secondAttribute="leading" constant="25" id="UTp-n5-4En"/>
+                                    <constraint firstAttribute="bottom" secondItem="Z6b-ur-m6B" secondAttribute="bottom" constant="30" id="Ut3-UW-6Rk"/>
+                                    <constraint firstItem="71u-E6-dkJ" firstAttribute="leading" secondItem="fh5-y6-Z9m" secondAttribute="leading" constant="25" id="cZX-P7-DJi"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z6b-ur-m6B" secondAttribute="trailing" constant="25" id="r6w-X3-heX"/>
+                                    <constraint firstItem="71u-E6-dkJ" firstAttribute="top" secondItem="fh5-y6-Z9m" secondAttribute="top" constant="25" id="vXs-AE-dDt"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yi3-qS-A5a">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,8 +71,12 @@
                         <constraints>
                             <constraint firstItem="yi3-qS-A5a" firstAttribute="bottom" secondItem="P9o-SL-rSo" secondAttribute="bottom" id="4zJ-i9-lKw"/>
                             <constraint firstItem="yi3-qS-A5a" firstAttribute="leading" secondItem="P9o-SL-rSo" secondAttribute="leading" id="Pdg-2x-vCl"/>
+                            <constraint firstItem="fh5-y6-Z9m" firstAttribute="leading" secondItem="P9o-SL-rSo" secondAttribute="leading" id="XIi-eD-QSk"/>
                             <constraint firstItem="yi3-qS-A5a" firstAttribute="trailing" secondItem="P9o-SL-rSo" secondAttribute="trailing" id="cTR-Tn-BtK"/>
+                            <constraint firstItem="fh5-y6-Z9m" firstAttribute="top" secondItem="P9o-SL-rSo" secondAttribute="top" id="gbq-Ic-aEE"/>
+                            <constraint firstItem="P9o-SL-rSo" firstAttribute="bottom" secondItem="fh5-y6-Z9m" secondAttribute="bottom" id="hLN-ee-dS7"/>
                             <constraint firstItem="yi3-qS-A5a" firstAttribute="top" secondItem="dSw-7j-pfN" secondAttribute="top" id="pGV-oL-aE3"/>
+                            <constraint firstItem="P9o-SL-rSo" firstAttribute="trailing" secondItem="fh5-y6-Z9m" secondAttribute="trailing" id="x1u-vi-0g3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="P9o-SL-rSo"/>
                     </view>
@@ -54,6 +88,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emptyView" destination="fh5-y6-Z9m" id="10J-gZ-Ox7"/>
                         <outlet property="tableView" destination="yi3-qS-A5a" id="StA-RV-yBq"/>
                         <segue destination="vgU-MN-TiQ" kind="show" identifier="BILShowContactDetailSegue" id="DNF-VY-lcM"/>
                         <segue destination="MRb-dt-iPo" kind="show" identifier="BILContactsToAddByIDSegue" id="MFj-WI-7HB"/>
@@ -720,6 +755,6 @@
         <image name="icon_contact_h" width="22" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gah-MQ-HfQ"/>
+        <segue reference="CcC-n5-YSv"/>
     </inferredMetricsTieBreakers>
 </document>

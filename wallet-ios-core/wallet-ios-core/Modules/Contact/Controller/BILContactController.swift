@@ -29,6 +29,8 @@ class BILContactController: BILLightBlueBaseController {
     
     var emptyTitle: String?
     var emptyDescription: String?
+	
+	@IBOutlet weak var emptyView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,7 +166,11 @@ extension BILContactController {
 
 	@objc
 	func loadContacts() {
-		handleContacts(datas: bil_contactManager.models)
+		let models = bil_contactManager.models
+		let isEmpty = models.count == 0
+		tableView.isHidden = isEmpty
+		emptyView.isHidden = !isEmpty
+		handleContacts(datas: models)
 		tableView.reloadData()
 	}
 	
