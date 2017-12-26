@@ -17,8 +17,8 @@ extension Contact {
         }, failure: failure)
     }
     
-    static func addContactToServer(id: String = "", address: String = "", name: String, remark: String = "", success: @escaping (Contact) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        BILNetworkManager.request(request: .addContact(walletID: id, name: name, remark: remark, address: address), success: { (data) in
+    static func addContactToServer(id: String = "", address: String = "", name: String, remark: String = "", coinType: CoinType = .btc, success: @escaping (Contact) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        BILNetworkManager.request(request: .addContact(walletID: id, name: name, remark: remark, address: address, coinType: coinType), success: { (data) in
             let contact = Contact(name: name, walletID: id, address: address, remark: remark)
             success(contact)
             NotificationCenter.default.post(name: .contactDidChanged, object: contact)

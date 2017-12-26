@@ -58,8 +58,8 @@ enum Router: URLRequestConvertible {
                 return (.bil_contact_get_all, ["walletKey": BILDeviceManager.shared.contactKey])
             case .searchWalletID(let walletID):
                 return (.bil_contact_search_id, ["walletId": walletID])
-            case .addContact(let walletID, let name, let remark, let address):
-                return (.bil_contact_add, ["walletKey": BILDeviceManager.shared.contactKey, "contactName": name, "remark": remark, "walletId": walletID, "address": address])
+            case .addContact(let walletID, let name, let remark, let address, let coinType):
+                return (.bil_contact_add, ["walletKey": BILDeviceManager.shared.contactKey, "contactName": name, "remark": remark, "walletId": walletID, "address": address, "coinType": coinType.name])
             }
         }()
         
@@ -92,7 +92,7 @@ enum Router: URLRequestConvertible {
     case getContactLastAddress(walletID: String)
     case getContacts
     case searchWalletID(walletID: String)
-    case addContact(walletID: String, name: String, remark: String, address: String)
+    case addContact(walletID: String, name: String, remark: String, address: String, coinType: CoinType)
     
 }
 
