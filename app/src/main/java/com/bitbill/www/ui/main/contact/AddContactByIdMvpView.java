@@ -8,7 +8,7 @@ import com.bitbill.www.common.base.view.MvpView;
 public interface AddContactByIdMvpView extends MvpView {
     String getWalletId();
 
-    void searchWalletIdSuccess();
+    void searchWalletIdSuccess(String address);
 
     void searchWalletIdFail();
 

@@ -42,7 +42,12 @@ public class AddContactByIdPresenter<M extends ContactModel, V extends AddContac
                             return;
                         }
                         if (searchWalletIdResponseApiResponse != null && searchWalletIdResponseApiResponse.isSuccess()) {
-                            getMvpView().searchWalletIdSuccess();
+                            SearchWalletIdResponse data = searchWalletIdResponseApiResponse.getData();
+                            String address = null;
+                            if (data != null) {
+                                address = data.getAddress();
+                            }
+                            getMvpView().searchWalletIdSuccess(address);
                         } else {
                             getMvpView().searchWalletIdFail();
                         }

@@ -43,8 +43,8 @@
 
                 <RadioButton
                     android:id="@+id/rb_socket_status"
-                    android:layout_width="11dp"
-                    android:layout_height="11dp"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@id/tv_total_asset"
                     android:layout_marginRight="@dimen/activity_padding"

@@ -17,6 +17,9 @@ import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.ui.common.BtcAddressMvpPresentder;
 import com.bitbill.www.ui.common.BtcAddressMvpView;
 import com.bitbill.www.ui.common.BtcAddressPresenter;
+import com.bitbill.www.ui.common.GetLastAddressMvpPresenter;
+import com.bitbill.www.ui.common.GetLastAddressMvpView;
+import com.bitbill.www.ui.common.GetLastAddressPresenter;
 import com.bitbill.www.ui.guide.GuideMvpPresenter;
 import com.bitbill.www.ui.guide.GuideMvpView;
 import com.bitbill.www.ui.guide.GuidePresenter;
@@ -26,6 +29,12 @@ import com.bitbill.www.ui.main.MainPresenter;
 import com.bitbill.www.ui.main.contact.AddContactByIdMvpPresenter;
 import com.bitbill.www.ui.main.contact.AddContactByIdMvpView;
 import com.bitbill.www.ui.main.contact.AddContactByIdPresenter;
+import com.bitbill.www.ui.main.contact.ContactMvpPresenter;
+import com.bitbill.www.ui.main.contact.ContactMvpView;
+import com.bitbill.www.ui.main.contact.ContactPresenter;
+import com.bitbill.www.ui.main.contact.SearchContactResultMvpPresenter;
+import com.bitbill.www.ui.main.contact.SearchContactResultMvpView;
+import com.bitbill.www.ui.main.contact.SearchContactResultPresenter;
 import com.bitbill.www.ui.main.receive.BtcReceiveMvpPresenter;
 import com.bitbill.www.ui.main.receive.BtcReceiveMvpView;
 import com.bitbill.www.ui.main.receive.BtcReceivePresenter;
@@ -210,6 +219,27 @@ public class ActivityModule {
     @PerActivity
     AddContactByIdMvpPresenter<ContactModel, AddContactByIdMvpView> provideAddContactByIdPresenter(
             AddContactByIdPresenter<ContactModel, AddContactByIdMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    SearchContactResultMvpPresenter<ContactModel, SearchContactResultMvpView> provideSearchContactResultPresenter(
+            SearchContactResultPresenter<ContactModel, SearchContactResultMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ContactMvpPresenter<ContactModel, ContactMvpView> provideContactPresenter(
+            ContactPresenter<ContactModel, ContactMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    GetLastAddressMvpPresenter<ContactModel, GetLastAddressMvpView> provideGetLastAddressPresenter(
+            GetLastAddressPresenter<ContactModel, GetLastAddressMvpView> presenter) {
         return presenter;
     }
 

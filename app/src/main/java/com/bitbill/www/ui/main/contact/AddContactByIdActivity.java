@@ -3,6 +3,7 @@ package com.bitbill.www.ui.main.contact;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -52,6 +53,13 @@ public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMv
 
     @Override
     public void initView() {
+        etSearchId.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {   // 按下完成按钮，这里和上面imeOptions对应
+                btnAddNow.performClick();
+                return true;
+            }
+            return false;
+        });
 
     }
 
@@ -76,8 +84,10 @@ public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMv
     }
 
     @Override
-    public void searchWalletIdSuccess() {
-// TODO: 2017/12/25 跳转到搜索结果界面
+    public void searchWalletIdSuccess(String address) {
+        // 跳转到搜索结果界面
+        SearchContactResultActivity.start(AddContactByIdActivity.this, address, getWalletId());
+
     }
 
     @Override

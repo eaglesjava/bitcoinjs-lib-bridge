@@ -58,7 +58,7 @@ public class EditTextWapper extends FrameLayout {
     private String mInputHint;
     private float mInputPadding = 10;
     private Drawable mRightDrawable;
-    private int mInputType = INPUT_DEFAULT;
+    private int mInputType = 0;
     private int mMaxLines = 1;
     private float mInputPaddingBottom = mInputPadding;
     private float mInputPaddingRight;
@@ -191,7 +191,7 @@ public class EditTextWapper extends FrameLayout {
     }
 
     @NonNull
-    private EditText getEtText() {
+    public EditText getEtText() {
         return etText;
     }
 

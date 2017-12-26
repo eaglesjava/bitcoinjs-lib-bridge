@@ -23,11 +23,11 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
     @Id(autoincrement = true)
     private Long id;
 
-    @Property(nameInDb = "name")
-    private String name;
-
     @Property(nameInDb = "wallet_id")
     private String walletId;
+
+    @Property(nameInDb = "wallet_key")
+    private String walletKey;//默认"BTC"
 
     @Property(nameInDb = "address")
     private String address;
@@ -35,14 +35,23 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
     @Property(nameInDb = "remark")
     private String remark;
 
+    @Property(nameInDb = "contact_name")
+    private String contactName;
 
-    @Generated(hash = 1912314887)
-    public Contact(Long id, String name, String walletId, String address, String remark) {
+    @Property(nameInDb = "coin_type")
+    private String coinType;//默认"BTC"
+
+
+    @Generated(hash = 1951439029)
+    public Contact(Long id, String walletId, String walletKey, String address,
+                   String remark, String contactName, String coinType) {
         this.id = id;
-        this.name = name;
         this.walletId = walletId;
+        this.walletKey = walletKey;
         this.address = address;
         this.remark = remark;
+        this.contactName = contactName;
+        this.coinType = coinType;
     }
 
     @Generated(hash = 672515148)
@@ -57,13 +66,6 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getWalletId() {
         return this.walletId;
@@ -83,7 +85,7 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
 
     @Override
     public String getTarget() {
-        return name;
+        return contactName;
     }
 
     @Override
@@ -97,5 +99,29 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCoinType() {
+        return this.coinType;
+    }
+
+    public void setCoinType(String coinType) {
+        this.coinType = coinType;
+    }
+
+    public String getContactName() {
+        return this.contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getWalletKey() {
+        return this.walletKey;
+    }
+
+    public void setWalletKey(String walletKey) {
+        this.walletKey = walletKey;
     }
 }

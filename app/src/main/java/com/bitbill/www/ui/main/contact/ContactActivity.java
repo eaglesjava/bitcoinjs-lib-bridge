@@ -11,23 +11,31 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.decoration.DividerDecoration;
 import com.bitbill.www.common.base.view.dialog.ListSelectDialog;
+import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
+import com.bitbill.www.model.eventbus.UpdateContactEvent;
 import com.mcxtzhang.indexlib.IndexBar.utils.IndexHelper;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
-public class ContactActivity extends BaseToolbarActivity {
+public class ContactActivity extends BaseToolbarActivity<ContactMvpPresenter> implements ContactMvpView {
     @BindView(R.id.rv)
     RecyclerView mRv;
 
@@ -35,6 +43,8 @@ public class ContactActivity extends BaseToolbarActivity {
     CommonAdapter<Contact> mAdapter;
     LinearLayoutManager mManager;
     List<Contact> mDatas;
+    @Inject
+    ContactMvpPresenter<ContactModel, ContactMvpView> mContactMvpPresenter;
     private ListSelectDialog mListSelectDialog;
     private EmptyWrapper mEmptyWrapper;
 
@@ -44,18 +54,18 @@ public class ContactActivity extends BaseToolbarActivity {
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public ContactMvpPresenter getMvpPresenter() {
+        return mContactMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
     public void onBeforeSetContentLayout() {
-// TODO: 2017/12/20 test data
+        //  test data
         mDatas = new ArrayList<>();
 
     }
@@ -72,9 +82,9 @@ public class ContactActivity extends BaseToolbarActivity {
         mAdapter = new CommonAdapter<Contact>(this, R.layout.item_contact_view, mDatas) {
             @Override
             protected void convert(ViewHolder holder, Contact contact, int position) {
-                holder.setText(R.id.tv_contact_name, contact.getName());
+                holder.setText(R.id.tv_contact_name, contact.getContactName());
                 holder.setText(R.id.tv_contact_address, contact.getAddress());
-                holder.setText(R.id.tv_contact_label, String.valueOf(contact.getName().charAt(0)));
+                holder.setText(R.id.tv_contact_label, StringUtils.getNameLabel(contact.getContactName()));
                 if (position == 0) {//等于0肯定要有title的
                     holder.setText(R.id.tv_label_title, mDatas.get(position).getBaseIndexTag());
 
@@ -111,9 +121,6 @@ public class ContactActivity extends BaseToolbarActivity {
         int dividerLeftPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 55, getResources().getDisplayMetrics());
         mRv.addItemDecoration(new DividerDecoration(this, DividerDecoration.VERTICAL_LIST).setDividerLeftPadding(dividerLeftPadding));
 
-        //对已有数据进行排序 创建索引
-        new IndexHelper(mDatas);
-
         mListSelectDialog = ListSelectDialog.newInstance(getResources().getStringArray(R.array.dialog_create_contact));
         mListSelectDialog.setOnListSelectItemClickListener(position -> {
             switch (position) {
@@ -136,7 +143,7 @@ public class ContactActivity extends BaseToolbarActivity {
 
     @Override
     public void initData() {
-
+        getMvpPresenter().loadContact();
 
     }
 
@@ -176,5 +183,27 @@ public class ContactActivity extends BaseToolbarActivity {
 
     public void addNowClick(View view) {
         showSelectDialog();
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onUpdateContactEvent(UpdateContactEvent updateContactEvent) {
+        UpdateContactEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UpdateContactEvent.class);
+        //重新加载联系人信息
+        getMvpPresenter().loadContact();
+    }
+
+    @Override
+    public void loadContactSuccess(List<Contact> contacts) {
+        mDatas.clear();
+        mDatas.addAll(contacts);
+        //对已有数据进行排序 创建索引
+        new IndexHelper(mDatas);
+        mEmptyWrapper.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void loadContactFail() {
+
     }
 }

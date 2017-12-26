@@ -9,13 +9,15 @@ public class AddContactsRequest {
     private String address;
     private String remark;
     private String contactName;
+    private String coinType;
 
-    public AddContactsRequest(String walletId, String walletKey, String address, String remark, String contactName) {
+    public AddContactsRequest(String walletId, String walletKey, String address, String remark, String contactName, String coinType) {
         this.walletId = walletId;
         this.walletKey = walletKey;
         this.address = address;
         this.remark = remark;
         this.contactName = contactName;
+        this.coinType = coinType;
     }
 
     public String getWalletId() {

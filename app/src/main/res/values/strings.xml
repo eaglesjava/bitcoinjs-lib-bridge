@@ -169,4 +169,12 @@
     <string name="hint_search_wallet_id">搜索对方ID</string>
     <string name="btn_add_now">立即添加</string>
     <string name="hint_no_contact">您还没有联系人</string>
+    <string name="input_contact_name">姓名</string>
+    <string name="input_contact_remark">备注</string>
+    <string name="btn_confirm_add">确定添加</string>
+    <string name="fail_add_contact">添加联系人失败</string>
+    <string name="msg_get_wallet_id_fail">钱包ID获取失败，请返回重试</string>
+    <string name="msg_input_contact_name">请输入联系人姓名</string>
+    <string name="msg_load_contact_fail">加载联系人失败</string>
+    <string name="title_activity_add_contact_by_address">通过地址添加</string>
 </resources>

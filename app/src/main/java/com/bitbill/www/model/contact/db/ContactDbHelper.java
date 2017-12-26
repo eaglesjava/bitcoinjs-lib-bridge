@@ -64,6 +64,17 @@ public class ContactDbHelper extends DbHelper implements ContactDb {
     }
 
     @Override
+    public Observable<Void> deleteContact(Contact contact) {
+        return Observable.fromCallable(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                mContactDao.delete(contact);
+                return null;
+            }
+        });
+    }
+
+    @Override
     public Observable<Boolean> updateContact(Contact wallet) {
         return Observable.fromCallable(new Callable<Boolean>() {
             @Override

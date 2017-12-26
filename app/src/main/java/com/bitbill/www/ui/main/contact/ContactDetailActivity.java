@@ -9,14 +9,18 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
+import com.bitbill.www.ui.common.GetLastAddressMvpPresenter;
+import com.bitbill.www.ui.common.GetLastAddressMvpView;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class ContactDetailActivity extends BaseToolbarActivity {
+public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvpPresenter> implements GetLastAddressMvpView {
 
     @BindView(R.id.tv_contact_label)
     TextView mTvContactLabel;
@@ -28,6 +32,8 @@ public class ContactDetailActivity extends BaseToolbarActivity {
     TextView mTvWalletAddress;
     @BindView(R.id.tv_wallet_remark)
     TextView mTvWalletRemark;
+    @Inject
+    GetLastAddressMvpPresenter<ContactModel, GetLastAddressMvpView> mGetLastAddressMvpPresenter;
     private Contact mContact;
 
     public static void start(Context context, Contact contact) {
@@ -43,13 +49,13 @@ public class ContactDetailActivity extends BaseToolbarActivity {
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public GetLastAddressMvpPresenter getMvpPresenter() {
+        return mGetLastAddressMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -64,20 +70,22 @@ public class ContactDetailActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
-        if (mContact == null || StringUtils.isEmpty(mContact.getName()) || StringUtils.isEmpty(String.valueOf(mContact.getName().charAt(0)))) {
+        if (mContact == null || StringUtils.isEmpty(mContact.getContactName()) || StringUtils.isEmpty(String.valueOf(mContact.getContactName().charAt(0)))) {
             // TODO: 2017/12/20
             showMessage("加载联系人信息失败");
             return;
         }
-        mTvContactLabel.setText(String.valueOf(mContact.getName().charAt(0)));
-        mTvContactName.setText(mContact.getName());
+        mTvContactLabel.setText(StringUtils.getNameLabel(mContact.getContactName()));
+        mTvContactName.setText(mContact.getContactName());
         mTvWalletAddress.setText(mContact.getAddress());
         mTvWalletRemark.setText(mContact.getRemark());
+        mTvWalletId.setText(mContact.getWalletId());
+        mTvWalletAddress.setText(mContact.getAddress());
     }
 
     @Override
     public void initData() {
-
+        getMvpPresenter().getLastAddress();
     }
 
     @Override
@@ -109,4 +117,24 @@ public class ContactDetailActivity extends BaseToolbarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public String getWalletId() {
+        return mContact == null ? "" : mContact.getWalletId();
+    }
+
+    @Override
+    public void getLastAddressSuccess(String address) {
+
+        mTvWalletAddress.setText(mContact.getAddress());
+    }
+
+    @Override
+    public void getLastAddressFail() {
+
+    }
+
+    @Override
+    public void requireWalletId() {
+
+    }
 }

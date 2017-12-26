@@ -940,4 +940,20 @@ public class StringUtils {
         etText.setLongClickable(editable);
         etText.setInputType(editable ? InputType.TYPE_CLASS_TEXT : InputType.TYPE_NULL);
     }
+
+    /**
+     * 联系人备份id 取设备id md5并取前十位
+     *
+     * @return
+     */
+    public static String getContactKey() {
+        return EncryptUtils.encryptMD5ToString(DeviceUtil.getDeviceId()).substring(0, 10);
+    }
+
+    public static String getNameLabel(String name) {
+        if (isEmpty(name)) {
+            return "";
+        }
+        return String.valueOf(name.trim().charAt(0));
+    }
 }

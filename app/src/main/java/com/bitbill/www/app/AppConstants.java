@@ -29,6 +29,9 @@ public final class AppConstants {
     public static final String EXTRA_CONTACT = "extra_contact";
     public static final String EXTRA_RECEIVE_ADDRESS = "receive_address";
     public static final String EXTRA_RECEIVE_AMOUNT = "receive_amount";
+    public static final String EXTRA_CONTACT_ADDRESS = "contact_address";
+    public static final String EXTRA_WALLET_ID = "wallet_id";
+
 
     public static final String ARG_DATAS = "args_datas";
     public static final String ARG_WALLET = "arg_wallet";
@@ -44,6 +47,11 @@ public final class AppConstants {
     public static final String EVENT_CONFIRM = "confirm";
     public static final String EVENT_UNCONFIRM = "unconfirm";
     public static final String PLATFORM = "Android";
+
+    /**
+     * cointype
+     */
+    public static final String BTC_COIN_TYPE = "BTC";
 
 
     private AppConstants() {
