@@ -13,15 +13,16 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
 
     var walletID: String?
     
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var idFirstWordLabel: UILabel!
+    @IBOutlet weak var nameInputView: BILInputView!
+    @IBOutlet weak var remarkInputView: BILInputView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        idLabel.text = walletID
-        guard let firstWord = walletID?.first else { return }
-        idFirstWordLabel.text = String(firstWord)
+        navigationItem.title = walletID
+        nameInputView.delegate = self
+        remarkInputView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,33 +31,56 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
     }
     
     @IBAction func addAction(_ sender: Any) {
-        guard let id = walletID else { return }
-        showAddContactAlert(id: id)
-    }
-    func showAddContactAlert(id: String) {
-        let alert = UIAlertController(title: "输入 \(id) 的名称", message: nil, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (action) in
-            guard let name = alert.textFields?.first?.text, !name.isEmpty else {
-                self.showTipAlert(msg: "不能为空")
-                return
-            }
-            self.addContact(id: id, name: name)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
-            
-        }))
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "请输入联系人名称"
-        }
-        
-        present(alert, animated: true, completion: nil)
+        addContact()
     }
     
-    func addContact(id: String, name: String) {
-        Contact.addContactToServer(id: id, name: name, success: { (contact) in
+    func checkName() -> String? {
+        return check(str: nameInputView.textField.text, minLength: 1, maxLength: 30, key: "名称")
+    }
+    
+    func checkRemark() -> String? {
+        return check(str: remarkInputView.textField.text, minLength: 1, maxLength: 100, key: "名称", required: false)
+    }
+    
+    func check(str: String?, minLength: Int, maxLength: Int, key: String, required: Bool = true) -> String? {
+        guard let s = str, !s.isEmpty else {
+            if required {
+                return "请输入\(key)"
+            }
+            return nil
+        }
+        var toReturn: String? = nil
+        switch s.count {
+        case minLength - 1:
+            toReturn = "请输入\(key)"
+        case let i where i > maxLength:
+            toReturn = "\(key)支持\(minLength)-\(maxLength)位"
+        default: ()
+        }
+        
+        return toReturn
+    }
+    
+    func addContact() {
+        guard let id = walletID else { return }
+        guard let name = nameInputView.textField.text else {
+            nameInputView.show(tip: "名称不能为空", type: .error)
+            return
+        }
+        
+        let nameError = checkName()
+        guard nameError == nil else {
+            nameInputView.textField.becomeFirstResponder()
+            nameInputView.show(tip: nameError!, type: .error)
+            return
+        }
+        
+        let remark = remarkInputView.textField.text ?? ""
+        addContact(id: id, name: name, remark: remark)
+    }
+    
+    func addContact(id: String, name: String, remark: String = "") {
+        Contact.addContactToServer(id: id, name: name, remark: remark, success: { (contact) in
             SVProgressHUD.showSuccess(withStatus: "添加成功")
             SVProgressHUD.dismiss(withDelay: 1.5, completion: {
                 guard let nav = self.navigationController else {
@@ -85,4 +109,23 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
     }
     */
 
+}
+
+extension BILSearchWalletIDResultController: BILInputViewDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case nameInputView.textField:
+            guard let msg = checkName() else
+            {
+                remarkInputView.textField.becomeFirstResponder()
+                return false
+            }
+            nameInputView.show(tip: msg, type: .error)
+        case remarkInputView.textField:
+            addContact()
+        default:
+            ()
+        }
+        return true
+    }
 }

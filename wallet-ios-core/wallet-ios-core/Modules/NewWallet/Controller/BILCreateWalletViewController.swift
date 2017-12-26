@@ -266,6 +266,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                     })
                 case .recover:
                     wallet.importWalletToServer(success: { (result) in
+                        wallet.encryptedMnemonic = nil
                         wallet.isNeedBackup = false
                         successFromSever(result: result)
                     }, failure: { (msg, code) in

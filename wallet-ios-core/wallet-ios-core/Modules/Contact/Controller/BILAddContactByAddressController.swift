@@ -113,7 +113,16 @@ extension BILAddContactByAddressController {
                 Contact.addContactToServer(id: "", address: address, name: name, remark: remark, success: { (contact) in
                     SVProgressHUD.showSuccess(withStatus: "添加成功")
                     SVProgressHUD.dismiss(withDelay: 1.5, completion: {
-                        self.navigationController?.popToRootViewController(animated: true)
+                        guard let nav = self.navigationController else {
+                            return
+                        }
+                        for cont in nav.viewControllers {
+                            if cont is BILContactController {
+                                nav.popToViewController(cont, animated: true)
+                                return
+                            }
+                        }
+                        nav.popToRootViewController(animated: true)
                     })
                 }) { (msg, code) in
                     self.bil_makeToast(msg: msg)
