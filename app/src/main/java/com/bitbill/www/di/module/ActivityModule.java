@@ -12,6 +12,7 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.qualifier.ActivityContext;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.ui.common.BtcAddressMvpPresentder;
 import com.bitbill.www.ui.common.BtcAddressMvpView;
@@ -207,8 +208,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    AddContactByIdMvpPresenter<WalletModel, AddContactByIdMvpView> provideAddContactByIdPresenter(
-            AddContactByIdPresenter<WalletModel, AddContactByIdMvpView> presenter) {
+    AddContactByIdMvpPresenter<ContactModel, AddContactByIdMvpView> provideAddContactByIdPresenter(
+            AddContactByIdPresenter<ContactModel, AddContactByIdMvpView> presenter) {
         return presenter;
     }
 

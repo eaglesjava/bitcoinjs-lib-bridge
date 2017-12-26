@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
-import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.contact.ContactModel;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMv
     @BindView(R.id.btn_add_now)
     TextView btnAddNow;
     @Inject
-    AddContactByIdMvpPresenter<WalletModel, AddContactByIdMvpView> mAddContactByIdMvpPresenter;
+    AddContactByIdMvpPresenter<ContactModel, AddContactByIdMvpView> mAddContactByIdMvpPresenter;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, AddContactByIdActivity.class);

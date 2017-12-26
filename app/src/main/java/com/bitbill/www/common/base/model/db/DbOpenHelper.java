@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
-import com.bitbill.www.model.wallet.db.entity.DaoMaster;
+import com.bitbill.www.model.contact.db.entity.DaoMaster;
 
 import org.greenrobot.greendao.database.Database;
 

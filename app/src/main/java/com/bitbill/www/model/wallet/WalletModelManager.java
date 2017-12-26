@@ -18,8 +18,6 @@ import com.bitbill.www.model.wallet.network.WalletApi;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
-import com.bitbill.www.model.wallet.network.entity.GetLastAddressRequest;
-import com.bitbill.www.model.wallet.network.entity.GetLastAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxHistoryRequest;
@@ -29,8 +27,6 @@ import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
-import com.bitbill.www.model.wallet.network.entity.SearchWalletIdRequest;
-import com.bitbill.www.model.wallet.network.entity.SearchWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 import com.bitbill.www.model.wallet.network.entity.TxHistory;
@@ -203,26 +199,4 @@ public class WalletModelManager extends ModelManager implements WalletModel {
         return mWalletApi.getConfig();
     }
 
-    /**
-     * 搜索WalletId
-     *
-     * @param searchWalletIdRequest
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<SearchWalletIdResponse>> searchWalletId(SearchWalletIdRequest searchWalletIdRequest) {
-        return mWalletApi.searchWalletId(searchWalletIdRequest);
-    }
-
-
-    /**
-     * 获取联系人最新地址
-     *
-     * @param getLastAddressRequest
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<GetLastAddressResponse>> getLastAddress(GetLastAddressRequest getLastAddressRequest) {
-        return mWalletApi.getLastAddress(getLastAddressRequest);
-    }
 }

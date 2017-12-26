@@ -9,6 +9,7 @@ import android.content.Context;
 
 import com.bitbill.www.BuildConfig;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.common.base.model.db.DbOpenHelper;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.socket.SocketHelper;
 import com.bitbill.www.di.qualifier.ApiInfo;
@@ -24,6 +25,14 @@ import com.bitbill.www.model.app.network.AppApi;
 import com.bitbill.www.model.app.network.AppApiHelper;
 import com.bitbill.www.model.app.prefs.AppPreferences;
 import com.bitbill.www.model.app.prefs.AppPreferencesHelper;
+import com.bitbill.www.model.contact.ContactModel;
+import com.bitbill.www.model.contact.ContactModelManager;
+import com.bitbill.www.model.contact.db.ContactDb;
+import com.bitbill.www.model.contact.db.ContactDbHelper;
+import com.bitbill.www.model.contact.db.entity.DaoMaster;
+import com.bitbill.www.model.contact.db.entity.DaoSession;
+import com.bitbill.www.model.contact.network.ContactApi;
+import com.bitbill.www.model.contact.network.ContactApiHelper;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.WalletModelManager;
 import com.bitbill.www.model.wallet.db.WalletDb;
@@ -68,6 +77,16 @@ public class ApplicationModule {
     @DatabaseInfo
     String provideDatabaseName() {
         return AppConstants.DB_NAME;
+    }
+
+    @Provides
+    @DatabaseInfo
+    DaoSession provideDaoSession(DbOpenHelper dbOpenHelper) {
+        //release 使用加密数据库
+        return new DaoMaster(BuildConfig.DEBUG
+                ? dbOpenHelper.getWritableDb()
+                : dbOpenHelper.getEncryptedWritableDb(BuildConfig.ENCRYPTED_DB_SECRECT))
+                .newSession();
     }
 
     @Provides
@@ -156,6 +175,24 @@ public class ApplicationModule {
     @Singleton
     WalletApi provideWalletApiHelper(WalletApiHelper walletApiHelper) {
         return walletApiHelper;
+    }
+
+    @Provides
+    @Singleton
+    ContactModel provideContactModuleManager(ContactModelManager contactModelManager) {
+        return contactModelManager;
+    }
+
+    @Provides
+    @Singleton
+    ContactDb provideContactDbHelper(ContactDbHelper contactDbHelper) {
+        return contactDbHelper;
+    }
+
+    @Provides
+    @Singleton
+    ContactApi provideContactApiHelper(ContactApiHelper contactApiHelper) {
+        return contactApiHelper;
     }
 
 

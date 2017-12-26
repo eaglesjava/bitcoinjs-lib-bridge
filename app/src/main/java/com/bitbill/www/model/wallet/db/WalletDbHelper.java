@@ -24,7 +24,8 @@
 package com.bitbill.www.model.wallet.db;
 
 import com.bitbill.www.common.base.model.db.DbHelper;
-import com.bitbill.www.common.base.model.db.DbOpenHelper;
+import com.bitbill.www.di.qualifier.DatabaseInfo;
+import com.bitbill.www.model.contact.db.entity.DaoSession;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.db.entity.WalletDao;
 
@@ -47,8 +48,8 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
     private final WalletDao mWalletDao;
 
     @Inject
-    public WalletDbHelper(DbOpenHelper dbOpenHelper) {
-        super(dbOpenHelper);
+    public WalletDbHelper(@DatabaseInfo DaoSession daoSession) {
+        super(daoSession);
         mWalletDao = mDaoSession.getWalletDao();
     }
 

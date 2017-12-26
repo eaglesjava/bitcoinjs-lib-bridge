@@ -8,8 +8,6 @@ import com.bitbill.www.di.qualifier.BaseUrlInfo;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
-import com.bitbill.www.model.wallet.network.entity.GetLastAddressRequest;
-import com.bitbill.www.model.wallet.network.entity.GetLastAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxHistoryRequest;
@@ -19,8 +17,6 @@ import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
-import com.bitbill.www.model.wallet.network.entity.SearchWalletIdRequest;
-import com.bitbill.www.model.wallet.network.entity.SearchWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 import com.bitbill.www.model.wallet.network.entity.TxHistory;
@@ -201,34 +197,4 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
                 });
     }
 
-    /**
-     * 搜索WalletId
-     *
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<SearchWalletIdResponse>> searchWalletId(SearchWalletIdRequest searchWalletIdRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.SEARCH_WALLETID)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(searchWalletIdRequest)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<SearchWalletIdResponse>>() {
-                });
-    }
-
-    /**
-     * 获取联系人最新地址
-     *
-     * @param getLastAddressRequest
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<GetLastAddressResponse>> getLastAddress(GetLastAddressRequest getLastAddressRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_LAST_ADDRESS)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(getLastAddressRequest)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<GetLastAddressResponse>>() {
-                });
-    }
 }

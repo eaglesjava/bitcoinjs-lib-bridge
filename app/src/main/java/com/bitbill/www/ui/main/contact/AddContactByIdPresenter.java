@@ -7,7 +7,7 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.wallet.network.entity.SearchWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.SearchWalletIdResponse;
 
@@ -19,7 +19,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2017/12/25.
  */
 @PerActivity
-public class AddContactByIdPresenter<M extends WalletModel, V extends AddContactByIdMvpView> extends ModelPresenter<M, V> implements AddContactByIdMvpPresenter<M, V> {
+public class AddContactByIdPresenter<M extends ContactModel, V extends AddContactByIdMvpView> extends ModelPresenter<M, V> implements AddContactByIdMvpPresenter<M, V> {
 
     @Inject
     public AddContactByIdPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {

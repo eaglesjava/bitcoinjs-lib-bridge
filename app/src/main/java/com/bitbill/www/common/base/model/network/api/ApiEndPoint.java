@@ -38,6 +38,8 @@ public final class ApiEndPoint {
             + "/wallet/getConfig";
     public static final String SEARCH_WALLETID = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/searchWalletId";
+    public static final String ADD_CONTACTS = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/addContacts";
     public static final String GET_LAST_ADDRESS = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/getLastAddress";
 

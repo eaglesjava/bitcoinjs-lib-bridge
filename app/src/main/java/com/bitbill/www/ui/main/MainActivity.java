@@ -151,7 +151,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         //设置全局钱包列表对象
         BitbillApp.get().setWallets(wallets);
         reloadWalletInfo();
+        //获取钱包余额
         getMvpPresenter().getBalance();
+        //加载未确认交易
+        getMvpPresenter().listUnconfirm();
     }
 
     private void reloadWalletInfo() {
@@ -295,8 +298,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void initData() {
         getMvpPresenter().loadWallet();
-        //加载未确认交易
-        getMvpPresenter().listUnconfirm();
     }
 
     @Override
