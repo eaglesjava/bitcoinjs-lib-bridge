@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 import SVProgressHUD
 
 extension String {
@@ -37,7 +36,6 @@ class BILContactController: BILLightBlueBaseController {
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: "BILContactCell", bundle: nil), forCellReuseIdentifier: "BILContactCell")
         tableView.register(UINib(nibName: "BILTableViewHeaderFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "BILTableViewHeaderFooterView")
-        tableView.emptyDataSetSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadContacts), name: .contactDidChanged, object: nil)
         
@@ -271,15 +269,5 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72.0
-    }
-}
-
-extension BILContactController: DZNEmptyDataSetSource {
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: emptyTitle ?? "您还没有联系人", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 18)])
-    }
-    
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: emptyDescription ?? "可以点击右上角添加联系人", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 14)])
     }
 }

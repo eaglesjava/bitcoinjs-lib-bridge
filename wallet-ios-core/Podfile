@@ -12,7 +12,6 @@ target 'wallet-ios-core' do
   pod 'TextFieldEffects'
   pod 'IQKeyboardManagerSwift'
   pod 'SnapKit'
-  pod 'DZNEmptyDataSet'
   pod 'SwiftyJSON'
   pod 'SVProgressHUD'
   pod 'Socket.IO-Client-Swift'
