@@ -1,0 +1,13 @@
+/* 
+  BILAuthenticator.strings
+  wallet-ios-core
+
+  Created by 仇弘扬 on 2017/12/26.
+  Copyright © 2017年 BitBill. All rights reserved.
+*/
+
+"kFaceIdAuthenticationReason" = "Confirm your face to authenticate.";
+"kFaceIdPasscodeAuthenticationReason" = "Face ID is locked now, because of too many failed attempts. Enter passcode to unlock Face ID.";
+"kTouchIdAuthenticationReason" = "Confirm your fingerprint to authenticate.";
+"kTouchIdPasscodeAuthenticationReason" = "Touch ID is locked now, because of too many failed attempts. Enter passcode to unlock Touch ID.";
+"kPasscodeAuthenticationReason" = "Confirm your iPhone's passcode to authenticate.";

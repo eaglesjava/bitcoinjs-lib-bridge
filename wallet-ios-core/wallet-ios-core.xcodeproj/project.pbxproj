@@ -69,6 +69,8 @@
 		BAB749161FF2287800E85607 /* BILAgreementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB749151FF2287800E85607 /* BILAgreementController.swift */; };
 		BAB749181FF2291D00E85607 /* agreement.html in Resources */ = {isa = PBXBuildFile; fileRef = BAB749171FF2291D00E85607 /* agreement.html */; };
 		BAB7491A1FF2298D00E85607 /* BILWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB749191FF2298D00E85607 /* BILWebViewController.swift */; };
+		BAB7491C1FF2496E00E85607 /* BILAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7491B1FF2496E00E85607 /* BILAuthenticator.swift */; };
+		BAB749201FF24F2800E85607 /* BILAuthenticator.strings in Resources */ = {isa = PBXBuildFile; fileRef = BAB749221FF24F2800E85607 /* BILAuthenticator.strings */; };
 		BAEFFD3F1FEB9E0C00C6EAB3 /* BILMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFFD3E1FEB9E0C00C6EAB3 /* BILMeCell.swift */; };
 		BAEFFD411FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js in Resources */ = {isa = PBXBuildFile; fileRef = BAEFFD401FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js */; };
 		BAEFFD441FEBB7BD00C6EAB3 /* diaoluo_da.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BAEFFD421FEBB7BC00C6EAB3 /* diaoluo_da.mp3 */; };
@@ -234,6 +236,9 @@
 		BAB749151FF2287800E85607 /* BILAgreementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAgreementController.swift; sourceTree = "<group>"; };
 		BAB749171FF2291D00E85607 /* agreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = agreement.html; sourceTree = "<group>"; };
 		BAB749191FF2298D00E85607 /* BILWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILWebViewController.swift; sourceTree = "<group>"; };
+		BAB7491B1FF2496E00E85607 /* BILAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAuthenticator.swift; sourceTree = "<group>"; };
+		BAB749211FF24F2800E85607 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILAuthenticator.strings"; sourceTree = "<group>"; };
+		BAB749231FF24F2C00E85607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/BILAuthenticator.strings; sourceTree = "<group>"; };
 		BAEFFD3E1FEB9E0C00C6EAB3 /* BILMeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeCell.swift; sourceTree = "<group>"; };
 		BAEFFD401FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "bitcoinjs-lib-app.js"; sourceTree = "<group>"; };
 		BAEFFD421FEBB7BC00C6EAB3 /* diaoluo_da.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diaoluo_da.mp3; sourceTree = "<group>"; };
@@ -594,6 +599,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		BAB7491D1FF24EFC00E85607 /* BILAuthenticator */ = {
+			isa = PBXGroup;
+			children = (
+				BAB7491B1FF2496E00E85607 /* BILAuthenticator.swift */,
+				BAB749221FF24F2800E85607 /* BILAuthenticator.strings */,
+			);
+			path = BILAuthenticator;
+			sourceTree = "<group>";
+		};
 		CC94E0011FB58C160098E730 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -944,6 +958,7 @@
 		CCEC67791FB190EE004CC6C5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				BAB7491D1FF24EFC00E85607 /* BILAuthenticator */,
 				BA04570E1FDE68B800070CCA /* CKQRCodeScan */,
 				BA04570B1FDE343A00070CCA /* CKCopyLabel */,
 				CCFEDEFB1FCE8D2D00F1A7FC /* CKSegmentedView */,
@@ -1164,6 +1179,7 @@
 				CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */,
 				BA4646191FD78FB500680D33 /* Recieve.xcassets in Resources */,
 				CCE5E1681FC7FB9E00F7555D /* BILHomeTableHeaderView.xib in Resources */,
+				BAB749201FF24F2800E85607 /* BILAuthenticator.strings in Resources */,
 				CCE5E1721FC81E3700F7555D /* Home.xcassets in Resources */,
 				BAB749181FF2291D00E85607 /* agreement.html in Resources */,
 				BA1918F21FD7E7BA00B6F568 /* BILPopMenuItemView.xib in Resources */,
@@ -1382,6 +1398,7 @@
 				CCE5E1761FCBC4B000F7555D /* BILTransactionHistoryModel.swift in Sources */,
 				CC4417071FBEB47C00C4B158 /* BILBackupWalletSuccessController.swift in Sources */,
 				BAB7491A1FF2298D00E85607 /* BILWebViewController.swift in Sources */,
+				BAB7491C1FF2496E00E85607 /* BILAuthenticator.swift in Sources */,
 				BA1746FA1FDFCB1A000615CF /* BILScanQRCodeResultController.swift in Sources */,
 				CC94E04D1FB94DAA0098E730 /* BILWelcomeViewController.swift in Sources */,
 				CCED05641FDBB7A700689498 /* BILChooseWalletCell.swift in Sources */,
@@ -1464,6 +1481,15 @@
 				BAEFFD4A1FEBCD0B00C6EAB3 /* zh-Hans */,
 			);
 			name = Home.storyboard;
+			sourceTree = "<group>";
+		};
+		BAB749221FF24F2800E85607 /* BILAuthenticator.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BAB749211FF24F2800E85607 /* zh-Hans */,
+				BAB749231FF24F2C00E85607 /* Base */,
+			);
+			name = BILAuthenticator.strings;
 			sourceTree = "<group>";
 		};
 		CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */ = {

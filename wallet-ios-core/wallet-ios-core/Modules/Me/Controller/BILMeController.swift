@@ -101,10 +101,14 @@ class BILMeController: BILBaseViewController {
 	
 	func backupContacts() {
 		let key = BILDeviceManager.shared.contactKey
-		showTipAlert(title: "您的联系人密钥", msg: key, actionTitle: "复制密钥") {
-			UIPasteboard.general.string = key
-			self.bil_makeToast(msg: "密钥已复制")
-		}
+        BILAuthenticator.shared.autherizeWithTouchIdOrFaceId(reason: "", success: {
+            self.showTipAlert(title: "您的联系人密钥", msg: key, actionTitle: "复制密钥") {
+                UIPasteboard.general.string = key
+                self.bil_makeToast(msg: "密钥已复制")
+            }
+        }) {
+            self.bil_makeToast(msg: "授权失败，无法查看您的联系人密钥")
+        }
 	}
 	
 	func recoverContacts() {
