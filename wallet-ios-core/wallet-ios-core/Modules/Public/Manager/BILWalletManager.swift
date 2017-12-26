@@ -13,11 +13,6 @@ class BILWalletManager: NSObject {
 	static let shared = {
 		return BILWalletManager()
 	}()
-    
-    override init() {
-        super.init()
-        loadWalletBalancesFromServer()
-    }
 	
 	weak var appDelegate: AppDelegate?
     
@@ -28,9 +23,8 @@ class BILWalletManager: NSObject {
     var wallets: [WalletModel] {
         get {
             var results = [WalletModel]()
-            guard let delegate = appDelegate else { return results }
             do {
-                let context = delegate.persistentContainer.viewContext
+                let context = coreDataContext
                 let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
                 results.append(contentsOf: try context.fetch(request))
             } catch {
@@ -66,15 +60,5 @@ class BILWalletManager: NSObject {
 		NotificationCenter.default.post(name: .walletDidChanged, object: nil)
 		try context.save()
 	}
-	
-    func loadWalletBalancesFromServer() {
-        for wallet in wallets {
-            wallet.getBalanceFromServer(success: { (w) in
-                
-            }, failure: { (msg, code) in
-                
-            })
-        }
-    }
 	
 }

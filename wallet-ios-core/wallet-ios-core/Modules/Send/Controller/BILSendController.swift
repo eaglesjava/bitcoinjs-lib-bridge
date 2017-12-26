@@ -17,7 +17,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     let showSelectContactController = "BILShowSelectContactController"
     
     var sendModel: BILSendModel?
-    var contact: Contact?
+    var contact: ContactModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     
     @objc
     func sendBTCToContact(notification: Notification) {
-        guard let contact = notification.object as? Contact else { return }
+        guard let contact = notification.object as? ContactModel else { return }
         didChooseContact(contact: contact)
     }
 
@@ -66,10 +66,10 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         }
     }
     
-    func didChooseContact(contact: Contact) {
+    func didChooseContact(contact: ContactModel) {
         loadViewIfNeeded()
         self.contact = contact
-        addressInputView.textField.text = "\(contact.name)( \(contact.detail) )"
+		addressInputView.textField.text = "\(contact.name ?? "")( \(contact.detail) )"
     }
     
     // MARK: - Actions
@@ -128,7 +128,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         }
         
         if let c = contact {
-            debugPrint(c.walletID)
+            debugPrint(c.walletID!)
             if c.additionType == .walletID {
                 c.getContactAddressFromServer(success: { (address) in
                     next(address: address, isContact: true)
@@ -139,7 +139,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
             else
             {
                 let address = c.address
-                next(address: address, isContact: true)
+                next(address: address!, isContact: true)
             }
         }
         else

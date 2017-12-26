@@ -16,7 +16,7 @@ class BILContactDetailController: BILLightBlueBaseController {
     @IBOutlet weak var contactTypeStringLabel: BILCopyLabel!
     @IBOutlet weak var remarkLabel: UILabel!
     
-    var contact: Contact?
+    var contact: ContactModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()

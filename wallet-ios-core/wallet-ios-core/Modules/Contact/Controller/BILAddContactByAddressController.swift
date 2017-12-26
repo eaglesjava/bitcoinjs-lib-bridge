@@ -126,7 +126,7 @@ extension BILAddContactByAddressController {
             debugPrint(result)
             let isValidate = result as! Bool
             if isValidate {
-                Contact.addContactToServer(id: "", address: address, name: name, remark: remark, success: { (contact) in
+                ContactModel.addContactToServer(id: "", address: address, name: name, remark: remark, success: { (contact) in
                     SVProgressHUD.showSuccess(withStatus: "添加成功")
                     SVProgressHUD.dismiss(withDelay: 1.5, completion: {
                         guard let nav = self.navigationController else {

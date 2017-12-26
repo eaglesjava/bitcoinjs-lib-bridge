@@ -19,10 +19,10 @@ extension String {
 
 class BILContactController: BILLightBlueBaseController {
 
-    typealias DidSelectContactClosure = (Contact) -> Void
+    typealias DidSelectContactClosure = (ContactModel) -> Void
     
     @IBOutlet weak var tableView: UITableView!
-    var contacts = [String: [Contact]]()
+    var contacts = [String: [ContactModel]]()
     var firstLetters = [String]()
     var showTableViewIndexes: Bool = false
     
@@ -38,24 +38,15 @@ class BILContactController: BILLightBlueBaseController {
         tableView.register(UINib(nibName: "BILContactCell", bundle: nil), forCellReuseIdentifier: "BILContactCell")
         tableView.register(UINib(nibName: "BILTableViewHeaderFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "BILTableViewHeaderFooterView")
         tableView.emptyDataSetSource = self
-        loadContacts()
-        
-        setupRefresh()
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadContacts), name: .contactDidChanged, object: nil)
         
         firstLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".map{ String($0) }
+		loadContacts()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    
-    func setupRefresh() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(loadContacts), for: .valueChanged)
-        refreshControl.tintColor = UIColor.white
-        tableView.refreshControl = refreshControl
     }
     
     deinit {
@@ -118,7 +109,7 @@ class BILContactController: BILLightBlueBaseController {
 	
 	func checkID(id: String) {
 		SVProgressHUD.show()
-		Contact.getContactFromServer(by: id, success: { (id) in
+		ContactModel.getContactFromServer(by: id, success: { (id) in
 			DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(350), execute: {
 				SVProgressHUD.dismiss()
 				self.showResult(id: id)
@@ -127,7 +118,6 @@ class BILContactController: BILLightBlueBaseController {
 			self.bil_makeToast(msg: msg)
 			SVProgressHUD.dismiss()
 		}
-		
 	}
 	
 	func showResult(id: String) {
@@ -138,7 +128,7 @@ class BILContactController: BILLightBlueBaseController {
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == .bil_showContactDetailSegue {
-            guard (sender as? Contact) != nil else { return false }
+            guard (sender as? ContactModel) != nil else { return false }
         }
         return true
     }
@@ -153,7 +143,7 @@ class BILContactController: BILLightBlueBaseController {
         switch id {
         case String.bil_showContactDetailSegue:
             let cont = segue.destination as! BILContactDetailController
-            if let contact = sender as? Contact {
+            if let contact = sender as? ContactModel {
                 cont.contact = contact
             }
 		case String.bil_contactsToResultSegue:
@@ -173,31 +163,21 @@ class BILContactController: BILLightBlueBaseController {
 }
 
 extension BILContactController {
-    @objc
-    func loadContacts() {
-        func loadEnd() {
-            self.tableView.reloadData()
-        }
-        
-        Contact.getContactsFromServer(success: { (contacts) in
-            self.handleContacts(datas: contacts)
-            loadEnd()
-        }) { (msg, code) in
-            self.emptyTitle = "获取联系人失败"
-            self.emptyDescription = "请检查您的网络，或稍后再试"
-            self.bil_makeToast(msg: msg)
-            loadEnd()
-        }
-    }
-    
-    func handleContacts(datas: [Contact]) {
+
+	@objc
+	func loadContacts() {
+		handleContacts(datas: bil_contactManager.models)
+		tableView.reloadData()
+	}
+	
+    func handleContacts(datas: [ContactModel]) {
         contacts.removeAll()
         for contact in datas {
             let firstLetter = contact.firstNameLetter
-            debugPrint("\(firstLetter), \(contact.name)")
+			debugPrint("\(firstLetter), \(contact.name ?? "")")
             var array = contacts[firstLetter]
             if array == nil {
-                array = [Contact]()
+                array = [ContactModel]()
             }
             array?.append(contact)
             contacts[firstLetter] = array

@@ -80,7 +80,7 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
     }
     
     func addContact(id: String, name: String, remark: String = "") {
-        Contact.addContactToServer(id: id, name: name, remark: remark, success: { (contact) in
+        ContactModel.addContactToServer(id: id, name: name, remark: remark, success: { (contact) in
             SVProgressHUD.showSuccess(withStatus: "添加成功")
             SVProgressHUD.dismiss(withDelay: 1.5, completion: {
                 guard let nav = self.navigationController else {

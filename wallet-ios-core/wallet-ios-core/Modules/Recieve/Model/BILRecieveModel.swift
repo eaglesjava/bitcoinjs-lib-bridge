@@ -8,8 +8,8 @@
 
 import UIKit
 
-enum CoinType {
-    case btc
+enum CoinType: Int16 {
+    case btc = 0
     
     var name: String {
         get {

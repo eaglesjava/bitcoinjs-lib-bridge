@@ -44,7 +44,7 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
             return
         }
         
-        Contact.getContactFromServer(by: id, success: { (id) in
+        ContactModel.getContactFromServer(by: id, success: { (id) in
             self.showResult(id: id)
         }) { (msg, code) in
             showToast(msg: msg)

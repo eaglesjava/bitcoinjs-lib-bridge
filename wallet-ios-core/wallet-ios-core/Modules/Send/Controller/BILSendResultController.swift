@@ -64,7 +64,7 @@ class BILSendResultController: BILBaseViewController {
     }
     
     func addContact(address: String, name: String) {
-        Contact.addContactToServer(address: address, name: name, success: { (contact) in
+        ContactModel.addContactToServer(address: address, name: name, success: { (contact) in
             SVProgressHUD.showSuccess(withStatus: "添加成功")
             SVProgressHUD.dismiss(withDelay: 1.5, completion: {
                 self.dismiss(animated: true, completion: nil)

@@ -15,7 +15,7 @@ class BILContactCell: UITableViewCell {
     @IBOutlet weak var detailLabel: BILCopyLabel!
     @IBOutlet weak var seletedButton: UIButton!
     
-    var contact: Contact? {
+    var contact: ContactModel? {
         didSet {
             guard let c = contact else { return }
             nameLabel.text = c.name
