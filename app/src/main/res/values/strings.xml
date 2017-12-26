@@ -165,4 +165,8 @@
     <string name="msg_send_transaction_fail">发送交易失败</string>
     <string name="msg_balance_not_enough">余额不足</string>
     <string name="title_activity_scan_result">扫描结果</string>
+    <string name="title_activity_add_contact_by_id">通过ID添加</string>
+    <string name="hint_search_wallet_id">搜索对方ID</string>
+    <string name="btn_add_now">立即添加</string>
+    <string name="hint_no_contact">您还没有联系人</string>
 </resources>

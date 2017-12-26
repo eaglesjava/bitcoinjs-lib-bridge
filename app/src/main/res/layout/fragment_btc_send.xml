@@ -21,8 +21,7 @@
             android:layout_marginTop="10dp"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/inset_send_contact"
-            android:hint="接收方地址"
-            android:singleLine="true" />
+            android:hint="接收方地址"/>
 
         <ImageView
             android:id="@+id/iv_contact"

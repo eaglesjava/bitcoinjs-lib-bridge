@@ -15,20 +15,21 @@ import com.bitbill.www.model.wallet.db.WalletDb;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.WalletApi;
-import com.bitbill.www.model.wallet.network.entity.AddContactsRequest;
-import com.bitbill.www.model.wallet.network.entity.AddContactsResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
-import com.bitbill.www.model.wallet.network.entity.GetContactsResponse;
+import com.bitbill.www.model.wallet.network.entity.GetLastAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.GetLastAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.wallet.network.entity.GetTxHistoryRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
+import com.bitbill.www.model.wallet.network.entity.SearchWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.SearchWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
@@ -173,23 +174,23 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     /**
      * 交易记录
      *
-     * @param extendedKeysHash
+     * @param getTxHistoryRequest
      * @return
      */
     @Override
-    public Observable<ApiResponse<List<TxHistory>>> getTxHistory(String extendedKeysHash) {
-        return mWalletApi.getTxHistory(extendedKeysHash);
+    public Observable<ApiResponse<List<TxHistory>>> getTxHistory(GetTxHistoryRequest getTxHistoryRequest) {
+        return mWalletApi.getTxHistory(getTxHistoryRequest);
     }
 
     /**
      * 未确认交易列表
      *
-     * @param extendedKeysHash
+     * @param listUnconfirmRequest
      * @return
      */
     @Override
-    public Observable<ApiResponse<List<Unconfirm>>> listUnconfirm(String extendedKeysHash) {
-        return mWalletApi.listUnconfirm(extendedKeysHash);
+    public Observable<ApiResponse<List<Unconfirm>>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest) {
+        return mWalletApi.listUnconfirm(listUnconfirmRequest);
     }
 
     /**
@@ -205,44 +206,23 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     /**
      * 搜索WalletId
      *
-     * @param walletId
+     * @param searchWalletIdRequest
      * @return
      */
     @Override
-    public Observable<ApiResponse<SearchWalletIdResponse>> searchWalletId(String walletId) {
-        return mWalletApi.searchWalletId(walletId);
+    public Observable<ApiResponse<SearchWalletIdResponse>> searchWalletId(SearchWalletIdRequest searchWalletIdRequest) {
+        return mWalletApi.searchWalletId(searchWalletIdRequest);
     }
 
-    /**
-     * 增加联系人
-     *
-     * @param addContactsRequest
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<AddContactsResponse>> addContacts(AddContactsRequest addContactsRequest) {
-        return mWalletApi.addContacts(addContactsRequest);
-    }
-
-    /**
-     * 获取联系人
-     *
-     * @param walletKey
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<GetContactsResponse>> getContacts(String walletKey) {
-        return mWalletApi.getContacts(walletKey);
-    }
 
     /**
      * 获取联系人最新地址
      *
-     * @param walletId
+     * @param getLastAddressRequest
      * @return
      */
     @Override
-    public Observable<ApiResponse<GetLastAddressResponse>> getLastAddress(String walletId) {
-        return mWalletApi.getLastAddress(walletId);
+    public Observable<ApiResponse<GetLastAddressResponse>> getLastAddress(GetLastAddressRequest getLastAddressRequest) {
+        return mWalletApi.getLastAddress(getLastAddressRequest);
     }
 }

@@ -20,6 +20,7 @@ import com.mcxtzhang.indexlib.IndexBar.utils.IndexHelper;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
+import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class ContactActivity extends BaseToolbarActivity {
     LinearLayoutManager mManager;
     List<Contact> mDatas;
     private ListSelectDialog mListSelectDialog;
+    private EmptyWrapper mEmptyWrapper;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ContactActivity.class);
@@ -55,20 +57,7 @@ public class ContactActivity extends BaseToolbarActivity {
     public void onBeforeSetContentLayout() {
 // TODO: 2017/12/20 test data
         mDatas = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            Contact contact = new Contact();
-            if (i < 3) {
-                contact.setName("三文鱼");//名称
-            } else if (i < 6) {
-                contact.setName("汪涵洋");//名称
-            } else if (i < 10) {
-                contact.setName("崔雅妮");//名称
-            } else {
-                contact.setName("sanwenyu");//名称
-            }
-            contact.setAddress("34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK");
-            mDatas.add(contact);
-        }
+
     }
 
     @Override
@@ -112,8 +101,11 @@ public class ContactActivity extends BaseToolbarActivity {
                 return false;
             }
         });
+        mEmptyWrapper = new EmptyWrapper(mAdapter);
 
-        mRv.setAdapter(mAdapter);
+        mEmptyWrapper.setEmptyView(R.layout.layout_contact_empty_view);
+
+        mRv.setAdapter(mEmptyWrapper);
 
         //如果add两个，那么按照先后顺序，依次渲染。
         int dividerLeftPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 55, getResources().getDisplayMetrics());
@@ -127,7 +119,7 @@ public class ContactActivity extends BaseToolbarActivity {
             switch (position) {
                 case 0:
                     //通过id添加
-                    showMessage("通过id添加");
+                    AddContactByIdActivity.start(ContactActivity.this);
                     break;
                 case 1:
                     //通过地址添加
@@ -169,11 +161,20 @@ public class ContactActivity extends BaseToolbarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_contact_create) {
-            // 跳出选择对话框
-            mListSelectDialog.show(getSupportFragmentManager(), ListSelectDialog.TAG);
+            showSelectDialog();
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showSelectDialog() {
+        // 跳出选择对话框
+        mListSelectDialog.show(getSupportFragmentManager(), ListSelectDialog.TAG);
+    }
+
+    public void addNowClick(View view) {
+        showSelectDialog();
     }
 }

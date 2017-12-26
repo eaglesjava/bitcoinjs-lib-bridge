@@ -92,7 +92,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:hint="备注（20字内）" />
+                android:hint="备注（20字内）"
+                android:maxLength="20"/>
 
             <Button
                 android:id="@+id/btn_next"
