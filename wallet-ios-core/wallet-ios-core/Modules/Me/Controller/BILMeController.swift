@@ -11,6 +11,7 @@ import UIKit
 extension String {
     static var bil_meToBackupWalletSegue: String { return "BILMeToBackupWalletSegue" }
 	static var bil_meToWalletDetailSegue: String { return "BILMeToWalletDetailSegue" }
+    static var bil_meToAboutUsSegue: String { return "BILMeToAboutUsSegue" }
 }
 
 class BILMeController: BILBaseViewController {
@@ -58,7 +59,7 @@ class BILMeController: BILBaseViewController {
             case .preference:
                 return[]
             case .other:
-                return []
+                return ["关于我们"]
             }
         }
         
@@ -79,11 +80,6 @@ class BILMeController: BILBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.register(UINib(nibName: "BILTableViewHeaderFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "BILTableViewHeaderFooterView")
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
@@ -93,8 +89,8 @@ class BILMeController: BILBaseViewController {
 		NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
 	}
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         navigationController?.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
     }
 	
@@ -191,6 +187,7 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: sectionType.cellID(), for: indexPath)
 		let model = sectionType.dataArray()[indexPath.row]
         switch sectionType {
+        case .other: fallthrough
 		case .contacts:
 			let c = cell as! BILMeCell
 			c.titleLabel.text = model as? String
@@ -237,6 +234,8 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
 		case .wallet:
 			guard let wallet = sectionType.dataArray()[indexPath.row] as? WalletModel else { return }
 			performSegue(withIdentifier: .bil_meToWalletDetailSegue, sender: wallet)
+        case .other:
+            performSegue(withIdentifier: .bil_meToAboutUsSegue, sender: nil)
 		default:
 			()
 		}
