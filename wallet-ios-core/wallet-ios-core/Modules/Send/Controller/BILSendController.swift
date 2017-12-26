@@ -30,6 +30,16 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(transactionDidSend(notification:)), name: .transactionSended, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sendBTCToContact(notification:)), name: .sendBTCToContact, object: nil)
     }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		NotificationCenter.default.addObserver(self, selector: #selector(scanQRCodeAction(_:)), name: .shortcutScanQRCode, object: nil)
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		NotificationCenter.default.removeObserver(self, name: .shortcutScanQRCode, object: nil)
+	}
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .transactionSended, object: nil)
@@ -73,6 +83,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     }
     
     // MARK: - Actions
+	@objc
     @IBAction func scanQRCodeAction(_ sender: Any) {
         unowned let unownedSelf = self
         let cont = BILQRCodeScanViewController.controller { (qrString) in

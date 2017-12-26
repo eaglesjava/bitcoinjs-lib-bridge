@@ -308,6 +308,9 @@
                                                     <state key="normal" title="扫一扫" image="btn_home_shortcut_scan">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="scanAction:" destination="8tZ-8n-vAq" eventType="touchUpInside" id="JVF-22-bhU"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fr0-Wm-VYA">
                                                     <rect key="frame" x="187" y="8" width="1" height="50"/>
@@ -327,6 +330,9 @@
                                                     <state key="normal" title="添加联系人" image="btn_home_shortcut_add_contact">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="addContactAction:" destination="8tZ-8n-vAq" eventType="touchUpInside" id="CMG-p7-1q0"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

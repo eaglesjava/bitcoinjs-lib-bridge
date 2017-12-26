@@ -47,7 +47,13 @@ class BILContactController: BILLightBlueBaseController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+		NotificationCenter.default.addObserver(self, selector: #selector(newContactAction(_:)), name: .shortcutAddContact, object: nil)
     }
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		NotificationCenter.default.removeObserver(self, name: .shortcutAddContact, object: nil)
+	}
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .contactDidChanged, object: nil)
@@ -58,6 +64,7 @@ class BILContactController: BILLightBlueBaseController {
         // Dispose of any resources that can be recreated.
     }
 
+	@objc
     @IBAction func newContactAction(_ sender: Any) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         sheet.addAction(UIAlertAction(title: "通过 ID 添加", style: .default, handler: { (action) in

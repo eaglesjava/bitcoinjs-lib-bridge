@@ -18,4 +18,6 @@ extension Notification.Name {
     static var sendBTCToContact: Notification.Name { get { return NSNotification.Name("sendBTCToContact") } }
     static var contactDidChanged: Notification.Name { get { return NSNotification.Name("contactDidChanged") } }
     static var networkStatusDidChanged: Notification.Name { get { return NSNotification.Name("networkStatusDidChanged") } }
+	static var shortcutScanQRCode: Notification.Name { get { return NSNotification.Name("shortcutScanQRCode") } }
+	static var shortcutAddContact: Notification.Name { get { return NSNotification.Name("shortcutAddContact") } }
 }
