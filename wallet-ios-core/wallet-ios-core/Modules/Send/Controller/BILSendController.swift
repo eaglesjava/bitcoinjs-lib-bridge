@@ -25,6 +25,11 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         NotificationCenter.default.addObserver(self, selector: #selector(transactionDidSend(notification:)), name: .transactionSended, object: nil)
