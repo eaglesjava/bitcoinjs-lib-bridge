@@ -31,6 +31,11 @@ class BILBaseViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
+    }
 	
 	func bil_setBackgroudColor() {
         if gradientLayer == nil {

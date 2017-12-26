@@ -25,11 +25,6 @@ class BILAgreementController: BILWebViewController {
         }
         webView.loadFileURL(htmlURL, allowingReadAccessTo: htmlURL)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
