@@ -20,7 +20,7 @@ class BILAgreementController: BILWebViewController {
         }
 
         // Do any additional setup after loading the view.
-        guard let htmlURL = Bundle.main.url(forResource: "agreement", withExtension: "html") else {
+        guard let htmlURL = Bundle.main.url(forResource: "agreement", withExtension: "doc") else {
             return
         }
         webView.loadFileURL(htmlURL, allowingReadAccessTo: htmlURL)

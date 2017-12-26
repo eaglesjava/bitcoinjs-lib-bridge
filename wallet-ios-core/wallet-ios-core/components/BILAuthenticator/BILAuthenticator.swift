@@ -53,10 +53,13 @@ extension BILAuthenticator {
         return false
     }
     public func touchIDAvailable() -> Bool {
-        if #available(iOS 10.0, *) {
+        if #available(iOS 11.0, *) {
             return (LAContext().biometryType == .touchID)
         }
-        return false
+        else
+        {
+            return LAContext().canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil)
+        }
     }
 }
 

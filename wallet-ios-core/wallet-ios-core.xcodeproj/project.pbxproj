@@ -71,6 +71,7 @@
 		BAB7491A1FF2298D00E85607 /* BILWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB749191FF2298D00E85607 /* BILWebViewController.swift */; };
 		BAB7491C1FF2496E00E85607 /* BILAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7491B1FF2496E00E85607 /* BILAuthenticator.swift */; };
 		BAB749201FF24F2800E85607 /* BILAuthenticator.strings in Resources */ = {isa = PBXBuildFile; fileRef = BAB749221FF24F2800E85607 /* BILAuthenticator.strings */; };
+		BAB749251FF2537700E85607 /* agreement.doc in Resources */ = {isa = PBXBuildFile; fileRef = BAB749241FF2537300E85607 /* agreement.doc */; };
 		BAEFFD3F1FEB9E0C00C6EAB3 /* BILMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEFFD3E1FEB9E0C00C6EAB3 /* BILMeCell.swift */; };
 		BAEFFD411FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js in Resources */ = {isa = PBXBuildFile; fileRef = BAEFFD401FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js */; };
 		BAEFFD441FEBB7BD00C6EAB3 /* diaoluo_da.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BAEFFD421FEBB7BC00C6EAB3 /* diaoluo_da.mp3 */; };
@@ -239,6 +240,7 @@
 		BAB7491B1FF2496E00E85607 /* BILAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAuthenticator.swift; sourceTree = "<group>"; };
 		BAB749211FF24F2800E85607 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILAuthenticator.strings"; sourceTree = "<group>"; };
 		BAB749231FF24F2C00E85607 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/BILAuthenticator.strings; sourceTree = "<group>"; };
+		BAB749241FF2537300E85607 /* agreement.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = agreement.doc; sourceTree = "<group>"; };
 		BAEFFD3E1FEB9E0C00C6EAB3 /* BILMeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeCell.swift; sourceTree = "<group>"; };
 		BAEFFD401FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "bitcoinjs-lib-app.js"; sourceTree = "<group>"; };
 		BAEFFD421FEBB7BC00C6EAB3 /* diaoluo_da.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diaoluo_da.mp3; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				BAB749171FF2291D00E85607 /* agreement.html */,
+				BAB749241FF2537300E85607 /* agreement.doc */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1148,6 +1151,7 @@
 				CCEC67611FB18C3A004CC6C5 /* Assets.xcassets in Resources */,
 				CC4660491FBE96E600A87132 /* Public.xcassets in Resources */,
 				BA20A6001FD68DE400EC2147 /* Me.storyboard in Resources */,
+				BAB749251FF2537700E85607 /* agreement.doc in Resources */,
 				CCEC67831FB190EE004CC6C5 /* index.js in Resources */,
 				CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */,
 				CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */,
