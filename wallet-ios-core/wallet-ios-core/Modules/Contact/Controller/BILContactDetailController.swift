@@ -25,7 +25,7 @@ class BILContactDetailController: BILLightBlueBaseController {
         guard let c = contact else { return }
         nameFirstWordLabel.text = c.firstNameWord
         nameLabel.text = c.name
-        contactTypeLabel.text = c.additionType == .walletID ? "钱包ID" : "钱包地址"
+        contactTypeLabel.text = (c.additionType == .walletID ? "钱包ID" : "钱包地址") + " (\(c.coinType.name))"
         contactTypeStringLabel.valueTitle = c.additionType == .walletID ? "ID" : "地址"
         contactTypeStringLabel.text = c.detail
         remarkLabel.text = c.remarkString

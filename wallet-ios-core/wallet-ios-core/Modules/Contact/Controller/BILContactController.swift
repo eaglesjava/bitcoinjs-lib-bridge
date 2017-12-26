@@ -47,6 +47,11 @@ class BILContactController: BILLightBlueBaseController {
         firstLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".map{ String($0) }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        navigationController?.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
+    }
+    
     func setupRefresh() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(loadContacts), for: .valueChanged)

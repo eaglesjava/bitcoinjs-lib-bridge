@@ -92,6 +92,11 @@ class BILMeController: BILBaseViewController {
 	deinit {
 		NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
 	}
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        navigationController?.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
+    }
 	
 	@objc
 	func walletDidChanged(notification: Notification) {

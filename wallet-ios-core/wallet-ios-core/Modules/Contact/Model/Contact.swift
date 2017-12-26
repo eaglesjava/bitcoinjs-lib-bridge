@@ -23,6 +23,7 @@ class Contact: NSObject, Comparable {
     var walletID: String
     var address: String
     var remark: String
+    var coinType: CoinType
     
     var additionType: ContactAdditionType = .address
     
@@ -54,11 +55,12 @@ class Contact: NSObject, Comparable {
                   remark: jsonData["remark"].stringValue)
     }
     
-    init(name: String, walletID: String = "", address: String = "", remark: String = "") {
+    init(name: String, walletID: String = "", address: String = "", remark: String = "", coinType: CoinType = .btc) {
         self.name = name
         self.walletID = walletID
         self.address = address
         self.remark = remark
+        self.coinType = coinType
         additionType = !walletID.isEmpty ? .walletID : .address
     }
     
