@@ -313,7 +313,7 @@
                                         </constraints>
                                         <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                 <color key="value" red="1" green="1" blue="1" alpha="0.40195847600000001" colorSpace="custom" customColorSpace="sRGB"/>
@@ -476,7 +476,7 @@
                                         </constraints>
                                         <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                 <color key="value" red="1" green="1" blue="1" alpha="0.40195847600000001" colorSpace="custom" customColorSpace="sRGB"/>
@@ -580,13 +580,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xqb-yL-7h3" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29" width="325" height="44"/>
+                                        <rect key="frame" x="0.0" y="29" width="277" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="3dJ-UV-4nZ"/>
                                         </constraints>
                                         <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                 <color key="value" red="1" green="1" blue="1" alpha="0.40195847600000001" colorSpace="custom" customColorSpace="sRGB"/>
@@ -603,15 +603,28 @@
                                             <constraint firstAttribute="height" constant="1" id="nNq-pt-tT3"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Uc-uN-WYL">
+                                        <rect key="frame" x="277" y="29" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="Ynf-P7-Z5b"/>
+                                        </constraints>
+                                        <state key="normal" image="btn_scan_qrcode"/>
+                                        <connections>
+                                            <action selector="scanQRCodeAction:" destination="QiL-YC-s9A" eventType="touchUpInside" id="Atq-2e-XoK"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Xqb-yL-7h3" firstAttribute="top" secondItem="FI8-7w-5qv" secondAttribute="bottom" id="8sl-al-7RS"/>
                                     <constraint firstItem="kRh-Ob-p9N" firstAttribute="leading" secondItem="yX6-JW-MfI" secondAttribute="leading" id="CdP-Gx-pd1"/>
                                     <constraint firstItem="FI8-7w-5qv" firstAttribute="leading" secondItem="yX6-JW-MfI" secondAttribute="leading" id="D3X-sK-689"/>
-                                    <constraint firstAttribute="trailing" secondItem="Xqb-yL-7h3" secondAttribute="trailing" id="SHr-ZB-7CF"/>
+                                    <constraint firstItem="8Uc-uN-WYL" firstAttribute="centerY" secondItem="Xqb-yL-7h3" secondAttribute="centerY" id="SKR-r0-2YF"/>
+                                    <constraint firstItem="8Uc-uN-WYL" firstAttribute="height" secondItem="Xqb-yL-7h3" secondAttribute="height" id="XhC-DB-sy7"/>
                                     <constraint firstAttribute="bottom" secondItem="kRh-Ob-p9N" secondAttribute="bottom" id="Ylp-ih-Ldb"/>
+                                    <constraint firstAttribute="trailing" secondItem="8Uc-uN-WYL" secondAttribute="trailing" constant="4" id="Zvz-3U-xqY"/>
                                     <constraint firstItem="FI8-7w-5qv" firstAttribute="top" secondItem="yX6-JW-MfI" secondAttribute="top" constant="8" id="m3H-l9-IJX"/>
+                                    <constraint firstItem="8Uc-uN-WYL" firstAttribute="leading" secondItem="Xqb-yL-7h3" secondAttribute="trailing" id="og8-g1-QDS"/>
                                     <constraint firstItem="Xqb-yL-7h3" firstAttribute="leading" secondItem="yX6-JW-MfI" secondAttribute="leading" id="s6b-ci-MHX"/>
                                     <constraint firstItem="kRh-Ob-p9N" firstAttribute="top" secondItem="Xqb-yL-7h3" secondAttribute="bottom" id="uxo-NY-5DG"/>
                                     <constraint firstAttribute="trailing" secondItem="kRh-Ob-p9N" secondAttribute="trailing" id="vmk-gk-p4l"/>
@@ -697,15 +710,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YX2-AF-Kby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1710" y="470"/>
+            <point key="canvasLocation" x="1709.5999999999999" y="469.1154422788606"/>
         </scene>
     </scenes>
     <resources>
         <image name="btc_contact_search" width="21" height="21"/>
+        <image name="btn_scan_qrcode" width="14" height="14"/>
         <image name="icon_contact" width="22" height="18"/>
         <image name="icon_contact_h" width="22" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CcC-n5-YSv"/>
+        <segue reference="gah-MQ-HfQ"/>
     </inferredMetricsTieBreakers>
 </document>

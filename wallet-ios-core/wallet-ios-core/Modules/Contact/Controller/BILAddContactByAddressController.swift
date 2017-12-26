@@ -15,6 +15,8 @@ class BILAddContactByAddressController: BILLightBlueBaseController {
     @IBOutlet weak var addressInputView: BILInputView!
     @IBOutlet weak var remarkInputView: BILInputView!
     
+    var address: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +24,8 @@ class BILAddContactByAddressController: BILLightBlueBaseController {
         nameInputView.delegate = self
         addressInputView.delegate = self
         remarkInputView.delegate = self
+        
+        addressInputView.textField.text = address
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +35,18 @@ class BILAddContactByAddressController: BILLightBlueBaseController {
     
     @IBAction func addAction(_ sender: Any) {
         addContact()
+    }
+    
+    @IBAction func scanQRCodeAction(_ sender: Any) {
+        unowned let unownedSelf = self
+        let cont = BILQRCodeScanViewController.controller { (qrString) in
+            if let result = BILURLHelper.transferBitCoinURL(urlString: qrString)?.address {
+                unownedSelf.navigationController?.popViewController(animated: true)
+                debugPrint(result)
+                unownedSelf.addressInputView.textField.text = result
+            }
+        }
+        show(cont, sender: sender)
     }
     /*
     // MARK: - Navigation

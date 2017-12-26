@@ -92,7 +92,27 @@ class BILContactController: BILLightBlueBaseController {
 			if let result = BILURLHelper.transferContactURL(urlString: qrString) {
 				unownedSelf.navigationController?.popViewController(animated: true)
 				unownedSelf.checkID(id: result)
+                return
 			}
+            if let address = BILURLHelper.transferBitCoinURL(urlString: qrString)?.address {
+                debugPrint(address)
+                unownedSelf.navigationController?.popViewController(animated: true)
+                SVProgressHUD.show()
+                BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
+                    let isValidate = result as! Bool
+                    if isValidate {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(350), execute: {
+                            SVProgressHUD.dismiss()
+                            unownedSelf.performSegue(withIdentifier: .bil_contactsToAddByAddressSegue, sender: address)
+                        })
+                    } else {
+                        unownedSelf.showTipAlert(msg: "不是合法的地址")
+                        SVProgressHUD.dismiss()
+                    }
+                }, failure: { (error) in
+                    unownedSelf.showTipAlert(msg: error.localizedDescription)
+                })
+            }
 		}
 		show(cont, sender: nil)
 	}
@@ -141,6 +161,11 @@ class BILContactController: BILLightBlueBaseController {
 			guard let walletID = sender as? String else { return }
 			let cont = segue.destination as! BILSearchWalletIDResultController
 			cont.walletID = walletID
+        case String.bil_contactsToAddByAddressSegue:
+            guard let address = sender as? String else { return }
+            let cont = segue.destination as! BILAddContactByAddressController
+            cont.address = address
+            
         default:
             ()
         }
