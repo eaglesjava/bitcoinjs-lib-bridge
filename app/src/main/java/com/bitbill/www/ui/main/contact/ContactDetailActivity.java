@@ -12,7 +12,7 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.model.contact.network.entity.Contact;
+import com.bitbill.www.model.contact.db.entity.Contact;
 
 import butterknife.BindView;
 

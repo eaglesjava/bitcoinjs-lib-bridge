@@ -15,7 +15,7 @@ import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.decoration.DividerDecoration;
 import com.bitbill.www.common.base.view.dialog.ListSelectDialog;
-import com.bitbill.www.model.contact.network.entity.Contact;
+import com.bitbill.www.model.contact.db.entity.Contact;
 import com.mcxtzhang.indexlib.IndexBar.utils.IndexHelper;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
