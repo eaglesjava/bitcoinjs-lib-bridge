@@ -69,6 +69,7 @@
                                                                         <constraint firstItem="Elz-Nn-Vnf" firstAttribute="leading" secondItem="Mzq-57-qKB" secondAttribute="leading" id="EWm-JE-qnV"/>
                                                                         <constraint firstItem="9mQ-5p-ITN" firstAttribute="leading" secondItem="Mzq-57-qKB" secondAttribute="leading" id="FVs-9b-kfs"/>
                                                                         <constraint firstAttribute="trailing" secondItem="Elz-Nn-Vnf" secondAttribute="trailing" id="NCu-So-NVj"/>
+                                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9mQ-5p-ITN" secondAttribute="trailing" id="Rhw-2h-zHb"/>
                                                                         <constraint firstItem="9mQ-5p-ITN" firstAttribute="top" secondItem="Mzq-57-qKB" secondAttribute="top" id="aBe-lW-TBa"/>
                                                                         <constraint firstAttribute="bottom" secondItem="Elz-Nn-Vnf" secondAttribute="bottom" id="aSl-Ni-5KR"/>
                                                                     </constraints>
@@ -115,7 +116,8 @@
                                                                         <constraint firstItem="Y45-qI-hSi" firstAttribute="top" secondItem="8hW-Hm-BY4" secondAttribute="top" id="PnY-7V-BhR"/>
                                                                         <constraint firstItem="JN2-bM-Ppa" firstAttribute="top" secondItem="Y45-qI-hSi" secondAttribute="bottom" constant="4" id="RUf-e0-0fl"/>
                                                                         <constraint firstAttribute="bottom" secondItem="JN2-bM-Ppa" secondAttribute="bottom" id="TCu-OU-bVI"/>
-                                                                        <constraint firstItem="JN2-bM-Ppa" firstAttribute="leading" secondItem="8hW-Hm-BY4" secondAttribute="leading" id="XKs-az-whU"/>
+                                                                        <constraint firstItem="JN2-bM-Ppa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8hW-Hm-BY4" secondAttribute="leading" id="XKs-az-whU"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="JN2-bM-Ppa" secondAttribute="trailing" constant="15" id="e6O-w2-kib"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -157,9 +159,10 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="bottom" secondItem="MMP-II-XdY" secondAttribute="bottom" id="3MW-JZ-TLq"/>
                                                                         <constraint firstItem="iJr-DZ-SE9" firstAttribute="top" secondItem="rJ6-Dd-EK3" secondAttribute="top" id="AwT-nk-djO"/>
-                                                                        <constraint firstItem="iJr-DZ-SE9" firstAttribute="leading" secondItem="rJ6-Dd-EK3" secondAttribute="leading" id="B4x-G5-D5R"/>
+                                                                        <constraint firstItem="iJr-DZ-SE9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rJ6-Dd-EK3" secondAttribute="leading" id="B4x-G5-D5R"/>
                                                                         <constraint firstItem="MMP-II-XdY" firstAttribute="leading" secondItem="rJ6-Dd-EK3" secondAttribute="leading" id="H27-qh-RhX"/>
                                                                         <constraint firstAttribute="trailing" secondItem="MMP-II-XdY" secondAttribute="trailing" id="MXt-qz-CgU"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="iJr-DZ-SE9" secondAttribute="trailing" constant="-13" id="VEu-pn-Lbv"/>
                                                                         <constraint firstItem="MMP-II-XdY" firstAttribute="top" secondItem="iJr-DZ-SE9" secondAttribute="bottom" constant="4" id="eFA-JY-5gD"/>
                                                                     </constraints>
                                                                 </view>
@@ -252,11 +255,12 @@
                                                     <constraints>
                                                         <constraint firstItem="MNm-pR-Y3T" firstAttribute="centerY" secondItem="WZH-mv-CjK" secondAttribute="centerY" id="2jj-Gk-fIb"/>
                                                         <constraint firstItem="6ap-fE-eNJ" firstAttribute="top" secondItem="3jh-zW-ztf" secondAttribute="bottom" constant="8" id="9am-Qj-faD"/>
+                                                        <constraint firstAttribute="trailing" secondItem="6ap-fE-eNJ" secondAttribute="trailing" constant="217" id="EKl-js-ltn"/>
                                                         <constraint firstAttribute="height" constant="75" id="Ed5-36-ww1"/>
                                                         <constraint firstItem="NwA-EF-6cy" firstAttribute="centerY" secondItem="WZH-mv-CjK" secondAttribute="centerY" id="RA5-fx-WlR"/>
                                                         <constraint firstItem="MNm-pR-Y3T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3jh-zW-ztf" secondAttribute="trailing" constant="20" id="Vxa-U6-wmZ"/>
                                                         <constraint firstItem="3jh-zW-ztf" firstAttribute="leading" secondItem="NwA-EF-6cy" secondAttribute="trailing" constant="15" id="hu0-pL-3p0"/>
-                                                        <constraint firstItem="6ap-fE-eNJ" firstAttribute="leading" secondItem="3jh-zW-ztf" secondAttribute="leading" id="kwq-gw-fnd"/>
+                                                        <constraint firstItem="6ap-fE-eNJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3jh-zW-ztf" secondAttribute="leading" id="kwq-gw-fnd"/>
                                                         <constraint firstItem="NwA-EF-6cy" firstAttribute="leading" secondItem="WZH-mv-CjK" secondAttribute="leading" constant="15" id="wL3-9O-jJz"/>
                                                         <constraint firstItem="3jh-zW-ztf" firstAttribute="top" secondItem="WZH-mv-CjK" secondAttribute="top" constant="12" id="xAs-5n-Op7"/>
                                                         <constraint firstAttribute="trailing" secondItem="MNm-pR-Y3T" secondAttribute="trailing" constant="20" id="ydd-Fv-arq"/>
@@ -286,6 +290,57 @@
                                                 <segue key="preview" inheritsFrom="commit" id="L9q-GY-xTX"/>
                                             </segue>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BILHomeShortcutCell" rowHeight="66" id="8tZ-8n-vAq" customClass="BILHomeShortcutCell" customModule="wallet_ios_core" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="185" width="375" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8tZ-8n-vAq" id="Ch7-gZ-gSx">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqe-gw-hpm" customClass="BILHomeShortcutButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="5" width="187" height="56"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="56" id="x1V-ga-GaO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="扫一扫" image="btn_home_shortcut_scan">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fr0-Wm-VYA">
+                                                    <rect key="frame" x="187" y="8" width="1" height="50"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="Mjx-Wh-jvc"/>
+                                                        <constraint firstAttribute="width" constant="1" id="QIz-sv-ie0"/>
+                                                    </constraints>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKD-ly-HwV" customClass="BILHomeShortcutButton" customModule="wallet_ios_core" customModuleProvider="target">
+                                                    <rect key="frame" x="188" y="5" width="187" height="56"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="56" id="7h3-VH-VXU"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="添加联系人" image="btn_home_shortcut_add_contact">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="jKD-ly-HwV" secondAttribute="trailing" id="2NK-1J-B1R"/>
+                                                <constraint firstItem="fr0-Wm-VYA" firstAttribute="leading" secondItem="sqe-gw-hpm" secondAttribute="trailing" id="CWD-Pg-NEN"/>
+                                                <constraint firstItem="jKD-ly-HwV" firstAttribute="width" secondItem="sqe-gw-hpm" secondAttribute="width" id="Daf-RC-Gep"/>
+                                                <constraint firstItem="sqe-gw-hpm" firstAttribute="centerY" secondItem="Ch7-gZ-gSx" secondAttribute="centerY" id="De1-CT-QXg"/>
+                                                <constraint firstItem="jKD-ly-HwV" firstAttribute="centerY" secondItem="Ch7-gZ-gSx" secondAttribute="centerY" id="OcK-lm-4WG"/>
+                                                <constraint firstItem="sqe-gw-hpm" firstAttribute="leading" secondItem="Ch7-gZ-gSx" secondAttribute="leading" id="TcL-pT-Pjh"/>
+                                                <constraint firstItem="fr0-Wm-VYA" firstAttribute="centerY" secondItem="Ch7-gZ-gSx" secondAttribute="centerY" id="kv5-cj-syO"/>
+                                                <constraint firstItem="jKD-ly-HwV" firstAttribute="leading" secondItem="fr0-Wm-VYA" secondAttribute="trailing" id="mht-cN-m6Z"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -603,6 +658,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="btn_home_shortcut_add_contact" width="32" height="27"/>
+        <image name="btn_home_shortcut_scan" width="30" height="30"/>
         <image name="icon_home" width="19" height="19"/>
         <image name="icon_home_bch" width="36" height="36"/>
         <image name="icon_home_btc" width="36" height="36"/>

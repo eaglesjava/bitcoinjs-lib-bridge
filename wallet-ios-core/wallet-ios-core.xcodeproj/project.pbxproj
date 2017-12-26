@@ -110,6 +110,8 @@
 		CCC6B7701FECF74300EE7A32 /* String+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B76F1FECF74300EE7A32 /* String+QRCode.swift */; };
 		CCC6B7731FF2979800EE7A32 /* ContactModel+Getters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B7721FF2979800EE7A32 /* ContactModel+Getters.swift */; };
 		CCC6B7751FF2A09900EE7A32 /* BILCoreDataModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B7741FF2A09900EE7A32 /* BILCoreDataModelManager.swift */; };
+		CCC6B7771FF2BB2500EE7A32 /* BILHomeShortcutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B7761FF2BB2500EE7A32 /* BILHomeShortcutCell.swift */; };
+		CCC6B7791FF2BFF000EE7A32 /* BILHomeShortcutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B7781FF2BFF000EE7A32 /* BILHomeShortcutButton.swift */; };
 		CCE5E1641FC7C1BE00F7555D /* BILHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE5E1631FC7C1BE00F7555D /* BILHomeViewController.swift */; };
 		CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE5E1651FC7FB9400F7555D /* BILHomeTableHeaderView.swift */; };
 		CCE5E1681FC7FB9E00F7555D /* BILHomeTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE5E1671FC7FB9E00F7555D /* BILHomeTableHeaderView.xib */; };
@@ -285,6 +287,8 @@
 		CCC6B7711FF1379700EE7A32 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Send.strings"; sourceTree = "<group>"; };
 		CCC6B7721FF2979800EE7A32 /* ContactModel+Getters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactModel+Getters.swift"; sourceTree = "<group>"; };
 		CCC6B7741FF2A09900EE7A32 /* BILCoreDataModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILCoreDataModelManager.swift; sourceTree = "<group>"; };
+		CCC6B7761FF2BB2500EE7A32 /* BILHomeShortcutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeShortcutCell.swift; sourceTree = "<group>"; };
+		CCC6B7781FF2BFF000EE7A32 /* BILHomeShortcutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeShortcutButton.swift; sourceTree = "<group>"; };
 		CCE5E1631FC7C1BE00F7555D /* BILHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeViewController.swift; sourceTree = "<group>"; };
 		CCE5E1651FC7FB9400F7555D /* BILHomeTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILHomeTableHeaderView.swift; sourceTree = "<group>"; };
 		CCE5E1671FC7FB9E00F7555D /* BILHomeTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILHomeTableHeaderView.xib; sourceTree = "<group>"; };
@@ -912,6 +916,8 @@
 				CCFEDEEB1FCC067E00F1A7FC /* BILTransactionCell.swift */,
 				CCFEDEEC1FCC067E00F1A7FC /* BILTransactionCell.xib */,
 				CCFEDEF11FCD43CE00F1A7FC /* BILHomeAssetCell.swift */,
+				CCC6B7761FF2BB2500EE7A32 /* BILHomeShortcutCell.swift */,
+				CCC6B7781FF2BFF000EE7A32 /* BILHomeShortcutButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1401,6 +1407,7 @@
 				CC94E0591FBA99160098E730 /* BILInputView.swift in Sources */,
 				BA12AC5B1FEA73D700812F38 /* BILAddContactByAddressController.swift in Sources */,
 				CCED055C1FDA6D2E00689498 /* BILSpecificVolumeRecieveInputController.swift in Sources */,
+				CCC6B7771FF2BB2500EE7A32 /* BILHomeShortcutCell.swift in Sources */,
 				BA284D111FD946B000A1C9F6 /* BILRecieveController.swift in Sources */,
 				CCE5E1761FCBC4B000F7555D /* BILTransactionHistoryModel.swift in Sources */,
 				CC4417071FBEB47C00C4B158 /* BILBackupWalletSuccessController.swift in Sources */,
@@ -1440,6 +1447,7 @@
 				CCE5E1781FCBC4E100F7555D /* BILTransactionManager.swift in Sources */,
 				CC94E0511FB9824B0098E730 /* ASKPlaceHolderColorTextField.swift in Sources */,
 				BA04570D1FDE345100070CCA /* BILCopyLabel.swift in Sources */,
+				CCC6B7791FF2BFF000EE7A32 /* BILHomeShortcutButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

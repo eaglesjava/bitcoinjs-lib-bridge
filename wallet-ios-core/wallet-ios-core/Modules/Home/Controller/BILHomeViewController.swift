@@ -9,12 +9,15 @@
 import UIKit
 
 enum BILHomeSectionType: Int {
-	case asset = 0
+	case shortcut = 0
+	case asset
 	case recentRecord
 	case wallet
 	
 	var sectionTitle: String {
 		switch self {
+		case .shortcut:
+			return "快捷方式"
 		case .asset:
 			return "总资产"
 		case .recentRecord:
@@ -26,6 +29,8 @@ enum BILHomeSectionType: Int {
 	
 	var sectionSubTitle: String {
 		switch self {
+		case .shortcut:
+			return "前往设置自定义"
 		case .asset:
 			return "当前币种 1 个"
 		case .recentRecord:
@@ -51,6 +56,8 @@ enum BILHomeSectionType: Int {
 	
 	var rowHeight: CGFloat {
 		switch self {
+		case .shortcut:
+			return 80
 		case .asset:
 			return 66
 		case .recentRecord:
@@ -62,6 +69,7 @@ enum BILHomeSectionType: Int {
 	
 	var headerActionButtonImage: UIImage? {
 		switch self {
+		case .shortcut: fallthrough
 		case .asset: fallthrough
 		case .recentRecord:
 			return nil
@@ -76,6 +84,8 @@ enum BILHomeSectionType: Int {
 	
 	func dataArray() -> [Any] {
 		switch self {
+		case .shortcut:
+			return [NSObject()]
 		case .asset:
 			return [NSObject()]
 		case .recentRecord:
@@ -87,6 +97,8 @@ enum BILHomeSectionType: Int {
 	
 	func cellID() -> String {
 		switch self {
+		case .shortcut:
+			return "BILHomeShortcutCell"
 		case .asset:
 			return "BILHomeAssetCell"
 		case .recentRecord:
@@ -227,6 +239,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	func actionButtonTapped(headerView: BILHomeTableHeaderView) {
 		guard let type = BILHomeSectionType(rawValue: headerView.tag) else { return }
 		switch type {
+		case .shortcut: ()
 		case .asset: ()
 		case .recentRecord: ()
 		case .wallet:
@@ -327,8 +340,9 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let type = BILHomeSectionType(rawValue: indexPath.section) else { return UITableViewCell() }
-		let cell = tableView.dequeueReusableCell(withIdentifier: type.cellID())
+		let cell = tableView.dequeueReusableCell(withIdentifier: type.cellID(), for: indexPath)
 		switch type {
+		case .shortcut: ()
 		case .asset:
             let c = cell as! BILHomeAssetCell
             c.btcBanlanceLabel.text = totalBTCBalance
@@ -340,7 +354,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
             c.needBackupButton.tag = indexPath.row
 			c.wallet = type.dataArray()[indexPath.row] as? WalletModel
 		}
-		return cell!
+		return cell
 	}
 	
     override func didReceiveMemoryWarning() {
