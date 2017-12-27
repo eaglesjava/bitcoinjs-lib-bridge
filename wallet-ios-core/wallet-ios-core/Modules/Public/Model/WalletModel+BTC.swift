@@ -8,13 +8,28 @@
 
 import Foundation
 
-let BTC_SATOSHI = 100000000
+let BTC_SATOSHI: Int64 = 100000000
 
 func BTCFormatString(btc: Int64) -> String {
     if btc == 0 {
         return "0.00"
     }
-    return "\(Double(btc) / Double(BTC_SATOSHI))"
+    let str = String(btc % BTC_SATOSHI)
+    let d = Double(btc) / Double(BTC_SATOSHI)
+    if str.count > 2 {
+        return String(format: "%f", d)
+    }
+    var count = 0
+    for char in str.reversed() {
+        if char == "0" {
+            count += 1
+        }
+        else
+        {
+            break
+        }
+    }
+    return String(format: "%.\(8 - count)f", d)
 }
 
 extension WalletModel {
