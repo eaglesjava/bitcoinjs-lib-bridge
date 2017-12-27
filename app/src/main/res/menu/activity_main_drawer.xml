@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:showIn="navigation_view">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group>
         <item
             android:id="@+id/nav_asset"
             android:icon="@drawable/ic_menu_asset"
-            android:title="@string/title_asset"/>
+            android:title="@string/title_asset" />
         <item
             android:id="@+id/nav_receive"
             android:icon="@drawable/ic_menu_receive"
-            android:title="@string/title_receive"/>
+            android:title="@string/title_receive" />
         <item
             android:id="@+id/nav_send"
             android:icon="@drawable/ic_menu_send"
-            android:title="@string/title_send"/>
+            android:title="@string/title_send" />
         <item
             android:id="@+id/nav_contact"
             android:icon="@drawable/ic_menu_contact"
-            android:title="@string/title_contact"/>
-    </group>
+            android:title="@string/title_contact" />
 
+    </group>
     <item android:title="@string/title_security">
         <menu>
             <item
                 android:id="@+id/nav_wallet_manage"
                 android:icon="@drawable/ic_menu_contact"
-                android:title="@string/title_wallet_manage"/>
+                android:title="@string/title_wallet_manage" />
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_menu_setting"
-                android:title="@string/title_setting"/>
+                android:title="@string/title_setting" />
 
         </menu>
     </item>

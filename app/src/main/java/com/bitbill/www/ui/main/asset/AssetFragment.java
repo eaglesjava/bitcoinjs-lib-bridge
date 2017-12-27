@@ -179,7 +179,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     @Override
     public void onBackupClick(Wallet wallet, View view) {
         //跳转到备份界面
-        BackUpWalletActivity.start(getBaseActivity(), wallet);
+        BackUpWalletActivity.start(getBaseActivity(), wallet, false);
     }
 
     /**

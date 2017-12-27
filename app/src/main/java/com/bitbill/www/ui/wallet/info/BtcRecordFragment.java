@@ -15,7 +15,7 @@ import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.CustomSwipeToRefresh;
-import com.bitbill.www.common.widget.DividerDecoration;
+import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -116,7 +116,7 @@ public class BtcRecordFragment extends BaseLazyFragment {
             }
         });
         refreshLayout.setColorSchemeResources(R.color.blue);
-        DividerDecoration decor = new DividerDecoration(getBaseActivity(), DividerDecoration.VERTICAL);
+        Decoration decor = new Decoration(getBaseActivity(), Decoration.VERTICAL);
         mRecyclerView.addItemDecoration(decor);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
         // Set the adapter

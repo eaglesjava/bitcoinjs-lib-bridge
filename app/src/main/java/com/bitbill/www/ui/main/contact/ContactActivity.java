@@ -38,8 +38,6 @@ import butterknife.BindView;
 public class ContactActivity extends BaseToolbarActivity<ContactMvpPresenter> implements ContactMvpView {
     @BindView(R.id.rv)
     RecyclerView mRv;
-
-
     CommonAdapter<Contact> mAdapter;
     LinearLayoutManager mManager;
     List<Contact> mDatas;

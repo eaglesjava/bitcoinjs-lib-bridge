@@ -35,17 +35,17 @@ import com.bitbill.www.R;
 /**
  * Edited by isanwenyu@163.com 2017/12/8.
  * <p>
- * DividerDecoration is a {@link RecyclerView.ItemDecoration} that can be used as a divider
+ * Decoration is a {@link RecyclerView.ItemDecoration} that can be used as a divider
  * between items of a {@link LinearLayoutManager}. It supports both {@link #HORIZONTAL} and
  * {@link #VERTICAL} orientations.
  * <p>
  * <pre>
- *     mDividerItemDecoration = new DividerDecoration(recyclerView.getContext(),
+ *     mDividerItemDecoration = new Decoration(recyclerView.getContext(),
  *             mLayoutManager.getOrientation());
  *     recyclerView.addItemDecoration(mDividerItemDecoration);
  * </pre>
  */
-public class DividerDecoration extends RecyclerView.ItemDecoration {
+public class Decoration extends RecyclerView.ItemDecoration {
     public static final int HORIZONTAL = LinearLayout.HORIZONTAL;
     public static final int VERTICAL = LinearLayout.VERTICAL;
 
@@ -65,7 +65,7 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
      * @param context     Current context, it will be used to access resources.
      * @param orientation Divider orientation. Should be {@link #HORIZONTAL} or {@link #VERTICAL}.
      */
-    public DividerDecoration(Context context, int orientation) {
+    public Decoration(Context context, int orientation) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
         a.recycle();

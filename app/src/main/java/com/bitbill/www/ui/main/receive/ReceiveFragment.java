@@ -116,7 +116,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
             @Override
             public void onBackupClick(Wallet wallet, View view) {
                 //跳转到备份钱包界面
-                BackUpWalletActivity.start(getBaseActivity(), wallet);
+                BackUpWalletActivity.start(getBaseActivity(), wallet, false);
             }
         });
         setupViewPager();

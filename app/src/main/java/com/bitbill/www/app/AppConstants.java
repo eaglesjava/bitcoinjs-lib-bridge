@@ -31,6 +31,7 @@ public final class AppConstants {
     public static final String EXTRA_RECEIVE_AMOUNT = "receive_amount";
     public static final String EXTRA_CONTACT_ADDRESS = "contact_address";
     public static final String EXTRA_WALLET_ID = "wallet_id";
+    public static final String EXTRA_IS_FROM_SETTING = "is_from_setting";
 
 
     public static final String ARG_DATAS = "args_datas";

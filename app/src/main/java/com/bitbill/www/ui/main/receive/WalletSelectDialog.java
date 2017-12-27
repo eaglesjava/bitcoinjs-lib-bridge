@@ -18,7 +18,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.common.widget.DividerDecoration;
+import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.dialog.BaseDialog;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -120,7 +120,7 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
     @Override
     public void initView() {
 
-        DividerDecoration decor = new DividerDecoration(getBaseActivity(), DividerDecoration.VERTICAL);
+        Decoration decor = new Decoration(getBaseActivity(), Decoration.VERTICAL);
         mRecyclerView.addItemDecoration(decor);
 
         mAdapter = new CommonAdapter<Wallet>(getBaseActivity(), R.layout.item_wallet_select_view, mWalletList) {

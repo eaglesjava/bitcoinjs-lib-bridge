@@ -21,6 +21,7 @@ import butterknife.OnClick;
 
 public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPresenter> implements BackupWalletMvpView {
 
+    public static final int REQUEST_BACKUP_CODE = 0x11;
     private static final String TAG = "BackUpWalletActivity";
     private static final int RESULT_BACKUP_WALLET = 0x10;
     @BindView(R.id.et_input_mnemonic)
@@ -29,10 +30,12 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
     BackupWalletPresenter<WalletModel, BackupWalletMvpView> mBackupWaleltPresenter;
     private PwdDialogFragment pwdDialogFragment;
     private Wallet mWallet;
+    private boolean isFromSetting;
 
-    public static void start(Context context, Wallet wallet) {
+    public static void start(Context context, Wallet wallet, boolean isFromSetting) {
         Intent intent = new Intent(context, BackUpWalletActivity.class);
         intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
+        intent.putExtra(AppConstants.EXTRA_IS_FROM_SETTING, isFromSetting);
         context.startActivity(intent);
     }
 
@@ -40,6 +43,7 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+        isFromSetting = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_SETTING, false);
     }
 
     @Override
@@ -143,7 +147,9 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
     public void onBackPressed() {
         finish();
         //返回首页
-        MainActivity.start(BackUpWalletActivity.this);
+        if (!isFromSetting) {
+            MainActivity.start(BackUpWalletActivity.this);
+        }
 
     }
 }

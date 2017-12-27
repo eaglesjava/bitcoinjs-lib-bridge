@@ -117,6 +117,10 @@
             android:name=".ui.main.contact.AddContactByAddressActivity"
             android:label="@string/title_activity_add_contact_by_address"
             android:theme="@style/AppTheme.Blue"></activity>
+        <activity
+            android:name=".ui.main.my.WalletSettingActivity"
+            android:label="@string/title_activity_wallet_setting"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

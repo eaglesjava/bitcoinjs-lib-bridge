@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.bitbill.www.common.widget.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.bitbill.www.common.base.view.BaseListFragment"
+        style="@style/RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        tools:context="com.bitbill.www.common.base.view.BaseListFragment"
+        tools:listitem="@layout/item_btc_record" />
+</com.bitbill.www.common.widget.CustomSwipeToRefresh>

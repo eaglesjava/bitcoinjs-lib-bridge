@@ -98,7 +98,7 @@ public class InitWalletSuccessActivity extends BaseCompleteActivity {
         switch (view.getId()) {
             case R.id.btn_bak_wallet:
                 //跳转到备份钱包界面
-                BackUpWalletActivity.start(InitWalletSuccessActivity.this, mWallet);
+                BackUpWalletActivity.start(InitWalletSuccessActivity.this, mWallet, false);
                 break;
             case R.id.btn_bak_wallet_delay:
                 //跳转到主页
