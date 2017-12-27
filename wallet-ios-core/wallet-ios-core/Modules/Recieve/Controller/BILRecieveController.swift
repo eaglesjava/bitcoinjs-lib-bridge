@@ -28,7 +28,7 @@ class BILRecieveController: BILBaseViewController {
 	var recieveModel: BILRecieveModel?
     
     lazy var qrCodeHeight: CGFloat = {
-        return min(180, UIScreen.main.bounds.height - 388 - 88)
+        return min(160, UIScreen.main.bounds.height - 388 - 88)
     }()
     
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ class BILRecieveController: BILBaseViewController {
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(sender:)))
 		bgView.addGestureRecognizer(tap)
         
-        qrCodeImageViewHeight.constant = min(160, UIScreen.main.bounds.height - 388 - 88)
+        qrCodeImageViewHeight.constant = qrCodeHeight - (currentWallet!.isNeedBackup ? 10 : 0)
         
         NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
     }

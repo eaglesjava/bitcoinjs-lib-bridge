@@ -188,7 +188,7 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
             guard let header = tableView.headerView(forSection: i) as? BILTableViewHeaderFooterView  else { continue }
             if i == section {
                 let headerRect = view.convert(header.frame, from: tableView)
-                
+
                 header.bgImageView.image = backgroundImage?.snapshotSubImage(rect: headerRect)
             }
             else

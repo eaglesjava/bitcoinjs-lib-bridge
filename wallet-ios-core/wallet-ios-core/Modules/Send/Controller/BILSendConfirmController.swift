@@ -151,8 +151,6 @@ class BILSendConfirmController: BILBaseViewController {
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
-                
-                
             }) { (msg, code) in
                 errorHandler(msg: msg)
             }

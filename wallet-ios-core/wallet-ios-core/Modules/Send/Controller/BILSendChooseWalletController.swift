@@ -13,7 +13,14 @@ class BILSendChooseWalletController: BILBaseViewController {
     let confirmSegue = "BILChooseWalletToConfirmSegue"
     
     var sendModel: BILSendModel?
-    var wallet: WalletModel?
+    var wallet: WalletModel? {
+        didSet {
+            guard let w = wallet else { return }
+            if let isSendAll = sendModel?.isSendAll, isSendAll {
+                sendModel?.amount = BTCFormatString(btc: w.btcBalance)
+            }
+        }
+    }
     
     var targetAmount = 0
     
@@ -64,9 +71,6 @@ class BILSendChooseWalletController: BILBaseViewController {
             unowned let s = self
             cont.setDidSelecteWalletClosure(onSelected: { (wallet) in
                 s.wallet = wallet
-                if let isSendAll = s.sendModel?.isSendAll, isSendAll {
-                    s.sendModel?.amount = BTCFormatString(btc: wallet.btcBalance)
-                }
             })
         case confirmSegue:
             let cont = segue.destination as! BILSendConfirmController

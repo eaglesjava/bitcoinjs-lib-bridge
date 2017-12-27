@@ -291,7 +291,7 @@
                                             </segue>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BILHomeShortcutCell" rowHeight="66" id="8tZ-8n-vAq" customClass="BILHomeShortcutCell" customModule="wallet_ios_core" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BILHomeShortcutCell" rowHeight="66" id="8tZ-8n-vAq" customClass="BILHomeShortcutCell" customModule="wallet_ios_core" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="185" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8tZ-8n-vAq" id="Ch7-gZ-gSx">

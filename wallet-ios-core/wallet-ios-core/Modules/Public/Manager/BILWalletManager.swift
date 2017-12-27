@@ -26,6 +26,8 @@ class BILWalletManager: NSObject {
             do {
                 let context = coreDataContext
                 let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
+                let date = NSSortDescriptor(key: "createDate", ascending: false)
+                request.sortDescriptors = [date]
                 results.append(contentsOf: try context.fetch(request))
             } catch {
                 debugPrint("查询钱包失败")
