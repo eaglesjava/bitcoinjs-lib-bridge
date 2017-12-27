@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/black</color>
-    <color name="colorPrimaryDark">@color/black</color>
+    <color name="colorPrimary">@color/transparent</color>
+    <color name="colorPrimaryDark">@color/transparent</color>
     <color name="colorAccent">@color/blue</color>
     <color name="windowBackground">@color/dark_bg</color>
-    <color name="dark_bg">#000</color>
+    <color name="dark_bg">@color/black</color>
     <color name="bg_splash_start">#1E2128</color>
     <color name="bg_splash_end">#0E0E11</color>
     <color name="transparent">#00000000</color>

@@ -145,21 +145,33 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                 switch (tab.getPosition()) {
                     case 0:
                         setTitle(R.string.title_asset);
+                        changeThemeColor(false);
                         break;
                     case 1:
                         setTitle(R.string.title_contact);
+                        changeThemeColor(true);
                         break;
                     case 2:
                         setTitle(R.string.title_receive);
+                        changeThemeColor(false);
                         break;
                     case 3:
                         setTitle(R.string.title_send);
+                        changeThemeColor(false);
                         break;
 
                 }
             }
         });
 
+    }
+
+    private void changeThemeColor(boolean isBlue) {
+        if (isBlue) {
+            getWindow().setBackgroundDrawableResource(R.drawable.bg_blue);
+        } else {
+            getWindow().setBackgroundDrawableResource(R.color.windowBackground);
+        }
     }
 
     @Override

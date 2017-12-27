@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.EditTextWapper;
@@ -108,6 +109,7 @@ public class SearchContactResultActivity extends BaseToolbarActivity<SearchConta
     @Override
     public void addContactSuccess() {
         EventBus.getDefault().postSticky(new UpdateContactEvent());
+        AppManager.get().finishActivity(AddContactByIdActivity.class);
         finish();
     }
 
