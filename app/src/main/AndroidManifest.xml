@@ -116,7 +116,7 @@
         <activity
             android:name=".ui.main.contact.AddContactByAddressActivity"
             android:label="@string/title_activity_add_contact_by_address"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme.Blue"></activity>
     </application>
 
 </manifest>

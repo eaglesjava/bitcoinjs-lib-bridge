@@ -26,25 +26,39 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15sp" />
 
-        <TextView
-            style="@style/Text.White"
-            android:layout_marginTop="30dp"
-            android:text="钱包ID" />
+        <LinearLayout
+            android:id="@+id/ll_wallet_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_wallet_id"
-            style="@style/Text.White.Big"
-            android:layout_marginTop="8dp" />
+            <TextView
+                style="@style/Text.White"
+                android:layout_marginTop="30dp"
+                android:text="钱包ID" />
 
-        <TextView
-            style="@style/Text.White"
-            android:layout_marginTop="30dp"
-            android:text="钱包地址" />
+            <TextView
+                android:id="@+id/tv_wallet_id"
+                style="@style/Text.White.Big"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_wallet_address"
-            style="@style/Text.White.Big"
-            android:layout_marginTop="8dp" />
+        <LinearLayout
+            android:id="@+id/ll_wallet_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Text.White"
+                android:layout_marginTop="30dp"
+                android:text="钱包地址" />
+
+            <TextView
+                android:id="@+id/tv_wallet_address"
+                style="@style/Text.White.Big"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
 
         <TextView
             style="@style/Text.White"

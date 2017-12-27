@@ -115,5 +115,15 @@ public class ContactDbHelper extends DbHelper implements ContactDb {
         });
     }
 
+    @Override
+    public Observable<Contact> getContactByAddress(String address) {
+        return Observable.fromCallable(new Callable<Contact>() {
+            @Override
+            public Contact call() throws Exception {
+                return mContactDao.queryBuilder().where(ContactDao.Properties.Address.eq(address)).unique();
+            }
+        });
+    }
+
 
 }

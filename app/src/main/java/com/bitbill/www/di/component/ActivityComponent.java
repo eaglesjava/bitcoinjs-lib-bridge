@@ -9,6 +9,7 @@ import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.main.asset.AssetFragment;
+import com.bitbill.www.ui.main.contact.AddBtcContactByAddressFragment;
 import com.bitbill.www.ui.main.contact.AddContactByIdActivity;
 import com.bitbill.www.ui.main.contact.ContactActivity;
 import com.bitbill.www.ui.main.contact.ContactDetailActivity;
@@ -73,4 +74,6 @@ public interface ActivityComponent {
     void inject(ContactActivity contactActivity);
 
     void inject(ContactDetailActivity contactDetailActivity);
+
+    void inject(AddBtcContactByAddressFragment addBtcContactByAddressFragment);
 }

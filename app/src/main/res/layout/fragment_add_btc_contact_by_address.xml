@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_padding"
+    android:paddingLeft="@dimen/activity_padding"
+    android:paddingRight="@dimen/activity_padding"
+    tools:context="com.bitbill.www.ui.main.contact.AddBtcContactByAddressFragment">
+
+    <com.bitbill.www.common.widget.EditTextWapper
+        android:id="@+id/etw_contact_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:inputHint="@string/hint_input_please"
+        app:inputPaddingBottom="10dp"
+        app:inputTitle="@string/input_contact_name" />
+
+    <com.bitbill.www.common.widget.EditTextWapper
+        android:id="@+id/etw_contact_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:inputHint="@string/hint_input_please"
+        app:inputPaddingBottom="10dp"
+        app:inputTitle="@string/input_contact_address"
+        app:rightDrawable="@drawable/ic_contact_scan" />
+
+
+    <com.bitbill.www.common.widget.EditTextWapper
+        android:id="@+id/etw_contact_remark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:inputHint="@string/hint_input_please"
+        app:inputPaddingBottom="10dp"
+        app:inputTitle="@string/input_contact_remark" />
+
+</LinearLayout>
+

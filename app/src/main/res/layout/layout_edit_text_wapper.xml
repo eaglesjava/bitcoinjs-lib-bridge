@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:animateLayoutChanges="true"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,30 +13,30 @@
         <TextView
             android:id="@+id/tv_title"
             style="@style/Text.InputTitle"
-            android:layout_width="match_parent"
-            />
+            android:layout_width="match_parent" />
 
         <com.bitbill.www.common.widget.PwdStatusView
             android:id="@+id/psv_status"
             android:layout_width="51dp"
             android:layout_height="2dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 
     <EditText
         android:id="@+id/et_text"
         style="@style/EditText.Wapper"
         android:layout_width="match_parent"
+        android:drawablePadding="10dp"
         android:hint="@string/hint_input_please"/>
 
     <View
         android:id="@+id/et_line"
-        style="@style/Line.Horizontal"/>
+        style="@style/Line.Horizontal" />
 
     <TextView
         android:id="@+id/tv_etw_bottom_hint"
         style="@style/Text.Small.Green"
         android:layout_marginTop="10dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </LinearLayout>

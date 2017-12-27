@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.SparseArray;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -68,6 +69,7 @@ public class EditTextWapper extends FrameLayout {
     private boolean mErrorState;
     private TextWatcher mTextWatcher;
     private String mBottomHint;
+    private OnClickListener mOnRightImageClickListener;
 
     public EditTextWapper(Context context) {
         super(context);
@@ -140,7 +142,7 @@ public class EditTextWapper extends FrameLayout {
         setInputType(mInputType);
         setMaxLines(mMaxLines);
         setInputPwdStatusVisible(mInputPwdStatusVisible);
-
+        setRightDrawable(mRightDrawable);
         getEtText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -183,6 +185,28 @@ public class EditTextWapper extends FrameLayout {
             }
         });
         getEtText().clearFocus();
+
+        getEtText().setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (getEtText().getCompoundDrawables()[2] != null) {
+
+                        boolean touchable = event.getX() > (getWidth() - getEtText().getTotalPaddingRight())
+                                && (event.getX() < ((getWidth() - getPaddingRight())));
+
+                        if (touchable) {
+                            //里面写上自己想做的事情，也就是DrawableRight的触发事件
+                            if (mOnRightImageClickListener != null) {
+                                mOnRightImageClickListener.onClick(v);
+                            }
+
+                        }
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     private void setInputHint(String inputHint) {
@@ -296,5 +320,18 @@ public class EditTextWapper extends FrameLayout {
 
     public void setEditable(boolean editable) {
         StringUtils.setEditable(getEtText(), editable);
+    }
+
+    public void setRightDrawable(Drawable rightDrawable) {
+        mRightDrawable = rightDrawable;
+        if (mRightDrawable != null) {
+            etText.setCompoundDrawablesWithIntrinsicBounds(null, null, rightDrawable, null);
+        } else {
+            etText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        }
+    }
+
+    public void setOnRightImageClickListener(OnClickListener onRightImageClickListener) {
+        mOnRightImageClickListener = onRightImageClickListener;
     }
 }

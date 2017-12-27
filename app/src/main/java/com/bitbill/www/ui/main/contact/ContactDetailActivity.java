@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -32,6 +34,10 @@ public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvp
     TextView mTvWalletAddress;
     @BindView(R.id.tv_wallet_remark)
     TextView mTvWalletRemark;
+    @BindView(R.id.ll_wallet_id)
+    LinearLayout mLLWalletId;
+    @BindView(R.id.ll_wallet_address)
+    LinearLayout mLLWalletAddress;
     @Inject
     GetLastAddressMvpPresenter<ContactModel, GetLastAddressMvpView> mGetLastAddressMvpPresenter;
     private Contact mContact;
@@ -71,15 +77,22 @@ public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvp
     @Override
     public void initView() {
         if (mContact == null || StringUtils.isEmpty(mContact.getContactName()) || StringUtils.isEmpty(String.valueOf(mContact.getContactName().charAt(0)))) {
-            // TODO: 2017/12/20
             showMessage("加载联系人信息失败");
             return;
         }
         mTvContactLabel.setText(StringUtils.getNameLabel(mContact.getContactName()));
         mTvContactName.setText(mContact.getContactName());
-        mTvWalletAddress.setText(mContact.getAddress());
+        if (StringUtils.isEmpty(mContact.getAddress())) {
+            mLLWalletAddress.setVisibility(View.GONE);
+        } else {
+            mTvWalletAddress.setText(mContact.getAddress());
+        }
         mTvWalletRemark.setText(StringUtils.isEmpty(mContact.getRemark()) ? "无" : mContact.getRemark());
-        mTvWalletId.setText(mContact.getWalletId());
+        if (StringUtils.isEmpty(mContact.getWalletId())) {
+            mLLWalletId.setVisibility(View.GONE);
+        } else {
+            mTvWalletId.setText(mContact.getWalletId());
+        }
         mTvWalletAddress.setText(mContact.getAddress());
     }
 

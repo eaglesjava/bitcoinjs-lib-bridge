@@ -85,6 +85,11 @@ public class ContactModelManager extends ModelManager implements ContactModel {
         return mContactDb.getContactByWalletId(walletId);
     }
 
+    @Override
+    public Observable<Contact> getContactByAddress(String address) {
+        return mContactDb.getContactByAddress(address);
+    }
+
     /**
      * 搜索WalletId
      *

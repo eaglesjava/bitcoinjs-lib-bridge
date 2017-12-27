@@ -84,7 +84,7 @@ public class SendFragment extends BaseLazyFragment {
                 String qrcodeResult = data.getStringExtra(ScanQrcodeActivity.EXTRA_SCAN_QRCODE_RESULT);
                 //填充地址
                 if (mBtcSendFrg != null) {
-                    // TODO: 2017/12/15  校验比特币地址
+                    // 校验比特币地址
                     mBtcSendFrg.setSendAddress(qrcodeResult);
                 }
             }

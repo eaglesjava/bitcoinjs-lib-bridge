@@ -130,7 +130,7 @@ public class ContactActivity extends BaseToolbarActivity<ContactMvpPresenter> im
                     break;
                 case 1:
                     //通过地址添加
-                    showMessage("通过地址添加");
+                    AddContactByAddressActivity.start(ContactActivity.this);
                     break;
                 case 2:
                     //扫码添加

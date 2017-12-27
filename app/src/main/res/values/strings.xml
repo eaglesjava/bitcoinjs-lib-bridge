@@ -177,4 +177,9 @@
     <string name="msg_input_contact_name">请输入联系人姓名</string>
     <string name="msg_load_contact_fail">加载联系人失败</string>
     <string name="title_activity_add_contact_by_address">通过地址添加</string>
+    <string name="input_contact_address">钱包地址</string>
+    <string name="action_contact_save">保存</string>
+    <string name="msg_contact_is_exsist">联系人已存在</string>
+    <string name="error_contact_name_required">请输入姓名</string>
+    <string name="error_contact_address_required">请输入钱包地址</string>
 </resources>

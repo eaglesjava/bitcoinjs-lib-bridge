@@ -49,5 +49,7 @@ public interface ContactDb extends Db {
 
     Observable<Contact> getContactByWalletId(String walletId);
 
+    Observable<Contact> getContactByAddress(String address);
+
 
 }

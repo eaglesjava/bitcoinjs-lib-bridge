@@ -26,6 +26,9 @@ import com.bitbill.www.ui.guide.GuidePresenter;
 import com.bitbill.www.ui.main.MainMvpPresenter;
 import com.bitbill.www.ui.main.MainMvpView;
 import com.bitbill.www.ui.main.MainPresenter;
+import com.bitbill.www.ui.main.contact.AddContactByAddressMvpPresenter;
+import com.bitbill.www.ui.main.contact.AddContactByAddressMvpView;
+import com.bitbill.www.ui.main.contact.AddContactByAddressPresenter;
 import com.bitbill.www.ui.main.contact.AddContactByIdMvpPresenter;
 import com.bitbill.www.ui.main.contact.AddContactByIdMvpView;
 import com.bitbill.www.ui.main.contact.AddContactByIdPresenter;
@@ -240,6 +243,13 @@ public class ActivityModule {
     @PerActivity
     GetLastAddressMvpPresenter<ContactModel, GetLastAddressMvpView> provideGetLastAddressPresenter(
             GetLastAddressPresenter<ContactModel, GetLastAddressMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    AddContactByAddressMvpPresenter<ContactModel, AddContactByAddressMvpView> provideAddContactByAddressPresenter(
+            AddContactByAddressPresenter<ContactModel, AddContactByAddressMvpView> presenter) {
         return presenter;
     }
 

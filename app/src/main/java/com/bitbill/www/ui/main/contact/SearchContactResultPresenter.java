@@ -31,6 +31,10 @@ public class SearchContactResultPresenter<M extends ContactModel, V extends Sear
     @Override
     public void checkContact() {
 
+        if (!isValidWalletId()) {
+            return;
+
+        }
         //check 本地是否已存在
         getCompositeDisposable().add(getModelManager()
                 .getContactByWalletId(getMvpView().getWalletId())
