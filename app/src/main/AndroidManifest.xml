@@ -99,6 +99,7 @@
         <activity
             android:name=".ui.main.contact.ContactActivity"
             android:label="@string/title_activity_contact"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.contact.ContactDetailActivity"

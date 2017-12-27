@@ -136,6 +136,7 @@ public class ContactActivity extends BaseToolbarActivity<ContactMvpPresenter> im
                     //扫码添加
                     showMessage("扫码添加");
                     break;
+
             }
         });
 
@@ -158,6 +159,10 @@ public class ContactActivity extends BaseToolbarActivity<ContactMvpPresenter> im
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

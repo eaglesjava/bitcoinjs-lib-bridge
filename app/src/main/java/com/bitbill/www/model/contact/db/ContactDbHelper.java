@@ -105,5 +105,15 @@ public class ContactDbHelper extends DbHelper implements ContactDb {
         });
     }
 
+    @Override
+    public Observable<Contact> getContactByWalletId(String walletId) {
+        return Observable.fromCallable(new Callable<Contact>() {
+            @Override
+            public Contact call() throws Exception {
+                return mContactDao.queryBuilder().where(ContactDao.Properties.WalletId.eq(walletId)).unique();
+            }
+        });
+    }
+
 
 }

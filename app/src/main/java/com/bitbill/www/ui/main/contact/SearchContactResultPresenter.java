@@ -29,6 +29,38 @@ public class SearchContactResultPresenter<M extends ContactModel, V extends Sear
     }
 
     @Override
+    public void checkContact() {
+
+        //check 本地是否已存在
+        getCompositeDisposable().add(getModelManager()
+                .getContactByWalletId(getMvpView().getWalletId())
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<Contact>() {
+                    @Override
+                    public void onNext(Contact contact) {
+                        super.onNext(contact);
+                        if (contact != null) {
+                            if (!isViewAttached()) {
+                                return;
+                            }
+                            getMvpView().isExsistContact();
+                        } else {
+                            addContact();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        addContact();
+                    }
+                }));
+    }
+
+    @Override
     public void addContact() {
         if (!isValidWalletId() || !isValidContactName()) {
             return;
@@ -48,17 +80,27 @@ public class SearchContactResultPresenter<M extends ContactModel, V extends Sear
                             @Override
                             public void onNext(ApiResponse<AddContactsResponse> addContactsResponseApiResponse) {
                                 super.onNext(addContactsResponseApiResponse);
-                                if (addContactsResponseApiResponse != null && addContactsResponseApiResponse.isSuccess()) {
-                                    if (!isViewAttached()) {
-                                        return;
+                                if (addContactsResponseApiResponse != null) {
+                                    if (addContactsResponseApiResponse.isSuccess()) {
+                                        if (!isViewAttached()) {
+                                            return;
+                                        }
+                                        getMvpView().addContactSuccess();
+                                    } else {
+                                        removeContact(contact);
+                                        if (!isViewAttached()) {
+                                            return;
+                                        }
+                                        getMvpView().addContactFail(addContactsResponseApiResponse.getMessage());
+
                                     }
-                                    getMvpView().addContactSuccess();
                                 } else {
                                     removeContact(contact);
                                     if (!isViewAttached()) {
                                         return;
                                     }
-                                    getMvpView().addContactFail();
+
+                                    getMvpView().addContactFail(null);
                                 }
 
                             }
@@ -73,7 +115,7 @@ public class SearchContactResultPresenter<M extends ContactModel, V extends Sear
                                 if (e instanceof ANError) {
                                     handleApiError(((ANError) e));
                                 } else {
-                                    getMvpView().addContactFail();
+                                    getMvpView().addContactFail(null);
                                 }
                             }
                         }));

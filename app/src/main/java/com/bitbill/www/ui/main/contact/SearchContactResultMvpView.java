@@ -18,9 +18,11 @@ public interface SearchContactResultMvpView extends MvpView {
 
     void addContactSuccess();
 
-    void addContactFail();
+    void addContactFail(String message);
 
     void requireWalletId();
 
     void requireContactName();
+
+    void isExsistContact();
 }

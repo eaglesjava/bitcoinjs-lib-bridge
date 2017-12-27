@@ -9,5 +9,7 @@ import com.bitbill.www.model.contact.ContactModel;
 
 public interface SearchContactResultMvpPresenter<M extends ContactModel, V extends SearchContactResultMvpView> extends MvpPresenter<V> {
 
+    void checkContact();
+
     void addContact();
 }

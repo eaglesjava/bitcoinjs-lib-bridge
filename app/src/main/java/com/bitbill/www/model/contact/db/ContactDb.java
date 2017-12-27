@@ -47,5 +47,7 @@ public interface ContactDb extends Db {
 
     Observable<Contact> getContactById(Long contactId);
 
+    Observable<Contact> getContactByWalletId(String walletId);
+
 
 }

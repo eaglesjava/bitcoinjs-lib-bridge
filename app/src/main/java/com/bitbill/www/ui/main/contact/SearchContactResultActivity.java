@@ -7,9 +7,9 @@ import android.widget.Button;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
-import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.base.view.widget.EditTextWapper;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.eventbus.UpdateContactEvent;
 
@@ -109,15 +109,13 @@ public class SearchContactResultActivity extends BaseToolbarActivity<SearchConta
     public void addContactSuccess() {
         //返回联系人界面
         ContactActivity.start(SearchContactResultActivity.this);
-        //结束添加相关流程
-        AppManager.get().finishActivity(AddContactByIdActivity.class);
-        finish();
         EventBus.getDefault().postSticky(new UpdateContactEvent());
+        finish();
     }
 
     @Override
-    public void addContactFail() {
-        showMessage(R.string.fail_add_contact);
+    public void addContactFail(String message) {
+        showMessage(StringUtils.isEmpty(message) ? getString(R.string.fail_add_contact) : message);
     }
 
     @Override
@@ -132,10 +130,15 @@ public class SearchContactResultActivity extends BaseToolbarActivity<SearchConta
         mEtwContactName.requestFocus();
     }
 
+    @Override
+    public void isExsistContact() {
+        showMessage("联系人已存在");
+    }
+
     @OnClick(R.id.btn_confirm_add)
     public void onViewClicked() {
 
         mEtwContactName.removeError();
-        getMvpPresenter().addContact();
+        getMvpPresenter().checkContact();
     }
 }
