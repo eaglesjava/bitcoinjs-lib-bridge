@@ -195,7 +195,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lla-QY-BHV">
-                                                <rect key="frame" x="95" y="5" width="184" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                 <state key="normal" title="当前钱包未备份，马上备份">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -206,9 +206,11 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.96470588235294119" green="0.25098039215686274" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Lla-QY-BHV" firstAttribute="centerY" secondItem="JlX-0g-CmX" secondAttribute="centerY" id="YEy-LW-hSN"/>
-                                            <constraint firstItem="Lla-QY-BHV" firstAttribute="centerX" secondItem="JlX-0g-CmX" secondAttribute="centerX" id="kY7-4Y-voZ"/>
+                                            <constraint firstItem="Lla-QY-BHV" firstAttribute="top" secondItem="JlX-0g-CmX" secondAttribute="top" id="dPA-qc-lIb"/>
+                                            <constraint firstAttribute="trailing" secondItem="Lla-QY-BHV" secondAttribute="trailing" id="mvR-B4-M8d"/>
+                                            <constraint firstAttribute="bottom" secondItem="Lla-QY-BHV" secondAttribute="bottom" id="rcy-Rq-zR8"/>
                                             <constraint firstAttribute="height" constant="40" id="vxY-sp-bdT"/>
+                                            <constraint firstItem="Lla-QY-BHV" firstAttribute="leading" secondItem="JlX-0g-CmX" secondAttribute="leading" id="whk-AV-jKY"/>
                                         </constraints>
                                     </view>
                                 </subviews>

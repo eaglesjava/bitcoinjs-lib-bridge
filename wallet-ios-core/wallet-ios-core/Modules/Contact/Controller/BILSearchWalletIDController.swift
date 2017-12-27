@@ -44,6 +44,11 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
             return
         }
         
+        guard !ContactModel.isWalletIDExits(walletID: id) else {
+            showToast(msg: "ID 已存在")
+            return
+        }
+        
         ContactModel.getContactFromServer(by: id, success: { (id) in
             self.showResult(id: id)
         }) { (msg, code) in

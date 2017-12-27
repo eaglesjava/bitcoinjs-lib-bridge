@@ -42,7 +42,10 @@ class BILAddContactByAddressController: BILLightBlueBaseController {
         let cont = BILQRCodeScanViewController.controller { (qrString) in
             if let result = BILURLHelper.transferBitCoinURL(urlString: qrString)?.address {
                 unownedSelf.navigationController?.popViewController(animated: true)
-                debugPrint(result)
+                guard !ContactModel.isAddressExits(address: result) else {
+                    unownedSelf.bil_makeToast(msg: "地址已存在")
+                    return
+                }
                 unownedSelf.addressInputView.textField.text = result
             }
         }
@@ -122,6 +125,11 @@ extension BILAddContactByAddressController {
             return
         }
         
+        guard !ContactModel.isAddressExits(address: address) else {
+            showTipAlert(msg: "地址已存在")
+            return
+        }
+        
         BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
             debugPrint(result)
             let isValidate = result as! Bool
@@ -165,6 +173,10 @@ extension BILAddContactByAddressController: BILInputViewDelegate {
         case addressInputView.textField:
             guard let address = addressInputView.textField.text else {
                 addressInputView.show(tip: "地址不能为空", type: .error)
+                return false
+            }
+            guard !ContactModel.isAddressExits(address: address) else {
+                addressInputView.show(tip: "地址已存在", type: .error)
                 return false
             }
             BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in

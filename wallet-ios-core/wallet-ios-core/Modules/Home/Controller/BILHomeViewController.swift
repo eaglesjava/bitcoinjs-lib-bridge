@@ -120,7 +120,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		}
 	}
 	
-	var dataArray: [BILHomeSectionType] = [.asset, .recentRecord, .wallet]
+	var dataArray: [BILHomeSectionType] = [.shortcut, .asset, .recentRecord, .wallet]
 	
 	let headerViewID = "BILHomeTableHeaderView"
 	let walletCellID = BILHomeSectionType.wallet.cellID()

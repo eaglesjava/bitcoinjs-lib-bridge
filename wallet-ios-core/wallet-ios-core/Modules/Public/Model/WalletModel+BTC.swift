@@ -14,7 +14,7 @@ func BTCFormatString(btc: Int64) -> String {
     if btc == 0 {
         return "0.00"
     }
-    return String(format: "%f", Double(btc) / Double(BTC_SATOSHI))
+    return "\(Double(btc) / Double(BTC_SATOSHI))"
 }
 
 extension WalletModel {

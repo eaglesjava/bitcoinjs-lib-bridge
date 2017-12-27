@@ -60,6 +60,12 @@ enum Router: URLRequestConvertible {
                 return (.bil_contact_search_id, ["walletId": walletID])
             case .addContact(let walletID, let name, let remark, let address, let coinType):
                 return (.bil_contact_add, ["walletKey": BILDeviceManager.shared.contactKey, "contactName": name, "remark": remark, "walletId": walletID, "address": address, "coinType": coinType.name])
+            case .updateContact(let walletID, let name, let remark, let address):
+                return (.bil_contact_update, ["walletKey": BILDeviceManager.shared.contactKey, "contactName": name, "remark": remark, "walletId": walletID, "address": address])
+            case .deleteContact(let walletID, let address):
+                return (.bil_contact_delete, ["walletKey": BILDeviceManager.shared.contactKey, "walletId": walletID, "address": address])
+            case .recoverContacts(let recoverKey):
+                return (.bil_contact_recover, ["walletKey": BILDeviceManager.shared.contactKey, "recoverKey": recoverKey])
             }
         }()
         
@@ -93,12 +99,15 @@ enum Router: URLRequestConvertible {
     case getContacts
     case searchWalletID(walletID: String)
     case addContact(walletID: String, name: String, remark: String, address: String, coinType: CoinType)
+    case updateContact(walletID: String, name: String, remark: String, address: String)
+    case deleteContact(walletID: String, address: String)
+    case recoverContacts(recoverKey: String)
     
 }
 
 extension String {
-//    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
-    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
+    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
+//    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
     static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
     static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
     static var bil_wallet_delete: String { get { return bil_wallet_path + "deleteWallet" } }
@@ -117,13 +126,14 @@ extension String {
     static var bil_contact_get_last_address: String { get { return bil_wallet_path + "getLastAddress" } }
     static var bil_contact_search_id: String { get { return bil_wallet_path + "searchWalletId" } }
     static var bil_contact_add: String { get { return bil_wallet_path + "addContacts" } }
-    
-    
+    static var bil_contact_update: String { get { return bil_wallet_path + "updateContacts" } }
+    static var bil_contact_delete: String { get { return bil_wallet_path + "deleteContacts" } }
+    static var bil_contact_recover: String { get { return bil_wallet_path + "recoverContacts" } }
 }
 
 extension String {
-//    static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
-    static var bil_socket_base_url: String { get { return "http://walletservice.bitbill.com:8088/" } }
+    static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
+//    static var bil_socket_base_url: String { get { return "http://walletservice.bitbill.com:8088/" } }
 }
 
 extension String {

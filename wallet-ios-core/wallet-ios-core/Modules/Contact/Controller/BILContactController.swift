@@ -94,6 +94,10 @@ class BILContactController: BILLightBlueBaseController {
             if let address = BILURLHelper.transferBitCoinURL(urlString: qrString)?.address {
                 debugPrint(address)
                 unownedSelf.navigationController?.popViewController(animated: true)
+                guard !ContactModel.isAddressExits(address: address) else {
+                    unownedSelf.bil_makeToast(msg: "地址已存在")
+                    return
+                }
                 SVProgressHUD.show()
                 BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
                     let isValidate = result as! Bool
@@ -115,6 +119,10 @@ class BILContactController: BILLightBlueBaseController {
 	}
 	
 	func checkID(id: String) {
+        guard !ContactModel.isWalletIDExits(walletID: id) else {
+            bil_makeToast(msg: "ID 已存在")
+            return
+        }
 		SVProgressHUD.show()
 		ContactModel.getContactFromServer(by: id, success: { (id) in
 			DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(350), execute: {

@@ -1,28 +1,35 @@
 //
-//  BILSearchWalletIDResultController.swift
+//  BILContactEditController.swift
 //  wallet-ios-core
 //
-//  Created by 仇弘扬 on 2017/12/20.
+//  Created by 仇弘扬 on 2017/12/27.
 //  Copyright © 2017年 BitBill. All rights reserved.
 //
 
 import UIKit
 import SVProgressHUD
 
-class BILSearchWalletIDResultController: BILLightBlueBaseController {
+class BILContactEditController: BILLightBlueBaseController {
 
-    var walletID: String?
+    var contact: ContactModel?
     
     @IBOutlet weak var nameInputView: BILInputView!
     @IBOutlet weak var remarkInputView: BILInputView!
+    @IBOutlet weak var contactTypeLabel: UILabel!
+    @IBOutlet weak var contactTypeStringLabel: BILCopyLabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.title = walletID
         nameInputView.delegate = self
         remarkInputView.delegate = self
+        guard let c = contact else { return }
+        contactTypeLabel.text = c.additionType == .walletID ? "钱包ID" : ("钱包地址" + " (\(c.coinType.name))")
+        contactTypeStringLabel.valueTitle = c.additionType == .walletID ? "ID" : "地址"
+        contactTypeStringLabel.text = c.detail
+        remarkInputView.textField.text = c.remark
+        nameInputView.textField.text = c.name
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,8 +37,11 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func addAction(_ sender: Any) {
-        addContact()
+    @IBAction func saveAction(_ sender: Any) {
+        updateContact()
+    }
+    @IBAction func deleteAction(_ sender: Any) {
+        deleteContact()
     }
     
     func checkName() -> String? {
@@ -61,10 +71,25 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
         return toReturn
     }
     
-    func addContact() {
-        guard let id = walletID else { return }
+    func deleteContact() {
+        bil_showLoading(status: "deleting...")
+        contact?.deleteFromServer(success: {
+            self.navigationController?.popToRootViewController(animated: true)
+            self.bil_dismissHUD()
+        }, failure: { (msg, code) in
+            self.bil_makeToast(msg: msg)
+            self.bil_dismissHUD()
+        })
+    }
+    
+    func updateContact() {
         guard let name = nameInputView.textField.text else {
             nameInputView.show(tip: "名称不能为空", type: .error)
+            return
+        }
+        
+        guard name != contact?.name || remarkInputView.textField.text != contact?.remark else {
+            showTipAlert(msg: "您没有做任何修改")
             return
         }
         
@@ -76,29 +101,16 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
         }
         
         let remark = remarkInputView.textField.text ?? ""
-        addContact(id: id, name: name, remark: remark)
-    }
-    
-    func addContact(id: String, name: String, remark: String = "") {
-        ContactModel.addContactToServer(id: id, name: name, remark: remark, success: { (contact) in
-            SVProgressHUD.showSuccess(withStatus: "添加成功")
+        contact?.updateToServer(name: name, remark: remark, success: { (contact) in
+            SVProgressHUD.showSuccess(withStatus: "更新成功")
             SVProgressHUD.dismiss(withDelay: 1.5, completion: {
-                guard let nav = self.navigationController else {
-                    return
-                }
-                for cont in nav.viewControllers {
-                    if cont is BILContactController {
-                        nav.popToViewController(cont, animated: true)
-                        return
-                    }
-                }
-                nav.popToRootViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
             })
         }) { (msg, code) in
-            self.bil_makeToast(msg: msg)
+            self.showTipAlert(msg: msg)
         }
     }
-
+    
     /*
     // MARK: - Navigation
 
@@ -111,7 +123,7 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
 
 }
 
-extension BILSearchWalletIDResultController: BILInputViewDelegate {
+extension BILContactEditController: BILInputViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case nameInputView.textField:
@@ -122,7 +134,7 @@ extension BILSearchWalletIDResultController: BILInputViewDelegate {
             }
             nameInputView.show(tip: msg, type: .error)
         case remarkInputView.textField:
-            addContact()
+            updateContact()
         default:
             ()
         }

@@ -114,7 +114,25 @@ class BILMeController: BILBaseViewController {
 		}
 		
 		alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (action) in
-			
+            guard let key = alert.textFields?.first?.text, !key.isEmpty else {
+                self.bil_makeToast(msg: "密钥不能为空")
+                return
+            }
+            self.bil_showLoading(status: "recovering...")
+            ContactModel.recoverContactsFromServer(recoverKey: key, success: { (contacts) in
+                let count = contacts.count
+                if count == 0 {
+                    self.bil_makeToast(msg: "您没有新增的联系人")
+                }
+                else
+                {
+                    self.bil_makeToast(msg: "您恢复了 \(contacts.count) 个联系人")
+                }
+                self.bil_dismissHUD()
+            }, failure: { (msg, code) in
+                self.bil_makeToast(msg: msg)
+                self.bil_dismissHUD()
+            })
 		}))
 		
 		alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in

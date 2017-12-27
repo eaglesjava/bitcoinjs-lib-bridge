@@ -69,5 +69,19 @@ class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
 		guard let n = notificationName else { return }
 		NotificationCenter.default.post(name: n, object: nil)
 	}
+    
+    func fetch(key: String, value: String) -> T? {
+        var model: T? = nil
+        do {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let request: NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
+            request.predicate = NSPredicate(format: "\(key)=%@", value)
+            let results = try context.fetch(request)
+            model = results.first
+        } catch {
+            return model
+        }
+        return model
+    }
 	
 }
