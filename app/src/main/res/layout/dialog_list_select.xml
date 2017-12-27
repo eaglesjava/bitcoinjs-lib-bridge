@@ -14,6 +14,6 @@
         android:layout_margin="40dp"
         android:background="@color/white"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.bitbill.www.common.base.view.dialog.ListSelectDialog"
+        tools:context=".common.widget.dialog.ListSelectDialog"
         tools:listitem="@layout/item_dialog_list" />
 </android.support.constraint.ConstraintLayout>

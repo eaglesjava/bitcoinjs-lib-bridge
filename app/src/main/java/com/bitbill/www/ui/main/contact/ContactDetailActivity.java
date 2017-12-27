@@ -10,11 +10,11 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.presenter.GetLastAddressMvpPresenter;
+import com.bitbill.www.common.presenter.GetLastAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
-import com.bitbill.www.ui.common.GetLastAddressMvpPresenter;
-import com.bitbill.www.ui.common.GetLastAddressMvpView;
 
 import javax.inject.Inject;
 
@@ -78,7 +78,7 @@ public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvp
         mTvContactLabel.setText(StringUtils.getNameLabel(mContact.getContactName()));
         mTvContactName.setText(mContact.getContactName());
         mTvWalletAddress.setText(mContact.getAddress());
-        mTvWalletRemark.setText(mContact.getRemark());
+        mTvWalletRemark.setText(StringUtils.isEmpty(mContact.getRemark()) ? "无" : mContact.getRemark());
         mTvWalletId.setText(mContact.getWalletId());
         mTvWalletAddress.setText(mContact.getAddress());
     }

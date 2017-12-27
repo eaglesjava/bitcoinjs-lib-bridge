@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.bitbill.www.common.base.view.widget.AmountEditText
+        <com.bitbill.www.common.widget.AmountEditText
             android:id="@+id/et_input_amount"
             style="@style/EditText.Amount"
             android:layout_width="match_parent"

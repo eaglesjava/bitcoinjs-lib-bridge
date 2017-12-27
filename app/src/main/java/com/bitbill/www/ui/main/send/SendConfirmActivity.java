@@ -14,16 +14,16 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.dialog.BaseConfirmDialog;
-import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
-import com.bitbill.www.common.base.view.dialog.PwdDialogFragment;
+import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
+import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
+import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
+import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
-import com.bitbill.www.ui.common.BtcAddressMvpPresentder;
-import com.bitbill.www.ui.common.BtcAddressMvpView;
 
 import org.greenrobot.eventbus.EventBus;
 

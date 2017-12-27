@@ -11,7 +11,7 @@
     android:padding="@dimen/activity_padding"
     tools:context="com.bitbill.www.ui.wallet.init.CreateWalletIdActivity">
 
-    <com.bitbill.www.common.base.view.widget.EditTextWapper
+    <com.bitbill.www.common.widget.EditTextWapper
         android:id="@+id/etw_wallet_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

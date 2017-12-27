@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
 
-            <com.bitbill.www.common.base.view.widget.EditTextWapper
+            <com.bitbill.www.common.widget.EditTextWapper
                 android:id="@+id/etw_trade_pwd_before"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 app:inputType="inputPasswordHide"
                 />
 
-            <com.bitbill.www.common.base.view.widget.EditTextWapper
+            <com.bitbill.www.common.widget.EditTextWapper
                 android:id="@+id/etw_trade_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 app:inputType="inputPasswordHide"
                 />
 
-            <com.bitbill.www.common.base.view.widget.EditTextWapper
+            <com.bitbill.www.common.widget.EditTextWapper
                 android:id="@+id/etw_trade_pwd_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

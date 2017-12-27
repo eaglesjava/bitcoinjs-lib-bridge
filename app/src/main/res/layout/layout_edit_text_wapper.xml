@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             />
 
-        <com.bitbill.www.common.base.view.widget.PwdStatusView
+        <com.bitbill.www.common.widget.PwdStatusView
             android:id="@+id/psv_status"
             android:layout_width="51dp"
             android:layout_height="2dp"

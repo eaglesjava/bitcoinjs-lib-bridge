@@ -1,4 +1,4 @@
-<com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
+<com.bitbill.www.common.widget.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
@@ -233,4 +233,4 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-</com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh>
+</com.bitbill.www.common.widget.CustomSwipeToRefresh>

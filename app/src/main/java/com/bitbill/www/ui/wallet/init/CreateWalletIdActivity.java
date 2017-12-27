@@ -7,9 +7,9 @@ import android.os.Bundle;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.dialog.SupportCoinDialog;
-import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.EditTextWapper;
+import com.bitbill.www.common.widget.dialog.SupportCoinDialog;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 

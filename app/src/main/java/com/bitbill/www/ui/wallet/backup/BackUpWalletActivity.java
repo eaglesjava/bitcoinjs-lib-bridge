@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.dialog.PwdDialogFragment;
+import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.main.MainActivity;

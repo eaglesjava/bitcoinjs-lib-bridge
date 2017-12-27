@@ -8,8 +8,8 @@ import android.widget.Button;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.widget.EditTextWapper;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.eventbus.UpdateContactEvent;
 

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh
+    <com.bitbill.www.common.widget.CustomSwipeToRefresh
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,5 +29,5 @@
             app:layoutManager="LinearLayoutManager"
             tools:context="com.bitbill.www.ui.wallet.info.BtcRecordFragment"
             tools:listitem="@layout/item_btc_record"/>
-    </com.bitbill.www.common.base.view.widget.CustomSwipeToRefresh>
+    </com.bitbill.www.common.widget.CustomSwipeToRefresh>
 </LinearLayout>

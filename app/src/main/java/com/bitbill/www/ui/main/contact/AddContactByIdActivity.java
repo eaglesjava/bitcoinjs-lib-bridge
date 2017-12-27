@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.dialog.MessageConfirmDialog;
+import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.contact.ContactModel;
 
 import javax.inject.Inject;

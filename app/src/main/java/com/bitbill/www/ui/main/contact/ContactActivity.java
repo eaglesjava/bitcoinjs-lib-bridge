@@ -12,9 +12,9 @@ import android.view.View;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.base.view.decoration.DividerDecoration;
-import com.bitbill.www.common.base.view.dialog.ListSelectDialog;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.decoration.DividerDecoration;
+import com.bitbill.www.common.widget.dialog.ListSelectDialog;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.UpdateContactEvent;

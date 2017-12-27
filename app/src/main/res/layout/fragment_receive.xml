@@ -16,17 +16,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <com.bitbill.www.common.base.view.widget.NoScrollViewPager
+        <com.bitbill.www.common.widget.NoScrollViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </com.bitbill.www.common.base.view.widget.NoScrollViewPager>
+        </com.bitbill.www.common.widget.NoScrollViewPager>
 
 
     </LinearLayout>
 
-    <com.bitbill.www.common.base.view.widget.SelectWalletView
+    <com.bitbill.www.common.widget.SelectWalletView
         android:id="@+id/wv_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
