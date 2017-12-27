@@ -12,6 +12,7 @@ class BILTableViewHeaderFooterView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var bil_backgroundView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

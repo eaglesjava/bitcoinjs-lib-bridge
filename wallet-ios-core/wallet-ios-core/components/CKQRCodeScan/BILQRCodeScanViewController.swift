@@ -43,8 +43,6 @@ class BILQRCodeScanViewController: BILBaseViewController {
             navigationItem.largeTitleDisplayMode = .never
         }
         
-        setupSession()
-        
         scanFrame.addSubview(scanLine)
     }
     
@@ -55,6 +53,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupSession()
         scanSession?.startRunning()
     }
     
@@ -93,6 +92,9 @@ class BILQRCodeScanViewController: BILBaseViewController {
     }
     
     func setupSession() {
+        guard scanSession != nil else {
+            return
+        }
         do {
             guard let device = AVCaptureDevice.default(for: .video) else { return }
             

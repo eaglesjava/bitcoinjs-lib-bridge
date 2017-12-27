@@ -78,7 +78,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRb-iU-ttO" customClass="BILWhiteBorderButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="517" width="325" height="55"/>
+                                <rect key="frame" x="25" y="492" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="0aU-Wh-Aff"/>
                                 </constraints>
@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9E-N3-fyw">
-                                <rect key="frame" x="25" y="587" width="325" height="55"/>
+                                <rect key="frame" x="25" y="562" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="3OW-Um-V0U"/>
                                 </constraints>
@@ -102,7 +102,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8I-VI-SFJ">
-                                <rect key="frame" x="25" y="447" width="325" height="55"/>
+                                <rect key="frame" x="25" y="422" width="325" height="55"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="Dp3-Nx-byP"/>
@@ -129,7 +129,7 @@
                             <constraint firstItem="Mtd-FW-skP" firstAttribute="top" secondItem="Zcu-Bh-rZz" secondAttribute="bottom" constant="10" id="JtJ-G8-eoL"/>
                             <constraint firstItem="aWP-ji-LN2" firstAttribute="leading" secondItem="ha7-lL-iwI" secondAttribute="trailing" constant="25" id="M6m-QH-piF"/>
                             <constraint firstItem="Zcu-Bh-rZz" firstAttribute="leading" secondItem="aWP-ji-LN2" secondAttribute="leading" id="Oxe-1f-hpn"/>
-                            <constraint firstAttribute="bottom" secondItem="m9E-N3-fyw" secondAttribute="bottom" constant="25" id="P4d-Ta-fZc"/>
+                            <constraint firstAttribute="bottom" secondItem="m9E-N3-fyw" secondAttribute="bottom" constant="50" id="P4d-Ta-fZc"/>
                             <constraint firstItem="aWP-ji-LN2" firstAttribute="top" secondItem="ha7-lL-iwI" secondAttribute="top" id="Q5K-4w-uFd"/>
                             <constraint firstItem="Zcu-Bh-rZz" firstAttribute="top" secondItem="aWP-ji-LN2" secondAttribute="bottom" constant="5" id="S1V-yK-ZUH"/>
                             <constraint firstItem="cRb-iU-ttO" firstAttribute="top" secondItem="M8I-VI-SFJ" secondAttribute="bottom" constant="15" id="T2L-47-RRK"/>
@@ -150,6 +150,7 @@
                     </view>
                     <connections>
                         <outlet property="backupButton" destination="M8I-VI-SFJ" id="cQQ-VT-eaR"/>
+                        <outlet property="buttonBottomSpace" destination="P4d-Ta-fZc" id="dV9-id-bmG"/>
                         <outlet property="dateLabel" destination="359-rW-M42" id="bKe-uX-n5K"/>
                         <outlet property="idLabel" destination="Zcu-Bh-rZz" id="VPX-3N-qH6"/>
                         <outlet property="qrImageView" destination="ha7-lL-iwI" id="1mq-m3-RY6"/>
@@ -208,7 +209,7 @@
                                             <rect key="frame" x="25" y="149" width="325" height="1"/>
                                             <color key="backgroundColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="Xx8-LT-Kdb"/>
+                                                <constraint firstAttribute="height" constant="0.5" id="Xx8-LT-Kdb"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -306,7 +307,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v5k-zu-P5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2430" y="839"/>
+            <point key="canvasLocation" x="2429.5999999999999" y="838.83058470764627"/>
         </scene>
         <!--钱包地址-->
         <scene sceneID="3l3-Wz-bl1">
@@ -616,7 +617,7 @@ EOmSseWMhUlEA
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbu-E8-h2i">
                                                     <rect key="frame" x="301" y="14" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.18823529411764706" green="0.60784313725490191" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="onTintColor" red="0.12156862745098039" green="0.26666666666666666" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="switchChanged:" destination="yvR-HR-YRe" eventType="valueChanged" id="GGX-e1-iOr"/>
                                                     </connections>

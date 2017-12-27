@@ -24,6 +24,8 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
 	
     @IBOutlet weak var backupButton: BILWhiteBorderButton!
     @IBOutlet weak var walletAddressButton: BILWhiteBorderButton!
+    @IBOutlet weak var buttonBottomSpace: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +47,9 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
             let width = qrImageView.frame.width
             qrImageView.image = w.id_qrString.qrCodeImage(targetSize: CGSize(width: width, height: width))
             backupButton.isHidden = !w.isNeedBackup
+        }
+        if let version = Float(UIDevice.current.systemVersion), version < 11.0 {
+            buttonBottomSpace.constant = 25
         }
     }
 

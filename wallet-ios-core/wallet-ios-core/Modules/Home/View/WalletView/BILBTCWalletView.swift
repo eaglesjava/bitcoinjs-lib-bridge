@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 
@@ -41,6 +42,9 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
+        
+        tableView.emptyDataSetSource = self
+        
 		tableView.register(UINib(nibName: "BILTransactionCell", bundle: nil), forCellReuseIdentifier: "BILTransactionCell")
         
         setupRefresh()
@@ -124,4 +128,10 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     */
 
+}
+
+extension BILBTCWalletView: DZNEmptyDataSetSource {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "无交易记录", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15), NSAttributedStringKey.foregroundColor: UIColor(white: 1.0, alpha: 0.3)])
+    }
 }

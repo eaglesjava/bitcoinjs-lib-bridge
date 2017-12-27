@@ -17,7 +17,7 @@ class BILHomeShortcutCell: UITableViewCell {
 
 	@IBAction func scanAction(_ sender: Any) {
 		BILControllerManager.shared.mainTabBarController?.selectedIndex = 3
-		postNotification(name: .shortcutScanQRCode, after: 100)
+		postNotification(name: .shortcutScanQRCode, after: 10)
 	}
 	@IBAction func addContactAction(_ sender: Any) {
 		BILControllerManager.shared.mainTabBarController?.selectedIndex = 1

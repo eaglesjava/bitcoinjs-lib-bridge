@@ -55,6 +55,10 @@ extension BILAboutUsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let segue = segues[indexPath.row]
         performSegue(withIdentifier: segue, sender: nil)

@@ -51,6 +51,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="bgImageView" destination="YHa-ET-jN2" id="Wxq-60-WSt"/>
+                <outlet property="bil_backgroundView" destination="hSx-QM-EE4" id="zb9-kU-flD"/>
                 <outlet property="titleLabel" destination="vJh-zz-cab" id="6p8-lZ-KkI"/>
             </connections>
             <point key="canvasLocation" x="45.5" y="-348"/>
