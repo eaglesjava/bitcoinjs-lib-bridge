@@ -85,7 +85,7 @@ enum BILHomeSectionType: Int {
 	func dataArray() -> [Any] {
 		switch self {
 		case .shortcut:
-			return [NSObject()]
+            return BILSettingManager.isHomeShortcutEnabled ? [NSObject()] : []
 		case .asset:
 			return [NSObject()]
 		case .recentRecord:

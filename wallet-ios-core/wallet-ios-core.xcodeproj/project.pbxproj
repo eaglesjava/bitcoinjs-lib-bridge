@@ -61,6 +61,8 @@
 		BA5893FC1FF35CFE008C96C4 /* ContactModel+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5893FB1FF35CFE008C96C4 /* ContactModel+BIL.swift */; };
 		BA5893FF1FF36540008C96C4 /* service_cn.html in Resources */ = {isa = PBXBuildFile; fileRef = BA5893FD1FF3653F008C96C4 /* service_cn.html */; };
 		BA5894001FF36540008C96C4 /* service.html in Resources */ = {isa = PBXBuildFile; fileRef = BA5893FE1FF36540008C96C4 /* service.html */; };
+		BA5894021FF37A65008C96C4 /* BILMeSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5894011FF37A65008C96C4 /* BILMeSwitchCell.swift */; };
+		BA5894041FF37C8A008C96C4 /* BILSettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5894031FF37C8A008C96C4 /* BILSettingManager.swift */; };
 		BA6E95EB1FDFE5AF0085F7B5 /* BILSendChooseWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E95EA1FDFE5AF0085F7B5 /* BILSendChooseWalletController.swift */; };
 		BA6E95ED1FDFF0EE0085F7B5 /* BILSendConfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E95EC1FDFF0EE0085F7B5 /* BILSendConfirmController.swift */; };
 		BA6E95EF1FE0CD790085F7B5 /* BILBitCoinInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E95EE1FE0CD790085F7B5 /* BILBitCoinInputView.swift */; };
@@ -233,6 +235,8 @@
 		BA5893FB1FF35CFE008C96C4 /* ContactModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactModel+BIL.swift"; sourceTree = "<group>"; };
 		BA5893FD1FF3653F008C96C4 /* service_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = service_cn.html; sourceTree = "<group>"; };
 		BA5893FE1FF36540008C96C4 /* service.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = service.html; sourceTree = "<group>"; };
+		BA5894011FF37A65008C96C4 /* BILMeSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeSwitchCell.swift; sourceTree = "<group>"; };
+		BA5894031FF37C8A008C96C4 /* BILSettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSettingManager.swift; sourceTree = "<group>"; };
 		BA6E95EA1FDFE5AF0085F7B5 /* BILSendChooseWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSendChooseWalletController.swift; sourceTree = "<group>"; };
 		BA6E95EC1FDFF0EE0085F7B5 /* BILSendConfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSendConfirmController.swift; sourceTree = "<group>"; };
 		BA6E95EE1FE0CD790085F7B5 /* BILBitCoinInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILBitCoinInputView.swift; sourceTree = "<group>"; };
@@ -538,6 +542,7 @@
 				BAEFFD3E1FEB9E0C00C6EAB3 /* BILMeCell.swift */,
 				BAEFFD481FEBC69800C6EAB3 /* BILMeWalletCell.swift */,
 				BA51991B1FF0F898004F6602 /* BILMeUnspentBalanceCell.swift */,
+				BA5894011FF37A65008C96C4 /* BILMeSwitchCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -727,6 +732,7 @@
 				CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */,
 				BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */,
 				CC4417041FBEB25C00C4B158 /* BILControllerManager.swift */,
+				BA5894031FF37C8A008C96C4 /* BILSettingManager.swift */,
 				CCE5E16D1FC80E0600F7555D /* BILWalletManager.swift */,
 				CCC6B7741FF2A09900EE7A32 /* BILCoreDataModelManager.swift */,
 				CCE5E1771FCBC4E100F7555D /* BILTransactionManager.swift */,
@@ -1352,6 +1358,7 @@
 				BA1142391FD53CC80025BF80 /* BILGuideContactView.swift in Sources */,
 				CCE5E1701FC8165A00F7555D /* BILGradientView.swift in Sources */,
 				CC8E4C381FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift in Sources */,
+				BA5894021FF37A65008C96C4 /* BILMeSwitchCell.swift in Sources */,
 				CCED055E1FDA9B4C00689498 /* BILRecieveModel.swift in Sources */,
 				BA1746F41FDFB89D000615CF /* BILURLHelper.swift in Sources */,
 				CC94E0531FB984630098E730 /* BILGradientButton.swift in Sources */,
@@ -1430,6 +1437,7 @@
 				CCF634F21FBEC25400840097 /* BILTabBarController.swift in Sources */,
 				CCC6B7731FF2979800EE7A32 /* ContactModel+Getters.swift in Sources */,
 				CCF635011FC2B95100840097 /* BILGuideBaseView.swift in Sources */,
+				BA5894041FF37C8A008C96C4 /* BILSettingManager.swift in Sources */,
 				CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */,
 				CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */,
 				CC94E0C51FBD87D70098E730 /* BILMnemonicCell.swift in Sources */,

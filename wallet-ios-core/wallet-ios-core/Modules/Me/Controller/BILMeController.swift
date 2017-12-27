@@ -17,13 +17,16 @@ extension String {
 class BILMeController: BILBaseViewController {
     
     enum BILMeSectionType: Int {
-		case contacts = 0
+        case homeShortcut = 0
+		case contacts
         case wallet
         case preference
         case other
         
         var sectionTitle: String {
             switch self {
+            case .homeShortcut:
+                return "首页设置"
 			case .contacts:
 				return "联系人设置"
             case .wallet:
@@ -52,6 +55,8 @@ class BILMeController: BILBaseViewController {
         
         func dataArray() -> [Any] {
             switch self {
+            case .homeShortcut:
+                return ["主页快捷功能"]
 			case .contacts:
 				return ["备份联系人", "恢复联系人"]
             case .wallet:
@@ -65,6 +70,8 @@ class BILMeController: BILBaseViewController {
         
         func cellID() -> String {
             switch self {
+            case .homeShortcut:
+                return "BILMeSwitchCell"
             case .wallet:
                 return "BILMeWalletCell"
             default:
@@ -75,7 +82,7 @@ class BILMeController: BILBaseViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
-    var sections: [BILMeSectionType] = [.contacts, .wallet, .preference, .other]
+    var sections: [BILMeSectionType] = [.homeShortcut, .contacts, .wallet, .preference, .other]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,6 +211,13 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: sectionType.cellID(), for: indexPath)
 		let model = sectionType.dataArray()[indexPath.row]
         switch sectionType {
+        case .homeShortcut:
+            let c = cell as! BILMeSwitchCell
+            c.bil_switch.isOn = BILSettingManager.isHomeShortcutEnabled
+            c.switchChangedClosure = { (isOn) in
+                BILSettingManager.isHomeShortcutEnabled = isOn
+            }
+            c.titleLabel.text = model as? String
         case .other: fallthrough
 		case .contacts:
 			let c = cell as! BILMeCell
