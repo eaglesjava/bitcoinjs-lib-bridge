@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -20,13 +21,14 @@ import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
+import com.bitbill.www.model.eventbus.UpdateContactEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
-import com.bitbill.www.ui.main.contact.ContactActivity;
+import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.my.WalletSettingActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
@@ -55,6 +57,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     MainMvpPresenter<WalletModel, MainMvpView> mMainMvpPresenter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.tabs)
+    TabLayout mTabLayout;
     @BindView(R.id.nav_view)
     NavigationView navView;
     @BindView(R.id.drawer_layout)
@@ -66,6 +70,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private ReceiveFragment mReceiveFragment;
     private SendFragment mSendFragment;
     private Socket mSocket;
+    private ContactFragment mContactFragment;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -94,13 +99,77 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+    public void onBeforeSetContentLayout() {
+    }
+
+    @Override
+    public void init(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void initView() {
+
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                hideKeyboard();
+            }
+        });
+        navView.setNavigationItemSelectedListener(this);
+
+        mAdapter = new FragmentAdapter(getSupportFragmentManager());
+        mAssetFragment = AssetFragment.newInstance();
+        mAdapter.addItem(mAssetFragment);
+        mContactFragment = ContactFragment.newInstance();
+        mAdapter.addItem(mContactFragment);
+        mReceiveFragment = ReceiveFragment.newInstance();
+        mAdapter.addItem(mReceiveFragment);
+        mSendFragment = SendFragment.newInstance();
+        mAdapter.addItem(mSendFragment);
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setOffscreenPageLimit(3);
+
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                switch (tab.getPosition()) {
+                    case 0:
+                        setTitle(R.string.title_asset);
+                        break;
+                    case 1:
+                        setTitle(R.string.title_contact);
+                        break;
+                    case 2:
+                        setTitle(R.string.title_receive);
+                        break;
+                    case 3:
+                        setTitle(R.string.title_send);
+                        break;
+
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void initData() {
+        getMvpPresenter().loadWallet();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -109,25 +178,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_asset) {
-            // 切换到资产界面
-            mViewPager.setCurrentItem(0, false);
-            setTitle(R.string.title_asset);
-
-        } else if (id == R.id.nav_receive) {
-            // 切换到接收界面
-            mViewPager.setCurrentItem(1, false);
-            setTitle(R.string.title_receive);
-
-        } else if (id == R.id.nav_send) {
-            // 切换到发送界面
-            mViewPager.setCurrentItem(2, false);
-            setTitle(R.string.title_send);
-
-        } else if (id == R.id.nav_contact) {
-            // 切换到联系人界面
-            ContactActivity.start(this);
-        } else if (id == R.id.nav_wallet_manage) {
+        if (id == R.id.nav_wallet_manage) {
             // 切换到钱包管理界面
             WalletSettingActivity.start(this);
         }
@@ -210,27 +261,15 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
     }
 
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onWalletUpdateSuccess(WalletUpdateEvent walletUpdateEvent) {
-        WalletUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletUpdateEvent.class);
-        //重新加载钱包信息
-        getMvpPresenter().loadWallet();
-    }
 
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onSendSuccess(SendSuccessEvent sendSuccessEvent) {
-        SendSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(SendSuccessEvent.class);
-        //重新加载钱包信息
-        if (mSendFragment != null) {
-            mSendFragment.sendSuccess();
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
-    }
-
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onUnConfirmReceive(UnConfirmEvent unConfirmEvent) {
-        UnConfirmEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
-        //加载未确认交易
-        getMvpPresenter().listUnconfirm();
     }
 
     @Override
@@ -260,51 +299,36 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
     }
 
-    @Override
-    public void onBeforeSetContentLayout() {
-    }
-
-    @Override
-    public void init(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    public void initView() {
-
-        setSupportActionBar(toolbar);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                hideKeyboard();
-            }
-        });
-        navView.setNavigationItemSelectedListener(this);
-
-        mAdapter = new FragmentAdapter(getSupportFragmentManager());
-        mAssetFragment = AssetFragment.newInstance();
-        mAdapter.addItem(mAssetFragment);
-        mReceiveFragment = ReceiveFragment.newInstance();
-        mAdapter.addItem(mReceiveFragment);
-        mSendFragment = SendFragment.newInstance();
-        mAdapter.addItem(mSendFragment);
-        mViewPager.setAdapter(mAdapter);
-        mViewPager.setOffscreenPageLimit(3);
-    }
-
-    @Override
-    public void initData() {
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onWalletUpdateSuccess(WalletUpdateEvent walletUpdateEvent) {
+        WalletUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletUpdateEvent.class);
+        //重新加载钱包信息
         getMvpPresenter().loadWallet();
     }
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_main;
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onSendSuccess(SendSuccessEvent sendSuccessEvent) {
+        SendSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(SendSuccessEvent.class);
+        //重新加载钱包信息
+        if (mSendFragment != null) {
+            mSendFragment.sendSuccess();
+        }
     }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onUnConfirmReceive(UnConfirmEvent unConfirmEvent) {
+        UnConfirmEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
+        //加载未确认交易
+        getMvpPresenter().listUnconfirm();
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onUpdateContactEvent(UpdateContactEvent updateContactEvent) {
+        UpdateContactEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UpdateContactEvent.class);
+        //重新加载联系人信息
+        if (mContactFragment != null) {
+            mContactFragment.initData();
+        }
+    }
+
 }

@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.model.entity.Entity;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.widget.CustomSwipeToRefresh;
 import com.bitbill.www.common.widget.Decoration;
@@ -15,6 +14,7 @@ import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +24,14 @@ import butterknife.BindView;
  * Created by isanwenyu on 2017/12/27.
  */
 
-public abstract class BaseListFragment<E extends Entity, P extends MvpPresenter> extends BaseFragment<P> implements BaseListControl {
+public abstract class BaseListFragment<E extends Serializable, P extends MvpPresenter> extends BaseFragment<P> implements BaseListControl {
 
+    @BindView(R.id.list)
+    protected RecyclerView mRecyclerView;
+    protected RecyclerView.Adapter mAdapter;
+    protected List<E> mDatas;
     @BindView(R.id.refresh_layout)
     CustomSwipeToRefresh mRefreshLayout;
-    @BindView(R.id.list)
-    RecyclerView mRecyclerView;
-
-    RecyclerView.Adapter mAdapter;
-    List<E> mDatas;
 
     protected abstract void onListItemClick(E e, int position);
 

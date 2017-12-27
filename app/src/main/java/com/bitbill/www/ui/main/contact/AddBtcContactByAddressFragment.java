@@ -176,7 +176,7 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
     @Override
     public void addContactSuccess() {
         EventBus.getDefault().postSticky(new UpdateContactEvent());
-        ContactActivity.start(getBaseActivity());
+        getBaseActivity().finish();
 
     }
 

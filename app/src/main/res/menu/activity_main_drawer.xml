@@ -3,25 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group>
-        <item
-            android:id="@+id/nav_asset"
-            android:icon="@drawable/ic_menu_asset"
-            android:title="@string/title_asset" />
-        <item
-            android:id="@+id/nav_receive"
-            android:icon="@drawable/ic_menu_receive"
-            android:title="@string/title_receive" />
-        <item
-            android:id="@+id/nav_send"
-            android:icon="@drawable/ic_menu_send"
-            android:title="@string/title_send" />
-        <item
-            android:id="@+id/nav_contact"
-            android:icon="@drawable/ic_menu_contact"
-            android:title="@string/title_contact" />
+    <item android:title="@string/title_account_info">
+        <menu>
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/ic_menu_contact"
+                android:title="@string/title_contact" />
 
-    </group>
+        </menu>
+    </item>
     <item android:title="@string/title_security">
         <menu>
             <item
@@ -32,6 +22,15 @@
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_menu_setting"
                 android:title="@string/title_setting" />
+
+        </menu>
+    </item>
+    <item android:title="@string/title_other">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/ic_menu_contact"
+                android:title="@string/title_about_us" />
 
         </menu>
     </item>

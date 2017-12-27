@@ -108,8 +108,6 @@ public class SearchContactResultActivity extends BaseToolbarActivity<SearchConta
     @Override
     public void addContactSuccess() {
         EventBus.getDefault().postSticky(new UpdateContactEvent());
-        //返回联系人界面
-        ContactActivity.start(SearchContactResultActivity.this);
         finish();
     }
 
