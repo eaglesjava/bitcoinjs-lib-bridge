@@ -47,7 +47,11 @@ extension WalletModel {
             failure("extKey不能为空", -1)
             return
         }
-        BILNetworkManager.request(request: .importWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
+        BILNetworkManager.request(request: .importWallet(walletID: walletID, extendedKey: extKey), success: { (result) in
+            let json = JSON(result)
+            let lastIndex = json["index"].int64Value
+            self.generateAddresses(from: self.lastAddressIndex, to: lastIndex)
+        }, failure: failure)
     }
     
     

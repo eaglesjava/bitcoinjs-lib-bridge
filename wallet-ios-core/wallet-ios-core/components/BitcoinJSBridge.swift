@@ -72,6 +72,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 		let method = "bridge.getBitcoinAddressByMasterXPublicKey('\(xpub)', \(index))"
 		callJS(method: method, success: success, failure: failure)
 	}
+    
+    func getAddresses(xpub: String, fromIndex: Int = 0, toIndex: Int, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
+        let method = "bridge.getBitcoinContinuousAddressByMasterXPublicKey('\(xpub)', \(fromIndex), \(toIndex))"
+        callJS(method: method, success: success, failure: failure)
+    }
 	
 	func getMasterXPublicKey(seed: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
 		let method = "bridge.getBitcoinMasterXPublicKey('\(seed)')"

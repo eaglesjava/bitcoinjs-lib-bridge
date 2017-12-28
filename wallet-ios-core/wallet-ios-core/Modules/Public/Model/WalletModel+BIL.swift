@@ -20,6 +20,16 @@ extension WalletModel {
 }
 
 extension WalletModel {
+    func generateAddresses(from: Int64, to: Int64) {
+        BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: 0, toIndex: 100, success: { (result) in
+            debugPrint(result)
+        }) { (error) in
+            debugPrint(error)
+        }
+    }
+}
+
+extension WalletModel {
     static func generateAES(pwd: String) -> AES? {
         do {
             let key = String(pwd.sha256().prefix(32))
