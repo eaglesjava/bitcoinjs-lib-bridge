@@ -43,17 +43,22 @@ class BILRecieveController: BILBaseViewController {
         
         qrCodeImageViewHeight.constant = qrCodeHeight - (currentWallet!.isNeedBackup ? 10 : 0)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(walletCountDidChanged(notification:)), name: .walletCountDidChanged, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .walletCountDidChanged, object: nil)
     }
     
     @objc
-    func walletDidChanged(notification: Notification) {
-        currentWallet = BILWalletManager.shared.wallets.first
-        refreshUI()
+    func walletCountDidChanged(notification: Notification) {
+        if let walletID = currentWallet?.id, WalletModel.checkIDIsExists(id: walletID) {
+            refreshUI()
+        }
+        else
+        {
+            currentWallet = BILWalletManager.shared.wallets.first
+        }
     }
     
     func refreshUI() {
@@ -106,6 +111,7 @@ class BILRecieveController: BILBaseViewController {
 	}
 	
 	@IBAction func currentWalletViewTapped(_ sender: Any) {
+        NotificationCenter.default.post(name: .recievePageCurrentWallet, object: currentWallet)
 		showChooseWalletView()
 	}
 	

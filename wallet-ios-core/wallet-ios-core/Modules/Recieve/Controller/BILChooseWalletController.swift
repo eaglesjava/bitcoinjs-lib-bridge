@@ -29,19 +29,21 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 
         // Do any additional setup after loading the view.
 		tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
-        NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .recievePageCurrentWallet, object: nil)
     }
     
     @objc
     func walletDidChanged(notification: Notification) {
         tableView.reloadData()
-        if wallets.count > 0 {
-            tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
+        guard let wallet = notification.object as? WalletModel, let index = wallets.index(of: wallet) else {
+            return
         }
+        currentSelectedIndex = index
+        tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .recievePageCurrentWallet, object: nil)
     }
 
     override func didReceiveMemoryWarning() {

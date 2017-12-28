@@ -101,12 +101,14 @@ class BILContactEditController: BILLightBlueBaseController {
         }
         
         let remark = remarkInputView.textField.text ?? ""
+        bil_showLoading(status: "updating...")
         contact?.updateToServer(name: name, remark: remark, success: { (contact) in
             SVProgressHUD.showSuccess(withStatus: "更新成功")
             SVProgressHUD.dismiss(withDelay: 1.5, completion: {
                 self.navigationController?.popViewController(animated: true)
             })
         }) { (msg, code) in
+            self.bil_dismissHUD()
             self.showTipAlert(msg: msg)
         }
     }

@@ -26,8 +26,12 @@ extension UIViewController {
         SVProgressHUD.show(withStatus: status)
     }
     
-    func bil_dismissHUD(delay: Double = 0) {
-        SVProgressHUD.dismiss(withDelay: delay)
+    func bil_showSuccess(status: String) {
+        SVProgressHUD.showSuccess(withStatus: status)
+    }
+    
+    func bil_dismissHUD(delay: Double = 0, complete: SVProgressHUDDismissCompletion? = nil) {
+        SVProgressHUD.dismiss(withDelay: delay, completion: complete)
     }
     
     func showTipAlert(title: String? = nil, msg: String? = nil, actionTitle: String = "我知道了", dismissed: (() -> Void)? = nil) {

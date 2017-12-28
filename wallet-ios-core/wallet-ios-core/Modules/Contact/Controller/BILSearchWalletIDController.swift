@@ -32,6 +32,7 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
         view.endEditing(true)
         func showToast(msg: String) {
             showTipAlert(title: nil, msg: msg) {
+                self.bil_dismissHUD()
                 self.idInputView.textField.becomeFirstResponder()
             }
         }
@@ -49,6 +50,7 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
             return
         }
         
+        bil_showLoading(status: "searching...")
         ContactModel.getContactFromServer(by: id, success: { (id) in
             self.showResult(id: id)
         }) { (msg, code) in
@@ -58,6 +60,7 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
     }
     
     func showResult(id: String) {
+        self.bil_dismissHUD()
         performSegue(withIdentifier: .bil_searchIDToResultSegue, sender: id)
     }
     

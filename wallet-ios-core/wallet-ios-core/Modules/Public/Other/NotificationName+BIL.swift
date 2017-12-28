@@ -15,6 +15,7 @@ extension Notification.Name {
     static var transactionSended: Notification.Name { get { return NSNotification.Name("transactionSended") } }
     static var recievedUnconfirmTransaction: Notification.Name { get { return NSNotification.Name("recievedUnconfirmTransaction") } }
     static var unconfirmTransactionBeenConfirmed: Notification.Name { get { return NSNotification.Name("unconfirmTransactionBeenConfirmed") } }
+    static var recievePageCurrentWallet: Notification.Name { get { return NSNotification.Name("recievePageCurrentWallet") } }
     static var sendBTCToContact: Notification.Name { get { return NSNotification.Name("sendBTCToContact") } }
     static var contactDidChanged: Notification.Name { get { return NSNotification.Name("contactDidChanged") } }
     static var networkStatusDidChanged: Notification.Name { get { return NSNotification.Name("networkStatusDidChanged") } }

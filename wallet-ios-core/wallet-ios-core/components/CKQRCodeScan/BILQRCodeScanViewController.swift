@@ -92,7 +92,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
     }
     
     func setupSession() {
-        guard scanSession != nil else {
+        guard scanSession == nil else {
             return
         }
         do {

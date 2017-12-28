@@ -134,6 +134,7 @@ extension BILAddContactByAddressController {
             debugPrint(result)
             let isValidate = result as! Bool
             if isValidate {
+                self.bil_showLoading(status: "adding...")
                 ContactModel.addContactToServer(id: "", address: address, name: name, remark: remark, success: { (contact) in
                     SVProgressHUD.showSuccess(withStatus: "添加成功")
                     SVProgressHUD.dismiss(withDelay: 1.5, completion: {
@@ -149,13 +150,16 @@ extension BILAddContactByAddressController {
                         nav.popToRootViewController(animated: true)
                     })
                 }) { (msg, code) in
+                    self.bil_dismissHUD()
                     self.bil_makeToast(msg: msg)
                 }
             } else {
+                self.bil_dismissHUD()
                 self.addressInputView.show(tip: "不是合法的地址", type: .error)
             }
         }) { (error) in
             debugPrint(error)
+            self.showTipAlert(msg: error.localizedDescription)
         }
     }
 }
