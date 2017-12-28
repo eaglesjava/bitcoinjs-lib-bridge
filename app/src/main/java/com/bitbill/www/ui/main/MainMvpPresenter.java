@@ -34,8 +34,6 @@ import com.bitbill.www.model.wallet.WalletModel;
 @PerActivity
 public interface MainMvpPresenter<M extends WalletModel, V extends MainMvpView> extends MvpPresenter<V> {
 
-    void loadWallet();
-
     void getBalance();
 
     void listUnconfirm();

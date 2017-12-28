@@ -140,7 +140,7 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
     @OnClick(R.id.btn_wirtten_mnemonic)
     public void wirttenMnemonicClick(View view) {
         //跳转到备份确定界面
-        BackupWalletConfirmActivity.start(BackUpWalletActivity.this, getMnemonic(), getWallet());
+        BackupWalletConfirmActivity.start(BackUpWalletActivity.this, getMnemonic(), getWallet(), isFromSetting);
     }
 
     @Override

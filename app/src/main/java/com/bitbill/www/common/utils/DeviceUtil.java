@@ -14,11 +14,6 @@ import android.util.Log;
 
 import com.bitbill.www.app.BitbillApp;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
-
 /**
  * <pre>
  * 获取设备信息工具
@@ -165,33 +160,6 @@ public class DeviceUtil {
             versionCode = 0;
         }
         return versionCode;
-    }
-
-    // 获得设备ip
-    public static String getIp() {
-        String ipaddress = "";
-        try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface
-                    .getNetworkInterfaces(); en.hasMoreElements(); ) {
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf
-                        .getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    // 必须加isIPv4Address判断 否则返回ipv6网络请求出错
-                    if (!inetAddress.isLoopbackAddress()
-                            && StringUtils.isIPv4Address(inetAddress
-                            .getHostAddress())) {
-                        // ipaddress=ipaddress+";"+
-                        // inetAddress.getHostAddress().toString();
-                        ipaddress = inetAddress.getHostAddress();
-                    }
-                }
-            }
-        } catch (SocketException ex) {
-            Log.e("IpAddress", ex.toString());
-        }
-        Log.i("IpAddress", ipaddress);
-        return ipaddress;
     }
 
     /**

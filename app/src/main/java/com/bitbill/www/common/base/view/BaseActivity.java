@@ -25,6 +25,7 @@ import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.utils.DialogUtils;
 import com.bitbill.www.common.utils.NetworkUtils;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.SingleToast;
 import com.bitbill.www.di.component.ActivityComponent;
 import com.bitbill.www.di.component.DaggerActivityComponent;
@@ -34,6 +35,9 @@ import com.bitbill.www.model.eventbus.NetWorkChangedEvent;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Unbinder;
 
@@ -49,6 +53,7 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     private ActivityComponent mActivityComponent;
     private Unbinder mUnBinder;
     private P mMvpPresenter;
+    private List<MvpPresenter> mPresenters = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,11 +67,24 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         AppManager.get().addActivity(this);
         handleIntent(getIntent());
         mInflater = getLayoutInflater();
-        mMvpPresenter = getMvpPresenter();
-        if (getMvpPresenter() != null) {
-            getMvpPresenter().onAttach(this);
+        addPresenter(mMvpPresenter = getMvpPresenter());
+        if (!StringUtils.isEmpty(getPresenters())) {
+            for (MvpPresenter mvpPresenter : getPresenters()) {
+                if (mMvpPresenter != null) {
+                    mvpPresenter.onAttach(this);
+
+                }
+            }
         }
 
+    }
+
+    protected List<MvpPresenter> getPresenters() {
+        return mPresenters;
+    }
+
+    protected void addPresenter(MvpPresenter mvpPresenter) {
+        mPresenters.add(mvpPresenter);
     }
 
     private void setScreenOrientation() {
@@ -216,11 +234,16 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         }
         DialogUtils.close(mProgressDialog);
         AppManager.get().finishActivity(this);
-        super.onDestroy();
-        if (getMvpPresenter() != null) {
-            getMvpPresenter().onDetach();
+        if (!StringUtils.isEmpty(getPresenters())) {
+            for (MvpPresenter mvpPresenter : getPresenters()) {
+                if (mvpPresenter != null) {
+                    mvpPresenter.onDetach();
+
+                }
+            }
         }
         SingleToast.clear();
+        super.onDestroy();
     }
 
     /**

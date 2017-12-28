@@ -40,16 +40,22 @@
                     android:layout_marginTop="5dp"
                     android:text="@string/title_total_assets" />
 
-
-                <RadioButton
-                    android:id="@+id/rb_socket_status"
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
+                <FrameLayout
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@id/tv_total_asset"
-                    android:layout_marginRight="@dimen/activity_padding"
-                    android:background="@drawable/socket_status_green_corner"
-                    android:button="@color/transparent" />
+                    android:layout_marginRight="@dimen/activity_padding">
+
+                    <RadioButton
+                        android:id="@+id/rb_socket_status"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/socket_status_green_corner"
+                        android:button="@color/transparent" />
+                </FrameLayout>
+
             </RelativeLayout>
 
             <LinearLayout

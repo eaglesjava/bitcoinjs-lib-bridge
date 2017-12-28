@@ -39,7 +39,7 @@ public interface ContactDb extends Db {
 
     Observable<Long> insertContact(final Contact contact);
 
-    Observable<Void> deleteContact(final Contact contact);
+    Observable<Boolean> deleteContact(final Contact contact);
 
     Observable<Boolean> updateContact(final Contact contact);
 

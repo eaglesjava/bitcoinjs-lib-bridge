@@ -56,12 +56,23 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
     private GridViewAdapter mMnemonicAdapter;
     private GridViewAdapter mMnemonicConfrimAdapter;
     private Wallet mWallet;
+    private boolean isFromSetting;
 
-    public static void start(Context context, String mnemonic, Wallet wallet) {
+    public static void start(Context context, String mnemonic, Wallet wallet, boolean isFromSetting) {
         Intent intent = new Intent(context, BackupWalletConfirmActivity.class);
         intent.putExtra(AppConstants.EXTRA_MNEMONIC, mnemonic);
         intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
+        intent.putExtra(AppConstants.EXTRA_IS_FROM_SETTING, isFromSetting);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+
+        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+        mMnemonic = getIntent().getStringExtra(AppConstants.EXTRA_MNEMONIC);
+        isFromSetting = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_SETTING, false);
     }
 
     @Override
@@ -84,8 +95,9 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
             mMnemonicConfrimAdapter.notifyDataSetChanged();
             //重置提示布局
             tvHintClick.setVisibility(mMnemonicConfirmList.size() > 0 ? View.GONE : View.VISIBLE);
-            mMnemonicAdapter.notifyDataSetChanged();
-
+            for (int i = 0; i < gvMnemonic.getChildCount(); i++) {
+                gvMnemonic.setItemChecked(i, false);
+            }
             return true;
         }
 
@@ -119,8 +131,6 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
 
     @Override
     public void initData() {
-        mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
-        mMnemonic = getIntent().getStringExtra(AppConstants.EXTRA_MNEMONIC);
         mMnemonicArray = mMnemonic.split(" ");
         //直接赋值 对mMnemonicList排序mMnemonicArray也会受影响
         mMnemonicList = new ArrayList<>();
@@ -217,7 +227,7 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
     public void backupSuccess() {
 
         //跳转到备份成功界面
-        BackupWalletSuccessActivity.start(BackupWalletConfirmActivity.this);
+        BackupWalletSuccessActivity.start(BackupWalletConfirmActivity.this, isFromSetting);
         EventBus.getDefault().postSticky(new WalletUpdateEvent(getWallet()));
         finish();
     }

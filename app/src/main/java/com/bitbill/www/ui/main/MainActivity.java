@@ -19,9 +19,13 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
+import com.bitbill.www.common.presenter.WalletMvpPresenter;
+import com.bitbill.www.common.presenter.WalletMvpView;
+import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
-import com.bitbill.www.model.eventbus.UpdateContactEvent;
+import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -48,13 +52,15 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
 
     @Inject
     MainMvpPresenter<WalletModel, MainMvpView> mMainMvpPresenter;
+    @Inject
+    WalletMvpPresenter<WalletModel, WalletMvpView> mWalletPresenter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tabs)
@@ -85,6 +91,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void injectComponent() {
         //inject activity
         getActivityComponent().inject(this);
+        addPresenter(mWalletPresenter);
     }
 
     @Override
@@ -169,14 +176,17 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private void changeThemeColor(boolean isBlue) {
         if (isBlue) {
             getWindow().setBackgroundDrawableResource(R.drawable.bg_blue);
+            mTabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
+
         } else {
             getWindow().setBackgroundDrawableResource(R.color.windowBackground);
+            mTabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.blue));
         }
     }
 
     @Override
     public void initData() {
-        getMvpPresenter().loadWallet();
+        mWalletPresenter.loadWallets();
     }
 
     @Override
@@ -211,9 +221,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void loadWalletsSuccess(List<Wallet> wallets) {
 
-        if (wallets == null) {
-            return;
-        }
+        if (StringUtils.isEmpty(wallets)) finish();//结束主界面
         //设置全局钱包列表对象
         BitbillApp.get().setWallets(wallets);
         reloadWalletInfo();
@@ -315,7 +323,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void onWalletUpdateSuccess(WalletUpdateEvent walletUpdateEvent) {
         WalletUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletUpdateEvent.class);
         //重新加载钱包信息
-        getMvpPresenter().loadWallet();
+        mWalletPresenter.loadWallets();
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -335,12 +343,20 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onUpdateContactEvent(UpdateContactEvent updateContactEvent) {
-        UpdateContactEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UpdateContactEvent.class);
+    public void onUpdateContactEvent(ContactUpdateEvent contactUpdateEvent) {
+        ContactUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(ContactUpdateEvent.class);
         //重新加载联系人信息
         if (mContactFragment != null) {
             mContactFragment.initData();
         }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onWalletDeleteSuccess(WalletDeleteEvent walletDeleteEvent) {
+        WalletDeleteEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletDeleteEvent.class);
+        Wallet wallet = walletDeleteEvent.getWallet();
+        // TODO: 2017/12/28 优化 重新加载钱包信息
+        mWalletPresenter.loadWallets();
     }
 
 }

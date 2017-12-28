@@ -69,7 +69,7 @@ public class EditTextWapper extends FrameLayout {
     private boolean mErrorState;
     private TextWatcher mTextWatcher;
     private String mBottomHint;
-    private OnClickListener mOnRightImageClickListener;
+    private OnClickListener mOnRightDrawableClickListener;
 
     public EditTextWapper(Context context) {
         super(context);
@@ -197,8 +197,8 @@ public class EditTextWapper extends FrameLayout {
 
                         if (touchable) {
                             //里面写上自己想做的事情，也就是DrawableRight的触发事件
-                            if (mOnRightImageClickListener != null) {
-                                mOnRightImageClickListener.onClick(v);
+                            if (mOnRightDrawableClickListener != null) {
+                                mOnRightDrawableClickListener.onClick(v);
                             }
 
                         }
@@ -332,6 +332,6 @@ public class EditTextWapper extends FrameLayout {
     }
 
     public void setOnRightImageClickListener(OnClickListener onRightImageClickListener) {
-        mOnRightImageClickListener = onRightImageClickListener;
+        mOnRightDrawableClickListener = onRightImageClickListener;
     }
 }

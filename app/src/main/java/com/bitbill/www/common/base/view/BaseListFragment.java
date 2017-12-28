@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.CustomSwipeToRefresh;
 import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
@@ -118,6 +119,10 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
 
     }
 
+    protected boolean isDataEmpty() {
+        return StringUtils.isEmpty(mDatas);
+    }
+
     @Override
     public RecyclerView.Adapter getAdapter() {
         return mAdapter;
@@ -134,6 +139,21 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void notifyItemChanged(int position) {
+        mAdapter.notifyItemChanged(position);
+    }
+
+    protected void notifyItemRemoved(int position) {
+        mDatas.remove(position);//删除数据源
+        mAdapter.notifyItemRemoved(position);//刷新被删除的地方
+        mAdapter.notifyItemRangeChanged(position, getItemCount());//刷新被删除数据，以及其后面的数据
+
+    }
+
+    private int getItemCount() {
+        return mAdapter.getItemCount();
+    }
 
     @Override
     public int getLayoutId() {

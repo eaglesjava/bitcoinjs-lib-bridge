@@ -14,20 +14,16 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.Charset;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
@@ -51,16 +47,6 @@ public class StringUtils {
             .compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
     private final static Pattern NUMBER_STR = Pattern
             .compile("^[0-9]*$");
-    private final static Pattern IMG_URL = Pattern
-            .compile(".*?(gif|jpeg|png|jpg|bmp)");
-    private final static Pattern URL = Pattern
-            .compile("^(https|http)://.*?$(net|com|.com.cn|org|me|)");
-    private static final Pattern IPV4_PATTERN =
-            Pattern.compile("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
-    private static final Pattern IPV6_STD_PATTERN =
-            Pattern.compile("^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$");
-    private static final Pattern IPV6_HEX_COMPRESSED_PATTERN =
-            Pattern.compile("^((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)$");
 
     /**
      * 判断全文都是否为中文
@@ -112,76 +98,6 @@ public class StringUtils {
 
     /**
      * <pre>
-     * 判断是否是一个合法的手机号码
-     * 规则:11位数字并且已数字1开头
-     * </pre>
-     *
-     * @param phoneNum
-     * @return
-     */
-    public static boolean isPhoneNum(String phoneNum) {
-        if (!StringUtils.isNotEmpty(phoneNum))
-            return false;
-        return PHONE_NUM.matcher(getRealPhone(phoneNum)).matches() && phoneNum.startsWith("1");
-    }
-
-    /**
-     * <pre>
-     * 判断是否是一个合法的手机号码
-     * </pre>
-     *
-     * @param phoneNum
-     * @return
-     */
-    public static boolean isPhoneNumValide(String phoneNum) {
-        if (!StringUtils.isNotEmpty(phoneNum))
-            return false;
-        return PHONE_NUM.matcher(getRealPhone(phoneNum)).matches() && phoneNum.startsWith("1");
-    }
-
-
-    /**
-     * 去除空格得到真实的手机字符串
-     *
-     * @param phoneNum
-     * @return
-     */
-    public static String getRealPhone(String phoneNum) {
-        if (!StringUtils.isNotEmpty(phoneNum))
-            return "";
-        return phoneNum.trim().replaceAll(" ", "");
-    }
-
-    /**
-     * <pre>
-     * 判断是不是一个合法的电子邮件地址
-     * </pre>
-     *
-     * @param email
-     * @return
-     */
-    public static boolean isEmail(String email) {
-        if (email == null || email.trim().length() == 0)
-            return false;
-        return EMAILER.matcher(email).matches();
-    }
-
-    /**
-     * <pre>
-     * 判断一个url是否为图片url
-     * </pre>
-     *
-     * @param url
-     * @return
-     */
-    public static boolean isImgUrl(String url) {
-        if (url == null || url.trim().length() == 0)
-            return false;
-        return IMG_URL.matcher(url).matches();
-    }
-
-    /**
-     * <pre>
      * 判断是否为一个合法的url地址
      * </pre>
      *
@@ -191,38 +107,6 @@ public class StringUtils {
     public static boolean isUrl(String str) {
         //使用android系统的url合法性判断工具
         return URLUtil.isValidUrl(str);
-    }
-
-    public static boolean isIPv4Address(final String input) {
-        if (!isNotEmpty(input)) {
-            return false;
-        }
-        return IPV4_PATTERN.matcher(input).matches();
-
-    }
-
-    public static boolean isIPv6StdAddress(final String input) {
-        if (!isNotEmpty(input)) {
-            return false;
-        }
-        return IPV6_STD_PATTERN.matcher(input).matches();
-
-    }
-
-    public static boolean isIPv6HexCompressedAddress(final String input) {
-        if (!isNotEmpty(input)) {
-            return false;
-        }
-        return IPV6_HEX_COMPRESSED_PATTERN.matcher(input).matches();
-
-    }
-
-    public static boolean isIPv6Address(final String input) {
-        if (!isNotEmpty(input)) {
-            return false;
-        }
-        return isIPv6StdAddress(input) || isIPv6HexCompressedAddress(input);
-
     }
 
     /**
@@ -297,111 +181,6 @@ public class StringUtils {
         return s == null ? "" : s;
     }
 
-    /**
-     * 将一个InputStream流转换成字符串
-     *
-     * @param is
-     * @return
-     */
-    public static String toConvertString(InputStream is) {
-        StringBuffer res = new StringBuffer();
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader read = new BufferedReader(isr);
-        try {
-            String line;
-            line = read.readLine();
-            while (line != null) {
-                res.append(line + "<br>");
-                line = read.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (null != isr) {
-                    isr.close();
-                    isr.close();
-                }
-                if (null != read) {
-                    read.close();
-                    read = null;
-                }
-                if (null != is) {
-                    is.close();
-                    is = null;
-                }
-            } catch (IOException e) {
-            }
-        }
-        return res.toString();
-    }
-
-    /***
-     * 截取字符串
-     *
-     * @param start 从那里开始，0算起
-     * @param num   截取多少个
-     * @param str   截取的字符串
-     * @return
-     */
-    public static String getSubString(int start, int num, String str) {
-        if (str == null) {
-            return "";
-        }
-        int leng = str.length();
-        if (start < 0) {
-            start = 0;
-        }
-        if (start > leng) {
-            start = leng;
-        }
-        if (num < 0) {
-            num = 1;
-        }
-        int end = start + num;
-        if (end > leng) {
-            end = leng;
-        }
-        return str.substring(start, end);
-    }
-
-    /**
-     * 获取当前时间为每年第几周
-     *
-     * @return
-     */
-    public static int getWeekOfYear() {
-        return getWeekOfYear(new Date());
-    }
-
-    /**
-     * 获取当前时间为每年第几周
-     *
-     * @param date
-     * @return
-     */
-    public static int getWeekOfYear(Date date) {
-        Calendar c = Calendar.getInstance();
-        c.setFirstDayOfWeek(Calendar.MONDAY);
-        c.setTime(date);
-        int week = c.get(Calendar.WEEK_OF_YEAR) - 1;
-        week = week == 0 ? 52 : week;
-        return week > 0 ? week : 1;
-    }
-
-    public static int[] getCurrentDate() {
-        int[] dateBundle = new int[3];
-        String[] temp = getDateTime("yyyy-MM-dd").split("-");
-
-        for (int i = 0; i < 3; i++) {
-            try {
-                dateBundle[i] = Integer.parseInt(temp[i]);
-            } catch (Exception e) {
-                dateBundle[i] = 0;
-            }
-        }
-        return dateBundle;
-    }
 
     /**
      * 返回当前系统时间
@@ -409,41 +188,6 @@ public class StringUtils {
     public static String getDateTime(String format) {
         SimpleDateFormat df = new SimpleDateFormat(format);
         return df.format(new Date());
-    }
-
-    /**
-     * 判断短信效验码是否有效
-     *
-     * @param smsCode
-     * @return
-     */
-    public static boolean isValidSmsCode(String smsCode) {
-        //是否是六位数字
-        return smsCode != null && isNumber(smsCode) && smsCode.length() == 6;
-    }
-
-    /**
-     * 注册、修改、重置密码校验
-     *
-     * @param loginPwd
-     * @return
-     */
-    public static boolean isValidLoginPwdFormat(String loginPwd) {
-        //规则：六位以上 包含数字和字母
-        return StringUtils.isNotEmpty(loginPwd) && loginPwd.length() >= 6 && PASSWORD_PATTERN.matcher(loginPwd).matches();
-    }
-
-    /**
-     * <pre>
-     * 判断是否为一个合法的短信验证码
-     * </pre>
-     *
-     * @param code
-     * @return
-     */
-    public static boolean isValidCode(String code) {
-        // 验证码6位
-        return StringUtils.isNotEmpty(code) && code.length() == 6;
     }
 
     /**
@@ -510,41 +254,6 @@ public class StringUtils {
     }
 
     /**
-     * 替换手机号中间四位为****号
-     *
-     * @param originPwd
-     * @return
-     */
-    public static String getSecretPwd(String originPwd) {
-        if (isNotEmpty(originPwd) && originPwd.length() == 11) {
-            StringBuffer buffer = new StringBuffer(originPwd);
-            return buffer.replace(3, 7, "****").toString();
-        }
-        return "未知";
-    }
-
-    /**
-     * 用户名规则
-     * 是否是有效的用户名（不得超过十个字）
-     *
-     * @param username
-     * @return
-     */
-    public static boolean isValidateUserName(String username) {
-        if (!StringUtils.isNotEmpty(username)) {
-            return false;
-        }
-        if (username.length() > 10) {
-            return false;
-        }
-
-        String regex = "^[a-zA-Z0-9\u4E00-\u9FA5]+$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher match = pattern.matcher(username);
-        return match.matches();
-    }
-
-    /**
      * 获取格式化的金额字符串
      *
      * @param damount
@@ -574,23 +283,6 @@ public class StringUtils {
         return format.format(amount);
     }
 
-    /**
-     * 获取数字和字母组合字符数组
-     *
-     * @return
-     */
-    public static char[] getInputTypePwdChars() {
-        char[] temp = new char[62];
-        int len = 0;
-        for (char i = 'a'; i < 'Z'; i++) {
-            temp[len] = i;
-            len++;
-        }
-        for (char j = '0'; j <= '9'; j++) {
-            temp[len] = j;
-        }
-        return temp;
-    }
 
     public static boolean needUpdate(String appVersion, String comPareVersion) {
         if (isNotEmpty(appVersion) && isNotEmpty(comPareVersion)) {
@@ -830,7 +522,7 @@ public class StringUtils {
 
 
     /**
-     * 复制粘贴文本
+     * 设置下划线
      *
      * @param textView
      */
@@ -929,6 +621,11 @@ public class StringUtils {
     public static String formatDate(String date) {
         // TODO: 2017/12/25 format  date
         return date;
+    }
+
+
+    public static String formatDate(long dateTime) {
+        return DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.getDefault()).format(new Date(dateTime));
     }
 
     public static void setEditable(EditText etText, boolean editable) {

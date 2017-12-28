@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import com.bitbill.www.common.base.view.BaseFragmentActivity;
+import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -30,12 +31,26 @@ public class WalletSettingActivity extends BaseFragmentActivity {
         return mWalletSettingFragment;
     }
 
+    /**
+     * todo resume时会多次调用需优化
+     *
+     * @param walletUpdateEvent
+     */
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onWalletUpdateSuccess(WalletUpdateEvent walletUpdateEvent) {
-        WalletUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletUpdateEvent.class);
+        Wallet wallet = walletUpdateEvent.getWallet();
         //重新加载钱包信息
         if (mWalletSettingFragment != null) {
-            mWalletSettingFragment.initData();
+            mWalletSettingFragment.updateWallet(wallet);
+        }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onWalletDeleteSuccess(WalletDeleteEvent walletDeleteEvent) {
+        Wallet wallet = walletDeleteEvent.getWallet();
+        //重新加载钱包信息
+        if (mWalletSettingFragment != null) {
+            mWalletSettingFragment.deleteWallet(wallet);
         }
     }
 }

@@ -14,7 +14,7 @@ import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.model.contact.ContactModel;
-import com.bitbill.www.model.eventbus.UpdateContactEvent;
+import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.ui.main.send.ScanQrcodeActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -175,13 +175,13 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
 
     @Override
     public void addContactSuccess() {
-        EventBus.getDefault().postSticky(new UpdateContactEvent());
+        EventBus.getDefault().postSticky(new ContactUpdateEvent());
         getBaseActivity().finish();
 
     }
 
     @Override
     public void addContactFail(String message) {
-        showMessage(StringUtils.isEmail(message) ? getString(R.string.fail_add_contact) : message);
+        showMessage(StringUtils.isEmpty(message) ? getString(R.string.fail_add_contact) : message);
     }
 }

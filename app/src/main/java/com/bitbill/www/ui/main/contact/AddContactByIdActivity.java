@@ -4,25 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.widget.DrawableEditText;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.contact.ContactModel;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMvpPresenter> implements AddContactByIdMvpView {
 
     @BindView(R.id.et_search_id)
-    EditText etSearchId;
-    @BindView(R.id.btn_add_now)
-    TextView btnAddNow;
+    DrawableEditText etSearchId;
     @Inject
     AddContactByIdMvpPresenter<ContactModel, AddContactByIdMvpView> mAddContactByIdMvpPresenter;
 
@@ -53,14 +49,19 @@ public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMv
 
     @Override
     public void initView() {
+        etSearchId.setOnRightDrawableClickListener(v -> searchWalletId());
         etSearchId.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {   // 按下完成按钮，这里和上面imeOptions对应
-                btnAddNow.performClick();
+                searchWalletId();
                 return true;
             }
             return false;
         });
 
+    }
+
+    private void searchWalletId() {
+        getMvpPresenter().searchWalletId();
     }
 
     @Override
@@ -73,10 +74,6 @@ public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMv
         return R.layout.activity_add_contact_by_id;
     }
 
-    @OnClick(R.id.btn_add_now)
-    public void onViewClicked() {
-        getMvpPresenter().searchWalletId();
-    }
 
     @Override
     public String getWalletId() {

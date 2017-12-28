@@ -16,7 +16,11 @@ import android.view.ViewGroup;
 
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.utils.DialogUtils;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.component.ActivityComponent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -30,6 +34,7 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
     protected LayoutInflater mInflater; //视图填充器
     protected View mView;
     protected P mMvpPresenter;
+    private List<MvpPresenter> mPresenters = new ArrayList<>();
     private BaseActivity<MvpPresenter> mActivity;
     private Unbinder mUnBinder;
     private ProgressDialog mProgressDialog;
@@ -53,9 +58,13 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         injectComponent();
-        mMvpPresenter = getMvpPresenter();
-        if (getMvpPresenter() != null) {
-            getMvpPresenter().onAttach(this);
+        addPresenter(mMvpPresenter = getMvpPresenter());
+        if (!StringUtils.isEmpty(getPresenters())) {
+            for (MvpPresenter mvpPresenter : getPresenters()) {
+                if (mvpPresenter != null) {
+                    mvpPresenter.onAttach(this);
+                }
+            }
         }
         onBeforeSetContentLayout();
         init(savedInstanceState);
@@ -77,10 +86,22 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
     }
 
 
+    public List<MvpPresenter> getPresenters() {
+        return mPresenters;
+    }
+
+    private void addPresenter(MvpPresenter mvpPresenter) {
+        mPresenters.add(mvpPresenter);
+    }
+
     @Override
     public void onDestroyView() {
-        if (getMvpPresenter() != null) {
-            getMvpPresenter().onDetach();
+        if (!StringUtils.isEmpty(getPresenters())) {
+            for (MvpPresenter mvpPresenter : getPresenters()) {
+                if (mvpPresenter != null) {
+                    mvpPresenter.onDetach();
+                }
+            }
         }
         super.onDestroyView();
     }

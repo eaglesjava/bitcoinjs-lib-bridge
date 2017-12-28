@@ -133,10 +133,10 @@ public class SearchContactResultPresenter<M extends ContactModel, V extends Sear
         getCompositeDisposable().add(getModelManager()
                 .deleteContact(contact)
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Void>() {
+                .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override
-                    public void onNext(Void aVoid) {
-                        super.onNext(aVoid);
+                    public void onNext(Boolean aBoolean) {
+                        super.onNext(aBoolean);
                     }
 
                     @Override

@@ -12,7 +12,7 @@ import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.model.contact.ContactModel;
-import com.bitbill.www.model.eventbus.UpdateContactEvent;
+import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -108,7 +108,7 @@ public class SearchContactResultActivity extends BaseToolbarActivity<SearchConta
 
     @Override
     public void addContactSuccess() {
-        EventBus.getDefault().postSticky(new UpdateContactEvent());
+        EventBus.getDefault().postSticky(new ContactUpdateEvent());
         AppManager.get().finishActivity(AddContactByIdActivity.class);
         finish();
     }

@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="42dp"
-              android:background="@color/white"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dialog_msg"
+        style="@style/Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/red_msg"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/et_confirm_pwd"
@@ -12,5 +22,5 @@
         android:layout_width="match_parent"
         android:layout_margin="@dimen/dialog_confirm_padding"
         android:hint="请输入密码以确认"
-        android:theme="@style/AppTheme.ConfrimEditText"/>
+        android:theme="@style/AppTheme.ConfrimEditText" />
 </LinearLayout>

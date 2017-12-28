@@ -14,6 +14,8 @@ import com.bitbill.www.ui.main.contact.AddContactByIdActivity;
 import com.bitbill.www.ui.main.contact.ContactDetailActivity;
 import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.contact.SearchContactResultActivity;
+import com.bitbill.www.ui.main.my.WalletDetailActivity;
+import com.bitbill.www.ui.main.my.WalletSettingFragment;
 import com.bitbill.www.ui.main.receive.BtcReceiveFragment;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.receive.ScanPayActivity;
@@ -76,4 +78,8 @@ public interface ActivityComponent {
     void inject(ContactDetailActivity contactDetailActivity);
 
     void inject(AddBtcContactByAddressFragment addBtcContactByAddressFragment);
+
+    void inject(WalletDetailActivity walletDetailActivity);
+
+    void inject(WalletSettingFragment walletSettingFragment);
 }

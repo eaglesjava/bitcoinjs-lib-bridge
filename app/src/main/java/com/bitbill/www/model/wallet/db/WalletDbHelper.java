@@ -75,6 +75,17 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
     }
 
     @Override
+    public Observable<Boolean> deleteWallet(Wallet wallet) {
+        return Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                mWalletDao.delete(wallet);
+                return true;
+            }
+        });
+    }
+
+    @Override
     public Observable<List<Wallet>> getAllWallets() {
         return Observable.fromCallable(new Callable<List<Wallet>>() {
             @Override

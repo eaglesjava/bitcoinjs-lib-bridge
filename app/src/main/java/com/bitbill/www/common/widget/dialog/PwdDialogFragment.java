@@ -2,8 +2,10 @@ package com.bitbill.www.common.widget.dialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.utils.StringUtils;
@@ -18,10 +20,14 @@ public class PwdDialogFragment extends BaseConfirmDialog {
 
     public static final String TAG = "InputDialogFragment";
     private static final String CONFIRM_WALLET = "confirm_wallet";
+    private static final String PWD_MESSAGE = "pwd_message";
     @BindView(R.id.et_confirm_pwd)
     EditText etConfirmPwd;
+    @BindView(R.id.tv_dialog_msg)
+    TextView tvDialogMsg;
     private Wallet mWallet;
     private OnPwdValidatedListener mOnPwdValidatedListener;
+    private String mPwdMsg;
 
     public static PwdDialogFragment newInstance(String title, Wallet wallet, boolean isOnlyPositiveBtn) {
 
@@ -34,9 +40,22 @@ public class PwdDialogFragment extends BaseConfirmDialog {
         return fragment;
     }
 
+    public static PwdDialogFragment newInstance(String title, String msg, Wallet wallet, boolean isOnlyPositiveBtn) {
+
+        Bundle args = new Bundle();
+        args.putString(CONFIRM_TITLE, title);
+        args.putString(PWD_MESSAGE, msg);
+        args.putSerializable(CONFIRM_WALLET, wallet);
+        args.putBoolean(CONFIRM_ONLY_POSITIVE_BTN, isOnlyPositiveBtn);
+        PwdDialogFragment fragment = new PwdDialogFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onBeforeSetContentLayout() {
         mWallet = (Wallet) getArguments().getSerializable(CONFIRM_WALLET);
+        mPwdMsg = getArguments().getString(PWD_MESSAGE);
     }
 
     @Override
@@ -80,6 +99,10 @@ public class PwdDialogFragment extends BaseConfirmDialog {
         });
 
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        if (StringUtils.isNotEmpty(mPwdMsg)) {
+            tvDialogMsg.setVisibility(View.VISIBLE);
+            tvDialogMsg.setText(mPwdMsg);
+        }
 
     }
 

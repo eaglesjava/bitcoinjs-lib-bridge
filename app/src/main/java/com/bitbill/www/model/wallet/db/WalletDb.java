@@ -41,6 +41,8 @@ public interface WalletDb extends Db {
 
     Observable<Boolean> updateWallet(final Wallet wallet);
 
+    Observable<Boolean> deleteWallet(final Wallet wallet);
+
     Observable<List<Wallet>> getAllWallets();
 
     Observable<Wallet> getWalletById(Long walletId);

@@ -61,44 +61,6 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
     }
 
     @Override
-    public void loadWallet() {
-        getCompositeDisposable().add(getModelManager().getAllWallets()
-                .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<List<Wallet>>(getMvpView()) {
-                    @Override
-                    protected void onStart() {
-                        super.onStart();
-                    }
-
-                    @Override
-                    public void onNext(List<Wallet> wallets) {
-                        super.onNext(wallets);
-                        if (!isViewAttached()) {
-                            return;
-                        }
-                        if (!StringUtils.isEmpty(wallets)) {
-
-                            getMvpView().loadWalletsSuccess(wallets);
-                        } else {
-
-                            getMvpView().loadWalletsFail();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        if (!isViewAttached()) {
-                            return;
-                        }
-                        if (e instanceof ANError) {
-                            handleApiError((ANError) e);
-                        }
-                    }
-                }));
-    }
-
-    @Override
     public void getBalance() {
         if (!isValidWallets()) {
             return;

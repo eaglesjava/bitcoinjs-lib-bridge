@@ -54,6 +54,13 @@ public final class AppConstants {
      */
     public static final String BTC_COIN_TYPE = "BTC";
 
+    /**
+     * bitbill h5
+     */
+    public static final String SCHEME_BITBILL = "bitbill";
+    public static final String HOST_BITBILL = "www.bitbill.com";
+    public static final String PATH_CONTACT = "contact";
+    public static final String QUERY_ID = "id";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

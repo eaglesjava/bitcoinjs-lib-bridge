@@ -22,6 +22,8 @@ interface BaseListControl<E extends Entity> {
 
     void notifyDataSetChanged();
 
+    void notifyItemChanged(int position);
+
     RecyclerView.LayoutManager getLayoutManager();
 
     int getItemLayoutId();

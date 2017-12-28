@@ -2,6 +2,8 @@
 
 package com.bitbill.www.model.wallet.db.entity;
 
+import android.support.annotation.NonNull;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -13,7 +15,7 @@ import org.greenrobot.greendao.annotation.Transient;
  */
 
 @Entity(nameInDb = "wallet")
-public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
+public class Wallet extends com.bitbill.www.common.base.model.entity.Entity implements Comparable<Wallet> {
 
     @Id(autoincrement = true)
     private Long id;
@@ -246,5 +248,32 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setBtcUnconfirm(long btcUnconfirm) {
         this.btcUnconfirm = btcUnconfirm;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof Wallet) {
+            Wallet wallet = (Wallet) obj;
+            return id.equals(wallet.getId());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public int compareTo(@NonNull Wallet o) {
+
+        return (int) (id - o.getId());
     }
 }

@@ -61,7 +61,7 @@ public class ContactModelManager extends ModelManager implements ContactModel {
     }
 
     @Override
-    public Observable<Void> deleteContact(Contact contact) {
+    public Observable<Boolean> deleteContact(Contact contact) {
         return mContactDb.deleteContact(contact);
     }
 

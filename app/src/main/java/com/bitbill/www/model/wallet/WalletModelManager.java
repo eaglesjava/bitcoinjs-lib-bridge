@@ -69,6 +69,11 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     }
 
     @Override
+    public Observable<Boolean> deleteWallet(Wallet wallet) {
+        return mWalletDb.deleteWallet(wallet);
+    }
+
+    @Override
     public Observable<List<Wallet>> getAllWallets() {
         return mWalletDb.getAllWallets();
     }

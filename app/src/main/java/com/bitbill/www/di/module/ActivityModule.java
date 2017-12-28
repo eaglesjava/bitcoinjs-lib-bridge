@@ -13,6 +13,9 @@ import com.bitbill.www.common.presenter.BtcAddressPresenter;
 import com.bitbill.www.common.presenter.GetLastAddressMvpPresenter;
 import com.bitbill.www.common.presenter.GetLastAddressMvpView;
 import com.bitbill.www.common.presenter.GetLastAddressPresenter;
+import com.bitbill.www.common.presenter.WalletMvpPresenter;
+import com.bitbill.www.common.presenter.WalletMvpView;
+import com.bitbill.www.common.presenter.WalletPresenter;
 import com.bitbill.www.common.rx.AppSchedulerProvider;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.qualifier.ActivityContext;
@@ -38,6 +41,9 @@ import com.bitbill.www.ui.main.contact.ContactPresenter;
 import com.bitbill.www.ui.main.contact.SearchContactResultMvpPresenter;
 import com.bitbill.www.ui.main.contact.SearchContactResultMvpView;
 import com.bitbill.www.ui.main.contact.SearchContactResultPresenter;
+import com.bitbill.www.ui.main.my.WalletDetailMvpPresenter;
+import com.bitbill.www.ui.main.my.WalletDetailMvpView;
+import com.bitbill.www.ui.main.my.WalletDetailPresenter;
 import com.bitbill.www.ui.main.receive.BtcReceiveMvpPresenter;
 import com.bitbill.www.ui.main.receive.BtcReceiveMvpView;
 import com.bitbill.www.ui.main.receive.BtcReceivePresenter;
@@ -208,6 +214,20 @@ public class ActivityModule {
     @PerActivity
     BtcSendMvpPresenter<WalletModel, BtcSendMvpView> provideBtcSendPresenter(
             BtcSendPresenter<WalletModel, BtcSendMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    WalletDetailMvpPresenter<WalletModel, WalletDetailMvpView> provideWalletDetailPresenter(
+            WalletDetailPresenter<WalletModel, WalletDetailMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    WalletMvpPresenter<WalletModel, WalletMvpView> provideWalletPresenter(
+            WalletPresenter<WalletModel, WalletMvpView> presenter) {
         return presenter;
     }
 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_padding"
+    tools:context="com.bitbill.www.ui.main.my.WalletDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_wallet_id_qrcode"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Text.Content.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/text_wallet_id" />
+
+            <TextView
+                android:id="@+id/tv_wallet_id"
+                style="@style/Text.Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                style="@style/Line.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                style="@style/Text.Content.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/text_wallet_add_time" />
+
+            <TextView
+                android:id="@+id/tv_wallet_add_time"
+                style="@style/Text.Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_wallet_backup"
+            style="@style/Button.White"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="15dp"
+            android:text="@string/btn_backup_wallet" />
+
+        <Button
+            android:id="@+id/btn_wallet_address"
+            style="@style/Button.Transparent.Corner.White"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="15dp"
+            android:text="@string/btn_wallet_address" />
+
+        <Button
+            android:id="@+id/btn_wallet_delete"
+            style="@style/Button.Transparent"
+            android:layout_width="match_parent"
+            android:text="@string/btn_delete_wallet"
+            android:textColor="@color/white_60" />
+    </LinearLayout>
+</FrameLayout>

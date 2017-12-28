@@ -64,12 +64,12 @@ public class ContactDbHelper extends DbHelper implements ContactDb {
     }
 
     @Override
-    public Observable<Void> deleteContact(Contact contact) {
-        return Observable.fromCallable(new Callable<Void>() {
+    public Observable<Boolean> deleteContact(Contact contact) {
+        return Observable.fromCallable(new Callable<Boolean>() {
             @Override
-            public Void call() throws Exception {
+            public Boolean call() throws Exception {
                 mContactDao.delete(contact);
-                return null;
+                return true;
             }
         });
     }
