@@ -1,5 +1,5 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.bridge = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var bitcoin=require('bitcoinjs-lib'),bip39=require('bip39'),BITCOIN_MAINNET_PATH='m/44\'/0\'/0\'/0',BITCOIN_TESTNET_PATH='m/44\'/1\'/0\'/0';function generateMnemonicRandom(a,b){var c=bip39.generateMnemonic(a,null,b);return c}function generateMnemonicRandomCN(a){return generateMnemonicRandom(a,bip39.wordlists.chinese_simplified)}function mnemonicToSeedHex(a,b){return bip39.mnemonicToSeedHex(a,b)}function validateMnemonic(a){return bip39.validateMnemonic(a,bip39.wordlists.chinese_simplified)||bip39.validateMnemonic(a,bip39.wordlists.english)}function validateAddress(a){try{return bitcoin.address.toOutputScript(a),!0}catch(a){return falseR}}function getBitcoinAddressBySeedHex(a,b){var c=generateBitcoinMainnetMasterKeychain(a);return c.derive(b).getAddress()}function getBitcoinMasterXPublicKey(a){var b=generateBitcoinMainnetMasterKeychain(a);return b.neutered().toBase58()}function getBitcoinAddressByMasterXPublicKey(a,b){var c=bitcoin.HDNode.fromBase58(a);return c.derive(b).getAddress()}function generateMainnetMasterKeychain(a){var b=bitcoin.HDNode.fromSeedHex(a);return b}function generateBitcoinMainnetMasterKeychain(a){return generateMainnetMasterKeychain(a).derivePath(BITCOIN_MAINNET_PATH)}function generateBitcoinTestnetMasterKeychain(a){return generateMainnetMasterKeychain(a).derivePath(BITCOIN_TESTNET_PATH)}function buildTransaction(a,b){for(var c,d=generateBitcoinMainnetMasterKeychain(a),e=JSON.parse(b),f=new bitcoin.TransactionBuilder,g=e.inputs,h=[],j=0;j<g.length;j++)c=g[j],f.addInput(c.txHash,c.index),h[j]=d.derive(c.bip39Index);for(var i,k=data.outputs,l=0;l<k.length;l++)i=k[l],txb.addOutput(i.address,i.amount);for(var m=ecPairs.length-1;0<=m;m--)txb.sign(m,ecPairs[m]);return txb.build().toHex()}module.exports={generateMnemonicRandom:generateMnemonicRandom,generateMnemonicRandomCN:generateMnemonicRandomCN,mnemonicToSeedHex:mnemonicToSeedHex,validateMnemonic:validateMnemonic,validateAddress:validateAddress,getBitcoinAddressBySeedHex:getBitcoinAddressBySeedHex,getBitcoinAddressByMasterXPublicKey:getBitcoinAddressByMasterXPublicKey,getBitcoinMasterXPublicKey:getBitcoinMasterXPublicKey,buildTransaction:buildTransaction,bip39:bip39};
+var bitcoin=require('bitcoinjs-lib'),bip39=require('bip39'),BITCOIN_MAINNET_PATH='m/44\'/0\'/0\'/0',BITCOIN_TESTNET_PATH='m/44\'/1\'/0\'/0';function generateMnemonicRandom(a,b){return bip39.generateMnemonic(a,null,b)}function generateMnemonicRandomCN(a){return generateMnemonicRandom(a,bip39.wordlists.chinese_simplified)}function mnemonicToSeedHex(a,b){return bip39.mnemonicToSeedHex(a,b)}function validateMnemonic(a){return bip39.validateMnemonic(a,bip39.wordlists.chinese_simplified)||bip39.validateMnemonic(a,bip39.wordlists.english)}function validateAddress(a){try{return bitcoin.address.toOutputScript(a),!0}catch(a){return!1}}function getBitcoinAddressBySeedHex(a,b){var c=generateBitcoinMainnetMasterKeychain(a);return c.derive(b).getAddress()}function getBitcoinMasterXPublicKey(a){var b=generateBitcoinMainnetMasterKeychain(a);return b.neutered().toBase58()}function getBitcoinAddressByMasterXPublicKey(a,b){var c=bitcoin.HDNode.fromBase58(a);return c.derive(b).getAddress()}function generateMainnetMasterKeychain(a){return bitcoin.HDNode.fromSeedHex(a)}function generateBitcoinMainnetMasterKeychain(a){return generateMainnetMasterKeychain(a).derivePath(BITCOIN_MAINNET_PATH)}function generateBitcoinTestnetMasterKeychain(a){return generateMainnetMasterKeychain(a).derivePath(BITCOIN_TESTNET_PATH)}function buildTransaction(a,b){b=JSON.parse(b);for(var c,d=b.inputs,e=b.outputs,f=generateBitcoinMainnetMasterKeychain(a),g=new bitcoin.TransactionBuilder,h=[],j=0;j<d.length;j++)c=d[j],g.addInput(c.txHash,c.index),h[j]=f.derive(c.bip39Index);for(var i,k=0;k<e.length;k++)i=e[k],g.addOutput(i.address,i.amount);for(var l=h.length-1;0<=l;l--)g.sign(l,h[l]);return g.build().toHex()}module.exports={generateMnemonicRandom:generateMnemonicRandom,generateMnemonicRandomCN:generateMnemonicRandomCN,mnemonicToSeedHex:mnemonicToSeedHex,validateMnemonic:validateMnemonic,validateAddress:validateAddress,getBitcoinAddressBySeedHex:getBitcoinAddressBySeedHex,getBitcoinAddressByMasterXPublicKey:getBitcoinAddressByMasterXPublicKey,getBitcoinMasterXPublicKey:getBitcoinMasterXPublicKey,buildTransaction:buildTransaction,bip39:bip39};
 
 },{"bip39":10,"bitcoinjs-lib":29}],2:[function(require,module,exports){
 (function (global){
@@ -28,36 +28,40 @@ var BigInteger=require('./bigi');require('./convert'),module.exports=BigInteger;
 
 },{"./bigi":6,"./convert":7}],9:[function(require,module,exports){
 module.exports={
-  "_from": "bigi@^1.4.0",
+  "_args": [
+    [
+      "bigi@1.4.2",
+      "/Users/sniper256/Documents/GitHub/wallet-ios-core/wallet-ios-core/wallet-ios-core/components/bitcoinjs-lib-bridge"
+    ]
+  ],
+  "_development": true,
+  "_from": "bigi@1.4.2",
   "_id": "bigi@1.4.2",
   "_inBundle": false,
   "_integrity": "sha1-nGZalfiLiwj8Bc/XMfVhhZ1yWCU=",
   "_location": "/bigi",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "bigi@^1.4.0",
+    "raw": "bigi@1.4.2",
     "name": "bigi",
     "escapedName": "bigi",
-    "rawSpec": "^1.4.0",
+    "rawSpec": "1.4.2",
     "saveSpec": null,
-    "fetchSpec": "^1.4.0"
+    "fetchSpec": "1.4.2"
   },
   "_requiredBy": [
     "/bitcoinjs-lib",
     "/ecurve"
   ],
   "_resolved": "https://registry.npmjs.org/bigi/-/bigi-1.4.2.tgz",
-  "_shasum": "9c665a95f88b8b08fc05cfd731f561859d725825",
-  "_spec": "bigi@^1.4.0",
-  "_where": "/Users/company/workspace/github/bitbill/test/node_modules/bitcoinjs-lib",
+  "_spec": "1.4.2",
+  "_where": "/Users/sniper256/Documents/GitHub/wallet-ios-core/wallet-ios-core/wallet-ios-core/components/bitcoinjs-lib-bridge",
   "bugs": {
     "url": "https://github.com/cryptocoinjs/bigi/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {},
-  "deprecated": false,
   "description": "Big integers.",
   "devDependencies": {
     "coveralls": "^2.11.2",
