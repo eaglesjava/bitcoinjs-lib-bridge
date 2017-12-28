@@ -41,7 +41,15 @@ class BILContactEditController: BILLightBlueBaseController {
         updateContact()
     }
     @IBAction func deleteAction(_ sender: Any) {
-        deleteContact()
+        let alert = UIAlertController(title: "提示", message: "确定要删除该联系人吗？", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "删除", style: .destructive, handler: { (action) in
+            self.deleteContact()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
     
     func checkName() -> String? {
