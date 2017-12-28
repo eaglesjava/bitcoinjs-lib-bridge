@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 let bil_contactManager = BILCoreDataModelManager<ContactModel>(modelName: "ContactModel", notificationName: .contactDidChanged)
+let bil_btc_addressManager = BILCoreDataModelManager<BTCAddressModel>(modelName: "BTCAddressModel", notificationName: nil)
 
 class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
 	

@@ -20,8 +20,9 @@ extension WalletModel {
 }
 
 extension WalletModel {
-    func generateAddresses(from: Int64, to: Int64) {
-        BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: 0, toIndex: 100, success: { (result) in
+    func generateAddresses(from: Int64, to: Int64, success: @escaping ([BTCAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        guard from < to else { return }
+        BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: from, toIndex: from, success: { (result) in
             debugPrint(result)
         }) { (error) in
             debugPrint(error)

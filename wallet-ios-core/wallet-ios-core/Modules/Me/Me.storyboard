@@ -617,7 +617,7 @@ EOmSseWMhUlEA
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbu-E8-h2i">
                                                     <rect key="frame" x="301" y="14" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.12156862745098039" green="0.26666666666666666" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="onTintColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="switchChanged:" destination="yvR-HR-YRe" eventType="valueChanged" id="GGX-e1-iOr"/>
                                                     </connections>

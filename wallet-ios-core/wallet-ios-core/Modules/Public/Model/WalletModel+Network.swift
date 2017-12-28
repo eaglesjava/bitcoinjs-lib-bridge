@@ -50,7 +50,9 @@ extension WalletModel {
         BILNetworkManager.request(request: .importWallet(walletID: walletID, extendedKey: extKey), success: { (result) in
             let json = JSON(result)
             let lastIndex = json["index"].int64Value
-            self.generateAddresses(from: self.lastAddressIndex, to: lastIndex)
+            success(result)
+            self.generateAddresses(from: self.lastAddressIndex, to: lastIndex, success: { (addresses) in
+            }, failure: failure)
         }, failure: failure)
     }
     

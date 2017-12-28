@@ -39,14 +39,29 @@ extension WalletModel {
             return
         }
         let index = lastAddressIndex
-        BitcoinJSBridge.shared.getAddress(xpub: xpub, index: Int(index), success: { (address) in
-            if address is String {
-                success(address as! String)
-            } else {
+        if index == (addresses?.count)! - 1 {
+            guard let address = (addresses?.lastObject as? BTCAddressModel)?.address else {
                 failure("获取地址失败")
+                return
             }
-        }) { (error) in
-            failure(error.localizedDescription)
+            success(address)
+        }
+        else
+        {
+            BitcoinJSBridge.shared.getAddress(xpub: xpub, index: Int(index), success: { (address) in
+                if let add = address as? String {
+                    let addModel = bil_btc_addressManager.newModel()
+                    addModel.address = add
+                    addModel.index = index
+                    addModel.satoshi = 0
+                    self.addToAddresses(addModel)
+                    success(add)
+                } else {
+                    failure("获取地址失败")
+                }
+            }) { (error) in
+                failure(error.localizedDescription)
+            }
         }
     }
 	
