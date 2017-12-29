@@ -21,6 +21,7 @@ import javax.inject.Singleton;
 public class AppPreferencesHelper extends PreferencesHelper implements AppPreferences {
 
     public static final String IS_RECEIVE_REMIND_DIALOG_SHOWN = "is_remind_dialog_shown";
+    public static final String IS_SHORT_CUT_SHOWN = "is_shortcut_shown";
 
     @Inject
     public AppPreferencesHelper(@ApplicationContext Context context, @PrefersAppInfo String prefFileName) {
@@ -37,5 +38,16 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     public boolean isReceiveRemindDialogShown() {
 
         return mPrefs.getBoolean(IS_RECEIVE_REMIND_DIALOG_SHOWN, false);
+    }
+
+    @Override
+    public boolean isShortcutShown() {
+        return mPrefs.getBoolean(IS_SHORT_CUT_SHOWN, true);
+    }
+
+    @Override
+    public void setShortcutShown(boolean shown) {
+
+        mPrefs.edit().putBoolean(IS_SHORT_CUT_SHOWN, shown).apply();
     }
 }

@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
@@ -77,6 +78,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private SendFragment mSendFragment;
     private Socket mSocket;
     private ContactFragment mContactFragment;
+    private Switch mShortcutSwitch;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -117,6 +119,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void initView() {
 
+        setUpDrawerLayout();
+
+        setUpViewpager();
+    }
+
+    private void setUpDrawerLayout() {
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -130,8 +138,22 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                 hideKeyboard();
             }
         });
+
+
         navView.setNavigationItemSelectedListener(this);
 
+        mShortcutSwitch = ((Switch) navView.getMenu().findItem(R.id.nav_shortcut).getActionView());
+        mShortcutSwitch.setChecked(getMvpPresenter().isShortcutShown());
+        mShortcutSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            getMvpPresenter().setShortcutShown(isChecked);
+            //设置首页快捷方式是否显示
+            if (mAssetFragment != null) {
+                mAssetFragment.setShortcutShown(isChecked);
+            }
+        });
+    }
+
+    private void setUpViewpager() {
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
         mAssetFragment = AssetFragment.newInstance();
         mAdapter.addItem(mAssetFragment);
@@ -170,7 +192,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                 }
             }
         });
-
     }
 
     private void changeThemeColor(boolean isBlue) {

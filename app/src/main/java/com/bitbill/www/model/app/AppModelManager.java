@@ -49,4 +49,14 @@ public class AppModelManager extends ModelManager implements AppModel {
     public boolean isReceiveRemindDialogShown() {
         return mAppPreferences.isReceiveRemindDialogShown();
     }
+
+    @Override
+    public boolean isShortcutShown() {
+        return mAppPreferences.isShortcutShown();
+    }
+
+    @Override
+    public void setShortcutShown(boolean shown) {
+        mAppPreferences.setShortcutShown(shown);
+    }
 }

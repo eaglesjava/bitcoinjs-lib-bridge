@@ -15,4 +15,9 @@ public interface AppPreferences extends Prefs {
     void setReceiveRemindDialogShown();
 
     boolean isReceiveRemindDialogShown();
+
+    boolean isShortcutShown();
+
+    void setShortcutShown(boolean shown);
+
 }

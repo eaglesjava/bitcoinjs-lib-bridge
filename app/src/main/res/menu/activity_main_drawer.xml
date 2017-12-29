@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <item android:title="@string/title_main_setting">
+        <menu>
+            <item
+                android:id="@+id/nav_shortcut"
+                android:icon="@drawable/ic_menu_contact"
+                android:title="@string/title_main_shortcut"
+                app:actionLayout="@layout/switch_item" />
+
+        </menu>
+    </item>
     <item android:title="@string/title_account_info">
         <menu>
             <item
@@ -31,7 +42,6 @@
                 android:id="@+id/nav_about_us"
                 android:icon="@drawable/ic_menu_contact"
                 android:title="@string/title_about_us" />
-
         </menu>
     </item>
 

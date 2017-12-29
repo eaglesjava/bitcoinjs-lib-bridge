@@ -265,4 +265,8 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
                 break;
         }
     }
+
+    public void setShortcutShown(boolean shortcutShown) {
+        mLlShortCut.setVisibility(shortcutShown ? View.VISIBLE : View.GONE);
+    }
 }

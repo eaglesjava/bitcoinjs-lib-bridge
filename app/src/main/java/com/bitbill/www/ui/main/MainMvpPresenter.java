@@ -34,6 +34,10 @@ import com.bitbill.www.model.wallet.WalletModel;
 @PerActivity
 public interface MainMvpPresenter<M extends WalletModel, V extends MainMvpView> extends MvpPresenter<V> {
 
+    boolean isShortcutShown();
+
+    void setShortcutShown(boolean shown);
+
     void getBalance();
 
     void listUnconfirm();
