@@ -208,6 +208,6 @@
     <string name="text_go_to_setting_custom">前往设置自定义</string>
     <string name="text_short_cut_scan">扫一扫</string>
     <string name="text_short_cut_contact">添加联系人</string>
-    <string name="title_main_setting">首页设置</string>
-    <string name="title_main_shortcut">首页快捷功能</string>
+    <string name="title_prefer_setting">偏好设置</string>
+    <string name="title_main_shortcut">主页快捷方式</string>
 </resources>

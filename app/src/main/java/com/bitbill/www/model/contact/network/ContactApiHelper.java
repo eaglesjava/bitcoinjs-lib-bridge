@@ -7,6 +7,10 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
 import com.bitbill.www.model.contact.network.entity.AddContactsRequest;
 import com.bitbill.www.model.contact.network.entity.AddContactsResponse;
+import com.bitbill.www.model.contact.network.entity.DeleteContactsRequest;
+import com.bitbill.www.model.contact.network.entity.RecoverContactsRequest;
+import com.bitbill.www.model.contact.network.entity.RecoverContactsResponse;
+import com.bitbill.www.model.contact.network.entity.UpdateContactsRequest;
 import com.bitbill.www.model.wallet.network.entity.GetLastAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.GetLastAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.SearchWalletIdRequest;
@@ -42,6 +46,40 @@ public class ContactApiHelper extends ApiHelper implements ContactApi {
                 .addApplicationJsonBody(addContactsRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<AddContactsResponse>>() {
+                });
+    }
+
+    /**
+     * @param updateContactsRequest
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<Void>> updateContacts(UpdateContactsRequest updateContactsRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.UPDATE_CONTACTS)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addApplicationJsonBody(updateContactsRequest)
+                .build()
+                .getParseObservable(new TypeToken<ApiResponse<Void>>() {
+                });
+    }
+
+    @Override
+    public Observable<ApiResponse<RecoverContactsResponse>> recoverContacts(RecoverContactsRequest recoverContactsRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.RECOVER_CONTACTS)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addApplicationJsonBody(recoverContactsRequest)
+                .build()
+                .getParseObservable(new TypeToken<ApiResponse<RecoverContactsResponse>>() {
+                });
+    }
+
+    @Override
+    public Observable<ApiResponse<Void>> deleteContacts(DeleteContactsRequest deleteContactsRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.DELETE_CONTACTS)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addApplicationJsonBody(deleteContactsRequest)
+                .build()
+                .getParseObservable(new TypeToken<ApiResponse<Void>>() {
                 });
     }
 

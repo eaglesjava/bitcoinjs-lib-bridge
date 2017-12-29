@@ -4,10 +4,16 @@ import com.bitbill.www.common.base.model.network.api.Api;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
+import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
+import com.bitbill.www.model.wallet.network.entity.GetCacheVersionResponse;
+import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxHistoryRequest;
+import com.bitbill.www.model.wallet.network.entity.GetTxInfoRequest;
+import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
@@ -43,6 +49,14 @@ public interface WalletApi extends Api {
      * @return
      */
     Observable<ApiResponse<java.lang.String>> importWallet(ImportWalletRequest importWalletRequest);
+
+    /**
+     * 删除钱包
+     *
+     * @param deleteWalletRequest
+     * @return
+     */
+    Observable<ApiResponse<java.lang.String>> deleteWallet(DeleteWalletRequest deleteWalletRequest);
 
     /**
      * 检查WalletId
@@ -115,6 +129,29 @@ public interface WalletApi extends Api {
      */
     Observable<ApiResponse<GetConfigResponse>> getConfig();
 
+    /**
+     * 获取交易详情
+     *
+     * @param getTxInfoRequest
+     * @return
+     */
+    Observable<ApiResponse<GetTxInfoResponse>> getTxInfo(GetTxInfoRequest getTxInfoRequest);
+
+
+    /**
+     * 获取交易详情
+     *
+     * @return
+     */
+    Observable<ApiResponse<GetExchangeRateResponse>> getExchangeRate();
+
+    /**
+     * 获取钱包缓存版本号
+     *
+     * @param getCacheVersionRequest
+     * @return
+     */
+    Observable<ApiResponse<GetCacheVersionResponse>> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest);
 
 
 }

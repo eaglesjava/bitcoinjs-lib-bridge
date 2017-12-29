@@ -17,6 +17,8 @@ public final class ApiEndPoint {
             + "/wallet/create";
     public static final String WALLET_IMPORT = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/import";
+    public static final String WALLET_DELETE = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/deleteWallet";
     public static final String CHECK_WALLETID = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/checkWalletId";
     public static final String GET_WALLETID = BuildConfig.BASE_URL + BITBILL_BITCOIN
@@ -40,8 +42,20 @@ public final class ApiEndPoint {
             + "/wallet/searchWalletId";
     public static final String ADD_CONTACTS = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/addContacts";
+    public static final String UPDATE_CONTACTS = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/updateContacts";
+    public static final String RECOVER_CONTACTS = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/recoverContacts";
+    public static final String DELETE_CONTACTS = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/deleteContacts";
     public static final String GET_LAST_ADDRESS = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/getLastAddress";
+    public static final String GET_TXINFO = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/getTxInfo";
+    public static final String GET_EXCHANGE_RATE = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/get_exchange_rate";
+    public static final String GET_CACHE_VERSION = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/getCacheVersion";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

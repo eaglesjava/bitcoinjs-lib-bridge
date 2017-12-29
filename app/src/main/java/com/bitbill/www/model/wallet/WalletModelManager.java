@@ -17,10 +17,16 @@ import com.bitbill.www.model.wallet.network.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.WalletApi;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
+import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
+import com.bitbill.www.model.wallet.network.entity.GetCacheVersionResponse;
+import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxHistoryRequest;
+import com.bitbill.www.model.wallet.network.entity.GetTxInfoRequest;
+import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
@@ -118,6 +124,11 @@ public class WalletModelManager extends ModelManager implements WalletModel {
         return mWalletApi.importWallet(importWalletRequest);
     }
 
+    @Override
+    public Observable<ApiResponse<String>> deleteWallet(DeleteWalletRequest deleteWalletRequest) {
+        return mWalletApi.deleteWallet(deleteWalletRequest);
+    }
+
     /**
      * 检查WalletId
      *
@@ -202,6 +213,21 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     @Override
     public Observable<ApiResponse<GetConfigResponse>> getConfig() {
         return mWalletApi.getConfig();
+    }
+
+    @Override
+    public Observable<ApiResponse<GetTxInfoResponse>> getTxInfo(GetTxInfoRequest getTxInfoRequest) {
+        return mWalletApi.getTxInfo(getTxInfoRequest);
+    }
+
+    @Override
+    public Observable<ApiResponse<GetExchangeRateResponse>> getExchangeRate() {
+        return mWalletApi.getExchangeRate();
+    }
+
+    @Override
+    public Observable<ApiResponse<GetCacheVersionResponse>> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest) {
+        return mWalletApi.getCacheVersion(getCacheVersionRequest);
     }
 
 }

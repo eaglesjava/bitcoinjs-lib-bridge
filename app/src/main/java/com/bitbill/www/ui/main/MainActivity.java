@@ -141,16 +141,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
 
         navView.setNavigationItemSelectedListener(this);
-
-        mShortcutSwitch = ((Switch) navView.getMenu().findItem(R.id.nav_shortcut).getActionView());
-        mShortcutSwitch.setChecked(getMvpPresenter().isShortcutShown());
-        mShortcutSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            getMvpPresenter().setShortcutShown(isChecked);
-            //设置首页快捷方式是否显示
-            if (mAssetFragment != null) {
-                mAssetFragment.setShortcutShown(isChecked);
-            }
-        });
     }
 
     private void setUpViewpager() {

@@ -11,6 +11,10 @@ import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.contact.network.ContactApi;
 import com.bitbill.www.model.contact.network.entity.AddContactsRequest;
 import com.bitbill.www.model.contact.network.entity.AddContactsResponse;
+import com.bitbill.www.model.contact.network.entity.DeleteContactsRequest;
+import com.bitbill.www.model.contact.network.entity.RecoverContactsRequest;
+import com.bitbill.www.model.contact.network.entity.RecoverContactsResponse;
+import com.bitbill.www.model.contact.network.entity.UpdateContactsRequest;
 import com.bitbill.www.model.wallet.network.entity.GetLastAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.GetLastAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.SearchWalletIdRequest;
@@ -48,6 +52,21 @@ public class ContactModelManager extends ModelManager implements ContactModel {
     @Override
     public Observable<ApiResponse<AddContactsResponse>> addContacts(AddContactsRequest addContactsRequest) {
         return mContactApi.addContacts(addContactsRequest);
+    }
+
+    @Override
+    public Observable<ApiResponse<Void>> updateContacts(UpdateContactsRequest updateContactsRequest) {
+        return mContactApi.updateContacts(updateContactsRequest);
+    }
+
+    @Override
+    public Observable<ApiResponse<RecoverContactsResponse>> recoverContacts(RecoverContactsRequest recoverContactsRequest) {
+        return mContactApi.recoverContacts(recoverContactsRequest);
+    }
+
+    @Override
+    public Observable<ApiResponse<Void>> deleteContacts(DeleteContactsRequest deleteContactsRequest) {
+        return mContactApi.deleteContacts(deleteContactsRequest);
     }
 
     @Override
