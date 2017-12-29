@@ -41,6 +41,9 @@ import com.bitbill.www.ui.main.contact.ContactPresenter;
 import com.bitbill.www.ui.main.contact.SearchContactResultMvpPresenter;
 import com.bitbill.www.ui.main.contact.SearchContactResultMvpView;
 import com.bitbill.www.ui.main.contact.SearchContactResultPresenter;
+import com.bitbill.www.ui.main.my.ContactSettingMvpPresenter;
+import com.bitbill.www.ui.main.my.ContactSettingMvpView;
+import com.bitbill.www.ui.main.my.ContactSettingPresenter;
 import com.bitbill.www.ui.main.my.WalletDetailMvpPresenter;
 import com.bitbill.www.ui.main.my.WalletDetailMvpView;
 import com.bitbill.www.ui.main.my.WalletDetailPresenter;
@@ -270,6 +273,13 @@ public class ActivityModule {
     @PerActivity
     AddContactByAddressMvpPresenter<ContactModel, AddContactByAddressMvpView> provideAddContactByAddressPresenter(
             AddContactByAddressPresenter<ContactModel, AddContactByAddressMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ContactSettingMvpPresenter<ContactModel, ContactSettingMvpView> provideContactSettingPresenter(
+            ContactSettingPresenter<ContactModel, ContactSettingMvpView> presenter) {
         return presenter;
     }
 

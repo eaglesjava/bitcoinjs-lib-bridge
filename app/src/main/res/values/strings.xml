@@ -210,4 +210,8 @@
     <string name="text_short_cut_contact">添加联系人</string>
     <string name="title_prefer_setting">偏好设置</string>
     <string name="title_main_shortcut">主页快捷方式</string>
+    <string name="title_activity_contact_setting">联系人设置</string>
+    <string name="setting_backup_contact">备份联系人</string>
+    <string name="setting_recover_contact">恢复联系人</string>
+    <string name="hint_contact_key">请输入联系人密钥</string>
 </resources>

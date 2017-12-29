@@ -34,6 +34,7 @@ import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
+import com.bitbill.www.ui.main.my.ContactSettingActivity;
 import com.bitbill.www.ui.main.my.WalletSettingActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
@@ -214,6 +215,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (id == R.id.nav_wallet_manage) {
             // 切换到钱包管理界面
             WalletSettingActivity.start(this);
+        } else if (id == R.id.nav_contact) {
+            // 切换到钱包管理界面
+            ContactSettingActivity.start(this);
         }
 
         // TODO: 2017/11/17 add other nav item

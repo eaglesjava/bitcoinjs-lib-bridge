@@ -22,6 +22,11 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.guide.GuideActivity"
@@ -33,13 +38,8 @@
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".ui.wallet.importing.ImportWalletActivity"
             android:label="@string/title_activity_import_wallet"
@@ -123,7 +123,11 @@
         <activity
             android:name=".ui.main.send.ContactSelectActivity"
             android:label="@string/title_activity_contact_select"
-            android:theme="@style/AppTheme.Blue"></activity>
+            android:theme="@style/AppTheme.Blue" />
+        <activity
+            android:name=".ui.main.my.ContactSettingActivity"
+            android:label="@string/title_activity_contact_setting"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
