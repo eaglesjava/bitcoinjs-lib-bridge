@@ -23,7 +23,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     var isLoading = false
     var isLoadingMore = false
 	
-	var transactions = [BILTransactionHistoryModel]()
+	var transactions = [BTCTransactionModel]()
 	
 	weak var wallet: WalletModel? {
 		didSet {

@@ -28,7 +28,7 @@ class BILRecieveController: BILBaseViewController {
 	var recieveModel: BILRecieveModel?
     
     lazy var qrCodeHeight: CGFloat = {
-        return min(160, UIScreen.main.bounds.height - 388 - 88)
+        return min(150, UIScreen.main.bounds.height - 388 - 88)
     }()
     
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ class BILRecieveController: BILBaseViewController {
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(sender:)))
 		bgView.addGestureRecognizer(tap)
         
-        qrCodeImageViewHeight.constant = qrCodeHeight - (currentWallet!.isNeedBackup ? 10 : 0)
+        qrCodeImageViewHeight.constant = qrCodeHeight
         
         NotificationCenter.default.addObserver(self, selector: #selector(walletCountDidChanged(notification:)), name: .walletCountDidChanged, object: nil)
     }
@@ -164,10 +164,14 @@ class BILRecieveController: BILBaseViewController {
 	}
 	
 	@IBAction func generateNewAddress(_ sender: Any) {
+        bil_showLoading(status: "生成中...")
 		currentWallet?.getNewBTCAddress(success: { (address) in
 			self.setAddress(address: address)
+            self.bil_dismissHUD()
 		}, failure: { (errorMsg) in
 			debugPrint(errorMsg)
+            self.bil_dismissHUD()
+            self.bil_makeToast(msg: errorMsg)
 		})
 	}
 	// MARK: - Navigation

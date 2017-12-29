@@ -69,7 +69,7 @@ extension WalletModel {
         }, failure: failure)
     }
     
-    func getTransactionHistoryFromSever(page: Int, size: Int, success: @escaping (_ txs: [BILTransactionHistoryModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func getTransactionHistoryFromSever(page: Int, size: Int, success: @escaping (_ txs: [BTCTransactionModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
             failure("extKey不能为空", -1)
             return
@@ -77,12 +77,16 @@ extension WalletModel {
         BILNetworkManager.request(request: .getTransactionHistory(extendedKeyHash: extKey.md5(), page: page, size: size), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
-            let datas = json["history"].arrayValue
-            var models = [BILTransactionHistoryModel]()
+            let datas = json["list"].arrayValue
             for json in datas {
-                models.append(BILTransactionHistoryModel(jsonData: json))
+                BTCTransactionHandler.handleBTCTransactionData(json: json, wallet: self)
             }
-            success(models)
+            do {
+                try BILWalletManager.shared.saveWallets()
+                success(self.btc_transactionArray)
+            } catch {
+                failure(error.localizedDescription, -2)
+            }
         }, failure: failure)
     }
     

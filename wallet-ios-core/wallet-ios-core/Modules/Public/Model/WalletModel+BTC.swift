@@ -33,6 +33,37 @@ func BTCFormatString(btc: Int64) -> String {
 }
 
 extension WalletModel {
+    
+    static func fetch(by addresses: [String], isAll: Bool = true) -> WalletModel? {
+        for wallet in BILWalletManager.shared.wallets {
+            if wallet.contain(btcAddresses: addresses, isAll: isAll) {
+                return wallet
+            }
+        }
+        return nil
+    }
+    
+    func contain(btcAddress: String) -> Bool {
+        guard let set = addresses else { return false }
+        let count = set.filter({
+            ($0 as? BTCAddressModel)?.address == btcAddress
+        }).count
+        return count > 0
+    }
+    
+    func contain(btcAddresses: [String], isAll: Bool = true) -> Bool {
+        var count = 0
+        for address in btcAddresses {
+            if contain(btcAddress: address) {
+                count += 1
+            }
+            if !isAll, count >= 1 {
+                return true
+            }
+        }
+        return count == btcAddresses.count
+    }
+    
     func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         guard let xpub = mainExtPublicKey else {
             failure("主扩展公钥为空")
@@ -83,14 +114,21 @@ extension WalletModel {
 				}
 			}, failure: { (msg, code) in
 				debugPrint(msg)
+                self.lastAddressIndex -= step
 				failure(msg)
 			})
 		}) { (msg) in
-			self.lastAddressIndex -= 1
+			self.lastAddressIndex -= step
 			failure(msg)
 		}
 	}
 	
+    var btc_transactionArray: [BTCTransactionModel] {
+        get {
+            return self.btcTransactions?.array as! [BTCTransactionModel]
+        }
+    }
+    
     var btc_balanceString: String {
         get {
             return BTCFormatString(btc: btcBalance)

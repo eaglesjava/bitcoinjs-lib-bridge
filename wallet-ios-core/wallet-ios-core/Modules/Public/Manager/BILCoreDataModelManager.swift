@@ -12,6 +12,7 @@ import CoreData
 
 let bil_contactManager = BILCoreDataModelManager<ContactModel>(modelName: "ContactModel", notificationName: .contactDidChanged)
 let bil_btc_addressManager = BILCoreDataModelManager<BTCAddressModel>(modelName: "BTCAddressModel", notificationName: nil)
+let bil_btc_transactionManager = BILCoreDataModelManager<BTCTransactionModel>(modelName: "BTCTransactionModel", notificationName: nil)
 
 class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
 	
@@ -49,6 +50,11 @@ class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
 		let contact = NSEntityDescription.insertNewObject(forEntityName: modelName, into: context) as! T
 		return contact
 	}
+    
+    func newModelIfNeeded(key: String, value: String) -> T {
+        guard let model = fetch(key: key, value: value) else { return newModel() }
+        return model
+    }
 	
 	func saveModels() throws {
 		let context = coreDataContext
@@ -72,17 +78,43 @@ class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
 	}
     
     func fetch(key: String, value: String) -> T? {
+        return fetch(keyValues: (key, value))
+    }
+    
+    func fetch(keyValues: (key: String, value: String)...) -> T? {
+        var arr = [String]()
+        for (key, value) in keyValues {
+            arr.append("\(key)='\(value)'")
+        }
+        let str = arr.joined(separator: " AND ")
         var model: T? = nil
         do {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let request: NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
-            request.predicate = NSPredicate(format: "\(key)=%@", value)
+            request.predicate = NSPredicate(format: "\(str)")
             let results = try context.fetch(request)
             model = results.first
         } catch {
             return model
         }
         return model
+    }
+    
+    func fetchCount(key: String, value: String) -> Int {
+        let count = 0
+        do {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let request: NSFetchRequest = T.fetchRequest()
+            request.resultType = .countResultType
+            request.predicate = NSPredicate(format: "\(key)=%@", value)
+            let results = try context.fetch(request)
+            guard let c = results.first as? Int else {
+                return count
+            }
+            return c
+        } catch {
+            return count
+        }
     }
 	
 }

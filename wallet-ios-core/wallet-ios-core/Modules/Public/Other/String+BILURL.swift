@@ -106,8 +106,8 @@ enum Router: URLRequestConvertible {
 }
 
 extension String {
-//    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
-    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
+    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
+//    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
     static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
     static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
     static var bil_wallet_delete: String { get { return bil_wallet_path + "deleteWallet" } }
@@ -119,7 +119,7 @@ extension String {
     static var bil_wallet_get_transaction_build_config:  String { get { return bil_wallet_path + "getTxElement" } }
     static var bil_wallet_refresh_address: String { get { return bil_wallet_path + "refreshAddress" } }
     static var bil_wallet_send_transaction: String { get { return bil_wallet_path + "sendTransaction" } }
-    static var bil_wallet_transaction_history: String { get { return bil_wallet_path + "getTxHistory" } }
+    static var bil_wallet_transaction_history: String { get { return bil_wallet_path + "getTxList" } }
     static var bil_wallet_get_unconfirm_transaction: String { get { return bil_wallet_path + "listUnconfirm" } }
     
     static var bil_contact_get_all: String { get { return bil_wallet_path + "getContacts" } }
@@ -132,8 +132,8 @@ extension String {
 }
 
 extension String {
-//    static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
-    static var bil_socket_base_url: String { get { return "http://walletservice.bitbill.com:8088/" } }
+    static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
+//    static var bil_socket_base_url: String { get { return "http://walletservice.bitbill.com:8088/" } }
 }
 
 extension String {

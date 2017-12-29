@@ -16,7 +16,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var utxos = [BitcoinUTXOModel]()
+    var addresses = [BTCAddressModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +29,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
     func refreshUI() {
         if let w = wallet {
             idLabel.text = w.id
-            SVProgressHUD.show(withStatus: "Scaning...")
-            w.getUTXOFromServer(success: { (utxos) in
-                self.utxos = utxos
-                self.tableView.reloadData()
-                SVProgressHUD.dismiss()
-            }, failure: { (msg, code) in
-                SVProgressHUD.showError(withStatus: msg)
-            })
+            addresses = w.addresses?.array as! [BTCAddressModel]
         }
     }
     @IBAction func scanMoreAddressAction(_ sender: Any) {
@@ -44,6 +37,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
         SVProgressHUD.show(withStatus: "Scaning...")
         w.getNewBTCAddress(step: 10, success: { (address) in
             self.refreshUI()
+            self.bil_dismissHUD()
         }) { (msg) in
             SVProgressHUD.showError(withStatus: msg)
         }
@@ -74,14 +68,14 @@ extension BILWalletAddressController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return utxos.count
+        return addresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BILMeUnspentBalanceCell", for: indexPath) as! BILMeUnspentBalanceCell
-        let utxo = utxos[indexPath.row]
+        let utxo = addresses[indexPath.row]
         cell.titleLabel.text = utxo.address
-        cell.subTitleLabel.text = utxo.amoutString + " BTC"
+        cell.subTitleLabel.text = BTCFormatString(btc: utxo.satoshi) + " BTC"
         return cell
     }
     

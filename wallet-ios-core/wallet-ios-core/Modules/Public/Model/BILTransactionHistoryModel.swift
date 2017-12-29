@@ -14,11 +14,6 @@ import DateToolsSwift
 
 class BILTransactionHistoryModel: NSObject {
 	
-    enum BILTransactionType {
-		case recieve
-		case send
-	}
-	
     var inAddress: [String]
     var outAddress: [String]
 	var type = BILTransactionType.recieve

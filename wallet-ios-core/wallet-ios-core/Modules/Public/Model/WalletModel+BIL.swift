@@ -24,8 +24,25 @@ extension WalletModel {
         guard from < to else { return }
         BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: from, toIndex: from, success: { (result) in
             debugPrint(result)
+            guard let array = result as? [String] else {
+                failure("生成失败", -1)
+                return
+            }
+            for address in array {
+                let tx = bil_btc_addressManager.newModelIfNeeded(key: "address", value: address)
+                tx.address = address
+                tx.satoshi = 0
+                self.addToAddresses(tx)
+            }
+            self.lastAddressIndex = to
+            do {
+                try BILWalletManager.shared.saveWallets()
+            } catch {
+                failure(error.localizedDescription, -2)
+            }
         }) { (error) in
             debugPrint(error)
+            failure(error.localizedDescription, -2)
         }
     }
 }
@@ -93,19 +110,11 @@ extension WalletModel {
     }
     
     static func checkMnemonicIsExists (m: String) -> Bool {
-        var toReturn = false
-        
-        toReturn = fetch(mnemonicHash: m.md5()) != nil
-        
-        return toReturn
+        return fetch(key: "mnemonicHash", value: m.md5()) > 0
     }
     
     static func checkIDIsExists (id: String) -> Bool {
-        var toReturn = false
-        
-        toReturn = fetch(id: id) != nil
-        
-        return toReturn
+        return fetch(key: "id", value: id) > 0
     }
 }
 
@@ -156,24 +165,16 @@ extension WalletModel {
             cleanUp(wallet: nil, error: error.localizedDescription)
         })
     }
+    
 	static func fetch(mnemonicHash: String?) -> WalletModel? {
-		var wallet: WalletModel? = nil
-		guard let hash = mnemonicHash else {
-			return wallet
-		}
-		do {
-			let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-			let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
-			request.predicate = NSPredicate(format: "mnemonicHash=%@", hash)
-			let results = try context.fetch(request)
-			wallet = results.first
-		} catch {
-			return wallet
-		}
-		return wallet
+		return fetch(keyPath: "mnemonicHash", id: mnemonicHash)
 	}
     
     static func fetch(id: String?) -> WalletModel? {
+        return fetch(keyPath: "id", id: id)
+    }
+    
+    static func fetch(keyPath: String, id: String?) -> WalletModel? {
         var wallet: WalletModel? = nil
         guard let idStr = id else {
             return wallet
@@ -181,13 +182,27 @@ extension WalletModel {
         do {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let request: NSFetchRequest<WalletModel> = WalletModel.fetchRequest()
-            request.predicate = NSPredicate(format: "id=%@", idStr)
+            request.predicate = NSPredicate(format: "\(keyPath)=%@", idStr)
             let results = try context.fetch(request)
             wallet = results.first
         } catch {
             return wallet
         }
         return wallet
+    }
+    
+    static func fetch(key: String, value: String) -> Int {
+        var count = 0
+        do {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let request: NSFetchRequest = WalletModel.fetchRequest()
+            request.resultType = .countResultType
+            request.predicate = NSPredicate(format: "\(key)=%@", value)
+            count = try context.count(for: request)
+            return count
+        } catch {
+            return count
+        }
     }
 	
 	func save() {

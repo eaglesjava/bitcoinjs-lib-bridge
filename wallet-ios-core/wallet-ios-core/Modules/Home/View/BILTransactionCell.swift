@@ -14,13 +14,13 @@ class BILTransactionCell: UITableViewCell {
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var volumeLabel: UILabel!
 	
-	var transaction: BILTransactionHistoryModel? {
+	var transaction: BTCTransactionModel? {
 		didSet {
 			if let t = transaction {
-				typeImageView.image = UIImage(named: t.type == .recieve ? "icon_record_recieve" : "icon_record_send")
-				addressLabel.text = t.firstAddress
-				dateLabel.text = t.dateSring
-				volumeLabel.text = t.volumeString
+                typeImageView.image = t.type.image
+                addressLabel.text = t.firstTargetAddress?.address
+                dateLabel.text = t.dateSring
+                volumeLabel.text = t.volumeString
 			}
 		}
 	}
