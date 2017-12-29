@@ -167,7 +167,7 @@ public class ContactFragment extends BaseListFragment<Contact, ContactMvpPresent
         return super.onOptionsItemSelected(item);
     }
 
-    private void showSelectDialog() {
+    public void showSelectDialog() {
         // 跳出选择对话框
         mListSelectDialog.show(getChildFragmentManager(), ListSelectDialog.TAG);
     }

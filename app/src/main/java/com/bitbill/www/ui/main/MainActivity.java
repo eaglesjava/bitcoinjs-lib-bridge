@@ -359,4 +359,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mWalletPresenter.loadWallets();
     }
 
+    public void addContact() {
+        mViewPager.setCurrentItem(1, true);
+        mContactFragment.showSelectDialog();
+    }
 }

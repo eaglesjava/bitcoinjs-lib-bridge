@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.bitbill.www.common.widget.WalletView;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.bitbill.www.ui.main.MainActivity;
+import com.bitbill.www.ui.main.send.ScanQrcodeActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import com.bitbill.www.ui.wallet.info.WalletInfoActivity;
@@ -30,7 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
@@ -52,6 +57,17 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     TextView mWalletCountView;
     @BindView(R.id.rb_socket_status)
     RadioButton ivSocketStatus;
+    @BindView(R.id.ll_short_cut_scan)
+    LinearLayout mLlShortCutScan;
+    @BindView(R.id.ll_short_cut_contact)
+    LinearLayout mLlShortCutContact;
+    @BindView(R.id.ll_short_cut)
+    LinearLayout mLlShortCut;
+    @BindView(R.id.fl_btc_unconfirm)
+    FrameLayout mFlBtcUnconfirm;
+    @BindView(R.id.iv_plus)
+    ImageView mIvPlus;
+    Unbinder unbinder;
 
     private PopupWalletMenu mWalletMenu;
     private int mWalletCount;
@@ -219,6 +235,34 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
                     .beginTransaction()
                     .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<Unconfirm>) data), BtcUnconfirmFragment.TAG)
                     .commit();
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick({R.id.ll_short_cut_scan, R.id.ll_short_cut_contact, R.id.ll_short_cut})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_short_cut_scan:
+                //打开扫一扫界面
+                ScanQrcodeActivity.start(getBaseActivity());
+                break;
+            case R.id.ll_short_cut_contact:
+                //跳转到联系人界面并弹出选择框
+                ((MainActivity) getBaseActivity()).addContact();
+                break;
         }
     }
 }
