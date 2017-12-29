@@ -135,7 +135,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
         mAssetFragment = AssetFragment.newInstance();
         mAdapter.addItem(mAssetFragment);
-        mContactFragment = ContactFragment.newInstance();
+        mContactFragment = ContactFragment.newInstance(false);
         mAdapter.addItem(mContactFragment);
         mReceiveFragment = ReceiveFragment.newInstance();
         mAdapter.addItem(mReceiveFragment);

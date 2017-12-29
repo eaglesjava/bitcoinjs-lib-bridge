@@ -11,12 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseListFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.bitbill.www.common.widget.dialog.ListSelectDialog;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
+import com.bitbill.www.ui.main.send.ContactSelectActivity;
+import com.bitbill.www.ui.main.send.ScanQrcodeActivity;
 import com.mcxtzhang.indexlib.IndexBar.utils.IndexHelper;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
@@ -31,14 +34,21 @@ public class ContactFragment extends BaseListFragment<Contact, ContactMvpPresent
     ContactMvpPresenter<ContactModel, ContactMvpView> mContactMvpPresenter;
     private ListSelectDialog mListSelectDialog;
     private EmptyWrapper mEmptyWrapper;
+    private boolean isSelect;
 
-    public static ContactFragment newInstance() {
+    public static ContactFragment newInstance(boolean isSelect) {
 
         Bundle args = new Bundle();
-
+        args.putBoolean(AppConstants.ARG_IS_SELECT, isSelect);
         ContactFragment fragment = new ContactFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onBeforeSetContentLayout() {
+        super.onBeforeSetContentLayout();
+        isSelect = getArguments().getBoolean(AppConstants.ARG_IS_SELECT);
     }
 
     @Override
@@ -58,15 +68,18 @@ public class ContactFragment extends BaseListFragment<Contact, ContactMvpPresent
 
     @Override
     protected void onListItemClick(Contact contact, int position) {
-
-        //跳转到联系人详情页面
-        ContactDetailActivity.start(getBaseActivity(), mDatas.get(position));
+        if (isSelect) {
+            ((ContactSelectActivity) getBaseActivity()).finishSelect(contact);
+        } else {
+            //跳转到联系人详情页面
+            ContactDetailActivity.start(getBaseActivity(), mDatas.get(position));
+        }
     }
 
     @Override
     protected void itemConvert(ViewHolder holder, Contact contact, int position) {
         holder.setText(R.id.tv_contact_name, contact.getContactName());
-        holder.setText(R.id.tv_contact_address, contact.getAddress());
+        holder.setText(R.id.tv_contact_address, StringUtils.isEmpty(contact.getWalletId()) ? contact.getAddress() : contact.getWalletId());
         holder.setText(R.id.tv_contact_label, StringUtils.getNameLabel(contact.getContactName()));
         if (position == 0) {//等于0肯定要有title的
             holder.setText(R.id.tv_label_title, contact.getBaseIndexTag());
@@ -116,7 +129,7 @@ public class ContactFragment extends BaseListFragment<Contact, ContactMvpPresent
                     break;
                 case 2:
                     //扫码添加
-                    showMessage("扫码添加");
+                    ScanQrcodeActivity.start(getBaseActivity());
                     break;
 
             }

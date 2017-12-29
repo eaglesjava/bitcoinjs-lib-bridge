@@ -4,6 +4,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.webkit.URLUtil;
@@ -22,8 +23,10 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -473,6 +476,10 @@ public class StringUtils {
         return arrays.length == 0;
     }
 
+    public static boolean isEmpty(Map map) {
+        return map == null || map.size() == 0;
+    }
+
     public static boolean isRequiredLength(String s) {
         if (s == null) return false;
         return s.length() >= 6 && s.length() <= 20;
@@ -591,10 +598,11 @@ public class StringUtils {
 
     }
 
-    public static String[] parseScanResult(String result) {
+    public static Map<String, String> parseScanResult(String result) {
         if (isEmpty(result)) {
             return null;
         }
+        Map<String, String> resultMap = new HashMap<>();
         //解析协议
         if (result.toLowerCase().startsWith(AppConstants.SCHEME_BITCOIN) && result.contains(":")) {
             String address = null;
@@ -606,16 +614,25 @@ public class StringUtils {
                     amount = amountString.replace("amount=", "");
                 }
                 address = result.substring(result.indexOf(":") + 1, askIndex);
-
             } else {
                 address = result.substring(result.indexOf(":") + 1);
             }
 
-            return new String[]{address, amount};
+            resultMap.put(AppConstants.QUERY_AMOUNT, amount);
+            resultMap.put(AppConstants.QUERY_ADDRESS, address);
+            return resultMap;
 
-        } else {
-            return new String[]{result};
+        } else if (result.toLowerCase().startsWith(AppConstants.SCHEME_BITBILL)) {
+            Uri parse = Uri.parse(result);
+            if (AppConstants.HOST_BITBILL.equals(parse.getHost())) {
+                String path = parse.getPath();
+                if (isNotEmpty(path) && AppConstants.PATH_CONTACT.equals(path.replace("/", ""))) {
+                    String contactId = parse.getQueryParameter(AppConstants.QUERY_ID);
+                    resultMap.put(AppConstants.QUERY_ID, contactId);
+                }
+            }
         }
+        return resultMap;
     }
 
     public static String formatDate(String date) {

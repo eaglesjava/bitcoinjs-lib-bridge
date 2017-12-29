@@ -118,6 +118,10 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.my.WalletDetailActivity"
+            android:theme="@style/AppTheme.Blue" />
+        <activity
+            android:name=".ui.main.send.ContactSelectActivity"
+            android:label="@string/title_activity_contact_select"
             android:theme="@style/AppTheme.Blue"></activity>
     </application>
 

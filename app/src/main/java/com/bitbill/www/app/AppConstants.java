@@ -36,6 +36,7 @@ public final class AppConstants {
 
     public static final String ARG_DATAS = "args_datas";
     public static final String ARG_WALLET = "arg_wallet";
+    public static final String ARG_IS_SELECT = "is_select";
     /**
      * btc about
      */
@@ -61,6 +62,8 @@ public final class AppConstants {
     public static final String HOST_BITBILL = "www.bitbill.com";
     public static final String PATH_CONTACT = "contact";
     public static final String QUERY_ID = "id";
+    public static final String QUERY_AMOUNT = "amount";
+    public static final String QUERY_ADDRESS = "address";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

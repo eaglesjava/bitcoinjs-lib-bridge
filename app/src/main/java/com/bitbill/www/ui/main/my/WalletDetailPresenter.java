@@ -40,6 +40,7 @@ public class WalletDetailPresenter<M extends WalletModel, V extends WalletDetail
         stringBuilder.append(":")
                 .append("//")
                 .append(AppConstants.HOST_BITBILL)
+                .append("/")
                 .append(AppConstants.PATH_CONTACT)
                 .append("?")
                 .append(AppConstants.QUERY_ID)

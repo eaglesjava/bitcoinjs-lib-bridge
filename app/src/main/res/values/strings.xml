@@ -203,4 +203,5 @@
     <string name="msg_delete_wallet_success">删除钱包成功</string>
     <string name="msg_delete_wallet_fail">删除钱包失败，请重试</string>
     <string name="msg_get_wallet_info_fail">获取钱包信息失败，请返回重试</string>
+    <string name="title_activity_contact_select">联系人</string>
 </resources>
