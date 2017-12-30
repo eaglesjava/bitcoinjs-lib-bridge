@@ -28,6 +28,38 @@ enum BILTransactionType: Int16 {
     }
 }
 
+enum BILTransactionStatus {
+    case unconfirm
+    case success
+    case failure
+    
+    var image: UIImage? {
+        var str = ""
+        switch self {
+        case .unconfirm:
+            str = "pic_transaction_unconfirm"
+        case .success:
+            str = "pic_transaction_success"
+        case .failure:
+            str = "pic_transaction_failed"
+        }
+        return UIImage(named: str)
+    }
+    
+    var description: String {
+        var str = ""
+        switch self {
+        case .unconfirm:
+            str = "待确认"
+        case .success:
+            str = "交易成功"
+        case .failure:
+            str = "交易失败"
+        }
+        return str
+    }
+}
+
 extension BTCTransactionModel {
     
     var confirmCount: Int64 {
@@ -43,6 +75,10 @@ extension BTCTransactionModel {
         set { typeRawValue = newValue.rawValue }
     }
     
+    var status: BILTransactionStatus {
+        get { return height > 0 ? .success : .unconfirm }
+    }
+    
     var dateSring: String {
         get {
             guard let d: Date = createdDate else { return "" }
@@ -56,21 +92,73 @@ extension BTCTransactionModel {
         }
     }
     
-    var firstTargetAddress: BTCAddressModel? {
+    var remarkString: String {
+        get { return remark!.isEmpty ? "无" : remark! }
+    }
+    
+    var firstTargetAddress: BTCTXAddressModel? {
         get {
-            guard let model = targets?.firstObject as? BTCAddressModel else {
+            guard let model = targets?.firstObject as? BTCTXAddressModel else {
                 return nil
             }
             return model
         }
     }
     
+    var inputAddresses: [String] {
+        get {
+            return getAddressStringArray(from: inputs!)
+        }
+    }
+    
+    var outputAddresses: [String] {
+        get {
+            return getAddressStringArray(from: outputs!)
+        }
+    }
+    
+    var targetAddresses: [String] {
+        get {
+            return getAddressStringArray(from: targets!)
+        }
+    }
+    
+    func getAddressStringArray(from set: NSOrderedSet) -> [String] {
+        var toReturn = [String]()
+        
+        for addModel in set {
+            let add = addModel as! BTCTXAddressModel
+            toReturn.append(add.address!)
+        }
+        
+        return toReturn
+    }
+    
+    func clearSatoshi() {
+        inSatoshi = 0
+        outSatoshi = 0
+        targetSatoshi = 0
+    }
+    
+    func newAddressModelIfNeeded(_ address: String, isInput: Bool = true) -> BTCTXAddressModel {
+        let array = (isInput ? inputs : outputs)!.array
+        for add in array {
+            let tx = add as! BTCTXAddressModel
+            if tx.address == address {
+                return tx
+            }
+        }
+        let tx = bil_btc_tx_addressManager.newModel()
+        return tx
+    }
+    
     func setProperties(json: JSON) {
+        clearSatoshi()
         height = json["height"].int64Value
         var inAddresses = [String]()
         for j in json["inputs"].arrayValue {
             let add = j["address"].stringValue
-            let tx = bil_btc_addressManager.newModelIfNeeded(key: "address", value: add)
+            let tx = newAddressModelIfNeeded(add)
             tx.address = add
             tx.satoshi = j["value"].int64Value
             inAddresses.append(add)
@@ -81,7 +169,7 @@ extension BTCTransactionModel {
         for j in json["outputs"].arrayValue {
             debugPrint(j["address"])
             let add = j["address"].stringValue
-            let tx = bil_btc_addressManager.newModelIfNeeded(key: "address", value: add)
+            let tx = newAddressModelIfNeeded(add, isInput: false)
             tx.address = add
             tx.satoshi = j["value"].int64Value
             outAddresses.append(add)
@@ -90,7 +178,7 @@ extension BTCTransactionModel {
         }
         remark = json["remark"].stringValue
         txHash = json["txHash"].stringValue
-        createdDate = Date(dateString: json["createdTime"].stringValue, format: "yyyy:MM:dd HH:mm:ss")
+        createdDate = Date(dateString: json["createdTime"].stringValue, format: "yyyy-MM-dd HH:mm:ss")
         
         var wallet: WalletModel?
         if let inw = WalletModel.fetch(by: inAddresses, isAll: false) {
@@ -116,17 +204,17 @@ extension BTCTransactionModel {
             return
         }
         
-        for add in outAddresses {
-            let tx = bil_btc_addressManager.newModelIfNeeded(key: "address", value: add)
+        for add in outputs! {
+            let tx = add as! BTCTXAddressModel
             switch type {
             case .send:
-                if !w.contain(btcAddress: add) {
+                if !w.contain(btcAddress: tx.address!) {
                     self.addToTargets(tx)
                     targetSatoshi += tx.satoshi
                 }
             case .transfer: fallthrough
             case .recieve:
-                if w.contain(btcAddress: add) {
+                if w.contain(btcAddress: tx.address!) {
                     self.addToTargets(tx)
                     targetSatoshi += tx.satoshi
                 }

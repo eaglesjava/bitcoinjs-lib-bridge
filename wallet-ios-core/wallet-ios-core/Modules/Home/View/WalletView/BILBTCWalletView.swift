@@ -119,6 +119,11 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 		cell.separatorInset = UIEdgeInsetsMake(0, 25, 0, 25)
 		return cell
 	}
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tx = transactions[indexPath.row]
+        viewController()?.performSegue(withIdentifier: .bil_walletToBTCTXDetailSegue, sender: tx)
+    }
 	
     /*
     // Only override draw() if you perform custom drawing.

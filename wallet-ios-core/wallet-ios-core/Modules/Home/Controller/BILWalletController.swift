@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension String {
+    static let bil_walletToBTCTXDetailSegue = "BILWalletToBTCTXDetailSegue"
+}
+
 class BILWalletController: BILBaseViewController {
 
 	var wallet: WalletModel?
@@ -41,14 +45,22 @@ class BILWalletController: BILBaseViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        guard let id = segue.identifier else { return }
+        switch id {
+        case .bil_walletToBTCTXDetailSegue:
+            guard let tx = sender as? BTCTransactionModel, let cont = segue.destination as? BILBTCTransactionController else {
+                return
+            }
+            cont.transaction = tx
+        default:
+            ()
+        }
     }
-    */
 
 }

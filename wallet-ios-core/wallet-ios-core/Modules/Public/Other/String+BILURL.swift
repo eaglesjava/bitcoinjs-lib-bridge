@@ -120,7 +120,7 @@ extension String {
     static var bil_wallet_refresh_address: String { get { return bil_wallet_path + "refreshAddress" } }
     static var bil_wallet_send_transaction: String { get { return bil_wallet_path + "sendTransaction" } }
     static var bil_wallet_transaction_history: String { get { return bil_wallet_path + "getTxList" } }
-    static var bil_wallet_get_unconfirm_transaction: String { get { return bil_wallet_path + "listUnconfirm" } }
+    static var bil_wallet_get_unconfirm_transaction: String { get { return bil_wallet_path + "listUnconfirmTx" } }
     
     static var bil_contact_get_all: String { get { return bil_wallet_path + "getContacts" } }
     static var bil_contact_get_last_address: String { get { return bil_wallet_path + "getLastAddress" } }

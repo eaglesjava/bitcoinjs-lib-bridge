@@ -13,6 +13,6 @@ class BILTransactionManager: NSObject {
 		return BILTransactionManager()
 	}()
 	
-	var recnetRecords = [BILTransactionHistoryModel]()
+	var recnetRecords = [BTCTransactionModel]()
 	
 }

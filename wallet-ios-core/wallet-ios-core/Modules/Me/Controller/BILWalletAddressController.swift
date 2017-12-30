@@ -16,7 +16,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var addresses = [BTCAddressModel]()
+    var addresses = [BTCWalletAddressModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +29,17 @@ class BILWalletAddressController: BILLightBlueBaseController {
     func refreshUI() {
         if let w = wallet {
             idLabel.text = w.id
-            addresses = w.addresses?.array as! [BTCAddressModel]
+            addresses = w.addresses?.array as! [BTCWalletAddressModel]
+            tableView.reloadData()
         }
     }
     @IBAction func scanMoreAddressAction(_ sender: Any) {
         guard let w = wallet else { return }
         SVProgressHUD.show(withStatus: "Scaning...")
-        w.getNewBTCAddress(step: 10, success: { (address) in
+        w.generateAddresses(from: w.lastAddressIndex, to: w.lastAddressIndex + 10, success: { (addresses) in
             self.refreshUI()
             self.bil_dismissHUD()
-        }) { (msg) in
+        }) { (msg, code) in
             SVProgressHUD.showError(withStatus: msg)
         }
     }

@@ -46,7 +46,7 @@ extension WalletModel {
     func contain(btcAddress: String) -> Bool {
         guard let set = addresses else { return false }
         let count = set.filter({
-            ($0 as? BTCAddressModel)?.address == btcAddress
+            ($0 as? BTCWalletAddressModel)?.address == btcAddress
         }).count
         return count > 0
     }
@@ -71,7 +71,7 @@ extension WalletModel {
         }
         let index = lastAddressIndex
         if index == (addresses?.count)! - 1 {
-            guard let address = (addresses?.lastObject as? BTCAddressModel)?.address else {
+            guard let address = (addresses?.lastObject as? BTCWalletAddressModel)?.address else {
                 failure("获取地址失败")
                 return
             }
@@ -81,7 +81,7 @@ extension WalletModel {
         {
             BitcoinJSBridge.shared.getAddress(xpub: xpub, index: Int(index), success: { (address) in
                 if let add = address as? String {
-                    let addModel = bil_btc_addressManager.newModel()
+                    let addModel = bil_btc_wallet_addressManager.newModel()
                     addModel.address = add
                     addModel.index = index
                     addModel.satoshi = 0
@@ -96,12 +96,12 @@ extension WalletModel {
         }
     }
 	
-    func getNewBTCAddress(step: Int64 = 1, success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
+    func getNewBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         guard let extPub = mainExtPublicKey else {
             failure("主扩展公钥为空")
             return
         }
-		lastAddressIndex += step
+		lastAddressIndex += 1
 		lastBTCAddress(success: { (address) in
 			BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: self.lastAddressIndex), success: { (result) in
 				debugPrint(result)
@@ -109,16 +109,16 @@ extension WalletModel {
 					try BILWalletManager.shared.saveWallets()
 					success(address)
 				} catch {
-					self.lastAddressIndex -= step
+					self.lastAddressIndex -= 1
 					failure("新地址保存失败")
 				}
 			}, failure: { (msg, code) in
 				debugPrint(msg)
-                self.lastAddressIndex -= step
+                self.lastAddressIndex -= 1
 				failure(msg)
 			})
 		}) { (msg) in
-			self.lastAddressIndex -= step
+			self.lastAddressIndex -= 1
 			failure(msg)
 		}
 	}

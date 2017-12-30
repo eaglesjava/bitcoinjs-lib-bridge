@@ -74,12 +74,14 @@ extension WalletModel {
             failure("extKey不能为空", -1)
             return
         }
+        success(btc_transactionArray)
         BILNetworkManager.request(request: .getTransactionHistory(extendedKeyHash: extKey.md5(), page: page, size: size), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
             let datas = json["list"].arrayValue
             for json in datas {
-                BTCTransactionHandler.handleBTCTransactionData(json: json, wallet: self)
+                let model = bil_btc_transactionManager.newModelIfNeeded(key: "txHash", value: json["txHash"].stringValue)
+                model.setProperties(json: json)
             }
             do {
                 try BILWalletManager.shared.saveWallets()
@@ -174,7 +176,7 @@ extension WalletModel {
         }, failure: failure)
     }
     
-    static func getUnconfirmTransactionFromSever(wallets: [WalletModel], success: @escaping (_ txs: [BILTransactionHistoryModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    static func getUnconfirmTransactionFromSever(wallets: [WalletModel], success: @escaping (_ txs: [BTCTransactionModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard wallets.count > 0 else {
             failure("数据错误", -1)
             return
@@ -183,12 +185,20 @@ extension WalletModel {
             debugPrint(result)
             let json = JSON(result)
             let txDatas = json["unconfirm"].arrayValue
-            var models = [BILTransactionHistoryModel]()
+            var utx = [BTCTransactionModel]()
             for json in txDatas {
-                models.append(BILTransactionHistoryModel(forHome: json))
+                let model = bil_btc_transactionManager.newModelIfNeeded(key: "txHash", value: json["txHash"].stringValue)
+                model.setProperties(json: json)
+                if model.wallet != nil {
+                    utx.append(model)
+                }
             }
-            
-            success(models)
+            do {
+                try BILWalletManager.shared.saveWallets()
+                success(utx)
+            } catch {
+                failure(error.localizedDescription, -2)
+            }
             
         }, failure: failure)
     }

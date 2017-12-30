@@ -371,6 +371,7 @@
                         <outlet property="tableView" destination="M1n-R6-OZx" id="hkO-Ao-jXY"/>
                         <segue destination="umR-fX-gdo" kind="presentation" identifier="BILHomeToCreateWalletSegue" id="rD5-QY-LHF"/>
                         <segue destination="huK-BF-QsO" kind="presentation" identifier="BILHomeToImportWalletSegue" id="Cmc-gq-ScG"/>
+                        <segue destination="TqK-OB-58a" kind="show" identifier="BILHomeToBTCTXDetailSegue" id="x97-tA-LLC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLj-r4-B14" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -576,11 +577,147 @@
                     </view>
                     <connections>
                         <outlet property="btcWalletView" destination="p94-Cl-lLs" id="Luo-rw-mx1"/>
+                        <segue destination="TqK-OB-58a" kind="show" identifier="BILWalletToBTCTXDetailSegue" id="q7A-8l-BQ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f7U-3G-XZ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="957.60000000000002" y="191.1544227886057"/>
+        </scene>
+        <!--Transaction Controller-->
+        <scene sceneID="sRc-fY-fio">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="TqK-OB-58a" customClass="BILBTCTransactionController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bdt-wf-2Nm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rA2-oI-gJE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="MKt-5U-Wmu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MQ-76-CAT">
+                                            <rect key="frame" x="170" y="101" width="36" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_transaction_success" translatesAutoresizingMaskIntoConstraints="NO" id="1gt-vt-dJH">
+                                            <rect key="frame" x="160" y="25" width="56" height="56"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUR-oj-tqV">
+                                            <rect key="frame" x="151" y="133" width="74" height="47"/>
+                                            <fontDescription key="fontDescription" name="DINCond-Bold" family="DINCond-Bold" pointSize="40"/>
+                                            <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="8MQ-76-CAT" firstAttribute="top" secondItem="1gt-vt-dJH" secondAttribute="bottom" constant="20" id="3Wt-aa-x1H"/>
+                                        <constraint firstItem="8MQ-76-CAT" firstAttribute="centerX" secondItem="MKt-5U-Wmu" secondAttribute="centerX" id="QaD-GS-arN"/>
+                                        <constraint firstItem="RUR-oj-tqV" firstAttribute="top" secondItem="8MQ-76-CAT" secondAttribute="bottom" constant="15" id="WeJ-V9-nHh"/>
+                                        <constraint firstItem="1gt-vt-dJH" firstAttribute="centerX" secondItem="MKt-5U-Wmu" secondAttribute="centerX" id="eup-7R-gwC"/>
+                                        <constraint firstItem="RUR-oj-tqV" firstAttribute="centerX" secondItem="MKt-5U-Wmu" secondAttribute="centerX" id="gSx-Jw-TPP"/>
+                                        <constraint firstItem="1gt-vt-dJH" firstAttribute="top" secondItem="MKt-5U-Wmu" secondAttribute="top" constant="25" id="of7-w9-Thd"/>
+                                    </constraints>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="V8p-JF-Nwu">
+                                    <rect key="frame" x="0.0" y="335" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfh-tV-KHB">
+                                            <rect key="frame" x="91.5" y="5" width="192" height="33"/>
+                                            <state key="normal">
+                                                <attributedString key="attributedTitle">
+                                                    <fragment content="去 Blockchain.info 查看交易">
+                                                        <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                            <integer key="NSUnderline" value="1"/>
+                                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                            </state>
+                                            <connections>
+                                                <action selector="checkTXAction:" destination="TqK-OB-58a" eventType="touchUpInside" id="GBO-UQ-Vfv"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="dfh-tV-KHB" firstAttribute="centerY" secondItem="V8p-JF-Nwu" secondAttribute="centerY" id="6Cm-wM-JJg"/>
+                                        <constraint firstItem="dfh-tV-KHB" firstAttribute="centerX" secondItem="V8p-JF-Nwu" secondAttribute="centerX" id="7hy-ZB-uQT"/>
+                                    </constraints>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BILTXDetailCell" rowHeight="102" id="nMK-an-bIt" customClass="BILTXDetailCell" customModule="wallet_ios_core" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="233" width="375" height="102"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nMK-an-bIt" id="dMp-rk-fkY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1d-BW-uoe">
+                                                    <rect key="frame" x="25" y="15" width="325" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBP-Zq-dpz" customClass="BILCopyLabel" customModule="wallet_ios_core" customModuleProvider="target">
+                                                    <rect key="frame" x="25" y="42" width="325" height="45"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="I1d-BW-uoe" firstAttribute="top" secondItem="dMp-rk-fkY" secondAttribute="top" constant="15" id="9kz-VY-O8x"/>
+                                                <constraint firstItem="iBP-Zq-dpz" firstAttribute="top" secondItem="I1d-BW-uoe" secondAttribute="bottom" constant="10" id="OiY-UF-ltw"/>
+                                                <constraint firstItem="iBP-Zq-dpz" firstAttribute="leading" secondItem="dMp-rk-fkY" secondAttribute="leading" constant="25" id="QyN-cH-0LG"/>
+                                                <constraint firstItem="I1d-BW-uoe" firstAttribute="leading" secondItem="dMp-rk-fkY" secondAttribute="leading" constant="25" id="RU5-sy-kA2"/>
+                                                <constraint firstAttribute="trailing" secondItem="iBP-Zq-dpz" secondAttribute="trailing" constant="25" id="gQy-eC-aHS"/>
+                                                <constraint firstAttribute="trailing" secondItem="I1d-BW-uoe" secondAttribute="trailing" constant="25" id="jb3-3q-jWa"/>
+                                                <constraint firstAttribute="bottom" secondItem="iBP-Zq-dpz" secondAttribute="bottom" constant="15" id="sLU-W8-QGB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="keyLabel" destination="I1d-BW-uoe" id="TRh-dy-hRk"/>
+                                            <outlet property="valueLabel" destination="iBP-Zq-dpz" id="Jny-o0-R2z"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="TqK-OB-58a" id="C3r-UQ-caT"/>
+                                    <outlet property="delegate" destination="TqK-OB-58a" id="Z4W-HO-UQi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="75H-t4-X8h" firstAttribute="bottom" secondItem="rA2-oI-gJE" secondAttribute="bottom" id="8Yk-qC-c12"/>
+                            <constraint firstItem="75H-t4-X8h" firstAttribute="trailing" secondItem="rA2-oI-gJE" secondAttribute="trailing" id="C4B-9t-txG"/>
+                            <constraint firstItem="rA2-oI-gJE" firstAttribute="leading" secondItem="75H-t4-X8h" secondAttribute="leading" id="PJ0-3O-KSm"/>
+                            <constraint firstItem="rA2-oI-gJE" firstAttribute="top" secondItem="75H-t4-X8h" secondAttribute="top" id="VZf-dL-dlW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="75H-t4-X8h"/>
+                    </view>
+                    <connections>
+                        <outlet property="statusImageView" destination="1gt-vt-dJH" id="PUe-Rv-UL0"/>
+                        <outlet property="statusLabel" destination="8MQ-76-CAT" id="6ls-zD-hGv"/>
+                        <outlet property="tableView" destination="rA2-oI-gJE" id="J28-29-h7D"/>
+                        <outlet property="targetAmountLabel" destination="RUR-oj-tqV" id="nTq-ML-Irv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7D3-Od-RZP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1764" y="191.1544227886057"/>
         </scene>
         <!--BILCreateWalletViewController-->
         <scene sceneID="9pz-Tm-E8K">
@@ -675,8 +812,10 @@
         <image name="icon_home_btc" width="36" height="36"/>
         <image name="icon_home_eth" width="36" height="36"/>
         <image name="icon_home_h" width="19" height="19"/>
+        <image name="pic_transaction_success" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="q7A-8l-BQ7"/>
         <segue reference="uYk-8g-9ar"/>
     </inferredMetricsTieBreakers>
 </document>

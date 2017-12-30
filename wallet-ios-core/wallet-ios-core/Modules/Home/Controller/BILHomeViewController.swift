@@ -110,6 +110,10 @@ enum BILHomeSectionType: Int {
 	
 }
 
+extension String {
+    static let bil_homeToBTCTXDetailSegue = "BILHomeToBTCTXDetailSegue"
+}
+
 class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITableViewDataSource, BILHomeTableHeaderViewDelegate {
 
 	@IBOutlet weak var tableView: UITableView!
@@ -356,6 +360,18 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		}
 		return cell
 	}
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let type = BILHomeSectionType(rawValue: indexPath.section) else { return }
+        switch type {
+        case .shortcut: ()
+        case .asset: ()
+        case .recentRecord:
+            let tx = type.dataArray()[indexPath.row] as? BTCTransactionModel
+            performSegue(withIdentifier: .bil_homeToBTCTXDetailSegue, sender: tx)
+        case .wallet: ()
+        }
+    }
 	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -374,10 +390,6 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-		if segue.identifier == "BILHomeToWalletSegue" {
-			
-		}
-        
         guard let id = segue.identifier else { return }
         
         switch id {
@@ -389,6 +401,11 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
                 let wallet = wallets[(sender as! UIView).tag]
                 cont.mnemonicHash = wallet.mnemonicHash
             }
+        case .bil_homeToBTCTXDetailSegue:
+            guard let tx = sender as? BTCTransactionModel, let cont = segue.destination as? BILBTCTransactionController else {
+                return
+            }
+            cont.transaction = tx
         default:
             ()
         }
