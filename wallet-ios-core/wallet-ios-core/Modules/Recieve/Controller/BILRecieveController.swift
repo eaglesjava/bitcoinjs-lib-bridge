@@ -172,6 +172,7 @@ class BILRecieveController: BILBaseViewController {
         bil_showLoading(status: "生成中...")
 		currentWallet?.getNewBTCAddress(success: { (address) in
 			self.setAddress(address: address)
+            self.bil_makeToast(msg: "地址已刷新")
             self.bil_dismissHUD()
 		}, failure: { (errorMsg) in
 			debugPrint(errorMsg)
