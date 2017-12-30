@@ -31,6 +31,16 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 
         // Do any additional setup after loading the view.
 		mnemonicView.emptyTitle = "请输入密码解锁助记词"
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlertForSnapshot), name: .UIApplicationUserDidTakeScreenshot, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationUserDidTakeScreenshot, object: nil)
+    }
+    
+    @objc
+    func showAlertForSnapshot() {
+        showTipAlert(msg: "截图是不安全的，您的图片可能被别的应用使用。请抄写如下助记词，并妥善保存。")
     }
 	
 	override func viewDidAppear(_ animated: Bool) {

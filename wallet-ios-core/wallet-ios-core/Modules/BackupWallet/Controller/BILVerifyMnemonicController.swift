@@ -53,7 +53,6 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
     @IBAction func verifyMnemonicAction(_ sender: Any) {
 		if verifyMnemonicView.dataArray == dataArray {
 			performSegue(withIdentifier: "BILBackUpSuccessSugue", sender: nil)
-			wallet?.encryptedMnemonic = ""
 			wallet?.isNeedBackup = false
 			wallet?.save()
 		}

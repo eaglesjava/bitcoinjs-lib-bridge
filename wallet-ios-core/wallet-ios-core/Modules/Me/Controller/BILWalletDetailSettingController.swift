@@ -46,7 +46,6 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
             dateLabel.text = w.createDate?.format(with: "yyyy.MM.dd")
             let width = qrImageView.frame.width
             qrImageView.image = w.id_qrString.qrCodeImage(targetSize: CGSize(width: width, height: width))
-            backupButton.isHidden = !w.isNeedBackup
         }
         if let version = Float(UIDevice.current.systemVersion), version < 11.0 {
             buttonBottomSpace.constant = 25
