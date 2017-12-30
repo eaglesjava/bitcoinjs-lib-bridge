@@ -511,7 +511,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18p-z0-huL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="295" width="325" height="55"/>
+                                <rect key="frame" x="25" y="331" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="hw4-hg-UVv"/>
                                 </constraints>
@@ -520,14 +520,23 @@
                                     <action selector="nextAction:" destination="ACT-yT-QtD" eventType="touchUpInside" id="UhI-TB-qvz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅支持符合 BIP39 标准的助记词" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqG-1c-iK7">
+                                <rect key="frame" x="25" y="290" width="325" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.6705882353" green="0.90196078430000004" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="xev-18-wrL" firstAttribute="trailing" secondItem="18p-z0-huL" secondAttribute="trailing" constant="25" id="Bbi-L2-Jhr"/>
+                            <constraint firstItem="zqG-1c-iK7" firstAttribute="leading" secondItem="xev-18-wrL" secondAttribute="leading" constant="25" id="LIv-k3-9f3"/>
+                            <constraint firstItem="18p-z0-huL" firstAttribute="top" secondItem="zqG-1c-iK7" secondAttribute="bottom" constant="25" id="WB7-AQ-3AJ"/>
+                            <constraint firstItem="xev-18-wrL" firstAttribute="trailing" secondItem="zqG-1c-iK7" secondAttribute="trailing" constant="25" id="d7U-VA-Cah"/>
                             <constraint firstItem="18p-z0-huL" firstAttribute="leading" secondItem="xev-18-wrL" secondAttribute="leading" constant="25" id="g4k-PH-1Zr"/>
                             <constraint firstItem="dRR-r5-8xB" firstAttribute="top" secondItem="xev-18-wrL" secondAttribute="top" constant="25" id="ipK-aM-zHk"/>
                             <constraint firstItem="xev-18-wrL" firstAttribute="trailing" secondItem="dRR-r5-8xB" secondAttribute="trailing" constant="25" id="ncZ-Ky-4s2"/>
-                            <constraint firstItem="18p-z0-huL" firstAttribute="top" secondItem="dRR-r5-8xB" secondAttribute="bottom" constant="30" id="wox-Zd-MMP"/>
+                            <constraint firstItem="zqG-1c-iK7" firstAttribute="top" secondItem="dRR-r5-8xB" secondAttribute="bottom" constant="25" id="rZj-H5-izb"/>
                             <constraint firstItem="dRR-r5-8xB" firstAttribute="leading" secondItem="xev-18-wrL" secondAttribute="leading" constant="25" id="xKb-JC-deM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xev-18-wrL"/>
