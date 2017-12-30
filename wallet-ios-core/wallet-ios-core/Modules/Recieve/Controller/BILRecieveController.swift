@@ -50,6 +50,11 @@ class BILRecieveController: BILBaseViewController {
         NotificationCenter.default.removeObserver(self, name: .walletCountDidChanged, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshUI()
+    }
+    
     @objc
     func walletCountDidChanged(notification: Notification) {
         if let walletID = currentWallet?.id, WalletModel.checkIDIsExists(id: walletID) {
