@@ -26,6 +26,9 @@ class BILSpecificVolumeRecieveController: BILBaseViewController {
 		}
     }
 
+    @IBAction func doneAction(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

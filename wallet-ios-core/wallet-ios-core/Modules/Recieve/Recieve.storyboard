@@ -361,7 +361,7 @@
         <!--特定金额接收-->
         <scene sceneID="aq4-DF-Ck3">
             <objects>
-                <viewController title="特定金额接收" hidesBottomBarWhenPushed="YES" id="z6H-Hj-0bh" customClass="BILSpecificVolumeRecieveController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="z6H-Hj-0bh" customClass="BILSpecificVolumeRecieveController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AmT-rK-PNC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -411,6 +411,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="blV-CA-Zjj"/>
                     </view>
+                    <navigationItem key="navigationItem" title="特定金额接收" id="Q03-cE-dXW">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="MGW-M2-LOt">
+                            <connections>
+                                <action selector="doneAction:" destination="z6H-Hj-0bh" id="k25-rc-yOB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="AFR-Cm-jtb" id="zfq-et-WB0"/>
                         <outlet property="amountLabel" destination="8PS-8e-2Ja" id="Lr1-ct-E11"/>
