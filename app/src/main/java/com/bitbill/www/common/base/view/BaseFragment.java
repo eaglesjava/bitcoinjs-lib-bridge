@@ -90,7 +90,7 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
         return mPresenters;
     }
 
-    private void addPresenter(MvpPresenter mvpPresenter) {
+    protected void addPresenter(MvpPresenter mvpPresenter) {
         mPresenters.add(mvpPresenter);
     }
 

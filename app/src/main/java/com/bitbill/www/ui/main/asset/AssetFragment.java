@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -20,9 +19,12 @@ import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.PopupWalletMenu;
 import com.bitbill.www.common.widget.WalletView;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.bitbill.www.ui.main.MainActivity;
+import com.bitbill.www.ui.main.my.ShortCutSettingMvpPresenter;
+import com.bitbill.www.ui.main.my.ShortCutSettingMvpView;
 import com.bitbill.www.ui.main.send.ScanQrcodeActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
@@ -32,10 +34,10 @@ import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 
 /**
@@ -43,7 +45,7 @@ import butterknife.Unbinder;
  * Activities that contain this fragment must implement the
  * create an instance of this fragment.
  */
-public class AssetFragment extends BaseLazyFragment implements WalletView.OnWalletClickListener {
+public class AssetFragment extends BaseLazyFragment implements WalletView.OnWalletClickListener, ShortCutSettingMvpView {
 
 
     private static final int BOTTOM_MARGIN = 15;//unit dp
@@ -67,8 +69,8 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     FrameLayout mFlBtcUnconfirm;
     @BindView(R.id.iv_plus)
     ImageView mIvPlus;
-    Unbinder unbinder;
-
+    @Inject
+    ShortCutSettingMvpPresenter<AppModel, ShortCutSettingMvpView> mShortCutSettingMvpPresenter;
     private PopupWalletMenu mWalletMenu;
     private int mWalletCount;
     private boolean isFirstLoading = true;//第一次加载
@@ -103,7 +105,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        addPresenter(mShortCutSettingMvpPresenter);
     }
 
     @Override
@@ -238,20 +240,6 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
     @OnClick({R.id.ll_short_cut_scan, R.id.ll_short_cut_contact, R.id.ll_short_cut})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -268,5 +256,11 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
     public void setShortcutShown(boolean shortcutShown) {
         mLlShortCut.setVisibility(shortcutShown ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setShortcutShown(mShortCutSettingMvpPresenter.isShortcutShown());
     }
 }

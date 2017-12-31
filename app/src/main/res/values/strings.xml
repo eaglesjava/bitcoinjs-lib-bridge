@@ -214,4 +214,10 @@
     <string name="setting_backup_contact">备份联系人</string>
     <string name="setting_recover_contact">恢复联系人</string>
     <string name="hint_contact_key">请输入联系人密钥</string>
+    <string name="msg_contact_key_copied">联系人密钥已复制</string>
+    <string name="msg_recover_contact_success">恢复联系人成功</string>
+    <string name="msg_recover_fail">恢复联系人失败</string>
+    <string name="msg_no_contact_recover">没有联系人可恢复</string>
+    <string name="title_activity_shorcut_setting">快捷方式设置</string>
+    <string name="setting_short_cut">主页快捷功能</string>
 </resources>

@@ -30,7 +30,6 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
-import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
@@ -54,23 +53,11 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
         implements MainMvpPresenter<M, V> {
 
     private static final String TAG = "MainPresenter";
-    @Inject
-    AppModel mAppModel;
 
     @Inject
     public MainPresenter(M appModel, SchedulerProvider schedulerProvider,
                          CompositeDisposable compositeDisposable) {
         super(appModel, schedulerProvider, compositeDisposable);
-    }
-
-    @Override
-    public boolean isShortcutShown() {
-        return mAppModel.isShortcutShown();
-    }
-
-    @Override
-    public void setShortcutShown(boolean shown) {
-        mAppModel.setShortcutShown(shown);
     }
 
     @Override

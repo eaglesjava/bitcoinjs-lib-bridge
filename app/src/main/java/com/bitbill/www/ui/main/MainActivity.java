@@ -13,7 +13,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
@@ -35,6 +34,7 @@ import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.my.ContactSettingActivity;
+import com.bitbill.www.ui.main.my.ShortCutSettingActivity;
 import com.bitbill.www.ui.main.my.WalletSettingActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
@@ -79,7 +79,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private SendFragment mSendFragment;
     private Socket mSocket;
     private ContactFragment mContactFragment;
-    private Switch mShortcutSwitch;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -218,6 +217,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         } else if (id == R.id.nav_contact) {
             // 切换到钱包管理界面
             ContactSettingActivity.start(this);
+        } else if (id == R.id.nav_shortcut) {
+            // 切换到快捷方式设置界面
+            ShortCutSettingActivity.start(this);
         }
 
         // TODO: 2017/11/17 add other nav item

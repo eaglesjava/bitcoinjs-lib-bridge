@@ -38,7 +38,7 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
             MessageConfirmDialog.newInstance(getString(R.string.setting_backup_contact), walletKey, "复制联系人密钥", true)
                     .setConfirmDialogClickListener((dialog, which) -> {
                         StringUtils.copy(walletKey, ContactSettingActivity.this);
-                        showMessage("联系人密钥已复制");
+                        showMessage(R.string.msg_contact_key_copied);
                     })
                     .show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
         }
@@ -128,19 +128,19 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
 
     @Override
     public void recoverContactSuccess() {
-        showMessage("恢复联系人成功");
+        showMessage(R.string.msg_recover_contact_success);
         EventBus.getDefault().postSticky(new ContactUpdateEvent());
     }
 
     @Override
     public void receoverContactFail() {
-        showMessage("恢复联系人失败");
+        showMessage(R.string.msg_recover_fail);
 
     }
 
     @Override
     public void receoverContactsNull() {
-        showMessage("没有联系人可恢复");
+        showMessage(R.string.msg_no_contact_recover);
     }
 
     @OnClick({R.id.tv_backup_contact, R.id.tv_recover_contact})
