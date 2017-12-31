@@ -13,4 +13,6 @@ public interface ContactSettingMvpView extends MvpView {
     void recoverContactSuccess();
 
     void receoverContactFail();
+
+    void receoverContactsNull();
 }

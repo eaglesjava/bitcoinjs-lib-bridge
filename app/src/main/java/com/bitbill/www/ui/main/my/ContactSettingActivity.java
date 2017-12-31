@@ -3,6 +3,8 @@ package com.bitbill.www.ui.main.my;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 
 import com.bitbill.www.R;
@@ -27,6 +29,21 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
     ContactSettingMvpPresenter<ContactModel, ContactSettingMvpView> mContactSettingMvpPresenter;
     private PwdDialogFragment mBackupContactPwdDialogFragment;
     private InputDialogFragment mRecoverContactInputDialogFragment;
+    private Handler mDialogHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            String walletKey = getMvpPresenter().getWalletKey();
+            //显示联系人key对话框
+            MessageConfirmDialog.newInstance(getString(R.string.setting_backup_contact), walletKey, "复制联系人密钥", true)
+                    .setConfirmDialogClickListener((dialog, which) -> {
+                        StringUtils.copy(walletKey, ContactSettingActivity.this);
+                        showMessage("联系人密钥已复制");
+                    })
+                    .show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
+        }
+    };
+
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ContactSettingActivity.class);
@@ -61,16 +78,12 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
     @Override
     public void initView() {
 
-        mBackupContactPwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.setting_backup_contact), BitbillApp.get().getWallets().get(0), false);
+        mBackupContactPwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.setting_backup_contact), BitbillApp.get().getDefaultWallet(), false);
         mBackupContactPwdDialogFragment.setOnPwdValidatedListener(new PwdDialogFragment.OnPwdValidatedListener() {
             @Override
             public void onPwdCnfirmed(String confirmPwd) {
-                // TODO: 2017/12/29 对话框未显示
-                String walletKey = getMvpPresenter().getWalletKey();
-                //显示联系人key对话框
-                MessageConfirmDialog.newInstance(null, walletKey, "复制联系人密钥", false)
-                        .setConfirmDialogClickListener((dialog, which) -> StringUtils.copy(walletKey, ContactSettingActivity.this))
-                        .show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
+
+                mDialogHandler.sendMessageDelayed(new Message(), 100);
             }
 
             @Override
@@ -123,6 +136,11 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
     public void receoverContactFail() {
         showMessage("恢复联系人失败");
 
+    }
+
+    @Override
+    public void receoverContactsNull() {
+        showMessage("没有联系人可恢复");
     }
 
     @OnClick({R.id.tv_backup_contact, R.id.tv_recover_contact})

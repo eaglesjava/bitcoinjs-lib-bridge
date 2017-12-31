@@ -9,14 +9,14 @@ import java.util.List;
 public class RecoverContactsResponse {
 
 
-    private List<ContactsBean> contacts;
+    private List<ContactsBean> rows;
 
     public List<ContactsBean> getContacts() {
-        return contacts;
+        return rows;
     }
 
     public void setContacts(List<ContactsBean> contacts) {
-        this.contacts = contacts;
+        this.rows = contacts;
     }
 
     public static class ContactsBean {

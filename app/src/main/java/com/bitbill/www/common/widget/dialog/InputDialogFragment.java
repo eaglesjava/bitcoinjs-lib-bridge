@@ -121,7 +121,7 @@ public class InputDialogFragment extends BaseConfirmDialog {
 
     @Override
     public int getLayoutId() {
-        return R.layout.dialog_confirm_pwd_content;
+        return R.layout.dialog_confirm_input_content;
     }
 
     public String getConfirmInputText() {
