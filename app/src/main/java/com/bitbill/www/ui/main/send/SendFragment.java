@@ -16,6 +16,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.ui.wallet.info.BchInfoFragment;
 import com.bitbill.www.ui.wallet.info.EthInfoFragment;
 
@@ -159,6 +160,12 @@ public class SendFragment extends BaseLazyFragment {
         //reset ui
         if (mBtcSendFrg != null) {
             mBtcSendFrg.sendSuccess();
+        }
+    }
+
+    public void setSendAddress(Contact sendContact) {
+        if (mBtcSendFrg != null) {
+            mBtcSendFrg.setSendAddress(sendContact);
         }
     }
 }

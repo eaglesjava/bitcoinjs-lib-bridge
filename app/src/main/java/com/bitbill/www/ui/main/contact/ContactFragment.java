@@ -174,10 +174,13 @@ public class ContactFragment extends BaseListFragment<Contact, ContactMvpPresent
 
     @Override
     public void loadContactSuccess(List<Contact> contacts) {
-
-        //对已有数据进行排序 创建索引
-        new IndexHelper(contacts);
-        setDatas(contacts);
+        if (StringUtils.isEmpty(contacts)) {
+            clearData();
+        } else {
+            //对已有数据进行排序 创建索引
+            new IndexHelper(contacts);
+            setDatas(contacts);
+        }
 
     }
 

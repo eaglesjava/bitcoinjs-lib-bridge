@@ -35,4 +35,6 @@ interface BaseListControl<E extends Entity> {
     boolean isEnableRefresh();
 
     int getRefreshSchemeColor();
+
+    void clearData();
 }

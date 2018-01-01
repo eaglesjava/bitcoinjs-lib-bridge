@@ -132,6 +132,11 @@
             android:label="@string/title_activity_shorcut_setting"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".ui.main.contact.EditContactActivity"
+            android:label="@string/title_activity_edit_contact"
+            android:theme="@style/AppTheme.Blue">
+        </activity>
     </application>
 
 </manifest>

@@ -134,6 +134,16 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
         mRecyclerView.setAdapter(adapter);
     }
 
+
+    @Override
+    public void clearData() {
+        if (mDatas == null) {
+            mDatas = new ArrayList<>();
+        }
+        mDatas.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public void notifyDataSetChanged() {
         mAdapter.notifyDataSetChanged();

@@ -76,6 +76,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="Button.Transparent.White60" parent="Button.Transparent">
+
+        <item name="android:textColor">@color/white_60</item>
+    </style>
+
     <style name="Button.White" parent="Button">
         <item name="android:textColor">@color/btn_blue_text</item>
         <item name="android:background">@drawable/btn_white_corner</item>

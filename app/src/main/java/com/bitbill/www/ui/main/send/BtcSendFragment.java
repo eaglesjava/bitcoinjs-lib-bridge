@@ -94,10 +94,19 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return mSendAddress;
     }
 
+    public void setSendAddress(Contact sendContact) {
+        if (sendContact != null) {
+
+            mSendAddress = sendContact.getAddress();
+            String walletId = sendContact.getWalletId();
+            setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? mSendAddress : walletId) + ")");
+
+        }
+    }
+
     public void setSendAddress(String sendAddress) {
         etSendAddress.setText(sendAddress);
     }
-
 
     public void sendSuccess() {
         etSendAddress.setText("");
@@ -122,13 +131,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ContactSelectActivity.REQUEST_SELECT_CONTACT_CODE && resultCode == ContactSelectActivity.RESULT_SELECT_CONTACT_CODE && data != null) {
             Contact contact = (Contact) data.getSerializableExtra(AppConstants.EXTRA_CONTACT);
-            if (contact != null) {
-
-                mSendAddress = contact.getAddress();
-                String walletId = contact.getWalletId();
-                setSendAddress(contact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? mSendAddress : walletId) + ")");
-
-            }
+            setSendAddress(contact);
         }
     }
 }

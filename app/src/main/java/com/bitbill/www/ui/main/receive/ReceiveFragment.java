@@ -82,7 +82,6 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     @Override
     public void onBeforeSetContentLayout() {
         setHasOptionsMenu(true);
-        mWalletList = new ArrayList<>();
 
     }
 
@@ -173,6 +172,9 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
      */
     @Override
     public void lazyData() {
+        if (mWalletList == null) {
+            mWalletList = new ArrayList<>();
+        }
         mWalletList.clear();
         mWalletList.addAll(BitbillApp.get().getWallets());
         //重置选中的钱包对象
@@ -182,7 +184,9 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
         } else {
             mSelectedWallet = mWalletList.get(mSelectedPosition);
         }
-
+        if (selectWalletView == null) {
+            return;
+        }
         if (mSelectedWallet != null) {
             //重置单选select对象
             for (Wallet wallet : mWalletList) {

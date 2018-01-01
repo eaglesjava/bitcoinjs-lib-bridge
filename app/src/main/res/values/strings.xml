@@ -220,4 +220,18 @@
     <string name="msg_no_contact_recover">没有联系人可恢复</string>
     <string name="title_activity_shorcut_setting">快捷方式设置</string>
     <string name="setting_short_cut">主页快捷功能</string>
+    <string name="title_activity_edit_contact">编辑联系人</string>
+    <string name="text_contact_wallet_id">钱包ID</string>
+    <string name="text_contact_address">钱包地址</string>
+    <string name="text_remark">备注</string>
+    <string name="btn_send">发送</string>
+    <string name="text_require_contact_name">请输入联系人姓名</string>
+    <string name="msg_get_contact_info_fail">联系人信息获取失败，请返回重试</string>
+    <string name="msg_contact_info_no_edit">联系人信息没有修改</string>
+    <string name="msg_delete_contact_success">删除联系人信息成功</string>
+    <string name="msg_delete_contact_fail">删除联系人信息失败</string>
+    <string name="msg_update_contact_success">更新联系人信息成功</string>
+    <string name="msg_update_contact_fail">更新联系人信息失败</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_delete">删除</string>
 </resources>

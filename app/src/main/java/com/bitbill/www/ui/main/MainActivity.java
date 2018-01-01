@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
@@ -22,6 +23,7 @@ import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
@@ -58,6 +60,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
+    private static final int INDEX_ASSET = 0;
+    private static final int INDEX_CONTACT = 1;
+    private static final int INDEX_RECEIVE = 2;
+    private static final int INDEX_SEND = 3;
 
     @Inject
     MainMvpPresenter<WalletModel, MainMvpView> mMainMvpPresenter;
@@ -79,9 +85,31 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private SendFragment mSendFragment;
     private Socket mSocket;
     private ContactFragment mContactFragment;
+    private Contact mSendContact;
+    private int index = INDEX_ASSET;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
+    }
+
+    public static void start(Context context, Contact sendContact) {
+
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(AppConstants.EXTRA_CONTACT, sendContact);
+        context.startActivity(intent);
+    }
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+        mSendContact = ((Contact) intent.getSerializableExtra(AppConstants.EXTRA_CONTACT));
+        if (mSendContact != null) {
+            //切换到发送联系人界面
+            mViewPager.setCurrentItem(INDEX_SEND);
+            if (mSendFragment != null) {
+                mSendFragment.setSendAddress(mSendContact);
+            }
+        }
     }
 
     @Override
@@ -161,20 +189,21 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
+                index = tab.getPosition();
                 switch (tab.getPosition()) {
-                    case 0:
+                    case INDEX_ASSET:
                         setTitle(R.string.title_asset);
                         changeThemeColor(false);
                         break;
-                    case 1:
+                    case INDEX_CONTACT:
                         setTitle(R.string.title_contact);
                         changeThemeColor(true);
                         break;
-                    case 2:
+                    case INDEX_RECEIVE:
                         setTitle(R.string.title_receive);
                         changeThemeColor(false);
                         break;
-                    case 3:
+                    case INDEX_SEND:
                         setTitle(R.string.title_send);
                         changeThemeColor(false);
                         break;
@@ -380,4 +409,5 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mViewPager.setCurrentItem(1, true);
         mContactFragment.showSelectDialog();
     }
+
 }

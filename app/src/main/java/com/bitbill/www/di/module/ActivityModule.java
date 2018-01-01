@@ -38,6 +38,9 @@ import com.bitbill.www.ui.main.contact.AddContactByIdPresenter;
 import com.bitbill.www.ui.main.contact.ContactMvpPresenter;
 import com.bitbill.www.ui.main.contact.ContactMvpView;
 import com.bitbill.www.ui.main.contact.ContactPresenter;
+import com.bitbill.www.ui.main.contact.EditContactMvpPresenter;
+import com.bitbill.www.ui.main.contact.EditContactMvpView;
+import com.bitbill.www.ui.main.contact.EditContactPresenter;
 import com.bitbill.www.ui.main.contact.SearchContactResultMvpPresenter;
 import com.bitbill.www.ui.main.contact.SearchContactResultMvpView;
 import com.bitbill.www.ui.main.contact.SearchContactResultPresenter;
@@ -290,6 +293,13 @@ public class ActivityModule {
     @PerActivity
     ShortCutSettingMvpPresenter<AppModel, ShortCutSettingMvpView> provideShortCutSettingPresenter(
             ShortCutSettingPresenter<AppModel, ShortCutSettingMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    EditContactMvpPresenter<ContactModel, EditContactMvpView> provideEditContactPresenter(
+            EditContactPresenter<ContactModel, EditContactMvpView> presenter) {
         return presenter;
     }
 

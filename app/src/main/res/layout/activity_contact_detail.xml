@@ -35,7 +35,7 @@
             <TextView
                 style="@style/Text.White"
                 android:layout_marginTop="30dp"
-                android:text="钱包ID" />
+                android:text="@string/text_contact_wallet_id"/>
 
             <TextView
                 android:id="@+id/tv_wallet_id"
@@ -52,7 +52,7 @@
             <TextView
                 style="@style/Text.White"
                 android:layout_marginTop="30dp"
-                android:text="钱包地址" />
+                android:text="@string/text_contact_address"/>
 
             <TextView
                 android:id="@+id/tv_wallet_address"
@@ -63,7 +63,7 @@
         <TextView
             style="@style/Text.White"
             android:layout_marginTop="30dp"
-            android:text="备注" />
+            android:text="@string/text_remark"/>
 
         <TextView
             android:id="@+id/tv_wallet_remark"
@@ -78,6 +78,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="15dp"
-        android:text="发送" />
+        android:text="@string/btn_send"/>
 </FrameLayout>
 

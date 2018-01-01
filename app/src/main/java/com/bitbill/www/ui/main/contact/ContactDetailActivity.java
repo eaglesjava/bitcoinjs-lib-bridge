@@ -11,18 +11,16 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.presenter.GetLastAddressMvpPresenter;
-import com.bitbill.www.common.presenter.GetLastAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
-
-import javax.inject.Inject;
+import com.bitbill.www.ui.main.MainActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
-public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvpPresenter> implements GetLastAddressMvpView {
+public class ContactDetailActivity extends BaseToolbarActivity {
 
     @BindView(R.id.tv_contact_label)
     TextView mTvContactLabel;
@@ -38,8 +36,7 @@ public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvp
     LinearLayout mLLWalletId;
     @BindView(R.id.ll_wallet_address)
     LinearLayout mLLWalletAddress;
-    @Inject
-    GetLastAddressMvpPresenter<ContactModel, GetLastAddressMvpView> mGetLastAddressMvpPresenter;
+
     private Contact mContact;
 
     public static void start(Context context, Contact contact) {
@@ -55,13 +52,12 @@ public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvp
     }
 
     @Override
-    public GetLastAddressMvpPresenter getMvpPresenter() {
-        return mGetLastAddressMvpPresenter;
+    public MvpPresenter getMvpPresenter() {
+        return null;
     }
 
     @Override
     public void injectComponent() {
-        getActivityComponent().inject(this);
     }
 
     @Override
@@ -98,7 +94,7 @@ public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvp
 
     @Override
     public void initData() {
-        getMvpPresenter().getLastAddress();
+
     }
 
     @Override
@@ -122,32 +118,18 @@ public class ContactDetailActivity extends BaseToolbarActivity<GetLastAddressMvp
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_contact_edit) {
-            // TODO: 2017/12/20 跳转到编辑界面
-            showMessage("编辑联系人");
+            // 跳转到编辑界面
+            EditContactActivity.start(ContactDetailActivity.this, mContact);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public String getWalletId() {
-        return mContact == null ? "" : mContact.getWalletId();
-    }
-
-    @Override
-    public void getLastAddressSuccess(String address) {
-
-        mTvWalletAddress.setText(mContact.getAddress());
-    }
-
-    @Override
-    public void getLastAddressFail() {
-
-    }
-
-    @Override
-    public void requireWalletId() {
-
+    @OnClick(R.id.btn_send)
+    public void onViewClicked() {
+        //跳转到发送界面
+        finish();
+        MainActivity.start(this, mContact);
     }
 }

@@ -3,7 +3,6 @@ package com.bitbill.www.ui.main.contact;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
@@ -35,11 +34,8 @@ public class ContactPresenter<M extends ContactModel, V extends ContactMvpView> 
                         if (!isViewAttached()) {
                             return;
                         }
-                        if (!StringUtils.isEmpty(contacts)) {
-                            getMvpView().loadContactSuccess(contacts);
-                        } else {
-                            getMvpView().loadContactFail();
-                        }
+                        getMvpView().loadContactSuccess(contacts);
+
                     }
 
                     @Override

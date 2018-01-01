@@ -61,4 +61,13 @@ public class MessageEvent extends Entity {
     public void setTo(Class<?> to) {
         this.to = to;
     }
+
+    public Serializable getData() {
+        return data;
+    }
+
+    public MessageEvent setData(Serializable data) {
+        this.data = data;
+        return this;
+    }
 }
