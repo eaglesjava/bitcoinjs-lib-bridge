@@ -16,7 +16,7 @@ class BILWalletController: BILBaseViewController {
 
 	var wallet: WalletModel?
 	@IBOutlet weak var btcWalletView: BILBTCWalletView!
-	
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

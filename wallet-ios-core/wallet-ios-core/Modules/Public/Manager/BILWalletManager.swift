@@ -8,17 +8,18 @@
 
 import UIKit
 import CoreData
+import SwiftyJSON
 
-class BILWalletManager: NSObject {
+class BILWalletManager {
 	static let shared = {
 		return BILWalletManager()
 	}()
-	
-	weak var appDelegate: AppDelegate?
     
-    var coreDataContext = {
-        (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    }()
+    weak var appDelegate: AppDelegate?
+    
+    var cnyExchangeRate: Double = 0
+    var usdExchangeRate: Double = 0
+    var loadExchangeRateTimer = Timer()
     
     var wallets: [WalletModel] {
         get {
@@ -34,6 +35,46 @@ class BILWalletManager: NSObject {
                 UIApplication.shared.keyWindow?.makeToast("查询钱包失败")
             }
             return results
+        }
+    }
+    
+    var coreDataContext = {
+        (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }()
+    
+    init() {
+        loadExchangeRateTimer = Timer(timeInterval: 30, target: self, selector: #selector(loadExchangeRate), userInfo: nil, repeats: true)
+        applicationDidBecomeActive()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: .UIApplicationWillResignActive, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
+    }
+    
+    @objc
+    func applicationDidBecomeActive() {
+        RunLoop.current.add(loadExchangeRateTimer, forMode: .defaultRunLoopMode)
+        loadExchangeRateTimer.fire()
+    }
+    
+    @objc
+    func applicationWillResignActive() {
+        loadExchangeRateTimer.invalidate()
+    }
+    
+    @objc
+    func loadExchangeRate() {
+        BILNetworkManager.request(request: .getExchangeRate, success: { (result) in
+            let json = JSON(result)
+            self.cnyExchangeRate = json["cnyrate"].doubleValue
+            self.usdExchangeRate = json["usdrate"].doubleValue
+            NotificationCenter.default.post(name: .exchangeRateDidChanged, object: nil)
+        }) { (msg, code) in
+            debugPrint(msg)
         }
     }
     

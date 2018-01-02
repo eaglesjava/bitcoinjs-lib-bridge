@@ -510,7 +510,7 @@
                                                     <constraint firstItem="YpS-A2-L2U" firstAttribute="centerY" secondItem="PG4-eO-E5r" secondAttribute="centerY" id="cCX-Td-mXm"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 CNY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIi-ue-mEd">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 CNY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIi-ue-mEd" customClass="BILExchangeRateLabel" customModule="wallet_ios_core" customModuleProvider="target">
                                                 <rect key="frame" x="24" y="82" width="66" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -555,7 +555,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="balanceLabel" destination="Pcd-Bi-NdR" id="nc0-TB-mCc"/>
-                                    <outlet property="cnyLabel" destination="kIi-ue-mEd" id="L9R-H8-ouE"/>
+                                    <outlet property="currencyLabel" destination="kIi-ue-mEd" id="JIW-pa-ia9"/>
                                     <outlet property="heightOfBalanceView" destination="olm-fc-DMG" id="S7g-FI-6gW"/>
                                     <outlet property="tableView" destination="Aej-k9-JvA" id="lvf-6o-9sO"/>
                                     <outlet property="unconfirmBalanceLabel" destination="xa1-Vm-H3E" id="LEx-ha-S4v"/>

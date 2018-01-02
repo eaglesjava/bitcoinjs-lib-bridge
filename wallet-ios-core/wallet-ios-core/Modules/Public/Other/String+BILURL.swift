@@ -52,6 +52,8 @@ enum Router: URLRequestConvertible {
                     pubKeys.append(pubkey.md5())
                 }
                 return (.bil_wallet_get_unconfirm_transaction, ["extendedKeysHash": pubKeys.joined(separator: "|")])
+            case .getExchangeRate:
+                return (.bil_get_exchange_Rate, [:])
             case .getContactLastAddress(let walletID):
                 return (.bil_contact_get_last_address, ["walletId": walletID])
             case .getContacts:
@@ -76,6 +78,11 @@ enum Router: URLRequestConvertible {
         debugPrint("load \(result.path) with \(result.parameters ?? [:])")
         
         request.httpMethod = HTTPMethod.post.rawValue
+        
+        if result.path == .bil_get_exchange_Rate {
+            request.httpMethod = HTTPMethod.get.rawValue
+        }
+        
         request.setValue("iOS", forHTTPHeaderField: "platform")
         request.timeoutInterval = 30.0
         return try encoding.encode(request, with: result.parameters)
@@ -94,6 +101,8 @@ enum Router: URLRequestConvertible {
     case refreshAddress(extendedKeyHash: String, index: Int64)
     case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int64, txHash: String, txHex: String, remark: String)
     case getUnconfirmTransaction(wallets: [WalletModel])
+    
+    case getExchangeRate
 
     case getContactLastAddress(walletID: String)
     case getContacts
@@ -106,42 +115,45 @@ enum Router: URLRequestConvertible {
 }
 
 extension String {
-//    static var bil_base_url: String { get { return "http://192.168.1.10:8086/" } }
-    static var bil_base_url: String { get { return "http://walletservice.bitbill.com:8086/" } }
-    static var bil_wallet_path: String { get { return "bitbill/bitcoin/wallet/" } }
-    static var bil_wallet_create: String { get { return bil_wallet_path + "create" } }
-    static var bil_wallet_delete: String { get { return bil_wallet_path + "deleteWallet" } }
-    static var bil_wallet_import: String { get { return bil_wallet_path + "import" } }
-    static var bil_wallet_check_id:  String { get { return bil_wallet_path + "checkWalletId" } }
-    static var bil_wallet_get_id:  String { get { return bil_wallet_path + "getWalletId" } }
-    static var bil_wallet_get_balance:  String { get { return bil_wallet_path + "getBalance" } }
-    static var bil_wallet_get_UTXO:  String { get { return bil_wallet_path + "listUnspent" } }
-    static var bil_wallet_get_transaction_build_config:  String { get { return bil_wallet_path + "getTxElement" } }
-    static var bil_wallet_refresh_address: String { get { return bil_wallet_path + "refreshAddress" } }
-    static var bil_wallet_send_transaction: String { get { return bil_wallet_path + "sendTransaction" } }
-    static var bil_wallet_transaction_history: String { get { return bil_wallet_path + "getTxList" } }
-    static var bil_wallet_get_unconfirm_transaction: String { get { return bil_wallet_path + "listUnconfirmTx" } }
+//    static let bil_base_url = "http://192.168.1.10:8086/"
+    static let bil_base_url = "http://walletservice.bitbill.com:8086/"
+    static let bil_path = "bitbill/bitcoin/"
+    static let bil_wallet_path = bil_path + "wallet/"
+    static let bil_wallet_create = bil_wallet_path + "create"
+    static let bil_wallet_delete = bil_wallet_path + "deleteWallet"
+    static let bil_wallet_import = bil_wallet_path + "import"
+    static let bil_wallet_check_id = bil_wallet_path + "checkWalletId"
+    static let bil_wallet_get_id = bil_wallet_path + "getWalletId"
+    static let bil_wallet_get_balance = bil_wallet_path + "getBalance"
+    static let bil_wallet_get_UTXO = bil_wallet_path + "listUnspent"
+    static let bil_wallet_get_transaction_build_config = bil_wallet_path + "getTxElement"
+    static let bil_wallet_refresh_address = bil_wallet_path + "refreshAddress"
+    static let bil_wallet_send_transaction = bil_wallet_path + "sendTransaction"
+    static let bil_wallet_transaction_history = bil_wallet_path + "getTxList"
+    static let bil_wallet_get_unconfirm_transaction = bil_wallet_path + "listUnconfirmTx"
+
+    static let bil_get_exchange_Rate = bil_path + "get_exchange_rate"
     
-    static var bil_contact_get_all: String { get { return bil_wallet_path + "getContacts" } }
-    static var bil_contact_get_last_address: String { get { return bil_wallet_path + "getLastAddress" } }
-    static var bil_contact_search_id: String { get { return bil_wallet_path + "searchWalletId" } }
-    static var bil_contact_add: String { get { return bil_wallet_path + "addContacts" } }
-    static var bil_contact_update: String { get { return bil_wallet_path + "updateContacts" } }
-    static var bil_contact_delete: String { get { return bil_wallet_path + "deleteContacts" } }
-    static var bil_contact_recover: String { get { return bil_wallet_path + "recoverContacts" } }
+    static let bil_contact_get_all = bil_wallet_path + "getContacts"
+    static let bil_contact_get_last_address = bil_wallet_path + "getLastAddress"
+    static let bil_contact_search_id = bil_wallet_path + "searchWalletId"
+    static let bil_contact_add = bil_wallet_path + "addContacts"
+    static let bil_contact_update = bil_wallet_path + "updateContacts"
+    static let bil_contact_delete = bil_wallet_path + "deleteContacts"
+    static let bil_contact_recover = bil_wallet_path + "recoverContacts"
 }
 
 extension String {
-//    static var bil_socket_base_url: String { get { return "http://192.168.1.10:8088/" } }
-    static var bil_socket_base_url: String { get { return "http://walletservice.bitbill.com:8088/" } }
+//    static let bil_socket_base_url = "http://192.168.1.10:8088/"
+    static let bil_socket_base_url = "http://walletservice.bitbill.com:8088/"
 }
 
 extension String {
-    static var bil_socket_event_register: String { get { return "register" } }
-    static var bil_socket_event_unconfirm: String { get { return "unconfirm" } }
-    static var bil_socket_event_confirm: String { get { return "confirm" } }
+    static let bil_socket_event_register = "register"
+    static let bil_socket_event_unconfirm = "unconfirm"
+    static let bil_socket_event_confirm = "confirm"
 }
 
 extension String {
-    static var bil_extenal_blockchain_transaction: String { get { return "https://blockchain.info/tx/" } }
+    static let bil_extenal_blockchain_transaction = "https://blockchain.info/tx/"
 }

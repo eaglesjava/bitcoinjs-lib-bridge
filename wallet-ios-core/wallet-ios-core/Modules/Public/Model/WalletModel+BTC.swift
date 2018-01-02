@@ -139,9 +139,10 @@ extension WalletModel {
             return BTCFormatString(btc: btcUnconfirmBalance)
         }
     }
-    var btc_cnyString: String {
+    var btc_currencyString: String {
         get {
-            return "0.00"
+            let price = Double(btcBalance) * BILWalletManager.shared.cnyExchangeRate / Double(BTC_SATOSHI)
+            return String(price) + "CNY"
         }
     }
 }

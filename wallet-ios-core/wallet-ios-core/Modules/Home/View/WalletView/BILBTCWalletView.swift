@@ -13,7 +13,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var cnyLabel: UILabel!
+    @IBOutlet weak var currencyLabel: BILExchangeRateLabel!
 	@IBOutlet weak var unconfirmBalanceLabel: UILabel!
 	@IBOutlet weak var heightOfBalanceView: NSLayoutConstraint!
     @IBOutlet weak var unconfirmContainerView: UIView!
@@ -32,7 +32,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 122 : 213
                 self.balanceLabel.text = w.btc_balanceString
                 self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + " BTC "
-                self.cnyLabel.text = w.btc_cnyString + " CNY"
+                self.currencyLabel.btcValue = w.btcBalance
             }) { (msg, code) in
                 debugPrint(msg)
             }

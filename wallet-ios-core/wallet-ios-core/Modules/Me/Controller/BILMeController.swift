@@ -17,22 +17,22 @@ extension String {
 class BILMeController: BILBaseViewController {
     
     enum BILMeSectionType: Int {
-        case homeShortcut = 0
+        case preference = 0
 		case contacts
         case wallet
-        case preference
+        case system
         case other
         
         var sectionTitle: String {
             switch self {
-            case .homeShortcut:
-                return "首页设置"
+            case .preference:
+                return "偏好设置"
 			case .contacts:
 				return "联系人设置"
             case .wallet:
-                return "钱包"
-            case .preference:
-                return "偏好设置"
+                return "钱包集成"
+            case .system:
+                return "系统相关"
             case .other:
                 return "其它"
             }
@@ -55,13 +55,13 @@ class BILMeController: BILBaseViewController {
         
         func dataArray() -> [Any] {
             switch self {
-            case .homeShortcut:
+            case .preference:
                 return ["主页快捷功能"]
 			case .contacts:
 				return ["备份联系人", "恢复联系人"]
             case .wallet:
                 return BILWalletManager.shared.wallets
-            case .preference:
+            case .system:
                 return[]
             case .other:
                 return ["关于我们"]
@@ -70,7 +70,7 @@ class BILMeController: BILBaseViewController {
         
         func cellID() -> String {
             switch self {
-            case .homeShortcut:
+            case .preference:
                 return "BILMeSwitchCell"
             case .wallet:
                 return "BILMeWalletCell"
@@ -82,7 +82,7 @@ class BILMeController: BILBaseViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
-    var sections: [BILMeSectionType] = [.homeShortcut, .contacts, .wallet, .preference, .other]
+    var sections: [BILMeSectionType] = [.preference, .contacts, .wallet, .system, .other]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,9 +211,10 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: sectionType.cellID(), for: indexPath)
 		let model = sectionType.dataArray()[indexPath.row]
         switch sectionType {
-        case .homeShortcut:
+        case .preference:
             let c = cell as! BILMeSwitchCell
             c.bil_switch.isOn = BILSettingManager.isHomeShortcutEnabled
+            c.bil_switch.onTintColor = UIColor(patternImage: UIImage(named: "pic_switch_background")!)
             c.switchChangedClosure = { (isOn) in
                 BILSettingManager.isHomeShortcutEnabled = isOn
             }
@@ -246,6 +247,7 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
         let sectionType = sections[section]
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BILTableViewHeaderFooterView") as! BILTableViewHeaderFooterView
         headerView.titleLabel.text = sectionType.sectionTitle
+        headerView.titleLabel.textColor = UIColor(white: 1, alpha: 0.3)
         headerView.bil_backgroundView.backgroundColor = UIColor(white: 1.0, alpha: 0.04)
         headerView.bgImageView.image = backgroundImage?.snapshotSubImage(rect: view.convert(headerView.frame, from: tableView))
         return headerView

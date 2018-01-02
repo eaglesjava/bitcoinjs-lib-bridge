@@ -9,16 +9,18 @@
 import Foundation
 
 extension Notification.Name {
-	static var walletDidChanged: Notification.Name { get { return NSNotification.Name("walletDidChanged") } }
-    static var walletCountDidChanged: Notification.Name { get { return NSNotification.Name("walletCountDidChanged") } }
-    static var balanceDidChanged: Notification.Name { get { return NSNotification.Name("balanceDidChanged") } }
-    static var transactionSended: Notification.Name { get { return NSNotification.Name("transactionSended") } }
-    static var recievedUnconfirmTransaction: Notification.Name { get { return NSNotification.Name("recievedUnconfirmTransaction") } }
-    static var unconfirmTransactionBeenConfirmed: Notification.Name { get { return NSNotification.Name("unconfirmTransactionBeenConfirmed") } }
-    static var recievePageCurrentWallet: Notification.Name { get { return NSNotification.Name("recievePageCurrentWallet") } }
-    static var sendBTCToContact: Notification.Name { get { return NSNotification.Name("sendBTCToContact") } }
-    static var contactDidChanged: Notification.Name { get { return NSNotification.Name("contactDidChanged") } }
-    static var networkStatusDidChanged: Notification.Name { get { return NSNotification.Name("networkStatusDidChanged") } }
-	static var shortcutScanQRCode: Notification.Name { get { return NSNotification.Name("shortcutScanQRCode") } }
-	static var shortcutAddContact: Notification.Name { get { return NSNotification.Name("shortcutAddContact") } }
+	static let walletDidChanged = NSNotification.Name("walletDidChanged")
+    static let walletCountDidChanged = NSNotification.Name("walletCountDidChanged")
+    static let balanceDidChanged = NSNotification.Name("balanceDidChanged")
+    static let transactionSended = NSNotification.Name("transactionSended")
+    static let recievedUnconfirmTransaction = NSNotification.Name("recievedUnconfirmTransaction")
+    static let unconfirmTransactionBeenConfirmed = NSNotification.Name("unconfirmTransactionBeenConfirmed")
+    static let recievePageCurrentWallet = NSNotification.Name("recievePageCurrentWallet")
+    static let sendBTCToContact = NSNotification.Name("sendBTCToContact")
+    static let contactDidChanged = NSNotification.Name("contactDidChanged")
+    static let networkStatusDidChanged = NSNotification.Name("networkStatusDidChanged")
+	static let shortcutScanQRCode = NSNotification.Name("shortcutScanQRCode")
+	static let shortcutAddContact = NSNotification.Name("shortcutAddContact")
+    
+    static let exchangeRateDidChanged = NSNotification.Name("exchangeRateDidChanged")
 }
