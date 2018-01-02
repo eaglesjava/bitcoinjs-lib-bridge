@@ -61,7 +61,7 @@ extension WalletModel {
                 return true
             }
         }
-        return count == btcAddresses.count
+        return count > 0 && count == btcAddresses.count
     }
     
     func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {

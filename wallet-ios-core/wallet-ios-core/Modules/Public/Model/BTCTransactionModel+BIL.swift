@@ -201,6 +201,11 @@ extension BTCTransactionModel {
         }
         
         guard let w = wallet else {
+            do {
+                try bil_btc_transactionManager.remove(model: self)
+            } catch {
+                debugPrint(error.localizedDescription)
+            }
             return
         }
         
