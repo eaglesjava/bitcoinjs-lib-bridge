@@ -44,16 +44,8 @@ enum Router: URLRequestConvertible {
                                                        "hexTx" : txHex,
                                                        "remark": remark])
             case .getUnconfirmTransaction(let wallets):
-                var pubKeys = [String]()
-                for wallet in wallets {
-                    guard let pubkey = wallet.mainExtPublicKey else {
-                        continue
-                    }
-                    pubKeys.append(pubkey.md5())
-                }
-                return (.bil_wallet_get_unconfirm_transaction, ["extendedKeysHash": pubKeys.joined(separator: "|")])
-            case .getExchangeRate:
-                return (.bil_get_exchange_Rate, [:])
+                let hashes = WalletModel.getKeyHash(wallets: wallets)
+                return (.bil_wallet_get_unconfirm_transaction, ["extendedKeysHash": hashes])
             case .getContactLastAddress(let walletID):
                 return (.bil_contact_get_last_address, ["walletId": walletID])
             case .getContacts:
@@ -68,6 +60,10 @@ enum Router: URLRequestConvertible {
                 return (.bil_contact_delete, ["walletKey": BILDeviceManager.shared.contactKey, "walletId": walletID, "address": address])
             case .recoverContacts(let recoverKey):
                 return (.bil_contact_recover, ["walletKey": BILDeviceManager.shared.contactKey, "recoverKey": recoverKey])
+            case .getExchangeRate:
+                return (.bil_get_exchange_Rate, [:])
+            case .getBlockHeightAndWalletVersion(let hashes):
+                return (.bil_get_blockHeight_WalletVersion, ["extendedKeysHash": hashes])
             }
         }()
         
@@ -78,10 +74,6 @@ enum Router: URLRequestConvertible {
         debugPrint("load \(result.path) with \(result.parameters ?? [:])")
         
         request.httpMethod = HTTPMethod.post.rawValue
-        
-        if result.path == .bil_get_exchange_Rate {
-            request.httpMethod = HTTPMethod.get.rawValue
-        }
         
         request.setValue("iOS", forHTTPHeaderField: "platform")
         request.timeoutInterval = 30.0
@@ -101,8 +93,6 @@ enum Router: URLRequestConvertible {
     case refreshAddress(extendedKeyHash: String, index: Int64)
     case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int64, txHash: String, txHex: String, remark: String)
     case getUnconfirmTransaction(wallets: [WalletModel])
-    
-    case getExchangeRate
 
     case getContactLastAddress(walletID: String)
     case getContacts
@@ -112,11 +102,14 @@ enum Router: URLRequestConvertible {
     case deleteContact(walletID: String, address: String)
     case recoverContacts(recoverKey: String)
     
+    case getExchangeRate
+    case getBlockHeightAndWalletVersion(hashes: String)
+    
 }
 
 extension String {
-//    static let bil_base_url = "http://192.168.1.10:8086/"
-    static let bil_base_url = "http://walletservice.bitbill.com:8086/"
+    static let bil_base_url = "http://192.168.1.10:8086/"
+//    static let bil_base_url = "http://walletservice.bitbill.com:8086/"
     static let bil_path = "bitbill/bitcoin/"
     static let bil_wallet_path = bil_path + "wallet/"
     static let bil_wallet_create = bil_wallet_path + "create"
@@ -131,8 +124,6 @@ extension String {
     static let bil_wallet_send_transaction = bil_wallet_path + "sendTransaction"
     static let bil_wallet_transaction_history = bil_wallet_path + "getTxList"
     static let bil_wallet_get_unconfirm_transaction = bil_wallet_path + "listUnconfirmTx"
-
-    static let bil_get_exchange_Rate = bil_path + "get_exchange_rate"
     
     static let bil_contact_get_all = bil_wallet_path + "getContacts"
     static let bil_contact_get_last_address = bil_wallet_path + "getLastAddress"
@@ -141,11 +132,14 @@ extension String {
     static let bil_contact_update = bil_wallet_path + "updateContacts"
     static let bil_contact_delete = bil_wallet_path + "deleteContacts"
     static let bil_contact_recover = bil_wallet_path + "recoverContacts"
+    
+    static let bil_get_exchange_Rate = bil_path + "get_exchange_rate"
+    static let bil_get_blockHeight_WalletVersion = bil_wallet_path + "getCacheVersion"
 }
 
 extension String {
-//    static let bil_socket_base_url = "http://192.168.1.10:8088/"
-    static let bil_socket_base_url = "http://walletservice.bitbill.com:8088/"
+    static let bil_socket_base_url = "http://192.168.1.10:8088/"
+//    static let bil_socket_base_url = "http://walletservice.bitbill.com:8088/"
 }
 
 extension String {

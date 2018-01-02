@@ -19,7 +19,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var unconfirmContainerView: UIView!
     
     private var page: Int = 0
-    private var size: Int = 20
+    private var size: Int = 2000
     var isLoading = false
     var isLoadingMore = false
 	
@@ -28,6 +28,13 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	weak var wallet: WalletModel? {
 		didSet {
             guard let w = wallet else { return }
+            transactions.removeAll()
+            let txs = w.btcTransactions?.sortedArray(comparator: { (lhs, rhs) -> ComparisonResult in
+                let l = lhs as! BTCTransactionModel
+                let r = rhs as! BTCTransactionModel
+                return l.createdDate!.compare(r.createdDate!)
+            }) as! [BTCTransactionModel]
+            transactions.append(contentsOf: txs)
             w.getBalanceFromServer(success: { (wallet) in
                 self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 122 : 213
                 self.balanceLabel.text = w.btc_balanceString
@@ -75,12 +82,14 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     func loadTransactionHistory() {
         guard let w = wallet else { return }
         guard !isLoading else { return }
+        guard w.needLoadServer else { return }
         isLoading = true
         w.getTransactionHistoryFromSever(page: page, size: size, success: { (txs) in
             if !self.isLoadingMore {
                 self.transactions.removeAll()
             }
             self.transactions.append(contentsOf: txs)
+            w.needLoadServer = false
             self.loadEnd()
         }) { (msg, code) in
             self.loadEnd()
@@ -116,6 +125,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "BILTransactionCell") as! BILTransactionCell
 		cell.transaction = transactions[indexPath.row]
+        cell.confirmLabel.isHidden = false
 		cell.separatorInset = UIEdgeInsetsMake(0, 25, 0, 25)
 		return cell
 	}

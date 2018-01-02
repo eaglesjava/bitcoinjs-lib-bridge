@@ -13,7 +13,8 @@ class BILTransactionCell: UITableViewCell {
 	@IBOutlet weak var addressLabel: UILabel!
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var volumeLabel: UILabel!
-	
+    @IBOutlet weak var confirmLabel: UILabel!
+    
 	var transaction: BTCTransactionModel? {
 		didSet {
 			if let t = transaction {
@@ -21,6 +22,8 @@ class BILTransactionCell: UITableViewCell {
                 addressLabel.text = t.firstTargetAddress?.address
                 dateLabel.text = t.dateSring
                 volumeLabel.text = t.volumeString
+                confirmLabel.text = t.confirmString
+                confirmLabel.textColor = UIColor(white: 1.0, alpha: t.height > 0 ? 1.0 : 0.6)
 			}
 		}
 	}

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 let BTC_SATOSHI: Int64 = 100000000
 
@@ -95,33 +96,76 @@ extension WalletModel {
             }
         }
     }
-	
-    func getNewBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
+    
+    func refreshAddressToSever(index: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (String) -> Void) {
         guard let extPub = mainExtPublicKey else {
             failure("主扩展公钥为空")
             return
         }
-		lastAddressIndex += 1
-		lastBTCAddress(success: { (address) in
-			BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: self.lastAddressIndex), success: { (result) in
-				debugPrint(result)
-				do {
-					try BILWalletManager.shared.saveWallets()
-					success(address)
-				} catch {
-					self.lastAddressIndex -= 1
-					failure("新地址保存失败")
-				}
-			}, failure: { (msg, code) in
-				debugPrint(msg)
-                self.lastAddressIndex -= 1
-				failure(msg)
-			})
-		}) { (msg) in
-			self.lastAddressIndex -= 1
-			failure(msg)
-		}
+        
+        guard index > lastAddressIndex else {
+            failure("index 小于或等于当前地址，不需要刷新")
+            return
+        }
+
+        BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: index), success: { (result) in
+            debugPrint(result)
+            let json = JSON(result)
+            let serverIndex = json["indexNo"].int64Value
+            if self.lastAddressIndex > serverIndex {
+                self.lastAddressIndex = serverIndex
+            }
+            self.generateAddresses(from: self.lastAddressIndex, to: serverIndex, success: success, failure: { (msg, code) in
+                failure(msg)
+            })
+        }, failure: { (msg, code) in
+            debugPrint(msg)
+            failure(msg)
+        })
+    }
+	
+    func getNewBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
+        let tempIndex = lastAddressIndex + 1
+        refreshAddressToSever(index: tempIndex, success: { (models) in
+            guard let address = models.last?.address else {
+                failure("生成地址失败")
+                return
+            }
+            success(address)
+        }, failure: failure)
 	}
+    
+    func generateAddresses(from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        guard from <= to else {
+            failure("起始值大于结束值", -1)
+            return
+        }
+        BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: from, toIndex: to, success: { (result) in
+            debugPrint(result)
+            guard let array = result as? [String] else {
+                failure("生成失败", -1)
+                return
+            }
+            var models = [BTCWalletAddressModel]()
+            for address in array {
+                let tx = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: address)
+                tx.address = address
+                tx.satoshi = 0
+                self.addToAddresses(tx)
+                models.append(tx)
+            }
+            self.lastAddressIndex = to
+            do {
+                try BILWalletManager.shared.saveWallets()
+                success(models)
+            } catch {
+                failure(error.localizedDescription, -2)
+            }
+        }) { (error) in
+            debugPrint(error)
+            failure(error.localizedDescription, -2)
+        }
+    }
 	
     var btc_transactionArray: [BTCTransactionModel] {
         get {

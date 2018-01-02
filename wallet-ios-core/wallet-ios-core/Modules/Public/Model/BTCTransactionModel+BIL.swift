@@ -22,7 +22,7 @@ enum BILTransactionType: Int16 {
         case .send:
             str = "icon_record_send"
         case .transfer:
-            str = "icon_home_h"
+            str = "icon_record_transfer"
         }
         return UIImage(named: str)
     }
@@ -64,7 +64,7 @@ extension BTCTransactionModel {
     
     var confirmCount: Int64 {
         get {
-            return height
+            return Int64(BILWalletManager.shared.btcBlockHeight) - height + 1
         }
     }
     
@@ -94,6 +94,10 @@ extension BTCTransactionModel {
     
     var remarkString: String {
         get { return remark!.isEmpty ? "无" : remark! }
+    }
+    
+    var confirmString: String {
+        get { return height == -1 ? "未确认" : ((confirmCount > 1000 ? "1000+" : "\(confirmCount)") + " 确认") }
     }
     
     var firstTargetAddress: BTCTXAddressModel? {
@@ -155,6 +159,7 @@ extension BTCTransactionModel {
     func setProperties(json: JSON) {
         clearSatoshi()
         height = json["height"].int64Value
+        serverID = json["id"].int64Value
         var inAddresses = [String]()
         for j in json["inputs"].arrayValue {
             let add = j["address"].stringValue

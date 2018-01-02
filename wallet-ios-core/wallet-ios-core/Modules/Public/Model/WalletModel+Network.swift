@@ -10,6 +10,20 @@ import Foundation
 import SwiftyJSON
 
 extension WalletModel {
+    
+    func syncWallet(json: JSON) {
+        let addressIndex = json["indexNo"].int64Value
+        if lastAddressIndex < addressIndex {
+            generateAddresses(from: lastAddressIndex, to: addressIndex, success: { (addresses) in
+                
+            }, failure: { (msg, code) in
+                debugPrint(msg)
+            })
+        }
+        let serverVersion = json["version"].int64Value
+        needLoadServer = version < serverVersion
+    }
+    
     func createWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let walletID = id else {
             failure("ID不能为空", -1)
@@ -206,7 +220,7 @@ extension WalletModel {
     static func getKeyHash(wallets: [WalletModel]) -> String {
         var keys = [String]()
         for wallet in wallets {
-            guard let key = wallet.mainExtPublicKey else{ continue }
+            guard let key = wallet.mainExtPublicKey else { continue }
             keys.append(key.md5())
         }
         return keys.joined(separator: "|")

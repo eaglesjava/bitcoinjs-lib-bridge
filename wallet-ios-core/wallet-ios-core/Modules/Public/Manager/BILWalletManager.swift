@@ -17,8 +17,32 @@ class BILWalletManager {
     
     weak var appDelegate: AppDelegate?
     
-    var cnyExchangeRate: Double = 0
-    var usdExchangeRate: Double = 0
+    var cnyExchangeRate: Double {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "bil_cnyExchangeRate")
+        }
+        get {
+            return UserDefaults.standard.double(forKey: "bil_cnyExchangeRate")
+        }
+    }
+    var usdExchangeRate: Double {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "bil_usdExchangeRate")
+        }
+        get {
+            return UserDefaults.standard.double(forKey: "bil_usdExchangeRate")
+        }
+    }
+    
+    var btcBlockHeight: Int {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "bil_btcBlockHeight")
+        }
+        get {
+            return UserDefaults.standard.integer(forKey: "bil_btcBlockHeight")
+        }
+    }
+    
     var loadExchangeRateTimer = Timer()
     
     var wallets: [WalletModel] {
@@ -48,6 +72,8 @@ class BILWalletManager {
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: .UIApplicationWillResignActive, object: nil)
+        
+        loadBlockHeightAndWalletVersion()
     }
     
     deinit {
@@ -72,6 +98,22 @@ class BILWalletManager {
             let json = JSON(result)
             self.cnyExchangeRate = json["cnyrate"].doubleValue
             self.usdExchangeRate = json["usdrate"].doubleValue
+            NotificationCenter.default.post(name: .exchangeRateDidChanged, object: nil)
+        }) { (msg, code) in
+            debugPrint(msg)
+        }
+    }
+    
+    @objc
+    func loadBlockHeightAndWalletVersion() {
+        let hashes = WalletModel.getKeyHash(wallets: wallets)
+        BILNetworkManager.request(request: .getBlockHeightAndWalletVersion(hashes: hashes), success: { (result) in
+            let json = JSON(result)
+            for wallet in self.wallets {
+                let subJson = json[wallet.id!]
+                wallet.syncWallet(json: subJson)
+            }
+            self.btcBlockHeight = json["blockheight"].intValue
             NotificationCenter.default.post(name: .exchangeRateDidChanged, object: nil)
         }) { (msg, code) in
             debugPrint(msg)

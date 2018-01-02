@@ -20,40 +20,6 @@ extension WalletModel {
 }
 
 extension WalletModel {
-    func generateAddresses(from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        guard from <= to else {
-            failure("起始值大于结束值", -1)
-            return
-        }
-        BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: from, toIndex: to, success: { (result) in
-            debugPrint(result)
-            guard let array = result as? [String] else {
-                failure("生成失败", -1)
-                return
-            }
-            var models = [BTCWalletAddressModel]()
-            for address in array {
-                let tx = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: address)
-                tx.address = address
-                tx.satoshi = 0
-                self.addToAddresses(tx)
-                models.append(tx)
-            }
-            self.lastAddressIndex = to
-            do {
-                try BILWalletManager.shared.saveWallets()
-                success(models)
-            } catch {
-                failure(error.localizedDescription, -2)
-            }
-        }) { (error) in
-            debugPrint(error)
-            failure(error.localizedDescription, -2)
-        }
-    }
-}
-
-extension WalletModel {
     static func generateAES(pwd: String) -> AES? {
         do {
             let key = String(pwd.sha256().prefix(32))
