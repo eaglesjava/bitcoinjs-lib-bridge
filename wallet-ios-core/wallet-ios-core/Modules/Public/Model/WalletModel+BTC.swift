@@ -115,6 +115,10 @@ extension WalletModel {
             if self.lastAddressIndex > serverIndex {
                 self.lastAddressIndex = serverIndex
             }
+            if index > serverIndex {
+                failure("暂时无法生成更多的地址了")
+                return
+            }
             self.generateAddresses(from: self.lastAddressIndex, to: serverIndex, success: success, failure: { (msg, code) in
                 failure(msg)
             })
