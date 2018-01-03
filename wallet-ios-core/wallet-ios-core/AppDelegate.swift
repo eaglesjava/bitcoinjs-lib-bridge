@@ -11,6 +11,15 @@ import CoreData
 import IQKeyboardManagerSwift
 import CryptoSwift
 
+enum BILApplicationShortcutItemType: String {
+    
+    case contact
+    case scanQRCode
+    case send
+    case recieve
+    
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -30,10 +39,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let cont = UIStoryboard(name: "NewWallet", bundle: nil).instantiateInitialViewController()
 			window?.makeKeyAndVisible()
 			window?.rootViewController?.present(cont!, animated: false, completion: nil)
+            UIApplication.shared.shortcutItems = nil
 		}
+        else
+        {
+            createShortcuts()
+        }
+        
+        NotificationCenter.default.addObserver(forName: .walletCountDidChanged, object: nil, queue: OperationQueue.main) { (_) in
+            if BILWalletManager.shared.wallets.count == 0 {
+                UIApplication.shared.shortcutItems = nil
+            }
+            else
+            {
+                self.createShortcuts()
+            }
+        }
+        
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            handle(shortcutItem: shortcutItem)
+        }
 		
 		return true
 	}
+    
+    func createShortcuts() {
+        let contactItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.contact.rawValue, localizedTitle: "联系人", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_contact_h"), userInfo: nil)
+        let scanItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.scanQRCode.rawValue, localizedTitle: "扫一扫", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "btn_home_shortcut_scan"), userInfo: nil)
+        let sendItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.send.rawValue, localizedTitle: "发送", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_send_h"), userInfo: nil)
+        let recieveItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.recieve.rawValue, localizedTitle: "接收", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_recieve_h"), userInfo: nil)
+        
+        UIApplication.shared.shortcutItems = [contactItem, scanItem, sendItem, recieveItem]
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        handle(shortcutItem: shortcutItem)
+        completionHandler(true)
+    }
+    
+    func handle(shortcutItem: UIApplicationShortcutItem) {
+        guard let type = BILApplicationShortcutItemType(rawValue: shortcutItem.type) else { return }
+        switch type {
+        case .contact:
+            BILControllerManager.shared.mainTabBarController?.selectedIndex = 1
+        case .scanQRCode:
+            BILControllerManager.shared.mainTabBarController?.selectedIndex = 3
+            if let cont = (BILControllerManager.shared.mainTabBarController?.selectedViewController as? UINavigationController)?.viewControllers.first as? BILSendController {
+                cont.scanQRCodeAction(shortcutItem)
+            }
+        case .send:
+            BILControllerManager.shared.mainTabBarController?.selectedIndex = 3
+        case .recieve:
+            BILControllerManager.shared.mainTabBarController?.selectedIndex = 2
+        }
+    }
 
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

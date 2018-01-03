@@ -16,7 +16,6 @@ class BILTabBarController: UITabBarController {
         // Do any additional setup after loading the view.
 		BILControllerManager.shared.mainTabBarController = self
 		
-		
 		tabBar.backgroundImage = UIImage()
 		tabBar.shadowImage = UIImage()
 		tabBar.tintColor = UIColor.white

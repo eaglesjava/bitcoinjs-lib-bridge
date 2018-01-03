@@ -8,12 +8,15 @@
 
 import UIKit
 
+extension String {
+    static let addressToAmountSegue = "BILAddressToAmountSegue"
+    static let scanResultSegue = "BILSendToScanResult"
+}
+
 class BILSendController: BILBaseViewController, UITextFieldDelegate {
 
     @IBOutlet weak var addressInputView: BILInputView!
     
-    let addressToAmountSegue = "BILAddressToAmountSegue"
-    let scanResultSegue = "BILSendToScanResult"
     let showSelectContactController = "BILShowSelectContactController"
     
     var sendModel: BILSendModel?
@@ -96,7 +99,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
                 }
                 else
                 {
-                    unownedSelf.performSegue(withIdentifier: unownedSelf.scanResultSegue, sender: sender)
+                    unownedSelf.performSegue(withIdentifier: .scanResultSegue, sender: sender)
                 }
             }
         }
@@ -127,7 +130,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
                     let model = BILSendModel(address: address)
                     model.isContactAddress = isContact
                     self.sendModel = model
-                    self.performSegue(withIdentifier: self.addressToAmountSegue, sender: nil)
+                    self.performSegue(withIdentifier: .addressToAmountSegue, sender: nil)
                 }
                 else
                 {
@@ -171,10 +174,10 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         view.endEditing(true)
         guard let id = segue.identifier else { return }
         switch id {
-        case addressToAmountSegue:
+        case .addressToAmountSegue:
             let cont = segue.destination as! BILSendInputAmountController
             cont.sendModel = sendModel
-        case scanResultSegue:
+        case .scanResultSegue:
             let cont = segue.destination as! BILScanQRCodeResultController
             cont.sendModel = sendModel
         case showSelectContactController:
