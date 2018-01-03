@@ -22,6 +22,18 @@ extension WalletModel {
         }
         let serverVersion = json["version"].int64Value
         needLoadServer = version < serverVersion
+        if needLoadServer {
+            getTransactionHistoryFromSever(page: 0, size: btcTransactions!.count + 1000, success: { (txs) in
+                self.version = serverVersion
+                do {
+                    try BILWalletManager.shared.saveWallets()
+                } catch {
+                    debugPrint(error)
+                }
+            }, failure: { (msg, code) in
+                debugPrint(msg)
+            })
+        }
     }
     
     func createWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
