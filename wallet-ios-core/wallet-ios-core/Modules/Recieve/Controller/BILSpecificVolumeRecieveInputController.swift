@@ -12,7 +12,7 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController, UITextFiel
 	
 	var recieveModel: BILRecieveModel?
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var cnyLabel: UILabel!
+    @IBOutlet weak var cnyLabel: BILExchangeRateLabel!
     @IBOutlet weak var coinNameLabel: UILabel!
     @IBOutlet weak var nextButtonBottomSpace: NSLayoutConstraint!
 	
@@ -89,6 +89,14 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController, UITextFiel
             text.removeSubrange(rangeLocation..<upperLocation)
         }
         debugPrint("\(text)  \(range)    \(string)")
+        
+        if text.count > 30 {
+            return false
+        }
+        
+        if let coinAmount = Double(text) {
+            cnyLabel.btcValue = coinAmount
+        }
         
         if text.contains(".") {
             let array = text.components(separatedBy: ".")

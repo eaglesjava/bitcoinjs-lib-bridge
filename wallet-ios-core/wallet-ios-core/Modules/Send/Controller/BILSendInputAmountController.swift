@@ -101,20 +101,21 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
             text.removeSubrange(rangeLocation..<upperLocation)
         }
         
+        if text.count > 30 {
+            return false
+        }
+        
+        if let coinAmount = Double(text) {
+            cnyLabel.btcValue = coinAmount
+        }
+        
         if text.contains(".") {
             let array = text.components(separatedBy: ".")
             if array.count > 2 {
                 return false
             }
             let decimalPlace = array[1]
-            if let coinAmount = Double(text) {
-                cnyLabel.btcValue = Int64(coinAmount * Double(BTC_SATOSHI))
-            }
             return decimalPlace.count <= "\(BTC_SATOSHI)".count - 1
-        }
-        
-        if let coinAmount = Int64(text) {
-            cnyLabel.btcValue = coinAmount * BTC_SATOSHI
         }
         
         return true

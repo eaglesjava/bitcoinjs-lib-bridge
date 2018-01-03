@@ -8,7 +8,9 @@
 
 import UIKit
 
-class BILAgreementController: BILWebViewController {
+class BILAgreementController: BILBaseViewController {
+    
+    @IBOutlet weak var textView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +22,27 @@ class BILAgreementController: BILWebViewController {
         }
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+//        textView.scrollRectToVisible(CGRect.zero, animated: false)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         guard let htmlURL = Bundle.main.url(forResource: "service_cn", withExtension: "html") else {
             return
         }
-        webView.loadFileURL(htmlURL, allowingReadAccessTo: htmlURL)
+        do {
+            let data = try Data(contentsOf: htmlURL)
+            let att = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+            textView.attributedText = att
+        } catch {
+            showTipAlert(msg: error.localizedDescription, dismissed: {
+                self.navigationController?.popViewController(animated: true)
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {

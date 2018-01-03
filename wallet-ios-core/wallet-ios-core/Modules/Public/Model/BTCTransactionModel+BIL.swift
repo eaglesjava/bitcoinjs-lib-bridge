@@ -88,7 +88,16 @@ extension BTCTransactionModel {
     
     var volumeString: String {
         get {
-            return String(format: "\(type == .recieve ? "+" : "-")\(BTCFormatString(btc: Int64(targetSatoshi))) BTC")
+            var symbol = ""
+            switch type {
+            case .recieve:
+                symbol = "+"
+            case .send:
+                symbol = "-"
+            default:
+                ()
+            }
+            return String(format: "\(symbol)\(BTCFormatString(btc: Int64(targetSatoshi))) BTC")
         }
     }
     

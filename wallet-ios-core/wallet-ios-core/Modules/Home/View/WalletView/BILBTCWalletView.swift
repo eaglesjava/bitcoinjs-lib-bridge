@@ -32,14 +32,14 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
             let txs = w.btcTransactions?.sortedArray(comparator: { (lhs, rhs) -> ComparisonResult in
                 let l = lhs as! BTCTransactionModel
                 let r = rhs as! BTCTransactionModel
-                return l.createdDate!.compare(r.createdDate!)
+                return r.createdDate!.compare(l.createdDate!)
             }) as! [BTCTransactionModel]
             transactions.append(contentsOf: txs)
             w.getBalanceFromServer(success: { (wallet) in
                 self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 122 : 213
                 self.balanceLabel.text = w.btc_balanceString
                 self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + " BTC "
-                self.currencyLabel.btcValue = w.btcBalance
+                self.currencyLabel.btcValue = Double(w.btc_balanceString)
             }) { (msg, code) in
                 debugPrint(msg)
             }

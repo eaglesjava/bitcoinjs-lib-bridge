@@ -22,7 +22,7 @@ func getCurrency(btcValue: Int64) -> String {
 
 class BILExchangeRateLabel: UILabel {
     
-    var btcValue: Int64 = 0 {
+    var btcValue: Double? = 0 {
         didSet {
             rateDidChanged()
         }
@@ -38,6 +38,11 @@ class BILExchangeRateLabel: UILabel {
         setupNotifation()
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        rateDidChanged()
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: .exchangeRateDidChanged, object: nil)
     }
@@ -48,6 +53,7 @@ class BILExchangeRateLabel: UILabel {
     
     @objc
     func rateDidChanged() {
-        text = getCurrency(btcValue: btcValue)
+        guard let value = btcValue else { return }
+        text = getCurrency(btcValue: value)
     }
 }
