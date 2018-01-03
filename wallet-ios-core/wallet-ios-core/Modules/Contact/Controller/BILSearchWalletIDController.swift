@@ -31,8 +31,8 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
     @IBAction func searchAction(_ sender: Any) {
         view.endEditing(true)
         func showToast(msg: String) {
+            self.bil_dismissHUD()
             showTipAlert(title: nil, msg: msg) {
-                self.bil_dismissHUD()
                 self.idInputView.textField.becomeFirstResponder()
             }
         }
