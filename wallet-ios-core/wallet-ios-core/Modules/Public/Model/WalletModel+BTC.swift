@@ -189,8 +189,7 @@ extension WalletModel {
     }
     var btc_currencyString: String {
         get {
-            let price = Double(btcBalance) * BILWalletManager.shared.cnyExchangeRate / Double(BTC_SATOSHI)
-            return String(price) + "CNY"
+            return getCurrency(btcValue: btcBalance)
         }
     }
 }

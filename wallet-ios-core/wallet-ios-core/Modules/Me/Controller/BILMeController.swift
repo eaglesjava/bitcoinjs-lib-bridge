@@ -11,6 +11,7 @@ import UIKit
 extension String {
     static var bil_meToBackupWalletSegue: String { return "BILMeToBackupWalletSegue" }
 	static var bil_meToWalletDetailSegue: String { return "BILMeToWalletDetailSegue" }
+    static var bil_meToSettingSegue: String { return "BILMeToSettingSegue" }
     static var bil_meToAboutUsSegue: String { return "BILMeToAboutUsSegue" }
 }
 
@@ -62,7 +63,7 @@ class BILMeController: BILBaseViewController {
             case .wallet:
                 return BILWalletManager.shared.wallets
             case .system:
-                return[]
+                return ["系统设置"]
             case .other:
                 return ["关于我们"]
             }
@@ -220,6 +221,7 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
             }
             c.titleLabel.text = model as? String
         case .other: fallthrough
+        case .system: fallthrough
 		case .contacts:
 			let c = cell as! BILMeCell
 			c.titleLabel.text = model as? String
@@ -227,8 +229,6 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
             let c = cell as! BILMeWalletCell
             let wallet = model as? WalletModel
             c.wallet = wallet
-        default:
-            ()
         }
         return cell
     }
@@ -268,6 +268,8 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
 		case .wallet:
 			guard let wallet = sectionType.dataArray()[indexPath.row] as? WalletModel else { return }
 			performSegue(withIdentifier: .bil_meToWalletDetailSegue, sender: wallet)
+        case .system:
+            performSegue(withIdentifier: .bil_meToSettingSegue, sender: nil)
         case .other:
             performSegue(withIdentifier: .bil_meToAboutUsSegue, sender: nil)
 		default:

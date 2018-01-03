@@ -75,6 +75,7 @@
 		BA6E95F71FE272570085F7B5 /* BTCTransactionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E95F61FE272570085F7B5 /* BTCTransactionBuilder.swift */; };
 		BA81240E1FFB36DC0036DEC6 /* BILExchangeRateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA81240D1FFB36DC0036DEC6 /* BILExchangeRateLabel.swift */; };
 		BA8E666E1FFC860500F2539D /* BILInputWalletIDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8E666D1FFC860500F2539D /* BILInputWalletIDController.swift */; };
+		BA8E66701FFCC25C00F2539D /* BILAppSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8E666F1FFCC25C00F2539D /* BILAppSettingController.swift */; };
 		BAA371181FD1430C00E757A6 /* String+BILURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA371171FD1430C00E757A6 /* String+BILURL.swift */; };
 		BAB749161FF2287800E85607 /* BILAgreementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB749151FF2287800E85607 /* BILAgreementController.swift */; };
 		BAB7491A1FF2298D00E85607 /* BILWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB749191FF2298D00E85607 /* BILWebViewController.swift */; };
@@ -254,6 +255,7 @@
 		BA6E95F61FE272570085F7B5 /* BTCTransactionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCTransactionBuilder.swift; sourceTree = "<group>"; };
 		BA81240D1FFB36DC0036DEC6 /* BILExchangeRateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILExchangeRateLabel.swift; sourceTree = "<group>"; };
 		BA8E666D1FFC860500F2539D /* BILInputWalletIDController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILInputWalletIDController.swift; sourceTree = "<group>"; };
+		BA8E666F1FFCC25C00F2539D /* BILAppSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAppSettingController.swift; sourceTree = "<group>"; };
 		BAA371171FD1430C00E757A6 /* String+BILURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BILURL.swift"; sourceTree = "<group>"; };
 		BAA371191FD1556E00E757A6 /* wallet-ios-core.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "wallet-ios-core.entitlements"; sourceTree = "<group>"; };
 		BAB749151FF2287800E85607 /* BILAgreementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAgreementController.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				BA5199191FF0A1E1004F6602 /* BILWalletAddressController.swift */,
 				BA51991D1FF22113004F6602 /* BILAboutUsViewController.swift */,
 				BAB749151FF2287800E85607 /* BILAgreementController.swift */,
+				BA8E666F1FFCC25C00F2539D /* BILAppSettingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1471,6 +1474,7 @@
 				CC4417011FBEAC7F00C4B158 /* WalletModel+BIL.swift in Sources */,
 				BA0457111FDE68C700070CCA /* BILQRCodeScanViewController.swift in Sources */,
 				BA6E95EB1FDFE5AF0085F7B5 /* BILSendChooseWalletController.swift in Sources */,
+				BA8E66701FFCC25C00F2539D /* BILAppSettingController.swift in Sources */,
 				BA12AC3F1FEA5D2B00812F38 /* BILSearchWalletIDResultController.swift in Sources */,
 				CCE5E1661FC7FB9400F7555D /* BILHomeTableHeaderView.swift in Sources */,
 				BA1918EE1FD7DCE500B6F568 /* BILPopMenu.swift in Sources */,

@@ -14,7 +14,7 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
     let chooseWalletSegue = "BILInputToChooseWalletSegue"
     
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var cnyLabel: UILabel!
+    @IBOutlet weak var cnyLabel: BILExchangeRateLabel!
     @IBOutlet weak var coinNameLabel: UILabel!
     @IBOutlet weak var nextButtonBottomSpace: NSLayoutConstraint!
     
@@ -100,7 +100,6 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
             let upperLocation = text.index(rangeLocation, offsetBy: range.length)
             text.removeSubrange(rangeLocation..<upperLocation)
         }
-        debugPrint("\(text)  \(range)    \(string)")
         
         if text.contains(".") {
             let array = text.components(separatedBy: ".")
@@ -108,11 +107,21 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
                 return false
             }
             let decimalPlace = array[1]
+            if let coinAmount = Double(text) {
+                cnyLabel.btcValue = Int64(coinAmount * Double(BTC_SATOSHI))
+            }
             return decimalPlace.count <= "\(BTC_SATOSHI)".count - 1
+        }
+        
+        if let coinAmount = Int64(text) {
+            cnyLabel.btcValue = coinAmount * BTC_SATOSHI
         }
         
         return true
     }
+    
+    
+    
     @IBAction func sendAllBalance(_ sender: Any) {
         sendModel?.isSendAll = true
         performSegue(withIdentifier: chooseWalletSegue, sender: nil)

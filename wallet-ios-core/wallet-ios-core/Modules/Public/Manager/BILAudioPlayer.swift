@@ -11,6 +11,9 @@ import AVFoundation
 
 class BILAudioPlayer: NSObject {
     static func play(filePath: String?) {
+        guard BILSettingManager.isSoundEnabled else {
+            return
+        }
         guard let path = filePath else {
             return
         }

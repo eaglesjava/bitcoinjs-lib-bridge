@@ -52,6 +52,7 @@ class BILSokectManager: NSObject {
             debugPrint(data)
             self.postWallets()
             NotificationCenter.default.post(name: .networkStatusDidChanged, object: nil)
+            BILWalletManager.shared.loadBlockHeightAndWalletVersion()
         }
         socket.on(clientEvent: .disconnect) { (data, ack) in
             debugPrint("socket disconnect")

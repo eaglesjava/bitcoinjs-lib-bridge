@@ -8,11 +8,23 @@
 
 import UIKit
 
+func getCurrency(btcValue: Double) -> String {
+    let currencyType = BILSettingManager.currencyType
+    let price = Double(btcValue) * currencyType.rate
+    return String(format: "%.2f", price) + " " + currencyType.symbolName
+}
+
+func getCurrency(btcValue: Int64) -> String {
+    let currencyType = BILSettingManager.currencyType
+    let price = Double(btcValue) * currencyType.rate / Double(BTC_SATOSHI)
+    return String(format: "%.2f", price) + " " + currencyType.symbolName
+}
+
 class BILExchangeRateLabel: UILabel {
     
     var btcValue: Int64 = 0 {
         didSet {
-            rateDidchange()
+            rateDidChanged()
         }
     }
     
@@ -31,12 +43,11 @@ class BILExchangeRateLabel: UILabel {
     }
     
     func setupNotifation() {
-        NotificationCenter.default.addObserver(self, selector: #selector(rateDidchange), name: .exchangeRateDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(rateDidChanged), name: .exchangeRateDidChanged, object: nil)
     }
     
     @objc
-    func rateDidchange() {
-        let price = Double(btcValue) * BILWalletManager.shared.cnyExchangeRate / Double(BTC_SATOSHI)
-        text = String(format: "%.2f", price) + " CNY"
+    func rateDidChanged() {
+        text = getCurrency(btcValue: btcValue)
     }
 }
