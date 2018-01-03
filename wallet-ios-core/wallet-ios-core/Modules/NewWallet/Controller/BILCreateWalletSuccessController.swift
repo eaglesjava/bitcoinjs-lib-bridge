@@ -11,7 +11,7 @@ import UIKit
 class BILCreateWalletSuccessController: BILBaseViewController {
 
 	var mnemonicHash: String?
-    var createWalletType: BILCreateWalletViewController.CreateWalletType = .new
+    var createWalletType: CreateWalletType = .new
 	
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var resultTitleLabel: UILabel!
@@ -25,17 +25,17 @@ class BILCreateWalletSuccessController: BILBaseViewController {
 
         // Do any additional setup after loading the view.
         titleLabel.text = "\(createWalletType.titleString())钱包"
-        titleLabel.text = "\(createWalletType.titleString())成功"
+        resultTitleLabel.text = "\(createWalletType.titleString())成功"
         switch createWalletType {
         case .new:
-            msgLabel.text = "钱包创建成功，强烈建议您在使用前将助记词储存到安全地方做好钱包备份"
+            msgLabel.text = "钱包创建成功，请您务必在使用前将助记词储存到安全地方做好钱包备份"
         case .recover:
-            msgLabel.text = "钱包导入成功，强烈建议您保管好助记词和密码"
+            msgLabel.text = "钱包导入成功，请您务必保管好助记词和密码"
             backupButton.isHidden = true
             backupLaterButton.isHidden = true
             okButton.isHidden = false
         case .resetPassword:
-            msgLabel.text = "钱包密码重置成功，强烈建议您保管好助记词和密码"
+            msgLabel.text = "钱包密码重置成功，请您务必保管好助记词和密码"
             backupButton.isHidden = true
             backupLaterButton.isHidden = true
             okButton.isHidden = false

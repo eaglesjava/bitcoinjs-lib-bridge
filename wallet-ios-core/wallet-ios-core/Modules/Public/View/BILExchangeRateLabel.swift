@@ -37,6 +37,6 @@ class BILExchangeRateLabel: UILabel {
     @objc
     func rateDidchange() {
         let price = Double(btcValue) * BILWalletManager.shared.cnyExchangeRate / Double(BTC_SATOSHI)
-        text = String(price) + " CNY"
+        text = String(format: "%.2f", price) + " CNY"
     }
 }

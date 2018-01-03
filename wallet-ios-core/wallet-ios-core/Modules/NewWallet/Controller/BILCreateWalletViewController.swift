@@ -10,37 +10,33 @@ import UIKit
 import SVProgressHUD
 import CoreData
 import CryptoSwift
-import PopupDialog
+
+enum CreateWalletType {
+    case new
+    case recover
+    case resetPassword
+    
+    func titleString() -> String {
+        switch self {
+        case .new:
+            return "创建"
+        case .recover:
+            return "导入"
+        case .resetPassword:
+            return "重置"
+        }
+    }
+}
 
 class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate {
-	
-	enum CreateWalletType {
-		case new
-		case recover
-        case resetPassword
-		
-		func titleString() -> String {
-            switch self {
-            case .new:
-                return "创建"
-            case .recover:
-                return "导入"
-            case .resetPassword:
-                return "重置"
-            }
-		}
-		
-	}
 	
 	@IBOutlet weak var inputsView: UIView!
 	@IBOutlet weak var passwordStrengthView: BILPasswordStrengthView!
 	@IBOutlet weak var passwordTextField: ASKPlaceHolderColorTextField!
-	@IBOutlet weak var walletNameTextField: ASKPlaceHolderColorTextField!
 	@IBOutlet weak var confirmPasswordTextField: ASKPlaceHolderColorTextField!
 	
 	@IBOutlet weak var createButton: BILGradientButton!
 	
-	@IBOutlet weak var walletNameInputView: BILInputView!
 	@IBOutlet weak var passwordInputView: BILInputView!
 	@IBOutlet weak var confirmPasswordInputView: BILInputView!
 	
@@ -54,8 +50,6 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	var mnemonicHash: String?
     var walletID: String?
 	
-	var hasShownAlert = false
-	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,20 +59,10 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		createButton.setTitle("开始\(titleString)", for: .normal)
     }
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-        if let w = walletID, !w.isEmpty {
-            walletNameTextField.isEnabled = false
-            walletNameTextField.text = w
-            walletNameTextField.textColor = UIColor.bil_white_60_color
-        }
-	}
-	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(true)
 		NotificationCenter.default.addObserver(self, selector: #selector(self.textFieldValueDidChange(notification:))
 			, name: .UITextFieldTextDidChange, object: nil)
-		showAlertForSupportedCoins()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
@@ -92,28 +76,6 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
     }
 	
 	// MARK: - UI
-	
-	func showAlertForSupportedCoins() {
-		guard !hasShownAlert else {
-			return
-		}
-		hasShownAlert = true
-		let buttonTitle = "我知道了"
-		
-		let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
-		let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: false, hideStatusBar: false) {
-			
-		}
-		
-		let button = DefaultButton(title: buttonTitle, height: 50, dismissOnTap: true) {
-			
-		}
-		popup.addButton(button)
-		
-		present(popup, animated: true) {
-			
-		}
-	}
 	
 	func createSuccess() {
 		performSegue(withIdentifier: "BILCreateWalletSuccessSegue", sender: nil)
@@ -144,61 +106,8 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		}
 		return false
 	}
-	
-	func checkWalletID() -> String? {
-        let emptyTip = "钱包ID"
-		guard let walletID = walletNameTextField.text else {
-			return emptyTip
-		}
-		var toReturn: String? = nil
-		switch walletID.count {
-		case 0:
-			toReturn = emptyTip
-            return toReturn
-		case let i where i > 20: fallthrough
-        case 1...5:
-            toReturn = "钱包ID支持6-20位字符"
-		default: ()
-		}
-        
-        func count(string: String, pattern: String) throws -> Int {
-            let exp = try NSRegularExpression(pattern: pattern, options: .allowCommentsAndWhitespace)
-            let count = exp.numberOfMatches(in: string, options: .reportCompletion, range: NSMakeRange(0, string.count))
-            return count
-        }
-        
-        do {
-            let numCount = try count(string: walletID, pattern: "[0-9]")
-            let lowerCount = try count(string: walletID, pattern: "[a-z]")
-            let upperCount = try count(string: walletID, pattern: "[A-Z]")
-            let underlineCount = try count(string: walletID, pattern: "[_]")
-            let otherCount = walletID.count - numCount - lowerCount - upperCount - underlineCount
-            if otherCount > 0 {
-                toReturn = "ID仅支持字母、数字和下划线"
-            }
-            
-            if try count(string: String(walletID.first!), pattern: "[a-zA-Z]") == 0 {
-                toReturn = "ID仅能以字母开头"
-            }
-        } catch {
-            
-        }
-        
-        if createWalletType == .new, WalletModel.checkIDIsExists(id: walletID) {
-            toReturn = "钱包ID已存在"
-        }
-        
-		return toReturn
-	}
     
 	func createWallet() {
-		
-		let walletIDError = checkWalletID()
-		guard walletIDError == nil else {
-            walletNameTextField.becomeFirstResponder()
-			walletNameInputView.show(tip: walletIDError!, type: .error)
-			return
-		}
         
         let pwdError = checkPassword()
         guard pwdError == nil else {
@@ -244,7 +153,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 return
             }
             
-            wallet.id = self.walletNameTextField.text!
+            wallet.id = self.walletID
             wallet.resetProperties(m: m, pwd: pwd, needSave:false, success: { (w) in
                 func successFromSever(result: [String: Any]) {
                     do {
@@ -303,13 +212,6 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		switch textField {
-		case walletNameTextField:
-			let walletIDError = checkWalletID()
-			guard walletIDError == nil else {
-				walletNameInputView.show(tip: walletIDError!, type: .error)
-				return false
-			}
-			passwordTextField.becomeFirstResponder()
 		case passwordTextField:
             let pwdError = checkPassword()
             guard pwdError == nil else {
@@ -337,8 +239,6 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
     func textFieldValueDidChange(notification: Notification) {
 		if let textField: UITextField = notification.object as? UITextField {
 			switch textField {
-			case walletNameTextField:
-				walletNameInputView.show(tip: "钱包ID", type: .normal)
 			case passwordTextField:
 				passwordStrengthView.strength = BILPasswordStrengthView.caculatePasswordStrength(pwd: textField.text ?? "")
 				passwordInputView.show(tip: "创建钱包密码", type: .normal)

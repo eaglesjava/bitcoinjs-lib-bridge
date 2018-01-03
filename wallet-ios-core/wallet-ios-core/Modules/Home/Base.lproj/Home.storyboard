@@ -719,10 +719,10 @@
             </objects>
             <point key="canvasLocation" x="1764" y="191.1544227886057"/>
         </scene>
-        <!--BILCreateWalletViewController-->
+        <!--BILInputWalletIDController-->
         <scene sceneID="9pz-Tm-E8K">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="BILCreateWalletViewController" storyboardName="NewWallet" referencedIdentifier="BILCreateWalletViewController" id="aVg-jc-87Q" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="BILCreateWalletViewController" storyboardName="NewWallet" referencedIdentifier="BILInputWalletIDController" id="aVg-jc-87Q" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="PCU-Kr-GX5"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YzT-KV-ofY" userLabel="First Responder" sceneMemberID="firstResponder"/>

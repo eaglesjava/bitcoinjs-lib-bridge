@@ -15,7 +15,8 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 	@IBOutlet weak var mnemonicView: BILMnemonicView!
 	
 	let emptyTitle = "点击以输入"
-	let sugueID = "BILMnemonicToNewWalletSegue"
+	let sugueID = "BILMnemonicToWalletIDSegue"
+    let resetSegueID = "BILMnemonicToResetPasswordSegue"
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +94,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
                         self.bil_dismissSelfModalViewController()
                     }))
                     alert.addAction(UIAlertAction(title: "重置", style: .destructive, handler: { (action) in
-                        self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: wallet.id))
+                        self.performSegue(withIdentifier: self.resetSegueID, sender: segueSender(mnemonic: mnemonic, walletID: wallet.id))
                     }))
                     self.present(alert, animated: true)
                 }
@@ -154,7 +155,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
 		if segue.identifier == sugueID {
-			let cont = segue.destination as! BILCreateWalletViewController
+			let cont = segue.destination as! BILInputWalletIDController
             cont.navigationItem.rightBarButtonItem = nil
             guard let s = sender as? (mnemonic: String, walletID: String?) else {
                 return
@@ -162,6 +163,16 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 			cont.mnemonic = s.mnemonic
             cont.walletID = s.walletID
 		}
+        
+        if segue.identifier == resetSegueID {
+            let cont = segue.destination as! BILCreateWalletViewController
+            cont.navigationItem.rightBarButtonItem = nil
+            guard let s = sender as? (mnemonic: String, walletID: String?) else {
+                return
+            }
+            cont.mnemonic = s.mnemonic
+            cont.walletID = s.walletID
+        }
     }
 
 }
