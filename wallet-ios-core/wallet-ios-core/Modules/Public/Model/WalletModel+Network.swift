@@ -227,6 +227,9 @@ extension WalletModel {
             }
             do {
                 try BILWalletManager.shared.saveWallets()
+				utx.sort(by: { (lhs, rhs) -> Bool in
+					rhs.createdDate!.isEarlier(than: lhs.createdDate!)
+				})
                 success(utx)
             } catch {
                 failure(error.localizedDescription, -2)
