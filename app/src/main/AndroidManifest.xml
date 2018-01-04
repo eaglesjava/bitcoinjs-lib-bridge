@@ -139,6 +139,14 @@
             android:name=".ui.main.my.SystemSettingActivity"
             android:label="@string/title_activity_system_setting"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.main.my.AboutUsActivity"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.main.my.UseRuleActivity"
+            android:label="@string/title_activity_use_rule"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

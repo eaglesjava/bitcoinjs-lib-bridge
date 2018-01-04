@@ -16,6 +16,7 @@ import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
 import com.bitbill.www.model.wallet.network.socket.Register;
 
 import javax.inject.Inject;
@@ -119,9 +120,9 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
 
         getCompositeDisposable().add(getModelManager().createWallet(new CreateWalletRequest(mWallet.getName(), mWallet.getXPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
                 .compose(applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<String>>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<ApiResponse>(getMvpView()) {
                     @Override
-                    public void onNext(ApiResponse<String> stringApiResponse) {
+                    public void onNext(ApiResponse stringApiResponse) {
                         super.onNext(stringApiResponse);
                         if (!isViewAttached()) {
                             return;
@@ -168,9 +169,9 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         getCompositeDisposable().add(getModelManager()
                 .importWallet(new ImportWalletRequest(mWallet.getName(), mWallet.getXPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
                 .compose(applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<String>>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<ApiResponse<ImportWalletResponse>>(getMvpView()) {
                     @Override
-                    public void onNext(ApiResponse<String> stringApiResponse) {
+                    public void onNext(ApiResponse<ImportWalletResponse> stringApiResponse) {
                         super.onNext(stringApiResponse);
                         if (!isViewAttached()) {
                             return;

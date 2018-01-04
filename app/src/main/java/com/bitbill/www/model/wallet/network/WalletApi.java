@@ -17,6 +17,7 @@ import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
 import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
@@ -40,7 +41,7 @@ public interface WalletApi extends Api {
      * @param createWalletRequest
      * @return
      */
-    Observable<ApiResponse<java.lang.String>> createWallet(CreateWalletRequest createWalletRequest);
+    Observable<ApiResponse> createWallet(CreateWalletRequest createWalletRequest);
 
     /**
      * 导入钱包
@@ -48,7 +49,7 @@ public interface WalletApi extends Api {
      * @param importWalletRequest
      * @return
      */
-    Observable<ApiResponse<java.lang.String>> importWallet(ImportWalletRequest importWalletRequest);
+    Observable<ApiResponse<ImportWalletResponse>> importWallet(ImportWalletRequest importWalletRequest);
 
     /**
      * 删除钱包
@@ -56,7 +57,7 @@ public interface WalletApi extends Api {
      * @param deleteWalletRequest
      * @return
      */
-    Observable<ApiResponse<java.lang.String>> deleteWallet(DeleteWalletRequest deleteWalletRequest);
+    Observable<ApiResponse> deleteWallet(DeleteWalletRequest deleteWalletRequest);
 
     /**
      * 检查WalletId
@@ -64,7 +65,7 @@ public interface WalletApi extends Api {
      * @param checkWalletIdRequest
      * @return
      */
-    Observable<ApiResponse<java.lang.String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest);
+    Observable<ApiResponse> checkWalletId(CheckWalletIdRequest checkWalletIdRequest);
 
     /**
      * 获取walletId

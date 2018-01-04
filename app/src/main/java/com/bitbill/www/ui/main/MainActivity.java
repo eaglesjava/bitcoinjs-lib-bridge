@@ -35,6 +35,7 @@ import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
+import com.bitbill.www.ui.main.my.AboutUsActivity;
 import com.bitbill.www.ui.main.my.ContactSettingActivity;
 import com.bitbill.www.ui.main.my.ShortCutSettingActivity;
 import com.bitbill.www.ui.main.my.SystemSettingActivity;
@@ -253,10 +254,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         } else if (id == R.id.nav_sys_setting) {
             // 切换到系统设置界面
             SystemSettingActivity.start(this);
+        } else if (id == R.id.nav_about_us) {
+            // 切换到关于我们界面
+            AboutUsActivity.start(this);
         }
-
-        // TODO: 2017/11/17 add other nav item
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -30,6 +30,7 @@ import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
+import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
 import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
@@ -109,7 +110,7 @@ public class WalletModelManager extends ModelManager implements WalletModel {
      * @return
      */
     @Override
-    public Observable<ApiResponse<java.lang.String>> createWallet(CreateWalletRequest createWalletRequest) {
+    public Observable<ApiResponse> createWallet(CreateWalletRequest createWalletRequest) {
         return mWalletApi.createWallet(createWalletRequest);
     }
 
@@ -120,12 +121,12 @@ public class WalletModelManager extends ModelManager implements WalletModel {
      * @return
      */
     @Override
-    public Observable<ApiResponse<java.lang.String>> importWallet(ImportWalletRequest importWalletRequest) {
+    public Observable<ApiResponse<ImportWalletResponse>> importWallet(ImportWalletRequest importWalletRequest) {
         return mWalletApi.importWallet(importWalletRequest);
     }
 
     @Override
-    public Observable<ApiResponse<String>> deleteWallet(DeleteWalletRequest deleteWalletRequest) {
+    public Observable<ApiResponse> deleteWallet(DeleteWalletRequest deleteWalletRequest) {
         return mWalletApi.deleteWallet(deleteWalletRequest);
     }
 
@@ -136,7 +137,7 @@ public class WalletModelManager extends ModelManager implements WalletModel {
      * @return
      */
     @Override
-    public Observable<ApiResponse<java.lang.String>> checkWalletId(CheckWalletIdRequest checkWalletIdRequest) {
+    public Observable<ApiResponse> checkWalletId(CheckWalletIdRequest checkWalletIdRequest) {
         return mWalletApi.checkWalletId(checkWalletIdRequest);
     }
 

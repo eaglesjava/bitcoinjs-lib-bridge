@@ -36,9 +36,9 @@ public class CreateWalletIdPresenter<M extends WalletModel, V extends CreateWall
                 .add(getModelManager()
                         .checkWalletId(new CheckWalletIdRequest(getMvpView().getWalletId()))
                         .compose(this.applyScheduler())
-                        .subscribeWith(new BaseSubcriber<ApiResponse<String>>(getMvpView()) {
+                        .subscribeWith(new BaseSubcriber<ApiResponse>(getMvpView()) {
                             @Override
-                            public void onNext(ApiResponse<String> stringApiResponse) {
+                            public void onNext(ApiResponse stringApiResponse) {
                                 super.onNext(stringApiResponse);
                                 if (!isViewAttached()) {
                                     return;
