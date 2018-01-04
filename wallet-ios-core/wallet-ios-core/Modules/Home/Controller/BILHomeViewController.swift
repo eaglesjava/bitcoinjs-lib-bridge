@@ -177,10 +177,6 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		super.viewWillAppear(animated)
 		navigationController?.setNavigationBarHidden(true, animated: false)
 		tableView.reloadData()
-		
-		DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
-			NotificationCenter.default.post(name: .unconfirmTransactionBeenConfirmed, object: nil)
-		}
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
