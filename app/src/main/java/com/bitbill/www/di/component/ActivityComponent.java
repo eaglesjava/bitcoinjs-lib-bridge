@@ -16,6 +16,7 @@ import com.bitbill.www.ui.main.contact.EditContactActivity;
 import com.bitbill.www.ui.main.contact.SearchContactResultActivity;
 import com.bitbill.www.ui.main.my.ContactSettingActivity;
 import com.bitbill.www.ui.main.my.ShortCutSettingActivity;
+import com.bitbill.www.ui.main.my.SystemSettingActivity;
 import com.bitbill.www.ui.main.my.WalletDetailActivity;
 import com.bitbill.www.ui.main.my.WalletSettingFragment;
 import com.bitbill.www.ui.main.receive.BtcReceiveFragment;
@@ -88,4 +89,6 @@ public interface ActivityComponent {
     void inject(ShortCutSettingActivity shorcutSettingActivity);
 
     void inject(EditContactActivity editContactActivity);
+
+    void inject(SystemSettingActivity systemSettingActivity);
 }

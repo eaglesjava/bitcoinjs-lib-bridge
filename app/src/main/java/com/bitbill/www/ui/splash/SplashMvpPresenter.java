@@ -11,4 +11,6 @@ public interface SplashMvpPresenter<M extends WalletModel, V extends SplashMvpVi
      * 本地是否有钱包
      */
     void hasWallet();
+
+    void getExchangeRate();
 }

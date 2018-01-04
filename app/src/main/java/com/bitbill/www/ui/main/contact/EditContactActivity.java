@@ -105,6 +105,11 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
     @Override
     public void updateContactSuccess() {
         showMessage(R.string.msg_update_contact_success);
+        ContactUpdateEvent event = new ContactUpdateEvent();
+        event.setData(mContact);
+        EventBus.getDefault().postSticky(event);
+        finish();
+
     }
 
     @Override

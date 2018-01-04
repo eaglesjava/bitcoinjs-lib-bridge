@@ -20,7 +20,7 @@
         android:layout_height="13dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_receive_right_arrow" />
+        android:src="@drawable/ic_right_arrow" />
 
     <TextView
         android:id="@+id/tv_back_up"

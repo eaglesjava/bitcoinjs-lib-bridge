@@ -84,7 +84,7 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
         }
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-//        dialog.getWindow().setWindowAnimations(R.style.DialogWalletSelect);
+        dialog.getWindow().setWindowAnimations(R.style.DialogWalletSelect);
         return dialog;
     }
 

@@ -12,7 +12,7 @@ import com.androidnetworking.error.ANError;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.model.Model;
-import com.bitbill.www.common.base.model.network.ApiError;
+import com.bitbill.www.common.base.model.network.api.ApiError;
 import com.bitbill.www.common.base.view.MvpView;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.google.gson.Gson;

@@ -34,6 +34,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
                 getMvpPresenter().hasWallet();
             }
         }, 2000);
+        getMvpPresenter().getExchangeRate();
     }
 
     @Override

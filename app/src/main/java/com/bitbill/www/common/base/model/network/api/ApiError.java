@@ -2,7 +2,7 @@
  * Copyright (c) 2017 bitbill.com
  */
 
-package com.bitbill.www.common.base.model.network;
+package com.bitbill.www.common.base.model.network.api;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

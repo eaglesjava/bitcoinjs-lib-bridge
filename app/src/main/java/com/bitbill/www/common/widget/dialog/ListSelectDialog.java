@@ -104,8 +104,9 @@ public class ListSelectDialog extends BaseDialog implements BaseViewControl {
         return R.layout.dialog_list_select;
     }
 
-    public void setOnListSelectItemClickListener(OnListSelectItemClickListener onListSelectItemClickListener) {
+    public ListSelectDialog setOnListSelectItemClickListener(OnListSelectItemClickListener onListSelectItemClickListener) {
         mOnListSelectItemClickListener = onListSelectItemClickListener;
+        return this;
     }
 
     public interface OnListSelectItemClickListener {

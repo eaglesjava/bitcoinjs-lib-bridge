@@ -37,6 +37,7 @@ import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.my.ContactSettingActivity;
 import com.bitbill.www.ui.main.my.ShortCutSettingActivity;
+import com.bitbill.www.ui.main.my.SystemSettingActivity;
 import com.bitbill.www.ui.main.my.WalletSettingActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
@@ -249,6 +250,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         } else if (id == R.id.nav_shortcut) {
             // 切换到快捷方式设置界面
             ShortCutSettingActivity.start(this);
+        } else if (id == R.id.nav_sys_setting) {
+            // 切换到系统设置界面
+            SystemSettingActivity.start(this);
         }
 
         // TODO: 2017/11/17 add other nav item

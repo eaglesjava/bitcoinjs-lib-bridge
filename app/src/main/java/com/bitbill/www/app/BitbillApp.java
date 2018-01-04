@@ -14,6 +14,7 @@ import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.di.component.ApplicationComponent;
 import com.bitbill.www.di.component.DaggerApplicationComponent;
 import com.bitbill.www.di.module.ApplicationModule;
+import com.bitbill.www.model.app.prefs.AppPreferences;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.socket.Register;
@@ -45,7 +46,9 @@ public class BitbillApp extends Application {
     OkHttpClient mOkhttpClient;
     private ApplicationComponent mApplicationComponent;
     private List<Wallet> mWallets;
-    private double mBtcValue = 100000;// TODO: 2017/12/25 for test
+    private double mBtcCnyValue;
+    private double mBtcUsdValue;
+    private AppPreferences.SelectedCurrency mSelectedCurrency = AppPreferences.SelectedCurrency.CNY;
 
     public static BitbillApp get() {
         return sInstance;
@@ -123,6 +126,7 @@ public class BitbillApp extends Application {
             public void call(Object... args) {
 
                 Log.d(TAG, "EVENT_UNCONFIRM called with: args = [" + args + "]");
+                // TODO: 2018/1/4 根据设置开启音效
                 // 播放声音
                 SoundUtils.playSound(R.raw.diaoluo_da);
                 //  获取未确认列表
@@ -171,12 +175,40 @@ public class BitbillApp extends Application {
         return mSocket.connected();
     }
 
-    public double getBtcValue() {
-        return mBtcValue;
+    public double getBtcCnyValue() {
+        return mBtcCnyValue;
     }
 
-    public void setBtcValue(double btcValue) {
-        mBtcValue = btcValue;
+    public void setBtcCnyValue(double btcCnyValue) {
+        mBtcCnyValue = btcCnyValue;
+    }
+
+    public double getBtcUsdValue() {
+        return mBtcUsdValue;
+    }
+
+    public void setBtcUsdValue(double btcUsdValue) {
+        mBtcUsdValue = btcUsdValue;
+    }
+
+    public String getBtcValue(String btcAmount) {
+        if (mSelectedCurrency == null) {
+            return "0.00";
+        }
+        double btcRate;
+        if (mSelectedCurrency.equals(AppPreferences.SelectedCurrency.CNY)) {
+            btcRate = getBtcCnyValue();
+        } else {
+            btcRate = getBtcUsdValue();
+        }
+        if (btcRate == 0) {
+            return "0.00";
+        }
+        return String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyValue(btcRate, btcAmount), mSelectedCurrency.name());
+    }
+
+    public void setSelectedCurrency(AppPreferences.SelectedCurrency selectedCurrency) {
+        mSelectedCurrency = selectedCurrency;
     }
 }
 

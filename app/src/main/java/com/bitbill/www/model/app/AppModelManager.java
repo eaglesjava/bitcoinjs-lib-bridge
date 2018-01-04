@@ -59,4 +59,24 @@ public class AppModelManager extends ModelManager implements AppModel {
     public void setShortcutShown(boolean shown) {
         mAppPreferences.setShortcutShown(shown);
     }
+
+    @Override
+    public boolean isSoundEnable() {
+        return mAppPreferences.isSoundEnable();
+    }
+
+    @Override
+    public void setSoundEnabled(boolean soundEnabled) {
+        mAppPreferences.setSoundEnabled(soundEnabled);
+    }
+
+    @Override
+    public SelectedCurrency getSelectedCurrency() {
+        return mAppPreferences.getSelectedCurrency();
+    }
+
+    @Override
+    public void setSelectedCurrency(SelectedCurrency selectedCurrency) {
+        mAppPreferences.setSelectedCurrency(selectedCurrency);
+    }
 }

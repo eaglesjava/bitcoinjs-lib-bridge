@@ -228,7 +228,7 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
 
     @Override
     public Observable<ApiResponse<GetExchangeRateResponse>> getExchangeRate() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.GET_EXCHANGE_RATE)
+        return Rx2AndroidNetworking.post(ApiEndPoint.GET_EXCHANGE_RATE)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<GetExchangeRateResponse>>() {

@@ -1,11 +1,13 @@
 package com.bitbill.www.ui.splash;
 
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 
 import javax.inject.Inject;
 
@@ -46,4 +48,31 @@ public class SplashPresenter<M extends WalletModel, V extends SplashMvpView> ext
                     }
                 }));
     }
+
+    @Override
+    public void getExchangeRate() {
+        getCompositeDisposable().add(getModelManager().getExchangeRate()
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<ApiResponse<GetExchangeRateResponse>>() {
+                    @Override
+                    public void onNext(ApiResponse<GetExchangeRateResponse> getExchangeRateResponseApiResponse) {
+                        super.onNext(getExchangeRateResponseApiResponse);
+                        if (getExchangeRateResponseApiResponse != null) {
+                            if (getExchangeRateResponseApiResponse.isSuccess()) {
+                                GetExchangeRateResponse data = getExchangeRateResponseApiResponse.getData();
+                                if (data != null) {
+                                    getApp().setBtcCnyValue(data.getCnyrate());
+                                    getApp().setBtcUsdValue(data.getUsdrate());
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                }));
+    }
+
 }

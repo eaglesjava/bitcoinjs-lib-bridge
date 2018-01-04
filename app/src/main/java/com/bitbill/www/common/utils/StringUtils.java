@@ -564,13 +564,14 @@ public class StringUtils {
         return amount.multiply(satoshi).longValue();
     }
 
-    public static String multiplyCnyValue(double btcCny, String sendAmount) {
+    public static String multiplyValue(double btcRate, String amount) {
         try {
             //8位小数
             DecimalFormat df = new DecimalFormat("#.##");
             df.setMinimumFractionDigits(2);
-            BigDecimal btcCnyDecimal = new BigDecimal(btcCny);
-            BigDecimal amountDecimal = new BigDecimal(sendAmount);
+            df.setGroupingUsed(true);
+            BigDecimal btcCnyDecimal = new BigDecimal(btcRate);
+            BigDecimal amountDecimal = new BigDecimal(amount);
 
             BigDecimal multiply = btcCnyDecimal.multiply(amountDecimal);
             multiply.setScale(2, RoundingMode.FLOOR);

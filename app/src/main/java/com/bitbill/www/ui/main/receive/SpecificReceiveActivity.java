@@ -23,7 +23,7 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
 
     @BindView(R.id.et_input_amount)
     EditText etInputAmount;
-    @BindView(R.id.tv_btc_cny)
+    @BindView(R.id.tv_btc_value)
     TextView tvBtcCny;
     private String mReceiveAddress;
 
@@ -62,7 +62,7 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
-        tvBtcCny.setText(String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyCnyValue(BitbillApp.get().getBtcValue(), getReceiveAmount())));
+        tvBtcCny.setText(BitbillApp.get().getBtcValue(getReceiveAmount()));
         etInputAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -77,7 +77,7 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                tvBtcCny.setText(String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyCnyValue(BitbillApp.get().getBtcValue(), getReceiveAmount())));
+                tvBtcCny.setText(BitbillApp.get().getBtcValue(getReceiveAmount()));
             }
         });
 

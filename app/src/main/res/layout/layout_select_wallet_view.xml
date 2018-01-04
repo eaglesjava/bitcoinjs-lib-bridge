@@ -61,6 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="5dp"
-            android:src="@drawable/ic_receive_right_arrow"/>
+            android:src="@drawable/ic_right_arrow" />
     </LinearLayout>
 </LinearLayout>

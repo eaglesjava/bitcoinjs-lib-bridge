@@ -53,7 +53,7 @@ public final class ApiEndPoint {
     public static final String GET_TXINFO = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/getTxInfo";
     public static final String GET_EXCHANGE_RATE = BuildConfig.BASE_URL + BITBILL_BITCOIN
-            + "/wallet/get_exchange_rate";
+            + "/get_exchange_rate";
     public static final String GET_CACHE_VERSION = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/getCacheVersion";
 

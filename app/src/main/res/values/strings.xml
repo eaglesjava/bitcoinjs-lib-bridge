@@ -65,7 +65,7 @@
     <string name="title_notification">消息提醒</string>
     <string name="title_security">安全设置</string>
     <string name="title_wallet_manage">钱包集成</string>
-    <string name="title_setting">设置</string>
+    <string name="title_sys_setting">系统设置</string>
     <string name="text_mnemonic">助记词</string>
     <string name="hint_click_input_please">请点击输入</string>
     <string name="btn_next">下一步</string>
@@ -145,7 +145,9 @@
     <string name="error_old_pwd_required">请输入原交易密码</string>
     <string name="title_activity_send_confirm">确认发送</string>
     <string name="text_send_all">选择全部余额</string>
-    <string name="text_btc_cny_value">%s CNY</string>
+    <string name="text_btc_cny_value">%1$s %2$s</string>
+    <string name="text_usd">USD</string>
+    <string name="text_cny">CNY</string>
     <string name="title_activity_select_wallet">选择钱包</string>
     <string name="title_activity_send_amount">发送金额</string>
     <string name="title_activity_scan_pay">特定金额接收</string>
@@ -234,4 +236,9 @@
     <string name="msg_update_contact_fail">更新联系人信息失败</string>
     <string name="btn_save">保存</string>
     <string name="btn_delete">删除</string>
+    <string name="title_activity_system_setting">系统设置</string>
+    <string name="setting_sound">音效</string>
+    <string name="setting_currency">货币</string>
+
+
 </resources>

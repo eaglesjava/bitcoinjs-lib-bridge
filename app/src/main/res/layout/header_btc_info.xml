@@ -28,7 +28,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_btc_cny"
+        android:id="@+id/tv_btc_value"
         style="@style/Text"
         android:paddingLeft="@dimen/activity_padding"
         android:paddingRight="@dimen/activity_padding"

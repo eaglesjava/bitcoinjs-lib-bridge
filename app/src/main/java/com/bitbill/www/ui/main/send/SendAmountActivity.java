@@ -28,8 +28,8 @@ public class SendAmountActivity extends BaseToolbarActivity {
     EditText etSendAmount;
     @BindView(R.id.btn_next)
     Button btnNext;
-    @BindView(R.id.tv_btc_cny)
-    TextView tvBtcCny;
+    @BindView(R.id.tv_btc_value)
+    TextView tvBtcValue;
 
     private String mAddress;
     private String mAmount;
@@ -126,7 +126,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
     }
 
     private void updateCnyValue() {
-        tvBtcCny.setText(String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyCnyValue(BitbillApp.get().getBtcValue(), getSendAmount())));
+        tvBtcValue.setText(BitbillApp.get().getBtcValue(getSendAmount()));
     }
 
     @Override

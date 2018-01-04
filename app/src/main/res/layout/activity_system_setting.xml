@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.bitbill.www.ui.main.my.SystemSettingActivity">
+
+    <com.bitbill.www.common.widget.SettingView
+        android:id="@+id/sv_sound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hasBottomLine="true"
+        app:hasSwitch="true"
+        app:leftString="@string/setting_sound" />
+
+    <com.bitbill.www.common.widget.SettingView
+        android:id="@+id/sv_currency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftString="@string/setting_currency"
+        app:rightResource="@drawable/ic_right_arrow"
+        app:rightString="@string/text_cny" />
+
+</LinearLayout>

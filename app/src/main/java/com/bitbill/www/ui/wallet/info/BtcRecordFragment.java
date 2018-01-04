@@ -42,7 +42,7 @@ public class BtcRecordFragment extends BaseLazyFragment {
     TextView tvAmountLabel;
     @BindView(R.id.refresh_layout)
     CustomSwipeToRefresh refreshLayout;
-    @BindView(R.id.tv_btc_cny)
+    @BindView(R.id.tv_btc_value)
     TextView tvBtcCny;
     @BindView(R.id.tv_btc_unconfirm)
     TextView tvBtcUnconfirm;
@@ -174,7 +174,7 @@ public class BtcRecordFragment extends BaseLazyFragment {
             tvBtcUnconfirm.setText(String.format(getString(R.string.text_btc_unconfirm), StringUtils.satoshi2btc(mWalelt.getBtcUnconfirm())));
 
         }
-        tvBtcCny.setText(String.format(getString(R.string.text_btc_cny_value), StringUtils.multiplyCnyValue(BitbillApp.get().getBtcValue(), StringUtils.satoshi2btc(mWalelt.getBtcBalance()))));
+        tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBtcBalance())));
     }
 
     /**

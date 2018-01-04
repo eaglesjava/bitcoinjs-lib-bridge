@@ -3,15 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="@string/title_account_info">
-        <menu>
-            <item
-                android:id="@+id/nav_contact"
-                android:icon="@drawable/ic_menu_contact"
-                android:title="@string/title_contact" />
-
-        </menu>
-    </item>
     <item android:title="@string/title_prefer_setting">
         <menu>
             <item
@@ -28,9 +19,13 @@
                 android:icon="@drawable/ic_menu_wallet_manage"
                 android:title="@string/title_wallet_manage" />
             <item
-                android:id="@+id/nav_setting"
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/ic_menu_contact"
+                android:title="@string/title_contact" />
+            <item
+                android:id="@+id/nav_sys_setting"
                 android:icon="@drawable/ic_menu_setting"
-                android:title="@string/title_setting" />
+                android:title="@string/title_sys_setting" />
 
         </menu>
     </item>

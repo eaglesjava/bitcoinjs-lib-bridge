@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="SettingView">
+        <attr name="leftString" format="string" />
+        <attr name="rightString" format="string" />
+        <attr name="rightStringColor" format="color" />
+        <attr name="rightResource" format="color|reference" />
+        <attr name="hasSwitch" format="boolean" />
+        <attr name="hasBottomLine" format="boolean" />
+    </declare-styleable>
+</resources>

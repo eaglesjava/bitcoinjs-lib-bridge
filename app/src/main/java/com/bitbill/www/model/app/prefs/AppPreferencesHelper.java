@@ -20,8 +20,6 @@ import javax.inject.Singleton;
 @Singleton
 public class AppPreferencesHelper extends PreferencesHelper implements AppPreferences {
 
-    public static final String IS_RECEIVE_REMIND_DIALOG_SHOWN = "is_remind_dialog_shown";
-    public static final String IS_SHORT_CUT_SHOWN = "is_shortcut_shown";
 
     @Inject
     public AppPreferencesHelper(@ApplicationContext Context context, @PrefersAppInfo String prefFileName) {
@@ -49,5 +47,28 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     public void setShortcutShown(boolean shown) {
 
         mPrefs.edit().putBoolean(IS_SHORT_CUT_SHOWN, shown).apply();
+    }
+
+    @Override
+    public boolean isSoundEnable() {
+        return mPrefs.getBoolean(IS_SOUND_ENABLED, true);
+    }
+
+    @Override
+    public void setSoundEnabled(boolean soundEnabled) {
+
+        mPrefs.edit().putBoolean(IS_SOUND_ENABLED, soundEnabled).apply();
+
+    }
+
+    @Override
+    public SelectedCurrency getSelectedCurrency() {
+        return SelectedCurrency.valueOf(mPrefs.getString(SELECTED_CURRENCY, SelectedCurrency.CNY.name()));
+    }
+
+    @Override
+    public void setSelectedCurrency(SelectedCurrency selectedCurrency) {
+        mPrefs.edit().putString(SELECTED_CURRENCY, selectedCurrency.name()).apply();
+
     }
 }

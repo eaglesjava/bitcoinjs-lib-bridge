@@ -15,7 +15,11 @@ import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.contact.db.entity.Contact;
+import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.ui.main.MainActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -72,6 +76,11 @@ public class ContactDetailActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
         if (mContact == null || StringUtils.isEmpty(mContact.getContactName()) || StringUtils.isEmpty(String.valueOf(mContact.getContactName().charAt(0)))) {
             showMessage("加载联系人信息失败");
             return;
@@ -90,10 +99,6 @@ public class ContactDetailActivity extends BaseToolbarActivity {
             mTvWalletId.setText(mContact.getWalletId());
         }
         mTvWalletAddress.setText(mContact.getAddress());
-    }
-
-    @Override
-    public void initData() {
 
     }
 
@@ -131,5 +136,12 @@ public class ContactDetailActivity extends BaseToolbarActivity {
         //跳转到发送界面
         finish();
         MainActivity.start(this, mContact);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN, priority = 1)
+    public void onUpdateContactEvent(ContactUpdateEvent contactUpdateEvent) {
+        //重新加载联系人信息
+        mContact = ((Contact) contactUpdateEvent.getData());
+        initData();
     }
 }
