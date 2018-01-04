@@ -29,7 +29,8 @@ class BILWalletAddressController: BILLightBlueBaseController {
     func refreshUI() {
         if let w = wallet {
             idLabel.text = w.id
-            addresses = w.addresses?.array as! [BTCWalletAddressModel]
+			w.updateUTXOAtLocal()
+            addresses = w.btc_addressModels
             tableView.reloadData()
         }
     }
@@ -38,6 +39,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
         SVProgressHUD.show(withStatus: "Scaning...")
         let targetIndex = w.lastAddressIndex + 10
         w.refreshAddressToSever(index: targetIndex, success: { (addresses) in
+			BILWalletManager.shared.loadBlockHeightAndWalletVersion()
             self.refreshUI()
             self.bil_dismissHUD()
         }) { (msg) in

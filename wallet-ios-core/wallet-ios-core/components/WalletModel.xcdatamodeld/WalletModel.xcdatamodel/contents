@@ -23,6 +23,7 @@
     <entity name="BTCWalletAddressModel" representedClassName="BTCWalletAddressModel" syncable="YES" codeGenerationType="class">
         <attribute name="address" attributeType="String" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isUsed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="satoshi" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WalletModel" inverseName="addresses" inverseEntity="WalletModel" syncable="YES"/>
     </entity>
@@ -55,7 +56,7 @@
         <element name="BCHTransactionModel" positionX="-54" positionY="36" width="128" height="45"/>
         <element name="BTCTransactionModel" positionX="27" positionY="-162" width="128" height="240"/>
         <element name="BTCTXAddressModel" positionX="-162" positionY="-9" width="128" height="75"/>
-        <element name="BTCWalletAddressModel" positionX="198" positionY="108" width="128" height="105"/>
+        <element name="BTCWalletAddressModel" positionX="198" positionY="108" width="128" height="120"/>
         <element name="ContactModel" positionX="-369" positionY="18" width="128" height="135"/>
         <element name="WalletModel" positionX="-182" positionY="-24" width="128" height="270"/>
     </elements>

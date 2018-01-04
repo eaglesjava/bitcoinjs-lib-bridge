@@ -182,6 +182,43 @@ extension WalletModel {
         }
     }
 	
+	func updateUTXOAtLocal() {
+		for add in btc_addressModels {
+			add.satoshi = 0
+		}
+		for tx in btc_transactionArray {
+			debugPrint("------")
+			if tx.height == -1 {
+				continue
+			}
+			for add in tx.inputAddressModels {
+				if let wAdd = bil_btc_wallet_addressManager.fetch(key: "address", value: add.address!) {
+					debugPrint("add: \(add.address!) - \(add.satoshi)")
+					wAdd.satoshi -= add.satoshi
+					wAdd.isUsed = true
+				}
+			}
+			for add in tx.outputAddressModels {
+				if let wAdd = bil_btc_wallet_addressManager.fetch(key: "address", value: add.address!) {
+					debugPrint("add: \(add.address!) + \(add.satoshi)")
+					wAdd.satoshi += add.satoshi
+					wAdd.isUsed = true
+				}
+			}
+		}
+		do {
+			try BILWalletManager.shared.saveWallets()
+		} catch {
+			debugPrint("保存本地 UTXO 数据失败")
+		}
+	}
+	
+	var btc_addressModels: [BTCWalletAddressModel] {
+		get {
+			return self.addresses?.array as! [BTCWalletAddressModel]
+		}
+	}
+	
     var btc_transactionArray: [BTCTransactionModel] {
         get {
             return self.btcTransactions?.array as! [BTCTransactionModel]

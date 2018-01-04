@@ -733,9 +733,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWl-W4-hLH">
-                                                    <rect key="frame" x="230" y="13" width="120" height="19.5"/>
+                                                    <rect key="frame" x="270" y="13" width="80" height="19.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="120" id="Yfw-xo-1LS"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Yfw-xo-1LS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

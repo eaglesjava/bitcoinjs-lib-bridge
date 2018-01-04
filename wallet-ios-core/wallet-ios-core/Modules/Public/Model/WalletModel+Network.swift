@@ -17,6 +17,7 @@ extension WalletModel {
 			getTransactionHistoryFromSever(page: 0, size: btcTransactions!.count + 1000, success: { (txs) in
 				self.version = version
 				do {
+					self.updateUTXOAtLocal()
 					try BILWalletManager.shared.saveWallets()
 					self.needLoadServer = false
 				} catch {
