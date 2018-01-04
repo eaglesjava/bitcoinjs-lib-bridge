@@ -11,13 +11,13 @@ import UIKit
 func getCurrency(btcValue: Double) -> String {
     let currencyType = BILSettingManager.currencyType
     let price = Double(btcValue) * currencyType.rate
-    return String(format: "%.2f", price) + " " + currencyType.symbolName
+	var formatString = NumberFormatter.localizedString(from: NSNumber(value: price), number: .currency)
+	formatString.removeFirst()
+    return formatString + " " + currencyType.symbolName
 }
 
 func getCurrency(btcValue: Int64) -> String {
-    let currencyType = BILSettingManager.currencyType
-    let price = Double(btcValue) * currencyType.rate / Double(BTC_SATOSHI)
-    return String(format: "%.2f", price) + " " + currencyType.symbolName
+    return getCurrency(btcValue: Double(btcValue) / Double(BTC_SATOSHI))
 }
 
 class BILExchangeRateLabel: UILabel {

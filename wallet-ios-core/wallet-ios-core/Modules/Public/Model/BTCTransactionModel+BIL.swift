@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Timepiece
 
 enum BILTransactionType: Int16 {
     case recieve = 0
