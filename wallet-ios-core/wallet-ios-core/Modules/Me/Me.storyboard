@@ -402,6 +402,9 @@
                         <viewLayoutGuide key="safeArea" id="xMF-ED-lhu"/>
                     </view>
                     <navigationItem key="navigationItem" title="系统设置" id="1Md-s1-Xl3"/>
+                    <connections>
+                        <outlet property="tableView" destination="eRR-OW-wmV" id="pbw-G1-r93"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ASt-PM-1Qv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

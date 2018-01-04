@@ -58,7 +58,8 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
     }
     
     var sections: [BILSettingSectionType] = [.sound, .currency]
-    
+	@IBOutlet weak var tableView: UITableView!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -121,10 +122,12 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         sheet.addAction(UIAlertAction(title: "CNY", style: .default, handler: { (action) in
             BILSettingManager.currencyType = .cny
             self.bil_makeToast(msg: "已保存")
+			self.tableView.reloadData()
         }))
         sheet.addAction(UIAlertAction(title: "USD", style: .default, handler: { (action) in
             BILSettingManager.currencyType = .usd
             self.bil_makeToast(msg: "已保存")
+			self.tableView.reloadData()
         }))
         
         sheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
