@@ -107,6 +107,9 @@ class BILWalletManager {
     @objc
     func loadBlockHeightAndWalletVersion() {
         let hashes = WalletModel.getKeyHash(wallets: wallets)
+		guard !hashes.isEmpty else {
+			return
+		}
         BILNetworkManager.request(request: .getBlockHeightAndWalletVersion(hashes: hashes), success: { (result) in
             let json = JSON(result)
             for wallet in self.wallets {

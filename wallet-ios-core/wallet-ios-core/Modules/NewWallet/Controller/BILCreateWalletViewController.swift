@@ -159,9 +159,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 func successFromSever(result: [String: Any]) {
                     do {
                         try BILWalletManager.shared.saveWallets()
-                        if self.createWalletType == .recover {
-                            wallet.syncWallet(json: JSON(result))
-                        }
+						BILWalletManager.shared.loadBlockHeightAndWalletVersion()
                         NotificationCenter.default.post(name: .walletCountDidChanged, object: nil)
                         self.mnemonicHash = wallet.mnemonicHash
                         self.createSuccess()
