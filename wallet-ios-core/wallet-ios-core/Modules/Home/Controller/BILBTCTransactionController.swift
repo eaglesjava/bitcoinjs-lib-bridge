@@ -17,7 +17,7 @@ class BILBTCTransactionController: BILLightBlueBaseController {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
     
-    var datas = [(key: String, value: String)]()
+	var datas = [(key: String, value: String, cellID: String)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +34,20 @@ class BILBTCTransactionController: BILLightBlueBaseController {
         statusLabel.text = tx.status.description
         statusImageView.image = tx.status.image
         
-        datas.append(("交易 hash", value: tx.txHash!))
-        datas.append(("发送地址", value: tx.inputAddresses.joined(separator: "\n")))
-        datas.append(("接收地址", value: tx.targetAddresses.joined(separator: "\n")))
+		datas.append(("交易 hash", value: tx.txHash!, cellID: "BILTXDetailCell"))
+        datas.append(("发送地址", value: "", cellID: "BILTXTitleCell"))
+		for addModel in tx.inputAddressModels {
+			datas.append((addModel.address!, value: BTCFormatString(btc: addModel.satoshi) + " BTC", cellID: "BILAddressCell"))
+		}
+        datas.append(("接收地址", value: "", cellID: "BILTXTitleCell"))
+		for addModel in tx.outputAddressModels {
+			datas.append((addModel.address!, value: BTCFormatString(btc: addModel.satoshi) + " BTC", cellID: "BILAddressCell"))
+		}
         if tx.status == .success {
-            datas.append(("确认", value: "\(tx.confirmCount)"))
+            datas.append(("确认", value: "\(tx.confirmCount)", cellID: "BILTXDetailCell"))
         }
-        datas.append(("备注", value: tx.remarkString))
-        datas.append(("交易时间", value: tx.dateSring))
+        datas.append(("备注", value: tx.remarkString, cellID: "BILTXDetailCell"))
+        datas.append(("交易时间", value: tx.dateSring, cellID: "BILTXDetailCell"))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,11 +85,23 @@ extension BILBTCTransactionController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BILTXDetailCell", for: indexPath) as! BILTXDetailCell
-        let element = datas[indexPath.row]
-        cell.keyLabel.text = element.key
-        cell.valueLabel.text = element.value
-        cell.valueLabel.valueTitle = element.key
+		let element = datas[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: element.cellID, for: indexPath)
+		
+		switch element.cellID {
+		case "BILTXDetailCell", "BILTXTitleCell":
+			let c = cell as! BILTXDetailCell
+			c.keyLabel?.text = element.key
+			c.valueLabel?.text = element.value
+			c.valueLabel?.valueTitle = element.key
+		case "BILAddressCell":
+			let c = cell as! BILAddressCell
+			c.addressLabel.text = element.key
+			c.amountLabel.text = element.value
+		default:
+			()
+		}
+		
         return cell
     }
 }

@@ -109,6 +109,14 @@ extension BTCTransactionModel {
     var confirmString: String {
         get { return height == -1 ? "未确认" : ((confirmCount > 1000 ? "1000+" : "\(confirmCount)") + " 确认") }
     }
+	
+	var inputAddressModels: [BTCTXAddressModel] {
+		get { return inputs?.array as! [BTCTXAddressModel] }
+	}
+	
+	var outputAddressModels: [BTCTXAddressModel] {
+		get { return outputs?.array as! [BTCTXAddressModel] }
+	}
     
     var firstTargetAddress: BTCTXAddressModel? {
         get {

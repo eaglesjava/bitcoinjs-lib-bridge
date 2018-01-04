@@ -10,8 +10,8 @@ import UIKit
 
 class BILTXDetailCell: UITableViewCell {
 
-    @IBOutlet weak var keyLabel: UILabel!
-    @IBOutlet weak var valueLabel: BILCopyLabel!
+	@IBOutlet weak var keyLabel: UILabel?
+    @IBOutlet weak var valueLabel: BILCopyLabel?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

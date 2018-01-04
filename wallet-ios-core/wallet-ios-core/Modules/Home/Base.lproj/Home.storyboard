@@ -626,7 +626,7 @@
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="V8p-JF-Nwu">
-                                    <rect key="frame" x="0.0" y="335" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="429" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfh-tV-KHB">
@@ -690,6 +690,71 @@
                                         <connections>
                                             <outlet property="keyLabel" destination="I1d-BW-uoe" id="TRh-dy-hRk"/>
                                             <outlet property="valueLabel" destination="iBP-Zq-dpz" id="Jny-o0-R2z"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BILTXTitleCell" rowHeight="50" id="loQ-q7-NiC" customClass="BILTXDetailCell" customModule="wallet_ios_core" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="335" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="loQ-q7-NiC" id="qJB-Td-0js">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvI-ns-vDg">
+                                                    <rect key="frame" x="25" y="15" width="325" height="35"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="IvI-ns-vDg" secondAttribute="trailing" constant="25" id="0AF-PA-K1D"/>
+                                                <constraint firstAttribute="bottom" secondItem="IvI-ns-vDg" secondAttribute="bottom" id="87g-Pv-RKF"/>
+                                                <constraint firstItem="IvI-ns-vDg" firstAttribute="leading" secondItem="qJB-Td-0js" secondAttribute="leading" constant="25" id="Rmf-O9-EjR"/>
+                                                <constraint firstItem="IvI-ns-vDg" firstAttribute="top" secondItem="qJB-Td-0js" secondAttribute="top" constant="15" id="kTE-y8-ffQ"/>
+                                                <constraint firstItem="IvI-ns-vDg" firstAttribute="top" secondItem="qJB-Td-0js" secondAttribute="top" constant="15" id="sTf-BB-fpn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="keyLabel" destination="IvI-ns-vDg" id="yua-DL-XCh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BILAddressCell" id="RnE-Nv-7f9" customClass="BILAddressCell" customModule="wallet_ios_core" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="385" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RnE-Nv-7f9" id="GZE-8a-IKa">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIC-Be-vnV" customClass="BILAddressLabel" customModule="wallet_ios_core" customModuleProvider="target">
+                                                    <rect key="frame" x="25" y="10" width="56.5" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWl-W4-hLH">
+                                                    <rect key="frame" x="230" y="13" width="120" height="19.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="Yfw-xo-1LS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="sWl-W4-hLH" secondAttribute="trailing" constant="25" id="13o-kD-eWe"/>
+                                                <constraint firstAttribute="bottom" secondItem="uIC-Be-vnV" secondAttribute="bottom" constant="10" id="Vt1-Qf-9To"/>
+                                                <constraint firstItem="sWl-W4-hLH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uIC-Be-vnV" secondAttribute="trailing" constant="20" id="Wfq-qz-rIa"/>
+                                                <constraint firstItem="uIC-Be-vnV" firstAttribute="leading" secondItem="GZE-8a-IKa" secondAttribute="leading" constant="25" id="hwo-ZD-oiU"/>
+                                                <constraint firstItem="sWl-W4-hLH" firstAttribute="centerY" secondItem="uIC-Be-vnV" secondAttribute="centerY" id="s6I-Xb-usn"/>
+                                                <constraint firstItem="uIC-Be-vnV" firstAttribute="top" secondItem="GZE-8a-IKa" secondAttribute="top" constant="10" id="uWw-eN-dfk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="addressLabel" destination="uIC-Be-vnV" id="efu-qt-Hg6"/>
+                                            <outlet property="amountLabel" destination="sWl-W4-hLH" id="e59-gH-dfZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
