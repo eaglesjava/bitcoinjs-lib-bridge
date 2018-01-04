@@ -11,9 +11,12 @@ import UIKit
 func getCurrency(btcValue: Double) -> String {
     let currencyType = BILSettingManager.currencyType
     let price = Double(btcValue) * currencyType.rate
-	var formatString = NumberFormatter.localizedString(from: NSNumber(value: price), number: .currency)
-	formatString.removeFirst()
-    return formatString + " " + currencyType.symbolName
+	let formatter = NumberFormatter()
+	print(formatter.positiveFormat)
+	formatter.numberStyle = NumberFormatter.Style.decimal
+	formatter.positiveFormat = "#,##0.00"
+	let formatString = formatter.string(from: NSNumber(value: price))
+    return (formatString ?? "0.00") + " " + currencyType.symbolName
 }
 
 func getCurrency(btcValue: Int64) -> String {
