@@ -796,8 +796,10 @@
                         <viewLayoutGuide key="safeArea" id="kiJ-aO-LeB"/>
                     </view>
                     <connections>
+                        <outlet property="addContactButton" destination="D0h-tY-xJB" id="OEk-Nf-Pnj"/>
                         <outlet property="addressLabel" destination="sUF-cQ-IYF" id="JUd-Wf-5ZZ"/>
                         <outlet property="amountLabel" destination="mxM-WT-G4P" id="Rg5-ub-vCV"/>
+                        <outlet property="contactRecommendLabel" destination="0g2-RI-9zC" id="3bQ-jg-XsO"/>
                         <outlet property="txHashLabel" destination="quC-Gd-rV2" id="bZC-ag-z4C"/>
                     </connections>
                 </viewController>
