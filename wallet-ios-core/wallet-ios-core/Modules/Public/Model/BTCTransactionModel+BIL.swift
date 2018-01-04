@@ -142,7 +142,7 @@ extension BTCTransactionModel {
         
         for addModel in set {
             let add = addModel as! BTCTXAddressModel
-            toReturn.append(add.address!)
+            toReturn.append(add.address! + "\t" + BTCFormatString(btc: add.satoshi) + " BTC")
         }
         
         return toReturn
