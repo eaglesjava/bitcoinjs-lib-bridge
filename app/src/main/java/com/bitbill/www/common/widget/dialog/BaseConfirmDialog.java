@@ -78,6 +78,10 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
             mDialogBtnPositive.setVisibility(View.VISIBLE);
             mDialogBtnPositive.setText(mPositiveText);
         }
+
+        getDialog().setCanceledOnTouchOutside(false);
+        getDialog().setCancelable(false);
+
         initView();
         initData();
         return view;
