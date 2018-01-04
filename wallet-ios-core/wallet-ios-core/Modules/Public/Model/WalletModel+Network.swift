@@ -12,10 +12,26 @@ import SwiftyJSON
 extension WalletModel {
     
     func syncWallet(json: JSON) {
+		
+		func loadTXs(version: Int64) {
+			getTransactionHistoryFromSever(page: 0, size: btcTransactions!.count + 1000, success: { (txs) in
+				self.version = version
+				do {
+					try BILWalletManager.shared.saveWallets()
+					self.needLoadServer = false
+				} catch {
+					debugPrint(error)
+				}
+			}, failure: { (msg, code) in
+				debugPrint(msg)
+			})
+		}
+		
         let addressIndex = json["indexNo"].int64Value
         if lastAddressIndex < addressIndex {
             generateAddresses(from: lastAddressIndex, to: addressIndex, success: { (addresses) in
                 self.needLoadServer = true
+				loadTXs(version: self.version)
             }, failure: { (msg, code) in
                 debugPrint(msg)
             })
@@ -23,17 +39,7 @@ extension WalletModel {
         let serverVersion = json["version"].int64Value
         needLoadServer = version < serverVersion
         if needLoadServer {
-            getTransactionHistoryFromSever(page: 0, size: btcTransactions!.count + 1000, success: { (txs) in
-                self.version = serverVersion
-                do {
-                    try BILWalletManager.shared.saveWallets()
-					self.needLoadServer = false
-                } catch {
-                    debugPrint(error)
-                }
-            }, failure: { (msg, code) in
-                debugPrint(msg)
-            })
+			loadTXs(version: serverVersion)
         }
     }
     
