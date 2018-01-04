@@ -177,6 +177,10 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		super.viewWillAppear(animated)
 		navigationController?.setNavigationBarHidden(true, animated: false)
 		tableView.reloadData()
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(5)) {
+			NotificationCenter.default.post(name: .unconfirmTransactionBeenConfirmed, object: nil)
+		}
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -188,12 +192,16 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
     @objc
     func refresh(sender: Any?) {
         uncofirmTransactionDidChanged(notification: nil)
-        WalletModel.getBalanceFromServer(wallets: wallets, success: {
-            self.balanceDidChanged(notification: nil)
-        }) { (msg, code) in
-            
-        }
+		loadBalance()
     }
+	
+	func loadBalance() {
+		WalletModel.getBalanceFromServer(wallets: wallets, success: {
+			self.balanceDidChanged(notification: nil)
+		}) { (msg, code) in
+			
+		}
+	}
     
     @objc
 	func balanceDidChanged(notification: Notification?) {
@@ -212,6 +220,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
             self.tableView.reloadData()
             self.tableView.refreshControl?.endRefreshing()
         }
+		loadBalance()
         WalletModel.getUnconfirmTransactionFromSever(wallets: wallets, success: { (txs)  in
             BILTransactionManager.shared.recnetRecords = txs
             loadEnd()
