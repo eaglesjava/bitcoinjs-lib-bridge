@@ -166,7 +166,12 @@ class BILSendConfirmController: BILBaseViewController {
             wallet.getNewBTCAddress(success: { (address) in
                 createTXBuilder(address: address)
             }) { (msg) in
-                errorHandler(msg: msg)
+				let address = wallet.randomAddress()
+				guard let add = address.address else {
+					errorHandler(msg: "未能生成找零地址")
+					return
+				}
+				createTXBuilder(address: add)
             }
         }
     }

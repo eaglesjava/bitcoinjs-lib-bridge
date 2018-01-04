@@ -64,6 +64,11 @@ extension WalletModel {
         }
         return count > 0 && count == btcAddresses.count
     }
+	
+	func randomAddress() -> BTCWalletAddressModel {
+		let count = addresses!.count
+		return addresses![Int(arc4random()) % count] as! BTCWalletAddressModel
+	}
     
     func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         guard let xpub = mainExtPublicKey else {
