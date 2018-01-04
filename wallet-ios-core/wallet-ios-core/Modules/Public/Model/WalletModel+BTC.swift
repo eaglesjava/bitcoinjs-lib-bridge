@@ -18,7 +18,7 @@ func BTCFormatString(btc: Int64) -> String {
     let str = String(btc % BTC_SATOSHI)
     let d = Double(btc) / Double(BTC_SATOSHI)
     if str.count > 2 {
-        return String(format: "%f", d)
+        return "\(d)"
     }
     var count = 0
     for char in str.reversed() {
