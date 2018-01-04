@@ -415,8 +415,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-hN-dTZ">
-                                <rect key="frame" x="25" y="165" width="325" height="588"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="white" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-hN-dTZ">
+                                <rect key="frame" x="0.0" y="140" width="375" height="613"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -424,9 +424,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cu4-hN-dTZ" firstAttribute="top" secondItem="KMf-E7-fvy" secondAttribute="top" constant="25" id="CWN-OW-0PG"/>
-                            <constraint firstItem="KMf-E7-fvy" firstAttribute="trailing" secondItem="cu4-hN-dTZ" secondAttribute="trailing" constant="25" id="JrB-gV-OSZ"/>
-                            <constraint firstItem="cu4-hN-dTZ" firstAttribute="leading" secondItem="KMf-E7-fvy" secondAttribute="leading" constant="25" id="tbg-mP-5fo"/>
+                            <constraint firstItem="cu4-hN-dTZ" firstAttribute="top" secondItem="KMf-E7-fvy" secondAttribute="top" id="CWN-OW-0PG"/>
+                            <constraint firstItem="KMf-E7-fvy" firstAttribute="trailing" secondItem="cu4-hN-dTZ" secondAttribute="trailing" id="JrB-gV-OSZ"/>
+                            <constraint firstItem="cu4-hN-dTZ" firstAttribute="leading" secondItem="KMf-E7-fvy" secondAttribute="leading" id="tbg-mP-5fo"/>
                             <constraint firstItem="KMf-E7-fvy" firstAttribute="bottom" secondItem="cu4-hN-dTZ" secondAttribute="bottom" constant="25" id="uT3-oT-Moa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KMf-E7-fvy"/>

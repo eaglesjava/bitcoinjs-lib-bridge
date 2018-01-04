@@ -31,6 +31,7 @@ class BILAgreementController: BILBaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+		textView.contentInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         guard let htmlURL = Bundle.main.url(forResource: "service_cn", withExtension: "html") else {
             return
         }
