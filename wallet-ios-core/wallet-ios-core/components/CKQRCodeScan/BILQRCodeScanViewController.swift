@@ -48,9 +48,11 @@ class BILQRCodeScanViewController: BILBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupSession()
-        scanSession?.startRunning()
-        startScanAnimation()
+		DispatchQueue.main.async {
+			self.setupSession()
+			self.scanSession?.startRunning()
+			self.startScanAnimation()
+		}
     }
     
     override func viewWillAppear(_ animated: Bool) {
