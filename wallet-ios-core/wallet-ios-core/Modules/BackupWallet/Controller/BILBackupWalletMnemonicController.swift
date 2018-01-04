@@ -38,7 +38,10 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
         NotificationCenter.default.removeObserver(self, name: .UIApplicationUserDidTakeScreenshot, object: nil)
     }
     
-    @objc
+	@IBAction func cancelAction(_ sender: Any) {
+		dismiss(animated: true, completion: nil)
+	}
+	@objc
     func showAlertForSnapshot() {
         showTipAlert(msg: "截图是不安全的，您的图片可能被别的应用使用。请抄写如下助记词，并妥善保存。")
     }

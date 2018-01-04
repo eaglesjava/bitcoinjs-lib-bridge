@@ -229,10 +229,6 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	}
 	
 	// MARK: - Actions
-	
-	@IBAction func cancelAction(_ sender: Any) {
-		dismiss(animated: true, completion: nil)
-	}
 	@IBAction func createWalletAction(_ sender: Any) {
 		createWallet()
 	}

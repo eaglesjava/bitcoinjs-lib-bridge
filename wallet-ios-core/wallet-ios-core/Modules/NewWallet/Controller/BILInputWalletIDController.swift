@@ -54,6 +54,10 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self, name: .UITextFieldTextDidChange, object: nil)
     }
+	
+	@IBAction func cancelAction(_ sender: Any) {
+		dismiss(animated: true, completion: nil)
+	}
     
     func showAlertForSupportedCoins() {
         guard !hasShownAlert else {

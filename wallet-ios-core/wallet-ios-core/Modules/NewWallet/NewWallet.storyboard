@@ -198,7 +198,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m5Z-7N-lHJ"/>
                     </view>
-                    <navigationItem key="navigationItem" title="输入钱包ID" id="22G-j6-p1V"/>
+                    <navigationItem key="navigationItem" title="输入钱包ID" id="22G-j6-p1V">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Q0p-0n-rGy">
+                            <connections>
+                                <action selector="cancelAction:" destination="CHR-q9-jMG" id="2U8-Dt-CQS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="walletNameInputView" destination="04q-lU-fSV" id="udA-j8-E0T"/>
                         <outlet property="walletNameTextField" destination="QmJ-tL-aFu" id="nsq-MY-TuU"/>
@@ -439,46 +445,7 @@
                                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <font key="NSFont" size="14" name="PingFangSC-Medium"/>
                                                             <real key="NSKern" value="0.0"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="28">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="56">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="84">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="112">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="140">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="168">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="196">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="224">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="252">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="280">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="308">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="left" location="336">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -536,13 +503,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="toO-yT-FMS"/>
                     </view>
-                    <navigationItem key="navigationItem" title="创建钱包" id="IzW-ej-leD">
-                        <barButtonItem key="rightBarButtonItem" title="取消" id="fIk-2A-9Sb">
-                            <connections>
-                                <action selector="cancelAction:" destination="7rK-Mf-YUl" id="uoY-HV-vnX"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="创建钱包" id="IzW-ej-leD"/>
                     <connections>
                         <outlet property="confirmPasswordInputView" destination="HZ0-VV-HbH" id="kLt-xo-fIJ"/>
                         <outlet property="confirmPasswordTextField" destination="5Hf-Dg-FgH" id="ksT-uJ-03R"/>
@@ -820,7 +781,7 @@
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pdu-bD-2bn"/>
+        <segue reference="qHS-m8-k5o"/>
         <segue reference="CeZ-0d-fBr"/>
     </inferredMetricsTieBreakers>
 </document>

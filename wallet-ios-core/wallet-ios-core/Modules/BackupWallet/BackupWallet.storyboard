@@ -95,6 +95,11 @@
                                 <action selector="bil_pop" destination="8XA-fy-7b1" id="RMr-9N-0KL"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="g1t-Gv-vAB">
+                            <connections>
+                                <action selector="cancelAction:" destination="8XA-fy-7b1" id="QLb-Dj-159"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mnemonicView" destination="lhT-aq-ezO" id="5ec-VR-F9K"/>
