@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import DateToolsSwift
 
 let BTC_SATOSHI: Int64 = 100000000
 
@@ -151,6 +152,7 @@ extension WalletModel {
             failure("起始值大于结束值", -1)
             return
         }
+		let beginDate = Date()
         BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: from, toIndex: to, success: { (result) in
             debugPrint(result)
             guard let array = result as? [String] else {
@@ -169,6 +171,8 @@ extension WalletModel {
             do {
                 try BILWalletManager.shared.saveWallets()
                 success(models)
+				let endDate = Date()
+				debugPrint("生成 \(to - from + 1) 个地址，用时：\(endDate.seconds(from: beginDate))s")
             } catch {
                 failure(error.localizedDescription, -2)
             }

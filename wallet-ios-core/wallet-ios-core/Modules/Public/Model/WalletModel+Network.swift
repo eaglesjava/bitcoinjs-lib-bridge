@@ -15,7 +15,7 @@ extension WalletModel {
         let addressIndex = json["indexNo"].int64Value
         if lastAddressIndex < addressIndex {
             generateAddresses(from: lastAddressIndex, to: addressIndex, success: { (addresses) in
-                
+                self.needLoadServer = true
             }, failure: { (msg, code) in
                 debugPrint(msg)
             })
@@ -27,6 +27,7 @@ extension WalletModel {
                 self.version = serverVersion
                 do {
                     try BILWalletManager.shared.saveWallets()
+					self.needLoadServer = false
                 } catch {
                     debugPrint(error)
                 }
@@ -77,8 +78,6 @@ extension WalletModel {
             let json = JSON(result)
             let lastIndex = json["indexNo"].int64Value
             success(result)
-            self.generateAddresses(from: self.lastAddressIndex, to: lastIndex, success: { (addresses) in
-            }, failure: failure)
         }, failure: failure)
     }
     
