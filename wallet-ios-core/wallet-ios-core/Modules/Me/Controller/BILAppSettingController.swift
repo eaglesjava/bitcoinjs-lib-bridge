@@ -43,7 +43,7 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
             case .sound:
                 return ["音效"]
             case .currency:
-                return ["货币"]
+                return ["当前币种"]
             }
         }
         
@@ -99,6 +99,8 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         case .currency:
             let c = cell as! BILMeCell
             c.titleLabel.text = model as? String
+			c.subTitleLabel.text = BILSettingManager.currencyType.localizedName
+			c.subTitleLabel.textColor = UIColor(white: 1.0, alpha: 0.6)
         }
         
         return cell

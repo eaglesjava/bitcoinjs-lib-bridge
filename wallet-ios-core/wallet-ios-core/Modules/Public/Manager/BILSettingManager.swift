@@ -39,6 +39,19 @@ enum CurrencyType: Int {
             }
         }
     }
+	
+	var name: String {
+		get {
+			switch self {
+			case .cny:
+				return "Chinese Yuan"
+			case .usd:
+				return "US Dolloar"
+			}
+		}
+	}
+	
+	var localizedName: String { get { return name } }
     
     var rate: Double {
         get {
