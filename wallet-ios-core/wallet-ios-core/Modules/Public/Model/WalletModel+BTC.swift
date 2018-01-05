@@ -73,13 +73,13 @@ extension WalletModel {
     
     func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         guard let xpub = mainExtPublicKey else {
-            failure("主扩展公钥为空")
+            failure(.publicWalletIDError)
             return
         }
         let index = lastAddressIndex
         if index == (addresses?.count)! - 1 {
             guard let address = (addresses?.lastObject as? BTCWalletAddressModel)?.address else {
-                failure("获取地址失败")
+                failure(.publicWalletGetAddressError)
                 return
             }
             success(address)
@@ -95,7 +95,7 @@ extension WalletModel {
                     self.addToAddresses(addModel)
                     success(add)
                 } else {
-                    failure("获取地址失败")
+                    failure(.publicWalletGetAddressError)
                 }
             }) { (error) in
                 failure(error.localizedDescription)
@@ -105,7 +105,7 @@ extension WalletModel {
     
     func refreshAddressToSever(index: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (String) -> Void) {
         guard let extPub = mainExtPublicKey else {
-            failure("主扩展公钥为空")
+            failure(.publicWalletExtKeyError)
             return
         }
         
@@ -124,7 +124,7 @@ extension WalletModel {
             }
             self.lastAddressIndex = serverIndex
             if index > serverIndex {
-                failure("暂时无法生成更多的地址了")
+                failure(.publicWalletNoMoreAddress)
                 return
             }
             self.generateAddresses(from: localIndex, to: self.lastAddressIndex, success: success, failure: { (msg, code) in
@@ -140,7 +140,7 @@ extension WalletModel {
         let tempIndex = lastAddressIndex + 1
         refreshAddressToSever(index: tempIndex, success: { (models) in
             guard let address = models.last?.address else {
-                failure("生成地址失败")
+                failure(.publicWalletGenerateAddressError)
                 return
             }
             success(address)
@@ -149,14 +149,14 @@ extension WalletModel {
     
     func generateAddresses(from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard from <= to else {
-            failure("起始值大于结束值", -1)
+            failure(.publicWalletIndexError, -1)
             return
         }
 		let beginDate = Date()
         BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: from, toIndex: to, success: { (result) in
             debugPrint(result)
             guard let array = result as? [String] else {
-                failure("生成失败", -1)
+                failure(.publicWalletGenerateAddressError, -1)
                 return
             }
             var models = [BTCWalletAddressModel]()

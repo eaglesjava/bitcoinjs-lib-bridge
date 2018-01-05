@@ -40,7 +40,7 @@ class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
 				results.append(contentsOf: try context.fetch(request))
 			} catch {
 				debugPrint("查询\(T.self)失败")
-				UIApplication.shared.keyWindow?.makeToast("查询\(T.self)失败")
+				UIApplication.shared.keyWindow?.makeToast("Search \(T.self) failed")
 			}
 			return results
 		}

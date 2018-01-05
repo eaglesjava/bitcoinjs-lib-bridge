@@ -51,11 +51,11 @@ enum BILTransactionStatus {
         var str = ""
         switch self {
         case .unconfirm:
-            str = "待确认"
+            str = .publicTransactionUnconfirm
         case .success:
-            str = "交易成功"
+            str = .publicTransactionSuccess
         case .failure:
-            str = "交易失败"
+            str = .publicTransactionFailure
         }
         return str
     }
@@ -107,7 +107,7 @@ extension BTCTransactionModel {
     }
     
     var confirmString: String {
-        get { return height == -1 ? "未确认" : ((confirmCount > 1000 ? "1000+" : "\(confirmCount)") + " 确认") }
+        get { return height == -1 ? .publicTransactionUnconfirm : ((confirmCount > 1000 ? "1000+" : "\(confirmCount) ") + .publicTransactionConfirmed) }
     }
 	
 	var inputAddressModels: [BTCTXAddressModel] {

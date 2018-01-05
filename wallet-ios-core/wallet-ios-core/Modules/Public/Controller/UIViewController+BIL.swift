@@ -38,7 +38,7 @@ extension UIViewController {
         SVProgressHUD.dismiss(withDelay: delay, completion: complete)
     }
     
-    func showTipAlert(title: String? = nil, msg: String? = nil, actionTitle: String = "我知道了", dismissed: (() -> Void)? = nil) {
+    func showTipAlert(title: String? = nil, msg: String? = nil, actionTitle: String = .publicAlertActionTitle, dismissed: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { (action) in

@@ -46,11 +46,11 @@ extension WalletModel {
     
     func createWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let walletID = id else {
-            failure("ID不能为空", -1)
+            failure(.publicWalletExtKeyError, -1)
             return
         }
         guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
+            failure(.publicWalletIDError, -1)
             return
         }
         BILNetworkManager.request(request: .createWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
@@ -58,7 +58,7 @@ extension WalletModel {
     
     func deleteWalletInSever(success: @escaping () -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
+            failure(.publicWalletExtKeyError, -1)
             return
         }
         BILNetworkManager.request(request: .deleteWallet(extendedKeyHash: extKey.md5()), success: { (result) in
@@ -74,11 +74,11 @@ extension WalletModel {
     
     func importWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let walletID = id else {
-            failure("ID不能为空", -1)
+            failure(.publicWalletIDError, -1)
             return
         }
         guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
+            failure(.publicWalletExtKeyError, -1)
             return
         }
         BILNetworkManager.request(request: .importWallet(walletID: walletID, extendedKey: extKey), success: { (result) in
@@ -101,7 +101,7 @@ extension WalletModel {
     
     func getTransactionHistoryFromSever(page: Int, size: Int, success: @escaping (_ txs: [BTCTransactionModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
+            failure(.publicWalletExtKeyError, -1)
             return
         }
         success(btc_transactionArray)
@@ -124,7 +124,7 @@ extension WalletModel {
     
     func getUTXOFromServer(success: @escaping (_ utxo: [BitcoinUTXOModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
+            failure(.publicWalletExtKeyError, -1)
             return
         }
         BILNetworkManager.request(request: .getUTXO(extendedKeyHash: extKey.md5()), success: { (result) in
@@ -156,7 +156,7 @@ extension WalletModel {
     
     func getTXBuildConfigurationFromServer(success: @escaping (_ utxo: [BitcoinUTXOModel], _ fee: [BTCFee], _ bestFee: BTCFee?) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
+            failure(.publicWalletExtKeyError, -1)
             return
         }
         BILNetworkManager.request(request: .getTransactionBuildConfig(extendedKeyHash: extKey.md5()), success: { (result) in
@@ -197,7 +197,7 @@ extension WalletModel {
     
     func send(transaction: BTCTransaction, success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
-            failure("extKey不能为空", -1)
+            failure(.publicWalletExtKeyError, -1)
             return
         }
         let tx = transaction
@@ -208,7 +208,7 @@ extension WalletModel {
     
     static func getUnconfirmTransactionFromSever(wallets: [WalletModel], success: @escaping (_ txs: [BTCTransactionModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard wallets.count > 0 else {
-            failure("数据错误", -1)
+            failure(.publicWalletDataError, -1)
             return
         }
         BILNetworkManager.request(request: .getUnconfirmTransaction(wallets: wallets), success: { (result) in
@@ -274,7 +274,7 @@ extension WalletModel {
             debugPrint(result)
             let json = JSON(result)
             guard let id = json["walletId"].string else {
-                failure("获取到错误的数据", -1)
+                failure(.publicWalletDataError, -1)
                 return
             }
             success(id.isEmpty ? nil : id)

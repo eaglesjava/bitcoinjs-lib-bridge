@@ -44,9 +44,9 @@ enum CurrencyType: Int {
 		get {
 			switch self {
 			case .cny:
-				return "Chinese Yuan"
+				return .publicCurrencyCNYName
 			case .usd:
-				return "US Dolloar"
+				return .publicCurrencyUSDName
 			}
 		}
 	}

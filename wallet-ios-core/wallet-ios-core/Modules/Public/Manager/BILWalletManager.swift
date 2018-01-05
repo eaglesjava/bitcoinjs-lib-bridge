@@ -56,7 +56,7 @@ class BILWalletManager {
                 results.append(contentsOf: try context.fetch(request))
             } catch {
                 debugPrint("查询钱包失败")
-                UIApplication.shared.keyWindow?.makeToast("查询钱包失败")
+                UIApplication.shared.keyWindow?.makeToast(.publicWalletFetchError)
             }
             return results
         }

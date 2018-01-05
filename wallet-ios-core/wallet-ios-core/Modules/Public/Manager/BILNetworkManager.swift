@@ -30,7 +30,7 @@ class BILNetworkManager: NSObject {
             else
             {
                 guard let error = response.error else {
-                    failure("连接服务器失败", -1)
+                    failure(.publicNetworkConnectServerFaild, -1)
                     return
                 }
                 failure("\(error.localizedDescription)", -1)

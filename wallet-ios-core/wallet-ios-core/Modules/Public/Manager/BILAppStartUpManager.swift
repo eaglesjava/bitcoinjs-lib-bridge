@@ -142,7 +142,7 @@ class BILAppStartUpManager: NSObject {
 	private func setupIQKeyboard() {
 		IQKeyboardManager.sharedManager().enable = true
 		IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
-		IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = "收起键盘"
+        IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = .publicKeyboardHide
         
         IQKeyboardManager.sharedManager().disabledToolbarClasses.append(BILSendInputAmountController.self)
         IQKeyboardManager.sharedManager().disabledToolbarClasses.append(BILSpecificVolumeRecieveInputController.self)
