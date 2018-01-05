@@ -442,8 +442,8 @@
     </style>
 
     <style name="DialogWalletSelect">
-        <item name="android:windowEnterAnimation">@anim/slide_left</item>
-        <item name="android:windowExitAnimation">@anim/slide_right</item>
+        <item name="android:windowEnterAnimation">@anim/slide_top</item>
+        <item name="android:windowExitAnimation">@anim/slide_bottom</item>
     </style>
 
     <style name="RecyclerView">

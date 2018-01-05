@@ -170,11 +170,11 @@ public class BtcRecordFragment extends BaseLazyFragment {
         refreshLayout.setRefreshing(false);
 
         if (mWalelt != null) {
-            tvAmount.setText(StringUtils.satoshi2btc(mWalelt.getBtcBalance()));
-            tvBtcUnconfirm.setText(String.format(getString(R.string.text_btc_unconfirm), StringUtils.satoshi2btc(mWalelt.getBtcUnconfirm())));
+            tvAmount.setText(StringUtils.satoshi2btc(mWalelt.getBalance()));
+            tvBtcUnconfirm.setText(String.format(getString(R.string.text_btc_unconfirm), StringUtils.satoshi2btc(mWalelt.getUnconfirm())));
 
         }
-        tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBtcBalance())));
+        tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBalance())));
     }
 
     /**

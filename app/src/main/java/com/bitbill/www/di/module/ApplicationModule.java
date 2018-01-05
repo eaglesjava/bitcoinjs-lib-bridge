@@ -19,6 +19,10 @@ import com.bitbill.www.di.qualifier.DatabaseInfo;
 import com.bitbill.www.di.qualifier.PrefersAppInfo;
 import com.bitbill.www.di.qualifier.PrefersWalletInfo;
 import com.bitbill.www.di.qualifier.SocketUrlInfo;
+import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.address.AddressModelManager;
+import com.bitbill.www.model.address.db.AddressDb;
+import com.bitbill.www.model.address.db.AddressDbHelper;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.AppModelManager;
 import com.bitbill.www.model.app.network.AppApi;
@@ -193,6 +197,18 @@ public class ApplicationModule {
     @Singleton
     ContactApi provideContactApiHelper(ContactApiHelper contactApiHelper) {
         return contactApiHelper;
+    }
+
+    @Provides
+    @Singleton
+    AddressModel provideAddressModuleManager(AddressModelManager addressModelManager) {
+        return addressModelManager;
+    }
+
+    @Provides
+    @Singleton
+    AddressDb provideAddressDbHelper(AddressDbHelper addressDbHelper) {
+        return addressDbHelper;
     }
 
 

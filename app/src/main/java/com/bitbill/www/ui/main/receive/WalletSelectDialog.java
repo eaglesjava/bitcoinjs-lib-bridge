@@ -84,7 +84,7 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
         }
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-        dialog.getWindow().setWindowAnimations(R.style.DialogWalletSelect);
+//        dialog.getWindow().setWindowAnimations(R.style.DialogWalletSelect);
         return dialog;
     }
 
@@ -129,7 +129,7 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
             protected void convert(ViewHolder holder, Wallet wallet, final int position) {
 
                 holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()));
-                holder.setText(R.id.tv_wallet_amount, StringUtils.satoshi2btc(wallet.getBtcBalance()) + " btc");
+                holder.setText(R.id.tv_wallet_amount, StringUtils.satoshi2btc(wallet.getBalance()) + " btc");
                 holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
 
                 holder.setChecked(R.id.rb_selector, wallet.isSelected());

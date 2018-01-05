@@ -82,11 +82,11 @@ public class SelectWalletActivity extends BaseToolbarActivity {
             protected void convert(ViewHolder holder, Wallet wallet, final int position) {
 
                 holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()));
-                holder.setText(R.id.tv_wallet_amount, StringUtils.satoshi2btc(wallet.getBtcBalance()) + " btc");
+                holder.setText(R.id.tv_wallet_amount, StringUtils.satoshi2btc(wallet.getBalance()) + " btc");
                 holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
 
                 holder.setChecked(R.id.rb_selector, wallet.isSelected());
-                if (wallet.getBtcBalance() > StringUtils.btc2Satoshi(mSendAmount)) {
+                if (wallet.getBalance() > StringUtils.btc2Satoshi(mSendAmount)) {
                     //余额可用
                     holder.setVisible(R.id.rb_selector, true);
                     holder.itemView.setAlpha(1.0f);
@@ -163,7 +163,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
             return;
         }
         //跳转到确认发送界面
-        SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, isSendAll ? StringUtils.satoshi2btc(mSelectedWallet.getBtcBalance()) : mSendAmount, isSendAll, mSelectedWallet);
+        SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, isSendAll ? StringUtils.satoshi2btc(mSelectedWallet.getBalance()) : mSendAmount, isSendAll, mSelectedWallet);
     }
 
     private boolean validSelectedWallet() {
@@ -181,7 +181,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
 
     public boolean isValidBtcBalance() {
 
-        if (getSelectedWallet().getBtcBalance() < StringUtils.btc2Satoshi(mSendAmount)) {
+        if (getSelectedWallet().getBalance() < StringUtils.btc2Satoshi(mSendAmount)) {
             MessageConfirmDialog.newInstance(getString(R.string.msg_balance_not_enough), true).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
             return false;
         }

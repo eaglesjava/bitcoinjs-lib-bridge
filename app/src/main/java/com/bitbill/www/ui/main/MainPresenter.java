@@ -83,8 +83,8 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                         //设置钱包余额
                         for (Wallet wallet : wallets) {
                             JSONObject amountJsonObj = dataJsonObj.getJSONObject(wallet.getName());
-                            wallet.setBtcBalance(amountJsonObj.getLong("balance"));
-                            wallet.setBtcUnconfirm(amountJsonObj.getLong("unconfirm"));
+                            wallet.setBalance(amountJsonObj.getLong("balance"));
+                            wallet.setUnconfirm(amountJsonObj.getLong("unconfirm"));
                             //更新钱包
                             getModelManager().updateWallet(wallet);
                         }

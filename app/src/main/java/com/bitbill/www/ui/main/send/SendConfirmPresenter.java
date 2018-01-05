@@ -266,7 +266,7 @@ public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMv
         if (isSendAll) {
             index = unspentList.size() - 1;
             //通过utxo设置余额
-            wallet.setBtcBalance(amount);
+            wallet.setBalance(amount);
         }
         //check amount
         if (amount <= 0 || index == -1 || fee <= 0) {

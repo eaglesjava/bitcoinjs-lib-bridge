@@ -23,6 +23,7 @@ import com.bitbill.www.model.wallet.network.entity.SearchWalletIdResponse;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 
@@ -30,6 +31,7 @@ import io.reactivex.Observable;
  * Created by isanwenyu on 2017/12/26.
  */
 
+@Singleton
 public class ContactModelManager extends ModelManager implements ContactModel {
 
     private final ContactDb mContactDb;

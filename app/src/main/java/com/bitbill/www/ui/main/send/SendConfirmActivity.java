@@ -351,8 +351,8 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
             return;
         }
         refreshFeeHintLayout(StringUtils.satoshi2btc(fee));
-        if (isSendAll && mWallet.getBtcBalance() - fee > 0) {
-            setTvSendAmount(StringUtils.satoshi2btc(mWallet.getBtcBalance() - fee));
+        if (isSendAll && mWallet.getBalance() - fee > 0) {
+            setTvSendAmount(StringUtils.satoshi2btc(mWallet.getBalance() - fee));
         }
     }
 

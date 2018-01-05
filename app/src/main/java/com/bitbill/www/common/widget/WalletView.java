@@ -166,7 +166,7 @@ public class WalletView extends LinearLayout implements View.OnClickListener {
         this.setWalletName(StringUtils.cutWalletName(wallet.getName()))
                 .setWalletLabel(String.valueOf(wallet.getName().charAt(0)))
                 // TODO: 2017/11/28 从后台获余额
-                .setWalletAmount(StringUtils.satoshi2btc(wallet.getBtcBalance()) + " btc")
+                .setWalletAmount(StringUtils.satoshi2btc(wallet.getBalance()) + " btc")
                 .setBackuped(wallet.getIsBackuped());
         return this;
     }
