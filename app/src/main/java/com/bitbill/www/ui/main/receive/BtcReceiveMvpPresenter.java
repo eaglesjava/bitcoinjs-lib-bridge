@@ -9,11 +9,7 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
  */
 public interface BtcReceiveMvpPresenter<M extends WalletModel, V extends BtcReceiveMvpView> extends MvpPresenter<V> {
 
-    void refreshAddress(Wallet selectedWallet);
-
     void loadAddress(Wallet selectedWallet);
-
-    void requestRefreshAddress(Wallet selectedWallet);
 
     void createAddressQrcode(String address);
 }

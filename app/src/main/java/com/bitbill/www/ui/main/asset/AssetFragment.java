@@ -101,11 +101,11 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
+        addPresenter(mShortCutSettingMvpPresenter);
     }
 
     @Override
     public void onBeforeSetContentLayout() {
-        addPresenter(mShortCutSettingMvpPresenter);
     }
 
     @Override

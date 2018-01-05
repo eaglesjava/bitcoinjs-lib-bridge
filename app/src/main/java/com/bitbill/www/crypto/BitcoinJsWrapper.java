@@ -103,6 +103,10 @@ public class BitcoinJsWrapper {
         executeJS("validateAddress('" + address + "')", callback);
     }
 
+    public void getBitcoinContinuousAddressByMasterXPublicKey(String xpub, long fromIndex, long inIndex, Callback callback) {
+        executeJS("getBitcoinContinuousAddressByMasterXPublicKey('" + xpub + "'," + fromIndex + "," + inIndex + ")", callback);
+    }
+
     public interface Callback {
         void call(String key, String... jsResult);
     }

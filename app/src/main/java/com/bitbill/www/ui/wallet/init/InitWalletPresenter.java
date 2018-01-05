@@ -171,16 +171,22 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                 .compose(applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<ImportWalletResponse>>(getMvpView()) {
                     @Override
-                    public void onNext(ApiResponse<ImportWalletResponse> stringApiResponse) {
-                        super.onNext(stringApiResponse);
+                    public void onNext(ApiResponse<ImportWalletResponse> importWalletResponseApiResponse) {
+                        super.onNext(importWalletResponseApiResponse);
                         if (!isViewAttached()) {
                             return;
                         }
-                        Log.d(TAG, "onNext() called with: stringApiResponse = [" + stringApiResponse + "]");
-                        if (stringApiResponse != null && stringApiResponse.getStatus() == ApiResponse.STATUS_CODE_SUCCESS) {
+                        Log.d(TAG, "onNext() called with: importWalletResponseApiResponse = [" + importWalletResponseApiResponse + "]");
+                        if (importWalletResponseApiResponse != null && importWalletResponseApiResponse.isSuccess()) {
                             //完善wallet相关属性
                             StringUtils.encryptSeedHex(mWallet.getSeedHex(), mWallet.getXPublicKey(), getMvpView().getTradePwd(), mWallet);
                             insertWallet();
+                            ImportWalletResponse data = importWalletResponseApiResponse.getData();
+                            if (data != null) {
+                                getMvpView().getResponseAddressIndex(data.getIndexNo());
+                            }
+
+
                         } else {
                             getMvpView().createWalletFail();
                         }

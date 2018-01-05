@@ -12,6 +12,8 @@ import android.widget.ScrollView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
+import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
@@ -29,7 +31,7 @@ import butterknife.OnClick;
  * 导入钱包
  * Created by isanwenyu@163.com on 2017/11/14.
  */
-public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresenter> implements InitWalletMvpView {
+public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresenter> implements InitWalletMvpView, BtcAddressMvpView {
 
     @BindView(R.id.etw_trade_pwd)
     EditTextWapper etwTradePwd;
@@ -44,12 +46,15 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Inject
     InitWalletMvpPresenter<WalletModel, InitWalletMvpView> initWalletMvpPresenter;
+    @Inject
+    BtcAddressMvpPresentder<WalletModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
     private boolean isCreateWallet = true;
     private EditTextWapper focusView;
     private boolean cancel;
     private Wallet mWallet;
     private boolean isResetPwd;
     private boolean isFromAsset;
+    private long mIndexNo;
 
     public static void start(Context context, Wallet wallet, boolean isCreateWallet) {
         Intent intent = new Intent(context, InitWalletActivity.class);
@@ -71,6 +76,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void injectComponent() {
         //inject activity
         getActivityComponent().inject(this);
+        addPresenter(mBtcAddressMvpPresentder);
     }
 
     @Override
@@ -208,12 +214,36 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         return mWallet;
     }
 
+    @Override
+    public void getWalletFail() {
+
+    }
+
+    @Override
+    public void newAddressFail() {
+
+    }
+
+    @Override
+    public void newAddressSuccess(String lastAddress) {
+
+    }
+
+    @Override
+    public void reachAddressIndexLimit() {
+
+    }
+
     public String getConfirmTradePwd() {
         return etwTradePwdConfirm.getText();
     }
 
     @Override
     public void createWalletSuccess() {
+        if (!isCreateWallet) {
+            // 优化检查最新地址索引逻辑
+            mBtcAddressMvpPresentder.checkLastAddressIndex(mIndexNo, getWallet().getLastAddressIndex());
+        }
         //跳转到穿件钱包成功界面
         InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);
         if (isFromAsset) {
@@ -253,6 +283,12 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     public boolean isResetPwd() {
         return isResetPwd;
+    }
+
+    @Override
+    public void getResponseAddressIndex(long indexNo) {
+        mIndexNo = indexNo;
+
     }
 
 }

@@ -108,7 +108,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mBtcAddressMvpPresentder.onAttach(this);
+        mBtcAddressMvpPresentder.onDetach();
     }
 
     @Override
@@ -392,6 +392,11 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     public void newAddressSuccess(String lastAddress) {
         mLastAddress = lastAddress;
         getMvpPresenter().buildTransaction();
+    }
+
+    @Override
+    public void reachAddressIndexLimit() {
+
     }
 
 

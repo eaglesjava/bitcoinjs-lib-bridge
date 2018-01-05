@@ -395,7 +395,7 @@
     </style>
 
     <style name="Line">
-        <item name="android:background">@color/edit_line</item>
+        <item name="android:background">@color/line_30</item>
     </style>
 
     <style name="Line.Horizontal" parent="Line">

@@ -32,6 +32,7 @@
     <color name="red_msg">#FD676E</color>
     <color name="edit_line">#80F2F2F2</color>
     <color name="item_line">#F2F2F2</color>
+    <color name="line_30">#4dF2F2F2</color>
     <color name="error">#FD6D73</color>
     <color name="green">#ABE64D</color>
     <color name="div_gray_bg">#d9dada</color>

@@ -16,4 +16,6 @@ public interface BtcAddressMvpView extends MvpView {
     void newAddressFail();
 
     void newAddressSuccess(String lastAddress);
+
+    void reachAddressIndexLimit();
 }

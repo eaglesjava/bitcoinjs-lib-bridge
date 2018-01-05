@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
+import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -24,7 +26,7 @@ import butterknife.OnClick;
  * Use the {@link BtcReceiveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter> implements BtcReceiveMvpView {
+public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter> implements BtcReceiveMvpView, BtcAddressMvpView {
 
 
     @BindView(R.id.tv_address)
@@ -35,7 +37,11 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     TextView tvReceiveAmount;
     @Inject
     BtcReceiveMvpPresenter<WalletModel, BtcReceiveMvpView> mReceiveMvpPresenter;
+    @Inject
+    BtcAddressMvpPresentder<WalletModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
+
     private MenuItem mRefreshItem;
+    private Wallet mSelectedWallet;
 
     public BtcReceiveFragment() {
         // Required empty public constructor
@@ -69,6 +75,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
+        addPresenter(mBtcAddressMvpPresentder);
     }
 
     @Override
@@ -119,6 +126,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     }
 
     public void loadAddress(Wallet selectedWallet) {
+        mSelectedWallet = selectedWallet;
         if (mReceiveMvpPresenter != null) {
             mReceiveMvpPresenter.loadAddress(selectedWallet);
 
@@ -127,15 +135,16 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     }
 
     public void refreshAddress(Wallet selectedWallet) {
-        if (mReceiveMvpPresenter != null) {
-            mReceiveMvpPresenter.refreshAddress(selectedWallet);
+        mSelectedWallet = selectedWallet;
+        if (mBtcAddressMvpPresentder != null) {
+            mBtcAddressMvpPresentder.newAddress();
 
         }
 
     }
 
-    public void setSendAddress(String sendAddress) {
-        tvAddress.setText(sendAddress);
+    public void setReceiveAddress(String receiveAddress) {
+        tvAddress.setText(receiveAddress);
     }
 
     @Override
@@ -146,13 +155,6 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     @Override
     public void createAddressQrcodeFail() {
         showMessage(R.string.error_create_address_qrcode);
-
-    }
-
-    @Override
-    public void refreshAddressFail() {
-
-        showMessage(R.string.error_refresh_address);
     }
 
     @Override
@@ -162,12 +164,39 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     }
 
     @Override
-    public void refreshAddressSuccess() {
-        showMessage(R.string.success_refresh_address);
-
+    public void loadAddressFail() {
+        showMessage(R.string.msg_load_address_fail);
     }
 
     public String getCurrentAddress() {
         return tvAddress.getText().toString();
+    }
+
+    @Override
+    public Wallet getWallet() {
+        return mSelectedWallet;
+    }
+
+    @Override
+    public void getWalletFail() {
+        showMessage(R.string.error_get_wallet_info_fail);
+    }
+
+    @Override
+    public void newAddressFail() {
+        showMessage(R.string.error_refresh_address);
+    }
+
+    @Override
+    public void newAddressSuccess(String lastAddress) {
+        showMessage(R.string.success_refresh_address);
+        getMvpPresenter().createAddressQrcode(lastAddress);
+        setReceiveAddress(lastAddress);
+
+    }
+
+    @Override
+    public void reachAddressIndexLimit() {
+        showMessage(R.string.msg_reach_address_index_limit);
     }
 }

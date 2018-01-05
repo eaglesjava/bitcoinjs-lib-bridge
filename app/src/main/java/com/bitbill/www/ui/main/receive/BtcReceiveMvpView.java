@@ -9,15 +9,13 @@ import com.bitbill.www.common.base.view.MvpView;
  */
 public interface BtcReceiveMvpView extends MvpView {
 
-    void setSendAddress(String address);
+    void setReceiveAddress(String address);
 
     void createAddressQrcodeSuccess(Bitmap qrcodeBitmap);
 
     void createAddressQrcodeFail();
 
-    void refreshAddressFail();
-
     void getSelectedWalletFail();
 
-    void refreshAddressSuccess();
+    void loadAddressFail();
 }

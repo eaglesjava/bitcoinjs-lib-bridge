@@ -25,7 +25,7 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     private Long walletId;
 
     @Property(nameInDb = "index")
-    private int index;
+    private Long index;
 
     @Property(nameInDb = "coin_type")
     private String coinType;//默认"BTC"
@@ -33,8 +33,8 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "created_at")
     private Date createdAt;
 
-    @Generated(hash = 1221567693)
-    public Address(Long id, String name, Long walletId, int index, String coinType,
+    @Generated(hash = 1524232744)
+    public Address(Long id, String name, Long walletId, Long index, String coinType,
                    Date createdAt) {
         this.id = id;
         this.name = name;
@@ -72,11 +72,11 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
         this.walletId = walletId;
     }
 
-    public int getIndex() {
+    public Long getIndex() {
         return this.index;
     }
 
-    public void setIndex(int index) {
+    public void setIndex(Long index) {
         this.index = index;
     }
 

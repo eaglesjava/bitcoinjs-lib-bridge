@@ -41,6 +41,9 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     @Property(nameInDb = "last_address_index")
     private long lastAddressIndex;
 
+    @Property(nameInDb = "last_address")
+    private String lastAddress;
+
     @Property(nameInDb = "encrypt_seed")
     private String encryptSeed;
 
@@ -71,7 +74,7 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     private String coinType;//默认"BTC"
 
     @ToMany(referencedJoinProperty = "walletId")
-    @OrderBy("createdAt ASC")
+    @OrderBy("index ASC")
     private List<Address> addressList;
 
     @Transient
@@ -82,8 +85,6 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     private String tradePwd;
     @Transient
     private boolean selected;
-    @Transient
-    private String lastAddress;
 
     /**
      * Used to resolve relations
@@ -97,15 +98,16 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     @Generated(hash = 741381941)
     private transient WalletDao myDao;
 
-    @Generated(hash = 1164886308)
+    @Generated(hash = 1378478911)
     public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash, long lastAddressIndex,
-                  String encryptSeed, String seedHexHash, boolean isBackuped, long createdAt, long updatedAt,
-                  boolean isDefault, String XPublicKey, long balance, long unconfirm, String coinType) {
+                  String lastAddress, String encryptSeed, String seedHexHash, boolean isBackuped, long createdAt,
+                  long updatedAt, boolean isDefault, String XPublicKey, long balance, long unconfirm, String coinType) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
         this.mnemonicHash = mnemonicHash;
         this.lastAddressIndex = lastAddressIndex;
+        this.lastAddress = lastAddress;
         this.encryptSeed = encryptSeed;
         this.seedHexHash = seedHexHash;
         this.isBackuped = isBackuped;

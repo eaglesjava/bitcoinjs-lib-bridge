@@ -2,18 +2,14 @@ package com.bitbill.www.ui.main.receive;
 
 import android.graphics.Bitmap;
 
-import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
-import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
-import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
 
 import javax.inject.Inject;
 
@@ -55,105 +51,9 @@ public class BtcReceivePresenter<M extends WalletModel, V extends BtcReceiveMvpV
                 if (!isViewAttached()) {
                     return;
                 }
-                getMvpView().setSendAddress(address);
+                getMvpView().setReceiveAddress(address);
             }
         });
-    }
-
-    @Override
-    public void refreshAddress(Wallet selectedWallet) {
-        if (!isValidSelectedWallet(selectedWallet)) {
-            return;
-        }
-        //刷新地址index+1
-        long index = selectedWallet.getLastAddressIndex() + 1;
-        selectedWallet.setLastAddressIndex(index);
-        BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(selectedWallet.getXPublicKey(), index, new BitcoinJsWrapper.Callback() {
-            @Override
-            public void call(String key, String... jsResult) {
-                if (jsResult == null) {
-                    return;
-                }
-                String address = jsResult[0];
-
-                if (!isValidBtcAddress(address)) {
-                    return;
-                }
-                selectedWallet.setLastAddress(address);
-                //更新地址index 并请求后台刷新
-                updateAddressIndex(selectedWallet);
-
-            }
-        });
-    }
-
-    private void updateAddressIndex(Wallet selectedWallet) {
-        selectedWallet.setLastAddressIndex(selectedWallet.getLastAddressIndex());
-        getCompositeDisposable().add(getModelManager().updateWallet(selectedWallet)
-                .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>() {
-                    @Override
-                    public void onNext(Boolean aBoolean) {
-                        super.onNext(aBoolean);
-                        if (aBoolean) {
-                            //后台扫描地址
-                            requestRefreshAddress(selectedWallet);
-                        } else {
-                            //本地index更新失败
-                            if (!isViewAttached()) {
-                                return;
-                            }
-                            getMvpView().refreshAddressFail();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        if (!isViewAttached()) {
-                            return;
-                        }
-                        getMvpView().refreshAddressFail();
-                    }
-                }));
-    }
-
-    @Override
-    public void requestRefreshAddress(Wallet selectedWallet) {
-        String xPublicKeyHash = EncryptUtils.encryptMD5ToString(selectedWallet.getXPublicKey());
-        // check xPublicKeyHash
-        if (!isValidXPublicKeyHash(xPublicKeyHash)) {
-            return;
-        }
-        getCompositeDisposable().add(getModelManager()
-                .refreshAddress(new RefreshAddressRequest(xPublicKeyHash, selectedWallet.getLastAddressIndex()))
-                .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<RefreshAddressResponse>>() {
-                    @Override
-                    public void onNext(ApiResponse<RefreshAddressResponse> refreshAddressResponseApiResponse) {
-                        super.onNext(refreshAddressResponseApiResponse);
-                        if (!isViewAttached()) {
-                            return;
-                        }
-                        if (refreshAddressResponseApiResponse.isSuccess()) {
-
-                            createAddressQrcode(selectedWallet.getLastAddress());
-                            getMvpView().setSendAddress(selectedWallet.getLastAddress());
-                            getMvpView().refreshAddressSuccess();
-                        } else {
-                            getMvpView().refreshAddressFail();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        if (!isViewAttached()) {
-                            return;
-                        }
-                        getMvpView().refreshAddressFail();
-                    }
-                }));
     }
 
     @Override
@@ -208,17 +108,9 @@ public class BtcReceivePresenter<M extends WalletModel, V extends BtcReceiveMvpV
         return true;
     }
 
-    public boolean isValidXPublicKeyHash(String hash) {
-        if (StringUtils.isEmpty(hash)) {
-            getMvpView().refreshAddressFail();
-            return false;
-        }
-        return true;
-    }
-
     private boolean isValidBtcAddress(String btcAddress) {
         if (StringUtils.isEmpty(btcAddress)) {
-            getMvpView().refreshAddressFail();
+            getMvpView().loadAddressFail();
             return false;
         }
         return true;

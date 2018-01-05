@@ -10,13 +10,13 @@ public class ImportWalletResponse {
      * indexNo : 49
      */
 
-    private int indexNo;
+    private long indexNo;
 
-    public int getIndexNo() {
+    public long getIndexNo() {
         return indexNo;
     }
 
-    public void setIndexNo(int indexNo) {
+    public void setIndexNo(long indexNo) {
         this.indexNo = indexNo;
     }
 }

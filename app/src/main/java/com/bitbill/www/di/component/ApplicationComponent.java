@@ -10,6 +10,7 @@ import android.content.Context;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.di.module.ApplicationModule;
 import com.bitbill.www.di.qualifier.ApplicationContext;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -39,6 +40,8 @@ public interface ApplicationComponent {
     WalletModel getWalletModel();
 
     ContactModel getContactModel();
+
+    AddressModel getAddressModel();
 
     Socket getSocket();
 }
