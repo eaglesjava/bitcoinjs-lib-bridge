@@ -47,6 +47,15 @@ function getBitcoinAddressByMasterXPublicKey(xpub, index) {
     return node.derive(index).getAddress();
 }
 
+function getBitcoinContinuousAddressByMasterXPublicKey(xpub, fromIndex, inIndex) {
+    var node = bitcoin.HDNode.fromBase58(xpub);
+    var addresses = new Array();
+    for (var i = fromIndex, j = 0; i <= inIndex; i++, j++) {
+        addresses[j] = node.derive(i).getAddress();
+    }
+    return addresses;
+}
+
 function generateMainnetMasterKeychain(seedHex) {
     return bitcoin.HDNode.fromSeedHex(seedHex);
 }
@@ -94,6 +103,7 @@ module.exports = {
     validateAddress: validateAddress,
     getBitcoinAddressBySeedHex: getBitcoinAddressBySeedHex,
     getBitcoinAddressByMasterXPublicKey: getBitcoinAddressByMasterXPublicKey,
+    getBitcoinContinuousAddressByMasterXPublicKey: getBitcoinContinuousAddressByMasterXPublicKey,
     getBitcoinMasterXPublicKey: getBitcoinMasterXPublicKey,
     buildTransaction: buildTransaction,
     bip39: bip39
