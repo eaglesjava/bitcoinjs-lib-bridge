@@ -221,7 +221,11 @@ extension WalletModel {
 	
     var btc_transactionArray: [BTCTransactionModel] {
         get {
-            return self.btcTransactions?.array as! [BTCTransactionModel]
+            return btcTransactions!.sortedArray(comparator: { (lhs, rhs) -> ComparisonResult in
+                let l = lhs as! BTCTransactionModel
+                let r = rhs as! BTCTransactionModel
+                return r.createdDate!.compare(l.createdDate!)
+            }) as! [BTCTransactionModel]
         }
     }
     

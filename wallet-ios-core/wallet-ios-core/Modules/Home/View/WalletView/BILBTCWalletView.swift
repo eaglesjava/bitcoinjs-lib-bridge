@@ -29,12 +29,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 		didSet {
             guard let w = wallet else { return }
             transactions.removeAll()
-            let txs = w.btcTransactions?.sortedArray(comparator: { (lhs, rhs) -> ComparisonResult in
-                let l = lhs as! BTCTransactionModel
-                let r = rhs as! BTCTransactionModel
-                return r.createdDate!.compare(l.createdDate!)
-            }) as! [BTCTransactionModel]
-            transactions.append(contentsOf: txs)
+            transactions.append(contentsOf: w.btc_transactionArray)
             w.getBalanceFromServer(success: { (wallet) in
                 self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 122 : 213
                 self.balanceLabel.text = w.btc_balanceString
@@ -85,15 +80,8 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         guard w.needLoadServer else { return }
         isLoading = true
         w.getTransactionHistoryFromSever(page: page, size: size, success: { (txs) in
-            if !self.isLoadingMore {
-                self.transactions.removeAll()
-            }
-            let txsa = w.btcTransactions?.sortedArray(comparator: { (lhs, rhs) -> ComparisonResult in
-                let l = lhs as! BTCTransactionModel
-                let r = rhs as! BTCTransactionModel
-                return r.createdDate!.compare(l.createdDate!)
-            }) as! [BTCTransactionModel]
-            self.transactions.append(contentsOf: txsa)
+            self.transactions.removeAll()
+            self.transactions.append(contentsOf: w.btc_transactionArray)
             w.needLoadServer = false
             self.loadEnd()
         }) { (msg, code) in

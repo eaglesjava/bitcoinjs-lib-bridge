@@ -25,8 +25,8 @@ enum Router: URLRequestConvertible {
                 return (.bil_wallet_check_id, ["walletId": walletID])
             case .getWalletID(let extendedKeyHash):
                 return (.bil_wallet_get_id, ["extendedKeysHash": extendedKeyHash])
-            case .getTransactionHistory(let extendedKeyHash, let page, let size):
-                return (.bil_wallet_transaction_history, ["extendedKeysHash": extendedKeyHash, "page": page, "size": size])
+            case .getTransactionHistory(let extendedKeyHash, let id,let page, let size):
+                return (.bil_wallet_transaction_history, ["extendedKeysHash": extendedKeyHash, "id": id, "page": page, "size": size])
             case .getBalance(let extendedKeyHash):
                 return (.bil_wallet_get_balance, ["extendedKeysHash": extendedKeyHash])
             case .getUTXO(let extendedKeyHash):
@@ -88,7 +88,7 @@ enum Router: URLRequestConvertible {
     case getWalletID(extendedKeyHash: String)
     case getBalance(extendedKeyHash: String)
     case getUTXO(extendedKeyHash: String)
-    case getTransactionHistory(extendedKeyHash: String, page: Int, size: Int)
+    case getTransactionHistory(extendedKeyHash: String, id: String, page: Int, size: Int)
     case getTransactionBuildConfig(extendedKeyHash: String)
     case refreshAddress(extendedKeyHash: String, index: Int64)
     case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int64, txHash: String, txHex: String, remark: String)
