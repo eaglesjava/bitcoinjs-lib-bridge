@@ -82,8 +82,6 @@ extension WalletModel {
             return
         }
         BILNetworkManager.request(request: .importWallet(walletID: walletID, extendedKey: extKey), success: { (result) in
-            let json = JSON(result)
-            let lastIndex = json["indexNo"].int64Value
             success(result)
         }, failure: failure)
     }

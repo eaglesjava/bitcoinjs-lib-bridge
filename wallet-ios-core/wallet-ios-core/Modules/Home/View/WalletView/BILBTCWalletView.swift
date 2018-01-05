@@ -88,7 +88,12 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
             if !self.isLoadingMore {
                 self.transactions.removeAll()
             }
-            self.transactions.append(contentsOf: txs)
+            let txsa = w.btcTransactions?.sortedArray(comparator: { (lhs, rhs) -> ComparisonResult in
+                let l = lhs as! BTCTransactionModel
+                let r = rhs as! BTCTransactionModel
+                return r.createdDate!.compare(l.createdDate!)
+            }) as! [BTCTransactionModel]
+            self.transactions.append(contentsOf: txsa)
             w.needLoadServer = false
             self.loadEnd()
         }) { (msg, code) in
@@ -109,7 +114,9 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     @objc
     func refresh(sender: Any?) {
+        wallet?.needLoadServer = true
         DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
+            self.loadTransactionHistory()
             self.tableView.refreshControl?.endRefreshing()
         }
     }
