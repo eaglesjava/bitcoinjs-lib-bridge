@@ -214,7 +214,6 @@
 		BA12AC471FEA672600812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Home.strings"; sourceTree = "<group>"; };
 		BA12AC4C1FEA67B900812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Send.strings; sourceTree = "<group>"; };
 		BA12AC4D1FEA67BC00812F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Send.storyboard; sourceTree = "<group>"; };
-		BA12AC541FEA6FFA00812F38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Home.strings; sourceTree = "<group>"; };
 		BA12AC591FEA715C00812F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		BA12AC5A1FEA73D700812F38 /* BILAddContactByAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAddContactByAddressController.swift; sourceTree = "<group>"; };
 		BA12AC981FEB932900812F38 /* BILMeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeController.swift; sourceTree = "<group>"; };
@@ -269,7 +268,6 @@
 		BAEFFD431FEBB7BD00C6EAB3 /* diaoluo_xiao.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diaoluo_xiao.mp3; sourceTree = "<group>"; };
 		BAEFFD461FEBB7F700C6EAB3 /* BILAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAudioPlayer.swift; sourceTree = "<group>"; };
 		BAEFFD481FEBC69800C6EAB3 /* BILMeWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeWalletCell.swift; sourceTree = "<group>"; };
-		BAEFFD4A1FEBCD0B00C6EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Home.strings"; sourceTree = "<group>"; };
 		BAEFFD4B1FEBCE9F00C6EAB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BAEFFD4C1FEBCEC000C6EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		BAEFFD4D1FEBCEC400C6EAB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -1532,9 +1530,7 @@
 		BA12AC501FEA6FBE00812F38 /* Home.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BA12AC541FEA6FFA00812F38 /* en */,
 				BA12AC591FEA715C00812F38 /* Base */,
-				BAEFFD4A1FEBCD0B00C6EAB3 /* zh-Hans */,
 			);
 			name = Home.storyboard;
 			sourceTree = "<group>";

@@ -29,7 +29,10 @@ class BILAboutUsViewController: BILBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func emailAction(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "mailto:hi@bitbill.com")!, options: [:], completionHandler: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -170,7 +170,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8uA-u4-dj8">
-                                <rect key="frame" x="0.0" y="140" width="375" height="638"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="594"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="PJf-Pu-7Lb">
@@ -273,13 +273,38 @@
                                     <outlet property="delegate" destination="RhM-oC-9eX" id="ENW-Gg-eHw"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kal-Hp-JzV">
+                                <rect key="frame" x="0.0" y="734" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DR5-Ft-Rhg">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <state key="normal" title="hi@bitbill.com">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="emailAction:" destination="RhM-oC-9eX" eventType="touchUpInside" id="Iad-d1-Qir"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="DR5-Ft-Rhg" secondAttribute="trailing" id="SuL-C2-32p"/>
+                                    <constraint firstAttribute="bottom" secondItem="DR5-Ft-Rhg" secondAttribute="bottom" id="UAt-Om-cnx"/>
+                                    <constraint firstItem="DR5-Ft-Rhg" firstAttribute="top" secondItem="Kal-Hp-JzV" secondAttribute="top" id="aiO-hp-JAa"/>
+                                    <constraint firstItem="DR5-Ft-Rhg" firstAttribute="leading" secondItem="Kal-Hp-JzV" secondAttribute="leading" id="eFk-rP-njg"/>
+                                    <constraint firstAttribute="height" constant="44" id="iyj-Zc-wdh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.2274509804" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Wn3-XZ-tdV" firstAttribute="bottom" secondItem="8uA-u4-dj8" secondAttribute="bottom" id="02S-Iu-EL8"/>
                             <constraint firstItem="Wn3-XZ-tdV" firstAttribute="trailing" secondItem="8uA-u4-dj8" secondAttribute="trailing" id="2bv-dO-7hz"/>
+                            <constraint firstItem="Kal-Hp-JzV" firstAttribute="bottom" secondItem="Wn3-XZ-tdV" secondAttribute="bottom" id="91m-w6-Ubt"/>
                             <constraint firstItem="8uA-u4-dj8" firstAttribute="top" secondItem="Wn3-XZ-tdV" secondAttribute="top" id="IqH-NG-X6c"/>
+                            <constraint firstItem="Kal-Hp-JzV" firstAttribute="leading" secondItem="Wn3-XZ-tdV" secondAttribute="leading" id="R2f-W0-5nW"/>
                             <constraint firstItem="8uA-u4-dj8" firstAttribute="leading" secondItem="Wn3-XZ-tdV" secondAttribute="leading" id="eDa-ZC-ibY"/>
+                            <constraint firstItem="Wn3-XZ-tdV" firstAttribute="trailing" secondItem="Kal-Hp-JzV" secondAttribute="trailing" id="m3N-qa-V2q"/>
+                            <constraint firstItem="Kal-Hp-JzV" firstAttribute="top" secondItem="8uA-u4-dj8" secondAttribute="bottom" id="uzV-cs-lOz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wn3-XZ-tdV"/>
                     </view>
@@ -291,7 +316,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nzi-n8-lMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="838.83058470764627"/>
+            <point key="canvasLocation" x="1612" y="838.66995073891633"/>
         </scene>
         <!--系统设置-->
         <scene sceneID="2RD-3w-Olv">
