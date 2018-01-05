@@ -100,17 +100,17 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
                 }
                 else
                 {
-                    SVProgressHUD.show(withStatus: "请求数据中...")
+                    self.bil_showLoading()
                     BitcoinJSBridge.shared.getMasterXPublicKey(mnemonic: mnemonic, success: { (pubKey) in
                         WalletModel.getWalletIDFromSever(mainExtPublicKey: pubKey as! String, success: { (id) in
                             self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: id))
-                            SVProgressHUD.dismiss()
+                            self.bil_dismissHUD()
                         }, failure: { (errorMsg, code) in
-                            SVProgressHUD.dismiss()
+                            self.bil_dismissHUD()
                             self.showTipAlert(title: alertTitle, msg: errorMsg)
                         })
                     }, failure: { (error) in
-                        SVProgressHUD.dismiss()
+                        self.bil_dismissHUD()
                         self.performSegue(withIdentifier: self.sugueID, sender: segueSender(mnemonic: mnemonic, walletID: nil))
                     })
                 }

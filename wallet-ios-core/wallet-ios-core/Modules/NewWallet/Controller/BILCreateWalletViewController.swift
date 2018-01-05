@@ -125,24 +125,21 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		
 		getMnemonic { (m) in
             func cleanUp(wallet: WalletModel?, error: String) {
-                SVProgressHUD.showError(withStatus: error)
-                SVProgressHUD.dismiss(withDelay: 1.2)
+                self.bil_showError(status: error)
                 debugPrint(error)
                 if let w = wallet {
                     do {
                         try BILWalletManager.shared.remove(wallet: w)
                     } catch {
-                        SVProgressHUD.showError(withStatus: "操作失败")
-                        SVProgressHUD.dismiss(withDelay: 1.2)
+                        self.bil_showError(status: "操作失败")
                     }
                 }
             }
             guard let pwd = self.passwordTextField.text else {
-                SVProgressHUD.showError(withStatus: "密码不能为空")
-                SVProgressHUD.dismiss(withDelay: 1.2)
+                self.bil_showError(status: "密码不能为空")
                 return
             }
-            SVProgressHUD.show(withStatus: "处理中...")
+            self.bil_showLoading()
             
             var localWallet = WalletModel.fetch(mnemonicHash: m.md5())
             
@@ -163,7 +160,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                         NotificationCenter.default.post(name: .walletCountDidChanged, object: nil)
                         self.mnemonicHash = wallet.mnemonicHash
                         self.createSuccess()
-                        SVProgressHUD.dismiss()
+                        self.bil_dismissHUD()
                     } catch {
                         cleanUp(wallet: wallet, error: error.localizedDescription)
                     }
@@ -186,8 +183,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                     successFromSever(result: [:])
                 }
             }, failure: { (errorMsg) in
-                SVProgressHUD.showError(withStatus: errorMsg)
-                SVProgressHUD.dismiss(withDelay: 1.2)
+                self.bil_showError(status: errorMsg)
             })
 		}
 		
@@ -204,7 +200,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 self.createWalletType = .new
 				complete(str)
 			}) { (error) in
-				SVProgressHUD.showError(withStatus: error.localizedDescription)
+				self.bil_showError(status: error.localizedDescription)
 				debugPrint(error)
 			}
 		}

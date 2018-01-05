@@ -98,17 +98,17 @@ class BILContactController: BILLightBlueBaseController {
                     unownedSelf.bil_makeToast(msg: "地址已存在")
                     return
                 }
-                SVProgressHUD.show()
+                self.bil_showLoading()
                 BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
                     let isValidate = result as! Bool
                     if isValidate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(350), execute: {
-                            SVProgressHUD.dismiss()
+                            self.bil_dismissHUD()
                             unownedSelf.performSegue(withIdentifier: .bil_contactsToAddByAddressSegue, sender: address)
                         })
                     } else {
                         unownedSelf.showTipAlert(msg: "不是合法的地址")
-                        SVProgressHUD.dismiss()
+                        self.bil_dismissHUD()
                     }
                 }, failure: { (error) in
                     unownedSelf.showTipAlert(msg: error.localizedDescription)
@@ -123,15 +123,15 @@ class BILContactController: BILLightBlueBaseController {
             bil_makeToast(msg: "ID 已存在")
             return
         }
-		SVProgressHUD.show()
+		self.bil_showLoading()
 		ContactModel.getContactFromServer(by: id, success: { (id) in
 			DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(350), execute: {
-				SVProgressHUD.dismiss()
+				self.bil_dismissHUD()
 				self.showResult(id: id)
 			})
 		}) { (msg, code) in
 			self.bil_makeToast(msg: msg)
-			SVProgressHUD.dismiss()
+			self.bil_dismissHUD()
 		}
 	}
 	

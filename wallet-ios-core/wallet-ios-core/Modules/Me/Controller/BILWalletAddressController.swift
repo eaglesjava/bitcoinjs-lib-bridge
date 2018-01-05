@@ -36,14 +36,14 @@ class BILWalletAddressController: BILLightBlueBaseController {
     }
     @IBAction func scanMoreAddressAction(_ sender: Any) {
         guard let w = wallet else { return }
-        SVProgressHUD.show(withStatus: "Scaning...")
+        bil_showLoading()
         let targetIndex = w.lastAddressIndex + 10
         w.refreshAddressToSever(index: targetIndex, success: { (addresses) in
 			BILWalletManager.shared.loadBlockHeightAndWalletVersion()
             self.refreshUI()
             self.bil_dismissHUD()
         }) { (msg) in
-            SVProgressHUD.showError(withStatus: msg)
+            self.bil_showError(status: msg)
         }
     }
     

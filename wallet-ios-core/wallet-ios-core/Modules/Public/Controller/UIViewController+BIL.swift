@@ -22,12 +22,16 @@ extension UIViewController {
 		
 	}
     
-    func bil_showLoading(status: String?) {
+    func bil_showLoading(status: String? = nil) {
         SVProgressHUD.show(withStatus: status)
     }
     
     func bil_showSuccess(status: String) {
         SVProgressHUD.showSuccess(withStatus: status)
+    }
+    
+    func bil_showError(status: String) {
+        SVProgressHUD.showError(withStatus: status)
     }
     
     func bil_dismissHUD(delay: Double = 0, complete: SVProgressHUDDismissCompletion? = nil) {
