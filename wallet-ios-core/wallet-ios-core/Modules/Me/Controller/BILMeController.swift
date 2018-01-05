@@ -126,7 +126,7 @@ class BILMeController: BILBaseViewController {
                 self.bil_makeToast(msg: "密钥不能为空")
                 return
             }
-            self.bil_showLoading(status: "recovering...")
+            self.bil_showLoading(status: nil)
             ContactModel.recoverContactsFromServer(recoverKey: key, success: { (contacts) in
                 let count = contacts.count
                 if count == 0 {

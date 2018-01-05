@@ -156,7 +156,7 @@ class BILSendConfirmController: BILBaseViewController {
             }
         }
         
-        bil_showLoading(status: "处理中...")
+        bil_showLoading(status: nil)
         
         if model.isSendAll {
             createTXBuilder(address: nil)
@@ -232,7 +232,7 @@ class BILSendConfirmController: BILBaseViewController {
             errorHandler(msg: "解密 Seed 失败")
             return
         }
-        bil_showLoading(status: "发送中...")
+        bil_showLoading(status: nil)
         builder.seedHex = seed
         builder.build(success: { (tx) in
             debugPrint(tx.bytesCount)

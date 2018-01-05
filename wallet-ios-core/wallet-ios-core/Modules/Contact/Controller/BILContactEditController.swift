@@ -80,7 +80,7 @@ class BILContactEditController: BILLightBlueBaseController {
     }
     
     func deleteContact() {
-        bil_showLoading(status: "deleting...")
+        bil_showLoading(status: nil)
         contact?.deleteFromServer(success: {
             self.navigationController?.popToRootViewController(animated: true)
             self.bil_dismissHUD()
@@ -109,7 +109,7 @@ class BILContactEditController: BILLightBlueBaseController {
         }
         
         let remark = remarkInputView.textField.text ?? ""
-        bil_showLoading(status: "updating...")
+        bil_showLoading(status: nil)
         contact?.updateToServer(name: name, remark: remark, success: { (contact) in
             SVProgressHUD.showSuccess(withStatus: "更新成功")
             SVProgressHUD.dismiss(withDelay: 1.5, completion: {

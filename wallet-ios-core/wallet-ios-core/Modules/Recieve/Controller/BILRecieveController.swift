@@ -169,7 +169,7 @@ class BILRecieveController: BILBaseViewController {
 	}
 	
 	@IBAction func generateNewAddress(_ sender: Any) {
-        bil_showLoading(status: "生成中...")
+        bil_showLoading(status: nil)
 		currentWallet?.getNewBTCAddress(success: { (address) in
 			self.setAddress(address: address)
             self.bil_makeToast(msg: "地址已刷新")

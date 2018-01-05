@@ -50,7 +50,7 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
             return
         }
         
-        bil_showLoading(status: "searching...")
+        bil_showLoading(status: nil)
         ContactModel.getContactFromServer(by: id, success: { (id) in
             self.showResult(id: id)
         }) { (msg, code) in

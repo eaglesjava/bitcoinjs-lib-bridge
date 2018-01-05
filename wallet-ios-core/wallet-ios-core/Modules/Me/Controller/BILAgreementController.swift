@@ -31,18 +31,20 @@ class BILAgreementController: BILBaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-		textView.contentInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
-        guard let htmlURL = Bundle.main.url(forResource: "service_cn", withExtension: "html") else {
-            return
-        }
-        do {
-            let data = try Data(contentsOf: htmlURL)
-            let att = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
-            textView.attributedText = att
-        } catch {
-            showTipAlert(msg: error.localizedDescription, dismissed: {
-                self.navigationController?.popViewController(animated: true)
-            })
+        if textView.attributedText.string.isEmpty {
+            textView.contentInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
+            guard let htmlURL = Bundle.main.url(forResource: "service_cn", withExtension: "html") else {
+                return
+            }
+            do {
+                let data = try Data(contentsOf: htmlURL)
+                let att = try NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+                textView.attributedText = att
+            } catch {
+                showTipAlert(msg: error.localizedDescription, dismissed: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
         }
     }
 

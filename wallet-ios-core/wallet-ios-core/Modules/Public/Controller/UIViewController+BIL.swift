@@ -22,7 +22,7 @@ extension UIViewController {
 		
 	}
     
-    func bil_showLoading(status: String) {
+    func bil_showLoading(status: String?) {
         SVProgressHUD.show(withStatus: status)
     }
     
