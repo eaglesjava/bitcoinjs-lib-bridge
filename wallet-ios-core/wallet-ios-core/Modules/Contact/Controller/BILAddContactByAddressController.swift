@@ -134,7 +134,7 @@ extension BILAddContactByAddressController {
             debugPrint(result)
             let isValidate = result as! Bool
             if isValidate {
-                self.bil_showLoading(status: "adding...")
+                self.bil_showLoading(status: nil)
                 ContactModel.addContactToServer(id: "", address: address, name: name, remark: remark, success: { (contact) in
                     SVProgressHUD.showSuccess(withStatus: "添加成功")
                     SVProgressHUD.dismiss(withDelay: 1.5, completion: {
