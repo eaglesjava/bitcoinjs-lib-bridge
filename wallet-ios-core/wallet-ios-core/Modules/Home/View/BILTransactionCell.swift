@@ -18,7 +18,7 @@ class BILTransactionCell: UITableViewCell {
 	var transaction: BTCTransactionModel? {
 		didSet {
 			if let t = transaction {
-                typeImageView.image = t.type.image
+                typeImageView.image = t.height == -1 ? UIImage(named: "icon_record_unconfirm") : t.type.image
                 addressLabel.text = t.firstTargetAddress?.address
                 dateLabel.text = t.dateSring
                 volumeLabel.text = t.volumeString
