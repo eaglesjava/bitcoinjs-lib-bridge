@@ -79,6 +79,7 @@ class BILSokectManager: NSObject {
         socket.on(.bil_socket_event_confirm) { (data, emitter) in
             debugPrint(data)
             NotificationCenter.default.post(name: .unconfirmTransactionBeenConfirmed, object: nil)
+			BILWalletManager.shared.loadBlockHeightAndWalletVersion()
         }
     }
     
