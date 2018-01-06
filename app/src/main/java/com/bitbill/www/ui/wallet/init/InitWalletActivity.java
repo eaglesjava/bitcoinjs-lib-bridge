@@ -242,7 +242,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void createWalletSuccess() {
         if (!isCreateWallet) {
             // 优化检查最新地址索引逻辑
-            mBtcAddressMvpPresentder.checkLastAddressIndex(mIndexNo, getWallet().getLastAddressIndex());
+            mBtcAddressMvpPresentder.checkLastAddressIndex(mIndexNo, getWallet().getLastAddressIndex(), getWallet());
         }
         //跳转到穿件钱包成功界面
         InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);

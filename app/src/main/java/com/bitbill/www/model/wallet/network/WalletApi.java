@@ -7,26 +7,22 @@ import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
-import com.bitbill.www.model.wallet.network.entity.GetCacheVersionResponse;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxHistoryRequest;
 import com.bitbill.www.model.wallet.network.entity.GetTxInfoRequest;
 import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
+import com.bitbill.www.model.wallet.network.entity.GetTxListRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
+import com.bitbill.www.model.wallet.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
-import com.bitbill.www.model.wallet.network.entity.TxHistory;
-import com.bitbill.www.model.wallet.network.entity.Unconfirm;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -110,10 +106,10 @@ public interface WalletApi extends Api {
     /**
      * 交易记录
      *
-     * @param getTxHistoryRequest
+     * @param getTxListRequest
      * @return
      */
-    Observable<ApiResponse<List<TxHistory>>> getTxHistory(GetTxHistoryRequest getTxHistoryRequest);
+    Observable<ApiResponse<ListTxElementResponse>> getTxList(GetTxListRequest getTxListRequest);
 
     /**
      * 未确认交易列表
@@ -121,7 +117,7 @@ public interface WalletApi extends Api {
      * @param listUnconfirmRequest
      * @return
      */
-    Observable<ApiResponse<List<Unconfirm>>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest);
+    Observable<ApiResponse<ListTxElementResponse>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest);
 
     /**
      * 获取配置信息
@@ -152,7 +148,7 @@ public interface WalletApi extends Api {
      * @param getCacheVersionRequest
      * @return
      */
-    Observable<ApiResponse<GetCacheVersionResponse>> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest);
+    Observable<ApiResponse> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest);
 
 
 }

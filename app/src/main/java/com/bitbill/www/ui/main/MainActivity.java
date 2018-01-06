@@ -20,9 +20,12 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
+import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
+import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
@@ -31,7 +34,8 @@ import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.Unconfirm;
+import com.bitbill.www.model.wallet.network.entity.TxElement;
+import com.bitbill.www.model.wallet.network.entity.TxItem;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
@@ -58,7 +62,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
@@ -71,6 +75,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     MainMvpPresenter<WalletModel, MainMvpView> mMainMvpPresenter;
     @Inject
     WalletMvpPresenter<WalletModel, WalletMvpView> mWalletPresenter;
+    @Inject
+    ParseTxInfoMvpPresenter<AddressModel, ParseTxInfoMvpView> mParseTxInfoMvpPresenter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tabs)
@@ -89,6 +95,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private ContactFragment mContactFragment;
     private Contact mSendContact;
     private int index = INDEX_ASSET;
+    private List<TxElement> mTxInfoList;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -124,6 +131,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         //inject activity
         getActivityComponent().inject(this);
         addPresenter(mWalletPresenter);
+        addPresenter(mParseTxInfoMvpPresenter);
     }
 
     @Override
@@ -264,7 +272,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void OnTransactionRecordItemClick(Unconfirm item) {
+    public void OnTransactionRecordItemClick(TxItem item) {
         //跳转到确认交易详情
 
     }
@@ -319,7 +327,17 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void listUnconfirmSuccess(List<Unconfirm> data) {
+    public void listUnconfirmSuccess(List<TxElement> data) {
+        loadUnconfrim(data);
+    }
+
+    private void loadUnconfrim(List<TxElement> data) {
+        mTxInfoList = data;
+        mParseTxInfoMvpPresenter.parseTxInfo();
+
+    }
+
+    private void loadParsedUnconfirmList(List<TxItem> data) {
         if (mAssetFragment != null) {
             mAssetFragment.loadUnconfirm(data);
         }
@@ -327,9 +345,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void listUnconfirmFail() {
-        if (mAssetFragment != null) {
-            mAssetFragment.loadUnconfirm(null);
-        }
+        loadParsedUnconfirmList(null);
     }
 
 
@@ -415,4 +431,27 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mContactFragment.showSelectDialog();
     }
 
+    @Override
+    public List<TxElement> getTxInfoList() {
+        return mTxInfoList;
+    }
+
+    @Override
+    public void requireTxInfoList() {
+    }
+
+    @Override
+    public void getTxInfoListFail() {
+
+    }
+
+    @Override
+    public void parsedTxItemList(List<TxItem> txItems) {
+        loadParsedUnconfirmList(txItems);
+    }
+
+    @Override
+    public void parsedTxItemListFail() {
+        showMessage("解析交易列表信息失败");
+    }
 }

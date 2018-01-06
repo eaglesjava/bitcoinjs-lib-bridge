@@ -64,4 +64,9 @@ public class AddressDbHelper extends DbHelper implements AddressDb {
         return Observable.fromCallable(() -> mAddressDao.queryBuilder().where(AddressDao.Properties.WalletId.eq(walletId)).list());
 
     }
+
+    @Override
+    public Address getAddressByName(String address) {
+        return mAddressDao.queryBuilder().where(AddressDao.Properties.Name.eq(address)).unique();
+    }
 }

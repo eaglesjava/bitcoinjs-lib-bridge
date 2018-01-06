@@ -10,28 +10,24 @@ import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
-import com.bitbill.www.model.wallet.network.entity.GetCacheVersionResponse;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxHistoryRequest;
 import com.bitbill.www.model.wallet.network.entity.GetTxInfoRequest;
 import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
+import com.bitbill.www.model.wallet.network.entity.GetTxListRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
+import com.bitbill.www.model.wallet.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
-import com.bitbill.www.model.wallet.network.entity.TxHistory;
-import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 import com.google.gson.reflect.TypeToken;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
-
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -176,12 +172,12 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
      * @return
      */
     @Override
-    public Observable<ApiResponse<List<TxHistory>>> getTxHistory(GetTxHistoryRequest getTxHistoryRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_TX_HISTORY)
+    public Observable<ApiResponse<ListTxElementResponse>> getTxList(GetTxListRequest getTxListRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.GET_TX_LIST)
                 .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(getTxHistoryRequest)
+                .addApplicationJsonBody(getTxListRequest)
                 .build()
-                .getParseObservable(new TypeToken<ApiResponse<List<TxHistory>>>() {
+                .getParseObservable(new TypeToken<ApiResponse<ListTxElementResponse>>() {
                 });
     }
 
@@ -191,12 +187,12 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
      * @return
      */
     @Override
-    public Observable<ApiResponse<List<Unconfirm>>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.LIST_UNCONFIRM)
+    public Observable<ApiResponse<ListTxElementResponse>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.LIST_UNCONFIRM_TX)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .addApplicationJsonBody(listUnconfirmRequest)
                 .build()
-                .getParseObservable(new TypeToken<ApiResponse<List<Unconfirm>>>() {
+                .getParseObservable(new TypeToken<ApiResponse<ListTxElementResponse>>() {
                 });
     }
 
@@ -237,12 +233,12 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
     }
 
     @Override
-    public Observable<ApiResponse<GetCacheVersionResponse>> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_EXCHANGE_RATE)
+    public Observable<ApiResponse> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.GET_CACHE_VERSION)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .addApplicationJsonBody(getCacheVersionRequest)
                 .build()
-                .getParseObservable(new TypeToken<ApiResponse<GetCacheVersionResponse>>() {
+                .getParseObservable(new TypeToken<ApiResponse>() {
                 });
     }
 

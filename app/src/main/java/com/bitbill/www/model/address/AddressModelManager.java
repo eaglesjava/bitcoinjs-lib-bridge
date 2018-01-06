@@ -54,4 +54,9 @@ public class AddressModelManager extends ModelManager implements AddressModel {
     public Observable<List<Address>> getAddressByWalletId(Long walletId) {
         return mAddressDb.getAddressByWalletId(walletId);
     }
+
+    @Override
+    public Address getAddressByName(String address) {
+        return mAddressDb.getAddressByName(address);
+    }
 }

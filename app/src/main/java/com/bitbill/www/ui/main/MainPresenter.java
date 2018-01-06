@@ -33,8 +33,8 @@ import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
+import com.bitbill.www.model.wallet.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
-import com.bitbill.www.model.wallet.network.entity.Unconfirm;
 
 import org.json.JSONObject;
 
@@ -68,8 +68,9 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
         List<Wallet> wallets = getMvpView().getWallets();
         String extendedKeysHash = "";
         for (int i = 0; i < wallets.size(); i++) {
-            // TODO: 2017/12/21 check xpubkey
-            extendedKeysHash += EncryptUtils.encryptMD5ToString(wallets.get(i).getXPublicKey());
+            // check xpubkey
+            String xPublicKey = wallets.get(i).getXPublicKey();
+            extendedKeysHash += StringUtils.isEmpty(xPublicKey) ? "" : EncryptUtils.encryptMD5ToString(xPublicKey);
             if (i < wallets.size() - 1) {
                 extendedKeysHash += "|";
             }
@@ -143,17 +144,21 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
         getCompositeDisposable().add(getModelManager()
                 .listUnconfirm(new ListUnconfirmRequest(extendedKeysHash))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<List<Unconfirm>>>() {
+                .subscribeWith(new BaseSubcriber<ApiResponse<ListTxElementResponse>>() {
                     @Override
-                    public void onNext(ApiResponse<List<Unconfirm>> listApiResponse) {
+                    public void onNext(ApiResponse<ListTxElementResponse> listApiResponse) {
                         super.onNext(listApiResponse);
                         if (!isViewAttached()) {
                             return;
                         }
                         if (listApiResponse != null && listApiResponse.isSuccess()) {
 
-                            List<Unconfirm> data = listApiResponse.getData();
-                            getMvpView().listUnconfirmSuccess(data);
+                            ListTxElementResponse data = listApiResponse.getData();
+                            if (data != null) {
+                                getMvpView().listUnconfirmSuccess(data.getList());
+                            } else {
+                                getMvpView().listUnconfirmFail();
+                            }
 
                         } else {
                             getMvpView().listUnconfirmFail();

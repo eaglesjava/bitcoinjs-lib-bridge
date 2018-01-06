@@ -32,10 +32,10 @@ public final class ApiEndPoint {
             + "/wallet/sendTransaction";
     public static final String GET_BALANCE = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/getBalance";
-    public static final String GET_TX_HISTORY = BuildConfig.BASE_URL + BITBILL_BITCOIN
-            + "/wallet/getTxHistory";
-    public static final String LIST_UNCONFIRM = BuildConfig.BASE_URL + BITBILL_BITCOIN
-            + "/wallet/listUnconfirm";
+    public static final String GET_TX_LIST = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/getTxList";
+    public static final String LIST_UNCONFIRM_TX = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/wallet/listUnconfirmTx";
     public static final String GET_CONFIG = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/getConfig";
     public static final String SEARCH_WALLETID = BuildConfig.BASE_URL + BITBILL_BITCOIN

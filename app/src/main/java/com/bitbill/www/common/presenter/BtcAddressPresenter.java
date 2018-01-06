@@ -58,10 +58,6 @@ public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpV
         }
         Wallet wallet = getMvpView().getWallet();
         String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
-        // check xPublicKeyHash
-        if (!isValidXPublicKeyHash(xPublicKeyHash)) {
-            return;
-        }
         getCompositeDisposable().add(getModelManager()
                 .refreshAddress(new RefreshAddressRequest(xPublicKeyHash, index))
                 .compose(this.applyScheduler())
@@ -76,7 +72,7 @@ public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpV
 
                             if (refreshAddressResponseApiResponse.getData() != null) {
                                 long indexNo = refreshAddressResponseApiResponse.getData().getIndexNo();
-                                checkLastAddressIndex(indexNo, index);
+                                checkLastAddressIndex(indexNo, index, wallet);
                             }
                         } else {
                             getMvpView().newAddressFail();
@@ -98,14 +94,12 @@ public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpV
     }
 
     @Override
-    public void checkLastAddressIndex(long indexNo, long lastIndex) {
+    public void checkLastAddressIndex(long indexNo, long lastIndex, Wallet wallet) {
         // TODO: 2018/1/5 check index
-        if (indexNo == 0) {
+        if (indexNo <= 0) {
             return;
         }
-
-        Wallet wallet = getMvpView().getWallet();
-
+        // TODO: 2018/1/6  check wallet
 
         if (indexNo < lastIndex) {
             getMvpView().reachAddressIndexLimit();
@@ -128,16 +122,15 @@ public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpV
                 getMvpView().newAddressFail();
             }
         } else if (indexNo == lastIndex) {
-            getBitcoinAddressByMasterXPublicKey(indexNo);
+            getBitcoinAddressByMasterXPublicKey(indexNo, wallet);
         } else {
             //批量生成地址
-            getBitcoinContinuousAddress(lastIndex, indexNo);
+            getBitcoinContinuousAddress(lastIndex, indexNo, wallet);
         }
     }
 
     @Override
-    public void getBitcoinAddressByMasterXPublicKey(long index) {
-        Wallet wallet = getMvpView().getWallet();
+    public void getBitcoinAddressByMasterXPublicKey(long index, Wallet wallet) {
         BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(wallet.getXPublicKey(), index, new BitcoinJsWrapper.Callback() {
             @Override
             public void call(String key, String... jsResult) {
@@ -163,9 +156,8 @@ public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpV
     }
 
     @Override
-    public void getBitcoinContinuousAddress(long fromIndex, long toIndex) {
+    public void getBitcoinContinuousAddress(long fromIndex, long toIndex, Wallet wallet) {
 
-        Wallet wallet = getMvpView().getWallet();
         BitcoinJsWrapper.getInstance().getBitcoinContinuousAddressByMasterXPublicKey(wallet.getXPublicKey(), fromIndex, toIndex, new BitcoinJsWrapper.Callback() {
             @Override
             public void call(String key, String... jsResult) {
@@ -245,14 +237,6 @@ public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpV
 
     public boolean isValidXPublicKey() {
         if (StringUtils.isEmpty(getMvpView().getWallet().getXPublicKey())) {
-            getMvpView().getWalletFail();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isValidXPublicKeyHash(String hash) {
-        if (StringUtils.isEmpty(hash)) {
             getMvpView().getWalletFail();
             return false;
         }

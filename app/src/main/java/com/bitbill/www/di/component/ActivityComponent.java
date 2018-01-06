@@ -28,6 +28,7 @@ import com.bitbill.www.ui.splash.SplashActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.backup.BackupWalletConfirmActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
+import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
 import com.bitbill.www.ui.wallet.init.InitWalletActivity;
 import com.bitbill.www.ui.wallet.init.ResetPwdActivity;
@@ -91,4 +92,6 @@ public interface ActivityComponent {
     void inject(EditContactActivity editContactActivity);
 
     void inject(SystemSettingActivity systemSettingActivity);
+
+    void inject(BtcRecordFragment btcRecordFragment);
 }

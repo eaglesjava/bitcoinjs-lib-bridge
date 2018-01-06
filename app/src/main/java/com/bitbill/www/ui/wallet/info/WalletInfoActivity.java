@@ -14,7 +14,7 @@ import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
+import com.bitbill.www.model.wallet.network.entity.TxItem;
 
 import butterknife.BindView;
 
@@ -34,7 +34,7 @@ public class WalletInfoActivity extends BaseToolbarActivity implements BtcRecord
     }
 
     @Override
-    public void OnTransactionRecordItemClick(TransactionRecord item) {
+    public void OnTransactionRecordItemClick(TxItem item) {
 
     }
 

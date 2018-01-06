@@ -10,9 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
 import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.presenter.BtcAddressPresenter;
+import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
+import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
+import com.bitbill.www.common.presenter.GetCacheVersionPresenter;
 import com.bitbill.www.common.presenter.GetLastAddressMvpPresenter;
 import com.bitbill.www.common.presenter.GetLastAddressMvpView;
 import com.bitbill.www.common.presenter.GetLastAddressPresenter;
+import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
+import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
+import com.bitbill.www.common.presenter.ParseTxInfoPresenter;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.presenter.WalletPresenter;
@@ -20,6 +26,7 @@ import com.bitbill.www.common.rx.AppSchedulerProvider;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.qualifier.ActivityContext;
 import com.bitbill.www.di.scope.PerActivity;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -83,6 +90,9 @@ import com.bitbill.www.ui.wallet.backup.BackupWalletPresenter;
 import com.bitbill.www.ui.wallet.importing.ImportWalletMvpPresenter;
 import com.bitbill.www.ui.wallet.importing.ImportWalletMvpView;
 import com.bitbill.www.ui.wallet.importing.ImportWalletPresenter;
+import com.bitbill.www.ui.wallet.info.BtcRecordMvpPresenter;
+import com.bitbill.www.ui.wallet.info.BtcRecordMvpView;
+import com.bitbill.www.ui.wallet.info.BtcRecordPresenter;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdMvpPresenter;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdMvpView;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdPresenter;
@@ -310,6 +320,27 @@ public class ActivityModule {
     @PerActivity
     SystemSettingMvpPresenter<AppModel, SystemSettingMvpView> provideSystemSettingPresenter(
             SystemSettingPresenter<AppModel, SystemSettingMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> provideGetCacheVersionPresenter(
+            GetCacheVersionPresenter<WalletModel, GetCacheVersionMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ParseTxInfoMvpPresenter<AddressModel, ParseTxInfoMvpView> provideParseTxInfoPresenter(
+            ParseTxInfoPresenter<AddressModel, ParseTxInfoMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    BtcRecordMvpPresenter<WalletModel, BtcRecordMvpView> provideBtcRecordPresenter(
+            BtcRecordPresenter<WalletModel, BtcRecordMvpView> presenter) {
         return presenter;
     }
 

@@ -25,4 +25,6 @@ public interface AddressDb extends Db {
 
     Observable<List<Address>> getAddressByWalletId(Long walletId);
 
+    Address getAddressByName(String address);
+
 }

@@ -2,27 +2,25 @@ package com.bitbill.www.ui.wallet.info;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.common.base.view.BaseLazyListFragment;
+import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
+import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.common.widget.CustomSwipeToRefresh;
-import com.bitbill.www.common.widget.Decoration;
+import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.TransactionRecord;
-import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.bitbill.www.model.wallet.network.entity.TxElement;
+import com.bitbill.www.model.wallet.network.entity.TxItem;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -32,24 +30,23 @@ import butterknife.BindView;
  * Activities containing this fragment MUST implement the {@link OnTransactionRecordItemClickListener}
  * interface.
  */
-public class BtcRecordFragment extends BaseLazyFragment {
+public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvpPresenter> implements BtcRecordMvpView, ParseTxInfoMvpView {
 
-    @BindView(R.id.list)
-    RecyclerView mRecyclerView;
     @BindView(R.id.tv_amount)
     TextView tvAmount;
     @BindView(R.id.tv_amount_label)
     TextView tvAmountLabel;
-    @BindView(R.id.refresh_layout)
-    CustomSwipeToRefresh refreshLayout;
     @BindView(R.id.tv_btc_value)
     TextView tvBtcCny;
     @BindView(R.id.tv_btc_unconfirm)
     TextView tvBtcUnconfirm;
+    @Inject
+    BtcRecordMvpPresenter<WalletModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
+    @Inject
+    ParseTxInfoMvpPresenter<AddressModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
     private OnTransactionRecordItemClickListener mListener;
-    private List<TransactionRecord> mRecordList;
-    private CommonAdapter<TransactionRecord> mAdapter;
     private Wallet mWalelt;
+    private List<TxElement> mTxElementList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -84,21 +81,42 @@ public class BtcRecordFragment extends BaseLazyFragment {
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public BtcRecordMvpPresenter getMvpPresenter() {
+        return mBtcRecordMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
+        getActivityComponent().inject(this);
+        addPresenter(mViewParseTxInfoMvpPresenter);
+    }
 
+    @Override
+    protected void onListItemClick(TxItem txItem, int position) {
+        if (mListener != null) {
+            mListener.OnTransactionRecordItemClick(txItem);
+        }
+    }
+
+    @Override
+    protected void itemConvert(ViewHolder holder, TxItem txItem, int position) {
+
+    }
+
+    @Override
+    public int getRefreshSchemeColor() {
+        return R.color.blue;
+    }
+
+    @Override
+    public void onLayoutRefresh() {
+        lazyData();
     }
 
     @Override
     public void onBeforeSetContentLayout() {
         mWalelt = (Wallet) getArguments().getSerializable(AppConstants.ARG_WALLET);
-        if (mRecordList == null) {
-            mRecordList = new ArrayList();
-        }
+
 
     }
 
@@ -109,36 +127,7 @@ public class BtcRecordFragment extends BaseLazyFragment {
 
     @Override
     public void initView() {
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                lazyData();
-            }
-        });
-        refreshLayout.setColorSchemeResources(R.color.blue);
-        Decoration decor = new Decoration(getBaseActivity(), Decoration.VERTICAL);
-        mRecyclerView.addItemDecoration(decor);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
-        // Set the adapter
-        mAdapter = new CommonAdapter<TransactionRecord>(getBaseActivity(), R.layout.item_btc_record, mRecordList) {
-
-            @Override
-            protected void convert(ViewHolder holder, TransactionRecord transactionRecord, int position) {
-                holder.setText(R.id.tv_address, transactionRecord.getAddress());
-                holder.setText(R.id.tv_amount, (transactionRecord.getStatus() == 0 ? "+" : "-") + transactionRecord.getAmount() + " btc");
-                holder.setText(R.id.tv_date, StringUtils.formatDate(transactionRecord.getDate()) + "  " + (transactionRecord.getConfirmCount() == 0 ? "未确认" : transactionRecord.getConfirmCount() + " 确认"));
-                holder.setImageResource(R.id.iv_status, transactionRecord.getConfirmCount() == 0 ? R.drawable.ic_item_unconfirm : (transactionRecord.getStatus() == 0 ? R.drawable.ic_item_receive : R.drawable.ic_item_send));
-                holder.setOnClickListener(R.id.rl_item_container, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mListener != null) {
-                            mListener.OnTransactionRecordItemClick(transactionRecord);
-                        }
-                    }
-                });
-            }
-        };
-        mRecyclerView.setAdapter(mAdapter);
+        super.initView();
         StringUtils.setAmountTypeface(getBaseActivity(), tvAmount);
     }
 
@@ -156,18 +145,6 @@ public class BtcRecordFragment extends BaseLazyFragment {
     @Override
     public void lazyData() {
 
-        // TODO: 2017/12/5 获取列表数据
-        mRecordList.clear();
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 2, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 1, 235));
-        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 4, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 5, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 2, 235));
-        mRecordList.add(new TransactionRecord(1, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        mRecordList.add(new TransactionRecord(0, "1PN9ET1..dfaDFDsRaqfPN", "2017.11.10 15:32", 0, 235));
-        refreshLayout.setRefreshing(false);
 
         if (mWalelt != null) {
             tvAmount.setText(StringUtils.satoshi2btc(mWalelt.getBalance()));
@@ -175,6 +152,55 @@ public class BtcRecordFragment extends BaseLazyFragment {
 
         }
         tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBalance())));
+        getMvpPresenter().getTxRecord();
+    }
+
+    @Override
+    public Wallet getWallet() {
+        return mWalelt;
+    }
+
+    @Override
+    public void getWalletFail() {
+        showMessage(R.string.error_get_wallet_info_fail);
+    }
+
+    @Override
+    public void getTxRecordSuccess(List<TxElement> list) {
+        if (!StringUtils.isEmpty(list)) {
+            mTxElementList = list;
+            mViewParseTxInfoMvpPresenter.parseTxInfo();
+        }
+    }
+
+    @Override
+    public void getTxRecordFail() {
+        showMessage(R.string.fail_get_tx_record);
+    }
+
+    @Override
+    public List<TxElement> getTxInfoList() {
+        return mTxElementList;
+    }
+
+    @Override
+    public void requireTxInfoList() {
+
+    }
+
+    @Override
+    public void getTxInfoListFail() {
+
+    }
+
+    @Override
+    public void parsedTxItemList(List<TxItem> txItems) {
+        setDatas(txItems);
+    }
+
+    @Override
+    public void parsedTxItemListFail() {
+        showMessage(R.string.fail_parse_tx_item_list);
     }
 
     /**
@@ -189,6 +215,6 @@ public class BtcRecordFragment extends BaseLazyFragment {
      */
     public interface OnTransactionRecordItemClickListener {
         // TODO: Update argument type and name
-        void OnTransactionRecordItemClick(TransactionRecord item);
+        void OnTransactionRecordItemClick(TxItem item);
     }
 }

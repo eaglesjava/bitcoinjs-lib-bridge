@@ -14,13 +14,13 @@ public interface BtcAddressMvpPresentder<M extends WalletModel, V extends BtcAdd
      */
     void newAddress();
 
-    void getBitcoinAddressByMasterXPublicKey(long index);
+    void getBitcoinAddressByMasterXPublicKey(long index, Wallet wallet);
 
     void requestRefreshAddress(long index);
 
-    void checkLastAddressIndex(long indexNo, long lastIndex);
+    void checkLastAddressIndex(long indexNo, long lastIndex, Wallet wallet);
 
-    void getBitcoinContinuousAddress(long fromIndex, long toIndex);
+    void getBitcoinContinuousAddress(long fromIndex, long toIndex, Wallet wallet);
 
     void updateAddressIndex(Wallet wallet, String[] addressArray);
 }

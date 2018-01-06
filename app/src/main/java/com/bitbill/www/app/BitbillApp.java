@@ -49,6 +49,7 @@ public class BitbillApp extends Application {
     private double mBtcCnyValue;
     private double mBtcUsdValue;
     private AppPreferences.SelectedCurrency mSelectedCurrency = AppPreferences.SelectedCurrency.CNY;
+    private long mBlockHeight;
 
     public static BitbillApp get() {
         return sInstance;
@@ -209,6 +210,14 @@ public class BitbillApp extends Application {
 
     public void setSelectedCurrency(AppPreferences.SelectedCurrency selectedCurrency) {
         mSelectedCurrency = selectedCurrency;
+    }
+
+    public long getBlockHeight() {
+        return mBlockHeight;
+    }
+
+    public void setBlockHeight(long blockHeight) {
+        mBlockHeight = blockHeight;
     }
 }
 
