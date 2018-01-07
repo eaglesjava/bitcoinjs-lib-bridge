@@ -327,6 +327,7 @@
 		CC64080A200235860068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Contact.strings"; sourceTree = "<group>"; };
 		CC64080D200235CD0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BackupWalletC.strings; sourceTree = "<group>"; };
 		CC640811200235F40068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ContactC.strings"; sourceTree = "<group>"; };
+		CC64081320023C240068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ContactC.strings; sourceTree = "<group>"; };
 		CC8E4C371FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILBackupWalletMnemonicController.swift; sourceTree = "<group>"; };
 		CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BIL.swift"; sourceTree = "<group>"; };
 		CC94E0461FB946290098E730 /* UIView+BILGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BILGradient.swift"; sourceTree = "<group>"; };
@@ -1752,6 +1753,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC640811200235F40068153A /* zh-Hans */,
+				CC64081320023C240068153A /* en */,
 			);
 			name = ContactC.strings;
 			sourceTree = "<group>";

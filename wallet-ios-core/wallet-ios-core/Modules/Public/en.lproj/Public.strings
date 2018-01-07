@@ -5,9 +5,9 @@
   Created by 仇弘扬 on 2018/1/5.
   Copyright © 2018年 BitBill. All rights reserved.
 */
-"Public.currency.name.cny" = "Chinese Yuan";
-"Public.currency.name.usd" = "US Dolloar";
-"Public.keyboard.hide" = "Hide the keyboard";
+"Public.currency.name.cny" = "人民币";
+"Public.currency.name.usd" = "美元";
+"Public.keyboard.hide" = "收起键盘";
 "Public.wallet.fetch.failed" = "查询钱包失败";
 "Public.network.connect.sever.failed" = "连接服务器失败";
 
