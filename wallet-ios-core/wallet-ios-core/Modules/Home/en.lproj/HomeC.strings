@@ -21,7 +21,7 @@
 "HomeC.home.pop.wallet.import" = "导入钱包";
 
 "HomeC.tx.detail.cell.hash" = "交易 hash";
-"HomeC.tx.detail.cell.address.recieve" = "接收地址";
+"HomeC.tx.detail.cell.address.receive" = "接收地址";
 "HomeC.tx.detail.cell.address.send" = "发送地址";
 "HomeC.tx.detail.cell.confirm" = "确认";
 "HomeC.tx.detail.cell.remark" = "备注";

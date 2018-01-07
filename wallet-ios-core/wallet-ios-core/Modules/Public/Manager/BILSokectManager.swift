@@ -70,11 +70,11 @@ class BILSokectManager: NSObject {
             let jsonStr = data.first as? String ?? ""
             var json = JSON(parseJSON: jsonStr)["context"]
             let amount = json["amount"].int64Value
-            BILAudioPlayer.playRecieveMoney(isBig: amount > (BTC_SATOSHI / 2))
+            BILAudioPlayer.playReceiveMoney(isBig: amount > (BTC_SATOSHI / 2))
             let wallet = WalletModel.fetch(id: json["walletId"].string)
             wallet?.syncWallet(json: json)
             BILWalletManager.shared.btcBlockHeight = json["height"].intValue
-            NotificationCenter.default.post(name: .recievedUnconfirmTransaction, object: nil)
+            NotificationCenter.default.post(name: .receivedUnconfirmTransaction, object: nil)
         }
         socket.on(.bil_socket_event_confirm) { (data, emitter) in
             debugPrint(data)

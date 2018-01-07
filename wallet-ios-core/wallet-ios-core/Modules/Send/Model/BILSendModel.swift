@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class BILSendModel: BILRecieveModel {
+class BILSendModel: BILReceiveModel {
     
     var wallet: WalletModel?
     

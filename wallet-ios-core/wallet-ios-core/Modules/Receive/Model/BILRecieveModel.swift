@@ -1,5 +1,5 @@
 //
-//  BILRecieveModel.swift
+//  BILReceiveModel.swift
 //  wallet-ios-core
 //
 //  Created by 仇弘扬 on 2017/12/8.
@@ -30,7 +30,7 @@ enum CoinType: Int16 {
     }
 }
 
-class BILRecieveModel: NSObject {
+class BILReceiveModel: NSObject {
 	
 	var address: String
     var amount: String

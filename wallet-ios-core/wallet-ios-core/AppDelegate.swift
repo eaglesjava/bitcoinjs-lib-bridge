@@ -16,7 +16,7 @@ enum BILApplicationShortcutItemType: String {
     case contact
     case scanQRCode
     case send
-    case recieve
+    case receive
     
 }
 
@@ -67,9 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let contactItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.contact.rawValue, localizedTitle: "联系人", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_contact_h"), userInfo: nil)
         let scanItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.scanQRCode.rawValue, localizedTitle: "扫一扫", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "btn_home_shortcut_scan"), userInfo: nil)
         let sendItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.send.rawValue, localizedTitle: "发送", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_send_h"), userInfo: nil)
-        let recieveItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.recieve.rawValue, localizedTitle: "接收", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_recieve_h"), userInfo: nil)
+        let receiveItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.receive.rawValue, localizedTitle: "接收", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_receive_h"), userInfo: nil)
         
-        UIApplication.shared.shortcutItems = [contactItem, scanItem, sendItem, recieveItem]
+        UIApplication.shared.shortcutItems = [contactItem, scanItem, sendItem, receiveItem]
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         case .send:
             BILControllerManager.shared.mainTabBarController?.selectedIndex = 3
-        case .recieve:
+        case .receive:
             BILControllerManager.shared.mainTabBarController?.selectedIndex = 2
         }
     }

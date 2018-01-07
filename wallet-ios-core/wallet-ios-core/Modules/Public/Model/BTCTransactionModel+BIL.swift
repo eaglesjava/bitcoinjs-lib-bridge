@@ -11,15 +11,15 @@ import SwiftyJSON
 import Timepiece
 
 enum BILTransactionType: Int16 {
-    case recieve = 0
+    case receive = 0
     case send
     case transfer
     
     var image: UIImage? {
         var str = ""
         switch self {
-        case .recieve:
-            str = "icon_record_recieve"
+        case .receive:
+            str = "icon_record_receive"
         case .send:
             str = "icon_record_send"
         case .transfer:
@@ -72,7 +72,7 @@ extension BTCTransactionModel {
     var feeSatoshi: Int64 { get { return inSatoshi - outSatoshi } }
     
     var type: BILTransactionType {
-        get { return BILTransactionType(rawValue: typeRawValue) ?? .recieve }
+        get { return BILTransactionType(rawValue: typeRawValue) ?? .receive }
         set { typeRawValue = newValue.rawValue }
     }
     
@@ -91,7 +91,7 @@ extension BTCTransactionModel {
         get {
             var symbol = ""
             switch type {
-            case .recieve:
+            case .receive:
                 symbol = "+"
             case .send:
                 symbol = "-"
@@ -219,7 +219,7 @@ extension BTCTransactionModel {
         {
             if let outw = WalletModel.fetch(by: outAddresses, isAll: false) {
                 wallet = outw
-                typeRawValue = BILTransactionType.recieve.rawValue
+                typeRawValue = BILTransactionType.receive.rawValue
             }
         }
         
@@ -241,7 +241,7 @@ extension BTCTransactionModel {
                     targetSatoshi += tx.satoshi
                 }
             case .transfer: fallthrough
-            case .recieve:
+            case .receive:
                 if w.contain(btcAddress: tx.address!) {
                     self.addToTargets(tx)
                     targetSatoshi += tx.satoshi

@@ -1,0 +1,15 @@
+/* 
+  ReceiveC.strings
+  wallet-ios-core
+
+  Created by 仇弘扬 on 2018/1/7.
+  Copyright © 2018年 BitBill. All rights reserved.
+*/
+
+"ReceiveC.receive.address.tip.title" = "友情提醒";
+"ReceiveC.receive.address.tip.msg" = "为保护您的隐私，每次接收操作时，都将使用新地址，已使用的旧地址仍然可用";
+"ReceiveC.receive.address.tip.refresh" = "地址已刷新";
+
+"ReceiveC.specific.check.amount.tip.title" = "提示";
+"ReceiveC.specific.check.amount.tip.msg.empty" = "请输入金额";
+"ReceiveC.specific.check.amount.tip.msg.zero" = "请输入大于 0 的金额";

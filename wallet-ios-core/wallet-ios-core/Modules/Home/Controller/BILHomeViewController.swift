@@ -146,7 +146,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         NotificationCenter.default.addObserver(self, selector: #selector(walletCountDidChanged(notification:)), name: .walletCountDidChanged, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(balanceDidChanged(notification:)), name: .walletDidChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(uncofirmTransactionDidChanged(notification:)), name: .recievedUnconfirmTransaction, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(uncofirmTransactionDidChanged(notification:)), name: .receivedUnconfirmTransaction, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(uncofirmTransactionDidChanged(notification:)), name: .unconfirmTransactionBeenConfirmed, object: nil)
 		
 		if #available(iOS 11.0, *) {
@@ -167,7 +167,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .recievedUnconfirmTransaction, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .receivedUnconfirmTransaction, object: nil)
         NotificationCenter.default.removeObserver(self, name: .unconfirmTransactionBeenConfirmed, object: nil)
         NotificationCenter.default.removeObserver(self, name: .walletCountDidChanged, object: nil)
         

@@ -41,19 +41,19 @@ extension String {
 	static let homeHomePopWalletNew = "HomeC.home.pop.wallet.new".bil_localized
 	static let homeHomePopWalletImport = "HomeC.home.pop.wallet.import".bil_localized
 	static let homeTxDetailHash = "HomeC.tx.detail.cell.hash".bil_localized
-	static let homeTxDetailRecieveAddress = "HomeC.tx.detail.cell.address.recieve".bil_localized
+	static let homeTxDetailReceiveAddress = "HomeC.tx.detail.cell.address.receive".bil_localized
 	static let homeTxDetailSendAddress = "HomeC.tx.detail.cell.address.send".bil_localized
 	static let homeTxDetailConfirm = "HomeC.tx.detail.cell.confirm".bil_localized
 	static let homeTxDetailRemark = "HomeC.tx.detail.cell.remark".bil_localized
 	static let homeTxDetailDate = "HomeC.tx.detail.cell.date".bil_localized
 	static let homeTxDetailNoTx = "HomeC.tx.detail.noTx".bil_localized
 	
-	static let recieveAddressTipTitle = "RecieveC.recieve.address.tip.title".bil_localized
-	static let recieveAddressTipMessage = "RecieveC.recieve.address.tip.msg".bil_localized
-	static let recieveAddressTipRefresh = "RecieveC.recieve.address.tip.refresh".bil_localized
-	static let recieveSpecificCheckAmountTipTitle = "RecieveC.specific.check.amount.tip.title".bil_localized
-	static let recieveSpecificCheckAmountTipMessageEmpty = "RecieveC.specific.check.amount.tip.msg.empty".bil_localized
-	static let recieveSpecificCheckAmountTipMessageZero = "RecieveC.specific.check.amount.tip.msg.zero".bil_localized
+	static let receiveAddressTipTitle = "ReceiveC.receive.address.tip.title".bil_localized
+	static let receiveAddressTipMessage = "ReceiveC.receive.address.tip.msg".bil_localized
+	static let receiveAddressTipRefresh = "ReceiveC.receive.address.tip.refresh".bil_localized
+	static let receiveSpecificCheckAmountTipTitle = "ReceiveC.specific.check.amount.tip.title".bil_localized
+	static let receiveSpecificCheckAmountTipMessageEmpty = "ReceiveC.specific.check.amount.tip.msg.empty".bil_localized
+	static let receiveSpecificCheckAmountTipMessageZero = "ReceiveC.specific.check.amount.tip.msg.zero".bil_localized
 	
 	static let sendSendAddressInvalid = "SendC.send.address.invalid".bil_localized
 	static let sendSendAddressEmpty = "SendC.send.address.empty".bil_localized

@@ -1,5 +1,5 @@
 //
-//  BILRecieveController.swift
+//  BILReceiveController.swift
 //  wallet-ios-core
 //
 //  Created by 仇弘扬 on 2017/12/7.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILRecieveController: BILBaseViewController {
+class BILReceiveController: BILBaseViewController {
     @IBOutlet weak var qrCodeImageViewHeight: NSLayoutConstraint!
     
 	@IBOutlet var chooseWalletContainerView: UIView!
@@ -25,7 +25,7 @@ class BILRecieveController: BILBaseViewController {
         }
     }
 	
-	var recieveModel: BILRecieveModel?
+	var receiveModel: BILReceiveModel?
     
     lazy var qrCodeHeight: CGFloat = {
         return min(150, UIScreen.main.bounds.height - 388 - 88)
@@ -36,7 +36,7 @@ class BILRecieveController: BILBaseViewController {
 
         // Do any additional setup after loading the view.
         currentWallet = BILWalletManager.shared.wallets.first
-		performSegue(withIdentifier: "BILRecieveChooseWalletSegue", sender: nil)
+		performSegue(withIdentifier: "BILReceiveChooseWalletSegue", sender: nil)
 		
 		let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(sender:)))
 		bgView.addGestureRecognizer(tap)
@@ -82,7 +82,7 @@ class BILRecieveController: BILBaseViewController {
     }
 	
 	func setAddress(address: String) {
-		recieveModel = BILRecieveModel(address: address, amount: "")
+		receiveModel = BILReceiveModel(address: address, amount: "")
 		let scale = UIScreen.main.scale
 		let size = CGSize(width: qrCodeHeight, height: qrCodeHeight).applying(CGAffineTransform(scaleX: scale, y: scale))
 		qrCodeImageView.image = BILQRCodeHelper.generateQRCode(msg: "bitcoin:\(address)", targetSize: size)
@@ -95,7 +95,7 @@ class BILRecieveController: BILBaseViewController {
 		let key = "BILShowTipForWalletNewAddress"
 		let shown = UserDefaults.standard.bool(forKey: key)
 		if !shown {
-			showTipAlert(title: .recieveAddressTipTitle, msg: .recieveAddressTipMessage)
+			showTipAlert(title: .receiveAddressTipTitle, msg: .receiveAddressTipMessage)
 			UserDefaults.standard.set(true, forKey: key)
 		}
     }
@@ -116,7 +116,7 @@ class BILRecieveController: BILBaseViewController {
 	}
 	
 	@IBAction func currentWalletViewTapped(_ sender: Any) {
-        NotificationCenter.default.post(name: .recievePageCurrentWallet, object: currentWallet)
+        NotificationCenter.default.post(name: .receivePageCurrentWallet, object: currentWallet)
 		showChooseWalletView()
 	}
 	
@@ -172,7 +172,7 @@ class BILRecieveController: BILBaseViewController {
         bil_showLoading(status: nil)
 		currentWallet?.getNewBTCAddress(success: { (address) in
 			self.setAddress(address: address)
-            self.bil_makeToast(msg: .recieveAddressTipRefresh)
+            self.bil_makeToast(msg: .receiveAddressTipRefresh)
             self.bil_dismissHUD()
 		}, failure: { (errorMsg) in
 			debugPrint(errorMsg)
@@ -193,16 +193,16 @@ class BILRecieveController: BILBaseViewController {
         // Pass the selected object to the new view controller.
 		guard let id = segue.identifier else { return }
 		switch id {
-		case "BILRecieveToBackUpWallet":
+		case "BILReceiveToBackUpWallet":
 			if let cont = (segue.destination as? UINavigationController)?.viewControllers.first as? BILBackupWalletMnemonicController {
 				if let wallet = currentWallet {
 					cont.mnemonicHash = wallet.mnemonicHash
 				}
 			}
-		case "BILToSpecificRecieveSegue":
-			let cont = segue.destination as! BILSpecificVolumeRecieveInputController
-			cont.recieveModel = recieveModel
-		case "BILRecieveChooseWalletSegue":
+		case "BILToSpecificReceiveSegue":
+			let cont = segue.destination as! BILSpecificVolumeReceiveInputController
+			cont.receiveModel = receiveModel
+		case "BILReceiveChooseWalletSegue":
 			let cont = segue.destination as! BILChooseWalletController
 			unowned let s = self
 			cont.setDidSelecteWalletClosure(onSelected: { (wallet) in

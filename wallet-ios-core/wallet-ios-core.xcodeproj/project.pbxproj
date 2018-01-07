@@ -48,7 +48,7 @@
 		BA284D111FD946B000A1C9F6 /* BILRecieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA284D101FD946B000A1C9F6 /* BILRecieveController.swift */; };
 		BA284D141FD9480200A1C9F6 /* BILQRCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA284D131FD9480200A1C9F6 /* BILQRCodeHelper.swift */; };
 		BA40B1AA1FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40B1A91FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift */; };
-		BA4646191FD78FB500680D33 /* Recieve.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA4646181FD78FB500680D33 /* Recieve.xcassets */; };
+		BA4646191FD78FB500680D33 /* Receive.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA4646181FD78FB500680D33 /* Receive.xcassets */; };
 		BA46461B1FD78FC400680D33 /* Contact.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461A1FD78FC400680D33 /* Contact.xcassets */; };
 		BA46461D1FD78FCF00680D33 /* Send.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461C1FD78FCF00680D33 /* Send.xcassets */; };
 		BA46461F1FD78FDB00680D33 /* Me.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461E1FD78FDB00680D33 /* Me.xcassets */; };
@@ -94,8 +94,8 @@
 		CC4660531FBEA67600A87132 /* BILCreateWalletSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4660521FBEA67600A87132 /* BILCreateWalletSuccessController.swift */; };
 		CC64079D1FFE21F00068153A /* BILAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC64079C1FFE21F00068153A /* BILAddressCell.swift */; };
 		CC6407A42001ED6A0068153A /* HomeC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6407A62001ED6A0068153A /* HomeC.strings */; };
-		CC6407AA2001FA620068153A /* Recieve.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC6407AC2001FA620068153A /* Recieve.storyboard */; };
-		CC6407B32001FB1B0068153A /* RecieveC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6407B52001FB1B0068153A /* RecieveC.strings */; };
+		CC6407AA2001FA620068153A /* Receive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC6407AC2001FA620068153A /* Receive.storyboard */; };
+		CC6407B32001FB1B0068153A /* ReceiveC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6407B52001FB1B0068153A /* ReceiveC.strings */; };
 		CC6407BD200207310068153A /* SendC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6407BF200207310068153A /* SendC.strings */; };
 		CC6407C1200212A60068153A /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC6407C3200212A60068153A /* Me.storyboard */; };
 		CC6407CA200213EC0068153A /* MeC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6407CC200213EC0068153A /* MeC.strings */; };
@@ -230,7 +230,7 @@
 		BA284D101FD946B000A1C9F6 /* BILRecieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILRecieveController.swift; sourceTree = "<group>"; };
 		BA284D131FD9480200A1C9F6 /* BILQRCodeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILQRCodeHelper.swift; sourceTree = "<group>"; };
 		BA40B1A91FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BTCTransactionModel+BIL.swift"; sourceTree = "<group>"; };
-		BA4646181FD78FB500680D33 /* Recieve.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Recieve.xcassets; sourceTree = "<group>"; };
+		BA4646181FD78FB500680D33 /* Receive.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Receive.xcassets; sourceTree = "<group>"; };
 		BA46461A1FD78FC400680D33 /* Contact.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Contact.xcassets; sourceTree = "<group>"; };
 		BA46461C1FD78FCF00680D33 /* Send.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Send.xcassets; sourceTree = "<group>"; };
 		BA46461E1FD78FDB00680D33 /* Me.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Me.xcassets; sourceTree = "<group>"; };
@@ -287,11 +287,11 @@
 		CC6407A72001ED6B0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HomeC.strings; sourceTree = "<group>"; };
 		CC6407A82001F1DE0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/HomeC.strings; sourceTree = "<group>"; };
 		CC6407A92001F1E30068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Public.strings; sourceTree = "<group>"; };
-		CC6407AD2001FA6C0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Recieve.storyboard; sourceTree = "<group>"; };
-		CC6407AE2001FA730068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Recieve.strings"; sourceTree = "<group>"; };
-		CC6407B02001FA750068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Recieve.strings; sourceTree = "<group>"; };
-		CC6407B42001FB1B0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RecieveC.strings; sourceTree = "<group>"; };
-		CC6407B62001FB1C0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RecieveC.strings"; sourceTree = "<group>"; };
+		CC6407AD2001FA6C0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Receive.storyboard; sourceTree = "<group>"; };
+		CC6407AE2001FA730068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Receive.strings"; sourceTree = "<group>"; };
+		CC6407B02001FA750068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Receive.strings; sourceTree = "<group>"; };
+		CC6407B42001FB1B0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ReceiveC.strings; sourceTree = "<group>"; };
+		CC6407B62001FB1C0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ReceiveC.strings"; sourceTree = "<group>"; };
 		CC6407B8200206D30068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Send.strings"; sourceTree = "<group>"; };
 		CC6407BA200206D80068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Send.strings; sourceTree = "<group>"; };
 		CC6407BE200207310068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SendC.strings; sourceTree = "<group>"; };
@@ -429,18 +429,18 @@
 			path = CKQRCodeScan;
 			sourceTree = "<group>";
 		};
-		BA20A5D41FD68D4E00EC2147 /* Recieve */ = {
+		BA20A5D41FD68D4E00EC2147 /* Receive */ = {
 			isa = PBXGroup;
 			children = (
-				CC6407AC2001FA620068153A /* Recieve.storyboard */,
-				BA4646181FD78FB500680D33 /* Recieve.xcassets */,
-				CC6407B52001FB1B0068153A /* RecieveC.strings */,
+				CC6407AC2001FA620068153A /* Receive.storyboard */,
+				BA4646181FD78FB500680D33 /* Receive.xcassets */,
+				CC6407B52001FB1B0068153A /* ReceiveC.strings */,
 				BA20A5D51FD68D4E00EC2147 /* Other */,
 				BA20A5D71FD68D4E00EC2147 /* Controller */,
 				BA20A5D91FD68D4E00EC2147 /* Model */,
 				BA20A5DB1FD68D4E00EC2147 /* View */,
 			);
-			path = Recieve;
+			path = Receive;
 			sourceTree = "<group>";
 		};
 		BA20A5D51FD68D4E00EC2147 /* Other */ = {
@@ -670,7 +670,7 @@
 				CC94E02E1FB58D9C0098E730 /* Base */,
 				CC94E0191FB58D1F0098E730 /* Public */,
 				CCE5E14A1FC7BEDE00F7555D /* Home */,
-				BA20A5D41FD68D4E00EC2147 /* Recieve */,
+				BA20A5D41FD68D4E00EC2147 /* Receive */,
 				BA20A6011FD68F0600EC2147 /* Contact */,
 				BA20A5DD1FD68D4F00EC2147 /* Send */,
 				BA20A5EE1FD68D6500EC2147 /* Me */,
@@ -1235,21 +1235,21 @@
 				CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */,
 				CC6407BD200207310068153A /* SendC.strings in Resources */,
 				CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */,
-				CC6407B32001FB1B0068153A /* RecieveC.strings in Resources */,
+				CC6407B32001FB1B0068153A /* ReceiveC.strings in Resources */,
 				BA46461D1FD78FCF00680D33 /* Send.xcassets in Resources */,
 				CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */,
 				BA46461B1FD78FC400680D33 /* Contact.xcassets in Resources */,
 				BA12AC481FEA67B300812F38 /* Send.storyboard in Resources */,
 				CCFEDEEE1FCC067E00F1A7FC /* BILTransactionCell.xib in Resources */,
 				BAEFFD451FEBB7BD00C6EAB3 /* diaoluo_xiao.mp3 in Resources */,
-				CC6407AA2001FA620068153A /* Recieve.storyboard in Resources */,
+				CC6407AA2001FA620068153A /* Receive.storyboard in Resources */,
 				BA46461F1FD78FDB00680D33 /* Me.xcassets in Resources */,
 				BAEFFD411FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js in Resources */,
 				CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */,
 				BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */,
 				CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */,
 				BA5894001FF36540008C96C4 /* service.html in Resources */,
-				BA4646191FD78FB500680D33 /* Recieve.xcassets in Resources */,
+				BA4646191FD78FB500680D33 /* Receive.xcassets in Resources */,
 				CCE5E1681FC7FB9E00F7555D /* BILHomeTableHeaderView.xib in Resources */,
 				BAB749201FF24F2800E85607 /* BILAuthenticator.strings in Resources */,
 				CCE5E1721FC81E3700F7555D /* Home.xcassets in Resources */,
@@ -1589,23 +1589,23 @@
 			name = HomeC.strings;
 			sourceTree = "<group>";
 		};
-		CC6407AC2001FA620068153A /* Recieve.storyboard */ = {
+		CC6407AC2001FA620068153A /* Receive.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CC6407AD2001FA6C0068153A /* Base */,
 				CC6407AE2001FA730068153A /* zh-Hans */,
 				CC6407B02001FA750068153A /* en */,
 			);
-			name = Recieve.storyboard;
+			name = Receive.storyboard;
 			sourceTree = "<group>";
 		};
-		CC6407B52001FB1B0068153A /* RecieveC.strings */ = {
+		CC6407B52001FB1B0068153A /* ReceiveC.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CC6407B42001FB1B0068153A /* en */,
 				CC6407B62001FB1C0068153A /* zh-Hans */,
 			);
-			name = RecieveC.strings;
+			name = ReceiveC.strings;
 			sourceTree = "<group>";
 		};
 		CC6407BF200207310068153A /* SendC.strings */ = {

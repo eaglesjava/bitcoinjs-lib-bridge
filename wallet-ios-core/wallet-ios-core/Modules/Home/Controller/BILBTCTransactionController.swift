@@ -39,7 +39,7 @@ class BILBTCTransactionController: BILLightBlueBaseController {
 		for addModel in tx.inputAddressModels {
 			datas.append((addModel.address!, value: BTCFormatString(btc: addModel.satoshi) + " BTC", cellID: "BILAddressCell"))
 		}
-        datas.append((.homeTxDetailRecieveAddress, value: "", cellID: "BILTXTitleCell"))
+        datas.append((.homeTxDetailReceiveAddress, value: "", cellID: "BILTXTitleCell"))
 		for addModel in tx.outputAddressModels {
 			datas.append((addModel.address!, value: BTCFormatString(btc: addModel.satoshi) + " BTC", cellID: "BILAddressCell"))
 		}

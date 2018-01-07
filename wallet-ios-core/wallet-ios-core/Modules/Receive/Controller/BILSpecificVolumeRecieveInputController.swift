@@ -1,5 +1,5 @@
 //
-//  BILSpecificVolumeRecieveInputController.swift
+//  BILSpecificVolumeReceiveInputController.swift
 //  wallet-ios-core
 //
 //  Created by 仇弘扬 on 2017/12/8.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class BILSpecificVolumeRecieveInputController: BILBaseViewController, UITextFieldDelegate {
+class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFieldDelegate {
 	
-	var recieveModel: BILRecieveModel?
+	var receiveModel: BILReceiveModel?
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var cnyLabel: BILExchangeRateLabel!
     @IBOutlet weak var coinNameLabel: UILabel!
@@ -20,7 +20,7 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController, UITextFiel
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		if let r = recieveModel {
+		if let r = receiveModel {
 			coinNameLabel.text  = r.coinType.name
 		}
         
@@ -121,19 +121,19 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController, UITextFiel
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		switch identifier {
 		case "BILVolumeToQRCodeSegue":
-			guard let _ = recieveModel else {
+			guard let _ = receiveModel else {
 				return false
 			}
 			guard let text = amountTextField.text, !text.isEmpty else {
-				showTipAlert(title: .recieveSpecificCheckAmountTipTitle, msg: .recieveSpecificCheckAmountTipMessageEmpty)
+				showTipAlert(title: .receiveSpecificCheckAmountTipTitle, msg: .receiveSpecificCheckAmountTipMessageEmpty)
 				return false
 			}
 			
 			guard let btcValue = Double(text), btcValue > 0 else {
-				showTipAlert(title: .recieveSpecificCheckAmountTipTitle, msg: .recieveSpecificCheckAmountTipMessageZero)
+				showTipAlert(title: .receiveSpecificCheckAmountTipTitle, msg: .receiveSpecificCheckAmountTipMessageZero)
 				return false
 			}
-			recieveModel?.amount = text
+			receiveModel?.amount = text
 			return true
 		default:
 			return true
@@ -147,8 +147,8 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController, UITextFiel
 		guard let id = segue.identifier else { return }
 		switch id {
 		case "BILVolumeToQRCodeSegue":
-			let cont = segue.destination as! BILSpecificVolumeRecieveController
-			cont.recieveModel = recieveModel
+			let cont = segue.destination as! BILSpecificVolumeReceiveController
+			cont.receiveModel = receiveModel
 		default:
 			()
 		}

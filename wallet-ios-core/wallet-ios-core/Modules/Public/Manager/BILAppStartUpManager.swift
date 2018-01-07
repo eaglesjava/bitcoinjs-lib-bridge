@@ -145,10 +145,10 @@ class BILAppStartUpManager: NSObject {
         IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = .publicKeyboardHide
         
         IQKeyboardManager.sharedManager().disabledToolbarClasses.append(BILSendInputAmountController.self)
-        IQKeyboardManager.sharedManager().disabledToolbarClasses.append(BILSpecificVolumeRecieveInputController.self)
+        IQKeyboardManager.sharedManager().disabledToolbarClasses.append(BILSpecificVolumeReceiveInputController.self)
         
         IQKeyboardManager.sharedManager().disabledTouchResignedClasses.append(BILSendInputAmountController.self)
-        IQKeyboardManager.sharedManager().disabledTouchResignedClasses.append(BILSpecificVolumeRecieveInputController.self)
+        IQKeyboardManager.sharedManager().disabledTouchResignedClasses.append(BILSpecificVolumeReceiveInputController.self)
 	}
 	
 	private func loadJS() {

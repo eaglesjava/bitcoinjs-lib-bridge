@@ -1,5 +1,5 @@
 //
-//  BILSpecificVolumeRecieveController.swift
+//  BILSpecificVolumeReceiveController.swift
 //  wallet-ios-core
 //
 //  Created by 仇弘扬 on 2017/12/8.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class BILSpecificVolumeRecieveController: BILBaseViewController {
+class BILSpecificVolumeReceiveController: BILBaseViewController {
 
-	var recieveModel: BILRecieveModel?
+	var receiveModel: BILReceiveModel?
 	
 	@IBOutlet weak var addressLabel: UILabel!
 	@IBOutlet weak var qrCodeImageView: UIImageView!
@@ -19,7 +19,7 @@ class BILSpecificVolumeRecieveController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		if let r = recieveModel {
+		if let r = receiveModel {
 			addressLabel.text = r.address
 			qrCodeImageView.image = BILQRCodeHelper.generateQRCode(msg: r.urlString)
 			amountLabel.text = "\(r.amount) \(r.coinType.name)"
