@@ -32,7 +32,7 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
 
         // Do any additional setup after loading the view.
 		randomMnemonicView.dataArray = randomArray
-		verifyMnemonicView.emptyTitle = "请按顺序点击下方文字"
+		verifyMnemonicView.emptyTitle = .backupWallet_verify_emptyTitle
         verifyMnemonicView.collectionView.allowsSelection = false
     }
 
@@ -63,10 +63,10 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
 	}
 	
 	func showAlertForFail() {
-		let alert = UIAlertController(title: "备份失败", message: "请重新检查您的助记词是否正确", preferredStyle: .alert)
+		let alert = UIAlertController(title: .backupWallet_mnemonic_failed, message: .newWallet_import_checkAgain, preferredStyle: .alert)
 		
-		let ok = UIAlertAction(title: "确认", style: .default, handler: nil)
-		let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+		let ok = UIAlertAction(title: .backupWallet_mnemonic_confirm, style: .default, handler: nil)
+		let cancel = UIAlertAction(title: .backupWallet_mnemonic_cancel, style: .cancel, handler: nil)
 		alert.addAction(ok)
 		alert.addAction(cancel)
 		

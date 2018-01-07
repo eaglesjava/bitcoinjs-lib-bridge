@@ -30,7 +30,7 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		mnemonicView.emptyTitle = "请输入密码解锁助记词"
+		mnemonicView.emptyTitle = .backupWallet_mnemonic_emptyTitle
         NotificationCenter.default.addObserver(self, selector: #selector(showAlertForSnapshot), name: .UIApplicationUserDidTakeScreenshot, object: nil)
     }
     
@@ -43,7 +43,7 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 	}
 	@objc
     func showAlertForSnapshot() {
-        showTipAlert(msg: "截图是不安全的，您的图片可能被别的应用使用。请抄写如下助记词，并妥善保存。")
+        showTipAlert(msg: .backupWallet_mnemonic_snapshotTip)
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -54,10 +54,10 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 		}
 	}
 	
-    func showAlertForFail(_ msg: String = "请稍后再试") {
-		let alert = UIAlertController(title: "备份失败", message: msg, preferredStyle: .alert)
+    func showAlertForFail(_ msg: String = .backupWallet_mnemonic_tryLater) {
+		let alert = UIAlertController(title: .backupWallet_mnemonic_failed, message: msg, preferredStyle: .alert)
 		
-		let ok = UIAlertAction(title: "确认", style: .default) { (action) in
+		let ok = UIAlertAction(title: .backupWallet_mnemonic_confirm, style: .default) { (action) in
 			BILControllerManager.shared.showMainTabBarController()
 		}
 		alert.addAction(ok)
@@ -66,23 +66,23 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 	}
 	
 	func showAlertForPassword() {
-		let alert = UIAlertController(title: "备份钱包", message: nil, preferredStyle: .alert)
+		let alert = UIAlertController(title: .backupWallet_mnemonic_backupWallet, message: nil, preferredStyle: .alert)
 		
-		let ok = UIAlertAction(title: "确认", style: .default) { (action) in
+		let ok = UIAlertAction(title: .backupWallet_mnemonic_confirm, style: .default) { (action) in
 			guard let pwd = alert.textFields?.first?.text else {
 				self.showAlertForFail()
 				return
 			}
 			self.decryptMnemonic(pwd: pwd)
 		}
-		let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+		let cancel = UIAlertAction(title: .backupWallet_mnemonic_cancel, style: .cancel) { (action) in
 			BILControllerManager.shared.showMainTabBarController()
 		}
 		alert.addAction(ok)
 		alert.addAction(cancel)
 		
 		alert.addTextField { (textField) in
-			textField.placeholder = "请输入密码以确认"
+			textField.placeholder = .backupWallet_mnemonic_inputPwd
 			textField.isSecureTextEntry = true
 		}
 		
@@ -91,11 +91,11 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 	
 	func decryptMnemonic(pwd: String) {
         guard let w = self.wallet else {
-            self.showAlertForFail("获取钱包数据失败")
+            self.showAlertForFail(.backupWallet_mnemonic_getWalletFailed)
             return
         }
         guard let m = w.decryptMnemonic(pwd: pwd) else {
-            self.showAlertForFail("解密钱包数据失败")
+            self.showAlertForFail(.backupWallet_mnemonic_decodeWalletFailed)
             return
         }
         mnemonic = m

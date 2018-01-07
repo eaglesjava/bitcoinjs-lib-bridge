@@ -1,0 +1,39 @@
+
+/* Class = "UIButton"; normalTitle = "完成"; ObjectID = "1fa-hr-uEL"; */
+"1fa-hr-uEL.normalTitle" = "完成";
+
+/* Class = "UILabel"; text = "备份钱包"; ObjectID = "5ea-vL-cxT"; */
+"5ea-vL-cxT.text" = "备份钱包";
+
+/* Class = "UIBarButtonItem"; title = "清空"; ObjectID = "8pf-tL-nj2"; */
+"8pf-tL-nj2.title" = "清空";
+
+/* Class = "UILabel"; text = "备份成功"; ObjectID = "IhF-lJ-FtW"; */
+"IhF-lJ-FtW.text" = "备份成功";
+
+/* Class = "UILabel"; text = "截图是不安全的，您的图片可能被别的应用使用。请抄写如下助记词，并妥善保存，我们会在下个屏幕上确认！"; ObjectID = "Vvc-4z-9cT"; */
+"Vvc-4z-9cT.text" = "截图是不安全的，您的图片可能被别的应用使用。请抄写如下助记词，并妥善保存，我们会在下个屏幕上确认！";
+
+/* Class = "UILabel"; text = "请妥善保管您的助记词"; ObjectID = "eak-mz-PIO"; */
+"eak-mz-PIO.text" = "请妥善保管您的助记词";
+
+/* Class = "UINavigationItem"; title = "记下助记词"; ObjectID = "fRA-hf-Rq9"; */
+"fRA-hf-Rq9.title" = "记下助记词";
+
+/* Class = "UILabel"; text = "请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！"; ObjectID = "hvy-wf-TqK"; */
+"hvy-wf-TqK.text" = "请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！";
+
+/* Class = "UIButton"; normalTitle = "确认"; ObjectID = "l7V-Xw-Pbi"; */
+"l7V-Xw-Pbi.normalTitle" = "确认";
+
+/* Class = "UINavigationItem"; title = "备份成功"; ObjectID = "qgc-Mh-7ji"; */
+"qgc-Mh-7ji.title" = "备份成功";
+
+/* Class = "UIButton"; normalTitle = "已按顺序记下助记词"; ObjectID = "qlY-G9-oj8"; */
+"qlY-G9-oj8.normalTitle" = "已按顺序记下助记词";
+
+/* Class = "UILabel"; text = "按顺序点击助记词，确认您的助记词备份正确"; ObjectID = "ua5-CA-eV7"; */
+"ua5-CA-eV7.text" = "按顺序点击助记词，确认您的助记词备份正确";
+
+/* Class = "UINavigationItem"; title = "验证助记词"; ObjectID = "zoM-4O-otz"; */
+"zoM-4O-otz.title" = "验证助记词";

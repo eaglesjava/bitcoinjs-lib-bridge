@@ -162,7 +162,23 @@ extension String {
 	static let newWallet_import_exits = "NewWalletC.import_exits".bil_localized
 	static let newWallet_import_resetOrNot = "NewWalletC.import_resetOrNot".bil_localized
 	static let newWallet_import_reset = "NewWalletC.import_reset".bil_localized
-//	static let newWallet_import_ = "NewWalletC.inputID_exits".bil_localized
+
+}
+
+extension String {
+	static let backupWallet_mnemonic_emptyTitle = "BackupWalletC.mnmonic_emptyTitle".bil_localized
+	static let backupWallet_mnemonic_snapshotTip = "BackupWalletC.mnmonic_snapshotTip".bil_localized
+	static let backupWallet_mnemonic_tryLater = "BackupWalletC.mnmonic_tryLater".bil_localized
+	static let backupWallet_mnemonic_failed = "BackupWalletC.mnmonic_failed".bil_localized
+	static let backupWallet_mnemonic_backupWallet = "BackupWalletC.mnmonic_backupWallet".bil_localized
+	static let backupWallet_mnemonic_inputPwd = "BackupWalletC.mnmonic_inputPwd".bil_localized
+	static let backupWallet_mnemonic_getWalletFailed = "BackupWalletC.mnmonic_getWalletFailed".bil_localized
+	static let backupWallet_mnemonic_decodeWalletFailed = "BackupWalletC.mnmonic_decodeWalletFailed".bil_localized
+	static let backupWallet_mnemonic_confirm = "BackupWalletC.mnmonic_confirm".bil_localized
+	static let backupWallet_mnemonic_cancel = "BackupWalletC.mnmonic_cancel".bil_localized
+	
+	static let backupWallet_verify_emptyTitle = "BackupWalletC.verify_emptyTitle".bil_localized
+//	static let backupWallet_mnemonic_ = "NewWalletC.inputID_exits".bil_localized
 }
 
 extension String {

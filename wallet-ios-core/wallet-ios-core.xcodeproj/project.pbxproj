@@ -104,6 +104,8 @@
 		CC6407E2200231830068153A /* BILAllInOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6407E4200231830068153A /* BILAllInOneView.xib */; };
 		CC6407E92002318F0068153A /* BILGuideKeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6407EB2002318F0068153A /* BILGuideKeyView.xib */; };
 		CC6407F0200231970068153A /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6407F2200231970068153A /* BILGuideContactView.xib */; };
+		CC6407F7200231B80068153A /* BackupWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC6407F9200231B80068153A /* BackupWallet.storyboard */; };
+		CC640800200231D10068153A /* BackupWalletC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC640802200231D10068153A /* BackupWalletC.strings */; };
 		CC8E4C381FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E4C371FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift */; };
 		CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */; };
 		CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0461FB946290098E730 /* UIView+BILGradient.swift */; };
@@ -120,7 +122,6 @@
 		CC94E0971FBAE1A50098E730 /* String+MnemonicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */; };
 		CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */; };
 		CC94E09D1FBBE6410098E730 /* BILAppStartUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */; };
-		CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0B71FBD6E620098E730 /* BackupWallet.storyboard */; };
 		CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0B91FBD7FF30098E730 /* BackupWallet.xcassets */; };
 		CC94E0BF1FBD83E90098E730 /* BILMnemonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0BE1FBD83E90098E730 /* BILMnemonicView.swift */; };
 		CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */; };
@@ -142,7 +143,6 @@
 		CCE9BE801FBD9DF0007A59E7 /* BILVerifyMnemonicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE9BE7F1FBD9DF0007A59E7 /* BILVerifyMnemonicController.swift */; };
 		CCE9BE821FBE8CA0007A59E7 /* BILMnemonicViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE9BE811FBE8CA0007A59E7 /* BILMnemonicViewDelegate.swift */; };
 		CCEC67581FB18C3A004CC6C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */; };
-		CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */; };
 		CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */; };
 		CCEC67611FB18C3A004CC6C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCEC67601FB18C3A004CC6C5 /* Assets.xcassets */; };
 		CCEC67641FB18C3A004CC6C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEC67621FB18C3A004CC6C5 /* LaunchScreen.storyboard */; };
@@ -318,6 +318,10 @@
 		CC6407F1200231970068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILGuideContactView.xib; sourceTree = "<group>"; };
 		CC6407F4200231990068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILGuideContactView.strings; sourceTree = "<group>"; };
 		CC6407F62002319A0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILGuideContactView.strings"; sourceTree = "<group>"; };
+		CC6407F8200231B80068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BackupWallet.storyboard; sourceTree = "<group>"; };
+		CC6407FB200231BA0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BackupWallet.strings; sourceTree = "<group>"; };
+		CC6407FD200231BC0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BackupWallet.strings"; sourceTree = "<group>"; };
+		CC640803200231D20068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BackupWalletC.strings"; sourceTree = "<group>"; };
 		CC8E4C371FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILBackupWalletMnemonicController.swift; sourceTree = "<group>"; };
 		CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BIL.swift"; sourceTree = "<group>"; };
 		CC94E0461FB946290098E730 /* UIView+BILGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BILGradient.swift"; sourceTree = "<group>"; };
@@ -334,7 +338,6 @@
 		CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MnemonicData.swift"; sourceTree = "<group>"; };
 		CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewWallet.xcassets; sourceTree = "<group>"; };
 		CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAppStartUpManager.swift; sourceTree = "<group>"; };
-		CC94E0B71FBD6E620098E730 /* BackupWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupWallet.storyboard; sourceTree = "<group>"; };
 		CC94E0B91FBD7FF30098E730 /* BackupWallet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BackupWallet.xcassets; sourceTree = "<group>"; };
 		CC94E0BE1FBD83E90098E730 /* BILMnemonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BILMnemonicView.swift; sourceTree = "<group>"; };
 		CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicView.xib; sourceTree = "<group>"; };
@@ -357,7 +360,6 @@
 		CCE9BE811FBE8CA0007A59E7 /* BILMnemonicViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMnemonicViewDelegate.swift; sourceTree = "<group>"; };
 		CCEC67541FB18C3A004CC6C5 /* wallet-ios-core.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wallet-ios-core.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		CCEC67601FB18C3A004CC6C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCEC67631FB18C3A004CC6C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCEC67651FB18C3A004CC6C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -880,8 +882,9 @@
 		CC94E0A21FBD6E3B0098E730 /* BackupWallet */ = {
 			isa = PBXGroup;
 			children = (
-				CC94E0B71FBD6E620098E730 /* BackupWallet.storyboard */,
+				CC6407F9200231B80068153A /* BackupWallet.storyboard */,
 				CC94E0B91FBD7FF30098E730 /* BackupWallet.xcassets */,
+				CC640802200231D10068153A /* BackupWalletC.strings */,
 				CC94E0A41FBD6E3B0098E730 /* Other */,
 				CC94E0A61FBD6E3B0098E730 /* Protocol */,
 				CC94E0A81FBD6E3B0098E730 /* Controller */,
@@ -1019,7 +1022,6 @@
 				CCEC67791FB190EE004CC6C5 /* components */,
 				CCEC67571FB18C3A004CC6C5 /* AppDelegate.swift */,
 				CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */,
-				CCEC675B1FB18C3A004CC6C5 /* SecondViewController.swift */,
 				CCEC67601FB18C3A004CC6C5 /* Assets.xcassets */,
 				CCEC67621FB18C3A004CC6C5 /* LaunchScreen.storyboard */,
 				CCEC67651FB18C3A004CC6C5 /* Info.plist */,
@@ -1233,6 +1235,7 @@
 				CCEC67831FB190EE004CC6C5 /* index.js in Resources */,
 				CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */,
 				CC6407CE200224400068153A /* NewWallet.storyboard in Resources */,
+				CC640800200231D10068153A /* BackupWalletC.strings in Resources */,
 				CC6407E2200231830068153A /* BILAllInOneView.xib in Resources */,
 				BA8E66731FFF658E00F2539D /* Public.strings in Resources */,
 				BA05EAEB1FE7A14100B43B95 /* BILContactCell.xib in Resources */,
@@ -1246,7 +1249,7 @@
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
 				BAEFFD441FEBB7BD00C6EAB3 /* diaoluo_da.mp3 in Resources */,
 				CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */,
-				CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */,
+				CC6407F7200231B80068153A /* BackupWallet.storyboard in Resources */,
 				CC6407BD200207310068153A /* SendC.strings in Resources */,
 				CC6407E92002318F0068153A /* BILGuideKeyView.xib in Resources */,
 				CC6407B32001FB1B0068153A /* ReceiveC.strings in Resources */,
@@ -1454,7 +1457,6 @@
 				BA51991C1FF0F898004F6602 /* BILMeUnspentBalanceCell.swift in Sources */,
 				BA05EAF11FE7BA6B00B43B95 /* String+PinYin.swift in Sources */,
 				BA284D141FD9480200A1C9F6 /* BILQRCodeHelper.swift in Sources */,
-				CCEC675C1FB18C3A004CC6C5 /* SecondViewController.swift in Sources */,
 				BAB749161FF2287800E85607 /* BILAgreementController.swift in Sources */,
 				BA6E95F31FE1433C0085F7B5 /* BILContactController.swift in Sources */,
 				BA6E95F11FE12F300085F7B5 /* BILSendResultController.swift in Sources */,
@@ -1708,6 +1710,24 @@
 				CC6407F62002319A0068153A /* zh-Hans */,
 			);
 			name = BILGuideContactView.xib;
+			sourceTree = "<group>";
+		};
+		CC6407F9200231B80068153A /* BackupWallet.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC6407F8200231B80068153A /* Base */,
+				CC6407FB200231BA0068153A /* en */,
+				CC6407FD200231BC0068153A /* zh-Hans */,
+			);
+			name = BackupWallet.storyboard;
+			sourceTree = "<group>";
+		};
+		CC640802200231D10068153A /* BackupWalletC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC640803200231D20068153A /* zh-Hans */,
+			);
+			name = BackupWalletC.strings;
 			sourceTree = "<group>";
 		};
 		CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */ = {
