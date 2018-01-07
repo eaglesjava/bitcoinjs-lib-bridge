@@ -19,7 +19,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, GetCacheVersionMvpView {
+public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, GetCacheVersionMvpView, BtcAddressMvpView {
 
     @BindView(R.id.fl_content)
     View flContent;
@@ -73,5 +73,30 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     @Override
     public void getResponseAddressIndex(long indexNo, long lastIndex, Wallet wallet) {
         mBtcAddressMvpPresentder.checkLastAddressIndex(indexNo, lastIndex, wallet);
+    }
+
+    @Override
+    public Wallet getWallet() {
+        return null;
+    }
+
+    @Override
+    public void getWalletFail() {
+
+    }
+
+    @Override
+    public void newAddressFail() {
+
+    }
+
+    @Override
+    public void newAddressSuccess(String lastAddress) {
+
+    }
+
+    @Override
+    public void reachAddressIndexLimit() {
+
     }
 }

@@ -30,7 +30,7 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
     @BindView(R.id.list)
     protected RecyclerView mRecyclerView;
     protected RecyclerView.Adapter mAdapter;
-    protected List<E> mDatas;
+    protected List<E> mDatas = new ArrayList<>();
     @BindView(R.id.refresh_layout)
     CustomSwipeToRefresh mRefreshLayout;
 
@@ -40,7 +40,7 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
 
     @Override
     public void onBeforeSetContentLayout() {
-        mDatas = new ArrayList<>();
+
     }
 
     @Override
@@ -82,7 +82,6 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
     public void initRecyclerView() {
         if (getLayoutManager() == null || getItemLayoutId() == 0) {
             new RuntimeException("must implement getLayoutManager or getItemLayoutId");
-            return;
         }
         mRecyclerView.setLayoutManager(getLayoutManager());
         if (getDecoration() != null) {
@@ -106,7 +105,8 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
     @Override
     @NonNull
     public DividerDecoration getDecoration() {
-        return new DividerDecoration(getBaseActivity(), Decoration.VERTICAL);
+        DividerDecoration dividerDecoration = new DividerDecoration(getBaseActivity(), Decoration.VERTICAL);
+        return dividerDecoration.setDividerPadding(0);
     }
 
     public void setDatas(List<E> datas) {

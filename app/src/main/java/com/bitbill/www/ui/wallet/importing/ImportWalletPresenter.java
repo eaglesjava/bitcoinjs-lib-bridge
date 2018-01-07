@@ -33,7 +33,8 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
             return;
         }
         getMvpView().showLoading();
-        String mnemonicHash = StringUtils.getSHA256Hex(getMvpView().getMnemonic());
+
+        String mnemonicHash = StringUtils.getSHA256Hex(handleMnemonic());
         getCompositeDisposable().add(getModelManager().getWalletByMnemonicHash(mnemonicHash)
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Wallet>() {
@@ -78,7 +79,7 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
         }
         // 校验助记词是否正确
         try {
-            BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(getMvpView().getMnemonic(), new BitcoinJsWrapper.Callback() {
+            BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(handleMnemonic(), new BitcoinJsWrapper.Callback() {
                 @Override
                 public void call(String key, String... jsResult) {
                     if (jsResult != null && "true".equals(jsResult[0]) && jsResult.length > 2) {
@@ -112,7 +113,6 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
                                             } else {
                                                 getMvpView().importWalletFail();
                                             }
-
                                         }
                                         getMvpView().hideLoading();
                                     }
@@ -145,6 +145,13 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
             getMvpView().hideLoading();
         }
 
+    }
+
+    private String handleMnemonic() {
+        String mnemonic = getMvpView().getMnemonic();
+        //移除助记词多余空格
+        mnemonic = mnemonic.replaceAll(" {2,}", " ");
+        return mnemonic;
     }
 
     public boolean isValidMnemonic() {

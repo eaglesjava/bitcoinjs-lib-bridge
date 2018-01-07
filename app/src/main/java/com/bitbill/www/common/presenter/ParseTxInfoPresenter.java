@@ -93,10 +93,10 @@ public class ParseTxInfoPresenter<M extends AddressModel, V extends ParseTxInfoM
                         }
                         txItem.setSumAmount(amount);
                         txItem.setInOut(inOut);
-                        txItems.add(txItem);
                         txItem.setTxHash(txElement.getTxHash());
                         txItem.setHeight(txElement.getHeight());
                         txItem.setCreatedTime(txElement.getCreatedTime());
+                        txItems.add(txItem);
                     }
                     return Observable.just(txItems);
                 })

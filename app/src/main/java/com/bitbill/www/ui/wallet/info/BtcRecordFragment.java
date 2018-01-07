@@ -99,8 +99,37 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     }
 
     @Override
-    protected void itemConvert(ViewHolder holder, TxItem txItem, int position) {
+    public int getItemLayoutId() {
+        return R.layout.item_btc_record;
+    }
 
+    @Override
+    protected void itemConvert(ViewHolder holder, TxItem txItem, int position) {
+        holder.setText(R.id.tv_address, txItem.getInOut() == TxItem.InOut.OUT ? txItem.getGatherAddressIn() : txItem.getGatherAddressOut());
+        String inOutString = txItem.getInOut() == TxItem.InOut.TRANSFER ? "" : (txItem.getInOut() == TxItem.InOut.IN ? "+" : "-");
+        holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txItem.getSumAmount()) + " btc");
+
+        holder.setText(R.id.tv_date, txItem.getCreatedTime());
+        if (txItem.getHeight() == -1) {
+            holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
+            holder.setAlpha(R.id.tv_confirm_count, 0.6f);
+            holder.setText(R.id.tv_confirm_count, "未确认");
+        } else {
+            long confirmCount = BitbillApp.get().getBlockHeight() - txItem.getHeight() + 1;
+            holder.setAlpha(R.id.tv_confirm_count, 1.0f);
+            holder.setText(R.id.tv_confirm_count, confirmCount + "确认");
+            switch (txItem.getInOut()) {
+                case TRANSFER:
+                    holder.setImageResource(R.id.iv_status, R.drawable.ic_item_transfer);
+                    break;
+                case IN:
+                    holder.setImageResource(R.id.iv_status, R.drawable.ic_item_receive);
+                    break;
+                case OUT:
+                    holder.setImageResource(R.id.iv_status, R.drawable.ic_item_send);
+                    break;
+            }
+        }
     }
 
     @Override

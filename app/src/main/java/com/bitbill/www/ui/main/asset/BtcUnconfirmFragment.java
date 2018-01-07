@@ -104,7 +104,7 @@ public class BtcUnconfirmFragment extends BaseFragment {
 
             @Override
             protected void convert(ViewHolder holder, TxItem unconfirm, int position) {
-                holder.setText(R.id.tv_address, unconfirm.getGatherAddressOut());
+                holder.setText(R.id.tv_address, unconfirm.getInOut() == TxItem.InOut.OUT ? unconfirm.getGatherAddressIn() : unconfirm.getGatherAddressOut());
                 String inOutString = unconfirm.getInOut() == TxItem.InOut.TRANSFER ? "" : (unconfirm.getInOut() == TxItem.InOut.IN ? "+" : "-");
                 holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(unconfirm.getSumAmount()) + " btc");
                 long confirmCount = BitbillApp.get().getBlockHeight() - unconfirm.getHeight() + 1;
