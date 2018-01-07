@@ -1,0 +1,117 @@
+
+/* Class = "UIButton"; normalTitle = "删除联系人"; ObjectID = "0ze-rm-y8b"; */
+"0ze-rm-y8b.normalTitle" = "删除联系人";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "18R-oz-D9v"; */
+"18R-oz-D9v.placeholder" = "请输入";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "4bB-TM-qhB"; */
+"4bB-TM-qhB.placeholder" = "请输入";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "6Kj-Ov-lYm"; */
+"6Kj-Ov-lYm.placeholder" = "请输入";
+
+/* Class = "UILabel"; text = "您还没有联系人"; ObjectID = "71u-E6-dkJ"; */
+"71u-E6-dkJ.text" = "您还没有联系人";
+
+/* Class = "UILabel"; text = "  BCH  "; ObjectID = "7Zi-Dz-ID7"; */
+"7Zi-Dz-ID7.text" = "  BCH  ";
+
+/* Class = "UILabel"; text = "钱包ID"; ObjectID = "8wa-9V-3e2"; */
+"8wa-9V-3e2.text" = "钱包ID";
+
+/* Class = "UILabel"; text = "B"; ObjectID = "DZI-H4-dgr"; */
+"DZI-H4-dgr.text" = "B";
+
+/* Class = "UILabel"; text = "备注"; ObjectID = "EHU-qC-GsX"; */
+"EHU-qC-GsX.text" = "备注";
+
+/* Class = "UILabel"; text = "地址"; ObjectID = "FI8-7w-5qv"; */
+"FI8-7w-5qv.text" = "地址";
+
+/* Class = "UILabel"; text = "钱包ID"; ObjectID = "FXY-Mp-LB9"; */
+"FXY-Mp-LB9.text" = "钱包ID";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "HPW-Ge-qoY"; */
+"HPW-Ge-qoY.placeholder" = "请输入";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "LFc-uK-qH9"; */
+"LFc-uK-qH9.text" = "Label";
+
+/* Class = "UILabel"; text = "  ETH  "; ObjectID = "O72-d3-VNh"; */
+"O72-d3-VNh.text" = "  ETH  ";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "OGy-hD-rpv"; */
+"OGy-hD-rpv.placeholder" = "请输入";
+
+/* Class = "UILabel"; text = "钱包ID"; ObjectID = "PFb-n2-MGB"; */
+"PFb-n2-MGB.text" = "钱包ID";
+
+/* Class = "UILabel"; text = "   BTC   "; ObjectID = "QaQ-Kp-DH9"; */
+"QaQ-Kp-DH9.text" = "   BTC   ";
+
+/* Class = "UIBarButtonItem"; title = "新建"; ObjectID = "VKD-sb-acM"; */
+"VKD-sb-acM.title" = "新建";
+
+/* Class = "UINavigationItem"; title = "通过ID添加"; ObjectID = "Wpq-Wv-Sw5"; */
+"Wpq-Wv-Sw5.title" = "通过ID添加";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "Xqb-yL-7h3"; */
+"Xqb-yL-7h3.placeholder" = "请输入";
+
+/* Class = "UILabel"; text = "钱包ID"; ObjectID = "YHI-KQ-7L9"; */
+"YHI-KQ-7L9.text" = "钱包ID";
+
+/* Class = "UILabel"; text = "名称"; ObjectID = "Ytn-tL-54H"; */
+"Ytn-tL-54H.text" = "名称";
+
+/* Class = "UIButton"; normalTitle = "立即添加"; ObjectID = "Z6b-ur-m6B"; */
+"Z6b-ur-m6B.normalTitle" = "立即添加";
+
+/* Class = "UILabel"; text = "备注"; ObjectID = "a2p-1s-32B"; */
+"a2p-1s-32B.text" = "备注";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "cMX-Vg-kFU"; */
+"cMX-Vg-kFU.placeholder" = "请输入";
+
+/* Class = "UILabel"; text = "名称"; ObjectID = "dIA-Zd-JLl"; */
+"dIA-Zd-JLl.text" = "名称";
+
+/* Class = "UIButton"; normalTitle = "    添加到联系人    "; ObjectID = "dYK-MJ-pcj"; */
+"dYK-MJ-pcj.normalTitle" = "    添加到联系人    ";
+
+/* Class = "UINavigationItem"; title = "联系人详情"; ObjectID = "fmK-w8-sle"; */
+"fmK-w8-sle.title" = "联系人详情";
+
+/* Class = "UILabel"; text = "备注"; ObjectID = "hFV-B6-wJK"; */
+"hFV-B6-wJK.text" = "备注";
+
+/* Class = "UINavigationItem"; title = "通过地址添加"; ObjectID = "hoi-GI-4Yo"; */
+"hoi-GI-4Yo.title" = "通过地址添加";
+
+/* Class = "UITabBarItem"; title = "联系人"; ObjectID = "ic5-jT-iGX"; */
+"ic5-jT-iGX.title" = "联系人";
+
+/* Class = "UITextField"; placeholder = "搜索对方钱包ID"; ObjectID = "ikQ-St-aBA"; */
+"ikQ-St-aBA.placeholder" = "搜索对方钱包ID";
+
+/* Class = "UIButton"; normalTitle = "发送"; ObjectID = "kCS-Hq-IuO"; */
+"kCS-Hq-IuO.normalTitle" = "发送";
+
+/* Class = "UINavigationItem"; title = "编辑联系人"; ObjectID = "loc-Av-3sV"; */
+"loc-Av-3sV.title" = "编辑联系人";
+
+/* Class = "UILabel"; text = "无"; ObjectID = "nTG-6c-hbZ"; */
+"nTG-6c-hbZ.text" = "无";
+
+/* Class = "UINavigationItem"; title = "联系人"; ObjectID = "nyY-9Y-U6O"; */
+"nyY-9Y-U6O.title" = "联系人";
+
+/* Class = "UILabel"; text = "备注"; ObjectID = "o7w-di-mR0"; */
+"o7w-di-mR0.text" = "备注";
+
+/* Class = "UINavigationItem"; title = "搜索结果"; ObjectID = "wn3-GR-h2l"; */
+"wn3-GR-h2l.title" = "搜索结果";
+
+/* Class = "UILabel"; text = "名称"; ObjectID = "yMh-70-0wW"; */
+"yMh-70-0wW.text" = "名称";

@@ -25,8 +25,8 @@ class BILContactEditController: BILLightBlueBaseController {
         nameInputView.delegate = self
         remarkInputView.delegate = self
         guard let c = contact else { return }
-        contactTypeLabel.text = c.additionType == .walletID ? "钱包ID" : ("钱包地址" + " (\(c.coinType.name))")
-        contactTypeStringLabel.valueTitle = c.additionType == .walletID ? "ID" : "地址"
+        contactTypeLabel.text = c.additionType == .walletID ? .contact_detail_walletID : (.contact_detail_walletAddress + " (\(c.coinType.name))")
+        contactTypeStringLabel.valueTitle = c.additionType == .walletID ? .contact_detail_id : .contact_detail_address
         contactTypeStringLabel.text = c.detail
         remarkInputView.textField.text = c.remark
         nameInputView.textField.text = c.name

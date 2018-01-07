@@ -35,26 +35,26 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
     }
     
     func checkName() -> String? {
-        return check(str: nameInputView.textField.text, minLength: 1, maxLength: 30, key: "名称")
+        return check(str: nameInputView.textField.text, minLength: 1, maxLength: 30, key: .contact_searchResult_name)
     }
     
     func checkRemark() -> String? {
-        return check(str: remarkInputView.textField.text, minLength: 1, maxLength: 100, key: "备注", required: false)
+        return check(str: remarkInputView.textField.text, minLength: 1, maxLength: 100, key: .contact_searchResult_remark, required: false)
     }
     
     func check(str: String?, minLength: Int, maxLength: Int, key: String, required: Bool = true) -> String? {
         guard let s = str, !s.isEmpty else {
             if required {
-                return "请输入\(key)"
+                return "\(String.contact_searchResult_input)\(key)"
             }
             return nil
         }
         var toReturn: String? = nil
         switch s.count {
         case minLength - 1:
-            toReturn = "请输入\(key)"
+            toReturn = "\(String.contact_searchResult_input)\(key)"
         case let i where i > maxLength:
-            toReturn = "\(key)支持\(minLength)-\(maxLength)位"
+            toReturn = "\(key)\(String.contact_searchResult_surport)\(minLength)-\(maxLength)\(String.contact_searchResult_wei)"
         default: ()
         }
         
@@ -64,7 +64,7 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
     func addContact() {
         guard let id = walletID else { return }
         guard let name = nameInputView.textField.text else {
-            nameInputView.show(tip: "名称不能为空", type: .error)
+            nameInputView.show(tip: .contact_searchResult_nameEmpty, type: .error)
             return
         }
         
@@ -82,7 +82,7 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
     func addContact(id: String, name: String, remark: String = "") {
         bil_showLoading(status: nil)
         ContactModel.addContactToServer(id: id, name: name, remark: remark, success: { (contact) in
-            self.bil_showSuccess(status: "添加成功")
+            self.bil_showSuccess(status: .contact_searchResult_success)
             self.bil_dismissHUD(delay: 1.5, complete: {
                 guard let nav = self.navigationController else {
                     return

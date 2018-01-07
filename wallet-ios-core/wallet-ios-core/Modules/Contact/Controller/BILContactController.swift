@@ -67,17 +67,17 @@ class BILContactController: BILLightBlueBaseController {
 	@objc
     @IBAction func newContactAction(_ sender: Any) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        sheet.addAction(UIAlertAction(title: "通过 ID 添加", style: .default, handler: { (action) in
+        sheet.addAction(UIAlertAction(title: .contact_contact_addByID, style: .default, handler: { (action) in
             self.performSegue(withIdentifier: .bil_contactsToAddByIDSegue, sender: sender)
         }))
-        sheet.addAction(UIAlertAction(title: "通过 地址 添加", style: .default, handler: { (action) in
+        sheet.addAction(UIAlertAction(title: .contact_contact_addByAddress, style: .default, handler: { (action) in
             self.performSegue(withIdentifier: .bil_contactsToAddByAddressSegue, sender: sender)
         }))
-        sheet.addAction(UIAlertAction(title: "扫码添加", style: .default, handler: { (action) in
+        sheet.addAction(UIAlertAction(title: .contact_contact_scanCode, style: .default, handler: { (action) in
 			self.addContactByScanQRCode()
         }))
         
-        sheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+        sheet.addAction(UIAlertAction(title: .contact_contact_cancel, style: .cancel, handler: { (action) in
             
         }))
         present(sheet, animated: true, completion: nil)
@@ -95,7 +95,7 @@ class BILContactController: BILLightBlueBaseController {
                 debugPrint(address)
                 unownedSelf.navigationController?.popViewController(animated: true)
                 guard !ContactModel.isAddressExits(address: address) else {
-                    unownedSelf.bil_makeToast(msg: "地址已存在")
+                    unownedSelf.bil_makeToast(msg: .contact_contact_addressExits)
                     return
                 }
                 self.bil_showLoading()
@@ -107,7 +107,7 @@ class BILContactController: BILLightBlueBaseController {
                             unownedSelf.performSegue(withIdentifier: .bil_contactsToAddByAddressSegue, sender: address)
                         })
                     } else {
-                        unownedSelf.showTipAlert(msg: "不是合法的地址")
+                        unownedSelf.showTipAlert(msg: .contact_contact_addressInvalid)
                         self.bil_dismissHUD()
                     }
                 }, failure: { (error) in

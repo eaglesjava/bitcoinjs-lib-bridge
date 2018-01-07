@@ -43,7 +43,7 @@ class BILAddContactByAddressController: BILLightBlueBaseController {
             if let result = BILURLHelper.transferBitCoinURL(urlString: qrString)?.address {
                 unownedSelf.navigationController?.popViewController(animated: true)
                 guard !ContactModel.isAddressExits(address: result) else {
-                    unownedSelf.bil_makeToast(msg: "地址已存在")
+                    unownedSelf.bil_makeToast(msg: .contact_contact_addressExits)
                     return
                 }
                 unownedSelf.addressInputView.textField.text = result
@@ -77,26 +77,26 @@ extension BILAddContactByAddressController {
     }
     
     func checkName() -> String? {
-        return check(str: nameInputView.textField.text, minLength: 1, maxLength: 30, key: "名称")
+        return check(str: nameInputView.textField.text, minLength: 1, maxLength: 30, key: .contact_searchResult_name)
     }
     
     func checkRemark() -> String? {
-        return check(str: remarkInputView.textField.text, minLength: 1, maxLength: 100, key: "名称", required: false)
+        return check(str: remarkInputView.textField.text, minLength: 1, maxLength: 100, key: .contact_searchResult_remark, required: false)
     }
     
     func check(str: String?, minLength: Int, maxLength: Int, key: String, required: Bool = true) -> String? {
         guard let s = str, !s.isEmpty else {
             if required {
-                return "请输入\(key)"
+                return "\(String.contact_searchResult_input)\(key)"
             }
             return nil
         }
         var toReturn: String? = nil
         switch s.count {
         case minLength - 1:
-            toReturn = "请输入\(key)"
+            toReturn = "\(String.contact_searchResult_input)\(key)"
         case let i where i > maxLength:
-            toReturn = "\(key)支持\(minLength)-\(maxLength)位"
+            toReturn = "\(key)\(String.contact_searchResult_surport)\(minLength)-\(maxLength)\(String.contact_searchResult_wei)"
         default: ()
         }
         
@@ -105,7 +105,7 @@ extension BILAddContactByAddressController {
     
     func addContact() {
         guard let name = nameInputView.textField.text else {
-            nameInputView.show(tip: "名称不能为空", type: .error)
+            nameInputView.show(tip: .contact_searchResult_nameEmpty, type: .error)
             return
         }
         
@@ -119,14 +119,14 @@ extension BILAddContactByAddressController {
         let remark = remarkInputView.textField.text ?? ""
         
         guard let address = addressInputView.textField.text else {
-            showTipAlert(title: nil, msg: "地址不能为空", dismissed: {
+            showTipAlert(title: nil, msg: .contact_contact_addressInvalid, dismissed: {
                 self.addressInputView.textField.becomeFirstResponder()
             })
             return
         }
         
         guard !ContactModel.isAddressExits(address: address) else {
-            showTipAlert(msg: "地址已存在")
+            showTipAlert(msg: .contact_contact_addressExits)
             return
         }
         
@@ -136,7 +136,7 @@ extension BILAddContactByAddressController {
             if isValidate {
                 self.bil_showLoading(status: nil)
                 ContactModel.addContactToServer(id: "", address: address, name: name, remark: remark, success: { (contact) in
-                    self.bil_showSuccess(status: "添加成功")
+                    self.bil_showSuccess(status: .contact_searchResult_success)
                     self.bil_dismissHUD(delay: 1.5, complete: {
                         guard let nav = self.navigationController else {
                             return
@@ -155,7 +155,7 @@ extension BILAddContactByAddressController {
                 }
             } else {
                 self.bil_dismissHUD()
-                self.addressInputView.show(tip: "不是合法的地址", type: .error)
+                self.addressInputView.show(tip: .contact_contact_addressInvalid, type: .error)
             }
         }) { (error) in
             debugPrint(error)
@@ -176,11 +176,11 @@ extension BILAddContactByAddressController: BILInputViewDelegate {
             nameInputView.show(tip: msg, type: .error)
         case addressInputView.textField:
             guard let address = addressInputView.textField.text else {
-                addressInputView.show(tip: "地址不能为空", type: .error)
+                addressInputView.show(tip: .contact_contact_addressInvalid, type: .error)
                 return false
             }
             guard !ContactModel.isAddressExits(address: address) else {
-                addressInputView.show(tip: "地址已存在", type: .error)
+                addressInputView.show(tip: .contact_contact_addressExits, type: .error)
                 return false
             }
             BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
@@ -189,7 +189,7 @@ extension BILAddContactByAddressController: BILInputViewDelegate {
                 if isValidate {
                     self.remarkInputView.textField.becomeFirstResponder()
                 } else {
-                    self.addressInputView.show(tip: "不是合法的地址", type: .error)
+                    self.addressInputView.show(tip: .contact_contact_addressInvalid, type: .error)
                 }
             }) { (error) in
                 debugPrint(error)
@@ -207,11 +207,11 @@ extension BILAddContactByAddressController: BILInputViewDelegate {
         if let textField: UITextField = notification.object as? UITextField {
             switch textField {
             case nameInputView.textField:
-                nameInputView.show(tip: "名称", type: .normal)
+                nameInputView.show(tip: .contact_searchResult_name, type: .normal)
             case addressInputView.textField:
-                addressInputView.show(tip: "地址", type: .normal)
+                addressInputView.show(tip: .contact_detail_address, type: .normal)
             case remarkInputView.textField:
-                remarkInputView.show(tip: "备注", type: .normal)
+                remarkInputView.show(tip: .contact_searchResult_remark, type: .normal)
             default: ()
             }
         }

@@ -37,16 +37,16 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
             }
         }
         guard let id = idInputView.textField.text, !id.isEmpty else {
-            showToast(msg: "ID 不能为空")
+            showToast(msg: .contact_search_empty)
             return
         }
         guard id.count <= 20 else {
-            showToast(msg: "ID 太长了")
+            showToast(msg: .contact_search_tooLong)
             return
         }
         
         guard !ContactModel.isWalletIDExits(walletID: id) else {
-            showToast(msg: "ID 已存在")
+            showToast(msg: .contact_contact_IDExits)
             return
         }
         

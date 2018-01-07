@@ -29,8 +29,8 @@ class BILContactDetailController: BILLightBlueBaseController {
         guard let c = contact else { return }
         nameFirstWordLabel.text = c.firstNameWord
         nameLabel.text = c.name
-        contactTypeLabel.text = c.additionType == .walletID ? "钱包ID" : ("钱包地址" + " (\(c.coinType.name))")
-        contactTypeStringLabel.valueTitle = c.additionType == .walletID ? "ID" : "地址"
+        contactTypeLabel.text = c.additionType == .walletID ? .contact_detail_walletID : (.contact_detail_walletAddress + " (\(c.coinType.name))")
+        contactTypeStringLabel.valueTitle = c.additionType == .walletID ? .contact_detail_id : .contact_detail_address
         contactTypeStringLabel.text = c.detail
         remarkLabel.text = c.remarkString
     }
@@ -42,7 +42,7 @@ class BILContactDetailController: BILLightBlueBaseController {
     
     @IBAction func sendAction(_ sender: Any) {
         guard let c = contact else {
-            bil_makeToast(msg: "数据错误")
+            bil_makeToast(msg: .contact_detail_error)
             return
         }
         tabBarController?.selectedIndex = 3

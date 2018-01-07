@@ -43,7 +43,6 @@
 		BA1918EE1FD7DCE500B6F568 /* BILPopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1918ED1FD7DCE500B6F568 /* BILPopMenu.swift */; };
 		BA1918F01FD7E67600B6F568 /* BILPopMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1918EF1FD7E67600B6F568 /* BILPopMenuItemView.swift */; };
 		BA1918F21FD7E7BA00B6F568 /* BILPopMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1918F11FD7E7BA00B6F568 /* BILPopMenuItemView.xib */; };
-		BA20A6111FD68F5200EC2147 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA20A6101FD68F5100EC2147 /* Contact.storyboard */; };
 		BA284D111FD946B000A1C9F6 /* BILRecieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA284D101FD946B000A1C9F6 /* BILRecieveController.swift */; };
 		BA284D141FD9480200A1C9F6 /* BILQRCodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA284D131FD9480200A1C9F6 /* BILQRCodeHelper.swift */; };
 		BA40B1AA1FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40B1A91FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift */; };
@@ -106,6 +105,8 @@
 		CC6407F0200231970068153A /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6407F2200231970068153A /* BILGuideContactView.xib */; };
 		CC6407F7200231B80068153A /* BackupWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC6407F9200231B80068153A /* BackupWallet.storyboard */; };
 		CC640800200231D10068153A /* BackupWalletC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC640802200231D10068153A /* BackupWalletC.strings */; };
+		CC6408042002357E0068153A /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC6408062002357E0068153A /* Contact.storyboard */; };
+		CC640810200235F40068153A /* ContactC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC640812200235F40068153A /* ContactC.strings */; };
 		CC8E4C381FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E4C371FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift */; };
 		CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */; };
 		CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0461FB946290098E730 /* UIView+BILGradient.swift */; };
@@ -226,7 +227,6 @@
 		BA1918ED1FD7DCE500B6F568 /* BILPopMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILPopMenu.swift; sourceTree = "<group>"; };
 		BA1918EF1FD7E67600B6F568 /* BILPopMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILPopMenuItemView.swift; sourceTree = "<group>"; };
 		BA1918F11FD7E7BA00B6F568 /* BILPopMenuItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILPopMenuItemView.xib; sourceTree = "<group>"; };
-		BA20A6101FD68F5100EC2147 /* Contact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
 		BA284D101FD946B000A1C9F6 /* BILRecieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILRecieveController.swift; sourceTree = "<group>"; };
 		BA284D131FD9480200A1C9F6 /* BILQRCodeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILQRCodeHelper.swift; sourceTree = "<group>"; };
 		BA40B1A91FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BTCTransactionModel+BIL.swift"; sourceTree = "<group>"; };
@@ -322,6 +322,11 @@
 		CC6407FB200231BA0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BackupWallet.strings; sourceTree = "<group>"; };
 		CC6407FD200231BC0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BackupWallet.strings"; sourceTree = "<group>"; };
 		CC640803200231D20068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BackupWalletC.strings"; sourceTree = "<group>"; };
+		CC6408052002357E0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Contact.storyboard; sourceTree = "<group>"; };
+		CC640808200235810068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Contact.strings; sourceTree = "<group>"; };
+		CC64080A200235860068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Contact.strings"; sourceTree = "<group>"; };
+		CC64080D200235CD0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BackupWalletC.strings; sourceTree = "<group>"; };
+		CC640811200235F40068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ContactC.strings"; sourceTree = "<group>"; };
 		CC8E4C371FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILBackupWalletMnemonicController.swift; sourceTree = "<group>"; };
 		CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BIL.swift"; sourceTree = "<group>"; };
 		CC94E0461FB946290098E730 /* UIView+BILGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BILGradient.swift"; sourceTree = "<group>"; };
@@ -601,8 +606,9 @@
 		BA20A6011FD68F0600EC2147 /* Contact */ = {
 			isa = PBXGroup;
 			children = (
-				BA20A6101FD68F5100EC2147 /* Contact.storyboard */,
+				CC6408062002357E0068153A /* Contact.storyboard */,
 				BA46461A1FD78FC400680D33 /* Contact.xcassets */,
+				CC640812200235F40068153A /* ContactC.strings */,
 				BA20A6041FD68F0600EC2147 /* Controller */,
 				BA20A6061FD68F0600EC2147 /* Model */,
 				BA20A6081FD68F0600EC2147 /* View */,
@@ -1237,6 +1243,7 @@
 				CC6407CE200224400068153A /* NewWallet.storyboard in Resources */,
 				CC640800200231D10068153A /* BackupWalletC.strings in Resources */,
 				CC6407E2200231830068153A /* BILAllInOneView.xib in Resources */,
+				CC640810200235F40068153A /* ContactC.strings in Resources */,
 				BA8E66731FFF658E00F2539D /* Public.strings in Resources */,
 				BA05EAEB1FE7A14100B43B95 /* BILContactCell.xib in Resources */,
 				CC6407CA200213EC0068153A /* MeC.strings in Resources */,
@@ -1244,7 +1251,7 @@
 				BA0457181FDE6CE600070CCA /* QRCodeResource.xcassets in Resources */,
 				CCFEDEF81FCE62D400F1A7FC /* FF_DIN_Condensed_Bold.otf in Resources */,
 				BA12AC4E1FEA6FBE00812F38 /* Home.storyboard in Resources */,
-				BA20A6111FD68F5200EC2147 /* Contact.storyboard in Resources */,
+				CC6408042002357E0068153A /* Contact.storyboard in Resources */,
 				CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */,
 				CCEC67811FB190EE004CC6C5 /* LICENSE in Resources */,
 				BAEFFD441FEBB7BD00C6EAB3 /* diaoluo_da.mp3 in Resources */,
@@ -1726,8 +1733,27 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC640803200231D20068153A /* zh-Hans */,
+				CC64080D200235CD0068153A /* en */,
 			);
 			name = BackupWalletC.strings;
+			sourceTree = "<group>";
+		};
+		CC6408062002357E0068153A /* Contact.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC6408052002357E0068153A /* Base */,
+				CC640808200235810068153A /* en */,
+				CC64080A200235860068153A /* zh-Hans */,
+			);
+			name = Contact.storyboard;
+			sourceTree = "<group>";
+		};
+		CC640812200235F40068153A /* ContactC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC640811200235F40068153A /* zh-Hans */,
+			);
+			name = ContactC.strings;
 			sourceTree = "<group>";
 		};
 		CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */ = {

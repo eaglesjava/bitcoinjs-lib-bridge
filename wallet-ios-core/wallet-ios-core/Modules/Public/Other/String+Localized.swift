@@ -178,7 +178,33 @@ extension String {
 	static let backupWallet_mnemonic_cancel = "BackupWalletC.mnmonic_cancel".bil_localized
 	
 	static let backupWallet_verify_emptyTitle = "BackupWalletC.verify_emptyTitle".bil_localized
-//	static let backupWallet_mnemonic_ = "NewWalletC.inputID_exits".bil_localized
+}
+
+extension String {
+	static let contact_contact_addByID = "ContactC.contact_addByID".bil_localized
+	static let contact_contact_addByAddress = "ContactC.contact_addByAddress".bil_localized
+	static let contact_contact_scanCode = "ContactC.contact_scanCode".bil_localized
+	static let contact_contact_cancel = "ContactC.contact_cancel".bil_localized
+	static let contact_contact_addressExits = "ContactC.contact_addressExits".bil_localized
+	static let contact_contact_addressInvalid = "ContactC.contact_addressInvalid".bil_localized
+	static let contact_contact_IDExits = "ContactC.contact_IDExits".bil_localized
+	
+	static let contact_detail_walletID = "ContactC.detail_walletID".bil_localized
+	static let contact_detail_walletAddress = "ContactC.detail_walletAddress".bil_localized
+	static let contact_detail_id = "ContactC.detail_id".bil_localized
+	static let contact_detail_address = "ContactC.detail_address".bil_localized
+	static let contact_detail_error = "ContactC.detail_error".bil_localized
+	
+	static let contact_search_empty = "ContactC.search_empty".bil_localized
+	static let contact_search_tooLong = "ContactC.search_tooLong".bil_localized
+	
+	static let contact_searchResult_name = "ContactC.searchResult_name".bil_localized
+	static let contact_searchResult_remark = "ContactC.searchResult_remark".bil_localized
+	static let contact_searchResult_input = "ContactC.searchResult_input".bil_localized
+	static let contact_searchResult_surport = "ContactC.searchResult_surport".bil_localized
+	static let contact_searchResult_wei = "ContactC.searchResult_wei".bil_localized
+	static let contact_searchResult_nameEmpty = "ContactC.searchResult_nameEmpty".bil_localized
+	static let contact_searchResult_success = "ContactC.searchResult_success".bil_localized
 }
 
 extension String {
