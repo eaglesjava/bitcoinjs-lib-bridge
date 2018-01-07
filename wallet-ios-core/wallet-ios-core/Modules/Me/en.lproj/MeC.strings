@@ -7,3 +7,48 @@
 */
 
 "MeC.agreementName" = "service";
+
+"MeC.meSection_preference" = "偏好设置";
+"MeC.meSection_contacts" = "联系人设置";
+"MeC.meSection_wallet" = "钱包集成";
+"MeC.meSection_system" = "系统相关";
+"MeC.meSection_other" = "其它";
+
+"MeC.meCell_shortcut" = "主页快捷功能";
+"MeC.meCell_contactBackup" = "备份联系人";
+"MeC.meCell_contactRecover" = "恢复联系人";
+"MeC.meCell_system" = "系统设置";
+"MeC.meCell_aboutUs" = "关于我们";
+
+"MeC.contact_yourKey" = "您的联系人密钥";
+"MeC.contact_copyKey" = "复制密钥";
+"MeC.contact_keyCopied" = "密钥已复制";
+"MeC.contact_authFailed" = "授权失败，无法查看您的联系人密钥";
+"MeC.contact_inputKey" = "请输入密钥以确认";
+"MeC.contact_keyEmpty" = "密钥不能为空";
+"MeC.contact_noMore" = "您没有新增的联系人";
+"MeC.contact_recovered" = "您恢复了";
+"MeC.contact_contact" = "个联系人";
+
+"MeC.confirm" = "确认";
+"MeC.cancel" = "取消";
+
+"MeC.wallet_deleteFailed" = "删除钱包失败";
+"MeC.wallet_delete" = "删除钱包";
+"MeC.wallet_deleteMessage" = "请谨慎使用此操作，删除前确认您的钱包已备份，否则数字资产将无法找回！";
+"MeC.wallet_passwordEmpty" = "密码不能为空";
+"MeC.wallet_passwordError" = "密码输入错误";
+"MeC.wallet_inputPassword" = "请输入密码以确认";
+"MeC.wallet_tryLater" = "请稍后再试";
+"MeC.wallet_failed" = "操作失败";
+"MeC.wallet_backupNow" = "立即备份";
+
+"MeC.walletAddress_addressAndBalance" = "地址与余额";
+
+"MeC.aboutUs_agreement" = "使用条款";
+
+"MeC.appSetting_sound" = "音效";
+"MeC.appSetting_currency" = "货币";
+"MeC.appSetting_cellSound" = "音效";
+"MeC.appSetting_cellCurrency" = "当前币种";
+"MeC.appSetting_saved" = "已保存";

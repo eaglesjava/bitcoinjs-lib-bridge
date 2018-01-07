@@ -1,0 +1,38 @@
+/* 
+  NewWalletC.strings
+  wallet-ios-core
+
+  Created by 仇弘扬 on 2018/1/7.
+  Copyright © 2018年 BitBill. All rights reserved.
+*/
+
+"NewWalletC.inputID_IKnow" = "我知道了";
+"NewWalletC.inputID_title" = "钱包ID";
+"NewWalletC.inputID_range" = "钱包ID支持6-20位字符";
+"NewWalletC.inputID_format" = "ID仅支持字母、数字和下划线";
+"NewWalletC.inputID_prefix" = "ID仅能以字母开头";
+"NewWalletC.inputID_exits" = "钱包ID已存在";
+
+"NewWalletC.create_typeNew" = "创建";
+"NewWalletC.create_typeRecover" = "导入";
+"NewWalletC.create_typeResetPassword" = "重置";
+"NewWalletC.create_wallet" = "钱包";
+"NewWalletC.create_begin" = "开始";
+"NewWalletC.create_pwdInput" = "请输入密码";
+"NewWalletC.create_pwdRange" = "密码支持6-20位字符";
+"NewWalletC.create_pwdNotEqual" = "密码不一致";
+"NewWalletC.create_failed" = "操作失败";
+"NewWalletC.create_pwdEmpty" = "密码不能为空";
+"NewWalletC.create_createPwd" = "创建钱包密码";
+"NewWalletC.create_confirmPwd" = "确认钱包密码";
+"NewWalletC.createSuccess_new" = "钱包创建成功，请您务必在使用前将助记词储存到安全地方做好钱包备份";
+"NewWalletC.createSuccess_recover" = "钱包导入成功，请您务必保管好助记词和密码";
+"NewWalletC.createSuccess_reset" = "钱包密码重置成功，请您务必保管好助记词和密码";
+"NewWalletC.createSuccess" = "成功";
+
+"NewWalletC.import_emptyTitle" = "点击以输入";
+"NewWalletC.import_failed" = "导入失败";
+"NewWalletC.import_checkAgain" = "请重新检查您的助记词是否正确";
+"NewWalletC.import_exits" = "钱包已存在";
+"NewWalletC.import_resetOrNot" = "是否重置密码";
+"NewWalletC.import_reset" = "重置";

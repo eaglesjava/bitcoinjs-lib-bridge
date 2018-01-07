@@ -14,7 +14,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 	@IBOutlet weak var textView: UITextView!
 	@IBOutlet weak var mnemonicView: BILMnemonicView!
 	
-	let emptyTitle = "点击以输入"
+	let emptyTitle = String.newWallet_import_emptyTitle
 	let sugueID = "BILMnemonicToWalletIDSegue"
     let resetSegueID = "BILMnemonicToResetPasswordSegue"
 	
@@ -67,8 +67,8 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     
 	@IBAction func nextAction(_ sender: Any) {
         
-        let alertTitle = NSLocalizedString("导入失败", comment: "")
-        let alertMsg = NSLocalizedString("请重新检查您的助记词是否正确", comment: "")
+        let alertTitle = String.newWallet_import_failed
+        let alertMsg = String.newWallet_import_checkAgain
         
         guard let text = textView.text, !text.isEmpty else {
             self.textView.becomeFirstResponder()
@@ -89,11 +89,11 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
             if isValidate {
                 if let wallet = WalletModel.fetch(mnemonicHash: mnemonic.md5()) {
                     debugPrint("钱包已存在在本地")
-                    let alert = UIAlertController(title: "钱包已存在", message: "是否重置密码", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+                    let alert = UIAlertController(title: .newWallet_import_exits, message: .newWallet_import_resetOrNot, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: .meMe_cancel, style: .cancel, handler: { (action) in
                         self.bil_dismissSelfModalViewController()
                     }))
-                    alert.addAction(UIAlertAction(title: "重置", style: .destructive, handler: { (action) in
+                    alert.addAction(UIAlertAction(title: .newWallet_import_reset, style: .destructive, handler: { (action) in
                         self.performSegue(withIdentifier: self.resetSegueID, sender: segueSender(mnemonic: mnemonic, walletID: wallet.id))
                     }))
                     self.present(alert, animated: true)

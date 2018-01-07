@@ -64,7 +64,7 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
             return
         }
         hasShownAlert = true
-        let buttonTitle = "我知道了"
+        let buttonTitle = String.newWallet_inputID_IKnow
         
         let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
         let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: false, hideStatusBar: false) {
@@ -82,7 +82,7 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
     }
     
     func checkWalletID() -> String? {
-        let emptyTip = "钱包ID"
+        let emptyTip = String.newWallet_inputID_title
         guard let walletID = walletNameTextField.text else {
             return emptyTip
         }
@@ -93,7 +93,7 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
             return toReturn
         case let i where i > 20: fallthrough
         case 1...5:
-            toReturn = "钱包ID支持6-20位字符"
+            toReturn = .newWallet_inputID_range
         default: ()
         }
         
@@ -110,18 +110,18 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
             let underlineCount = try count(string: walletID, pattern: "[_]")
             let otherCount = walletID.count - numCount - lowerCount - upperCount - underlineCount
             if otherCount > 0 {
-                toReturn = "ID仅支持字母、数字和下划线"
+                toReturn = .newWallet_inputID_format
             }
             
             if try count(string: String(walletID.first!), pattern: "[a-zA-Z]") == 0 {
-                toReturn = "ID仅能以字母开头"
+                toReturn = .newWallet_inputID_prefix
             }
         } catch {
             
         }
         
         if createWalletType == .new, WalletModel.checkIDIsExists(id: walletID) {
-            toReturn = "钱包ID已存在"
+            toReturn = .newWallet_inputID_exits
         }
         
         return toReturn
@@ -132,7 +132,7 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
         if let textField: UITextField = notification.object as? UITextField {
             switch textField {
             case walletNameTextField:
-                walletNameInputView.show(tip: "钱包ID", type: .normal)
+                walletNameInputView.show(tip: .newWallet_inputID_title, type: .normal)
             default: ()
             }
         }

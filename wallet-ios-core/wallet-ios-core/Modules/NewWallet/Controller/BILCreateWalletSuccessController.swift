@@ -24,18 +24,18 @@ class BILCreateWalletSuccessController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        titleLabel.text = "\(createWalletType.titleString())钱包"
-        resultTitleLabel.text = "\(createWalletType.titleString())成功"
+        titleLabel.text = "\(createWalletType.titleString())\(String.newWallet_create_wallet)"
+        resultTitleLabel.text = "\(createWalletType.titleString())\(String.newWallet_createSuccess)"
         switch createWalletType {
         case .new:
-            msgLabel.text = "钱包创建成功，请您务必在使用前将助记词储存到安全地方做好钱包备份"
+            msgLabel.text = .newWallet_createSuccess_new
         case .recover:
-            msgLabel.text = "钱包导入成功，请您务必保管好助记词和密码"
+            msgLabel.text = .newWallet_createSuccess_recover
             backupButton.isHidden = true
             backupLaterButton.isHidden = true
             okButton.isHidden = false
         case .resetPassword:
-            msgLabel.text = "钱包密码重置成功，请您务必保管好助记词和密码"
+            msgLabel.text = .newWallet_createSuccess_reset
             backupButton.isHidden = true
             backupLaterButton.isHidden = true
             okButton.isHidden = false

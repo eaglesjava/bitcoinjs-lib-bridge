@@ -25,7 +25,6 @@
 		BA0C22381FECAFC90063A882 /* BILWalletDetailSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C22371FECAFC90063A882 /* BILWalletDetailSettingController.swift */; };
 		BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */; };
 		BA1142391FD53CC80025BF80 /* BILGuideContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */; };
-		BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */; };
 		BA11423D1FD676540025BF80 /* WalletModel+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423C1FD676540025BF80 /* WalletModel+Network.swift */; };
 		BA11423F1FD679FA0025BF80 /* WalletModel+BTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */; };
 		BA12AC351FE8C22100812F38 /* BILContactDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12AC341FE8C22100812F38 /* BILContactDetailController.swift */; };
@@ -99,8 +98,13 @@
 		CC6407BD200207310068153A /* SendC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6407BF200207310068153A /* SendC.strings */; };
 		CC6407C1200212A60068153A /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC6407C3200212A60068153A /* Me.storyboard */; };
 		CC6407CA200213EC0068153A /* MeC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6407CC200213EC0068153A /* MeC.strings */; };
+		CC6407CE200224400068153A /* NewWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC6407D0200224400068153A /* NewWallet.storyboard */; };
+		CC6407D7200229020068153A /* NewWalletC.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6407D9200229020068153A /* NewWalletC.strings */; };
+		CC6407DB2002315A0068153A /* BILSupportedCoinsPopupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6407DD2002315A0068153A /* BILSupportedCoinsPopupController.xib */; };
+		CC6407E2200231830068153A /* BILAllInOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6407E4200231830068153A /* BILAllInOneView.xib */; };
+		CC6407E92002318F0068153A /* BILGuideKeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6407EB2002318F0068153A /* BILGuideKeyView.xib */; };
+		CC6407F0200231970068153A /* BILGuideContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6407F2200231970068153A /* BILGuideContactView.xib */; };
 		CC8E4C381FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E4C371FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift */; };
-		CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0171FB58CDC0098E730 /* NewWallet.storyboard */; };
 		CC94E0451FB9458D0098E730 /* UIViewController+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */; };
 		CC94E0471FB946290098E730 /* UIView+BILGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0461FB946290098E730 /* UIView+BILGradient.swift */; };
 		CC94E04B1FB946480098E730 /* UIColor+BILHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E04A1FB946480098E730 /* UIColor+BILHex.swift */; };
@@ -116,7 +120,6 @@
 		CC94E0971FBAE1A50098E730 /* String+MnemonicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */; };
 		CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */; };
 		CC94E09D1FBBE6410098E730 /* BILAppStartUpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */; };
-		CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */; };
 		CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0B71FBD6E620098E730 /* BackupWallet.storyboard */; };
 		CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0B91FBD7FF30098E730 /* BackupWallet.xcassets */; };
 		CC94E0BF1FBD83E90098E730 /* BILMnemonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0BE1FBD83E90098E730 /* BILMnemonicView.swift */; };
@@ -156,10 +159,8 @@
 		CCED05641FDBB7A700689498 /* BILChooseWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED05631FDBB7A700689498 /* BILChooseWalletCell.swift */; };
 		CCF634F21FBEC25400840097 /* BILTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634F11FBEC25400840097 /* BILTabBarController.swift */; };
 		CCF634F51FBEC63300840097 /* BILAllInOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634F41FBEC63300840097 /* BILAllInOneView.swift */; };
-		CCF634F71FBEC64400840097 /* BILAllInOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF634F61FBEC64400840097 /* BILAllInOneView.xib */; };
 		CCF634F91FBECC0000840097 /* BILBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634F81FBECC0000840097 /* BILBaseViewController.swift */; };
 		CCF634FB1FC2B79900840097 /* BILGuideKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF634FA1FC2B79900840097 /* BILGuideKeyView.swift */; };
-		CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF634FE1FC2B82B00840097 /* BILGuideKeyView.xib */; };
 		CCF635011FC2B95100840097 /* BILGuideBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF635001FC2B95100840097 /* BILGuideBaseView.swift */; };
 		CCF635031FC2C5C600840097 /* BILGuideItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF635021FC2C5C600840097 /* BILGuideItem.swift */; };
 		CCF635051FC3DA3600840097 /* BILImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF635041FC3DA3600840097 /* BILImportWalletController.swift */; };
@@ -206,7 +207,6 @@
 		BA0C22371FECAFC90063A882 /* BILWalletDetailSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILWalletDetailSettingController.swift; sourceTree = "<group>"; };
 		BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILDeviceManager.swift; sourceTree = "<group>"; };
 		BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideContactView.swift; sourceTree = "<group>"; };
-		BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideContactView.xib; sourceTree = "<group>"; };
 		BA11423C1FD676540025BF80 /* WalletModel+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+Network.swift"; sourceTree = "<group>"; };
 		BA11423E1FD679FA0025BF80 /* WalletModel+BTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BTC.swift"; sourceTree = "<group>"; };
 		BA12AC341FE8C22100812F38 /* BILContactDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILContactDetailController.swift; sourceTree = "<group>"; };
@@ -301,8 +301,24 @@
 		CC6407C7200212AC0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Me.strings"; sourceTree = "<group>"; };
 		CC6407CB200213EC0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MeC.strings; sourceTree = "<group>"; };
 		CC6407CD200214060068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MeC.strings"; sourceTree = "<group>"; };
+		CC6407CF200224400068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewWallet.storyboard; sourceTree = "<group>"; };
+		CC6407D2200224430068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewWallet.strings; sourceTree = "<group>"; };
+		CC6407D4200224450068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NewWallet.strings"; sourceTree = "<group>"; };
+		CC6407D8200229020068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewWalletC.strings; sourceTree = "<group>"; };
+		CC6407DA200229030068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NewWalletC.strings"; sourceTree = "<group>"; };
+		CC6407DC2002315A0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILSupportedCoinsPopupController.xib; sourceTree = "<group>"; };
+		CC6407DF200231670068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILSupportedCoinsPopupController.strings; sourceTree = "<group>"; };
+		CC6407E1200231690068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILSupportedCoinsPopupController.strings"; sourceTree = "<group>"; };
+		CC6407E3200231830068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILAllInOneView.xib; sourceTree = "<group>"; };
+		CC6407E6200231880068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILAllInOneView.strings; sourceTree = "<group>"; };
+		CC6407E82002318A0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILAllInOneView.strings"; sourceTree = "<group>"; };
+		CC6407EA2002318F0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILGuideKeyView.xib; sourceTree = "<group>"; };
+		CC6407ED200231920068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILGuideKeyView.strings; sourceTree = "<group>"; };
+		CC6407EF200231930068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILGuideKeyView.strings"; sourceTree = "<group>"; };
+		CC6407F1200231970068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILGuideContactView.xib; sourceTree = "<group>"; };
+		CC6407F4200231990068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILGuideContactView.strings; sourceTree = "<group>"; };
+		CC6407F62002319A0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILGuideContactView.strings"; sourceTree = "<group>"; };
 		CC8E4C371FBD8AF40047E8FF /* BILBackupWalletMnemonicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILBackupWalletMnemonicController.swift; sourceTree = "<group>"; };
-		CC94E0171FB58CDC0098E730 /* NewWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewWallet.storyboard; sourceTree = "<group>"; };
 		CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BIL.swift"; sourceTree = "<group>"; };
 		CC94E0461FB946290098E730 /* UIView+BILGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BILGradient.swift"; sourceTree = "<group>"; };
 		CC94E04A1FB946480098E730 /* UIColor+BILHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BILHex.swift"; sourceTree = "<group>"; };
@@ -318,7 +334,6 @@
 		CC94E0951FBAE1A40098E730 /* String+MnemonicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MnemonicData.swift"; sourceTree = "<group>"; };
 		CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewWallet.xcassets; sourceTree = "<group>"; };
 		CC94E09C1FBBE6410098E730 /* BILAppStartUpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAppStartUpManager.swift; sourceTree = "<group>"; };
-		CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILSupportedCoinsPopupController.xib; sourceTree = "<group>"; };
 		CC94E0B71FBD6E620098E730 /* BackupWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupWallet.storyboard; sourceTree = "<group>"; };
 		CC94E0B91FBD7FF30098E730 /* BackupWallet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BackupWallet.xcassets; sourceTree = "<group>"; };
 		CC94E0BE1FBD83E90098E730 /* BILMnemonicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BILMnemonicView.swift; sourceTree = "<group>"; };
@@ -361,10 +376,8 @@
 		CCED05631FDBB7A700689498 /* BILChooseWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILChooseWalletCell.swift; sourceTree = "<group>"; };
 		CCF634F11FBEC25400840097 /* BILTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILTabBarController.swift; sourceTree = "<group>"; };
 		CCF634F41FBEC63300840097 /* BILAllInOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAllInOneView.swift; sourceTree = "<group>"; };
-		CCF634F61FBEC64400840097 /* BILAllInOneView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILAllInOneView.xib; sourceTree = "<group>"; };
 		CCF634F81FBECC0000840097 /* BILBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILBaseViewController.swift; sourceTree = "<group>"; };
 		CCF634FA1FC2B79900840097 /* BILGuideKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideKeyView.swift; sourceTree = "<group>"; };
-		CCF634FE1FC2B82B00840097 /* BILGuideKeyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILGuideKeyView.xib; sourceTree = "<group>"; };
 		CCF635001FC2B95100840097 /* BILGuideBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideBaseView.swift; sourceTree = "<group>"; };
 		CCF635021FC2C5C600840097 /* BILGuideItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideItem.swift; sourceTree = "<group>"; };
 		CCF635041FC3DA3600840097 /* BILImportWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILImportWalletController.swift; sourceTree = "<group>"; };
@@ -684,7 +697,8 @@
 			isa = PBXGroup;
 			children = (
 				CC94E09A1FBBE2300098E730 /* NewWallet.xcassets */,
-				CC94E0171FB58CDC0098E730 /* NewWallet.storyboard */,
+				CC6407D9200229020068153A /* NewWalletC.strings */,
+				CC6407D0200224400068153A /* NewWallet.storyboard */,
 				CC94E0081FB58CAA0098E730 /* Controller */,
 				CC94E00E1FB58CAA0098E730 /* View */,
 			);
@@ -699,7 +713,7 @@
 				CC94E04E1FB950040098E730 /* BILCreateWalletViewController.swift */,
 				CC4660521FBEA67600A87132 /* BILCreateWalletSuccessController.swift */,
 				CCF635041FC3DA3600840097 /* BILImportWalletController.swift */,
-				CC94E09E1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib */,
+				CC6407DD2002315A0068153A /* BILSupportedCoinsPopupController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1055,11 +1069,11 @@
 			children = (
 				CCF635001FC2B95100840097 /* BILGuideBaseView.swift */,
 				CCF634F41FBEC63300840097 /* BILAllInOneView.swift */,
-				CCF634F61FBEC64400840097 /* BILAllInOneView.xib */,
+				CC6407E4200231830068153A /* BILAllInOneView.xib */,
 				CCF634FA1FC2B79900840097 /* BILGuideKeyView.swift */,
-				CCF634FE1FC2B82B00840097 /* BILGuideKeyView.xib */,
+				CC6407EB2002318F0068153A /* BILGuideKeyView.xib */,
 				BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */,
-				BA11423A1FD53CD10025BF80 /* BILGuideContactView.xib */,
+				CC6407F2200231970068153A /* BILGuideContactView.xib */,
 				CCF635021FC2C5C600840097 /* BILGuideItem.swift */,
 			);
 			path = Guide;
@@ -1218,8 +1232,8 @@
 				CC6407C1200212A60068153A /* Me.storyboard in Resources */,
 				CCEC67831FB190EE004CC6C5 /* index.js in Resources */,
 				CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */,
-				CC94E0181FB58CDC0098E730 /* NewWallet.storyboard in Resources */,
-				CCF634F71FBEC64400840097 /* BILAllInOneView.xib in Resources */,
+				CC6407CE200224400068153A /* NewWallet.storyboard in Resources */,
+				CC6407E2200231830068153A /* BILAllInOneView.xib in Resources */,
 				BA8E66731FFF658E00F2539D /* Public.strings in Resources */,
 				BA05EAEB1FE7A14100B43B95 /* BILContactCell.xib in Resources */,
 				CC6407CA200213EC0068153A /* MeC.strings in Resources */,
@@ -1234,7 +1248,7 @@
 				CC94E0BA1FBD7FF30098E730 /* BackupWallet.xcassets in Resources */,
 				CC94E0B81FBD6E620098E730 /* BackupWallet.storyboard in Resources */,
 				CC6407BD200207310068153A /* SendC.strings in Resources */,
-				CCF634FF1FC2B82B00840097 /* BILGuideKeyView.xib in Resources */,
+				CC6407E92002318F0068153A /* BILGuideKeyView.xib in Resources */,
 				CC6407B32001FB1B0068153A /* ReceiveC.strings in Resources */,
 				BA46461D1FD78FCF00680D33 /* Send.xcassets in Resources */,
 				CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */,
@@ -1242,11 +1256,12 @@
 				BA12AC481FEA67B300812F38 /* Send.storyboard in Resources */,
 				CCFEDEEE1FCC067E00F1A7FC /* BILTransactionCell.xib in Resources */,
 				BAEFFD451FEBB7BD00C6EAB3 /* diaoluo_xiao.mp3 in Resources */,
+				CC6407D7200229020068153A /* NewWalletC.strings in Resources */,
 				CC6407AA2001FA620068153A /* Receive.storyboard in Resources */,
 				BA46461F1FD78FDB00680D33 /* Me.xcassets in Resources */,
 				BAEFFD411FEBAE9C00C6EAB3 /* bitcoinjs-lib-app.js in Resources */,
-				CC94E09F1FBBEAF10098E730 /* BILSupportedCoinsPopupController.xib in Resources */,
-				BA11423B1FD53CD10025BF80 /* BILGuideContactView.xib in Resources */,
+				CC6407DB2002315A0068153A /* BILSupportedCoinsPopupController.xib in Resources */,
+				CC6407F0200231970068153A /* BILGuideContactView.xib in Resources */,
 				CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */,
 				BA5894001FF36540008C96C4 /* service.html in Resources */,
 				BA4646191FD78FB500680D33 /* Receive.xcassets in Resources */,
@@ -1634,6 +1649,65 @@
 				CC6407CD200214060068153A /* zh-Hans */,
 			);
 			name = MeC.strings;
+			sourceTree = "<group>";
+		};
+		CC6407D0200224400068153A /* NewWallet.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC6407CF200224400068153A /* Base */,
+				CC6407D2200224430068153A /* en */,
+				CC6407D4200224450068153A /* zh-Hans */,
+			);
+			name = NewWallet.storyboard;
+			sourceTree = "<group>";
+		};
+		CC6407D9200229020068153A /* NewWalletC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC6407D8200229020068153A /* en */,
+				CC6407DA200229030068153A /* zh-Hans */,
+			);
+			name = NewWalletC.strings;
+			sourceTree = "<group>";
+		};
+		CC6407DD2002315A0068153A /* BILSupportedCoinsPopupController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC6407DC2002315A0068153A /* Base */,
+				CC6407DF200231670068153A /* en */,
+				CC6407E1200231690068153A /* zh-Hans */,
+			);
+			name = BILSupportedCoinsPopupController.xib;
+			sourceTree = "<group>";
+		};
+		CC6407E4200231830068153A /* BILAllInOneView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC6407E3200231830068153A /* Base */,
+				CC6407E6200231880068153A /* en */,
+				CC6407E82002318A0068153A /* zh-Hans */,
+			);
+			name = BILAllInOneView.xib;
+			sourceTree = "<group>";
+		};
+		CC6407EB2002318F0068153A /* BILGuideKeyView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC6407EA2002318F0068153A /* Base */,
+				CC6407ED200231920068153A /* en */,
+				CC6407EF200231930068153A /* zh-Hans */,
+			);
+			name = BILGuideKeyView.xib;
+			sourceTree = "<group>";
+		};
+		CC6407F2200231970068153A /* BILGuideContactView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC6407F1200231970068153A /* Base */,
+				CC6407F4200231990068153A /* en */,
+				CC6407F62002319A0068153A /* zh-Hans */,
+			);
+			name = BILGuideContactView.xib;
 			sourceTree = "<group>";
 		};
 		CCEC675D1FB18C3A004CC6C5 /* Main.storyboard */ = {

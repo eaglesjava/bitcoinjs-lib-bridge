@@ -20,11 +20,11 @@ enum CreateWalletType {
     func titleString() -> String {
         switch self {
         case .new:
-            return "创建"
+            return .newWallet_create_typeNew
         case .recover:
-            return "导入"
+            return .newWallet_create_typeRecover
         case .resetPassword:
-            return "重置"
+            return .newWallet_create_typeResetPassword
         }
     }
 }
@@ -56,8 +56,8 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 
         // Do any additional setup after loading the view.
 		let titleString = createWalletType.titleString()
-		title = "\(titleString)钱包"
-		createButton.setTitle("开始\(titleString)", for: .normal)
+		title = "\(titleString)\(String.newWallet_create_wallet)"
+		createButton.setTitle("\(String.newWallet_create_begin)\(titleString)", for: .normal)
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -85,16 +85,16 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	func checkPassword() -> String? {
         
         guard let pwd = passwordTextField.text else {
-            return "请输入密码"
+            return .newWallet_create_pwdInput
         }
         
         var toReturn: String? = nil
         switch pwd.count {
         case 0:
-            toReturn = "请输入密码"
+            toReturn = .newWallet_create_pwdInput
         case let i where i > 20: fallthrough
         case 1...5:
-            toReturn = "密码支持6-20位字符"
+            toReturn = .newWallet_create_pwdRange
         default: ()
         }
         
@@ -119,7 +119,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		
 		guard checkConfirmPassword() else {
             confirmPasswordTextField.becomeFirstResponder()
-			confirmPasswordInputView.show(tip: "密码不一致", type: .error)
+			confirmPasswordInputView.show(tip: .newWallet_create_pwdNotEqual, type: .error)
 			return
 		}
 		
@@ -131,12 +131,12 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                     do {
                         try BILWalletManager.shared.remove(wallet: w)
                     } catch {
-                        self.bil_showError(status: "操作失败")
+                        self.bil_showError(status: .newWallet_create_failed)
                     }
                 }
             }
             guard let pwd = self.passwordTextField.text else {
-                self.bil_showError(status: "密码不能为空")
+                self.bil_showError(status: .newWallet_create_pwdEmpty)
                 return
             }
             self.bil_showLoading()
@@ -235,9 +235,9 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 			switch textField {
 			case passwordTextField:
 				passwordStrengthView.strength = BILPasswordStrengthView.caculatePasswordStrength(pwd: textField.text ?? "")
-				passwordInputView.show(tip: "创建钱包密码", type: .normal)
+				passwordInputView.show(tip: .newWallet_create_createPwd, type: .normal)
 			case confirmPasswordTextField:
-				confirmPasswordInputView.show(tip: "确认钱包密码", type: .normal)
+				confirmPasswordInputView.show(tip: .newWallet_create_confirmPwd, type: .normal)
 			default: ()
 			}
 		}

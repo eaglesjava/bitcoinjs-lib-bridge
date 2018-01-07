@@ -133,6 +133,39 @@ extension String {
 }
 
 extension String {
+	static let newWallet_inputID_IKnow = "NewWalletC.inputID_IKnow".bil_localized
+	static let newWallet_inputID_title = "NewWalletC.inputID_title".bil_localized
+	static let newWallet_inputID_range = "NewWalletC.inputID_range".bil_localized
+	static let newWallet_inputID_format = "NewWalletC.inputID_format".bil_localized
+	static let newWallet_inputID_prefix = "NewWalletC.inputID_prefix".bil_localized
+	static let newWallet_inputID_exits = "NewWalletC.inputID_exits".bil_localized
+	
+	static let newWallet_create_typeNew = "NewWalletC.create_typeNew".bil_localized
+	static let newWallet_create_typeRecover = "NewWalletC.create_typeRecover".bil_localized
+	static let newWallet_create_typeResetPassword = "NewWalletC.create_typeResetPassword".bil_localized
+	static let newWallet_create_wallet = "NewWalletC.create_wallet".bil_localized
+	static let newWallet_create_begin = "NewWalletC.create_begin".bil_localized
+	static let newWallet_create_pwdInput = "NewWalletC.create_pwdInput".bil_localized
+	static let newWallet_create_pwdRange = "NewWalletC.create_pwdRange".bil_localized
+	static let newWallet_create_pwdNotEqual = "NewWalletC.create_pwdNotEqual".bil_localized
+	static let newWallet_create_failed = "NewWalletC.create_failed".bil_localized
+	static let newWallet_create_pwdEmpty = "NewWalletC.create_pwdEmpty".bil_localized
+	static let newWallet_create_createPwd = "NewWalletC.create_createPwd".bil_localized
+	static let newWallet_create_confirmPwd = "NewWalletC.create_confirmPwd".bil_localized
+	static let newWallet_createSuccess_new = "NewWalletC.createSuccess_new".bil_localized
+	static let newWallet_createSuccess_recover = "NewWalletC.createSuccess_recover".bil_localized
+	static let newWallet_createSuccess_reset = "NewWalletC.createSuccess_reset".bil_localized
+	static let newWallet_createSuccess = "NewWalletC.createSuccess".bil_localized
+	static let newWallet_import_emptyTitle = "NewWalletC.import_emptyTitle".bil_localized
+	static let newWallet_import_failed = "NewWalletC.import_failed".bil_localized
+	static let newWallet_import_checkAgain = "NewWalletC.import_checkAgain".bil_localized
+	static let newWallet_import_exits = "NewWalletC.import_exits".bil_localized
+	static let newWallet_import_resetOrNot = "NewWalletC.import_resetOrNot".bil_localized
+	static let newWallet_import_reset = "NewWalletC.import_reset".bil_localized
+//	static let newWallet_import_ = "NewWalletC.inputID_exits".bil_localized
+}
+
+extension String {
     var bil_localized: String {
         get {
             guard let tableName = components(separatedBy: ".").first else {
