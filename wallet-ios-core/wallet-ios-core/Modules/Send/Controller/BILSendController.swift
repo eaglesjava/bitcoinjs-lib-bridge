@@ -72,7 +72,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
             if isValidate {
                 self.addressInputView.textField.text = address
             } else {
-                self.showTipAlert(title: nil, msg: "不是合法的地址")
+                self.showTipAlert(title: nil, msg: .sendSendAddressInvalid)
             }
         }) { (error) in
             debugPrint(error)
@@ -121,7 +121,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         
         func next(address: String, isContact: Bool = false) {
             guard !(address.isEmpty) else {
-                bil_makeToast(msg: NSLocalizedString("地址不能为空", comment: ""))
+                bil_makeToast(msg: .sendSendAddressEmpty)
                 return
             }
             BitcoinJSBridge.shared.validateAddress(address: address, success: { (result) in
@@ -134,10 +134,10 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
                 }
                 else
                 {
-                    self.showTipAlert(title: "地址不正确", msg: "您输入的不是合法的地址")
+                    self.showTipAlert(title: .sendSendAddressInvalidTitle, msg: .sendSendAddressInvalid)
                 }
             }) { (error) in
-                self.showTipAlert(title: "出现了错误", msg: error.localizedDescription)
+                self.showTipAlert(title: .sendSendAddressError, msg: error.localizedDescription)
             }
         }
         
@@ -147,7 +147,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
                 c.getContactAddressFromServer(success: { (address) in
                     next(address: address, isContact: true)
                 }, failure: { (msg, code) in
-                    self.showTipAlert(title: "出现了错误", msg: msg)
+                    self.showTipAlert(title: .sendSendAddressError, msg: msg)
                 })
             }
             else
@@ -159,7 +159,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         else
         {
             guard let add = addressInputView.textField.text, !(add.isEmpty) else {
-                showTipAlert(msg: "地址不能为空")
+                showTipAlert(msg: .sendSendAddressEmpty)
                 return
             }
             next(address: add)

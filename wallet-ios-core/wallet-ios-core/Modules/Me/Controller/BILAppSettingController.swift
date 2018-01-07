@@ -17,9 +17,9 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         var sectionTitle: String {
             switch self {
             case .sound:
-                return "音效"
+                return .meAppSetting_sound
             case .currency:
-                return "货币"
+                return .meAppSetting_currency
             }
         }
         
@@ -41,9 +41,9 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         func dataArray() -> [Any] {
             switch self {
             case .sound:
-                return ["音效"]
+                return [String.meAppSetting_cellSound]
             case .currency:
-                return ["当前币种"]
+                return [String.meAppSetting_cellCurrency]
             }
         }
         
@@ -119,18 +119,18 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
     
     func chooseCurrencyType() {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        sheet.addAction(UIAlertAction(title: "CNY", style: .default, handler: { (action) in
+        sheet.addAction(UIAlertAction(title: CurrencyType.cny.localizedName, style: .default, handler: { (action) in
             BILSettingManager.currencyType = .cny
-            self.bil_makeToast(msg: "已保存")
+            self.bil_makeToast(msg: .meAppSetting_saved)
 			self.tableView.reloadData()
         }))
-        sheet.addAction(UIAlertAction(title: "USD", style: .default, handler: { (action) in
+        sheet.addAction(UIAlertAction(title: CurrencyType.usd.localizedName, style: .default, handler: { (action) in
             BILSettingManager.currencyType = .usd
-            self.bil_makeToast(msg: "已保存")
+            self.bil_makeToast(msg: .meAppSetting_saved)
 			self.tableView.reloadData()
         }))
         
-        sheet.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+        sheet.addAction(UIAlertAction(title: .meMe_cancel, style: .cancel, handler: { (action) in
             
         }))
         present(sheet, animated: true, completion: nil)

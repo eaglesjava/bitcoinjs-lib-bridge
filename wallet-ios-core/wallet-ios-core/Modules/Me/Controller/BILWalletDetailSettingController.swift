@@ -62,43 +62,43 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
         wallet.deleteWalletInSever(success: {
             self.navigationController?.popViewController(animated: true)
         }) { (msg, code) in
-            self.showTipAlert(msg: "删除钱包失败")
+            self.showTipAlert(msg: .meWallet_deleteFailed)
         }
     }
     
     @IBAction func removeWalletAction(_ sender: Any) {
         guard let wallet = self.wallet else { return }
-        let alert = UIAlertController(title: "删除钱包", message: "请谨慎使用此操作，删除前确认您的钱包已备份，否则数字资产将无法找回！", preferredStyle: .alert)
+        let alert = UIAlertController(title: .meWallet_delete, message: .meWallet_deleteMessage, preferredStyle: .alert)
         
-        let ok = UIAlertAction(title: "确认", style: .default) { (action) in
+        let ok = UIAlertAction(title: .meMe_confirm, style: .default) { (action) in
             guard let pwd = alert.textFields?.first?.text, !pwd.isEmpty else {
-                self.showAlertForFail("密码不能为空")
+                self.showAlertForFail(.meWallet_passwordEmpty)
                 return
             }
             if !wallet.checkPassword(pwd: pwd) {
-                self.showAlertForFail("密码输入错误")
+                self.showAlertForFail(.meWallet_passwordError)
                 return
             }
             self.deleteWallet()
         }
-        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+        let cancel = UIAlertAction(title: .meMe_cancel, style: .cancel) { (action) in
             
         }
         alert.addAction(ok)
         alert.addAction(cancel)
         
         alert.addTextField { (textField) in
-            textField.placeholder = "请输入密码以确认"
+            textField.placeholder = .meWallet_inputPassword
             textField.isSecureTextEntry = true
         }
         
         present(alert, animated: true, completion: nil)
     }
     
-    func showAlertForFail(_ msg: String = "请稍后再试") {
-        let alert = UIAlertController(title: "操作失败", message: msg, preferredStyle: .alert)
+    func showAlertForFail(_ msg: String = .meWallet_tryLater) {
+        let alert = UIAlertController(title: .meWallet_failed, message: msg, preferredStyle: .alert)
         
-        let ok = UIAlertAction(title: "确认", style: .default) { (action) in
+        let ok = UIAlertAction(title: .meMe_confirm, style: .default) { (action) in
             BILControllerManager.shared.showMainTabBarController()
         }
         alert.addAction(ok)

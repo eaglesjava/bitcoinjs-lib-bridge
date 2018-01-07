@@ -28,9 +28,108 @@ extension String {
     static let publicTransactionConfirmed = "Public.transaction.status.confirmed".bil_localized
     static let publicTransactionNoRemark = "Public.transaction.remark.none".bil_localized
     static let publicAlertActionTitle = "Public.alert.action.title".bil_localized
-//    static let publicCurrencyCnyName = "Public.transaction.status.failure".bil_localized
-//    static let publicCurrencyCnyName = "Public.transaction.status.failure".bil_localized
-//    static let publicCurrencyCnyName = "Public.transaction.status.failure".bil_localized
+	
+    static let homeHomeSectionShortcut = "HomeC.home.section.shortcut".bil_localized
+    static let homeHomeSectionAsset = "HomeC.home.section.asset".bil_localized
+    static let homeHomeSectionUnconfirm = "HomeC.home.section.unconfirm".bil_localized
+	static let homeHomeSectionWallet = "HomeC.home.section.wallet".bil_localized
+	static let homeHomeSectionSubTitleShortcut = "HomeC.home.section.subtitle.shortcut".bil_localized
+	static let homeHomeSectionSubTitleAsset = "HomeC.home.section.subtitle.asset".bil_localized
+	static let homeHomeSectionSubTitleUnconfirm = "HomeC.home.section.subtitle.unconfirm".bil_localized
+	static let homeHomeSectionSubTitleWallet = "HomeC.home.section.subtitle.wallet".bil_localized
+	static let homeHomeSectionUnitGe = "HomeC.home.section.subtitle.unit.ge".bil_localized
+	static let homeHomePopWalletNew = "HomeC.home.pop.wallet.new".bil_localized
+	static let homeHomePopWalletImport = "HomeC.home.pop.wallet.import".bil_localized
+	static let homeTxDetailHash = "HomeC.tx.detail.cell.hash".bil_localized
+	static let homeTxDetailRecieveAddress = "HomeC.tx.detail.cell.address.recieve".bil_localized
+	static let homeTxDetailSendAddress = "HomeC.tx.detail.cell.address.send".bil_localized
+	static let homeTxDetailConfirm = "HomeC.tx.detail.cell.confirm".bil_localized
+	static let homeTxDetailRemark = "HomeC.tx.detail.cell.remark".bil_localized
+	static let homeTxDetailDate = "HomeC.tx.detail.cell.date".bil_localized
+	static let homeTxDetailNoTx = "HomeC.tx.detail.noTx".bil_localized
+	
+	static let recieveAddressTipTitle = "RecieveC.recieve.address.tip.title".bil_localized
+	static let recieveAddressTipMessage = "RecieveC.recieve.address.tip.msg".bil_localized
+	static let recieveAddressTipRefresh = "RecieveC.recieve.address.tip.refresh".bil_localized
+	static let recieveSpecificCheckAmountTipTitle = "RecieveC.specific.check.amount.tip.title".bil_localized
+	static let recieveSpecificCheckAmountTipMessageEmpty = "RecieveC.specific.check.amount.tip.msg.empty".bil_localized
+	static let recieveSpecificCheckAmountTipMessageZero = "RecieveC.specific.check.amount.tip.msg.zero".bil_localized
+	
+	static let sendSendAddressInvalid = "SendC.send.address.invalid".bil_localized
+	static let sendSendAddressEmpty = "SendC.send.address.empty".bil_localized
+	static let sendSendAddressInvalidTitle = "SendC.send.address.invalid.title".bil_localized
+	static let sendSendAddressError = "SendC.send.address.error".bil_localized
+	static let sendAmountCheckTipTitle = "SendC.amount.check.amount.tip.title".bil_localized
+	static let sendAmountCheckTipMessageEmpty = "SendC.amount.check.amount.tip.msg.empty".bil_localized
+	static let sendAmountCheckTipMessageZero = "SendC.amount.check.amount.tip.msg.zero".bil_localized
+	static let sendAmountCheckTipMessageNotEnough = "SendC.amount.check.amount.tip.msg.notEnough".bil_localized
+	static let sendConfirmMinute = "SendC.confirm.minute".bil_localized
+	static let sendConfirmHour = "SendC.confirm.hour".bil_localized
+	static let sendConfirmDay = "SendC.confirm.day".bil_localized
+	static let sendConfirmAverageTime = "SendC.confirm.averageTime".bil_localized
+	static let sendConfirmNeedSpend = "SendC.confirm.needSpend".bil_localized
+	static let sendConfirmNotEnoughBalace = "SendC.confirm.notEnoughBalace".bil_localized
+	static let sendConfirmCannotFindChangeAddress = "SendC.confirm.cannotFindChangeAddress".bil_localized
+	static let sendConfirmRemarkTooLong = "SendC.confirm.remarkTooLong".bil_localized
+	static let sendConfirmSendFailed = "SendC.confirm.sendFailed".bil_localized
+	static let sendConfirmPasswordTitle = "SendC.confirm.passwordTitle".bil_localized
+	static let sendConfirmPasswordMessageEmpty = "SendC.confirm.passwordMessageEmpty".bil_localized
+	static let sendConfirmPasswordMessageWrong = "SendC.confirm.passwordMessageWrong".bil_localized
+	static let sendConfirmCancel = "SendC.confirm.cancel".bil_localized
+	static let sendConfirmConfirm = "SendC.confirm.confirm".bil_localized
+	static let sendConfirmPasswordPlaceholder = "SendC.confirm.passwordPlaceholder".bil_localized
+	static let sendConfirmBuildTxFailed = "SendC.confirm.buildTxFailed".bil_localized
+	static let sendConfirmSeedFailed = "SendC.confirm.seedFailed".bil_localized
+	static let sendConfirmTryLater = "SendC.confirm.tryLater".bil_localized
+	static let sendResultInput = "SendC.result.input".bil_localized
+	static let sendResultInputName = "SendC.result.inputName".bil_localized
+	static let sendResultInputNamePlaceHolder = "SendC.result.inputNamePlaceholder".bil_localized
+	static let sendResultAddSuccess = "SendC.result.addSuccess".bil_localized
+}
+
+extension String {
+	static let meMe_agreementName = "MeC.agreementName".bil_localized
+	static let meMe_meSection_preference = "MeC.meSection_preference".bil_localized
+	static let meMe_meSection_contacts = "MeC.meSection_contacts".bil_localized
+	static let meMe_meSection_wallet = "MeC.meSection_wallet".bil_localized
+	static let meMe_meSection_system = "MeC.meSection_system".bil_localized
+	static let meMe_meSection_other = "MeC.meSection_other".bil_localized
+	static let meMe_meCell_shortcut = "MeC.meCell_shortcut".bil_localized
+	static let meMe_meCell_contactBackup = "MeC.meCell_contactBackup".bil_localized
+	static let meMe_meCell_contactRecover = "MeC.meCell_contactRecover".bil_localized
+	static let meMe_meCell_system = "MeC.meCell_system".bil_localized
+	static let meMe_meCell_aboutUs = "MeC.meCell_aboutUs".bil_localized
+	static let meMe_contact_yourKey = "MeC.contact_yourKey".bil_localized
+	static let meMe_contact_copyKey = "MeC.contact_copyKey".bil_localized
+	static let meMe_contact_keyCopied = "MeC.contact_keyCopied".bil_localized
+	static let meMe_contact_authFailed = "MeC.contact_authFailed".bil_localized
+	static let meMe_contact_inputKey = "MeC.contact_inputKey".bil_localized
+	static let meMe_contact_keyEmpty = "MeC.contact_keyEmpty".bil_localized
+	static let meMe_contact_noMore = "MeC.contact_noMore".bil_localized
+	static let meMe_contact_recovered = "MeC.contact_recovered".bil_localized
+	static let meMe_contact_contact = "MeC.contact_contact".bil_localized
+	static let meMe_confirm = "MeC.confirm".bil_localized
+	static let meMe_cancel = "MeC.cancel".bil_localized
+	
+	static let meWallet_deleteFailed = "MeC.wallet_deleteFailed".bil_localized
+	static let meWallet_delete = "MeC.wallet_delete".bil_localized
+	static let meWallet_deleteMessage = "MeC.wallet_deleteMessage".bil_localized
+	static let meWallet_passwordEmpty = "MeC.wallet_passwordEmpty".bil_localized
+	static let meWallet_passwordError = "MeC.wallet_passwordError".bil_localized
+	static let meWallet_inputPassword = "MeC.wallet_inputPassword".bil_localized
+	static let meWallet_tryLater = "MeC.wallet_tryLater".bil_localized
+	static let meWallet_failed = "MeC.wallet_failed".bil_localized
+	static let meWallet_backupNow = "MeC.wallet_backupNow".bil_localized
+	
+	static let meWalletAddress_addressAndBalance = "MeC.WalletAddress_addressAndBalance".bil_localized
+	
+	static let meAboutUs_agreement = "MeC.aboutUs_agreement".bil_localized
+	
+	static let meAppSetting_sound = "MeC.appSetting_sound".bil_localized
+	static let meAppSetting_currency = "MeC.appSetting_currency".bil_localized
+	static let meAppSetting_cellSound = "MeC.appSetting_cellSound".bil_localized
+	static let meAppSetting_cellCurrency = "MeC.appSetting_cellCurrency".bil_localized
+	static let meAppSetting_saved = "MeC.appSetting_saved".bil_localized
 }
 
 extension String {
@@ -40,7 +139,7 @@ extension String {
                 return self
             }
             
-            return NSLocalizedString(self, tableName: tableName.capitalized, comment: "")
+            return NSLocalizedString(self, tableName: tableName, comment: "")
         }
     }
 }

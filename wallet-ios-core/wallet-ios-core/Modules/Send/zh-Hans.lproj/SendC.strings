@@ -1,0 +1,42 @@
+/* 
+  SendC.strings
+  wallet-ios-core
+
+  Created by 仇弘扬 on 2018/1/7.
+  Copyright © 2018年 BitBill. All rights reserved.
+*/
+
+"SendC.send.address.invalid" = "您输入的不是合法的地址";
+"SendC.send.address.empty" = "地址不能为空";
+"SendC.send.address.invalid.title" = "地址不正确";
+"SendC.send.address.error" = "出现了错误";
+
+"SendC.amount.check.amount.tip.title" = "提示";
+"SendC.amount.check.amount.tip.msg.empty" = "请输入金额";
+"SendC.amount.check.amount.tip.msg.zero" = "请输入大于 0 的金额";
+"SendC.amount.check.amount.tip.msg.notEnough" = "余额不足";
+
+"SendC.confirm.minute" = "分钟";
+"SendC.confirm.hour" = "小时";
+"SendC.confirm.day" = "天";
+"SendC.confirm.averageTime" = "平均确认时间";
+"SendC.confirm.needSpend" = "需耗费";
+"SendC.confirm.notEnoughBalace" = "余额不足以支付手续费";
+"SendC.confirm.cannotFindChangeAddress" = "未能生成找零地址";
+"SendC.confirm.remarkTooLong" = "备注不能超过20个字";
+"SendC.confirm.sendFailed" = "发送失败";
+"SendC.confirm.passwordTitle" = "输入钱包密码";
+"SendC.confirm.passwordMessageEmpty" = "密码不能为空";
+"SendC.confirm.passwordMessageWrong" = "密码输入错误";
+"SendC.confirm.cancel" = "取消";
+"SendC.confirm.confirm" = "确认";
+"SendC.confirm.passwordPlaceholder" = "请输入密码以确认";
+"SendC.confirm.buildTxFailed" = "创建交易失败";
+"SendC.confirm.seedFailed" = "解密 Seed 失败";
+"SendC.confirm.tryLater" = "请稍后再试";
+
+"SendC.result.input" = "输入";
+"SendC.result.inputName" = "的名称";
+"SendC.result.inputNamePlaceholder" = "请输入联系人名称";
+"SendC.result.addSuccess" = "添加成功";
+

@@ -5,6 +5,9 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "6ap-fE-eNJ"; */
 "6ap-fE-eNJ.text" = "Label";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "8MQ-76-CAT"; */
+"8MQ-76-CAT.text" = "Label";
+
 /* Class = "UILabel"; text = "BTC"; ObjectID = "9mQ-5p-ITN"; */
 "9mQ-5p-ITN.text" = "BTC";
 
@@ -19,6 +22,12 @@
 
 /* Class = "UILabel"; text = "  BCH  "; ObjectID = "HyH-em-rLE"; */
 "HyH-em-rLE.text" = "  BCH  ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "I1d-BW-uoe"; */
+"I1d-BW-uoe.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "IvI-ns-vDg"; */
+"IvI-ns-vDg.text" = "Label";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "JN2-bM-Ppa"; */
 "JN2-bM-Ppa.text" = "0";
@@ -35,29 +44,47 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "Pcd-Bi-NdR"; */
 "Pcd-Bi-NdR.text" = "0";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "RUR-oj-tqV"; */
+"RUR-oj-tqV.text" = "Label";
+
 /* Class = "UILabel"; text = "BCH"; ObjectID = "Y45-qI-hSi"; */
 "Y45-qI-hSi.text" = "BCH";
 
 /* Class = "UILabel"; text = "   BTC   "; ObjectID = "bqZ-ZL-T8C"; */
 "bqZ-ZL-T8C.text" = "   BTC   ";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "iBP-Zq-dpz"; */
+"iBP-Zq-dpz.text" = "Label";
+
 /* Class = "UILabel"; text = "ETH"; ObjectID = "iJr-DZ-SE9"; */
 "iJr-DZ-SE9.text" = "ETH";
+
+/* Class = "UIButton"; normalTitle = "添加联系人"; ObjectID = "jKD-ly-HwV"; */
+"jKD-ly-HwV.normalTitle" = "添加联系人";
 
 /* Class = "UILabel"; text = "0.00 CNY"; ObjectID = "kIi-ue-mEd"; */
 "kIi-ue-mEd.text" = "0.00 CNY";
 
 /* Class = "UILabel"; text = "未确认"; ObjectID = "rm9-o8-4xS"; */
-"rm9-o8-4xS.text" = "Unconfirm";
+"rm9-o8-4xS.text" = "未确认";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "sWl-W4-hLH"; */
+"sWl-W4-hLH.text" = "Label";
 
 /* Class = "UITabBarItem"; title = "资产"; ObjectID = "skP-T0-JsY"; */
-"skP-T0-JsY.title" = "Asset";
+"skP-T0-JsY.title" = "资产";
+
+/* Class = "UIButton"; normalTitle = "扫一扫"; ObjectID = "sqe-gw-hpm"; */
+"sqe-gw-hpm.normalTitle" = "扫一扫";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "uIC-Be-vnV"; */
+"uIC-Be-vnV.text" = "Address";
 
 /* Class = "UIBarButtonItem"; title = "总资产"; ObjectID = "wqZ-hg-Heu"; */
-"wqZ-hg-Heu.title" = "My assets";
+"wqZ-hg-Heu.title" = "总资产";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "xa1-Vm-H3E"; */
 "xa1-Vm-H3E.text" = "0";
 
 /* Class = "UILabel"; text = "交易记录"; ObjectID = "z7d-Rg-cIr"; */
-"z7d-Rg-cIr.text" = "transaction records";
+"z7d-Rg-cIr.text" = "交易记录";

@@ -17,26 +17,26 @@ enum BILHomeSectionType: Int {
 	var sectionTitle: String {
 		switch self {
 		case .shortcut:
-			return "快捷方式"
+			return .homeHomeSectionShortcut
 		case .asset:
-			return "总资产"
+			return .homeHomeSectionAsset
 		case .recentRecord:
-			return "未确认交易"
+			return .homeHomeSectionUnconfirm
 		case .wallet:
-			return "我的钱包"
+			return .homeHomeSectionWallet
 		}
 	}
 	
 	var sectionSubTitle: String {
 		switch self {
 		case .shortcut:
-			return "前往设置自定义"
+			return .homeHomeSectionSubTitleShortcut
 		case .asset:
-			return "当前币种 1 个"
+			return "\(String.homeHomeSectionSubTitleAsset) 1 \(String.homeHomeSectionUnitGe)"
 		case .recentRecord:
-			return "正在进行中 \(numberOfRows()) 个"
+			return "\(String.homeHomeSectionSubTitleUnconfirm) \(numberOfRows()) \(String.homeHomeSectionUnitGe)"
 		case .wallet:
-			return "当前钱包 \(numberOfRows()) 个"
+			return "\(String.homeHomeSectionSubTitleWallet) \(numberOfRows()) \(String.homeHomeSectionUnitGe)"
 		}
 	}
 	

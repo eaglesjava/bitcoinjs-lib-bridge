@@ -142,6 +142,6 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 
 extension BILBTCWalletView: DZNEmptyDataSetSource {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: "无交易记录", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15), NSAttributedStringKey.foregroundColor: UIColor(white: 1.0, alpha: 0.3)])
+        return NSAttributedString(string: .homeTxDetailNoTx, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15), NSAttributedStringKey.foregroundColor: UIColor(white: 1.0, alpha: 0.3)])
     }
 }

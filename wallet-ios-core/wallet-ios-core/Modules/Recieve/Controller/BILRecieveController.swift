@@ -95,7 +95,7 @@ class BILRecieveController: BILBaseViewController {
 		let key = "BILShowTipForWalletNewAddress"
 		let shown = UserDefaults.standard.bool(forKey: key)
 		if !shown {
-			showTipAlert(title: "友情提醒", msg: "为保护您的隐私，每次接收操作时，都将使用新地址，已使用的旧地址仍然可用")
+			showTipAlert(title: .recieveAddressTipTitle, msg: .recieveAddressTipMessage)
 			UserDefaults.standard.set(true, forKey: key)
 		}
     }
@@ -172,7 +172,7 @@ class BILRecieveController: BILBaseViewController {
         bil_showLoading(status: nil)
 		currentWallet?.getNewBTCAddress(success: { (address) in
 			self.setAddress(address: address)
-            self.bil_makeToast(msg: "地址已刷新")
+            self.bil_makeToast(msg: .recieveAddressTipRefresh)
             self.bil_dismissHUD()
 		}, failure: { (errorMsg) in
 			debugPrint(errorMsg)

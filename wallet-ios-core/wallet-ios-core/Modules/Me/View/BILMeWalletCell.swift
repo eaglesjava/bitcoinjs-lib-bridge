@@ -15,7 +15,7 @@ class BILMeWalletCell: BILMeCell {
             guard let w = wallet else { return }
             titleLabel.text = w.id
             actionButton.isHidden = !w.isNeedBackup
-            actionButton.setTitle("立即备份", for: .normal)
+            actionButton.setTitle(.meWallet_backupNow, for: .normal)
         }
     }
     

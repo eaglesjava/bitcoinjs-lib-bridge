@@ -85,7 +85,7 @@ extension BILWalletAddressController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BILTableViewHeaderFooterView") as! BILTableViewHeaderFooterView
-        headerView.titleLabel.text = "地址与余额"
+        headerView.titleLabel.text = .meWalletAddress_addressAndBalance
         headerView.bgImageView.image = backgroundImage?.snapshotSubImage(rect: view.convert(headerView.frame, from: tableView))
         return headerView
     }

@@ -27,14 +27,14 @@ struct BTCFee {
     var timeString: String {
         get {
             if timeInMinute < 60 {
-                return " \(timeInMinute) 分钟"
+                return " \(timeInMinute) \(String.sendConfirmMinute)"
             }
             let minuteInDay = 60 * 24
             if timeInMinute < minuteInDay {
-                return " \(timeInMinute / 60) 小时"
+                return " \(timeInMinute / 60) \(String.sendConfirmHour)"
             }
             
-            return " \(timeInMinute / minuteInDay) 天"
+            return " \(timeInMinute / minuteInDay) \(String.sendConfirmDay)"
         }
     }
 }
@@ -102,10 +102,10 @@ class BILSendConfirmController: BILBaseViewController {
                 let remainAmount = Int64(model.bitcoinSatoshiAmount) - fee
                 amountLabel.text = "\(BTCFormatString(btc: remainAmount)) BTC"
             }
-            feeTipeLabel.text = "平均确认时间\(nearFee.timeString)，需耗费 \(BTCFormatString(btc: fee)) BTC"
+            feeTipeLabel.text = "\(String.sendConfirmAverageTime)\(nearFee.timeString)，\(String.sendConfirmNeedSpend) \(BTCFormatString(btc: fee)) BTC"
 			isNotEnougnBalance = false
         } catch {
-            feeTipeLabel.text = "余额不足以支付手续费"
+            feeTipeLabel.text = .sendConfirmNotEnoughBalace
 			isNotEnougnBalance = true
         }
     }
@@ -147,7 +147,7 @@ class BILSendConfirmController: BILBaseViewController {
                 else
                 {
                     self.isNotEnougnBalance = true
-                    self.showTipAlert(title: "提示", msg: "余额不足以支付手续费", dismissed: {
+                    self.showTipAlert(title: .sendAmountCheckTipTitle, msg: .sendConfirmNotEnoughBalace, dismissed: {
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
@@ -168,7 +168,7 @@ class BILSendConfirmController: BILBaseViewController {
             }) { (msg) in
 				let address = wallet.randomAddress()
 				guard let add = address.address else {
-					errorHandler(msg: "未能生成找零地址")
+					errorHandler(msg: .sendConfirmCannotFindChangeAddress)
 					return
 				}
 				createTXBuilder(address: add)
@@ -178,39 +178,39 @@ class BILSendConfirmController: BILBaseViewController {
 
     @IBAction func nextAction(_ sender: Any) {
 		guard !isNotEnougnBalance else {
-			showTipAlert(msg: "余额不足")
+			showTipAlert(msg: .sendAmountCheckTipMessageNotEnough)
 			return
 		}
         guard (remarkInputView.textField.text ?? "").count <= 20 else {
-            showTipAlert(title: nil, msg: "备注不能超过20个字")
+            showTipAlert(title: nil, msg: .sendConfirmRemarkTooLong)
             return
         }
         guard let wallet = sendModel?.wallet else {
-            showTipAlert(title: "发送失败", msg: "请稍后再试")
+            showTipAlert(title: .sendConfirmSendFailed, msg: .sendConfirmTryLater)
             return
         }
         
-        let alert = UIAlertController(title: "输入钱包密码", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: .sendConfirmPasswordTitle, message: nil, preferredStyle: .alert)
         
-        let ok = UIAlertAction(title: "确认", style: .default) { (action) in
+        let ok = UIAlertAction(title: .sendConfirmConfirm, style: .default) { (action) in
             guard let pwd = alert.textFields?.first?.text, !pwd.isEmpty else {
-                self.showAlertForFail("密码不能为空")
+                self.showAlertForFail(.sendConfirmPasswordMessageEmpty)
                 return
             }
             if !wallet.checkPassword(pwd: pwd) {
-                self.showAlertForFail("密码输入错误")
+                self.showAlertForFail(.sendConfirmPasswordMessageWrong)
                 return
             }
             self.send(password: pwd)
         }
-        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+        let cancel = UIAlertAction(title: .sendConfirmCancel, style: .cancel) { (action) in
             
         }
         alert.addAction(ok)
         alert.addAction(cancel)
         
         alert.addTextField { (textField) in
-            textField.placeholder = "请输入密码以确认"
+            textField.placeholder = .sendConfirmPasswordPlaceholder
             textField.isSecureTextEntry = true
         }
         
@@ -223,13 +223,13 @@ class BILSendConfirmController: BILBaseViewController {
             self.bil_dismissHUD()
         }
         guard let builder = txBuilder else {
-            errorHandler(msg: "创建交易失败")
+            errorHandler(msg: .sendConfirmBuildTxFailed)
             return
         }
         guard let wallet = sendModel?.wallet else { return }
         
         guard let seed = wallet.decryptSeed(pwd: password) else {
-            errorHandler(msg: "解密 Seed 失败")
+            errorHandler(msg: .sendConfirmSeedFailed)
             return
         }
         bil_showLoading(status: nil)
@@ -242,7 +242,7 @@ class BILSendConfirmController: BILBaseViewController {
                 self.sendSuccess(tx: tx)
             }, failure: { (msg, code) in
                 debugPrint(msg)
-                self.showTipAlert(title: "发送失败", msg: "\(msg), code = \(code)")
+                self.showTipAlert(title: .sendConfirmSendFailed, msg: "\(msg), code = \(code)")
             })
             
         }, failure: { (error) in
@@ -261,10 +261,10 @@ class BILSendConfirmController: BILBaseViewController {
         }
     }
     
-    func showAlertForFail(_ msg: String = "请稍后再试") {
-        let alert = UIAlertController(title: "发送失败", message: msg, preferredStyle: .alert)
+    func showAlertForFail(_ msg: String = .sendConfirmTryLater) {
+        let alert = UIAlertController(title: .sendConfirmSendFailed, message: msg, preferredStyle: .alert)
         
-        let ok = UIAlertAction(title: "确认", style: .default) { (action) in
+        let ok = UIAlertAction(title: .sendConfirmConfirm, style: .default) { (action) in
             BILControllerManager.shared.showMainTabBarController()
         }
         alert.addAction(ok)

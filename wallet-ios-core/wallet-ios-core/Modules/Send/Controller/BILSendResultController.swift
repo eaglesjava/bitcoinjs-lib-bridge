@@ -43,21 +43,21 @@ class BILSendResultController: BILBaseViewController {
     }
     
     func showAddContactAlert(address: String) {
-        let alert = UIAlertController(title: "输入 \(address) 的名称", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "\(String.sendResultInput) \(address) \(String.sendResultInputName)", message: nil, preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: .sendConfirmConfirm, style: .default, handler: { (action) in
             guard let name = alert.textFields?.first?.text else {
                 return
             }
             self.addContact(address: address, name: name)
         }))
         
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+        alert.addAction(UIAlertAction(title: .sendConfirmCancel, style: .cancel, handler: { (action) in
             
         }))
         
         alert.addTextField { (textField) in
-            textField.placeholder = "请输入联系人名称"
+            textField.placeholder = .sendResultInputNamePlaceHolder
         }
         
         present(alert, animated: true, completion: nil)
@@ -65,7 +65,7 @@ class BILSendResultController: BILBaseViewController {
     
     func addContact(address: String, name: String) {
         ContactModel.addContactToServer(address: address, name: name, success: { (contact) in
-            self.bil_showSuccess(status: "添加成功")
+            self.bil_showSuccess(status: .sendResultAddSuccess)
             self.bil_dismissHUD(delay: 1.5, complete: {
                 self.dismiss(animated: true, completion: nil)
             })

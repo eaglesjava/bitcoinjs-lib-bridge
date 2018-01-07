@@ -125,12 +125,12 @@ class BILSpecificVolumeRecieveInputController: BILBaseViewController, UITextFiel
 				return false
 			}
 			guard let text = amountTextField.text, !text.isEmpty else {
-				showTipAlert(title: "提示", msg: "请输入金额")
+				showTipAlert(title: .recieveSpecificCheckAmountTipTitle, msg: .recieveSpecificCheckAmountTipMessageEmpty)
 				return false
 			}
 			
 			guard let btcValue = Double(text), btcValue > 0 else {
-				showTipAlert(title: "提示", msg: "请输入大于 0 的金额")
+				showTipAlert(title: .recieveSpecificCheckAmountTipTitle, msg: .recieveSpecificCheckAmountTipMessageZero)
 				return false
 			}
 			recieveModel?.amount = text

@@ -12,7 +12,7 @@ class BILAboutUsViewController: BILBaseViewController {
 
     @IBOutlet weak var versionLabel: UILabel!
     
-    let titles = ["使用条款"]
+    let titles = [String.meAboutUs_agreement]
     let segues = ["BILAboutUsToAgreementSegue"]
     
     override func viewDidLoad() {

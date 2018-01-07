@@ -1,0 +1,69 @@
+
+/* Class = "UILabel"; text = "B"; ObjectID = "1fX-Kn-fBM"; */
+"1fX-Kn-fBM.text" = "B";
+
+/* Class = "UIBarButtonItem"; title = "刷新地址"; ObjectID = "3l4-sG-DnM"; */
+"3l4-sG-DnM.title" = "刷新地址";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "3sB-VA-6TC"; */
+"3sB-VA-6TC.text" = "Label";
+
+/* Class = "UILabel"; text = "CoinName"; ObjectID = "4uu-Ed-8Ox"; */
+"4uu-Ed-8Ox.text" = "CoinName";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "8PS-8e-2Ja"; */
+"8PS-8e-2Ja.text" = "0";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "AFR-Cm-jtb"; */
+"AFR-Cm-jtb.text" = "Address";
+
+/* Class = "UILabel"; text = "  ETH  "; ObjectID = "DeF-SM-Qmy"; */
+"DeF-SM-Qmy.text" = "  ETH  ";
+
+/* Class = "UILabel"; text = "  BCH  "; ObjectID = "KFJ-ZR-qQm"; */
+"KFJ-ZR-qQm.text" = "  BCH  ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "LfU-2L-QPe"; */
+"LfU-2L-QPe.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "当前钱包未备份，马上备份"; ObjectID = "Lla-QY-BHV"; */
+"Lla-QY-BHV.normalTitle" = "当前钱包未备份，马上备份";
+
+/* Class = "UILabel"; text = "btc balance"; ObjectID = "MRt-I8-1l2"; */
+"MRt-I8-1l2.text" = "btc balance";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "MbP-wN-eFm"; */
+"MbP-wN-eFm.normalTitle" = "下一步";
+
+/* Class = "UINavigationItem"; title = "特定金额接收"; ObjectID = "Q03-cE-dXW"; */
+"Q03-cE-dXW.title" = "特定金额接收";
+
+/* Class = "UILabel"; text = "0.00"; ObjectID = "Q37-vr-w7f"; */
+"Q37-vr-w7f.text" = "0.00";
+
+/* Class = "UILabel"; text = "选择钱包"; ObjectID = "RfN-nk-PWa"; */
+"RfN-nk-PWa.text" = "选择钱包";
+
+/* Class = "UILabel"; text = "   BTC   "; ObjectID = "Vbc-mO-Bu1"; */
+"Vbc-mO-Bu1.text" = "   BTC   ";
+
+/* Class = "UINavigationItem"; title = "接收数量"; ObjectID = "WWw-Bm-kvr"; */
+"WWw-Bm-kvr.title" = "接收数量";
+
+/* Class = "UILabel"; text = "扫一扫，向我支付"; ObjectID = "XWN-KL-CfM"; */
+"XWN-KL-CfM.text" = "扫一扫，向我支付";
+
+/* Class = "UIViewController"; title = "输入数量"; ObjectID = "cY8-4Y-AaO"; */
+"cY8-4Y-AaO.title" = "输入数量";
+
+/* Class = "UITabBarItem"; title = "接收"; ObjectID = "ic5-jT-iGX"; */
+"ic5-jT-iGX.title" = "接收";
+
+/* Class = "UINavigationItem"; title = "接收"; ObjectID = "nyY-9Y-U6O"; */
+"nyY-9Y-U6O.title" = "接收";
+
+/* Class = "UILabel"; text = "B"; ObjectID = "rdY-VJ-rcF"; */
+"rdY-VJ-rcF.text" = "B";
+
+/* Class = "UILabel"; text = "ID"; ObjectID = "xOj-Rc-rYE"; */
+"xOj-Rc-rYE.text" = "ID";

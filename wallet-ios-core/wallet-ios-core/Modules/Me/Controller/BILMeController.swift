@@ -27,15 +27,15 @@ class BILMeController: BILBaseViewController {
         var sectionTitle: String {
             switch self {
             case .preference:
-                return "偏好设置"
+                return .meMe_meSection_preference
 			case .contacts:
-				return "联系人设置"
+				return .meMe_meSection_contacts
             case .wallet:
-                return "钱包集成"
+                return .meMe_meSection_wallet
             case .system:
-                return "系统相关"
+                return .meMe_meSection_system
             case .other:
-                return "其它"
+                return .meMe_meSection_other
             }
         }
         
@@ -57,15 +57,15 @@ class BILMeController: BILBaseViewController {
         func dataArray() -> [Any] {
             switch self {
             case .preference:
-                return ["主页快捷功能"]
+                return [String.meMe_meCell_shortcut]
 			case .contacts:
-				return ["备份联系人", "恢复联系人"]
+				return [String.meMe_meCell_contactBackup, String.meMe_meCell_contactRecover]
             case .wallet:
                 return BILWalletManager.shared.wallets
             case .system:
-                return ["系统设置"]
+                return [String.meMe_meCell_system]
             case .other:
-                return ["关于我们"]
+                return [String.meMe_meCell_aboutUs]
             }
         }
         
@@ -105,36 +105,36 @@ class BILMeController: BILBaseViewController {
 	func backupContacts() {
 		let key = BILDeviceManager.shared.contactKey
         BILAuthenticator.shared.autherizeWithTouchIdOrFaceId(reason: "", success: {
-            self.showTipAlert(title: "您的联系人密钥", msg: key, actionTitle: "复制密钥") {
+            self.showTipAlert(title: .meMe_contact_yourKey, msg: key, actionTitle: .meMe_contact_copyKey) {
                 UIPasteboard.general.string = key
-                self.bil_makeToast(msg: "密钥已复制")
+                self.bil_makeToast(msg: .meMe_contact_keyCopied)
             }
         }) {
-            self.bil_makeToast(msg: "授权失败，无法查看您的联系人密钥")
+            self.bil_makeToast(msg: .meMe_contact_authFailed)
         }
 	}
 	
 	func recoverContacts() {
-		let alert = UIAlertController(title: "恢复联系人", message: nil, preferredStyle: .alert)
+		let alert = UIAlertController(title: .meMe_meCell_contactRecover, message: nil, preferredStyle: .alert)
 		
 		alert.addTextField { (textField) in
-			textField.placeholder = "请输入密钥以确认"
+			textField.placeholder = .meMe_contact_inputKey
 		}
 		
-		alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (action) in
+		alert.addAction(UIAlertAction(title: .meMe_confirm, style: .default, handler: { (action) in
             guard let key = alert.textFields?.first?.text, !key.isEmpty else {
-                self.bil_makeToast(msg: "密钥不能为空")
+                self.bil_makeToast(msg: .meMe_contact_keyEmpty)
                 return
             }
             self.bil_showLoading(status: nil)
             ContactModel.recoverContactsFromServer(recoverKey: key, success: { (contacts) in
                 let count = contacts.count
                 if count == 0 {
-                    self.bil_makeToast(msg: "您没有新增的联系人")
+                    self.bil_makeToast(msg: .meMe_contact_noMore)
                 }
                 else
                 {
-                    self.bil_makeToast(msg: "您恢复了 \(contacts.count) 个联系人")
+                    self.bil_makeToast(msg: "\(String.meMe_contact_recovered) \(contacts.count) \(String.meMe_contact_contact)")
                 }
                 self.bil_dismissHUD()
             }, failure: { (msg, code) in
@@ -143,7 +143,7 @@ class BILMeController: BILBaseViewController {
             })
 		}))
 		
-		alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+		alert.addAction(UIAlertAction(title: .meMe_cancel, style: .cancel, handler: { (action) in
 			
 		}))
 		

@@ -34,20 +34,20 @@ class BILBTCTransactionController: BILLightBlueBaseController {
         statusLabel.text = tx.status.description
         statusImageView.image = tx.status.image
         
-		datas.append(("交易 hash", value: tx.txHash!, cellID: "BILTXDetailCell"))
-        datas.append(("发送地址", value: "", cellID: "BILTXTitleCell"))
+		datas.append((.homeTxDetailHash, value: tx.txHash!, cellID: "BILTXDetailCell"))
+        datas.append((.homeTxDetailSendAddress, value: "", cellID: "BILTXTitleCell"))
 		for addModel in tx.inputAddressModels {
 			datas.append((addModel.address!, value: BTCFormatString(btc: addModel.satoshi) + " BTC", cellID: "BILAddressCell"))
 		}
-        datas.append(("接收地址", value: "", cellID: "BILTXTitleCell"))
+        datas.append((.homeTxDetailRecieveAddress, value: "", cellID: "BILTXTitleCell"))
 		for addModel in tx.outputAddressModels {
 			datas.append((addModel.address!, value: BTCFormatString(btc: addModel.satoshi) + " BTC", cellID: "BILAddressCell"))
 		}
         if tx.status == .success {
-            datas.append(("确认", value: "\(tx.confirmCount)", cellID: "BILTXDetailCell"))
+            datas.append((.homeTxDetailConfirm, value: "\(tx.confirmCount)", cellID: "BILTXDetailCell"))
         }
-        datas.append(("备注", value: tx.remarkString, cellID: "BILTXDetailCell"))
-        datas.append(("交易时间", value: tx.dateSring, cellID: "BILTXDetailCell"))
+        datas.append((.homeTxDetailRemark, value: tx.remarkString, cellID: "BILTXDetailCell"))
+        datas.append((.homeTxDetailDate, value: tx.dateSring, cellID: "BILTXDetailCell"))
     }
     
     override func viewWillAppear(_ animated: Bool) {

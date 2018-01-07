@@ -133,11 +133,11 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == chooseWalletSegue {
             guard let amount = amountTextField.text, !(amount.isEmpty) else {
-                showTipAlert(title: nil, msg: "金额不能为空")
+                showTipAlert(title: .sendAmountCheckTipTitle, msg: .sendAmountCheckTipMessageEmpty)
                 return false
             }
             guard let amountD = Double(amount), amountD > 0 else {
-                showTipAlert(title: nil, msg: "金额必须大于 0")
+                showTipAlert(title: .sendAmountCheckTipTitle, msg: .sendAmountCheckTipMessageZero)
                 return false
             }
             sendModel?.amount = amount

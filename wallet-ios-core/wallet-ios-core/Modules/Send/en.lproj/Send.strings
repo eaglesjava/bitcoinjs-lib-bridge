@@ -3,7 +3,7 @@
 "0g2-RI-9zC.text" = "推荐您添加该地址到新联系人以便下次交易";
 
 /* Class = "UIViewController"; title = "发送"; ObjectID = "1bf-2n-T7s"; */
-"1bf-2n-T7s.title" = "Send";
+"1bf-2n-T7s.title" = "发送";
 
 /* Class = "UILabel"; text = "address"; ObjectID = "3oK-wN-dDO"; */
 "3oK-wN-dDO.text" = "address";
@@ -15,13 +15,13 @@
 "4RA-bO-hKB.text" = "平均确认时间30分钟，需耗费0.0002BTC";
 
 /* Class = "UITabBarItem"; title = "发送"; ObjectID = "5MS-kJ-Ypl"; */
-"5MS-kJ-Ypl.title" = "Send";
+"5MS-kJ-Ypl.title" = "发送";
 
 /* Class = "UIButton"; normalTitle = "完成"; ObjectID = "6nF-hb-Mn0"; */
-"6nF-hb-Mn0.normalTitle" = "Done";
+"6nF-hb-Mn0.normalTitle" = "完成";
 
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "7dV-Wt-9E5"; */
-"7dV-Wt-9E5.normalTitle" = "Next";
+"7dV-Wt-9E5.normalTitle" = "下一步";
 
 /* Class = "UILabel"; text = "0 CNY"; ObjectID = "AZE-8B-09r"; */
 "AZE-8B-09r.text" = "0 CNY";
@@ -42,28 +42,28 @@
 "Erz-zk-b10.text" = "amount";
 
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "Fio-ZW-1aj"; */
-"Fio-ZW-1aj.normalTitle" = "Next";
+"Fio-ZW-1aj.normalTitle" = "下一步";
 
 /* Class = "UITextField"; placeholder = "接收方地址"; ObjectID = "FtQ-ul-LSb"; */
-"FtQ-ul-LSb.placeholder" = "Address";
+"FtQ-ul-LSb.placeholder" = "接收方地址";
 
 /* Class = "UILabel"; text = "发送成功"; ObjectID = "GcY-Ih-Dbp"; */
 "GcY-Ih-Dbp.text" = "发送成功";
 
 /* Class = "UILabel"; text = "接收方地址"; ObjectID = "H0V-Re-jp2"; */
-"H0V-Re-jp2.text" = "Address";
+"H0V-Re-jp2.text" = "接收方地址";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "IEb-Gs-FlA"; */
 "IEb-Gs-FlA.text" = "Label";
 
 /* Class = "UINavigationItem"; title = "发送"; ObjectID = "LlB-ZE-aT8"; */
-"LlB-ZE-aT8.title" = "Send";
+"LlB-ZE-aT8.title" = "发送";
 
 /* Class = "UINavigationItem"; title = "确认"; ObjectID = "Pjz-b4-hnz"; */
-"Pjz-b4-hnz.title" = "Confirm";
+"Pjz-b4-hnz.title" = "确认";
 
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "R8m-SG-IX7"; */
-"R8m-SG-IX7.normalTitle" = "Next";
+"R8m-SG-IX7.normalTitle" = "下一步";
 
 /* Class = "UILabel"; text = "接收方"; ObjectID = "T3Y-an-Yus"; */
 "T3Y-an-Yus.text" = "接收方";
@@ -82,6 +82,9 @@
 
 /* Class = "UINavigationItem"; title = "发送金额"; ObjectID = "bed-TV-fGp"; */
 "bed-TV-fGp.title" = "发送金额";
+
+/* Class = "UIBarButtonItem"; title = "扫一扫"; ObjectID = "jOK-o3-08X"; */
+"jOK-o3-08X.title" = "扫一扫";
 
 /* Class = "UILabel"; text = "CoinName"; ObjectID = "jUa-cr-pb8"; */
 "jUa-cr-pb8.text" = "CoinName";
@@ -107,8 +110,8 @@
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "ohd-e8-95F"; */
 "ohd-e8-95F.normalTitle" = "下一步";
 
-/* Class = "UILabel"; text = "0 CNY"; ObjectID = "ood-C6-emK"; */
-"ood-C6-emK.text" = "0 CNY";
+/* Class = "UILabel"; text = "0.00"; ObjectID = "ood-C6-emK"; */
+"ood-C6-emK.text" = "0.00";
 
 /* Class = "UILabel"; text = "   BTC   "; ObjectID = "psK-vY-Miv"; */
 "psK-vY-Miv.text" = "   BTC   ";
@@ -123,7 +126,7 @@
 "tAE-ee-pat.placeholder" = "20字以内";
 
 /* Class = "UIBarButtonItem"; title = "选择全部余额"; ObjectID = "yYV-Yz-7JL"; */
-"yYV-Yz-7JL.title" = "Send All";
+"yYV-Yz-7JL.title" = "选择全部余额";
 
 /* Class = "UILabel"; text = "  ETH  "; ObjectID = "zdY-hz-j0J"; */
 "zdY-hz-j0J.text" = "  ETH  ";

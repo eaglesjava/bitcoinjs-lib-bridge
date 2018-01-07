@@ -44,7 +44,7 @@ class BILSendChooseWalletController: BILBaseViewController {
             return
         }
         if model.isSendAll, w.btcBalance == 0 {
-            showTipAlert(title: "提示", msg: "余额不足")
+            showTipAlert(title: .sendAmountCheckTipTitle, msg: .sendAmountCheckTipMessageNotEnough)
             return
         }
         
@@ -54,7 +54,7 @@ class BILSendChooseWalletController: BILBaseViewController {
         }
         else
         {
-            showTipAlert(title: "提示", msg: "余额不足")
+            showTipAlert(title: .sendAmountCheckTipTitle, msg: .sendAmountCheckTipMessageNotEnough)
         }
     }
     

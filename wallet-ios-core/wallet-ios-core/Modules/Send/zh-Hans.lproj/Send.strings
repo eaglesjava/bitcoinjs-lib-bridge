@@ -110,8 +110,8 @@
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "ohd-e8-95F"; */
 "ohd-e8-95F.normalTitle" = "下一步";
 
-/* Class = "UILabel"; text = "0 CNY"; ObjectID = "ood-C6-emK"; */
-"ood-C6-emK.text" = "0 CNY";
+/* Class = "UILabel"; text = "0.00"; ObjectID = "ood-C6-emK"; */
+"ood-C6-emK.text" = "0.00";
 
 /* Class = "UILabel"; text = "   BTC   "; ObjectID = "psK-vY-Miv"; */
 "psK-vY-Miv.text" = "   BTC   ";
