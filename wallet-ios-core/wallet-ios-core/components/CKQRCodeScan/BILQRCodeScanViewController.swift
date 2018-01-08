@@ -43,20 +43,15 @@ class BILQRCodeScanViewController: BILBaseViewController {
             navigationItem.largeTitleDisplayMode = .never
         }
         
+        setupSession()
+        startScanAnimation()
+        
         scanFrame.addSubview(scanLine)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-		DispatchQueue.main.async {
-			self.setupSession()
-			self.scanSession?.startRunning()
-			self.startScanAnimation()
-		}
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        scanSession?.startRunning()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -122,9 +117,9 @@ class BILQRCodeScanViewController: BILBaseViewController {
             previewLayer.videoGravity = .resizeAspectFill
             containerView.layer.insertSublayer(previewLayer, at: 0)
             previewLayer.frame = containerView.bounds
-            
+
             NotificationCenter.default.addObserver(self, selector: #selector(captureInputPortFormatDescriptionDidChange(notification:)), name: .AVCaptureInputPortFormatDescriptionDidChange, object: nil)
-            
+
             self.scanSession = scanSession
             self.previewLayer = previewLayer
             self.output = output
