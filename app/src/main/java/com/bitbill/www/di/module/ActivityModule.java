@@ -226,7 +226,6 @@ public class ActivityModule {
     }
 
     @Provides
-    @PerActivity
     BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> provideBtcAddressPresenter(
             BtcAddressPresenter<AddressModel, BtcAddressMvpView> presenter) {
         return presenter;

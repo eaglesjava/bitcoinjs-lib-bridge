@@ -128,7 +128,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
                 if (isSendAll) {
                     getMvpPresenter().buildTransaction();
                 } else {
-                    mBtcAddressMvpPresentder.newAddress();
+                    mBtcAddressMvpPresentder.refreshAddress();
                 }
             }
 

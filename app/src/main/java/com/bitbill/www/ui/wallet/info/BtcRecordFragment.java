@@ -152,6 +152,11 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     }
 
     @Override
+    public boolean isEnableRefresh() {
+        return true;
+    }
+
+    @Override
     public void onBeforeSetContentLayout() {
         mWalelt = (Wallet) getArguments().getSerializable(AppConstants.ARG_WALLET);
 
@@ -201,6 +206,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     @Override
     public void getWalletFail() {
         showMessage(R.string.error_get_wallet_info_fail);
+        setRefresh(false);
     }
 
     @Override
@@ -214,6 +220,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     @Override
     public void getTxRecordFail() {
         showMessage(R.string.fail_get_tx_record);
+        setRefresh(false);
     }
 
     @Override
@@ -229,16 +236,19 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     @Override
     public void getTxInfoListFail() {
 
+        setRefresh(false);
     }
 
     @Override
     public void parsedTxItemList(List<TxItem> txItems) {
         setDatas(txItems);
+        setRefresh(false);
     }
 
     @Override
     public void parsedTxItemListFail() {
         showMessage(R.string.fail_parse_tx_item_list);
+        setRefresh(false);
     }
 
     /**

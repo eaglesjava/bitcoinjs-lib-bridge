@@ -39,7 +39,11 @@ public interface WalletDb extends Db {
 
     Observable<Long> insertWallet(final Wallet wallet);
 
+    Observable<Boolean> insertWallets(List<Wallet> wallets);
+
     Observable<Boolean> updateWallet(final Wallet wallet);
+
+    Observable<Boolean> updateWallets(List<Wallet> walletList);
 
     Observable<Boolean> deleteWallet(final Wallet wallet);
 

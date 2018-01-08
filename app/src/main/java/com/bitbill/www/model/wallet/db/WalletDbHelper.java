@@ -30,7 +30,6 @@ import com.bitbill.www.di.qualifier.DatabaseInfo;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -55,74 +54,61 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
 
     @Override
     public Observable<Long> insertWallet(final Wallet wallet) {
-        return Observable.fromCallable(new Callable<Long>() {
-            @Override
-            public Long call() throws Exception {
-                return mWalletDao.insert(wallet);
-            }
+        return Observable.fromCallable(() -> mWalletDao.insert(wallet));
+    }
+
+    @Override
+    public Observable<Boolean> insertWallets(List<Wallet> walletList) {
+        return Observable.fromCallable(() -> {
+            mWalletDao.insertInTx(walletList);
+            return true;
         });
     }
 
     @Override
     public Observable<Boolean> updateWallet(Wallet wallet) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                mWalletDao.update(wallet);
-                return true;
-            }
+        return Observable.fromCallable(() -> {
+            mWalletDao.update(wallet);
+            return true;
+        });
+    }
+
+    @Override
+    public Observable<Boolean> updateWallets(List<Wallet> walletList) {
+        return Observable.fromCallable(() -> {
+            mWalletDao.updateInTx(walletList);
+            return true;
         });
     }
 
     @Override
     public Observable<Boolean> deleteWallet(Wallet wallet) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                mWalletDao.delete(wallet);
-                return true;
-            }
+        return Observable.fromCallable(() -> {
+            mWalletDao.delete(wallet);
+            return true;
         });
     }
 
     @Override
     public Observable<List<Wallet>> getAllWallets() {
-        return Observable.fromCallable(new Callable<List<Wallet>>() {
-            @Override
-            public List<Wallet> call() throws Exception {
-                return mWalletDao.loadAll();
-            }
-        });
+        return Observable.fromCallable(() -> mWalletDao.loadAll());
     }
 
     @Override
     public Observable<Wallet> getWalletById(Long walletId) {
-        return Observable.fromCallable(new Callable<Wallet>() {
-            @Override
-            public Wallet call() throws Exception {
-                return mWalletDao.load(walletId);
-            }
-        });
+        return Observable.fromCallable(() -> mWalletDao.load(walletId));
     }
 
     @Override
     public Observable<Wallet> getWalletByMnemonicHash(String mnemonicHash) {
-        return Observable.fromCallable(new Callable<Wallet>() {
-            @Override
-            public Wallet call() throws Exception {
-                return mWalletDao.queryBuilder().where(WalletDao.Properties.MnemonicHash.eq(mnemonicHash)).unique();
-            }
-        });
+        return Observable.fromCallable(() ->
+                mWalletDao.queryBuilder().where(WalletDao.Properties.MnemonicHash.eq(mnemonicHash)).unique());
     }
 
     @Override
     public Observable<Wallet> getWalletBySeedHash(String seedHash) {
-        return Observable.fromCallable(new Callable<Wallet>() {
-            @Override
-            public Wallet call() throws Exception {
-                return mWalletDao.queryBuilder().where(WalletDao.Properties.SeedHexHash.eq(seedHash)).unique();
-            }
-        });
+        return Observable.fromCallable(() ->
+                mWalletDao.queryBuilder().where(WalletDao.Properties.SeedHexHash.eq(seedHash)).unique());
     }
 
 }

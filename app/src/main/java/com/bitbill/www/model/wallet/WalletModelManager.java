@@ -13,13 +13,13 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.wallet.db.WalletDb;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.WalletApi;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
+import com.bitbill.www.model.wallet.network.entity.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.wallet.network.entity.GetTxElement;
 import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
@@ -67,8 +67,18 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     }
 
     @Override
+    public Observable<Boolean> insertWallets(List<Wallet> wallets) {
+        return mWalletDb.insertWallets(wallets);
+    }
+
+    @Override
     public Observable<Boolean> updateWallet(Wallet wallet) {
         return mWalletDb.updateWallet(wallet);
+    }
+
+    @Override
+    public Observable<Boolean> updateWallets(List<Wallet> walletList) {
+        return mWalletDb.updateWallets(walletList);
     }
 
     @Override

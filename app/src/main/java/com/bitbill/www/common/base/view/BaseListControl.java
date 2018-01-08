@@ -35,4 +35,6 @@ interface BaseListControl<E extends Entity> {
     int getRefreshSchemeColor();
 
     void clearData();
+
+    void setRefresh(boolean refresh);
 }

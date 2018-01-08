@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:paddingBottom="8dp"
-    android:paddingLeft="@dimen/activity_padding"
-    android:paddingRight="@dimen/activity_padding"
-    android:paddingTop="8dp">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:paddingBottom="15dp"
+              android:paddingLeft="@dimen/activity_padding"
+              android:paddingRight="@dimen/activity_padding"
+              android:paddingTop="15dp">
 
     <ImageView
         android:id="@+id/iv_status"
@@ -20,7 +20,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="15dp"
         android:layout_toEndOf="@+id/iv_status"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <TextView
@@ -62,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:gravity="right"
         android:text="+2.35 btc"
         android:textSize="17sp"

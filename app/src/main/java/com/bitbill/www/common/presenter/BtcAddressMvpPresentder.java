@@ -10,15 +10,13 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 public interface BtcAddressMvpPresentder<M extends AddressModel, V extends BtcAddressMvpView> extends MvpPresenter<V> {
     /**
-     *
+     * 刷新地址
      */
-    void newAddress();
+    void refreshAddress();
 
     void getBitcoinAddressByMasterXPublicKey(long index, Wallet wallet);
 
-    void requestRefreshAddress();
-
-    void checkLastAddressIndex(long indexNo, long lastIndex, Wallet wallet);
+    void checkLastAddressIndex(long indexNo, Wallet wallet);
 
     void getBitcoinContinuousAddress(long fromIndex, long toIndex, Wallet wallet);
 

@@ -77,7 +77,7 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     private String coinType;//默认"BTC"
 
     @Property(nameInDb = "version")
-    private String version;
+    private long version;
 
     @ToMany(referencedJoinProperty = "walletId")
     @OrderBy("index ASC")
@@ -104,10 +104,10 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     @Generated(hash = 741381941)
     private transient WalletDao myDao;
 
-    @Generated(hash = 908950308)
-    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash, long lastAddressIndex,
-                  String lastAddress, String encryptSeed, String seedHexHash, boolean isBackuped, long createdAt, long updatedAt,
-                  boolean isDefault, String XPublicKey, long balance, long unconfirm, String coinType, String version) {
+    @Generated(hash = 50611538)
+    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash, long lastAddressIndex, String lastAddress,
+                  String encryptSeed, String seedHexHash, boolean isBackuped, long createdAt, long updatedAt, boolean isDefault,
+                  String XPublicKey, long balance, long unconfirm, String coinType, long version) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
@@ -390,14 +390,6 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
         myDao.update(this);
     }
 
-    public String getVersion() {
-        return this.version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
     /**
      * called by internal mechanisms, do not call yourself.
      */
@@ -405,5 +397,13 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getWalletDao() : null;
+    }
+
+    public long getVersion() {
+        return this.version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
     }
 }

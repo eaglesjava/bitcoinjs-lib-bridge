@@ -9,7 +9,6 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.utils.EncryptUtils;
-import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.address.db.entity.Address;
 import com.bitbill.www.model.address.network.entity.RefreshAddressRequest;
@@ -28,7 +27,6 @@ import io.reactivex.disposables.CompositeDisposable;
 /**
  * Created by isanwenyu@163.com on 2017/12/15.
  */
-@PerActivity
 public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvpView> extends ModelPresenter<M, V> implements BtcAddressMvpPresentder<M, V> {
 
     @Inject
@@ -37,13 +35,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
     }
 
     @Override
-    public void newAddress() {
-        requestRefreshAddress();
-    }
-
-
-    @Override
-    public void requestRefreshAddress() {
+    public void refreshAddress() {
         if (!isValidWallet() || !isValidXPublicKey()) {
             return;
         }
@@ -65,7 +57,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
 
                             if (refreshAddressResponseApiResponse.getData() != null) {
                                 long indexNo = refreshAddressResponseApiResponse.getData().getIndexNo();
-                                checkLastAddressIndex(indexNo, index, wallet);
+                                checkLastAddressIndex(indexNo, wallet);
                             }
                         } else {
                             getMvpView().newAddressFail();
@@ -87,13 +79,17 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
     }
 
     @Override
-    public void checkLastAddressIndex(long indexNo, long lastIndex, Wallet wallet) {
+    public void checkLastAddressIndex(long indexNo, Wallet wallet) {
         // TODO: 2018/1/5 check index
         if (indexNo <= 0) {
             return;
         }
         // TODO: 2018/1/6  check wallet
-
+        long lastIndex = wallet.getLastAddressIndex();
+        if (StringUtils.isNotEmpty(wallet.getLastAddress())) {
+            //如果最新地址已存在++
+            lastIndex++;
+        }
         if (indexNo < lastIndex) {
             getMvpView().reachAddressIndexLimit();
             String lastAddress = wallet.getLastAddress();
@@ -141,7 +137,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                 }
                 wallet.setLastAddress(address);
                 wallet.setLastAddressIndex(index);
-                //更新地址index 并请求后台刷新
+                //更新地址index
                 updateAddressIndex(wallet, jsResult);
 
             }
@@ -172,7 +168,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                 }
                 wallet.setLastAddressIndex(toIndex);
                 wallet.setLastAddress(address);
-                //更新地址index 并请求后台刷新
+                //更新地址index
                 updateAddressIndex(wallet, jsResult);
 
             }
@@ -186,18 +182,18 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
             //构造address列表
             addressList.add(new Address(null, addressArray[i], wallet.getId(), wallet.getLastAddressIndex() - (addressArray.length - 1) + i, AppConstants.BTC_COIN_TYPE, new Date()));
         }
-        getCompositeDisposable().add(getModelManager().insertAddressListAndUpdatWallet(addressList, wallet)
+        getCompositeDisposable().add(getModelManager()
+                .insertAddressListAndUpdatWallet(addressList, wallet)
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);
-                        //本地index更新失败
+                        //本地index更新成功
                         if (!isViewAttached()) {
                             return;
                         }
                         if (aBoolean) {
-                            //后台扫描地址
                             getMvpView().newAddressSuccess(wallet.getLastAddress());
                         } else {
                             getMvpView().newAddressFail();

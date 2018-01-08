@@ -7,6 +7,7 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
@@ -14,6 +15,7 @@ import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +29,9 @@ import io.reactivex.disposables.CompositeDisposable;
 
 @PerActivity
 public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheVersionMvpView> extends ModelPresenter<M, V> implements GetCacheVersionMvpPresenter<M, V> {
+    @Inject
+    AddressModel mAddressModel;
+
     @Inject
     public GetCacheVersionPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);
@@ -68,14 +73,22 @@ public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheV
                                     if (data != null && !StringUtils.isEmpty(wallets)) {
                                         getApp().setBlockHeight(data.getLong("blockheight"));
                                         // TODO: 2018/1/6 缓存blockheight
+                                        List<Wallet> tmpWalletList = new ArrayList<>();
                                         for (Wallet wallet : wallets) {
                                             JSONObject amountJsonObj = data.getJSONObject(wallet.getName());
                                             long indexNo = amountJsonObj.getLong("indexNo");
                                             if (indexNo > 0) {
-                                                getMvpView().getResponseAddressIndex(indexNo, wallet.getLastAddressIndex(), wallet);
+                                                getMvpView().getResponseAddressIndex(indexNo, wallet);
                                             }
-                                            amountJsonObj.getLong("version");
-                                            // TODO: 2018/1/6 version 更新
+                                            long version = amountJsonObj.getLong("version");
+                                            if (wallet.getVersion() != version) {
+                                                wallet.setVersion(version);
+                                                tmpWalletList.add(wallet);
+                                            }
+                                        }
+                                        if (tmpWalletList.size() > 0) {
+                                            updateWalletList(tmpWalletList);
+                                            getMvpView().getDiffVersionWallets(tmpWalletList);
                                         }
                                     }
                                 } catch (JSONException e) {
@@ -83,6 +96,22 @@ public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheV
                                 }
                             }
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                }));
+    }
+
+    private void updateWalletList(List<Wallet> walletList) {
+        getCompositeDisposable().add(getModelManager().updateWallets(walletList)
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<Boolean>() {
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        super.onNext(aBoolean);
                     }
 
                     @Override

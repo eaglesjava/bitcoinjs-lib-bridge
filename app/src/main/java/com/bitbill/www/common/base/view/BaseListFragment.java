@@ -31,7 +31,7 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
     protected RecyclerView mRecyclerView;
     protected RecyclerView.Adapter mAdapter;
     protected List<E> mDatas = new ArrayList<>();
-    CustomSwipeToRefresh mRefreshLayout;
+    protected CustomSwipeToRefresh mRefreshLayout;
 
     protected abstract void onListItemClick(E e, int position);
 
@@ -105,6 +105,12 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
         setAdapter(mAdapter);
     }
 
+    @Override
+    public void setRefresh(boolean refresh) {
+        if (mRefreshLayout != null) {
+            mRefreshLayout.setRefreshing(refresh);
+        }
+    }
 
     @Override
     @NonNull

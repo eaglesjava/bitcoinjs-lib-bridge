@@ -20,6 +20,10 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
+import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
+import com.bitbill.www.common.presenter.BtcAddressMvpView;
+import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
+import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
@@ -62,7 +66,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, BtcAddressMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
@@ -77,6 +81,11 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     WalletMvpPresenter<WalletModel, WalletMvpView> mWalletPresenter;
     @Inject
     ParseTxInfoMvpPresenter<AddressModel, ParseTxInfoMvpView> mParseTxInfoMvpPresenter;
+    @Inject
+    GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
+    @Inject
+    BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tabs)
@@ -132,6 +141,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         getActivityComponent().inject(this);
         addPresenter(mWalletPresenter);
         addPresenter(mParseTxInfoMvpPresenter);
+        addPresenter(mGetCacheVersionMvpPresenter);
+        addPresenter(mBtcAddressMvpPresentder);
     }
 
     @Override
@@ -237,6 +248,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void initData() {
         mWalletPresenter.loadWallets();
+        mGetCacheVersionMvpPresenter.getCacheVersion();
     }
 
     @Override
@@ -284,6 +296,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         //设置全局钱包列表对象
         BitbillApp.get().setWallets(wallets);
         reloadWalletInfo();
+
         //获取钱包余额
         getMvpPresenter().getBalance();
         //加载未确认交易
@@ -453,5 +466,42 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void parsedTxItemListFail() {
         showMessage("解析交易列表信息失败");
+    }
+
+    @Override
+    public Wallet getWallet() {
+        return null;
+    }
+
+    @Override
+    public void getWalletFail() {
+
+    }
+
+    @Override
+    public void newAddressFail() {
+
+    }
+
+    @Override
+    public void newAddressSuccess(String lastAddress) {
+
+    }
+
+    @Override
+    public void reachAddressIndexLimit() {
+
+    }
+
+    @Override
+    public void getResponseAddressIndex(long indexNo, Wallet wallet) {
+        mBtcAddressMvpPresentder.checkLastAddressIndex(indexNo, wallet);
+    }
+
+    @Override
+    public void getDiffVersionWallets(List<Wallet> tmpWalletList) {
+
+        // TODO: 2018/1/8 只更新更改的wallet
+
     }
 }
