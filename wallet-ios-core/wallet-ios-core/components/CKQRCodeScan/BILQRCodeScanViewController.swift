@@ -102,7 +102,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
             
             let scanSession = AVCaptureSession()
             if scanSession.canSetSessionPreset(.high) {
-                
+                scanSession.sessionPreset = .high
             }
             if scanSession.canAddInput(input) {
                 scanSession.addInput(input)
