@@ -31,12 +31,13 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
     protected RecyclerView mRecyclerView;
     protected RecyclerView.Adapter mAdapter;
     protected List<E> mDatas = new ArrayList<>();
-    @BindView(R.id.refresh_layout)
     CustomSwipeToRefresh mRefreshLayout;
 
     protected abstract void onListItemClick(E e, int position);
 
     protected abstract void itemConvert(ViewHolder holder, E e, int position);
+
+    protected abstract int getItemLayoutId();
 
     @Override
     public void onBeforeSetContentLayout() {
@@ -56,17 +57,20 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
 
     @Override
     public void initRefreshLayout() {
-        if (!isEnableRefresh()) {
-            mRefreshLayout.setEnabled(false);
-        } else {
-            mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    onLayoutRefresh();
+        mRefreshLayout = mView.findViewById(R.id.refresh_layout);
+        if (mRefreshLayout != null) {
+            if (!isEnableRefresh()) {
+                mRefreshLayout.setEnabled(false);
+            } else {
+                mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        onLayoutRefresh();
+                    }
+                });
+                if (getRefreshSchemeColor() != 0) {
+                    mRefreshLayout.setColorSchemeResources(getRefreshSchemeColor());
                 }
-            });
-            if (getRefreshSchemeColor() != 0) {
-                mRefreshLayout.setColorSchemeResources(getRefreshSchemeColor());
             }
         }
 
@@ -105,8 +109,7 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
     @Override
     @NonNull
     public DividerDecoration getDecoration() {
-        DividerDecoration dividerDecoration = new DividerDecoration(getBaseActivity(), Decoration.VERTICAL);
-        return dividerDecoration.setDividerPadding(0);
+        return new DividerDecoration(getBaseActivity(), Decoration.VERTICAL);
     }
 
     public void setDatas(List<E> datas) {
@@ -173,11 +176,6 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
     @Override
     public RecyclerView.LayoutManager getLayoutManager() {
         return new LinearLayoutManager(getBaseActivity());
-    }
-
-    @Override
-    public int getItemLayoutId() {
-        return 0;
     }
 
     @Override

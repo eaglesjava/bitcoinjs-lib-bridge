@@ -42,54 +42,53 @@ public class ParseTxInfoPresenter<M extends AddressModel, V extends ParseTxInfoM
                         List<TxElement.InputsBean> inputs = txElement.getInputs();
 
                         long inputAmount = 0;
-                        boolean isAllIn = true;
                         TxItem.InOut inOut = TxItem.InOut.IN;
-                        String inAddress = null;
+                        List<String> inSelfAddressList = new ArrayList<>();
                         for (TxElement.InputsBean input : inputs) {
                             Address addressByName = getModelManager().getAddressByName(input.getAddress());
                             if (addressByName != null) {
                                 inputAmount += input.getValue();
-                                if (inAddress != null) {
-                                    inAddress = input.getAddress();
-                                }
-                            } else {
-                                isAllIn = false;
+                                inSelfAddressList.add(input.getAddress());
                             }
                         }
-                        long outAmount = 0;
-                        boolean isAllOut = true;
-                        String outAddress = null;
+                        long outSelfAmout = 0;
+                        long outOtherAmout = 0;
+                        List<String> outSelfAddressList = new ArrayList<>();
+                        List<String> outOtherAddressList = new ArrayList<>();
                         List<TxElement.OutputsBean> outputs = txElement.getOutputs();
                         for (TxElement.OutputsBean output : outputs) {
                             Address addressByName = getModelManager().getAddressByName(output.getAddress());
                             if (addressByName != null) {
-                                outAmount += output.getValue();
-                                if (outAddress != null) {
-                                    outAddress = output.getAddress();
-                                }
+                                outSelfAmout += output.getValue();
+                                outSelfAddressList.add(output.getAddress());
                             } else {
-                                isAllOut = false;
-
+                                outOtherAmout += output.getValue();
+                                outOtherAddressList.add(output.getAddress());
                             }
                         }
 
                         TxItem txItem = new TxItem();
                         long amount = 0;
-                        if (isAllIn && isAllOut) {
-                            amount = outAmount;
+                        boolean isContainIn = inSelfAddressList.size() > 0;
+                        boolean isAllOut = outputs.size() == outSelfAddressList.size();
+                        boolean isContainOut = outSelfAddressList.size() > 0;
+                        if (isContainIn && isAllOut) {
+                            amount = outSelfAmout;
                             //ouput地址全部是本地地址 为转移类型
                             inOut = TxItem.InOut.TRANSFER;
-                            txItem.setGatherAddressOut(outputs.get(0).getAddress());
-                        } else if (inputAmount > 0) {
+                            txItem.setGatherAddressOut(outSelfAddressList.get(0));
+                        } else if (isContainIn) {
                             //发送
                             inOut = TxItem.InOut.OUT;
-                            amount = inputAmount;
-                            txItem.setGatherAddressIn(inAddress);
-                        } else {
+                            amount = outOtherAmout;
+                            txItem.setGatherAddressIn(outOtherAddressList.get(0));
+                        } else if (isContainOut) {
                             //接收
                             inOut = TxItem.InOut.IN;
-                            amount = outAmount;
-                            txItem.setGatherAddressOut(outAddress);
+                            amount = outSelfAmout;
+                            txItem.setGatherAddressOut(outSelfAddressList.get(0));
+                        } else {
+                            continue;
                         }
                         txItem.setSumAmount(amount);
                         txItem.setInOut(inOut);

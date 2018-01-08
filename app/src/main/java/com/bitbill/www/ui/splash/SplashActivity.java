@@ -9,6 +9,7 @@ import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
 import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.guide.GuideActivity;
@@ -28,7 +29,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
-    BtcAddressMvpPresentder<WalletModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
+    BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

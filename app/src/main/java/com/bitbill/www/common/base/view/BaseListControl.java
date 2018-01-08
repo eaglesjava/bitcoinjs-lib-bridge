@@ -26,8 +26,6 @@ interface BaseListControl<E extends Entity> {
 
     RecyclerView.LayoutManager getLayoutManager();
 
-    int getItemLayoutId();
-
     void initRefreshLayout();
 
     void onLayoutRefresh();

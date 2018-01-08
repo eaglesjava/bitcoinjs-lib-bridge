@@ -13,6 +13,7 @@ import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
 import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -38,7 +39,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     @Inject
     BtcReceiveMvpPresenter<WalletModel, BtcReceiveMvpView> mReceiveMvpPresenter;
     @Inject
-    BtcAddressMvpPresentder<WalletModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
+    BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
 
     private MenuItem mRefreshItem;
     private Wallet mSelectedWallet;

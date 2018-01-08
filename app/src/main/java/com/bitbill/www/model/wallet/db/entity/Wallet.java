@@ -4,9 +4,10 @@ package com.bitbill.www.model.wallet.db.entity;
 
 import android.support.annotation.NonNull;
 
+import com.bitbill.model.db.dao.AddressDao;
+import com.bitbill.model.db.dao.DaoSession;
+import com.bitbill.model.db.dao.WalletDao;
 import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.address.db.entity.AddressDao;
-import com.bitbill.www.model.contact.db.entity.DaoSession;
 
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
@@ -16,6 +17,7 @@ import org.greenrobot.greendao.annotation.OrderBy;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.Transient;
+import org.greenrobot.greendao.annotation.Unique;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     private Long id;
 
     @Property(nameInDb = "name")
+    @Unique
     private String name;
 
     @Property(nameInDb = "encrypt_mnemonic")
@@ -387,6 +390,14 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
         myDao.update(this);
     }
 
+    public String getVersion() {
+        return this.version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
     /**
      * called by internal mechanisms, do not call yourself.
      */
@@ -394,13 +405,5 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getWalletDao() : null;
-    }
-
-    public String getVersion() {
-        return this.version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
     }
 }

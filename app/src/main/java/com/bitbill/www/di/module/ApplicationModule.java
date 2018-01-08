@@ -7,6 +7,8 @@ package com.bitbill.www.di.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.bitbill.model.db.dao.DaoMaster;
+import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.www.BuildConfig;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.model.db.DbOpenHelper;
@@ -23,6 +25,8 @@ import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.address.AddressModelManager;
 import com.bitbill.www.model.address.db.AddressDb;
 import com.bitbill.www.model.address.db.AddressDbHelper;
+import com.bitbill.www.model.address.network.AddressApi;
+import com.bitbill.www.model.address.network.AddressApiHelper;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.AppModelManager;
 import com.bitbill.www.model.app.network.AppApi;
@@ -33,8 +37,6 @@ import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.ContactModelManager;
 import com.bitbill.www.model.contact.db.ContactDb;
 import com.bitbill.www.model.contact.db.ContactDbHelper;
-import com.bitbill.www.model.contact.db.entity.DaoMaster;
-import com.bitbill.www.model.contact.db.entity.DaoSession;
 import com.bitbill.www.model.contact.network.ContactApi;
 import com.bitbill.www.model.contact.network.ContactApiHelper;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -211,5 +213,10 @@ public class ApplicationModule {
         return addressDbHelper;
     }
 
+    @Provides
+    @Singleton
+    AddressApi provideAddressApiHelper(AddressApiHelper addressApiHelper) {
+        return addressApiHelper;
+    }
 
 }

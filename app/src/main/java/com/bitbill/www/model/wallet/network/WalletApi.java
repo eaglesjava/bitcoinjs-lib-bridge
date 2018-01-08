@@ -19,8 +19,6 @@ import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
 import com.bitbill.www.model.wallet.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
-import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
-import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 
@@ -78,14 +76,6 @@ public interface WalletApi extends Api {
      * @return
      */
     Observable<ApiResponse> getBalance(GetBalanceRequest getBalanceRequest);
-
-    /**
-     * 扫描地址
-     *
-     * @param refreshAddressRequest
-     * @return
-     */
-    Observable<ApiResponse<RefreshAddressResponse>> refreshAddress(RefreshAddressRequest refreshAddressRequest);
 
     /**
      * 获取交易相关元素

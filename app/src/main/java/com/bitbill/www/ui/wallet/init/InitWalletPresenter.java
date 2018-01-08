@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.androidnetworking.error.ANError;
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
@@ -59,6 +60,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         mWallet.setUpdatedAt(System.currentTimeMillis());
         mWallet.setName(getMvpView().getWalletId());
         mWallet.setTradePwd(getMvpView().getTradePwd());
+        mWallet.setCoinType(AppConstants.BTC_COIN_TYPE);
         //显示加载
         getMvpView().showLoading();
         if (getMvpView().isCreateWallet()) {

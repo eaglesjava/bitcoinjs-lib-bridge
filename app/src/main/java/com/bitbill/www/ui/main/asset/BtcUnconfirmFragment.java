@@ -2,15 +2,13 @@ package com.bitbill.www.ui.main.asset;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.base.view.BaseFragment;
+import com.bitbill.www.common.base.view.BaseListFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.network.entity.TxItem;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -27,7 +25,7 @@ import butterknife.BindView;
  * Activities containing this fragment MUST implement the {@link OnTransactionRecordItemClickListener}
  * interface.
  */
-public class BtcUnconfirmFragment extends BaseFragment {
+public class BtcUnconfirmFragment extends BaseListFragment<TxItem, MvpPresenter> {
 
     public static final String TAG = BtcUnconfirmFragment.class.getSimpleName();
     private static final String ARG_UNCONFIRM_LIST = "arg_unconfirm_list";
@@ -83,11 +81,48 @@ public class BtcUnconfirmFragment extends BaseFragment {
     }
 
     @Override
-    public void onBeforeSetContentLayout() {
-        mUnconfirmList = (List<TxItem>) getArguments().getSerializable(ARG_UNCONFIRM_LIST);
-        if (mUnconfirmList == null) {
-            mUnconfirmList = new ArrayList();
+    public int getItemLayoutId() {
+        return R.layout.item_btc_record_unconfirm;
+    }
+
+    @Override
+    protected void onListItemClick(TxItem txItem, int position) {
+        if (mListener != null) {
+            mListener.OnTransactionRecordItemClick(txItem);
         }
+    }
+
+    @Override
+    protected void itemConvert(ViewHolder holder, TxItem txItem, int position) {
+        holder.setText(R.id.tv_address, txItem.getInOut() == TxItem.InOut.OUT ? txItem.getGatherAddressIn() : txItem.getGatherAddressOut());
+        String inOutString = txItem.getInOut() == TxItem.InOut.TRANSFER ? "" : (txItem.getInOut() == TxItem.InOut.IN ? "+" : "-");
+        holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txItem.getSumAmount()) + " btc");
+
+        holder.setText(R.id.tv_date, txItem.getCreatedTime());
+        if (txItem.getHeight() == -1) {
+            holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
+            holder.setAlpha(R.id.tv_confirm_count, 0.6f);
+            holder.setText(R.id.tv_confirm_count, "未确认");
+        } else {
+            long confirmCount = BitbillApp.get().getBlockHeight() - txItem.getHeight() + 1;
+            holder.setAlpha(R.id.tv_confirm_count, 1.0f);
+            holder.setText(R.id.tv_confirm_count, confirmCount > 1000 ? "1000+" : String.valueOf(confirmCount) + "确认");
+            switch (txItem.getInOut()) {
+                case TRANSFER:
+                    holder.setImageResource(R.id.iv_status, R.drawable.ic_item_transfer);
+                    break;
+                case IN:
+                    holder.setImageResource(R.id.iv_status, R.drawable.ic_item_receive);
+                    break;
+                case OUT:
+                    holder.setImageResource(R.id.iv_status, R.drawable.ic_item_send);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onBeforeSetContentLayout() {
 
     }
 
@@ -98,50 +133,17 @@ public class BtcUnconfirmFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
-        // Set the adapter
-        mAdapter = new CommonAdapter<TxItem>(getBaseActivity(), R.layout.item_btc_record_unconfirm, mUnconfirmList) {
-
-            @Override
-            protected void convert(ViewHolder holder, TxItem unconfirm, int position) {
-                holder.setText(R.id.tv_address, unconfirm.getInOut() == TxItem.InOut.OUT ? unconfirm.getGatherAddressIn() : unconfirm.getGatherAddressOut());
-                String inOutString = unconfirm.getInOut() == TxItem.InOut.TRANSFER ? "" : (unconfirm.getInOut() == TxItem.InOut.IN ? "+" : "-");
-                holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(unconfirm.getSumAmount()) + " btc");
-                long confirmCount = BitbillApp.get().getBlockHeight() - unconfirm.getHeight() + 1;
-                holder.setAlpha(R.id.tv_confirm_count, confirmCount > 0 ? 1.0f : 0.6f);
-                holder.setText(R.id.tv_confirm_count, confirmCount + "确认");
-                holder.setText(R.id.tv_date, unconfirm.getCreatedTime());
-                if (unconfirm.getHeight() == -1) {
-                    holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
-                } else {
-                    switch (unconfirm.getInOut()) {
-                        case TRANSFER:
-                            holder.setImageResource(R.id.iv_status, R.drawable.ic_item_transfer);
-                            break;
-                        case IN:
-                            holder.setImageResource(R.id.iv_status, R.drawable.ic_item_receive);
-                            break;
-                        case OUT:
-                            holder.setImageResource(R.id.iv_status, R.drawable.ic_item_send);
-                            break;
-                    }
-                }
-                holder.setOnClickListener(R.id.rl_item_container, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mListener != null) {
-                            mListener.OnTransactionRecordItemClick(unconfirm);
-                        }
-                    }
-                });
-            }
-        };
-        mRecyclerView.setAdapter(mAdapter);
-        tvInProgress.setText(String.format(getString(R.string.text_in_progress_count), mUnconfirmList.size()));
+        super.initView();
     }
 
     @Override
     public void initData() {
+        mUnconfirmList = (List<TxItem>) getArguments().getSerializable(ARG_UNCONFIRM_LIST);
+        if (mUnconfirmList == null) {
+            mUnconfirmList = new ArrayList();
+        }
+        setDatas(mUnconfirmList);
+        tvInProgress.setText(String.format(getString(R.string.text_in_progress_count), mUnconfirmList.size()));
     }
 
     @Override

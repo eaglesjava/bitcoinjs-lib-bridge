@@ -2,6 +2,7 @@ package com.bitbill.www.ui.wallet.info;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -11,6 +12,8 @@ import com.bitbill.www.common.base.view.BaseLazyListFragment;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.Decoration;
+import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -98,6 +101,12 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
         }
     }
 
+    @NonNull
+    @Override
+    public DividerDecoration getDecoration() {
+        return new DividerDecoration(getBaseActivity(), Decoration.VERTICAL);
+    }
+
     @Override
     public int getItemLayoutId() {
         return R.layout.item_btc_record;
@@ -117,7 +126,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
         } else {
             long confirmCount = BitbillApp.get().getBlockHeight() - txItem.getHeight() + 1;
             holder.setAlpha(R.id.tv_confirm_count, 1.0f);
-            holder.setText(R.id.tv_confirm_count, confirmCount + "确认");
+            holder.setText(R.id.tv_confirm_count, (confirmCount > 1000 ? "1000+" : String.valueOf(confirmCount)) + "确认");
             switch (txItem.getInOut()) {
                 case TRANSFER:
                     holder.setImageResource(R.id.iv_status, R.drawable.ic_item_transfer);

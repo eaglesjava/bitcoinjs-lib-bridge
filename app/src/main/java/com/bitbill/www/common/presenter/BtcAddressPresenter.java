@@ -12,27 +12,24 @@ import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.address.network.entity.RefreshAddressRequest;
+import com.bitbill.www.model.address.network.entity.RefreshAddressResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.RefreshAddressRequest;
-import com.bitbill.www.model.wallet.network.entity.RefreshAddressResponse;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by isanwenyu@163.com on 2017/12/15.
  */
 @PerActivity
-public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpView> extends ModelPresenter<M, V> implements BtcAddressMvpPresentder<M, V> {
-    @Inject
-    AddressModel mAddressModel;
+public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvpView> extends ModelPresenter<M, V> implements BtcAddressMvpPresentder<M, V> {
 
     @Inject
     public BtcAddressPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
@@ -41,22 +38,18 @@ public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpV
 
     @Override
     public void newAddress() {
-        if (!isValidWallet()) {
-            return;
-        }
-        //刷新地址index+1
-        Wallet wallet = getMvpView().getWallet();
-        long index = wallet.getLastAddressIndex() + 1;
-        requestRefreshAddress(index);
+        requestRefreshAddress();
     }
 
 
     @Override
-    public void requestRefreshAddress(long index) {
+    public void requestRefreshAddress() {
         if (!isValidWallet() || !isValidXPublicKey()) {
             return;
         }
         Wallet wallet = getMvpView().getWallet();
+        //刷新地址index+1
+        long index = wallet.getLastAddressIndex() + 1;
         String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
         getCompositeDisposable().add(getModelManager()
                 .refreshAddress(new RefreshAddressRequest(xPublicKeyHash, index))
@@ -188,16 +181,12 @@ public class BtcAddressPresenter<M extends WalletModel, V extends BtcAddressMvpV
 
     @Override
     public void updateAddressIndex(Wallet wallet, String[] addressArray) {
-        getCompositeDisposable().add(getModelManager().updateWallet(wallet)
-                .concatMap(aBoolean -> {
-                    Boolean option;
-                    for (int i = 0; i < addressArray.length; i++) {
-
-                        mAddressModel.insertAddress(new Address(null, addressArray[i], wallet.getId(), wallet.getLastAddressIndex() - (addressArray.length - 1) + i, AppConstants.BTC_COIN_TYPE, new Date()));
-                    }
-                    option = true;
-                    return Observable.just(option);
-                })
+        List<Address> addressList = new ArrayList<>();
+        for (int i = 0; i < addressArray.length; i++) {
+            //构造address列表
+            addressList.add(new Address(null, addressArray[i], wallet.getId(), wallet.getLastAddressIndex() - (addressArray.length - 1) + i, AppConstants.BTC_COIN_TYPE, new Date()));
+        }
+        getCompositeDisposable().add(getModelManager().insertAddressListAndUpdatWallet(addressList, wallet)
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override

@@ -20,6 +20,7 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -53,7 +54,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     @Inject
     SendConfirmMvpPresenter<WalletModel, SendConfirmMvpView> mSendConfirmMvpPresenter;
     @Inject
-    BtcAddressMvpPresentder<WalletModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
+    BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
     private String mSendAddress;
     private String mSendAmount;
     private PwdDialogFragment mPwdDialogFragment;

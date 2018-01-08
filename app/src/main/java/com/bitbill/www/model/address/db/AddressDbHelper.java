@@ -1,10 +1,12 @@
 package com.bitbill.www.model.address.db;
 
+import com.bitbill.model.db.dao.AddressDao;
+import com.bitbill.model.db.dao.DaoSession;
+import com.bitbill.model.db.dao.WalletDao;
 import com.bitbill.www.common.base.model.db.DbHelper;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
 import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.address.db.entity.AddressDao;
-import com.bitbill.www.model.contact.db.entity.DaoSession;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
 
@@ -21,16 +23,35 @@ import io.reactivex.Observable;
 public class AddressDbHelper extends DbHelper implements AddressDb {
 
     private final AddressDao mAddressDao;
+    private final WalletDao mWalletDao;
 
     @Inject
     public AddressDbHelper(@DatabaseInfo DaoSession daoSession) {
         super(daoSession);
         mAddressDao = daoSession.getAddressDao();
+        mWalletDao = daoSession.getWalletDao();
     }
 
     @Override
     public Observable<Long> insertAddress(Address address) {
         return Observable.fromCallable(() -> mAddressDao.insert(address));
+    }
+
+    @Override
+    public Observable<Boolean> insertAddressList(List<Address> addressList) {
+        return Observable.fromCallable(() -> {
+            mAddressDao.insertInTx(addressList);
+            return true;
+        });
+    }
+
+    @Override
+    public Observable<Boolean> insertAddressListAndUpdatWallet(List<Address> addressList, Wallet wallet) {
+        return Observable.fromCallable(() -> mDaoSession.callInTxNoException(() -> {
+            mAddressDao.insertInTx(addressList);
+            mWalletDao.update(wallet);
+            return true;
+        }));
     }
 
     @Override

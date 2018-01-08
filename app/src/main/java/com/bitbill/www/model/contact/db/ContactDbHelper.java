@@ -23,11 +23,11 @@
 
 package com.bitbill.www.model.contact.db;
 
+import com.bitbill.model.db.dao.ContactDao;
+import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.www.common.base.model.db.DbHelper;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
 import com.bitbill.www.model.contact.db.entity.Contact;
-import com.bitbill.www.model.contact.db.entity.ContactDao;
-import com.bitbill.www.model.contact.db.entity.DaoSession;
 
 import java.util.List;
 import java.util.concurrent.Callable;

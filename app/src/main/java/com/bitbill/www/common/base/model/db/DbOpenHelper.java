@@ -7,9 +7,9 @@ package com.bitbill.www.common.base.model.db;
 import android.content.Context;
 import android.util.Log;
 
+import com.bitbill.model.db.dao.DaoMaster;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
-import com.bitbill.www.model.contact.db.entity.DaoMaster;
 
 import org.greenrobot.greendao.database.Database;
 

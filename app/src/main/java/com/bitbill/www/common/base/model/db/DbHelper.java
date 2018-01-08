@@ -5,7 +5,7 @@
 package com.bitbill.www.common.base.model.db;
 
 
-import com.bitbill.www.model.contact.db.entity.DaoSession;
+import com.bitbill.model.db.dao.DaoSession;
 
 /**
  * Created by isanwenyu@163.com on 2017/7/26.

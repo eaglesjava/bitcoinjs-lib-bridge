@@ -1,8 +1,14 @@
 package com.bitbill.www.model.address;
 
 import com.bitbill.www.common.base.model.ModelManager;
+import com.bitbill.www.common.base.model.network.api.ApiHeader;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.model.address.db.AddressDb;
 import com.bitbill.www.model.address.db.entity.Address;
+import com.bitbill.www.model.address.network.AddressApi;
+import com.bitbill.www.model.address.network.entity.RefreshAddressRequest;
+import com.bitbill.www.model.address.network.entity.RefreshAddressResponse;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
 
@@ -19,15 +25,27 @@ import io.reactivex.Observable;
 public class AddressModelManager extends ModelManager implements AddressModel {
 
     private final AddressDb mAddressDb;
+    private final AddressApi mAddressApi;
 
     @Inject
-    public AddressModelManager(AddressDb addressDb) {
+    public AddressModelManager(AddressDb addressDb, AddressApi addressApi) {
         mAddressDb = addressDb;
+        mAddressApi = addressApi;
     }
 
     @Override
     public Observable<Long> insertAddress(Address address) {
         return mAddressDb.insertAddress(address);
+    }
+
+    @Override
+    public Observable<Boolean> insertAddressList(List<Address> addressList) {
+        return mAddressDb.insertAddressList(addressList);
+    }
+
+    @Override
+    public Observable<Boolean> insertAddressListAndUpdatWallet(List<Address> addressList, Wallet wallet) {
+        return mAddressDb.insertAddressListAndUpdatWallet(addressList, wallet);
     }
 
     @Override
@@ -58,5 +76,15 @@ public class AddressModelManager extends ModelManager implements AddressModel {
     @Override
     public Address getAddressByName(String address) {
         return mAddressDb.getAddressByName(address);
+    }
+
+    @Override
+    public ApiHeader getApiHeader() {
+        return mAddressApi.getApiHeader();
+    }
+
+    @Override
+    public Observable<ApiResponse<RefreshAddressResponse>> refreshAddress(RefreshAddressRequest refreshAddressRequest) {
+        return mAddressApi.refreshAddress(refreshAddressRequest);
     }
 }
