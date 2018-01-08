@@ -31,7 +31,9 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
             transactions.removeAll()
             transactions.append(contentsOf: w.btc_transactionArray)
             w.getBalanceFromServer(success: { (wallet) in
-                self.heightOfBalanceView.constant = w.btcUnconfirmBalance == 0 ? 122 : 213
+                var frame = self.tableView.tableHeaderView!.frame
+                frame.size.height = w.btcUnconfirmBalance == 0 ? 113 : 201
+                self.tableView.tableHeaderView?.frame = frame
                 self.balanceLabel.text = w.btc_balanceString
                 self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + " BTC "
                 self.currencyLabel.btcValue = Double(w.btc_balanceString)
@@ -48,6 +50,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView.emptyDataSetSource = self
         
 		tableView.register(UINib(nibName: "BILTransactionCell", bundle: nil), forCellReuseIdentifier: "BILTransactionCell")
+        tableView.register(UINib(nibName: "BILTableViewHeaderFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "BILTableViewHeaderFooterView")
         
         setupRefresh()
         
@@ -128,6 +131,39 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tx = transactions[indexPath.row]
         viewController()?.performSegue(withIdentifier: .bil_walletToBTCTXDetailSegue, sender: tx)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 36
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BILTableViewHeaderFooterView") as! BILTableViewHeaderFooterView
+        headerView.titleLabel.text = .homeTxDetailTx
+        headerView.titleLabel.textColor = UIColor(white: 1.0, alpha: 0.6)
+        headerView.bil_backgroundView.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
+        return headerView
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let section = tableView.indexPathsForVisibleRows?.first?.section else { return }
+        
+        for i in 0...numberOfSections(in: tableView) {
+            guard let header = tableView.headerView(forSection: i) as? BILTableViewHeaderFooterView  else { continue }
+            if i == section {
+                let headerRect = viewController()!.view.convert(header.frame, from: tableView)
+                
+                header.bgImageView.image = (viewController() as? BILBaseViewController)?.backgroundImage?.snapshotSubImage(rect: headerRect)
+            }
+            else
+            {
+                header.bgImageView.image = nil
+            }
+        }
     }
 	
     /*
