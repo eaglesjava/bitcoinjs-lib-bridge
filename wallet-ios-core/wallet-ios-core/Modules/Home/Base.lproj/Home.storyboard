@@ -666,7 +666,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1d-BW-uoe">
                                                     <rect key="frame" x="25" y="15" width="325" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBP-Zq-dpz" customClass="BILCopyLabel" customModule="wallet_ios_core" customModuleProvider="target">
@@ -702,7 +702,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvI-ns-vDg">
                                                     <rect key="frame" x="25" y="15" width="325" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -733,9 +733,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWl-W4-hLH">
-                                                    <rect key="frame" x="270" y="13" width="80" height="19.5"/>
+                                                    <rect key="frame" x="230" y="10" width="120" height="19.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Yfw-xo-1LS"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Yfw-xo-1LS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -744,10 +744,10 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="sWl-W4-hLH" secondAttribute="trailing" constant="25" id="13o-kD-eWe"/>
+                                                <constraint firstItem="sWl-W4-hLH" firstAttribute="top" secondItem="uIC-Be-vnV" secondAttribute="top" id="2iN-3e-ban"/>
                                                 <constraint firstAttribute="bottom" secondItem="uIC-Be-vnV" secondAttribute="bottom" constant="10" id="Vt1-Qf-9To"/>
                                                 <constraint firstItem="sWl-W4-hLH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uIC-Be-vnV" secondAttribute="trailing" constant="20" id="Wfq-qz-rIa"/>
                                                 <constraint firstItem="uIC-Be-vnV" firstAttribute="leading" secondItem="GZE-8a-IKa" secondAttribute="leading" constant="25" id="hwo-ZD-oiU"/>
-                                                <constraint firstItem="sWl-W4-hLH" firstAttribute="centerY" secondItem="uIC-Be-vnV" secondAttribute="centerY" id="s6I-Xb-usn"/>
                                                 <constraint firstItem="uIC-Be-vnV" firstAttribute="top" secondItem="GZE-8a-IKa" secondAttribute="top" constant="10" id="uWw-eN-dfk"/>
                                             </constraints>
                                         </tableViewCellContentView>

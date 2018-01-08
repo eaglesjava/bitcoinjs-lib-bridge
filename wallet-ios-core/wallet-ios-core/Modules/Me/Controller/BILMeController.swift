@@ -96,6 +96,11 @@ class BILMeController: BILBaseViewController {
 	deinit {
 		NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
 	}
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollViewDidScroll(tableView)
+    }
 	
 	@objc
 	func walletDidChanged(notification: Notification) {
@@ -185,6 +190,7 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let section = tableView.indexPathsForVisibleRows?.first?.section else { return }
+        
         for i in 0...numberOfSections(in: tableView) {
             guard let header = tableView.headerView(forSection: i) as? BILTableViewHeaderFooterView  else { continue }
             if i == section {
@@ -249,7 +255,6 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
         headerView.titleLabel.text = sectionType.sectionTitle
         headerView.titleLabel.textColor = UIColor(white: 1, alpha: 0.3)
         headerView.bil_backgroundView.backgroundColor = UIColor(white: 1.0, alpha: 0.04)
-        headerView.bgImageView.image = backgroundImage?.snapshotSubImage(rect: view.convert(headerView.frame, from: tableView))
         return headerView
     }
 	
