@@ -20,8 +20,8 @@ extension UIColor {
 }
 
 extension UIColor {
-	static var bil_gradient_start_color: UIColor { get { return UIColor(hex: 0x309BEA) } }
-	static var bil_gradient_end_color: UIColor { get { return UIColor(hex: 0x1F44A0) } }
+	static var bil_gradient_start_color: UIColor { get { return UIColor(hex: 0x2991DD) } }
+	static var bil_gradient_end_color: UIColor { get { return UIColor(hex: 0x113CA6) } }
 	static var bil_gradient_start_red_color: UIColor { get { return UIColor(hex: 0xFF626C) } }
 	static var bil_gradient_end_red_color: UIColor { get { return UIColor(hex: 0xFF454D) } }
 	static var bil_gradient_shadow_color: UIColor { get { return UIColor(hex: 0xB4EC51) } }
