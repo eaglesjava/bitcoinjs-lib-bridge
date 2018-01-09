@@ -10,20 +10,17 @@ import UIKit
 
 class BILTransactionCell: UITableViewCell {
 	@IBOutlet weak var typeImageView: UIImageView!
-	@IBOutlet weak var addressLabel: UILabel!
+	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var volumeLabel: UILabel!
-    @IBOutlet weak var confirmLabel: UILabel!
     
 	var transaction: BTCTransactionModel? {
 		didSet {
 			if let t = transaction {
                 typeImageView.image = t.height == -1 ? UIImage(named: "icon_record_unconfirm") : t.type.image
-                addressLabel.text = t.firstTargetAddress?.address
                 dateLabel.text = t.dateSring
                 volumeLabel.text = t.volumeString
-                confirmLabel.text = t.confirmString
-                confirmLabel.textColor = UIColor(white: 1.0, alpha: t.height > 0 ? 1.0 : 0.6)
+                titleLabel.text = t.height == -1 ? t.status.description : t.typeString
 			}
 		}
 	}

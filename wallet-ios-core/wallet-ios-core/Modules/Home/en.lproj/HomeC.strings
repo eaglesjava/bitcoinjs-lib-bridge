@@ -12,9 +12,9 @@
 "HomeC.home.section.wallet" = "My wallet";
 
 "HomeC.home.section.subtitle.shortcut" = "前往设置自定义";
-"HomeC.home.section.subtitle.asset" = "Present currency";
-"HomeC.home.section.subtitle.unconfirm" = "Ongoing transaction";
-"HomeC.home.section.subtitle.wallet" = "Current wallet";
+"HomeC.home.section.subtitle.asset" = "Present currency: ";
+"HomeC.home.section.subtitle.unconfirm" = "Ongoing transaction: ";
+"HomeC.home.section.subtitle.wallet" = "Current wallet: ";
 "HomeC.home.section.subtitle.unit.ge" = "";
 
 "HomeC.home.pop.wallet.new" = "Create";

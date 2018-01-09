@@ -26,6 +26,9 @@ extension String {
     static let publicTransactionSuccess = "Public.transaction.status.success".bil_localized
     static let publicTransactionFailure = "Public.transaction.status.failure".bil_localized
     static let publicTransactionConfirmed = "Public.transaction.status.confirmed".bil_localized
+    static let publicTransactionTypeReceive = "Public.transaction.type.receive".bil_localized
+    static let publicTransactionTypeSend = "Public.transaction.type.send".bil_localized
+    static let publicTransactionTypeTransfer = "Public.transaction.type.transfer".bil_localized
     static let publicTransactionNoRemark = "Public.transaction.remark.none".bil_localized
     static let publicAlertActionTitle = "Public.alert.action.title".bil_localized
 	

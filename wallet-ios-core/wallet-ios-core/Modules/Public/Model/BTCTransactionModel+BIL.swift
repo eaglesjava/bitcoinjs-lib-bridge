@@ -27,6 +27,19 @@ enum BILTransactionType: Int16 {
         }
         return UIImage(named: str)
     }
+    
+    var description: String {
+        var str = ""
+        switch self {
+        case .receive:
+            str = .publicTransactionTypeReceive
+        case .send:
+            str = .publicTransactionTypeSend
+        case .transfer:
+            str = .publicTransactionTypeTransfer
+        }
+        return str
+    }
 }
 
 enum BILTransactionStatus {
@@ -104,6 +117,10 @@ extension BTCTransactionModel {
     
     var remarkString: String {
         get { return remark!.isEmpty ? "无" : remark! }
+    }
+    
+    var typeString: String {
+        get { return type.description }
     }
     
     var confirmString: String {

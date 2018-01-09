@@ -25,6 +25,10 @@
 "Public.transaction.status.failure" = "Transaction is failed";
 "Public.transaction.status.confirmed" = "Confirmed";
 
+"Public.transaction.type.receive" = "已接收";
+"Public.transaction.type.send" = "已发送";
+"Public.transaction.type.transfer" = "已转移";
+
 "Public.transaction.remark.none" = "无";
 
 "Public.alert.action.title" = "Get it";

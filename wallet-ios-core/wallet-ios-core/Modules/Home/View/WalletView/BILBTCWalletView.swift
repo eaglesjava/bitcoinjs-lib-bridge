@@ -117,13 +117,12 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 70
+		return 74
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "BILTransactionCell") as! BILTransactionCell
 		cell.transaction = transactions[indexPath.row]
-        cell.confirmLabel.isHidden = false
 		cell.separatorInset = UIEdgeInsetsMake(0, 25, 0, 25)
 		return cell
 	}

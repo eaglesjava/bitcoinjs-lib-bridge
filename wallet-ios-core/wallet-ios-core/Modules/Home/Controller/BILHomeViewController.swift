@@ -61,7 +61,7 @@ enum BILHomeSectionType: Int {
 		case .asset:
 			return 66
 		case .recentRecord:
-			return 56
+			return 74
 		case .wallet:
 			return 89
 		}
@@ -89,7 +89,7 @@ enum BILHomeSectionType: Int {
 		case .asset:
 			return [NSObject()]
 		case .recentRecord:
-			return BILTransactionManager.shared.recnetRecords
+			return BILWalletManager.shared.wallets.first!.btc_transactionArray
 		case .wallet:
 			return BILWalletManager.shared.wallets
 		}
@@ -361,7 +361,9 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
             c.btcBanlanceLabel.text = totalBTCBalance
 		case .recentRecord:
 			let c = cell as! BILTransactionCell
-			c.transaction = type.dataArray()[indexPath.row] as? BTCTransactionModel
+            let tx = type.dataArray()[indexPath.row] as? BTCTransactionModel
+			c.transaction = tx
+            c.titleLabel.text = tx?.wallet?.id
 		case .wallet:
 			let c = cell as! BILWalletCell
             c.needBackupButton.tag = indexPath.row
