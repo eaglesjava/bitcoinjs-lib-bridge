@@ -31,6 +31,7 @@ extension String {
     static let publicTransactionTypeTransfer = "Public.transaction.type.transfer".bil_localized
     static let publicTransactionNoRemark = "Public.transaction.remark.none".bil_localized
     static let publicAlertActionTitle = "Public.alert.action.title".bil_localized
+    static let publicToastComingSoon = "Public.toast.comingSoon".bil_localized
 	
     static let homeHomeSectionShortcut = "HomeC.home.section.shortcut".bil_localized
     static let homeHomeSectionAsset = "HomeC.home.section.asset".bil_localized

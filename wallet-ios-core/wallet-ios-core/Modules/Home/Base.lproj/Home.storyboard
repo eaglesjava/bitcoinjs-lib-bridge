@@ -386,7 +386,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAz-d0-tdZ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAz-d0-tdZ" customClass="BILCoinHeaderView" customModule="wallet_ios_core" customModuleProvider="target">
                                 <rect key="frame" x="25" y="89" width="325" height="32"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   BTC   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqZ-ZL-T8C">
@@ -868,7 +868,7 @@
         <image name="pic_transaction_success" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="q7A-8l-BQ7"/>
+        <segue reference="x97-tA-LLC"/>
         <segue reference="uYk-8g-9ar"/>
     </inferredMetricsTieBreakers>
 </document>

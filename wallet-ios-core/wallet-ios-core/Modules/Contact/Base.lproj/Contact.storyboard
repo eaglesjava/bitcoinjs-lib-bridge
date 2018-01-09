@@ -878,7 +878,7 @@
                                     <outlet property="title" destination="FI8-7w-5qv" id="ruf-H0-koT"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsW-n1-hWf">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsW-n1-hWf" customClass="BILCoinHeaderView" customModule="wallet_ios_core" customModuleProvider="target">
                                 <rect key="frame" x="25" y="141" width="270" height="32"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   BTC   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaQ-Kp-DH9">
