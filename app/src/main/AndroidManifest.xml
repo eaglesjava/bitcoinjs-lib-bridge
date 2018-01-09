@@ -146,7 +146,11 @@
         <activity
             android:name=".ui.main.my.UseRuleActivity"
             android:label="@string/title_activity_use_rule"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.wallet.info.transfer.TransferDetailsActivity"
+            android:label="@string/title_activity_transfer_details"
+            android:theme="@style/AppTheme.Blue"></activity>
     </application>
 
 </manifest>

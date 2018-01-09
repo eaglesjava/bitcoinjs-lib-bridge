@@ -50,6 +50,7 @@ import com.bitbill.www.ui.main.my.SystemSettingActivity;
 import com.bitbill.www.ui.main.my.WalletSettingActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
+import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -286,7 +287,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void OnTransactionRecordItemClick(TxItem item) {
         //跳转到确认交易详情
-
+        TransferDetailsActivity.start(MainActivity.this, item);
     }
 
     @Override

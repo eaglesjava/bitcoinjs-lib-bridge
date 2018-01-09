@@ -95,6 +95,9 @@ public class ParseTxInfoPresenter<M extends AddressModel, V extends ParseTxInfoM
                         txItem.setTxHash(txElement.getTxHash());
                         txItem.setHeight(txElement.getHeight());
                         txItem.setCreatedTime(txElement.getCreatedTime());
+                        txItem.setInputs(inputs);
+                        txItem.setOutputs(outputs);
+                        txItem.setRemark(txElement.getRemark());
                         txItems.add(txItem);
                     }
                     return Observable.just(txItems);

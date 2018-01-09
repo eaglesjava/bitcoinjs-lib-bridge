@@ -32,11 +32,13 @@ public final class AppConstants {
     public static final String EXTRA_CONTACT_ADDRESS = "contact_address";
     public static final String EXTRA_WALLET_ID = "wallet_id";
     public static final String EXTRA_IS_FROM_SETTING = "is_from_setting";
+    public static final String EXTRA_TX_ITEM = "tx_item";
 
 
     public static final String ARG_DATAS = "args_datas";
     public static final String ARG_WALLET = "arg_wallet";
     public static final String ARG_IS_SELECT = "is_select";
+    public static final String ARG_TX_ITEM = "arg_tx_item";
     /**
      * btc about
      */
@@ -64,6 +66,7 @@ public final class AppConstants {
     public static final String QUERY_ID = "id";
     public static final String QUERY_AMOUNT = "amount";
     public static final String QUERY_ADDRESS = "address";
+    public static final String TX_BLOCK_CHAIN_PREFIX = "https://blockchain.info/tx/";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

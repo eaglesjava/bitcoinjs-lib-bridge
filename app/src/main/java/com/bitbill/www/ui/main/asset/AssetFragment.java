@@ -233,11 +233,13 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
                 getChildFragmentManager().beginTransaction().remove(fragment);
             }
         } else {
+            if (isAdded()) {
 
-            getChildFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<TxItem>) unconfirmList), BtcUnconfirmFragment.TAG)
-                    .commit();
+                getChildFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<TxItem>) unconfirmList), BtcUnconfirmFragment.TAG)
+                        .commit();
+            }
         }
     }
 

@@ -13,18 +13,6 @@ public abstract class BaseFragmentActivity extends BaseToolbarActivity {
     private static final String TAG = BaseFragmentActivity.class.getSimpleName();
     protected Fragment mFragment;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (mFragment == null) {
-            mFragment = getFragment();
-        }
-        if (mFragment != null && getSupportFragmentManager().findFragmentById(CONTENT_VIEW_ID) == null) {
-            //如果没有添加过 添加fragment
-            getSupportFragmentManager().beginTransaction().add(CONTENT_VIEW_ID, mFragment).commitAllowingStateLoss();
-        }
-    }
-
     /**
      * 子类实现获取添加的碎片
      *
@@ -54,7 +42,13 @@ public abstract class BaseFragmentActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
-
+        if (mFragment == null) {
+            mFragment = getFragment();
+        }
+        if (mFragment != null && getSupportFragmentManager().findFragmentById(CONTENT_VIEW_ID) == null) {
+            //如果没有添加过 添加fragment
+            getSupportFragmentManager().beginTransaction().add(CONTENT_VIEW_ID, mFragment).commitAllowingStateLoss();
+        }
     }
 
     @Override

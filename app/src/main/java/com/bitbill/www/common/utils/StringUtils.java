@@ -21,6 +21,7 @@ import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public class StringUtils {
     public static final Pattern IS_CHINESE_CHAR = Pattern.compile("[\u4e00-\u9fa5]");
     public static final Pattern PASSWORD_PATTERN =
             Pattern.compile("[!@#$%^&*_]*.*[a-zA-Z][!@#$%^&*_]*.*[0-9][!@#$%^&*_]*|[!@#$%^&*_]*.*[0-9][!@#$%^&*_]*.*[a-zA-Z][!@#$%^&*_]*");
+    public final static SimpleDateFormat yyyyMMddHHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final static Pattern PHONE_NUM = Pattern
             .compile("\\d{11}");// 手机号码11位
     private final static Pattern WALLET_ID = Pattern
@@ -184,14 +186,6 @@ public class StringUtils {
         return s == null ? "" : s;
     }
 
-
-    /**
-     * 返回当前系统时间
-     */
-    public static String getDateTime(String format) {
-        SimpleDateFormat df = new SimpleDateFormat(format);
-        return df.format(new Date());
-    }
 
     /**
      * 判断字符串是否为null或长度为0
@@ -637,13 +631,19 @@ public class StringUtils {
     }
 
     public static String formatDate(String date) {
-        // TODO: 2017/12/25 format  date
+        //format date by local
+        try {
+            Date parse = yyyyMMddHHmmss.parse(date);
+            return formatDate(parse.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return date;
     }
 
 
     public static String formatDate(long dateTime) {
-        return DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.getDefault()).format(new Date(dateTime));
+        return DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault()).format(new Date(dateTime));
     }
 
     public static void setEditable(EditText etText, boolean editable) {

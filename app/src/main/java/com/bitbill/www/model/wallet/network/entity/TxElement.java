@@ -1,8 +1,10 @@
 package com.bitbill.www.model.wallet.network.entity;
 
+import com.bitbill.www.common.base.model.entity.Entity;
+
 import java.util.List;
 
-public class TxElement {
+public class TxElement extends Entity {
     /**
      * createdTime : 2017-12-19 16:51:47
      * height : -1
@@ -16,6 +18,7 @@ public class TxElement {
     private String txHash;
     private List<InputsBean> inputs;
     private List<OutputsBean> outputs;
+    private String remark;
 
     public String getCreatedTime() {
         return createdTime;
@@ -57,7 +60,15 @@ public class TxElement {
         this.outputs = outputs;
     }
 
-    public static class InputsBean {
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public static class InputsBean extends Entity {
         /**
          * address : 17fLtpDmu7GhMgFyVBCrNySSanodr3toXP
          * value : 0.001
@@ -83,7 +94,7 @@ public class TxElement {
         }
     }
 
-    public static class OutputsBean {
+    public static class OutputsBean extends Entity {
         /**
          * address : 17fLtpDmu7GhMgFyVBCrNySSanodr3toXP
          * value : 0.001
@@ -100,7 +111,7 @@ public class TxElement {
             this.address = address;
         }
 
-        public double getValue() {
+        public long getValue() {
             return value;
         }
 

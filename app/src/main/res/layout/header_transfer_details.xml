@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity">
+
+    <ImageView
+        android:id="@+id/iv_transfer_status"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_transfer_unconfirm" />
+
+    <TextView
+        android:id="@+id/tv_transfer_status"
+        style="@style/Content.Title.White80"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/status_transfer_unconfirm" />
+
+    <TextView
+        android:id="@+id/tv_transfer_amount"
+        style="@style/Text.White"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="33dp"
+        android:text="+2.5001 BTC"
+        android:textAllCaps="true"
+        android:textSize="40sp" />
+
+
+</LinearLayout>
