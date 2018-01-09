@@ -21,7 +21,7 @@
 "6nF-hb-Mn0.normalTitle" = "Complete";
 
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "7dV-Wt-9E5"; */
-"7dV-Wt-9E5.normalTitle" = "下一步";
+"7dV-Wt-9E5.normalTitle" = "Next";
 
 /* Class = "UILabel"; text = "0 CNY"; ObjectID = "AZE-8B-09r"; */
 "AZE-8B-09r.text" = "0 CNY";
@@ -42,13 +42,13 @@
 "Erz-zk-b10.text" = "amount";
 
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "Fio-ZW-1aj"; */
-"Fio-ZW-1aj.normalTitle" = "下一步";
+"Fio-ZW-1aj.normalTitle" = "Next";
 
 /* Class = "UITextField"; placeholder = "接收方地址"; ObjectID = "FtQ-ul-LSb"; */
 "FtQ-ul-LSb.placeholder" = "Address of receiver";
 
 /* Class = "UILabel"; text = "发送成功"; ObjectID = "GcY-Ih-Dbp"; */
-"GcY-Ih-Dbp.text" = "发送成功";
+"GcY-Ih-Dbp.text" = "Send successfully";
 
 /* Class = "UILabel"; text = "接收方地址"; ObjectID = "H0V-Re-jp2"; */
 "H0V-Re-jp2.text" = "Address of receiver";
@@ -63,7 +63,7 @@
 "Pjz-b4-hnz.title" = "Confirm";
 
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "R8m-SG-IX7"; */
-"R8m-SG-IX7.normalTitle" = "下一步";
+"R8m-SG-IX7.normalTitle" = "Next";
 
 /* Class = "UILabel"; text = "接收方"; ObjectID = "T3Y-an-Yus"; */
 "T3Y-an-Yus.text" = "Receiver";
@@ -72,7 +72,7 @@
 "UXO-wd-COs.text" = "  BCH  ";
 
 /* Class = "UINavigationItem"; title = "扫描结果"; ObjectID = "UYV-Bh-eJo"; */
-"UYV-Bh-eJo.title" = "扫描结果";
+"UYV-Bh-eJo.title" = "Scan results";
 
 /* Class = "UILabel"; text = "备注"; ObjectID = "WJZ-AI-aCJ"; */
 "WJZ-AI-aCJ.text" = "Note";
@@ -90,7 +90,7 @@
 "jUa-cr-pb8.text" = "CoinName";
 
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "jrl-VK-cpH"; */
-"jrl-VK-cpH.normalTitle" = "下一步";
+"jrl-VK-cpH.normalTitle" = "Next";
 
 /* Class = "UILabel"; text = "walletID"; ObjectID = "k3E-gX-6yP"; */
 "k3E-gX-6yP.text" = "walletID";
@@ -108,7 +108,7 @@
 "nB8-vV-4XD.text" = "detail";
 
 /* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "ohd-e8-95F"; */
-"ohd-e8-95F.normalTitle" = "下一步";
+"ohd-e8-95F.normalTitle" = "Next";
 
 /* Class = "UILabel"; text = "0.00"; ObjectID = "ood-C6-emK"; */
 "ood-C6-emK.text" = "0.00";

@@ -10,23 +10,23 @@
 "ContactC.contact_addByAddress" = "Add via address";
 "ContactC.contact_scanCode" = "Add via scanning";
 "ContactC.contact_cancel" = "Cancel";
-"ContactC.contact_addressExits" = "地址已存在";
+"ContactC.contact_addressExits" = "Address already exists";
 "ContactC.contact_addressInvalid" = "The input address is invalid";
-"ContactC.contact_IDExits" = "ID 已存在";
+"ContactC.contact_IDExits" = "ID already exists";
 
 "ContactC.detail_walletID" = "Wallet ID";
 "ContactC.detail_walletAddress" = "Address of digital asset";
 "ContactC.detail_id" = "ID";
 "ContactC.detail_address" = "address";
-"ContactC.detail_error" = "数据错误";
+"ContactC.detail_error" = "Data error";
 
 "ContactC.search_empty" = "Wallet ID cannot be empty";
 "ContactC.search_tooLong" = "Wallet ID supports 6-20 characters";
 
 "ContactC.searchResult_name" = "Name";
 "ContactC.searchResult_remark" = "Note";
-"ContactC.searchResult_input" = "请输入";
-"ContactC.searchResult_surport" = "支持";
+"ContactC.searchResult_input" = "Please input";
+"ContactC.searchResult_surport" = "support";
 "ContactC.searchResult_wei" = "位";
 "ContactC.searchResult_nameEmpty" = "Name cannot be empty";
-"ContactC.searchResult_success" = "添加成功";
+"ContactC.searchResult_success" = "Add successfully";

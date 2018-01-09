@@ -6,8 +6,8 @@
   Copyright © 2017年 BitBill. All rights reserved.
 */
 
-"kFaceIdAuthenticationReason" = "Confirm your face to authenticate.";
-"kFaceIdPasscodeAuthenticationReason" = "Face ID is locked now, because of too many failed attempts. Enter passcode to unlock Face ID.";
-"kTouchIdAuthenticationReason" = "Confirm your fingerprint to authenticate.";
-"kTouchIdPasscodeAuthenticationReason" = "Touch ID is locked now, because of too many failed attempts. Enter passcode to unlock Touch ID.";
-"kPasscodeAuthenticationReason" = "Confirm your iPhone's passcode to authenticate.";
+"kFaceIdAuthenticationReason" = "Use your face ID to authenticate.";
+"kFaceIdPasscodeAuthenticationReason" = "Face ID locked due to too much wrong input. Please input the passcode";
+"kTouchIdAuthenticationReason" = "Use your Touch ID to authenticate.";
+"kTouchIdPasscodeAuthenticationReason" = "Touch ID locked due to too much wrong input. Please input the password.";
+"kPasscodeAuthenticationReason" = "Please input your iPhone's passcode to authenticate.";

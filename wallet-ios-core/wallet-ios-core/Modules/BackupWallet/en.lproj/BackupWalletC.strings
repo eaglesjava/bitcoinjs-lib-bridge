@@ -6,15 +6,15 @@
   Copyright © 2018年 BitBill. All rights reserved.
 */
 
-"BackupWalletC.mnmonic_emptyTitle" = "请输入密码解锁助记词";
+"BackupWalletC.mnmonic_emptyTitle" = "Please input password to decode the mnemonic words.";
 "BackupWalletC.mnmonic_snapshotTip" = "Screenshot is unsafe, which may be used by other apps. Please write down the  mnemonic words below and then save it. It will be confirmed on next screen.";
-"BackupWalletC.mnmonic_tryLater" = "请稍后再试";
+"BackupWalletC.mnmonic_tryLater" = "Please retry later";
 "BackupWalletC.mnmonic_failed" = "Fail to back up";
 "BackupWalletC.mnmonic_backupWallet" = "Back up wallet";
 "BackupWalletC.mnmonic_inputPwd" = "Please input password and confirm";
-"BackupWalletC.mnmonic_getWalletFailed" = "获取钱包数据失败";
+"BackupWalletC.mnmonic_getWalletFailed" = "Failed to fetch wallet data";
 "BackupWalletC.mnmonic_decodeWalletFailed" = "Fail to decode wallet";
 "BackupWalletC.mnmonic_confirm" = "Confirm";
 "BackupWalletC.mnmonic_cancel" = "Cancel";
 
-"BackupWalletC.verify_emptyTitle" = "请按顺序点击下方文字";
+"BackupWalletC.verify_emptyTitle" = "Please click the below words in the correct order";

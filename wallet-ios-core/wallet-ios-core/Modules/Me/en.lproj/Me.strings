@@ -12,7 +12,7 @@
 "3Nt-x4-Uvf.text" = "Wallet ID";
 
 /* Class = "UINavigationItem"; title = "使用条款"; ObjectID = "66E-MU-jNj"; */
-"66E-MU-jNj.title" = "使用条款";
+"66E-MU-jNj.title" = "Usage terms";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "7hZ-6J-UwI"; */
 "7hZ-6J-UwI.text" = "Label";
@@ -75,10 +75,10 @@
 "gR3-UO-dS8.text" = "Label";
 
 /* Class = "UILabel"; text = "添加时间"; ObjectID = "hal-wb-t1D"; */
-"hal-wb-t1D.text" = "添加时间";
+"hal-wb-t1D.text" = "Add time";
 
 /* Class = "UIButton"; normalTitle = "删除钱包"; ObjectID = "m9E-N3-fyw"; */
-"m9E-N3-fyw.normalTitle" = "删除钱包";
+"m9E-N3-fyw.normalTitle" = "Delete wallet";
 
 /* Class = "UILabel"; text = "   BTC   "; ObjectID = "yRc-fZ-w8T"; */
 "yRc-fZ-w8T.text" = "   BTC   ";

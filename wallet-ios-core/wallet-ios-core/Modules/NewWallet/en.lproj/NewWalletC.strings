@@ -11,26 +11,26 @@
 "NewWalletC.inputID_range" = "Wallet ID supports 6-20 characters";
 "NewWalletC.inputID_format" = "ID only supports letter, number and underline";
 "NewWalletC.inputID_prefix" = "ID only begins with letter";
-"NewWalletC.inputID_exits" = "钱包ID已存在";
+"NewWalletC.inputID_exits" = "Wallet ID exists";
 
 "NewWalletC.create_typeNew" = "create";
 "NewWalletC.create_typeRecover" = "import";
 "NewWalletC.create_typeResetPassword" = "reset";
 "NewWalletC.create_wallet" = "wallet";
-"NewWalletC.create_begin" = "Start";
+"NewWalletC.create_begin" = "Start ";
 "NewWalletC.create_pwdInput" = "Please input password";
 "NewWalletC.create_pwdRange" = "Password supports 6-20 characters";
 "NewWalletC.create_pwdNotEqual" = "Password is inconsistent";
-"NewWalletC.create_failed" = "操作失败";
-"NewWalletC.create_pwdEmpty" = "密码不能为空";
+"NewWalletC.create_failed" = "Operation failed";
+"NewWalletC.create_pwdEmpty" = "Password can't be empty";
 "NewWalletC.create_createPwd" = "Create wallet password";
 "NewWalletC.create_confirmPwd" = "Confirm the wallet password";
 "NewWalletC.createSuccess_new" = "Wallet is created successfully, please save the mnemonic words in a safe place for the backups of wallet before using it.";
-"NewWalletC.createSuccess_recover" = "钱包导入成功，请您务必保管好助记词和密码";
-"NewWalletC.createSuccess_reset" = "钱包密码重置成功，请您务必保管好助记词和密码";
-"NewWalletC.createSuccess" = "成功";
+"NewWalletC.createSuccess_recover" = "Wallet import successfully. Please save your mnemonic words and password.";
+"NewWalletC.createSuccess_reset" = "Password reset successfully. Please save your mnemonic words and password.";
+"NewWalletC.createSuccess" = "Successful";
 
-"NewWalletC.import_emptyTitle" = "点击以输入";
+"NewWalletC.import_emptyTitle" = "Click to enter";
 "NewWalletC.import_failed" = "Fail to input";
 "NewWalletC.import_checkAgain" = "Please recheck whether your mnemonic words is right";
 "NewWalletC.import_exits" = "Wallet has been existed";

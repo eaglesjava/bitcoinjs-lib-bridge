@@ -9,20 +9,20 @@
 "SendC.send.address.invalid" = "The input address is invalid";
 "SendC.send.address.empty" = "Address cannot be empty";
 "SendC.send.address.invalid.title" = "Address is wrong";
-"SendC.send.address.error" = "出现了错误";
+"SendC.send.address.error" = "Error occurs";
 
 "SendC.amount.check.amount.tip.title" = "Tip";
-"SendC.amount.check.amount.tip.msg.empty" = "请输入金额";
-"SendC.amount.check.amount.tip.msg.zero" = "请输入大于 0 的金额";
-"SendC.amount.check.amount.tip.msg.notEnough" = "余额不足";
+"SendC.amount.check.amount.tip.msg.empty" = "Please input amount";
+"SendC.amount.check.amount.tip.msg.zero" = "Please input an amount larger than 0";
+"SendC.amount.check.amount.tip.msg.notEnough" = "Not enough balance";
 
-"SendC.confirm.minute" = "分钟";
-"SendC.confirm.hour" = "小时";
-"SendC.confirm.day" = "天";
+"SendC.confirm.minute" = "mins";
+"SendC.confirm.hour" = "hours";
+"SendC.confirm.day" = "days";
 "SendC.confirm.averageTime" = "Average time of confirmation";
 "SendC.confirm.needSpend" = "needs to cost";
-"SendC.confirm.notEnoughBalace" = "余额不足以支付手续费";
-"SendC.confirm.cannotFindChangeAddress" = "未能生成找零地址";
+"SendC.confirm.notEnoughBalace" = "Balance less than transaction fee";
+"SendC.confirm.cannotFindChangeAddress" = "Can't generate change address";
 "SendC.confirm.remarkTooLong" = "Please input not more than 20 words";
 "SendC.confirm.sendFailed" = "Fail to send";
 "SendC.confirm.passwordTitle" = "Input wallet password";
@@ -32,10 +32,10 @@
 "SendC.confirm.confirm" = "Confirm";
 "SendC.confirm.passwordPlaceholder" = "Please input password and confirm";
 "SendC.confirm.buildTxFailed" = "Transaction is failed";
-"SendC.confirm.seedFailed" = "解密 Seed 失败";
-"SendC.confirm.tryLater" = "请稍后再试";
+"SendC.confirm.seedFailed" = "Failed to decode seed";
+"SendC.confirm.tryLater" = "Please retry later";
 
-"SendC.result.input" = "输入";
-"SendC.result.inputName" = "的名称";
-"SendC.result.inputNamePlaceholder" = "请输入联系人名称";
-"SendC.result.addSuccess" = "添加成功";
+"SendC.result.input" = "Please input";
+"SendC.result.inputName" = "'s name";
+"SendC.result.inputNamePlaceholder" = "Please input contact name";
+"SendC.result.addSuccess" = "Add successfully";

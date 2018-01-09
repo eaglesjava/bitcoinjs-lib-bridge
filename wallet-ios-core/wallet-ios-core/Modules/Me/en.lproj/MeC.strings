@@ -9,46 +9,46 @@
 "MeC.agreementName" = "service";
 
 "MeC.meSection_preference" = "Predilection settings";
-"MeC.meSection_contacts" = "联系人设置";
+"MeC.meSection_contacts" = "Contact settings";
 "MeC.meSection_wallet" = "Wallet integration";
-"MeC.meSection_system" = "系统相关";
+"MeC.meSection_system" = "System related";
 "MeC.meSection_other" = "Other";
 
-"MeC.meCell_shortcut" = "主页快捷功能";
-"MeC.meCell_contactBackup" = "备份联系人";
-"MeC.meCell_contactRecover" = "恢复联系人";
+"MeC.meCell_shortcut" = "Home shortcuts";
+"MeC.meCell_contactBackup" = "Backup contacts";
+"MeC.meCell_contactRecover" = "Restore contacts";
 "MeC.meCell_system" = "System settings";
 "MeC.meCell_aboutUs" = "About us ";
 
-"MeC.contact_yourKey" = "您的联系人密钥";
-"MeC.contact_copyKey" = "复制密钥";
-"MeC.contact_keyCopied" = "密钥已复制";
-"MeC.contact_authFailed" = "授权失败，无法查看您的联系人密钥";
-"MeC.contact_inputKey" = "请输入密钥以确认";
-"MeC.contact_keyEmpty" = "密钥不能为空";
-"MeC.contact_noMore" = "您没有新增的联系人";
-"MeC.contact_recovered" = "您恢复了";
-"MeC.contact_contact" = "个联系人";
+"MeC.contact_yourKey" = "Your contact passphrase";
+"MeC.contact_copyKey" = "Copy passphrase";
+"MeC.contact_keyCopied" = "Passphrase copied";
+"MeC.contact_authFailed" = "Authentication failed. Can't read your contact passphrase.";
+"MeC.contact_inputKey" = "Please input passphrase";
+"MeC.contact_keyEmpty" = "Passphrase can't be empty";
+"MeC.contact_noMore" = "No new contact";
+"MeC.contact_recovered" = "You restored";
+"MeC.contact_contact" = "contacts";
 
 "MeC.confirm" = "Confirm";
 "MeC.cancel" = "Cancel";
 
-"MeC.wallet_deleteFailed" = "删除钱包失败";
-"MeC.wallet_delete" = "删除钱包";
+"MeC.wallet_deleteFailed" = "Failed to delete wallet";
+"MeC.wallet_delete" = "Delete wallet";
 "MeC.wallet_deleteMessage" = "Please be cautious about this operation, confirm that your wallet has been backed up before deleting, or the digital asset cannot be found.";
-"MeC.wallet_passwordEmpty" = "密码不能为空";
-"MeC.wallet_passwordError" = "密码输入错误";
+"MeC.wallet_passwordEmpty" = "Password can't be empty";
+"MeC.wallet_passwordError" = "Wrong password";
 "MeC.wallet_inputPassword" = "Please input password and confirm";
-"MeC.wallet_tryLater" = "请稍后再试";
-"MeC.wallet_failed" = "操作失败";
-"MeC.wallet_backupNow" = "立即备份";
+"MeC.wallet_tryLater" = "Please retry later";
+"MeC.wallet_failed" = "Operation failed";
+"MeC.wallet_backupNow" = "Backup now";
 
 "MeC.walletAddress_addressAndBalance" = "Address and balance";
 
 "MeC.aboutUs_agreement" = "Usage terms";
 
-"MeC.appSetting_sound" = "音效";
-"MeC.appSetting_currency" = "货币";
-"MeC.appSetting_cellSound" = "音效";
-"MeC.appSetting_cellCurrency" = "当前币种";
-"MeC.appSetting_saved" = "已保存";
+"MeC.appSetting_sound" = "Sound";
+"MeC.appSetting_currency" = "Currency";
+"MeC.appSetting_cellSound" = "Sound";
+"MeC.appSetting_cellCurrency" = "Current currency";
+"MeC.appSetting_saved" = "Saved";

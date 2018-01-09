@@ -8,9 +8,9 @@
 
 "ReceiveC.receive.address.tip.title" = "Tip";
 "ReceiveC.receive.address.tip.msg" = "For protection of your privacy, new address shall be used when you receive this operation every time. The used address can still be available.";
-"ReceiveC.receive.address.tip.refresh" = "地址已刷新";
+"ReceiveC.receive.address.tip.refresh" = "Address refreshed";
 "ReceiveC.receive.specificButtonTitle" = "Receive special amount";
 
 "ReceiveC.specific.check.amount.tip.title" = "Tip";
-"ReceiveC.specific.check.amount.tip.msg.empty" = "请输入金额";
-"ReceiveC.specific.check.amount.tip.msg.zero" = "请输入大于 0 的金额";
+"ReceiveC.specific.check.amount.tip.msg.empty" = "Please input amount";
+"ReceiveC.specific.check.amount.tip.msg.zero" = "Amount must be larger than 0";

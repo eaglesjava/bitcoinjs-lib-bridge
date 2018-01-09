@@ -1,18 +1,18 @@
 
 /* Class = "UIButton"; normalTitle = "删除联系人"; ObjectID = "0ze-rm-y8b"; */
-"0ze-rm-y8b.normalTitle" = "删除联系人";
+"0ze-rm-y8b.normalTitle" = "Delete contact";
 
-/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "18R-oz-D9v"; */
-"18R-oz-D9v.placeholder" = "请输入";
+/* Class = "UITextField"; placeholder = "Please input"; ObjectID = "18R-oz-D9v"; */
+"18R-oz-D9v.placeholder" = "Please input";
 
-/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "4bB-TM-qhB"; */
-"4bB-TM-qhB.placeholder" = "请输入";
+/* Class = "UITextField"; placeholder = "Please input"; ObjectID = "4bB-TM-qhB"; */
+"4bB-TM-qhB.placeholder" = "Please input";
 
-/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "6Kj-Ov-lYm"; */
-"6Kj-Ov-lYm.placeholder" = "请输入";
+/* Class = "UITextField"; placeholder = "Please input"; ObjectID = "6Kj-Ov-lYm"; */
+"6Kj-Ov-lYm.placeholder" = "Please input";
 
 /* Class = "UILabel"; text = "您还没有联系人"; ObjectID = "71u-E6-dkJ"; */
-"71u-E6-dkJ.text" = "您还没有联系人";
+"71u-E6-dkJ.text" = "You don’t have any contact yet";
 
 /* Class = "UILabel"; text = "  BCH  "; ObjectID = "7Zi-Dz-ID7"; */
 "7Zi-Dz-ID7.text" = "  BCH  ";
@@ -32,8 +32,8 @@
 /* Class = "UILabel"; text = "钱包ID"; ObjectID = "FXY-Mp-LB9"; */
 "FXY-Mp-LB9.text" = "Wallet ID";
 
-/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "HPW-Ge-qoY"; */
-"HPW-Ge-qoY.placeholder" = "请输入";
+/* Class = "UITextField"; placeholder = "Please input"; ObjectID = "HPW-Ge-qoY"; */
+"HPW-Ge-qoY.placeholder" = "Please input";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "LFc-uK-qH9"; */
 "LFc-uK-qH9.text" = "Label";
@@ -41,8 +41,8 @@
 /* Class = "UILabel"; text = "  ETH  "; ObjectID = "O72-d3-VNh"; */
 "O72-d3-VNh.text" = "  ETH  ";
 
-/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "OGy-hD-rpv"; */
-"OGy-hD-rpv.placeholder" = "请输入";
+/* Class = "UITextField"; placeholder = "Please input"; ObjectID = "OGy-hD-rpv"; */
+"OGy-hD-rpv.placeholder" = "Please input";
 
 /* Class = "UILabel"; text = "钱包ID"; ObjectID = "PFb-n2-MGB"; */
 "PFb-n2-MGB.text" = "Wallet ID";
@@ -56,8 +56,8 @@
 /* Class = "UINavigationItem"; title = "通过ID添加"; ObjectID = "Wpq-Wv-Sw5"; */
 "Wpq-Wv-Sw5.title" = "Add via ID";
 
-/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "Xqb-yL-7h3"; */
-"Xqb-yL-7h3.placeholder" = "请输入";
+/* Class = "UITextField"; placeholder = "Please input"; ObjectID = "Xqb-yL-7h3"; */
+"Xqb-yL-7h3.placeholder" = "Please input";
 
 /* Class = "UILabel"; text = "钱包ID"; ObjectID = "YHI-KQ-7L9"; */
 "YHI-KQ-7L9.text" = "Wallet ID";
@@ -66,13 +66,13 @@
 "Ytn-tL-54H.text" = "Name";
 
 /* Class = "UIButton"; normalTitle = "立即添加"; ObjectID = "Z6b-ur-m6B"; */
-"Z6b-ur-m6B.normalTitle" = "立即添加";
+"Z6b-ur-m6B.normalTitle" = "Add";
 
 /* Class = "UILabel"; text = "备注"; ObjectID = "a2p-1s-32B"; */
 "a2p-1s-32B.text" = "Note";
 
-/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "cMX-Vg-kFU"; */
-"cMX-Vg-kFU.placeholder" = "请输入";
+/* Class = "UITextField"; placeholder = "Please input"; ObjectID = "cMX-Vg-kFU"; */
+"cMX-Vg-kFU.placeholder" = "Please input";
 
 /* Class = "UILabel"; text = "名称"; ObjectID = "dIA-Zd-JLl"; */
 "dIA-Zd-JLl.text" = "Name";
@@ -93,13 +93,13 @@
 "ic5-jT-iGX.title" = "Contact";
 
 /* Class = "UITextField"; placeholder = "搜索对方钱包ID"; ObjectID = "ikQ-St-aBA"; */
-"ikQ-St-aBA.placeholder" = "搜索对方钱包ID";
+"ikQ-St-aBA.placeholder" = "Search wallet ID";
 
 /* Class = "UIButton"; normalTitle = "发送"; ObjectID = "kCS-Hq-IuO"; */
 "kCS-Hq-IuO.normalTitle" = "Send";
 
 /* Class = "UINavigationItem"; title = "编辑联系人"; ObjectID = "loc-Av-3sV"; */
-"loc-Av-3sV.title" = "编辑联系人";
+"loc-Av-3sV.title" = "Edit contact";
 
 /* Class = "UILabel"; text = "无"; ObjectID = "nTG-6c-hbZ"; */
 "nTG-6c-hbZ.text" = "无";
@@ -111,7 +111,7 @@
 "o7w-di-mR0.text" = "Note";
 
 /* Class = "UINavigationItem"; title = "搜索结果"; ObjectID = "wn3-GR-h2l"; */
-"wn3-GR-h2l.title" = "搜索结果";
+"wn3-GR-h2l.title" = "Search results";
 
 /* Class = "UILabel"; text = "名称"; ObjectID = "yMh-70-0wW"; */
 "yMh-70-0wW.text" = "Name";

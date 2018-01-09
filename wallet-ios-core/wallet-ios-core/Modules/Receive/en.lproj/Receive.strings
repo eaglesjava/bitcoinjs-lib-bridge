@@ -32,8 +32,8 @@
 /* Class = "UILabel"; text = "btc balance"; ObjectID = "MRt-I8-1l2"; */
 "MRt-I8-1l2.text" = "btc balance";
 
-/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "MbP-wN-eFm"; */
-"MbP-wN-eFm.normalTitle" = "下一步";
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "MbP-wN-eFm"; */
+"MbP-wN-eFm.normalTitle" = "Next";
 
 /* Class = "UINavigationItem"; title = "特定金额接收"; ObjectID = "Q03-cE-dXW"; */
 "Q03-cE-dXW.title" = "Receive special amount";
@@ -54,7 +54,7 @@
 "XWN-KL-CfM.text" = "Scan to pay";
 
 /* Class = "UIViewController"; title = "输入数量"; ObjectID = "cY8-4Y-AaO"; */
-"cY8-4Y-AaO.title" = "输入数量";
+"cY8-4Y-AaO.title" = "Enter amount";
 
 /* Class = "UITabBarItem"; title = "接收"; ObjectID = "ic5-jT-iGX"; */
 "ic5-jT-iGX.title" = "Receive";

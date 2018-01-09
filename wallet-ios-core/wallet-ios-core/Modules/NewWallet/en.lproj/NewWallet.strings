@@ -1,9 +1,9 @@
 
-/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "18p-z0-huL"; */
-"18p-z0-huL.normalTitle" = "下一步";
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "18p-z0-huL"; */
+"18p-z0-huL.normalTitle" = "Next";
 
 /* Class = "UINavigationItem"; title = "输入钱包ID"; ObjectID = "22G-j6-p1V"; */
-"22G-j6-p1V.title" = "输入钱包ID";
+"22G-j6-p1V.title" = "Please input wallet ID";
 
 /* Class = "UILabel"; text = "确认钱包密码"; ObjectID = "48F-7A-au2"; */
 "48F-7A-au2.text" = "Confirm the wallet password";
@@ -11,8 +11,8 @@
 /* Class = "UIButton"; normalTitle = "完成"; ObjectID = "53E-rO-tJL"; */
 "53E-rO-tJL.normalTitle" = "Complete";
 
-/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "5Hf-Dg-FgH"; */
-"5Hf-Dg-FgH.placeholder" = "请输入";
+/* Class = "UITextField"; placeholder = "Please input"; ObjectID = "5Hf-Dg-FgH"; */
+"5Hf-Dg-FgH.placeholder" = "Please input";
 
 /* Class = "UIButton"; normalTitle = "创建钱包"; ObjectID = "99u-my-xAt"; */
 "99u-my-xAt.normalTitle" = "Create wallet";
@@ -35,10 +35,10 @@
 /* Class = "UINavigationItem"; title = "创建钱包"; ObjectID = "IzW-ej-leD"; */
 "IzW-ej-leD.title" = "Create wallet";
 
-/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "LDx-Bb-axf"; */
-"LDx-Bb-axf.normalTitle" = "下一步";
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "LDx-Bb-axf"; */
+"LDx-Bb-axf.normalTitle" = "Next";
 
-/* Class = "UITextField"; placeholder = "请输入6-20位字符，以字母开头"; ObjectID = "QmJ-tL-aFu"; */
+/* Class = "UITextField"; placeholder = "Please input6-20位字符，以字母开头"; ObjectID = "QmJ-tL-aFu"; */
 "QmJ-tL-aFu.placeholder" = "Please input 6-20 characters with the beginning of letter";
 
 /* Class = "UILabel"; text = "创建钱包密码"; ObjectID = "T6d-DG-zPG"; */
@@ -59,7 +59,7 @@
 /* Class = "UILabel"; text = "请牢记您的密码！Bitbill 不存储用户密码，无法提供找回或重置功能"; ObjectID = "h8s-0C-PiF"; */
 "h8s-0C-PiF.text" = "Tip: Please remember your password, BitBill cannot save user’s password, and does not have the service of finding or resetting password";
 
-/* Class = "UITextField"; placeholder = "请输入6-20位字符"; ObjectID = "kiL-9x-MRJ"; */
+/* Class = "UITextField"; placeholder = "Please input6-20位字符"; ObjectID = "kiL-9x-MRJ"; */
 "kiL-9x-MRJ.placeholder" = "Please input 6-20 characters";
 
 /* Class = "UIBarButtonItem"; title = "取消"; ObjectID = "ltI-X7-8pX"; */
@@ -75,4 +75,4 @@
 "ucR-LZ-9nJ.title" = "Bitbill";
 
 /* Class = "UILabel"; text = "仅支持符合 BIP39 标准的助记词"; ObjectID = "zqG-1c-iK7"; */
-"zqG-1c-iK7.text" = "仅支持符合 BIP39 标准的助记词";
+"zqG-1c-iK7.text" = "Supports BIP39 mnemonic words only";
