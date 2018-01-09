@@ -45,7 +45,7 @@
 "T6d-DG-zPG.text" = "创建钱包密码";
 
 /* Class = "UILabel"; text = "钱包创建成功，强烈建议您在使用前将助记词储存到安全地方做好钱包备份"; ObjectID = "ZLj-js-I3r"; */
-"ZLj-js-I3r.text" = "钱包创建成功，强烈建议您在使用前将助记词储存到安全地方做好钱包备份";
+"ZLj-js-I3r.text" = "钱包创建成功，请在使用前将助记词储存到安全地方做好钱包备份。";
 
 /* Class = "UIButton"; normalTitle = "确定"; ObjectID = "aQP-jQ-EWn"; */
 "aQP-jQ-EWn.normalTitle" = "确定";

@@ -20,11 +20,11 @@
 "Public.wallet.error.address.generate" = "生成地址失败";
 "Public.wallet.error.address.index" = "index 错误";
 
-"Public.transaction.status.unconfirm" = "待确认";
-"Public.transaction.status.success" = "交易成功";
-"Public.transaction.status.failure" = "交易失败";
-"Public.transaction.status.confirmed" = "确认";
+"Public.transaction.status.unconfirm" = "Unconfirmed";
+"Public.transaction.status.success" = "Transaction is successful";
+"Public.transaction.status.failure" = "Transaction is failed";
+"Public.transaction.status.confirmed" = "Confirmed";
 
 "Public.transaction.remark.none" = "无";
 
-"Public.alert.action.title" = "我知道了";
+"Public.alert.action.title" = "Get it";

@@ -11,7 +11,7 @@
 "ContactC.contact_scanCode" = "扫码添加";
 "ContactC.contact_cancel" = "取消";
 "ContactC.contact_addressExits" = "地址已存在";
-"ContactC.contact_addressInvalid" = "不是合法的地址";
+"ContactC.contact_addressInvalid" = "您输入的是无效地址";
 "ContactC.contact_IDExits" = "ID 已存在";
 
 "ContactC.detail_walletID" = "钱包ID";
@@ -20,8 +20,8 @@
 "ContactC.detail_address" = "地址";
 "ContactC.detail_error" = "数据错误";
 
-"ContactC.search_empty" = "ID 不能为空";
-"ContactC.search_tooLong" = "ID 太长了";
+"ContactC.search_empty" = "钱包 ID 不能为空";
+"ContactC.search_tooLong" = "钱包 ID 支持 6-20 位字符";
 
 "ContactC.searchResult_name" = "名称";
 "ContactC.searchResult_remark" = "备注";

@@ -27,7 +27,7 @@
 "EHU-qC-GsX.text" = "备注";
 
 /* Class = "UILabel"; text = "地址"; ObjectID = "FI8-7w-5qv"; */
-"FI8-7w-5qv.text" = "地址";
+"FI8-7w-5qv.text" = "数字资产地址";
 
 /* Class = "UILabel"; text = "钱包ID"; ObjectID = "FXY-Mp-LB9"; */
 "FXY-Mp-LB9.text" = "钱包ID";

@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "推荐您添加该地址到新联系人以便下次交易"; ObjectID = "0g2-RI-9zC"; */
-"0g2-RI-9zC.text" = "推荐您添加该地址到新联系人以便下次交易";
+"0g2-RI-9zC.text" = "添加地址为常用联系人可以方便下次交易";
 
 /* Class = "UIViewController"; title = "发送"; ObjectID = "1bf-2n-T7s"; */
 "1bf-2n-T7s.title" = "发送";

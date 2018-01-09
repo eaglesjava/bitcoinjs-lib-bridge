@@ -56,8 +56,8 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 
         // Do any additional setup after loading the view.
 		let titleString = createWalletType.titleString()
-		title = "\(titleString)\(String.newWallet_create_wallet)"
-		createButton.setTitle("\(String.newWallet_create_begin)\(titleString)", for: .normal)
+		title = "\(titleString) \(String.newWallet_create_wallet)".capitalized
+		createButton.setTitle("\(String.newWallet_create_begin) \(titleString)", for: .normal)
     }
 	
 	override func viewDidAppear(_ animated: Bool) {

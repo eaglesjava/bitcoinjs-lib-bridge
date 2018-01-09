@@ -21,7 +21,7 @@
 "fRA-hf-Rq9.title" = "记下助记词";
 
 /* Class = "UILabel"; text = "请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！"; ObjectID = "hvy-wf-TqK"; */
-"hvy-wf-TqK.text" = "请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！";
+"hvy-wf-TqK.text" = "请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转走您的数字资产！ ";
 
 /* Class = "UIButton"; normalTitle = "确认"; ObjectID = "l7V-Xw-Pbi"; */
 "l7V-Xw-Pbi.normalTitle" = "确认";

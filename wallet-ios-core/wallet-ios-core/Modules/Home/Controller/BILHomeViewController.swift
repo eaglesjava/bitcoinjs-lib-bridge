@@ -266,10 +266,10 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
             })
             
             let menu = BILPopMenu()
-            menu.addItem(item: BILPopMenuItem(title: "创建钱包", tapped: {
+            menu.addItem(item: BILPopMenuItem(title: .homeHomePopWalletNew, tapped: {
                 self.performSegue(withIdentifier: "BILHomeToCreateWalletSegue", sender: nil)
             }))
-            menu.addItem(item: BILPopMenuItem(title: "导入钱包", tapped: {
+            menu.addItem(item: BILPopMenuItem(title: .homeHomePopWalletImport, tapped: {
                 self.performSegue(withIdentifier: "BILHomeToImportWalletSegue", sender: nil)
             }))
             menu.show(in: view.window!, focusPoint: point, willDismiss: {

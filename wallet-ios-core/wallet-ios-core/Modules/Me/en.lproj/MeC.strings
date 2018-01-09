@@ -8,17 +8,17 @@
 
 "MeC.agreementName" = "service";
 
-"MeC.meSection_preference" = "偏好设置";
+"MeC.meSection_preference" = "Predilection settings";
 "MeC.meSection_contacts" = "联系人设置";
-"MeC.meSection_wallet" = "钱包集成";
+"MeC.meSection_wallet" = "Wallet integration";
 "MeC.meSection_system" = "系统相关";
-"MeC.meSection_other" = "其它";
+"MeC.meSection_other" = "Other";
 
 "MeC.meCell_shortcut" = "主页快捷功能";
 "MeC.meCell_contactBackup" = "备份联系人";
 "MeC.meCell_contactRecover" = "恢复联系人";
-"MeC.meCell_system" = "系统设置";
-"MeC.meCell_aboutUs" = "关于我们";
+"MeC.meCell_system" = "System settings";
+"MeC.meCell_aboutUs" = "About us ";
 
 "MeC.contact_yourKey" = "您的联系人密钥";
 "MeC.contact_copyKey" = "复制密钥";
@@ -30,22 +30,22 @@
 "MeC.contact_recovered" = "您恢复了";
 "MeC.contact_contact" = "个联系人";
 
-"MeC.confirm" = "确认";
-"MeC.cancel" = "取消";
+"MeC.confirm" = "Confirm";
+"MeC.cancel" = "Cancel";
 
 "MeC.wallet_deleteFailed" = "删除钱包失败";
 "MeC.wallet_delete" = "删除钱包";
-"MeC.wallet_deleteMessage" = "请谨慎使用此操作，删除前确认您的钱包已备份，否则数字资产将无法找回！";
+"MeC.wallet_deleteMessage" = "Please be cautious about this operation, confirm that your wallet has been backed up before deleting, or the digital asset cannot be found.";
 "MeC.wallet_passwordEmpty" = "密码不能为空";
 "MeC.wallet_passwordError" = "密码输入错误";
-"MeC.wallet_inputPassword" = "请输入密码以确认";
+"MeC.wallet_inputPassword" = "Please input password and confirm";
 "MeC.wallet_tryLater" = "请稍后再试";
 "MeC.wallet_failed" = "操作失败";
 "MeC.wallet_backupNow" = "立即备份";
 
-"MeC.walletAddress_addressAndBalance" = "地址与余额";
+"MeC.walletAddress_addressAndBalance" = "Address and balance";
 
-"MeC.aboutUs_agreement" = "使用条款";
+"MeC.aboutUs_agreement" = "Usage terms";
 
 "MeC.appSetting_sound" = "音效";
 "MeC.appSetting_currency" = "货币";

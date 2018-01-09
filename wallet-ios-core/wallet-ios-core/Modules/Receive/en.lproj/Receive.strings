@@ -3,7 +3,7 @@
 "1fX-Kn-fBM.text" = "B";
 
 /* Class = "UIBarButtonItem"; title = "刷新地址"; ObjectID = "3l4-sG-DnM"; */
-"3l4-sG-DnM.title" = "刷新地址";
+"3l4-sG-DnM.title" = "Refresh address";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "3sB-VA-6TC"; */
 "3sB-VA-6TC.text" = "Label";
@@ -27,7 +27,7 @@
 "LfU-2L-QPe.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "当前钱包未备份，马上备份"; ObjectID = "Lla-QY-BHV"; */
-"Lla-QY-BHV.normalTitle" = "当前钱包未备份，马上备份";
+"Lla-QY-BHV.normalTitle" = "If current wallet is not backed up, please back up it immediately.";
 
 /* Class = "UILabel"; text = "btc balance"; ObjectID = "MRt-I8-1l2"; */
 "MRt-I8-1l2.text" = "btc balance";
@@ -36,31 +36,31 @@
 "MbP-wN-eFm.normalTitle" = "下一步";
 
 /* Class = "UINavigationItem"; title = "特定金额接收"; ObjectID = "Q03-cE-dXW"; */
-"Q03-cE-dXW.title" = "特定金额接收";
+"Q03-cE-dXW.title" = "Receive special amount";
 
 /* Class = "UILabel"; text = "0.00"; ObjectID = "Q37-vr-w7f"; */
 "Q37-vr-w7f.text" = "0.00";
 
 /* Class = "UILabel"; text = "选择钱包"; ObjectID = "RfN-nk-PWa"; */
-"RfN-nk-PWa.text" = "选择钱包";
+"RfN-nk-PWa.text" = "Choose wallet";
 
 /* Class = "UILabel"; text = "   BTC   "; ObjectID = "Vbc-mO-Bu1"; */
 "Vbc-mO-Bu1.text" = "   BTC   ";
 
 /* Class = "UINavigationItem"; title = "接收数量"; ObjectID = "WWw-Bm-kvr"; */
-"WWw-Bm-kvr.title" = "接收数量";
+"WWw-Bm-kvr.title" = "The quantity of reception";
 
 /* Class = "UILabel"; text = "扫一扫，向我支付"; ObjectID = "XWN-KL-CfM"; */
-"XWN-KL-CfM.text" = "扫一扫，向我支付";
+"XWN-KL-CfM.text" = "Scan to pay";
 
 /* Class = "UIViewController"; title = "输入数量"; ObjectID = "cY8-4Y-AaO"; */
 "cY8-4Y-AaO.title" = "输入数量";
 
 /* Class = "UITabBarItem"; title = "接收"; ObjectID = "ic5-jT-iGX"; */
-"ic5-jT-iGX.title" = "接收";
+"ic5-jT-iGX.title" = "Receive";
 
 /* Class = "UINavigationItem"; title = "接收"; ObjectID = "nyY-9Y-U6O"; */
-"nyY-9Y-U6O.title" = "接收";
+"nyY-9Y-U6O.title" = "Receive";
 
 /* Class = "UILabel"; text = "B"; ObjectID = "rdY-VJ-rcF"; */
 "rdY-VJ-rcF.text" = "B";

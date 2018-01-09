@@ -1,15 +1,15 @@
 
 /* Class = "UINavigationItem"; title = "系统设置"; ObjectID = "1Md-s1-Xl3"; */
-"1Md-s1-Xl3.title" = "系统设置";
+"1Md-s1-Xl3.title" = "System settings";
 
 /* Class = "UINavigationItem"; title = "钱包地址"; ObjectID = "1ew-17-gnL"; */
-"1ew-17-gnL.title" = "钱包地址";
+"1ew-17-gnL.title" = "Wallet address";
 
 /* Class = "UILabel"; text = "DateLabel"; ObjectID = "359-rW-M42"; */
 "359-rW-M42.text" = "DateLabel";
 
 /* Class = "UILabel"; text = "钱包ID"; ObjectID = "3Nt-x4-Uvf"; */
-"3Nt-x4-Uvf.text" = "钱包ID";
+"3Nt-x4-Uvf.text" = "Wallet ID";
 
 /* Class = "UINavigationItem"; title = "使用条款"; ObjectID = "66E-MU-jNj"; */
 "66E-MU-jNj.title" = "使用条款";
@@ -36,10 +36,10 @@
 "Hau-eU-XiZ.text" = "  BCH  ";
 
 /* Class = "UIButton"; normalTitle = "    扫描地址    "; ObjectID = "Kb1-BY-mIR"; */
-"Kb1-BY-mIR.normalTitle" = "    扫描地址    ";
+"Kb1-BY-mIR.normalTitle" = "    Scan address    ";
 
 /* Class = "UIButton"; normalTitle = "备份钱包"; ObjectID = "M8I-VI-SFJ"; */
-"M8I-VI-SFJ.normalTitle" = "备份钱包";
+"M8I-VI-SFJ.normalTitle" = "Back up wallet";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "M9Z-w3-kzh"; */
 "M9Z-w3-kzh.text" = "Label";
@@ -57,19 +57,19 @@
 "aQw-gC-1oQ.text" = "Label";
 
 /* Class = "UILabel"; text = "钱包ID"; ObjectID = "aWP-ji-LN2"; */
-"aWP-ji-LN2.text" = "钱包ID";
+"aWP-ji-LN2.text" = "Wallet ID";
 
 /* Class = "UIButton"; normalTitle = "钱包地址"; ObjectID = "cRb-iU-ttO"; */
-"cRb-iU-ttO.normalTitle" = "钱包地址";
+"cRb-iU-ttO.normalTitle" = "Wallet address";
 
 /* Class = "UITabBarItem"; title = "我"; ObjectID = "dFI-W1-AfE"; */
-"dFI-W1-AfE.title" = "我";
+"dFI-W1-AfE.title" = "Me";
 
 /* Class = "UILabel"; text = "Address"; ObjectID = "e1L-Dt-de7"; */
 "e1L-Dt-de7.text" = "Address";
 
 /* Class = "UINavigationItem"; title = "我"; ObjectID = "eKr-Bz-A3s"; */
-"eKr-Bz-A3s.title" = "我";
+"eKr-Bz-A3s.title" = "Me";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "gR3-UO-dS8"; */
 "gR3-UO-dS8.text" = "Label";
@@ -84,4 +84,4 @@
 "yRc-fZ-w8T.text" = "   BTC   ";
 
 /* Class = "UINavigationItem"; title = "关于我们"; ObjectID = "yxy-TC-0gw"; */
-"yxy-TC-0gw.title" = "关于我们";
+"yxy-TC-0gw.title" = "About Us";

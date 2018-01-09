@@ -51,7 +51,7 @@ class BILCopyLabel: UILabel {
     @objc
     func tapAction(gesture: UITapGestureRecognizer) {
         UIPasteboard.general.string = text
-        bil_makeToast(msg: "\(valueTitle ?? "")已复制")
+        bil_makeToast(msg: "\(valueTitle ?? "") has been copied")
     }
     
     /*
@@ -67,7 +67,7 @@ class BILCopyLabel: UILabel {
 final class BILAddressLabel: BILCopyLabel {
     override var valueTitle: String? {
         get {
-            return "地址"
+            return String.contact_detail_address.capitalized
         }
         set {}
     }
@@ -76,7 +76,7 @@ final class BILAddressLabel: BILCopyLabel {
 final class BILTXHashLabel: BILCopyLabel {
     override var valueTitle: String? {
         get {
-            return "交易 hash "
+            return String.homeTxDetailHash
         }
         set {}
     }

@@ -25,7 +25,7 @@
 "NewWalletC.create_pwdEmpty" = "密码不能为空";
 "NewWalletC.create_createPwd" = "创建钱包密码";
 "NewWalletC.create_confirmPwd" = "确认钱包密码";
-"NewWalletC.createSuccess_new" = "钱包创建成功，请您务必在使用前将助记词储存到安全地方做好钱包备份";
+"NewWalletC.createSuccess_new" = "钱包创建成功，请在使用前将助记词储存到安全地方做好钱包备份。";
 "NewWalletC.createSuccess_recover" = "钱包导入成功，请您务必保管好助记词和密码";
 "NewWalletC.createSuccess_reset" = "钱包密码重置成功，请您务必保管好助记词和密码";
 "NewWalletC.createSuccess" = "成功";

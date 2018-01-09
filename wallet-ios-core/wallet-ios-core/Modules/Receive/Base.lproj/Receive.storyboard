@@ -14,6 +14,9 @@
         <array key="FF_DIN_Condensed_Bold.otf">
             <string>DINCond-Bold</string>
         </array>
+        <array key="PingFang.ttc">
+            <string>PingFangSC-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--接收-->
@@ -88,20 +91,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="77y-FX-QbG">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77y-FX-QbG">
                                 <rect key="frame" x="142.5" y="428" width="90" height="33"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="特定金额接收">
-                                            <attributes>
-                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name="PingFangSC-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                                <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
+                                <state key="normal" title="特定金额接收">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="cY8-4Y-AaO" kind="show" identifier="BILToSpecificReceiveSegue" id="FMW-7X-C3S"/>
@@ -264,6 +258,7 @@
                         <outlet property="currentWalletShortIDLabel" destination="rdY-VJ-rcF" id="EmP-tn-SQ3"/>
                         <outlet property="qrCodeImageView" destination="eI9-zD-BLC" id="fxo-if-Dqb"/>
                         <outlet property="qrCodeImageViewHeight" destination="i7l-8s-L5B" id="QxN-c6-isa"/>
+                        <outlet property="specificButton" destination="77y-FX-QbG" id="gsy-j6-z6C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJj-1m-aWm" userLabel="First Responder" sceneMemberID="firstResponder"/>

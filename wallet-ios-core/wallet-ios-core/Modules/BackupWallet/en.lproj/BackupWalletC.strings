@@ -7,14 +7,14 @@
 */
 
 "BackupWalletC.mnmonic_emptyTitle" = "请输入密码解锁助记词";
-"BackupWalletC.mnmonic_snapshotTip" = "截图是不安全的，您的图片可能被别的应用使用。请抄写如下助记词，并妥善保存。";
+"BackupWalletC.mnmonic_snapshotTip" = "Screenshot is unsafe, which may be used by other apps. Please write down the  mnemonic words below and then save it. It will be confirmed on next screen.";
 "BackupWalletC.mnmonic_tryLater" = "请稍后再试";
-"BackupWalletC.mnmonic_failed" = "备份失败";
-"BackupWalletC.mnmonic_backupWallet" = "备份钱包";
-"BackupWalletC.mnmonic_inputPwd" = "请输入密码以确认";
+"BackupWalletC.mnmonic_failed" = "Fail to back up";
+"BackupWalletC.mnmonic_backupWallet" = "Back up wallet";
+"BackupWalletC.mnmonic_inputPwd" = "Please input password and confirm";
 "BackupWalletC.mnmonic_getWalletFailed" = "获取钱包数据失败";
-"BackupWalletC.mnmonic_decodeWalletFailed" = "解密钱包数据失败";
-"BackupWalletC.mnmonic_confirm" = "确认";
-"BackupWalletC.mnmonic_cancel" = "取消";
+"BackupWalletC.mnmonic_decodeWalletFailed" = "Fail to decode wallet";
+"BackupWalletC.mnmonic_confirm" = "Confirm";
+"BackupWalletC.mnmonic_cancel" = "Cancel";
 
 "BackupWalletC.verify_emptyTitle" = "请按顺序点击下方文字";

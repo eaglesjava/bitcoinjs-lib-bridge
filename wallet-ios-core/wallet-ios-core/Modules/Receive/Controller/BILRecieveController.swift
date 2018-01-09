@@ -18,6 +18,7 @@ class BILReceiveController: BILBaseViewController {
     @IBOutlet weak var currentWalletIDLabel: UILabel!
     @IBOutlet weak var currentWalletBalanceLabel: UILabel!
     @IBOutlet weak var currentWalletShortIDLabel: UILabel!
+    @IBOutlet weak var specificButton: UIButton!
     
     var currentWallet: WalletModel? {
         didSet {
@@ -42,6 +43,7 @@ class BILReceiveController: BILBaseViewController {
 		bgView.addGestureRecognizer(tap)
         
         qrCodeImageViewHeight.constant = qrCodeHeight
+        specificButton.setAttributedTitle(NSAttributedString(string: .receiveSpecificButtonTitle, attributes: [.font: UIFont.systemFont(ofSize: 15), .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(walletCountDidChanged(notification:)), name: .walletCountDidChanged, object: nil)
     }

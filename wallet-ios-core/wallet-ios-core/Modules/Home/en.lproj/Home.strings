@@ -36,7 +36,7 @@
 "MMP-II-XdY.text" = "0";
 
 /* Class = "UIButton"; normalTitle = "马上备份"; ObjectID = "MNm-pR-Y3T"; */
-"MNm-pR-Y3T.normalTitle" = "马上备份";
+"MNm-pR-Y3T.normalTitle" = "Back up";
 
 /* Class = "UILabel"; text = "B"; ObjectID = "NwA-EF-6cy"; */
 "NwA-EF-6cy.text" = "B";
@@ -60,28 +60,28 @@
 "iJr-DZ-SE9.text" = "ETH";
 
 /* Class = "UIButton"; normalTitle = "添加联系人"; ObjectID = "jKD-ly-HwV"; */
-"jKD-ly-HwV.normalTitle" = "添加联系人";
+"jKD-ly-HwV.normalTitle" = "Add contact";
 
 /* Class = "UILabel"; text = "0.00 CNY"; ObjectID = "kIi-ue-mEd"; */
 "kIi-ue-mEd.text" = "0.00 CNY";
 
 /* Class = "UILabel"; text = "未确认"; ObjectID = "rm9-o8-4xS"; */
-"rm9-o8-4xS.text" = "未确认";
+"rm9-o8-4xS.text" = "Unconfirmed";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "sWl-W4-hLH"; */
 "sWl-W4-hLH.text" = "Label";
 
 /* Class = "UITabBarItem"; title = "资产"; ObjectID = "skP-T0-JsY"; */
-"skP-T0-JsY.title" = "资产";
+"skP-T0-JsY.title" = "Asset";
 
 /* Class = "UIButton"; normalTitle = "扫一扫"; ObjectID = "sqe-gw-hpm"; */
-"sqe-gw-hpm.normalTitle" = "扫一扫";
+"sqe-gw-hpm.normalTitle" = "Scan";
 
 /* Class = "UILabel"; text = "Address"; ObjectID = "uIC-Be-vnV"; */
 "uIC-Be-vnV.text" = "Address";
 
 /* Class = "UIBarButtonItem"; title = "总资产"; ObjectID = "wqZ-hg-Heu"; */
-"wqZ-hg-Heu.title" = "总资产";
+"wqZ-hg-Heu.title" = "Total asset";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "xa1-Vm-H3E"; */
 "xa1-Vm-H3E.text" = "0";

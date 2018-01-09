@@ -52,6 +52,7 @@ extension String {
 	static let receiveAddressTipTitle = "ReceiveC.receive.address.tip.title".bil_localized
 	static let receiveAddressTipMessage = "ReceiveC.receive.address.tip.msg".bil_localized
 	static let receiveAddressTipRefresh = "ReceiveC.receive.address.tip.refresh".bil_localized
+    static let receiveSpecificButtonTitle = "ReceiveC.receive.specificButtonTitle".bil_localized
 	static let receiveSpecificCheckAmountTipTitle = "ReceiveC.specific.check.amount.tip.title".bil_localized
 	static let receiveSpecificCheckAmountTipMessageEmpty = "ReceiveC.specific.check.amount.tip.msg.empty".bil_localized
 	static let receiveSpecificCheckAmountTipMessageZero = "ReceiveC.specific.check.amount.tip.msg.zero".bil_localized
