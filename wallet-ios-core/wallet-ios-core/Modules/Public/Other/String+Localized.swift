@@ -200,6 +200,7 @@ extension String {
 	static let contact_detail_id = "ContactC.detail_id".bil_localized
 	static let contact_detail_address = "ContactC.detail_address".bil_localized
 	static let contact_detail_error = "ContactC.detail_error".bil_localized
+    static let contact_detail_copied = "ContactC.detail_copied".bil_localized
 	
 	static let contact_search_empty = "ContactC.search_empty".bil_localized
 	static let contact_search_tooLong = "ContactC.search_tooLong".bil_localized

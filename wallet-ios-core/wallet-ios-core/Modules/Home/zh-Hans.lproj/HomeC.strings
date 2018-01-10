@@ -12,9 +12,9 @@
 "HomeC.home.section.wallet" = "我的钱包";
 
 "HomeC.home.section.subtitle.shortcut" = "前往设置自定义";
-"HomeC.home.section.subtitle.asset" = "当前币种 %d";
-"HomeC.home.section.subtitle.unconfirm" = "正在进行中 %d";
-"HomeC.home.section.subtitle.wallet" = "当前钱包 %d";
+"HomeC.home.section.subtitle.asset" = "当前币种";
+"HomeC.home.section.subtitle.unconfirm" = "正在进行中";
+"HomeC.home.section.subtitle.wallet" = "当前钱包";
 "HomeC.home.section.subtitle.unit.ge" = "个";
 
 "HomeC.home.pop.wallet.new" = "创建钱包";

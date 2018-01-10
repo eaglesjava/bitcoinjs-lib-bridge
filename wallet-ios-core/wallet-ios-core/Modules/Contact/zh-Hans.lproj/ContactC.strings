@@ -20,6 +20,8 @@
 "ContactC.detail_address" = "地址";
 "ContactC.detail_error" = "数据错误";
 
+"ContactC.detail_copied" = "已复制";
+
 "ContactC.search_empty" = "钱包 ID 不能为空";
 "ContactC.search_tooLong" = "钱包 ID 支持 6-20 位字符";
 

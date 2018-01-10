@@ -20,6 +20,8 @@
 "ContactC.detail_address" = "address";
 "ContactC.detail_error" = "Data error";
 
+"ContactC.detail_copied" = " has been copied";
+
 "ContactC.search_empty" = "Wallet ID cannot be empty";
 "ContactC.search_tooLong" = "Wallet ID supports 6-20 characters";
 

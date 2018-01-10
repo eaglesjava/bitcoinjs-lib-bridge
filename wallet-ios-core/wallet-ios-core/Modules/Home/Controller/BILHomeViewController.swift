@@ -89,7 +89,7 @@ enum BILHomeSectionType: Int {
 		case .asset:
 			return [NSObject()]
 		case .recentRecord:
-			return BILWalletManager.shared.wallets.first!.btc_transactionArray
+			return BILTransactionManager.shared.recnetRecords
 		case .wallet:
 			return BILWalletManager.shared.wallets
 		}

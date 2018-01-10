@@ -459,6 +459,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g8R-UX-fFt">
                                 <rect key="frame" x="0.0" y="50" width="360" height="206"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BILChooseWalletCell" rowHeight="85" id="RZ5-qo-Gxd" customClass="BILChooseWalletCell" customModule="wallet_ios_core" customModuleProvider="target">
@@ -478,7 +479,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfU-2L-QPe">
-                                                            <rect key="frame" x="85" y="50" width="33" height="16"/>
+                                                            <rect key="frame" x="85" y="49" width="33" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -513,12 +514,12 @@
                                                     <constraints>
                                                         <constraint firstItem="rgd-Iu-ei0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3sB-VA-6TC" secondAttribute="trailing" constant="20" id="3qB-dD-jrr"/>
                                                         <constraint firstItem="3sB-VA-6TC" firstAttribute="top" secondItem="1fX-Kn-fBM" secondAttribute="top" id="4ca-Ce-Xq3"/>
+                                                        <constraint firstItem="LfU-2L-QPe" firstAttribute="bottom" secondItem="1fX-Kn-fBM" secondAttribute="bottom" id="BQR-ur-pW6"/>
                                                         <constraint firstItem="LfU-2L-QPe" firstAttribute="leading" secondItem="3sB-VA-6TC" secondAttribute="leading" id="DGv-Tr-nyl"/>
                                                         <constraint firstItem="rgd-Iu-ei0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LfU-2L-QPe" secondAttribute="trailing" constant="20" id="La4-gM-4Gl"/>
                                                         <constraint firstItem="rgd-Iu-ei0" firstAttribute="centerY" secondItem="Ldv-XR-Q0r" secondAttribute="centerY" id="XAP-t3-0sh"/>
                                                         <constraint firstAttribute="trailing" secondItem="rgd-Iu-ei0" secondAttribute="trailing" constant="25" id="Zxx-P6-wOh"/>
                                                         <constraint firstItem="1fX-Kn-fBM" firstAttribute="leading" secondItem="Ldv-XR-Q0r" secondAttribute="leading" constant="25" id="baH-fO-xs8"/>
-                                                        <constraint firstItem="LfU-2L-QPe" firstAttribute="top" secondItem="3sB-VA-6TC" secondAttribute="bottom" constant="8" id="fRg-K9-oxx"/>
                                                         <constraint firstItem="1fX-Kn-fBM" firstAttribute="centerY" secondItem="Ldv-XR-Q0r" secondAttribute="centerY" id="fnz-3Q-2mZ"/>
                                                         <constraint firstItem="3sB-VA-6TC" firstAttribute="leading" secondItem="1fX-Kn-fBM" secondAttribute="trailing" constant="15" id="rS5-l1-tIo"/>
                                                     </constraints>
@@ -583,7 +584,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sDP-2p-BDQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1150" y="649"/>
+            <point key="canvasLocation" x="1148.8" y="648.57571214392806"/>
         </scene>
     </scenes>
     <resources>

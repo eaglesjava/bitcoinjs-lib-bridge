@@ -11,13 +11,13 @@ import Toast_Swift
 
 extension UIViewController {
     func bil_makeToast(msg: String?, completion: ((_ didTap: Bool) -> Void)? = nil) {
-        view.makeToast(msg, completion: completion)
+        view.makeToast(msg, duration: 2.5, completion: completion)
     }
 }
 
 extension UIView {
     func bil_makeToast(msg: String?, completion: ((_ didTap: Bool) -> Void)? = nil) {
-        window?.makeToast(msg, completion: completion)
+        window?.makeToast(msg, duration: 2.5, completion: completion)
     }
 }
 
@@ -51,7 +51,7 @@ class BILCopyLabel: UILabel {
     @objc
     func tapAction(gesture: UITapGestureRecognizer) {
         UIPasteboard.general.string = text
-        bil_makeToast(msg: "\(valueTitle ?? "") has been copied")
+        bil_makeToast(msg: "\(valueTitle ?? "")\(String.contact_detail_copied)")
     }
     
     /*
