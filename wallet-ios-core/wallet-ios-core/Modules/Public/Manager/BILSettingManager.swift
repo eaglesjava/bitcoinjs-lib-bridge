@@ -68,7 +68,7 @@ enum CurrencyType: Int {
 }
 
 enum BILLanguageType: String {
-    case zh_cn = "zh-Hans-US"
+    case zh_cn = "zh-Hans"
     case en = "en"
     
     var name: String {
@@ -128,10 +128,21 @@ class BILSettingManager: NSObject {
             UserDefaults.standard.set([newValue.rawValue], forKey: .bil_UserDefaultsKey_currentLanguageType)
         }
         get {
-            guard let str  = (UserDefaults.standard.array(forKey: .bil_UserDefaultsKey_currentLanguageType) as? [String])?.first else {
+            guard var str  = (UserDefaults.standard.array(forKey: .bil_UserDefaultsKey_currentLanguageType) as? [String])?.first else {
+                self.currentLanguage = .en
                 return .en
             }
-            return BILLanguageType(rawValue: str) ?? .en
+            if str.hasPrefix(BILLanguageType.zh_cn.rawValue) {
+                str = BILLanguageType.zh_cn.rawValue
+            }
+            if str.hasPrefix(BILLanguageType.en.rawValue) {
+                str = BILLanguageType.en.rawValue
+            }
+            if let type = BILLanguageType(rawValue: str) {
+                return type
+            }
+            self.currentLanguage = .en
+            return .en
         }
     }
 }
