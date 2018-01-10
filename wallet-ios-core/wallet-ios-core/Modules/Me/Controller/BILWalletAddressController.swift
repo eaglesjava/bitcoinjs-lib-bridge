@@ -24,6 +24,17 @@ class BILWalletAddressController: BILLightBlueBaseController {
         // Do any additional setup after loading the view.
         tableView.register(UINib(nibName: "BILTableViewHeaderFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "BILTableViewHeaderFooterView")
         refreshUI()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
+    }
+    
+    @objc
+    func walletDidChanged(notification: Notification) {
+        refreshUI()
     }
     
     func refreshUI() {

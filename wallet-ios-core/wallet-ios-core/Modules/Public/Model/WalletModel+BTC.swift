@@ -88,7 +88,7 @@ extension WalletModel {
         {
             BitcoinJSBridge.shared.getAddress(xpub: xpub, index: Int(index), success: { (address) in
                 if let add = address as? String {
-                    let addModel = bil_btc_wallet_addressManager.newModel()
+                    let addModel = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: add)
                     addModel.address = add
                     addModel.index = index
                     addModel.satoshi = 0
