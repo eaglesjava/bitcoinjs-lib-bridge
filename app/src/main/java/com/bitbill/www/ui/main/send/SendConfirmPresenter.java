@@ -16,12 +16,12 @@ import com.bitbill.www.crypto.entity.Transaction;
 import com.bitbill.www.crypto.utils.ConvertUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.network.entity.GetTxElement;
+import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.transaction.network.entity.SendTransactionRequest;
+import com.bitbill.www.model.transaction.network.entity.SendTransactionResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.GetTxElement;
-import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
-import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +35,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu on 2017/12/18.
  */
 @PerActivity
-public class SendConfirmPresenter<M extends WalletModel, V extends SendConfirmMvpView> extends ModelPresenter<M, V> implements SendConfirmMvpPresenter<M, V> {
+public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpView> extends ModelPresenter<M, V> implements SendConfirmMvpPresenter<M, V> {
 
     private static final String TAG = "SendConfirmPresenter";
 

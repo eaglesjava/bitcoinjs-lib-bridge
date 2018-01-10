@@ -1,4 +1,4 @@
-package com.bitbill.www.model.wallet.network.entity;
+package com.bitbill.www.model.transaction.network.entity;
 
 /**
  * extendedKeysHash	true	String	扩展公钥MD5

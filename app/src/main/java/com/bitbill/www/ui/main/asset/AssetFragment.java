@@ -20,8 +20,8 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.PopupWalletMenu;
 import com.bitbill.www.common.widget.WalletView;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.TxItem;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.main.my.ShortCutSettingMvpPresenter;
 import com.bitbill.www.ui.main.my.ShortCutSettingMvpView;
@@ -225,7 +225,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
     }
 
-    public void loadUnconfirm(List<TxItem> unconfirmList) {
+    public void loadUnconfirm(List<TxRecord> unconfirmList) {
         if (StringUtils.isEmpty(unconfirmList)) {
             //如果加载不到未确认列表 移除BtcUnconfirmFragment
             Fragment fragment = getChildFragmentManager().findFragmentByTag(BtcUnconfirmFragment.TAG);
@@ -237,7 +237,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
                 getChildFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<TxItem>) unconfirmList), BtcUnconfirmFragment.TAG)
+                        .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<TxRecord>) unconfirmList), BtcUnconfirmFragment.TAG)
                         .commit();
             }
         }

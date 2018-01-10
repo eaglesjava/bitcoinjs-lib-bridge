@@ -273,5 +273,6 @@
     <string name="title_address_balance">地址与余额</string>
     <string name="copy_address">地址已复制</string>
     <string name="positive_copy_contact_key">复制联系人密钥</string>
+    <string name="copy_confim_count">交易高度已复制</string>
 
 </resources>

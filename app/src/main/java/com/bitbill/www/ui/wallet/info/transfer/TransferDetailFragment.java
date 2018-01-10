@@ -10,13 +10,15 @@ import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseListFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
-import com.bitbill.www.model.wallet.network.entity.TxElement;
-import com.bitbill.www.model.wallet.network.entity.TxItem;
+import com.bitbill.www.model.transaction.db.entity.Input;
+import com.bitbill.www.model.transaction.db.entity.Output;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
 
@@ -29,14 +31,14 @@ import butterknife.ButterKnife;
 
 public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPresenter> {
 
-    private TxItem mTxItem;
+    private TxRecord mTxRecord;
     private HeaderViewHolder mHeaderViewHolder;
     private FooterViewHolder mFooterViewHolder;
 
-    public static TransferDetailFragment newInstance(TxItem txItem) {
+    public static TransferDetailFragment newInstance(TxRecord txRecord) {
 
         Bundle args = new Bundle();
-        args.putSerializable(AppConstants.ARG_TX_ITEM, txItem);
+        args.putSerializable(AppConstants.ARG_TX_ITEM, txRecord);
         TransferDetailFragment fragment = new TransferDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -66,34 +68,35 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
 
     @Override
     public void initData() {
-        mTxItem = ((TxItem) getArguments().getSerializable(AppConstants.ARG_TX_ITEM));
-        if (mTxItem == null) {
+        mTxRecord = ((TxRecord) getArguments().getSerializable(AppConstants.ARG_TX_ITEM));
+        if (mTxRecord == null) {
             showMessage(R.string.fail_load_transfer_details);
             return;
         }
         //构造列表数据
         mDatas.clear();
-        mDatas.add(new TransferHashItem().setHash(mTxItem.getTxHash()).setTitle(getString(R.string.title_tx_hash)));
-        for (TxElement.InputsBean inputsBean : mTxItem.getInputs()) {
+        mDatas.add(new TransferHashItem().setHash(mTxRecord.getTxHash()).setTitle(getString(R.string.title_tx_hash)));
+        for (Input inputsBean : mTxRecord.getInputs()) {
             mDatas.add(new TransferSendItem().setAddress(inputsBean.getAddress()).setAmount(inputsBean.getValue()).setTitle(getString(R.string.title_tx_send_address)));
         }
-        for (TxElement.OutputsBean outputsBean : mTxItem.getOutputs()) {
+        for (Output outputsBean : mTxRecord.getOutputs()) {
             mDatas.add(new TransferReceiveItem().setAddress(outputsBean.getAddress()).setAmount(outputsBean.getValue()).setTitle(getString(R.string.title_tx_receive_address)));
         }
-        mDatas.add(new TransferRemarkItem().setRemark(mTxItem.getRemark()).setTitle(getString(R.string.title_tx_remark)));
-        mDatas.add(new TransferDateItem().setDate(StringUtils.formatDate(mTxItem.getCreatedTime())).setTitle(getString(R.string.title_tx_date)));
+
+        mDatas.add(new TransferRemarkItem().setRemark(mTxRecord.getRemark()).setTitle(getString(R.string.title_tx_remark)));
+        mDatas.add(new TransferDateItem().setDate(StringUtils.formatDate(mTxRecord.getCreatedTime())).setTitle(getString(R.string.title_tx_date)));
         mAdapter.notifyDataSetChanged();
 
         if (mHeaderViewHolder != null) {
 
-            String inOutString = mTxItem.getInOut() == TxItem.InOut.TRANSFER ? "" : (mTxItem.getInOut() == TxItem.InOut.IN ? "+" : "-");
-            mHeaderViewHolder.mTvTransferAmount.setText(inOutString + StringUtils.satoshi2btc(mTxItem.getSumAmount()) + " btc");
+            String inOutString = mTxRecord.getInOut() == TxRecord.InOut.TRANSFER ? "" : (mTxRecord.getInOut() == TxRecord.InOut.IN ? "+" : "-");
+            mHeaderViewHolder.mTvTransferAmount.setText(inOutString + StringUtils.satoshi2btc(mTxRecord.getSumAmount()) + " btc");
             StringUtils.setAmountTypeface(getBaseActivity(), mHeaderViewHolder.mTvTransferAmount);
-            if (mTxItem.getHeight() == -1) {
+            if (mTxRecord.getHeight() == -1) {
                 mHeaderViewHolder.mIvTransferStatus.setImageResource(R.drawable.ic_transfer_unconfirm);
                 mHeaderViewHolder.mTvTransferStatus.setText(R.string.status_transfer_unconfirm);
             } else {
-                switch (mTxItem.getInOut()) {
+                switch (mTxRecord.getInOut()) {
                     case TRANSFER:
                         mHeaderViewHolder.mIvTransferStatus.setImageResource(R.drawable.ic_item_transfer);
                         mHeaderViewHolder.mTvTransferStatus.setText(R.string.status_transfer_self);
@@ -110,7 +113,7 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
             }
         }
         if (mFooterViewHolder != null) {
-            mFooterViewHolder.mTvViewTx.setOnClickListener(v -> UIHelper.openBrower(getBaseActivity(), AppConstants.TX_BLOCK_CHAIN_PREFIX + mTxItem.getTxHash()));
+            mFooterViewHolder.mTvViewTx.setOnClickListener(v -> UIHelper.openBrower(getBaseActivity(), AppConstants.TX_BLOCK_CHAIN_PREFIX + mTxRecord.getTxHash()));
         }
     }
 
@@ -133,6 +136,12 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
             TransferReceiveItem receiveItem = (TransferReceiveItem) transferItem;
             UIHelper.copy(getBaseActivity(), receiveItem.getAddress());
             showMessage(R.string.copy_receive_address);
+
+        } else if (transferItem instanceof TransferConfirmItem) {
+
+            TransferConfirmItem confirmItem = (TransferConfirmItem) transferItem;
+            UIHelper.copy(getBaseActivity(), getConfirmCount(confirmItem));
+            showMessage(R.string.copy_confim_count);
 
         } else if (transferItem instanceof TransferRemarkItem) {
 
@@ -177,6 +186,11 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
             holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(receiveItem.getAmount()) + " BTC");
             holder.setVisible(R.id.tv_tx_right, true);
 
+        } else if (transferItem instanceof TransferConfirmItem) {
+            holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_remark));
+            holder.setText(R.id.tv_tx_left, getConfirmCount((TransferConfirmItem) transferItem));
+            holder.setVisible(R.id.tv_tx_right, false);
+
         } else if (transferItem instanceof TransferRemarkItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_remark));
             TransferRemarkItem remarkItem = (TransferRemarkItem) transferItem;
@@ -190,6 +204,11 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
             holder.setVisible(R.id.tv_tx_right, false);
 
         }
+    }
+
+    private String getConfirmCount(TransferConfirmItem transferItem) {
+        TransferConfirmItem confirmItem = transferItem;
+        return String.valueOf(BitbillApp.get().getBlockHeight() - confirmItem.getHeight() + 1);
     }
 
     @Override

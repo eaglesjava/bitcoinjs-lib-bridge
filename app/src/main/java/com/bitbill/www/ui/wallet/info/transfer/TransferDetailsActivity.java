@@ -6,26 +6,26 @@ import android.support.v4.app.Fragment;
 
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseFragmentActivity;
-import com.bitbill.www.model.wallet.network.entity.TxItem;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 
 public class TransferDetailsActivity extends BaseFragmentActivity {
 
-    private TxItem mTxItem;
+    private TxRecord mTxRecord;
 
-    public static void start(Context context, TxItem txItem) {
+    public static void start(Context context, TxRecord txRecord) {
         Intent starter = new Intent(context, TransferDetailsActivity.class);
-        starter.putExtra(AppConstants.EXTRA_TX_ITEM, txItem);
+        starter.putExtra(AppConstants.EXTRA_TX_ITEM, txRecord);
         context.startActivity(starter);
     }
 
     @Override
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
-        mTxItem = ((TxItem) getIntent().getSerializableExtra(AppConstants.EXTRA_TX_ITEM));
+        mTxRecord = ((TxRecord) getIntent().getSerializableExtra(AppConstants.EXTRA_TX_ITEM));
     }
 
     @Override
     protected Fragment getFragment() {
-        return TransferDetailFragment.newInstance(mTxItem);
+        return TransferDetailFragment.newInstance(mTxRecord);
     }
 }

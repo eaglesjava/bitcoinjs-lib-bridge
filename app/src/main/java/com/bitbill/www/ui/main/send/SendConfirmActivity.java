@@ -22,9 +22,9 @@ import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
-import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -52,7 +52,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     @BindView(R.id.et_send_mark)
     EditText etSendMark;
     @Inject
-    SendConfirmMvpPresenter<WalletModel, SendConfirmMvpView> mSendConfirmMvpPresenter;
+    SendConfirmMvpPresenter<TxModel, SendConfirmMvpView> mSendConfirmMvpPresenter;
     @Inject
     BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
     private String mSendAddress;

@@ -2,6 +2,8 @@ package com.bitbill.www.model.wallet.network;
 
 import com.bitbill.www.common.base.model.network.api.Api;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
@@ -9,19 +11,10 @@ import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
 import com.bitbill.www.model.wallet.network.entity.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxElement;
-import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxInfoRequest;
-import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxListRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
-import com.bitbill.www.model.wallet.network.entity.ListTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
-import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
-import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 
 import io.reactivex.Observable;
 
@@ -78,37 +71,6 @@ public interface WalletApi extends Api {
      */
     Observable<ApiResponse> getBalance(GetBalanceRequest getBalanceRequest);
 
-    /**
-     * 获取交易相关元素
-     *
-     * @param getTxElement
-     * @return
-     */
-    Observable<ApiResponse<GetTxElementResponse>> getTxElement(GetTxElement getTxElement);
-
-    /**
-     * 发送交易
-     *
-     * @param sendTransactionRequest
-     * @return
-     */
-    Observable<ApiResponse<SendTransactionResponse>> sendTransaction(SendTransactionRequest sendTransactionRequest);
-
-    /**
-     * 交易记录
-     *
-     * @param getTxListRequest
-     * @return
-     */
-    Observable<ApiResponse<ListTxElementResponse>> getTxList(GetTxListRequest getTxListRequest);
-
-    /**
-     * 未确认交易列表
-     *
-     * @param listUnconfirmRequest
-     * @return
-     */
-    Observable<ApiResponse<ListTxElementResponse>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest);
 
     /**
      * 获取配置信息

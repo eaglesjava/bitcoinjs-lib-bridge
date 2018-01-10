@@ -1,4 +1,4 @@
-package com.bitbill.www.model.wallet.network.entity;
+package com.bitbill.www.model.transaction.network.entity;
 
 import java.util.List;
 

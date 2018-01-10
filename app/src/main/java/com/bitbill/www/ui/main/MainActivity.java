@@ -36,10 +36,11 @@ import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
 import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
+import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.TxElement;
-import com.bitbill.www.model.wallet.network.entity.TxItem;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
@@ -81,7 +82,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Inject
     WalletMvpPresenter<WalletModel, WalletMvpView> mWalletPresenter;
     @Inject
-    ParseTxInfoMvpPresenter<AddressModel, ParseTxInfoMvpView> mParseTxInfoMvpPresenter;
+    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mParseTxInfoMvpPresenter;
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
@@ -285,7 +286,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void OnTransactionRecordItemClick(TxItem item) {
+    public void OnTransactionRecordItemClick(TxRecord item) {
         //跳转到确认交易详情
         TransferDetailsActivity.start(MainActivity.this, item);
     }
@@ -351,7 +352,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     }
 
-    private void loadParsedUnconfirmList(List<TxItem> data) {
+    private void loadParsedUnconfirmList(List<TxRecord> data) {
         if (mAssetFragment != null) {
             mAssetFragment.loadUnconfirm(data);
         }
@@ -460,8 +461,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void parsedTxItemList(List<TxItem> txItems) {
-        loadParsedUnconfirmList(txItems);
+    public void parsedTxItemList(List<TxRecord> txRecords) {
+        loadParsedUnconfirmList(txRecords);
     }
 
     @Override

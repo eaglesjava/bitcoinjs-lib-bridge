@@ -29,6 +29,7 @@ import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.contact.ContactModel;
+import com.bitbill.www.model.transaction.TxModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.ui.guide.GuideMvpPresenter;
 import com.bitbill.www.ui.guide.GuideMvpView;
@@ -220,8 +221,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    SendConfirmMvpPresenter<WalletModel, SendConfirmMvpView> provideSendConfrimPresenter(
-            SendConfirmPresenter<WalletModel, SendConfirmMvpView> presenter) {
+    SendConfirmMvpPresenter<TxModel, SendConfirmMvpView> provideSendConfrimPresenter(
+            SendConfirmPresenter<TxModel, SendConfirmMvpView> presenter) {
         return presenter;
     }
 
@@ -331,15 +332,15 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    ParseTxInfoMvpPresenter<AddressModel, ParseTxInfoMvpView> provideParseTxInfoPresenter(
-            ParseTxInfoPresenter<AddressModel, ParseTxInfoMvpView> presenter) {
+    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> provideParseTxInfoPresenter(
+            ParseTxInfoPresenter<TxModel, ParseTxInfoMvpView> presenter) {
         return presenter;
     }
 
     @Provides
     @PerActivity
-    BtcRecordMvpPresenter<WalletModel, BtcRecordMvpView> provideBtcRecordPresenter(
-            BtcRecordPresenter<WalletModel, BtcRecordMvpView> presenter) {
+    BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> provideBtcRecordPresenter(
+            BtcRecordPresenter<TxModel, BtcRecordMvpView> presenter) {
         return presenter;
     }
 

@@ -39,6 +39,12 @@ import com.bitbill.www.model.contact.db.ContactDb;
 import com.bitbill.www.model.contact.db.ContactDbHelper;
 import com.bitbill.www.model.contact.network.ContactApi;
 import com.bitbill.www.model.contact.network.ContactApiHelper;
+import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.TxModelManager;
+import com.bitbill.www.model.transaction.db.TxDb;
+import com.bitbill.www.model.transaction.db.TxDbHelper;
+import com.bitbill.www.model.transaction.network.TxApi;
+import com.bitbill.www.model.transaction.network.TxApiHelper;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.WalletModelManager;
 import com.bitbill.www.model.wallet.db.WalletDb;
@@ -217,6 +223,24 @@ public class ApplicationModule {
     @Singleton
     AddressApi provideAddressApiHelper(AddressApiHelper addressApiHelper) {
         return addressApiHelper;
+    }
+
+    @Provides
+    @Singleton
+    TxModel provideTxModuleManager(TxModelManager txModelManager) {
+        return txModelManager;
+    }
+
+    @Provides
+    @Singleton
+    TxDb provideTxDbHelper(TxDbHelper txDbHelper) {
+        return txDbHelper;
+    }
+
+    @Provides
+    @Singleton
+    TxApi provideTxApiHelper(TxApiHelper txApiHelper) {
+        return txApiHelper;
     }
 
 }

@@ -13,6 +13,7 @@ import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.contact.ContactModel;
+import com.bitbill.www.model.transaction.TxModel;
 import com.bitbill.www.model.wallet.WalletModel;
 
 import javax.inject.Singleton;
@@ -42,6 +43,8 @@ public interface ApplicationComponent {
     ContactModel getContactModel();
 
     AddressModel getAddressModel();
+
+    TxModel getTxModel();
 
     Socket getSocket();
 }

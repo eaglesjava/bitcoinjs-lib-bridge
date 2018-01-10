@@ -30,11 +30,12 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
+import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
+import com.bitbill.www.model.transaction.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
-import com.bitbill.www.model.wallet.network.entity.ListTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
 
 import org.json.JSONObject;
 
@@ -53,6 +54,8 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
         implements MainMvpPresenter<M, V> {
 
     private static final String TAG = "MainPresenter";
+    @Inject
+    TxModel mTxModel;
 
     @Inject
     public MainPresenter(M appModel, SchedulerProvider schedulerProvider,
@@ -141,7 +144,7 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                 extendedKeysHash += "|";
             }
         }
-        getCompositeDisposable().add(getModelManager()
+        getCompositeDisposable().add(mTxModel
                 .listUnconfirm(new ListUnconfirmRequest(extendedKeysHash))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<ListTxElementResponse>>() {

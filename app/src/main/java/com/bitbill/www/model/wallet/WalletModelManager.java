@@ -11,6 +11,8 @@ import com.bitbill.www.common.base.model.ModelManager;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.ApplicationContext;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.db.WalletDb;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.WalletApi;
@@ -21,19 +23,10 @@ import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
 import com.bitbill.www.model.wallet.network.entity.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxElement;
-import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxInfoRequest;
-import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxListRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
-import com.bitbill.www.model.wallet.network.entity.ListTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
-import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
-import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 
 import java.util.List;
 
@@ -167,37 +160,6 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     @Override
     public Observable<ApiResponse> getBalance(GetBalanceRequest getBalanceRequest) {
         return mWalletApi.getBalance(getBalanceRequest);
-    }
-
-    @Override
-    public Observable<ApiResponse<GetTxElementResponse>> getTxElement(GetTxElement getTxElement) {
-        return mWalletApi.getTxElement(getTxElement);
-    }
-
-    @Override
-    public Observable<ApiResponse<SendTransactionResponse>> sendTransaction(SendTransactionRequest sendTransactionRequest) {
-        return mWalletApi.sendTransaction(sendTransactionRequest);
-    }
-
-    /**
-     * 交易记录
-     *
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<ListTxElementResponse>> getTxList(GetTxListRequest getTxListRequest) {
-        return mWalletApi.getTxList(getTxListRequest);
-    }
-
-    /**
-     * 未确认交易列表
-     *
-     * @param listUnconfirmRequest
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<ListTxElementResponse>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest) {
-        return mWalletApi.listUnconfirm(listUnconfirmRequest);
     }
 
     /**

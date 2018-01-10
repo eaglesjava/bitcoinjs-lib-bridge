@@ -5,6 +5,8 @@ import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiHelper;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
@@ -12,19 +14,10 @@ import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
 import com.bitbill.www.model.wallet.network.entity.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxElement;
-import com.bitbill.www.model.wallet.network.entity.GetTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxInfoRequest;
-import com.bitbill.www.model.wallet.network.entity.GetTxInfoResponse;
-import com.bitbill.www.model.wallet.network.entity.GetTxListRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
-import com.bitbill.www.model.wallet.network.entity.ListTxElementResponse;
-import com.bitbill.www.model.wallet.network.entity.ListUnconfirmRequest;
-import com.bitbill.www.model.wallet.network.entity.SendTransactionRequest;
-import com.bitbill.www.model.wallet.network.entity.SendTransactionResponse;
 import com.google.gson.reflect.TypeToken;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -126,56 +119,6 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
                 .addApplicationJsonBody(getBalanceRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse>() {
-                });
-    }
-
-    @Override
-    public Observable<ApiResponse<GetTxElementResponse>> getTxElement(GetTxElement getTxElement) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_TX_ELEMENT)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(getTxElement)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<GetTxElementResponse>>() {
-                });
-    }
-
-    @Override
-    public Observable<ApiResponse<SendTransactionResponse>> sendTransaction(SendTransactionRequest sendTransactionRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.SEND_TRANSACTION)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(sendTransactionRequest)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<SendTransactionResponse>>() {
-                });
-    }
-
-    /**
-     * 交易记录
-     *
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<ListTxElementResponse>> getTxList(GetTxListRequest getTxListRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_TX_LIST)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(getTxListRequest)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<ListTxElementResponse>>() {
-                });
-    }
-
-    /**
-     * 未确认交易列表
-     *
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<ListTxElementResponse>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.LIST_UNCONFIRM_TX)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(listUnconfirmRequest)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<ListTxElementResponse>>() {
                 });
     }
 

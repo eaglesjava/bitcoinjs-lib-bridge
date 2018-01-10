@@ -14,11 +14,10 @@ import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.bitbill.www.model.wallet.network.entity.TxElement;
-import com.bitbill.www.model.wallet.network.entity.TxItem;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.List;
@@ -33,7 +32,7 @@ import butterknife.BindView;
  * Activities containing this fragment MUST implement the {@link OnTransactionRecordItemClickListener}
  * interface.
  */
-public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvpPresenter> implements BtcRecordMvpView, ParseTxInfoMvpView {
+public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordMvpPresenter> implements BtcRecordMvpView, ParseTxInfoMvpView {
 
     @BindView(R.id.tv_amount)
     TextView tvAmount;
@@ -44,9 +43,9 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     @BindView(R.id.tv_btc_unconfirm)
     TextView tvBtcUnconfirm;
     @Inject
-    BtcRecordMvpPresenter<WalletModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
+    BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
     @Inject
-    ParseTxInfoMvpPresenter<AddressModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
+    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
     private OnTransactionRecordItemClickListener mListener;
     private Wallet mWalelt;
     private List<TxElement> mTxElementList;
@@ -95,9 +94,9 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     }
 
     @Override
-    protected void onListItemClick(TxItem txItem, int position) {
+    protected void onListItemClick(TxRecord txRecord, int position) {
         if (mListener != null) {
-            mListener.OnTransactionRecordItemClick(txItem);
+            mListener.OnTransactionRecordItemClick(txRecord);
         }
     }
 
@@ -113,21 +112,15 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     }
 
     @Override
-    protected void itemConvert(ViewHolder holder, TxItem txItem, int position) {
-        holder.setText(R.id.tv_address, txItem.getInOut() == TxItem.InOut.OUT ? txItem.getGatherAddressIn() : txItem.getGatherAddressOut());
-        String inOutString = txItem.getInOut() == TxItem.InOut.TRANSFER ? "" : (txItem.getInOut() == TxItem.InOut.IN ? "+" : "-");
-        holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txItem.getSumAmount()) + " btc");
+    protected void itemConvert(ViewHolder holder, TxRecord txRecord, int position) {
+        String inOutString = txRecord.getInOut() == TxRecord.InOut.TRANSFER ? "" : (txRecord.getInOut() == TxRecord.InOut.IN ? "+" : "-");
+        holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txRecord.getSumAmount()) + " btc");
 
-        holder.setText(R.id.tv_date, txItem.getCreatedTime());
-        if (txItem.getHeight() == -1) {
+        holder.setText(R.id.tv_date, txRecord.getCreatedTime());
+        if (txRecord.getHeight() == -1) {
             holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
-            holder.setAlpha(R.id.tv_confirm_count, 0.6f);
-            holder.setText(R.id.tv_confirm_count, "未确认");
         } else {
-            long confirmCount = BitbillApp.get().getBlockHeight() - txItem.getHeight() + 1;
-            holder.setAlpha(R.id.tv_confirm_count, 1.0f);
-            holder.setText(R.id.tv_confirm_count, (confirmCount > 1000 ? "1000+" : String.valueOf(confirmCount)) + "确认");
-            switch (txItem.getInOut()) {
+            switch (txRecord.getInOut()) {
                 case TRANSFER:
                     holder.setImageResource(R.id.iv_status, R.drawable.ic_item_transfer);
                     break;
@@ -243,8 +236,8 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
     }
 
     @Override
-    public void parsedTxItemList(List<TxItem> txItems) {
-        setDatas(txItems);
+    public void parsedTxItemList(List<TxRecord> txRecords) {
+        setDatas(txRecords);
         setRefresh(false);
     }
 
@@ -266,6 +259,6 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxItem, BtcRecordMvp
      */
     public interface OnTransactionRecordItemClickListener {
         // TODO: Update argument type and name
-        void OnTransactionRecordItemClick(TxItem item);
+        void OnTransactionRecordItemClick(TxRecord item);
     }
 }

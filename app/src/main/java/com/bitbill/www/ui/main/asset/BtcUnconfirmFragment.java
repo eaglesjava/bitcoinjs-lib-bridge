@@ -6,11 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
-import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseListFragment;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.model.wallet.network.entity.TxItem;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -25,7 +24,7 @@ import butterknife.BindView;
  * Activities containing this fragment MUST implement the {@link OnTransactionRecordItemClickListener}
  * interface.
  */
-public class BtcUnconfirmFragment extends BaseListFragment<TxItem, MvpPresenter> {
+public class BtcUnconfirmFragment extends BaseListFragment<TxRecord, MvpPresenter> {
 
     public static final String TAG = BtcUnconfirmFragment.class.getSimpleName();
     private static final String ARG_UNCONFIRM_LIST = "arg_unconfirm_list";
@@ -34,8 +33,8 @@ public class BtcUnconfirmFragment extends BaseListFragment<TxItem, MvpPresenter>
     @BindView(R.id.tv_in_progress)
     TextView tvInProgress;
     private OnTransactionRecordItemClickListener mListener;
-    private List<TxItem> mUnconfirmList;
-    private CommonAdapter<TxItem> mAdapter;
+    private List<TxRecord> mUnconfirmList;
+    private CommonAdapter<TxRecord> mAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -44,7 +43,7 @@ public class BtcUnconfirmFragment extends BaseListFragment<TxItem, MvpPresenter>
     public BtcUnconfirmFragment() {
     }
 
-    public static BtcUnconfirmFragment newInstance(ArrayList<TxItem> unconfirmList) {
+    public static BtcUnconfirmFragment newInstance(ArrayList<TxRecord> unconfirmList) {
         BtcUnconfirmFragment fragment = new BtcUnconfirmFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_UNCONFIRM_LIST, unconfirmList);
@@ -86,28 +85,22 @@ public class BtcUnconfirmFragment extends BaseListFragment<TxItem, MvpPresenter>
     }
 
     @Override
-    protected void onListItemClick(TxItem txItem, int position) {
+    protected void onListItemClick(TxRecord txRecord, int position) {
         if (mListener != null) {
-            mListener.OnTransactionRecordItemClick(txItem);
+            mListener.OnTransactionRecordItemClick(txRecord);
         }
     }
 
     @Override
-    protected void itemConvert(ViewHolder holder, TxItem txItem, int position) {
-        holder.setText(R.id.tv_address, txItem.getInOut() == TxItem.InOut.OUT ? txItem.getGatherAddressIn() : txItem.getGatherAddressOut());
-        String inOutString = txItem.getInOut() == TxItem.InOut.TRANSFER ? "" : (txItem.getInOut() == TxItem.InOut.IN ? "+" : "-");
-        holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txItem.getSumAmount()) + " btc");
-
-        holder.setText(R.id.tv_date, txItem.getCreatedTime());
-        if (txItem.getHeight() == -1) {
+    protected void itemConvert(ViewHolder holder, TxRecord txRecord, int position) {
+        String inOutString = txRecord.getInOut() == TxRecord.InOut.TRANSFER ? "" : (txRecord.getInOut() == TxRecord.InOut.IN ? "+" : "-");
+        holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txRecord.getSumAmount()) + " btc");
+        holder.setText(R.id.tv_wallet_id, txRecord.getWallet().getName());
+        holder.setText(R.id.tv_date, txRecord.getCreatedTime());
+        if (txRecord.getHeight() == -1) {
             holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
-            holder.setAlpha(R.id.tv_confirm_count, 0.6f);
-            holder.setText(R.id.tv_confirm_count, "未确认");
         } else {
-            long confirmCount = BitbillApp.get().getBlockHeight() - txItem.getHeight() + 1;
-            holder.setAlpha(R.id.tv_confirm_count, 1.0f);
-            holder.setText(R.id.tv_confirm_count, confirmCount > 1000 ? "1000+" : String.valueOf(confirmCount) + "确认");
-            switch (txItem.getInOut()) {
+            switch (txRecord.getInOut()) {
                 case TRANSFER:
                     holder.setImageResource(R.id.iv_status, R.drawable.ic_item_transfer);
                     break;
@@ -138,7 +131,7 @@ public class BtcUnconfirmFragment extends BaseListFragment<TxItem, MvpPresenter>
 
     @Override
     public void initData() {
-        mUnconfirmList = (List<TxItem>) getArguments().getSerializable(ARG_UNCONFIRM_LIST);
+        mUnconfirmList = (List<TxRecord>) getArguments().getSerializable(ARG_UNCONFIRM_LIST);
         if (mUnconfirmList == null) {
             mUnconfirmList = new ArrayList();
         }
@@ -163,6 +156,6 @@ public class BtcUnconfirmFragment extends BaseListFragment<TxItem, MvpPresenter>
      */
     public interface OnTransactionRecordItemClickListener {
         // TODO: Update argument type and name
-        void OnTransactionRecordItemClick(TxItem item);
+        void OnTransactionRecordItemClick(TxRecord item);
     }
 }
