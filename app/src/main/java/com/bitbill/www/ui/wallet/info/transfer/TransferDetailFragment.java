@@ -119,31 +119,31 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
         if (transferItem instanceof TransferHashItem) {
 
             TransferHashItem hashItem = (TransferHashItem) transferItem;
-            StringUtils.copy(hashItem.getHash(), getBaseActivity());
+            UIHelper.copy(getBaseActivity(), hashItem.getHash());
             showMessage(R.string.copy_tx_hash);
 
         } else if (transferItem instanceof TransferSendItem) {
 
             TransferSendItem sendItem = (TransferSendItem) transferItem;
-            StringUtils.copy(sendItem.getAddress(), getBaseActivity());
+            UIHelper.copy(getBaseActivity(), sendItem.getAddress());
             showMessage(R.string.copy_send_address);
 
         } else if (transferItem instanceof TransferReceiveItem) {
 
             TransferReceiveItem receiveItem = (TransferReceiveItem) transferItem;
-            StringUtils.copy(receiveItem.getAddress(), getBaseActivity());
+            UIHelper.copy(getBaseActivity(), receiveItem.getAddress());
             showMessage(R.string.copy_receive_address);
 
         } else if (transferItem instanceof TransferRemarkItem) {
 
             TransferRemarkItem remarkItem = (TransferRemarkItem) transferItem;
-            StringUtils.copy(remarkItem.getRemark(), getBaseActivity());
+            UIHelper.copy(getBaseActivity(), remarkItem.getRemark());
             showMessage(R.string.copy_remark);
 
         } else if (transferItem instanceof TransferDateItem) {
 
             TransferDateItem dateItem = (TransferDateItem) transferItem;
-            StringUtils.copy(dateItem.getDate(), getBaseActivity());
+            UIHelper.copy(getBaseActivity(), dateItem.getDate());
             showMessage(R.string.copy_tx_date);
         }
     }

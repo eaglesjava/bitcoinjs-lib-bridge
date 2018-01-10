@@ -35,15 +35,19 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "created_at")
     private Date createdAt;
 
-    @Generated(hash = 1524232744)
+    @Property(nameInDb = "balance")
+    private Long balance;
+
+    @Generated(hash = 670839834)
     public Address(Long id, String name, Long walletId, Long index, String coinType,
-                   Date createdAt) {
+                   Date createdAt, Long balance) {
         this.id = id;
         this.name = name;
         this.walletId = walletId;
         this.index = index;
         this.coinType = coinType;
         this.createdAt = createdAt;
+        this.balance = balance;
     }
 
     @Generated(hash = 388317431)
@@ -96,5 +100,13 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Long balance) {
+        this.balance = balance;
     }
 }

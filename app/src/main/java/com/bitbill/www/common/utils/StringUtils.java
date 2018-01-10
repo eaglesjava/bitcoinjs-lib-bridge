@@ -1,6 +1,5 @@
 package com.bitbill.www.common.utils;
 
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -500,21 +499,6 @@ public class StringUtils {
         if (isEmpty(name)) return "";
         if (name.length() <= 12) return name;
         return name.substring(0, 12) + "..";
-    }
-
-    /**
-     * 复制粘贴文本
-     *
-     * @param content
-     * @param context
-     */
-    public static void copy(String content, Context context) {
-        if (isEmpty(content)) {
-            return;
-        }
-        // 得到剪贴板管理器
-        ClipboardManager cmb = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        cmb.setText(content.trim());
     }
 
     public static boolean isValidMnemonic(String mnemonic) {

@@ -25,6 +25,7 @@
     <color name="blue_dark">#1F44A0</color>
     <color name="blue_active">#318AF3</color>
     <color name="blue_tab">#396EB9</color>
+    <color name="blue_text">#3E7EC2</color>
     <color name="btn_blue_text">#3C76BE</color>
     <color name="red">#FF626C</color>
     <color name="red_dark">#FF454D</color>

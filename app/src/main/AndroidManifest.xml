@@ -150,6 +150,10 @@
         <activity
             android:name=".ui.wallet.info.transfer.TransferDetailsActivity"
             android:label="@string/title_activity_transfer_details"
+            android:theme="@style/AppTheme.Blue" />
+        <activity
+            android:name=".ui.main.my.WalletAddressActivity"
+            android:label="@string/title_activity_wallet_address"
             android:theme="@style/AppTheme.Blue"></activity>
     </application>
 

@@ -10,7 +10,7 @@ import android.view.View;
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.dialog.InputDialogFragment;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
@@ -35,9 +35,9 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
 
             String walletKey = getMvpPresenter().getWalletKey();
             //显示联系人key对话框
-            MessageConfirmDialog.newInstance(getString(R.string.setting_backup_contact), walletKey, "复制联系人密钥", true)
+            MessageConfirmDialog.newInstance(getString(R.string.setting_backup_contact), walletKey, getString(R.string.positive_copy_contact_key), true)
                     .setConfirmDialogClickListener((dialog, which) -> {
-                        StringUtils.copy(walletKey, ContactSettingActivity.this);
+                        UIHelper.copy(ContactSettingActivity.this, walletKey);
                         showMessage(R.string.msg_contact_key_copied);
                     })
                     .show(getSupportFragmentManager(), MessageConfirmDialog.TAG);

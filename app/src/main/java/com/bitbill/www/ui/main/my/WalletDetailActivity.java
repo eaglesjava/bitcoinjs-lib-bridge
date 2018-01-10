@@ -124,8 +124,8 @@ public class WalletDetailActivity extends BaseToolbarActivity<WalletDetailMvpPre
                 BackUpWalletActivity.start(WalletDetailActivity.this, mWallet, true);
                 break;
             case R.id.btn_wallet_address:
-                // TODO: 2017/12/28  跳转到钱包地址界面
-                showMessage("钱包地址界面");
+                // 跳转到钱包地址界面
+                WalletAddressActivity.start(WalletDetailActivity.this, mWallet);
                 break;
             case R.id.btn_wallet_delete:
                 //删除钱包
@@ -150,7 +150,7 @@ public class WalletDetailActivity extends BaseToolbarActivity<WalletDetailMvpPre
 
     @Override
     public void createQrcodeFail() {
-        showMessage("生成钱包ID二维码失败");
+        showMessage(R.string.fail_create_qrcode);
     }
 
     @Override

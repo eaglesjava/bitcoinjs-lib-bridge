@@ -12,7 +12,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
 import com.bitbill.www.common.presenter.BtcAddressMvpView;
-import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -122,7 +122,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     @OnClick(value = {R.id.tv_address, R.id.iv_qrcode})
     public void copyClick(View v) {
         //复制地址到剪切板
-        StringUtils.copy(tvAddress.getText().toString(), getBaseActivity());
+        UIHelper.copy(getBaseActivity(), tvAddress.getText().toString());
         showMessage(R.string.toast_copy_address_success);
     }
 
