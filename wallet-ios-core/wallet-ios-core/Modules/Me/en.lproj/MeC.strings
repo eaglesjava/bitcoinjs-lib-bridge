@@ -49,6 +49,8 @@
 
 "MeC.appSetting_sound" = "Sound";
 "MeC.appSetting_currency" = "Currency";
+"MeC.appSetting_language" = "Language";
 "MeC.appSetting_cellSound" = "Sound";
-"MeC.appSetting_cellCurrency" = "Current currency";
+"MeC.appSetting_cellCurrency" = "Alternative currency";
+"MeC.appSetting_cellLanguage" = "Alternative language";
 "MeC.appSetting_saved" = "Saved";

@@ -133,8 +133,10 @@ extension String {
 	
 	static let meAppSetting_sound = "MeC.appSetting_sound".bil_localized
 	static let meAppSetting_currency = "MeC.appSetting_currency".bil_localized
+    static let meAppSetting_language = "MeC.appSetting_language".bil_localized
 	static let meAppSetting_cellSound = "MeC.appSetting_cellSound".bil_localized
 	static let meAppSetting_cellCurrency = "MeC.appSetting_cellCurrency".bil_localized
+    static let meAppSetting_cellLanguage = "MeC.appSetting_cellLanguage".bil_localized
 	static let meAppSetting_saved = "MeC.appSetting_saved".bil_localized
 }
 
@@ -162,6 +164,7 @@ extension String {
 	static let newWallet_createSuccess_recover = "NewWalletC.createSuccess_recover".bil_localized
 	static let newWallet_createSuccess_reset = "NewWalletC.createSuccess_reset".bil_localized
 	static let newWallet_createSuccess = "NewWalletC.createSuccess".bil_localized
+    static let newWallet_create_agreementTitle = "NewWalletC.create_agreementTitle".bil_localized
 	static let newWallet_import_emptyTitle = "NewWalletC.import_emptyTitle".bil_localized
 	static let newWallet_import_failed = "NewWalletC.import_failed".bil_localized
 	static let newWallet_import_checkAgain = "NewWalletC.import_checkAgain".bil_localized

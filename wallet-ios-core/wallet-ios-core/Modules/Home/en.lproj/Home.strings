@@ -72,7 +72,7 @@
 "sWl-W4-hLH.text" = "Label";
 
 /* Class = "UITabBarItem"; title = "资产"; ObjectID = "skP-T0-JsY"; */
-"skP-T0-JsY.title" = "Asset";
+"skP-T0-JsY.title" = "Assets";
 
 /* Class = "UIButton"; normalTitle = "扫一扫"; ObjectID = "sqe-gw-hpm"; */
 "sqe-gw-hpm.normalTitle" = "Scan";

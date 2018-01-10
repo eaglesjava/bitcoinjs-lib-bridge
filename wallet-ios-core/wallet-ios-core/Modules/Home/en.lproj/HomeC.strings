@@ -6,24 +6,24 @@
   Copyright © 2018年 BitBill. All rights reserved.
 */
 
-"HomeC.home.section.shortcut" = "Shortcut";
-"HomeC.home.section.asset" = "Total asset";
+"HomeC.home.section.shortcut" = "Shortcuts";
+"HomeC.home.section.asset" = "Total assets";
 "HomeC.home.section.unconfirm" = "Ongoing transaction";
-"HomeC.home.section.wallet" = "My wallet";
+"HomeC.home.section.wallet" = "My wallets";
 
-"HomeC.home.section.subtitle.shortcut" = "Config shortcut on settings";
-"HomeC.home.section.subtitle.asset" = "Present currency: ";
+"HomeC.home.section.subtitle.shortcut" = "Config shortcuts on settings";
+"HomeC.home.section.subtitle.asset" = "Present currencies: ";
 "HomeC.home.section.subtitle.unconfirm" = "Ongoing transaction: ";
-"HomeC.home.section.subtitle.wallet" = "Current wallet: ";
+"HomeC.home.section.subtitle.wallet" = "Current wallets: ";
 "HomeC.home.section.subtitle.unit.ge" = "";
 
 "HomeC.home.pop.wallet.new" = "Create";
 "HomeC.home.pop.wallet.import" = "Import";
 
 "HomeC.tx.detail.cell.hash" = "Transaction hash";
-"HomeC.tx.detail.cell.address.receive" = "Address of sender";
-"HomeC.tx.detail.cell.address.send" = "Address of Receiver";
-"HomeC.tx.detail.cell.confirm" = "Confirm";
+"HomeC.tx.detail.cell.address.receive" = "Addresses of sender";
+"HomeC.tx.detail.cell.address.send" = "Addresses of receiver";
+"HomeC.tx.detail.cell.confirm" = "Confirmation";
 "HomeC.tx.detail.cell.remark" = "Note";
 "HomeC.tx.detail.cell.date" = "Transaction date";
 "HomeC.tx.detail.noTx" = "No transaction records";

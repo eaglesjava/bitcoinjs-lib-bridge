@@ -21,7 +21,7 @@
 "Public.wallet.error.address.index" = "Index error";
 
 "Public.transaction.status.unconfirm" = "Unconfirmed";
-"Public.transaction.status.success" = "Transaction is successful";
+"Public.transaction.status.success" = "Transaction is confirmed";
 "Public.transaction.status.failure" = "Transaction is failed";
 "Public.transaction.status.confirmed" = "Confirmed";
 

@@ -37,7 +37,8 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	@IBOutlet weak var confirmPasswordTextField: ASKPlaceHolderColorTextField!
 	
 	@IBOutlet weak var createButton: BILGradientButton!
-	
+    @IBOutlet weak var agreenmentButton: UIButton!
+    
 	@IBOutlet weak var passwordInputView: BILInputView!
 	@IBOutlet weak var confirmPasswordInputView: BILInputView!
 	
@@ -56,8 +57,12 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 
         // Do any additional setup after loading the view.
 		let titleString = createWalletType.titleString()
-		title = "\(titleString) \(String.newWallet_create_wallet)".capitalized
-		createButton.setTitle("\(String.newWallet_create_begin)\(titleString)", for: .normal)
+		title = "\(titleString.capitalized)\(String.newWallet_create_wallet)"
+        let to = BILSettingManager.currentLanguage == .en ? " to " : ""
+		createButton.setTitle("\(String.newWallet_create_begin)\(to)\(titleString)", for: .normal)
+        
+        let font = BILSettingManager.currentLanguage == .en ? UIFont.italicSystemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14, weight: .medium)
+        agreenmentButton.setAttributedTitle(NSAttributedString(string: .newWallet_create_agreementTitle, attributes: [.font: font, .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
     }
 	
 	override func viewDidAppear(_ animated: Bool) {

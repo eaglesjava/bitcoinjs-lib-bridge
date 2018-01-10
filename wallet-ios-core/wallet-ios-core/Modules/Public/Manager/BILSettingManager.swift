@@ -12,6 +12,7 @@ extension String {
     static let bil_UserDefaultsKey_isHomeShortcutEnabled    = "bil_isHomeShortcutEnabled"
     static let bil_UserDefaultsKey_isSoundEnabled           = "bil_isSoundEnabled"
     static let bil_UserDefaultsKey_currencyType             = "bil_currencyType"
+    static let bil_UserDefaultsKey_currentLanguageType             = "AppleLanguages"
 }
 
 enum CurrencyType: Int {
@@ -66,6 +67,22 @@ enum CurrencyType: Int {
     
 }
 
+enum BILLanguageType: String {
+    case zh_cn = "zh-Hans-US"
+    case en = "en"
+    
+    var name: String {
+        get {
+            switch self {
+            case .zh_cn:
+                return "简体中文"
+            case .en:
+                return "English"
+            }
+        }
+    }
+}
+
 class BILSettingManager: NSObject {
     static var isHomeShortcutEnabled: Bool {
         set {
@@ -103,6 +120,18 @@ class BILSettingManager: NSObject {
                 self.currencyType = .usd
             }
             return CurrencyType(rawValue: UserDefaults.standard.integer(forKey: .bil_UserDefaultsKey_currencyType)) ?? .usd
+        }
+    }
+    
+    static var currentLanguage: BILLanguageType {
+        set {
+            UserDefaults.standard.set([newValue.rawValue], forKey: .bil_UserDefaultsKey_currentLanguageType)
+        }
+        get {
+            guard let str  = (UserDefaults.standard.array(forKey: .bil_UserDefaultsKey_currentLanguageType) as? [String])?.first else {
+                return .en
+            }
+            return BILLanguageType(rawValue: str) ?? .en
         }
     }
 }

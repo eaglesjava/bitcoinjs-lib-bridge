@@ -13,12 +13,15 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
     enum BILSettingSectionType: Int {
         case sound = 0
         case currency
+        case language
         
         var sectionTitle: String {
             switch self {
             case .sound:
                 return .meAppSetting_sound
             case .currency:
+                return .meAppSetting_currency
+            case .language:
                 return .meAppSetting_currency
             }
         }
@@ -44,6 +47,8 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
                 return [String.meAppSetting_cellSound]
             case .currency:
                 return [String.meAppSetting_cellCurrency]
+            case .language:
+                return [String.meAppSetting_cellLanguage]
             }
         }
         
@@ -57,7 +62,7 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    var sections: [BILSettingSectionType] = [.sound, .currency]
+    var sections: [BILSettingSectionType] = [.sound, .currency, .language]
 	@IBOutlet weak var tableView: UITableView!
 	
     override func viewDidLoad() {
@@ -97,6 +102,11 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
                 BILSettingManager.isSoundEnabled = isOn
             }
             c.titleLabel.text = model as? String
+        case .language:
+            let c = cell as! BILMeCell
+            c.titleLabel.text = model as? String
+            c.subTitleLabel.text = BILSettingManager.currentLanguage.name
+            c.subTitleLabel.textColor = UIColor(white: 1.0, alpha: 0.6)
         case .currency:
             let c = cell as! BILMeCell
             c.titleLabel.text = model as? String
@@ -112,9 +122,30 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         switch sectionType {
         case .currency:
             chooseCurrencyType()
+        case .language:
+            chooseLanguageType()
         default:
             ()
         }
+    }
+    
+    func chooseLanguageType() {
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: BILLanguageType.en.name, style: .default, handler: { (action) in
+            BILSettingManager.currentLanguage = .en
+            self.bil_makeToast(msg: .meAppSetting_saved)
+            self.tableView.reloadData()
+        }))
+        sheet.addAction(UIAlertAction(title: BILLanguageType.zh_cn.name, style: .default, handler: { (action) in
+            BILSettingManager.currentLanguage = .zh_cn
+            self.bil_makeToast(msg: .meAppSetting_saved)
+            self.tableView.reloadData()
+        }))
+        
+        sheet.addAction(UIAlertAction(title: .meMe_cancel, style: .cancel, handler: { (action) in
+            
+        }))
+        present(sheet, animated: true, completion: nil)
     }
     
     func chooseCurrencyType() {

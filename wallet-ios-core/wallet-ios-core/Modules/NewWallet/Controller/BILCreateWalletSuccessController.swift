@@ -24,8 +24,8 @@ class BILCreateWalletSuccessController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        titleLabel.text = "\(createWalletType.titleString())\(String.newWallet_create_wallet)"
-        resultTitleLabel.text = "\(createWalletType.titleString())\(String.newWallet_createSuccess)"
+        titleLabel.text = "\(createWalletType.titleString().capitalized)\(String.newWallet_create_wallet)"
+        resultTitleLabel.text = "\(createWalletType.titleString().capitalized)\(String.newWallet_createSuccess)"
         switch createWalletType {
         case .new:
             msgLabel.text = .newWallet_createSuccess_new

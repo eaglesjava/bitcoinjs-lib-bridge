@@ -7,7 +7,7 @@
 */
 
 "ReceiveC.receive.address.tip.title" = "Tip";
-"ReceiveC.receive.address.tip.msg" = "For protection of your privacy, new address shall be used when you receive this operation every time. The used address can still be available.";
+"ReceiveC.receive.address.tip.msg" = "To protect your privacy, new address is used every time you receive coins. The old address can still be used.";
 "ReceiveC.receive.address.tip.refresh" = "Address refreshed";
 "ReceiveC.receive.specificButtonTitle" = "Receive special amount";
 

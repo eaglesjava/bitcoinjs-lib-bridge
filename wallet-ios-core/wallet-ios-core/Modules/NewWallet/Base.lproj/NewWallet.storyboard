@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="PingFang.ttc">
+            <string>PingFangSC-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Bitbill-->
         <scene sceneID="Gij-tA-ZH9">
@@ -437,18 +442,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Enl-ZG-JLz">
                                         <rect key="frame" x="61" y="419.5" width="253" height="31.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="inX-qB-wAa">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成即表示您已同意 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="inX-qB-wAa">
                                                 <rect key="frame" x="0.0" y="6" width="131" height="20"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="完成即表示您已同意 ">
-                                                        <attributes>
-                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <font key="NSFont" size="14" name="PingFangSC-Medium"/>
-                                                            <real key="NSKern" value="0.0"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBF-o4-3Ym">
@@ -505,6 +502,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="创建钱包" id="IzW-ej-leD"/>
                     <connections>
+                        <outlet property="agreenmentButton" destination="SBF-o4-3Ym" id="0NA-hb-doG"/>
                         <outlet property="confirmPasswordInputView" destination="HZ0-VV-HbH" id="kLt-xo-fIJ"/>
                         <outlet property="confirmPasswordTextField" destination="5Hf-Dg-FgH" id="ksT-uJ-03R"/>
                         <outlet property="createButton" destination="53E-rO-tJL" id="cFm-0E-yll"/>

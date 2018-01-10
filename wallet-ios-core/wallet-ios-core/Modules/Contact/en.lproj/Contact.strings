@@ -90,7 +90,7 @@
 "hoi-GI-4Yo.title" = "Add via address";
 
 /* Class = "UITabBarItem"; title = "联系人"; ObjectID = "ic5-jT-iGX"; */
-"ic5-jT-iGX.title" = "Contact";
+"ic5-jT-iGX.title" = "Contacts";
 
 /* Class = "UITextField"; placeholder = "搜索对方钱包ID"; ObjectID = "ikQ-St-aBA"; */
 "ikQ-St-aBA.placeholder" = "Search wallet ID";
@@ -105,7 +105,7 @@
 "nTG-6c-hbZ.text" = "无";
 
 /* Class = "UINavigationItem"; title = "联系人"; ObjectID = "nyY-9Y-U6O"; */
-"nyY-9Y-U6O.title" = "Contact";
+"nyY-9Y-U6O.title" = "Contacts";
 
 /* Class = "UILabel"; text = "备注"; ObjectID = "o7w-di-mR0"; */
 "o7w-di-mR0.text" = "Note";

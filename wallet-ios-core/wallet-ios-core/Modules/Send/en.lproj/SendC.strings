@@ -19,8 +19,8 @@
 "SendC.confirm.minute" = "mins";
 "SendC.confirm.hour" = "hours";
 "SendC.confirm.day" = "days";
-"SendC.confirm.averageTime" = "Average time of confirmation";
-"SendC.confirm.needSpend" = "needs to cost";
+"SendC.confirm.averageTime" = "Average confirmation";
+"SendC.confirm.needSpend" = "fee";
 "SendC.confirm.notEnoughBalace" = "Balance less than transaction fee";
 "SendC.confirm.cannotFindChangeAddress" = "Can't generate change address";
 "SendC.confirm.remarkTooLong" = "Please input not more than 20 words";

@@ -29,6 +29,7 @@
 "NewWalletC.createSuccess_recover" = "钱包导入成功，请您务必保管好助记词和密码";
 "NewWalletC.createSuccess_reset" = "钱包密码重置成功，请您务必保管好助记词和密码";
 "NewWalletC.createSuccess" = "成功";
+"NewWalletC.create_agreementTitle" = "《Bitbill 服务条款》";
 
 "NewWalletC.import_emptyTitle" = "点击以输入";
 "NewWalletC.import_failed" = "导入失败";

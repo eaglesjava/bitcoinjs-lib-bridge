@@ -16,7 +16,7 @@
 "NewWalletC.create_typeNew" = "create";
 "NewWalletC.create_typeRecover" = "import";
 "NewWalletC.create_typeResetPassword" = "reset";
-"NewWalletC.create_wallet" = "wallet";
+"NewWalletC.create_wallet" = " wallet";
 "NewWalletC.create_begin" = "Start ";
 "NewWalletC.create_pwdInput" = "Please input password";
 "NewWalletC.create_pwdRange" = "Password supports 6-20 characters";
@@ -28,7 +28,8 @@
 "NewWalletC.createSuccess_new" = "Wallet is created successfully, please save the mnemonic words in a safe place for the backups of wallet before using it.";
 "NewWalletC.createSuccess_recover" = "Wallet import successfully. Please save your mnemonic words and password.";
 "NewWalletC.createSuccess_reset" = "Password reset successfully. Please save your mnemonic words and password.";
-"NewWalletC.createSuccess" = "Successful";
+"NewWalletC.createSuccess" = " successfully";
+"NewWalletC.create_agreementTitle" = " the Bitbill usage terms";
 
 "NewWalletC.import_emptyTitle" = "Click to enter";
 "NewWalletC.import_failed" = "Fail to input";

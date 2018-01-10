@@ -18,10 +18,10 @@
 "eak-mz-PIO.text" = "Please keep your mnemonic words carefully";
 
 /* Class = "UINavigationItem"; title = "记下助记词"; ObjectID = "fRA-hf-Rq9"; */
-"fRA-hf-Rq9.title" = "Remember mnemonic words";
+"fRA-hf-Rq9.title" = "Save words";
 
 /* Class = "UILabel"; text = "请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转移您的代币！"; ObjectID = "hvy-wf-TqK"; */
-"hvy-wf-TqK.text" = "Please confirm that your surroundings is safe. Anyone who gets your mnemonic words can transfer your digital asset.";
+"hvy-wf-TqK.text" = "Please confirm that your surroundings is safe. Anyone who gets your mnemonic words can transfer your digital assets.";
 
 /* Class = "UIButton"; normalTitle = "确认"; ObjectID = "l7V-Xw-Pbi"; */
 "l7V-Xw-Pbi.normalTitle" = "Confirm";
@@ -30,10 +30,10 @@
 "qgc-Mh-7ji.title" = "Succeed to back up";
 
 /* Class = "UIButton"; normalTitle = "已按顺序记下助记词"; ObjectID = "qlY-G9-oj8"; */
-"qlY-G9-oj8.normalTitle" = "Have saved the mnemonic words orderly.";
+"qlY-G9-oj8.normalTitle" = "I have saved them orderly.";
 
 /* Class = "UILabel"; text = "按顺序点击助记词，确认您的助记词备份正确"; ObjectID = "ua5-CA-eV7"; */
-"ua5-CA-eV7.text" = "Click mnemonic words orderly, confirm whether the backups of your mnemonic words is right";
+"ua5-CA-eV7.text" = "Click on the mnemonic words orderly to confirm whether your backup is right.";
 
 /* Class = "UINavigationItem"; title = "验证助记词"; ObjectID = "zoM-4O-otz"; */
-"zoM-4O-otz.title" = "Verify mnemonic words";
+"zoM-4O-otz.title" = "Verify words";

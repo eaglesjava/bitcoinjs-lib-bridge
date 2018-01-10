@@ -96,10 +96,10 @@
 "k3E-gX-6yP.text" = "walletID";
 
 /* Class = "UILabel"; text = "发出钱包"; ObjectID = "lcc-2b-hNg"; */
-"lcc-2b-hNg.text" = "Send wallet";
+"lcc-2b-hNg.text" = "Sending wallet";
 
 /* Class = "UILabel"; text = "手续费"; ObjectID = "lzV-m8-TsC"; */
-"lzV-m8-TsC.text" = "service charge";
+"lzV-m8-TsC.text" = "Service charge";
 
 /* Class = "UILabel"; text = "amount"; ObjectID = "mxM-WT-G4P"; */
 "mxM-WT-G4P.text" = "amount";

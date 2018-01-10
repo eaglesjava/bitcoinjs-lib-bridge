@@ -49,6 +49,8 @@
 
 "MeC.appSetting_sound" = "音效";
 "MeC.appSetting_currency" = "货币";
+"MeC.appSetting_language" = "多语言";
 "MeC.appSetting_cellSound" = "音效";
 "MeC.appSetting_cellCurrency" = "当前币种";
+"MeC.appSetting_cellLanguage" = "当前语言";
 "MeC.appSetting_saved" = "已保存";
