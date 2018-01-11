@@ -2,6 +2,8 @@ package com.bitbill.www.common.base.view;
 
 import android.os.Bundle;
 
+import com.bitbill.www.app.BitbillApp;
+
 /**
  * <pre>
  * 基础布局相关接口
@@ -10,6 +12,9 @@ import android.os.Bundle;
  * </pre>
  */
 public interface BaseViewControl {
+
+    BitbillApp getApp();
+
     void onBeforeSetContentLayout();
 
     void init(Bundle savedInstanceState);

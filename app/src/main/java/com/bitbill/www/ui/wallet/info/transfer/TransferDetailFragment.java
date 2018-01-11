@@ -73,16 +73,26 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
             showMessage(R.string.fail_load_transfer_details);
             return;
         }
+        mTxRecord.__setDaoSession(getApp().getDaoSession());
         //构造列表数据
         mDatas.clear();
         mDatas.add(new TransferHashItem().setHash(mTxRecord.getTxHash()).setTitle(getString(R.string.title_tx_hash)));
-        for (Input inputsBean : mTxRecord.getInputs()) {
-            mDatas.add(new TransferSendItem().setAddress(inputsBean.getAddress()).setAmount(inputsBean.getValue()).setTitle(getString(R.string.title_tx_send_address)));
-        }
-        for (Output outputsBean : mTxRecord.getOutputs()) {
-            mDatas.add(new TransferReceiveItem().setAddress(outputsBean.getAddress()).setAmount(outputsBean.getValue()).setTitle(getString(R.string.title_tx_receive_address)));
+        try {
+            for (Input inputsBean : mTxRecord.getInputs()) {
+                mDatas.add(new TransferSendItem().setAddress(inputsBean.getAddress()).setAmount(inputsBean.getValue()).setTitle(getString(R.string.title_tx_send_address)));
+            }
+            for (Output outputsBean : mTxRecord.getOutputs()) {
+                mDatas.add(new TransferReceiveItem().setAddress(outputsBean.getAddress()).setAmount(outputsBean.getValue()).setTitle(getString(R.string.title_tx_receive_address)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        long height = mTxRecord.getHeight();
+        if (height != -1) {
+            //非待确认状态
+            mDatas.add(new TransferConfirmItem(height).setTitle(getString(R.string.title_tx_confirm)));
+        }
         mDatas.add(new TransferRemarkItem().setRemark(mTxRecord.getRemark()).setTitle(getString(R.string.title_tx_remark)));
         mDatas.add(new TransferDateItem().setDate(StringUtils.formatDate(mTxRecord.getCreatedTime())).setTitle(getString(R.string.title_tx_date)));
         mAdapter.notifyDataSetChanged();
@@ -187,7 +197,7 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
             holder.setVisible(R.id.tv_tx_right, true);
 
         } else if (transferItem instanceof TransferConfirmItem) {
-            holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_remark));
+            holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_confirm));
             holder.setText(R.id.tv_tx_left, getConfirmCount((TransferConfirmItem) transferItem));
             holder.setVisible(R.id.tv_tx_right, false);
 

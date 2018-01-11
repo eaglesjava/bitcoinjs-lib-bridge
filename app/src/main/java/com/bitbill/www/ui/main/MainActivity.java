@@ -107,15 +107,17 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private Contact mSendContact;
     private int index = INDEX_ASSET;
     private List<TxElement> mTxInfoList;
+    private String mAddress;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
-    public static void start(Context context, Contact sendContact) {
+    public static void start(Context context, Contact sendContact, String address) {
 
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(AppConstants.EXTRA_CONTACT, sendContact);
+        intent.putExtra(AppConstants.EXTRA_ADDRESS, address);
         context.startActivity(intent);
     }
 
@@ -128,6 +130,14 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             mViewPager.setCurrentItem(INDEX_SEND);
             if (mSendFragment != null) {
                 mSendFragment.setSendAddress(mSendContact);
+            }
+        } else {
+
+            mAddress = intent.getStringExtra(AppConstants.EXTRA_ADDRESS);
+            if (StringUtils.isNotEmpty(mAddress)) {
+                //切换到发送界面
+                mViewPager.setCurrentItem(INDEX_SEND);
+                mSendFragment.setSendAddress(mAddress);
             }
         }
     }

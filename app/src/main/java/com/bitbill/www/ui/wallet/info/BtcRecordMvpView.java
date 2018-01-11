@@ -17,4 +17,6 @@ public interface BtcRecordMvpView extends MvpView {
     void getTxRecordSuccess(List<TxElement> list);
 
     void getTxRecordFail();
+
+    long getConfrimId();
 }

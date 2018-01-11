@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseViewControl;
 
 import butterknife.BindView;
@@ -45,14 +46,21 @@ public abstract class BaseConfirmDialog extends BaseDialog implements BaseViewCo
     private boolean mOnlyPositiveBtn;
     private boolean autoDismiss = true;
     private String mPositiveText;
+    private BitbillApp mApp;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mApp = BitbillApp.get();
         mLayoutInflate = LayoutInflater.from(getContext());
         mTitle = getArguments().getString(CONFIRM_TITLE, null);
         mPositiveText = getArguments().getString(CONFIRM_POSITIVE_BTN_TEXT, null);
         mOnlyPositiveBtn = getArguments().getBoolean(CONFIRM_ONLY_POSITIVE_BTN, false);
+    }
+
+    @Override
+    public BitbillApp getApp() {
+        return mApp;
     }
 
     @Nullable

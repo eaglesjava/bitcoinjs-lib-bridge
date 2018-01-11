@@ -33,12 +33,15 @@ public final class AppConstants {
     public static final String EXTRA_WALLET_ID = "wallet_id";
     public static final String EXTRA_IS_FROM_SETTING = "is_from_setting";
     public static final String EXTRA_TX_ITEM = "tx_item";
+    public static final String EXTRA_ADDRESS = "address";
+    public static final String EXTRA_IS_FROM_SEND = "is_from_send";
 
 
     public static final String ARG_DATAS = "args_datas";
     public static final String ARG_WALLET = "arg_wallet";
     public static final String ARG_IS_SELECT = "is_select";
     public static final String ARG_TX_ITEM = "arg_tx_item";
+    public static final String ARG_ADDRESS = "arg_address";
     /**
      * btc about
      */

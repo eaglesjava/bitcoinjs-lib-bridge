@@ -38,7 +38,7 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
         Wallet wallet = getMvpView().getWallet();
         String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
         getCompositeDisposable().add(getModelManager()
-                .getTxList(new GetTxListRequest(xPublicKeyHash))
+                .getTxList(new GetTxListRequest(xPublicKeyHash, getMvpView().getConfrimId()))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<ListTxElementResponse>>(getMvpView()) {
                     @Override

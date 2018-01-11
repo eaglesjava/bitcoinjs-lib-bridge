@@ -1,6 +1,5 @@
 package com.bitbill.www.ui.main.send;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -70,26 +69,11 @@ public class SendFragment extends BaseLazyFragment {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send_scan) {
             //打开扫描二维码
-            ScanQrcodeActivity.startForResult(this);
+            ScanQrcodeActivity.start(getBaseActivity(), true);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ScanQrcodeActivity.REQUEST_CODE_SCAN_QRCODE && resultCode == ScanQrcodeActivity.RESULT_CODE_SCAN_QRCODE_SUCCESS) {
-            if (data != null) {
-                String qrcodeResult = data.getStringExtra(ScanQrcodeActivity.EXTRA_SCAN_QRCODE_RESULT);
-                //填充地址
-                if (mBtcSendFrg != null) {
-                    // 校验比特币地址
-                    mBtcSendFrg.setSendAddress(qrcodeResult);
-                }
-            }
-        }
     }
 
     @Override
@@ -166,6 +150,12 @@ public class SendFragment extends BaseLazyFragment {
     public void setSendAddress(Contact sendContact) {
         if (mBtcSendFrg != null) {
             mBtcSendFrg.setSendAddress(sendContact);
+        }
+    }
+
+    public void setSendAddress(String sendAddress) {
+        if (mBtcSendFrg != null) {
+            mBtcSendFrg.setSendAddress(sendAddress);
         }
     }
 }

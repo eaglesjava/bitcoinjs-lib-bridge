@@ -54,10 +54,12 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     private Unbinder mUnBinder;
     private P mMvpPresenter;
     private List<MvpPresenter> mPresenters = new ArrayList<>();
+    private BitbillApp mApp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mApp = BitbillApp.get();
         setScreenOrientation();
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
@@ -77,6 +79,10 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
             }
         }
 
+    }
+
+    public BitbillApp getApp() {
+        return mApp;
     }
 
     protected List<MvpPresenter> getPresenters() {

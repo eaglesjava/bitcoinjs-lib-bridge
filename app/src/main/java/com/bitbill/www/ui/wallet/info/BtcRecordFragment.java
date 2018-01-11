@@ -116,19 +116,24 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
         String inOutString = txRecord.getInOut() == TxRecord.InOut.TRANSFER ? "" : (txRecord.getInOut() == TxRecord.InOut.IN ? "+" : "-");
         holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txRecord.getSumAmount()) + " btc");
 
-        holder.setText(R.id.tv_date, txRecord.getCreatedTime());
+
+        holder.setText(R.id.tv_date, StringUtils.formatDate(txRecord.getCreatedTime()));
         if (txRecord.getHeight() == -1) {
             holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
+            holder.setText(R.id.tv_status, getString(R.string.status_item_unconfirm));
         } else {
             switch (txRecord.getInOut()) {
                 case TRANSFER:
                     holder.setImageResource(R.id.iv_status, R.drawable.ic_item_transfer);
+                    holder.setText(R.id.tv_status, getString(R.string.status_transfer_self));
                     break;
                 case IN:
                     holder.setImageResource(R.id.iv_status, R.drawable.ic_item_receive);
+                    holder.setText(R.id.tv_status, getString(R.string.status_item_receive));
                     break;
                 case OUT:
                     holder.setImageResource(R.id.iv_status, R.drawable.ic_item_send);
+                    holder.setText(R.id.tv_status, getString(R.string.status_item_send));
                     break;
             }
         }
@@ -218,6 +223,11 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     @Override
     public void getTxRecordFail() {
         showMessage(R.string.fail_get_tx_record);
+    }
+
+    @Override
+    public long getConfrimId() {
+        return 0;
     }
 
     @Override

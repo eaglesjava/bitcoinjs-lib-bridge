@@ -9,34 +9,31 @@ import android.util.Log;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.ui.main.contact.SearchContactResultActivity;
-
-import java.util.Map;
+import com.bitbill.www.common.utils.UIHelper;
 
 import butterknife.BindView;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 
 public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeView.Delegate {
 
-    public static final int REQUEST_CODE_SCAN_QRCODE = 111;
-    public static final int RESULT_CODE_SCAN_QRCODE_SUCCESS = 333;
-    public static final String EXTRA_SCAN_QRCODE_RESULT = "scan_qrcode_result";
     private static final String TAG = "ScanQrcodeActivity";
     private static final int REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY = 666;
     @BindView(R.id.zxingview)
     QRCodeView mQRCodeView;
+    private boolean isFromSend;
 
-    public static void start(Context context) {
+    public static void start(Context context, boolean isFromSend) {
         Intent starter = new Intent(context, ScanQrcodeActivity.class);
+        starter.putExtra(AppConstants.EXTRA_IS_FROM_SEND, isFromSend);
         context.startActivity(starter);
     }
 
-    public static void startForResult(BaseFragment fragment) {
-        Intent starter = new Intent(fragment.getBaseActivity(), ScanQrcodeActivity.class);
-        fragment.startActivityForResult(starter, REQUEST_CODE_SCAN_QRCODE);
+    @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+        isFromSend = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_SEND, false);
     }
 
     @Override
@@ -117,25 +114,11 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
         Log.i(TAG, "result:" + result);
         vibrate();
         mQRCodeView.startSpot();
-        Intent data = new Intent();
-        Map<String, String> resultMap = StringUtils.parseScanResult(result);
-        if (StringUtils.isEmpty(resultMap)) {
+        if (StringUtils.isEmpty(result)) {
             showMessage("解析扫码地址失败");
             return;
         }
-        String address = resultMap.get(AppConstants.QUERY_ADDRESS);
-        String amount = resultMap.get(AppConstants.QUERY_AMOUNT);
-        String contactId = resultMap.get(AppConstants.QUERY_ID);
-
-        if (StringUtils.isNotEmpty(contactId)) {
-            //跳转到联系人搜索结果页面
-            SearchContactResultActivity.start(ScanQrcodeActivity.this, null, contactId);
-        } else if (StringUtils.isNotEmpty(amount)) {
-            SendAmountActivity.start(ScanQrcodeActivity.this, address, amount);
-        } else {
-            data.putExtra(EXTRA_SCAN_QRCODE_RESULT, address);
-            setResult(RESULT_CODE_SCAN_QRCODE_SUCCESS, data);
-        }
+        UIHelper.parseScanResult(ScanQrcodeActivity.this, result, isFromSend);
         finish();
     }
 

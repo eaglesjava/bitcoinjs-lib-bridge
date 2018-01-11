@@ -135,7 +135,7 @@ public class ContactDetailActivity extends BaseToolbarActivity {
     public void onViewClicked() {
         //跳转到发送界面
         finish();
-        MainActivity.start(this, mContact);
+        MainActivity.start(this, mContact, null);
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN, priority = 1)

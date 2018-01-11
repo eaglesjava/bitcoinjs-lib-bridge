@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -32,6 +33,7 @@ public class ListSelectDialog extends BaseDialog implements BaseViewControl {
     private String[] datas;
     private CommonAdapter<String> mAdapter;
     private OnListSelectItemClickListener mOnListSelectItemClickListener;
+    private BitbillApp mApp;
 
     public static ListSelectDialog newInstance(String[] datas) {
 
@@ -41,6 +43,17 @@ public class ListSelectDialog extends BaseDialog implements BaseViewControl {
         ListSelectDialog fragment = new ListSelectDialog();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mApp = BitbillApp.get();
+    }
+
+    @Override
+    public BitbillApp getApp() {
+        return mApp;
     }
 
     @Nullable

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.utils.DialogUtils;
 import com.bitbill.www.common.utils.StringUtils;
@@ -38,11 +39,18 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
     private BaseActivity<MvpPresenter> mActivity;
     private Unbinder mUnBinder;
     private ProgressDialog mProgressDialog;
+    private BitbillApp mApp;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(false);
+        mApp = BitbillApp.get();
+    }
+
+    @Override
+    public BitbillApp getApp() {
+        return mApp;
     }
 
     /**

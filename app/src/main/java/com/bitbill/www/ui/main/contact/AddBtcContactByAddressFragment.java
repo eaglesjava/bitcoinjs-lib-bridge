@@ -1,7 +1,6 @@
 package com.bitbill.www.ui.main.contact;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
@@ -10,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.EditTextWapper;
@@ -43,10 +43,10 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
         // Required empty public constructor
     }
 
-    public static AddBtcContactByAddressFragment newInstance() {
+    public static AddBtcContactByAddressFragment newInstance(String address) {
 
         Bundle args = new Bundle();
-
+        args.putString(AppConstants.ARG_ADDRESS, address);
         AddBtcContactByAddressFragment fragment = new AddBtcContactByAddressFragment();
         fragment.setArguments(args);
         return fragment;
@@ -108,24 +108,13 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
 
     @Override
     public void initView() {
-        mEtwContactAddress.setOnRightImageClickListener(v -> ScanQrcodeActivity.startForResult(AddBtcContactByAddressFragment.this));
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ScanQrcodeActivity.REQUEST_CODE_SCAN_QRCODE && resultCode == ScanQrcodeActivity.RESULT_CODE_SCAN_QRCODE_SUCCESS) {
-            if (data != null) {
-                String qrcodeResult = data.getStringExtra(ScanQrcodeActivity.EXTRA_SCAN_QRCODE_RESULT);
-                //填充地址
-                mEtwContactAddress.setText(qrcodeResult);
-
-            }
-        }
+        mEtwContactAddress.setOnRightImageClickListener(v -> ScanQrcodeActivity.start(getBaseActivity(), false));
     }
 
     @Override
     public void initData() {
+        String address = getArguments().getString(AppConstants.ARG_ADDRESS);
+        mEtwContactAddress.setText(address);
 
     }
 
@@ -147,6 +136,12 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
     @Override
     public String getAddress() {
         return mEtwContactAddress.getText();
+    }
+
+    public void setAddress(String address) {
+        if (mEtwContactAddress != null) {
+            mEtwContactAddress.setText(address);
+        }
     }
 
     @Override

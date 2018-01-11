@@ -94,6 +94,12 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return mSendAddress;
     }
 
+    public void setSendAddress(String sendAddress) {
+
+        mSendAddress = sendAddress;
+        etSendAddress.setText(sendAddress);
+    }
+
     public void setSendAddress(Contact sendContact) {
         if (sendContact != null) {
 
@@ -102,10 +108,6 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
             setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? mSendAddress : walletId) + ")");
 
         }
-    }
-
-    public void setSendAddress(String sendAddress) {
-        etSendAddress.setText(sendAddress);
     }
 
     public void sendSuccess() {

@@ -125,11 +125,11 @@ public class ContactFragment extends BaseListFragment<Contact, ContactMvpPresent
                     break;
                 case 1:
                     //通过地址添加
-                    AddContactByAddressActivity.start(getBaseActivity());
+                    AddContactByAddressActivity.start(getBaseActivity(), null);
                     break;
                 case 2:
                     //扫码添加
-                    ScanQrcodeActivity.start(getBaseActivity());
+                    ScanQrcodeActivity.start(getBaseActivity(), false);
                     break;
 
             }

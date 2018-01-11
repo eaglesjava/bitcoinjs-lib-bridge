@@ -19,6 +19,7 @@ import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.converter.PropertyConverter;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,11 +38,10 @@ public class TxRecord extends Entity {
     private InOut inOut = InOut.IN;//0: 转移,1：in（接收）,2：out(发送)
     private long sumAmount;
     private long height;
-    private String createdTime;
+    private Date createdTime;
     @ToMany(referencedJoinProperty = "txId")
     @OrderBy("id ASC")
     private List<Input> inputs;
-
     @ToMany(referencedJoinProperty = "txId")
     @OrderBy("id ASC")
     private List<Output> outputs;
@@ -59,9 +59,9 @@ public class TxRecord extends Entity {
     @Generated(hash = 1885063144)
     private transient Long wallet__resolvedKey;
 
-    @Generated(hash = 2100055210)
+    @Generated(hash = 1194131978)
     public TxRecord(Long id, Long walletId, String txHash, InOut inOut, long sumAmount,
-                    long height, String createdTime, String mRemark) {
+                    long height, Date createdTime, String mRemark) {
         this.id = id;
         this.walletId = walletId;
         this.txHash = txHash;
@@ -107,19 +107,19 @@ public class TxRecord extends Entity {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public void setHeight(long height) {
         this.height = height;
     }
 
-    public String getCreatedTime() {
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public Date getCreatedTime() {
         return createdTime;
     }
 
-    public TxRecord setCreatedTime(String createdTime) {
+    public TxRecord setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
         return this;
     }

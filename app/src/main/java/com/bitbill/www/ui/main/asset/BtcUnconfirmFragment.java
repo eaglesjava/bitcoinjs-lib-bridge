@@ -95,8 +95,13 @@ public class BtcUnconfirmFragment extends BaseListFragment<TxRecord, MvpPresente
     protected void itemConvert(ViewHolder holder, TxRecord txRecord, int position) {
         String inOutString = txRecord.getInOut() == TxRecord.InOut.TRANSFER ? "" : (txRecord.getInOut() == TxRecord.InOut.IN ? "+" : "-");
         holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txRecord.getSumAmount()) + " btc");
-        holder.setText(R.id.tv_wallet_id, txRecord.getWallet().getName());
-        holder.setText(R.id.tv_date, txRecord.getCreatedTime());
+        try {
+            txRecord.__setDaoSession(getApp().getDaoSession());
+            holder.setText(R.id.tv_wallet_id, txRecord.getWallet().getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        holder.setText(R.id.tv_date, StringUtils.formatDate(txRecord.getCreatedTime()));
         if (txRecord.getHeight() == -1) {
             holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
         } else {

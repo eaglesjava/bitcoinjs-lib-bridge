@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
+import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.www.BuildConfig;
 import com.bitbill.www.R;
 import com.bitbill.www.common.utils.SoundUtils;
@@ -16,6 +17,7 @@ import com.bitbill.www.di.component.DaggerApplicationComponent;
 import com.bitbill.www.di.module.ApplicationModule;
 import com.bitbill.www.model.app.prefs.AppPreferences;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
+import com.bitbill.www.model.wallet.db.WalletDbHelper;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.socket.Register;
 
@@ -44,6 +46,8 @@ public class BitbillApp extends Application {
     Socket mSocket;
     @Inject
     OkHttpClient mOkhttpClient;
+    @Inject
+    WalletDbHelper mWalletDbHelper;
     private ApplicationComponent mApplicationComponent;
     private List<Wallet> mWallets;
     private double mBtcCnyValue;
@@ -60,7 +64,6 @@ public class BitbillApp extends Application {
         super.onCreate();
 
         sInstance = this;
-
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
 
@@ -218,6 +221,10 @@ public class BitbillApp extends Application {
 
     public void setBlockHeight(long blockHeight) {
         mBlockHeight = blockHeight;
+    }
+
+    public DaoSession getDaoSession() {
+        return mWalletDbHelper.getDaoSession();
     }
 }
 

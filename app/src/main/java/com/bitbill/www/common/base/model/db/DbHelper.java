@@ -17,4 +17,8 @@ public class DbHelper implements Db {
     public DbHelper(DaoSession daoSession) {
         mDaoSession = daoSession;
     }
+
+    public DaoSession getDaoSession() {
+        return mDaoSession;
+    }
 }

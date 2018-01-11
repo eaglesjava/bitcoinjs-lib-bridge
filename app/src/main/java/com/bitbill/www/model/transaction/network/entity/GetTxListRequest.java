@@ -7,7 +7,10 @@ public class GetTxListRequest {
 
     private String extendedKeysHash;
 
-    public GetTxListRequest(String extendedKeysHash) {
+    private long id;
+
+    public GetTxListRequest(String extendedKeysHash, long id) {
         this.extendedKeysHash = extendedKeysHash;
+        this.id = id;
     }
 }

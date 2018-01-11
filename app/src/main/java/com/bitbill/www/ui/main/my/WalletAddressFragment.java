@@ -54,6 +54,7 @@ public class WalletAddressFragment extends BaseListFragment<Address, BtcAddressM
     public void initData() {
         mWallet = (Wallet) getArguments().getSerializable(AppConstants.ARG_WALLET);
         if (mWallet != null) {
+            mWallet.__setDaoSession(getApp().getDaoSession());
             String name = mWallet.getName();
             mTvWalletId.setText(name);
             mAddressList = mWallet.getAddressList();

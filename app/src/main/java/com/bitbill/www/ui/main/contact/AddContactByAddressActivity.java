@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.ui.wallet.info.BchInfoFragment;
 import com.bitbill.www.ui.wallet.info.EthInfoFragment;
 
@@ -25,10 +27,22 @@ public class AddContactByAddressActivity extends BaseToolbarActivity {
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
     private FragmentAdapter mFragmentAdapter;
+    private String mAddress;
+    private AddBtcContactByAddressFragment mAddBtcContactByAddressFragment;
 
-    public static void start(Context context) {
+    public static void start(Context context, String address) {
         Intent starter = new Intent(context, AddContactByAddressActivity.class);
+        starter.putExtra(AppConstants.EXTRA_ADDRESS, address);
         context.startActivity(starter);
+    }
+
+    @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+        mAddress = intent.getStringExtra(AppConstants.EXTRA_ADDRESS);
+        if (StringUtils.isNotEmpty(mAddress) && mAddBtcContactByAddressFragment != null) {
+            mAddBtcContactByAddressFragment.setAddress(mAddress);
+        }
     }
 
     @Override
@@ -61,7 +75,8 @@ public class AddContactByAddressActivity extends BaseToolbarActivity {
      */
     private void setUpViewPager() {
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
-        mFragmentAdapter.addItem("btc", AddBtcContactByAddressFragment.newInstance());
+        mAddBtcContactByAddressFragment = AddBtcContactByAddressFragment.newInstance(mAddress);
+        mFragmentAdapter.addItem("btc", mAddBtcContactByAddressFragment);
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
         mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         mViewPager.setAdapter(mFragmentAdapter);

@@ -41,6 +41,7 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
     private int mSelectedPos = -1;
     private OnWalletSelectItemClickListener mOnWalletSelectItemClickListener;
     private Wallet mSelectedWallet;
+    private BitbillApp mApp;
 
     public static WalletSelectDialog newInstance() {
 
@@ -48,6 +49,17 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
         WalletSelectDialog fragment = new WalletSelectDialog();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mApp = BitbillApp.get();
+    }
+
+    @Override
+    public BitbillApp getApp() {
+        return mApp;
     }
 
     @Nullable

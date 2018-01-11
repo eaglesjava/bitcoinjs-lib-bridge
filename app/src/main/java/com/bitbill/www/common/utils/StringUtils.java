@@ -3,7 +3,6 @@ package com.bitbill.www.common.utils;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.webkit.URLUtil;
@@ -23,7 +22,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -577,41 +575,15 @@ public class StringUtils {
 
     }
 
-    public static Map<String, String> parseScanResult(String result) {
-        if (isEmpty(result)) {
-            return null;
+    public static Date getDate(String date) {
+        //get date by string
+        Date parse = null;
+        try {
+            parse = yyyyMMddHHmmss.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        Map<String, String> resultMap = new HashMap<>();
-        //解析协议
-        if (result.toLowerCase().startsWith(AppConstants.SCHEME_BITCOIN) && result.contains(":")) {
-            String address = null;
-            String amount = null;
-            int askIndex = result.indexOf("?");
-            if (askIndex != -1 & askIndex + 1 < result.length()) {
-                String amountString = result.substring(askIndex + 1);
-                if (amountString.contains("amount=")) {
-                    amount = amountString.replace("amount=", "");
-                }
-                address = result.substring(result.indexOf(":") + 1, askIndex);
-            } else {
-                address = result.substring(result.indexOf(":") + 1);
-            }
-
-            resultMap.put(AppConstants.QUERY_AMOUNT, amount);
-            resultMap.put(AppConstants.QUERY_ADDRESS, address);
-            return resultMap;
-
-        } else if (result.toLowerCase().startsWith(AppConstants.SCHEME_BITBILL)) {
-            Uri parse = Uri.parse(result);
-            if (AppConstants.HOST_BITBILL.equals(parse.getHost())) {
-                String path = parse.getPath();
-                if (isNotEmpty(path) && AppConstants.PATH_CONTACT.equals(path.replace("/", ""))) {
-                    String contactId = parse.getQueryParameter(AppConstants.QUERY_ID);
-                    resultMap.put(AppConstants.QUERY_ID, contactId);
-                }
-            }
-        }
-        return resultMap;
+        return parse;
     }
 
     public static String formatDate(String date) {
@@ -623,6 +595,13 @@ public class StringUtils {
             e.printStackTrace();
         }
         return date;
+    }
+
+    public static String formatDate(Date date) {
+        if (date == null) {
+            return "-- -- --";
+        }
+        return formatDate(date.getTime());
     }
 
 
