@@ -179,7 +179,7 @@ extension BTCTransactionModel {
         targetSatoshi = 0
     }
     
-    func newAddressModelIfNeeded(_ address: String, isInput: Bool = true) -> BTCTXAddressModel {
+    func newAddressModelIfNeeded(_ address: String, index: Int, isInput: Bool = true) -> BTCTXAddressModel {
         let array = (isInput ? inputs : outputs)!.array
         for add in array {
             let tx = add as! BTCTXAddressModel
@@ -188,6 +188,8 @@ extension BTCTransactionModel {
             }
         }
         let tx = bil_btc_tx_addressManager.newModel()
+        tx.address = address
+        tx.index = Int64(index)
         return tx
     }
     
@@ -198,8 +200,7 @@ extension BTCTransactionModel {
         var inAddresses = [String]()
         for j in json["inputs"].arrayValue {
             let add = j["address"].stringValue
-            let tx = newAddressModelIfNeeded(add)
-            tx.address = add
+            let tx = newAddressModelIfNeeded(add, index: inAddresses.count)
             tx.satoshi = j["value"].int64Value
             inAddresses.append(add)
             inSatoshi += tx.satoshi
@@ -209,8 +210,7 @@ extension BTCTransactionModel {
         for j in json["outputs"].arrayValue {
             debugPrint(j["address"])
             let add = j["address"].stringValue
-            let tx = newAddressModelIfNeeded(add, isInput: false)
-            tx.address = add
+            let tx = newAddressModelIfNeeded(add, index: outAddresses.count, isInput: false)
             tx.satoshi = j["value"].int64Value
             outAddresses.append(add)
             outSatoshi += tx.satoshi
