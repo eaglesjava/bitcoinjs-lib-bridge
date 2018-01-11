@@ -46,6 +46,7 @@
 "MeC.walletAddress_addressAndBalance" = "地址与余额";
 
 "MeC.aboutUs_agreement" = "使用条款";
+"MeC.aboutUs_contactUs" = "联系我们";
 
 "MeC.appSetting_sound" = "音效";
 "MeC.appSetting_currency" = "货币";

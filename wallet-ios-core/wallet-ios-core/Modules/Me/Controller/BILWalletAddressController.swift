@@ -94,6 +94,7 @@ extension BILWalletAddressController: UITableViewDelegate, UITableViewDataSource
         let utxo = addresses[indexPath.row]
         cell.titleLabel.text = utxo.address
         cell.subTitleLabel.text = BTCFormatString(btc: utxo.satoshi) + " BTC"
+        cell.subTitleLabel.textColor = UIColor(white: 1.0, alpha: utxo.satoshi == 0 ? 0.3 : 1.0) 
         return cell
     }
     

@@ -131,6 +131,7 @@ extension String {
 	static let meWalletAddress_addressAndBalance = "MeC.walletAddress_addressAndBalance".bil_localized
 	
 	static let meAboutUs_agreement = "MeC.aboutUs_agreement".bil_localized
+    static let meAboutUs_contactUs = "MeC.aboutUs_contactUs".bil_localized
 	
 	static let meAppSetting_sound = "MeC.appSetting_sound".bil_localized
 	static let meAppSetting_currency = "MeC.appSetting_currency".bil_localized

@@ -12,7 +12,7 @@ class BILAboutUsViewController: BILBaseViewController {
 
     @IBOutlet weak var versionLabel: UILabel!
     
-    let titles = [String.meAboutUs_agreement]
+    let titles = [String.meAboutUs_agreement, String.meAboutUs_contactUs]
     let segues = ["BILAboutUsToAgreementSegue"]
     
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class BILAboutUsViewController: BILBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func emailAction(_ sender: Any) {
+    @IBAction func emailAction(_ sender: Any?) {
         UIApplication.shared.open(URL(string: "mailto:hi@bitbill.com")!, options: [:], completionHandler: nil)
     }
     
@@ -63,8 +63,15 @@ extension BILAboutUsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let segue = segues[indexPath.row]
-        performSegue(withIdentifier: segue, sender: nil)
+        switch indexPath.row {
+        case 0:
+            let segue = segues[indexPath.row]
+            performSegue(withIdentifier: segue, sender: nil)
+        case 1:
+            emailAction(nil)
+        default:
+            ()
+        }
     }
     
 }
