@@ -116,7 +116,7 @@ extension BTCTransactionModel {
     }
     
     var remarkString: String {
-        get { return remark!.isEmpty ? "无" : remark! }
+        get { return remark!.isEmpty ? .publicTransactionNoRemark : remark! }
     }
     
     var typeString: String {

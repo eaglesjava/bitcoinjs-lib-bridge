@@ -28,3 +28,4 @@
 "HomeC.tx.detail.cell.date" = "Transaction date";
 "HomeC.tx.detail.noTx" = "No transaction records";
 "HomeC.tx.detail.tx" = "Transaction records";
+"HomeC.tx.detail.blockchain" = "View on Blockchain.info";

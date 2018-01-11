@@ -30,7 +30,7 @@
 "qgc-Mh-7ji.title" = "Succeed to back up";
 
 /* Class = "UIButton"; normalTitle = "已按顺序记下助记词"; ObjectID = "qlY-G9-oj8"; */
-"qlY-G9-oj8.normalTitle" = "I have saved them orderly.";
+"qlY-G9-oj8.normalTitle" = "I have saved them orderly";
 
 /* Class = "UILabel"; text = "按顺序点击助记词，确认您的助记词备份正确"; ObjectID = "ua5-CA-eV7"; */
 "ua5-CA-eV7.text" = "Click on the mnemonic words orderly to confirm whether your backup is right.";

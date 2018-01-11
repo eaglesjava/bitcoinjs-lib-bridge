@@ -762,6 +762,7 @@
                         <viewLayoutGuide key="safeArea" id="75H-t4-X8h"/>
                     </view>
                     <connections>
+                        <outlet property="blockchainButton" destination="dfh-tV-KHB" id="wds-Bv-6uQ"/>
                         <outlet property="statusImageView" destination="1gt-vt-dJH" id="PUe-Rv-UL0"/>
                         <outlet property="statusLabel" destination="8MQ-76-CAT" id="6ls-zD-hGv"/>
                         <outlet property="tableView" destination="rA2-oI-gJE" id="J28-29-h7D"/>

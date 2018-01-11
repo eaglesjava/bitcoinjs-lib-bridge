@@ -16,6 +16,7 @@ class BILSendResultController: BILBaseViewController {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var txHashLabel: BILCopyLabel!
     @IBOutlet weak var addContactButton: BILGradientButton!
+    @IBOutlet weak var blockchainButton: UIButton!
     @IBOutlet weak var contactRecommendLabel: UILabel!
     
     var sendModel: BILSendModel?
@@ -35,6 +36,8 @@ class BILSendResultController: BILBaseViewController {
             addContactButton.isHidden = model.isContactAddress
             contactRecommendLabel.isHidden = model.isContactAddress
         }
+        
+        blockchainButton.setAttributedTitle(NSAttributedString(string: .homeTxDetailBlockchain, attributes: [.font: UIFont.systemFont(ofSize: 15), .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
     }
     @IBAction func addContactAction(_ sender: Any) {
         if let tx = sendModel?.transaction {

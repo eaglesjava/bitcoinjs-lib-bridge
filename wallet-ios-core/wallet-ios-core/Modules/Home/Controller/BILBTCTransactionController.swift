@@ -9,6 +9,7 @@
 import UIKit
 
 class BILBTCTransactionController: BILLightBlueBaseController {
+    @IBOutlet weak var blockchainButton: UIButton!
     
     var transaction: BTCTransactionModel?
     @IBOutlet weak var tableView: UITableView!
@@ -48,6 +49,8 @@ class BILBTCTransactionController: BILLightBlueBaseController {
         }
         datas.append((.homeTxDetailRemark, value: tx.remarkString, cellID: "BILTXDetailCell"))
         datas.append((.homeTxDetailDate, value: tx.dateSring, cellID: "BILTXDetailCell"))
+        
+        blockchainButton.setAttributedTitle(NSAttributedString(string: .homeTxDetailBlockchain, attributes: [.font: UIFont.systemFont(ofSize: 15), .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

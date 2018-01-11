@@ -47,7 +47,7 @@ extension ContactModel: Comparable {
 	
 	var remarkString: String {
 		get {
-			return remark!.isEmpty ? "无" : remark!
+			return remark!.isEmpty ? .publicTransactionNoRemark : remark!
 		}
 	}
 }

@@ -35,7 +35,7 @@
 
 "MeC.wallet_deleteFailed" = "Failed to delete wallet";
 "MeC.wallet_delete" = "Delete wallet";
-"MeC.wallet_deleteMessage" = "Please be cautious about this operation, confirm that your wallet has been backed up before deleting, or the digital asset cannot be found.";
+"MeC.wallet_deleteMessage" = "Please be cautious about this operation, confirm that your wallet has been backed up before deleting, or the digital assets cannot be found.";
 "MeC.wallet_passwordEmpty" = "Password can't be empty";
 "MeC.wallet_passwordError" = "Wrong password";
 "MeC.wallet_inputPassword" = "Please input password and confirm";

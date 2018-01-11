@@ -51,7 +51,7 @@
 "aQP-jQ-EWn.normalTitle" = "Confirm";
 
 /* Class = "UINavigationItem"; title = "输入助记词"; ObjectID = "cca-Ld-QW8"; */
-"cca-Ld-QW8.title" = "Input mnemonic words";
+"cca-Ld-QW8.title" = "Mnemonic words";
 
 /* Class = "UIButton"; normalTitle = "稍后备份"; ObjectID = "gbd-8O-69h"; */
 "gbd-8O-69h.normalTitle" = "Back up later";

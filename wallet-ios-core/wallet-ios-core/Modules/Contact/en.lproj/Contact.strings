@@ -102,7 +102,7 @@
 "loc-Av-3sV.title" = "Edit contact";
 
 /* Class = "UILabel"; text = "无"; ObjectID = "nTG-6c-hbZ"; */
-"nTG-6c-hbZ.text" = "无";
+"nTG-6c-hbZ.text" = "-";
 
 /* Class = "UINavigationItem"; title = "联系人"; ObjectID = "nyY-9Y-U6O"; */
 "nyY-9Y-U6O.title" = "Contacts";

@@ -29,7 +29,7 @@
 "Public.transaction.type.send" = "Sent";
 "Public.transaction.type.transfer" = "Transferred";
 
-"Public.transaction.remark.none" = "None";
+"Public.transaction.remark.none" = "-";
 
 "Public.alert.action.title" = "Get it";
 

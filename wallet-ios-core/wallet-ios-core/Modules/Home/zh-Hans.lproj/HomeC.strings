@@ -28,3 +28,4 @@
 "HomeC.tx.detail.cell.date" = "交易时间";
 "HomeC.tx.detail.noTx" = "无交易记录";
 "HomeC.tx.detail.tx" = "交易记录";
+"HomeC.tx.detail.blockchain" = "去 Blockchain.info 查看交易";
