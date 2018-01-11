@@ -30,7 +30,7 @@ class BILCoinHeaderView: UIView {
     @objc
     func tapped(tap: UITapGestureRecognizer) {
         let label = tap.view as! UILabel
-        if label.text != "BTC" {
+        if !(label.text ?? "").contains("BTC") {
             viewController()?.bil_makeToast(msg: .publicToastComingSoon)
         }
     }

@@ -11,13 +11,13 @@ import Toast_Swift
 
 extension UIViewController {
     func bil_makeToast(msg: String?, completion: ((_ didTap: Bool) -> Void)? = nil) {
-        view.makeToast(msg, duration: 2.5, completion: completion)
+        view.makeToast(msg, completion: completion)
     }
 }
 
 extension UIView {
     func bil_makeToast(msg: String?, completion: ((_ didTap: Bool) -> Void)? = nil) {
-        window?.makeToast(msg, duration: 2.5, completion: completion)
+        window?.makeToast(msg, completion: completion)
     }
 }
 

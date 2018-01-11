@@ -54,6 +54,7 @@ class BILAppStartUpManager: NSObject {
         style.shadowOpacity = 0.3
         ToastManager.shared.style = style
         ToastManager.shared.position = .bottom
+        ToastManager.shared.duration = 1.5
     }
     
     func setupPushService() {

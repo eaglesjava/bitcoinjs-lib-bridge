@@ -12,7 +12,7 @@ extension String {
     static let bil_UserDefaultsKey_isHomeShortcutEnabled    = "bil_isHomeShortcutEnabled"
     static let bil_UserDefaultsKey_isSoundEnabled           = "bil_isSoundEnabled"
     static let bil_UserDefaultsKey_currencyType             = "bil_currencyType"
-    static let bil_UserDefaultsKey_currentLanguageType             = "AppleLanguages"
+    static let bil_UserDefaultsKey_currentLanguageType      = "AppleLanguages"
 }
 
 enum CurrencyType: Int {
