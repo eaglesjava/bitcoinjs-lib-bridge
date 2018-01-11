@@ -208,6 +208,7 @@ extension WalletModel {
 		}
 		do {
 			try BILWalletManager.shared.saveWallets()
+            NotificationCenter.default.post(name: .localUTXODidChanged, object: nil)
 		} catch {
 			debugPrint("保存本地 UTXO 数据失败")
 		}

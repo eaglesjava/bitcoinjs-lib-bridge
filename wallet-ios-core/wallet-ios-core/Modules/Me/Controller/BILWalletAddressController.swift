@@ -25,16 +25,19 @@ class BILWalletAddressController: BILLightBlueBaseController {
         tableView.register(UINib(nibName: "BILTableViewHeaderFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "BILTableViewHeaderFooterView")
         refreshUI()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .walletDidChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(localUTXODidChanged(notification:)), name: .localUTXODidChanged, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .localUTXODidChanged, object: nil)
     }
     
     @objc
-    func walletDidChanged(notification: Notification) {
-        refreshUI()
+    func localUTXODidChanged(notification: Notification) {
+        if let w = wallet {
+            addresses = w.btc_addressModels
+            tableView.reloadData()
+        }
     }
     
     func refreshUI() {
