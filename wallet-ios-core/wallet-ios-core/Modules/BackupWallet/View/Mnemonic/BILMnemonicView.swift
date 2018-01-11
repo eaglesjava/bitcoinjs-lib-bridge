@@ -74,7 +74,7 @@ class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		let text = dataArray[indexPath.item]
 		var size = text.size(withAttributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 21)])
-		size.width += 18
+		size.width += 6
 		size.height = 30
 		return size
 	}
