@@ -25,12 +25,12 @@
 "SendC.confirm.cannotFindChangeAddress" = "Can't generate change address";
 "SendC.confirm.remarkTooLong" = "Please input not more than 20 words";
 "SendC.confirm.sendFailed" = "Fail to send";
-"SendC.confirm.passwordTitle" = "Input wallet password";
+"SendC.confirm.passwordTitle" = "Wallet password";
 "SendC.confirm.passwordMessageEmpty" = "Password cannot be empty";
 "SendC.confirm.passwordMessageWrong" = "Password is wrong";
 "SendC.confirm.cancel" = "Cancel";
 "SendC.confirm.confirm" = "Confirm";
-"SendC.confirm.passwordPlaceholder" = "Please input password and confirm";
+"SendC.confirm.passwordPlaceholder" = "Input password and confirm";
 "SendC.confirm.buildTxFailed" = "Transaction is failed";
 "SendC.confirm.seedFailed" = "Failed to decode seed";
 "SendC.confirm.tryLater" = "Please retry later";

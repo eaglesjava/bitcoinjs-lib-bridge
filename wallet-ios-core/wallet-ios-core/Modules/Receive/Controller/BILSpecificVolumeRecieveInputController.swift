@@ -47,7 +47,7 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
         
         if let kbFrame = info[UIKeyboardFrameEndUserInfoKey] as? CGRect {
             UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
-                self.nextButtonBottomSpace.constant = kbFrame.height + 30
+                self.nextButtonBottomSpace.constant = kbFrame.height + 25
             }, completion: { (finished) in
                 
             })
@@ -72,7 +72,7 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
         }
         
         UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
-            self.nextButtonBottomSpace.constant = 30
+            self.nextButtonBottomSpace.constant = 25
         }, completion: { (finished) in
             
         })

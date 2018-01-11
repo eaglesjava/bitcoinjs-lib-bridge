@@ -1,6 +1,6 @@
 
 /* Class = "UINavigationItem"; title = "系统设置"; ObjectID = "1Md-s1-Xl3"; */
-"1Md-s1-Xl3.title" = "System settings";
+"1Md-s1-Xl3.title" = "General";
 
 /* Class = "UINavigationItem"; title = "钱包地址"; ObjectID = "1ew-17-gnL"; */
 "1ew-17-gnL.title" = "Wallet address";
@@ -19,9 +19,6 @@
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "9Vi-mc-EER"; */
 "9Vi-mc-EER.text" = "Label";
-
-/* Class = "UIButton"; normalTitle = "hi@bitbill.com"; ObjectID = "DR5-Ft-Rhg"; */
-"DR5-Ft-Rhg.normalTitle" = "hi@bitbill.com";
 
 /* Class = "UILabel"; text = "IDLabel"; ObjectID = "EF6-td-NI9"; */
 "EF6-td-NI9.text" = "IDLabel";

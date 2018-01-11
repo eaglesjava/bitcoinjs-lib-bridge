@@ -60,7 +60,7 @@
 "iJr-DZ-SE9.text" = "ETH";
 
 /* Class = "UIButton"; normalTitle = "添加联系人"; ObjectID = "jKD-ly-HwV"; */
-"jKD-ly-HwV.normalTitle" = "添加联系人";
+"jKD-ly-HwV.normalTitle" = "添加";
 
 /* Class = "UILabel"; text = "0.00 CNY"; ObjectID = "kIi-ue-mEd"; */
 "kIi-ue-mEd.text" = "0.00 CNY";

@@ -100,6 +100,9 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
             c.bil_switch.onTintColor = UIColor(patternImage: UIImage(named: "pic_switch_background")!)
             c.switchChangedClosure = { (isOn) in
                 BILSettingManager.isSoundEnabled = isOn
+                if isOn {
+                    BILAudioPlayer.playReceiveMoney()
+                }
             }
             c.titleLabel.text = model as? String
         case .language:

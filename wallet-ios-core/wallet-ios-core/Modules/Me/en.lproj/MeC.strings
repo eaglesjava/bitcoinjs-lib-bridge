@@ -8,17 +8,17 @@
 
 "MeC.agreementName" = "service";
 
-"MeC.meSection_preference" = "Predilection settings";
-"MeC.meSection_contacts" = "Contact settings";
-"MeC.meSection_wallet" = "Wallet integration";
-"MeC.meSection_system" = "System related";
+"MeC.meSection_preference" = "Assets";
+"MeC.meSection_contacts" = "Contact";
+"MeC.meSection_wallet" = "Wallet";
+"MeC.meSection_system" = "Settings";
 "MeC.meSection_other" = "Other";
 
-"MeC.meCell_shortcut" = "Home shortcuts";
+"MeC.meCell_shortcut" = "Shortcuts";
 "MeC.meCell_contactBackup" = "Backup contacts";
 "MeC.meCell_contactRecover" = "Restore contacts";
-"MeC.meCell_system" = "System settings";
-"MeC.meCell_aboutUs" = "About us ";
+"MeC.meCell_system" = "General";
+"MeC.meCell_aboutUs" = "About us";
 
 "MeC.contact_yourKey" = "Your contact passphrase";
 "MeC.contact_copyKey" = "Copy passphrase";
@@ -41,9 +41,9 @@
 "MeC.wallet_inputPassword" = "Please input password and confirm";
 "MeC.wallet_tryLater" = "Please retry later";
 "MeC.wallet_failed" = "Operation failed";
-"MeC.wallet_backupNow" = "Backup now";
+"MeC.wallet_backupNow" = "Back up";
 
-"MeC.walletAddress_addressAndBalance" = "Address and balance";
+"MeC.walletAddress_addressAndBalance" = "Address & balance";
 
 "MeC.aboutUs_agreement" = "Usage terms";
 "MeC.aboutUs_contactUs" = "Contact us";
@@ -52,6 +52,6 @@
 "MeC.appSetting_currency" = "Currency";
 "MeC.appSetting_language" = "Language";
 "MeC.appSetting_cellSound" = "Sound";
-"MeC.appSetting_cellCurrency" = "Alternative currency";
+"MeC.appSetting_cellCurrency" = "Currency";
 "MeC.appSetting_cellLanguage" = "Language";
 "MeC.appSetting_saved" = "Saved";

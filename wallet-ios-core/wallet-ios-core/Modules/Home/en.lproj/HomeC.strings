@@ -11,8 +11,8 @@
 "HomeC.home.section.unconfirm" = "Ongoing transaction";
 "HomeC.home.section.wallet" = "My wallets";
 
-"HomeC.home.section.subtitle.shortcut" = "Config shortcuts on settings";
-"HomeC.home.section.subtitle.asset" = "Present currencies: ";
+"HomeC.home.section.subtitle.shortcut" = "Config on settings";
+"HomeC.home.section.subtitle.asset" = "Current currencies: ";
 "HomeC.home.section.subtitle.unconfirm" = "Ongoing transaction: ";
 "HomeC.home.section.subtitle.wallet" = "Current wallets: ";
 "HomeC.home.section.subtitle.unit.ge" = "";
@@ -23,8 +23,9 @@
 "HomeC.tx.detail.cell.hash" = "Transaction hash";
 "HomeC.tx.detail.cell.address.receive" = "Addresses of sender";
 "HomeC.tx.detail.cell.address.send" = "Addresses of receiver";
+"HomeC.tx.detail.cell.fee" = "Fees";
 "HomeC.tx.detail.cell.confirm" = "Confirmation";
-"HomeC.tx.detail.cell.remark" = "Note";
+"HomeC.tx.detail.cell.remark" = "Remarks";
 "HomeC.tx.detail.cell.date" = "Transaction date";
 "HomeC.tx.detail.noTx" = "No transaction records";
 "HomeC.tx.detail.tx" = "Transaction records";

@@ -27,7 +27,7 @@
 "LfU-2L-QPe.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "当前钱包未备份，马上备份"; ObjectID = "Lla-QY-BHV"; */
-"Lla-QY-BHV.normalTitle" = "Wallet not backed up, back up it now";
+"Lla-QY-BHV.normalTitle" = "Back up wallet now";
 
 /* Class = "UILabel"; text = "btc balance"; ObjectID = "MRt-I8-1l2"; */
 "MRt-I8-1l2.text" = "btc balance";
@@ -36,7 +36,7 @@
 "MbP-wN-eFm.normalTitle" = "Next";
 
 /* Class = "UINavigationItem"; title = "特定金额接收"; ObjectID = "Q03-cE-dXW"; */
-"Q03-cE-dXW.title" = "Receive specific amount";
+"Q03-cE-dXW.title" = "Receive";
 
 /* Class = "UILabel"; text = "0.00"; ObjectID = "Q37-vr-w7f"; */
 "Q37-vr-w7f.text" = "0.00";
@@ -48,7 +48,7 @@
 "Vbc-mO-Bu1.text" = "   BTC   ";
 
 /* Class = "UINavigationItem"; title = "接收数量"; ObjectID = "WWw-Bm-kvr"; */
-"WWw-Bm-kvr.title" = "The quantity of reception";
+"WWw-Bm-kvr.title" = "Amount";
 
 /* Class = "UILabel"; text = "扫一扫，向我支付"; ObjectID = "XWN-KL-CfM"; */
 "XWN-KL-CfM.text" = "Scan to pay";

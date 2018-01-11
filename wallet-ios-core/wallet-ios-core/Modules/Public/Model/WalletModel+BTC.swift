@@ -182,6 +182,23 @@ extension WalletModel {
         }
     }
 	
+    func updateUTXO(utxos: [BitcoinUTXOModel]) {
+        for add in btc_addressModels {
+            add.satoshi = 0
+        }
+        for utxo in utxos {
+            let add = utxo.address
+            let model = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: add)
+            model.satoshi += utxo.satoshiAmount
+        }
+        do {
+            try BILWalletManager.shared.saveWallets()
+            NotificationCenter.default.post(name: .localUTXODidChanged, object: nil)
+        } catch {
+            debugPrint("保存本地 UTXO 数据失败")
+        }
+    }
+    
 	func updateUTXOAtLocal() {
 		for add in btc_addressModels {
 			add.satoshi = 0

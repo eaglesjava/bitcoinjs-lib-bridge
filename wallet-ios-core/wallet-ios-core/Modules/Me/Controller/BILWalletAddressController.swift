@@ -26,6 +26,12 @@ class BILWalletAddressController: BILLightBlueBaseController {
         refreshUI()
         
         NotificationCenter.default.addObserver(self, selector: #selector(localUTXODidChanged(notification:)), name: .localUTXODidChanged, object: nil)
+        wallet?.getUTXOFromServer(success: { (utxos) in
+            self.refreshUI()
+            self.bil_dismissHUD()
+        }, failure: { (msg, code) in
+            self.bil_showError(status: msg)
+        })
     }
     
     deinit {
@@ -43,7 +49,6 @@ class BILWalletAddressController: BILLightBlueBaseController {
     func refreshUI() {
         if let w = wallet {
             idLabel.text = w.id
-			w.updateUTXOAtLocal()
             addresses = w.btc_addressModels
             tableView.reloadData()
         }
@@ -53,9 +58,13 @@ class BILWalletAddressController: BILLightBlueBaseController {
         bil_showLoading()
         let targetIndex = w.lastAddressIndex + 10
         w.refreshAddressToSever(index: targetIndex, success: { (addresses) in
-			BILWalletManager.shared.loadBlockHeightAndWalletVersion()
-            self.refreshUI()
-            self.bil_dismissHUD()
+            BILWalletManager.shared.loadBlockHeightAndWalletVersion()
+            w.getUTXOFromServer(success: { (utxos) in
+                self.refreshUI()
+                self.bil_dismissHUD()
+            }, failure: { (msg, code) in
+                self.bil_showError(status: msg)
+            })
         }) { (msg) in
             self.bil_showError(status: msg)
         }

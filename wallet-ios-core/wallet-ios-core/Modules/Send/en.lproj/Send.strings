@@ -36,7 +36,7 @@
 "DxN-Ff-T7C.text" = "Label";
 
 /* Class = "UILabel"; text = "发送金额"; ObjectID = "EJd-yd-ypz"; */
-"EJd-yd-ypz.text" = "Sending amount";
+"EJd-yd-ypz.text" = "Amount";
 
 /* Class = "UILabel"; text = "amount"; ObjectID = "Erz-zk-b10"; */
 "Erz-zk-b10.text" = "amount";
@@ -45,7 +45,7 @@
 "Fio-ZW-1aj.normalTitle" = "Next";
 
 /* Class = "UITextField"; placeholder = "接收方地址"; ObjectID = "FtQ-ul-LSb"; */
-"FtQ-ul-LSb.placeholder" = "Address of receiver";
+"FtQ-ul-LSb.placeholder" = "Receiver";
 
 /* Class = "UILabel"; text = "发送成功"; ObjectID = "GcY-Ih-Dbp"; */
 "GcY-Ih-Dbp.text" = "Send successfully";
@@ -75,7 +75,7 @@
 "UYV-Bh-eJo.title" = "Scan results";
 
 /* Class = "UILabel"; text = "备注"; ObjectID = "WJZ-AI-aCJ"; */
-"WJZ-AI-aCJ.text" = "Note";
+"WJZ-AI-aCJ.text" = "Remarks";
 
 /* Class = "UILabel"; text = "B"; ObjectID = "baX-6Q-L8p"; */
 "baX-6Q-L8p.text" = "B";
@@ -123,10 +123,10 @@
 "sUF-cQ-IYF.text" = "address";
 
 /* Class = "UITextField"; placeholder = "20字以内"; ObjectID = "tAE-ee-pat"; */
-"tAE-ee-pat.placeholder" = "within 20 words";
+"tAE-ee-pat.placeholder" = "Within 20 words";
 
 /* Class = "UIBarButtonItem"; title = "选择全部余额"; ObjectID = "yYV-Yz-7JL"; */
-"yYV-Yz-7JL.title" = "choose the total balance";
+"yYV-Yz-7JL.title" = "Total balance";
 
 /* Class = "UILabel"; text = "  ETH  "; ObjectID = "zdY-hz-j0J"; */
 "zdY-hz-j0J.text" = "  ETH  ";

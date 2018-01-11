@@ -100,6 +100,14 @@ extension BTCTransactionModel {
         }
     }
     
+    var fee: Int64 {
+        return inSatoshi - outSatoshi
+    }
+    
+    var feeString: String {
+        return BTCFormatString(btc: fee)
+    }
+    
     var volumeString: String {
         get {
             var symbol = ""

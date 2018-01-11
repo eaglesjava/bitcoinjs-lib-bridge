@@ -43,7 +43,9 @@ class BILSendConfirmController: BILBaseViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var walletIDLabel: UILabel!
+    @IBOutlet weak var timeTipLabel: UILabel!
     @IBOutlet weak var feeTipeLabel: UILabel!
+    
     @IBOutlet weak var feeSlider: UISlider!
     
     @IBOutlet weak var remarkInputView: BILInputView!
@@ -102,12 +104,17 @@ class BILSendConfirmController: BILBaseViewController {
                 let remainAmount = Int64(model.bitcoinSatoshiAmount) - fee
                 amountLabel.text = "\(BTCFormatString(btc: remainAmount)) BTC"
             }
-            feeTipeLabel.text = "\(String.sendConfirmAverageTime)\(nearFee.timeString)，\(String.sendConfirmNeedSpend) \(BTCFormatString(btc: fee)) BTC"
+            updateLabels(fee: BTCFormatString(btc: fee), time: nearFee.timeString)
 			isNotEnougnBalance = false
         } catch {
             feeTipeLabel.text = .sendConfirmNotEnoughBalace
 			isNotEnougnBalance = true
         }
+    }
+    
+    func updateLabels(fee: String, time: String) {
+        timeTipLabel.text = "\(String.sendConfirmAverageTime)\(time)"
+        feeTipeLabel.text = "\(String.sendConfirmNeedSpend) \(fee) BTC"
     }
     
     func setFees(fees: [BTCFee], best:BTCFee?) {

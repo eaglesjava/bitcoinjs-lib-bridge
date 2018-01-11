@@ -44,6 +44,7 @@ class BILBTCTransactionController: BILLightBlueBaseController {
 		for addModel in tx.outputAddressModels {
 			datas.append((addModel.address!, value: BTCFormatString(btc: addModel.satoshi) + " BTC", cellID: "BILAddressCell"))
 		}
+        datas.append((.homeTxDetailFee, value: tx.feeString + " BTC", cellID: "BILTXDetailCell"))
         if tx.status == .success {
             datas.append((.homeTxDetailConfirm, value: "\(tx.confirmCount)", cellID: "BILTXDetailCell"))
         }

@@ -165,6 +165,7 @@ extension WalletModel {
                     utxoModels.append(utxo)
                 }
             }
+            self.updateUTXO(utxos: utxoModels)
             success(utxoModels)
         }, failure: failure)
     }

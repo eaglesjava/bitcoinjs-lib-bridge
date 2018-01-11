@@ -51,7 +51,7 @@
 "QaQ-Kp-DH9.text" = "   BTC   ";
 
 /* Class = "UIBarButtonItem"; title = "新建"; ObjectID = "VKD-sb-acM"; */
-"VKD-sb-acM.title" = "新建";
+"VKD-sb-acM.title" = "添加";
 
 /* Class = "UINavigationItem"; title = "通过ID添加"; ObjectID = "Wpq-Wv-Sw5"; */
 "Wpq-Wv-Sw5.title" = "通过ID添加";

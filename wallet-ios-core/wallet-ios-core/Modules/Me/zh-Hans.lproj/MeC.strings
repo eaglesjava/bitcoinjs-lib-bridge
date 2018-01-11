@@ -8,16 +8,16 @@
 
 "MeC.agreementName" = "service_cn";
 
-"MeC.meSection_preference" = "偏好设置";
+"MeC.meSection_preference" = "资产设置";
 "MeC.meSection_contacts" = "联系人设置";
 "MeC.meSection_wallet" = "钱包集成";
-"MeC.meSection_system" = "系统相关";
+"MeC.meSection_system" = "系统设置";
 "MeC.meSection_other" = "其它";
 
-"MeC.meCell_shortcut" = "主页快捷功能";
+"MeC.meCell_shortcut" = "快捷功能";
 "MeC.meCell_contactBackup" = "备份联系人";
 "MeC.meCell_contactRecover" = "恢复联系人";
-"MeC.meCell_system" = "系统设置";
+"MeC.meCell_system" = "通用";
 "MeC.meCell_aboutUs" = "关于我们";
 
 "MeC.contact_yourKey" = "您的联系人密钥";

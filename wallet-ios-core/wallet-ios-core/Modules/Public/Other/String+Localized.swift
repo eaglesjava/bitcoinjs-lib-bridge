@@ -49,6 +49,7 @@ extension String {
 	static let homeTxDetailSendAddress = "HomeC.tx.detail.cell.address.send".bil_localized
 	static let homeTxDetailConfirm = "HomeC.tx.detail.cell.confirm".bil_localized
 	static let homeTxDetailRemark = "HomeC.tx.detail.cell.remark".bil_localized
+    static let homeTxDetailFee = "HomeC.tx.detail.cell.fee".bil_localized
 	static let homeTxDetailDate = "HomeC.tx.detail.cell.date".bil_localized
 	static let homeTxDetailNoTx = "HomeC.tx.detail.noTx".bil_localized
     static let homeTxDetailTx = "HomeC.tx.detail.tx".bil_localized

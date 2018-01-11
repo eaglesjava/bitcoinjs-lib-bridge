@@ -409,7 +409,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="389"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8g4-qX-fCD">
-                                        <rect key="frame" x="0.0" y="0.0" width="319" height="508"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="319" height="534"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8V6-fq-Du0">
                                                 <rect key="frame" x="25" y="30" width="269" height="65"/>
@@ -471,7 +471,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfY-WC-jVa">
-                                                <rect key="frame" x="25" y="207" width="269" height="98"/>
+                                                <rect key="frame" x="25" y="207" width="269" height="124"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手续费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzV-m8-TsC">
                                                         <rect key="frame" x="0.0" y="0.0" width="46" height="18"/>
@@ -485,8 +485,15 @@
                                                             <action selector="sliderValueChanged:" destination="OMj-P2-5SR" eventType="valueChanged" id="yjb-vA-3vP"/>
                                                         </connections>
                                                     </slider>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平均确认时间30分钟，需耗费0.0002BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4RA-bO-hKB">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="需耗费0.0002BTC" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7b-f4-uH3">
+                                                        <rect key="frame" x="0.0" y="106" width="269" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="平均确认时间30分钟" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHo-oD-r3P">
                                                         <rect key="frame" x="0.0" y="80" width="269" height="18"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -494,21 +501,20 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="4RA-bO-hKB" secondAttribute="trailing" id="1gW-qB-oYD"/>
-                                                    <constraint firstAttribute="bottom" secondItem="4RA-bO-hKB" secondAttribute="bottom" id="A4M-PE-Mcl"/>
-                                                    <constraint firstItem="4RA-bO-hKB" firstAttribute="leading" secondItem="EfY-WC-jVa" secondAttribute="leading" id="Asj-ES-fXy"/>
-                                                    <constraint firstItem="4RA-bO-hKB" firstAttribute="top" secondItem="MUh-ay-4Fk" secondAttribute="bottom" constant="16" id="MhQ-mh-GMA"/>
+                                                    <constraint firstAttribute="bottom" secondItem="k7b-f4-uH3" secondAttribute="bottom" id="50D-uK-xst"/>
+                                                    <constraint firstItem="k7b-f4-uH3" firstAttribute="leading" secondItem="EfY-WC-jVa" secondAttribute="leading" id="MQu-hv-ETn"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lzV-m8-TsC" secondAttribute="trailing" constant="20" symbolic="YES" id="OPe-Ja-hEe"/>
                                                     <constraint firstItem="MUh-ay-4Fk" firstAttribute="leading" secondItem="EfY-WC-jVa" secondAttribute="leading" id="PEb-1a-0p2"/>
                                                     <constraint firstItem="MUh-ay-4Fk" firstAttribute="top" secondItem="lzV-m8-TsC" secondAttribute="bottom" constant="16" id="PSy-2I-mjK"/>
+                                                    <constraint firstAttribute="trailing" secondItem="k7b-f4-uH3" secondAttribute="trailing" id="crn-Fn-4S6"/>
                                                     <constraint firstItem="lzV-m8-TsC" firstAttribute="top" secondItem="EfY-WC-jVa" secondAttribute="top" id="nBA-wY-pKa"/>
-                                                    <constraint firstAttribute="height" constant="98" id="nBe-4K-FrJ"/>
+                                                    <constraint firstAttribute="height" constant="124" id="nBe-4K-FrJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="MUh-ay-4Fk" secondAttribute="trailing" id="oqc-2l-vGW"/>
                                                     <constraint firstItem="lzV-m8-TsC" firstAttribute="leading" secondItem="EfY-WC-jVa" secondAttribute="leading" id="zzg-S5-xsa"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rWp-g6-haV">
-                                                <rect key="frame" x="25" y="345" width="269" height="47"/>
+                                                <rect key="frame" x="25" y="371" width="269" height="47"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发出钱包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcc-2b-hNg">
                                                         <rect key="frame" x="0.0" y="0.0" width="269" height="17"/>
@@ -539,7 +545,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XN-FN-VbS" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="25" y="432" width="269" height="74"/>
+                                                <rect key="frame" x="25" y="458" width="269" height="74"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJZ-AI-aCJ">
                                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -653,8 +659,9 @@
                         <outlet property="addressLabel" destination="3oK-wN-dDO" id="to3-F1-mrc"/>
                         <outlet property="amountLabel" destination="Erz-zk-b10" id="3dw-UK-BRG"/>
                         <outlet property="feeSlider" destination="MUh-ay-4Fk" id="KhV-0B-nBa"/>
-                        <outlet property="feeTipeLabel" destination="4RA-bO-hKB" id="tPN-S0-ti7"/>
+                        <outlet property="feeTipeLabel" destination="k7b-f4-uH3" id="gNg-Gp-kzf"/>
                         <outlet property="remarkInputView" destination="2XN-FN-VbS" id="81r-Md-HGD"/>
+                        <outlet property="timeTipLabel" destination="PHo-oD-r3P" id="khi-Sm-cCH"/>
                         <outlet property="walletIDLabel" destination="k3E-gX-6yP" id="GQd-8b-30l"/>
                         <segue destination="gQ4-lN-Jcy" kind="presentation" identifier="BILSendConfirmToResultSegue" id="EbY-my-Ag0"/>
                     </connections>
