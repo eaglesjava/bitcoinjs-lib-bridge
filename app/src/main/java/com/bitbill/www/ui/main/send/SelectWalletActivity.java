@@ -160,6 +160,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
             return;
         }
         if (!isValidBtcBalance()) {
+            MessageConfirmDialog.newInstance(getString(R.string.msg_balance_not_enough), true).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
             return;
         }
         //跳转到确认发送界面
@@ -181,10 +182,13 @@ public class SelectWalletActivity extends BaseToolbarActivity {
 
     public boolean isValidBtcBalance() {
 
-        if (getSelectedWallet().getBalance() < StringUtils.btc2Satoshi(mSendAmount)) {
-            MessageConfirmDialog.newInstance(getString(R.string.msg_balance_not_enough), true).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
-            return false;
+        if (isSendAll) {
+            if (getSelectedWallet().getBalance() > 0) return true;
+        } else if (mSendAmount != null) {
+            if (getSelectedWallet().getBalance() > StringUtils.btc2Satoshi(mSendAmount)) {
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 }

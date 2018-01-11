@@ -9,6 +9,7 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.GetTxListRequest;
 import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.transaction.network.entity.TxElement;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -37,8 +39,19 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
         }
         Wallet wallet = getMvpView().getWallet();
         String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
-        getCompositeDisposable().add(getModelManager()
-                .getTxList(new GetTxListRequest(xPublicKeyHash, getMvpView().getConfrimId()))
+        getCompositeDisposable().add(Observable.fromCallable(() -> {
+            List<TxRecord> txRecordList = wallet.getTxRecordList();
+            if (StringUtils.isEmpty(txRecordList)) {
+                return 0l;
+            }
+            for (int i = txRecordList.size() - 1; i < 0; i--) {
+                if (txRecordList.get(i).getHeight() == -1l) {
+                    return txRecordList.get(i++).getElementId();
+                }
+            }
+            return 0l;
+        })
+                .concatMap(aLong -> getModelManager().getTxList(new GetTxListRequest(xPublicKeyHash, aLong)))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<ListTxElementResponse>>(getMvpView()) {
                     @Override

@@ -112,6 +112,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         txRecord.setHeight(txElement.getHeight());
                         txRecord.setCreatedTime(StringUtils.getDate(txElement.getCreatedTime()));
                         txRecord.setRemark(txElement.getRemark());
+                        txRecord.setElementId(txElement.getId());
                         getModelManager().insertTxRecord(txRecord);
                         insertInputs(inputs, txRecord);
                         insertOutputs(outputs, txRecord);

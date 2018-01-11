@@ -46,6 +46,7 @@ public class TxRecord extends Entity {
     @OrderBy("id ASC")
     private List<Output> outputs;
     private String mRemark;
+    private Long elementId;
     /**
      * Used to resolve relations
      */
@@ -59,9 +60,9 @@ public class TxRecord extends Entity {
     @Generated(hash = 1885063144)
     private transient Long wallet__resolvedKey;
 
-    @Generated(hash = 1194131978)
+    @Generated(hash = 32579472)
     public TxRecord(Long id, Long walletId, String txHash, InOut inOut, long sumAmount,
-                    long height, Date createdTime, String mRemark) {
+                    long height, Date createdTime, String mRemark, Long elementId) {
         this.id = id;
         this.walletId = walletId;
         this.txHash = txHash;
@@ -70,6 +71,7 @@ public class TxRecord extends Entity {
         this.height = height;
         this.createdTime = createdTime;
         this.mRemark = mRemark;
+        this.elementId = elementId;
     }
 
     @Generated(hash = 1564994407)
@@ -107,11 +109,11 @@ public class TxRecord extends Entity {
         return height;
     }
 
-    public void setHeight(long height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(long height) {
         this.height = height;
     }
 
@@ -292,6 +294,14 @@ public class TxRecord extends Entity {
             walletId = wallet == null ? null : wallet.getId();
             wallet__resolvedKey = walletId;
         }
+    }
+
+    public Long getElementId() {
+        return this.elementId;
+    }
+
+    public void setElementId(Long elementId) {
+        this.elementId = elementId;
     }
 
     public enum InOut {

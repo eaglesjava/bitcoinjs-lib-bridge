@@ -278,5 +278,6 @@
     <string name="status_item_send">已发送</string>
     <string name="status_item_unconfirm">待确认</string>
     <string name="title_tx_confirm">确认</string>
+    <string name="status_item_transfer">已转移</string>
 
 </resources>

@@ -5,6 +5,7 @@ import com.bitbill.www.model.transaction.db.entity.Input;
 import com.bitbill.www.model.transaction.db.entity.Output;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
 
+
 /**
  * Created by isanwenyu on 2018/1/10.
  */

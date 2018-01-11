@@ -236,6 +236,10 @@ public class EditTextWapper extends FrameLayout {
     public void setInputType(int inputType) {
         this.mInputType = inputType;
         getEtText().setInputType(INPUT_TYPE_ARRAY.get(inputType));
+        if (inputType == INPUT_PWD_HIDE || inputType == INPUT_PWD_VISIBLE) {
+            //密码输入最大字符20个
+            getEtText().setMaxEms(20);
+        }
     }
 
     public void setMaxLines(int maxLines) {

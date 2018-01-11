@@ -534,6 +534,7 @@ public class StringUtils {
      * @return
      */
     public static long btc2Satoshi(String sendAmount) {
+        if (sendAmount == null) return 0;
         //8位小数
         BigDecimal amount = new BigDecimal(sendAmount);
         BigDecimal satoshi = new BigDecimal(AppConstants.SATOSHI);

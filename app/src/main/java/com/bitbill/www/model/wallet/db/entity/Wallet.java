@@ -6,8 +6,10 @@ import android.support.annotation.NonNull;
 
 import com.bitbill.model.db.dao.AddressDao;
 import com.bitbill.model.db.dao.DaoSession;
+import com.bitbill.model.db.dao.TxRecordDao;
 import com.bitbill.model.db.dao.WalletDao;
 import com.bitbill.www.model.address.db.entity.Address;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
@@ -82,6 +84,10 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
     @ToMany(referencedJoinProperty = "walletId")
     @OrderBy("index ASC")
     private List<Address> addressList;
+
+    @ToMany(referencedJoinProperty = "walletId")
+    @OrderBy("createdTime DESC")
+    private List<TxRecord> txRecordList;
 
     @Transient
     private String mnemonic;
@@ -405,5 +411,35 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 1072630674)
+    public List<TxRecord> getTxRecordList() {
+        if (txRecordList == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            TxRecordDao targetDao = daoSession.getTxRecordDao();
+            List<TxRecord> txRecordListNew = targetDao._queryWallet_TxRecordList(id);
+            synchronized (this) {
+                if (txRecordList == null) {
+                    txRecordList = txRecordListNew;
+                }
+            }
+        }
+        return txRecordList;
+    }
+
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
+    @Generated(hash = 789112272)
+    public synchronized void resetTxRecordList() {
+        txRecordList = null;
     }
 }

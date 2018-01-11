@@ -125,7 +125,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
             switch (txRecord.getInOut()) {
                 case TRANSFER:
                     holder.setImageResource(R.id.iv_status, R.drawable.ic_item_transfer);
-                    holder.setText(R.id.tv_status, getString(R.string.status_transfer_self));
+                    holder.setText(R.id.tv_status, getString(R.string.status_item_transfer));
                     break;
                 case IN:
                     holder.setImageResource(R.id.iv_status, R.drawable.ic_item_receive);
@@ -163,6 +163,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     @Override
     public void onBeforeSetContentLayout() {
         mWalelt = (Wallet) getArguments().getSerializable(AppConstants.ARG_WALLET);
+        mWalelt.__setDaoSession(getApp().getDaoSession());
 
 
     }

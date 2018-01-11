@@ -19,6 +19,7 @@ public class TxElement extends Entity {
     private List<InputsBean> inputs;
     private List<OutputsBean> outputs;
     private String remark;
+    private long id;
 
     public String getCreatedTime() {
         return createdTime;
@@ -66,6 +67,14 @@ public class TxElement extends Entity {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public static class InputsBean extends Entity {
