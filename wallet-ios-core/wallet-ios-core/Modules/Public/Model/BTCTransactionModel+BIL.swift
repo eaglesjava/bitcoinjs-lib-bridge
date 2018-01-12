@@ -191,7 +191,7 @@ extension BTCTransactionModel {
         let array = (isInput ? inputs : outputs)!.array
         for add in array {
             let tx = add as! BTCTXAddressModel
-            if tx.address == address {
+            if tx.address == address && tx.index == Int64(index) {
                 return tx
             }
         }

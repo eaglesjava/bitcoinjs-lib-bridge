@@ -50,6 +50,7 @@
 		BA46461B1FD78FC400680D33 /* Contact.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461A1FD78FC400680D33 /* Contact.xcassets */; };
 		BA46461D1FD78FCF00680D33 /* Send.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461C1FD78FCF00680D33 /* Send.xcassets */; };
 		BA46461F1FD78FDB00680D33 /* Me.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461E1FD78FDB00680D33 /* Me.xcassets */; };
+		BA4C0C6E20085F3200176224 /* server.crt in Resources */ = {isa = PBXBuildFile; fileRef = BA4C0C6D20085F3200176224 /* server.crt */; };
 		BA51991A1FF0A1E1004F6602 /* BILWalletAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5199191FF0A1E1004F6602 /* BILWalletAddressController.swift */; };
 		BA51991C1FF0F898004F6602 /* BILMeUnspentBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51991B1FF0F898004F6602 /* BILMeUnspentBalanceCell.swift */; };
 		BA51991E1FF22113004F6602 /* BILAboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51991D1FF22113004F6602 /* BILAboutUsViewController.swift */; };
@@ -235,6 +236,7 @@
 		BA46461A1FD78FC400680D33 /* Contact.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Contact.xcassets; sourceTree = "<group>"; };
 		BA46461C1FD78FCF00680D33 /* Send.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Send.xcassets; sourceTree = "<group>"; };
 		BA46461E1FD78FDB00680D33 /* Me.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Me.xcassets; sourceTree = "<group>"; };
+		BA4C0C6D20085F3200176224 /* server.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server.crt; sourceTree = "<group>"; };
 		BA5199191FF0A1E1004F6602 /* BILWalletAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILWalletAddressController.swift; sourceTree = "<group>"; };
 		BA51991B1FF0F898004F6602 /* BILMeUnspentBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeUnspentBalanceCell.swift; sourceTree = "<group>"; };
 		BA51991D1FF22113004F6602 /* BILAboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAboutUsViewController.swift; sourceTree = "<group>"; };
@@ -1051,6 +1053,7 @@
 		CCEC67791FB190EE004CC6C5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				BA4C0C6D20085F3200176224 /* server.crt */,
 				BAB7491D1FF24EFC00E85607 /* BILAuthenticator */,
 				BA04570E1FDE68B800070CCA /* CKQRCodeScan */,
 				BA04570B1FDE343A00070CCA /* CKCopyLabel */,
@@ -1245,6 +1248,7 @@
 				CCEC67831FB190EE004CC6C5 /* index.js in Resources */,
 				CCEC675F1FB18C3A004CC6C5 /* Main.storyboard in Resources */,
 				CC6407CE200224400068153A /* NewWallet.storyboard in Resources */,
+				BA4C0C6E20085F3200176224 /* server.crt in Resources */,
 				CC640800200231D10068153A /* BackupWalletC.strings in Resources */,
 				CC6407E2200231830068153A /* BILAllInOneView.xib in Resources */,
 				CC640810200235F40068153A /* ContactC.strings in Resources */,
