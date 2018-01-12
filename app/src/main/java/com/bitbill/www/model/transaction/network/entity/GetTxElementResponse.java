@@ -41,7 +41,7 @@ public class GetTxElementResponse {
          * reqSings : 1
          * sumOutAmount : 10000
          * txHash : d2f3501936f9a57ec2a3aac14b01bb693c376bf4978f13eba61dba3f5bb9d54d
-         * txId : 12102
+         * txid : 12102
          * updatedTime : 2017-12-16 14:14:23
          * vIndex : 0
          * vType : pubkeyhash
@@ -61,7 +61,7 @@ public class GetTxElementResponse {
         private int reqSings;
         private int sumOutAmount;
         private String txHash;
-        private int txId;
+        private String txid;
         private String updatedTime;
         private int vIndex;
         private String vType;
@@ -171,12 +171,12 @@ public class GetTxElementResponse {
             this.txHash = txHash;
         }
 
-        public int getTxId() {
-            return txId;
+        public String getTxid() {
+            return txid;
         }
 
-        public void setTxId(int txId) {
-            this.txId = txId;
+        public void setTxid(String txid) {
+            this.txid = txid;
         }
 
         public String getUpdatedTime() {

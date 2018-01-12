@@ -48,7 +48,7 @@ public class AddressDbHelper extends DbHelper implements AddressDb {
     @Override
     public Observable<Boolean> insertAddressListAndUpdatWallet(List<Address> addressList, Wallet wallet) {
         return Observable.fromCallable(() -> mDaoSession.callInTxNoException(() -> {
-            mAddressDao.insertInTx(addressList);
+            mAddressDao.insertOrReplaceInTx(addressList);
             mWalletDao.update(wallet);
             return true;
         }));

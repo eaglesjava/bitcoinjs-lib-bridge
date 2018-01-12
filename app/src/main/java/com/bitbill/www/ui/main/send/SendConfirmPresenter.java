@@ -54,7 +54,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         getCompositeDisposable().add(getModelManager()
                 .getTxElement(new GetTxElement(encryptMD5ToString))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<GetTxElementResponse>>() {
+                .subscribeWith(new BaseSubcriber<ApiResponse<GetTxElementResponse>>(getMvpView()) {
                     @Override
                     public void onNext(ApiResponse<GetTxElementResponse> listUnspentResponseApiResponse) {
                         super.onNext(listUnspentResponseApiResponse);
@@ -143,7 +143,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         String inAddress = "";
         for (int i = 0; i <= index; i++) {
             GetTxElementResponse.UtxoBean unspent = unspentList.get(i);
-            inputs.add(new Transaction.Input(unspent.getTxHash(), unspent.getVIndex(), unspent.getAddressIndex()));
+            inputs.add(new Transaction.Input(unspent.getTxid(), unspent.getVIndex(), unspent.getAddressIndex()));
             inAddress += unspent.getAddressTxt();
             if (i < index - 1) inAddress += "|";
         }
@@ -205,7 +205,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         getCompositeDisposable().add(getModelManager()
                 .sendTransaction(new SendTransactionRequest(extendedKeysHash, inAddress, outAddress, outAmount, txHash, txHex, getMvpView().getRemark()))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<SendTransactionResponse>>() {
+                .subscribeWith(new BaseSubcriber<ApiResponse<SendTransactionResponse>>(getMvpView()) {
                     @Override
                     public void onNext(ApiResponse<SendTransactionResponse> sendTransactionResponseApiResponse) {
                         super.onNext(sendTransactionResponseApiResponse);

@@ -280,12 +280,12 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
         sbSendFee.setMax(100);
         int feeRange = getMaxFeeByte() - getMinFeeByte();
         if (feeRange != 0) {
-            sbSendFee.setProgress(getBestFeeByte() / feeRange * 100);
+            sbSendFee.setProgress((int) (getBestFeeByte() * 1.0 / feeRange * 100));
         }
         sbSendFee.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                int seekFee = (progress * (getMaxFeeByte() - getMinFeeByte()) / 100) + getMinFeeByte();
+                int seekFee = (int) ((progress * (getMaxFeeByte() - getMinFeeByte()) * 1.0 / 100) + getMinFeeByte());
                 updateFeeLayout(seekFee);
 
             }
@@ -305,12 +305,16 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     private void updateFeeLayout(int progress) {
         int index = -1;
         for (int i = 0; i < mFees.size() - 1; i++) {
-            if (progress == mFees.get(i).getFee()) {
+            int currentFee = mFees.get(i).getFee();
+            int nextFee = mFees.get(i + 1).getFee();
+            if (progress == currentFee) {
                 index = i;
                 break;
             }
-            int currentFee = mFees.get(i).getFee();
-            int nextFee = mFees.get(i + 1).getFee();
+            if (progress == nextFee) {
+                index = i + 1;
+                break;
+            }
             if (progress > currentFee && progress < nextFee) {
                 if (progress < (currentFee + nextFee) / 2) {
                     index = i;
