@@ -230,4 +230,10 @@ extension String {
             return NSLocalizedString(self, tableName: tableName, comment: "")
         }
     }
+    
+    var bil_ui_localized: String {
+        get {
+            return NSLocalizedString(self, tableName: "UI", comment: "")
+        }
+    }
 }

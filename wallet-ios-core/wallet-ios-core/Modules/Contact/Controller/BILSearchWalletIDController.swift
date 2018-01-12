@@ -23,6 +23,12 @@ class BILSearchWalletIDController: BILLightBlueBaseController {
         idInputView.delegate = self
         idInputView.textField.becomeFirstResponder()
     }
+    
+    override func languageDidChanged() {
+        super.languageDidChanged()
+        title = "Add via ID".bil_ui_localized
+        idInputView.textField.placeholder = "Search wallet ID".bil_ui_localized
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

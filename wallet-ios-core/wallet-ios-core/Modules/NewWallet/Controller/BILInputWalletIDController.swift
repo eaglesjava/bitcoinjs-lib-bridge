@@ -159,7 +159,7 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
             walletNameInputView.show(tip: walletIDError!, type: .error)
             return
         }
-        if walletID != nil {
+        if walletID != nil && !walletNameTextField.isEnabled {
             self.performSegue(withIdentifier: "BILWalletIDToPasswordSegue", sender: nil)
             return
         }

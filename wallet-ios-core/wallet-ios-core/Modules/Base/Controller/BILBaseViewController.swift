@@ -30,6 +30,7 @@ class BILBaseViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        languageDidChanged()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

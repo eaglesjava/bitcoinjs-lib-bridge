@@ -24,6 +24,14 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
         nameInputView.delegate = self
         remarkInputView.delegate = self
     }
+    
+    override func languageDidChanged() {
+        super.languageDidChanged()
+        nameInputView.updateTitleString("Name".bil_ui_localized)
+        remarkInputView.updateTitleString("Remarks".bil_ui_localized)
+        nameInputView.textField.placeholder = "Please input".bil_ui_localized
+        remarkInputView.textField.placeholder = "Please input".bil_ui_localized
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -54,7 +62,7 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
         case minLength - 1:
             toReturn = "\(String.contact_searchResult_input)\(key)"
         case let i where i > maxLength:
-            toReturn = "\(key)\(String.contact_searchResult_surport)\(minLength)-\(maxLength)\(String.contact_searchResult_wei)"
+            toReturn = "\(key) \(String.contact_searchResult_surport) \(minLength)-\(maxLength) \(String.contact_searchResult_wei)"
         default: ()
         }
         
@@ -129,5 +137,17 @@ extension BILSearchWalletIDResultController: BILInputViewDelegate {
             ()
         }
         return true
+    }
+    @objc
+    func textFieldValueDidChange(notification: Notification) {
+        if let textField: UITextField = notification.object as? UITextField {
+            switch textField {
+            case nameInputView.textField:
+                nameInputView.show(tip: "Name".bil_ui_localized, type: .normal)
+            case remarkInputView.textField:
+                remarkInputView.show(tip: "Remarks".bil_ui_localized, type: .normal)
+            default: ()
+            }
+        }
     }
 }

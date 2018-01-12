@@ -19,6 +19,7 @@ class BILReceiveController: BILBaseViewController {
     @IBOutlet weak var currentWalletBalanceLabel: UILabel!
     @IBOutlet weak var currentWalletShortIDLabel: UILabel!
     @IBOutlet weak var specificButton: UIButton!
+    @IBOutlet weak var backupButton: UIButton!
     
     var currentWallet: WalletModel? {
         didSet {
@@ -43,9 +44,17 @@ class BILReceiveController: BILBaseViewController {
 		bgView.addGestureRecognizer(tap)
         
         qrCodeImageViewHeight.constant = qrCodeHeight
-        specificButton.setAttributedTitle(NSAttributedString(string: .receiveSpecificButtonTitle, attributes: [.font: UIFont.systemFont(ofSize: 15), .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(walletCountDidChanged(notification:)), name: .walletCountDidChanged, object: nil)
+        
+        languageDidChanged()
+    }
+    
+    override func languageDidChanged() {
+        title = "Receive".bil_ui_localized
+        navigationItem.rightBarButtonItem?.title = "Refresh address".bil_ui_localized
+        specificButton.setAttributedTitle(NSAttributedString(string: .receiveSpecificButtonTitle, attributes: [.font: UIFont.systemFont(ofSize: 15), .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
+        backupButton.setTitle("Back up wallet now".bil_ui_localized, for: .normal)
     }
     
     deinit {

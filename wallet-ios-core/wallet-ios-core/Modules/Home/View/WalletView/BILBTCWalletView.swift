@@ -17,6 +17,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet weak var unconfirmBalanceLabel: UILabel!
 	@IBOutlet weak var heightOfBalanceView: NSLayoutConstraint!
     @IBOutlet weak var unconfirmContainerView: UIView!
+    @IBOutlet weak var unconfirmLabel: UILabel!
     
     private var page: Int = 0
     private var size: Int = 2000
@@ -57,7 +58,13 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         unconfirmContainerView.layer.borderWidth = 1
         unconfirmContainerView.layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
         unconfirmContainerView.layer.cornerRadius = 5
+        
+        languageDidChanged()
 	}
+    
+    override func languageDidChanged() {
+        unconfirmLabel.text = "Unconfirmed".bil_ui_localized
+    }
     
     func reloadData() {
         page = 0

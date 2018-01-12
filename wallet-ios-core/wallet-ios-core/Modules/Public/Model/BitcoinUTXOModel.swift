@@ -31,7 +31,7 @@ class BitcoinUTXOModel: NSObject, Comparable {
     var availableforspending: Bool
     var address: String
     init(jsonData: JSON) {
-        txHash = jsonData["txHash"].stringValue
+        txHash = jsonData["txid"].stringValue
         txOutputIndex = jsonData["vIndex"].intValue
         bip39Index = jsonData["addressIndex"].intValue
         requiredSignatureCount = jsonData["reqSings"].intValue

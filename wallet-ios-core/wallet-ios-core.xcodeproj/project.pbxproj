@@ -23,6 +23,9 @@
 		BA05EAF51FE7D35900B43B95 /* BILTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA05EAF41FE7D35900B43B95 /* BILTableViewHeaderFooterView.swift */; };
 		BA05EAF71FE7D38D00B43B95 /* BILTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA05EAF61FE7D38D00B43B95 /* BILTableViewHeaderFooterView.xib */; };
 		BA0C22381FECAFC90063A882 /* BILWalletDetailSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C22371FECAFC90063A882 /* BILWalletDetailSettingController.swift */; };
+		BA0EA97520088FD3005161A7 /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA0EA97720088FD3005161A7 /* UI.strings */; };
+		BA0EA97A200895CA005161A7 /* UIView+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0EA979200895CA005161A7 /* UIView+Language.swift */; };
+		BA0EA97C20089610005161A7 /* UIViewController+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0EA97B20089610005161A7 /* UIViewController+Language.swift */; };
 		BA1142371FD5161A0025BF80 /* BILDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */; };
 		BA1142391FD53CC80025BF80 /* BILGuideContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */; };
 		BA11423D1FD676540025BF80 /* WalletModel+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA11423C1FD676540025BF80 /* WalletModel+Network.swift */; };
@@ -208,6 +211,10 @@
 		BA05EAF41FE7D35900B43B95 /* BILTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		BA05EAF61FE7D38D00B43B95 /* BILTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
 		BA0C22371FECAFC90063A882 /* BILWalletDetailSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILWalletDetailSettingController.swift; sourceTree = "<group>"; };
+		BA0EA97620088FD3005161A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UI.strings; sourceTree = "<group>"; };
+		BA0EA97820088FD6005161A7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UI.strings"; sourceTree = "<group>"; };
+		BA0EA979200895CA005161A7 /* UIView+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Language.swift"; sourceTree = "<group>"; };
+		BA0EA97B20089610005161A7 /* UIViewController+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Language.swift"; sourceTree = "<group>"; };
 		BA1142361FD5161A0025BF80 /* BILDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILDeviceManager.swift; sourceTree = "<group>"; };
 		BA1142381FD53CC80025BF80 /* BILGuideContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILGuideContactView.swift; sourceTree = "<group>"; };
 		BA11423C1FD676540025BF80 /* WalletModel+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+Network.swift"; sourceTree = "<group>"; };
@@ -285,15 +292,11 @@
 		CC4660481FBE96E600A87132 /* Public.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Public.xcassets; sourceTree = "<group>"; };
 		CC4660521FBEA67600A87132 /* BILCreateWalletSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILCreateWalletSuccessController.swift; sourceTree = "<group>"; };
 		CC64079C1FFE21F00068153A /* BILAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BILAddressCell.swift; sourceTree = "<group>"; };
-		CC64079F2001ECCA0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Home.strings; sourceTree = "<group>"; };
-		CC6407A12001ECCB0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Home.strings"; sourceTree = "<group>"; };
 		CC6407A52001ED6A0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HomeC.strings"; sourceTree = "<group>"; };
 		CC6407A72001ED6B0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HomeC.strings; sourceTree = "<group>"; };
 		CC6407A82001F1DE0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/HomeC.strings; sourceTree = "<group>"; };
 		CC6407A92001F1E30068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Public.strings; sourceTree = "<group>"; };
 		CC6407AD2001FA6C0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Receive.storyboard; sourceTree = "<group>"; };
-		CC6407AE2001FA730068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Receive.strings"; sourceTree = "<group>"; };
-		CC6407B02001FA750068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Receive.strings; sourceTree = "<group>"; };
 		CC6407B42001FB1B0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ReceiveC.strings; sourceTree = "<group>"; };
 		CC6407B62001FB1C0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ReceiveC.strings"; sourceTree = "<group>"; };
 		CC6407B8200206D30068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Send.strings"; sourceTree = "<group>"; };
@@ -327,8 +330,6 @@
 		CC6407FD200231BC0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BackupWallet.strings"; sourceTree = "<group>"; };
 		CC640803200231D20068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BackupWalletC.strings"; sourceTree = "<group>"; };
 		CC6408052002357E0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Contact.storyboard; sourceTree = "<group>"; };
-		CC640808200235810068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Contact.strings; sourceTree = "<group>"; };
-		CC64080A200235860068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Contact.strings"; sourceTree = "<group>"; };
 		CC64080D200235CD0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BackupWalletC.strings; sourceTree = "<group>"; };
 		CC640811200235F40068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ContactC.strings"; sourceTree = "<group>"; };
 		CC64081320023C240068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ContactC.strings; sourceTree = "<group>"; };
@@ -785,6 +786,7 @@
 		CC94E01F1FB58D1F0098E730 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BA0EA97B20089610005161A7 /* UIViewController+Language.swift */,
 				CC94E0441FB9458D0098E730 /* UIViewController+BIL.swift */,
 				CCF634F11FBEC25400840097 /* BILTabBarController.swift */,
 				BAB749191FF2298D00E85607 /* BILWebViewController.swift */,
@@ -825,6 +827,7 @@
 			isa = PBXGroup;
 			children = (
 				CC94E0461FB946290098E730 /* UIView+BILGradient.swift */,
+				BA0EA979200895CA005161A7 /* UIView+Language.swift */,
 				BA81240D1FFB36DC0036DEC6 /* BILExchangeRateLabel.swift */,
 				BA5B57262004C40A00BD5C2F /* BILCoinHeaderView.swift */,
 			);
@@ -840,6 +843,7 @@
 				CC94E0361FB58D9C0098E730 /* Manager */,
 				CC94E0381FB58D9C0098E730 /* Model */,
 				CC94E03A1FB58D9C0098E730 /* View */,
+				BA0EA97720088FD3005161A7 /* UI.strings */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1267,6 +1271,7 @@
 				CC6407F7200231B80068153A /* BackupWallet.storyboard in Resources */,
 				CC6407BD200207310068153A /* SendC.strings in Resources */,
 				CC6407E92002318F0068153A /* BILGuideKeyView.xib in Resources */,
+				BA0EA97520088FD3005161A7 /* UI.strings in Resources */,
 				CC6407B32001FB1B0068153A /* ReceiveC.strings in Resources */,
 				BA46461D1FD78FCF00680D33 /* Send.xcassets in Resources */,
 				CC94E09B1FBBE2310098E730 /* NewWallet.xcassets in Resources */,
@@ -1459,6 +1464,7 @@
 				CCF634F91FBECC0000840097 /* BILBaseViewController.swift in Sources */,
 				BAEFFD471FEBB7F700C6EAB3 /* BILAudioPlayer.swift in Sources */,
 				BA04571A1FDE6DC500070CCA /* BILSendController.swift in Sources */,
+				BA0EA97C20089610005161A7 /* UIViewController+Language.swift in Sources */,
 				CCFEDEFA1FCE672D00F1A7FC /* BILWalletController.swift in Sources */,
 				BA05EAED1FE7A24300B43B95 /* BILLightBlueBaseController.swift in Sources */,
 				BA5B57272004C40A00BD5C2F /* BILCoinHeaderView.swift in Sources */,
@@ -1518,6 +1524,7 @@
 				CC94E0971FBAE1A50098E730 /* String+MnemonicData.swift in Sources */,
 				CCF634F21FBEC25400840097 /* BILTabBarController.swift in Sources */,
 				BA8E66781FFF6A3C00F2539D /* String+Localized.swift in Sources */,
+				BA0EA97A200895CA005161A7 /* UIView+Language.swift in Sources */,
 				CCC6B7731FF2979800EE7A32 /* ContactModel+Getters.swift in Sources */,
 				CCF635011FC2B95100840097 /* BILGuideBaseView.swift in Sources */,
 				BA5894041FF37C8A008C96C4 /* BILSettingManager.swift in Sources */,
@@ -1573,6 +1580,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		BA0EA97720088FD3005161A7 /* UI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA0EA97620088FD3005161A7 /* en */,
+				BA0EA97820088FD6005161A7 /* zh-Hans */,
+			);
+			name = UI.strings;
+			sourceTree = "<group>";
+		};
 		BA12AC4A1FEA67B300812F38 /* Send.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1587,8 +1603,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				BA12AC591FEA715C00812F38 /* Base */,
-				CC64079F2001ECCA0068153A /* en */,
-				CC6407A12001ECCB0068153A /* zh-Hans */,
 			);
 			name = Home.storyboard;
 			sourceTree = "<group>";
@@ -1626,8 +1640,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC6407AD2001FA6C0068153A /* Base */,
-				CC6407AE2001FA730068153A /* zh-Hans */,
-				CC6407B02001FA750068153A /* en */,
 			);
 			name = Receive.storyboard;
 			sourceTree = "<group>";
@@ -1751,8 +1763,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC6408052002357E0068153A /* Base */,
-				CC640808200235810068153A /* en */,
-				CC64080A200235860068153A /* zh-Hans */,
 			);
 			name = Contact.storyboard;
 			sourceTree = "<group>";

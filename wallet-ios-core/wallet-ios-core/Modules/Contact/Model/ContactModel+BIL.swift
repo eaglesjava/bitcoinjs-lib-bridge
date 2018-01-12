@@ -10,9 +10,15 @@ import Foundation
 
 extension ContactModel {
     static func isWalletIDExits(walletID: String) -> Bool {
+        guard !walletID.isEmpty else {
+            return false
+        }
         return bil_contactManager.fetch(key: "walletID", value: walletID) != nil
     }
     static func isAddressExits(address: String) -> Bool {
+        guard !address.isEmpty else {
+            return false
+        }
         return bil_contactManager.fetch(key: "address", value: address) != nil
     }
 }

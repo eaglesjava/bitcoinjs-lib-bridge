@@ -1,0 +1,72 @@
+/* 
+  UI.strings
+  wallet-ios-core
+
+  Created by 仇弘扬 on 2018/1/12.
+  Copyright © 2018年 BitBill. All rights reserved.
+*/
+
+"Unconfirmed" = "Unconfirmed";
+"Back up" = "Back up";
+"Add contact" = "Add contact";
+"Assets" = "Assets";
+"Scan" = "Scan";
+"Address" = "Address";
+
+"Refresh address" = "Refresh address";
+"Back up wallet now" = "Back up wallet now";
+"Receive specific amount" = "Receive";
+"Choose wallet" = "Choose wallet";
+"Receive amount" = "Amount";
+"Scan to pay" = "Scan to pay";
+"Enter amount" = "Enter amount";
+"Receive" = "Receive";
+"Done" = "Done";
+
+"Delete contact" = "Delete contact";
+"Please input" = "Please input ";
+"No contacts" = "No contacts";
+"Wallet ID" = "Wallet ID";
+"Remarks" = "Remarks";
+"Address of digital asset" = "Address of digital asset";
+"Add" = "Add";
+"Add via ID" = "Add via ID";
+"Name" = "Name";
+"Add now" = "Add";
+"    Add to contact    " = "    Add to contact    ";
+"Contact details" = "Contact details";
+"Add via address" = "Add via address";
+"Contacts" = "Contacts";
+"Search wallet ID" = "Search wallet ID";
+"Send" = "Send";
+"Edit contact" = "Edit contact";
+"Search results" = "Search results";
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+"Tip" = "Tip";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+

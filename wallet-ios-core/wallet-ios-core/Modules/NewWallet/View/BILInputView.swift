@@ -36,6 +36,11 @@ class BILInputView: UIView, UITextFieldDelegate {
 		line.backgroundColor = UIColor.bil_white_40_color
         titleString = title?.text
 	}
+    
+    func updateTitleString(_ titleString: String) {
+        self.titleString = titleString
+        title?.text = titleString
+    }
 	
 	func updateFunctionTipHeight(height: CGFloat, animate: Bool = false) {
 		guard let h = functionTipHeight else { return }

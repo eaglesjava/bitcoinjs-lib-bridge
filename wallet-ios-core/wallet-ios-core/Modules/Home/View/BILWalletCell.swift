@@ -30,7 +30,11 @@ class BILWalletCell: UITableViewCell {
 	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-		
+		languageDidChanged()
+    }
+    
+    override func languageDidChanged() {
+        needBackupButton.setTitle("Back up".bil_ui_localized, for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

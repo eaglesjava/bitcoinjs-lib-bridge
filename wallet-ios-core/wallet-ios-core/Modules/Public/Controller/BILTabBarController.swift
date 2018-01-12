@@ -20,6 +20,22 @@ class BILTabBarController: UITabBarController {
 		tabBar.shadowImage = UIImage()
 		tabBar.tintColor = UIColor.white
         tabBar.unselectedItemTintColor = UIColor(white: 1.0, alpha: 0.3)
+        
+        languageDidChanged()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        languageDidChanged()
+    }
+    
+    override func languageDidChanged() {
+        guard let items = tabBar.items else { return }
+        let titles = ["Assets".bil_ui_localized, "Contacts".bil_ui_localized, "Receive".bil_ui_localized, "Send".bil_ui_localized, "Me".bil_ui_localized]
+        for i in 0..<items.count {
+            print(items[i].title!)
+            items[i].title = titles[i]
+        }
     }
 
     override func didReceiveMemoryWarning() {

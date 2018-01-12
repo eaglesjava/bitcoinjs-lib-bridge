@@ -24,12 +24,18 @@ class BILChooseWalletController: UIViewController, UITableViewDelegate, UITableV
 	
 	fileprivate var didSelectClosure: ((WalletModel) -> Void)?
 	
+    @IBOutlet weak var titleLabel: UILabel?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 		tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
         NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .receivePageCurrentWallet, object: nil)
+        languageDidChanged()
+    }
+    
+    override func languageDidChanged() {
+        titleLabel?.text = "Choose wallet".bil_ui_localized
     }
     
     @objc

@@ -17,6 +17,7 @@ class BILContactEditController: BILLightBlueBaseController {
     @IBOutlet weak var remarkInputView: BILInputView!
     @IBOutlet weak var contactTypeLabel: UILabel!
     @IBOutlet weak var contactTypeStringLabel: BILCopyLabel!
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +26,22 @@ class BILContactEditController: BILLightBlueBaseController {
         nameInputView.delegate = self
         remarkInputView.delegate = self
         guard let c = contact else { return }
-        contactTypeLabel.text = c.additionType == .walletID ? .contact_detail_walletID : (.contact_detail_walletAddress + " (\(c.coinType.name))")
         contactTypeStringLabel.valueTitle = c.additionType == .walletID ? .contact_detail_id : .contact_detail_address
         contactTypeStringLabel.text = c.detail
         remarkInputView.textField.text = c.remark
         nameInputView.textField.text = c.name
+    }
+    
+    override func languageDidChanged() {
+        super.languageDidChanged()
+        title = "Edit contact".bil_ui_localized
+        nameInputView.updateTitleString("Name".bil_ui_localized)
+        remarkInputView.updateTitleString("Remarks".bil_ui_localized)
+        nameInputView.textField.placeholder = "Please input".bil_ui_localized
+        remarkInputView.textField.placeholder = "Please input".bil_ui_localized
+        guard let c = contact else { return }
+        contactTypeLabel.text = c.additionType == .walletID ? .contact_detail_walletID : (.contact_detail_walletAddress + " (\(c.coinType.name))")
+        deleteButton.setTitle("Delete contact".bil_ui_localized, for: .normal)
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,38 +53,38 @@ class BILContactEditController: BILLightBlueBaseController {
         updateContact()
     }
     @IBAction func deleteAction(_ sender: Any) {
-        let alert = UIAlertController(title: "提示", message: "确定要删除该联系人吗？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Tip".bil_ui_localized, message: "确定要删除该联系人吗？", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "删除", style: .destructive, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Delete".bil_ui_localized, style: .destructive, handler: { (action) in
             self.deleteContact()
         }))
         
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel".bil_ui_localized, style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
     }
     
     func checkName() -> String? {
-        return check(str: nameInputView.textField.text, minLength: 1, maxLength: 30, key: "名称")
+        return check(str: nameInputView.textField.text, minLength: 1, maxLength: 30, key: "Name".bil_ui_localized)
     }
     
     func checkRemark() -> String? {
-        return check(str: remarkInputView.textField.text, minLength: 1, maxLength: 100, key: "备注", required: false)
+        return check(str: remarkInputView.textField.text, minLength: 1, maxLength: 100, key: "Remarks".bil_ui_localized, required: false)
     }
     
     func check(str: String?, minLength: Int, maxLength: Int, key: String, required: Bool = true) -> String? {
         guard let s = str, !s.isEmpty else {
             if required {
-                return "请输入\(key)"
+                return "Please input".bil_ui_localized + "\(key)"
             }
             return nil
         }
         var toReturn: String? = nil
         switch s.count {
         case minLength - 1:
-            toReturn = "请输入\(key)"
+            toReturn = "Please input".bil_ui_localized + "\(key)"
         case let i where i > maxLength:
-            toReturn = "\(key)支持\(minLength)-\(maxLength)位"
+            toReturn = "\(key) \(String.contact_searchResult_surport) \(minLength)-\(maxLength) \(String.contact_searchResult_wei)"
         default: ()
         }
         
@@ -92,7 +104,7 @@ class BILContactEditController: BILLightBlueBaseController {
     
     func updateContact() {
         guard let name = nameInputView.textField.text else {
-            nameInputView.show(tip: "名称不能为空", type: .error)
+            nameInputView.show(tip: .contact_searchResult_nameEmpty, type: .error)
             return
         }
         

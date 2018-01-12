@@ -15,7 +15,9 @@ class BILSpecificVolumeReceiveController: BILBaseViewController {
 	@IBOutlet weak var addressLabel: UILabel!
 	@IBOutlet weak var qrCodeImageView: UIImageView!
 	@IBOutlet weak var amountLabel: UILabel!
-	override func viewDidLoad() {
+    @IBOutlet weak var payLabel: UILabel!
+    @IBOutlet weak var doneItem: UIBarButtonItem!
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -24,6 +26,12 @@ class BILSpecificVolumeReceiveController: BILBaseViewController {
 			qrCodeImageView.image = BILQRCodeHelper.generateQRCode(msg: r.urlString)
 			amountLabel.text = "\(r.amount) \(r.coinType.name)"
 		}
+    }
+    
+    override func languageDidChanged() {
+        title = "Receive".bil_ui_localized
+        payLabel.text = "Scan to pay".bil_ui_localized
+        doneItem.title = "Done".bil_ui_localized
     }
 
     @IBAction func doneAction(_ sender: Any) {

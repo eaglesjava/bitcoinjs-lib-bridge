@@ -77,4 +77,4 @@
 /* Class = "UILabel"; text = "仅支持符合 BIP39 标准的助记词"; ObjectID = "zqG-1c-iK7"; */
 "zqG-1c-iK7.text" = "Supports BIP39 mnemonic words only";
 
-"inX-qB-wAa.text" = "Start to create means agreed";
+"inX-qB-wAa.text" = "Start to %@ means agreed";

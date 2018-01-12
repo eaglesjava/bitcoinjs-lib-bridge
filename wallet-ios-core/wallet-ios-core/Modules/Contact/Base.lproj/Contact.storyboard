@@ -89,7 +89,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emptyLabel" destination="71u-E6-dkJ" id="yih-pG-j15"/>
                         <outlet property="emptyView" destination="fh5-y6-Z9m" id="10J-gZ-Ox7"/>
+                        <outlet property="newButton" destination="Z6b-ur-m6B" id="N14-9R-ACm"/>
+                        <outlet property="newItem" destination="VKD-sb-acM" id="X8U-F8-HEC"/>
                         <outlet property="tableView" destination="yi3-qS-A5a" id="StA-RV-yBq"/>
                         <segue destination="vgU-MN-TiQ" kind="show" identifier="BILShowContactDetailSegue" id="DNF-VY-lcM"/>
                         <segue destination="MRb-dt-iPo" kind="show" identifier="BILContactsToAddByIDSegue" id="MFj-WI-7HB"/>
@@ -228,6 +231,8 @@
                         <outlet property="nameFirstWordLabel" destination="DZI-H4-dgr" id="cbw-94-Tep"/>
                         <outlet property="nameLabel" destination="LFc-uK-qH9" id="eNn-eI-ESV"/>
                         <outlet property="remarkLabel" destination="nTG-6c-hbZ" id="lK3-aw-xHk"/>
+                        <outlet property="remarkTitleLabel" destination="EHU-qC-GsX" id="4Mr-xP-bSt"/>
+                        <outlet property="sendButton" destination="kCS-Hq-IuO" id="BbW-U1-Lcr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JWR-Ri-Ajw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -422,6 +427,7 @@
                     <connections>
                         <outlet property="contactTypeLabel" destination="FXY-Mp-LB9" id="Y0S-iI-MYv"/>
                         <outlet property="contactTypeStringLabel" destination="YHI-KQ-7L9" id="hq2-8h-MZB"/>
+                        <outlet property="deleteButton" destination="0ze-rm-y8b" id="k5s-yo-BLR"/>
                         <outlet property="nameInputView" destination="Xsc-59-xfp" id="36r-td-SOd"/>
                         <outlet property="remarkInputView" destination="HHF-xq-Ino" id="uy2-O4-xQK"/>
                     </connections>
@@ -911,9 +917,9 @@
                                     <constraint firstItem="7Zi-Dz-ID7" firstAttribute="leading" secondItem="QaQ-Kp-DH9" secondAttribute="trailing" constant="8" id="3j8-y3-1fv"/>
                                     <constraint firstItem="7Zi-Dz-ID7" firstAttribute="top" secondItem="fsW-n1-hWf" secondAttribute="top" id="3kO-Jr-s97"/>
                                     <constraint firstItem="O72-d3-VNh" firstAttribute="top" secondItem="fsW-n1-hWf" secondAttribute="top" id="CEo-pc-Ofl"/>
-                                    <constraint firstItem="O72-d3-VNh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Zi-Dz-ID7" secondAttribute="trailing" symbolic="YES" id="Jfa-Xf-z53"/>
+                                    <constraint firstItem="O72-d3-VNh" firstAttribute="leading" secondItem="7Zi-Dz-ID7" secondAttribute="trailing" constant="8" id="Jfa-Xf-z53"/>
                                     <constraint firstAttribute="height" constant="32" id="Pp6-oM-jx1"/>
-                                    <constraint firstAttribute="trailing" secondItem="O72-d3-VNh" secondAttribute="trailing" constant="109" id="XiX-MJ-wFn"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="O72-d3-VNh" secondAttribute="trailing" id="XiX-MJ-wFn"/>
                                     <constraint firstAttribute="bottom" secondItem="QaQ-Kp-DH9" secondAttribute="bottom" id="bdR-Ex-vcn"/>
                                     <constraint firstItem="QaQ-Kp-DH9" firstAttribute="top" secondItem="fsW-n1-hWf" secondAttribute="top" id="f2n-Oh-ZTb"/>
                                     <constraint firstItem="QaQ-Kp-DH9" firstAttribute="leading" secondItem="fsW-n1-hWf" secondAttribute="leading" id="f6c-yL-CAf"/>
@@ -954,7 +960,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YX2-AF-Kby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1709.5999999999999" y="469.1154422788606"/>
+            <point key="canvasLocation" x="1708.125" y="469.01408450704224"/>
         </scene>
     </scenes>
     <resources>

@@ -502,6 +502,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="创建钱包" id="IzW-ej-leD"/>
                     <connections>
+                        <outlet property="agreeLabel" destination="inX-qB-wAa" id="31b-h5-6cD"/>
                         <outlet property="agreenmentButton" destination="SBF-o4-3Ym" id="0NA-hb-doG"/>
                         <outlet property="confirmPasswordInputView" destination="HZ0-VV-HbH" id="kLt-xo-fIJ"/>
                         <outlet property="confirmPasswordTextField" destination="5Hf-Dg-FgH" id="ksT-uJ-03R"/>

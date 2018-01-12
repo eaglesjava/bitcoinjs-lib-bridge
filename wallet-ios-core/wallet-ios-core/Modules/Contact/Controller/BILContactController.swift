@@ -26,11 +26,11 @@ class BILContactController: BILLightBlueBaseController {
     var showTableViewIndexes: Bool = false
     
     var didSelectContactClosure: DidSelectContactClosure?
-    
-    var emptyTitle: String?
-    var emptyDescription: String?
 	
-	@IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var newItem: UIBarButtonItem!
+    @IBOutlet weak var newButton: BILWhiteBorderButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,14 @@ class BILContactController: BILLightBlueBaseController {
         
         firstLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".map{ String($0) }
 		loadContacts()
+    }
+    
+    override func languageDidChanged() {
+        super.languageDidChanged()
+        title = "Contacts".bil_ui_localized
+        emptyLabel.text = "No contacts".bil_ui_localized
+        newItem.title = "Add".bil_ui_localized
+        newButton.setTitle("Add now".bil_ui_localized, for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {

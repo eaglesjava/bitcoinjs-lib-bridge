@@ -42,7 +42,9 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	@IBOutlet weak var passwordInputView: BILInputView!
 	@IBOutlet weak var confirmPasswordInputView: BILInputView!
 	
-	var createWalletType: CreateWalletType = .new
+    @IBOutlet weak var agreeLabel: UILabel!
+    
+    var createWalletType: CreateWalletType = .new
 	var mnemonic: String? {
 		didSet {
             guard let m = mnemonic else { return }

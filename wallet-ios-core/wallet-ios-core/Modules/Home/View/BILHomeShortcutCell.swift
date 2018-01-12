@@ -9,12 +9,20 @@
 import UIKit
 
 class BILHomeShortcutCell: UITableViewCell {
-
+    @IBOutlet weak var contactButton: BILHomeShortcutButton!
+    @IBOutlet weak var scanButton: BILHomeShortcutButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        languageDidChanged()
     }
 
+    override func languageDidChanged() {
+        contactButton.setTitle("Add contact".bil_ui_localized, for: .normal)
+        scanButton.setTitle("Scan".bil_ui_localized, for: .normal)
+    }
+    
 	@IBAction func scanAction(_ sender: Any) {
 		BILControllerManager.shared.mainTabBarController?.selectedIndex = 3
 		postNotification(name: .shortcutScanQRCode, after: 10)

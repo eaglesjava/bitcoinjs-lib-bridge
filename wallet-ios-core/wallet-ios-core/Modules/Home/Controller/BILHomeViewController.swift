@@ -156,6 +156,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		}
         refresh(sender: nil)
         balanceDidChanged(notification: nil)
+        title = "Assets".bil_ui_localized
     }
     
     func setupRefresh() {

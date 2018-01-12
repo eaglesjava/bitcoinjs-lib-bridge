@@ -27,6 +27,12 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
         amountTextField.becomeFirstResponder()
+        
+        languageDidChanged()
+    }
+    
+    override func languageDidChanged() {
+        title = "Receive amount".bil_ui_localized
     }
     
     @objc internal func keyboardWillShow(_ notification : Notification?) {

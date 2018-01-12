@@ -27,6 +27,17 @@ class BILAddContactByAddressController: BILLightBlueBaseController {
         
         addressInputView.textField.text = address
     }
+    
+    override func languageDidChanged() {
+        super.languageDidChanged()
+        title = "Add via address".bil_ui_localized
+        nameInputView.updateTitleString("Name".bil_ui_localized)
+        addressInputView.updateTitleString("Address of digital asset".bil_ui_localized)
+        remarkInputView.updateTitleString("Remarks".bil_ui_localized)
+        nameInputView.textField.placeholder = "Please input".bil_ui_localized
+        addressInputView.textField.placeholder = "Please input".bil_ui_localized
+        remarkInputView.textField.placeholder = "Please input".bil_ui_localized
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -96,7 +107,7 @@ extension BILAddContactByAddressController {
         case minLength - 1:
             toReturn = "\(String.contact_searchResult_input)\(key)"
         case let i where i > maxLength:
-            toReturn = "\(key)\(String.contact_searchResult_surport)\(minLength)-\(maxLength)\(String.contact_searchResult_wei)"
+            toReturn = "\(key) \(String.contact_searchResult_surport) \(minLength)-\(maxLength) \(String.contact_searchResult_wei)"
         default: ()
         }
         
@@ -207,11 +218,11 @@ extension BILAddContactByAddressController: BILInputViewDelegate {
         if let textField: UITextField = notification.object as? UITextField {
             switch textField {
             case nameInputView.textField:
-                nameInputView.show(tip: .contact_searchResult_name, type: .normal)
+                nameInputView.show(tip: "Name".bil_ui_localized, type: .normal)
             case addressInputView.textField:
-                addressInputView.show(tip: .contact_detail_address, type: .normal)
+                addressInputView.show(tip: "Address of digital asset".bil_ui_localized, type: .normal)
             case remarkInputView.textField:
-                remarkInputView.show(tip: .contact_searchResult_remark, type: .normal)
+                remarkInputView.show(tip: "Remarks".bil_ui_localized, type: .normal)
             default: ()
             }
         }

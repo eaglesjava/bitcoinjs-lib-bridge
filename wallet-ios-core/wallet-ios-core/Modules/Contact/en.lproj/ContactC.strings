@@ -6,8 +6,8 @@
   Copyright © 2018年 BitBill. All rights reserved.
 */
 
-"ContactC.contact_addByID" = "Wallet ID";
-"ContactC.contact_addByAddress" = "Address";
+"ContactC.contact_addByID" = "Via wallet ID";
+"ContactC.contact_addByAddress" = "Via address";
 "ContactC.contact_scanCode" = "Scan QRCode";
 "ContactC.contact_cancel" = "Cancel";
 "ContactC.contact_addressExits" = "Address already exists";

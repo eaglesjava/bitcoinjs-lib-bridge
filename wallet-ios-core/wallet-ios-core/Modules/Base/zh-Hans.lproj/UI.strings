@@ -1,0 +1,41 @@
+/* 
+  UI.strings
+  wallet-ios-core
+
+  Created by 仇弘扬 on 2018/1/12.
+  Copyright © 2018年 BitBill. All rights reserved.
+*/
+"Unconfirmed" = "未确认";
+"Back up" = "马上备份";
+"Add contact" = "添加联系人";
+"Assets" = "资产";
+"Scan" = "扫一扫";
+
+"Refresh address" = "刷新地址";
+"Back up wallet now" = "当前钱包未备份，马上备份";
+"Receive specific amount" = "特定金额接收";
+"Choose wallet" = "选择钱包";
+"Receive amount" = "接收数量";
+"Scan to pay" = "扫一扫，向我支付";
+"Enter amount" = "输入数量";
+"Receive" = "接收";
+"Done" = "完成";
+
+"Delete contact" = "删除联系人";
+"Please input" = "请输入";
+"No contacts" = "您还没有联系人";
+"Wallet ID" = "钱包 ID";
+"Remarks" = "备注";
+"Address of digital asset" = "数字资产地址";
+"Add" = "添加";
+"Add via ID" = "通过 ID 添加";
+"Name" = "名称";
+"Add now" = "立即添加";
+"    Add to contact    " = "    添加到联系人    ";
+"Contact details" = "联系人详情";
+"Add via address" = "通过地址添加";
+"Contacts" = "联系人";
+"Search wallet ID" = "搜索对方钱包 ID";
+"Send" = "发送";
+"Edit contact" = "编辑联系人";
+"Search results" = "搜索结果";

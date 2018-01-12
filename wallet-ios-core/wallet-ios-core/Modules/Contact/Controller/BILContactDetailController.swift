@@ -15,6 +15,8 @@ class BILContactDetailController: BILLightBlueBaseController {
     @IBOutlet weak var contactTypeLabel: UILabel!
     @IBOutlet weak var contactTypeStringLabel: BILCopyLabel!
     @IBOutlet weak var remarkLabel: UILabel!
+    @IBOutlet weak var remarkTitleLabel: UILabel!
+    @IBOutlet weak var sendButton: BILWhiteBorderButton!
     
     var contact: ContactModel?
     
@@ -24,12 +26,19 @@ class BILContactDetailController: BILLightBlueBaseController {
         // Do any additional setup after loading the view.
     }
     
+    override func languageDidChanged() {
+        title = "Contact details".bil_ui_localized
+        remarkTitleLabel.text = "Remarks".bil_ui_localized
+        guard let c = contact else { return }
+        contactTypeLabel.text = c.additionType == .walletID ? .contact_detail_walletID : (.contact_detail_walletAddress + " (\(c.coinType.name))")
+        sendButton.setTitle("Send".bil_ui_localized, for: .normal)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let c = contact else { return }
         nameFirstWordLabel.text = c.firstNameWord
         nameLabel.text = c.name
-        contactTypeLabel.text = c.additionType == .walletID ? .contact_detail_walletID : (.contact_detail_walletAddress + " (\(c.coinType.name))")
         contactTypeStringLabel.valueTitle = c.additionType == .walletID ? .contact_detail_id : .contact_detail_address
         contactTypeStringLabel.text = c.detail
         remarkLabel.text = c.remarkString
