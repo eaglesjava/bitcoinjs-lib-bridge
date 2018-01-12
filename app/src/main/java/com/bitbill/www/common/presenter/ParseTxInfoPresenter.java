@@ -8,8 +8,6 @@ import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.address.db.entity.Address;
 import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.db.entity.Input;
-import com.bitbill.www.model.transaction.db.entity.Output;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.TxElement;
 
@@ -113,13 +111,12 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         txRecord.setCreatedTime(StringUtils.getDate(txElement.getCreatedTime()));
                         txRecord.setRemark(txElement.getRemark());
                         txRecord.setElementId(txElement.getId());
-                        getModelManager().insertTxRecord(txRecord);
-                        insertInputs(inputs, txRecord);
-                        insertOutputs(outputs, txRecord);
+                        getModelManager().insertTxRecordAndInputsOutputs(txRecord, inputs, outputs);
                         txRecords.add(txRecord);
                     }
                     return Observable.just(txRecords);
                 })
+                .concatMap(txRecords -> getModelManager().getTxRecords())
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<List<TxRecord>>() {
                     @Override
@@ -144,31 +141,6 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
 
     }
 
-    private List<Output> insertOutputs(List<TxElement.OutputsBean> outputs, TxRecord txRecord) {
-        List<Output> oOutputs = new ArrayList<>();
-        for (TxElement.OutputsBean outputsBean : outputs) {
-            Output output = new Output();
-            output.setAddress(outputsBean.getAddress());
-            output.setValue(outputsBean.getValue());
-            output.setTxId(txRecord.getId());
-            getModelManager().insertOutput(output);
-            oOutputs.add(output);
-        }
-        return oOutputs;
-    }
-
-    private List<Input> insertInputs(List<TxElement.InputsBean> inputs, TxRecord txRecord) {
-        List<Input> nInputs = new ArrayList<>();
-        for (TxElement.InputsBean inputsBean : inputs) {
-            Input input = new Input();
-            input.setTxId(txRecord.getId());
-            input.setAddress(inputsBean.getAddress());
-            input.setValue(inputsBean.getValue());
-            getModelManager().insertInput(input);
-            nInputs.add(input);
-        }
-        return nInputs;
-    }
 
     public boolean isValidTxInfoList() {
         List<TxElement> txInfoList = getMvpView().getTxInfoList();

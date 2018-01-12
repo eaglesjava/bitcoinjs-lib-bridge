@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -238,7 +239,7 @@ public class EditTextWapper extends FrameLayout {
         getEtText().setInputType(INPUT_TYPE_ARRAY.get(inputType));
         if (inputType == INPUT_PWD_HIDE || inputType == INPUT_PWD_VISIBLE) {
             //密码输入最大字符20个
-            getEtText().setMaxEms(20);
+            getEtText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
         }
     }
 

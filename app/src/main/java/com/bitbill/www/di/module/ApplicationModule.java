@@ -52,9 +52,23 @@ import com.bitbill.www.model.wallet.db.WalletDbHelper;
 import com.bitbill.www.model.wallet.network.WalletApi;
 import com.bitbill.www.model.wallet.network.WalletApiHelper;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManagerFactory;
 
 import dagger.Module;
 import dagger.Provides;
@@ -165,9 +179,63 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkhttpClient() {
+    OkHttpClient provideOkhttpClient(@ApplicationContext Context context) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(10, TimeUnit.SECONDS);
+        builder.readTimeout(20, TimeUnit.SECONDS);
+        builder.writeTimeout(20, TimeUnit.SECONDS);
+
+        InputStream cert = null;
+        try {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            cert = context.getAssets().open("ca/b4d4e57017f4e840.crt");
+            Certificate ca;
+            ca = cf.generateCertificate(cert);
+
+            // creating a KeyStore containing our trusted CAs
+            String keyStoreType = KeyStore.getDefaultType();
+            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(null, null);
+            keyStore.setCertificateEntry("ca", ca);
+
+            // creating a TrustManager that trusts the CAs in our KeyStore
+            String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+            tmf.init(keyStore);
+
+            // creating an SSLSocketFactory that uses our TrustManager
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, tmf.getTrustManagers(), null);
+
+            builder.sslSocketFactory(sslContext.getSocketFactory());
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    // 获取默认的 HostnameVerifier
+                    HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
+                    // 如果直接返回 true，等于不做域名校验
+                    return hv.verify(AppConstants.HOST_BITBILL_COM, session);
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                cert.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         return builder.build();
     }
 

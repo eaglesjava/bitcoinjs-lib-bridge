@@ -1,9 +1,12 @@
 package com.bitbill.www.model.transaction.db;
 
 import com.bitbill.www.common.base.model.db.Db;
-import com.bitbill.www.model.transaction.db.entity.Input;
-import com.bitbill.www.model.transaction.db.entity.Output;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.transaction.network.entity.TxElement;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 /**
@@ -12,9 +15,7 @@ import com.bitbill.www.model.transaction.db.entity.TxRecord;
 
 public interface TxDb extends Db {
 
-    Long insertTxRecord(TxRecord txRecord);
+    Long insertTxRecordAndInputsOutputs(TxRecord txRecord, List<TxElement.InputsBean> inputs, List<TxElement.OutputsBean> outputs);
 
-    Long insertInput(Input input);
-
-    Long insertOutput(Output output);
+    Observable<List<TxRecord>> getTxRecords();
 }

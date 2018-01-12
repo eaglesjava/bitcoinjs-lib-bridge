@@ -3,24 +3,34 @@ package com.bitbill.www.model.transaction.db.entity;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
 
 /**
  * Created by isanwenyu on 2018/1/10.
  */
-@Entity
+@Entity(
+
+        indexes = {
+                @Index(value = "txHash,txIndex", unique = true)
+        }
+)
 public class Input extends com.bitbill.www.common.base.model.entity.Entity {
     @Id(autoincrement = true)
     private Long id;
     private Long txId;
     private String address;
     private long value;//unit satoshi
+    private int txIndex;
+    private String txHash;
 
-    @Generated(hash = 1713187622)
-    public Input(Long id, Long txId, String address, long value) {
+    @Generated(hash = 1695776515)
+    public Input(Long id, Long txId, String address, long value, int txIndex, String txHash) {
         this.id = id;
         this.txId = txId;
         this.address = address;
         this.value = value;
+        this.txIndex = txIndex;
+        this.txHash = txHash;
     }
 
     @Generated(hash = 289903166)
@@ -57,5 +67,21 @@ public class Input extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setValue(long value) {
         this.value = value;
+    }
+
+    public int getTxIndex() {
+        return this.txIndex;
+    }
+
+    public void setTxIndex(int txIndex) {
+        this.txIndex = txIndex;
+    }
+
+    public String getTxHash() {
+        return this.txHash;
+    }
+
+    public void setTxHash(String txHash) {
+        this.txHash = txHash;
     }
 }

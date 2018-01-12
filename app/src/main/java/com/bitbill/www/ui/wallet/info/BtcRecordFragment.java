@@ -146,7 +146,8 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
 
     @Override
     public void onLayoutRefresh() {
-        lazyData();
+
+        getMvpPresenter().requestTxRecord();
     }
 
     @Override
@@ -200,7 +201,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
 
         }
         tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBalance())));
-        getMvpPresenter().getTxRecord();
+        getMvpPresenter().loadTxRecord();
     }
 
     @Override
@@ -229,6 +230,12 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     @Override
     public long getConfrimId() {
         return 0;
+    }
+
+    @Override
+    public void loadTxRecordSuccess(List<TxRecord> txRecordList) {
+        setDatas(txRecordList);
+        setRefresh(false);
     }
 
     @Override

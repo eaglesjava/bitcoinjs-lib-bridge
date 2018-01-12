@@ -7,8 +7,6 @@ import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.transaction.db.TxDb;
-import com.bitbill.www.model.transaction.db.entity.Input;
-import com.bitbill.www.model.transaction.db.entity.Output;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.TxApi;
 import com.bitbill.www.model.transaction.network.entity.GetTxElement;
@@ -18,6 +16,9 @@ import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.transaction.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionResponse;
+import com.bitbill.www.model.transaction.network.entity.TxElement;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -77,17 +78,13 @@ public class TxModelManager extends ModelManager implements TxModel {
     }
 
     @Override
-    public Long insertTxRecord(TxRecord txRecord) {
-        return mTxDb.insertTxRecord(txRecord);
+    public Long insertTxRecordAndInputsOutputs(TxRecord txRecord, List<TxElement.InputsBean> inputs, List<TxElement.OutputsBean> outputs) {
+        return mTxDb.insertTxRecordAndInputsOutputs(txRecord, inputs, outputs);
     }
 
     @Override
-    public Long insertInput(Input input) {
-        return mTxDb.insertInput(input);
+    public Observable<List<TxRecord>> getTxRecords() {
+        return mTxDb.getTxRecords();
     }
 
-    @Override
-    public Long insertOutput(Output output) {
-        return mTxDb.insertOutput(output);
-    }
 }

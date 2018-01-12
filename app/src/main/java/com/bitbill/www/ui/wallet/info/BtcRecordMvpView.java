@@ -1,6 +1,7 @@
 package com.bitbill.www.ui.wallet.info;
 
 import com.bitbill.www.common.base.view.MvpView;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -19,4 +20,6 @@ public interface BtcRecordMvpView extends MvpView {
     void getTxRecordFail();
 
     long getConfrimId();
+
+    void loadTxRecordSuccess(List<TxRecord> txRecordList);
 }

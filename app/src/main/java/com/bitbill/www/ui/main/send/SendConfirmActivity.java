@@ -1,10 +1,8 @@
 package com.bitbill.www.ui.main.send;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -278,16 +276,17 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     }
 
-    @TargetApi(Build.VERSION_CODES.O)
     private void refreshSeekBar() {
-        sbSendFee.setMax(getMaxFeeByte());
-        sbSendFee.setMin(getMinFeeByte());
-        sbSendFee.setProgress(getBestFeeByte());
+        sbSendFee.setMax(100);
+        int feeRange = getMaxFeeByte() - getMinFeeByte();
+        if (feeRange != 0) {
+            sbSendFee.setProgress(getBestFeeByte() / feeRange * 100);
+        }
         sbSendFee.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-                updateFeeLayout(i);
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                int seekFee = (progress * (getMaxFeeByte() - getMinFeeByte()) / 100) + getMinFeeByte();
+                updateFeeLayout(seekFee);
 
             }
 

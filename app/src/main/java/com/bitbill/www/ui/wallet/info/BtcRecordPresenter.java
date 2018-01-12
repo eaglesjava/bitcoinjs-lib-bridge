@@ -33,7 +33,20 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
     }
 
     @Override
-    public void getTxRecord() {
+    public void loadTxRecord() {
+        if (!isValidWallet()) {
+            return;
+        }
+        Wallet wallet = getMvpView().getWallet();
+        if (!StringUtils.isEmpty(wallet.getTxRecordList())) {
+            getMvpView().loadTxRecordSuccess(wallet.getTxRecordList());
+        } else {
+            requestTxRecord();
+        }
+    }
+
+    @Override
+    public void requestTxRecord() {
         if (!isValidWallet() || !isValidXPublicKey()) {
             return;
         }
