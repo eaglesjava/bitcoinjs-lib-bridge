@@ -18,6 +18,9 @@ func BTCFormatString(btc: Int64) -> String {
     }
     let str = String(btc % BTC_SATOSHI)
     let d = Double(btc) / Double(BTC_SATOSHI)
+    if str == "0" {
+        return String(format: "%.2f", d)
+    }
     if str.count > 2 {
         return "\(d)"
     }
