@@ -64,6 +64,9 @@ import com.bitbill.www.ui.main.my.ShortCutSettingPresenter;
 import com.bitbill.www.ui.main.my.SystemSettingMvpPresenter;
 import com.bitbill.www.ui.main.my.SystemSettingMvpView;
 import com.bitbill.www.ui.main.my.SystemSettingPresenter;
+import com.bitbill.www.ui.main.my.WalletAddressMvpPresenter;
+import com.bitbill.www.ui.main.my.WalletAddressMvpView;
+import com.bitbill.www.ui.main.my.WalletAddressPresenter;
 import com.bitbill.www.ui.main.my.WalletDetailMvpPresenter;
 import com.bitbill.www.ui.main.my.WalletDetailMvpView;
 import com.bitbill.www.ui.main.my.WalletDetailPresenter;
@@ -352,6 +355,13 @@ public class ActivityModule {
     @PerActivity
     BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> provideBtcRecordPresenter(
             BtcRecordPresenter<TxModel, BtcRecordMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    WalletAddressMvpPresenter<TxModel, WalletAddressMvpView> provideWalletAddressPresenter(
+            WalletAddressPresenter<TxModel, WalletAddressMvpView> presenter) {
         return presenter;
     }
 

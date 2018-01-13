@@ -14,6 +14,6 @@ public interface BtcAddressMvpPresentder<M extends AddressModel, V extends BtcAd
     /**
      * 刷新地址
      */
-    void refreshAddress();
+    void refreshAddress(int refreshCount);
 
 }

@@ -59,6 +59,11 @@ public class AddressModelManager extends ModelManager implements AddressModel {
     }
 
     @Override
+    public Observable<Boolean> updateAddressList(List<Address> addressList) {
+        return mAddressDb.updateAddressList(addressList);
+    }
+
+    @Override
     public Observable<List<Address>> getAllAddressList() {
         return mAddressDb.getAllAddressList();
     }

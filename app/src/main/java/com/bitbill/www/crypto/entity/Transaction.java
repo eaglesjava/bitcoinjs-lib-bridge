@@ -18,9 +18,9 @@ public class Transaction {
     public static class Input {
         private String txHash;
         private int index;
-        private int bip39Index;
+        private long bip39Index;
 
-        public Input(String txHash, int index, int bip39Index) {
+        public Input(String txHash, int index, long bip39Index) {
             this.txHash = txHash;
             this.index = index;
             this.bip39Index = bip39Index;
@@ -42,11 +42,11 @@ public class Transaction {
             this.index = index;
         }
 
-        public int getBip39Index() {
+        public long getBip39Index() {
             return bip39Index;
         }
 
-        public void setBip39Index(int bip39Index) {
+        public void setBip39Index(long bip39Index) {
             this.bip39Index = bip39Index;
         }
     }

@@ -51,14 +51,12 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         if (!isValidXPublicKey()) {
             return;
         }
-        getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(wallet.getXPublicKey(), wallet.getLastAddressIndex(), new BitcoinJsWrapper.Callback() {
             @Override
             public void call(String key, String... jsResult) {
                 if (!isViewAttached()) {
                     return;
                 }
-                getMvpView().hideLoading();
 
                 if (jsResult == null) {
                     getMvpView().loadAddressFail();
@@ -78,13 +76,13 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
     }
 
     @Override
-    public void refreshAddress() {
-        if (!isValidWallet() || !isValidXPublicKey()) {
+    public void refreshAddress(int refreshCount) {
+        if (!isValidWallet() || !isValidXPublicKey() || refreshCount <= 0) {
             return;
         }
         Wallet wallet = getMvpView().getWallet();
         //刷新地址index+1
-        long index = wallet.getLastAddressIndex() + 1;
+        long index = wallet.getLastAddressIndex() + refreshCount;
         String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
         getCompositeDisposable().add(getModelManager()
                 .refreshAddress(new RefreshAddressRequest(xPublicKeyHash, index))
@@ -103,7 +101,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                                 checkLastAddressIndex(indexNo, wallet);
                             }
                         } else {
-                            getMvpView().newAddressFail();
+                            getMvpView().refreshAddressFail();
                         }
                     }
 
@@ -151,9 +149,9 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                 }
             }
             if (StringUtils.isNotEmpty(lastAddress)) {
-                getMvpView().newAddressSuccess(lastAddress);
+                getMvpView().refreshAddressSuccess(lastAddress);
             } else {
-                getMvpView().newAddressFail();
+                getMvpView().refreshAddressFail();
             }
         } else if (indexNo == lastIndex) {
             getBitcoinAddressByMasterXPublicKey(indexNo, wallet);
@@ -173,13 +171,13 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                 }
                 getMvpView().hideLoading();
                 if (StringUtils.isEmpty(jsResult)) {
-                    getMvpView().newAddressFail();
+                    getMvpView().refreshAddressFail();
                     return;
                 }
                 String address = jsResult[0];
 
                 if (StringUtils.isEmpty(address)) {
-                    getMvpView().newAddressFail();
+                    getMvpView().refreshAddressFail();
                     return;
                 }
                 wallet.setLastAddress(address);
@@ -201,17 +199,17 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                 }
                 getMvpView().hideLoading();
                 if (StringUtils.isEmpty(jsResult)) {
-                    getMvpView().newAddressFail();
+                    getMvpView().refreshAddressFail();
                     return;
                 }
                 if (toIndex - fromIndex + 1 != jsResult.length) {
-                    getMvpView().newAddressFail();
+                    getMvpView().refreshAddressFail();
                     return;
                 }
                 String address = jsResult[jsResult.length - 1];
 
                 if (StringUtils.isEmpty(address)) {
-                    getMvpView().newAddressFail();
+                    getMvpView().refreshAddressFail();
                     return;
                 }
                 wallet.setLastAddressIndex(toIndex);
@@ -248,9 +246,9 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                             }
                         } else {
                             if (aBoolean) {
-                                getMvpView().newAddressSuccess(wallet.getLastAddress());
+                                getMvpView().refreshAddressSuccess(wallet.getLastAddress());
                             } else {
-                                getMvpView().newAddressFail();
+                                getMvpView().refreshAddressFail();
                             }
                         }
                     }
@@ -261,7 +259,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().newAddressFail();
+                        getMvpView().refreshAddressFail();
                     }
                 }));
     }

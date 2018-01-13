@@ -279,5 +279,6 @@
     <string name="status_item_unconfirm">待确认</string>
     <string name="title_tx_confirm">确认</string>
     <string name="status_item_transfer">已转移</string>
+    <string name="successs_address_refresh">地址刷新成功</string>
 
 </resources>

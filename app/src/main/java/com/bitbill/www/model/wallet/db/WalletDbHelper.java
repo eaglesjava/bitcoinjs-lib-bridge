@@ -23,10 +23,15 @@
 
 package com.bitbill.www.model.wallet.db;
 
+import com.bitbill.model.db.dao.AddressDao;
 import com.bitbill.model.db.dao.DaoSession;
+import com.bitbill.model.db.dao.InputDao;
+import com.bitbill.model.db.dao.OutputDao;
+import com.bitbill.model.db.dao.TxRecordDao;
 import com.bitbill.model.db.dao.WalletDao;
 import com.bitbill.www.common.base.model.db.DbHelper;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
@@ -45,11 +50,19 @@ import io.reactivex.Observable;
 public class WalletDbHelper extends DbHelper implements WalletDb {
 
     private final WalletDao mWalletDao;
+    private final AddressDao mAddressDao;
+    private final TxRecordDao mTxRecordDao;
+    private final InputDao mInputDao;
+    private final OutputDao mOutputDao;
 
     @Inject
     public WalletDbHelper(@DatabaseInfo DaoSession daoSession) {
         super(daoSession);
         mWalletDao = mDaoSession.getWalletDao();
+        mAddressDao = mDaoSession.getAddressDao();
+        mTxRecordDao = mDaoSession.getTxRecordDao();
+        mInputDao = mDaoSession.getInputDao();
+        mOutputDao = mDaoSession.getOutputDao();
     }
 
     @Override
@@ -90,6 +103,13 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
     @Override
     public Observable<Boolean> deleteWallet(Wallet wallet) {
         return Observable.fromCallable(() -> {
+            List<TxRecord> txRecordList = wallet.getTxRecordList();
+            for (TxRecord txRecord : txRecordList) {
+                mInputDao.deleteInTx(txRecord.getInputs());
+                mOutputDao.deleteInTx(txRecord.getOutputs());
+            }
+            mTxRecordDao.deleteInTx(txRecordList);
+            mAddressDao.deleteInTx(wallet.getAddressList());
             mWalletDao.delete(wallet);
             return true;
         });

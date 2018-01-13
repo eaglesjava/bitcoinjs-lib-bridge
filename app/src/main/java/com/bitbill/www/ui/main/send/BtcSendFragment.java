@@ -29,7 +29,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     Button btnNext;
     @Inject
     BtcSendMvpPresenter<WalletModel, BtcSendMvpView> mBtcSendMvpPresenter;
-    private String mSendAddress;
+    private Contact mSendContact;
 
     public static BtcSendFragment newInstance() {
 
@@ -91,23 +91,25 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
 
     @Override
     public String getSendAddress() {
-        return mSendAddress;
+        if (mSendContact != null) {
+
+            return mSendContact.getAddress();
+        }
+        return etSendAddress.getText().toString();
+    }
+
+    public void setSendAddress(Contact sendContact) {
+        mSendContact = sendContact;
+        if (sendContact != null) {
+            String walletId = sendContact.getWalletId();
+            setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? sendContact.getAddress() : walletId) + ")");
+
+        }
     }
 
     public void setSendAddress(String sendAddress) {
 
-        mSendAddress = sendAddress;
         etSendAddress.setText(sendAddress);
-    }
-
-    public void setSendAddress(Contact sendContact) {
-        if (sendContact != null) {
-
-            mSendAddress = sendContact.getAddress();
-            String walletId = sendContact.getWalletId();
-            setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? mSendAddress : walletId) + ")");
-
-        }
     }
 
     public void sendSuccess() {

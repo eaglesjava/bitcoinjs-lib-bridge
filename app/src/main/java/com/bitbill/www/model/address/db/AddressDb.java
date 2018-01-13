@@ -24,6 +24,8 @@ public interface AddressDb extends Db {
 
     Observable<Boolean> updateAddress(final Address address);
 
+    Observable<Boolean> updateAddressList(final List<Address> addressList);
+
     Observable<List<Address>> getAllAddressList();
 
     Observable<List<Address>> getAddressById(Long addressId);

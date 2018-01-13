@@ -71,6 +71,14 @@ public class AddressDbHelper extends DbHelper implements AddressDb {
     }
 
     @Override
+    public Observable<Boolean> updateAddressList(List<Address> addressList) {
+        return Observable.fromCallable(() -> {
+            mAddressDao.updateInTx(addressList);
+            return true;
+        });
+    }
+
+    @Override
     public Observable<List<Address>> getAllAddressList() {
         return Observable.fromCallable(() -> mAddressDao.loadAll());
     }

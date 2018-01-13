@@ -126,7 +126,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
                 if (isSendAll) {
                     getMvpPresenter().buildTransaction();
                 } else {
-                    mBtcAddressMvpPresentder.refreshAddress();
+                    mBtcAddressMvpPresentder.refreshAddress(1);
                 }
             }
 
@@ -388,12 +388,12 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     @Override
-    public void newAddressFail() {
+    public void refreshAddressFail() {
         sendTransactionFail(null);
     }
 
     @Override
-    public void newAddressSuccess(String lastAddress) {
+    public void refreshAddressSuccess(String lastAddress) {
         mLastAddress = lastAddress;
         getMvpPresenter().buildTransaction();
     }
