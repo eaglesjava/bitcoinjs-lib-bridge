@@ -140,6 +140,8 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
                 showTipAlert(title: .sendAmountCheckTipTitle, msg: .sendAmountCheckTipMessageZero)
                 return false
             }
+			sendModel?.isSendAll = false
+			sendModel?.wallet = nil
             sendModel?.amount = amount
         }
         return true

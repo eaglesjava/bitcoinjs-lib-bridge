@@ -225,8 +225,8 @@ class BILSendConfirmController: BILBaseViewController {
     }
     
     func send(password: String) {
-        func errorHandler(msg: String) {
-            self.showTipAlert(title: nil, msg: msg)
+		func errorHandler(title: String? = nil, msg: String) {
+            self.showTipAlert(title: title, msg: msg)
             self.bil_dismissHUD()
         }
         guard let builder = txBuilder else {
@@ -249,7 +249,7 @@ class BILSendConfirmController: BILBaseViewController {
                 self.sendSuccess(tx: tx)
             }, failure: { (msg, code) in
                 debugPrint(msg)
-                self.showTipAlert(title: .sendConfirmSendFailed, msg: "\(msg), code = \(code)")
+				errorHandler(title: .sendConfirmSendFailed, msg: msg)
             })
             
         }, failure: { (error) in
