@@ -13,6 +13,7 @@ class BILAboutUsViewController: BILBaseViewController {
     @IBOutlet weak var versionLabel: UILabel!
     
     let titles = [String.meAboutUs_agreement, String.meAboutUs_contactUs]
+	let subTitles = ["", "hi@bitbill.com"]
     let segues = ["BILAboutUsToAgreementSegue"]
     
     override func viewDidLoad() {
@@ -54,6 +55,8 @@ extension BILAboutUsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BILMeCell", for: indexPath)
         if let c = cell as? BILMeCell {
             c.titleLabel.text = titles[indexPath.row]
+			c.subTitleLabel.text = subTitles[indexPath.row]
+			c.subTitleLabel.textColor = UIColor.white
         }
         return cell
     }
