@@ -20,12 +20,12 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
-import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
-import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
+import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
+import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.utils.StringUtils;
@@ -41,6 +41,7 @@ import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
@@ -68,7 +69,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, BtcAddressMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
@@ -86,7 +87,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
-    BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
+    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -154,7 +155,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         addPresenter(mWalletPresenter);
         addPresenter(mParseTxInfoMvpPresenter);
         addPresenter(mGetCacheVersionMvpPresenter);
-        addPresenter(mBtcAddressMvpPresentder);
     }
 
     @Override
@@ -259,7 +259,11 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void initData() {
-        mWalletPresenter.loadWallets();
+        if (!StringUtils.isEmpty(getApp().getWallets())) {
+            loadWalletsSuccess(getApp().getWallets());
+        } else {
+            mWalletPresenter.loadWallets();
+        }
         mGetCacheVersionMvpPresenter.getCacheVersion();
     }
 
@@ -304,7 +308,13 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void loadWalletsSuccess(List<Wallet> wallets) {
 
-        if (StringUtils.isEmpty(wallets)) finish();//结束主界面
+        if (StringUtils.isEmpty(wallets)) {
+            //跳转到引导页面
+            GuideActivity.start(MainActivity.this);
+            //结束主界面
+            finish();
+        }
+
         //设置全局钱包列表对象
         BitbillApp.get().setWallets(wallets);
         reloadWalletInfo();
@@ -481,33 +491,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public Wallet getWallet() {
-        return null;
-    }
-
-    @Override
-    public void getWalletFail() {
-
-    }
-
-    @Override
-    public void newAddressFail() {
-
-    }
-
-    @Override
-    public void newAddressSuccess(String lastAddress) {
-
-    }
-
-    @Override
-    public void reachAddressIndexLimit() {
-
-    }
-
-    @Override
     public void getResponseAddressIndex(long indexNo, Wallet wallet) {
-        mBtcAddressMvpPresentder.checkLastAddressIndex(indexNo, wallet);
+        mSyncAddressMvpPresentder.syncLastAddressIndex(indexNo, wallet);
     }
 
     @Override
@@ -515,5 +500,19 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
         // TODO: 2018/1/8 只更新更改的wallet
 
+    }
+
+    @Override
+    public void showLoading() {
+        if (mAssetFragment != null) {
+            mAssetFragment.showLoading();
+        }
+    }
+
+    @Override
+    public void hideLoading() {
+        if (mAssetFragment != null) {
+            mAssetFragment.hideLoading();
+        }
     }
 }

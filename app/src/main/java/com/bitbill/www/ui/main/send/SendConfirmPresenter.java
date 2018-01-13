@@ -168,9 +168,15 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         Log.d(TAG, "buildTransaction() called with :seedHex=[" + transaction + "], jsResult = [" + txJson + "]");
         String finalInAddress = inAddress;
         String finalOutAddress = outAddress;
+
+        getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().buildTransaction(seedHex, txJson, new BitcoinJsWrapper.Callback() {
             @Override
             public void call(String key, String... jsResult) {
+                if (!isViewAttached()) {
+                    return;
+                }
+                getMvpView().hideLoading();
                 if (jsResult != null && jsResult.length > 0) {
                     String txHex = jsResult[0];
                     Log.d(TAG, "buildTransaction() called with: key = [" + key + "], jsResult = [" + jsResult + "]");
@@ -181,9 +187,6 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
                     Log.d(TAG, "buildTransaction() called with: reverseHex = [" + txHash + "]");
                     sendTransaction(txHash, txHex, finalInAddress, finalOutAddress);
                 } else {
-                    if (!isViewAttached()) {
-                        return;
-                    }
                     getMvpView().sendTransactionFail(null);
                 }
 

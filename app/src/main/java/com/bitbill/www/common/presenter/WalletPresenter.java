@@ -4,7 +4,6 @@ import com.androidnetworking.error.ANError;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -41,11 +40,8 @@ public class WalletPresenter<M extends WalletModel, V extends WalletMvpView> ext
                         if (!isViewAttached()) {
                             return;
                         }
-                        if (!StringUtils.isEmpty(wallets)) {
-                            getMvpView().loadWalletsSuccess(wallets);
-                        } else {
-                            getMvpView().loadWalletsFail();
-                        }
+                        getMvpView().loadWalletsSuccess(wallets);
+
                     }
 
                     @Override

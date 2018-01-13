@@ -54,7 +54,12 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
 
     @Override
     public Observable<Long> insertWallet(final Wallet wallet) {
-        return Observable.fromCallable(() -> mWalletDao.insert(wallet));
+        return Observable.fromCallable(() -> {
+            if (mWalletDao.count() == 0) {
+                wallet.setIsDefault(true);
+            }
+            return mWalletDao.insert(wallet);
+        });
     }
 
     @Override
@@ -68,6 +73,7 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
     @Override
     public Observable<Boolean> updateWallet(Wallet wallet) {
         return Observable.fromCallable(() -> {
+
             mWalletDao.update(wallet);
             return true;
         });
@@ -109,6 +115,13 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
     public Observable<Wallet> getWalletBySeedHash(String seedHash) {
         return Observable.fromCallable(() ->
                 mWalletDao.queryBuilder().where(WalletDao.Properties.SeedHexHash.eq(seedHash)).unique());
+    }
+
+    @Override
+    public Observable<Boolean> hasWallet() {
+
+        return Observable.fromCallable(() ->
+                mWalletDao.count() > 0);
     }
 
 }

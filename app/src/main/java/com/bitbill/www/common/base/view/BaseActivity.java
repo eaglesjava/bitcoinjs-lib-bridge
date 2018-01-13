@@ -151,7 +151,11 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     @Override
     public void showLoading() {
         hideLoading();
-        mProgressDialog = DialogUtils.showLoadingDialog(this);
+        if (mProgressDialog == null) {
+            mProgressDialog = DialogUtils.showLoadingDialog(this);
+        } else {
+            mProgressDialog.show();
+        }
     }
 
     @Override

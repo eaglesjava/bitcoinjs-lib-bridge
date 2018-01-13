@@ -400,6 +400,16 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void reachAddressIndexLimit() {
+        showMessage(R.string.msg_reach_address_index_limit);
+    }
+
+    @Override
+    public void loadAddressSuccess(String lastAddress) {
+
+    }
+
+    @Override
+    public void loadAddressFail() {
 
     }
 

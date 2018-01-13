@@ -55,4 +55,6 @@ public interface WalletDb extends Db {
 
     Observable<Wallet> getWalletBySeedHash(String seedHash);
 
+    Observable<Boolean> hasWallet();
+
 }

@@ -9,8 +9,10 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseListFragment;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -89,8 +91,17 @@ public class WalletSettingFragment extends BaseListFragment<Wallet, WalletMvpPre
 
     @Override
     public void loadWalletsSuccess(List<Wallet> wallets) {
+        if (StringUtils.isEmpty(wallets)) {
+
+            finishAndJumpGuide();
+        }
         //设置全局钱包列表对象
         updateWallets(wallets);
+    }
+
+    private void finishAndJumpGuide() {
+        GuideActivity.start(getBaseActivity());
+        getBaseActivity().finish();
     }
 
     private void updateWallets(List<Wallet> wallets) {
@@ -117,6 +128,9 @@ public class WalletSettingFragment extends BaseListFragment<Wallet, WalletMvpPre
     public void deleteWallet(Wallet wallet) {
         //移除全局钱包对象
         BitbillApp.get().getWallets().remove(wallet);
+        if (StringUtils.isEmpty(BitbillApp.get().getWallets())) {
+            finishAndJumpGuide();
+        }
         if (isDataEmpty()) {
             return;
         }

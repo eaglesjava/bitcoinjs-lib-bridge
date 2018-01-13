@@ -22,9 +22,7 @@ import com.bitbill.www.model.wallet.network.socket.Register;
 
 import javax.inject.Inject;
 
-import io.reactivex.ObservableSource;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Function;
 
 import static com.bitbill.www.app.AppConstants.PLATFORM;
 
@@ -223,24 +221,15 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         //  插入操作只有创建成功后
         getCompositeDisposable().add(getModelManager()
                 .insertWallet(mWallet)
-                .concatMap(new Function<Long, ObservableSource<Boolean>>() {
-                    @Override
-                    public ObservableSource<Boolean> apply(Long aLong) throws Exception {
-                        //第一个钱包自动设置为默认钱包
-                        mWallet.setIsDefault(aLong == 1l);
-                        Log.d(TAG, "initWalletSuccess id = [" + aLong + "]");
-                        return getModelManager().updateWallet(mWallet);
-                    }
-                })
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>() {
+                .subscribeWith(new BaseSubcriber<Long>() {
                     @Override
-                    public void onNext(Boolean aboolean) {
-                        super.onNext(aboolean);
+                    public void onNext(Long id) {
+                        super.onNext(id);
                         if (!isViewAttached()) {
                             return;
                         }
-                        if (aboolean) {
+                        if (id != null) {
                             getMvpView().createWalletSuccess();
                             //注册钱包
                             getApp().registerWallet(new Register(mWallet.getName(), "", DeviceUtil.getDeviceId(), PLATFORM));

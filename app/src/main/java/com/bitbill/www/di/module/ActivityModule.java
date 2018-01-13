@@ -19,6 +19,9 @@ import com.bitbill.www.common.presenter.GetLastAddressPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.presenter.ParseTxInfoPresenter;
+import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
+import com.bitbill.www.common.presenter.SyncAddressMvpView;
+import com.bitbill.www.common.presenter.SyncAddressPresenter;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.presenter.WalletPresenter;
@@ -227,8 +230,16 @@ public class ActivityModule {
     }
 
     @Provides
+    @PerActivity
     BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> provideBtcAddressPresenter(
             BtcAddressPresenter<AddressModel, BtcAddressMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> provideSyncAddressPresenter(
+            SyncAddressPresenter<AddressModel, SyncAddressMvpView> presenter) {
         return presenter;
     }
 

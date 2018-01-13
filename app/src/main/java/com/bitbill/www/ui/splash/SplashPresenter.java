@@ -6,7 +6,6 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.wallet.WalletModel;
-import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 
 import javax.inject.Inject;
@@ -25,16 +24,16 @@ public class SplashPresenter<M extends WalletModel, V extends SplashMvpView> ext
 
     @Override
     public void hasWallet() {
-        getCompositeDisposable().add(getModelManager().getWalletById(1l)
+        getCompositeDisposable().add(getModelManager().hasWallet()
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Wallet>() {
+                .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override
-                    public void onNext(Wallet wallet) {
-                        super.onNext(wallet);
+                    public void onNext(Boolean aBoolean) {
+                        super.onNext(aBoolean);
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().hasWallet(wallet != null);
+                        getMvpView().hasWallet(aBoolean);
 
                     }
 

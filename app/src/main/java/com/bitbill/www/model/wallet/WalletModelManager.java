@@ -100,6 +100,11 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     }
 
     @Override
+    public Observable<Boolean> hasWallet() {
+        return mWalletDb.hasWallet();
+    }
+
+    @Override
     public ApiHeader getApiHeader() {
         return mWalletApi.getApiHeader();
     }

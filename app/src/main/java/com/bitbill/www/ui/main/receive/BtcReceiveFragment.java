@@ -129,7 +129,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void loadAddress(Wallet selectedWallet) {
         mSelectedWallet = selectedWallet;
         if (mReceiveMvpPresenter != null) {
-            mReceiveMvpPresenter.loadAddress(selectedWallet);
+            mBtcAddressMvpPresentder.loadAddress();
 
         }
 
@@ -199,5 +199,11 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     @Override
     public void reachAddressIndexLimit() {
         showMessage(R.string.msg_reach_address_index_limit);
+    }
+
+    @Override
+    public void loadAddressSuccess(String lastAddress) {
+        getMvpPresenter().createAddressQrcode(lastAddress);
+        setReceiveAddress(lastAddress);
     }
 }
