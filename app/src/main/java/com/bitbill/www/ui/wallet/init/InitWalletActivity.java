@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
@@ -20,12 +20,15 @@ import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.main.asset.AssetFragment;
+import com.bitbill.www.ui.main.my.UseRuleActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -42,8 +45,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     Button btnStart;
     @BindView(R.id.init_wallet_form)
     LinearLayout initWalletForm;
-    @BindView(R.id.wallet_form)
-    ScrollView walletForm;
 
     @Inject
     InitWalletMvpPresenter<WalletModel, InitWalletMvpView> initWalletMvpPresenter;
@@ -54,8 +55,8 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     private boolean cancel;
     private Wallet mWallet;
     private boolean isResetPwd;
-    private boolean isFromAsset;
     private long mIndexNo;
+    private String mFromTag;
 
     public static void start(Context context, Wallet wallet, boolean isCreateWallet) {
         Intent intent = new Intent(context, InitWalletActivity.class);
@@ -64,12 +65,13 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         context.startActivity(intent);
     }
 
-    public static void start(Context context, Wallet wallet, boolean isCreateWallet, boolean isFromAsset) {
+    public static void start(Context context, Wallet wallet, boolean isCreateWallet, String fromTag, boolean isResetPwd) {
 
         Intent intent = new Intent(context, InitWalletActivity.class);
         intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
         intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
-        intent.putExtra(AppConstants.EXTRA_IS_FROM_ASSET, isFromAsset);
+        intent.putExtra(AppConstants.EXTRA_FROM_TAG, fromTag);
+        intent.putExtra(AppConstants.EXTRA_IS_RESET_PWD, isResetPwd);
         context.startActivity(intent);
     }
 
@@ -120,7 +122,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
                 }
             }
         });
-        btnStart.setText(isCreateWallet ? R.string.btn_start_create : R.string.btn_start_import);
 
     }
 
@@ -130,7 +131,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
         isResetPwd = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_RESET_PWD, false);
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
-        isFromAsset = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_ASSET, false);
+        mFromTag = getIntent().getStringExtra(AppConstants.EXTRA_FROM_TAG);
     }
 
     @Override
@@ -145,12 +146,20 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     protected void onResume() {
         super.onResume();
-        setTitle(isCreateWallet ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet);
+        setTitle(isResetPwd ? R.string.title_activity_reset_pwd : (isCreateWallet ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet));
     }
 
-    @OnClick(R.id.btn_start)
-    public void onViewClicked() {
-        attemptCreateOrImportWallet();
+    @OnClick(value = {R.id.btn_start, R.id.tv_server_rule})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_start:
+                attemptCreateOrImportWallet();
+                break;
+            case R.id.tv_server_rule:
+                ///跳转到服务条款界面
+                UseRuleActivity.start(InitWalletActivity.this);
+                break;
+        }
     }
 
     private void attemptCreateOrImportWallet() {
@@ -226,8 +235,8 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
             mSyncAddressMvpPresentder.syncLastAddressIndex(mIndexNo, getWallet());
         }
         //跳转到穿件钱包成功界面
-        InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet);
-        if (isFromAsset) {
+        InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet, false);
+        if (AssetFragment.TAG.equals(mFromTag)) {
             //从主页进入才通知钱包刷新
             EventBus.getDefault().postSticky(new WalletUpdateEvent());
         }
@@ -270,6 +279,25 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void getResponseAddressIndex(long indexNo) {
         mIndexNo = indexNo;
 
+    }
+
+    @Override
+    public void resetPwdSuccess() {
+
+        //跳转到穿件钱包成功界面
+        InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet, isResetPwd);
+    }
+
+    @Override
+    public void resetPwdFail() {
+        showMessage("重置密码失败，请重试");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
 }

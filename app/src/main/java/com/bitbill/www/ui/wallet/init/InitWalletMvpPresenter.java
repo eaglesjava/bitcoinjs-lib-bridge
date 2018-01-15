@@ -35,4 +35,5 @@ public interface InitWalletMvpPresenter<W extends WalletModel, V extends InitWal
      */
     void importWallet();
 
+    void resetPwd();
 }

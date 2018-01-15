@@ -54,17 +54,21 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         if (mWallet == null) {
             mWallet = new Wallet();
         }
-        mWallet.setCreatedAt(System.currentTimeMillis());
-        mWallet.setUpdatedAt(System.currentTimeMillis());
-        mWallet.setName(getMvpView().getWalletId());
         mWallet.setTradePwd(getMvpView().getTradePwd());
-        mWallet.setCoinType(AppConstants.BTC_COIN_TYPE);
         //显示加载
         getMvpView().showLoading();
-        if (getMvpView().isCreateWallet()) {
+        if (getMvpView().isResetPwd()) {
+            resetPwd();
+        } else if (getMvpView().isCreateWallet()) {
+            mWallet.setName(getMvpView().getWalletId());
+            mWallet.setCreatedAt(System.currentTimeMillis());
+            mWallet.setCoinType(AppConstants.BTC_COIN_TYPE);
             //生成助记词
             createMnemonic();
         } else {
+            mWallet.setName(getMvpView().getWalletId());
+            mWallet.setCreatedAt(System.currentTimeMillis());
+            mWallet.setCoinType(AppConstants.BTC_COIN_TYPE);
             //调用导入钱包接口
             importWallet();
         }
@@ -179,7 +183,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                         Log.d(TAG, "onNext() called with: importWalletResponseApiResponse = [" + importWalletResponseApiResponse + "]");
                         if (importWalletResponseApiResponse != null && importWalletResponseApiResponse.isSuccess()) {
                             //完善wallet相关属性
-                            StringUtils.encryptSeedHex(mWallet.getSeedHex(), mWallet.getXPublicKey(), getMvpView().getTradePwd(), mWallet);
+                            StringUtils.encryptMnemonicAndSeedHex(mWallet.getMnemonic(), mWallet.getSeedHex(), mWallet.getXPublicKey(), getMvpView().getTradePwd(), mWallet);
                             insertWallet();
                             ImportWalletResponse data = importWalletResponseApiResponse.getData();
                             if (data != null) {
@@ -252,6 +256,71 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
 
                     }
                 }));
+    }
+
+
+    @Override
+    public void resetPwd() {
+        if (!isValidWallet()) {
+            getMvpView().hideLoading();
+            return;
+        }
+        Wallet wallet = getMvpView().getWallet();
+        String mnemonic = wallet.getMnemonic();
+        // 校验助记词是否正确
+        try {
+            BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(mnemonic, new BitcoinJsWrapper.Callback() {
+                @Override
+                public void call(String key, String... jsResult) {
+                    if (jsResult != null && "true".equals(jsResult[0]) && jsResult.length > 2) {
+
+                        //更新wallet对象
+                        String seedHex = jsResult[1];
+                        String XPublicKey = jsResult[2];
+                        StringUtils.encryptMnemonicAndSeedHex(mnemonic, seedHex, XPublicKey, getMvpView().getTradePwd(), wallet);
+                        //不需要备份
+                        wallet.setIsBackuped(true);
+                        //更新数据库
+                        getCompositeDisposable().add(getModelManager()
+                                .updateWallet(wallet)
+                                .compose(applyScheduler())
+                                .subscribeWith(new BaseSubcriber<Boolean>() {
+                                    @Override
+                                    public void onNext(Boolean aBoolean) {
+                                        super.onNext(aBoolean);
+                                        if (!isViewAttached()) {
+                                            return;
+                                        }
+                                        getMvpView().hideLoading();
+                                        if (aBoolean) {
+                                            getMvpView().resetPwdSuccess();
+                                        } else {
+                                            getMvpView().resetPwdFail();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        super.onError(e);
+                                        if (!isViewAttached()) {
+                                            return;
+                                        }
+                                        getMvpView().resetPwdFail();
+                                        getMvpView().hideLoading();
+                                    }
+                                }));
+                    } else {
+                        getMvpView().resetPwdFail();
+                        getMvpView().hideLoading();
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            getMvpView().resetPwdFail();
+            getMvpView().hideLoading();
+        }
+
     }
 
     private boolean isValidWalletId() {

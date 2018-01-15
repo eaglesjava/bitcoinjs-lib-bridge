@@ -21,7 +21,6 @@ public final class AppConstants {
     public static final String EXTRA_WALLET = "extra_wallet";
     public static final String EXTRA_MNEMONIC = "etra_mnemonic";
     public static final String EXTRA_IS_CREATE_WALLET = "is_create_wallet";
-    public static final String EXTRA_IS_FROM_ASSET = "is_from_asset";
     public static final String EXTRA_IS_RESET_PWD = "is_reset_pwd";
     public static final String EXTRA_SEND_ADDRESS = "send_address";
     public static final String EXTRA_SEND_AMOUNT = "send_amount";
@@ -35,6 +34,7 @@ public final class AppConstants {
     public static final String EXTRA_TX_ITEM = "tx_item";
     public static final String EXTRA_ADDRESS = "address";
     public static final String EXTRA_IS_FROM_SEND = "is_from_send";
+    public static final String EXTRA_FROM_TAG = "from_where";
 
 
     public static final String ARG_DATAS = "args_datas";

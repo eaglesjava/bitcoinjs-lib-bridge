@@ -74,10 +74,6 @@
             android:name=".ui.wallet.init.CreateWalletIdActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.wallet.init.ResetPwdActivity"
-            android:label="@string/title_activity_reset_pwd"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".ui.main.send.SendConfirmActivity"
             android:label="@string/title_activity_send_confirm"
             android:theme="@style/AppTheme" />

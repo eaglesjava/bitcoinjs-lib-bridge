@@ -43,6 +43,7 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
                         super.onNext(wallet);
                         if (wallet != null) {
                             //助记词已存在
+                            wallet.setMnemonic(handleMnemonic());
                             getMvpView().hasExsistMnemonic(wallet);
                             getMvpView().hideLoading();
                         } else {
@@ -87,10 +88,11 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
                         String seedHex = jsResult[1];
                         String XPublicKey = jsResult[2];
                         String extendedKeysHash = EncryptUtils.encryptMD5ToString(XPublicKey);
-                        String mnemonicHash = EncryptUtils.encryptMD5ToString(getMvpView().getMnemonic());
+                        String mnemonicHash = EncryptUtils.encryptMD5ToString(handleMnemonic());
                         Wallet wallet = new Wallet();
                         wallet.setXPublicKey(XPublicKey);
                         wallet.setMnemonicHash(mnemonicHash);
+                        wallet.setMnemonic(handleMnemonic());
                         //不需要备份
                         wallet.setIsBackuped(true);
                         wallet.setSeedHex(seedHex);

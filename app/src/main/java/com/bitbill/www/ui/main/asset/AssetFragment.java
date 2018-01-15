@@ -48,6 +48,7 @@ import butterknife.OnClick;
 public class AssetFragment extends BaseLazyFragment implements WalletView.OnWalletClickListener, ShortCutSettingMvpView {
 
 
+    public static final String TAG = "AssetFragment";
     private static final int BOTTOM_MARGIN = 15;//unit dp
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -126,7 +127,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
             @Override
             public void onCreateWallet(View view) {
                 //跳转到创建钱包界面
-                CreateWalletIdActivity.start(getBaseActivity(), null, true, true);
+                CreateWalletIdActivity.start(getBaseActivity(), null, true, AssetFragment.TAG);
                 if (mWalletMenu.isShowing()) {
                     mWalletMenu.dismiss();
                 }
@@ -135,7 +136,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
             @Override
             public void onImportWallet(View view) {
                 //跳转到导入钱包界面
-                ImportWalletActivity.start(getBaseActivity(), true);
+                ImportWalletActivity.start(getBaseActivity(), AssetFragment.TAG);
                 if (mWalletMenu.isShowing()) {
                     mWalletMenu.dismiss();
                 }
@@ -155,12 +156,16 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
             isFirstLoading = false;
             return;
         }
-        mSwipeRefreshLayout.setRefreshing(true);
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
-        mSwipeRefreshLayout.setRefreshing(false);
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override

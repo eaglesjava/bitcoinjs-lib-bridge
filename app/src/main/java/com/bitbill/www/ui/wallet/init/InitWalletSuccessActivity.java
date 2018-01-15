@@ -35,11 +35,13 @@ public class InitWalletSuccessActivity extends BaseCompleteActivity {
     View llBottonBtns;
     private Wallet mWallet;
     private boolean isCreateWallet = true;//默认创建钱包成功界面
+    private boolean isResetPwd;
 
-    public static void start(Context context, Wallet wallet, boolean isCreateWallet) {
+    public static void start(Context context, Wallet wallet, boolean isCreateWallet, boolean isResetPwd) {
         Intent intent = new Intent(context, InitWalletSuccessActivity.class);
         intent.putExtra(AppConstants.EXTRA_WALLET, wallet);
         intent.putExtra(AppConstants.EXTRA_IS_CREATE_WALLET, isCreateWallet);
+        intent.putExtra(AppConstants.EXTRA_IS_RESET_PWD, isResetPwd);
         context.startActivity(intent);
     }
 
@@ -48,6 +50,7 @@ public class InitWalletSuccessActivity extends BaseCompleteActivity {
         super.handleIntent(intent);
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
         isCreateWallet = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_CREATE_WALLET, true);
+        isResetPwd = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_RESET_PWD, false);
     }
 
     @Override
@@ -73,19 +76,14 @@ public class InitWalletSuccessActivity extends BaseCompleteActivity {
     @Override
     public void initView() {
 
-        tvHintContent.setText(isCreateWallet ? R.string.hint_create_wallet_success : R.string.hint_import_wallet_success);
-        tvHintTitle.setText(isCreateWallet ? R.string.title_wallet_create_success : R.string.title_wallet_import_success);
+        tvHintContent.setText(isResetPwd ? R.string.hint_reset_pwd_success : (isCreateWallet ? R.string.hint_create_wallet_success : R.string.hint_import_wallet_success));
+        tvHintTitle.setText(isResetPwd ? R.string.title_reset_pwd_success : (isCreateWallet ? R.string.title_wallet_create_success : R.string.title_wallet_import_success));
         llBottonBtns.setVisibility(isCreateWallet ? View.VISIBLE : View.GONE);
+        setTitle(isResetPwd ? R.string.title_activity_reset_pwd : (isCreateWallet ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet));
     }
 
     @Override
     public void initData() {
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setTitle(isCreateWallet ? R.string.title_activity_create_wallet : R.string.title_activity_import_wallet);
     }
 
     @Override

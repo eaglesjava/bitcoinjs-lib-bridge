@@ -11,7 +11,6 @@ import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class UseRuleActivity extends BaseToolbarActivity {
     @BindView(R.id.tv_use_rule)
@@ -56,12 +55,5 @@ public class UseRuleActivity extends BaseToolbarActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_use_rule;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

@@ -15,7 +15,7 @@ import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
-import com.bitbill.www.ui.wallet.init.ResetPwdActivity;
+import com.bitbill.www.ui.wallet.init.InitWalletActivity;
 
 import javax.inject.Inject;
 
@@ -24,31 +24,32 @@ import butterknife.OnClick;
 
 public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPresenter> implements ImportWalletMvpView {
 
+    private static final String TAG = "ImportWalletActivity";
     @BindView(R.id.et_input_mnemonic)
     EditText etInputMnemonic;
     @BindView(R.id.btn_next)
     Button btnNext;
     @Inject
     ImportWalletMvpPresenter<WalletModel, ImportWalletMvpView> importWalletMvpPresenter;
-    private boolean isFromAsset;
+    private String mFromTag;
 
-    public static void start(Context context, boolean isFromAsset) {
+    public static void start(Context context, String fromTag) {
         Intent intent = new Intent(context, ImportWalletActivity.class);
-        intent.putExtra(AppConstants.EXTRA_IS_FROM_ASSET, isFromAsset);
+        intent.putExtra(AppConstants.EXTRA_FROM_TAG, fromTag);
         context.startActivity(intent);
     }
 
     @Override
     public void importWalletSuccess(Wallet wallet) {
         //进入初始化钱包成功界面
-        CreateWalletIdActivity.start(ImportWalletActivity.this, wallet, false, isFromAsset);
+        CreateWalletIdActivity.start(ImportWalletActivity.this, wallet, false, mFromTag);
     }
 
     @Override
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
 
-        isFromAsset = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_ASSET, false);
+        mFromTag = getIntent().getStringExtra(AppConstants.EXTRA_FROM_TAG);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
             public void onClick(DialogInterface dialog, int which) {
                 if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
                     //传递过去
-                    ResetPwdActivity.start(ImportWalletActivity.this, wallet);
+                    InitWalletActivity.start(ImportWalletActivity.this, wallet, false, mFromTag, true);
                     finish();
                 } else {
                     //取消

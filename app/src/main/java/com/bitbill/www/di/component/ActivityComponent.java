@@ -32,7 +32,6 @@ import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
 import com.bitbill.www.ui.wallet.init.InitWalletActivity;
-import com.bitbill.www.ui.wallet.init.ResetPwdActivity;
 
 import dagger.Component;
 
@@ -63,8 +62,6 @@ public interface ActivityComponent {
     void inject(ReceiveFragment receiveFragment);
 
     void inject(CreateWalletIdActivity createWalletIdActivity);
-
-    void inject(ResetPwdActivity resetPwdActivity);
 
     void inject(BtcReceiveFragment btcReceiveFragment);
 

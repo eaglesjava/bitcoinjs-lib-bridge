@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <TextView
+        style="@style/Text.White"
+        android:text="@string/text_complete_agree" />
+
+    <TextView
+        android:id="@+id/tv_server_rule"
+        style="@style/Text.White"
+        android:text="@string/text_bibill_server_rule" />
+</LinearLayout>

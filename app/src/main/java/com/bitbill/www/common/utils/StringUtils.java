@@ -23,7 +23,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -607,7 +606,7 @@ public class StringUtils {
 
 
     public static String formatDate(long dateTime) {
-        return DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault()).format(new Date(dateTime));
+        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM).format(new Date(dateTime));
     }
 
     public static void setEditable(EditText etText, boolean editable) {

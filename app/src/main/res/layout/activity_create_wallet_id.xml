@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,12 +18,12 @@
         app:bottomHint="@string/hint_bottom_wallet_id"
         app:inputHint="@string/hint_input_wallet_id"
         app:inputPaddingBottom="10dp"
-        app:inputTitle="@string/input_wallet_id"
-        />
+        app:inputTitle="@string/input_wallet_id" />
 
     <Button
         android:id="@+id/btn_next"
         style="@style/Button.Blue"
+        android:layout_gravity="bottom"
         android:layout_marginTop="30dp"
-        android:text="@string/btn_next"/>
-</LinearLayout>
+        android:text="@string/btn_next" />
+</FrameLayout>
