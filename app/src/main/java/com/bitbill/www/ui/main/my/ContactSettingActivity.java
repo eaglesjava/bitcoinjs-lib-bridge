@@ -16,6 +16,7 @@ import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -78,7 +79,8 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
     @Override
     public void initView() {
 
-        mBackupContactPwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.setting_backup_contact), BitbillApp.get().getDefaultWallet(), false);
+        Wallet defaultWallet = BitbillApp.get().getDefaultWallet();
+        mBackupContactPwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.setting_backup_contact), defaultWallet, false, String.format(getString(R.string.msg_input_defualt_wallet_pwd), defaultWallet.getName()));
         mBackupContactPwdDialogFragment.setOnPwdValidatedListener(new PwdDialogFragment.OnPwdValidatedListener() {
             @Override
             public void onPwdCnfirmed(String confirmPwd) {

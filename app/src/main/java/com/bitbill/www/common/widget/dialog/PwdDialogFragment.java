@@ -21,6 +21,7 @@ public class PwdDialogFragment extends BaseConfirmDialog {
     public static final String TAG = "InputDialogFragment";
     private static final String CONFIRM_WALLET = "confirm_wallet";
     private static final String PWD_MESSAGE = "pwd_message";
+    private static final String CONFIRM_INPUT_HINT = "input_hint";
     @BindView(R.id.et_confirm_pwd)
     EditText etConfirmPwd;
     @BindView(R.id.tv_dialog_msg)
@@ -28,6 +29,7 @@ public class PwdDialogFragment extends BaseConfirmDialog {
     private Wallet mWallet;
     private OnPwdValidatedListener mOnPwdValidatedListener;
     private String mPwdMsg;
+    private String mInputHint;
 
     public static PwdDialogFragment newInstance(String title, Wallet wallet, boolean isOnlyPositiveBtn) {
 
@@ -35,6 +37,18 @@ public class PwdDialogFragment extends BaseConfirmDialog {
         args.putString(CONFIRM_TITLE, title);
         args.putSerializable(CONFIRM_WALLET, wallet);
         args.putBoolean(CONFIRM_ONLY_POSITIVE_BTN, isOnlyPositiveBtn);
+        PwdDialogFragment fragment = new PwdDialogFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static PwdDialogFragment newInstance(String title, Wallet wallet, boolean isOnlyPositiveBtn, String inputHint) {
+
+        Bundle args = new Bundle();
+        args.putString(CONFIRM_TITLE, title);
+        args.putSerializable(CONFIRM_WALLET, wallet);
+        args.putBoolean(CONFIRM_ONLY_POSITIVE_BTN, isOnlyPositiveBtn);
+        args.putString(CONFIRM_INPUT_HINT, inputHint);
         PwdDialogFragment fragment = new PwdDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -56,6 +70,7 @@ public class PwdDialogFragment extends BaseConfirmDialog {
     public void onBeforeSetContentLayout() {
         mWallet = (Wallet) getArguments().getSerializable(CONFIRM_WALLET);
         mPwdMsg = getArguments().getString(PWD_MESSAGE);
+        mInputHint = getArguments().getString(CONFIRM_INPUT_HINT);
     }
 
     @Override
@@ -102,6 +117,9 @@ public class PwdDialogFragment extends BaseConfirmDialog {
         if (StringUtils.isNotEmpty(mPwdMsg)) {
             tvDialogMsg.setVisibility(View.VISIBLE);
             tvDialogMsg.setText(mPwdMsg);
+        }
+        if (StringUtils.isNotEmpty(mInputHint)) {
+            etConfirmPwd.setHint(mInputHint);
         }
 
     }

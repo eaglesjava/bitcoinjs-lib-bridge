@@ -19,6 +19,7 @@ import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
 import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.transaction.TxModel;
 import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
@@ -67,14 +68,16 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     private long mFeeByte;
     private long mBestFeeByte;
     private int mFeeTime;
+    private Contact mSendContact;
 
-    public static void start(Context context, String address, String sendAmount, boolean isSendAll, Wallet wallet) {
+    public static void start(Context context, String address, String sendAmount, boolean isSendAll, Wallet wallet, Contact sendContact) {
 
         Intent starter = new Intent(context, SendConfirmActivity.class);
         starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
         starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, sendAmount);
         starter.putExtra(AppConstants.EXTRA_WALLET, wallet);
         starter.putExtra(AppConstants.EXTRA_IS_SEND_ALL, isSendAll);
+        starter.putExtra(AppConstants.EXTRA_SEND_CONTACT, sendContact);
         context.startActivity(starter);
     }
 
@@ -85,6 +88,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
         mSendAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
         isSendAll = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_SEND_ALL, false);
+        mSendContact = (Contact) getIntent().getSerializableExtra(AppConstants.EXTRA_SEND_CONTACT);
     }
 
     @Override
@@ -179,7 +183,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     @Override
     public void sendTransactionSuccess() {
 
-        SendSuccessActivity.start(SendConfirmActivity.this, mSendAddress, mSendAmount);
+        SendSuccessActivity.start(SendConfirmActivity.this, mSendAddress, mSendAmount, mSendContact);
         sendSuccess();
     }
 

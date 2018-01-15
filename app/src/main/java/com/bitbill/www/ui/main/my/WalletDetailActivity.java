@@ -56,6 +56,9 @@ public class WalletDetailActivity extends BaseToolbarActivity<WalletDetailMvpPre
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+        if (mWallet != null) {
+            mWallet.__setDaoSession(getApp().getDaoSession());
+        }
     }
 
     @Override

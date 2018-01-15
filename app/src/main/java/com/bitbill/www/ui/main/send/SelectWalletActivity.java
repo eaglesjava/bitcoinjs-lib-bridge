@@ -13,6 +13,7 @@ import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
+import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -33,12 +34,14 @@ public class SelectWalletActivity extends BaseToolbarActivity {
     private String mSendAddress;
     private String mSendAmount;
     private boolean isSendAll;
+    private Contact mSendContact;
 
-    public static void start(Context context, String address, String sendAmount, boolean isSendAll) {
+    public static void start(Context context, String address, String sendAmount, boolean isSendAll, Contact sendContact) {
         Intent starter = new Intent(context, SelectWalletActivity.class);
         starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
         starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, sendAmount);
         starter.putExtra(AppConstants.EXTRA_IS_SEND_ALL, isSendAll);
+        starter.putExtra(AppConstants.EXTRA_SEND_CONTACT, sendContact);
         context.startActivity(starter);
     }
 
@@ -48,6 +51,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
         mSendAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
         mSendAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
         isSendAll = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_SEND_ALL, false);
+        mSendContact = (Contact) getIntent().getSerializableExtra(AppConstants.EXTRA_SEND_CONTACT);
     }
 
     @Override
@@ -164,7 +168,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
             return;
         }
         //跳转到确认发送界面
-        SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, isSendAll ? StringUtils.satoshi2btc(mSelectedWallet.getBalance()) : mSendAmount, isSendAll, mSelectedWallet);
+        SendConfirmActivity.start(SelectWalletActivity.this, mSendAddress, isSendAll ? StringUtils.satoshi2btc(mSelectedWallet.getBalance()) : mSendAmount, isSendAll, mSelectedWallet, mSendContact);
     }
 
     private boolean validSelectedWallet() {

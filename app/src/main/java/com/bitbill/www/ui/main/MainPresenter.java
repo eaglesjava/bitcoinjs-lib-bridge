@@ -81,31 +81,33 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
         getCompositeDisposable().add(getModelManager()
                 .getBalance(new GetBalanceRequest(extendedKeysHash))
                 .concatMap(stringApiResponse -> {
-                    boolean check = false;
+                    long allAmount = 0;
                     if (stringApiResponse.isSuccess()) {
                         JSONObject dataJsonObj = new JSONObject(String.valueOf(stringApiResponse.getData()));
+
                         //设置钱包余额
                         for (Wallet wallet : wallets) {
                             JSONObject amountJsonObj = dataJsonObj.getJSONObject(wallet.getName());
-                            wallet.setBalance(amountJsonObj.getLong("balance"));
+                            long balance = amountJsonObj.getLong("balance");
+                            wallet.setBalance(balance);
                             wallet.setUnconfirm(amountJsonObj.getLong("unconfirm"));
                             //更新钱包
                             getModelManager().updateWallet(wallet);
+                            allAmount += balance;
                         }
-                        check = true;
                     }
-                    return Observable.just(check);
+                    return Observable.just(allAmount);
                 })
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>() {
+                .subscribeWith(new BaseSubcriber<Long>() {
                     @Override
-                    public void onNext(Boolean aBoolean) {
-                        super.onNext(aBoolean);
+                    public void onNext(Long allAmount) {
+                        super.onNext(allAmount);
                         if (!isViewAttached()) {
                             return;
                         }
-                        if (aBoolean) {
-                            getMvpView().getBalanceSuccess(wallets);
+                        if (allAmount > 0) {
+                            getMvpView().getBalanceSuccess(wallets, allAmount);
                         } else {
                             getMvpView().getBalanceFail();
                         }

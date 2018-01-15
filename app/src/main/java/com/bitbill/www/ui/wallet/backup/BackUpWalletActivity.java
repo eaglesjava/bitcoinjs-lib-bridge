@@ -8,18 +8,21 @@ import android.widget.EditText;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
-import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.base.view.ScreenShotObserverActivity;
+import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.main.MainActivity;
+
+import java.io.File;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPresenter> implements BackupWalletMvpView {
+public class BackUpWalletActivity extends ScreenShotObserverActivity<BackupWalletMvpPresenter> implements BackupWalletMvpView {
 
     public static final int REQUEST_BACKUP_CODE = 0x11;
     private static final String TAG = "BackUpWalletActivity";
@@ -151,5 +154,12 @@ public class BackUpWalletActivity extends BaseToolbarActivity<BackupWalletMvpPre
             MainActivity.start(BackUpWalletActivity.this);
         }
 
+    }
+
+    @Override
+    public void onScreenShot(File shotFile) {
+        super.onScreenShot(shotFile);
+        //弹出截图危险提示对话框
+        MessageConfirmDialog.newInstance(getString(R.string.hint_bak_wallet_ban_screenshots), true).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
     }
 }

@@ -18,6 +18,7 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.contact.db.entity.Contact;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,11 +34,13 @@ public class SendAmountActivity extends BaseToolbarActivity {
 
     private String mAddress;
     private String mAmount;
+    private Contact mSendContact;
 
-    public static void start(Context context, String address, String amount) {
+    public static void start(Context context, String address, String amount, Contact sendContact) {
         Intent starter = new Intent(context, SendAmountActivity.class);
         starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
         starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, amount);
+        starter.putExtra(AppConstants.EXTRA_SEND_CONTACT, sendContact);
         context.startActivity(starter);
     }
 
@@ -46,6 +49,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
         super.handleIntent(intent);
         mAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
         mAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
+        mSendContact = (Contact) getIntent().getSerializableExtra(AppConstants.EXTRA_SEND_CONTACT);
     }
 
     @Override
@@ -143,7 +147,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
                     return;
                 }
                 //跳转到发送确认界面
-                SelectWalletActivity.start(SendAmountActivity.this, mAddress, getSendAmount(), false);
+                SelectWalletActivity.start(SendAmountActivity.this, mAddress, getSendAmount(), false, mSendContact);
                 break;
         }
     }
@@ -161,7 +165,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
      */
     private void sendAllAmount() {
         //跳转到发送确认界面
-        SelectWalletActivity.start(SendAmountActivity.this, mAddress, null, true);
+        SelectWalletActivity.start(SendAmountActivity.this, mAddress, null, true, mSendContact);
     }
 
     public String getSendAmount() {

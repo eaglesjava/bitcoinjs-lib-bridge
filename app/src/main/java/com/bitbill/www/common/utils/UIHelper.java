@@ -66,7 +66,7 @@ public class UIHelper {
                 address = result.substring(result.indexOf(":") + 1);
             }
 
-            SendAmountActivity.start(context, address, amount);
+            SendAmountActivity.start(context, address, amount, null);
 
         } else if (result.toLowerCase().startsWith(AppConstants.SCHEME_BITBILL)) {
             Uri parse = Uri.parse(result);

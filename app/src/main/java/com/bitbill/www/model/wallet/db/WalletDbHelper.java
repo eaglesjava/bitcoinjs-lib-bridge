@@ -117,7 +117,7 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
 
     @Override
     public Observable<List<Wallet>> getAllWallets() {
-        return Observable.fromCallable(() -> mWalletDao.loadAll());
+        return Observable.fromCallable(() -> mWalletDao.queryBuilder().orderDesc(WalletDao.Properties.CreatedAt).list());
     }
 
     @Override

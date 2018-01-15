@@ -98,6 +98,11 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return etSendAddress.getText().toString();
     }
 
+    public void setSendAddress(String sendAddress) {
+
+        etSendAddress.setText(sendAddress);
+    }
+
     public void setSendAddress(Contact sendContact) {
         mSendContact = sendContact;
         if (sendContact != null) {
@@ -107,11 +112,6 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         }
     }
 
-    public void setSendAddress(String sendAddress) {
-
-        etSendAddress.setText(sendAddress);
-    }
-
     public void sendSuccess() {
         etSendAddress.setText("");
     }
@@ -119,7 +119,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     @Override
     public void validateAddress(boolean validate) {
         if (validate) {
-            SendAmountActivity.start(getBaseActivity(), getSendAddress(), null);
+            SendAmountActivity.start(getBaseActivity(), getSendAddress(), null, mSendContact);
         } else {
             showMessage("请输入合法的地址");
         }

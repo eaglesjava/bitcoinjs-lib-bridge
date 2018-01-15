@@ -271,4 +271,10 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
         super.onResume();
         setShortcutShown(mShortCutSettingMvpPresenter.isShortcutShown());
     }
+
+    public void setBtcTotalAmount(Long btcTotalAmount) {
+        if (tvBtcAmount != null) {
+            tvBtcAmount.setText(StringUtils.satoshi2btc(btcTotalAmount));
+        }
+    }
 }

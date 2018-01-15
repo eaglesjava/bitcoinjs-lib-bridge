@@ -2,8 +2,6 @@
 
 package com.bitbill.www.model.wallet.db.entity;
 
-import android.support.annotation.NonNull;
-
 import com.bitbill.model.db.dao.AddressDao;
 import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.model.db.dao.TxRecordDao;
@@ -28,7 +26,7 @@ import java.util.List;
  */
 
 @Entity(nameInDb = "wallet")
-public class Wallet extends com.bitbill.www.common.base.model.entity.Entity implements Comparable<Wallet> {
+public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
 
     @Id(autoincrement = true)
     private Long id;
@@ -305,7 +303,7 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
         }
         if (obj instanceof Wallet) {
             Wallet wallet = (Wallet) obj;
-            return id.equals(wallet.getId());
+            return id.equals(wallet.getId()) && name.equals(((Wallet) obj).getName());
         } else {
             return false;
         }
@@ -313,14 +311,9 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity impl
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id.hashCode() + name.hashCode();
     }
 
-    @Override
-    public int compareTo(@NonNull Wallet o) {
-
-        return (int) (id - o.getId());
-    }
 
     public String getCoinType() {
         return this.coinType;

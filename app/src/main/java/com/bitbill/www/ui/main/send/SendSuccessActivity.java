@@ -3,6 +3,7 @@ package com.bitbill.www.ui.main.send;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -10,6 +11,9 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseCompleteActivity;
+import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.contact.db.entity.Contact;
+import com.bitbill.www.ui.main.contact.AddContactByAddressActivity;
 
 import butterknife.BindView;
 
@@ -27,11 +31,13 @@ public class SendSuccessActivity extends BaseCompleteActivity {
     Button btnCreateContact;
     private String mSendAddress;
     private String mSendAmount;
+    private Contact mSendContact;
 
-    public static void start(Context context, String address, String sendAmount) {
+    public static void start(Context context, String address, String sendAmount, Contact sendContact) {
         Intent starter = new Intent(context, SendSuccessActivity.class);
         starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
         starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, sendAmount);
+        starter.putExtra(AppConstants.EXTRA_SEND_CONTACT, sendContact);
         context.startActivity(starter);
     }
 
@@ -41,6 +47,7 @@ public class SendSuccessActivity extends BaseCompleteActivity {
 
         mSendAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
         mSendAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
+        mSendContact = (Contact) getIntent().getSerializableExtra(AppConstants.EXTRA_SEND_CONTACT);
     }
 
     @Override
@@ -67,6 +74,17 @@ public class SendSuccessActivity extends BaseCompleteActivity {
     public void initView() {
         tvSendAddress.setText(mSendAddress);
         tvSendAmount.setText(mSendAmount + " BTC");
+        if (mSendContact == null) {
+            btnCreateContact.setVisibility(View.VISIBLE);
+            btnCreateContact.setOnClickListener(v -> {
+                if (StringUtils.isNotEmpty(mSendAddress)) {
+                    AddContactByAddressActivity.start(SendSuccessActivity.this, mSendAddress);
+                }
+
+            });
+        } else {
+            btnCreateContact.setVisibility(View.GONE);
+        }
 
     }
 
@@ -85,7 +103,6 @@ public class SendSuccessActivity extends BaseCompleteActivity {
      */
     @Override
     protected void completeAction() {
-        // TODO: 2017/12/16 关闭相关流程
         finish();
     }
 }

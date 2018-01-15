@@ -40,7 +40,7 @@ public interface MainMvpView extends MvpView {
 
     void getBalanceFail();
 
-    void getBalanceSuccess(List<Wallet> wallets);
+    void getBalanceSuccess(List<Wallet> wallets, Long allAmount);
 
     void listUnconfirmSuccess(List<TxElement> data);
 
