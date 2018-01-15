@@ -125,7 +125,12 @@ class BILSettingManager: NSObject {
     
     static var currentLanguage: BILLanguageType {
         set {
-            UserDefaults.standard.set([newValue.rawValue], forKey: .bil_UserDefaultsKey_currentLanguageType)
+			if newValue == currentLanguage {
+				return
+			}
+			UserDefaults.standard.set([newValue.rawValue], forKey: .bil_UserDefaultsKey_currentLanguageType)
+			UserDefaults.standard.synchronize()
+			NotificationCenter.default.post(name: .languageDidChanged, object: nil)
         }
         get {
             guard var str  = (UserDefaults.standard.array(forKey: .bil_UserDefaultsKey_currentLanguageType) as? [String])?.first else {

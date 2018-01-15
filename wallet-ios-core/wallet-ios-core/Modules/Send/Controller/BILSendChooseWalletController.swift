@@ -11,7 +11,8 @@ import UIKit
 class BILSendChooseWalletController: BILBaseViewController {
     let chooseWalletSegue = "BILSendChooseWalletSegue"
     let confirmSegue = "BILChooseWalletToConfirmSegue"
-    
+	@IBOutlet weak var nextButton: BILGradientButton!
+	
     var sendModel: BILSendModel?
     var wallet: WalletModel? {
         didSet {
@@ -30,6 +31,12 @@ class BILSendChooseWalletController: BILBaseViewController {
         // Do any additional setup after loading the view.
         wallet = BILWalletManager.shared.wallets.first
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Choose wallet".bil_ui_localized
+		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

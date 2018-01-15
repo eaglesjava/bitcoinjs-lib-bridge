@@ -24,6 +24,11 @@ class BILAboutUsViewController: BILBaseViewController {
             versionLabel.text = version
         }
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "About us".bil_ui_localized
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -24,23 +24,30 @@ class BILCreateWalletSuccessController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        titleLabel.text = "\(createWalletType.titleString().capitalized)\(String.newWallet_create_wallet)"
-        resultTitleLabel.text = "\(createWalletType.titleString().capitalized)\(String.newWallet_createSuccess)"
-        switch createWalletType {
-        case .new:
-            msgLabel.text = .newWallet_createSuccess_new
-        case .recover:
-            msgLabel.text = .newWallet_createSuccess_recover
-            backupButton.isHidden = true
-            backupLaterButton.isHidden = true
-            okButton.isHidden = false
-        case .resetPassword:
-            msgLabel.text = .newWallet_createSuccess_reset
-            backupButton.isHidden = true
-            backupLaterButton.isHidden = true
-            okButton.isHidden = false
-        }
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		titleLabel.text = "\(createWalletType.titleString().capitalized)\(String.newWallet_create_wallet)"
+		resultTitleLabel.text = "\(createWalletType.titleString().capitalized)\(String.newWallet_createSuccess)"
+		switch createWalletType {
+		case .new:
+			msgLabel.text = .newWallet_createSuccess_new
+		case .recover:
+			msgLabel.text = .newWallet_createSuccess_recover
+			backupButton.isHidden = true
+			backupLaterButton.isHidden = true
+			okButton.isHidden = false
+		case .resetPassword:
+			msgLabel.text = .newWallet_createSuccess_reset
+			backupButton.isHidden = true
+			backupLaterButton.isHidden = true
+			okButton.isHidden = false
+		}
+		backupButton.setTitle("Back up wallet".bil_ui_localized, for: .normal)
+		backupLaterButton.setTitle("Back up later".bil_ui_localized, for: .normal)
+		okButton.setTitle("Confirm".bil_ui_localized, for: .normal)
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -12,6 +12,9 @@ import CryptoSwift
 
 class BILBackupWalletMnemonicController: BILBaseViewController {
 
+	@IBOutlet weak var secureLabel: UILabel!
+	@IBOutlet weak var snapshotTipLabel: UILabel!
+	@IBOutlet weak var nextButton: BILGradientButton!
 	@IBOutlet weak var mnemonicView: BILMnemonicView!
 	var wallet: WalletModel?
 	var mnemonicHash: String? {
@@ -33,6 +36,14 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 		mnemonicView.emptyTitle = .backupWallet_mnemonic_emptyTitle
         NotificationCenter.default.addObserver(self, selector: #selector(showAlertForSnapshot), name: .UIApplicationUserDidTakeScreenshot, object: nil)
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Save words".bil_ui_localized
+		secureLabel.text = "Mnemonic tip".bil_ui_localized
+		snapshotTipLabel.text = "Snapshot tip".bil_ui_localized
+		nextButton.setTitle("I have saved them orderly".bil_ui_localized, for: .normal)
+	}
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIApplicationUserDidTakeScreenshot, object: nil)

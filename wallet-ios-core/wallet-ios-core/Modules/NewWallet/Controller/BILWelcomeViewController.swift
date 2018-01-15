@@ -11,6 +11,7 @@ import UIKit
 class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
 
 	@IBOutlet weak var newWalletButton: BILGradientButton!
+	@IBOutlet weak var importWalletButton: UIButton!
 	@IBOutlet weak var guideScrollView: UIScrollView!
 	@IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var phoneImageViewBottomSpace: NSLayoutConstraint!
@@ -29,6 +30,12 @@ class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
         guideScrollView.addSubview(contactView)
 		guideViews.append(contentsOf: [allInOneView, keyView, contactView])
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		newWalletButton.setTitle("Create wallet".bil_ui_localized, for: .normal)
+		newWalletButton.setTitle("Import wallet".bil_ui_localized, for: .normal)
+	}
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()

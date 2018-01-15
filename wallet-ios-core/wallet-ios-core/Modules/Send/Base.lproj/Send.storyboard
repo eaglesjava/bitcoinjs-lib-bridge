@@ -70,6 +70,7 @@
                                     <constraint firstItem="zdY-hz-j0J" firstAttribute="leading" secondItem="UXO-wd-COs" secondAttribute="trailing" constant="8" id="Quj-UV-BRt"/>
                                     <constraint firstItem="UXO-wd-COs" firstAttribute="top" secondItem="zYG-PX-UBw" secondAttribute="top" id="Yyy-Hn-wvh"/>
                                     <constraint firstAttribute="bottom" secondItem="psK-vY-Miv" secondAttribute="bottom" id="g1b-1p-6nH"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zdY-hz-j0J" secondAttribute="trailing" constant="20" symbolic="YES" id="oM4-1Y-rvS"/>
                                     <constraint firstItem="psK-vY-Miv" firstAttribute="top" secondItem="zYG-PX-UBw" secondAttribute="top" id="z1t-ob-gPa"/>
                                 </constraints>
                             </view>
@@ -165,6 +166,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addressInputView" destination="Wgi-wN-8Lj" id="A0d-8R-hrq"/>
+                        <outlet property="nextButton" destination="R8m-SG-IX7" id="hLn-KT-RS9"/>
+                        <outlet property="scanItem" destination="jOK-o3-08X" id="InU-Rg-O3W"/>
                         <segue destination="jHS-Ph-MGA" kind="show" identifier="BILSendToScanResult" id="Am0-0V-zae"/>
                         <segue destination="UGK-9K-l5J" kind="show" identifier="BILAddressToAmountSegue" id="bBg-iP-77h"/>
                     </connections>
@@ -246,6 +249,7 @@
                             <constraint firstItem="jUa-cr-pb8" firstAttribute="leading" secondItem="glj-9L-kHX" secondAttribute="trailing" constant="20" id="4O5-6X-DiW"/>
                             <constraint firstItem="AZE-8B-09r" firstAttribute="top" secondItem="glj-9L-kHX" secondAttribute="bottom" constant="14" id="AUH-to-HKR"/>
                             <constraint firstItem="AZE-8B-09r" firstAttribute="leading" secondItem="glj-9L-kHX" secondAttribute="leading" constant="3" id="LWK-HY-UNJ"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AZE-8B-09r" secondAttribute="trailing" constant="20" symbolic="YES" id="OiZ-Mo-gQy"/>
                             <constraint firstItem="bnC-I7-ml0" firstAttribute="top" secondItem="AZE-8B-09r" secondAttribute="bottom" constant="30" id="Rh9-NX-mlY"/>
                             <constraint firstItem="glj-9L-kHX" firstAttribute="leading" secondItem="vAK-Z2-Y1X" secondAttribute="leading" constant="25" id="Tzv-ET-jiZ"/>
                             <constraint firstItem="vAK-Z2-Y1X" firstAttribute="trailing" secondItem="bnC-I7-ml0" secondAttribute="trailing" constant="25" id="ULM-AD-5mL"/>
@@ -261,10 +265,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="扫描结果" largeTitleDisplayMode="always" id="UYV-Bh-eJo"/>
                     <connections>
+                        <outlet property="addreddTitleLabel" destination="H0V-Re-jp2" id="9ag-W3-Anj"/>
                         <outlet property="addressLabel" destination="nB8-vV-4XD" id="hqa-NZ-olC"/>
                         <outlet property="amountTextField" destination="glj-9L-kHX" id="SK2-pH-piz"/>
                         <outlet property="cnyLabel" destination="AZE-8B-09r" id="36K-zT-xBd"/>
                         <outlet property="coinNameLabel" destination="jUa-cr-pb8" id="cYX-LT-BF3"/>
+                        <outlet property="nextButton" destination="ohd-e8-95F" id="kPd-ZW-DoB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMb-nG-JlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -342,7 +348,9 @@
                         <outlet property="amountTextField" destination="UEb-zw-ief" id="xtg-k6-Phc"/>
                         <outlet property="cnyLabel" destination="ood-C6-emK" id="eff-WW-1z4"/>
                         <outlet property="coinNameLabel" destination="AeR-cH-OoK" id="uCB-eJ-A9g"/>
+                        <outlet property="nextButton" destination="7dV-Wt-9E5" id="ym6-WF-Z8Z"/>
                         <outlet property="nextButtonBottomSpace" destination="Wjp-TN-niL" id="NRU-1S-oll"/>
+                        <outlet property="sendAllItem" destination="yYV-Yz-7JL" id="zhp-Ot-qeH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vc6-da-d2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -390,6 +398,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="选择钱包" largeTitleDisplayMode="never" id="3w2-Ub-f5o"/>
                     <connections>
+                        <outlet property="nextButton" destination="jrl-VK-cpH" id="im6-v0-epM"/>
                         <segue destination="OMj-P2-5SR" kind="show" identifier="BILChooseWalletToConfirmSegue" id="wqX-WW-msH"/>
                     </connections>
                 </viewController>
@@ -657,12 +666,17 @@
                     <navigationItem key="navigationItem" title="确认" id="Pjz-b4-hnz"/>
                     <connections>
                         <outlet property="addressLabel" destination="3oK-wN-dDO" id="to3-F1-mrc"/>
+                        <outlet property="addressTitleLabel" destination="T3Y-an-Yus" id="vf2-gd-6cQ"/>
                         <outlet property="amountLabel" destination="Erz-zk-b10" id="3dw-UK-BRG"/>
+                        <outlet property="amountTitleLabel" destination="EJd-yd-ypz" id="ZdK-IQ-iny"/>
                         <outlet property="feeSlider" destination="MUh-ay-4Fk" id="KhV-0B-nBa"/>
                         <outlet property="feeTipeLabel" destination="k7b-f4-uH3" id="gNg-Gp-kzf"/>
+                        <outlet property="feeTitleLabel" destination="lzV-m8-TsC" id="Nft-HY-FLG"/>
+                        <outlet property="nextButton" destination="Fio-ZW-1aj" id="dnL-xe-anQ"/>
                         <outlet property="remarkInputView" destination="2XN-FN-VbS" id="81r-Md-HGD"/>
                         <outlet property="timeTipLabel" destination="PHo-oD-r3P" id="khi-Sm-cCH"/>
                         <outlet property="walletIDLabel" destination="k3E-gX-6yP" id="GQd-8b-30l"/>
+                        <outlet property="walletTitleLabel" destination="lcc-2b-hNg" id="KxV-JS-VuS"/>
                         <segue destination="gQ4-lN-Jcy" kind="presentation" identifier="BILSendConfirmToResultSegue" id="EbY-my-Ag0"/>
                     </connections>
                 </viewController>
@@ -751,7 +765,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6nF-hb-Mn0">
                                 <rect key="frame" x="251" y="28" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="CAd-Sy-UAa"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="CAd-Sy-UAa"/>
                                     <constraint firstAttribute="height" constant="44" id="iQo-jI-1bq"/>
                                 </constraints>
                                 <state key="normal" title="完成">
@@ -808,6 +822,8 @@
                         <outlet property="amountLabel" destination="mxM-WT-G4P" id="Rg5-ub-vCV"/>
                         <outlet property="blockchainButton" destination="WaO-ha-tsz" id="LXk-Si-tZe"/>
                         <outlet property="contactRecommendLabel" destination="0g2-RI-9zC" id="3bQ-jg-XsO"/>
+                        <outlet property="doneButton" destination="6nF-hb-Mn0" id="5Ag-0l-q2x"/>
+                        <outlet property="resultLabel" destination="GcY-Ih-Dbp" id="jPW-C8-f8i"/>
                         <outlet property="txHashLabel" destination="quC-Gd-rV2" id="bZC-ag-z4C"/>
                     </connections>
                 </viewController>
@@ -968,6 +984,6 @@
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wL4-ft-O7m"/>
+        <segue reference="OJD-0X-kpj"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -28,20 +28,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	
 	weak var wallet: WalletModel? {
 		didSet {
-            guard let w = wallet else { return }
-            transactions.removeAll()
-            transactions.append(contentsOf: w.btc_transactionArray)
-            w.getBalanceFromServer(success: { (wallet) in
-                var frame = self.tableView.tableHeaderView!.frame
-                frame.size.height = w.btcUnconfirmBalance == 0 ? 113 : 201
-                self.tableView.tableHeaderView?.frame = frame
-                self.balanceLabel.text = w.btc_balanceString
-                self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + " BTC "
-                self.currencyLabel.btcValue = Double(w.btc_balanceString)
-            }) { (msg, code) in
-                debugPrint(msg)
-            }
-            reloadData()
+			didSetWallet()
 		}
 	}
 	
@@ -61,8 +48,28 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         
         languageDidChanged()
 	}
+	
+	func didSetWallet() {
+		guard let w = wallet else { return }
+		transactions.removeAll()
+		transactions.append(contentsOf: w.btc_transactionArray)
+		w.getBalanceFromServer(success: { (wallet) in
+			var frame = self.tableView.tableHeaderView!.frame
+			frame.size.height = w.btcUnconfirmBalance == 0 ? 113 : 201
+			let headerView = self.tableView.tableHeaderView
+			headerView?.frame = frame
+			self.tableView.tableHeaderView = headerView
+			self.balanceLabel.text = w.btc_balanceString
+			self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + " BTC "
+			self.currencyLabel.btcValue = Double(w.btc_balanceString)
+		}) { (msg, code) in
+			debugPrint(msg)
+		}
+		reloadData()
+	}
     
     override func languageDidChanged() {
+		super.languageDidChanged()
         unconfirmLabel.text = "Unconfirmed".bil_ui_localized
     }
     
@@ -81,7 +88,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     func loadEnd() {
         self.isLoading = false
         self.isLoadingMore = false
-        self.tableView.reloadData()
+        didSetWallet()
     }
     
     func loadTransactionHistory() {

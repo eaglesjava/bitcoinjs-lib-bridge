@@ -156,7 +156,10 @@
                         <outlet property="backupButton" destination="M8I-VI-SFJ" id="cQQ-VT-eaR"/>
                         <outlet property="buttonBottomSpace" destination="P4d-Ta-fZc" id="dV9-id-bmG"/>
                         <outlet property="dateLabel" destination="359-rW-M42" id="bKe-uX-n5K"/>
+                        <outlet property="dateTitleLabel" destination="hal-wb-t1D" id="keE-wh-FlZ"/>
+                        <outlet property="deleteButton" destination="m9E-N3-fyw" id="yq7-Qa-lCY"/>
                         <outlet property="idLabel" destination="Zcu-Bh-rZz" id="VPX-3N-qH6"/>
+                        <outlet property="idTitleLabel" destination="aWP-ji-LN2" id="zZh-z7-eMN"/>
                         <outlet property="qrImageView" destination="ha7-lL-iwI" id="1mq-m3-RY6"/>
                         <outlet property="walletAddressButton" destination="cRb-iU-ttO" id="75u-94-ObA"/>
                     </connections>
@@ -629,6 +632,8 @@ EOmSseWMhUlEA
                     <navigationItem key="navigationItem" title="钱包地址" largeTitleDisplayMode="never" id="1ew-17-gnL"/>
                     <connections>
                         <outlet property="idLabel" destination="EF6-td-NI9" id="GUI-qm-v3i"/>
+                        <outlet property="idTitleLabel" destination="3Nt-x4-Uvf" id="nDa-Zb-YnC"/>
+                        <outlet property="scanButton" destination="Kb1-BY-mIR" id="gNW-pu-IZm"/>
                         <outlet property="tableView" destination="eQC-ML-jrg" id="6QH-FO-pUN"/>
                     </connections>
                 </viewController>
@@ -831,6 +836,6 @@ EOmSseWMhUlEA
         <image name="logo" width="165" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WfD-od-GeW"/>
+        <segue reference="ibQ-sv-EQr"/>
     </inferredMetricsTieBreakers>
 </document>

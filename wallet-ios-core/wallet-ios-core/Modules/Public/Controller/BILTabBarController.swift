@@ -22,7 +22,12 @@ class BILTabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = UIColor(white: 1.0, alpha: 0.3)
         
         languageDidChanged()
-    }
+		NotificationCenter.default.addObserver(self, selector: #selector(languageDidChanged), name: .languageDidChanged, object: nil)
+	}
+	
+	deinit {
+		NotificationCenter.default.removeObserver(self, name: .languageDidChanged, object: nil)
+	}
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,6 +35,7 @@ class BILTabBarController: UITabBarController {
     }
     
     override func languageDidChanged() {
+		super.languageDidChanged()
         guard let items = tabBar.items else { return }
         let titles = ["Assets".bil_ui_localized, "Contacts".bil_ui_localized, "Receive".bil_ui_localized, "Send".bil_ui_localized, "Me".bil_ui_localized]
         for i in 0..<items.count {

@@ -31,7 +31,12 @@ class BILBaseViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         languageDidChanged()
+		NotificationCenter.default.addObserver(self, selector: #selector(languageDidChanged), name: .languageDidChanged, object: nil)
     }
+	
+	deinit {
+		NotificationCenter.default.removeObserver(self, name: .languageDidChanged, object: nil)
+	}
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

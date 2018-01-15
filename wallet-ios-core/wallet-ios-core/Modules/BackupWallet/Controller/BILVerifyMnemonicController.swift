@@ -12,6 +12,9 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
 
 	@IBOutlet weak var randomMnemonicView: BILMnemonicView!
 	@IBOutlet weak var verifyMnemonicView: BILMnemonicView!
+	@IBOutlet weak var tipLabel: UILabel!
+	@IBOutlet weak var clearItem: UIBarButtonItem!
+	@IBOutlet weak var confirmButton: BILGradientButton!
 	
 	var wallet: WalletModel?
 	
@@ -35,6 +38,14 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
 		verifyMnemonicView.emptyTitle = .backupWallet_verify_emptyTitle
         verifyMnemonicView.collectionView.allowsSelection = false
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Verify words".bil_ui_localized
+		tipLabel.text = "Click on the mnemonic words orderly to confirm whether your backup is right.".bil_ui_localized
+		clearItem.title = "Clear".bil_ui_localized
+		confirmButton.setTitle("Confirm".bil_ui_localized, for: .normal)
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

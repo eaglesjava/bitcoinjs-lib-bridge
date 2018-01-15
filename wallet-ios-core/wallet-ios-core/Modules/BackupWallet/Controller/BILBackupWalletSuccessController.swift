@@ -10,12 +10,24 @@ import UIKit
 
 class BILBackupWalletSuccessController: BILBaseViewController {
 
-    override func viewDidLoad() {
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var resultLabel: UILabel!
+	@IBOutlet weak var tipLabel: UILabel!
+	@IBOutlet weak var doneButton: BILGradientButton!
+	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		titleLabel.text = "Back up wallet".bil_ui_localized
+		resultLabel.text = "Succeed to back up".bil_ui_localized
+		tipLabel.text = "Please keep your mnemonic words carefully".bil_ui_localized
+		doneButton.setTitle("Complete".bil_ui_localized, for: .normal)
+	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

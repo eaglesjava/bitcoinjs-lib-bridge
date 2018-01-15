@@ -34,6 +34,7 @@ class BILWalletCell: UITableViewCell {
     }
     
     override func languageDidChanged() {
+		super.languageDidChanged()
         needBackupButton.setTitle("Back up".bil_ui_localized, for: .normal)
     }
 

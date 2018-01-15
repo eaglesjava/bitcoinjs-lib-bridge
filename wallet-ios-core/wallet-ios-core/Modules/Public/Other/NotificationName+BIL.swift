@@ -12,6 +12,7 @@ extension Notification.Name {
 	static let walletDidChanged = NSNotification.Name("walletDidChanged")
     static let walletCountDidChanged = NSNotification.Name("walletCountDidChanged")
     static let balanceDidChanged = NSNotification.Name("balanceDidChanged")
+	static let languageDidChanged = NSNotification.Name("languageDidChanged")
     static let transactionSended = NSNotification.Name("transactionSended")
     static let localUTXODidChanged = NSNotification.Name("localUTXODidChanged")
     static let receivedUnconfirmTransaction = NSNotification.Name("receivedUnconfirmTransaction")

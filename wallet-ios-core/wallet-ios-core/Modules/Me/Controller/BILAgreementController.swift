@@ -23,11 +23,11 @@ class BILAgreementController: BILBaseViewController {
 
         // Do any additional setup after loading the view.
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-//        textView.scrollRectToVisible(CGRect.zero, animated: false)
-    }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Usage terms".bil_ui_localized
+	}
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

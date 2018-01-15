@@ -299,35 +299,21 @@
 		CC6407AD2001FA6C0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Receive.storyboard; sourceTree = "<group>"; };
 		CC6407B42001FB1B0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ReceiveC.strings; sourceTree = "<group>"; };
 		CC6407B62001FB1C0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ReceiveC.strings"; sourceTree = "<group>"; };
-		CC6407B8200206D30068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Send.strings"; sourceTree = "<group>"; };
-		CC6407BA200206D80068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Send.strings; sourceTree = "<group>"; };
 		CC6407BE200207310068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SendC.strings; sourceTree = "<group>"; };
 		CC6407C0200207330068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SendC.strings"; sourceTree = "<group>"; };
 		CC6407C2200212A60068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Me.storyboard; sourceTree = "<group>"; };
-		CC6407C5200212A80068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Me.strings; sourceTree = "<group>"; };
-		CC6407C7200212AC0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Me.strings"; sourceTree = "<group>"; };
 		CC6407CB200213EC0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MeC.strings; sourceTree = "<group>"; };
 		CC6407CD200214060068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MeC.strings"; sourceTree = "<group>"; };
 		CC6407CF200224400068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewWallet.storyboard; sourceTree = "<group>"; };
-		CC6407D2200224430068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewWallet.strings; sourceTree = "<group>"; };
-		CC6407D4200224450068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NewWallet.strings"; sourceTree = "<group>"; };
 		CC6407D8200229020068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewWalletC.strings; sourceTree = "<group>"; };
 		CC6407DA200229030068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NewWalletC.strings"; sourceTree = "<group>"; };
 		CC6407DC2002315A0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILSupportedCoinsPopupController.xib; sourceTree = "<group>"; };
 		CC6407DF200231670068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILSupportedCoinsPopupController.strings; sourceTree = "<group>"; };
 		CC6407E1200231690068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILSupportedCoinsPopupController.strings"; sourceTree = "<group>"; };
 		CC6407E3200231830068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILAllInOneView.xib; sourceTree = "<group>"; };
-		CC6407E6200231880068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILAllInOneView.strings; sourceTree = "<group>"; };
-		CC6407E82002318A0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILAllInOneView.strings"; sourceTree = "<group>"; };
 		CC6407EA2002318F0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILGuideKeyView.xib; sourceTree = "<group>"; };
-		CC6407ED200231920068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILGuideKeyView.strings; sourceTree = "<group>"; };
-		CC6407EF200231930068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILGuideKeyView.strings"; sourceTree = "<group>"; };
 		CC6407F1200231970068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BILGuideContactView.xib; sourceTree = "<group>"; };
-		CC6407F4200231990068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BILGuideContactView.strings; sourceTree = "<group>"; };
-		CC6407F62002319A0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BILGuideContactView.strings"; sourceTree = "<group>"; };
 		CC6407F8200231B80068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BackupWallet.storyboard; sourceTree = "<group>"; };
-		CC6407FB200231BA0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BackupWallet.strings; sourceTree = "<group>"; };
-		CC6407FD200231BC0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BackupWallet.strings"; sourceTree = "<group>"; };
 		CC640803200231D20068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BackupWalletC.strings"; sourceTree = "<group>"; };
 		CC6408052002357E0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Contact.storyboard; sourceTree = "<group>"; };
 		CC64080D200235CD0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BackupWalletC.strings; sourceTree = "<group>"; };
@@ -1593,8 +1579,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				BA12AC4D1FEA67BC00812F38 /* Base */,
-				CC6407B8200206D30068153A /* zh-Hans */,
-				CC6407BA200206D80068153A /* en */,
 			);
 			name = Send.storyboard;
 			sourceTree = "<group>";
@@ -1666,8 +1650,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC6407C2200212A60068153A /* Base */,
-				CC6407C5200212A80068153A /* en */,
-				CC6407C7200212AC0068153A /* zh-Hans */,
 			);
 			name = Me.storyboard;
 			sourceTree = "<group>";
@@ -1685,8 +1667,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC6407CF200224400068153A /* Base */,
-				CC6407D2200224430068153A /* en */,
-				CC6407D4200224450068153A /* zh-Hans */,
 			);
 			name = NewWallet.storyboard;
 			sourceTree = "<group>";
@@ -1714,8 +1694,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC6407E3200231830068153A /* Base */,
-				CC6407E6200231880068153A /* en */,
-				CC6407E82002318A0068153A /* zh-Hans */,
 			);
 			name = BILAllInOneView.xib;
 			sourceTree = "<group>";
@@ -1724,8 +1702,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC6407EA2002318F0068153A /* Base */,
-				CC6407ED200231920068153A /* en */,
-				CC6407EF200231930068153A /* zh-Hans */,
 			);
 			name = BILGuideKeyView.xib;
 			sourceTree = "<group>";
@@ -1734,8 +1710,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC6407F1200231970068153A /* Base */,
-				CC6407F4200231990068153A /* en */,
-				CC6407F62002319A0068153A /* zh-Hans */,
 			);
 			name = BILGuideContactView.xib;
 			sourceTree = "<group>";
@@ -1744,8 +1718,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CC6407F8200231B80068153A /* Base */,
-				CC6407FB200231BA0068153A /* en */,
-				CC6407FD200231BC0068153A /* zh-Hans */,
 			);
 			name = BackupWallet.storyboard;
 			sourceTree = "<group>";

@@ -9,8 +9,7 @@
 import UIKit
 
 extension UIViewController {
-    @objc
-    func languageDidChanged() {
+    @objc func languageDidChanged() {
         view.languageDidChanged()
     }
 }

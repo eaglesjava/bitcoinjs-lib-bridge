@@ -53,7 +53,7 @@ class BILContactEditController: BILLightBlueBaseController {
         updateContact()
     }
     @IBAction func deleteAction(_ sender: Any) {
-        let alert = UIAlertController(title: "Tip".bil_ui_localized, message: "确定要删除该联系人吗？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Tip".bil_ui_localized, message: "Are you sure to delete this contact?".bil_ui_localized, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Delete".bil_ui_localized, style: .destructive, handler: { (action) in
             self.deleteContact()
@@ -109,7 +109,7 @@ class BILContactEditController: BILLightBlueBaseController {
         }
         
         guard name != contact?.name || remarkInputView.textField.text != contact?.remark else {
-            showTipAlert(msg: "您没有做任何修改")
+            showTipAlert(msg: "Nothing has been changed".bil_ui_localized)
             return
         }
         
@@ -123,7 +123,7 @@ class BILContactEditController: BILLightBlueBaseController {
         let remark = remarkInputView.textField.text ?? ""
         bil_showLoading(status: nil)
         contact?.updateToServer(name: name, remark: remark, success: { (contact) in
-            self.bil_showSuccess(status: "更新成功")
+            self.bil_showSuccess(status: "Updated successfully".bil_ui_localized)
             self.bil_dismissHUD(delay: 1.5, complete: {
                 self.navigationController?.popViewController(animated: true)
             })

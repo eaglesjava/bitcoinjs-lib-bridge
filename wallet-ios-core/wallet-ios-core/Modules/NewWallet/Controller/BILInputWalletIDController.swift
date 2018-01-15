@@ -13,7 +13,9 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
     
     @IBOutlet weak var walletNameTextField: ASKPlaceHolderColorTextField!
     @IBOutlet weak var walletNameInputView: BILInputView!
-    
+	@IBOutlet weak var nextButton: BILGradientButton!
+	@IBOutlet weak var cancelItem: UIBarButtonItem?
+	
     var createWalletType: CreateWalletType = .new
     var mnemonic: String? {
         didSet {
@@ -38,6 +40,16 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
             walletNameTextField.textColor = UIColor.bil_white_60_color
         }
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Input wallet ID".bil_ui_localized
+		walletNameInputView.updateTitleString("Wallet ID".bil_ui_localized)
+		walletNameInputView.tipLabel?.text = "Wallet ID tip".bil_ui_localized
+		walletNameTextField.placeholder = "6-20 characters, begin with letter.".bil_ui_localized
+		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
+		cancelItem?.title = "Cancel".bil_ui_localized
+	}
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

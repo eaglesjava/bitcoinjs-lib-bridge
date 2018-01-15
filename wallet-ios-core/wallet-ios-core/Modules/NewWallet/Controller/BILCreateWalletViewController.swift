@@ -42,7 +42,8 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 	@IBOutlet weak var passwordInputView: BILInputView!
 	@IBOutlet weak var confirmPasswordInputView: BILInputView!
 	
-    @IBOutlet weak var agreeLabel: UILabel!
+	@IBOutlet weak var tipLabel: UILabel!
+	@IBOutlet weak var agreeLabel: UILabel!
     
     var createWalletType: CreateWalletType = .new
 	var mnemonic: String? {
@@ -58,14 +59,27 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
 		let titleString = createWalletType.titleString()
 		title = "\(titleString.capitalized)\(String.newWallet_create_wallet)"
-        let to = BILSettingManager.currentLanguage == .en ? " to " : ""
+		let to = BILSettingManager.currentLanguage == .en ? " to " : ""
 		createButton.setTitle("\(String.newWallet_create_begin)\(to)\(titleString)", for: .normal)
-        
-        let font = BILSettingManager.currentLanguage == .en ? UIFont.italicSystemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14, weight: .medium)
-        agreenmentButton.setAttributedTitle(NSAttributedString(string: .newWallet_create_agreementTitle, attributes: [.font: font, .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
-    }
+		
+		let font = BILSettingManager.currentLanguage == .en ? UIFont.italicSystemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14, weight: .medium)
+		agreenmentButton.setAttributedTitle(NSAttributedString(string: .newWallet_create_agreementTitle, attributes: [.font: font, .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
+		
+		passwordInputView.updateTitleString("Create wallet password".bil_ui_localized)
+		passwordInputView.textField.placeholder = "Please input 6-20 characters".bil_ui_localized
+		
+		confirmPasswordInputView.updateTitleString("Confirm the wallet password".bil_ui_localized)
+		confirmPasswordInputView.textField.placeholder = "Please input".bil_ui_localized
+		tipLabel.text = "Password tip".bil_ui_localized
+		createButton.setTitle("Complete".bil_ui_localized, for: .normal)
+		agreeLabel.text = "Complete means agreed".bil_ui_localized
+	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(true)

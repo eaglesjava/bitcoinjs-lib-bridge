@@ -70,6 +70,11 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
 
         // Do any additional setup after loading the view.
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "General".bil_ui_localized
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

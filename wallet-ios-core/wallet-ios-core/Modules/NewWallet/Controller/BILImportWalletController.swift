@@ -14,17 +14,24 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 	@IBOutlet weak var textView: UITextView!
 	@IBOutlet weak var mnemonicView: BILMnemonicView!
 	
-	let emptyTitle = String.newWallet_import_emptyTitle
 	let sugueID = "BILMnemonicToWalletIDSegue"
     let resetSegueID = "BILMnemonicToResetPasswordSegue"
+	@IBOutlet weak var tipLabel: UILabel!
+	@IBOutlet weak var nextButton: BILGradientButton!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		self.mnemonicView.emptyTitle = emptyTitle
-//		textView.text = "seed sock milk update focus rotate barely fade car face mechanic mercy"
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Input mnemonic words".bil_ui_localized
+		tipLabel.text = "Supports BIP39 mnemonic words only".bil_ui_localized
+		self.mnemonicView.emptyTitle = .newWallet_import_emptyTitle
+		nextButton.setTitle("Next", for: .normal)
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -140,7 +147,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 		guard let text = textView.text, text.count == 0 else {
 			return
 		}
-		mnemonicView.emptyTitle = emptyTitle
+		mnemonicView.emptyTitle = .newWallet_import_emptyTitle
         resetMnemonicViewBorderColor()
 	}
 	

@@ -11,6 +11,11 @@ import UIKit
 class BILGuideContactView: BILGuideBaseView {
 
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		titleLabel.text = "Send coins by contacts".bil_ui_localized
+	}
     
     override func adjust(frame: CGRect, index: Int) {
         super.adjust(frame: frame, index: index)

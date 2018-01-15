@@ -14,8 +14,10 @@ class BILScanQRCodeResultController: BILBaseViewController {
     @IBOutlet weak var coinNameLabel: UILabel!
     @IBOutlet weak var cnyLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    
-    var sendModel: BILSendModel?
+	@IBOutlet weak var addreddTitleLabel: UILabel!
+	
+	@IBOutlet weak var nextButton: BILGradientButton!
+	var sendModel: BILSendModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,13 @@ class BILScanQRCodeResultController: BILBaseViewController {
         coinNameLabel.text = sendModel?.coinType.name
         amountTextField.text = sendModel?.amount
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Scan results".bil_ui_localized
+		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
+		addreddTitleLabel.text = "Address of receiver".bil_ui_localized
+	}
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

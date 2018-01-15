@@ -19,7 +19,9 @@ class BILSendResultController: BILBaseViewController {
     @IBOutlet weak var blockchainButton: UIButton!
     @IBOutlet weak var contactRecommendLabel: UILabel!
     
-    var sendModel: BILSendModel?
+	@IBOutlet weak var resultLabel: UILabel!
+	@IBOutlet weak var doneButton: UIButton!
+	var sendModel: BILSendModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +38,17 @@ class BILSendResultController: BILBaseViewController {
             addContactButton.isHidden = model.isContactAddress
             contactRecommendLabel.isHidden = model.isContactAddress
         }
-        
-        blockchainButton.setAttributedTitle(NSAttributedString(string: .homeTxDetailBlockchain, attributes: [.font: UIFont.systemFont(ofSize: 15), .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		blockchainButton.setAttributedTitle(NSAttributedString(string: .homeTxDetailBlockchain, attributes: [.font: UIFont.systemFont(ofSize: 15), .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)
+		doneButton.setTitle("Complete".bil_ui_localized, for: .normal)
+		resultLabel.text = "Send successfully".bil_ui_localized
+		contactRecommendLabel.text = "Add the address as the frequent contact for the next transaction".bil_ui_localized
+		addContactButton.setTitle("Quickly create contacts".bil_ui_localized, for: .normal)
+	}
+	
     @IBAction func addContactAction(_ sender: Any) {
         if let tx = sendModel?.transaction {
             showAddContactAlert(address: tx.address)

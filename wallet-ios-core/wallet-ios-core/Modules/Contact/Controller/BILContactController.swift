@@ -51,6 +51,7 @@ class BILContactController: BILLightBlueBaseController {
         emptyLabel.text = "No contacts".bil_ui_localized
         newItem.title = "Add".bil_ui_localized
         newButton.setTitle("Add now".bil_ui_localized, for: .normal)
+		tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {

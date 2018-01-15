@@ -47,7 +47,7 @@
         <attribute name="lastAddressIndex" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mainExtPublicKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mnemonicHash" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="needLoadServer" optional="YES" transient="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="needLoadServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="seedHash" attributeType="String" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="addresses" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BTCWalletAddressModel" inverseName="wallet" inverseEntity="BTCWalletAddressModel" syncable="YES"/>

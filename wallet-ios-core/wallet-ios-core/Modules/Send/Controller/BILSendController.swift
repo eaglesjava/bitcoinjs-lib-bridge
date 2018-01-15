@@ -22,11 +22,21 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     var sendModel: BILSendModel?
     var contact: ContactModel?
     
-    override func viewDidLoad() {
+	@IBOutlet weak var scanItem: UIBarButtonItem!
+	@IBOutlet weak var nextButton: BILGradientButton!
+	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Send".bil_ui_localized
+		scanItem.title = "Scan".bil_ui_localized
+		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
+		addressInputView.textField.placeholder = "Receiver".bil_ui_localized
+	}
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

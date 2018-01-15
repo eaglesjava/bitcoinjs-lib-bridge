@@ -11,6 +11,11 @@ import UIKit
 class BILGuideKeyView: BILGuideBaseView {
 
     @IBOutlet weak var keyImageViewBottomSpace: NSLayoutConstraint!
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		titleLabel.text = "Own your private keys".bil_ui_localized
+	}
     
     override func adjust(frame: CGRect, index: Int) {
         super.adjust(frame: frame, index: index)

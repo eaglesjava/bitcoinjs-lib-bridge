@@ -46,10 +46,15 @@ class BILSendConfirmController: BILBaseViewController {
     @IBOutlet weak var timeTipLabel: UILabel!
     @IBOutlet weak var feeTipeLabel: UILabel!
     
-    @IBOutlet weak var feeSlider: UISlider!
+	@IBOutlet weak var amountTitleLabel: UILabel!
+	@IBOutlet weak var addressTitleLabel: UILabel!
+	@IBOutlet weak var feeTitleLabel: UILabel!
+	@IBOutlet weak var walletTitleLabel: UILabel!
+	@IBOutlet weak var feeSlider: UISlider!
     
     @IBOutlet weak var remarkInputView: BILInputView!
-    
+	@IBOutlet weak var nextButton: BILGradientButton!
+	
     var sendModel: BILSendModel?
     var txBuilder: BTCTransactionBuilder? {
         didSet {
@@ -75,6 +80,18 @@ class BILSendConfirmController: BILBaseViewController {
         
         loadTransactionBuildConfiguration()
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Confirm".bil_ui_localized
+		addressTitleLabel.text = "Address of receiver".bil_ui_localized
+		amountTitleLabel.text = "Sending amount".bil_ui_localized
+		feeTitleLabel.text = "Service charge".bil_ui_localized
+		walletTitleLabel.text = "Sending wallet".bil_ui_localized
+		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
+		remarkInputView.textField.placeholder = "Within 20 words".bil_ui_localized
+		remarkInputView.title?.text = "Remarks".bil_ui_localized
+	}
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         print(sender.value)
@@ -251,7 +268,6 @@ class BILSendConfirmController: BILBaseViewController {
                 debugPrint(msg)
 				errorHandler(title: .sendConfirmSendFailed, msg: msg)
             })
-            
         }, failure: { (error) in
             errorHandler(msg: error.localizedDescription)
         })

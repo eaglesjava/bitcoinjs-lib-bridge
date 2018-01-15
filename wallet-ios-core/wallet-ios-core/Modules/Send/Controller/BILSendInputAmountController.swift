@@ -17,7 +17,9 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
     @IBOutlet weak var cnyLabel: BILExchangeRateLabel!
     @IBOutlet weak var coinNameLabel: UILabel!
     @IBOutlet weak var nextButtonBottomSpace: NSLayoutConstraint!
-    
+	@IBOutlet weak var sendAllItem: UIBarButtonItem!
+	@IBOutlet weak var nextButton: BILGradientButton!
+	
     var sendModel: BILSendModel?
     
     override func viewDidLoad() {
@@ -30,6 +32,13 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
         coinNameLabel.text = sendModel?.coinType.name
         amountTextField.becomeFirstResponder()
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Send amount".bil_ui_localized
+		sendAllItem.title = "Total balance".bil_ui_localized
+		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
+	}
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
@@ -92,7 +101,7 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard var text = textField.text else { return true }
-        print(text)
+		
         let rangeLocation =  text.index(text.startIndex, offsetBy: range.location)
         if range.length == 0 {
             text.insert(contentsOf: string, at:rangeLocation)
@@ -100,6 +109,10 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
             let upperLocation = text.index(rangeLocation, offsetBy: range.length)
             text.removeSubrange(rangeLocation..<upperLocation)
         }
+		
+		if text.count == 0 {
+			cnyLabel.btcValue = 0
+		}
         
         if text.count > 30 {
             return false

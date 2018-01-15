@@ -51,6 +51,7 @@ class BILReceiveController: BILBaseViewController {
     }
     
     override func languageDidChanged() {
+		super.languageDidChanged()
         title = "Receive".bil_ui_localized
         navigationItem.rightBarButtonItem?.title = "Refresh address".bil_ui_localized
         specificButton.setAttributedTitle(NSAttributedString(string: .receiveSpecificButtonTitle, attributes: [.font: UIFont.systemFont(ofSize: 15), .underlineStyle: NSUnderlineStyle.styleSingle.rawValue, .foregroundColor: UIColor.white]), for: .normal)

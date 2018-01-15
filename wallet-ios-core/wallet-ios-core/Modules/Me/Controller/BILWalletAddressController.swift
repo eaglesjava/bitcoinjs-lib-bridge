@@ -16,7 +16,9 @@ class BILWalletAddressController: BILLightBlueBaseController {
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var addresses = [BTCWalletAddressModel]()
+	@IBOutlet weak var idTitleLabel: UILabel!
+	@IBOutlet weak var scanButton: UIButton!
+	var addresses = [BTCWalletAddressModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,13 @@ class BILWalletAddressController: BILLightBlueBaseController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: .localUTXODidChanged, object: nil)
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Wallet address".bil_ui_localized
+		idTitleLabel.text = "Wallet ID".bil_ui_localized
+		scanButton.setTitle("    Scan address    ".bil_ui_localized, for: .normal)
+	}
     
     @objc
     func localUTXODidChanged(notification: Notification) {

@@ -32,6 +32,7 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
     }
     
     override func languageDidChanged() {
+		super.languageDidChanged()
         title = "Receive amount".bil_ui_localized
     }
     
@@ -86,7 +87,7 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
 	
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard var text = textField.text else { return true }
-        print(text)
+        
         let rangeLocation =  text.index(text.startIndex, offsetBy: range.location)
         if range.length == 0 {
             text.insert(contentsOf: string, at:rangeLocation)
@@ -94,7 +95,10 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
             let upperLocation = text.index(rangeLocation, offsetBy: range.length)
             text.removeSubrange(rangeLocation..<upperLocation)
         }
-        debugPrint("\(text)  \(range)    \(string)")
+		
+		if text.count == 0 {
+			cnyLabel.btcValue = 0
+		}
         
         if text.count > 30 {
             return false

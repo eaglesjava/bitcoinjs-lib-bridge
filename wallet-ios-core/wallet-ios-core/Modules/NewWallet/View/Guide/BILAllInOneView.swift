@@ -13,6 +13,7 @@ class BILAllInOneView: BILGuideBaseView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		backgroundColor = UIColor.clear
+		titleLabel.text = "Digital assets all in one".bil_ui_localized
 	}
 	
 	override func setupItems() {

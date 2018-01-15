@@ -21,10 +21,13 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
 	@IBOutlet weak var idLabel: UILabel!
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var qrImageView: UIImageView!
+	@IBOutlet weak var idTitleLabel: UILabel!
+	@IBOutlet weak var dateTitleLabel: UILabel!
 	
     @IBOutlet weak var backupButton: BILWhiteBorderButton!
     @IBOutlet weak var walletAddressButton: BILWhiteBorderButton!
-    @IBOutlet weak var buttonBottomSpace: NSLayoutConstraint!
+	@IBOutlet weak var deleteButton: UIButton!
+	@IBOutlet weak var buttonBottomSpace: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +40,15 @@ class BILWalletDetailSettingController: BILLightBlueBaseController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: .walletDidChanged, object: nil)
     }
+	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		idTitleLabel.text = "Wallet ID".bil_ui_localized
+		dateTitleLabel.text = "Add time".bil_ui_localized
+		backupButton.setTitle("Back up wallet".bil_ui_localized, for: .normal)
+		walletAddressButton.setTitle("Wallet address".bil_ui_localized, for: .normal)
+		deleteButton.setTitle("Delete wallet".bil_ui_localized, for: .normal)
+	}
     
     @objc
     func refreshUI() {

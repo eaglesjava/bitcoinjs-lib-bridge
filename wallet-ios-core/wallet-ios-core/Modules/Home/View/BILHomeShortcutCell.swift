@@ -19,6 +19,7 @@ class BILHomeShortcutCell: UITableViewCell {
     }
 
     override func languageDidChanged() {
+		super.languageDidChanged()
         contactButton.setTitle("Add contact".bil_ui_localized, for: .normal)
         scanButton.setTitle("Scan".bil_ui_localized, for: .normal)
     }

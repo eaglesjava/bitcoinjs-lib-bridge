@@ -103,6 +103,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mnemonicView" destination="lhT-aq-ezO" id="5ec-VR-F9K"/>
+                        <outlet property="nextButton" destination="qlY-G9-oj8" id="zCn-XC-1MX"/>
+                        <outlet property="secureLabel" destination="hvy-wf-TqK" id="SSr-oX-qLj"/>
+                        <outlet property="snapshotTipLabel" destination="Vvc-4z-9cT" id="Khd-lF-IfP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r0U-AR-7Xy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -182,7 +185,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="clearItem" destination="8pf-tL-nj2" id="oe9-7d-lXb"/>
+                        <outlet property="confirmButton" destination="l7V-Xw-Pbi" id="jSG-AJ-103"/>
                         <outlet property="randomMnemonicView" destination="Jhk-cm-Xns" id="ImU-Dd-xZS"/>
+                        <outlet property="tipLabel" destination="ua5-CA-eV7" id="jUs-tM-CI9"/>
                         <outlet property="verifyMnemonicView" destination="vhh-BX-E5a" id="pVX-Zv-CjF"/>
                         <segue destination="IyX-gE-Y7F" kind="showDetail" identifier="BILBackUpSuccessSugue" action="showViewController:sender:" id="fvx-de-Ubx"/>
                     </connections>
@@ -251,6 +257,12 @@
                         <viewLayoutGuide key="safeArea" id="Bbi-qb-RM5"/>
                     </view>
                     <navigationItem key="navigationItem" title="备份成功" id="qgc-Mh-7ji"/>
+                    <connections>
+                        <outlet property="doneButton" destination="1fa-hr-uEL" id="vsk-z2-a1G"/>
+                        <outlet property="resultLabel" destination="IhF-lJ-FtW" id="n2D-Dt-aZh"/>
+                        <outlet property="tipLabel" destination="eak-mz-PIO" id="H3Q-LL-XAo"/>
+                        <outlet property="titleLabel" destination="5ea-vL-cxT" id="E9m-7F-8Wv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLz-dB-bvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

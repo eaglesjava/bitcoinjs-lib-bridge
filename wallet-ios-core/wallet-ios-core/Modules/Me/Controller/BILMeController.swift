@@ -102,6 +102,12 @@ class BILMeController: BILBaseViewController {
         scrollViewDidScroll(tableView)
     }
 	
+	override func languageDidChanged() {
+		super.languageDidChanged()
+		title = "Me".bil_ui_localized
+		tableView.reloadData()
+	}
+	
 	@objc
 	func walletDidChanged(notification: Notification) {
 		tableView.reloadData()

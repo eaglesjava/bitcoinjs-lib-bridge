@@ -27,6 +27,7 @@ class BILContactDetailController: BILLightBlueBaseController {
     }
     
     override func languageDidChanged() {
+		super.languageDidChanged()
         title = "Contact details".bil_ui_localized
         remarkTitleLabel.text = "Remarks".bil_ui_localized
         guard let c = contact else { return }

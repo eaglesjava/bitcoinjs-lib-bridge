@@ -5,11 +5,13 @@
   Created by 仇弘扬 on 2018/1/12.
   Copyright © 2018年 BitBill. All rights reserved.
 */
+
 "Unconfirmed" = "未确认";
 "Back up" = "马上备份";
 "Add contact" = "添加联系人";
 "Assets" = "资产";
 "Scan" = "扫一扫";
+"Address" = "地址";
 
 "Refresh address" = "刷新地址";
 "Back up wallet now" = "当前钱包未备份，马上备份";
@@ -39,3 +41,66 @@
 "Send" = "发送";
 "Edit contact" = "编辑联系人";
 "Search results" = "搜索结果";
+"Cancel" = "取消";
+"Delete" = "删除";
+"Tip" = "提示";
+"Nothing has been changed" = "您没有做任何修改";
+"Updated successfully" = "更新成功";
+"Are you sure to delete this contact?" = "确定要删除该联系人吗？";
+
+"Receiver" = "接收方";
+"Send amount" = "发送金额";
+"Total balance" = "选择全部余额";
+"Next" = "下一步";
+"Scan results" = "扫描结果";
+"Address of receiver" = "接收方地址";
+"Sending amount" = "发送金额";
+"Fee" = "手续费";
+"Sending wallet" = "发出钱包";
+"Within 20 words" = "20字以内";
+"Complete" = "完成";
+"Send successfully" = "发送成功";
+"Add the address as the frequent contact for the next transaction" = "添加地址为常用联系人可以方便下次交易";
+"Quickly create contacts" = "快速创建联系人";
+
+"Me" = "我";
+"Wallet address" = "钱包地址";
+"General" = "通用";
+"Wallet ID" = "钱包 ID";
+"Usage terms" = "使用条款";
+"    Scan address    " = "    扫描地址    ";
+"Back up wallet" = "备份钱包";
+"Add time" = "添加时间";
+"Delete wallet" = "删除钱包";
+"About us" = "关于我们";
+
+"Input wallet ID" = "输入钱包ID";
+"Confirm the wallet password" = "确认钱包密码";
+"Create wallet" = "创建钱包";
+"Import wallet" = "导入钱包";
+"Create successfully" = "创建成功";
+"Wallet ID tip" = "设定您的钱包ID，它可以关联您的联系人，支持字母、数字和下划线，仅能以字母开头，一旦设定不可修改。";
+"6-20 characters, begin with letter." = "请输入6-20位字符，以字母开头";
+"Create wallet password" = "创建钱包密码";
+"Create success tip" = "钱包创建成功，请在使用前将助记词储存到安全地方做好钱包备份。";
+"Confirm" = "确定";
+"Input mnemonic words" = "输入助记词";
+"Back up later" = "稍后备份";
+"Password tip" = "请牢记您的密码！Bitbill 不存储用户密码，无法提供找回或重置功能";
+"Please input 6-20 characters" = "请输入6-20位字符";
+"Supports BIP39 mnemonic words only" = "仅支持符合 BIP39 标准的助记词";
+"Complete means agreed" = "完成即表示您已同意 ";
+
+"Digital assets all in one" = "数字资产 All in one";
+"Own your private keys" = "私钥掌握在您自己手里";
+"Send coins by contacts" = "添加联系人 一键转账";
+
+"Clear" = "清空";
+"Succeed to back up" = "备份成功";
+"Snapshot tip" = "截图是不安全的，您的图片可能被别的应用使用。请抄写如下助记词，并妥善保存，我们会在下个屏幕上确认！";
+"Please keep your mnemonic words carefully" = "请妥善保管您的助记词";
+"Save words" = "记下助记词";
+"Mnemonic tip" = "请确认您所在的环境是安全隐私的，任何人拿到您的助记词都可以转走您的数字资产！";
+"I have saved them orderly" = "已按顺序记下助记词";
+"Click on the mnemonic words orderly to confirm whether your backup is right." = "按顺序点击助记词，确认您的助记词备份正确";
+"Verify words" = "验证助记词";
