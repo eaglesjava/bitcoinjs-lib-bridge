@@ -34,7 +34,7 @@ class BILWelcomeViewController: BILBaseViewController, UIScrollViewDelegate {
 	override func languageDidChanged() {
 		super.languageDidChanged()
 		newWalletButton.setTitle("Create wallet".bil_ui_localized, for: .normal)
-		newWalletButton.setTitle("Import wallet".bil_ui_localized, for: .normal)
+		importWalletButton.setTitle("Import wallet".bil_ui_localized, for: .normal)
 	}
 	
 	override func viewDidLayoutSubviews() {

@@ -15,6 +15,7 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
     
     @IBOutlet weak var nameInputView: BILInputView!
     @IBOutlet weak var remarkInputView: BILInputView!
+    @IBOutlet weak var addButton: BILWhiteBorderButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class BILSearchWalletIDResultController: BILLightBlueBaseController {
         remarkInputView.updateTitleString("Remarks".bil_ui_localized)
         nameInputView.textField.placeholder = "Please input".bil_ui_localized
         remarkInputView.textField.placeholder = "Please input".bil_ui_localized
+        addButton.setTitle("Add to contact".bil_ui_localized, for: .normal)
     }
 
     override func didReceiveMemoryWarning() {

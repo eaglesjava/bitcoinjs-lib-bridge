@@ -38,6 +38,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="keyImageViewBottomSpace" destination="mqP-lY-FZk" id="u9R-h5-5RD"/>
+                <outlet property="titleLabel" destination="cHs-5w-O8p" id="Yzg-8f-492"/>
             </connections>
             <point key="canvasLocation" x="35.5" y="-109"/>
         </view>

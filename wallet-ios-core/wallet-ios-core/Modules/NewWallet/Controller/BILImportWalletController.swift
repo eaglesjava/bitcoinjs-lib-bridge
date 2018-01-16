@@ -18,7 +18,8 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     let resetSegueID = "BILMnemonicToResetPasswordSegue"
 	@IBOutlet weak var tipLabel: UILabel!
 	@IBOutlet weak var nextButton: BILGradientButton!
-	
+    @IBOutlet weak var cancelItem: UIBarButtonItem?
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,6 +32,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 		tipLabel.text = "Supports BIP39 mnemonic words only".bil_ui_localized
 		self.mnemonicView.emptyTitle = .newWallet_import_emptyTitle
 		nextButton.setTitle("Next", for: .normal)
+        cancelItem?.title = "Cancel".bil_ui_localized
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

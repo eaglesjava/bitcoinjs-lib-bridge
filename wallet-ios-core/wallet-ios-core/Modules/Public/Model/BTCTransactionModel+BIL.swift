@@ -96,7 +96,11 @@ extension BTCTransactionModel {
     var dateSring: String {
         get {
             guard let d: Date = createdDate else { return "" }
-            return d.stringIn(dateStyle: .medium, timeStyle: .medium)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .medium
+            dateFormatter.locale = Locale(identifier: BILSettingManager.currentLanguage.rawValue)
+            return dateFormatter.string(from: d)
         }
     }
     

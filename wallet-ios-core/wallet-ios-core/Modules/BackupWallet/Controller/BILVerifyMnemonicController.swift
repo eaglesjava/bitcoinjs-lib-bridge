@@ -11,8 +11,10 @@ import UIKit
 class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegate {
 
 	@IBOutlet weak var randomMnemonicView: BILMnemonicView!
-	@IBOutlet weak var verifyMnemonicView: BILMnemonicView!
-	@IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak var randomHeight: NSLayoutConstraint!
+    @IBOutlet weak var verifyMnemonicView: BILMnemonicView!
+    @IBOutlet weak var verifyHeight: NSLayoutConstraint!
+    @IBOutlet weak var tipLabel: UILabel!
 	@IBOutlet weak var clearItem: UIBarButtonItem!
 	@IBOutlet weak var confirmButton: BILGradientButton!
 	
@@ -21,12 +23,8 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
 	var randomArray = [String]()
 	var dataArray = [String]() {
 		didSet {
-			var arr = [String]()
-			var temp = [String](dataArray)
-			for _ in 0..<temp.count {
-				arr.append(temp.remove(at: Int(arc4random()) % temp.count))
-			}
-			randomArray = arr
+			let temp = [String](dataArray)
+			randomArray = temp.shuffle()
 		}
 	}
 	
@@ -37,6 +35,11 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
 		randomMnemonicView.dataArray = randomArray
 		verifyMnemonicView.emptyTitle = .backupWallet_verify_emptyTitle
         verifyMnemonicView.collectionView.allowsSelection = false
+        DispatchQueue.main.async {
+            let height = self.randomMnemonicView.collectionView.contentSize.height
+            self.randomHeight.constant = height + 50.0
+            self.view.layoutIfNeeded()
+        }
     }
 	
 	override func languageDidChanged() {
@@ -53,7 +56,16 @@ class BILVerifyMnemonicController: BILBaseViewController, BILMnemonicViewDelegat
     }
 	
 	func selectedMnemonicArrayDidChange(mnemonicView: BILMnemonicView, currentArray: [String]) {
-		verifyMnemonicView.dataArray = currentArray
+        if mnemonicView == randomMnemonicView {
+            debugPrint(self.verifyMnemonicView.collectionView.contentSize.height)
+            verifyMnemonicView.dataArray = currentArray
+            DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(1), execute: {
+                debugPrint(self.verifyMnemonicView.collectionView.contentSize.height)
+                let height = self.verifyMnemonicView.collectionView.contentSize.height
+                self.verifyHeight.constant = max(height + 50.0, 125.0)
+                self.view.layoutIfNeeded()
+            })
+        }
 	}
 
     @IBAction func clearAction(_ sender: Any) {

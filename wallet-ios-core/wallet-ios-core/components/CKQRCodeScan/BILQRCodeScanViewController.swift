@@ -13,6 +13,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
     
     fileprivate let scanKey = "QRCodeScan"
     fileprivate let scanDuration = 3.0
+    @IBOutlet weak var tipLabel: UILabel!
     
     typealias BILScanResultClosure = (String) -> Void
     
@@ -38,7 +39,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
 
         // Do any additional setup after loading the view.
         view.layoutIfNeeded()
-        title = NSLocalizedString("扫一扫", comment: "")
+        title = "Scan".bil_ui_localized
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
@@ -47,6 +48,11 @@ class BILQRCodeScanViewController: BILBaseViewController {
         startScanAnimation()
         
         scanFrame.addSubview(scanLine)
+    }
+    
+    override func languageDidChanged() {
+        super.languageDidChanged()
+        tipLabel.text = "Align within frame to scan".bil_ui_localized
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -156,7 +156,12 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 		}
         refresh(sender: nil)
         balanceDidChanged(notification: nil)
+    }
+    
+    override func languageDidChanged() {
+        super.languageDidChanged()
         title = "Assets".bil_ui_localized
+        tableView.reloadData()
     }
     
     func setupRefresh() {

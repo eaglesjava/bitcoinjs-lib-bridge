@@ -533,7 +533,7 @@
                                     <constraint firstAttribute="height" constant="55" id="VII-Lc-zSw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="    添加到联系人    "/>
+                                <state key="normal" title="添加到联系人"/>
                                 <connections>
                                     <action selector="addAction:" destination="iat-7s-W7J" eventType="touchUpInside" id="Ii8-rc-cXN"/>
                                 </connections>
@@ -667,6 +667,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="搜索结果" id="wn3-GR-h2l"/>
                     <connections>
+                        <outlet property="addButton" destination="dYK-MJ-pcj" id="WGA-zr-sa0"/>
                         <outlet property="nameInputView" destination="kNe-xM-CTg" id="iwU-Pv-g5v"/>
                         <outlet property="remarkInputView" destination="el0-t7-LDg" id="DAE-Ql-0o3"/>
                     </connections>

@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="containerView" destination="emW-aN-CQS" id="Ol2-Ze-sDC"/>
                 <outlet property="scanFrame" destination="h0G-5i-PJB" id="kUU-QT-tBA"/>
+                <outlet property="tipLabel" destination="DmR-Ih-AaW" id="9pk-6a-FTI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,8 +34,8 @@
                                 <constraint firstAttribute="width" secondItem="h0G-5i-PJB" secondAttribute="height" multiplier="1:1" id="mur-Ul-aSH"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将二维码放入框内，即可自动扫描" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmR-Ih-AaW">
-                            <rect key="frame" x="95" y="390" width="184" height="14.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将二维码放入框内，即可自动扫描" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmR-Ih-AaW">
+                            <rect key="frame" x="67" y="390" width="240" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -42,6 +43,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="DmR-Ih-AaW" firstAttribute="width" secondItem="h0G-5i-PJB" secondAttribute="width" id="Kw2-qU-vra"/>
                         <constraint firstItem="DmR-Ih-AaW" firstAttribute="top" secondItem="h0G-5i-PJB" secondAttribute="bottom" constant="22" id="M3c-M2-am3"/>
                         <constraint firstItem="h0G-5i-PJB" firstAttribute="centerX" secondItem="emW-aN-CQS" secondAttribute="centerX" id="WZJ-Nm-uMZ"/>
                         <constraint firstItem="h0G-5i-PJB" firstAttribute="top" secondItem="emW-aN-CQS" secondAttribute="top" constant="128" id="fPR-c5-DBg"/>

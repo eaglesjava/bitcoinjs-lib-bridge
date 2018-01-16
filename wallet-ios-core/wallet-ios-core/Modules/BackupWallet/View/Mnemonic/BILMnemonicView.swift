@@ -25,6 +25,7 @@ class BILMnemonicView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		didSet {
 			collectionView.reloadData()
             selectedArray.removeAll()
+            delegate?.selectedMnemonicArrayDidChange(mnemonicView: self, currentArray: selectedArray)
 		}
 	}
 	

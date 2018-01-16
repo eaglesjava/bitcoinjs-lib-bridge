@@ -103,6 +103,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mnemonicView" destination="lhT-aq-ezO" id="5ec-VR-F9K"/>
+                        <outlet property="mnemonicViewHeight" destination="a3v-HR-Z86" id="P5Y-uZ-BeW"/>
                         <outlet property="nextButton" destination="qlY-G9-oj8" id="zCn-XC-1MX"/>
                         <outlet property="secureLabel" destination="hvy-wf-TqK" id="SSr-oX-qLj"/>
                         <outlet property="snapshotTipLabel" destination="Vvc-4z-9cT" id="Khd-lF-IfP"/>
@@ -187,8 +188,10 @@
                     <connections>
                         <outlet property="clearItem" destination="8pf-tL-nj2" id="oe9-7d-lXb"/>
                         <outlet property="confirmButton" destination="l7V-Xw-Pbi" id="jSG-AJ-103"/>
+                        <outlet property="randomHeight" destination="bDd-2j-Dka" id="Tuk-EI-HSQ"/>
                         <outlet property="randomMnemonicView" destination="Jhk-cm-Xns" id="ImU-Dd-xZS"/>
                         <outlet property="tipLabel" destination="ua5-CA-eV7" id="jUs-tM-CI9"/>
+                        <outlet property="verifyHeight" destination="Vuo-cA-1fX" id="swu-W1-FrV"/>
                         <outlet property="verifyMnemonicView" destination="vhh-BX-E5a" id="pVX-Zv-CjF"/>
                         <segue destination="IyX-gE-Y7F" kind="showDetail" identifier="BILBackUpSuccessSugue" action="showViewController:sender:" id="fvx-de-Ubx"/>
                     </connections>

@@ -33,7 +33,7 @@
 "Add via ID" = "通过 ID 添加";
 "Name" = "名称";
 "Add now" = "立即添加";
-"    Add to contact    " = "    添加到联系人    ";
+"Add to contact" = "添加到联系人";
 "Contact details" = "联系人详情";
 "Add via address" = "通过地址添加";
 "Contacts" = "联系人";
@@ -104,3 +104,5 @@
 "I have saved them orderly" = "已按顺序记下助记词";
 "Click on the mnemonic words orderly to confirm whether your backup is right." = "按顺序点击助记词，确认您的助记词备份正确";
 "Verify words" = "验证助记词";
+
+"Align within frame to scan" = "放入框内，自动扫描";

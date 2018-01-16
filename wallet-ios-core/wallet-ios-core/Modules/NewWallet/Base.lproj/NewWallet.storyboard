@@ -53,7 +53,7 @@
                                 <rect key="frame" x="143.5" y="283" width="88" height="125"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wv8-kW-7dL">
-                                <rect key="frame" x="0.0" y="133" width="375" height="330"/>
+                                <rect key="frame" x="0.0" y="136" width="375" height="327"/>
                                 <connections>
                                     <outlet property="delegate" destination="Pad-Ft-1oa" id="zoV-EF-WDX"/>
                                 </connections>
@@ -103,7 +103,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04q-lU-fSV" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="138" width="325" height="106"/>
+                                <rect key="frame" x="25" y="141" width="325" height="106"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IS-md-azL">
                                         <rect key="frame" x="0.0" y="0.0" width="42.5" height="21"/>
@@ -232,7 +232,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evy-P9-DcP">
-                                <rect key="frame" x="0.0" y="113" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQ0-7J-8kK">
                                         <rect key="frame" x="25" y="24" width="325" height="202.5"/>
@@ -430,7 +430,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53E-rO-tJL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="469" width="325" height="55"/>
+                                        <rect key="frame" x="25" y="466" width="325" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="q3Z-bu-ldf"/>
                                         </constraints>
@@ -443,7 +443,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Enl-ZG-JLz">
-                                        <rect key="frame" x="61" y="422.5" width="253" height="31.5"/>
+                                        <rect key="frame" x="61" y="419.5" width="253" height="31.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成即表示您已同意 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="inX-qB-wAa">
                                                 <rect key="frame" x="0.0" y="6" width="131" height="20"/>
@@ -539,7 +539,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRR-r5-8xB">
-                                <rect key="frame" x="25" y="138" width="325" height="124"/>
+                                <rect key="frame" x="25" y="141" width="325" height="124"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86e-aY-GDa" customClass="BILMnemonicView" customModule="wallet_ios_core" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="124"/>
@@ -570,7 +570,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18p-z0-huL" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="328" width="325" height="55"/>
+                                <rect key="frame" x="25" y="331" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="hw4-hg-UVv"/>
                                 </constraints>
@@ -580,7 +580,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅支持符合 BIP39 标准的助记词" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqG-1c-iK7">
-                                <rect key="frame" x="25" y="287" width="325" height="16"/>
+                                <rect key="frame" x="25" y="290" width="325" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.6705882353" green="0.90196078430000004" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -608,6 +608,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelItem" destination="ltI-X7-8pX" id="RWA-uz-ekp"/>
                         <outlet property="mnemonicView" destination="86e-aY-GDa" id="6bi-4O-idm"/>
                         <outlet property="nextButton" destination="18p-z0-huL" id="Yik-Qh-wAj"/>
                         <outlet property="textView" destination="pVv-78-uyq" id="lQo-lm-HKQ"/>
@@ -759,7 +760,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jpv-SB-IYp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="QKL-vM-9CI">
-                        <rect key="frame" x="0.0" y="20" width="375" height="93"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

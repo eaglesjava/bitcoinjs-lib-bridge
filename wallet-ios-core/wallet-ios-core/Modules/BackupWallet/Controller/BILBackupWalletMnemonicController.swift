@@ -11,7 +11,8 @@ import CoreData
 import CryptoSwift
 
 class BILBackupWalletMnemonicController: BILBaseViewController {
-
+    @IBOutlet weak var mnemonicViewHeight: NSLayoutConstraint!
+    
 	@IBOutlet weak var secureLabel: UILabel!
 	@IBOutlet weak var snapshotTipLabel: UILabel!
 	@IBOutlet weak var nextButton: BILGradientButton!
@@ -26,6 +27,11 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
     var mnemonic = "" {
         didSet {
             mnemonicView.mnemonic = mnemonic
+            DispatchQueue.main.async {
+                let height = self.mnemonicView.collectionView.contentSize.height
+                self.mnemonicViewHeight.constant = max(height + 50.0, 125.0)
+                self.view.layoutIfNeeded()
+            }
         }
     }
 	
@@ -33,7 +39,6 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		mnemonicView.emptyTitle = .backupWallet_mnemonic_emptyTitle
         NotificationCenter.default.addObserver(self, selector: #selector(showAlertForSnapshot), name: .UIApplicationUserDidTakeScreenshot, object: nil)
     }
 	
