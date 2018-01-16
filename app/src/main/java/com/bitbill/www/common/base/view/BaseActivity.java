@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -78,7 +79,7 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
                 }
             }
         }
-
+        Log.d("BaseActivity", "onCreate: " + StringUtils.getContactKey());
     }
 
     public BitbillApp getApp() {

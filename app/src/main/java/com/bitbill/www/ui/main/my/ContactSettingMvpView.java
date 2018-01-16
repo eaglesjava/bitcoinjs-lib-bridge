@@ -10,7 +10,7 @@ public interface ContactSettingMvpView extends MvpView {
 
     void requireContactKey();
 
-    void recoverContactSuccess();
+    void recoverContactSuccess(int size);
 
     void receoverContactFail();
 

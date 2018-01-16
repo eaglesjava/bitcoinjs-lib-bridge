@@ -30,12 +30,13 @@
             android:id="@+id/ll_wallet_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 style="@style/Text.White"
                 android:layout_marginTop="30dp"
-                android:text="@string/text_contact_wallet_id"/>
+                android:text="@string/text_contact_wallet_id" />
 
             <TextView
                 android:id="@+id/tv_wallet_id"
@@ -47,12 +48,13 @@
             android:id="@+id/ll_wallet_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 style="@style/Text.White"
                 android:layout_marginTop="30dp"
-                android:text="@string/text_contact_address"/>
+                android:text="@string/text_contact_address" />
 
             <TextView
                 android:id="@+id/tv_wallet_address"
@@ -63,7 +65,7 @@
         <TextView
             style="@style/Text.White"
             android:layout_marginTop="30dp"
-            android:text="@string/text_remark"/>
+            android:text="@string/text_remark" />
 
         <TextView
             android:id="@+id/tv_wallet_remark"
@@ -78,6 +80,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="15dp"
-        android:text="@string/btn_send"/>
+        android:text="@string/btn_send" />
 </FrameLayout>
 

@@ -15,6 +15,7 @@ public interface AppPreferences extends Prefs {
     String IS_SHORT_CUT_SHOWN = "is_shortcut_shown";
     String IS_SOUND_ENABLED = "is_sound_enabled";
     String SELECTED_CURRENCY = "selected_currency";
+    String CONTACTKEY = "contactkey";
 
     void setReceiveRemindDialogShown();
 
@@ -31,6 +32,10 @@ public interface AppPreferences extends Prefs {
     SelectedCurrency getSelectedCurrency();
 
     void setSelectedCurrency(SelectedCurrency selectedCurrency);
+
+    String getContactKey();
+
+    void setContactkey(String contactKey);
 
     enum SelectedCurrency {
         CNY,

@@ -129,8 +129,8 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
     }
 
     @Override
-    public void recoverContactSuccess() {
-        showMessage(R.string.msg_recover_contact_success);
+    public void recoverContactSuccess(int size) {
+        showMessage(String.format(getString(R.string.msg_recover_contact_success), size));
         EventBus.getDefault().postSticky(new ContactUpdateEvent());
     }
 

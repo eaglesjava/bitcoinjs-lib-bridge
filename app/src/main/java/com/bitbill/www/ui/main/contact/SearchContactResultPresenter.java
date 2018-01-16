@@ -70,7 +70,7 @@ public class SearchContactResultPresenter<M extends ContactModel, V extends Sear
             return;
 
         }
-        Contact contact = new Contact(null, getMvpView().getWalletId(), StringUtils.getContactKey(), getMvpView().getAddress(), getMvpView().getRemark(), getMvpView().getContactName(), AppConstants.BTC_COIN_TYPE);
+        Contact contact = new Contact(null, getMvpView().getWalletId(), getApp().getContactKey(), getMvpView().getAddress(), getMvpView().getRemark(), getMvpView().getContactName(), AppConstants.BTC_COIN_TYPE);
         getCompositeDisposable()
                 .add(getModelManager()
                         .insertContact(contact)

@@ -81,24 +81,26 @@ public class ContactDetailActivity extends BaseToolbarActivity {
 
     @Override
     public void initData() {
-        if (mContact == null || StringUtils.isEmpty(mContact.getContactName()) || StringUtils.isEmpty(String.valueOf(mContact.getContactName().charAt(0)))) {
+        if (mContact == null || StringUtils.isEmpty(mContact.getContactName()) || StringUtils.isEmpty(StringUtils.getNameLabel(mContact.getContactName()))) {
             showMessage("加载联系人信息失败");
             return;
         }
         mTvContactLabel.setText(StringUtils.getNameLabel(mContact.getContactName()));
         mTvContactName.setText(mContact.getContactName());
-        if (StringUtils.isEmpty(mContact.getAddress())) {
-            mLLWalletAddress.setVisibility(View.GONE);
-        } else {
-            mTvWalletAddress.setText(mContact.getAddress());
-        }
+
         mTvWalletRemark.setText(StringUtils.isEmpty(mContact.getRemark()) ? "无" : mContact.getRemark());
         if (StringUtils.isEmpty(mContact.getWalletId())) {
             mLLWalletId.setVisibility(View.GONE);
+            if (StringUtils.isEmpty(mContact.getAddress())) {
+                mLLWalletAddress.setVisibility(View.GONE);
+            } else {
+                mTvWalletAddress.setText(mContact.getAddress());
+                mLLWalletAddress.setVisibility(View.VISIBLE);
+            }
         } else {
+            mLLWalletId.setVisibility(View.VISIBLE);
             mTvWalletId.setText(mContact.getWalletId());
         }
-        mTvWalletAddress.setText(mContact.getAddress());
 
     }
 

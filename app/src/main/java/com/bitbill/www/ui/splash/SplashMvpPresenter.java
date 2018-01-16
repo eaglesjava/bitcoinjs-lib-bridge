@@ -13,4 +13,6 @@ public interface SplashMvpPresenter<M extends WalletModel, V extends SplashMvpVi
     void hasWallet();
 
     void getExchangeRate();
+
+    String getContactKey();
 }

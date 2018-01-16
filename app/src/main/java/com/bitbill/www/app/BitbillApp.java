@@ -15,6 +15,7 @@ import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.di.component.ApplicationComponent;
 import com.bitbill.www.di.component.DaggerApplicationComponent;
 import com.bitbill.www.di.module.ApplicationModule;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.prefs.AppPreferences;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
 import com.bitbill.www.model.wallet.db.WalletDbHelper;
@@ -48,12 +49,15 @@ public class BitbillApp extends Application {
     OkHttpClient mOkhttpClient;
     @Inject
     WalletDbHelper mWalletDbHelper;
+    @Inject
+    AppModel mAppModel;
     private ApplicationComponent mApplicationComponent;
     private List<Wallet> mWallets;
     private double mBtcCnyValue;
     private double mBtcUsdValue;
     private AppPreferences.SelectedCurrency mSelectedCurrency = AppPreferences.SelectedCurrency.CNY;
     private long mBlockHeight;
+    private String mContactKey;
 
     public static BitbillApp get() {
         return sInstance;
@@ -228,6 +232,14 @@ public class BitbillApp extends Application {
 
     public DaoSession getDaoSession() {
         return mWalletDbHelper.getDaoSession();
+    }
+
+    public String getContactKey() {
+        return mContactKey;
+    }
+
+    public void setContactKey(String contactKey) {
+        mContactKey = contactKey;
     }
 }
 

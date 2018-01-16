@@ -620,15 +620,16 @@ public class StringUtils {
     }
 
     /**
-     * 联系人备份id 取设备id md5并取前十位
+     * 联系人备份id 随机取UUID md5并取前十位
      *
      * @return
      */
     public static String getContactKey() {
-        return EncryptUtils.encryptMD5ToString(DeviceUtil.getDeviceId()).substring(0, 10);
+        return EncryptUtils.encryptMD5ToString(DeviceUtil.getUUID()).substring(0, 10);
     }
 
     public static String getNameLabel(String name) {
+
         if (isEmpty(name)) {
             return "";
         }

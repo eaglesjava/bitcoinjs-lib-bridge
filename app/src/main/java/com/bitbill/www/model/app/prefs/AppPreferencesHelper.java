@@ -71,4 +71,14 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
         mPrefs.edit().putString(SELECTED_CURRENCY, selectedCurrency.name()).apply();
 
     }
+
+    @Override
+    public String getContactKey() {
+        return mPrefs.getString(CONTACTKEY, null);
+    }
+
+    @Override
+    public void setContactkey(String contactKey) {
+        mPrefs.edit().putString(CONTACTKEY, contactKey);
+    }
 }

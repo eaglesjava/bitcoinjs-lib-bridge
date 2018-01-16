@@ -1,5 +1,6 @@
 package com.bitbill.www.common.presenter;
 
+import com.androidnetworking.error.ANError;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
@@ -53,7 +54,11 @@ public class GetLastAddressPresenter<M extends ContactModel, V extends GetLastAd
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().getLastAddressFail();
+                        if (e instanceof ANError) {
+                            handleApiError(((ANError) e));
+                        } else {
+                            getMvpView().getLastAddressFail();
+                        }
                     }
 
                 }));

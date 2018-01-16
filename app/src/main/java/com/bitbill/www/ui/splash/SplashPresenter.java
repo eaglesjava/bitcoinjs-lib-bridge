@@ -4,7 +4,9 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 
@@ -17,6 +19,9 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 @PerActivity
 public class SplashPresenter<M extends WalletModel, V extends SplashMvpView> extends ModelPresenter<M, V> implements SplashMvpPresenter<M, V> {
+    @Inject
+    AppModel mAppModel;
+
     @Inject
     public SplashPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);
@@ -72,6 +77,17 @@ public class SplashPresenter<M extends WalletModel, V extends SplashMvpView> ext
                         super.onError(e);
                     }
                 }));
+    }
+
+    @Override
+    public String getContactKey() {
+
+        String contactKey = mAppModel.getContactKey();
+        if (StringUtils.isEmpty(contactKey)) {
+            contactKey = StringUtils.getContactKey();
+            mAppModel.setContactkey(contactKey);
+        }
+        return contactKey;
     }
 
 }

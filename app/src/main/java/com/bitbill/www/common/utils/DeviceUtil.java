@@ -14,6 +14,8 @@ import android.util.Log;
 
 import com.bitbill.www.app.BitbillApp;
 
+import java.util.UUID;
+
 /**
  * <pre>
  * 获取设备信息工具
@@ -103,6 +105,10 @@ public class DeviceUtil {
         String id = Settings.Secure.getString(BitbillApp.get().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         return id;
+    }
+
+    public static String getUUID() {
+        return UUID.randomUUID().toString();
     }
 
     // 获得设备型号

@@ -6,7 +6,6 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.contact.ContactModel;
@@ -14,12 +13,11 @@ import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.contact.network.entity.RecoverContactsRequest;
 import com.bitbill.www.model.contact.network.entity.RecoverContactsResponse;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -34,7 +32,7 @@ public class ContactSettingPresenter<M extends ContactModel, V extends ContactSe
 
     @Override
     public String getWalletKey() {
-        return DeviceUtil.getDeviceId();
+        return getApp().getContactKey();
     }
 
     @Override
@@ -86,35 +84,27 @@ public class ContactSettingPresenter<M extends ContactModel, V extends ContactSe
 
     @Override
     public void insertContact(List<RecoverContactsResponse.ContactsBean> contacts) {
-
-        getCompositeDisposable().add(Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-
-                boolean isSuccess = false;
-                for (RecoverContactsResponse.ContactsBean contactsBean : contacts) {
-                    getModelManager().insertContact(new Contact(null
-                            , contactsBean.getWalletContact()
-                            , getWalletKey()
-                            , contactsBean.getWalletAddress()
-                            , contactsBean.getRemark()
-                            , contactsBean.getContactName()
-                            , AppConstants.BTC_COIN_TYPE));
-                }
-                isSuccess = true;
-                return isSuccess;
-            }
-        })
+        List<Contact> contactList = new ArrayList<>();
+        for (RecoverContactsResponse.ContactsBean contactsBean : contacts) {
+            contactList.add(new Contact(null
+                    , contactsBean.getWalletContact()
+                    , getWalletKey()
+                    , contactsBean.getWalletAddress()
+                    , contactsBean.getRemark()
+                    , contactsBean.getContactName()
+                    , AppConstants.BTC_COIN_TYPE));
+        }
+        getCompositeDisposable().add(getModelManager().insertContacts(contactList)
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override
-                    public void onNext(Boolean aBoolean) {
-                        super.onNext(aBoolean);
+                    public void onNext(Boolean aboolean) {
+                        super.onNext(aboolean);
                         if (!isViewAttached()) {
                             return;
                         }
-                        if (aBoolean) {
-                            getMvpView().recoverContactSuccess();
+                        if (aboolean) {
+                            getMvpView().recoverContactSuccess(contactList.size());
                         } else {
                             getMvpView().receoverContactFail();
                         }

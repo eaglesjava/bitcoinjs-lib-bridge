@@ -64,6 +64,14 @@ public class ContactDbHelper extends DbHelper implements ContactDb {
     }
 
     @Override
+    public Observable<Boolean> insertContacts(List<Contact> contacts) {
+        return Observable.fromCallable(() -> {
+            mContactDao.insertInTx(contacts);
+            return true;
+        });
+    }
+
+    @Override
     public Observable<Boolean> deleteContact(Contact contact) {
         return Observable.fromCallable(new Callable<Boolean>() {
             @Override

@@ -79,4 +79,14 @@ public class AppModelManager extends ModelManager implements AppModel {
     public void setSelectedCurrency(SelectedCurrency selectedCurrency) {
         mAppPreferences.setSelectedCurrency(selectedCurrency);
     }
+
+    @Override
+    public String getContactKey() {
+        return mAppPreferences.getContactKey();
+    }
+
+    @Override
+    public void setContactkey(String contactKey) {
+        mAppPreferences.setContactkey(contactKey);
+    }
 }

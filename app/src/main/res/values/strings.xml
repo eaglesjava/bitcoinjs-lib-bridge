@@ -219,7 +219,7 @@
     <string name="setting_recover_contact">恢复联系人</string>
     <string name="hint_contact_key">请输入联系人密钥</string>
     <string name="msg_contact_key_copied">联系人密钥已复制</string>
-    <string name="msg_recover_contact_success">恢复联系人成功</string>
+    <string name="msg_recover_contact_success">恢复了%d个联系人</string>
     <string name="msg_recover_fail">恢复联系人失败</string>
     <string name="msg_no_contact_recover">没有联系人可恢复</string>
     <string name="title_activity_shorcut_setting">快捷方式设置</string>
@@ -287,5 +287,10 @@
     <string name="text_bibill_server_rule"><u>《Bitbill服务条款》</u></string>
     <string name="msg_input_defualt_wallet_pwd">请输入%s的钱包密码以确认</string>
     <string name="text_contact_us">联系我们</string>
+    <!--send fragment-->
+    <string name="fial_get_contact_last_address">获取联系人最新地址失败</string>
+    <string name="fail_get_contact_info">获取联系人信息失败</string>
+    <string name="fail_invalid_address">地址不合法</string>
+    <string name="fail_send_address_null">请输入地址</string>
 
 </resources>

@@ -6,7 +6,6 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.contact.ContactModel;
@@ -65,7 +64,7 @@ public class AddContactByAddressPresenter<M extends ContactModel, V extends AddC
     public void addContact() {
         Contact contact = new Contact(null
                 , null
-                , DeviceUtil.getDeviceId()
+                , getApp().getContactKey()
                 , getMvpView().getAddress()
                 , getMvpView().getRemark()
                 , getMvpView().getContactName()

@@ -10,4 +10,6 @@ import com.bitbill.www.model.wallet.WalletModel;
 public interface BtcSendMvpPresenter<M extends WalletModel, V extends BtcSendMvpView> extends MvpPresenter<V> {
 
     void validateBtcAddress();
+
+    void updateContact();
 }

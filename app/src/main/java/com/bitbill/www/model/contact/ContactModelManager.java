@@ -82,6 +82,11 @@ public class ContactModelManager extends ModelManager implements ContactModel {
     }
 
     @Override
+    public Observable<Boolean> insertContacts(List<Contact> contacts) {
+        return mContactDb.insertContacts(contacts);
+    }
+
+    @Override
     public Observable<Boolean> deleteContact(Contact contact) {
         return mContactDb.deleteContact(contact);
     }

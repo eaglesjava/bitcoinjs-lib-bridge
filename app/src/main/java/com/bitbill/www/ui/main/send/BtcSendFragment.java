@@ -8,8 +8,11 @@ import android.widget.Button;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseFragment;
+import com.bitbill.www.common.presenter.GetLastAddressMvpPresenter;
+import com.bitbill.www.common.presenter.GetLastAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.DrawableEditText;
+import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.wallet.WalletModel;
 
@@ -21,7 +24,7 @@ import butterknife.OnClick;
 /**
  * Created by isanwenyu@163.com on 2017/12/9.
  */
-public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implements BtcSendMvpView {
+public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implements BtcSendMvpView, GetLastAddressMvpView {
 
     @BindView(R.id.et_send_address)
     DrawableEditText etSendAddress;
@@ -29,6 +32,8 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     Button btnNext;
     @Inject
     BtcSendMvpPresenter<WalletModel, BtcSendMvpView> mBtcSendMvpPresenter;
+    @Inject
+    GetLastAddressMvpPresenter<ContactModel, GetLastAddressMvpView> mGetLastAddressMvpPresenter;
     private Contact mSendContact;
 
     public static BtcSendFragment newInstance() {
@@ -48,6 +53,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
+        addPresenter(mGetLastAddressMvpPresenter);
     }
 
     @Override
@@ -84,7 +90,12 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         switch (view.getId()) {
             case R.id.btn_next:
                 //跳转到发送金额界面
-                getMvpPresenter().validateBtcAddress();
+                if (mSendContact == null) {
+                    getMvpPresenter().validateBtcAddress();
+                } else {
+                    //请求最新联系人关联walletid地址
+                    mGetLastAddressMvpPresenter.getLastAddress();
+                }
                 break;
         }
     }
@@ -98,11 +109,6 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return etSendAddress.getText().toString();
     }
 
-    public void setSendAddress(String sendAddress) {
-
-        etSendAddress.setText(sendAddress);
-    }
-
     public void setSendAddress(Contact sendContact) {
         mSendContact = sendContact;
         if (sendContact != null) {
@@ -110,6 +116,11 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
             setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? sendContact.getAddress() : walletId) + ")");
 
         }
+    }
+
+    public void setSendAddress(String sendAddress) {
+
+        etSendAddress.setText(sendAddress);
     }
 
     public void sendSuccess() {
@@ -121,14 +132,19 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         if (validate) {
             SendAmountActivity.start(getBaseActivity(), getSendAddress(), null, mSendContact);
         } else {
-            showMessage("请输入合法的地址");
+            showMessage(R.string.fail_invalid_address);
         }
     }
 
     @Override
     public void requireAddress() {
-        showMessage("请输入或扫描地址");
+        showMessage(R.string.fail_send_address_null);
 
+    }
+
+    @Override
+    public Contact getSendContact() {
+        return mSendContact;
     }
 
     @Override
@@ -137,5 +153,28 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
             Contact contact = (Contact) data.getSerializableExtra(AppConstants.EXTRA_CONTACT);
             setSendAddress(contact);
         }
+    }
+
+    @Override
+    public String getWalletId() {
+        return mSendContact.getWalletId();
+    }
+
+    @Override
+    public void getLastAddressSuccess(String address) {
+        mSendContact.setAddress(address);
+        getMvpPresenter().validateBtcAddress();
+        getMvpPresenter().updateContact();
+    }
+
+    @Override
+    public void getLastAddressFail() {
+        showMessage(R.string.fial_get_contact_last_address);
+    }
+
+    @Override
+    public void requireWalletId() {
+        showMessage(R.string.fail_get_contact_info);
+
     }
 }

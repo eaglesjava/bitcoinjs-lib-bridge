@@ -42,6 +42,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
         getMvpPresenter().hasWallet();
         getMvpPresenter().getExchangeRate();
+        getApp().setContactKey(getMvpPresenter().getContactKey());
         // 根据是否是第一次进入判断跳转到引导页还是首页
     }
 
