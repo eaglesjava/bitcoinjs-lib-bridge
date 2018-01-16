@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.DeviceUtil;
+import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.SettingView;
 
 import butterknife.BindView;
@@ -22,7 +24,7 @@ public class AboutUsActivity extends BaseToolbarActivity {
     TextView mTvVersion;
     @BindView(R.id.sv_use_rule)
     SettingView mSvUseRule;
-    @BindView(R.id.sv_version_check)
+    @BindView(R.id.sv_contact_us)
     SettingView mSvVersionCheck;
 
     public static void start(Context context) {
@@ -65,13 +67,15 @@ public class AboutUsActivity extends BaseToolbarActivity {
         return R.layout.activity_about_us;
     }
 
-    @OnClick({R.id.sv_use_rule, R.id.sv_version_check})
+    @OnClick({R.id.sv_use_rule, R.id.sv_contact_us})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sv_use_rule:
                 UseRuleActivity.start(AboutUsActivity.this);
                 break;
-            case R.id.sv_version_check:
+            case R.id.sv_contact_us:
+                //发送邮件
+                UIHelper.sendEmail(AboutUsActivity.this, AppConstants.HI_BITBILL_EMAIL);
                 break;
         }
     }

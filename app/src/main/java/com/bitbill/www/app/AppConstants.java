@@ -72,6 +72,7 @@ public final class AppConstants {
     public static final String QUERY_ADDRESS = "address";
     public static final String TX_BLOCK_CHAIN_PREFIX = "https://blockchain.info/tx/";
     public static final String HOST_BITBILL_COM = "bitbill.com";
+    public static final String HI_BITBILL_EMAIL = "hi@bitbill.com";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

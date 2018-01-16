@@ -234,6 +234,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
         if (mSelectedPosition == -1 || mSelectedPosition > mWalletList.size() - 1) {
             // 选择默认的钱包对象作为选中的
             mSelectedWallet = BitbillApp.get().getDefaultWallet();
+            mSelectedPosition = mWalletList.indexOf(mSelectedWallet);
         } else {
             mSelectedWallet = mWalletList.get(mSelectedPosition);
         }

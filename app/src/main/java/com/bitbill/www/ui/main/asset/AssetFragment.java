@@ -253,7 +253,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
         switch (view.getId()) {
             case R.id.ll_short_cut_scan:
                 //打开扫一扫界面
-                ScanQrcodeActivity.start(getBaseActivity(), true);
+                ScanQrcodeActivity.start(getBaseActivity(), AssetFragment.TAG);
                 break;
             case R.id.ll_short_cut_contact:
                 //跳转到联系人界面并弹出选择框

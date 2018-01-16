@@ -28,7 +28,7 @@ import butterknife.BindView;
  */
 public class SendFragment extends BaseLazyFragment {
 
-    private static final String TAG = SendFragment.class.getSimpleName();
+    public static final String TAG = SendFragment.class.getSimpleName();
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.viewPager)
@@ -69,7 +69,7 @@ public class SendFragment extends BaseLazyFragment {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send_scan) {
             //打开扫描二维码
-            ScanQrcodeActivity.start(getBaseActivity(), true);
+            ScanQrcodeActivity.start(getBaseActivity(), SendFragment.TAG);
             return true;
         }
 

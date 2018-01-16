@@ -22,18 +22,18 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
     private static final int REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY = 666;
     @BindView(R.id.zxingview)
     QRCodeView mQRCodeView;
-    private boolean isFromSend;
+    private String mFromTag;
 
-    public static void start(Context context, boolean isFromSend) {
+    public static void start(Context context, String fromTag) {
         Intent starter = new Intent(context, ScanQrcodeActivity.class);
-        starter.putExtra(AppConstants.EXTRA_IS_FROM_SEND, isFromSend);
+        starter.putExtra(AppConstants.EXTRA_FROM_TAG, fromTag);
         context.startActivity(starter);
     }
 
     @Override
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
-        isFromSend = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_FROM_SEND, false);
+        mFromTag = getIntent().getStringExtra(AppConstants.EXTRA_FROM_TAG);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
             showMessage("解析扫码地址失败");
             return;
         }
-        UIHelper.parseScanResult(ScanQrcodeActivity.this, result, isFromSend);
+        UIHelper.parseScanResult(ScanQrcodeActivity.this, result, mFromTag);
         finish();
     }
 

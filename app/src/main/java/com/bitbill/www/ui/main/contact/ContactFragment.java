@@ -30,6 +30,7 @@ import javax.inject.Inject;
 
 public class ContactFragment extends BaseListFragment<Contact, ContactMvpPresenter> implements ContactMvpView {
 
+    public static final String TAG = "ContactFragment";
     @Inject
     ContactMvpPresenter<ContactModel, ContactMvpView> mContactMvpPresenter;
     private ListSelectDialog mListSelectDialog;
@@ -129,7 +130,7 @@ public class ContactFragment extends BaseListFragment<Contact, ContactMvpPresent
                     break;
                 case 2:
                     //扫码添加
-                    ScanQrcodeActivity.start(getBaseActivity(), false);
+                    ScanQrcodeActivity.start(getBaseActivity(), ContactFragment.TAG);
                     break;
 
             }

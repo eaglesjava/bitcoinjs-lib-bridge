@@ -1,6 +1,7 @@
 package com.bitbill.www.ui.main.contact;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.bitbill.www.common.app.AppManager;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.EditTextWapper;
+import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
+import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
@@ -164,7 +167,15 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
                 getMvpPresenter().updateContact();
                 break;
             case R.id.btn_delete:
-                getMvpPresenter().deleteContact();
+                MessageConfirmDialog.newInstance("提示", "确定要删除该联系人吗？", "删除", false)
+                        .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
+                                    getMvpPresenter().deleteContact();
+                                }
+                            }
+                        }).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
                 break;
         }
     }

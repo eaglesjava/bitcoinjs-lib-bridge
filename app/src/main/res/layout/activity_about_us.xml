@@ -32,9 +32,9 @@
         app:rightResource="@drawable/ic_right_arrow" />
 
     <com.bitbill.www.common.widget.SettingView
-        android:id="@+id/sv_version_check"
+        android:id="@+id/sv_contact_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:leftString="@string/text_version_update"
+        app:leftString="@string/text_contact_us"
         app:rightResource="@drawable/ic_right_arrow" />
 </LinearLayout>

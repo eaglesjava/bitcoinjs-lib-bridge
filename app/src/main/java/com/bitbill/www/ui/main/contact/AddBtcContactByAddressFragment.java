@@ -28,6 +28,7 @@ import butterknife.BindView;
  */
 public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactByAddressMvpPresenter> implements AddContactByAddressMvpView {
 
+    public static final String TAG = "AddBtcContactByAddressFragment";
     @BindView(R.id.etw_contact_name)
     EditTextWapper mEtwContactName;
     @BindView(R.id.etw_contact_address)
@@ -108,7 +109,7 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
 
     @Override
     public void initView() {
-        mEtwContactAddress.setOnRightImageClickListener(v -> ScanQrcodeActivity.start(getBaseActivity(), false));
+        mEtwContactAddress.setOnRightImageClickListener(v -> ScanQrcodeActivity.start(getBaseActivity(), AddBtcContactByAddressFragment.TAG));
     }
 
     @Override

@@ -8,7 +8,9 @@ import android.net.Uri;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.ui.main.MainActivity;
+import com.bitbill.www.ui.main.contact.AddBtcContactByAddressFragment;
 import com.bitbill.www.ui.main.contact.AddContactByAddressActivity;
+import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.contact.SearchContactResultActivity;
 import com.bitbill.www.ui.main.send.SendAmountActivity;
 
@@ -47,7 +49,7 @@ public class UIHelper {
         cmb.setText(content.trim());
     }
 
-    public static void parseScanResult(Context context, String result, boolean isFromSend) {
+    public static void parseScanResult(Context context, String result, String fromTag) {
         if (isEmpty(result)) {
             return;
         }
@@ -65,8 +67,13 @@ public class UIHelper {
             } else {
                 address = result.substring(result.indexOf(":") + 1);
             }
-
-            SendAmountActivity.start(context, address, amount, null);
+            if (AddBtcContactByAddressFragment.TAG.equals(fromTag) || ContactFragment.TAG.equals(fromTag)) {
+                AddContactByAddressActivity.start(context, address);
+            } else if (StringUtils.isNotEmpty(amount)) {
+                SendAmountActivity.start(context, address, amount, null);
+            } else {
+                MainActivity.start(context, null, address);
+            }
 
         } else if (result.toLowerCase().startsWith(AppConstants.SCHEME_BITBILL)) {
             Uri parse = Uri.parse(result);
@@ -80,12 +87,16 @@ public class UIHelper {
                 }
             }
         } else {
-            if (isFromSend) {
-                MainActivity.start(context, null, result);
-            } else {
-                AddContactByAddressActivity.start(context, result);
-            }
+            MainActivity.start(context, null, result);
         }
     }
 
+    public static void sendEmail(Context context, String email) {
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri content_url = Uri.parse("mailto:" + email);
+        intent.setData(content_url);
+        context.startActivity(Intent.createChooser(intent, context.getString(R.string.text_chose_email)));
+    }
 }
