@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -29,6 +30,8 @@ public class SendSuccessActivity extends BaseCompleteActivity {
     TextView tvHintContent;
     @BindView(R.id.btn_create_contact)
     Button btnCreateContact;
+    @BindView(R.id.ll_bottom_btns)
+    LinearLayout llBottomBtns;
     private String mSendAddress;
     private String mSendAmount;
     private Contact mSendContact;
@@ -75,7 +78,7 @@ public class SendSuccessActivity extends BaseCompleteActivity {
         tvSendAddress.setText(mSendAddress);
         tvSendAmount.setText(mSendAmount + " BTC");
         if (mSendContact == null) {
-            btnCreateContact.setVisibility(View.VISIBLE);
+            llBottomBtns.setVisibility(View.VISIBLE);
             btnCreateContact.setOnClickListener(v -> {
                 if (StringUtils.isNotEmpty(mSendAddress)) {
                     AddContactByAddressActivity.start(SendSuccessActivity.this, mSendAddress);
@@ -83,7 +86,7 @@ public class SendSuccessActivity extends BaseCompleteActivity {
 
             });
         } else {
-            btnCreateContact.setVisibility(View.GONE);
+            llBottomBtns.setVisibility(View.GONE);
         }
 
     }

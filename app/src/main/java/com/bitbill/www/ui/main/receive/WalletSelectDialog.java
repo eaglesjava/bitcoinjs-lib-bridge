@@ -1,25 +1,18 @@
 package com.bitbill.www.ui.main.receive;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.RelativeLayout;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.Decoration;
-import com.bitbill.www.common.widget.dialog.BaseDialog;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -32,7 +25,7 @@ import butterknife.ButterKnife;
 /**
  * Created by isanwenyu@163.com on 2017/12/9.
  */
-public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
+public class WalletSelectDialog extends BottomSheetDialogFragment implements BaseViewControl {
     public static final String TAG = "WalletSelectDialog";
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
@@ -67,7 +60,7 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         onBeforeSetContentLayout();
         View view = inflater.inflate(getLayoutId(), container);
-        setUnBinder(ButterKnife.bind(this, view));
+        ButterKnife.bind(this, view);
         init(savedInstanceState);
         //init view
         initView();
@@ -75,30 +68,6 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
         return view;
     }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // the content
-        final RelativeLayout root = new RelativeLayout(getActivity());
-        root.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-
-        // creating the fullscreen dialog
-        final Dialog dialog = new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(root);
-        if (dialog.getWindow() != null) {
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.getWindow().setLayout(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-//        dialog.getWindow().setWindowAnimations(R.style.DialogWalletSelect);
-        return dialog;
-    }
 
     @Override
     public void onBeforeSetContentLayout() {
@@ -132,10 +101,10 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
     @Override
     public void initView() {
 
-        Decoration decor = new Decoration(getBaseActivity(), Decoration.VERTICAL);
+        Decoration decor = new Decoration(getContext(), Decoration.VERTICAL);
         mRecyclerView.addItemDecoration(decor);
 
-        mAdapter = new CommonAdapter<Wallet>(getBaseActivity(), R.layout.item_wallet_select_view, mWalletList) {
+        mAdapter = new CommonAdapter<Wallet>(getContext(), R.layout.item_wallet_select_view, mWalletList) {
 
             @Override
             protected void convert(ViewHolder holder, Wallet wallet, final int position) {
@@ -170,8 +139,7 @@ public class WalletSelectDialog extends BaseDialog implements BaseViewControl {
                                 mOnWalletSelectItemClickListener.onItemSelected(wallet, position);
                             }
                         }
-                        dismissDialog(TAG);
-
+                        dismiss();
                     }
                 });
 

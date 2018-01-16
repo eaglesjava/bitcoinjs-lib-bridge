@@ -1,19 +1,25 @@
 package com.bitbill.www.ui.main.receive;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.SelectWalletView;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.app.AppModel;
@@ -21,6 +27,8 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.info.BchInfoFragment;
 import com.bitbill.www.ui.wallet.info.EthInfoFragment;
+import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,14 +51,19 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     ViewPager viewPager;
     @BindView(R.id.wv_select)
     SelectWalletView selectWalletView;
+    @BindView(R.id.list)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.fl_bottom_sheet)
+    FrameLayout bottomSheetView;
     @Inject
     ReceiveMvpPresenter<AppModel, ReceiveMvpView> mReceiveMvpPresenter;
+    private CommonAdapter<Wallet> mAdapter;
     private FragmentAdapter mFragmentAdapter;
     private BtcReceiveFragment mBtcReceiveFragment;
-    private List<Wallet> mWalletList;
-    private WalletSelectDialog mWalletSelectDialog;
+    private List<Wallet> mWalletList = new ArrayList<>();
     private Wallet mSelectedWallet;
     private int mSelectedPosition = -1;
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     public ReceiveFragment() {
         // Required empty public constructor
@@ -83,6 +96,24 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     public void onBeforeSetContentLayout() {
         setHasOptionsMenu(true);
 
+        mWalletList = BitbillApp.get().getWallets();
+        if (StringUtils.isEmpty(mWalletList)) return;
+        //  通过钱包对象设置选择后的当前位置
+        mSelectedPosition = mWalletList.indexOf(getSelectedWallet());
+
+    }
+
+    @Nullable
+    private Wallet getSelectedWallet() {
+        if (StringUtils.isEmpty(mWalletList)) return null;
+        Wallet selectedWallet = null;
+        for (Wallet wallet : mWalletList) {
+            if (wallet.isSelected()) {
+                selectedWallet = wallet;
+                return selectedWallet;
+            }
+        }
+        return selectedWallet;
     }
 
     @Override
@@ -92,23 +123,12 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
 
     @Override
     public void initView() {
-        mWalletSelectDialog = WalletSelectDialog.newInstance();
-        mWalletSelectDialog.setOnWalletSelectItemClickListener(new WalletSelectDialog.OnWalletSelectItemClickListener() {
-            @Override
-            public void onItemSelected(Wallet selectedWallet, int position) {
-                mSelectedWallet = selectedWallet;
-                mSelectedPosition = position;
-                //刷新选择布局
-                selectWalletView.setWallet(selectedWallet);
-                loadBtcAddress();
-            }
-        });
 
         selectWalletView.setOnWalletClickListener(new SelectWalletView.OnWalletClickListener() {
             @Override
             public void onWalletClick(Wallet wallet, View view) {
                 //弹出钱包选择界面
-                mWalletSelectDialog.show(getChildFragmentManager(), WalletSelectDialog.TAG);
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
             }
 
@@ -120,6 +140,54 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
         });
         setupViewPager();
 
+        setupBottomSheet();
+
+    }
+
+    private void setupBottomSheet() {
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView);
+        Decoration decor = new Decoration(getContext(), Decoration.VERTICAL);
+        mRecyclerView.addItemDecoration(decor);
+
+        mAdapter = new CommonAdapter<Wallet>(getContext(), R.layout.item_wallet_select_view, mWalletList) {
+
+            @Override
+            protected void convert(ViewHolder holder, Wallet wallet, final int position) {
+
+                holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()));
+                holder.setText(R.id.tv_wallet_amount, StringUtils.satoshi2btc(wallet.getBalance()) + " btc");
+                holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
+
+                holder.setChecked(R.id.rb_selector, wallet.isSelected());
+
+                holder.itemView.setOnClickListener(v -> {
+                    //实现单选方法三： RecyclerView另一种定向刷新方法：不会有白光一闪动画 也不会重复onBindVIewHolder
+                    //如果勾选的不是已经勾选状态的Item
+                    if (mSelectedPosition != position && mSelectedPosition != -1) {
+                        //先取消上个item的勾选状态
+                        ViewHolder commonHolder = ((ViewHolder) mRecyclerView.findViewHolderForAdapterPosition(mSelectedPosition));
+                        if (commonHolder != null) {//还在屏幕里
+                            commonHolder.setChecked(R.id.rb_selector, false);
+                        } else {
+                            //add by 2016 11 22 for 一些极端情况，holder被缓存在Recycler的cacheView里，
+                            //此时拿不到ViewHolder，但是也不会回调onBindViewHolder方法。所以add一个异常处理
+                            notifyItemChanged(mSelectedPosition);
+                        }
+                        mWalletList.get(mSelectedPosition).setSelected(false);//不管在不在屏幕里 都需要改变数据
+                        //设置新Item的勾选状态
+                        mSelectedPosition = position;
+                        mWalletList.get(mSelectedPosition).setSelected(true);
+                        holder.setChecked(R.id.rb_selector, wallet.isSelected());
+
+                    }
+                    // dismiss
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                });
+
+            }
+        };
+        mRecyclerView.setAdapter(mAdapter);
+        bottomSheetView.setOnClickListener(v -> mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED));
     }
 
 
@@ -201,6 +269,9 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
             loadBtcAddress();
         } else {
             selectWalletView.setVisibility(View.GONE);
+        }
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
         }
 
     }
