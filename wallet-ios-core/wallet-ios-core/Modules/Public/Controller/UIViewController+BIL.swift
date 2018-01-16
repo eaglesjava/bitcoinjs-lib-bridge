@@ -26,7 +26,7 @@ extension UIViewController {
         SVProgressHUD.show(withStatus: status)
     }
     
-    func bil_showSuccess(status: String) {
+    func bil_showSuccess(status: String? = nil) {
         SVProgressHUD.showSuccess(withStatus: status)
     }
     

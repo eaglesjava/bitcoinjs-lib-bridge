@@ -70,7 +70,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
             BILWalletManager.shared.loadBlockHeightAndWalletVersion()
             w.getUTXOFromServer(success: { (utxos) in
                 self.refreshUI()
-                self.bil_dismissHUD()
+                self.bil_showSuccess()
             }, failure: { (msg, code) in
                 self.bil_showError(status: msg)
             })
