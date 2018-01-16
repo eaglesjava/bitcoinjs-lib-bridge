@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BILChooseWalletController: BILLightBlueBaseController, UITableViewDelegate, UITableViewDataSource {
+class BILChooseWalletController: BILBaseViewController, UITableViewDelegate, UITableViewDataSource {
 
 	@IBOutlet weak var tableView: UITableView!
 	fileprivate let cellID = "BILChooseWalletCell"
@@ -38,6 +38,11 @@ class BILChooseWalletController: BILLightBlueBaseController, UITableViewDelegate
 		super.languageDidChanged()
         titleLabel?.text = "Choose wallet".bil_ui_localized
 		tableView.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer?.removeFromSuperlayer()
     }
     
     @objc

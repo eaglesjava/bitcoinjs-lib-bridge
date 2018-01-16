@@ -413,7 +413,7 @@
                         <viewLayoutGuide key="safeArea" id="blV-CA-Zjj"/>
                     </view>
                     <navigationItem key="navigationItem" title="特定金额接收" id="Q03-cE-dXW">
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="plain" id="MGW-M2-LOt">
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="MGW-M2-LOt">
                             <connections>
                                 <action selector="doneAction:" destination="z6H-Hj-0bh" id="k25-rc-yOB"/>
                             </connections>

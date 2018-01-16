@@ -136,7 +136,7 @@ class BILReceiveController: BILBaseViewController {
 	private let bgView = UIView(frame: UIScreen.main.bounds)
 	
 	func showChooseWalletView() {
-		
+		navigationItem.rightBarButtonItem?.isEnabled = false
 		let screenSize = UIScreen.main.bounds.size
 		
 		var bottom: CGFloat = 49.0
@@ -166,6 +166,7 @@ class BILReceiveController: BILBaseViewController {
 	}
 	
 	func hideChooseWalletView() {
+        navigationItem.rightBarButtonItem?.isEnabled = true
 		let screenSize = UIScreen.main.bounds.size
 		var targetFrame = chooseWalletContainerView.frame
 		targetFrame.origin.y = screenSize.height
