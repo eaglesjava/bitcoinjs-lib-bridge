@@ -102,6 +102,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelItem" destination="g1t-Gv-vAB" id="LVZ-tC-pFh"/>
                         <outlet property="mnemonicView" destination="lhT-aq-ezO" id="5ec-VR-F9K"/>
                         <outlet property="mnemonicViewHeight" destination="a3v-HR-Z86" id="P5Y-uZ-BeW"/>
                         <outlet property="nextButton" destination="qlY-G9-oj8" id="zCn-XC-1MX"/>

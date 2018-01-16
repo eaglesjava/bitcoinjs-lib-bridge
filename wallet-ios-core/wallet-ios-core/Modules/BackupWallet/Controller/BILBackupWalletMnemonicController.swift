@@ -17,7 +17,8 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 	@IBOutlet weak var snapshotTipLabel: UILabel!
 	@IBOutlet weak var nextButton: BILGradientButton!
 	@IBOutlet weak var mnemonicView: BILMnemonicView!
-	var wallet: WalletModel?
+    @IBOutlet weak var cancelItem: UIBarButtonItem?
+    var wallet: WalletModel?
 	var mnemonicHash: String? {
 		didSet {
 			wallet = WalletModel.fetch(mnemonicHash: mnemonicHash)
@@ -48,6 +49,7 @@ class BILBackupWalletMnemonicController: BILBaseViewController {
 		secureLabel.text = "Mnemonic tip".bil_ui_localized
 		snapshotTipLabel.text = "Snapshot tip".bil_ui_localized
 		nextButton.setTitle("I have saved them orderly".bil_ui_localized, for: .normal)
+        cancelItem?.title = "Cancel".bil_ui_localized
 	}
     
     deinit {

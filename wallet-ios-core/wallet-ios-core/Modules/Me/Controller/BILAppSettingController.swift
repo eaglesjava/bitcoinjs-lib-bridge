@@ -138,16 +138,17 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
     }
     
     func chooseLanguageType() {
+        func change(language: BILLanguageType) {
+            BILSettingManager.currentLanguage = language
+            self.bil_makeToast(msg: .meAppSetting_saved)
+            self.tableView.reloadData()
+        }
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         sheet.addAction(UIAlertAction(title: BILLanguageType.en.name, style: .default, handler: { (action) in
-            BILSettingManager.currentLanguage = .en
-            self.bil_makeToast(msg: .meAppSetting_saved)
-            self.tableView.reloadData()
+            change(language: .en)
         }))
         sheet.addAction(UIAlertAction(title: BILLanguageType.zh_cn.name, style: .default, handler: { (action) in
-            BILSettingManager.currentLanguage = .zh_cn
-            self.bil_makeToast(msg: .meAppSetting_saved)
-            self.tableView.reloadData()
+            change(language: .zh_cn)
         }))
         
         sheet.addAction(UIAlertAction(title: .meMe_cancel, style: .cancel, handler: { (action) in
