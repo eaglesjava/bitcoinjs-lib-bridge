@@ -29,7 +29,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -137,12 +136,7 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
         mMnemonicList.addAll(Arrays.asList(mMnemonicArray));
 
         // 对助记词进行乱序排序
-        Collections.sort(mMnemonicList, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.hashCode() - o2.hashCode();
-            }
-        });
+        Collections.shuffle(mMnemonicList);
 
         // 助记词确定框
         mMnemonicConfirmList = new ArrayList<>();

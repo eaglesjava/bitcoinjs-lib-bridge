@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    android:useLevel="false">
+
+    <!--半径设置为15dp是为了让边界能够显示出一丝track-->
+
+    <solid android:color="@color/white_80" />
+    <size
+        android:width="20dp"
+        android:height="20dp" />
+
+</shape>

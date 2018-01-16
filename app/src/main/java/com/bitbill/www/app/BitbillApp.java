@@ -163,6 +163,9 @@ public class BitbillApp extends Application {
                 return defaultWallet;
             }
         }
+        if (defaultWallet == null) {
+            defaultWallet = mWallets.get(0);
+        }
         return defaultWallet;
     }
 

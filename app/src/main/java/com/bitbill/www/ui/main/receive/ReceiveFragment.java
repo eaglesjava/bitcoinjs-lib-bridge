@@ -1,7 +1,6 @@
 package com.bitbill.www.ui.main.receive;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -96,24 +95,6 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     public void onBeforeSetContentLayout() {
         setHasOptionsMenu(true);
 
-        mWalletList = BitbillApp.get().getWallets();
-        if (StringUtils.isEmpty(mWalletList)) return;
-        //  通过钱包对象设置选择后的当前位置
-        mSelectedPosition = mWalletList.indexOf(getSelectedWallet());
-
-    }
-
-    @Nullable
-    private Wallet getSelectedWallet() {
-        if (StringUtils.isEmpty(mWalletList)) return null;
-        Wallet selectedWallet = null;
-        for (Wallet wallet : mWalletList) {
-            if (wallet.isSelected()) {
-                selectedWallet = wallet;
-                return selectedWallet;
-            }
-        }
-        return selectedWallet;
     }
 
     @Override
@@ -173,11 +154,15 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                             //此时拿不到ViewHolder，但是也不会回调onBindViewHolder方法。所以add一个异常处理
                             notifyItemChanged(mSelectedPosition);
                         }
-                        mWalletList.get(mSelectedPosition).setSelected(false);//不管在不在屏幕里 都需要改变数据
+                        //不管在不在屏幕里 都需要改变数据
                         //设置新Item的勾选状态
                         mSelectedPosition = position;
                         mWalletList.get(mSelectedPosition).setSelected(true);
                         holder.setChecked(R.id.rb_selector, wallet.isSelected());
+                        mSelectedWallet = wallet;
+                        //刷新选择布局
+                        selectWalletView.setWallet(wallet);
+                        loadBtcAddress();
 
                     }
                     // dismiss
