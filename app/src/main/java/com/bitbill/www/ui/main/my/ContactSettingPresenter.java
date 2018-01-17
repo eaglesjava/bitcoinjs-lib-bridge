@@ -86,9 +86,7 @@ public class ContactSettingPresenter<M extends ContactModel, V extends ContactSe
     public void insertContact(List<RecoverContactsResponse.ContactsBean> contacts) {
         List<Contact> contactList = new ArrayList<>();
         for (RecoverContactsResponse.ContactsBean contactsBean : contacts) {
-            contactList.add(new Contact(null
-                    , contactsBean.getWalletContact()
-                    , getWalletKey()
+            contactList.add(new Contact(null, contactsBean.getWalletContact()
                     , contactsBean.getWalletAddress()
                     , contactsBean.getRemark()
                     , contactsBean.getContactName()

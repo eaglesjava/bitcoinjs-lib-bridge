@@ -1,13 +1,15 @@
 package com.bitbill.www.ui.main.send;
 
+import com.androidnetworking.error.ANError;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.contact.ContactModel;
-import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.network.entity.GetLastAddressRequest;
+import com.bitbill.www.model.wallet.network.entity.GetLastAddressResponse;
 
 import javax.inject.Inject;
 
@@ -17,10 +19,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu on 2017/12/20.
  */
 @PerActivity
-public class BtcSendPresenter<M extends WalletModel, V extends BtcSendMvpView> extends ModelPresenter<M, V> implements BtcSendMvpPresenter<M, V> {
-
-    @Inject
-    ContactModel mContactModel;
+public class BtcSendPresenter<M extends ContactModel, V extends BtcSendMvpView> extends ModelPresenter<M, V> implements BtcSendMvpPresenter<M, V> {
 
     @Inject
     public BtcSendPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
@@ -28,30 +27,56 @@ public class BtcSendPresenter<M extends WalletModel, V extends BtcSendMvpView> e
     }
 
     @Override
-    public void validateBtcAddress() {
-        if (!isValidAddress()) {
+    public void getLastAddress() {
+        if (!isValidWalletId()) {
             return;
         }
-        BitcoinJsWrapper.getInstance().validateAddress(getMvpView().getSendAddress(), (key, jsResult) -> {
-            if (!isViewAttached()) {
-                return;
-            }
-            if (StringUtils.isEmpty(jsResult)) {
-                getMvpView().validateAddress(false);
-                return;
-            }
-            if ("true".equals(jsResult[0])) {
-                //验证成功
-                getMvpView().validateAddress(true);
-            } else {
-                getMvpView().validateAddress(false);
-            }
-        });
+        getCompositeDisposable().add(getModelManager()
+                .getLastAddress(new GetLastAddressRequest(getMvpView().getWalletId()))
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<ApiResponse<GetLastAddressResponse>>(getMvpView()) {
+                    @Override
+                    public void onNext(ApiResponse<GetLastAddressResponse> getLastAddressResponseApiResponse) {
+                        super.onNext(getLastAddressResponseApiResponse);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (getLastAddressResponseApiResponse != null && getLastAddressResponseApiResponse.isSuccess() && getLastAddressResponseApiResponse.getData() != null) {
+                            getMvpView().getLastAddressSuccess(getLastAddressResponseApiResponse.getData().getAddress());
+
+                        } else {
+                            getMvpView().getLastAddressFail();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (e instanceof ANError) {
+                            handleApiError(((ANError) e));
+                        } else {
+                            getMvpView().getLastAddressFail();
+                        }
+                    }
+
+                }));
+    }
+
+    public boolean isValidWalletId() {
+
+        if (StringUtils.isEmpty(getMvpView().getWalletId())) {
+            getMvpView().requireWalletId();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void updateContact() {
-        getCompositeDisposable().add(mContactModel
+        getCompositeDisposable().add(getModelManager()
                 .updateContact(getMvpView().getSendContact())
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Boolean>() {
@@ -67,11 +92,4 @@ public class BtcSendPresenter<M extends WalletModel, V extends BtcSendMvpView> e
                 }));
     }
 
-    public boolean isValidAddress() {
-        if (StringUtils.isEmpty(getMvpView().getSendAddress())) {
-            getMvpView().requireAddress();
-            return false;
-        }
-        return true;
-    }
 }

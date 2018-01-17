@@ -3,6 +3,7 @@ package com.bitbill.www.ui.wallet.info;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -117,7 +118,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
         holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txRecord.getSumAmount()) + " btc");
 
 
-        holder.setText(R.id.tv_date, StringUtils.formatDate(txRecord.getCreatedTime()));
+        holder.setText(R.id.tv_date, StringUtils.formatDateTime(txRecord.getCreatedTime()));
         if (txRecord.getHeight() == -1) {
             holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
             holder.setText(R.id.tv_status, getString(R.string.status_item_unconfirm));
@@ -197,7 +198,12 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
 
         if (mWalelt != null) {
             tvAmount.setText(StringUtils.satoshi2btc(mWalelt.getBalance()));
-            tvBtcUnconfirm.setText(String.format(getString(R.string.text_btc_unconfirm), StringUtils.satoshi2btc(mWalelt.getUnconfirm())));
+            if (mWalelt.getUnconfirm() > 0) {
+                tvBtcUnconfirm.setText(String.format(getString(R.string.text_btc_unconfirm), StringUtils.satoshi2btc(mWalelt.getUnconfirm())));
+                tvBtcUnconfirm.setVisibility(View.VISIBLE);
+            } else {
+                tvBtcUnconfirm.setVisibility(View.GONE);
+            }
 
         }
         tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBalance())));

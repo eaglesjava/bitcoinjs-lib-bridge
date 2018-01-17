@@ -42,20 +42,20 @@ public class AddContactByAddressPresenter<M extends ContactModel, V extends AddC
                     @Override
                     public void onNext(Contact contact) {
                         super.onNext(contact);
-                        if (contact != null) {
-                            if (!isViewAttached()) {
-                                return;
-                            }
-                            getMvpView().isExsistContact();
-                        } else {
-                            addContact();
+                        if (!isViewAttached()) {
+                            return;
                         }
+                        getMvpView().isExsistContact(contact != null);
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        addContact();
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        getMvpView().isExsistContact(false);
                     }
                 }));
     }
@@ -64,7 +64,6 @@ public class AddContactByAddressPresenter<M extends ContactModel, V extends AddC
     public void addContact() {
         Contact contact = new Contact(null
                 , null
-                , getApp().getContactKey()
                 , getMvpView().getAddress()
                 , getMvpView().getRemark()
                 , getMvpView().getContactName()
@@ -72,7 +71,7 @@ public class AddContactByAddressPresenter<M extends ContactModel, V extends AddC
         getCompositeDisposable().add(getModelManager()
                 .insertContact(contact)
                 .concatMap(aLong -> getModelManager()
-                        .addContacts(new AddContactsRequest(contact.getWalletId(), contact.getWalletKey(), contact.getAddress(), contact.getRemark(), contact.getContactName(), contact.getCoinType())))
+                        .addContacts(new AddContactsRequest(contact.getWalletId(), getApp().getContactKey(), contact.getAddress(), contact.getRemark(), contact.getContactName(), contact.getCoinType())))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<AddContactsResponse>>(getMvpView()) {
                     @Override

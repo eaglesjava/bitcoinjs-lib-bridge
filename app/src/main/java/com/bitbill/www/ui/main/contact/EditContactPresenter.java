@@ -38,7 +38,7 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
         contact.setRemark(getMvpView().getRemark());
         getCompositeDisposable().add(getModelManager()
                 .updateContacts(new UpdateContactsRequest(contact.getWalletId()
-                        , contact.getWalletKey()
+                        , getApp().getContactKey()
                         , contact.getAddress()
                         , contact.getRemark()
                         , contact.getContactName()
@@ -121,7 +121,7 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
 
         getCompositeDisposable().add(getModelManager()
                 .deleteContacts(new DeleteContactsRequest(contact.getWalletId()
-                        , contact.getWalletKey()
+                        , getApp().getContactKey()
                         , contact.getAddress()))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<Void>>() {

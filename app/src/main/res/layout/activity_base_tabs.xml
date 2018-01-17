@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".common.base.view.BaseTabsActivity">
+    tools:context="com.bitbill.www.common.base.view.BaseTabsActivity">
 
     <include
         layout="@layout/layout_tabs_blue"

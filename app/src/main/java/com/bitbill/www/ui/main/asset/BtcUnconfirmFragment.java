@@ -101,7 +101,7 @@ public class BtcUnconfirmFragment extends BaseListFragment<TxRecord, MvpPresente
         } catch (Exception e) {
             e.printStackTrace();
         }
-        holder.setText(R.id.tv_date, StringUtils.formatDate(txRecord.getCreatedTime()));
+        holder.setText(R.id.tv_date, StringUtils.formatDateTime(txRecord.getCreatedTime()));
         if (txRecord.getHeight() == -1) {
             holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);
         } else {

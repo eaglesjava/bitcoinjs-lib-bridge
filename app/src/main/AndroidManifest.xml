@@ -20,6 +20,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -82,6 +83,7 @@
         <activity
             android:name=".ui.main.send.SendAmountActivity"
             android:label="@string/title_activity_send_amount"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".ui.main.receive.ScanPayActivity"

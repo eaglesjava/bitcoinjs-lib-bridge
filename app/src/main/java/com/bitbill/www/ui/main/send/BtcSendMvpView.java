@@ -11,9 +11,13 @@ public interface BtcSendMvpView extends MvpView {
 
     String getSendAddress();
 
-    void validateAddress(boolean validate);
-
-    void requireAddress();
-
     Contact getSendContact();
+
+    String getWalletId();
+
+    void getLastAddressSuccess(String address);
+
+    void getLastAddressFail();
+
+    void requireWalletId();
 }

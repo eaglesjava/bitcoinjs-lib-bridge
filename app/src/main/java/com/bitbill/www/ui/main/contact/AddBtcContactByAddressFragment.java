@@ -11,8 +11,11 @@ import android.view.View;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.common.presenter.ValidateAddressMvpPresenter;
+import com.bitbill.www.common.presenter.ValidateAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.EditTextWapper;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.ui.main.send.ScanQrcodeActivity;
@@ -26,7 +29,7 @@ import butterknife.BindView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactByAddressMvpPresenter> implements AddContactByAddressMvpView {
+public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactByAddressMvpPresenter> implements AddContactByAddressMvpView, ValidateAddressMvpView {
 
     public static final String TAG = "AddBtcContactByAddressFragment";
     @BindView(R.id.etw_contact_name)
@@ -37,6 +40,8 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
     EditTextWapper mEtwContactRemark;
     @Inject
     AddContactByAddressMvpPresenter<ContactModel, AddContactByAddressMvpView> mAddContactByAddressMvpPresenter;
+    @Inject
+    ValidateAddressMvpPresenter<AddressModel, ValidateAddressMvpView> mValidateAddressMvpPresenter;
     private boolean cancel;
     private View focusView;
 
@@ -95,6 +100,7 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
+        addPresenter(mValidateAddressMvpPresenter);
     }
 
     @Override
@@ -130,8 +136,12 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
     }
 
     @Override
-    public void isExsistContact() {
-        showMessage(R.string.msg_contact_is_exsist);
+    public void isExsistContact(boolean isExsist) {
+        if (isExsist) {
+            showMessage(R.string.msg_contact_is_exsist);
+        } else {
+            mValidateAddressMvpPresenter.validateBtcAddress();
+        }
     }
 
     @Override
@@ -155,6 +165,15 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
         mEtwContactName.setError(R.string.error_contact_name_required);
         focusView = mEtwContactName;
         cancel = true;
+    }
+
+    @Override
+    public void validateAddress(boolean validate) {
+        if (validate) {
+            getMvpPresenter().addContact();
+        } else {
+            showMessage(R.string.fail_invalid_address);
+        }
     }
 
     @Override

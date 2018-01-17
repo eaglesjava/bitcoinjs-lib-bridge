@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.AttributeSet;
+import android.view.inputmethod.EditorInfo;
 
 import com.bitbill.www.common.utils.StringUtils;
 
@@ -66,6 +67,7 @@ public class AmountEditText extends android.support.v7.widget.AppCompatEditText 
     private void init(AttributeSet attrs, int defStyleAttr) {
         setFilters(new InputFilter[]{lengthFilter});
         StringUtils.setAmountTypeface(getContext(), this);
+        setInputType(EditorInfo.TYPE_CLASS_NUMBER | EditorInfo.TYPE_NUMBER_FLAG_DECIMAL);
     }
 
 }

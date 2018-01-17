@@ -106,11 +106,8 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                         if (!isViewAttached()) {
                             return;
                         }
-                        if (allAmount > 0) {
-                            getMvpView().getBalanceSuccess(wallets, allAmount);
-                        } else {
-                            getMvpView().getBalanceFail();
-                        }
+                        getMvpView().getBalanceSuccess(wallets, allAmount);
+
 
                     }
 

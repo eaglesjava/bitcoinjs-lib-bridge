@@ -13,15 +13,15 @@ import com.bitbill.www.common.presenter.BtcAddressPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.presenter.GetCacheVersionPresenter;
-import com.bitbill.www.common.presenter.GetLastAddressMvpPresenter;
-import com.bitbill.www.common.presenter.GetLastAddressMvpView;
-import com.bitbill.www.common.presenter.GetLastAddressPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.presenter.ParseTxInfoPresenter;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.presenter.SyncAddressPresenter;
+import com.bitbill.www.common.presenter.ValidateAddressMvpPresenter;
+import com.bitbill.www.common.presenter.ValidateAddressMvpView;
+import com.bitbill.www.common.presenter.ValidateAddressPresenter;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.presenter.WalletPresenter;
@@ -238,8 +238,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    BtcSendMvpPresenter<WalletModel, BtcSendMvpView> provideBtcSendPresenter(
-            BtcSendPresenter<WalletModel, BtcSendMvpView> presenter) {
+    BtcSendMvpPresenter<ContactModel, BtcSendMvpView> provideBtcSendPresenter(
+            BtcSendPresenter<ContactModel, BtcSendMvpView> presenter) {
         return presenter;
     }
 
@@ -287,8 +287,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    GetLastAddressMvpPresenter<ContactModel, GetLastAddressMvpView> provideGetLastAddressPresenter(
-            GetLastAddressPresenter<ContactModel, GetLastAddressMvpView> presenter) {
+    ValidateAddressMvpPresenter<AddressModel, ValidateAddressMvpView> provideGetLastAddressPresenter(
+            ValidateAddressPresenter<AddressModel, ValidateAddressMvpView> presenter) {
         return presenter;
     }
 

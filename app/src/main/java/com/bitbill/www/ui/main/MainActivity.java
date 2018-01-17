@@ -352,17 +352,16 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void getBalanceFail() {
-        showMessage("获取钱包余额失败");
+
     }
 
     @Override
     public void getBalanceSuccess(List<Wallet> wallets, Long totalAmount) {
         BitbillApp.get().setWallets(wallets);
-        if (totalAmount > 0) {
-            //设置btc总额
-            if (mAssetFragment != null) {
-                mAssetFragment.setBtcTotalAmount(totalAmount);
-            }
+
+        //设置btc总额
+        if (mAssetFragment != null) {
+            mAssetFragment.setBtcTotalAmount(totalAmount);
         }
         reloadWalletInfo();
     }

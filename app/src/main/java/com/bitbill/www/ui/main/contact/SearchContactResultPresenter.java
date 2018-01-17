@@ -70,14 +70,14 @@ public class SearchContactResultPresenter<M extends ContactModel, V extends Sear
             return;
 
         }
-        Contact contact = new Contact(null, getMvpView().getWalletId(), getApp().getContactKey(), getMvpView().getAddress(), getMvpView().getRemark(), getMvpView().getContactName(), AppConstants.BTC_COIN_TYPE);
+        Contact contact = new Contact(null, getMvpView().getWalletId(), getMvpView().getAddress(), getMvpView().getRemark(), getMvpView().getContactName(), AppConstants.BTC_COIN_TYPE);
         getCompositeDisposable()
                 .add(getModelManager()
                         .insertContact(contact)
                         .concatMap(aLong -> {
                             contact.setId(aLong);
                             return getModelManager()
-                                    .addContacts(new AddContactsRequest(contact.getWalletId(), contact.getWalletKey(), contact.getAddress(), contact.getRemark(), contact.getContactName(), contact.getCoinType()));
+                                    .addContacts(new AddContactsRequest(contact.getWalletId(), getApp().getContactKey(), contact.getAddress(), contact.getRemark(), contact.getContactName(), contact.getCoinType()));
                         })
                         .compose(this.applyScheduler())
                         .subscribeWith(new BaseSubcriber<ApiResponse<AddContactsResponse>>(getMvpView()) {

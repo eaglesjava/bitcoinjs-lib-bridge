@@ -586,27 +586,35 @@ public class StringUtils {
         return parse;
     }
 
-    public static String formatDate(String date) {
+    public static String formatDateTime(String date) {
         //format date by local
         try {
             Date parse = yyyyMMddHHmmss.parse(date);
-            return formatDate(parse.getTime());
+            return formatDateTime(parse.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return date;
     }
 
-    public static String formatDate(Date date) {
+    public static String formatDateTime(Date date) {
         if (date == null) {
             return "-- -- --";
         }
-        return formatDate(date.getTime());
+        return formatDateTime(date.getTime());
     }
 
 
-    public static String formatDate(long dateTime) {
+    public static String formatDateTime(long dateTime) {
         return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM).format(new Date(dateTime));
+    }
+
+    /**
+     * @param dateTime
+     * @return
+     */
+    public static String formatDate(long dateTime) {
+        return DateFormat.getDateInstance(DateFormat.MEDIUM).format(new Date(dateTime));
     }
 
     public static void setEditable(EditText etText, boolean editable) {
@@ -616,7 +624,7 @@ public class StringUtils {
         etText.setFocusable(editable);
         etText.setFocusableInTouchMode(editable);
         etText.setLongClickable(editable);
-        etText.setInputType(editable ? InputType.TYPE_CLASS_TEXT : InputType.TYPE_NULL);
+        etText.setInputType(editable ? etText.getInputType() : InputType.TYPE_NULL);
     }
 
     /**

@@ -148,7 +148,7 @@
         <item name="android:lines">1</item>
         <item name="android:maxLines">1</item>
         <item name="android:textSize">60sp</item>
-        <item name="android:inputType">numberDecimal</item>
+        <item name="android:inputType">number|numberDecimal</item>
         <item name="android:background">@color/transparent</item>
 
     </style>

@@ -7,7 +7,7 @@ import com.bitbill.www.common.base.view.MvpView;
  */
 
 public interface AddContactByAddressMvpView extends MvpView {
-    void isExsistContact();
+    void isExsistContact(boolean isExsist);
 
     String getAddress();
 

@@ -94,7 +94,7 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
             mDatas.add(new TransferConfirmItem(height).setTitle(getString(R.string.title_tx_confirm)));
         }
         mDatas.add(new TransferRemarkItem().setRemark(mTxRecord.getRemark()).setTitle(getString(R.string.title_tx_remark)));
-        mDatas.add(new TransferDateItem().setDate(StringUtils.formatDate(mTxRecord.getCreatedTime())).setTitle(getString(R.string.title_tx_date)));
+        mDatas.add(new TransferDateItem().setDate(StringUtils.formatDateTime(mTxRecord.getCreatedTime())).setTitle(getString(R.string.title_tx_date)));
         mAdapter.notifyDataSetChanged();
 
         if (mHeaderViewHolder != null) {

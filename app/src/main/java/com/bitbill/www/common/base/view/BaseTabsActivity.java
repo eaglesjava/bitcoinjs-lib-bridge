@@ -40,7 +40,7 @@ public abstract class BaseTabsActivity extends BaseToolbarActivity {
         for (int i = 0; i < tabStrip.getChildCount(); i++) {
             View tabView = tabStrip.getChildAt(i);
             if (tabView != null) {
-                tabView.setClickable(false);
+                tabView.setOnClickListener(v -> showMessage(R.string.msg_coming_soon));
             }
         }
         tabs.setSelectedTabIndicatorColor(getResources().getColor(isBlue() ? R.color.blue : R.color.black));
@@ -53,7 +53,7 @@ public abstract class BaseTabsActivity extends BaseToolbarActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_wallet_info;
+        return R.layout.activity_base_tabs;
     }
 
 }

@@ -87,7 +87,11 @@ public class UIHelper {
                 }
             }
         } else {
-            MainActivity.start(context, null, result);
+            if (AddBtcContactByAddressFragment.TAG.equals(fromTag) || ContactFragment.TAG.equals(fromTag)) {
+                AddContactByAddressActivity.start(context, result);
+            } else {
+                MainActivity.start(context, null, result);
+            }
         }
     }
 

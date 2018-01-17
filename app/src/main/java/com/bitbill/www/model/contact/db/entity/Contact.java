@@ -7,6 +7,7 @@ import com.mcxtzhang.indexlib.IndexBar.bean.BaseIndexPinyinBean;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.Property;
 
 import java.io.Serializable;
@@ -15,7 +16,10 @@ import java.io.Serializable;
  * Created by isanwenyu@163.com on 2017/11/17.
  */
 
-@Entity(nameInDb = "contact")
+@Entity(nameInDb = "contact",
+        indexes = {
+                @Index(value = "walletId,address", unique = true)
+        })
 public class Contact extends BaseIndexPinyinBean implements Serializable {
 
     private static final long serialVersionUID = 266;
@@ -25,9 +29,6 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
 
     @Property(nameInDb = "wallet_id")
     private String walletId;
-
-    @Property(nameInDb = "wallet_key")
-    private String walletKey;//默认"BTC"
 
     @Property(nameInDb = "address")
     private String address;
@@ -42,12 +43,11 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
     private String coinType;//默认"BTC"
 
 
-    @Generated(hash = 1951439029)
-    public Contact(Long id, String walletId, String walletKey, String address,
-                   String remark, String contactName, String coinType) {
+    @Generated(hash = 185153410)
+    public Contact(Long id, String walletId, String address, String remark,
+                   String contactName, String coinType) {
         this.id = id;
         this.walletId = walletId;
-        this.walletKey = walletKey;
         this.address = address;
         this.remark = remark;
         this.contactName = contactName;
@@ -115,13 +115,5 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
-    }
-
-    public String getWalletKey() {
-        return this.walletKey;
-    }
-
-    public void setWalletKey(String walletKey) {
-        this.walletKey = walletKey;
     }
 }

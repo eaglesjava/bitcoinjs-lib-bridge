@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -15,6 +14,7 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.AmountEditText;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,7 +22,7 @@ import butterknife.OnClick;
 public class SpecificReceiveActivity extends BaseToolbarActivity {
 
     @BindView(R.id.et_input_amount)
-    EditText etInputAmount;
+    AmountEditText etInputAmount;
     @BindView(R.id.tv_btc_value)
     TextView tvBtcCny;
     private String mReceiveAddress;

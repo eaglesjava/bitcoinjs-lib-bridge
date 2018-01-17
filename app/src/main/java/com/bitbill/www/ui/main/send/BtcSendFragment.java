@@ -8,13 +8,13 @@ import android.widget.Button;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseFragment;
-import com.bitbill.www.common.presenter.GetLastAddressMvpPresenter;
-import com.bitbill.www.common.presenter.GetLastAddressMvpView;
+import com.bitbill.www.common.presenter.ValidateAddressMvpPresenter;
+import com.bitbill.www.common.presenter.ValidateAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.DrawableEditText;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
-import com.bitbill.www.model.wallet.WalletModel;
 
 import javax.inject.Inject;
 
@@ -24,16 +24,16 @@ import butterknife.OnClick;
 /**
  * Created by isanwenyu@163.com on 2017/12/9.
  */
-public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implements BtcSendMvpView, GetLastAddressMvpView {
+public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implements BtcSendMvpView, ValidateAddressMvpView {
 
     @BindView(R.id.et_send_address)
     DrawableEditText etSendAddress;
     @BindView(R.id.btn_next)
     Button btnNext;
     @Inject
-    BtcSendMvpPresenter<WalletModel, BtcSendMvpView> mBtcSendMvpPresenter;
+    BtcSendMvpPresenter<ContactModel, BtcSendMvpView> mBtcSendMvpPresenter;
     @Inject
-    GetLastAddressMvpPresenter<ContactModel, GetLastAddressMvpView> mGetLastAddressMvpPresenter;
+    ValidateAddressMvpPresenter<AddressModel, ValidateAddressMvpView> mValidateAddressMvpPresenter;
     private Contact mSendContact;
 
     public static BtcSendFragment newInstance() {
@@ -53,7 +53,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
-        addPresenter(mGetLastAddressMvpPresenter);
+        addPresenter(mValidateAddressMvpPresenter);
     }
 
     @Override
@@ -91,10 +91,10 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
             case R.id.btn_next:
                 //跳转到发送金额界面
                 if (mSendContact == null) {
-                    getMvpPresenter().validateBtcAddress();
+                    mValidateAddressMvpPresenter.validateBtcAddress();
                 } else {
                     //请求最新联系人关联walletid地址
-                    mGetLastAddressMvpPresenter.getLastAddress();
+                    getMvpPresenter().getLastAddress();
                 }
                 break;
         }
@@ -109,6 +109,11 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return etSendAddress.getText().toString();
     }
 
+    public void setSendAddress(String sendAddress) {
+
+        etSendAddress.setText(sendAddress);
+    }
+
     public void setSendAddress(Contact sendContact) {
         mSendContact = sendContact;
         if (sendContact != null) {
@@ -116,11 +121,6 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
             setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? sendContact.getAddress() : walletId) + ")");
 
         }
-    }
-
-    public void setSendAddress(String sendAddress) {
-
-        etSendAddress.setText(sendAddress);
     }
 
     public void sendSuccess() {
@@ -140,6 +140,11 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     public void requireAddress() {
         showMessage(R.string.fail_send_address_null);
 
+    }
+
+    @Override
+    public String getAddress() {
+        return getSendAddress();
     }
 
     @Override
@@ -163,7 +168,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     @Override
     public void getLastAddressSuccess(String address) {
         mSendContact.setAddress(address);
-        getMvpPresenter().validateBtcAddress();
+        mValidateAddressMvpPresenter.validateBtcAddress();
         getMvpPresenter().updateContact();
     }
 

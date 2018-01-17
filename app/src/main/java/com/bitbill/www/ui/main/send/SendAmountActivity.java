@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -18,6 +17,7 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.AmountEditText;
 import com.bitbill.www.model.contact.db.entity.Contact;
 
 import butterknife.BindView;
@@ -26,7 +26,7 @@ import butterknife.OnClick;
 public class SendAmountActivity extends BaseToolbarActivity {
 
     @BindView(R.id.et_send_amount)
-    EditText etSendAmount;
+    AmountEditText etSendAmount;
     @BindView(R.id.btn_next)
     Button btnNext;
     @BindView(R.id.tv_btc_value)
