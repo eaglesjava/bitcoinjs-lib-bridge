@@ -19,8 +19,17 @@
         android:id="@+id/sv_currency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hasBottomLine="true"
         app:leftString="@string/setting_currency"
         app:rightResource="@drawable/ic_right_arrow"
         app:rightString="@string/text_cny" />
+
+    <com.bitbill.www.common.widget.SettingView
+        android:id="@+id/sv_languge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftString="@string/setting_languge"
+        app:rightResource="@drawable/ic_right_arrow"
+        app:rightString="@string/languge_simplified_chinese" />
 
 </LinearLayout>

@@ -10,6 +10,8 @@ import com.bitbill.www.common.base.model.prefs.PreferencesHelper;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.di.qualifier.PrefersAppInfo;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -80,5 +82,15 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     @Override
     public void setContactkey(String contactKey) {
         mPrefs.edit().putString(CONTACTKEY, contactKey);
+    }
+
+    @Override
+    public Locale getSelectedLocale() {
+        return new Locale(mPrefs.getString(SELECTED_LOCALE, Locale.CHINESE.getLanguage()));
+    }
+
+    @Override
+    public void setSelectedLocale(Locale locale) {
+        mPrefs.edit().putString(SELECTED_LOCALE, locale.getLanguage()).apply();
     }
 }

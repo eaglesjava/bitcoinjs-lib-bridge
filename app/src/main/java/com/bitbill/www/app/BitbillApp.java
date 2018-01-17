@@ -1,6 +1,7 @@
 package com.bitbill.www.app;
 
 import android.app.Application;
+import android.content.res.Configuration;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -9,6 +10,7 @@ import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.www.BuildConfig;
 import com.bitbill.www.R;
+import com.bitbill.www.common.utils.LocaleUtils;
 import com.bitbill.www.common.utils.SoundUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
@@ -27,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -84,6 +87,22 @@ public class BitbillApp extends Application {
         mWallets = new ArrayList<>();
 
         initSocket();
+
+        LocaleUtils.updateLocale(this, LocaleUtils.getUserLocale(this));
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Locale _UserLocale = LocaleUtils.getUserLocale(this);
+        //系统语言改变了应用保持之前设置的语言
+        if (_UserLocale != null) {
+            Locale.setDefault(_UserLocale);
+            Configuration _Configuration = new Configuration(newConfig);
+            _Configuration.setLocale(_UserLocale);
+            getResources().updateConfiguration(_Configuration, getResources().getDisplayMetrics());
+        }
+
     }
 
     public ApplicationComponent getComponent() {

@@ -7,6 +7,8 @@ package com.bitbill.www.model.app.prefs;
 
 import com.bitbill.www.common.base.model.prefs.Prefs;
 
+import java.util.Locale;
+
 /**
  * Created by isanwenyu@163.com on 2017/7/25.
  */
@@ -16,6 +18,7 @@ public interface AppPreferences extends Prefs {
     String IS_SOUND_ENABLED = "is_sound_enabled";
     String SELECTED_CURRENCY = "selected_currency";
     String CONTACTKEY = "contactkey";
+    String SELECTED_LOCALE = "selected_locale";
 
     void setReceiveRemindDialogShown();
 
@@ -36,6 +39,10 @@ public interface AppPreferences extends Prefs {
     String getContactKey();
 
     void setContactkey(String contactKey);
+
+    Locale getSelectedLocale();
+
+    void setSelectedLocale(Locale locale);
 
     enum SelectedCurrency {
         CNY,

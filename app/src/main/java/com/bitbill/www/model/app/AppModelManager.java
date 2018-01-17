@@ -10,6 +10,8 @@ import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.model.app.network.AppApi;
 import com.bitbill.www.model.app.prefs.AppPreferences;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -88,5 +90,15 @@ public class AppModelManager extends ModelManager implements AppModel {
     @Override
     public void setContactkey(String contactKey) {
         mAppPreferences.setContactkey(contactKey);
+    }
+
+    @Override
+    public Locale getSelectedLocale() {
+        return mAppPreferences.getSelectedLocale();
+    }
+
+    @Override
+    public void setSelectedLocale(Locale locale) {
+        mAppPreferences.setSelectedLocale(locale);
     }
 }

@@ -109,11 +109,6 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return etSendAddress.getText().toString();
     }
 
-    public void setSendAddress(String sendAddress) {
-
-        etSendAddress.setText(sendAddress);
-    }
-
     public void setSendAddress(Contact sendContact) {
         mSendContact = sendContact;
         if (sendContact != null) {
@@ -121,6 +116,11 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
             setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? sendContact.getAddress() : walletId) + ")");
 
         }
+    }
+
+    public void setSendAddress(String sendAddress) {
+
+        etSendAddress.setText(sendAddress);
     }
 
     public void sendSuccess() {
@@ -174,7 +174,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
 
     @Override
     public void getLastAddressFail() {
-        showMessage(R.string.fial_get_contact_last_address);
+        showMessage(R.string.fail_get_contact_last_address);
     }
 
     @Override

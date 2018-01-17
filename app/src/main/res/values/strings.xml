@@ -238,9 +238,6 @@
     <string name="msg_update_contact_fail">更新联系人信息失败</string>
     <string name="btn_save">保存</string>
     <string name="btn_delete">删除</string>
-    <string name="title_activity_system_setting">系统设置</string>
-    <string name="setting_sound">音效</string>
-    <string name="setting_currency">货币</string>
     <string name="title_activity_about_us">关于我们</string>
     <string name="text_use_rule">使用条款</string>
     <string name="text_version_update">版本日志</string>
@@ -288,10 +285,16 @@
     <string name="msg_input_defualt_wallet_pwd">请输入%s的钱包密码以确认</string>
     <string name="text_contact_us">联系我们</string>
     <!--send fragment-->
-    <string name="fial_get_contact_last_address">获取联系人最新地址失败</string>
+    <string name="fail_get_contact_last_address">获取联系人最新地址失败</string>
     <string name="fail_get_contact_info">获取联系人信息失败</string>
     <string name="fail_invalid_address">地址不合法</string>
     <string name="fail_send_address_null">请输入地址</string>
     <string name="msg_coming_soon">尽情期待</string>
+    <!--system setting-->
+    <string name="title_activity_system_setting">系统设置</string>
+    <string name="setting_sound">音效</string>
+    <string name="setting_currency">货币</string>
+    <string name="setting_languge">当前语言</string>
+    <string name="languge_simplified_chinese">简体中文</string>
 
 </resources>
