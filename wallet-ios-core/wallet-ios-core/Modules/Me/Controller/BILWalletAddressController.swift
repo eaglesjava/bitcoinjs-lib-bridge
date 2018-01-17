@@ -64,6 +64,23 @@ class BILWalletAddressController: BILLightBlueBaseController {
     }
     @IBAction func scanMoreAddressAction(_ sender: Any) {
         guard let w = wallet else { return }
+        
+        guard let seed = w.decryptSeed(pwd: "qqqqqq") else {
+            return
+        }
+        
+        BitcoinJSBridge.shared.getChangeXPublicKey(seed: seed, success: { (pub) in
+            debugPrint(pub)
+            BitcoinJSBridge.shared.getAddresses(xpub: pub as! String, fromIndex: 0, toIndex: 50, success: { (result) in
+                debugPrint(result)
+            }) { (error) in
+                debugPrint(error)
+            }
+        }) { (error) in
+            debugPrint(error)
+        }
+        
+        return
         bil_showLoading()
         let targetIndex = w.lastAddressIndex + 10
         w.refreshAddressToSever(index: targetIndex, success: { (addresses) in

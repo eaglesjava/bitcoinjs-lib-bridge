@@ -83,6 +83,11 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 		callJS(method: method, success: success, failure: failure)
 	}
     
+    func getChangeXPublicKey(seed: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
+        let method = "bridge.getBitcoinChangeXPublicKey('\(seed)')"
+        callJS(method: method, success: success, failure: failure)
+    }
+    
     func getMasterXPublicKey(mnemonic: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
         mnemonicToSeedHex(mnemonic: mnemonic, success: { (seedHex) in
             self.getMasterXPublicKey(seed: seedHex as! String, success: success, failure: failure)

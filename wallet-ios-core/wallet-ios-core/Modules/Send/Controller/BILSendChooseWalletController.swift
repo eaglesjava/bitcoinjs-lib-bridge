@@ -55,7 +55,7 @@ class BILSendChooseWalletController: BILBaseViewController {
             return
         }
         
-        if w.btcBalance >= Int64(model.bitcoinSatoshiAmount) {
+        if Double(w.btcBalance) / Double(BTC_SATOSHI) >= (Double(model.bitcoinAmount) ?? 0.0) {
             self.sendModel?.wallet = self.wallet
             self.performSegue(withIdentifier: self.confirmSegue, sender: sender)
         }
