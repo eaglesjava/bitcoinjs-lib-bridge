@@ -2,6 +2,7 @@ var bitcoin = require('bitcoinjs-lib');
 var bip39 = require('bip39');
 
 var BITCOIN_MAINNET_PATH = "m/44'/0'/0'/0";
+var BITCOIN_MAINNET_CHANGE_PATH = "m/44'/0'/0'/1";
 var BITCOIN_TESTNET_PATH = "m/44'/1'/0'/0";
 
 // 随机生成中文助记词，entropy： 长度， wordlist：
@@ -42,6 +43,11 @@ function getBitcoinMasterXPublicKey(seedHex) {
     return keychain.neutered().toBase58();
 }
 
+function getBitcoinChangeXPublicKey(seedHex) {
+    var keychain = generateBitcoinMainnetChangeKeychain(seedHex);
+    return keychain.neutered().toBase58();
+}
+
 function getBitcoinAddressByMasterXPublicKey(xpub, index) {
     var node = bitcoin.HDNode.fromBase58(xpub);
     return node.derive(index).getAddress();
@@ -62,6 +68,10 @@ function generateMainnetMasterKeychain(seedHex) {
 
 function generateBitcoinMainnetMasterKeychain(seedHex) {
     return generateMainnetMasterKeychain(seedHex).derivePath(BITCOIN_MAINNET_PATH);
+}
+
+function generateBitcoinMainnetChangeKeychain(seedHex) {
+    return generateMainnetMasterKeychain(seedHex).derivePath(BITCOIN_MAINNET_CHANGE_PATH);
 }
 
 function generateBitcoinTestnetMasterKeychain(seedHex) {
@@ -106,5 +116,6 @@ module.exports = {
     getBitcoinContinuousAddressByMasterXPublicKey: getBitcoinContinuousAddressByMasterXPublicKey,
     getBitcoinMasterXPublicKey: getBitcoinMasterXPublicKey,
     buildTransaction: buildTransaction,
+    getBitcoinChangeXPublicKey: getBitcoinChangeXPublicKey,
     bip39: bip39
 };
