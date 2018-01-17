@@ -32,6 +32,6 @@ class BILAudioPlayer: NSObject {
     }
     
     static func playReceiveMoney(isBig: Bool = false){
-        play(filePath: Bundle.main.path(forResource: isBig ? "diaoluo_da" : "diaoluo_xiao", ofType: "mp3"))
+        play(filePath: Bundle.main.path(forResource: isBig ? "diaoluo_da" : "diaoluo_xiao", ofType: "caf"))
     }
 }

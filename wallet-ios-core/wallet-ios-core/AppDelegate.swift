@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import IQKeyboardManagerSwift
 import CryptoSwift
+import UserNotifications
 
 enum BILApplicationShortcutItemType: String {
     
@@ -35,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		BILAppStartUpManager.shared.startSetup()
 		BILWalletManager.shared.appDelegate = self
+        
+        UNUserNotificationCenter.current().delegate = self
 		
 		let results = BILWalletManager.shared.wallets
 		debugPrint(results)
@@ -183,7 +186,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 		}
 	}
+}
 
-
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
 }
 
