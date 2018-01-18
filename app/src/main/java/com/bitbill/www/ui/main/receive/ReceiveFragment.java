@@ -2,21 +2,18 @@ package com.bitbill.www.ui.main.receive;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
-import com.bitbill.www.common.base.adapter.FragmentAdapter;
-import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.common.base.view.BaseFragment;
+import com.bitbill.www.common.base.view.BaseTabsLazyFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.SelectWalletView;
@@ -24,8 +21,6 @@ import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
-import com.bitbill.www.ui.wallet.info.BchInfoFragment;
-import com.bitbill.www.ui.wallet.info.EthInfoFragment;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -41,13 +36,9 @@ import butterknife.BindView;
  * Use the {@link ReceiveFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
+public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
 
     private static final String TAG = "ReceiveFragment";
-    @BindView(R.id.tabs)
-    TabLayout tabs;
-    @BindView(R.id.viewPager)
-    ViewPager viewPager;
     @BindView(R.id.wv_select)
     SelectWalletView selectWalletView;
     @BindView(R.id.list)
@@ -57,7 +48,6 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     @Inject
     ReceiveMvpPresenter<AppModel, ReceiveMvpView> mReceiveMvpPresenter;
     private CommonAdapter<Wallet> mAdapter;
-    private FragmentAdapter mFragmentAdapter;
     private BtcReceiveFragment mBtcReceiveFragment;
     private List<Wallet> mWalletList = new ArrayList<>();
     private Wallet mSelectedWallet;
@@ -104,7 +94,7 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
 
     @Override
     public void initView() {
-
+        super.initView();
         selectWalletView.setOnWalletClickListener(new SelectWalletView.OnWalletClickListener() {
             @Override
             public void onWalletClick(Wallet wallet, View view) {
@@ -119,10 +109,14 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
                 BackUpWalletActivity.start(getBaseActivity(), wallet, false);
             }
         });
-        setupViewPager();
 
         setupBottomSheet();
 
+    }
+
+    @Override
+    protected boolean isBlue() {
+        return false;
     }
 
     private void setupBottomSheet() {
@@ -176,22 +170,9 @@ public class ReceiveFragment extends BaseLazyFragment<ReceiveMvpPresenter> {
     }
 
 
-    private void setupViewPager() {
-        mFragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-        mBtcReceiveFragment = BtcReceiveFragment.newInstance();
-        mFragmentAdapter.addItem("btc", mBtcReceiveFragment);
-        mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
-        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
-        viewPager.setAdapter(mFragmentAdapter);
-        tabs.setupWithViewPager(viewPager);
-        //禁止tab选择
-        LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
-        for (int i = 0; i < tabStrip.getChildCount(); i++) {
-            View tabView = tabStrip.getChildAt(i);
-            if (tabView != null) {
-                tabView.setClickable(false);
-            }
-        }
+    @Override
+    protected BaseFragment getBtcFragment() {
+        return mBtcReceiveFragment = BtcReceiveFragment.newInstance();
     }
 
     @Override

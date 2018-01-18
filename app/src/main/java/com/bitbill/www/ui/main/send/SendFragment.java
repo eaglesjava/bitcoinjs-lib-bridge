@@ -1,39 +1,26 @@
 package com.bitbill.www.ui.main.send;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.bitbill.www.R;
-import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.base.view.BaseLazyFragment;
+import com.bitbill.www.common.base.view.BaseFragment;
+import com.bitbill.www.common.base.view.BaseTabsLazyFragment;
 import com.bitbill.www.model.contact.db.entity.Contact;
-import com.bitbill.www.ui.wallet.info.BchInfoFragment;
-import com.bitbill.www.ui.wallet.info.EthInfoFragment;
-
-import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SendFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SendFragment extends BaseLazyFragment {
+public class SendFragment extends BaseTabsLazyFragment {
 
     public static final String TAG = SendFragment.class.getSimpleName();
-    @BindView(R.id.tabs)
-    TabLayout tabs;
-    @BindView(R.id.viewPager)
-    ViewPager viewPager;
-    private FragmentAdapter mFragmentAdapter;
     private BtcSendFragment mBtcSendFrg;
 
     public SendFragment() {
@@ -97,37 +84,20 @@ public class SendFragment extends BaseLazyFragment {
 
     }
 
+
     @Override
-    public void initView() {
-        setupViewPager();
+    protected boolean isBlue() {
+        return false;
     }
 
-    private void setupViewPager() {
-        mFragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-        mBtcSendFrg = BtcSendFragment.newInstance();
-        mFragmentAdapter.addItem("btc", mBtcSendFrg);
-        mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
-        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
-        viewPager.setAdapter(mFragmentAdapter);
-        tabs.setupWithViewPager(viewPager);
-        //禁止tab选择
-        LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
-        for (int i = 0; i < tabStrip.getChildCount(); i++) {
-            View tabView = tabStrip.getChildAt(i);
-            if (tabView != null) {
-                tabView.setClickable(false);
-            }
-        }
+    @Override
+    protected BaseFragment getBtcFragment() {
+        return mBtcSendFrg = BtcSendFragment.newInstance();
     }
 
     @Override
     public void initData() {
 
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_send;
     }
 
     /**

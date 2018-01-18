@@ -25,6 +25,7 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.socket.Register;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -145,8 +146,13 @@ public class BitbillApp extends Application {
         }).on(EVENT_CONFIRM, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                JSONObject result = (JSONObject) args[0];
-                Log.d(TAG, "EVENT_CONFIRM called with: args = [" + result + "]");
+                JSONObject result = null;
+                try {
+                    result = new JSONObject(String.valueOf(args[0]));
+                    Log.d(TAG, "EVENT_CONFIRM called with: args = [" + result + "]");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 //  获取未确认列表
                 EventBus.getDefault().postSticky(new UnConfirmEvent());
             }
@@ -154,8 +160,13 @@ public class BitbillApp extends Application {
             @Override
             public void call(Object... args) {
 
-                JSONObject result = (JSONObject) args[0];
-                Log.d(TAG, "EVENT_UNCONFIRM called with: args = [" + result + "]");
+                JSONObject result = null;
+                try {
+                    result = new JSONObject(String.valueOf(args[0]));
+                    Log.d(TAG, "EVENT_UNCONFIRM called with: args = [" + result + "]");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // TODO: 2018/1/4 根据设置开启音效
                 // 播放声音
                 SoundUtils.playSound(R.raw.diaoluo_da);

@@ -12,7 +12,7 @@
         tools:context="com.bitbill.www.ui.main.receive.ReceiveFragment">
 
         <include
-            layout="@layout/layout_tabs_black"
+            layout="@layout/layout_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

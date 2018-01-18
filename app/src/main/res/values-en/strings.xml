@@ -131,7 +131,7 @@
     <string name="btn_create_contact_now">快速创建联系人</string>
     <string name="hint_send_success">推荐你添加该地址到新联系人以便下次交易</string>
     <string name="btn_confirm_send">确认发送</string>
-    <string name="action_send_scan">扫码</string>
+    <string name="action_send_scan">Scan</string>
     <string name="toast_copy_address_success">已复制地址</string>
     <string name="guide_section_three">添加联系人 一键转账</string>
     <string name="error_wallet_id_exsist">钱包id已存在</string>
@@ -164,7 +164,7 @@
     <string name="title_activity_contact">联系人</string>
     <string name="title_activity_contact_detail">联系人详情</string>
     <string name="action_contact_edit">编辑</string>
-    <string name="action_contact_create">新建</string>
+    <string name="action_contact_add">添加</string>
     <string name="text_btc_unconfirm">%s BTC 未确认</string>
     <string name="msg_send_transaction_fail">发送交易失败</string>
     <string name="msg_balance_not_enough">余额不足</string>
@@ -265,7 +265,7 @@
     <string name="text_view_tx_in_blockchain"><u>去Blockchain.info查看交易</u></string>
     <string name="text_chose_browser">请选择浏览器</string>
     <string name="text_chose_email">请选择邮箱</string>
-    <string name="status_transfer_success">接收成功</string>
+    <string name="status_transfer_success">交易成功</string>
     <string name="title_activity_wallet_address">钱包地址</string>
     <string name="fail_create_qrcode">生成钱包ID二维码失败</string>
     <string name="title_address_balance">地址与余额</string>
@@ -287,7 +287,7 @@
     <string name="fail_get_contact_info">获取联系人信息失败</string>
     <string name="fail_invalid_address">地址不合法</string>
     <string name="fail_send_address_null">请输入地址</string>
-    <string name="msg_coming_soon">尽情期待</string>
+    <string name="msg_coming_soon">coming soon</string>
     <string name="msg_input_send_amount">请输入发送金额</string>
     <string name="msg_input_gt_zero_amount">请输入大于0的金额</string>
     <string name="msg_input_specifc_amount">请输入特定金额</string>

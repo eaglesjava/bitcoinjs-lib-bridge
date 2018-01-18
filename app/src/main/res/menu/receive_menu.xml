@@ -4,7 +4,6 @@
 
     <item
         android:id="@+id/action_refresh"
-        android:icon="@drawable/ic_receive_refresh"
         android:title="@string/title_receive_address_refresh"
         app:showAsAction="always"/>
 

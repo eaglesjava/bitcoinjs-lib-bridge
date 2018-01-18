@@ -8,6 +8,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.LocaleUtils;
+import com.bitbill.www.common.utils.SoundUtils;
 import com.bitbill.www.common.widget.SettingView;
 import com.bitbill.www.common.widget.dialog.ListSelectDialog;
 import com.bitbill.www.model.app.AppModel;
@@ -64,7 +65,14 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
 
     @Override
     public void initView() {
-        mSvSound.setOnRightSwitchCheckedChangeListener((buttonView, isChecked) -> getMvpPresenter().setSoundEnabled(isChecked));
+        mSvSound.setSwitchChecked(getMvpPresenter().isSoundEnable());
+        mSvSound.setOnRightSwitchCheckedChangeListener((buttonView, isChecked) -> {
+            getMvpPresenter().setSoundEnabled(isChecked);
+            //开启播放声音
+            if (isChecked) {
+                SoundUtils.playSound(R.raw.diaoluo_da);
+            }
+        });
         String[] currencyArray = getResources().getStringArray(R.array.currency_type);
         mCurrencySelectDialog = ListSelectDialog.newInstance(currencyArray);
         mCurrencySelectDialog.setOnListSelectItemClickListener(position -> {
@@ -92,7 +100,6 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
 
     @Override
     public void initData() {
-        mSvSound.setSwitchChecked(getMvpPresenter().isSoundEnable());
         mSvCurrency.setRightText(getMvpPresenter().getSelectedCurrency().name());
         mSvLanguge.setRightText(Locale.CHINESE.getLanguage().equals(getMvpPresenter().getSelectedLocale().getLanguage()) ? mLanguageArray[0] : mLanguageArray[1]);
 

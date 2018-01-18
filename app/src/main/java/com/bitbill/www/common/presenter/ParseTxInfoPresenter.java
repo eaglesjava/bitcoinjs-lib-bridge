@@ -116,7 +116,6 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                     }
                     return Observable.just(txRecords);
                 })
-                .concatMap(txRecords -> getModelManager().getTxRecords())
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<List<TxRecord>>() {
                     @Override
