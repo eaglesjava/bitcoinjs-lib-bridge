@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.common.widget.CustomSwipeToRefresh;
 import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.zhy.adapter.recyclerview.CommonAdapter;
@@ -31,7 +30,7 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
     protected RecyclerView mRecyclerView;
     protected RecyclerView.Adapter mAdapter;
     protected List<E> mDatas = new ArrayList<>();
-    protected CustomSwipeToRefresh mRefreshLayout;
+    protected SwipeRefreshLayout mRefreshLayout;
 
     protected abstract void onListItemClick(E e, int position);
 

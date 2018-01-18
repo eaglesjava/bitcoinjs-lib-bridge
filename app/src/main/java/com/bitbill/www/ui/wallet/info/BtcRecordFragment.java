@@ -157,8 +157,12 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     }
 
     @Override
+    public void showLoading() {
+        setRefresh(true);
+    }
+
+    @Override
     public void hideLoading() {
-        super.hideLoading();
         setRefresh(false);
     }
 

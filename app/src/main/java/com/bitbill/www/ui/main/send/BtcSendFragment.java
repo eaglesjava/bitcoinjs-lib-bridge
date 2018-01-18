@@ -90,7 +90,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         switch (view.getId()) {
             case R.id.btn_next:
                 //跳转到发送金额界面
-                if (mSendContact == null) {
+                if (mSendContact == null || StringUtils.isEmpty(mSendContact.getWalletId())) {
                     mValidateAddressMvpPresenter.validateBtcAddress();
                 } else {
                     //请求最新联系人关联walletid地址
@@ -109,6 +109,11 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return etSendAddress.getText().toString();
     }
 
+    public void setSendAddress(String sendAddress) {
+
+        etSendAddress.setText(sendAddress);
+    }
+
     public void setSendAddress(Contact sendContact) {
         mSendContact = sendContact;
         if (sendContact != null) {
@@ -116,11 +121,6 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
             setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? sendContact.getAddress() : walletId) + ")");
 
         }
-    }
-
-    public void setSendAddress(String sendAddress) {
-
-        etSendAddress.setText(sendAddress);
     }
 
     public void sendSuccess() {

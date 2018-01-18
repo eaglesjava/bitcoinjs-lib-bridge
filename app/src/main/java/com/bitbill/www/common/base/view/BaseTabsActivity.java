@@ -2,6 +2,7 @@ package com.bitbill.www.common.base.view;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -40,7 +41,16 @@ public abstract class BaseTabsActivity extends BaseToolbarActivity {
         for (int i = 0; i < tabStrip.getChildCount(); i++) {
             View tabView = tabStrip.getChildAt(i);
             if (tabView != null) {
-                tabView.setOnClickListener(v -> showMessage(R.string.msg_coming_soon));
+                tabView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                            showMessage(R.string.msg_coming_soon);
+                            return true;
+                        }
+                        return false;
+                    }
+                });
             }
         }
         tabs.setSelectedTabIndicatorColor(getResources().getColor(isBlue() ? R.color.blue : R.color.black));

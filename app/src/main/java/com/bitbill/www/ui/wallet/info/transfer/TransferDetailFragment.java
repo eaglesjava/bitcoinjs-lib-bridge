@@ -108,16 +108,16 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
             } else {
                 switch (mTxRecord.getInOut()) {
                     case TRANSFER:
-                        mHeaderViewHolder.mIvTransferStatus.setImageResource(R.drawable.ic_item_transfer);
-                        mHeaderViewHolder.mTvTransferStatus.setText(R.string.status_transfer_self);
+                        mHeaderViewHolder.mIvTransferStatus.setImageResource(R.drawable.ic_transfer_success);
+                        mHeaderViewHolder.mTvTransferStatus.setText(R.string.status_transfer_success);
                         break;
                     case IN:
                         mHeaderViewHolder.mIvTransferStatus.setImageResource(R.drawable.ic_transfer_success);
-                        mHeaderViewHolder.mTvTransferStatus.setText(R.string.status_transfer_in);
+                        mHeaderViewHolder.mTvTransferStatus.setText(R.string.status_transfer_success);
                         break;
                     case OUT:
                         mHeaderViewHolder.mIvTransferStatus.setImageResource(R.drawable.ic_transfer_success);
-                        mHeaderViewHolder.mTvTransferStatus.setText(R.string.status_transfer_out);
+                        mHeaderViewHolder.mTvTransferStatus.setText(R.string.status_transfer_success);
                         break;
                 }
             }

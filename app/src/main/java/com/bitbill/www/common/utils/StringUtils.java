@@ -643,4 +643,12 @@ public class StringUtils {
         }
         return String.valueOf(name.trim().charAt(0));
     }
+
+    public static boolean isZero(String amount) {
+        if (isEmpty(amount)) {
+            return true;
+        }
+        BigDecimal bigDecimal = new BigDecimal(amount);
+        return bigDecimal.doubleValue() == 0;
+    }
 }

@@ -21,10 +21,10 @@
         android:hint="@string/hint_click_input_please" />
 
     <TextView
-        style="@style/Text.Small"
+        style="@style/Text.Small.Green"
         android:layout_width="match_parent"
         android:layout_marginBottom="25dp"
-        android:text="支持BIP39格式的助记词" />
+        android:text="仅支持符合BIP39标准的助记词" />
 
     <Button
         android:id="@+id/btn_next"

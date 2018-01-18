@@ -154,7 +154,11 @@ public class SendAmountActivity extends BaseToolbarActivity {
 
     private boolean isValidAmount() {
         if (StringUtils.isEmpty(getSendAmount())) {
-            showMessage("请输入发送金额");
+            showMessage(R.string.msg_input_send_amount);
+            return false;
+        }
+        if (StringUtils.isZero(getSendAmount())) {
+            showMessage(R.string.msg_input_gt_zero_amount);
             return false;
         }
         return true;

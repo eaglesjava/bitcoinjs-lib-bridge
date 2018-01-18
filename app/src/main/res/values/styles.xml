@@ -10,7 +10,10 @@
         <item name="colorControlActivated">@color/white</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowBackground">@color/dark_bg</item>
-        <item name="android:windowContentTransitions">true</item>
+        <!--<item name="android:windowContentTransitions">true</item>-->
+        <!--<item name="android:windowExitTransition">@transition/slide_left</item>-->
+        <!--<item name="android:windowEnterAnimation">@transition/slide_right</item>-->
+        <!--<item name="android:windowReenterTransition">@transition/slide_right</item>-->
     </style>
 
     <style name="AppTheme.PopupBottom" parent="AppTheme">

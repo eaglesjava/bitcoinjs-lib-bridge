@@ -96,11 +96,22 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
     @OnClick(value = R.id.btn_next)
     public void inputConfirmClick(View view) {
         //check输入金额 切换到扫码支付界面
-        if (StringUtils.isEmpty(getReceiveAmount())) {
-            showMessage("请输入特定金额");
+        if (!isValidAmount()) {
             return;
         }
         ScanPayActivity.start(SpecificReceiveActivity.this, getReceiveAddress(), getReceiveAmount());
+    }
+
+    private boolean isValidAmount() {
+        if (StringUtils.isEmpty(getReceiveAmount())) {
+            showMessage(R.string.msg_input_specifc_amount);
+            return false;
+        }
+        if (StringUtils.isZero(getReceiveAmount())) {
+            showMessage(R.string.msg_input_gt_zero_amount);
+            return false;
+        }
+        return true;
     }
 
     private String getReceiveAmount() {

@@ -81,7 +81,7 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
 
     @Override
     public void setContactkey(String contactKey) {
-        mPrefs.edit().putString(CONTACTKEY, contactKey);
+        mPrefs.edit().putString(CONTACTKEY, contactKey).apply();
     }
 
     @Override

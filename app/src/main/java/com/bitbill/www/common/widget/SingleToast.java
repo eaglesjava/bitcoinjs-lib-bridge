@@ -53,7 +53,7 @@ public class SingleToast {
                     View v = inflate.inflate(R.layout.layout_toast, null);
                     msgTextView = v.findViewById(R.id.message);
                     mToast.setView(msgTextView);
-                    float yOffset = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, context.getResources().getDisplayMetrics());
+                    float yOffset = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75, context.getResources().getDisplayMetrics());
                     mToast.setGravity(Gravity.BOTTOM, 0, (int) yOffset);
                     mToast.setDuration(Toast.LENGTH_SHORT);
                 }
