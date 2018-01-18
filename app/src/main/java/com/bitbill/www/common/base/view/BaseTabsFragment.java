@@ -39,12 +39,14 @@ public abstract class BaseTabsFragment<P extends MvpPresenter> extends BaseFragm
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
         mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         viewPager.setAdapter(mFragmentAdapter);
+        tabs.setTabTextColors(getResources().getColor(R.color.white_50), getResources().getColor(isBlue() ? R.color.blue_tab : R.color.black));
         tabs.setupWithViewPager(viewPager);
         //禁止tab选择
         LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
         for (int i = 0; i < tabStrip.getChildCount(); i++) {
             View tabView = tabStrip.getChildAt(i);
-            if (tabView != null) {
+            if (i > 0 &&
+                    tabView != null) {
                 tabView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -57,7 +59,6 @@ public abstract class BaseTabsFragment<P extends MvpPresenter> extends BaseFragm
                 });
             }
         }
-        tabs.setSelectedTabIndicatorColor(getResources().getColor(isBlue() ? R.color.blue : R.color.black));
     }
 
     protected abstract boolean isBlue();

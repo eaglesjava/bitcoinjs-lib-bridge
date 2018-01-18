@@ -111,7 +111,7 @@ public class WalletSettingFragment extends BaseListFragment<Wallet, WalletMvpPre
 
     @Override
     public void loadWalletsFail() {
-        showMessage("加载钱包信息失败，请返回重试");
+        showMessage(R.string.msg_get_wallet_info_fail);
     }
 
     public void updateWallet(Wallet wallet) {

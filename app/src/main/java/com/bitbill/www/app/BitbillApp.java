@@ -1,7 +1,9 @@
 package com.bitbill.www.app;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -56,6 +58,44 @@ public class BitbillApp extends Application {
     WalletDbHelper mWalletDbHelper;
     @Inject
     AppModel mAppModel;
+    ActivityLifecycleCallbacks callbacks = new ActivityLifecycleCallbacks() {
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            //强制修改应用语言
+            LocaleUtils.updateLocale(activity, LocaleUtils.getUserLocale(activity));
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity) {
+
+        }
+        //Activity 其它生命周期的回调
+    };
     private ApplicationComponent mApplicationComponent;
     private List<Wallet> mWallets;
     private double mBtcCnyValue;
@@ -88,8 +128,7 @@ public class BitbillApp extends Application {
         mWallets = new ArrayList<>();
 
         initSocket();
-
-        LocaleUtils.updateLocale(this, LocaleUtils.getUserLocale(this));
+        registerActivityLifecycleCallbacks(callbacks);
     }
 
     @Override

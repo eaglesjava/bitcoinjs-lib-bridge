@@ -35,12 +35,13 @@ public abstract class BaseTabsActivity extends BaseToolbarActivity {
         mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
         mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
         mViewPager.setAdapter(mFragmentAdapter);
+        tabs.setTabTextColors(getResources().getColor(R.color.white_50), getResources().getColor(isBlue() ? R.color.blue_tab : R.color.black));
         tabs.setupWithViewPager(mViewPager);
         //禁止tab选择
         LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
         for (int i = 0; i < tabStrip.getChildCount(); i++) {
             View tabView = tabStrip.getChildAt(i);
-            if (tabView != null) {
+            if (i > 0 && tabView != null) {
                 tabView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -53,7 +54,6 @@ public abstract class BaseTabsActivity extends BaseToolbarActivity {
                 });
             }
         }
-        tabs.setSelectedTabIndicatorColor(getResources().getColor(isBlue() ? R.color.blue : R.color.black));
     }
 
     protected abstract boolean isBlue();

@@ -13,6 +13,7 @@ import com.bitbill.www.common.widget.SettingView;
 import com.bitbill.www.common.widget.dialog.ListSelectDialog;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.prefs.AppPreferences;
+import com.bitbill.www.ui.main.MainActivity;
 
 import java.util.Locale;
 
@@ -121,4 +122,12 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
         return R.layout.activity_system_setting;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 }
