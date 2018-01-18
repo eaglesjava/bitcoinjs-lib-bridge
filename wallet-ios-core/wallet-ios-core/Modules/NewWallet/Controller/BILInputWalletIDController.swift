@@ -78,7 +78,7 @@ class BILInputWalletIDController: BILBaseViewController, BILInputViewDelegate {
         hasShownAlert = true
         let buttonTitle = String.newWallet_inputID_IKnow
         
-        let vc = UIViewController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
+        let vc = BILSupportedCoinsPopupController(nibName: "BILSupportedCoinsPopupController", bundle: nil)
         let popup = PopupDialog(viewController: vc, transitionStyle: .fadeIn, gestureDismissal: false, hideStatusBar: false) {
             
         }
