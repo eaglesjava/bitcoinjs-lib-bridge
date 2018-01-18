@@ -109,8 +109,8 @@
 
 "Currencies supported currently" = "Currencies supported currently";
 
-"-30" = "";
-"-31" = "";
-"-32" = "";
-"-40" = "";
-"-41" = "";
+"-30" = "Server is busy. Please try again later.";
+"-31" = "Lack of madatory parameters.";
+"-32" = "Invalid parameter type.";
+"-40" = "Wallet ID already exists.";
+"-41" = "Wallet not exists.";
