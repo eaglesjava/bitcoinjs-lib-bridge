@@ -548,7 +548,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="124"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-78-uyq">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-78-uyq" customClass="IQTextView" customModule="IQKeyboardManagerSwift">
                                         <rect key="frame" x="12" y="10" width="301" height="104"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -790,7 +790,7 @@
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qHS-m8-k5o"/>
+        <segue reference="pdu-bD-2bn"/>
         <segue reference="CeZ-0d-fBr"/>
     </inferredMetricsTieBreakers>
 </document>

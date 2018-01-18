@@ -8,10 +8,11 @@
 
 import UIKit
 import SVProgressHUD
+import IQKeyboardManagerSwift
 
 class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 
-	@IBOutlet weak var textView: UITextView!
+	@IBOutlet weak var textView: IQTextView!
 	@IBOutlet weak var mnemonicView: BILMnemonicView!
 	
 	let sugueID = "BILMnemonicToWalletIDSegue"
@@ -31,7 +32,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 		title = "Input mnemonic words".bil_ui_localized
 		tipLabel.text = "Supports BIP39 mnemonic words only".bil_ui_localized
 		self.mnemonicView.emptyTitle = .newWallet_import_emptyTitle
-		nextButton.setTitle("Next", for: .normal)
+		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
         cancelItem?.title = "Cancel".bil_ui_localized
 	}
 	
@@ -65,11 +66,6 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
             return nil
         }
         let words = trimmedString.components(separatedBy: " ")
-        let lengths = [12, 15, 18, 21, 24]
-        guard lengths.contains(words.count) else {
-            debugPrint("长度不符合")
-            return nil
-        }
         
         return words.joined(separator: " ")
     }
@@ -84,6 +80,12 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
             self.mnemonicView.layer.borderColor = UIColor(hex: 0xFD6D73).cgColor
             return
         }
+        
+        guard textView.text.contains(" ") else {
+            showTipAlert(title: alertTitle, msg: .newWallet_import_spaceTip, dismissed: nil)
+            return
+        }
+        
         guard let mnemonic = normalized(mnemonic: textView.text) else {
             showTipAlert(title: alertTitle, msg: alertMsg, dismissed: nil)
             return
@@ -137,12 +139,13 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 	}
 	
     func textViewDidChange(_ textView: UITextView) {
-        mnemonicView.layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
-        resetMnemonicViewBorderColor()
+        mnemonicView.layer.borderColor = UIColor(white: 1.0, alpha: 1.0).cgColor
     }
     
 	public func textViewDidBeginEditing(_ textView: UITextView) {
 		mnemonicView.emptyTitle = nil
+        mnemonicView.layer.borderColor = UIColor(white: 1.0, alpha: 1.0).cgColor
+        self.textView.placeholder = String.newWallet_import_12WordsTip
 	}
 	
 	public func textViewDidEndEditing(_ textView: UITextView) {
@@ -150,6 +153,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 			return
 		}
 		mnemonicView.emptyTitle = .newWallet_import_emptyTitle
+        self.textView.placeholder = nil
         resetMnemonicViewBorderColor()
 	}
 	

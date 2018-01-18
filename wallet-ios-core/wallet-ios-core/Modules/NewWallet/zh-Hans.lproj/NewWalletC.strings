@@ -37,3 +37,5 @@
 "NewWalletC.import_exits" = "钱包已存在";
 "NewWalletC.import_resetOrNot" = "是否重置密码";
 "NewWalletC.import_reset" = "重置";
+"NewWalletC.import_spaceTip" = "助记词需用空格分开";
+"NewWalletC.import_12WordsTip" = "通常12个字";

@@ -37,3 +37,5 @@
 "NewWalletC.import_exits" = "Wallet has been existed";
 "NewWalletC.import_resetOrNot" = "Whether it needs to reset password";
 "NewWalletC.import_reset" = "Reset";
+"NewWalletC.import_spaceTip" = "Mnemonic words must be seperated by space.";
+"NewWalletC.import_12WordsTip" = "normally 12 words";
