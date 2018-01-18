@@ -48,8 +48,15 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         unconfirmContainerView.layer.cornerRadius = 5
         
         languageDidChanged()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didSetWallet), name: .transactionDidChanged, object: nil)
 	}
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .transactionDidChanged, object: nil)
+    }
 	
+    @objc
 	func didSetWallet() {
 		guard let w = wallet else { return }
 		transactions.removeAll()

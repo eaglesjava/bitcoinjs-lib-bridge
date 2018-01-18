@@ -13,7 +13,7 @@ import CoreData
 let bil_contactManager = BILCoreDataModelManager<ContactModel>(modelName: "ContactModel", notificationName: .contactDidChanged)
 let bil_btc_wallet_addressManager = BILCoreDataModelManager<BTCWalletAddressModel>(modelName: "BTCWalletAddressModel", notificationName: nil)
 let bil_btc_tx_addressManager = BILCoreDataModelManager<BTCTXAddressModel>(modelName: "BTCTXAddressModel", notificationName: nil)
-let bil_btc_transactionManager = BILCoreDataModelManager<BTCTransactionModel>(modelName: "BTCTransactionModel", notificationName: nil)
+let bil_btc_transactionManager = BILCoreDataModelManager<BTCTransactionModel>(modelName: "BTCTransactionModel", notificationName: .transactionDidChanged)
 
 class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
 	
