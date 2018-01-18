@@ -90,3 +90,13 @@ class BILNetworkManager {
         }
     }
 }
+
+extension String {
+    func getNetworkMessage(code: Int) -> String? {
+        let msgCodes = [-31, -32, -33, -40, -41]
+        if msgCodes.contains(code) {
+            return String(code).bil_ui_localized
+        }
+        return nil
+    }
+}

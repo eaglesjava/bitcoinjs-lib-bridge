@@ -351,6 +351,7 @@
                         <outlet property="amountTextField" destination="tpP-M5-rrb" id="Pq5-bC-g6x"/>
                         <outlet property="cnyLabel" destination="Q37-vr-w7f" id="ujw-Ar-EbB"/>
                         <outlet property="coinNameLabel" destination="4uu-Ed-8Ox" id="GYq-Ny-02a"/>
+                        <outlet property="nextButton" destination="MbP-wN-eFm" id="uYZ-ZY-3HB"/>
                         <outlet property="nextButtonBottomSpace" destination="u0p-gM-1TP" id="nBi-wI-6Yn"/>
                     </connections>
                 </viewController>

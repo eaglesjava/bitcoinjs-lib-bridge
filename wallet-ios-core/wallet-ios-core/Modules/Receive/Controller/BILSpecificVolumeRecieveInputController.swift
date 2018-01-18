@@ -15,7 +15,8 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
     @IBOutlet weak var cnyLabel: BILExchangeRateLabel!
     @IBOutlet weak var coinNameLabel: UILabel!
     @IBOutlet weak var nextButtonBottomSpace: NSLayoutConstraint!
-	
+    @IBOutlet weak var nextButton: BILGradientButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,6 +35,7 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
     override func languageDidChanged() {
 		super.languageDidChanged()
         title = "Receive amount".bil_ui_localized
+        nextButton.setTitle("Next".bil_ui_localized, for: .normal)
     }
     
     @objc internal func keyboardWillShow(_ notification : Notification?) {

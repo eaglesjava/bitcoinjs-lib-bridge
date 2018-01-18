@@ -20,14 +20,14 @@
 "MeC.meCell_system" = "通用";
 "MeC.meCell_aboutUs" = "关于我们";
 
-"MeC.contact_yourKey" = "您的联系人密钥";
+"MeC.contact_yourKey" = "你的联系人密钥";
 "MeC.contact_copyKey" = "复制密钥";
 "MeC.contact_keyCopied" = "密钥已复制";
-"MeC.contact_authFailed" = "授权失败，无法查看您的联系人密钥";
+"MeC.contact_authFailed" = "授权失败，无法查看你的联系人密钥";
 "MeC.contact_inputKey" = "请输入密钥以确认";
 "MeC.contact_keyEmpty" = "密钥不能为空";
-"MeC.contact_noMore" = "您没有新增的联系人";
-"MeC.contact_recovered" = "您恢复了";
+"MeC.contact_noMore" = "你没有新增的联系人";
+"MeC.contact_recovered" = "你恢复了";
 "MeC.contact_contact" = "个联系人";
 
 "MeC.confirm" = "确认";
@@ -35,7 +35,7 @@
 
 "MeC.wallet_deleteFailed" = "删除钱包失败";
 "MeC.wallet_delete" = "删除钱包";
-"MeC.wallet_deleteMessage" = "请谨慎使用此操作，删除前确认您的钱包已备份，否则数字资产将无法找回！";
+"MeC.wallet_deleteMessage" = "请谨慎使用此操作，删除前确认你的钱包已备份，否则数字资产将无法找回！";
 "MeC.wallet_passwordEmpty" = "密码不能为空";
 "MeC.wallet_passwordError" = "密码输入错误";
 "MeC.wallet_inputPassword" = "请输入密码以确认";

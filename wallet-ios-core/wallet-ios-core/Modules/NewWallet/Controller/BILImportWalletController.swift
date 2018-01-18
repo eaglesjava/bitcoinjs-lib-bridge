@@ -31,9 +31,9 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
 		super.languageDidChanged()
 		title = "Input mnemonic words".bil_ui_localized
 		tipLabel.text = "Supports BIP39 mnemonic words only".bil_ui_localized
-		self.mnemonicView.emptyTitle = .newWallet_import_emptyTitle
 		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
         cancelItem?.title = "Cancel".bil_ui_localized
+        textView.placeholder = String.newWallet_import_12WordsTip
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -143,17 +143,13 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     }
     
 	public func textViewDidBeginEditing(_ textView: UITextView) {
-		mnemonicView.emptyTitle = nil
         mnemonicView.layer.borderColor = UIColor(white: 1.0, alpha: 1.0).cgColor
-        self.textView.placeholder = String.newWallet_import_12WordsTip
 	}
 	
 	public func textViewDidEndEditing(_ textView: UITextView) {
 		guard let text = textView.text, text.count == 0 else {
 			return
 		}
-		mnemonicView.emptyTitle = .newWallet_import_emptyTitle
-        self.textView.placeholder = nil
         resetMnemonicViewBorderColor()
 	}
 	

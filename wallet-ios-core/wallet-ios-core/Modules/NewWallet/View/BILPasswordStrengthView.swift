@@ -20,12 +20,13 @@ class BILPasswordStrengthView: UIView {
 	var strength: PasswordStrength = .none {
 		didSet {
 			var colors: [UIColor]
+            let red = UIColor(hex: 0xF64048)
 			let white = UIColor.white
 			let yellow = UIColor.yellow
 			let green = UIColor(hex: 0xABE64D)
 			switch strength {
 			case .low:
-				colors = [yellow, white, white]
+				colors = [red, white, white]
 			case .medium:
 				colors = [yellow, yellow, white]
 			case .high:

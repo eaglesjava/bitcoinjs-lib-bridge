@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oZT-mc-NTx">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -16,20 +12,20 @@
             <objects>
                 <viewController storyboardIdentifier="BILContactController" automaticallyAdjustsScrollViewInsets="NO" id="2Xo-Eg-YUe" customClass="BILContactController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dSw-7j-pfN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fh5-y6-Z9m">
-                                <rect key="frame" x="0.0" y="116" width="320" height="403"/>
+                                <rect key="frame" x="0.0" y="116" width="600" height="435"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还没有联系人" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71u-E6-dkJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你还没有联系人" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71u-E6-dkJ">
                                         <rect key="frame" x="25" y="25" width="261" height="45"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="37"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6b-ur-m6B" customClass="BILWhiteBorderButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="318" width="270" height="55"/>
+                                        <rect key="frame" x="25" y="350" width="550" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="vv6-Y1-xxH"/>
                                         </constraints>
@@ -51,7 +47,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yi3-qS-A5a">
-                                <rect key="frame" x="0.0" y="116" width="320" height="403"/>
+                                <rect key="frame" x="0.0" y="116" width="600" height="435"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -109,11 +105,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="vgU-MN-TiQ" customClass="BILContactDetailController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AEL-e6-SSZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZI-H4-dgr">
-                                <rect key="frame" x="130" y="141" width="60" height="60"/>
+                                <rect key="frame" x="270" y="141" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DZI-H4-dgr" secondAttribute="height" multiplier="1:1" id="FRp-lH-yI3"/>
@@ -129,22 +125,22 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFc-uK-qH9">
-                                <rect key="frame" x="139" y="216" width="42" height="21"/>
+                                <rect key="frame" x="279" y="216" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SJZ-lY-X6A">
-                                <rect key="frame" x="25" y="272" width="270" height="48"/>
+                                <rect key="frame" x="25" y="272" width="550" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFb-n2-MGB">
-                                        <rect key="frame" x="0.0" y="0.0" width="270" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="550" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包ID" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wa-9V-3e2" customClass="BILCopyLabel" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="270" height="20"/>
+                                        <rect key="frame" x="0.0" y="28" width="550" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -162,16 +158,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8v-mP-izt">
-                                <rect key="frame" x="25" y="350" width="270" height="48"/>
+                                <rect key="frame" x="25" y="350" width="550" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHU-qC-GsX">
-                                        <rect key="frame" x="0.0" y="0.0" width="270" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="550" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTG-6c-hbZ">
-                                        <rect key="frame" x="0.0" y="28" width="270" height="20"/>
+                                        <rect key="frame" x="0.0" y="28" width="550" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -189,7 +185,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCS-Hq-IuO" customClass="BILWhiteBorderButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="483" width="270" height="55"/>
+                                <rect key="frame" x="25" y="515" width="550" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="JdK-pN-5qh"/>
                                 </constraints>
@@ -244,11 +240,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="Cyi-S6-jxX" customClass="BILContactEditController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rRk-ja-HZP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xsc-59-xfp" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="214" width="270" height="74"/>
+                                <rect key="frame" x="25" y="214" width="550" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ytn-tL-54H">
                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -260,7 +256,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4bB-TM-qhB" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29" width="270" height="44"/>
+                                        <rect key="frame" x="0.0" y="29" width="550" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Yw4-g6-Mov"/>
                                         </constraints>
@@ -277,7 +273,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ch-Fw-HDc">
-                                        <rect key="frame" x="0.0" y="73" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="73" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="6Uc-nZ-f4F"/>
@@ -304,7 +300,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-xq-Ino" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="313" width="270" height="74"/>
+                                <rect key="frame" x="25" y="313" width="550" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2p-1s-32B">
                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -316,7 +312,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="18R-oz-D9v" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29" width="270" height="44"/>
+                                        <rect key="frame" x="0.0" y="29" width="550" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="J3b-KV-AZJ"/>
                                         </constraints>
@@ -333,7 +329,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-gm-XzG">
-                                        <rect key="frame" x="0.0" y="73" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="73" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="fax-Vc-I4D"/>
@@ -360,7 +356,7 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ze-rm-y8b">
-                                <rect key="frame" x="25" y="488" width="270" height="55"/>
+                                <rect key="frame" x="25" y="520" width="550" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="5oQ-Ck-1Te"/>
                                 </constraints>
@@ -373,16 +369,16 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ieE-7k-fQw">
-                                <rect key="frame" x="25" y="141" width="270" height="48"/>
+                                <rect key="frame" x="25" y="141" width="550" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXY-Mp-LB9">
-                                        <rect key="frame" x="0.0" y="0.0" width="270" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="550" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包ID" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHI-KQ-7L9" customClass="BILCopyLabel" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="270" height="20"/>
+                                        <rect key="frame" x="0.0" y="28" width="550" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -441,14 +437,14 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="MRb-dt-iPo" customClass="BILSearchWalletIDController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="er8-hz-eg1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6L-rn-Vwi" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="156" width="270" height="45"/>
+                                <rect key="frame" x="25" y="156" width="550" height="45"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索对方钱包ID" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ikQ-St-aBA" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="230" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="510" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="MWP-hf-xeU"/>
                                         </constraints>
@@ -465,14 +461,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uC1-3Y-Vie">
-                                        <rect key="frame" x="0.0" y="44" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="44" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="YDk-yU-ukQ"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WO-nk-JCx">
-                                        <rect key="frame" x="238" y="1" width="32" height="44"/>
+                                        <rect key="frame" x="518" y="1" width="32" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="fmQ-8t-Cvj"/>
                                             <constraint firstAttribute="height" constant="44" id="wyt-rH-4EV"/>
@@ -524,11 +520,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="iat-7s-W7J" customClass="BILSearchWalletIDResultController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UZ8-Rd-XI9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYK-MJ-pcj" customClass="BILWhiteBorderButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="483" width="270" height="55"/>
+                                <rect key="frame" x="25" y="515" width="550" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="VII-Lc-zSw"/>
                                 </constraints>
@@ -539,7 +535,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNe-xM-CTg" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="141" width="270" height="74"/>
+                                <rect key="frame" x="25" y="141" width="550" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIA-Zd-JLl">
                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -551,7 +547,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cMX-Vg-kFU" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29" width="270" height="44"/>
+                                        <rect key="frame" x="0.0" y="29" width="550" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="hEh-3L-tw8"/>
                                         </constraints>
@@ -568,7 +564,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKf-NB-T8Y">
-                                        <rect key="frame" x="0.0" y="73" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="73" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="j6Z-G3-Kdh"/>
@@ -595,7 +591,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="el0-t7-LDg" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="235" width="270" height="74"/>
+                                <rect key="frame" x="25" y="235" width="550" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7w-di-mR0">
                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -607,7 +603,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Kj-Ov-lYm" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29" width="270" height="44"/>
+                                        <rect key="frame" x="0.0" y="29" width="550" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="xSE-ZQ-NN7"/>
                                         </constraints>
@@ -624,7 +620,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJa-AF-mPh">
-                                        <rect key="frame" x="0.0" y="73" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="73" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Yby-lk-Kqd"/>
@@ -701,11 +697,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="QiL-YC-s9A" customClass="BILAddContactByAddressController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CNV-yZ-0a8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waG-Dy-t0J" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="198" width="270" height="74"/>
+                                <rect key="frame" x="25" y="198" width="550" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMh-70-0wW">
                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -717,7 +713,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPW-Ge-qoY" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29" width="270" height="44"/>
+                                        <rect key="frame" x="0.0" y="29" width="550" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="AyB-f6-aJK"/>
                                         </constraints>
@@ -734,7 +730,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zge-5k-0vi">
-                                        <rect key="frame" x="0.0" y="73" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="73" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Gek-z2-5fY"/>
@@ -761,7 +757,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEA-o8-7yq" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="386" width="270" height="74"/>
+                                <rect key="frame" x="25" y="386" width="550" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFV-B6-wJK">
                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -773,7 +769,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OGy-hD-rpv" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29" width="270" height="44"/>
+                                        <rect key="frame" x="0.0" y="29" width="550" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Pfl-8H-d7Q"/>
                                         </constraints>
@@ -790,7 +786,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrY-yF-RLU">
-                                        <rect key="frame" x="0.0" y="73" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="73" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Lrr-Rq-p7e"/>
@@ -817,7 +813,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yX6-JW-MfI" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="292" width="270" height="74"/>
+                                <rect key="frame" x="25" y="292" width="550" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FI8-7w-5qv">
                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -829,7 +825,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xqb-yL-7h3" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29" width="222" height="44"/>
+                                        <rect key="frame" x="0.0" y="29" width="502" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="3dJ-UV-4nZ"/>
                                         </constraints>
@@ -846,14 +842,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRh-Ob-p9N">
-                                        <rect key="frame" x="0.0" y="73" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="73" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="nNq-pt-tT3"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Uc-uN-WYL">
-                                        <rect key="frame" x="222" y="29" width="44" height="44"/>
+                                        <rect key="frame" x="502" y="29" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="Ynf-P7-Z5b"/>
                                         </constraints>
@@ -886,7 +882,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsW-n1-hWf" customClass="BILCoinHeaderView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="141" width="270" height="32"/>
+                                <rect key="frame" x="25" y="141" width="550" height="32"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   BTC   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaQ-Kp-DH9">
                                         <rect key="frame" x="0.0" y="0.0" width="53" height="32"/>

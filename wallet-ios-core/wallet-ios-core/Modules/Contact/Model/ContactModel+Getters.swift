@@ -20,7 +20,7 @@ extension ContactModel: Comparable {
 	
 	var firstNameWord: String {
 		get {
-			return String(name!.first ?? "B")
+            return String(name!.first ?? "B").uppercased()
 		}
 	}
 	

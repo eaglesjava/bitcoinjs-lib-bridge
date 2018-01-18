@@ -108,3 +108,9 @@
 "Align within frame to scan" = "Put the QR code into the box, it will automatically scan.";
 
 "Currencies supported currently" = "Currencies supported currently";
+
+"-30" = "";
+"-31" = "";
+"-32" = "";
+"-40" = "";
+"-41" = "";
