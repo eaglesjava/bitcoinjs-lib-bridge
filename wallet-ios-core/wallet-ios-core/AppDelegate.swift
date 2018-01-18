@@ -71,13 +71,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
     
     func createShortcuts() {
+        UIApplication.shared.shortcutItems = nil
         return
-        let contactItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.contact.rawValue, localizedTitle: "Contacts".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f3"), userInfo: nil)
-        let scanItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.scanQRCode.rawValue, localizedTitle: "Scan".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f4"), userInfo: nil)
-        let sendItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.send.rawValue, localizedTitle: "Send".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f2"), userInfo: nil)
-        let receiveItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.receive.rawValue, localizedTitle: "Receive".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f1"), userInfo: nil)
-        
-        UIApplication.shared.shortcutItems = [contactItem, scanItem, sendItem, receiveItem].reversed()
+//        let contactItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.contact.rawValue, localizedTitle: "Contacts".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f3"), userInfo: nil)
+//        let scanItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.scanQRCode.rawValue, localizedTitle: "Scan".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f4"), userInfo: nil)
+//        let sendItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.send.rawValue, localizedTitle: "Send".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f2"), userInfo: nil)
+//        let receiveItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.receive.rawValue, localizedTitle: "Receive".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f1"), userInfo: nil)
+//
+//        UIApplication.shared.shortcutItems = [contactItem, scanItem, sendItem, receiveItem].reversed()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
