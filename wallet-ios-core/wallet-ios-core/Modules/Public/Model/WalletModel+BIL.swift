@@ -114,9 +114,9 @@ extension WalletModel {
                 wallet.seedHash = s.md5()
                 wallet.mnemonicHash = m.md5()
                 
-                BitcoinJSBridge.shared.getMasterXPublicKey(seed: s, success: { (pubKey) in
-                    let extPubKey = pubKey as! String
-                    wallet.mainExtPublicKey = extPubKey
+                BitcoinJSBridge.shared.getXPublicKeys(seed: s, success: { (result) in
+                    wallet.mainExtPublicKey = result.mainPubkey
+                    wallet.changeExtPublicKey = result.changePubkey
                     if wallet.checkPassword(pwd: pwd) {
                         do {
                             if needSave {
@@ -130,6 +130,7 @@ extension WalletModel {
                 }, failure: { (error) in
                     cleanUp(wallet: wallet, error: error.localizedDescription)
                 })
+                
             } catch {
                 cleanUp(wallet: wallet, error: error.localizedDescription)
             }

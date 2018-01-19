@@ -31,6 +31,7 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	
 	enum JSError: Error {
 		case JSDidNotLoaded
+        case resultError
 	}
 	
 	static let shared: BitcoinJSBridge = {
@@ -76,6 +77,17 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
     func getAddresses(xpub: String, fromIndex: Int64 = 0, toIndex: Int64, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
         let method = "bridge.getBitcoinContinuousAddressByMasterXPublicKey('\(xpub)', \(fromIndex), \(toIndex))"
         callJS(method: method, success: success, failure: failure)
+    }
+    
+    func getXPublicKeys(seed: String, success: @escaping (_ object: (mainPubkey: String, changePubkey: String)) -> Void, failure: @escaping (_ error: Error) -> Void) {
+        let method = "bridge.getBitcoinXPublicKeys('\(seed)')"
+        callJS(method: method, success: { (result) in
+            guard let arr = result as? Array<String>, arr.count == 2 else {
+                failure(JSError.resultError)
+                return
+            }
+            success((arr[0], arr[1]))
+        }, failure: failure)
     }
 	
 	func getMasterXPublicKey(seed: String, success: @escaping (_ object: Any) -> Void, failure: @escaping (_ error: Error) -> Void) {
