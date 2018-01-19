@@ -205,7 +205,7 @@ extension BTCTransactionModel {
         return tx
     }
     
-    func setProperties(json: JSON) {
+    func setProperties(json: JSON, inWallet: WalletModel? = nil) {
         clearSatoshi()
         height = json["height"].int64Value
         serverID = json["id"].int64Value

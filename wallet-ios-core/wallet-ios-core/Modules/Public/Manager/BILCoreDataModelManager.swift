@@ -56,6 +56,11 @@ class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
         guard let model = fetch(key: key, value: value) else { return newModel() }
         return model
     }
+    
+    func newModelIfNeeded(keyValues: (key: String, value: String)...) -> T {
+        guard let model = fetch(keyValues: keyValues) else { return newModel() }
+        return model
+    }
 	
 	func saveModels() throws {
 		let context = coreDataContext
@@ -82,7 +87,7 @@ class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
         return fetch(keyValues: (key, value))
     }
     
-    func fetch(keyValues: (key: String, value: String)...) -> T? {
+    func fetch(keyValues: [(key: String, value: String)]) -> T? {
         var arr = [String]()
         for (key, value) in keyValues {
             arr.append("\(key)='\(value)'")
@@ -99,6 +104,10 @@ class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
             return model
         }
         return model
+    }
+    
+    func fetch(keyValues: (key: String, value: String)...) -> T? {
+        return fetch(keyValues: keyValues)
     }
     
     func fetchCount(key: String, value: String) -> Int {

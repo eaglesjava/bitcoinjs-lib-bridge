@@ -8,12 +8,12 @@
 
 "HomeC.home.section.shortcut" = "Shortcuts";
 "HomeC.home.section.asset" = "Total assets";
-"HomeC.home.section.unconfirm" = "Ongoing transaction";
+"HomeC.home.section.unconfirm" = "Unconfirmed";
 "HomeC.home.section.wallet" = "My wallets";
 
 "HomeC.home.section.subtitle.shortcut" = "Config on settings";
 "HomeC.home.section.subtitle.asset" = "Current currencies: ";
-"HomeC.home.section.subtitle.unconfirm" = "Ongoing transaction: ";
+"HomeC.home.section.subtitle.unconfirm" = "Ongoing transactions: ";
 "HomeC.home.section.subtitle.wallet" = "Current wallets: ";
 "HomeC.home.section.subtitle.unit.ge" = "";
 

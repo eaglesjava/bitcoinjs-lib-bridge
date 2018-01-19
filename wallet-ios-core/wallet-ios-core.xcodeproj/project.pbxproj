@@ -51,6 +51,7 @@
 		BA40B1AA1FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40B1A91FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift */; };
 		BA415FCD200F40E10057790B /* diaoluo_da.caf in Resources */ = {isa = PBXBuildFile; fileRef = BA415FCB200F40E10057790B /* diaoluo_da.caf */; };
 		BA415FCE200F40E10057790B /* diaoluo_xiao.caf in Resources */ = {isa = PBXBuildFile; fileRef = BA415FCC200F40E10057790B /* diaoluo_xiao.caf */; };
+		BA45EF112011A8A100C76D64 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA45EF132011A8A100C76D64 /* Localizable.strings */; };
 		BA4646191FD78FB500680D33 /* Receive.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA4646181FD78FB500680D33 /* Receive.xcassets */; };
 		BA46461B1FD78FC400680D33 /* Contact.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461A1FD78FC400680D33 /* Contact.xcassets */; };
 		BA46461D1FD78FCF00680D33 /* Send.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461C1FD78FCF00680D33 /* Send.xcassets */; };
@@ -243,6 +244,8 @@
 		BA40B1A91FF5F8F40021A1B0 /* BTCTransactionModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BTCTransactionModel+BIL.swift"; sourceTree = "<group>"; };
 		BA415FCB200F40E10057790B /* diaoluo_da.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = diaoluo_da.caf; sourceTree = "<group>"; };
 		BA415FCC200F40E10057790B /* diaoluo_xiao.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = diaoluo_xiao.caf; sourceTree = "<group>"; };
+		BA45EF122011A8A100C76D64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BA45EF142011A8A200C76D64 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BA4646181FD78FB500680D33 /* Receive.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Receive.xcassets; sourceTree = "<group>"; };
 		BA46461A1FD78FC400680D33 /* Contact.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Contact.xcassets; sourceTree = "<group>"; };
 		BA46461C1FD78FCF00680D33 /* Send.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Send.xcassets; sourceTree = "<group>"; };
@@ -737,6 +740,7 @@
 			children = (
 				CC4660481FBE96E600A87132 /* Public.xcassets */,
 				BA8E66751FFF658E00F2539D /* Public.strings */,
+				BA45EF132011A8A100C76D64 /* Localizable.strings */,
 				CC94E01B1FB58D1F0098E730 /* Other */,
 				BA284D121FD947EF00A1C9F6 /* Helper */,
 				CC94E01D1FB58D1F0098E730 /* Protocol */,
@@ -1250,6 +1254,7 @@
 				BA05EAEB1FE7A14100B43B95 /* BILContactCell.xib in Resources */,
 				CC6407CA200213EC0068153A /* MeC.strings in Resources */,
 				CCEC67841FB190EE004CC6C5 /* README.md in Resources */,
+				BA45EF112011A8A100C76D64 /* Localizable.strings in Resources */,
 				BA415FCE200F40E10057790B /* diaoluo_xiao.caf in Resources */,
 				BA0457181FDE6CE600070CCA /* QRCodeResource.xcassets in Resources */,
 				CCFEDEF81FCE62D400F1A7FC /* FF_DIN_Condensed_Bold.otf in Resources */,
@@ -1595,6 +1600,15 @@
 				BA12AC591FEA715C00812F38 /* Base */,
 			);
 			name = Home.storyboard;
+			sourceTree = "<group>";
+		};
+		BA45EF132011A8A100C76D64 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA45EF122011A8A100C76D64 /* en */,
+				BA45EF142011A8A200C76D64 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		BA8E66751FFF658E00F2539D /* Public.strings */ = {

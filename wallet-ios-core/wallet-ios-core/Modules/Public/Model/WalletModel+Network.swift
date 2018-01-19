@@ -17,7 +17,6 @@ extension WalletModel {
 			getTransactionHistoryFromSever(page: 0, size: btcTransactions!.count + 1000, success: { (txs) in
 				self.version = version
 				do {
-					self.updateUTXOAtLocal()
 					try BILWalletManager.shared.saveWallets()
 					self.needLoadServer = false
 				} catch {
@@ -125,8 +124,11 @@ extension WalletModel {
             let json = JSON(result)
             let datas = json["list"].arrayValue
             for json in datas {
-                let model = bil_btc_transactionManager.newModelIfNeeded(key: "txHash", value: json["txHash"].stringValue)
-                model.setProperties(json: json)
+                var model = bil_btc_transactionManager.newModelIfNeeded(keyValues: (key: "txHash", value: json["txHash"].stringValue))
+                if model.wallet != self {
+                    model = bil_btc_transactionManager.newModel()
+                }
+                model.setProperties(json: json, inWallet: self)
             }
             do {
                 try BILWalletManager.shared.saveWallets()
@@ -138,35 +140,9 @@ extension WalletModel {
     }
     
     func getUTXOFromServer(success: @escaping (_ utxo: [BitcoinUTXOModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        guard let extKey = mainExtPublicKey else {
-            failure(.publicWalletExtKeyError, -1)
-            return
-        }
-        BILNetworkManager.request(request: .getUTXO(extendedKeyHash: extKey.md5()), success: { (result) in
-            debugPrint(result)
-            let json = JSON(result)
-            var utxoDatas = json["utxo"].arrayValue
-            if utxoDatas.count == 0 {
-                utxoDatas = json["uxto"].arrayValue
-            }
-            var utxoModels = [BitcoinUTXOModel]()
-            var satoshisSum: Int64 = 0
-            for json in utxoDatas {
-                let utxo = BitcoinUTXOModel(jsonData: json)
-                var isContain = false
-                for u in utxoModels {
-                    if u == utxo {
-                        isContain = true
-                        break
-                    }
-                }
-                if !isContain {
-                    satoshisSum += utxo.satoshiAmount
-                    utxoModels.append(utxo)
-                }
-            }
-            self.updateUTXO(utxos: utxoModels)
-            success(utxoModels)
+        getTXBuildConfigurationFromServer(success: { (utxos, fees, fee) in
+            self.updateUTXO(utxos: utxos)
+            success(utxos)
         }, failure: failure)
     }
     
