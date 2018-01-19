@@ -233,22 +233,45 @@ extension BTCTransactionModel {
         createdDate = Date(dateString: json["createdTime"].stringValue, format: "yyyy-MM-dd HH:mm:ss")
         
         var wallet: WalletModel?
-        if let inw = WalletModel.fetch(by: inAddresses, isAll: false) {
-            if let outAllw = WalletModel.fetch(by: outAddresses, isAll: true) {
-                typeRawValue = BILTransactionType.transfer.rawValue
-                wallet = outAllw
+        if inWallet == nil {
+            if let inw = WalletModel.fetch(by: inAddresses, isAll: false) {
+                if let outAllw = WalletModel.fetch(by: outAddresses, isAll: true) {
+                    typeRawValue = BILTransactionType.transfer.rawValue
+                    wallet = outAllw
+                }
+                else
+                {
+                    wallet = inw
+                    typeRawValue = BILTransactionType.send.rawValue
+                }
             }
             else
             {
-                wallet = inw
-                typeRawValue = BILTransactionType.send.rawValue
+                if let outw = WalletModel.fetch(by: outAddresses, isAll: false) {
+                    wallet = outw
+                    typeRawValue = BILTransactionType.receive.rawValue
+                }
             }
         }
         else
         {
-            if let outw = WalletModel.fetch(by: outAddresses, isAll: false) {
-                wallet = outw
-                typeRawValue = BILTransactionType.receive.rawValue
+            if inWallet!.contain(btcAddresses: inputAddresses, isAll: false) {
+                if inWallet!.contain(btcAddresses: outAddresses, isAll: false) {
+                    wallet = inWallet
+                    typeRawValue = BILTransactionType.transfer.rawValue
+                }
+                else
+                {
+                    wallet = inWallet
+                    typeRawValue = BILTransactionType.send.rawValue
+                }
+            }
+            else
+            {
+                if inWallet!.contain(btcAddresses: outAddresses, isAll: false) {
+                    wallet = inWallet
+                    typeRawValue = BILTransactionType.receive.rawValue
+                }
             }
         }
         
