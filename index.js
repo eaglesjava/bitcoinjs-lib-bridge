@@ -38,6 +38,10 @@ function getBitcoinAddressBySeedHex(seedHex, index) {
     return bitcoinKeyChain.derive(index).getAddress();
 }
 
+function getBitcoinXPublicKeys(seedHex) {
+    return new Array(getBitcoinMasterXPublicKey(seedHex), getBitcoinChangeXPublicKey(seedHex))
+}
+
 function getBitcoinMasterXPublicKey(seedHex) {
     var keychain = generateBitcoinMainnetMasterKeychain(seedHex);
     return keychain.neutered().toBase58();
@@ -117,5 +121,6 @@ module.exports = {
     getBitcoinMasterXPublicKey: getBitcoinMasterXPublicKey,
     buildTransaction: buildTransaction,
     getBitcoinChangeXPublicKey: getBitcoinChangeXPublicKey,
+    getBitcoinXPublicKeys: getBitcoinXPublicKeys,
     bip39: bip39
 };
