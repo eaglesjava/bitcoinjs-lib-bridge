@@ -29,8 +29,8 @@ extension WalletModel {
 		}
 		
         let addressIndex = json["indexNo"].int64Value
-        if lastAddressIndex < addressIndex {
-            generateAddresses(from: lastAddressIndex, to: addressIndex, success: { (addresses) in
+        if lastBTCAddressIndex < addressIndex {
+            generateAddresses(from: lastBTCAddressIndex, to: addressIndex, success: { (addresses) in
                 self.needLoadServer = true
 				loadTXs(version: self.version)
             }, failure: { (msg, code) in

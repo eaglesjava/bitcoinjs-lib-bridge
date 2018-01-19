@@ -38,6 +38,41 @@ func BTCFormatString(btc: Int64) -> String {
 }
 
 extension WalletModel {
+    var btcBalance: Int64 {
+        set {
+            bitcoinWallet?.satoshi = newValue
+        }
+        get {
+            return bitcoinWallet?.satoshi ?? 0
+        }
+    }
+    var btcUnconfirmBalance: Int64 {
+        set {
+            bitcoinWallet?.unconfirmSatoshi = newValue
+        }
+        get {
+            return bitcoinWallet?.unconfirmSatoshi ?? 0
+        }
+    }
+    var lastBTCAddressIndex: Int64 {
+        set {
+            bitcoinWallet?.lastAddressIndex = newValue
+        }
+        get {
+            return bitcoinWallet?.lastAddressIndex ?? 0
+        }
+    }
+    var lastBTCChangeAddressIndex: Int64 {
+        set {
+            bitcoinWallet?.lastChangeAddressIndex = newValue
+        }
+        get {
+            return bitcoinWallet?.lastChangeAddressIndex ?? 0
+        }
+    }
+}
+
+extension WalletModel {
     
     static func fetch(by addresses: [String], isAll: Bool = true) -> WalletModel? {
         for wallet in BILWalletManager.shared.wallets {
@@ -79,7 +114,7 @@ extension WalletModel {
             failure(.publicWalletIDError)
             return
         }
-        let index = lastAddressIndex
+        let index = lastBTCAddressIndex
         if index == (addresses?.count)! - 1 {
             guard let address = (addresses?.lastObject as? BTCWalletAddressModel)?.address else {
                 failure(.publicWalletGetAddressError)
@@ -112,7 +147,7 @@ extension WalletModel {
             return
         }
         
-        guard index > lastAddressIndex else {
+        guard index > lastBTCAddressIndex else {
             failure("index 小于或等于当前地址，不需要刷新")
             return
         }
@@ -121,16 +156,16 @@ extension WalletModel {
             debugPrint(result)
             let json = JSON(result)
             let serverIndex = json["indexNo"].int64Value
-            var localIndex = self.lastAddressIndex
+            var localIndex = self.lastBTCAddressIndex
             if localIndex > serverIndex {
                 localIndex = serverIndex
             }
-            self.lastAddressIndex = serverIndex
+            self.lastBTCAddressIndex = serverIndex
             if index > serverIndex {
                 failure(.publicWalletNoMoreAddress)
                 return
             }
-            self.generateAddresses(from: localIndex, to: self.lastAddressIndex, success: success, failure: { (msg, code) in
+            self.generateAddresses(from: localIndex, to: self.lastBTCAddressIndex, success: success, failure: { (msg, code) in
                 failure(msg)
             })
         }, failure: { (msg, code) in
@@ -140,7 +175,7 @@ extension WalletModel {
     }
 	
     func getNewBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
-        let tempIndex = lastAddressIndex + 1
+        let tempIndex = lastBTCAddressIndex + 1
         refreshAddressToSever(index: tempIndex, success: { (models) in
             guard let address = models.last?.address else {
                 failure(.publicWalletGenerateAddressError)
@@ -170,7 +205,7 @@ extension WalletModel {
                 self.addToAddresses(tx)
                 models.append(tx)
             }
-            self.lastAddressIndex = to
+            self.lastBTCAddressIndex = to
             do {
                 try BILWalletManager.shared.saveWallets()
                 success(models)

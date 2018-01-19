@@ -65,7 +65,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
     @IBAction func scanMoreAddressAction(_ sender: Any) {
         guard let w = wallet else { return }
         bil_showLoading()
-        let targetIndex = w.lastAddressIndex + 10
+        let targetIndex = w.lastBTCAddressIndex + 10
         w.refreshAddressToSever(index: targetIndex, success: { (addresses) in
             BILWalletManager.shared.loadBlockHeightAndWalletVersion()
             w.getUTXOFromServer(success: { (utxos) in
