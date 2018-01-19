@@ -10,8 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BILSupportedCoinsPopupController" customModule="wallet_ios_core" customModuleProvider="target">
             <connections>
+                <outlet property="titleLabel" destination="TB6-tP-74Y" id="aiN-mk-SJ4"/>
                 <outlet property="view" destination="VoT-9P-wTq" id="xle-C4-TLW"/>
             </connections>
         </placeholder>

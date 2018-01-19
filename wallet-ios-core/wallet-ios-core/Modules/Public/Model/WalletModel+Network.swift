@@ -230,7 +230,7 @@ extension WalletModel {
         BILNetworkManager.request(request: .getUnconfirmTransaction(wallets: wallets), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
-            let txDatas = json["unconfirm"].arrayValue
+            let txDatas = json["list"].arrayValue
             var utx = [BTCTransactionModel]()
             for json in txDatas {
                 let model = bil_btc_transactionManager.newModelIfNeeded(key: "txHash", value: json["txHash"].stringValue)

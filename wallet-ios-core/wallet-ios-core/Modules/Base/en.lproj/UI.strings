@@ -106,3 +106,11 @@
 "Verify words" = "Verify words";
 
 "Align within frame to scan" = "Put the QR code into the box, it will automatically scan.";
+
+"Currencies supported currently" = "Currencies supported currently";
+
+"-30" = "Server is busy. Please try again later.";
+"-31" = "Lack of madatory parameters.";
+"-32" = "Invalid parameter type.";
+"-40" = "Wallet ID already exists.";
+"-41" = "Wallet not exists.";

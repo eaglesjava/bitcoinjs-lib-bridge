@@ -115,11 +115,12 @@ class BILSettingManager: NSObject {
             UserDefaults.standard.set(newValue.rawValue, forKey: .bil_UserDefaultsKey_currencyType)
         }
         get {
+            let defaultType: CurrencyType = self.currentLanguage == .zh_cn ? .cny : .usd
             if UserDefaults.standard.object(forKey: .bil_UserDefaultsKey_currencyType) == nil
             {
-                self.currencyType = .usd
+                self.currencyType = defaultType
             }
-            return CurrencyType(rawValue: UserDefaults.standard.integer(forKey: .bil_UserDefaultsKey_currencyType)) ?? .usd
+            return CurrencyType(rawValue: UserDefaults.standard.integer(forKey: .bil_UserDefaultsKey_currencyType)) ?? defaultType
         }
     }
     

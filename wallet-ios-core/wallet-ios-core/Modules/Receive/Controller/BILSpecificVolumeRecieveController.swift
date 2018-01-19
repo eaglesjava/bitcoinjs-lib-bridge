@@ -29,6 +29,7 @@ class BILSpecificVolumeReceiveController: BILBaseViewController {
     }
     
     override func languageDidChanged() {
+        super.languageDidChanged()
         title = "Receive".bil_ui_localized
         payLabel.text = "Scan to pay".bil_ui_localized
         doneItem.title = "Done".bil_ui_localized

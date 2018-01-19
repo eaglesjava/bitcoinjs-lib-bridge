@@ -154,9 +154,12 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         if let c = contact {
             debugPrint(c.walletID!)
             if c.additionType == .walletID {
+                bil_showLoading()
                 c.getContactAddressFromServer(success: { (address) in
+                    self.bil_dismissHUD()
                     next(address: address, isContact: true)
                 }, failure: { (msg, code) in
+                    self.bil_dismissHUD()
                     self.showTipAlert(title: .sendSendAddressError, msg: msg)
                 })
             }

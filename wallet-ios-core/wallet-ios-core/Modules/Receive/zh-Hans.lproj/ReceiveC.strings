@@ -7,7 +7,7 @@
 */
 
 "ReceiveC.receive.address.tip.title" = "友情提醒";
-"ReceiveC.receive.address.tip.msg" = "为保护您的隐私，每次接收操作时，都将使用新地址，已使用的旧地址仍然可用";
+"ReceiveC.receive.address.tip.msg" = "为保护你的隐私，每次接收操作时，都将使用新地址，已使用的旧地址仍然可用";
 "ReceiveC.receive.address.tip.refresh" = "地址已刷新";
 "ReceiveC.receive.specificButtonTitle" = "特定金额接收";
 

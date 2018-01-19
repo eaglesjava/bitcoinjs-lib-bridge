@@ -69,6 +69,7 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        navigationItem.rightBarButtonItem = nil
     }
 	
 	override func languageDidChanged() {
@@ -176,6 +177,9 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         present(sheet, animated: true, completion: nil)
     }
 
+    @IBAction func copyToken(_ sender: Any) {
+        UIPasteboard.general.string = BILAppStartUpManager.shared.deviceToken
+    }
     /*
     // MARK: - Navigation
 

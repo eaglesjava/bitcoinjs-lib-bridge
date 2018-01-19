@@ -174,7 +174,8 @@ extension String {
 	static var newWallet_import_exits: String { get { return "NewWalletC.import_exits".bil_localized } }
 	static var newWallet_import_resetOrNot: String { get { return "NewWalletC.import_resetOrNot".bil_localized } }
 	static var newWallet_import_reset: String { get { return "NewWalletC.import_reset".bil_localized } }
-
+    static var newWallet_import_spaceTip: String { get { return "NewWalletC.import_spaceTip".bil_localized } }
+    static var newWallet_import_12WordsTip: String { get { return "NewWalletC.import_12WordsTip".bil_localized } }
 }
 
 extension String {

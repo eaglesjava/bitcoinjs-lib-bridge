@@ -29,6 +29,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 	weak var wallet: WalletModel? {
 		didSet {
 			didSetWallet()
+            reloadData()
 		}
 	}
 	
@@ -47,12 +48,20 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         unconfirmContainerView.layer.cornerRadius = 5
         
         languageDidChanged()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didSetWallet), name: .transactionDidChanged, object: nil)
 	}
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .transactionDidChanged, object: nil)
+    }
 	
+    @objc
 	func didSetWallet() {
 		guard let w = wallet else { return }
 		transactions.removeAll()
 		transactions.append(contentsOf: w.btc_transactionArray)
+        tableView.reloadData()
 		w.getBalanceFromServer(success: { (wallet) in
 			var frame = self.tableView.tableHeaderView!.frame
 			frame.size.height = w.btcUnconfirmBalance == 0 ? 113 : 201
@@ -65,7 +74,6 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 		}) { (msg, code) in
 			debugPrint(msg)
 		}
-		reloadData()
 	}
     
     override func languageDidChanged() {

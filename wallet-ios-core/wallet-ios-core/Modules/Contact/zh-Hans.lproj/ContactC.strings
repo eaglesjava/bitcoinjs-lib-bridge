@@ -11,7 +11,7 @@
 "ContactC.contact_scanCode" = "扫码添加";
 "ContactC.contact_cancel" = "取消";
 "ContactC.contact_addressExits" = "地址已存在";
-"ContactC.contact_addressInvalid" = "您输入的是无效地址";
+"ContactC.contact_addressInvalid" = "你输入的是无效地址";
 "ContactC.contact_IDExits" = "ID 已存在";
 
 "ContactC.detail_walletID" = "钱包ID";

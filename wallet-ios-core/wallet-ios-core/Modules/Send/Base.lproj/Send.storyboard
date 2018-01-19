@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wp5-hk-BhU">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -28,11 +28,11 @@
             <objects>
                 <viewController title="发送" id="1bf-2n-T7s" userLabel="Send" customClass="BILSendController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i4h-D8-kkA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYG-PX-UBw" customClass="BILCoinHeaderView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="89" width="270" height="32"/>
+                                <rect key="frame" x="25" y="89" width="325" height="32"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   BTC   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psK-vY-Miv">
                                         <rect key="frame" x="0.0" y="0.0" width="53" height="32"/>
@@ -75,10 +75,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wgi-wN-8Lj" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="161" width="270" height="45"/>
+                                <rect key="frame" x="25" y="161" width="325" height="45"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="接收方地址" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="FtQ-ul-LSb" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="230" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="CvY-M7-Cca"/>
                                         </constraints>
@@ -95,14 +95,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFg-wi-GIZ">
-                                        <rect key="frame" x="0.0" y="44" width="270" height="1"/>
+                                        <rect key="frame" x="0.0" y="44" width="325" height="1"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="OUq-ks-zAt"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEB-of-jtC">
-                                        <rect key="frame" x="238" y="1" width="32" height="44"/>
+                                        <rect key="frame" x="293" y="1" width="32" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Kjg-FV-ywz"/>
                                             <constraint firstAttribute="width" constant="32" id="ONL-Ok-XxA"/>
@@ -132,7 +132,7 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8m-SG-IX7" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="434" width="270" height="55"/>
+                                <rect key="frame" x="25" y="533" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="iCX-dj-nSc"/>
                                 </constraints>
@@ -181,17 +181,17 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="jHS-Ph-MGA" customClass="BILScanQRCodeResultController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hUg-ff-d8M">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="60" translatesAutoresizingMaskIntoConstraints="NO" id="glj-9L-kHX">
-                                <rect key="frame" x="25" y="94" width="179" height="70"/>
+                                <rect key="frame" x="25" y="94" width="234" height="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="DINCond-Bold" family="DINCond-Bold" pointSize="60"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUa-cr-pb8">
-                                <rect key="frame" x="223.5" y="137.5" width="71.5" height="18"/>
+                                <rect key="frame" x="278.5" y="137.5" width="71.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="sV8-FW-uWB"/>
                                 </constraints>
@@ -206,16 +206,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnC-I7-ml0">
-                                <rect key="frame" x="25" y="226" width="270" height="46.5"/>
+                                <rect key="frame" x="25" y="226" width="325" height="46.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="接收方地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0V-Re-jp2">
-                                        <rect key="frame" x="0.0" y="0.0" width="270" height="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nB8-vV-4XD" customClass="BILAddressLabel" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="27" width="270" height="19.5"/>
+                                        <rect key="frame" x="0.0" y="27" width="325" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -233,7 +233,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohd-e8-95F" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="483" width="270" height="55"/>
+                                <rect key="frame" x="25" y="582" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="9HR-PO-jzt"/>
                                 </constraints>
@@ -282,11 +282,11 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="UGK-9K-l5J" customClass="BILSendInputAmountController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gIV-af-AzT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UEb-zw-ief">
-                                <rect key="frame" x="25" y="94" width="178.5" height="70"/>
+                                <rect key="frame" x="25" y="94" width="233.5" height="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="DINCond-Bold" family="DINCond-Bold" pointSize="60"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -295,7 +295,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CoinName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeR-cH-OoK">
-                                <rect key="frame" x="223.5" y="137.5" width="71.5" height="18"/>
+                                <rect key="frame" x="278.5" y="137.5" width="71.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="vzE-fQ-maf"/>
                                 </constraints>
@@ -310,7 +310,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dV-Wt-9E5" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="483" width="270" height="55"/>
+                                <rect key="frame" x="25" y="582" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="0FU-c6-uMV"/>
                                 </constraints>
@@ -362,18 +362,18 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="baX-2R-0kn" customClass="BILSendChooseWalletController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fTl-C3-qA6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vve-DA-SVf">
-                                <rect key="frame" x="0.0" y="76" width="320" height="377"/>
+                                <rect key="frame" x="0.0" y="76" width="375" height="476"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="07F-dk-H9q" kind="embed" identifier="BILSendChooseWalletSegue" id="HrS-EU-qtr"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrl-VK-cpH" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="483" width="270" height="55"/>
+                                <rect key="frame" x="25" y="582" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="w6q-jI-UW1"/>
                                 </constraints>
@@ -411,20 +411,20 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="OMj-P2-5SR" customClass="BILSendConfirmController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WOo-St-PZd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRy-on-X02">
-                                <rect key="frame" x="0.0" y="64" width="320" height="389"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="488"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8g4-qX-fCD">
-                                        <rect key="frame" x="0.0" y="0.0" width="319" height="534"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="534"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8V6-fq-Du0">
-                                                <rect key="frame" x="25" y="30" width="269" height="65"/>
+                                                <rect key="frame" x="25" y="30" width="324" height="65"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="接收方" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3Y-an-Yus">
-                                                        <rect key="frame" x="0.0" y="0.0" width="269" height="15"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="9cO-QI-btM"/>
                                                         </constraints>
@@ -433,7 +433,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oK-wN-dDO">
-                                                        <rect key="frame" x="0.0" y="25" width="269" height="40"/>
+                                                        <rect key="frame" x="0.0" y="25" width="324" height="40"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -452,16 +452,16 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4QU-B8-KO8">
-                                                <rect key="frame" x="25" y="120" width="269" height="47"/>
+                                                <rect key="frame" x="25" y="120" width="324" height="47"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJd-yd-ypz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="269" height="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amount" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Erz-zk-b10">
-                                                        <rect key="frame" x="0.0" y="27" width="269" height="20"/>
+                                                        <rect key="frame" x="0.0" y="27" width="324" height="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -480,7 +480,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfY-WC-jVa">
-                                                <rect key="frame" x="25" y="207" width="269" height="124"/>
+                                                <rect key="frame" x="25" y="207" width="324" height="124"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手续费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzV-m8-TsC">
                                                         <rect key="frame" x="0.0" y="0.0" width="46" height="18"/>
@@ -489,13 +489,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MUh-ay-4Fk">
-                                                        <rect key="frame" x="-2" y="34" width="273" height="31"/>
+                                                        <rect key="frame" x="-2" y="34" width="328" height="31"/>
                                                         <connections>
                                                             <action selector="sliderValueChanged:" destination="OMj-P2-5SR" eventType="valueChanged" id="yjb-vA-3vP"/>
                                                         </connections>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="需耗费0.0002BTC" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7b-f4-uH3">
-                                                        <rect key="frame" x="0.0" y="106" width="269" height="18"/>
+                                                        <rect key="frame" x="0.0" y="106" width="324" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -523,16 +523,16 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rWp-g6-haV">
-                                                <rect key="frame" x="25" y="371" width="269" height="47"/>
+                                                <rect key="frame" x="25" y="371" width="324" height="47"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发出钱包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcc-2b-hNg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="269" height="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="walletID" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3E-gX-6yP">
-                                                        <rect key="frame" x="0.0" y="27" width="269" height="20"/>
+                                                        <rect key="frame" x="0.0" y="27" width="324" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Gc3-V6-ntQ"/>
                                                         </constraints>
@@ -554,7 +554,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XN-FN-VbS" customClass="BILInputView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                <rect key="frame" x="25" y="458" width="269" height="74"/>
+                                                <rect key="frame" x="25" y="458" width="324" height="74"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJZ-AI-aCJ">
                                                         <rect key="frame" x="0.0" y="8" width="29" height="21"/>
@@ -566,7 +566,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="20字以内" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tAE-ee-pat" customClass="ASKPlaceHolderColorTextField" customModule="wallet_ios_core" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="29" width="269" height="44"/>
+                                                        <rect key="frame" x="0.0" y="29" width="324" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="Gs9-lQ-R2P"/>
                                                         </constraints>
@@ -583,7 +583,7 @@
                                                         </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCs-JV-9TW">
-                                                        <rect key="frame" x="0.0" y="72" width="269" height="1"/>
+                                                        <rect key="frame" x="0.0" y="72" width="324" height="1"/>
                                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="8eq-MT-SPM"/>
@@ -640,7 +640,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fio-ZW-1aj" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="483" width="270" height="55"/>
+                                <rect key="frame" x="25" y="582" width="325" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="6Ri-fo-Pas"/>
                                 </constraints>
@@ -689,45 +689,45 @@
             <objects>
                 <viewController storyboardIdentifier="BILSendResultController" id="gQ4-lN-Jcy" customClass="BILSendResultController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hol-Lf-wEi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7HV-UX-PNE" customClass="BILCreateWalletSucessView" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="95" width="320" height="378"/>
+                                <rect key="frame" x="0.0" y="95" width="375" height="378"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_success" translatesAutoresizingMaskIntoConstraints="NO" id="GsO-vo-IWL">
-                                        <rect key="frame" x="127.5" y="0.0" width="64" height="64"/>
+                                        <rect key="frame" x="155" y="0.0" width="64" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="64" id="JXH-7c-xTN"/>
                                             <constraint firstAttribute="height" constant="64" id="QMa-Ck-uCq"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-Ih-Dbp">
-                                        <rect key="frame" x="123" y="84" width="73.5" height="21"/>
+                                        <rect key="frame" x="150.5" y="84" width="73.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <color key="textColor" red="0.6705882352941176" green="0.90196078431372551" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUF-cQ-IYF" customClass="BILAddressLabel" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="135" width="270" height="17"/>
+                                        <rect key="frame" x="25" y="135" width="325" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐您添加该地址到新联系人以便下次交易" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0g2-RI-9zC">
-                                        <rect key="frame" x="25" y="233.5" width="270" height="33.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐你添加该地址到新联系人以便下次交易" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0g2-RI-9zC">
+                                        <rect key="frame" x="25" y="233.5" width="325" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amount" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxM-WT-G4P">
-                                        <rect key="frame" x="25" y="162" width="270" height="31.5"/>
+                                        <rect key="frame" x="25" y="162" width="325" height="31.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0h-tY-xJB" customClass="BILGradientButton" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="287" width="270" height="55"/>
+                                        <rect key="frame" x="25" y="270.5" width="325" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="7s6-iq-4Uk"/>
                                         </constraints>
@@ -763,7 +763,7 @@
                                 <viewLayoutGuide key="safeArea" id="kGN-gP-o7f"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6nF-hb-Mn0">
-                                <rect key="frame" x="251" y="28" width="44" height="44"/>
+                                <rect key="frame" x="306" y="28" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="CAd-Sy-UAa"/>
                                     <constraint firstAttribute="height" constant="44" id="iQo-jI-1bq"/>
@@ -776,7 +776,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WaO-ha-tsz">
-                                <rect key="frame" x="64" y="505" width="192" height="33"/>
+                                <rect key="frame" x="91.5" y="604" width="192" height="33"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="去 Blockchain.info 查看交易">
@@ -795,7 +795,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="txHash" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quC-Gd-rV2" customClass="BILTXHashLabel" customModule="wallet_ios_core" customModuleProvider="target">
-                                <rect key="frame" x="25" y="480" width="270" height="17"/>
+                                <rect key="frame" x="25" y="579" width="325" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -839,7 +839,7 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="H6r-O6-Djn">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -856,28 +856,28 @@
             <objects>
                 <viewController id="07F-dk-H9q" customClass="BILChooseWalletController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cZO-gj-KQw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="377"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tts-CG-0UP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="377"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="476"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="7Sd-Gf-7f5">
-                                    <rect key="frame" x="0.0" y="113" width="320" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="113" width="375" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BILChooseWalletCell" rowHeight="85" id="BBC-mF-yeC" customClass="BILChooseWalletCell" customModule="wallet_ios_core" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="85"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BBC-mF-yeC" id="iKQ-X7-Tvd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWY-Pv-TVt" customClass="BILGradientView" customModule="wallet_ios_core" customModuleProvider="target">
-                                                    <rect key="frame" x="25" y="8" width="270" height="68.5"/>
+                                                    <rect key="frame" x="25" y="8" width="325" height="68.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxN-Ff-T7C">
                                                             <rect key="frame" x="75" y="12" width="45" height="22"/>
@@ -908,7 +908,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Veo-se-otj">
-                                                            <rect key="frame" x="225" y="12.5" width="20" height="44"/>
+                                                            <rect key="frame" x="280" y="12.5" width="20" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="qr5-xu-pDy"/>
                                                             </constraints>
@@ -984,6 +984,6 @@
         <image name="pic_success" width="63" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OJD-0X-kpj"/>
+        <segue reference="wL4-ft-O7m"/>
     </inferredMetricsTieBreakers>
 </document>

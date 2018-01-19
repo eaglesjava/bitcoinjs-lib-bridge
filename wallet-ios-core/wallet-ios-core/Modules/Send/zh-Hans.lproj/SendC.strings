@@ -6,7 +6,7 @@
   Copyright © 2018年 BitBill. All rights reserved.
 */
 
-"SendC.send.address.invalid" = "您输入的是无效地址";
+"SendC.send.address.invalid" = "你输入的是无效地址";
 "SendC.send.address.empty" = "地址不能为空";
 "SendC.send.address.invalid.title" = "地址不正确";
 "SendC.send.address.error" = "出现了错误";

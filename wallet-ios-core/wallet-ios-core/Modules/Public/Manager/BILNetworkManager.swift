@@ -72,7 +72,7 @@ class BILNetworkManager {
                 let j = JSON(json)
                 let status = j["status"].intValue
                 if status < 0 {
-                    failure(j["message"].stringValue, j["status"].intValue)
+                    failure(String.getNetworkMessage(code: status) ?? j["message"].stringValue, status)
                 }
                 else
                 {
@@ -88,5 +88,15 @@ class BILNetworkManager {
                 failure("\(error.localizedDescription)", -1)
             }
         }
+    }
+}
+
+extension String {
+    static func getNetworkMessage(code: Int) -> String? {
+        let msgCodes = [-31, -32, -33, -40, -41]
+        if msgCodes.contains(code) {
+            return String(code).bil_ui_localized
+        }
+        return nil
     }
 }

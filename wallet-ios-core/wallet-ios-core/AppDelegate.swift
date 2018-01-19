@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import IQKeyboardManagerSwift
 import CryptoSwift
+import UserNotifications
 
 enum BILApplicationShortcutItemType: String {
     
@@ -35,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		BILAppStartUpManager.shared.startSetup()
 		BILWalletManager.shared.appDelegate = self
+        
+        UNUserNotificationCenter.current().delegate = self
 		
 		let results = BILWalletManager.shared.wallets
 		debugPrint(results)
@@ -68,12 +71,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
     
     func createShortcuts() {
-        let contactItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.contact.rawValue, localizedTitle: "联系人", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_contact_h"), userInfo: nil)
-        let scanItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.scanQRCode.rawValue, localizedTitle: "扫一扫", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "btn_home_shortcut_scan"), userInfo: nil)
-        let sendItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.send.rawValue, localizedTitle: "发送", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_send_h"), userInfo: nil)
-        let receiveItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.receive.rawValue, localizedTitle: "接收", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "icon_receive_h"), userInfo: nil)
-        
-        UIApplication.shared.shortcutItems = [contactItem, scanItem, sendItem, receiveItem]
+        UIApplication.shared.shortcutItems = nil
+        return
+//        let contactItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.contact.rawValue, localizedTitle: "Contacts".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f3"), userInfo: nil)
+//        let scanItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.scanQRCode.rawValue, localizedTitle: "Scan".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f4"), userInfo: nil)
+//        let sendItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.send.rawValue, localizedTitle: "Send".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f2"), userInfo: nil)
+//        let receiveItem = UIApplicationShortcutItem(type: BILApplicationShortcutItemType.receive.rawValue, localizedTitle: "Receive".bil_ui_localized, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "f1"), userInfo: nil)
+//
+//        UIApplication.shared.shortcutItems = [contactItem, scanItem, sendItem, receiveItem].reversed()
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
@@ -183,7 +188,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 		}
 	}
+}
 
-
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
 }
 

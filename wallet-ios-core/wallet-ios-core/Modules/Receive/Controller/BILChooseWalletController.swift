@@ -29,9 +29,13 @@ class BILChooseWalletController: BILBaseViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-		tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
         NotificationCenter.default.addObserver(self, selector: #selector(walletDidChanged(notification:)), name: .receivePageCurrentWallet, object: nil)
         languageDidChanged()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.selectRow(at: IndexPath(row: currentSelectedIndex, section: 0), animated: false, scrollPosition: .top)
     }
     
     override func languageDidChanged() {
