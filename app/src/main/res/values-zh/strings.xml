@@ -34,6 +34,7 @@
 
     <!--创建或导入钱包-->
     <string name="title_activity_import_wallet">导入钱包</string>
+    <string name="hint_input_mnemonic">通常十二个字</string>
     <string name="title_activity_create_wallet">创建钱包</string>
     <string name="error_invalid_trade_pwd">密码长度限制在6-20位字符</string>
     <string name="hint_input_please">请输入</string>
@@ -179,17 +180,6 @@
     <string name="msg_contact_is_exsist">联系人已存在</string>
     <string name="error_contact_name_required">请输入姓名</string>
     <string name="error_contact_address_required">请输入钱包地址</string>
-    <string name="title_activity_wallet_detail">WalletDetailActivity</string>
-    <string name="text_wallet_id">钱包ID</string>
-    <string name="text_wallet_add_time">添加时间</string>
-    <string name="btn_wallet_address">钱包地址</string>
-    <string name="btn_delete_wallet">删除钱包</string>
-    <string name="bitbill_wallet">Bitbill钱包</string>
-    <string name="msg_delete_wallet">请谨慎使用此操作，删除前确认你的钱包已备份，否则数字资产将无法找回！</string>
-    <string name="title_delete_wallet">删除钱包</string>
-    <string name="msg_delete_wallet_success">删除钱包成功</string>
-    <string name="msg_delete_wallet_fail">删除钱包失败，请重试</string>
-    <string name="msg_get_wallet_info_fail">获取钱包信息失败，请返回重试</string>
     <string name="title_activity_contact_select">联系人</string>
     <string name="title_shortcut">快捷方式</string>
     <string name="text_go_to_setting_custom">前往设置自定义</string>
@@ -270,6 +260,17 @@
     <string name="hint_back_up_now">立即备份</string>
     <string name="text_someone_wallet">%s 的钱包</string>
     <string name="title_activity_wallet_setting">钱包集成</string>
+    <!--wallet detail-->
+    <string name="text_wallet_id">钱包ID</string>
+    <string name="text_wallet_add_time">添加时间</string>
+    <string name="btn_wallet_address">钱包地址</string>
+    <string name="btn_delete_wallet">删除钱包</string>
+    <string name="bitbill_wallet">Bitbill钱包</string>
+    <string name="msg_delete_wallet">请谨慎使用此操作，删除前确认你的钱包已备份，否则数字资产将无法找回！</string>
+    <string name="title_delete_wallet">删除钱包</string>
+    <string name="msg_delete_wallet_success">删除钱包成功</string>
+    <string name="msg_delete_wallet_fail">删除钱包失败，请重试</string>
+    <string name="msg_get_wallet_info_fail">获取钱包信息失败，请返回重试</string>
     <!--contact setting-->
     <string name="title_activity_contact_setting">联系人设置</string>
     <string name="setting_backup_contact">备份联系人</string>
@@ -279,7 +280,7 @@
     <string name="msg_contact_key_copied">联系人密钥已复制</string>
     <string name="msg_recover_contact_success">恢复了%d个联系人</string>
     <string name="msg_recover_fail">恢复联系人失败</string>
-    <string name="msg_no_contact_recover">没有联系人可恢复</string>
+    <string name="msg_no_contact_recover">您没有新增的联系人</string>
     <!--system setting-->
     <string name="title_activity_system_setting">系统设置</string>
     <string name="setting_sound">音效</string>

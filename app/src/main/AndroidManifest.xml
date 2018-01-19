@@ -32,7 +32,6 @@
         </activity>
         <activity
             android:name=".ui.guide.GuideActivity"
-            android:label="@string/title_activity_guide"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.wallet.init.InitWalletActivity" />
         <activity

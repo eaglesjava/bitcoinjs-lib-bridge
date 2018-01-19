@@ -129,6 +129,7 @@ public class BitbillApp extends Application {
 
         initSocket();
         registerActivityLifecycleCallbacks(callbacks);
+        LocaleUtils.updateLocale(this, LocaleUtils.getUserLocale(this));
     }
 
     @Override

@@ -122,7 +122,9 @@ public abstract class BaseListFragment<E extends Serializable, P extends MvpPres
             mDatas = new ArrayList<>();
         }
         mDatas.clear();
-        mDatas.addAll(datas);
+        if (!StringUtils.isEmpty(datas)) {
+            mDatas.addAll(datas);
+        }
         notifyDataSetChanged();
 
     }

@@ -84,7 +84,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         boolean isContainIn = inSelfAddressList.size() > 0;
                         boolean isAllOut = outputs.size() == outSelfAddressList.size();
                         boolean isContainOut = outSelfAddressList.size() > 0;
-                        if (isContainIn && isAllOut) {
+                        if (isContainIn && isAllOut && inWalletId.equals(outWalletId)) {
                             amount = outSelfAmout;
                             //ouput地址全部是本地地址 为转移类型
                             inOut = TxRecord.InOut.TRANSFER;
@@ -103,6 +103,8 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                             txRecord.setWalletId(outWalletId);
                         } else if (inWalletId != null) {
                             txRecord.setWalletId(inWalletId);
+                        } else {
+                            continue;
                         }
                         txRecord.setSumAmount(amount);
                         txRecord.setInOut(inOut);

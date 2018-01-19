@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mSendContact = ((Contact) intent.getSerializableExtra(AppConstants.EXTRA_CONTACT));
         if (mSendContact != null) {
             //切换到发送联系人界面
-            mViewPager.setCurrentItem(INDEX_SEND);
+            mViewPager.setCurrentItem(INDEX_SEND, false);
             if (mSendFragment != null) {
                 mSendFragment.setSendAddress(mSendContact);
             }
@@ -137,7 +137,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             mAddress = intent.getStringExtra(AppConstants.EXTRA_ADDRESS);
             if (StringUtils.isNotEmpty(mAddress)) {
                 //切换到发送界面
-                mViewPager.setCurrentItem(INDEX_SEND);
+                mViewPager.setCurrentItem(INDEX_SEND, false);
                 mSendFragment.setSendAddress(mAddress);
             }
         }
@@ -372,8 +372,13 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     private void loadUnconfrim(List<TxElement> data) {
-        mTxInfoList = data;
-        mParseTxInfoMvpPresenter.parseTxInfo();
+        if (StringUtils.isEmpty(data)) {
+            parsedTxItemList(null);
+        } else {
+
+            mTxInfoList = data;
+            mParseTxInfoMvpPresenter.parseTxInfo();
+        }
 
     }
 

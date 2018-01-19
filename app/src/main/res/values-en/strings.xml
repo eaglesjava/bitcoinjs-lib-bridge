@@ -19,42 +19,42 @@
     <string name="disconnect">断开连接，请检查你的网络连接</string>
     <string name="error_connect">连接失败</string>
 
-    <!--主页-->
-    <string name="title_asset">资产</string>
-    <string name="title_receive">接收</string>
-    <string name="title_send">发送</string>
-    <string name="title_my">我</string>
-
     <!--引导页-->
-    <string name="title_activity_guide">GuideActivity</string>
-    <string name="btn_create_wallet">创建钱包</string>
-    <string name="btn_import_wallet">导入钱包</string>
-    <string name="guide_section_one">数字资产 All in one</string>
-    <string name="guide_section_two">私钥掌握在你自己手里</string>
+    <string name="btn_create_wallet">Create wallet</string>
+    <string name="btn_import_wallet">Import wallet</string>
+    <string name="guide_section_one">Digital assets all in one</string>
+    <string name="guide_section_two">Own your private keys</string>
+    <string name="guide_section_three">Send coins by contacts</string>
 
     <!--创建或导入钱包-->
-    <string name="title_activity_import_wallet">导入钱包</string>
-    <string name="title_activity_create_wallet">创建钱包</string>
-    <string name="error_invalid_trade_pwd">密码长度限制在6-20位字符</string>
-    <string name="hint_input_please">请输入</string>
-    <string name="hint_input_wallet_id">请输入6-20位，以字母开头</string>
-    <string name="hint_trade_pwd">请输入6-20位字符</string>
+    <string name="title_activity_create_wallet">Create wallet</string>
+    <string name="hint_bottom_wallet_id">Set your wallet ID associated with your contacts, which supports letter, number and underline, and only begins with letter.  The wallet ID cannot be modified once it is set.</string>
+    <string name="title_activity_import_wallet">Import wallet</string>
+    <string name="hint_input_mnemonic">normally 12 words</string>
+    <string name="hint_only_support_bip39">Supports BIP39 mnemonic words only</string>
+    <string name="error_invalid_trade_pwd">Please input 6-20 characters</string>
+    <string name="hint_input_please">Please input</string>
+    <string name="hint_input_wallet_id">6-20 characters, begin with letter.</string>
+    <string name="hint_trade_pwd">Please input 6-20 characters</string>
     <string name="input_wallet_name">钱包名称</string>
     <string name="input_wallet_id">钱包ID</string>
     <string name="input_trade_pwd">创建交易密码</string>
     <string name="input_trade_pwd_confirm">确认交易密码</string>
-    <string name="btn_start_import">开始导入</string>
-    <string name="btn_start_create">开始创建</string>
-    <string name="error_wallet_id_required">请输入钱包ID，6-20位，以字母开头</string>
-    <string name="error_wallet_id_length_required">钱包ID支持6-20位字符</string>
+    <string name="btn_start_import">Confirm</string>
+    <string name="btn_start_create">Confirm</string>
+    <string name="error_wallet_id_required">6-20 characters, begin with letter.</string>
+    <string name="error_wallet_id_length_required">Please input 6-20 characters</string>
     <string name="error_trade_pwd_required">请输入交易密码</string>
     <string name="error_confirm_trade_pwd_required">请输入确认交易密码</string>
     <string name="error_trade_pwd_inconsistent">密码不一致</string>
-    <string name="hint_back_up_pwd">请备份好你的密码！Bitbill不存储用户密码，无法提供找回或重置的功能</string>
-    <string name="action_settings">Settings</string>
+    <string name="hint_back_up_pwd">Tip: Please remember your password, BitBill cannot save user’s password, and does not have the service of finding or resetting password.</string>
     <string name="close">关闭</string>
     <!--main activity-->
     <string name="title_activity_main">资产</string>
+    <string name="title_asset">资产</string>
+    <string name="title_receive">接收</string>
+    <string name="title_send">发送</string>
+
 
     <string name="navigation_drawer_open">打开导航页</string>
     <string name="navigation_drawer_close">关闭导航页</string>
@@ -106,11 +106,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hint_bottom_wallet_id">设定你的钱包ID，它可以关联你的联系人，支持字母、数字和下划线，仅能以字母开头，一旦设定不可修改。</string>
     <!--wallet info -->
     <string name="title_activity_wallet_info">钱包信息</string>
     <string name="text_in_progress_count">正在进行中 %d个</string>
     <string name="text_unconfirm_transaction">未确认的交易</string>
+    <string name="status_item_receive">已接收</string>
+    <string name="status_item_send">已发送</string>
+    <string name="status_item_unconfirm">待确认</string>
+    <string name="title_tx_confirm">确认</string>
+    <string name="status_item_transfer">已转移</string>
 
     <!--receive fragment-->
     <string name="text_receive_specific_amount"><u>特定金额接收</u></string>
@@ -126,7 +130,6 @@
     <string name="btn_confirm_send">确认发送</string>
     <string name="action_send_scan">扫一扫</string>
     <string name="toast_copy_address_success">已复制地址</string>
-    <string name="guide_section_three">添加联系人 一键转账</string>
     <string name="error_wallet_id_exsist">钱包id已存在</string>
     <string name="title_activity_create_wallet_id">创建钱包ID</string>
     <string name="title_activity_wallet_init">创建钱包密码</string>
@@ -179,17 +182,6 @@
     <string name="msg_contact_is_exsist">联系人已存在</string>
     <string name="error_contact_name_required">请输入姓名</string>
     <string name="error_contact_address_required">请输入钱包地址</string>
-    <string name="title_activity_wallet_detail">WalletDetailActivity</string>
-    <string name="text_wallet_id">钱包ID</string>
-    <string name="text_wallet_add_time">添加时间</string>
-    <string name="btn_wallet_address">钱包地址</string>
-    <string name="btn_delete_wallet">删除钱包</string>
-    <string name="bitbill_wallet">Bitbill钱包</string>
-    <string name="msg_delete_wallet">请谨慎使用此操作，删除前确认你的钱包已备份，否则数字资产将无法找回！</string>
-    <string name="title_delete_wallet">删除钱包</string>
-    <string name="msg_delete_wallet_success">删除钱包成功</string>
-    <string name="msg_delete_wallet_fail">删除钱包失败，请重试</string>
-    <string name="msg_get_wallet_info_fail">获取钱包信息失败，请返回重试</string>
     <string name="title_activity_contact_select">联系人</string>
     <string name="title_shortcut">快捷方式</string>
     <string name="text_go_to_setting_custom">前往设置自定义</string>
@@ -232,18 +224,6 @@
     <string name="text_chose_browser">请选择浏览器</string>
     <string name="text_chose_email">请选择邮箱</string>
     <string name="status_transfer_success">交易成功</string>
-    <string name="title_activity_wallet_address">钱包地址</string>
-    <string name="fail_create_qrcode">生成钱包ID二维码失败</string>
-    <string name="title_address_balance">地址与余额</string>
-    <string name="copy_address">地址已复制</string>
-    <string name="positive_copy_contact_key">复制联系人密钥</string>
-    <string name="copy_confim_count">确认数已复制</string>
-    <string name="status_item_receive">已接收</string>
-    <string name="status_item_send">已发送</string>
-    <string name="status_item_unconfirm">待确认</string>
-    <string name="title_tx_confirm">确认</string>
-    <string name="status_item_transfer">已转移</string>
-    <string name="successs_address_refresh">地址刷新成功</string>
     <string name="text_complete_agree">完成即表示你已同意</string>
     <!--send fragment-->
     <string name="fail_get_contact_last_address">获取联系人最新地址失败</string>
@@ -255,6 +235,7 @@
     <string name="msg_input_gt_zero_amount">请输入大于0的金额</string>
     <string name="msg_input_specifc_amount">请输入特定金额</string>
     <!--setting-->
+    <string name="bitbill_wallet">Bitbill Wallet</string>
     <string name="title_prefer_setting">Prefer setting</string>
     <string name="setting_short_cut">Shortcuts</string>
     <string name="title_main_shortcut">Main shortcut</string>
@@ -270,12 +251,31 @@
     <string name="hint_back_up_now">Back up</string>
     <string name="text_someone_wallet">%s wallet</string>
     <string name="title_activity_wallet_setting">Wallet</string>
+    <!--wallet detail-->
+    <string name="text_wallet_id">Wallet ID</string>
+    <string name="text_wallet_add_time">Add date</string>
+    <string name="btn_wallet_address">Wallet address</string>
+    <string name="btn_delete_wallet">Delete wallet</string>
+    <string name="msg_delete_wallet">Please be cautious about this operation, confirm that your wallet has been backed up before deleting, or the digital assets cannot be found.</string>
+    <string name="title_delete_wallet">Delete wallet</string>
+    <string name="msg_delete_wallet_success">Deleted wallet</string>
+    <string name="msg_delete_wallet_fail">Operation failed</string>
+    <string name="msg_get_wallet_info_fail">Please retry later</string>
+    <!--wallet address-->
+    <string name="title_activity_wallet_address">Wallet address</string>
+    <string name="btn_scan_address">Scan address</string>
+    <string name="fail_create_qrcode">Generate wallet ID qr code failed.</string>
+    <string name="title_address_balance">Address and balance</string>
+    <string name="copy_address">Address copied</string>
+    <string name="copy_confim_count">Confirmation number copied</string>
+    <string name="successs_address_refresh">Address refreshed successfully</string>
     <!--contact setting-->
     <string name="title_activity_contact_setting">Contact</string>
     <string name="setting_backup_contact">Backup contacts</string>
     <string name="setting_recover_contact">Restore contacts</string>
     <string name="msg_input_defualt_wallet_pwd">Please input %s wallet password</string>
     <string name="hint_contact_key">Please input passphrase</string>
+    <string name="positive_copy_contact_key">Copy contact passphrase</string>
     <string name="msg_contact_key_copied">Passphrase copied</string>
     <string name="msg_recover_contact_success">You restored %d contacts</string>
     <string name="msg_recover_fail">Restore contact failed</string>

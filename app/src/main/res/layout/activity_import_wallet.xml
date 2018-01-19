@@ -18,13 +18,13 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="25dp"
-        android:hint="@string/hint_click_input_please" />
+        android:hint="@string/hint_input_mnemonic" />
 
     <TextView
         style="@style/Text.Small.Green"
         android:layout_width="match_parent"
         android:layout_marginBottom="25dp"
-        android:text="仅支持符合BIP39标准的助记词" />
+        android:text="@string/hint_only_support_bip39" />
 
     <Button
         android:id="@+id/btn_next"

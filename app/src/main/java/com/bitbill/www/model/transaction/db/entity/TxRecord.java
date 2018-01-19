@@ -13,10 +13,11 @@ import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.OrderBy;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
-import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.converter.PropertyConverter;
 
 import java.util.Date;
@@ -25,14 +26,20 @@ import java.util.List;
 /**
  * Created by isanwenyu@163.com on 2017/12/23.
  */
-@org.greenrobot.greendao.annotation.Entity
+@org.greenrobot.greendao.annotation.Entity(
+
+        indexes = {
+                @Index(value = "walletId,txHash", unique = true)
+        }
+)
 public class TxRecord extends Entity {
     @ToOne(joinProperty = "walletId")
     Wallet wallet;
     @Id(autoincrement = true)
     private Long id;
+    @NotNull
     private Long walletId;
-    @Unique
+    @NotNull
     private String txHash;
     @Convert(converter = InOutConverter.class, columnType = Integer.class)
     private InOut inOut = InOut.IN;//0: 转移,1：in（接收）,2：out(发送)
@@ -60,9 +67,9 @@ public class TxRecord extends Entity {
     @Generated(hash = 1885063144)
     private transient Long wallet__resolvedKey;
 
-    @Generated(hash = 32579472)
-    public TxRecord(Long id, Long walletId, String txHash, InOut inOut, long sumAmount,
-                    long height, Date createdTime, String mRemark, Long elementId) {
+    @Generated(hash = 731757339)
+    public TxRecord(Long id, @NotNull Long walletId, @NotNull String txHash, InOut inOut,
+                    long sumAmount, long height, Date createdTime, String mRemark, Long elementId) {
         this.id = id;
         this.walletId = walletId;
         this.txHash = txHash;
@@ -109,11 +116,11 @@ public class TxRecord extends Entity {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(long height) {
         this.height = height;
     }
 
-    public void setHeight(long height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
@@ -287,11 +294,15 @@ public class TxRecord extends Entity {
     /**
      * called by internal mechanisms, do not call yourself.
      */
-    @Generated(hash = 112459860)
-    public void setWallet(Wallet wallet) {
+    @Generated(hash = 276091648)
+    public void setWallet(@NotNull Wallet wallet) {
+        if (wallet == null) {
+            throw new DaoException(
+                    "To-one property 'walletId' has not-null constraint; cannot set to-one to null");
+        }
         synchronized (this) {
             this.wallet = wallet;
-            walletId = wallet == null ? null : wallet.getId();
+            walletId = wallet.getId();
             wallet__resolvedKey = walletId;
         }
     }

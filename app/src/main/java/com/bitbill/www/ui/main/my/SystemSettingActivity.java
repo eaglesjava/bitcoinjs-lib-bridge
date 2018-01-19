@@ -37,6 +37,7 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
 
     private ListSelectDialog mCurrencySelectDialog;
     private ListSelectDialog mLangugeSelectDialog;
+    private boolean isUpdateLocale;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SystemSettingActivity.class);
@@ -92,6 +93,7 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
             if (LocaleUtils.needUpdateLocale(this, locale)) {
                 LocaleUtils.updateLocale(this, locale);
                 restartAct();
+                isUpdateLocale = true;
             }
 
         });
@@ -125,9 +127,10 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+        if (isUpdateLocale) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 }

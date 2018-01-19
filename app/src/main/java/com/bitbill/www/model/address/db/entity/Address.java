@@ -1,10 +1,18 @@
 package com.bitbill.www.model.address.db.entity;
 
 
+import com.bitbill.model.db.dao.AddressDao;
+import com.bitbill.model.db.dao.DaoSession;
+import com.bitbill.model.db.dao.WalletDao;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
+
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Unique;
 
 import java.util.Date;
@@ -16,16 +24,16 @@ import java.util.Date;
 @Entity(nameInDb = "address")
 public class Address extends com.bitbill.www.common.base.model.entity.Entity {
 
+    @ToOne(joinProperty = "walletId")
+    Wallet wallet;
     @Id(autoincrement = true)
     private Long id;
-
     @Property(nameInDb = "name")
     @Unique
     private String name;
-
+    @NotNull
     @Property(nameInDb = "wallet_id")
     private Long walletId;
-
     @Property(nameInDb = "index")
     private Long index;
 
@@ -38,9 +46,24 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "balance")
     private Long balance;
 
-    @Generated(hash = 670839834)
-    public Address(Long id, String name, Long walletId, Long index, String coinType,
-                   Date createdAt, Long balance) {
+    /**
+     * Used to resolve relations
+     */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+
+    /**
+     * Used for active entity operations.
+     */
+    @Generated(hash = 1580986028)
+    private transient AddressDao myDao;
+
+    @Generated(hash = 1885063144)
+    private transient Long wallet__resolvedKey;
+
+    @Generated(hash = 1294345065)
+    public Address(Long id, String name, @NotNull Long walletId, Long index,
+                   String coinType, Date createdAt, Long balance) {
         this.id = id;
         this.name = name;
         this.walletId = walletId;
@@ -108,5 +131,87 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setBalance(Long balance) {
         this.balance = balance;
+    }
+
+    /**
+     * To-one relationship, resolved on first access.
+     */
+    @Generated(hash = 1903052073)
+    public Wallet getWallet() {
+        Long __key = this.walletId;
+        if (wallet__resolvedKey == null || !wallet__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            WalletDao targetDao = daoSession.getWalletDao();
+            Wallet walletNew = targetDao.load(__key);
+            synchronized (this) {
+                wallet = walletNew;
+                wallet__resolvedKey = __key;
+            }
+        }
+        return wallet;
+    }
+
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 276091648)
+    public void setWallet(@NotNull Wallet wallet) {
+        if (wallet == null) {
+            throw new DaoException(
+                    "To-one property 'walletId' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.wallet = wallet;
+            walletId = wallet.getId();
+            wallet__resolvedKey = walletId;
+        }
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
+    }
+
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 543375780)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getAddressDao() : null;
     }
 }
