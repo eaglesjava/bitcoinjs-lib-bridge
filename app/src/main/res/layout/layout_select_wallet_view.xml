@@ -12,7 +12,7 @@
         android:background="@color/red"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="当前钱包未备份，马上备份"
+        android:text="@string/title_back_up_now"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:visibility="gone"/>

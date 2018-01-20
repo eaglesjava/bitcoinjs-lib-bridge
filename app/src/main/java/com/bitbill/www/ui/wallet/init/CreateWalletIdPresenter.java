@@ -49,10 +49,10 @@ public class CreateWalletIdPresenter<M extends WalletModel, V extends CreateWall
                                     } else if (stringApiResponse.isWalletIdExsist()) {
                                         getMvpView().hasWalletIdExsist();
                                     } else {
-                                        getMvpView().checkWalletIdFail();
+                                        getMvpView().checkWalletIdFail(stringApiResponse.getMessage());
                                     }
                                 } else {
-                                    getMvpView().checkWalletIdFail();
+                                    getMvpView().checkWalletIdFail(null);
                                 }
                             }
 
@@ -67,6 +67,8 @@ public class CreateWalletIdPresenter<M extends WalletModel, V extends CreateWall
                                 if (e instanceof ANError) {
                                     ANError anError = (ANError) e;
                                     handleApiError(anError);
+                                } else {
+                                    getMvpView().checkWalletIdFail(null);
                                 }
                             }
                         }));

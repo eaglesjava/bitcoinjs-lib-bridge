@@ -3,6 +3,7 @@ package com.bitbill.www.ui.main;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -123,6 +124,11 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         mSendContact = ((Contact) intent.getSerializableExtra(AppConstants.EXTRA_CONTACT));
@@ -166,6 +172,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         init(savedInstanceState);
         initView();
         initData();
+        setTitle(R.string.title_activity_main);
     }
 
     @Override
@@ -497,7 +504,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void parsedTxItemListFail() {
-        showMessage("解析交易列表信息失败");
+        showMessage(R.string.fail_parse_tx_item);
     }
 
     @Override

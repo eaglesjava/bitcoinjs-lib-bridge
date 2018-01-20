@@ -221,7 +221,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
 
     @Override
     public void getWalletFail() {
-        showMessage(R.string.error_get_wallet_info_fail);
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
@@ -271,7 +271,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
 
     @Override
     public void parsedTxItemListFail() {
-        showMessage(R.string.fail_parse_tx_item_list);
+        showMessage(R.string.fail_parse_tx_item);
         setRefresh(false);
     }
 

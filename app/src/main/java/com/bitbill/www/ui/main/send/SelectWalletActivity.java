@@ -173,7 +173,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
 
     private boolean validSelectedWallet() {
         if (mSelectedWallet == null) {
-            showMessage("请选择钱包");
+            showMessage(R.string.msg_please_select_wallet);
             return false;
 
         }

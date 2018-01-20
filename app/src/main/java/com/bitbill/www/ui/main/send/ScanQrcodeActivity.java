@@ -115,7 +115,7 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
         vibrate();
         mQRCodeView.startSpot();
         if (StringUtils.isEmpty(result)) {
-            showMessage("解析扫码地址失败");
+            showMessage(R.string.fail_parse_scan_result);
             return;
         }
         UIHelper.parseScanResult(ScanQrcodeActivity.this, result, mFromTag);
@@ -127,6 +127,6 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
      */
     @Override
     public void onScanQRCodeOpenCameraError() {
-        showMessage("相机打开失败，请检查权限");
+        showMessage(R.string.fail_open_camera);
     }
 }

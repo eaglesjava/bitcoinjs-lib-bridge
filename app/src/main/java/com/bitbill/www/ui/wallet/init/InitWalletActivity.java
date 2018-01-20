@@ -261,13 +261,13 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     public void initWalletInfoFail() {
 
-        showMessage("初始化钱包失败，请重试");
+        showMessage(R.string.fail_init_wallet);
     }
 
     @Override
     public void invalidWalletId() {
 
-        showMessage("获取钱包信息失败，请重试");
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
@@ -290,7 +290,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Override
     public void resetPwdFail() {
-        showMessage("重置密码失败，请重试");
+        showMessage(R.string.fail_reset_wallet_pwd);
     }
 
     @Override

@@ -120,7 +120,7 @@ public class SearchContactResultActivity extends BaseToolbarActivity<SearchConta
 
     @Override
     public void requireWalletId() {
-        showMessage(R.string.msg_get_wallet_id_fail);
+        showMessage(R.string.fail_get_wallet_id);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class SearchContactResultActivity extends BaseToolbarActivity<SearchConta
 
     @Override
     public void isExsistContact() {
-        showMessage("联系人已存在");
+        showMessage(R.string.msg_contact_is_exsist);
     }
 
     @OnClick(R.id.btn_confirm_add)

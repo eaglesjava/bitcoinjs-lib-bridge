@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:qrcv_animTime="1000"
-        app:qrcv_barCodeTipText="将条码放入框内，即可自动扫描"
         app:qrcv_barcodeRectHeight="120dp"
         app:qrcv_borderColor="@android:color/white"
         app:qrcv_borderSize="0dp"
@@ -30,7 +29,7 @@
         app:qrcv_isShowTipTextAsSingleLine="false"
         app:qrcv_isTipTextBelowRect="true"
         app:qrcv_maskColor="@color/black_50"
-        app:qrcv_qrCodeTipText="将二维码放入框内，即可自动扫描"
+        app:qrcv_qrCodeTipText="@string/tip_qrcode_scan"
         app:qrcv_rectWidth="200dp"
         app:qrcv_scanLineColor="@color/white"
         app:qrcv_scanLineMargin="0dp"
@@ -38,7 +37,7 @@
         app:qrcv_tipTextColor="@android:color/white"
         app:qrcv_tipTextSize="12sp"
         app:qrcv_toolbarHeight="?actionBarSize"
-        app:qrcv_topOffset="100dp"
+        app:qrcv_topOffset="50dp"
         />
 
 </android.support.design.widget.CoordinatorLayout>

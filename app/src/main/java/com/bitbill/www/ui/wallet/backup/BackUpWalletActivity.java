@@ -117,17 +117,17 @@ public class BackUpWalletActivity extends ScreenShotObserverActivity<BackupWalle
 
     @Override
     public void loadMnemonicFail() {
-        showMessage(R.string.error_load_mnemonic_fail);
+        showMessage(R.string.fail_load_mnemonic);
     }
 
     @Override
     public void getWalletFail() {
-        showMessage(R.string.error_get_wallet_info_fail);
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
     public void getConfirmPwdFail() {
-        showMessage(R.string.error_get_confirm_pwd_fail);
+        showMessage(R.string.fail_get_confirm_pwd);
         showPwdDialog();
     }
 

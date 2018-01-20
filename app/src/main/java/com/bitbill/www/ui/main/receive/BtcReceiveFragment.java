@@ -123,7 +123,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void copyClick(View v) {
         //复制地址到剪切板
         UIHelper.copy(getBaseActivity(), tvAddress.getText().toString());
-        showMessage(R.string.toast_copy_address_success);
+        showMessage(R.string.msg_copy_address_success);
     }
 
     public void loadAddress(Wallet selectedWallet) {
@@ -155,18 +155,18 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
 
     @Override
     public void createAddressQrcodeFail() {
-        showMessage(R.string.error_create_address_qrcode);
+        showMessage(R.string.fail_create_address_qrcode);
     }
 
     @Override
     public void getSelectedWalletFail() {
 
-        showMessage(R.string.error_get_wallet_info_fail);
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
     public void loadAddressFail() {
-        showMessage(R.string.msg_load_address_fail);
+        showMessage(R.string.fail_load_address);
     }
 
     public String getCurrentAddress() {
@@ -180,17 +180,17 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
 
     @Override
     public void getWalletFail() {
-        showMessage(R.string.error_get_wallet_info_fail);
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
     public void refreshAddressFail() {
-        showMessage(R.string.error_refresh_address);
+        showMessage(R.string.fail_refresh_address);
     }
 
     @Override
     public void refreshAddressSuccess(String lastAddress) {
-        showMessage(R.string.success_refresh_address);
+        showMessage(R.string.msg_refreshed_address);
         getMvpPresenter().createAddressQrcode(lastAddress);
         setReceiveAddress(lastAddress);
 
@@ -198,7 +198,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
 
     @Override
     public void reachAddressIndexLimit() {
-        showMessage(R.string.msg_reach_address_index_limit);
+        showMessage(R.string.fail_reach_address_index_limit);
     }
 
     @Override

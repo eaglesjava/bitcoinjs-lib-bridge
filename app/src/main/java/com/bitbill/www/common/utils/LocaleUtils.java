@@ -100,6 +100,7 @@ public class LocaleUtils {
      */
     public static void updateLocale(Context pContext, Locale pNewUserLocale) {
         if (needUpdateLocale(pContext, pNewUserLocale)) {
+            Locale.setDefault(pNewUserLocale);
             Configuration _Configuration = pContext.getResources().getConfiguration();
             _Configuration.setLocale(pNewUserLocale);
             DisplayMetrics _DisplayMetrics = pContext.getResources().getDisplayMetrics();

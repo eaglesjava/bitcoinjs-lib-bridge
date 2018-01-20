@@ -121,7 +121,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void initView() {
-        mPwdDialogFragment = PwdDialogFragment.newInstance("交易密码", getWallet(), false);
+        mPwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.dialog_title_wallet_pwd), getWallet(), false);
         mPwdDialogFragment.setOnPwdValidatedListener(new PwdDialogFragment.OnPwdValidatedListener() {
             @Override
             public void onPwdCnfirmed(String confirmPwd) {
@@ -199,7 +199,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     @Override
     public void sendTransactionFail(String message) {
         if (StringUtils.isEmpty(message)) {
-            showMessage(R.string.msg_send_transaction_fail);
+            showMessage(R.string.fail_send_transaction);
         } else {
             showMessage(message);
         }
@@ -404,7 +404,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void reachAddressIndexLimit() {
-        showMessage(R.string.msg_reach_address_index_limit);
+        showMessage(R.string.fail_reach_address_index_limit);
     }
 
     @Override

@@ -55,7 +55,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
     @Override
     public void importWalletFail() {
 
-        showMessage(R.string.error_import_wallet_fail);
+        showMessage(R.string.fail_import_wallet);
     }
 
     @Override
@@ -65,12 +65,12 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @Override
     public void getMnemonicFail() {
-        showMessage(R.string.error_input_menemonic_fail);
+        showMessage(R.string.fail_input_menemonic);
     }
 
     @Override
     public void inputMnemonicError() {
-        showMessage(R.string.error_input_menemonic_fail);
+        showMessage(R.string.fail_input_menemonic);
     }
 
     @Override

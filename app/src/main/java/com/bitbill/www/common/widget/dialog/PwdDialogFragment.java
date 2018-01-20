@@ -99,7 +99,7 @@ public class PwdDialogFragment extends BaseConfirmDialog {
                         }
                     } else {
                         setAutoDismiss(false);
-                        showMessage("请输入正确的密码");
+                        showMessage(R.string.msg_dialg_input_correct_pwd);
                         return;
                     }
 

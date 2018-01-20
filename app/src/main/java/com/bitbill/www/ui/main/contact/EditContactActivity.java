@@ -39,6 +39,7 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
     @Inject
     EditContactMvpPresenter<ContactModel, EditContactMvpView> mEditContactMvpPresenter;
     private Contact mContact;
+    private boolean cancel;
 
     public static void start(Context context, Contact contact) {
         Intent starter = new Intent(context, EditContactActivity.class);
@@ -139,7 +140,8 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
     @Override
     public void requireContact() {
 
-        showMessage(R.string.msg_get_contact_info_fail);
+        etwContactName.setError(R.string.msg_get_contact_info_fail);
+        etwContactName.requestFocus();
     }
 
     @Override
@@ -164,10 +166,10 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
-                getMvpPresenter().updateContact();
+                updateContact();
                 break;
             case R.id.btn_delete:
-                MessageConfirmDialog.newInstance("提示", "确定要删除该联系人吗？", "删除", false)
+                MessageConfirmDialog.newInstance(getString(R.string.dialog_title_tips), getString(R.string.dialog_msg_delete_contact), getString(R.string.dialog_btn_delete), false)
                         .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -178,5 +180,10 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
                         }).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
                 break;
         }
+    }
+
+    private void updateContact() {
+        etwContactName.removeError();
+        getMvpPresenter().updateContact();
     }
 }

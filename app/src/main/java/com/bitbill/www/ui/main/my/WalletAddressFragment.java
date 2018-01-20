@@ -139,7 +139,7 @@ public class WalletAddressFragment extends BaseListFragment<Address, WalletAddre
     @Override
     public void reachAddressIndexLimit() {
 
-        showMessage(R.string.msg_reach_address_index_limit);
+        showMessage(R.string.fail_reach_address_index_limit);
 
     }
 

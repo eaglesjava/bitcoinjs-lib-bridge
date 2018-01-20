@@ -43,7 +43,7 @@
                 style="@style/ConfirmDialog.Button.Negative"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="取消"/>
+                android:text="@string/dialog_btn_cancel" />
 
             <View style="@style/Line.Vertical"/>
 
@@ -52,7 +52,7 @@
                 style="@style/ConfirmDialog.Button.Positive"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="确定"/>
+                android:text="@string/dialog_btn_comfirm" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

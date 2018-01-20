@@ -73,7 +73,7 @@ public class CreateWalletIdActivity extends BaseToolbarActivity<CreateWalletIdMv
 
     @Override
     public void initView() {
-        SupportCoinDialog.newInstance("目前支持以下币种", true, "我知道了")
+        SupportCoinDialog.newInstance(getString(R.string.dialog_title_support_coin_type), true, getString(R.string.dialog_btn_known))
                 .show(getSupportFragmentManager(), SupportCoinDialog.TAG);
 
     }
@@ -146,8 +146,8 @@ public class CreateWalletIdActivity extends BaseToolbarActivity<CreateWalletIdMv
     }
 
     @Override
-    public void checkWalletIdFail() {
-        showMessage(getString(R.string.error_wallet_id_check_fail));
+    public void checkWalletIdFail(String message) {
+        showMessage(StringUtils.isEmpty(message) ? getString(R.string.error_wallet_id_check_fail) : message);
 
     }
 

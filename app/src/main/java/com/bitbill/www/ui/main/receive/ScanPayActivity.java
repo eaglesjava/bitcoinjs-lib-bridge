@@ -91,7 +91,7 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
 
     @Override
     public void createReceiveQrcodeFail() {
-        showMessage("生成收款二维码失败，请返回重试");
+        showMessage(R.string.fail_create_pay_qrcode);
     }
 
     @Override
