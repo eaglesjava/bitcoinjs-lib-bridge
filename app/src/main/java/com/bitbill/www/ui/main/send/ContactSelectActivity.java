@@ -3,6 +3,7 @@ package com.bitbill.www.ui.main.send;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.BaseFragmentActivity;
@@ -22,6 +23,12 @@ public class ContactSelectActivity extends BaseFragmentActivity {
     public static void startForResult(BaseFragment fragment) {
         Intent starter = new Intent(fragment.getBaseActivity(), ContactSelectActivity.class);
         fragment.startActivityForResult(starter, REQUEST_SELECT_CONTACT_CODE);
+    }
+
+    @Override
+    public void onBeforeSetContentLayout() {
+        super.onBeforeSetContentLayout();
+        setTitle(R.string.title_activity_contact_select);
     }
 
     @Override

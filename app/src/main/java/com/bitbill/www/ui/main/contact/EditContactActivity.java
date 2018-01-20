@@ -65,6 +65,7 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
 
     @Override
     public void onBeforeSetContentLayout() {
+        setTitle(R.string.title_activity_edit_contact);
 
     }
 

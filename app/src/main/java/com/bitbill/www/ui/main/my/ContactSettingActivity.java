@@ -69,6 +69,7 @@ public class ContactSettingActivity extends BaseToolbarActivity<ContactSettingMv
     @Override
     public void onBeforeSetContentLayout() {
 
+        setTitle(R.string.title_activity_contact_setting);
     }
 
     @Override

@@ -37,6 +37,7 @@ public class ShortCutSettingActivity extends BaseToolbarActivity<ShortCutSetting
 
     @Override
     public void onBeforeSetContentLayout() {
+        setTitle(R.string.title_activity_shorcut_setting);
 
     }
 

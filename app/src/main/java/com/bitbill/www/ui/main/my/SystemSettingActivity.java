@@ -56,7 +56,7 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_system_setting);
     }
 
     @Override

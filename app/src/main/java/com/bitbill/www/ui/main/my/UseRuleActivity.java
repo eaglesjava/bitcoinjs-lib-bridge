@@ -33,7 +33,7 @@ public class UseRuleActivity extends BaseToolbarActivity {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_use_rule);
     }
 
     @Override

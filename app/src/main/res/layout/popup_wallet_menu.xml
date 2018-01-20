@@ -8,12 +8,12 @@
         android:id="@+id/tv_menu_create_wallet"
         style="@style/Text.Wallet.Menu"
         android:elevation="10dp"
-        android:text="创建钱包"/>
+        android:text="@string/menu_create_wallet" />
 
     <TextView
         android:id="@+id/tv_menu_import_wallet"
         style="@style/Text.Wallet.Menu"
         android:layout_marginTop="10dp"
         android:elevation="10dp"
-        android:text="导入钱包"/>
+        android:text="@string/menu_import_wallet" />
 </LinearLayout>

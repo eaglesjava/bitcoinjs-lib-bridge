@@ -23,14 +23,14 @@
     <string name="disconnect">断开连接，请检查你的网络连接</string>
     <string name="error_connect">连接失败</string>
 
-    <!--引导页-->
+    <!--guide-->
     <string name="btn_create_wallet">Create wallet</string>
     <string name="btn_import_wallet">Import wallet</string>
     <string name="guide_section_one">Digital assets all in one</string>
     <string name="guide_section_two">Own your private keys</string>
     <string name="guide_section_three">Send coins by contacts</string>
 
-    <!--创建或导入钱包-->
+    <!--create or import wallet-->
     <string name="title_activity_import_wallet">Import wallet</string>
     <string name="text_mnemonic">Mnemonic</string>
     <string name="hint_input_mnemonic">normally 12 words</string>
@@ -90,6 +90,8 @@
     <string name="navigation_drawer_open">Open navigation</string>
     <string name="navigation_drawer_close">Close navigation</string>
     <string name="fail_parse_tx_item">Parsing the transaction list information failed.</string>
+    <string name="menu_create_wallet">Create Wallet</string>
+    <string name="menu_import_wallet">Import Wallet</string>
     <!--scan qrcode -->
     <string name="fail_open_camera">The camera failed to open, please check permissions.</string>
     <string name="fail_parse_scan_result">Parsing the scan results failed</string>

@@ -44,6 +44,7 @@ public class AboutUsActivity extends BaseToolbarActivity {
 
     @Override
     public void onBeforeSetContentLayout() {
+        setTitle(R.string.title_activity_about_us);
 
     }
 
