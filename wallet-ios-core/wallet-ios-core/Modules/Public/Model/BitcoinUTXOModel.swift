@@ -30,6 +30,8 @@ class BitcoinUTXOModel: NSObject, Comparable {
     var amount: Double
     var availableforspending: Bool
     var address: String
+    var isChange: Bool
+    
     init(jsonData: JSON) {
         txHash = jsonData["txid"].stringValue
         txOutputIndex = jsonData["vIndex"].intValue
@@ -39,10 +41,11 @@ class BitcoinUTXOModel: NSObject, Comparable {
         amount = Double(satoshiAmount) / Double(BTC_SATOSHI)
         availableforspending = jsonData["availableforspending"].boolValue
         address = jsonData["addressTxt"].stringValue
+        isChange = jsonData["addressType"].boolValue
     }
     
     func toInput() -> BTCInput {
-        return BTCInput(txHash: txHash, index: txOutputIndex, bip39Index: bip39Index, satoshi: satoshiAmount, address: address)
+        return BTCInput(txHash: txHash, index: txOutputIndex, bip39Index: bip39Index, satoshi: satoshiAmount, address: address, isChange: isChange)
     }
     
     var amoutString: String {

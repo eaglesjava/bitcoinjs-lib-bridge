@@ -49,12 +49,14 @@ struct BTCInput {
     var bip39Index: Int
     var satoshi: Int64
     var address: String
-    init(txHash: String, index: Int, bip39Index: Int, satoshi: Int64, address: String) {
+    var isChange: Bool
+    init(txHash: String, index: Int, bip39Index: Int, satoshi: Int64, address: String, isChange: Bool) {
         self.txHash = txHash
         self.index = index
         self.bip39Index = bip39Index
         self.satoshi = satoshi
         self.address = address
+        self.isChange = isChange
     }
     
     func toDictionary() -> [String: Any] {
@@ -62,6 +64,7 @@ struct BTCInput {
         dic["txHash"] = txHash
         dic["index"] = index
         dic["bip39Index"] = bip39Index
+        dic["isChange"] = isChange
         return dic
     }
 }
