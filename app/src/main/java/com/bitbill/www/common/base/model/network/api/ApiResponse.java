@@ -5,8 +5,12 @@ package com.bitbill.www.common.base.model.network.api;
  */
 public class ApiResponse<T> {
 
-    public static final int STATUS_CODE_SUCCESS = 0;//成功
+    public static final int STATUS_CODE_SUCCESS = 0;//服务器忙请稍后再试!
+    public static final int STATUS_SERVER_BUSY = -30;//钱包id已存在
+    public static final int STATUS_LACK_MADATORY_PARAMS = -31;//缺少必要的参数
+    public static final int STATUS_INVALID_PARAM_TYPE = -32;//	无效的参数类型
     public static final int STATUS_WALLET_ID_EXSIST = -40;//钱包id已存在
+    public static final int STATUS_WALLET_NO_EXSIST = -41;//钱包id已存在
     /**
      * data : null
      * errorLog : null

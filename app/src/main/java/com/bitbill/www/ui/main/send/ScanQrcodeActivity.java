@@ -80,7 +80,7 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_scan_qrcode);
     }
 
     @Override

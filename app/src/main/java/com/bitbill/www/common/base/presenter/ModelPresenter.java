@@ -42,25 +42,25 @@ public class ModelPresenter<M extends Model, V extends MvpView> extends BasePres
     public void handleApiError(ANError error) {
 
         if (error == null || error.getErrorDetail() == null) {
-            getMvpView().onError(R.string.api_default_error);
+            getMvpView().onError(R.string.error_api_default);
             return;
         }
 
         if (error.getErrorCode() == AppConstants.API_STATUS_CODE_LOCAL_ERROR
                 && error.getErrorDetail().equals(ANConstants.CONNECTION_ERROR)) {
-            getMvpView().onError(R.string.connection_error);
+            getMvpView().onError(R.string.error_connection);
             return;
         }
 
         if (error.getErrorCode() == AppConstants.API_STATUS_CODE_LOCAL_ERROR
                 && error.getErrorDetail().equals(ANConstants.REQUEST_CANCELLED_ERROR)) {
-            getMvpView().onError(R.string.api_retry_error);
+            getMvpView().onError(R.string.error_api_retry);
             return;
         }
 
         if (error.getErrorCode() == AppConstants.API_STATUS_CODE_SERVER_ERROR
                 && error.getErrorDetail().equals(ANConstants.RESPONSE_FROM_SERVER_ERROR)) {
-            getMvpView().onError(R.string.api_server_error);
+            getMvpView().onError(R.string.error_api_server);
             return;
         }
 
@@ -71,7 +71,7 @@ public class ModelPresenter<M extends Model, V extends MvpView> extends BasePres
             ApiError apiError = gson.fromJson(error.getErrorBody(), ApiError.class);
 
             if (apiError == null || apiError.getMessage() == null) {
-                getMvpView().onError(R.string.api_default_error);
+                getMvpView().onError(R.string.error_api_default);
                 return;
             }
 
@@ -86,8 +86,9 @@ public class ModelPresenter<M extends Model, V extends MvpView> extends BasePres
             }
         } catch (JsonSyntaxException | NullPointerException e) {
             Log.e(TAG, "handleApiError", e);
-            getMvpView().onError(R.string.api_default_error);
+            getMvpView().onError(R.string.error_api_default);
         }
     }
+
 
 }

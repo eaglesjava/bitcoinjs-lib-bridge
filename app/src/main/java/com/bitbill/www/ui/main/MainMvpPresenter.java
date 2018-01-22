@@ -36,5 +36,7 @@ public interface MainMvpPresenter<M extends WalletModel, V extends MainMvpView> 
 
     void getBalance();
 
+    void loadBalance();
+
     void listUnconfirm();
 }

@@ -344,7 +344,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void loadWalletsFail() {
-        showMessage("加载钱包信息失败");
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
@@ -354,7 +354,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void getWalletsFail() {
-        showMessage("加载钱包信息失败");
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
@@ -434,7 +434,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private void requestCodeQRCodePermissions() {
         String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.VIBRATE};
         if (!EasyPermissions.hasPermissions(this, perms)) {
-            EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", REQUEST_CODE_QRCODE_PERMISSIONS, perms);
+            EasyPermissions.requestPermissions(this, getString(R.string.dialog_msg_request_permissions), REQUEST_CODE_QRCODE_PERMISSIONS, perms);
         }
     }
 

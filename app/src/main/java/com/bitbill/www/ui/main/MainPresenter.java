@@ -37,13 +37,13 @@ import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -80,33 +80,87 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
         }
         getCompositeDisposable().add(getModelManager()
                 .getBalance(new GetBalanceRequest(extendedKeysHash))
-                .concatMap(stringApiResponse -> {
-                    long allAmount = 0;
-                    if (stringApiResponse.isSuccess()) {
-                        JSONObject dataJsonObj = new JSONObject(String.valueOf(stringApiResponse.getData()));
-
-                        //设置钱包余额
-                        for (Wallet wallet : wallets) {
-                            JSONObject amountJsonObj = dataJsonObj.getJSONObject(wallet.getName());
-                            long balance = amountJsonObj.getLong("balance");
-                            wallet.setBalance(balance);
-                            wallet.setUnconfirm(amountJsonObj.getLong("unconfirm"));
-                            //更新钱包
-                            getModelManager().updateWallet(wallet);
-                            allAmount += balance;
-                        }
-                    }
-                    return Observable.just(allAmount);
-                })
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Long>() {
+                .subscribeWith(new BaseSubcriber<ApiResponse>() {
                     @Override
-                    public void onNext(Long allAmount) {
-                        super.onNext(allAmount);
+                    public void onNext(ApiResponse stringApiResponse) {
+                        if (stringApiResponse != null && stringApiResponse.isSuccess()) {
+                            try {
+                                JSONObject dataJsonObj = new JSONObject(String.valueOf(stringApiResponse.getData()));
+                                long totalAmount = 0;
+                                //设置钱包余额
+                                for (Wallet wallet : wallets) {
+                                    JSONObject amountJsonObj = dataJsonObj.getJSONObject(wallet.getName());
+                                    long balance = amountJsonObj.getLong("balance");
+                                    wallet.setBalance(balance);
+                                    wallet.setUnconfirm(amountJsonObj.getLong("unconfirm"));
+                                    totalAmount += balance;
+                                }
+                                updateWallets(wallets);
+                                getMvpView().getBalanceSuccess(wallets, totalAmount);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                loadBalance();
+                            }
+                        } else {
+
+                            loadBalance();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().getBalanceSuccess(wallets, allAmount);
+                        if (e instanceof ANError) {
+                            handleApiError(((ANError) e));
+                        }
+                        loadBalance();
+                    }
+                })
+        );
+    }
+
+    private void updateWallets(List<Wallet> wallets) {
+        getCompositeDisposable().add(getModelManager().updateWallets(wallets)
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<Boolean>() {
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        super.onNext(aBoolean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                }));
+    }
+
+    @Override
+    public void loadBalance() {
+        if (!isValidWallets()) {
+            return;
+        }
+        getCompositeDisposable().add(getModelManager()
+                .getAllWallets()
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<List<Wallet>>() {
+                    @Override
+                    public void onNext(List<Wallet> walletList) {
+                        super.onNext(walletList);
+                        if (!isViewAttached()) {
+                            return;
+                        }//设置钱包余额
+                        long totalAmount = 0;
+                        for (Wallet wallet : walletList) {
+                            totalAmount += wallet.getBalance();
+                        }
+                        getMvpView().getBalanceSuccess(walletList, totalAmount);
 
 
                     }

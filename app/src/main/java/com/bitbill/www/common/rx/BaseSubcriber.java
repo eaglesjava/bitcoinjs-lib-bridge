@@ -5,7 +5,10 @@
 package com.bitbill.www.common.rx;
 
 
+import com.bitbill.www.R;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.view.MvpView;
+import com.bitbill.www.common.utils.StringUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
@@ -28,6 +31,8 @@ public class BaseSubcriber<T> extends DisposableObserver<T> {
         super.onStart();
         if (isValidMvpView()) {
             mMvpView.showLoading();
+        } else {
+            return;
         }
     }
 
@@ -43,7 +48,11 @@ public class BaseSubcriber<T> extends DisposableObserver<T> {
      */
     @Override
     public void onNext(T t) {
-
+        if (t instanceof ApiResponse) {
+            if (handleApiResponse((ApiResponse) t)) {
+                return;
+            }
+        }
     }
 
     /**
@@ -58,6 +67,8 @@ public class BaseSubcriber<T> extends DisposableObserver<T> {
     public void onError(Throwable e) {
         if (isValidMvpView()) {
             mMvpView.hideLoading();
+        } else {
+            return;
         }
     }
 
@@ -70,10 +81,55 @@ public class BaseSubcriber<T> extends DisposableObserver<T> {
     public void onComplete() {
         if (isValidMvpView()) {
             mMvpView.hideLoading();
+        } else {
+            return;
         }
     }
 
     public boolean isValidMvpView() {
         return mMvpView != null;
+    }
+
+    public MvpView getSubcriberMvpView() {
+        return mMvpView;
+    }
+
+    public boolean handleApiResponse(ApiResponse apiResponse) {
+        if (!isValidMvpView()) {
+            return true;
+        }
+
+        if (apiResponse == null) {
+            getSubcriberMvpView().onError(R.string.error_api_server);
+            return true;
+        }
+        if (apiResponse.isSuccess()) {
+            return false;
+        }
+        switch (apiResponse.getStatus()) {
+            case ApiResponse.STATUS_SERVER_BUSY:
+                getSubcriberMvpView().onError(R.string.error_server_busy);
+                return true;
+            case ApiResponse.STATUS_LACK_MADATORY_PARAMS:
+                getSubcriberMvpView().onError(R.string.error_lack_madatory_params);
+                return true;
+            case ApiResponse.STATUS_INVALID_PARAM_TYPE:
+                getSubcriberMvpView().onError(R.string.error_invalid_param_type);
+                return true;
+            case ApiResponse.STATUS_WALLET_ID_EXSIST:
+                getSubcriberMvpView().onError(R.string.error_wallet_id_exsist);
+                return true;
+            case ApiResponse.STATUS_WALLET_NO_EXSIST:
+                getSubcriberMvpView().onError(R.string.error_wallet_no_exsist);
+                return true;
+
+        }
+        if (StringUtils.isNotEmpty(apiResponse.getMessage())) {
+            getSubcriberMvpView().onError(apiResponse.getMessage());
+            return true;
+        } else {
+            getSubcriberMvpView().onError(R.string.error_api_default);
+            return true;
+        }
     }
 }
