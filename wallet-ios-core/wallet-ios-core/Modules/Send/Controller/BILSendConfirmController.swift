@@ -86,7 +86,7 @@ class BILSendConfirmController: BILBaseViewController {
 		title = "Confirm".bil_ui_localized
 		addressTitleLabel.text = "Address of receiver".bil_ui_localized
 		amountTitleLabel.text = "Sending amount".bil_ui_localized
-		feeTitleLabel.text = "Service charge".bil_ui_localized
+		feeTitleLabel.text = "Fee".bil_ui_localized
 		walletTitleLabel.text = "Sending wallet".bil_ui_localized
 		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
 		remarkInputView.textField.placeholder = "Within 20 words".bil_ui_localized
@@ -266,7 +266,7 @@ class BILSendConfirmController: BILBaseViewController {
                 self.sendSuccess(tx: tx)
             }, failure: { (msg, code) in
                 debugPrint(msg)
-				errorHandler(title: .sendConfirmSendFailed, msg: msg)
+                errorHandler(title: .sendConfirmSendFailed, msg: msg)
             })
         }, failure: { (error) in
             errorHandler(msg: error.localizedDescription)
