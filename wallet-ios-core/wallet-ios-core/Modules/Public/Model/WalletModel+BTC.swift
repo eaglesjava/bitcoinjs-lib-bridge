@@ -88,12 +88,21 @@ extension WalletModel {
         return nil
     }
     
+    static func fetchWallets(by addresses: [String]) -> [WalletModel] {
+        var wallets = [WalletModel]()
+        for wallet in BILWalletManager.shared.wallets {
+            if wallet.contain(btcAddresses: addresses, isAll: false) {
+                wallets.append(wallet)
+            }
+        }
+        return wallets
+    }
+    
     func contain(btcAddress: String) -> Bool {
         guard let set = bitcoinWallet?.addresses else { return false }
-        let count = set.filter({
-            ($0 as? BTCWalletAddressModel)?.address == btcAddress
-        }).count
-        return count > 0
+        let adds = set.mutableArrayValue(forKey: "address")
+        adds.addObjects(from: bitcoinWallet?.changeAddresses?.mutableArrayValue(forKey: "address") as! [Any])
+        return adds.contains(btcAddress)
     }
     
     func contain(btcAddresses: [String], isAll: Bool = true) -> Bool {
@@ -113,6 +122,11 @@ extension WalletModel {
 		let count = bitcoinWallet!.addresses!.count
 		return bitcoinWallet!.addresses![Int(arc4random()) % count] as! BTCWalletAddressModel
 	}
+    
+    func randomChangeAddress() -> BTCWalletAddressModel {
+        let count = bitcoinWallet!.changeAddresses!.count
+        return bitcoinWallet!.changeAddresses![Int(arc4random()) % count] as! BTCWalletAddressModel
+    }
     
     func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         guard let xpub = mainExtPublicKey else {
@@ -198,6 +212,17 @@ extension WalletModel {
             success(address)
         }, failure: failure)
 	}
+    
+    func getNewBTCChangeAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
+        let tempIndex = lastBTCChangeAddressIndex + 1
+        refreshAddressToSever(index: lastBTCAddressIndex, changeIndex: tempIndex, success: { (models, changeModels) in
+            guard let address = models.last?.address else {
+                failure(.publicWalletGenerateAddressError)
+                return
+            }
+            success(address)
+        }, failure: failure)
+    }
     
     func generateAddresses(type: BitcoinAddressType = .normal, from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard from <= to else {

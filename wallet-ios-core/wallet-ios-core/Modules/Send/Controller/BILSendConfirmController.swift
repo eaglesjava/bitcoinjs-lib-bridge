@@ -187,10 +187,10 @@ class BILSendConfirmController: BILBaseViewController {
         }
         else
         {
-            wallet.getNewBTCAddress(success: { (address) in
+            wallet.getNewBTCChangeAddress(success: { (address) in
                 createTXBuilder(address: address)
             }) { (msg) in
-				let address = wallet.randomAddress()
+				let address = wallet.randomChangeAddress()
 				guard let add = address.address else {
 					errorHandler(msg: .sendConfirmCannotFindChangeAddress)
 					return

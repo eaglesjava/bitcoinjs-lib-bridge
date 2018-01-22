@@ -205,7 +205,18 @@ extension BTCTransactionModel {
         return tx
     }
     
-    func setProperties(json: JSON, inWallet: WalletModel? = nil) {
+    private func insertReceiveTX(json: JSON, inWallet: WalletModel, outWallet: WalletModel) {
+        let tx = BTCTransactionModel.newTxIfNeeded(json: json, outWallet: outWallet)
+        tx.setProperties(json: json, inWallet: inWallet, outWallet: outWallet)
+    }
+    
+    static func newTxIfNeeded(json: JSON, outWallet: WalletModel) -> BTCTransactionModel {
+        let txs = bil_btc_transactionManager.fetchAll(keyValues: [(key: "txHash", value: json["txHash"].stringValue)])
+        let filterd = txs.filter { $0.wallet?.wallet?.id == outWallet.id }
+        return filterd.first ?? bil_btc_transactionManager.newModel()
+    }
+    
+    func setProperties(json: JSON, inWallet: WalletModel? = nil, outWallet: WalletModel? = nil) {
         clearSatoshi()
         height = json["height"].int64Value
         serverID = json["id"].int64Value
@@ -235,12 +246,18 @@ extension BTCTransactionModel {
         var wallet: WalletModel?
         if inWallet == nil {
             if let inw = WalletModel.fetch(by: inAddresses, isAll: false) {
-                if let outAllw = WalletModel.fetch(by: outAddresses, isAll: true) {
+                let outAllWallets = WalletModel.fetchWallets(by: outAddresses)
+                if outAllWallets.count == 1, let outw = outAllWallets.first, outw.id! == inw.id! {
                     typeRawValue = BILTransactionType.transfer.rawValue
-                    wallet = outAllw
+                    wallet = outw
                 }
                 else
                 {
+                    for outw in outAllWallets {
+                        if outw.id != inw.id {
+                            insertReceiveTX(json: json, inWallet: inw, outWallet: outw)
+                        }
+                    }
                     wallet = inw
                     typeRawValue = BILTransactionType.send.rawValue
                 }
@@ -255,23 +272,30 @@ extension BTCTransactionModel {
         }
         else
         {
-            if inWallet!.contain(btcAddresses: inputAddresses, isAll: false) {
-                if inWallet!.contain(btcAddresses: outAddresses, isAll: false) {
-                    wallet = inWallet
-                    typeRawValue = BILTransactionType.transfer.rawValue
+            if outWallet == nil {
+                if inWallet!.contain(btcAddresses: inputAddresses, isAll: false) {
+                    if inWallet!.contain(btcAddresses: outAddresses, isAll: false) {
+                        wallet = inWallet
+                        typeRawValue = BILTransactionType.transfer.rawValue
+                    }
+                    else
+                    {
+                        wallet = inWallet
+                        typeRawValue = BILTransactionType.send.rawValue
+                    }
                 }
                 else
                 {
-                    wallet = inWallet
-                    typeRawValue = BILTransactionType.send.rawValue
+                    if inWallet!.contain(btcAddresses: outAddresses, isAll: false) {
+                        wallet = inWallet
+                        typeRawValue = BILTransactionType.receive.rawValue
+                    }
                 }
             }
             else
             {
-                if inWallet!.contain(btcAddresses: outAddresses, isAll: false) {
-                    wallet = inWallet
-                    typeRawValue = BILTransactionType.receive.rawValue
-                }
+                wallet = outWallet
+                typeRawValue = BILTransactionType.receive.rawValue
             }
         }
         

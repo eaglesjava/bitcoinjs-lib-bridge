@@ -89,22 +89,24 @@ class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
     }
     
     func fetch(keyValues: [(key: String, value: String)]) -> T? {
+        return fetchAll(keyValues: keyValues).first
+    }
+    
+    func fetchAll(keyValues: [(key: String, value: String)]) -> [T] {
         var arr = [String]()
         for (key, value) in keyValues {
             arr.append("\(key)='\(value)'")
         }
         let str = arr.joined(separator: " AND ")
-        var model: T? = nil
         do {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let request: NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
             request.predicate = NSPredicate(format: "\(str)")
             let results = try context.fetch(request)
-            model = results.first
+            return results
         } catch {
-            return model
+            return []
         }
-        return model
     }
     
     func fetch(keyValues: (key: String, value: String)...) -> T? {

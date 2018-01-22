@@ -108,9 +108,9 @@ enum Router: URLRequestConvertible {
 }
 
 extension String {
-    static let bil_base_url = "http://192.168.1.15:8086/"
-//    static let bil_base_host = "walletservice.bitbill.com"
-//    static let bil_base_url = "https://" + bil_base_host + "/"
+//    static let bil_base_url = "http://192.168.1.15:8086/"
+    static let bil_base_host = "walletservice.bitbill.com"
+    static let bil_base_url = "https://" + bil_base_host + "/"
     static let bil_path = "bitbill/bitcoin/"
     static let bil_wallet_path = bil_path + "wallet/"
     static let bil_wallet_create = bil_wallet_path + "create"
@@ -139,8 +139,8 @@ extension String {
 }
 
 extension String {
-    static let bil_socket_base_url = "http://192.168.1.15:8088/"
-//    static let bil_socket_base_url = "http://walletsocket.bitbill.com:8088/"
+//    static let bil_socket_base_url = "http://192.168.1.15:8088/"
+    static let bil_socket_base_url = "http://walletsocket.bitbill.com:8088/"
 }
 
 extension String {
