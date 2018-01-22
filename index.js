@@ -95,7 +95,7 @@ function buildTransaction(seedHex, data) {
     for (var i = 0; i < inputs.length; i++) {
         var input = inputs[i];
         txb.addInput(input["txHash"], input["index"]);
-        var isChange = input["isChange"]
+        var isChange = input["isChange"];
         (isChange ? changeKeychain : keychain).derive(input["bip39Index"]);
     }
 
