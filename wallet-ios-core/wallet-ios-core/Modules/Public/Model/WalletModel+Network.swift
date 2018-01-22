@@ -26,16 +26,39 @@ extension WalletModel {
 				debugPrint(msg)
 			})
 		}
+        
+        func handleChangeAddress(changeIndex: Int64) {
+            if lastBTCChangeAddressIndex < changeIndex {
+                generateAddresses(pubkey: changeExtPublicKey!, from: lastBTCChangeAddressIndex, to: changeIndex, success: { (addresses) in
+                    self.bitcoinWallet?.needLoadServer = true
+                    loadTXs(version: (self.bitcoinWallet?.version)!)
+                }, failure: { (msg, code) in
+                    debugPrint(msg)
+                })
+            }
+        }
 		
         let addressIndex = json["indexNo"].int64Value
+        let changeIndex = json["changeIndexNo"].int64Value
         if lastBTCAddressIndex < addressIndex {
-            generateAddresses(from: lastBTCAddressIndex, to: addressIndex, success: { (addresses) in
-                self.bitcoinWallet?.needLoadServer = true
-                loadTXs(version: (self.bitcoinWallet?.version)!)
+            generateAddresses(pubkey: mainExtPublicKey!, from: lastBTCAddressIndex, to: addressIndex, success: { (addresses) in
+                if self.lastBTCChangeAddressIndex < changeIndex {
+                    handleChangeAddress(changeIndex: changeIndex)
+                }
+                else
+                {
+                    self.bitcoinWallet?.needLoadServer = true
+                    loadTXs(version: (self.bitcoinWallet?.version)!)
+                }
             }, failure: { (msg, code) in
                 debugPrint(msg)
             })
         }
+        else
+        {
+            handleChangeAddress(changeIndex: changeIndex)
+        }
+        
         let serverVersion = json["version"].int64Value
         bitcoinWallet?.needLoadServer = (bitcoinWallet?.version)! < serverVersion
         if (bitcoinWallet?.needLoadServer)! {
@@ -44,15 +67,19 @@ extension WalletModel {
     }
     
     func createWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        guard let walletID = id else {
-            failure(.publicWalletExtKeyError, -1)
-            return
-        }
-        guard let extKey = mainExtPublicKey else {
+        guard let _ = id else {
             failure(.publicWalletIDError, -1)
             return
         }
-        BILNetworkManager.request(request: .createWallet(walletID: walletID, extendedKey: extKey), success: success, failure: failure)
+        guard let _ = mainExtPublicKey else {
+            failure(.publicWalletExtKeyError, -2)
+            return
+        }
+        guard let _ = changeExtPublicKey else {
+            failure(.publicWalletExtKeyError, -3)
+            return
+        }
+        BILNetworkManager.request(request: .createWallet(wallet: self), success: success, failure: failure)
     }
     
     func deleteWalletInSever(success: @escaping () -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
@@ -72,15 +99,19 @@ extension WalletModel {
     }
     
     func importWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
-        guard let walletID = id else {
+        guard let _ = id else {
             failure(.publicWalletIDError, -1)
             return
         }
-        guard let extKey = mainExtPublicKey else {
-            failure(.publicWalletExtKeyError, -1)
+        guard let _ = mainExtPublicKey else {
+            failure(.publicWalletExtKeyError, -2)
             return
         }
-        BILNetworkManager.request(request: .importWallet(walletID: walletID, extendedKey: extKey), success: { (result) in
+        guard let _ = changeExtPublicKey else {
+            failure(.publicWalletExtKeyError, -3)
+            return
+        }
+        BILNetworkManager.request(request: .importWallet(wallet: self), success: { (result) in
             success(result)
         }, failure: failure)
     }

@@ -165,7 +165,7 @@ extension WalletModel {
                 failure(.publicWalletNoMoreAddress)
                 return
             }
-            self.generateAddresses(from: localIndex, to: self.lastBTCAddressIndex, success: success, failure: { (msg, code) in
+            self.generateAddresses(pubkey: self.mainExtPublicKey!, from: localIndex, to: self.lastBTCAddressIndex, success: success, failure: { (msg, code) in
                 failure(msg)
             })
         }, failure: { (msg, code) in
@@ -185,13 +185,13 @@ extension WalletModel {
         }, failure: failure)
 	}
     
-    func generateAddresses(from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func generateAddresses(pubkey: String, from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard from <= to else {
             failure(.publicWalletIndexError, -1)
             return
         }
 		let beginDate = Date()
-        BitcoinJSBridge.shared.getAddresses(xpub: mainExtPublicKey!, fromIndex: from, toIndex: to, success: { (result) in
+        BitcoinJSBridge.shared.getAddresses(xpub: pubkey, fromIndex: from, toIndex: to, success: { (result) in
             debugPrint(result)
             guard let array = result as? [String] else {
                 failure(.publicWalletGenerateAddressError, -1)
