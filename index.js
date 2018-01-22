@@ -88,13 +88,15 @@ function buildTransaction(seedHex, data) {
     var outputs = data["outputs"];
 
     var keychain = generateBitcoinMainnetMasterKeychain(seedHex);
+    var changeKeychain = generateBitcoinMainnetChangeKeychain(seedHex);
     var txb = new bitcoin.TransactionBuilder();
     var ecPairs = [];
 
     for (var i = 0; i < inputs.length; i++) {
         var input = inputs[i];
         txb.addInput(input["txHash"], input["index"]);
-        ecPairs[i] = keychain.derive(input["bip39Index"]);
+        var isChange = input["isChange"]
+        (isChange ? changeKeychain : keychain).derive(input["bip39Index"]);
     }
 
     for (var _i = 0; _i < outputs.length; _i++) {
