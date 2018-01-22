@@ -97,7 +97,7 @@ class BILSendResultController: BILBaseViewController {
     }
     
     @IBAction func checkTransaction(_ sender: Any) {
-        guard let txHash = sendModel?.transaction else { return }
+        guard let txHash = sendModel?.transaction?.txHash else { return }
         if let url = URL(string: "\(String.bil_extenal_blockchain_transaction)\(txHash)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
