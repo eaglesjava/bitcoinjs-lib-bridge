@@ -37,6 +37,11 @@ func BTCFormatString(btc: Int64) -> String {
     return String(format: "%.\(8 - count)f", d)
 }
 
+enum BitcoinAddressType {
+    case normal
+    case change
+}
+
 extension WalletModel {
     var btcBalance: Int64 {
         set {
@@ -141,7 +146,7 @@ extension WalletModel {
         }
     }
     
-    func refreshAddressToSever(index: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (String) -> Void) {
+    func refreshAddressToSever(index: Int64, changeIndex: Int64 = 0, success: @escaping ([BTCWalletAddressModel], [BTCWalletAddressModel]) -> Void, failure: @escaping (String) -> Void) {
         guard let extPub = mainExtPublicKey else {
             failure(.publicWalletExtKeyError)
             return
@@ -152,22 +157,31 @@ extension WalletModel {
             return
         }
 
-        BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: index), success: { (result) in
+        BILNetworkManager.request(request: .refreshAddress(extendedKeyHash: extPub.md5(), index: index, changeIndex: changeIndex), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
             let serverIndex = json["indexNo"].int64Value
+            let serverChangeIndex = json["changeIndexNo"].int64Value
             var localIndex = self.lastBTCAddressIndex
-            if localIndex > serverIndex {
-                localIndex = serverIndex
-            }
+            var localChangeIndex = self.lastBTCChangeAddressIndex
+            localIndex = min(localIndex, serverIndex)
+            localChangeIndex = min(localChangeIndex, serverChangeIndex)
             self.lastBTCAddressIndex = serverIndex
+            self.lastBTCChangeAddressIndex = serverChangeIndex
             if index > serverIndex {
                 failure(.publicWalletNoMoreAddress)
                 return
             }
-            self.generateAddresses(pubkey: self.mainExtPublicKey!, from: localIndex, to: self.lastBTCAddressIndex, success: success, failure: { (msg, code) in
+            self.generateAddresses(from: localIndex, to: self.lastBTCAddressIndex, success: { (models) in
+                self.generateAddresses(type: .change, from: localChangeIndex, to: self.lastBTCChangeAddressIndex, success: { (changeModels) in
+                    success(models, changeModels)
+                }, failure: { (msg, code) in
+                    failure("change: \(msg)")
+                })
+            }, failure: { (msg, code) in
                 failure(msg)
             })
+            
         }, failure: { (msg, code) in
             debugPrint(msg)
             failure(msg)
@@ -176,7 +190,7 @@ extension WalletModel {
 	
     func getNewBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         let tempIndex = lastBTCAddressIndex + 1
-        refreshAddressToSever(index: tempIndex, success: { (models) in
+        refreshAddressToSever(index: tempIndex, changeIndex: lastBTCChangeAddressIndex, success: { (models, changeModels) in
             guard let address = models.last?.address else {
                 failure(.publicWalletGenerateAddressError)
                 return
@@ -185,13 +199,13 @@ extension WalletModel {
         }, failure: failure)
 	}
     
-    func generateAddresses(pubkey: String, from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func generateAddresses(type: BitcoinAddressType = .normal, from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard from <= to else {
             failure(.publicWalletIndexError, -1)
             return
         }
 		let beginDate = Date()
-        BitcoinJSBridge.shared.getAddresses(xpub: pubkey, fromIndex: from, toIndex: to, success: { (result) in
+        BitcoinJSBridge.shared.getAddresses(xpub: type == .normal ? mainExtPublicKey! : changeExtPublicKey!, fromIndex: from, toIndex: to, success: { (result) in
             debugPrint(result)
             guard let array = result as? [String] else {
                 failure(.publicWalletGenerateAddressError, -1)
@@ -202,10 +216,20 @@ extension WalletModel {
                 let add = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: address)
                 add.address = address
                 add.satoshi = 0
-                self.bitcoinWallet?.addToAddresses(add)
+                switch type {
+                case .normal:
+                    self.bitcoinWallet?.addToAddresses(add)
+                case .change:
+                    self.bitcoinWallet?.addToChangeAddresses(add)
+                }
                 models.append(add)
             }
-            self.lastBTCAddressIndex = to
+            switch type {
+            case .normal:
+                self.lastBTCAddressIndex = to
+            case .change:
+                self.lastBTCChangeAddressIndex = to
+            }
             do {
                 try BILWalletManager.shared.saveWallets()
                 success(models)
@@ -274,6 +298,12 @@ extension WalletModel {
 			return self.bitcoinWallet?.addresses?.array as! [BTCWalletAddressModel]
 		}
 	}
+    
+    var btc_changeAddressModels: [BTCWalletAddressModel] {
+        get {
+            return self.bitcoinWallet?.changeAddresses?.array as! [BTCWalletAddressModel]
+        }
+    }
 	
     var btc_transactionArray: [BTCTransactionModel] {
         get {

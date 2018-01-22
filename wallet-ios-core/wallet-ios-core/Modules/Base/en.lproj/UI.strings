@@ -114,3 +114,5 @@
 "-32" = "Invalid parameter type.";
 "-40" = "Wallet ID already exists.";
 "-41" = "Wallet not exists.";
+
+"Address of change" = "Address of change";

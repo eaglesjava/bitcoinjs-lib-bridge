@@ -19,6 +19,8 @@ class BILWalletAddressController: BILLightBlueBaseController {
 	@IBOutlet weak var idTitleLabel: UILabel!
 	@IBOutlet weak var scanButton: UIButton!
 	var addresses = [BTCWalletAddressModel]()
+    var changeAddresses = [BTCWalletAddressModel]()
+    let sectionTitles = [.meWalletAddress_addressAndBalance, "Address of change".bil_ui_localized]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
     func localUTXODidChanged(notification: Notification) {
         if let w = wallet {
             addresses = w.btc_addressModels
+            changeAddresses = w.btc_changeAddressModels
             tableView.reloadData()
         }
     }
@@ -59,6 +62,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
         if let w = wallet {
             idLabel.text = w.id
             addresses = w.btc_addressModels
+            changeAddresses = w.btc_changeAddressModels
             tableView.reloadData()
         }
     }
@@ -66,7 +70,8 @@ class BILWalletAddressController: BILLightBlueBaseController {
         guard let w = wallet else { return }
         bil_showLoading()
         let targetIndex = w.lastBTCAddressIndex + 10
-        w.refreshAddressToSever(index: targetIndex, success: { (addresses) in
+        let targetChangeIndex = w.lastBTCChangeAddressIndex + 10
+        w.refreshAddressToSever(index: targetIndex, changeIndex: targetChangeIndex, success: { (addresses, changeAddresses) in
             BILWalletManager.shared.loadBlockHeightAndWalletVersion()
             w.getUTXOFromServer(success: { (utxos) in
                 self.refreshUI()
@@ -99,8 +104,25 @@ class BILWalletAddressController: BILLightBlueBaseController {
 
 extension BILWalletAddressController: UITableViewDelegate, UITableViewDataSource {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let section = tableView.indexPathsForVisibleRows?.first?.section else { return }
+        
+        for i in 0...numberOfSections(in: tableView) {
+            guard let header = tableView.headerView(forSection: i) as? BILTableViewHeaderFooterView  else { continue }
+            if i == section {
+                let headerRect = view.convert(header.frame, from: tableView)
+                
+                header.bgImageView.image = backgroundImage?.snapshotSubImage(rect: headerRect)
+            }
+            else
+            {
+                header.bgImageView.image = nil
+            }
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sectionTitles.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,7 +131,7 @@ extension BILWalletAddressController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BILMeUnspentBalanceCell", for: indexPath) as! BILMeUnspentBalanceCell
-        let utxo = addresses[indexPath.row]
+        let utxo = indexPath.section == 0 ? addresses[indexPath.row] : changeAddresses[indexPath.row]
         cell.titleLabel.text = utxo.address
         cell.subTitleLabel.text = BTCFormatString(btc: utxo.satoshi) + " BTC"
         cell.subTitleLabel.textColor = UIColor(white: 1.0, alpha: utxo.satoshi == 0 ? 0.3 : 1.0) 
@@ -118,7 +140,7 @@ extension BILWalletAddressController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BILTableViewHeaderFooterView") as! BILTableViewHeaderFooterView
-        headerView.titleLabel.text = .meWalletAddress_addressAndBalance
+        headerView.titleLabel.text = sectionTitles[section]
         headerView.bgImageView.image = backgroundImage?.snapshotSubImage(rect: view.convert(headerView.frame, from: tableView))
         return headerView
     }

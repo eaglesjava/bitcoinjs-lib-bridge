@@ -33,8 +33,8 @@ enum Router: URLRequestConvertible {
                 return (.bil_wallet_get_UTXO, ["extendedKeysHash": extendedKeyHash])
             case .getTransactionBuildConfig(let extendedKeyHash):
                 return (.bil_wallet_get_transaction_build_config, ["extendedKeysHash": extendedKeyHash])
-            case .refreshAddress(let extendedKeyHash, let indexNum):
-                return (.bil_wallet_refresh_address, ["extendedKeysHash": extendedKeyHash, "indexNo": indexNum])
+            case .refreshAddress(let extendedKeyHash, let indexNum, let changIndex):
+                return (.bil_wallet_refresh_address, ["extendedKeysHash": extendedKeyHash, "indexNo": indexNum, "changeIndexNo": changIndex])
             case .sendTransaction(let extendedKeyHash, let address, let inAddress, let amount, let txHash, let txHex, let remark):
                 return (.bil_wallet_send_transaction, ["extendedKeysHash" : extendedKeyHash,
                                                        "inAddress": inAddress,
@@ -90,7 +90,7 @@ enum Router: URLRequestConvertible {
     case getUTXO(extendedKeyHash: String)
     case getTransactionHistory(extendedKeyHash: String, id: String, page: Int, size: Int)
     case getTransactionBuildConfig(extendedKeyHash: String)
-    case refreshAddress(extendedKeyHash: String, index: Int64)
+    case refreshAddress(extendedKeyHash: String, index: Int64, changeIndex: Int64)
     case sendTransaction(extendedKeyHash: String, address: String, inAddress: String, amount: Int64, txHash: String, txHex: String, remark: String)
     case getUnconfirmTransaction(wallets: [WalletModel])
 
@@ -108,9 +108,9 @@ enum Router: URLRequestConvertible {
 }
 
 extension String {
-//    static let bil_base_url = "http://192.168.1.11:8086/"
-    static let bil_base_host = "walletservice.bitbill.com"
-    static let bil_base_url = "https://" + bil_base_host + "/"
+    static let bil_base_url = "http://192.168.1.15:8086/"
+//    static let bil_base_host = "walletservice.bitbill.com"
+//    static let bil_base_url = "https://" + bil_base_host + "/"
     static let bil_path = "bitbill/bitcoin/"
     static let bil_wallet_path = bil_path + "wallet/"
     static let bil_wallet_create = bil_wallet_path + "create"
@@ -139,8 +139,8 @@ extension String {
 }
 
 extension String {
-//    static let bil_socket_base_url = "http://192.168.1.11:8088/"
-    static let bil_socket_base_url = "http://walletsocket.bitbill.com:8088/"
+    static let bil_socket_base_url = "http://192.168.1.15:8088/"
+//    static let bil_socket_base_url = "http://walletsocket.bitbill.com:8088/"
 }
 
 extension String {
