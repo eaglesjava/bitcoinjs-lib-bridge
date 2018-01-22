@@ -301,6 +301,6 @@ extension BTCTransactionModel {
             }
         }
         
-        w.addToBtcTransactions(self)
+        w.bitcoinWallet?.addToTransactions(self)
     }
 }

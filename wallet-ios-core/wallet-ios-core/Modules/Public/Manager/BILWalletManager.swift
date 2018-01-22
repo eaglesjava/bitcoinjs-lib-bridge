@@ -126,6 +126,7 @@ class BILWalletManager {
 	func newWallet() -> WalletModel {
 		let context = coreDataContext
 		let wallet = NSEntityDescription.insertNewObject(forEntityName: "WalletModel", into: context) as! WalletModel
+        wallet.bitcoinWallet = bil_btc_walletManager.newModel()
 		return wallet
 	}
     

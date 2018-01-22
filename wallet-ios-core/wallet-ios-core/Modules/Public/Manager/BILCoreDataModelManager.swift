@@ -14,6 +14,7 @@ let bil_contactManager = BILCoreDataModelManager<ContactModel>(modelName: "Conta
 let bil_btc_wallet_addressManager = BILCoreDataModelManager<BTCWalletAddressModel>(modelName: "BTCWalletAddressModel", notificationName: nil)
 let bil_btc_tx_addressManager = BILCoreDataModelManager<BTCTXAddressModel>(modelName: "BTCTXAddressModel", notificationName: nil)
 let bil_btc_transactionManager = BILCoreDataModelManager<BTCTransactionModel>(modelName: "BTCTransactionModel", notificationName: .transactionDidChanged)
+let bil_btc_walletManager = BILCoreDataModelManager<BitcoinWalletModel>(modelName: "BitcoinWalletModel", notificationName: nil)
 
 class BILCoreDataModelManager<T: NSManagedObject>: NSObject {
 	

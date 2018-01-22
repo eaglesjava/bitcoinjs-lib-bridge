@@ -84,7 +84,7 @@ extension WalletModel {
     }
     
     func contain(btcAddress: String) -> Bool {
-        guard let set = addresses else { return false }
+        guard let set = bitcoinWallet?.addresses else { return false }
         let count = set.filter({
             ($0 as? BTCWalletAddressModel)?.address == btcAddress
         }).count
@@ -105,8 +105,8 @@ extension WalletModel {
     }
 	
 	func randomAddress() -> BTCWalletAddressModel {
-		let count = addresses!.count
-		return addresses![Int(arc4random()) % count] as! BTCWalletAddressModel
+		let count = bitcoinWallet!.addresses!.count
+		return bitcoinWallet!.addresses![Int(arc4random()) % count] as! BTCWalletAddressModel
 	}
     
     func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
@@ -115,8 +115,8 @@ extension WalletModel {
             return
         }
         let index = lastBTCAddressIndex
-        if index == (addresses?.count)! - 1 {
-            guard let address = (addresses?.lastObject as? BTCWalletAddressModel)?.address else {
+        if index == bitcoinWallet!.addresses!.count - 1 {
+            guard let address = (bitcoinWallet?.addresses?.lastObject as? BTCWalletAddressModel)?.address else {
                 failure(.publicWalletGetAddressError)
                 return
             }
@@ -130,7 +130,7 @@ extension WalletModel {
                     addModel.address = add
                     addModel.index = index
                     addModel.satoshi = 0
-                    self.addToAddresses(addModel)
+                    self.bitcoinWallet?.addToAddresses(addModel)
                     success(add)
                 } else {
                     failure(.publicWalletGetAddressError)
@@ -199,11 +199,11 @@ extension WalletModel {
             }
             var models = [BTCWalletAddressModel]()
             for address in array {
-                let tx = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: address)
-                tx.address = address
-                tx.satoshi = 0
-                self.addToAddresses(tx)
-                models.append(tx)
+                let add = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: address)
+                add.address = address
+                add.satoshi = 0
+                self.bitcoinWallet?.addToAddresses(add)
+                models.append(add)
             }
             self.lastBTCAddressIndex = to
             do {
@@ -271,13 +271,13 @@ extension WalletModel {
 	
 	var btc_addressModels: [BTCWalletAddressModel] {
 		get {
-			return self.addresses?.array as! [BTCWalletAddressModel]
+			return self.bitcoinWallet?.addresses?.array as! [BTCWalletAddressModel]
 		}
 	}
 	
     var btc_transactionArray: [BTCTransactionModel] {
         get {
-            return btcTransactions!.sortedArray(comparator: { (lhs, rhs) -> ComparisonResult in
+            return bitcoinWallet?.transactions!.sortedArray(comparator: { (lhs, rhs) -> ComparisonResult in
                 let l = lhs as! BTCTransactionModel
                 let r = rhs as! BTCTransactionModel
                 return r.createdDate!.compare(l.createdDate!)

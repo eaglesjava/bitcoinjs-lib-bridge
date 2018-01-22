@@ -370,7 +370,7 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 			let c = cell as! BILTransactionCell
             let tx = type.dataArray()[indexPath.row] as? BTCTransactionModel
 			c.transaction = tx
-            c.titleLabel.text = tx?.wallet?.id
+            c.titleLabel.text = tx?.wallet?.wallet?.id
 		case .wallet:
 			let c = cell as! BILWalletCell
             c.needBackupButton.tag = indexPath.row

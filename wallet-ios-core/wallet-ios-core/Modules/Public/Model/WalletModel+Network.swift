@@ -14,11 +14,11 @@ extension WalletModel {
     func syncWallet(json: JSON) {
 		
 		func loadTXs(version: Int64) {
-			getTransactionHistoryFromSever(page: 0, size: btcTransactions!.count + 1000, success: { (txs) in
-				self.version = version
+            getTransactionHistoryFromSever(page: 0, size: (bitcoinWallet?.transactions?.count)! + 1000, success: { (txs) in
+				self.bitcoinWallet?.version = version
 				do {
 					try BILWalletManager.shared.saveWallets()
-					self.needLoadServer = false
+					self.bitcoinWallet?.needLoadServer = false
 				} catch {
 					debugPrint(error)
 				}
@@ -30,15 +30,15 @@ extension WalletModel {
         let addressIndex = json["indexNo"].int64Value
         if lastBTCAddressIndex < addressIndex {
             generateAddresses(from: lastBTCAddressIndex, to: addressIndex, success: { (addresses) in
-                self.needLoadServer = true
-				loadTXs(version: self.version)
+                self.bitcoinWallet?.needLoadServer = true
+                loadTXs(version: (self.bitcoinWallet?.version)!)
             }, failure: { (msg, code) in
                 debugPrint(msg)
             })
         }
         let serverVersion = json["version"].int64Value
-        needLoadServer = version < serverVersion
-        if needLoadServer {
+        bitcoinWallet?.needLoadServer = (bitcoinWallet?.version)! < serverVersion
+        if (bitcoinWallet?.needLoadServer)! {
 			loadTXs(version: serverVersion)
         }
     }

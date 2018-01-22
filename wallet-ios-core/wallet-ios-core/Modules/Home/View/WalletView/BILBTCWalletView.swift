@@ -107,7 +107,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
         w.getTransactionHistoryFromSever(page: page, size: size, success: { (txs) in
             self.transactions.removeAll()
             self.transactions.append(contentsOf: w.btc_transactionArray)
-            w.needLoadServer = false
+            w.bitcoinWallet?.needLoadServer = false
             self.loadEnd()
         }) { (msg, code) in
             self.loadEnd()
@@ -127,7 +127,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     @objc
     func refresh(sender: Any?) {
-        wallet?.needLoadServer = true
+        wallet?.bitcoinWallet?.needLoadServer = true
         DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
             self.loadTransactionHistory()
             self.tableView.refreshControl?.endRefreshing()
