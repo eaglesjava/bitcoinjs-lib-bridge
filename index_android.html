@@ -10,34 +10,92 @@
 <script type="text/javascript">
 
     function validateMnemonicReturnSeedHexAndXPublicKey(mnemonic){
-       var validate=bridge.validateMnemonic(mnemonic)
-       var seedHex = bridge.mnemonicToSeedHex(mnemonic, '')
-       var XPublicKey = bridge.getBitcoinMasterXPublicKey(seedHex)
-       return [validate,seedHex,XPublicKey]
+        var result={};
+        try {
+               var validate=bridge.validateMnemonic(mnemonic)
+               var seedHex = bridge.mnemonicToSeedHex(mnemonic, '')
+               var publicKeys = bridge.getBitcoinXPublicKeys(seedHex)
+               result.status=0
+               result.data=[validate,seedHex,publicKeys[0],publicKeys[1]]
+           }catch(e){
+               result.data=[]
+               result.message=e.message
+               result.status=-1
+           }
+        return JSON.stringify(result)
     }
 
     function generateMnemonicCNRetrunSeedHexAndXPublicKey(){
-        var mnemonic = bridge.generateMnemonicRandomCN(128)
-        var seedHex = bridge.mnemonicToSeedHex(mnemonic,'')
-        var XPublicKey = bridge.getBitcoinMasterXPublicKey(seedHex)
-        return [mnemonic,seedHex,XPublicKey]
+       var result={};
+       try {
+            var mnemonic = bridge.generateMnemonicRandomCN(128)
+            var seedHex = bridge.mnemonicToSeedHex(mnemonic,'')
+            var publicKeys = bridge.getBitcoinXPublicKeys(seedHex)
+            result.status=0
+            result.data=[mnemonic,seedHex,publicKeys[0],publicKeys[1]]
+       }catch(e){
+            result.data=[]
+            result.message=e.message
+            result.status=-1
+       }
+       return JSON.stringify(result)
     }
 
     function getBitcoinAddressByMasterXPublicKey(xpub,index){
-        var address=bridge.getBitcoinAddressByMasterXPublicKey(xpub,index)
-        return [address]
+        var result={};
+        try {
+            var address=bridge.getBitcoinAddressByMasterXPublicKey(xpub,index)
+            result.status=0
+            result.data=[address]
+        }catch(e){
+            result.data=[]
+            result.message=e.message
+            result.status=-1
+        }
+       return JSON.stringify(result)
     }
 
     function buildTransaction(seedHex, datas){
-        var txbHex=bridge.buildTransaction(seedHex,datas)
-        return [txbHex]
+        var result={};
+        try {
+            var txbHex=bridge.buildTransaction(seedHex,datas)
+            result.status=0
+            result.data=[txbHex]
+        }catch(e){
+            result.data=[]
+            result.message=e.message
+            result.status=-1
+        }
+       return JSON.stringify(result)
     }
 
     function validateAddress(address){
-        var validate=bridge.validateAddress(address)
-        return [validate]
+        var result={};
+        try {
+            var validate=bridge.validateAddress(address)
+            result.status=0
+            result.data=[validate]
+        }catch(e){
+            result.data=[]
+            result.message=e.message
+            result.status=-1
+        }
+       return JSON.stringify(result)
     }
 
+    function getBitcoinContinuousAddressByMasterXPublicKey(xpub,fromIndex,inIndex){
+        var result={};
+        try {
+            var addresses=bridge.getBitcoinContinuousAddressByMasterXPublicKey(xpub,fromIndex,inIndex)
+            result.status=0
+            result.data=addresses
+        }catch(e){
+            result.data=[]
+            result.message=e.message
+            result.status=-1
+        }
+       return JSON.stringify(result)
+    }
 
 </script>
 </body>
