@@ -11,14 +11,17 @@ import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.DeviceUtil;
+import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
+import com.bitbill.www.crypto.JsResult;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
 import com.bitbill.www.model.wallet.network.socket.Register;
+import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
 
@@ -86,20 +89,32 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         try {
             BitcoinJsWrapper.getInstance().generateMnemonicCNRetrunSeedHexAndXPublicKey(new BitcoinJsWrapper.Callback() {
                 @Override
-                public void call(String key, String... jsResult) {
+                public void call(String key, String jsResult) {
+                    if (!isViewAttached()) {
+                        return;
+                    }
+                    if (StringUtils.isEmpty(jsResult)) {
+                        getMvpView().hideLoading();
+                        return;
+                    }
+                    JsResult result = null;
                     try {
-                        if (jsResult != null && jsResult.length > 1) {
-
-                            Log.d(TAG, "generateMnemonicCNRetrunSeedHexAndXPublicKey: key = [" + key + "], Mnemonic = [" + jsResult[0] + "], seedhex = [" + jsResult[1] + "]");
-                            StringUtils.encryptMnemonicAndSeedHex(jsResult[0], jsResult[1], jsResult[2], getMvpView().getTradePwd(), mWallet);
+                        result = JsonUtils.deserialize(jsResult, JsResult.class);
+                    } catch (JsonSyntaxException e) {
+                        e.printStackTrace();
+                    }
+                    if (result.status == JsResult.STATUS_SUCCESS) {
+                        String[] data = result.getData();
+                        if (data != null && data.length > 1) {
+                            Log.d(TAG, "generateMnemonicCNRetrunSeedHexAndXPublicKey: key = [" + key + "], Mnemonic = [" + data[0] + "], seedhex = [" + data[1] + "]");
+                            StringUtils.encryptMnemonicAndSeedHex(data[0], data[1], data[2], getMvpView().getTradePwd(), mWallet);
                             //调用后台创建钱包接口
                             createWallet();
                         } else {
                             getMvpView().hideLoading();
                             getMvpView().createWalletFail();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else {
                         getMvpView().hideLoading();
                         getMvpView().createWalletFail();
                     }
@@ -268,15 +283,29 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         Wallet wallet = getMvpView().getWallet();
         String mnemonic = wallet.getMnemonic();
         // 校验助记词是否正确
-        try {
-            BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(mnemonic, new BitcoinJsWrapper.Callback() {
-                @Override
-                public void call(String key, String... jsResult) {
-                    if (jsResult != null && "true".equals(jsResult[0]) && jsResult.length > 2) {
+        BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(mnemonic, new BitcoinJsWrapper.Callback() {
+            @Override
+            public void call(String key, String jsResult) {
+                if (!isViewAttached()) {
+                    return;
+                }
+                if (StringUtils.isEmpty(jsResult)) {
+                    getMvpView().hideLoading();
+                    return;
+                }
+                JsResult result = null;
+                try {
+                    result = JsonUtils.deserialize(jsResult, JsResult.class);
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                if (result.status == JsResult.STATUS_SUCCESS) {
+                    String[] data = result.getData();
+                    if (data != null && "true".equals(data[0]) && data.length > 2) {
 
                         //更新wallet对象
-                        String seedHex = jsResult[1];
-                        String XPublicKey = jsResult[2];
+                        String seedHex = data[1];
+                        String XPublicKey = data[2];
                         StringUtils.encryptMnemonicAndSeedHex(mnemonic, seedHex, XPublicKey, getMvpView().getTradePwd(), wallet);
                         //不需要备份
                         wallet.setIsBackuped(true);
@@ -313,13 +342,12 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                         getMvpView().resetPwdFail();
                         getMvpView().hideLoading();
                     }
+                } else {
+                    getMvpView().resetPwdFail();
+                    getMvpView().hideLoading();
                 }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-            getMvpView().resetPwdFail();
-            getMvpView().hideLoading();
-        }
+            }
+        });
 
     }
 

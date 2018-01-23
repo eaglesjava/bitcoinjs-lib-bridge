@@ -12,6 +12,7 @@ import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.CryptoConstants;
+import com.bitbill.www.crypto.JsResult;
 import com.bitbill.www.crypto.entity.Transaction;
 import com.bitbill.www.crypto.utils.ConvertUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
@@ -22,6 +23,7 @@ import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -172,24 +174,44 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().buildTransaction(seedHex, txJson, new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String... jsResult) {
+            public void call(String key, String jsResult) {
+
                 if (!isViewAttached()) {
                     return;
                 }
                 getMvpView().hideLoading();
-                if (jsResult != null && jsResult.length > 0) {
-                    String txHex = jsResult[0];
-                    Log.d(TAG, "buildTransaction() called with: key = [" + key + "], jsResult = [" + jsResult + "]");
-                    byte[] hashData = EncryptUtils.encryptSHA256(EncryptUtils.encryptSHA256(ConvertUtils.hexString2Bytes(txHex)));
-                    //反转字节数组
-                    ConvertUtils.reverse(hashData);
-                    String txHash = ConvertUtils.bytes2HexString(hashData);
-                    Log.d(TAG, "buildTransaction() called with: reverseHex = [" + txHash + "]");
-                    sendTransaction(txHash, txHex, finalInAddress, finalOutAddress);
-                } else {
+                if (StringUtils.isEmpty(jsResult)) {
                     getMvpView().sendTransactionFail(null);
+                    return;
                 }
+                JsResult result = null;
+                try {
+                    result = JsonUtils.deserialize(jsResult, JsResult.class);
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                if (result == null) {
+                    getMvpView().sendTransactionFail(null);
+                    return;
+                }
+                if (result.status == JsResult.STATUS_SUCCESS) {
+                    String[] data = result.getData();
+                    if (data != null && data.length > 0) {
+                        String txHex = data[0];
+                        Log.d(TAG, "buildTransaction() called with: key = [" + key + "], jsResult = [" + jsResult + "]");
+                        byte[] hashData = EncryptUtils.encryptSHA256(EncryptUtils.encryptSHA256(ConvertUtils.hexString2Bytes(txHex)));
+                        //反转字节数组
+                        ConvertUtils.reverse(hashData);
+                        String txHash = ConvertUtils.bytes2HexString(hashData);
+                        Log.d(TAG, "buildTransaction() called with: reverseHex = [" + txHash + "]");
+                        sendTransaction(txHash, txHex, finalInAddress, finalOutAddress);
+                    } else {
+                        getMvpView().sendTransactionFail(null);
+                    }
 
+                } else {
+                    getMvpView().sendTransactionFail(result.getMessage());
+                }
             }
         });
 

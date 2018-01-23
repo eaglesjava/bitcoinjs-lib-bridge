@@ -75,7 +75,10 @@ public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheV
                                         // TODO: 2018/1/6 缓存blockheight
                                         List<Wallet> tmpWalletList = new ArrayList<>();
                                         for (Wallet wallet : wallets) {
-                                            JSONObject amountJsonObj = data.getJSONObject(wallet.getName());
+                                            JSONObject amountJsonObj = data.optJSONObject(wallet.getName());
+                                            if (amountJsonObj == null) {
+                                                continue;
+                                            }
                                             long indexNo = amountJsonObj.getLong("indexNo");
                                             if (indexNo > 0) {
                                                 getMvpView().getResponseAddressIndex(indexNo, wallet);

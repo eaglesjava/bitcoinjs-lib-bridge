@@ -4,12 +4,15 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
+import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
+import com.bitbill.www.crypto.JsResult;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.address.db.entity.Address;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,24 +63,41 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
     public void getBitcoinContinuousAddress(long fromIndex, long toIndex, Wallet wallet) {
         BitcoinJsWrapper.getInstance().getBitcoinContinuousAddressByMasterXPublicKey(wallet.getXPublicKey(), fromIndex, toIndex, new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String... jsResult) {
+            public void call(String key, String jsResult) {
 
+                if (!isViewAttached()) {
+                    return;
+                }
                 if (StringUtils.isEmpty(jsResult)) {
                     return;
                 }
-                if (toIndex - fromIndex + 1 != jsResult.length) {
+                JsResult result = null;
+                try {
+                    result = JsonUtils.deserialize(jsResult, JsResult.class);
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                if (result == null) {
                     return;
                 }
-                String address = jsResult[jsResult.length - 1];
+                if (result.status == JsResult.STATUS_SUCCESS) {
+                    String[] data = result.getData();
+                    if (StringUtils.isEmpty(data)) {
+                        return;
+                    }
+                    if (toIndex - fromIndex + 1 != data.length) {
+                        return;
+                    }
+                    String address = data[data.length - 1];
 
-                if (!isValidBtcAddress(address)) {
-                    return;
+                    if (!isValidBtcAddress(address)) {
+                        return;
+                    }
+                    wallet.setLastAddressIndex(toIndex);
+                    wallet.setLastAddress(address);
+                    //更新地址index
+                    updateAddressIndex(wallet, data);
                 }
-                wallet.setLastAddressIndex(toIndex);
-                wallet.setLastAddress(address);
-                //更新地址index
-                updateAddressIndex(wallet, jsResult);
-
             }
         });
     }

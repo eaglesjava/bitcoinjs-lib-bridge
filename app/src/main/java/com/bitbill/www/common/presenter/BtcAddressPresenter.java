@@ -6,8 +6,10 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
+import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
+import com.bitbill.www.crypto.JsResult;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
@@ -15,6 +17,8 @@ import com.bitbill.www.model.address.db.entity.Address;
 import com.bitbill.www.model.address.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.address.network.entity.RefreshAddressResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,24 +57,42 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         }
         BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(wallet.getXPublicKey(), wallet.getLastAddressIndex(), new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String... jsResult) {
+            public void call(String key, String jsResult) {
                 if (!isViewAttached()) {
                     return;
                 }
-
-                if (jsResult == null) {
+                if (StringUtils.isEmpty(jsResult)) {
                     getMvpView().loadAddressFail();
                     return;
                 }
-                String address = jsResult[0];
-
-                if (StringUtils.isEmpty(address)) {
+                JsResult result = null;
+                try {
+                    result = JsonUtils.deserialize(jsResult, JsResult.class);
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                if (result == null) {
                     getMvpView().loadAddressFail();
                     return;
                 }
-                wallet.setLastAddress(address);
+                if (result.status == JsResult.STATUS_SUCCESS) {
+                    String[] data = result.getData();
+                    if (data == null) {
+                        getMvpView().loadAddressFail();
+                        return;
+                    }
+                    String address = data[0];
 
-                updateAddressIndex(wallet, new String[]{address}, true);
+                    if (StringUtils.isEmpty(address)) {
+                        getMvpView().loadAddressFail();
+                        return;
+                    }
+                    wallet.setLastAddress(address);
+
+                    updateAddressIndex(wallet, new String[]{address}, true);
+                } else {
+                    getMvpView().loadAddressFail();
+                }
             }
         });
     }
@@ -165,7 +187,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(wallet.getXPublicKey(), index, new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String... jsResult) {
+            public void call(String key, String jsResult) {
                 if (!isViewAttached()) {
                     return;
                 }
@@ -174,16 +196,36 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                     getMvpView().refreshAddressFail();
                     return;
                 }
-                String address = jsResult[0];
-
-                if (StringUtils.isEmpty(address)) {
+                JsResult result = null;
+                try {
+                    result = JsonUtils.deserialize(jsResult, new TypeToken<JsResult>() {
+                    }.getType());
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                if (result == null) {
                     getMvpView().refreshAddressFail();
                     return;
                 }
-                wallet.setLastAddress(address);
-                wallet.setLastAddressIndex(index);
-                //更新地址index
-                updateAddressIndex(wallet, jsResult, false);
+                if (result.status == JsResult.STATUS_SUCCESS) {
+                    String[] data = result.getData();
+                    if (StringUtils.isEmpty(data)) {
+                        getMvpView().refreshAddressFail();
+                        return;
+                    }
+                    String address = data[0];
+
+                    if (StringUtils.isEmpty(address)) {
+                        getMvpView().refreshAddressFail();
+                        return;
+                    }
+                    wallet.setLastAddress(address);
+                    wallet.setLastAddressIndex(index);
+                    //更新地址index
+                    updateAddressIndex(wallet, data, false);
+                } else {
+                    getMvpView().refreshAddressFail();
+                }
 
             }
         });
@@ -193,7 +235,8 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().getBitcoinContinuousAddressByMasterXPublicKey(wallet.getXPublicKey(), fromIndex, toIndex, new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String... jsResult) {
+            public void call(String key, String jsResult) {
+
                 if (!isViewAttached()) {
                     return;
                 }
@@ -202,20 +245,35 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                     getMvpView().refreshAddressFail();
                     return;
                 }
-                if (toIndex - fromIndex + 1 != jsResult.length) {
+                JsResult result = null;
+                try {
+                    result = JsonUtils.deserialize(jsResult, JsResult.class);
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                if (result == null) {
                     getMvpView().refreshAddressFail();
                     return;
                 }
-                String address = jsResult[jsResult.length - 1];
+                if (result.status == JsResult.STATUS_SUCCESS) {
+                    String[] data = result.getData();
+                    if (data == null || toIndex - fromIndex + 1 != data.length) {
+                        getMvpView().refreshAddressFail();
+                        return;
+                    }
+                    String address = data[data.length - 1];
 
-                if (StringUtils.isEmpty(address)) {
+                    if (StringUtils.isEmpty(address)) {
+                        getMvpView().refreshAddressFail();
+                        return;
+                    }
+                    wallet.setLastAddressIndex(toIndex);
+                    wallet.setLastAddress(address);
+                    //更新地址index
+                    updateAddressIndex(wallet, data, false);
+                } else {
                     getMvpView().refreshAddressFail();
-                    return;
                 }
-                wallet.setLastAddressIndex(toIndex);
-                wallet.setLastAddress(address);
-                //更新地址index
-                updateAddressIndex(wallet, jsResult, false);
 
             }
         });

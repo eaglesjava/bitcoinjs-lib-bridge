@@ -90,7 +90,10 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                                 long totalAmount = 0;
                                 //设置钱包余额
                                 for (Wallet wallet : wallets) {
-                                    JSONObject amountJsonObj = dataJsonObj.getJSONObject(wallet.getName());
+                                    JSONObject amountJsonObj = dataJsonObj.optJSONObject(wallet.getName());
+                                    if (amountJsonObj == null) {
+                                        continue;
+                                    }
                                     long balance = amountJsonObj.getLong("balance");
                                     wallet.setBalance(balance);
                                     wallet.setUnconfirm(amountJsonObj.getLong("unconfirm"));

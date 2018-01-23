@@ -116,9 +116,9 @@ public class BaseSubcriber<T> extends DisposableObserver<T> {
             case ApiResponse.STATUS_INVALID_PARAM_TYPE:
                 getSubcriberMvpView().onError(R.string.error_invalid_param_type);
                 return true;
-            case ApiResponse.STATUS_WALLET_ID_EXSIST:
-                getSubcriberMvpView().onError(R.string.error_wallet_id_exsist);
-                return true;
+//            case ApiResponse.STATUS_WALLET_ID_EXSIST:
+//                getSubcriberMvpView().onError(R.string.error_wallet_id_exsist);
+//                return true;
             case ApiResponse.STATUS_WALLET_NO_EXSIST:
                 getSubcriberMvpView().onError(R.string.error_wallet_no_exsist);
                 return true;
