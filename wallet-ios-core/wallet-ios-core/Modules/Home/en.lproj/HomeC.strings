@@ -21,8 +21,8 @@
 "HomeC.home.pop.wallet.import" = "Import";
 
 "HomeC.tx.detail.cell.hash" = "Transaction hash";
-"HomeC.tx.detail.cell.address.receive" = "Addresses of sender";
-"HomeC.tx.detail.cell.address.send" = "Addresses of receiver";
+"HomeC.tx.detail.cell.address.receive" = "Addresses of receiver";
+"HomeC.tx.detail.cell.address.send" = "Addresses of sender";
 "HomeC.tx.detail.cell.fee" = "Fees";
 "HomeC.tx.detail.cell.confirm" = "Confirmation";
 "HomeC.tx.detail.cell.remark" = "Remarks";

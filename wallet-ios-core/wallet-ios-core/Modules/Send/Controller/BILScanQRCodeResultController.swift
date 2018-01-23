@@ -12,7 +12,7 @@ class BILScanQRCodeResultController: BILBaseViewController {
 
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var coinNameLabel: UILabel!
-    @IBOutlet weak var cnyLabel: UILabel!
+    @IBOutlet weak var cnyLabel: BILExchangeRateLabel!
     @IBOutlet weak var addressLabel: UILabel!
 	@IBOutlet weak var addreddTitleLabel: UILabel!
 	
@@ -23,9 +23,11 @@ class BILScanQRCodeResultController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addressLabel.text = sendModel?.address
-        coinNameLabel.text = sendModel?.coinType.name
-        amountTextField.text = sendModel?.amount
+        guard let model = sendModel else { return }
+        addressLabel.text = model.address
+        coinNameLabel.text = model.coinType.name
+        amountTextField.text = model.amount
+        cnyLabel.btcValue = Double(model.amount)
     }
 	
 	override func languageDidChanged() {
