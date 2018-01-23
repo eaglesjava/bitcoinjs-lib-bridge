@@ -5,10 +5,7 @@ package com.bitbill.www.model.address.network.entity;
  */
 public class RefreshAddressResponse {
     private long indexNo;
-
-    public RefreshAddressResponse(long indexNo) {
-        this.indexNo = indexNo;
-    }
+    private long changeIndexNo;
 
     public long getIndexNo() {
         return indexNo;
@@ -16,5 +13,13 @@ public class RefreshAddressResponse {
 
     public void setIndexNo(long indexNo) {
         this.indexNo = indexNo;
+    }
+
+    public long getChangeIndexNo() {
+        return changeIndexNo;
+    }
+
+    public void setChangeIndexNo(long changeIndexNo) {
+        this.changeIndexNo = changeIndexNo;
     }
 }

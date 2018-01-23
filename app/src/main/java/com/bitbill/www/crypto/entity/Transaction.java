@@ -19,11 +19,13 @@ public class Transaction {
         private String txHash;
         private int index;
         private long bip39Index;
+        private boolean isChange;
 
-        public Input(String txHash, int index, long bip39Index) {
+        public Input(String txHash, int index, long bip39Index, boolean isChange) {
             this.txHash = txHash;
             this.index = index;
             this.bip39Index = bip39Index;
+            this.isChange = isChange;
         }
 
         public String getTxHash() {
@@ -48,6 +50,14 @@ public class Transaction {
 
         public void setBip39Index(long bip39Index) {
             this.bip39Index = bip39Index;
+        }
+
+        public boolean isChange() {
+            return isChange;
+        }
+
+        public void setChange(boolean change) {
+            isChange = change;
         }
     }
 

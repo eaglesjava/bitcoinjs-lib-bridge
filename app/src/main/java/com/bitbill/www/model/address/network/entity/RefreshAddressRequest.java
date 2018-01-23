@@ -10,10 +10,12 @@ public class RefreshAddressRequest {
      */
     private String extendedKeysHash;
     private long indexNo;
+    private long changeIndexNo;
 
-    public RefreshAddressRequest(String extendedKeysHash, long indexNo) {
+    public RefreshAddressRequest(String extendedKeysHash, long indexNo, long changeIndexNo) {
         this.extendedKeysHash = extendedKeysHash;
         this.indexNo = indexNo;
+        this.changeIndexNo = changeIndexNo;
     }
 
     public String getExtendedKeysHash() {
@@ -23,5 +25,21 @@ public class RefreshAddressRequest {
     public RefreshAddressRequest setExtendedKeysHash(String extendedKeysHash) {
         this.extendedKeysHash = extendedKeysHash;
         return this;
+    }
+
+    public long getIndexNo() {
+        return indexNo;
+    }
+
+    public void setIndexNo(long indexNo) {
+        this.indexNo = indexNo;
+    }
+
+    public long getChangeIndexNo() {
+        return changeIndexNo;
+    }
+
+    public void setChangeIndexNo(long changeIndexNo) {
+        this.changeIndexNo = changeIndexNo;
     }
 }

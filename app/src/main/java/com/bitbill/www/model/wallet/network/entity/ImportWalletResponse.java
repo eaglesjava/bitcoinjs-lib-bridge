@@ -11,6 +11,7 @@ public class ImportWalletResponse {
      */
 
     private long indexNo;
+    private long changeIndexNo;
 
     public long getIndexNo() {
         return indexNo;
@@ -18,5 +19,13 @@ public class ImportWalletResponse {
 
     public void setIndexNo(long indexNo) {
         this.indexNo = indexNo;
+    }
+
+    public long getChangeIndexNo() {
+        return changeIndexNo;
+    }
+
+    public void setChangeIndexNo(long changeIndexNo) {
+        this.changeIndexNo = changeIndexNo;
     }
 }

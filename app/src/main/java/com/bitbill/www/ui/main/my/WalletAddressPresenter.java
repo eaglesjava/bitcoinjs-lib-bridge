@@ -40,7 +40,7 @@ public class WalletAddressPresenter<M extends TxModel, V extends WalletAddressMv
         if (!isValidWallet()) return;
 
         Wallet wallet = getMvpView().getWallet();
-        String encryptMD5ToString = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
+        String encryptMD5ToString = EncryptUtils.encryptMD5ToString(wallet.getExtentedPublicKey());
         getCompositeDisposable().add(getModelManager()
                 .getTxElement(new GetTxElement(encryptMD5ToString))
                 .compose(this.applyScheduler())

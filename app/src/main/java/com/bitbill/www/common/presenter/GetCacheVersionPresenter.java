@@ -45,7 +45,7 @@ public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheV
                     String extendedKeysHash = "";
                     for (int i = 0; i < wallets.size(); i++) {
                         // check xpubkey
-                        String xPublicKey = wallets.get(i).getXPublicKey();
+                        String xPublicKey = wallets.get(i).getExtentedPublicKey();
                         extendedKeysHash += StringUtils.isEmpty(xPublicKey) ? "" : EncryptUtils.encryptMD5ToString(xPublicKey);
                         if (i < wallets.size() - 1) {
                             extendedKeysHash += "|";
@@ -80,8 +80,9 @@ public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheV
                                                 continue;
                                             }
                                             long indexNo = amountJsonObj.getLong("indexNo");
-                                            if (indexNo > 0) {
-                                                getMvpView().getResponseAddressIndex(indexNo, wallet);
+                                            long changeIndexNo = amountJsonObj.getLong("changeIndexNo");
+                                            if (indexNo > 0 || changeIndexNo > 0) {
+                                                getMvpView().getResponseAddressIndex(indexNo, changeIndexNo, wallet);
                                             }
                                             long version = amountJsonObj.getLong("version");
                                             if (wallet.getVersion() != version) {

@@ -57,6 +57,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     private boolean isResetPwd;
     private long mIndexNo;
     private String mFromTag;
+    private long mChangeIndexNo;
 
     public static void start(Context context, Wallet wallet, boolean isCreateWallet) {
         Intent intent = new Intent(context, InitWalletActivity.class);
@@ -232,7 +233,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void createWalletSuccess() {
         if (!isCreateWallet) {
             // 优化检查最新地址索引逻辑
-            mSyncAddressMvpPresentder.syncLastAddressIndex(mIndexNo, getWallet());
+            mSyncAddressMvpPresentder.syncLastAddressIndex(mIndexNo, mChangeIndexNo, getWallet());
         }
         //跳转到穿件钱包成功界面
         InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet, false);
@@ -276,8 +277,9 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public void getResponseAddressIndex(long indexNo) {
+    public void getResponseAddressIndex(long indexNo, long changeIndexNo) {
         mIndexNo = indexNo;
+        mChangeIndexNo = changeIndexNo;
 
     }
 

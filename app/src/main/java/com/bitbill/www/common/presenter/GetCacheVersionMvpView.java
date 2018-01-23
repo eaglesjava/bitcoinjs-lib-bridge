@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface GetCacheVersionMvpView extends MvpView {
 
-    void getResponseAddressIndex(long indexNo, Wallet wallet);
+    void getResponseAddressIndex(long indexNo, long changeIndexNo, Wallet wallet);
 
     void getDiffVersionWallets(List<Wallet> tmpWalletList);
 }

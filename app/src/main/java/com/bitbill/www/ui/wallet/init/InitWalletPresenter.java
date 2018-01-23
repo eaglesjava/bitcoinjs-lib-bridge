@@ -105,9 +105,9 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     }
                     if (result.status == JsResult.STATUS_SUCCESS) {
                         String[] data = result.getData();
-                        if (data != null && data.length > 1) {
-                            Log.d(TAG, "generateMnemonicCNRetrunSeedHexAndXPublicKey: key = [" + key + "], Mnemonic = [" + data[0] + "], seedhex = [" + data[1] + "]");
-                            StringUtils.encryptMnemonicAndSeedHex(data[0], data[1], data[2], getMvpView().getTradePwd(), mWallet);
+                        if (data != null && data.length == 4) {
+                            Log.d(TAG, "generateMnemonicCNRetrunSeedHexAndXPublicKey: key = [" + key + "], Mnemonic = [" + data[0] + "], seedhex = [" + data[1] + "], extendedPublicKey = [" + data[2] + "], internalPublicKey = [" + data[3] + "]");
+                            StringUtils.encryptMnemonicAndSeedHex(data[0], data[1], data[2], data[3], getMvpView().getTradePwd(), mWallet);
                             //调用后台创建钱包接口
                             createWallet();
                         } else {
@@ -137,7 +137,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             return;
         }
 
-        getCompositeDisposable().add(getModelManager().createWallet(new CreateWalletRequest(mWallet.getName(), mWallet.getXPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
+        getCompositeDisposable().add(getModelManager().createWallet(new CreateWalletRequest(mWallet.getName(), mWallet.getExtentedPublicKey(), mWallet.getInternalPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
                 .compose(applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse>(getMvpView()) {
                     @Override
@@ -186,7 +186,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             return;
         }
         getCompositeDisposable().add(getModelManager()
-                .importWallet(new ImportWalletRequest(mWallet.getName(), mWallet.getXPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
+                .importWallet(new ImportWalletRequest(mWallet.getName(), mWallet.getExtentedPublicKey(), mWallet.getInternalPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
                 .compose(applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<ImportWalletResponse>>(getMvpView()) {
                     @Override
@@ -198,11 +198,11 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                         Log.d(TAG, "onNext() called with: importWalletResponseApiResponse = [" + importWalletResponseApiResponse + "]");
                         if (importWalletResponseApiResponse != null && importWalletResponseApiResponse.isSuccess()) {
                             //完善wallet相关属性
-                            StringUtils.encryptMnemonicAndSeedHex(mWallet.getMnemonic(), mWallet.getSeedHex(), mWallet.getXPublicKey(), getMvpView().getTradePwd(), mWallet);
+                            StringUtils.encryptMnemonicAndSeedHex(mWallet.getMnemonic(), mWallet.getSeedHex(), mWallet.getExtentedPublicKey(), mWallet.getInternalPublicKey(), getMvpView().getTradePwd(), mWallet);
                             insertWallet();
                             ImportWalletResponse data = importWalletResponseApiResponse.getData();
                             if (data != null) {
-                                getMvpView().getResponseAddressIndex(data.getIndexNo());
+                                getMvpView().getResponseAddressIndex(data.getIndexNo(), data.getChangeIndexNo());
                             }
 
 
@@ -290,6 +290,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     return;
                 }
                 if (StringUtils.isEmpty(jsResult)) {
+                    getMvpView().resetPwdFail();
                     getMvpView().hideLoading();
                     return;
                 }
@@ -299,14 +300,25 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                 } catch (JsonSyntaxException e) {
                     e.printStackTrace();
                 }
+                if (result == null) {
+                    getMvpView().resetPwdFail();
+                    getMvpView().hideLoading();
+                    return;
+                }
                 if (result.status == JsResult.STATUS_SUCCESS) {
                     String[] data = result.getData();
-                    if (data != null && "true".equals(data[0]) && data.length > 2) {
+                    if (data == null) {
+                        getMvpView().resetPwdFail();
+                        getMvpView().hideLoading();
+                        return;
+                    }
+                    if ("true".equals(data[0]) && data.length >= 4) {
 
                         //更新wallet对象
                         String seedHex = data[1];
-                        String XPublicKey = data[2];
-                        StringUtils.encryptMnemonicAndSeedHex(mnemonic, seedHex, XPublicKey, getMvpView().getTradePwd(), wallet);
+                        String extendedPublicKey = data[2];
+                        String internalPublicKey = data[3];
+                        StringUtils.encryptMnemonicAndSeedHex(mnemonic, seedHex, extendedPublicKey, internalPublicKey, getMvpView().getTradePwd(), wallet);
                         //不需要备份
                         wallet.setIsBackuped(true);
                         //更新数据库
@@ -412,7 +424,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
     }
 
     public boolean isValidXPublicKey() {
-        if (StringUtils.isEmpty(mWallet.getXPublicKey())) {
+        if (StringUtils.isEmpty(mWallet.getExtentedPublicKey())) {
             getMvpView().initWalletInfoFail();
             return false;
         }

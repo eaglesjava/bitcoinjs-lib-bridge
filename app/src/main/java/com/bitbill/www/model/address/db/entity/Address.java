@@ -46,6 +46,9 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "balance")
     private Long balance;
 
+    @Property(nameInDb = "is_internal")
+    private Boolean isInternal;
+
     /**
      * Used to resolve relations
      */
@@ -61,9 +64,9 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     @Generated(hash = 1885063144)
     private transient Long wallet__resolvedKey;
 
-    @Generated(hash = 1294345065)
-    public Address(Long id, String name, @NotNull Long walletId, Long index,
-                   String coinType, Date createdAt, Long balance) {
+    @Generated(hash = 2060081352)
+    public Address(Long id, String name, @NotNull Long walletId, Long index, String coinType,
+                   Date createdAt, Long balance, Boolean isInternal) {
         this.id = id;
         this.name = name;
         this.walletId = walletId;
@@ -71,6 +74,7 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
         this.coinType = coinType;
         this.createdAt = createdAt;
         this.balance = balance;
+        this.isInternal = isInternal;
     }
 
     @Generated(hash = 388317431)
@@ -213,5 +217,13 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getAddressDao() : null;
+    }
+
+    public Boolean getIsInternal() {
+        return this.isInternal;
+    }
+
+    public void setIsInternal(Boolean isInternal) {
+        this.isInternal = isInternal;
     }
 }

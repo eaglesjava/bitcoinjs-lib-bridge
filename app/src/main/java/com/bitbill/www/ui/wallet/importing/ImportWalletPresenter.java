@@ -107,14 +107,16 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
                 }
                 if (result.status == JsResult.STATUS_SUCCESS) {
                     String[] data = result.getData();
-                    if (data != null && "true".equals(data[0]) && data.length > 2) {
+                    if (data != null && "true".equals(data[0]) && data.length > 3) {
                         //更新wallet对象
                         String seedHex = data[1];
-                        String XPublicKey = data[2];
-                        String extendedKeysHash = EncryptUtils.encryptMD5ToString(XPublicKey);
+                        String extendedPublicKey = data[2];
+                        String internalPublicKey = data[3];
+                        String extendedKeysHash = EncryptUtils.encryptMD5ToString(extendedPublicKey);
                         String mnemonicHash = EncryptUtils.encryptMD5ToString(handleMnemonic());
                         Wallet wallet = new Wallet();
-                        wallet.setXPublicKey(XPublicKey);
+                        wallet.setExtentedPublicKey(extendedPublicKey);
+                        wallet.setInternalPublicKey(internalPublicKey);
                         wallet.setMnemonicHash(mnemonicHash);
                         wallet.setMnemonic(handleMnemonic());
                         wallet.setSeedHex(seedHex);

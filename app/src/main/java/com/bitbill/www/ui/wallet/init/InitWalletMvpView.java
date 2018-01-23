@@ -36,7 +36,7 @@ public interface InitWalletMvpView extends MvpView {
 
     boolean isResetPwd();
 
-    void getResponseAddressIndex(long indexNo);
+    void getResponseAddressIndex(long indexNo, long changeIndexNo);
 
     void resetPwdSuccess();
 

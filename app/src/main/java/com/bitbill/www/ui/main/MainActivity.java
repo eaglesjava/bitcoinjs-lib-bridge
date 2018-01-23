@@ -508,8 +508,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void getResponseAddressIndex(long indexNo, Wallet wallet) {
-        mSyncAddressMvpPresentder.syncLastAddressIndex(indexNo, wallet);
+    public void getResponseAddressIndex(long indexNo, long changeIndexNo, Wallet wallet) {
+        mSyncAddressMvpPresentder.syncLastAddressIndex(indexNo, changeIndexNo, wallet);
     }
 
     @Override

@@ -44,8 +44,14 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "last_address_index")
     private long lastAddressIndex;
 
+    @Property(nameInDb = "last_change_address_index")
+    private long lastChangeAddressIndex;
+
     @Property(nameInDb = "last_address")
     private String lastAddress;
+
+    @Property(nameInDb = "last_change_address")
+    private String lastChangeAddress;
 
     @Property(nameInDb = "encrypt_seed")
     private String encryptSeed;
@@ -65,8 +71,11 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "is_default")
     private boolean isDefault;
 
-    @Property(nameInDb = "xpublic_key")
-    private String XPublicKey;//十六进制字符串
+    @Property(nameInDb = "extented_public_key")
+    private String extentedPublicKey;//十六进制字符串
+
+    @Property(nameInDb = "internal_public_key")
+    private String internalPublicKey;//十六进制字符串
 
     @Property(nameInDb = "balance")
     private long balance;//unit Satoshi  1 BTC = 100000000 Satoshi
@@ -108,23 +117,27 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Generated(hash = 741381941)
     private transient WalletDao myDao;
 
-    @Generated(hash = 50611538)
-    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash, long lastAddressIndex, String lastAddress,
-                  String encryptSeed, String seedHexHash, boolean isBackuped, long createdAt, long updatedAt, boolean isDefault,
-                  String XPublicKey, long balance, long unconfirm, String coinType, long version) {
+    @Generated(hash = 645191502)
+    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash, long lastAddressIndex,
+                  long lastChangeAddressIndex, String lastAddress, String lastChangeAddress, String encryptSeed, String seedHexHash,
+                  boolean isBackuped, long createdAt, long updatedAt, boolean isDefault, String extentedPublicKey, String internalPublicKey,
+                  long balance, long unconfirm, String coinType, long version) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
         this.mnemonicHash = mnemonicHash;
         this.lastAddressIndex = lastAddressIndex;
+        this.lastChangeAddressIndex = lastChangeAddressIndex;
         this.lastAddress = lastAddress;
+        this.lastChangeAddress = lastChangeAddress;
         this.encryptSeed = encryptSeed;
         this.seedHexHash = seedHexHash;
         this.isBackuped = isBackuped;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.isDefault = isDefault;
-        this.XPublicKey = XPublicKey;
+        this.extentedPublicKey = extentedPublicKey;
+        this.internalPublicKey = internalPublicKey;
         this.balance = balance;
         this.unconfirm = unconfirm;
         this.coinType = coinType;
@@ -224,6 +237,14 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.lastAddressIndex = lastAddressIndex;
     }
 
+    public long getLastChangeAddressIndex() {
+        return lastChangeAddressIndex;
+    }
+
+    public void setLastChangeAddressIndex(long lastChangeAddressIndex) {
+        this.lastChangeAddressIndex = lastChangeAddressIndex;
+    }
+
     public String getMnemonic() {
         return mnemonic;
     }
@@ -267,12 +288,20 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.isBackuped = isBackuped;
     }
 
-    public String getXPublicKey() {
-        return XPublicKey;
+    public String getInternalPublicKey() {
+        return internalPublicKey;
     }
 
-    public Wallet setXPublicKey(String XPublicKey) {
-        this.XPublicKey = XPublicKey;
+    public void setInternalPublicKey(String internalPublicKey) {
+        this.internalPublicKey = internalPublicKey;
+    }
+
+    public String getExtentedPublicKey() {
+        return extentedPublicKey;
+    }
+
+    public Wallet setExtentedPublicKey(String extentedPublicKey) {
+        this.extentedPublicKey = extentedPublicKey;
         return this;
     }
 
@@ -434,5 +463,13 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Generated(hash = 789112272)
     public synchronized void resetTxRecordList() {
         txRecordList = null;
+    }
+
+    public String getLastChangeAddress() {
+        return this.lastChangeAddress;
+    }
+
+    public void setLastChangeAddress(String lastChangeAddress) {
+        this.lastChangeAddress = lastChangeAddress;
     }
 }

@@ -14,14 +14,16 @@ public class CreateWalletRequest {
 
     private String walletId;
     private String extendedKeys;//扩展公钥
+    private String extendedChangeKeys;//内部公钥
     private String clientId;
     private String deviceToken;
 
-    public CreateWalletRequest(String walletId, String extendedKeys, String clientId, String deviceToken) {
+    public CreateWalletRequest(String walletId, String extendedKeys, String extendedChangeKeys, String clientId, String deviceToken) {
         this.walletId = walletId;
         this.extendedKeys = extendedKeys;
         this.clientId = clientId;
         this.deviceToken = deviceToken;
+        this.extendedChangeKeys = extendedChangeKeys;
     }
 
     public String getWalletId() {

@@ -138,7 +138,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void refreshAddress(Wallet selectedWallet) {
         mSelectedWallet = selectedWallet;
         if (mBtcAddressMvpPresentder != null) {
-            mBtcAddressMvpPresentder.refreshAddress(1);
+            mBtcAddressMvpPresentder.refreshAddress(1, 0);
 
         }
 

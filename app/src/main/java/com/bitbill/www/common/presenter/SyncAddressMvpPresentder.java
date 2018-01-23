@@ -10,5 +10,5 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 public interface SyncAddressMvpPresentder<M extends AddressModel, V extends SyncAddressMvpView> extends MvpPresenter<V> {
 
-    void syncLastAddressIndex(long indexNo, Wallet wallet);
+    void syncLastAddressIndex(long indexNo, long changeIndexNo, Wallet wallet);
 }

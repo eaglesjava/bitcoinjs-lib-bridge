@@ -52,7 +52,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         if (!isValidWallet()) return;
 
         Wallet wallet = getMvpView().getWallet();
-        String encryptMD5ToString = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
+        String encryptMD5ToString = EncryptUtils.encryptMD5ToString(wallet.getExtentedPublicKey());
         getCompositeDisposable().add(getModelManager()
                 .getTxElement(new GetTxElement(encryptMD5ToString))
                 .compose(this.applyScheduler())
@@ -145,7 +145,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         String inAddress = "";
         for (int i = 0; i <= index; i++) {
             GetTxElementResponse.UtxoBean unspent = unspentList.get(i);
-            inputs.add(new Transaction.Input(unspent.getTxid(), unspent.getVIndex(), unspent.getAddressIndex()));
+            inputs.add(new Transaction.Input(unspent.getTxid(), unspent.getVIndex(), unspent.getAddressIndex(), unspent.isChange()));
             inAddress += unspent.getAddressTxt();
             if (i < index - 1) inAddress += "|";
         }
@@ -224,7 +224,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         if (!isValidWallet() || !isValidXPublicKey() || !isValidBtcAddress()) return;
 
         Wallet wallet = getMvpView().getWallet();
-        String extendedKeysHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
+        String extendedKeysHash = EncryptUtils.encryptMD5ToString(wallet.getExtentedPublicKey());
         long outAmount = getMvpView().getSendAmount();
 
         getCompositeDisposable().add(getModelManager()
@@ -325,7 +325,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
     }
 
     public boolean isValidXPublicKey() {
-        if (StringUtils.isEmpty(getMvpView().getWallet().getXPublicKey())) {
+        if (StringUtils.isEmpty(getMvpView().getWallet().getExtentedPublicKey())) {
             getMvpView().getWalletFail();
             return false;
         }

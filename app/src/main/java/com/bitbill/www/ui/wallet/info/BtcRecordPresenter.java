@@ -51,7 +51,7 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
             return;
         }
         Wallet wallet = getMvpView().getWallet();
-        String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getXPublicKey());
+        String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getExtentedPublicKey());
         getCompositeDisposable().add(Observable.fromCallable(() -> {
             List<TxRecord> txRecordList = wallet.getTxRecordList();
             if (StringUtils.isEmpty(txRecordList)) {
@@ -110,7 +110,7 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
     }
 
     public boolean isValidXPublicKey() {
-        if (StringUtils.isEmpty(getMvpView().getWallet().getXPublicKey())) {
+        if (StringUtils.isEmpty(getMvpView().getWallet().getExtentedPublicKey())) {
             getMvpView().getWalletFail();
             return false;
         }

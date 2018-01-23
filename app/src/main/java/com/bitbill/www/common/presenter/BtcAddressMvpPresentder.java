@@ -13,7 +13,10 @@ public interface BtcAddressMvpPresentder<M extends AddressModel, V extends BtcAd
 
     /**
      * 刷新地址
+     *
+     * @param refreshCount
+     * @param option       -1 外部地址找零地址都刷新 0 外部地址刷新 1 找零地址刷新
      */
-    void refreshAddress(int refreshCount);
+    void refreshAddress(int refreshCount, int option);
 
 }

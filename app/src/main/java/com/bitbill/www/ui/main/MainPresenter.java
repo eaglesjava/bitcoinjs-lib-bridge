@@ -72,7 +72,7 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
         String extendedKeysHash = "";
         for (int i = 0; i < wallets.size(); i++) {
             // check xpubkey
-            String xPublicKey = wallets.get(i).getXPublicKey();
+            String xPublicKey = wallets.get(i).getExtentedPublicKey();
             extendedKeysHash += StringUtils.isEmpty(xPublicKey) ? "" : EncryptUtils.encryptMD5ToString(xPublicKey);
             if (i < wallets.size() - 1) {
                 extendedKeysHash += "|";
@@ -195,7 +195,7 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
         String extendedKeysHash = "";
         for (int i = 0; i < wallets.size(); i++) {
             // TODO: 2017/12/21 check xpubkey
-            extendedKeysHash += EncryptUtils.encryptMD5ToString(wallets.get(i).getXPublicKey());
+            extendedKeysHash += EncryptUtils.encryptMD5ToString(wallets.get(i).getExtentedPublicKey());
             if (i < wallets.size() - 1) {
                 extendedKeysHash += "|";
             }

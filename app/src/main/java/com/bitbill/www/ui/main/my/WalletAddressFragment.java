@@ -183,6 +183,6 @@ public class WalletAddressFragment extends BaseListFragment<Address, WalletAddre
 
     @OnClick(R.id.tv_scan_address)
     public void onViewClicked() {
-        mBtcAddressMvpPresentder.refreshAddress(10);
+        mBtcAddressMvpPresentder.refreshAddress(10, -1);
     }
 }

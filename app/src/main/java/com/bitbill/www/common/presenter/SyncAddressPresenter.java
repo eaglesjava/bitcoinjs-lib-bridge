@@ -44,7 +44,7 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
     }
 
     @Override
-    public void syncLastAddressIndex(long indexNo, Wallet wallet) {
+    public void syncLastAddressIndex(long indexNo, long changeIndexNo, Wallet wallet) {
         //  check index
         if (indexNo <= 0) {
             return;
@@ -56,12 +56,18 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
         long lastIndex = wallet.getLastAddressIndex();
         if (indexNo > lastIndex) {
             //批量生成地址
-            getBitcoinContinuousAddress(lastIndex, indexNo, wallet);
+            getBitcoinContinuousAddress(lastIndex, indexNo, wallet, false);
+        }
+        long lastChangeAddressIndex = wallet.getLastChangeAddressIndex();
+        if (changeIndexNo > lastChangeAddressIndex) {
+            //批量生成地址
+            getBitcoinContinuousAddress(lastChangeAddressIndex, changeIndexNo, wallet, true);
         }
     }
 
-    public void getBitcoinContinuousAddress(long fromIndex, long toIndex, Wallet wallet) {
-        BitcoinJsWrapper.getInstance().getBitcoinContinuousAddressByMasterXPublicKey(wallet.getXPublicKey(), fromIndex, toIndex, new BitcoinJsWrapper.Callback() {
+    public void getBitcoinContinuousAddress(long fromIndex, long toIndex, Wallet wallet, boolean isInternal) {
+        String publicKey = isInternal ? wallet.getInternalPublicKey() : wallet.getExtentedPublicKey();
+        BitcoinJsWrapper.getInstance().getBitcoinContinuousAddressByMasterXPublicKey(publicKey, fromIndex, toIndex, new BitcoinJsWrapper.Callback() {
             @Override
             public void call(String key, String jsResult) {
 
@@ -96,17 +102,18 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
                     wallet.setLastAddressIndex(toIndex);
                     wallet.setLastAddress(address);
                     //更新地址index
-                    updateAddressIndex(wallet, data);
+                    updateAddressIndex(wallet, data, isInternal);
                 }
             }
         });
     }
 
-    public void updateAddressIndex(Wallet wallet, String[] addressArray) {
+    public void updateAddressIndex(Wallet wallet, String[] addressArray, boolean isInternal) {
         List<Address> addressList = new ArrayList<>();
         for (int i = 0; i < addressArray.length; i++) {
             //构造address列表
-            addressList.add(new Address(null, addressArray[i], wallet.getId(), wallet.getLastAddressIndex() - (addressArray.length - 1) + i, AppConstants.BTC_COIN_TYPE, new Date(), 0l));
+            long index = (isInternal ? wallet.getLastChangeAddressIndex() : wallet.getLastAddressIndex()) - (addressArray.length - 1) + i;
+            addressList.add(new Address(null, addressArray[i], wallet.getId(), index, AppConstants.BTC_COIN_TYPE, new Date(), 0l, isInternal));
         }
         getCompositeDisposable().add(getModelManager()
                 .insertAddressListAndUpdatWallet(addressList, wallet)
