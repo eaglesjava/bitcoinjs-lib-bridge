@@ -12,7 +12,7 @@
 "ContactC.contact_cancel" = "Cancel";
 "ContactC.contact_addressExits" = "Address already exists";
 "ContactC.contact_addressInvalid" = "The input address is invalid";
-"ContactC.contact_IDExits" = "ID already exists";
+"ContactC.contact_IDExits" = "Contact already exists";
 
 "ContactC.detail_walletID" = "Wallet ID";
 "ContactC.detail_walletAddress" = "Address of digital asset";
