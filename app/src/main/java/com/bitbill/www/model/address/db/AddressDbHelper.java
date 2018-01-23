@@ -4,10 +4,12 @@ import com.bitbill.model.db.dao.AddressDao;
 import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.model.db.dao.WalletDao;
 import com.bitbill.www.common.base.model.db.DbHelper;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
 import com.bitbill.www.model.address.db.entity.Address;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -97,5 +99,17 @@ public class AddressDbHelper extends DbHelper implements AddressDb {
     @Override
     public Address getAddressByName(String address) {
         return mAddressDao.queryBuilder().where(AddressDao.Properties.Name.eq(address)).unique();
+    }
+
+    @Override
+    public List<Wallet> getWalletsByAddresses(List<String> addressList) {
+        List<Address> addresses = mAddressDao.queryBuilder().where(AddressDao.Properties.Name.in(addressList)).list();
+        List<Wallet> wallets = new ArrayList<>();
+        if (StringUtils.isEmpty(addresses)) {
+            for (Address address : addresses) {
+                wallets.add(address.getWallet());
+            }
+        }
+        return wallets;
     }
 }

@@ -236,8 +236,13 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                         getMvpView().refreshAddressFail();
                         return;
                     }
-                    wallet.setLastAddress(address);
-                    wallet.setLastAddressIndex(index);
+                    if (isInternal) {
+                        wallet.setLastChangeAddress(address);
+                        wallet.setLastChangeAddressIndex(index);
+                    } else {
+                        wallet.setLastAddress(address);
+                        wallet.setLastAddressIndex(index);
+                    }
                     //更新地址index
                     updateAddressIndex(wallet, data, false, isInternal);
                 } else {
@@ -285,8 +290,14 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                         getMvpView().refreshAddressFail();
                         return;
                     }
-                    wallet.setLastAddressIndex(toIndex);
-                    wallet.setLastAddress(address);
+
+                    if (isInternal) {
+                        wallet.setLastChangeAddress(address);
+                        wallet.setLastChangeAddressIndex(toIndex);
+                    } else {
+                        wallet.setLastAddress(address);
+                        wallet.setLastAddressIndex(toIndex);
+                    }
                     //更新地址index
                     updateAddressIndex(wallet, data, false, isInternal);
                 } else {
