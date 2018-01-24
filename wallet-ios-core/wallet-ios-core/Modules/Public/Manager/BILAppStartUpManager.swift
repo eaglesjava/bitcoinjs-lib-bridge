@@ -38,8 +38,13 @@ class BILAppStartUpManager: NSObject {
 		setupSVProgressHUD()
         setupPushService()
         setupToast()
+        clearBadge()
         debugPrint(BILDeviceManager.shared.deviceID)
 	}
+    
+    func clearBadge() {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
     
     func setupToast() {
         var style = ToastStyle()
