@@ -94,6 +94,9 @@ class BILReceiveController: BILBaseViewController {
     }
 	
 	func setAddress(address: String) {
+		guard let w = currentWallet, w.contain(btcAddress: address) else {		
+			return
+		}
 		receiveModel = BILReceiveModel(address: address, amount: "")
 		let scale = UIScreen.main.scale
 		let size = CGSize(width: qrCodeHeight, height: qrCodeHeight).applying(CGAffineTransform(scaleX: scale, y: scale))
