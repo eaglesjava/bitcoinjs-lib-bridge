@@ -247,9 +247,9 @@ extension BTCTransactionModel {
         if inWallet == nil {
             if let inw = WalletModel.fetch(by: inAddresses, isAll: false) {
                 let outAllWallets = WalletModel.fetchWallets(by: outAddresses)
-                if outAllWallets.count == 1, let outw = outAllWallets.first, outw.id! == inw.id! {
+                if outAllWallets.count == 1, let transferWallet = WalletModel.fetch(by: outAddresses, isAll: true), transferWallet.id! == inw.id! {
                     typeRawValue = BILTransactionType.transfer.rawValue
-                    wallet = outw
+                    wallet = transferWallet
                 }
                 else
                 {
