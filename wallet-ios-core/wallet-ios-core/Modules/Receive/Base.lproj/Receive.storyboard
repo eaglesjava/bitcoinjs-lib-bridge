@@ -79,8 +79,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eI9-zD-BLC">
+                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eI9-zD-BLC">
                                 <rect key="frame" x="97.5" y="218" width="180" height="180"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="i7l-8s-L5B"/>
                                     <constraint firstAttribute="width" secondItem="eI9-zD-BLC" secondAttribute="height" multiplier="1:1" id="xKA-Ci-iW4"/>
@@ -90,6 +91,9 @@
                                         <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="9mM-Tl-GYL" appends="YES" id="u9c-Zy-1JF"/>
+                                </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77y-FX-QbG">
                                 <rect key="frame" x="142.5" y="428" width="90" height="33"/>
@@ -275,6 +279,11 @@
                         <segue destination="pdA-hL-swz" kind="embed" identifier="BILReceiveChooseWalletSegue" id="ra7-1Y-aNB"/>
                     </connections>
                 </containerView>
+                <tapGestureRecognizer id="9mM-Tl-GYL">
+                    <connections>
+                        <action selector="QRCodeTapped:" destination="2Xo-Eg-YUe" id="0um-p4-ENc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="788" y="113.79310344827587"/>
         </scene>

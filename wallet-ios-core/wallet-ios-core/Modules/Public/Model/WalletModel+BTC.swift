@@ -124,6 +124,9 @@ extension WalletModel {
 	}
     
     func randomChangeAddress() -> BTCWalletAddressModel {
+        guard bitcoinWallet!.changeAddresses!.count > 0 else {
+            return randomAddress()
+        }
         let count = bitcoinWallet!.changeAddresses!.count
         return bitcoinWallet!.changeAddresses![Int(arc4random()) % count] as! BTCWalletAddressModel
     }
@@ -187,6 +190,10 @@ extension WalletModel {
                 return
             }
             self.generateAddresses(from: localIndex, to: self.lastBTCAddressIndex, success: { (models) in
+                if self.lastBTCChangeAddressIndex == -1 {
+                    success(models, [])
+                    return
+                }
                 self.generateAddresses(type: .change, from: localChangeIndex, to: self.lastBTCChangeAddressIndex, success: { (changeModels) in
                     success(models, changeModels)
                 }, failure: { (msg, code) in

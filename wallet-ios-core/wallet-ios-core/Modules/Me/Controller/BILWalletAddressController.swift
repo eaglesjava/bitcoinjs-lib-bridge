@@ -122,11 +122,11 @@ extension BILWalletAddressController: UITableViewDelegate, UITableViewDataSource
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionTitles.count
+        return changeAddresses.count > 0 ? sectionTitles.count : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addresses.count
+        return section == 0 ? addresses.count : changeAddresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

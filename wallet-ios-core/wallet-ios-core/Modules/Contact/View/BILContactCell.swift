@@ -19,7 +19,7 @@ class BILContactCell: UITableViewCell {
         didSet {
             guard let c = contact else { return }
             nameLabel.text = c.name
-            firstWordLabel.text = c.firstNameWord
+            firstWordLabel.text = c.firstNameWord.uppercased()
             detailLabel.text = c.detail
             detailLabel.valueTitle = (c.additionType == .walletID ? "ID" : "地址")
         }

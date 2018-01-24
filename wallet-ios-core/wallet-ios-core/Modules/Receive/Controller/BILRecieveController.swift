@@ -14,7 +14,7 @@ class BILReceiveController: BILBaseViewController {
 	@IBOutlet var chooseWalletContainerView: UIView!
 	@IBOutlet weak var backupViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var qrCodeImageView: UIImageView!
-    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var addressLabel: BILAddressLabel!
     @IBOutlet weak var currentWalletIDLabel: UILabel!
     @IBOutlet weak var currentWalletBalanceLabel: UILabel!
     @IBOutlet weak var currentWalletShortIDLabel: UILabel!
@@ -193,6 +193,11 @@ class BILReceiveController: BILBaseViewController {
             self.bil_makeToast(msg: errorMsg)
 		})
 	}
+    
+    @IBAction func QRCodeTapped(_ sender: UITapGestureRecognizer) {
+        addressLabel.tapAction(gesture: sender)
+    }
+    
 	// MARK: - Navigation
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
