@@ -15,10 +15,10 @@ extension WalletModel {
 		
 		func loadTXs(version: Int64) {
             getTransactionHistoryFromSever(page: 0, size: (bitcoinWallet?.transactions?.count)! + 1000, success: { (txs) in
-				self.bitcoinWallet?.version = version
 				do {
 					try BILWalletManager.shared.saveWallets()
 					self.bitcoinWallet?.needLoadServer = false
+					self.bitcoinWallet?.version = version
 				} catch {
 					debugPrint(error)
 				}
