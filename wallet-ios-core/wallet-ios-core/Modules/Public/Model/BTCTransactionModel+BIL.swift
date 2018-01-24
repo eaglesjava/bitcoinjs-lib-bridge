@@ -273,8 +273,8 @@ extension BTCTransactionModel {
         else
         {
             if outWallet == nil {
-                if inWallet!.contain(btcAddresses: inputAddresses, isAll: false) {
-                    if inWallet!.contain(btcAddresses: outAddresses, isAll: false) {
+                if inWallet!.contain(btcAddresses: inAddresses, isAll: false) {
+                    if inWallet!.contain(btcAddresses: outAddresses, isAll: true) {
                         wallet = inWallet
                         typeRawValue = BILTransactionType.transfer.rawValue
                     }

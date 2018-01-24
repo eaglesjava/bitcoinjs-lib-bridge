@@ -102,7 +102,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
     func loadTransactionHistory() {
         guard let w = wallet else { return }
         guard !isLoading else { return }
-//        guard w.needLoadServer else { return }
+        guard let needLoad = w.bitcoinWallet?.needLoadServer, needLoad else { return }
         isLoading = true
         w.getTransactionHistoryFromSever(page: page, size: size, success: { (txs) in
             self.transactions.removeAll()

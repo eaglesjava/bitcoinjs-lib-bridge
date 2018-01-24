@@ -155,10 +155,7 @@ extension WalletModel {
             let json = JSON(result)
             let datas = json["list"].arrayValue
             for json in datas {
-                var model = bil_btc_transactionManager.newModelIfNeeded(keyValues: (key: "txHash", value: json["txHash"].stringValue))
-                if model.wallet != self {
-                    model = bil_btc_transactionManager.newModel()
-                }
+                let model = BTCTransactionModel.newTxIfNeeded(json: json, outWallet: self)
                 model.setProperties(json: json, inWallet: self)
             }
             do {

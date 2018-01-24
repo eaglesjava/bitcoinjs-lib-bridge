@@ -99,10 +99,15 @@ extension WalletModel {
     }
     
     func contain(btcAddress: String) -> Bool {
-        guard let set = bitcoinWallet?.addresses else { return false }
-        let adds = set.mutableArrayValue(forKey: "address")
-        adds.addObjects(from: bitcoinWallet?.changeAddresses?.mutableArrayValue(forKey: "address") as! [Any])
-        return adds.contains(btcAddress)
+        return setContain(addreessSet: bitcoinWallet?.addresses, address: btcAddress) || setContain(addreessSet: bitcoinWallet?.changeAddresses, address: btcAddress)
+    }
+    
+    func setContain(addreessSet: NSOrderedSet?, address: String) -> Bool {
+        guard let set = addreessSet else { return false }
+        let count = set.filter({
+            ($0 as? BTCWalletAddressModel)?.address == address
+        }).count
+        return count > 0
     }
     
     func contain(btcAddresses: [String], isAll: Bool = true) -> Bool {
@@ -169,7 +174,7 @@ extension WalletModel {
             return
         }
         
-        guard index > lastBTCAddressIndex else {
+        guard index > lastBTCAddressIndex || changeIndex > lastBTCChangeAddressIndex else {
             failure("index 小于或等于当前地址，不需要刷新")
             return
         }
@@ -223,7 +228,7 @@ extension WalletModel {
     func getNewBTCChangeAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         let tempIndex = lastBTCChangeAddressIndex + 1
         refreshAddressToSever(index: lastBTCAddressIndex, changeIndex: tempIndex, success: { (models, changeModels) in
-            guard let address = models.last?.address else {
+            guard let address = changeModels.last?.address else {
                 failure(.publicWalletGenerateAddressError)
                 return
             }
