@@ -72,6 +72,7 @@
     <string name="fail_init_wallet">初始化钱包失败，请重试</string>
     <string name="fail_get_wallet_info">获取钱包信息失败，请重试</string>
     <string name="fail_reset_wallet_pwd">重置密码失败，请重试</string>
+    <string name="fail_create_wallet">钱包创建失败，请重试</string>
 
     <!--reset wallet pwd-->
     <string name="title_activity_reset_pwd">重置钱包</string>

@@ -77,6 +77,26 @@ public class TxElement extends Entity {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof TxElement)) {
+            return false;
+        }
+        TxElement txElement = (TxElement) obj;
+        return txHash != null && txHash.equals(txElement.getTxHash());
+    }
+
+    @Override
+    public int hashCode() {
+        return txHash == null ? 0x00 : txHash.hashCode();
+    }
+
     public static class InputsBean extends Entity {
         /**
          * address : 17fLtpDmu7GhMgFyVBCrNySSanodr3toXP

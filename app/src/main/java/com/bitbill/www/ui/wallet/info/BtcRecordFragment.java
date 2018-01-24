@@ -21,6 +21,9 @@ import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -265,7 +268,22 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
 
     @Override
     public void parsedTxItemList(List<TxRecord> txRecords) {
-        setDatas(txRecords);
+        // TODO: 2018/1/24 优化 筛选当前钱包的交易
+        List newTxList = new ArrayList();
+        if (!StringUtils.isEmpty(txRecords)) {
+            for (TxRecord txRecord : txRecords) {
+                if (txRecord.getWalletId().equals(mWalelt.getId())) {
+                    newTxList.add(txRecord);
+                }
+            }
+        }
+        Collections.sort(newTxList, new Comparator<TxRecord>() {
+            @Override
+            public int compare(TxRecord o1, TxRecord o2) {
+                return (int) (o2.getCreatedTime().getTime() - o1.getCreatedTime().getTime());
+            }
+        });
+        setDatas(newTxList);
         setRefresh(false);
     }
 

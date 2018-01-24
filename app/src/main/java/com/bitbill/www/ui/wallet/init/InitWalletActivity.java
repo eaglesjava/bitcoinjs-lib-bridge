@@ -246,7 +246,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Override
     public void createWalletFail() {
         // TODO: 2017/11/21 弹出创建钱包失败提示
-        showMessage("钱包创建失败，请重试");
+        showMessage(isCreateWallet ? R.string.fail_create_wallet : R.string.fail_import_wallet);
     }
 
     @Override

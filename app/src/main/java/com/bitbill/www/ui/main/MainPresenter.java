@@ -214,7 +214,7 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
 
                             ListTxElementResponse data = listApiResponse.getData();
                             if (data != null) {
-                                getMvpView().listUnconfirmSuccess(data.getList());
+                                getMvpView().listUnconfirmSuccess(StringUtils.removeDuplicateList(data.getList()));
                             } else {
                                 getMvpView().listUnconfirmFail();
                             }

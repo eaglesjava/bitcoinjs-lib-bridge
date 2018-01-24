@@ -72,6 +72,7 @@
     <string name="fail_init_wallet">Failed to initialize the wallet. Please try again.</string>
     <string name="fail_get_wallet_info">Failed to retrieve wallet information. Please try again.</string>
     <string name="fail_reset_wallet_pwd">Reset password failed, please try again.</string>
+    <string name="fail_create_wallet">Failed to create wallet, please try again</string>
 
     <!--reset wallet pwd-->
     <string name="title_activity_reset_pwd">Reset wallet</string>

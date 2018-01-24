@@ -59,6 +59,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -499,7 +500,16 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void parsedTxItemList(List<TxRecord> txRecords) {
-        loadParsedUnconfirmList(txRecords);
+        //移除heigh不为-1的交易记录
+        List<TxRecord> newTxList = new ArrayList<>();
+        if (!StringUtils.isEmpty(txRecords)) {
+            for (TxRecord txRecord : txRecords) {
+                if (txRecord.getHeight() == -1) {
+                    newTxList.add(txRecord);
+                }
+            }
+        }
+        loadParsedUnconfirmList(newTxList);
     }
 
     @Override

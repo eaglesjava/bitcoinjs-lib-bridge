@@ -71,7 +71,7 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
             if (mWalletDao.count() == 0) {
                 wallet.setIsDefault(true);
             }
-            return mWalletDao.insert(wallet);
+            return mWalletDao.insertOrReplace(wallet);
         });
     }
 

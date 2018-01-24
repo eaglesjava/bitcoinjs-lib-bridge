@@ -38,19 +38,21 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
             return;
         }
         List<TxElement> txInfoList = getMvpView().getTxInfoList();
-
-        getCompositeDisposable().add(Observable.just(txInfoList)
+        getCompositeDisposable().add(Observable.just(StringUtils.removeDuplicateList(txInfoList))
                 .concatMap(txInfos -> {
                     List<TxRecord> txRecords = new ArrayList<>();
                     for (TxElement txElement : txInfos) {
                         List<TxElement.InputsBean> inputs = txElement.getInputs();
 
                         List<Long> inWalletIdList = new ArrayList<>();
+
                         for (TxElement.InputsBean input : inputs) {
                             Address addressByName = mAddressModel.getAddressByName(input.getAddress());
                             if (addressByName != null) {
                                 Long walletId = addressByName.getWalletId();
-                                inWalletIdList.add(walletId);
+                                if (!inWalletIdList.contains(walletId)) {
+                                    inWalletIdList.add(walletId);
+                                }
                             }
                         }
                         List<Long> outWalletIdList = new ArrayList<>();
@@ -58,15 +60,16 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         for (TxElement.OutputsBean output : outputs) {
                             Address addressByName = mAddressModel.getAddressByName(output.getAddress());
                             if (addressByName != null) {
-                                outWalletIdList.add(addressByName.getWalletId());
+                                Long walletId = addressByName.getWalletId();
+                                //排除in中存在的waleltID
+                                if (!outWalletIdList.contains(walletId)) {
+                                    outWalletIdList.add(walletId);
+                                }
                             }
                         }
 
                         boolean isContainIn = inWalletIdList.size() > 0;
                         boolean isAllOut = outWalletIdList.size() == 1;
-                        boolean isContainOut = outWalletIdList.size() > 0;
-
-                        if (!isContainIn && !isContainOut) continue;
 
                         //for in wallet
                         for (Long inWalletId : inWalletIdList) {
@@ -85,8 +88,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                                 inOut = TxRecord.InOut.OUT;
                                 for (TxElement.OutputsBean output : outputs) {
                                     Address addressByName = mAddressModel.getAddressByName(output.getAddress());
-                                    if (!inWalletId.equals(addressByName.getWalletId())) {
-                                        //不包含自己的所有金额
+                                    if (addressByName == null || !inWalletId.equals(addressByName.getWalletId()) || !addressByName.getIsInternal()) {
                                         amount += output.getValue();
                                     }
                                 }
@@ -101,40 +103,40 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                             inTxRecord.setElementId(txElement.getId());
                             getModelManager().insertTxRecordAndInputsOutputs(inTxRecord, inputs, outputs);
                             txRecords.add(inTxRecord);
-                            if (TxRecord.InOut.TRANSFER.equals(inOut)) {
+                        }
+                        if (isContainIn && isAllOut && inWalletIdList.get(0).equals(outWalletIdList.get(0))) {
+                            //ouput地址全部是本地地址 为转移类型 插入一条记录
+                            continue;
+                        }
+                        //for out wallet
+                        for (Long outWalletId : outWalletIdList) {
+                            if (inWalletIdList.contains(outWalletId)) {
+                                //排除in中存在的waleltID
                                 continue;
                             }
-                            //for out wallet
-                            for (Long outWalletId : outWalletIdList) {
-
-                                TxRecord outTxRecord = new TxRecord();
-                                TxRecord.InOut inout = TxRecord.InOut.IN;
-                                long outAmount = 0;
-                                if (isContainOut) {
-                                    //接收
-                                    inout = TxRecord.InOut.IN;
-                                    for (TxElement.OutputsBean output : outputs) {
-                                        Address addressByName = mAddressModel.getAddressByName(output.getAddress());
-                                        if (outWalletId.equals(addressByName.getWalletId())) {
-                                            outAmount += output.getValue();
-                                        }
-                                    }
+                            TxRecord outTxRecord = new TxRecord();
+                            TxRecord.InOut inout = TxRecord.InOut.IN;
+                            long outAmount = 0;
+                            //接收
+                            inout = TxRecord.InOut.IN;
+                            for (TxElement.OutputsBean output : outputs) {
+                                Address addressByName = mAddressModel.getAddressByName(output.getAddress());
+                                if (addressByName != null && outWalletId.equals(addressByName.getWalletId())) {
+                                    outAmount += output.getValue();
                                 }
-
-                                outTxRecord.setWalletId(outWalletId);
-                                outTxRecord.setSumAmount(outAmount);
-                                outTxRecord.setInOut(inout);
-                                outTxRecord.setTxHash(txElement.getTxHash());
-                                outTxRecord.setHeight(txElement.getHeight());
-                                outTxRecord.setCreatedTime(StringUtils.getDate(txElement.getCreatedTime()));
-                                outTxRecord.setRemark(txElement.getRemark());
-                                outTxRecord.setElementId(txElement.getId());
-                                getModelManager().insertTxRecordAndInputsOutputs(outTxRecord, inputs, outputs);
-                                txRecords.add(outTxRecord);
-
                             }
-                        }
+                            outTxRecord.setWalletId(outWalletId);
+                            outTxRecord.setSumAmount(outAmount);
+                            outTxRecord.setInOut(inout);
+                            outTxRecord.setTxHash(txElement.getTxHash());
+                            outTxRecord.setHeight(txElement.getHeight());
+                            outTxRecord.setCreatedTime(StringUtils.getDate(txElement.getCreatedTime()));
+                            outTxRecord.setRemark(txElement.getRemark());
+                            outTxRecord.setElementId(txElement.getId());
+                            getModelManager().insertTxRecordAndInputsOutputs(outTxRecord, inputs, outputs);
+                            txRecords.add(outTxRecord);
 
+                        }
                     }
                     return Observable.just(txRecords);
                 })

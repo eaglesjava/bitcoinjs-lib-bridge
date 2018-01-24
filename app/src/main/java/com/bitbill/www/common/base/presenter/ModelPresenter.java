@@ -13,8 +13,10 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.model.Model;
 import com.bitbill.www.common.base.model.network.api.ApiError;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.view.MvpView;
 import com.bitbill.www.common.rx.SchedulerProvider;
+import com.bitbill.www.common.utils.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -37,6 +39,45 @@ public class ModelPresenter<M extends Model, V extends MvpView> extends BasePres
 
     public M getModelManager() {
         return modelManager;
+    }
+
+    public boolean handleApiResponse(ApiResponse apiResponse) {
+        if (!isViewAttached()) {
+            return true;
+        }
+
+        if (apiResponse == null) {
+            getMvpView().onError(R.string.error_api_server);
+            return true;
+        }
+        if (apiResponse.isSuccess()) {
+            return false;
+        }
+        switch (apiResponse.getStatus()) {
+            case ApiResponse.STATUS_SERVER_BUSY:
+                getMvpView().onError(R.string.error_server_busy);
+                return true;
+            case ApiResponse.STATUS_LACK_MADATORY_PARAMS:
+                getMvpView().onError(R.string.error_lack_madatory_params);
+                return true;
+            case ApiResponse.STATUS_INVALID_PARAM_TYPE:
+                getMvpView().onError(R.string.error_invalid_param_type);
+                return true;
+            case ApiResponse.STATUS_WALLET_ID_EXSIST:
+                getMvpView().onError(R.string.error_wallet_id_exsist);
+                return true;
+            case ApiResponse.STATUS_WALLET_NO_EXSIST:
+                getMvpView().onError(R.string.error_wallet_no_exsist);
+                return true;
+
+        }
+        if (StringUtils.isNotEmpty(apiResponse.getMessage())) {
+            getMvpView().onError(apiResponse.getMessage());
+            return true;
+        } else {
+            getMvpView().onError(R.string.error_api_default);
+            return true;
+        }
     }
 
     public void handleApiError(ANError error) {

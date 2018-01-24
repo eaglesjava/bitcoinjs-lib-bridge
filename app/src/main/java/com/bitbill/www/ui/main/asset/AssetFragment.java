@@ -235,7 +235,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
             //如果加载不到未确认列表 移除BtcUnconfirmFragment
             Fragment fragment = getChildFragmentManager().findFragmentByTag(BtcUnconfirmFragment.TAG);
             if (fragment != null) {
-                getChildFragmentManager().beginTransaction().remove(fragment);
+                getChildFragmentManager().beginTransaction().remove(fragment).commit();
             }
         } else {
             if (isAdded()) {

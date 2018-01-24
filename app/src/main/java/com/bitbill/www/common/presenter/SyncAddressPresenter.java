@@ -71,9 +71,6 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
             @Override
             public void call(String key, String jsResult) {
 
-                if (!isViewAttached()) {
-                    return;
-                }
                 if (StringUtils.isEmpty(jsResult)) {
                     return;
                 }
@@ -99,8 +96,13 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
                     if (!isValidBtcAddress(address)) {
                         return;
                     }
-                    wallet.setLastAddressIndex(toIndex);
-                    wallet.setLastAddress(address);
+                    if (isInternal) {
+                        wallet.setLastChangeAddressIndex(toIndex);
+                        wallet.setLastChangeAddress(address);
+                    } else {
+                        wallet.setLastAddressIndex(toIndex);
+                        wallet.setLastAddress(address);
+                    }
                     //更新地址index
                     updateAddressIndex(wallet, data, isInternal);
                 }
@@ -128,9 +130,6 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        if (!isViewAttached()) {
-                            return;
-                        }
                     }
                 }));
     }

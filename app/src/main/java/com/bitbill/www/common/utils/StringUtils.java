@@ -21,7 +21,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -652,5 +654,12 @@ public class StringUtils {
         }
         BigDecimal bigDecimal = new BigDecimal(amount);
         return bigDecimal.doubleValue() == 0;
+    }
+
+    public static <T> List<T> removeDuplicateList(List<T> list) {
+        if (isEmpty(list)) {
+            return null;
+        }
+        return new ArrayList(new HashSet(list));
     }
 }
