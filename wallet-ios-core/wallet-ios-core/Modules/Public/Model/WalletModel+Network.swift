@@ -235,19 +235,22 @@ extension WalletModel {
             debugPrint(result)
             let json = JSON(result)
             let txDatas = json["list"].arrayValue
-            var utx = [BTCTransactionModel]()
             for json in txDatas {
                 let model = bil_btc_transactionManager.newModelIfNeeded(key: "txHash", value: json["txHash"].stringValue)
                 model.setProperties(json: json)
-                if model.wallet != nil {
-                    utx.append(model)
-                }
             }
+            
             do {
                 try BILWalletManager.shared.saveWallets()
+                
+                var utx = [BTCTransactionModel]()
+                for wallet in wallets {
+                    utx.append(contentsOf: wallet.unconfirmTxs())
+                }
 				utx.sort(by: { (lhs, rhs) -> Bool in
 					rhs.createdDate!.isEarlier(than: lhs.createdDate!)
 				})
+                
                 success(utx)
             } catch {
                 failure(error.localizedDescription, -2)

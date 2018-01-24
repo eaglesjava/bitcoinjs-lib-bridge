@@ -128,12 +128,19 @@ extension WalletModel {
 		return bitcoinWallet!.addresses![Int(arc4random()) % count] as! BTCWalletAddressModel
 	}
     
-    func randomChangeAddress() -> BTCWalletAddressModel {
+    func randomChangeAddress() -> BTCWalletAddressModel? {
         guard bitcoinWallet!.changeAddresses!.count > 0 else {
-            return randomAddress()
+            return nil
         }
         let count = bitcoinWallet!.changeAddresses!.count
-        return bitcoinWallet!.changeAddresses![Int(arc4random()) % count] as! BTCWalletAddressModel
+        return bitcoinWallet!.changeAddresses![Int(arc4random()) % count] as? BTCWalletAddressModel
+    }
+    
+    func unconfirmTxs() ->[BTCTransactionModel] {
+        let txs = btc_transactionArray
+        return txs.filter({
+            return $0.height == -1
+        })
     }
     
     func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
