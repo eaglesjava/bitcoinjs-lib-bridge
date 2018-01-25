@@ -17,7 +17,13 @@ extension UIViewController {
 
 extension UIView {
     func bil_makeToast(msg: String?, completion: ((_ didTap: Bool) -> Void)? = nil) {
-        window?.makeToast(msg, completion: completion)
+		if let cont = viewController() {
+			cont.bil_makeToast(msg: msg, completion: completion)
+		}
+		else
+		{
+			window?.makeToast(msg, completion: completion)
+		}
     }
 }
 

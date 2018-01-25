@@ -85,11 +85,25 @@ class BILReceiveController: BILBaseViewController {
             currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")"
             
             backupViewHeight.constant = w.isNeedBackup ? 40 : 0
-            w.lastBTCAddress(success: { (address) in
-                self.setAddress(address: address)
-            }, failure: { (errorMsg) in
-                debugPrint(errorMsg)
-            })
+			guard let add = w.btc_addressModels.last else {
+				w.lastBTCAddress(success: { (address) in
+					self.setAddress(address: address)
+				}, failure: { (msg) in
+					self.showTipAlert(msg: msg)
+				})
+				return
+			}
+			if add.isUsed {
+				w.getNewBTCAddress(success: { (address) in
+					self.setAddress(address: address)
+				}, failure: { (msg) in
+					self.setAddress(address: add.address!)
+				})
+			}
+			else
+			{
+				setAddress(address: add.address!)
+			}
         }
     }
 	

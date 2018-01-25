@@ -202,6 +202,11 @@ extension BTCTransactionModel {
         let tx = bil_btc_tx_addressManager.newModel()
         tx.address = address
         tx.index = Int64(index)
+		
+		if let wAdd = bil_btc_wallet_addressManager.fetch(key: "address", value: address) {
+			wAdd.isUsed = true
+		}
+		
         return tx
     }
     
@@ -325,6 +330,10 @@ extension BTCTransactionModel {
             }
         }
         
-        w.bitcoinWallet?.addToTransactions(self)
+		if w.btc_transactionArray.filter({
+			$0.txHash == self.txHash
+		}).count == 0 {
+			w.bitcoinWallet?.addToTransactions(self)
+		}
     }
 }

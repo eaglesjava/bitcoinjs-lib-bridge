@@ -69,7 +69,7 @@ class BILBTCWalletView: UIView, UITableViewDelegate, UITableViewDataSource {
 			headerView?.frame = frame
 			self.tableView.tableHeaderView = headerView
 			self.balanceLabel.text = w.btc_balanceString
-			self.unconfirmBalanceLabel.text = w.btc_unconfirm_balanceString + " BTC "
+			self.unconfirmBalanceLabel.text = "+" + w.btc_unconfirm_balanceString + " BTC "
 			self.currencyLabel.btcValue = Double(w.btc_balanceString)
 		}) { (msg, code) in
 			debugPrint(msg)

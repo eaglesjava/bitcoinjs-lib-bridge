@@ -136,12 +136,20 @@ extension WalletModel {
         return bitcoinWallet!.changeAddresses![Int(arc4random()) % count] as? BTCWalletAddressModel
     }
     
-    func unconfirmTxs() ->[BTCTransactionModel] {
+    func unconfirmTxs() -> [BTCTransactionModel] {
         let txs = btc_transactionArray
         return txs.filter({
             return $0.height == -1
         })
     }
+	
+	static func allUnconfirmBTCTransactions() -> [BTCTransactionModel] {
+		var txs: [BTCTransactionModel] = []
+		for wallet in BILWalletManager.shared.wallets {
+			txs.append(contentsOf: wallet.unconfirmTxs())
+		}
+		return txs
+	}
     
     func lastBTCAddress(success: @escaping (String) -> Void, failure: @escaping (String) -> Void) {
         guard let xpub = mainExtPublicKey else {
@@ -276,6 +284,7 @@ extension WalletModel {
             }
             do {
                 try BILWalletManager.shared.saveWallets()
+				
                 success(models)
 				let endDate = Date()
 				debugPrint("生成 \(to - from + 1) 个地址，用时：\(endDate.seconds(from: beginDate))s")
@@ -295,6 +304,7 @@ extension WalletModel {
         for utxo in utxos {
             let add = utxo.address
             let model = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: add)
+			model.isUsed = true
 			model.address = add
             model.satoshi += utxo.satoshiAmount
         }

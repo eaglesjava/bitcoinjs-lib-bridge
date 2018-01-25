@@ -14,7 +14,12 @@ extension WalletModel {
     func syncWallet(json: JSON) {
 		
 		func loadTXs(version: Int64) {
+			let unconfirm = WalletModel.allUnconfirmBTCTransactions()
             getTransactionHistoryFromSever(page: 0, size: (bitcoinWallet?.transactions?.count)! + 1000, success: { (txs) in
+				let newUnconfirm = WalletModel.allUnconfirmBTCTransactions()
+				if unconfirm != newUnconfirm {
+					NotificationCenter.default.post(name: .receivedUnconfirmTransaction, object: nil)
+				}
 				do {
 					try BILWalletManager.shared.saveWallets()
 					self.bitcoinWallet?.needLoadServer = false
