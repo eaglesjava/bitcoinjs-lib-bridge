@@ -184,12 +184,12 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     }
 
     @Override
-    public void refreshAddressFail() {
+    public void refreshAddressFail(boolean isInternal) {
         showMessage(R.string.fail_refresh_address);
     }
 
     @Override
-    public void refreshAddressSuccess(String lastAddress) {
+    public void refreshAddressSuccess(String lastAddress, boolean isInternal) {
         showMessage(R.string.msg_refreshed_address);
         getMvpPresenter().createAddressQrcode(lastAddress);
         setReceiveAddress(lastAddress);

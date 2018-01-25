@@ -31,6 +31,7 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.transaction.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -241,6 +242,31 @@ public class MainPresenter<M extends WalletModel, V extends MainMvpView> extends
                 })
         );
 
+    }
+
+    @Override
+    public void loadUnConfirmedList() {
+        getCompositeDisposable().add(mTxModel.getUnConfirmedTxRecord()
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<List<TxRecord>>() {
+                    @Override
+                    public void onNext(List<TxRecord> txRecords) {
+                        super.onNext(txRecords);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        getMvpView().loadUnconfirmSuccess(txRecords);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        getMvpView().loadUnconfirmFail();
+                    }
+                }));
     }
 
     public boolean isValidWallets() {

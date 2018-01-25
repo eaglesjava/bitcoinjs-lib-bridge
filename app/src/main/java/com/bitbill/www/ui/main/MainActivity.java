@@ -59,7 +59,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -376,21 +375,16 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void listUnconfirmSuccess(List<TxElement> data) {
-        loadUnconfrim(data);
-    }
-
-    private void loadUnconfrim(List<TxElement> data) {
         if (StringUtils.isEmpty(data)) {
-            parsedTxItemList(null);
+            loadUnconfirmList(null);
         } else {
 
             mTxInfoList = data;
             mParseTxInfoMvpPresenter.parseTxInfo();
         }
-
     }
 
-    private void loadParsedUnconfirmList(List<TxRecord> data) {
+    private void loadUnconfirmList(List<TxRecord> data) {
         if (mAssetFragment != null) {
             mAssetFragment.loadUnconfirm(data);
         }
@@ -398,7 +392,15 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void listUnconfirmFail() {
-        loadParsedUnconfirmList(null);
+    }
+
+    @Override
+    public void loadUnconfirmSuccess(List<TxRecord> txRecords) {
+        loadUnconfirmList(txRecords);
+    }
+
+    @Override
+    public void loadUnconfirmFail() {
     }
 
 
@@ -495,21 +497,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void getTxInfoListFail() {
-
     }
 
     @Override
     public void parsedTxItemList(List<TxRecord> txRecords) {
         //移除heigh不为-1的交易记录
-        List<TxRecord> newTxList = new ArrayList<>();
-        if (!StringUtils.isEmpty(txRecords)) {
-            for (TxRecord txRecord : txRecords) {
-                if (txRecord.getHeight() == -1) {
-                    newTxList.add(txRecord);
-                }
-            }
-        }
-        loadParsedUnconfirmList(newTxList);
+        getMvpPresenter().loadUnConfirmedList();
     }
 
     @Override

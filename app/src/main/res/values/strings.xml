@@ -144,7 +144,7 @@
     <string name="action_empty_mnemonic">清空</string>
 
     <!--tx record -->
-    <string name="text_btc_unconfirm">%s BTC 未确认</string>
+    <string name="text_btc_unconfirm">+ %s BTC 未确认</string>
     <string name="text_tx_record">交易记录</string>
     <string name="status_item_receive">已接收</string>
     <string name="status_item_send">已发送</string>
@@ -214,6 +214,7 @@
     <string name="btn_create_contact_now">快速创建联系人</string>
     <string name="hint_send_success">推荐你添加该地址到新联系人以便下次交易</string>
     <string name="fail_send_transaction">发送交易失败</string>
+    <string name="fail_refresh_change_address">生成找零地址失败，请重试</string>
 
     <!--scan qrcode-->
     <string name="title_activity_scan_qrcode">扫一扫</string>

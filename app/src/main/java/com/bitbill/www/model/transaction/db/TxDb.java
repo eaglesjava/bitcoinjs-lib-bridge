@@ -18,4 +18,7 @@ public interface TxDb extends Db {
     Long insertTxRecordAndInputsOutputs(TxRecord txRecord, List<TxElement.InputsBean> inputs, List<TxElement.OutputsBean> outputs);
 
     Observable<List<TxRecord>> getTxRecords();
+
+    Observable<List<TxRecord>> getUnConfirmedTxRecord();
+
 }

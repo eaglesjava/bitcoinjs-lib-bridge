@@ -87,4 +87,9 @@ public class TxModelManager extends ModelManager implements TxModel {
         return mTxDb.getTxRecords();
     }
 
+    @Override
+    public Observable<List<TxRecord>> getUnConfirmedTxRecord() {
+        return mTxDb.getUnConfirmedTxRecord();
+    }
+
 }

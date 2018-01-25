@@ -51,7 +51,12 @@ public class TxDbHelper extends DbHelper implements TxDb {
 
     @Override
     public Observable<List<TxRecord>> getTxRecords() {
-        return io.reactivex.Observable.fromCallable(() -> mTxRecordDao.loadAll());
+        return Observable.fromCallable(() -> mTxRecordDao.loadAll());
+    }
+
+    @Override
+    public Observable<List<TxRecord>> getUnConfirmedTxRecord() {
+        return Observable.fromCallable(() -> mTxRecordDao.queryBuilder().where(TxRecordDao.Properties.Height.eq(-1)).orderDesc(TxRecordDao.Properties.CreatedTime).list());
     }
 
     private List<Output> getOutputs(List<TxElement.OutputsBean> outputs, TxRecord txRecord) {
@@ -62,6 +67,7 @@ public class TxDbHelper extends DbHelper implements TxDb {
             output.setAddress(outputsBean.getAddress());
             output.setValue(outputsBean.getValue());
             output.setTxId(txRecord.getId());
+            output.setWalletId(txRecord.getWalletId());
             output.setTxHash(txRecord.getTxHash());
             output.setTxIndex(i);
             oOutputs.add(output);
@@ -75,6 +81,7 @@ public class TxDbHelper extends DbHelper implements TxDb {
             TxElement.InputsBean inputsBean = inputs.get(i);
             Input input = new Input();
             input.setTxId(txRecord.getId());
+            input.setWalletId(txRecord.getWalletId());
             input.setAddress(inputsBean.getAddress());
             input.setValue(inputsBean.getValue());
             input.setTxHash(txRecord.getTxHash());

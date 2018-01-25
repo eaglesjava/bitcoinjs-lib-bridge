@@ -13,9 +13,9 @@ public interface BtcAddressMvpView extends MvpView {
 
     void getWalletFail();
 
-    void refreshAddressFail();
+    void refreshAddressFail(boolean isInternal);
 
-    void refreshAddressSuccess(String lastAddress);
+    void refreshAddressSuccess(String lastAddress, boolean isInternal);
 
     void reachAddressIndexLimit();
 

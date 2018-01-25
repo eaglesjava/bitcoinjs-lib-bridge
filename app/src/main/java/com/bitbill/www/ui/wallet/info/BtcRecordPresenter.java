@@ -38,8 +38,11 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
             return;
         }
         Wallet wallet = getMvpView().getWallet();
-        if (!StringUtils.isEmpty(wallet.getTxRecordList())) {
-            getMvpView().loadTxRecordSuccess(wallet.getTxRecordList());
+        // TODO: 2018/1/25 在当前线程执行 需要优化
+        wallet.resetTxRecordList();
+        List<TxRecord> txRecordList = wallet.getTxRecordList();
+        if (!StringUtils.isEmpty(txRecordList)) {
+            getMvpView().loadTxRecordSuccess(txRecordList);
         } else {
             requestTxRecord();
         }

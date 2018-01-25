@@ -120,12 +120,12 @@ public class WalletAddressFragment extends BaseListFragment<Address, WalletAddre
     }
 
     @Override
-    public void refreshAddressFail() {
+    public void refreshAddressFail(boolean isInternal) {
 
     }
 
     @Override
-    public void refreshAddressSuccess(String lastAddress) {
+    public void refreshAddressSuccess(String lastAddress, boolean isInternal) {
         mWallet.resetAddressList();
         if (mAddressList == null) {
             mAddressList = new ArrayList<>();

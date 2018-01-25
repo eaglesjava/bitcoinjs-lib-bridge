@@ -99,19 +99,13 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
+        addPresenter(mBtcAddressMvpPresentder);
 
     }
 
     @Override
     public void onBeforeSetContentLayout() {
-        mBtcAddressMvpPresentder.onAttach(this);
 
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mBtcAddressMvpPresentder.onDetach();
     }
 
     @Override
@@ -392,14 +386,18 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     @Override
-    public void refreshAddressFail() {
-        sendTransactionFail(null);
+    public void refreshAddressFail(boolean isInternal) {
+        sendTransactionFail(getString(R.string.fail_refresh_change_address));
     }
 
     @Override
-    public void refreshAddressSuccess(String lastAddress) {
-        mLastAddress = lastAddress;
-        getMvpPresenter().buildTransaction();
+    public void refreshAddressSuccess(String lastAddress, boolean isInternal) {
+        if (isInternal) {
+            mLastAddress = lastAddress;
+            getMvpPresenter().buildTransaction();
+        } else {
+            refreshAddressFail(isInternal);
+        }
     }
 
     @Override

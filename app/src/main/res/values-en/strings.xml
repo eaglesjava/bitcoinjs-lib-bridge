@@ -142,7 +142,7 @@
     <string name="action_empty_mnemonic">Clear</string>
 
     <!--tx record -->
-    <string name="text_btc_unconfirm">%s BTC unconfirmed</string>
+    <string name="text_btc_unconfirm">+ %s BTC unconfirmed</string>
     <string name="text_tx_record">Transaction records</string>
     <string name="status_item_receive">Received</string>
     <string name="status_item_send">Sent</string>
@@ -213,6 +213,7 @@
     <string name="btn_create_contact_now">Quickly create contacts</string>
     <string name="hint_send_success">Add the address as the frequent contact for the next transaction</string>
     <string name="fail_send_transaction">Send failed</string>
+    <string name="fail_refresh_change_address">Failed to generate change address, please try again.</string>
 
     <!--scan qrcode-->
     <string name="title_activity_scan_qrcode">Scan</string>

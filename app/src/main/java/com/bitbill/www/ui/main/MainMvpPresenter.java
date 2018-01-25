@@ -39,4 +39,6 @@ public interface MainMvpPresenter<M extends WalletModel, V extends MainMvpView> 
     void loadBalance();
 
     void listUnconfirm();
+
+    void loadUnConfirmedList();
 }

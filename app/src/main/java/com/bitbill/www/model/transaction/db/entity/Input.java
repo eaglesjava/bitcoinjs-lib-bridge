@@ -11,22 +11,25 @@ import org.greenrobot.greendao.annotation.Index;
 @Entity(
 
         indexes = {
-                @Index(value = "txHash,txIndex", unique = true)
+                @Index(value = "walletId,txHash,txIndex", unique = true)
         }
 )
 public class Input extends com.bitbill.www.common.base.model.entity.Entity {
     @Id(autoincrement = true)
     private Long id;
     private Long txId;
+    private Long walletId;
     private String address;
     private long value;//unit satoshi
     private int txIndex;
     private String txHash;
 
-    @Generated(hash = 1695776515)
-    public Input(Long id, Long txId, String address, long value, int txIndex, String txHash) {
+    @Generated(hash = 1232612677)
+    public Input(Long id, Long txId, Long walletId, String address, long value, int txIndex,
+                 String txHash) {
         this.id = id;
         this.txId = txId;
+        this.walletId = walletId;
         this.address = address;
         this.value = value;
         this.txIndex = txIndex;
@@ -83,5 +86,13 @@ public class Input extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setTxHash(String txHash) {
         this.txHash = txHash;
+    }
+
+    public Long getWalletId() {
+        return this.walletId;
+    }
+
+    public void setWalletId(Long walletId) {
+        this.walletId = walletId;
     }
 }
