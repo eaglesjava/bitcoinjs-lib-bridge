@@ -5,15 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
@@ -29,7 +32,9 @@ import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
+import com.bitbill.www.common.utils.AnimationUtils;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
@@ -54,11 +59,14 @@ import com.bitbill.www.ui.main.my.WalletSettingActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
 import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
+import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -100,6 +108,16 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     DrawerLayout drawerLayout;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
+    @BindView(R.id.fl_bottom_sheet)
+    FrameLayout bottomSheetView;
+    @BindView(R.id.v_mask)
+    View mMaskView;
+    @BindView(R.id.list)
+    RecyclerView mRecyclerView;
+    private BottomSheetBehavior mBottomSheetBehavior;
+    private CommonAdapter<Wallet> mSelectWalletAdapter;
+    private List<Wallet> mWalletList = new ArrayList<>();
+
     private FragmentAdapter mAdapter;
     private AssetFragment mAssetFragment;
     private ReceiveFragment mReceiveFragment;
@@ -110,6 +128,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private int index = INDEX_ASSET;
     private List<TxElement> mTxInfoList;
     private String mAddress;
+    private int mSelectedPosition;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -190,6 +209,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         setUpDrawerLayout();
 
         setUpViewpager();
+
+        setupBottomSheet();
     }
 
     private void setUpDrawerLayout() {
@@ -264,6 +285,82 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
     }
 
+    /**
+     * todo 抽离成单独view
+     */
+    private void setupBottomSheet() {
+        mMaskView.setOnClickListener(v -> {
+            hideSelectWallet();
+        });
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView);
+        Decoration decor = new Decoration(this, Decoration.VERTICAL);
+        mRecyclerView.addItemDecoration(decor);
+
+        mSelectWalletAdapter = new CommonAdapter<Wallet>(this, R.layout.item_wallet_select_view, mWalletList) {
+
+            @Override
+            protected void convert(ViewHolder holder, Wallet wallet, final int position) {
+
+                holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()));
+                holder.setText(R.id.tv_wallet_amount, StringUtils.satoshi2btc(wallet.getBalance()) + " btc");
+                holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
+
+                holder.setChecked(R.id.rb_selector, wallet.isSelected());
+
+                holder.itemView.setOnClickListener(v -> {
+                    //实现单选方法三： RecyclerView另一种定向刷新方法：不会有白光一闪动画 也不会重复onBindVIewHolder
+                    //如果勾选的不是已经勾选状态的Item
+                    if (mSelectedPosition != position && mSelectedPosition != -1) {
+                        //先取消上个item的勾选状态
+                        ViewHolder commonHolder = ((ViewHolder) mRecyclerView.findViewHolderForAdapterPosition(mSelectedPosition));
+                        if (commonHolder != null) {//还在屏幕里
+                            commonHolder.setChecked(R.id.rb_selector, false);
+                        } else {
+                            //add by 2016 11 22 for 一些极端情况，holder被缓存在Recycler的cacheView里，
+                            //此时拿不到ViewHolder，但是也不会回调onBindViewHolder方法。所以add一个异常处理
+                            notifyItemChanged(mSelectedPosition);
+                        }
+                        //不管在不在屏幕里 都需要改变数据
+                        //设置新Item的勾选状态
+                        mSelectedPosition = position;
+                        mWalletList.get(mSelectedPosition).setSelected(true);
+                        holder.setChecked(R.id.rb_selector, wallet.isSelected());
+                        if (mReceiveFragment != null) {
+                            mReceiveFragment.setSelectedWallet(wallet);
+                        }
+                    }
+                    // dismiss
+                    hideSelectWallet();
+                });
+
+            }
+        };
+        mRecyclerView.setAdapter(mSelectWalletAdapter);
+        bottomSheetView.setOnClickListener(v -> {
+            hideSelectWallet();
+        });
+    }
+
+    private void hideSelectWallet() {
+        if (mBottomSheetBehavior != null) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+        if (mMaskView != null) {
+            AnimationUtils.getAlphaAnimation(1.0f, 0.0f, 200).start();
+            mMaskView.setVisibility(View.GONE);
+        }
+    }
+
+    public void showSelectWallet() {  //弹出钱包选择界面
+        if (mBottomSheetBehavior != null) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
+        if (mMaskView != null) {
+            AnimationUtils.getAlphaAnimation(0.0f, 1.0f, 200).start();
+            mMaskView.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void initData() {
         if (!StringUtils.isEmpty(getApp().getWallets())) {
@@ -321,9 +418,14 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             //结束主界面
             finish();
         }
-
+        mWalletList.clear();
+        mWalletList.addAll(wallets);
+        if (mSelectWalletAdapter != null) {
+            mSelectWalletAdapter.notifyDataSetChanged();
+        }
         //设置全局钱包列表对象
         BitbillApp.get().setWallets(wallets);
+
         reloadWalletInfo();
 
         //获取钱包余额
@@ -409,6 +511,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+
         } else {
             super.onBackPressed();
         }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
+import com.bitbill.www.common.base.model.entity.TitleItem;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseListFragment;
 import com.bitbill.www.common.utils.StringUtils;
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by isanwenyu on 2018/1/9.
  */
 
-public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPresenter> {
+public class TransferDetailFragment extends BaseListFragment<TitleItem, MvpPresenter> {
 
     private TxRecord mTxRecord;
     private HeaderViewHolder mHeaderViewHolder;
@@ -128,88 +129,88 @@ public class TransferDetailFragment extends BaseListFragment<TransferItem, MvpPr
     }
 
     @Override
-    protected void onListItemClick(TransferItem transferItem, int position) {
-        if (transferItem instanceof TransferHashItem) {
+    protected void onListItemClick(TitleItem titleItem, int position) {
+        if (titleItem instanceof TransferHashItem) {
 
-            TransferHashItem hashItem = (TransferHashItem) transferItem;
+            TransferHashItem hashItem = (TransferHashItem) titleItem;
             UIHelper.copy(getBaseActivity(), hashItem.getHash());
             showMessage(R.string.copy_tx_hash);
 
-        } else if (transferItem instanceof TransferSendItem) {
+        } else if (titleItem instanceof TransferSendItem) {
 
-            TransferSendItem sendItem = (TransferSendItem) transferItem;
+            TransferSendItem sendItem = (TransferSendItem) titleItem;
             UIHelper.copy(getBaseActivity(), sendItem.getAddress());
             showMessage(R.string.copy_send_address);
 
-        } else if (transferItem instanceof TransferReceiveItem) {
+        } else if (titleItem instanceof TransferReceiveItem) {
 
-            TransferReceiveItem receiveItem = (TransferReceiveItem) transferItem;
+            TransferReceiveItem receiveItem = (TransferReceiveItem) titleItem;
             UIHelper.copy(getBaseActivity(), receiveItem.getAddress());
             showMessage(R.string.copy_receive_address);
 
-        } else if (transferItem instanceof TransferConfirmItem) {
+        } else if (titleItem instanceof TransferConfirmItem) {
 
-            TransferConfirmItem confirmItem = (TransferConfirmItem) transferItem;
+            TransferConfirmItem confirmItem = (TransferConfirmItem) titleItem;
             UIHelper.copy(getBaseActivity(), getConfirmCount(confirmItem));
             showMessage(R.string.copy_confim_count);
 
-        } else if (transferItem instanceof TransferRemarkItem) {
+        } else if (titleItem instanceof TransferRemarkItem) {
 
-            TransferRemarkItem remarkItem = (TransferRemarkItem) transferItem;
+            TransferRemarkItem remarkItem = (TransferRemarkItem) titleItem;
             UIHelper.copy(getBaseActivity(), remarkItem.getRemark());
             showMessage(R.string.copy_remark);
 
-        } else if (transferItem instanceof TransferDateItem) {
+        } else if (titleItem instanceof TransferDateItem) {
 
-            TransferDateItem dateItem = (TransferDateItem) transferItem;
+            TransferDateItem dateItem = (TransferDateItem) titleItem;
             UIHelper.copy(getBaseActivity(), dateItem.getDate());
             showMessage(R.string.copy_tx_date);
         }
     }
 
     @Override
-    protected void itemConvert(ViewHolder holder, TransferItem transferItem, int position) {
+    protected void itemConvert(ViewHolder holder, TitleItem titleItem, int position) {
         //跟前一个title不一样 显示title布局
-        if (position == 1 || (StringUtils.isNotEmpty(transferItem.getTitle()) && !transferItem.getTitle().equals(mDatas.get(position - 2).getTitle()))) {
+        if (position == 1 || (StringUtils.isNotEmpty(titleItem.getTitle()) && !titleItem.getTitle().equals(mDatas.get(position - 2).getTitle()))) {
             holder.setVisible(R.id.tv_tx_title, true);
         } else {
             holder.setVisible(R.id.tv_tx_title, false);
         }
 
-        if (transferItem instanceof TransferHashItem) {
+        if (titleItem instanceof TransferHashItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_hash));
-            TransferHashItem hashItem = (TransferHashItem) transferItem;
+            TransferHashItem hashItem = (TransferHashItem) titleItem;
             holder.setText(R.id.tv_tx_left, hashItem.getHash());
             holder.setVisible(R.id.tv_tx_right, false);
 
-        } else if (transferItem instanceof TransferSendItem) {
+        } else if (titleItem instanceof TransferSendItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_send_address));
-            TransferSendItem sendItem = (TransferSendItem) transferItem;
+            TransferSendItem sendItem = (TransferSendItem) titleItem;
             holder.setText(R.id.tv_tx_left, sendItem.getAddress());
             holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(sendItem.getAmount()) + " BTC");
             holder.setVisible(R.id.tv_tx_right, true);
 
-        } else if (transferItem instanceof TransferReceiveItem) {
+        } else if (titleItem instanceof TransferReceiveItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_receive_address));
-            TransferReceiveItem receiveItem = (TransferReceiveItem) transferItem;
+            TransferReceiveItem receiveItem = (TransferReceiveItem) titleItem;
             holder.setText(R.id.tv_tx_left, receiveItem.getAddress());
             holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(receiveItem.getAmount()) + " BTC");
             holder.setVisible(R.id.tv_tx_right, true);
 
-        } else if (transferItem instanceof TransferConfirmItem) {
+        } else if (titleItem instanceof TransferConfirmItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_confirm));
-            holder.setText(R.id.tv_tx_left, getConfirmCount((TransferConfirmItem) transferItem));
+            holder.setText(R.id.tv_tx_left, getConfirmCount((TransferConfirmItem) titleItem));
             holder.setVisible(R.id.tv_tx_right, false);
 
-        } else if (transferItem instanceof TransferRemarkItem) {
+        } else if (titleItem instanceof TransferRemarkItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_remark));
-            TransferRemarkItem remarkItem = (TransferRemarkItem) transferItem;
+            TransferRemarkItem remarkItem = (TransferRemarkItem) titleItem;
             holder.setText(R.id.tv_tx_left, remarkItem.getRemark());
             holder.setVisible(R.id.tv_tx_right, false);
 
-        } else if (transferItem instanceof TransferDateItem) {
+        } else if (titleItem instanceof TransferDateItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_date));
-            TransferDateItem dateItem = (TransferDateItem) transferItem;
+            TransferDateItem dateItem = (TransferDateItem) titleItem;
             holder.setText(R.id.tv_tx_left, dateItem.getDate());
             holder.setVisible(R.id.tv_tx_right, false);
 

@@ -89,7 +89,7 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private long version;
 
     @ToMany(referencedJoinProperty = "walletId")
-    @OrderBy("index ASC")
+    @OrderBy("isInternal ASC,index ASC")
     private List<Address> addressList;
 
     @ToMany(referencedJoinProperty = "walletId")

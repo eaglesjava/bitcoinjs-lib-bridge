@@ -291,7 +291,8 @@
     <string name="title_activity_wallet_address">Wallet address</string>
     <string name="btn_scan_address">Scan address</string>
     <string name="fail_create_qrcode">Generate wallet ID qr code failed.</string>
-    <string name="title_address_balance">Address and balance</string>
+    <string name="title_address_balance">Addresses and balancees</string>
+    <string name="title_change_address">Change addresses</string>
     <string name="copy_address">Address copied</string>
     <string name="copy_confim_count">Confirmation number copied</string>
     <string name="successs_address_refresh">Address refreshed successfully</string>

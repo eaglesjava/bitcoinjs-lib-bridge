@@ -31,7 +31,7 @@ import butterknife.OnClick;
  * Created by isanwenyu on 2018/1/9.
  */
 
-public class WalletAddressFragment extends BaseListFragment<Address, WalletAddressMvpPresenter> implements WalletAddressMvpView, BtcAddressMvpView {
+public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletAddressMvpPresenter> implements WalletAddressMvpView, BtcAddressMvpView {
 
     @BindView(R.id.tv_wallet_id)
     TextView mTvWalletId;
@@ -72,21 +72,39 @@ public class WalletAddressFragment extends BaseListFragment<Address, WalletAddre
             String name = mWallet.getName();
             mTvWalletId.setText(name);
             mAddressList = mWallet.getAddressList();
-            setDatas(mAddressList);
+            buildData();
         }
         getMvpPresenter().requestListUnspent();
     }
 
+    private void buildData() {
+        mDatas.clear();
+        for (Address address : mAddressList) {
+            if (address.getIsInternal()) {
+                mDatas.add((AddressItem) new AddressItem.InternalAddressItem(address.getName(), address.getBalance()).setTitle(getString(R.string.title_change_address)));
+            } else {
+                mDatas.add((AddressItem) new AddressItem.ExtendedAddressItem(address.getName(), address.getBalance()).setTitle(getString(R.string.title_address_balance)));
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
-    protected void onListItemClick(Address address, int position) {
-        UIHelper.copy(getBaseActivity(), address.getName());
+    protected void onListItemClick(AddressItem addressItem, int position) {
+        UIHelper.copy(getBaseActivity(), addressItem.getAddress());
         showMessage(R.string.copy_address);
     }
 
     @Override
-    protected void itemConvert(ViewHolder holder, Address address, int position) {
-        holder.setText(R.id.tv_address, address.getName());
-        Long balance = address.getBalance();
+    protected void itemConvert(ViewHolder holder, AddressItem addressItem, int position) {   //跟前一个title不一样 显示title布局
+        if (position == 0 || (StringUtils.isNotEmpty(addressItem.getTitle()) && !addressItem.getTitle().equals(mDatas.get(position - 1).getTitle()))) {
+            holder.setVisible(R.id.tv_address_title, true);
+            holder.setText(R.id.tv_address_title, addressItem.getTitle());
+        } else {
+            holder.setVisible(R.id.tv_address_title, false);
+        }
+        holder.setText(R.id.tv_address, addressItem.getAddress());
+        Long balance = addressItem.getBalance();
         holder.setText(R.id.tv_amount, StringUtils.satoshi2btc(balance) + " BTC");
         holder.setAlpha(R.id.tv_amount, balance > 0 ? 1.0f : 0.6f);
 
@@ -166,7 +184,7 @@ public class WalletAddressFragment extends BaseListFragment<Address, WalletAddre
             }
 
         }
-        setDatas(mAddressList);
+        buildData();
         getMvpPresenter().updateAddressBalance(mAddressList);
 
     }
@@ -185,4 +203,5 @@ public class WalletAddressFragment extends BaseListFragment<Address, WalletAddre
     public void onViewClicked() {
         mBtcAddressMvpPresentder.refreshAddress(10, -1);
     }
+
 }

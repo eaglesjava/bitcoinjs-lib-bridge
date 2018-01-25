@@ -1,28 +1,22 @@
 package com.bitbill.www.ui.main.receive;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.BaseTabsLazyFragment;
-import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.SelectWalletView;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
-import com.zhy.adapter.recyclerview.CommonAdapter;
-import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,18 +35,12 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
     private static final String TAG = "ReceiveFragment";
     @BindView(R.id.wv_select)
     SelectWalletView selectWalletView;
-    @BindView(R.id.list)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.fl_bottom_sheet)
-    FrameLayout bottomSheetView;
     @Inject
     ReceiveMvpPresenter<AppModel, ReceiveMvpView> mReceiveMvpPresenter;
-    private CommonAdapter<Wallet> mAdapter;
     private BtcReceiveFragment mBtcReceiveFragment;
     private List<Wallet> mWalletList = new ArrayList<>();
     private Wallet mSelectedWallet;
     private int mSelectedPosition = -1;
-    private BottomSheetBehavior mBottomSheetBehavior;
 
     public ReceiveFragment() {
         // Required empty public constructor
@@ -98,8 +86,10 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
         selectWalletView.setOnWalletClickListener(new SelectWalletView.OnWalletClickListener() {
             @Override
             public void onWalletClick(Wallet wallet, View view) {
-                //弹出钱包选择界面
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                if (isAdded()) {
+
+                    ((MainActivity) getActivity()).showSelectWallet();
+                }
 
             }
 
@@ -110,63 +100,12 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
             }
         });
 
-        setupBottomSheet();
 
     }
 
     @Override
     protected boolean isBlue() {
         return false;
-    }
-
-    private void setupBottomSheet() {
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView);
-        Decoration decor = new Decoration(getContext(), Decoration.VERTICAL);
-        mRecyclerView.addItemDecoration(decor);
-
-        mAdapter = new CommonAdapter<Wallet>(getContext(), R.layout.item_wallet_select_view, mWalletList) {
-
-            @Override
-            protected void convert(ViewHolder holder, Wallet wallet, final int position) {
-
-                holder.setText(R.id.tv_wallet_name, StringUtils.cutWalletName(wallet.getName()));
-                holder.setText(R.id.tv_wallet_amount, StringUtils.satoshi2btc(wallet.getBalance()) + " btc");
-                holder.setText(R.id.tv_wallet_label, String.valueOf(wallet.getName().charAt(0)));
-
-                holder.setChecked(R.id.rb_selector, wallet.isSelected());
-
-                holder.itemView.setOnClickListener(v -> {
-                    //实现单选方法三： RecyclerView另一种定向刷新方法：不会有白光一闪动画 也不会重复onBindVIewHolder
-                    //如果勾选的不是已经勾选状态的Item
-                    if (mSelectedPosition != position && mSelectedPosition != -1) {
-                        //先取消上个item的勾选状态
-                        ViewHolder commonHolder = ((ViewHolder) mRecyclerView.findViewHolderForAdapterPosition(mSelectedPosition));
-                        if (commonHolder != null) {//还在屏幕里
-                            commonHolder.setChecked(R.id.rb_selector, false);
-                        } else {
-                            //add by 2016 11 22 for 一些极端情况，holder被缓存在Recycler的cacheView里，
-                            //此时拿不到ViewHolder，但是也不会回调onBindViewHolder方法。所以add一个异常处理
-                            notifyItemChanged(mSelectedPosition);
-                        }
-                        //不管在不在屏幕里 都需要改变数据
-                        //设置新Item的勾选状态
-                        mSelectedPosition = position;
-                        mWalletList.get(mSelectedPosition).setSelected(true);
-                        holder.setChecked(R.id.rb_selector, wallet.isSelected());
-                        mSelectedWallet = wallet;
-                        //刷新选择布局
-                        selectWalletView.setWallet(wallet);
-                        loadBtcAddress();
-
-                    }
-                    // dismiss
-                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                });
-
-            }
-        };
-        mRecyclerView.setAdapter(mAdapter);
-        bottomSheetView.setOnClickListener(v -> mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED));
     }
 
 
@@ -237,9 +176,6 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
         } else {
             selectWalletView.setVisibility(View.GONE);
         }
-        if (mAdapter != null) {
-            mAdapter.notifyDataSetChanged();
-        }
 
     }
 
@@ -275,5 +211,12 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
         if (mBtcReceiveFragment != null) {
             mBtcReceiveFragment.loadAddress(mSelectedWallet);
         }
+    }
+
+    public void setSelectedWallet(Wallet wallet) {
+        mSelectedWallet = wallet;
+        //刷新选择布局
+        selectWalletView.setWallet(wallet);
+        loadBtcAddress();
     }
 }

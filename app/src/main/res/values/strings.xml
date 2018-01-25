@@ -293,6 +293,7 @@
     <string name="btn_scan_address">扫描地址</string>
     <string name="fail_create_qrcode">生成钱包ID二维码失败</string>
     <string name="title_address_balance">地址与余额</string>
+    <string name="title_change_address">找零地址</string>
     <string name="copy_address">地址已复制</string>
     <string name="copy_confim_count">确认数已复制</string>
     <string name="successs_address_refresh">地址刷新成功</string>
