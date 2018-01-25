@@ -178,21 +178,21 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         if (wallet == null) {
             return;
         }
-        long lastIndex = wallet.getLastAddressIndex();
-        if (StringUtils.isNotEmpty(wallet.getLastAddress())) {
+        long lastIndex = isInternal ? wallet.getLastChangeAddressIndex() : wallet.getLastAddressIndex();
+        String lastAddress = isInternal ? wallet.getLastChangeAddress() : wallet.getLastAddress();
+        if (StringUtils.isNotEmpty(lastAddress)) {
             //如果最新地址已存在++
             lastIndex++;
         }
         if (indexNo < lastIndex) {
             getMvpView().reachAddressIndexLimit();
-            String lastAddress = isInternal ? wallet.getLastChangeAddress() : wallet.getLastAddress();
             //随机选择一个地址
             long randomIndex = ThreadLocalRandom.current().nextLong(indexNo);
             List<Address> addressList = wallet.getAddressList();
             if (!StringUtils.isEmpty(addressList)) {
 
                 for (Address address : addressList) {
-                    if (address.getIndex() == randomIndex) {
+                    if (isInternal == address.getIsInternal() && address.getIndex() == randomIndex) {
                         lastAddress = address.getName();
                         break;
                     }

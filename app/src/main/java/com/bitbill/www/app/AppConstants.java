@@ -36,8 +36,8 @@ public final class AppConstants {
     public static final String EXTRA_IS_FROM_SEND = "is_from_send";
     public static final String EXTRA_FROM_TAG = "from_where";
     public static final String EXTRA_SEND_CONTACT = "send_contact";
-
-
+    public static final String EXTRA_SEND_TXHASH = "send_txhash";
+    
     public static final String ARG_DATAS = "args_datas";
     public static final String ARG_WALLET = "arg_wallet";
     public static final String ARG_IS_SELECT = "is_select";

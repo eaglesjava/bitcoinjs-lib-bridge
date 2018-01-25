@@ -87,6 +87,9 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
         mSendAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
         mSendAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
         mWallet = (Wallet) getIntent().getSerializableExtra(AppConstants.EXTRA_WALLET);
+        if (mWallet != null) {
+            mWallet.__setDaoSession(getApp().getDaoSession());
+        }
         isSendAll = getIntent().getBooleanExtra(AppConstants.EXTRA_IS_SEND_ALL, false);
         mSendContact = (Contact) getIntent().getSerializableExtra(AppConstants.EXTRA_SEND_CONTACT);
     }
@@ -175,9 +178,9 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     @Override
-    public void sendTransactionSuccess() {
+    public void sendTransactionSuccess(String txHash) {
 
-        SendSuccessActivity.start(SendConfirmActivity.this, mSendAddress, mSendAmount, mSendContact);
+        SendSuccessActivity.start(SendConfirmActivity.this, mSendAddress, mSendAmount, mSendContact, txHash);
         sendSuccess();
     }
 

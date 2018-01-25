@@ -1,64 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context="com.bitbill.www.ui.main.send.SendSuccessActivity">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:src="@drawable/ic_wallet_create_success" />
-
-    <TextView
-        android:id="@+id/tv_hint_title"
-        style="@style/Text.Title.Small"
-        android:layout_marginTop="20dp"
-        android:text="@string/title_activity_send_success"
-        android:textColor="@color/green" />
-
-
-    <TextView
-        android:id="@+id/tv_send_address"
-
-        style="@style/Text.Address"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="1PN9ET1..sRaqfPN"
-        android:textColor="@color/white_60" />
-
-    <TextView
-        android:id="@+id/et_send_amount"
-        style="@style/Text.White"
-        android:layout_marginTop="5dp"
-        android:text="0.221 BTC"
-        android:textSize="26sp" />
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/ll_bottom_btns"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context="com.bitbill.www.ui.main.send.SendSuccessActivity">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:src="@drawable/ic_wallet_create_success" />
+
+        <TextView
+            android:id="@+id/tv_hint_title"
+            style="@style/Text.Title.Small"
+            android:layout_marginTop="20dp"
+            android:text="@string/title_activity_send_success"
+            android:textColor="@color/green" />
+
+
+        <TextView
+            android:id="@+id/tv_send_address"
+
+            style="@style/Text.Address"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="1PN9ET1..sRaqfPN"
+            android:textColor="@color/white_60" />
+
+        <TextView
+            android:id="@+id/et_send_amount"
+            style="@style/Text.White"
+            android:layout_marginTop="5dp"
+            android:text="0.221 BTC"
+            android:textSize="26sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_add_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_hint_content"
+                style="@style/Text.White"
+                android:layout_marginTop="50dp"
+                android:text="@string/hint_send_success" />
+
+            <Button
+                android:id="@+id/btn_create_contact"
+                style="@style/Button.Blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/btn_create_contact_now" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_view_txhash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_hint_content"
-            style="@style/Text.White"
-            android:layout_marginTop="50dp"
-            android:text="@string/hint_send_success" />
+            android:id="@+id/tv_tx_hash"
+            style="@style/Text"
+            android:textColor="@color/white_60" />
 
-        <Button
-            android:id="@+id/btn_create_contact"
-            style="@style/Button.Blue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/btn_create_contact_now" />
+        <TextView
+            android:id="@+id/tx_view_in_blockchain"
+            style="@style/Content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/text_view_tx_in_blockchain" />
     </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>

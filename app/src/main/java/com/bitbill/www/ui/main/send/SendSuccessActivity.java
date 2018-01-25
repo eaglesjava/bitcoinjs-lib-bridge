@@ -13,10 +13,12 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseCompleteActivity;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.ui.main.contact.AddContactByAddressActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class SendSuccessActivity extends BaseCompleteActivity {
 
@@ -30,17 +32,25 @@ public class SendSuccessActivity extends BaseCompleteActivity {
     TextView tvHintContent;
     @BindView(R.id.btn_create_contact)
     Button btnCreateContact;
-    @BindView(R.id.ll_bottom_btns)
-    LinearLayout llBottomBtns;
+    @BindView(R.id.ll_add_contact)
+    LinearLayout llAddContact;
+    @BindView(R.id.tv_tx_hash)
+    TextView mTvTxHash;
+    @BindView(R.id.tx_view_in_blockchain)
+    TextView mTxViewInBlockchain;
+    @BindView(R.id.ll_view_txhash)
+    LinearLayout mLlViewTxhash;
     private String mSendAddress;
     private String mSendAmount;
     private Contact mSendContact;
+    private String mTxHash;
 
-    public static void start(Context context, String address, String sendAmount, Contact sendContact) {
+    public static void start(Context context, String address, String sendAmount, Contact sendContact, String txHash) {
         Intent starter = new Intent(context, SendSuccessActivity.class);
         starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
         starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, sendAmount);
         starter.putExtra(AppConstants.EXTRA_SEND_CONTACT, sendContact);
+        starter.putExtra(AppConstants.EXTRA_SEND_TXHASH, txHash);
         context.startActivity(starter);
     }
 
@@ -51,6 +61,7 @@ public class SendSuccessActivity extends BaseCompleteActivity {
         mSendAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
         mSendAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
         mSendContact = (Contact) getIntent().getSerializableExtra(AppConstants.EXTRA_SEND_CONTACT);
+        mTxHash = getIntent().getStringExtra(AppConstants.EXTRA_SEND_TXHASH);
     }
 
     @Override
@@ -78,7 +89,7 @@ public class SendSuccessActivity extends BaseCompleteActivity {
         tvSendAddress.setText(mSendAddress);
         tvSendAmount.setText(mSendAmount + " BTC");
         if (mSendContact == null) {
-            llBottomBtns.setVisibility(View.VISIBLE);
+            llAddContact.setVisibility(View.VISIBLE);
             btnCreateContact.setOnClickListener(v -> {
                 if (StringUtils.isNotEmpty(mSendAddress)) {
                     AddContactByAddressActivity.start(SendSuccessActivity.this, mSendAddress);
@@ -86,8 +97,9 @@ public class SendSuccessActivity extends BaseCompleteActivity {
 
             });
         } else {
-            llBottomBtns.setVisibility(View.GONE);
+            llAddContact.setVisibility(View.GONE);
         }
+        mLlViewTxhash.setVisibility(StringUtils.isNotEmpty(mTxHash) ? View.VISIBLE : View.GONE);
 
     }
 
@@ -107,5 +119,19 @@ public class SendSuccessActivity extends BaseCompleteActivity {
     @Override
     protected void completeAction() {
         finish();
+    }
+
+
+    @OnClick({R.id.tv_tx_hash, R.id.tx_view_in_blockchain})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_tx_hash:
+                UIHelper.copy(SendSuccessActivity.this, mTxHash);
+                showMessage(R.string.copy_tx_hash);
+                break;
+            case R.id.tx_view_in_blockchain:
+                UIHelper.openBrower(SendSuccessActivity.this, AppConstants.TX_BLOCK_CHAIN_PREFIX + mTxHash);
+                break;
+        }
     }
 }

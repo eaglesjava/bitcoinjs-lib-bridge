@@ -57,9 +57,11 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         }
                         List<Long> outWalletIdList = new ArrayList<>();
                         List<TxElement.OutputsBean> outputs = txElement.getOutputs();
+                        int foundAddressCount = 0;
                         for (TxElement.OutputsBean output : outputs) {
                             Address addressByName = mAddressModel.getAddressByName(output.getAddress());
                             if (addressByName != null) {
+                                foundAddressCount++;
                                 Long walletId = addressByName.getWalletId();
                                 //排除in中存在的waleltID
                                 if (!outWalletIdList.contains(walletId)) {
@@ -69,7 +71,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         }
 
                         boolean isContainIn = inWalletIdList.size() > 0;
-                        boolean isAllOut = outWalletIdList.size() == 1;
+                        boolean isAllOut = outWalletIdList.size() == 1 && foundAddressCount == outputs.size();
 
                         //for in wallet
                         for (Long inWalletId : inWalletIdList) {

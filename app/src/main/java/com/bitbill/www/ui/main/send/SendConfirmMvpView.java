@@ -15,7 +15,7 @@ public interface SendConfirmMvpView extends MvpView {
 
     void sendTransactionFail(String message);
 
-    void sendTransactionSuccess();
+    void sendTransactionSuccess(String txHash);
 
     boolean isSendAll();
 

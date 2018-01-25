@@ -167,7 +167,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         //js调用构建交易
         Transaction transaction = new Transaction(inputs, outputs);
         String txJson = JsonUtils.serialize(transaction);
-        Log.d(TAG, "buildTransaction() called with :seedHex=[" + transaction + "], jsResult = [" + txJson + "]");
+        Log.d(TAG, "buildTransaction() called with :seedHex=[" + transaction + "], jsResult = [" + txJson + "], fee = [" + fee + "], feeByte = [" + feeByte + "]");
         String finalInAddress = inAddress;
         String finalOutAddress = outAddress;
 
@@ -238,7 +238,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
                             return;
                         }
                         if (sendTransactionResponseApiResponse != null && sendTransactionResponseApiResponse.isSuccess()) {
-                            getMvpView().sendTransactionSuccess();
+                            getMvpView().sendTransactionSuccess(txHash);
                         } else {
                             getMvpView().sendTransactionFail(sendTransactionResponseApiResponse.getMessage());
                         }
