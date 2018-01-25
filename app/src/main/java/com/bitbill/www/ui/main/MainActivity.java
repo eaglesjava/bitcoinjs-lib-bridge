@@ -73,6 +73,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 import io.socket.client.Socket;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -522,6 +523,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void onStart() {
         super.onStart();
         requestCodeQRCodePermissions();
+        JPushInterface.requestPermission(this);
     }
 
     @Override

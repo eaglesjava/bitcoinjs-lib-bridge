@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Unbinder;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by isanwenyu@163.com on 2017/07/17.
@@ -147,6 +148,17 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
     @Override
     public void showLoading() {
         if (mProgressDialog == null) {

@@ -36,6 +36,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import cn.jpush.android.api.JPushInterface;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import okhttp3.OkHttpClient;
@@ -130,6 +131,9 @@ public class BitbillApp extends Application {
         initSocket();
         registerActivityLifecycleCallbacks(callbacks);
         LocaleUtils.updateLocale(this, LocaleUtils.getUserLocale(this));
+
+        JPushInterface.setDebugMode(BuildConfig.DEBUG);
+        JPushInterface.init(this);
     }
 
     @Override
