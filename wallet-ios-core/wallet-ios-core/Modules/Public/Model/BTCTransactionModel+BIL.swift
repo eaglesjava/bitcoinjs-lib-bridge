@@ -189,6 +189,9 @@ extension BTCTransactionModel {
         inSatoshi = 0
         outSatoshi = 0
         targetSatoshi = 0
+		removeFromOutputs(outputs!)
+		removeFromInputs(inputs!)
+		removeFromTargets(targets!)
     }
     
     func newAddressModelIfNeeded(_ address: String, index: Int, isInput: Bool = true) -> BTCTXAddressModel {
@@ -220,6 +223,19 @@ extension BTCTransactionModel {
         let filterd = txs.filter { $0.wallet?.wallet?.id == outWallet.id }
         return filterd.first ?? bil_btc_transactionManager.newModel()
     }
+	
+	static func newTxAfterDelete(txHash: String) -> BTCTransactionModel {
+		let txs = bil_btc_transactionManager.fetchAll(keyValues: [(key: "txHash", value: txHash)])
+		for tx in txs {
+			tx.wallet?.removeFromTransactions(tx)
+			do {
+				try bil_btc_transactionManager.remove(model: tx)
+			} catch {
+				debugPrint(error.localizedDescription)
+			}
+		}
+		return bil_btc_transactionManager.newModel()
+	}
     
     func setProperties(json: JSON, inWallet: WalletModel? = nil, outWallet: WalletModel? = nil) {
         clearSatoshi()
@@ -312,7 +328,8 @@ extension BTCTransactionModel {
             }
             return
         }
-        
+		
+		debugPrint("--- 1 \(targetSatoshi)")
         for add in outputs! {
             let tx = add as! BTCTXAddressModel
             switch type {
@@ -320,15 +337,18 @@ extension BTCTransactionModel {
                 if !w.contain(btcAddress: tx.address!) {
                     self.addToTargets(tx)
                     targetSatoshi += tx.satoshi
+					debugPrint("--- 2 \(targetSatoshi)")
                 }
             case .transfer: fallthrough
             case .receive:
                 if w.contain(btcAddress: tx.address!) {
                     self.addToTargets(tx)
                     targetSatoshi += tx.satoshi
+					debugPrint("--- 3 \(targetSatoshi)")
                 }
             }
         }
+		debugPrint("--- 4 \(targetSatoshi)")
         
 		if w.btc_transactionArray.filter({
 			$0.txHash == self.txHash

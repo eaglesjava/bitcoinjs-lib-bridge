@@ -67,7 +67,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         }
         let words = trimmedString.components(separatedBy: " ")
         
-        return words.joined(separator: " ")
+        return words.joined(separator: " ").lowercased()
     }
     
 	@IBAction func nextAction(_ sender: Any) {

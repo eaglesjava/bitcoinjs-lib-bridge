@@ -21,9 +21,9 @@ extension WalletModel {
 					NotificationCenter.default.post(name: .receivedUnconfirmTransaction, object: nil)
 				}
 				do {
+					self.bitcoinWallet?.version = version
 					try BILWalletManager.shared.saveWallets()
 					self.bitcoinWallet?.needLoadServer = false
-					self.bitcoinWallet?.version = version
 				} catch {
 					debugPrint(error)
 				}
@@ -31,20 +31,21 @@ extension WalletModel {
 				debugPrint(msg)
 			})
 		}
-        
-        func handleChangeAddress(changeIndex: Int64) {
-            if lastBTCChangeAddressIndex < changeIndex {
-                generateAddresses(type: .change, from: lastBTCChangeAddressIndex, to: changeIndex, success: { (addresses) in
-                    self.bitcoinWallet?.needLoadServer = true
-                    loadTXs(version: (self.bitcoinWallet?.version)!)
-                }, failure: { (msg, code) in
-                    debugPrint(msg)
-                })
-            }
-        }
 		
         let addressIndex = json["indexNo"].int64Value
         let changeIndex = json["changeIndexNo"].int64Value
+		let serverVersion = json["version"].int64Value
+		func handleChangeAddress(changeIndex: Int64) {
+			if lastBTCChangeAddressIndex < changeIndex {
+				generateAddresses(type: .change, from: lastBTCChangeAddressIndex, to: changeIndex, success: { (addresses) in
+					self.bitcoinWallet?.needLoadServer = true
+					loadTXs(version: serverVersion)
+				}, failure: { (msg, code) in
+					debugPrint(msg)
+				})
+			}
+		}
+		debugPrint("---- \(addressIndex), \(lastBTCAddressIndex), \(changeIndex), \(lastBTCChangeAddressIndex)")
         if lastBTCAddressIndex < addressIndex {
             generateAddresses(from: lastBTCAddressIndex, to: addressIndex, success: { (addresses) in
                 if self.lastBTCChangeAddressIndex < changeIndex {
@@ -53,18 +54,19 @@ extension WalletModel {
                 else
                 {
                     self.bitcoinWallet?.needLoadServer = true
-                    loadTXs(version: (self.bitcoinWallet?.version)!)
+                    loadTXs(version: serverVersion)
                 }
             }, failure: { (msg, code) in
                 debugPrint(msg)
             })
+			return
         }
-        else
+        else if lastBTCChangeAddressIndex < changeIndex
         {
             handleChangeAddress(changeIndex: changeIndex)
+			return
         }
-        
-        let serverVersion = json["version"].int64Value
+		
         bitcoinWallet?.needLoadServer = (bitcoinWallet?.version)! < serverVersion
         if (bitcoinWallet?.needLoadServer)! {
 			loadTXs(version: serverVersion)
@@ -236,15 +238,22 @@ extension WalletModel {
             failure(.publicWalletDataError, -1)
             return
         }
+		
         BILNetworkManager.request(request: .getUnconfirmTransaction(wallets: wallets), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
-            let txDatas = json["list"].arrayValue
+            var txDatas = [JSON]()
+			for j in json["list"].arrayValue {
+				if txDatas.filter({
+					$0["txHash"] == j["txHash"]
+				}).count == 0 {
+					txDatas.append(j)
+				}
+			}
             for json in txDatas {
-                let model = bil_btc_transactionManager.newModelIfNeeded(key: "txHash", value: json["txHash"].stringValue)
+                let model = BTCTransactionModel.newTxAfterDelete(txHash: json["txHash"].stringValue)
                 model.setProperties(json: json)
             }
-            
             do {
                 try BILWalletManager.shared.saveWallets()
                 
