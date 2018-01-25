@@ -91,6 +91,7 @@ class BILSendConfirmController: BILBaseViewController {
 		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
 		remarkInputView.textField.placeholder = "Within 20 words".bil_ui_localized
 		remarkInputView.title?.text = "Remarks".bil_ui_localized
+		updateLabels(fee: " --", time: "--")
 	}
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {

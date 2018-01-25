@@ -22,6 +22,7 @@ class BILBackupWalletSuccessController: BILBaseViewController {
 
 	override func languageDidChanged() {
 		super.languageDidChanged()
+		title = "Congratulations".bil_ui_localized
 		titleLabel.text = "Back up wallet".bil_ui_localized
 		resultLabel.text = "Succeed to back up".bil_ui_localized
 		tipLabel.text = "Please keep your mnemonic words carefully".bil_ui_localized
