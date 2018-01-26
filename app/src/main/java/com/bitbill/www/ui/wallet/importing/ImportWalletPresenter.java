@@ -188,7 +188,7 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
             }
             return handledMnemonic.toString();
         } else {
-            return mnemonic;
+            return mnemonic.trim().replaceAll(" {2,}", " ").toLowerCase();
         }
     }
 
