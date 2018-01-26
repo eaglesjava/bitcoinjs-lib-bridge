@@ -735,6 +735,9 @@
                                         <state key="normal" title="快速创建联系人">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addContactAction:" destination="gQ4-lN-Jcy" eventType="touchUpInside" id="eZs-8d-8jI"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
