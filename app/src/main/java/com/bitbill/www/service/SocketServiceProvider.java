@@ -65,9 +65,6 @@ public class SocketServiceProvider extends Service {
             } catch (JsonSyntaxException e) {
                 e.printStackTrace();
             }
-            if (confirmed != null && confirmed.getContext() != null) {
-                // TODO: 2018/1/26 check local cache
-            }
             //  获取未确认列表
             EventBus.getDefault().postSticky(new ConfirmedEvent().setData(confirmed));
         }
@@ -85,7 +82,7 @@ public class SocketServiceProvider extends Service {
                 e.printStackTrace();
             }
             if (unConfirmed != null && unConfirmed.getContext() != null) {
-                if (AppConstants.TYPE_RECEIVE.equals(unConfirmed.getContext().getType())) {
+                if (AppConstants.TYPE_RECEIVE.equalsIgnoreCase(unConfirmed.getContext().getType())) {
                     //  根据设置开启音效
                     if (mAppModel.isSoundEnable()) {
                         // 播放声音
