@@ -3,7 +3,6 @@ package com.bitbill.www.ui.wallet.info;
 import com.bitbill.www.common.base.view.MvpView;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.TxElement;
-import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
 
@@ -11,15 +10,12 @@ import java.util.List;
  * Created by isanwenyu@163.com on 2018/1/6.
  */
 public interface BtcRecordMvpView extends MvpView {
-    Wallet getWallet();
 
     void getWalletFail();
 
     void getTxRecordSuccess(List<TxElement> list);
 
     void getTxRecordFail();
-
-    long getConfrimId();
 
     void loadTxRecordSuccess(List<TxRecord> txRecordList);
 }

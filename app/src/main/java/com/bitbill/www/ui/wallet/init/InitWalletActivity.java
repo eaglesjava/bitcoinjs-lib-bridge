@@ -14,12 +14,15 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
+import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.eventbus.RegisterEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.socket.Register;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.my.UseRuleActivity;
 
@@ -30,6 +33,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.bitbill.www.app.AppConstants.PLATFORM;
 
 /**
  * 导入钱包
@@ -230,7 +235,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    public void createWalletSuccess() {
+    public void createWalletSuccess(Wallet wallet) {
         if (!isCreateWallet) {
             // 优化检查最新地址索引逻辑
             mSyncAddressMvpPresentder.syncLastAddressIndex(mIndexNo, mChangeIndexNo, getWallet());
@@ -241,6 +246,8 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
             //从主页进入才通知钱包刷新
             EventBus.getDefault().postSticky(new WalletUpdateEvent());
         }
+        //注册钱包
+        EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", DeviceUtil.getDeviceId(), PLATFORM)));
     }
 
     @Override

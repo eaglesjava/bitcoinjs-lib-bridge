@@ -37,7 +37,7 @@ public final class AppConstants {
     public static final String EXTRA_FROM_TAG = "from_where";
     public static final String EXTRA_SEND_CONTACT = "send_contact";
     public static final String EXTRA_SEND_TXHASH = "send_txhash";
-    
+
     public static final String ARG_DATAS = "args_datas";
     public static final String ARG_WALLET = "arg_wallet";
     public static final String ARG_IS_SELECT = "is_select";
@@ -73,6 +73,12 @@ public final class AppConstants {
     public static final String TX_BLOCK_CHAIN_PREFIX = "https://blockchain.info/tx/";
     public static final String HOST_BITBILL_COM = "bitbill.com";
     public static final String HI_BITBILL_EMAIL = "hi@bitbill.com";
+
+    /**
+     * socket event
+     */
+    public static final String TYPE_RECEIVE = "TYPE_RECEIVE";
+    public static final String TYPE_SEND = "TYPE_SEND";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

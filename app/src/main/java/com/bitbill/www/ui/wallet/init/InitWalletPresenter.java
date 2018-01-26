@@ -20,14 +20,11 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
-import com.bitbill.www.model.wallet.network.socket.Register;
 import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
-
-import static com.bitbill.www.app.AppConstants.PLATFORM;
 
 /**
  * Created by isanwenyu@163.com on 2017/11/17.
@@ -249,9 +246,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                             return;
                         }
                         if (id != null) {
-                            getMvpView().createWalletSuccess();
-                            //注册钱包
-                            getApp().registerWallet(new Register(mWallet.getName(), "", DeviceUtil.getDeviceId(), PLATFORM));
+                            getMvpView().createWalletSuccess(mWallet);
                         } else {
                             getMvpView().createWalletFail();
                         }

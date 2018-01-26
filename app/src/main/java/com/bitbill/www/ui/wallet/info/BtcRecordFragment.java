@@ -49,7 +49,6 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
     private OnTransactionRecordItemClickListener mListener;
     private Wallet mWalelt;
-    private List<TxElement> mTxElementList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -148,7 +147,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     @Override
     public void onLayoutRefresh() {
 
-        getMvpPresenter().requestTxRecord();
+        getMvpPresenter().requestTxRecord(getWallet());
     }
 
     @Override
@@ -211,10 +210,9 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
 
         }
         tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBalance())));
-        getMvpPresenter().loadTxRecord();
+        getMvpPresenter().loadTxRecord(getWallet());
     }
 
-    @Override
     public Wallet getWallet() {
         return mWalelt;
     }
@@ -227,8 +225,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     @Override
     public void getTxRecordSuccess(List<TxElement> list) {
         if (!StringUtils.isEmpty(list)) {
-            mTxElementList = list;
-            mViewParseTxInfoMvpPresenter.parseTxInfo();
+            mViewParseTxInfoMvpPresenter.parseTxInfo(list);
         }
     }
 
@@ -238,19 +235,9 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     }
 
     @Override
-    public long getConfrimId() {
-        return 0;
-    }
-
-    @Override
     public void loadTxRecordSuccess(List<TxRecord> txRecordList) {
         setDatas(txRecordList);
         setRefresh(false);
-    }
-
-    @Override
-    public List<TxElement> getTxInfoList() {
-        return mTxElementList;
     }
 
     @Override
@@ -266,7 +253,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     @Override
     public void parsedTxItemList(List<TxRecord> txRecords) {
         // 重新加载当前交易
-        getMvpPresenter().loadTxRecord();
+        getMvpPresenter().loadTxRecord(getWallet());
     }
 
     @Override

@@ -33,27 +33,25 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
     }
 
     @Override
-    public void loadTxRecord() {
-        if (!isValidWallet()) {
+    public void loadTxRecord(Wallet wallet) {
+        if (!isValidWallet(wallet)) {
             return;
         }
-        Wallet wallet = getMvpView().getWallet();
         // TODO: 2018/1/25 在当前线程执行 需要优化
         wallet.resetTxRecordList();
         List<TxRecord> txRecordList = wallet.getTxRecordList();
         if (!StringUtils.isEmpty(txRecordList)) {
             getMvpView().loadTxRecordSuccess(txRecordList);
         } else {
-            requestTxRecord();
+            requestTxRecord(wallet);
         }
     }
 
     @Override
-    public void requestTxRecord() {
-        if (!isValidWallet() || !isValidXPublicKey()) {
+    public void requestTxRecord(Wallet wallet) {
+        if (!isValidWallet(wallet) || !isValidXPublicKey(wallet)) {
             return;
         }
-        Wallet wallet = getMvpView().getWallet();
         String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getExtentedPublicKey());
         getCompositeDisposable().add(Observable.fromCallable(() -> {
             List<TxRecord> txRecordList = wallet.getTxRecordList();
@@ -104,16 +102,16 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
                 }));
     }
 
-    private boolean isValidWallet() {
-        if (getMvpView().getWallet() == null) {
+    private boolean isValidWallet(Wallet wallet) {
+        if (wallet == null) {
             getMvpView().getWalletFail();
             return false;
         }
         return true;
     }
 
-    public boolean isValidXPublicKey() {
-        if (StringUtils.isEmpty(getMvpView().getWallet().getExtentedPublicKey())) {
+    public boolean isValidXPublicKey(Wallet wallet) {
+        if (StringUtils.isEmpty(wallet.getExtentedPublicKey())) {
             getMvpView().getWalletFail();
             return false;
         }

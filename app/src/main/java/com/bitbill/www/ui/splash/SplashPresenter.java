@@ -8,7 +8,10 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,16 +32,16 @@ public class SplashPresenter<M extends WalletModel, V extends SplashMvpView> ext
 
     @Override
     public void hasWallet() {
-        getCompositeDisposable().add(getModelManager().hasWallet()
+        getCompositeDisposable().add(getModelManager().getAllWallets()
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>() {
+                .subscribeWith(new BaseSubcriber<List<Wallet>>() {
                     @Override
-                    public void onNext(Boolean aBoolean) {
-                        super.onNext(aBoolean);
+                    public void onNext(List<Wallet> walletList) {
+                        super.onNext(walletList);
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().hasWallet(aBoolean);
+                        getMvpView().hasWallet(walletList);
 
                     }
 
@@ -48,7 +51,7 @@ public class SplashPresenter<M extends WalletModel, V extends SplashMvpView> ext
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().hasWallet(false);
+                        getMvpView().hasWallet(null);
                     }
                 }));
     }

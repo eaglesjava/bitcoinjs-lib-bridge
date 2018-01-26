@@ -1,10 +1,13 @@
 package com.bitbill.www.ui.main;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -37,8 +40,10 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
+import com.bitbill.www.model.eventbus.ConfirmedEvent;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
+import com.bitbill.www.model.eventbus.SocketServerStateEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
 import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
@@ -47,6 +52,10 @@ import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.socket.Confirmed;
+import com.bitbill.www.model.wallet.network.socket.ContextBean;
+import com.bitbill.www.model.wallet.network.socket.UnConfirmed;
+import com.bitbill.www.service.SocketServiceProvider;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
@@ -58,6 +67,8 @@ import com.bitbill.www.ui.main.my.SystemSettingActivity;
 import com.bitbill.www.ui.main.my.WalletSettingActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.send.SendFragment;
+import com.bitbill.www.ui.wallet.info.BtcRecordMvpPresenter;
+import com.bitbill.www.ui.wallet.info.BtcRecordMvpView;
 import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -79,7 +90,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcRecordMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
@@ -98,6 +109,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
     SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
+
+    @Inject
+    BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -127,9 +141,20 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private ContactFragment mContactFragment;
     private Contact mSendContact;
     private int index = INDEX_ASSET;
-    private List<TxElement> mTxInfoList;
     private String mAddress;
     private int mSelectedPosition;
+    private SocketServiceProvider mBoundService;
+    protected ServiceConnection socketConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mBoundService = ((SocketServiceProvider.LocalBinder) service).getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mBoundService = null;
+        }
+    };
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -181,6 +206,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         addPresenter(mWalletPresenter);
         addPresenter(mParseTxInfoMvpPresenter);
         addPresenter(mGetCacheVersionMvpPresenter);
+        addPresenter(mBtcRecordMvpPresenter);
     }
 
     @Override
@@ -193,6 +219,13 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         initView();
         initData();
         setTitle(R.string.title_activity_main);
+        doBindService();
+    }
+
+    private void doBindService() {
+        if (mBoundService == null) {
+            bindService(new Intent(MainActivity.this, SocketServiceProvider.class), socketConnection, Context.BIND_AUTO_CREATE);
+        }
     }
 
     @Override
@@ -481,9 +514,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (StringUtils.isEmpty(data)) {
             loadUnconfirmList(null);
         } else {
-
-            mTxInfoList = data;
-            mParseTxInfoMvpPresenter.parseTxInfo();
+            mParseTxInfoMvpPresenter.parseTxInfo(data);
         }
     }
 
@@ -513,7 +544,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-
+            hideSelectWallet();
         } else {
             super.onBackPressed();
         }
@@ -568,6 +599,49 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         UnConfirmEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
         //加载未确认交易
         getMvpPresenter().listUnconfirm();
+
+        UnConfirmed unConfirmed = (UnConfirmed) unConfirmEvent.getData();
+        if (unConfirmed != null && unConfirmed.getContext() != null) {
+
+            ContextBean context = unConfirmed.getContext();
+
+            updateLocalCache(context);
+
+        }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onConfirmedEvent(ConfirmedEvent confirmedEvent) {
+        EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
+        //加载未确认交易
+        getMvpPresenter().listUnconfirm();
+
+        Confirmed confirmed = (Confirmed) confirmedEvent.getData();
+        if (confirmed != null && confirmed.getContext() != null) {
+
+            ContextBean context = confirmed.getContext();
+            updateLocalCache(context);
+
+        }
+    }
+
+    private void updateLocalCache(ContextBean context) {
+        if (!StringUtils.isEmpty(mWalletList)) {
+            for (Wallet wallet : mWalletList) {
+                if (wallet.getName().equals(context.getWalletId())) {
+                    getResponseAddressIndex(context.getIndexNo(), context.getChangeIndexNo(), wallet);
+                    if (wallet.getVersion() != context.getVersion()) {
+                        List<Wallet> tmpWalletList = new ArrayList<>();
+                        tmpWalletList.add(wallet);
+                        //重新获取交易列表
+                        getDiffVersionWallets(tmpWalletList);
+                    }
+                }
+            }
+        }
+        if (context.getHeight() > 0) {
+            getApp().setBlockHeight(context.getHeight());
+        }
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -587,14 +661,16 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mWalletPresenter.loadWallets();
     }
 
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onSocketServerStateEvent(SocketServerStateEvent socketServerStateEvent) {
+        if (socketServerStateEvent != null && mAssetFragment != null) {
+            mAssetFragment.setSocketStatus(socketServerStateEvent.getState().equals(SocketServerStateEvent.ServerState.connected));
+        }
+    }
+
     public void addContact() {
         mViewPager.setCurrentItem(1, true);
         mContactFragment.showSelectDialog();
-    }
-
-    @Override
-    public List<TxElement> getTxInfoList() {
-        return mTxInfoList;
     }
 
     @Override
@@ -623,8 +699,13 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void getDiffVersionWallets(List<Wallet> tmpWalletList) {
+        if (!StringUtils.isEmpty(tmpWalletList)) {
+            for (Wallet wallet : tmpWalletList) {
 
-        // TODO: 2018/1/8 只更新更改的wallet
+                // 只更新更改的wallet的交易记录
+                mBtcRecordMvpPresenter.requestTxRecord(wallet);
+            }
+        }
 
     }
 
@@ -640,5 +721,27 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (mAssetFragment != null) {
             mAssetFragment.hideLoading();
         }
+    }
+
+    @Override
+    public void getWalletFail() {
+
+    }
+
+    @Override
+    public void getTxRecordSuccess(List<TxElement> list) {
+        if (!StringUtils.isEmpty(list)) {
+            mParseTxInfoMvpPresenter.parseTxInfo(list);
+        }
+    }
+
+    @Override
+    public void getTxRecordFail() {
+
+    }
+
+    @Override
+    public void loadTxRecordSuccess(List<TxRecord> txRecordList) {
+
     }
 }

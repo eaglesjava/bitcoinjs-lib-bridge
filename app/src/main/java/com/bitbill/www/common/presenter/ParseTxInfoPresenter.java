@@ -33,11 +33,10 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
     }
 
     @Override
-    public void parseTxInfo() {
-        if (!isValidTxInfoList()) {
+    public void parseTxInfo(List<TxElement> txInfoList) {
+        if (!isValidTxInfoList(txInfoList)) {
             return;
         }
-        List<TxElement> txInfoList = getMvpView().getTxInfoList();
         getCompositeDisposable().add(Observable.just(StringUtils.removeDuplicateList(txInfoList))
                 .concatMap(txInfos -> {
                     List<TxRecord> txRecords = new ArrayList<>();
@@ -167,8 +166,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
     }
 
 
-    public boolean isValidTxInfoList() {
-        List<TxElement> txInfoList = getMvpView().getTxInfoList();
+    public boolean isValidTxInfoList(List<TxElement> txInfoList) {
         if (StringUtils.isEmpty(txInfoList)) {
             getMvpView().requireTxInfoList();
             return false;

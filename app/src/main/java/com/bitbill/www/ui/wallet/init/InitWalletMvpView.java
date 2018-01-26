@@ -8,7 +8,7 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
  */
 public interface InitWalletMvpView extends MvpView {
 
-    void createWalletSuccess();
+    void createWalletSuccess(Wallet wallet);
 
     void createWalletFail();
 

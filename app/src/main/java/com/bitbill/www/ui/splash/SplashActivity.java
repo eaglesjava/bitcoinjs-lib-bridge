@@ -9,11 +9,18 @@ import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
+import com.bitbill.www.common.utils.DeviceUtil;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.eventbus.RegisterEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.model.wallet.network.socket.Register;
+import com.bitbill.www.service.SocketServiceProvider;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.MainActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -21,6 +28,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.bitbill.www.app.AppConstants.PLATFORM;
 
 public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, GetCacheVersionMvpView, SyncAddressMvpView {
 
@@ -43,7 +52,12 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         getMvpPresenter().hasWallet();
         getMvpPresenter().getExchangeRate();
         getApp().setContactKey(getMvpPresenter().getContactKey());
-        // 根据是否是第一次进入判断跳转到引导页还是首页
+
+        startSocketService();
+    }
+
+    private void startSocketService() {
+        SocketServiceProvider.start(SplashActivity.this);
     }
 
     @Override
@@ -58,8 +72,13 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     }
 
     @Override
-    public void hasWallet(boolean hasWallet) {
-        mHasWallet = hasWallet;
+    public void hasWallet(List<Wallet> walletList) {
+        if (mHasWallet = !StringUtils.isEmpty(walletList)) {
+            for (Wallet wallet : walletList) {
+                //注册钱包
+                EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", DeviceUtil.getDeviceId(), PLATFORM)));
+            }
+        }
         mGetCacheVersionMvpPresenter.getCacheVersion();
         flContent.postDelayed(new Runnable() {
             @Override
@@ -67,6 +86,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
                 jumpNext();
             }
         }, 2000);
+
     }
 
     private void jumpNext() {

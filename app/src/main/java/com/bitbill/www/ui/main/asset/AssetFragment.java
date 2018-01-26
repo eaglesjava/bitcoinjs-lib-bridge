@@ -147,7 +147,13 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
     @Override
     public void initData() {
-        ivSocketStatus.setChecked(BitbillApp.get().getSocketConnected());
+
+    }
+
+    public void setSocketStatus(boolean connected) {
+        if (ivSocketStatus != null) {
+            ivSocketStatus.setChecked(connected);
+        }
     }
 
     @Override
