@@ -2,6 +2,7 @@ package com.bitbill.www.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Notification;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,9 +29,8 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
-import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 import okhttp3.OkHttpClient;
 
 /**
@@ -119,6 +119,14 @@ public class BitbillApp extends Application {
 
         JPushInterface.setDebugMode(BuildConfig.DEBUG);
         JPushInterface.init(this);
+        BasicPushNotificationBuilder builder = new BasicPushNotificationBuilder(this);
+        builder.statusBarDrawable = R.drawable.ic_logo;
+        builder.notificationFlags = Notification.FLAG_AUTO_CANCEL
+                | Notification.FLAG_SHOW_LIGHTS;  //设置为自动消失和呼吸灯闪烁
+        builder.notificationDefaults = Notification.DEFAULT_SOUND
+                | Notification.DEFAULT_VIBRATE
+                | Notification.DEFAULT_LIGHTS;// 设置为铃声、震动、呼吸灯闪烁都要
+        JPushInterface.setPushNotificationBuilder(1, builder);
     }
 
     @Override

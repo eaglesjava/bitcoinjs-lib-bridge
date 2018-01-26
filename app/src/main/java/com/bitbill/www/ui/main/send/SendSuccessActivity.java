@@ -99,8 +99,12 @@ public class SendSuccessActivity extends BaseCompleteActivity {
         } else {
             llAddContact.setVisibility(View.GONE);
         }
-        mLlViewTxhash.setVisibility(StringUtils.isNotEmpty(mTxHash) ? View.VISIBLE : View.GONE);
-
+        if (StringUtils.isNotEmpty(mTxHash)) {
+            mLlViewTxhash.setVisibility(View.VISIBLE);
+            mTvTxHash.setText(mTxHash);
+        } else {
+            mLlViewTxhash.setVisibility(View.GONE);
+        }
     }
 
     @Override

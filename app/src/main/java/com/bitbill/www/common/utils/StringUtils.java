@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
 public class StringUtils {
 
     public static final Pattern IS_CHINESE_CHAR = Pattern.compile("[\u4e00-\u9fa5]");
+    public static final Pattern IS_ENGLISH_CHAR = Pattern.compile("[a-zA-Z]");
     public static final Pattern PASSWORD_PATTERN =
             Pattern.compile("[!@#$%^&*_]*.*[a-zA-Z][!@#$%^&*_]*.*[0-9][!@#$%^&*_]*|[!@#$%^&*_]*.*[0-9][!@#$%^&*_]*.*[a-zA-Z][!@#$%^&*_]*");
     public final static SimpleDateFormat yyyyMMddHHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

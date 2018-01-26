@@ -27,6 +27,7 @@ import com.google.gson.JsonSyntaxException;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
@@ -59,10 +60,12 @@ public class SocketServiceProvider extends Service {
         public void call(Object... args) {
             Confirmed confirmed = null;
             try {
-                JSONObject result = (JSONObject) args[0];
+                JSONObject result = new JSONObject(String.valueOf(args[0]));
                 Log.d(TAG, "EVENT_CONFIRM called with: args = [" + result + "]");
                 confirmed = JsonUtils.deserialize(result.toString(), Confirmed.class);
             } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             //  获取未确认列表
@@ -75,10 +78,12 @@ public class SocketServiceProvider extends Service {
 
             UnConfirmed unConfirmed = null;
             try {
-                JSONObject result = (JSONObject) args[0];
+                JSONObject result = new JSONObject(String.valueOf(args[0]));
                 Log.d(TAG, "EVENT_UNCONFIRM called with: args = [" + result + "]");
                 unConfirmed = JsonUtils.deserialize(result.toString(), UnConfirmed.class);
             } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             if (unConfirmed != null && unConfirmed.getContext() != null) {

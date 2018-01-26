@@ -28,6 +28,8 @@
     <string name="connect">Socket connected</string>
     <string name="disconnect">Disconnect. Check your network connection.</string>
     <string name="error_connect">Connect failed</string>
+    <!--JPush-->
+    <string name="msg_push_receive_amount">"You have received %s BTC"</string>
 
     <!--guide-->
     <string name="btn_create_wallet">Create wallet</string>

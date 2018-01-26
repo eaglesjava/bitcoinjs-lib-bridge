@@ -66,16 +66,7 @@ public class GetTxElementResponse {
         private int vIndex;
         private String vType;
         private int walletId;
-        private boolean isChange;
         private int addressType;//地址类型0:接收地址，1：找零地址
-
-        public boolean isChange() {
-            return isChange;
-        }
-
-        public void setChange(boolean change) {
-            isChange = change;
-        }
 
         public int getAddressIndex() {
             return addressIndex;

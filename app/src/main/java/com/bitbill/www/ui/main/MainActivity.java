@@ -192,6 +192,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                 mSendFragment.setSendAddress(mAddress);
             }
         }
+        boolean listConfirm = intent.getBooleanExtra(AppConstants.EXTRA_LIST_UNCONFIRM, false);
+        if (listConfirm) {
+            //获取未确认列表
+            getMvpPresenter().listUnconfirm();
+
+        }
     }
 
     @Override

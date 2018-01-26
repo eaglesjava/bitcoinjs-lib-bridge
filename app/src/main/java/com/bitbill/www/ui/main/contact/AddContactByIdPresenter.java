@@ -43,11 +43,7 @@ public class AddContactByIdPresenter<M extends ContactModel, V extends AddContac
                         }
                         if (searchWalletIdResponseApiResponse != null && searchWalletIdResponseApiResponse.isSuccess()) {
                             SearchWalletIdResponse data = searchWalletIdResponseApiResponse.getData();
-                            String address = null;
-                            if (data != null) {
-                                address = data.getAddress();
-                            }
-                            getMvpView().searchWalletIdSuccess(address);
+                            getMvpView().searchWalletIdSuccess();
                         } else {
                             getMvpView().searchWalletIdFail();
                         }

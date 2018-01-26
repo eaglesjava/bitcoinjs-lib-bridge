@@ -174,17 +174,22 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
 
     private String handleMnemonic() {
         String mnemonic = getMvpView().getMnemonic();
-        //移除助记词多余空格
-        char[] mnemonicArray = mnemonic.replaceAll(" ", "").toCharArray();
-        StringBuilder handledMnemonic = new StringBuilder();
-        for (int i = 0; i < mnemonicArray.length; i++) {
+        if (StringUtils.isChineseCharacters(mnemonic.replaceAll(" ", ""))) {
 
-            handledMnemonic.append(mnemonicArray[i]);
-            if (i < mnemonicArray.length - 1) {
-                handledMnemonic.append(" ");
+            //移除助记词多余空格
+            char[] mnemonicArray = mnemonic.replaceAll(" ", "").toCharArray();
+            StringBuilder handledMnemonic = new StringBuilder();
+            for (int i = 0; i < mnemonicArray.length; i++) {
+
+                handledMnemonic.append(mnemonicArray[i]);
+                if (i < mnemonicArray.length - 1) {
+                    handledMnemonic.append(" ");
+                }
             }
+            return handledMnemonic.toString();
+        } else {
+            return mnemonic;
         }
-        return handledMnemonic.toString();
     }
 
     public boolean isValidMnemonic() {

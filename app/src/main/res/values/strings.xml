@@ -23,6 +23,8 @@
     <string name="connect">已连接</string>
     <string name="disconnect">断开连接，请检查你的网络连接</string>
     <string name="error_connect">连接失败</string>
+    <!--JPush-->
+    <string name="msg_push_receive_amount">"你收到了 %s BTC"</string>
 
     <!--dialog -->
     <string name="dialog_btn_cancel">取消</string>

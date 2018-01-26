@@ -81,9 +81,9 @@ public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMv
     }
 
     @Override
-    public void searchWalletIdSuccess(String address) {
+    public void searchWalletIdSuccess() {
         // 跳转到搜索结果界面
-        SearchContactResultActivity.start(AddContactByIdActivity.this, address, getWalletId());
+        SearchContactResultActivity.start(AddContactByIdActivity.this, null, getWalletId());
 
     }
 

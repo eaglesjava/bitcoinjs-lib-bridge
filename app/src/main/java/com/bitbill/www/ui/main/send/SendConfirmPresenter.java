@@ -145,7 +145,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         String inAddress = "";
         for (int i = 0; i <= index; i++) {
             GetTxElementResponse.UtxoBean unspent = unspentList.get(i);
-            inputs.add(new Transaction.Input(unspent.getTxid(), unspent.getVIndex(), unspent.getAddressIndex(), unspent.isChange()));
+            inputs.add(new Transaction.Input(unspent.getTxid(), unspent.getVIndex(), unspent.getAddressIndex(), unspent.getAddressType() == 1));
             inAddress += unspent.getAddressTxt();
             if (i < index - 1) inAddress += "|";
         }
