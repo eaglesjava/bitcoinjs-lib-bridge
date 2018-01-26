@@ -151,13 +151,13 @@ extension WalletModel {
         return id
     }
     
-    func getTransactionHistoryFromSever(page: Int, size: Int, success: @escaping (_ txs: [BTCTransactionModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+    func getTransactionHistoryFromSever(page: Int, size: Int, id: String = "0", success: @escaping (_ txs: [BTCTransactionModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard let extKey = mainExtPublicKey else {
             failure(.publicWalletExtKeyError, -1)
             return
         }
         success(btc_transactionArray)
-        BILNetworkManager.request(request: .getTransactionHistory(extendedKeyHash: extKey.md5(), id: lastConfirmedTranscationServerID(), page: page, size: size), success: { (result) in
+        BILNetworkManager.request(request: .getTransactionHistory(extendedKeyHash: extKey.md5(), id: id, page: page, size: size), success: { (result) in
             debugPrint(result)
             let json = JSON(result)
             let datas = json["list"].arrayValue

@@ -43,7 +43,7 @@
 "MeC.wallet_failed" = "Operation failed";
 "MeC.wallet_backupNow" = "Back up";
 
-"MeC.walletAddress_addressAndBalance" = "Address & balance";
+"MeC.walletAddress_addressAndBalance" = "Addresses & balances";
 
 "MeC.aboutUs_agreement" = "Usage terms";
 "MeC.aboutUs_contactUs" = "Contact us";

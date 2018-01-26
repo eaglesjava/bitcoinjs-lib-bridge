@@ -199,6 +199,10 @@ class BILReceiveController: BILBaseViewController {
 	}
 	
 	@IBAction func generateNewAddress(_ sender: Any) {
+        guard let isTooMore = currentWallet?.isTooMoreUnusedBTCAddress(), !isTooMore else {
+            showTipAlert(msg: .publicWalletNoMoreAddress)
+            return
+        }
         bil_showLoading(status: nil)
 		currentWallet?.getNewBTCAddress(success: { (address) in
 			self.setAddress(address: address)

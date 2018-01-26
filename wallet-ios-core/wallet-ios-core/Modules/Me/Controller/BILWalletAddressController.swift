@@ -73,7 +73,7 @@ class BILWalletAddressController: BILLightBlueBaseController {
         let targetChangeIndex = w.lastBTCChangeAddressIndex + 10
         w.refreshAddressToSever(index: targetIndex, changeIndex: targetChangeIndex, success: { (addresses, changeAddresses) in
             BILWalletManager.shared.loadBlockHeightAndWalletVersion()
-			w.getTransactionHistoryFromSever(page: 0, size: w.btc_transactionArray.count + 2000, success: { (txs) in
+            w.getTransactionHistoryFromSever(page: 0, size: w.btc_transactionArray.count + 2000, success: { (txs) in
 			}, failure: { (msg, code) in
 			})
             w.getUTXOFromServer(success: { (utxos) in

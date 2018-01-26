@@ -130,6 +130,7 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
 	
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 		canCallJSFunction = true
+        BILWalletManager.shared.loadBlockHeightAndWalletVersion()
 	}
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

@@ -251,6 +251,17 @@ extension WalletModel {
         }, failure: failure)
     }
     
+    func isTooMoreUnusedBTCAddress() -> Bool {
+        let limitCount = 20
+        let count = btc_addressModels.count
+        guard count >= limitCount else {
+            return false
+        }
+        let last20Addresses = btc_addressModels[(count - limitCount + 1)...(count - 1)]
+        let usedCount = last20Addresses.filter { $0.isUsed }.count
+        return usedCount == 0
+    }
+    
     func generateAddresses(type: BitcoinAddressType = .normal, from: Int64, to: Int64, success: @escaping ([BTCWalletAddressModel]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
         guard from <= to else {
             failure(.publicWalletIndexError, -1)

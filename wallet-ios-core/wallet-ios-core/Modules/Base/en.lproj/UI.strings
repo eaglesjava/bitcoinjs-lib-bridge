@@ -116,4 +116,4 @@
 "-40" = "Wallet ID already exists.";
 "-41" = "Wallet not exists.";
 
-"Address of change" = "Address of change";
+"Address of change" = "Change addresses";
