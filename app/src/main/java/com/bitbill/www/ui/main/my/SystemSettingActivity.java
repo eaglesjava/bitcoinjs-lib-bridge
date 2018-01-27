@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.bitbill.www.R;
-import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.utils.LocaleUtils;
 import com.bitbill.www.common.utils.SoundUtils;
 import com.bitbill.www.common.widget.SettingView;
 import com.bitbill.www.common.widget.dialog.ListSelectDialog;
@@ -37,6 +35,7 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
 
     private ListSelectDialog mCurrencySelectDialog;
     private ListSelectDialog mLangugeSelectDialog;
+    private String[] mCurrencyArray;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SystemSettingActivity.class);
@@ -74,13 +73,12 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
                 SoundUtils.playSound(R.raw.diaoluo_da);
             }
         });
-        String[] currencyArray = getResources().getStringArray(R.array.currency_type);
-        mCurrencySelectDialog = ListSelectDialog.newInstance(currencyArray);
+        mCurrencyArray = getResources().getStringArray(R.array.currency_type);
+        mCurrencySelectDialog = ListSelectDialog.newInstance(mCurrencyArray);
         mCurrencySelectDialog.setOnListSelectItemClickListener(position -> {
-            mSvCurrency.setRightText(currencyArray[position]);
+            mSvCurrency.setRightText(mCurrencyArray[position]);
             AppPreferences.SelectedCurrency selectedCurrency = position == 0 ? AppPreferences.SelectedCurrency.CNY : AppPreferences.SelectedCurrency.USD;
             getMvpPresenter().setSelectedCurrency(selectedCurrency);
-            BitbillApp.get().setSelectedCurrency(selectedCurrency);
         });
         mSvCurrency.setOnClickListener(v -> mCurrencySelectDialog.show(getSupportFragmentManager(), ListSelectDialog.TAG));
 
@@ -88,9 +86,8 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
         mLangugeSelectDialog.setOnListSelectItemClickListener(position -> {
             mSvLanguge.setRightText(mLanguageArray[position]);
             Locale locale = (position == 0 ? Locale.CHINESE : Locale.ENGLISH);
-            getMvpPresenter().setSelectedLocale(locale);
-            if (LocaleUtils.needUpdateLocale(this, locale)) {
-                LocaleUtils.updateLocale(this, locale);
+            if (getMvpPresenter().needUpdateLocale(locale)) {
+                getMvpPresenter().setSelectedLocale(locale);
                 restartAct();
             }
 
@@ -101,7 +98,7 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
 
     @Override
     public void initData() {
-        mSvCurrency.setRightText(getMvpPresenter().getSelectedCurrency().name());
+        mSvCurrency.setRightText(AppPreferences.SelectedCurrency.CNY.equals(getMvpPresenter().getSelectedCurrency()) ? mCurrencyArray[0] : mCurrencyArray[1]);
         mSvLanguge.setRightText(Locale.CHINESE.getLanguage().equals(getMvpPresenter().getSelectedLocale().getLanguage()) ? mLanguageArray[0] : mLanguageArray[1]);
 
     }
@@ -110,15 +107,12 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
      * 重启当前Activity
      */
     private void restartAct() {
-//        finish();
-//        Intent _Intent = new Intent(this, SystemSettingActivity.class);
-//        startActivity(_Intent);
-//        //清除Activity退出和进入的动画
-//        overridePendingTransition(0, 0);
+        finish();
+        Intent _Intent = new Intent(this, SystemSettingActivity.class);
+        startActivity(_Intent);
+        //清除Activity退出和进入的动画
+        overridePendingTransition(0, 0);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
     @Override
@@ -129,5 +123,8 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

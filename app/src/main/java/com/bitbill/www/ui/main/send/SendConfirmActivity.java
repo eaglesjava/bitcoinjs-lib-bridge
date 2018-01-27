@@ -108,7 +108,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_send_confirm);
     }
 
     @Override
@@ -251,13 +251,13 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void getWalletFail() {
-        showMessage("获取钱包信息错误，请返回重试");
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
     public void getTxElementFail() {
         // TODO: 2017/12/19 错误处理待定
-        showMessage("获取钱包信息错误，请返回重试");
+        showMessage(R.string.fail_get_wallet_info);
     }
 
     @Override
@@ -362,19 +362,23 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     private void refreshFeeHintLayout(String feeBtc) {
-        StringBuilder hintbuilder = new StringBuilder();
+        tvFeeHint.setText(String.format(getString(R.string.hint_confirm_time_and_fees), formatTime(mFeeTime), feeBtc + " BTC"));
+    }
 
-        hintbuilder.append("平均出块时间")
-                .append(StringUtils.formatTime(mFeeTime))
-                .append("，需耗费")
-                .append(feeBtc)
-                .append("BTC");
-        tvFeeHint.setText(hintbuilder.toString());
+    public String formatTime(int time) {
+        if (time > 24 * 60) {
+            return time / (24 * 60) + getString(R.string.hint_time_days);
+        } else if (time > 60) {
+            return time / 60 + getString(R.string.hint_time_hours);
+        } else {
+            return time + getString(R.string.hint_time_minutes);
+        }
+
     }
 
     @Override
     public void amountNoEnough() {
-        MessageConfirmDialog.newInstance("余额不足，请返回重新选择", true)
+        MessageConfirmDialog.newInstance(getString(R.string.msg_dialog_amount_not_enough), true)
                 .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

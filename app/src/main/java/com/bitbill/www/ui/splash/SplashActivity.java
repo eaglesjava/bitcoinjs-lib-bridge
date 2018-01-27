@@ -14,6 +14,7 @@ import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.eventbus.RegisterEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -40,28 +41,6 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
     private static final String TAG = "SplashActivity";
     private static final int MSG_SET_ALIAS = 1001;
-    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
-        @Override
-        public void gotResult(int code, String alias, Set<String> tags) {
-            String logs;
-            switch (code) {
-                case 0:
-                    logs = "Set tag and alias success:" + alias;
-                    Log.i(TAG, logs);
-                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
-                    break;
-                case 6002:
-                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.:" + alias;
-                    Log.i(TAG, logs);
-                    // 延迟 60 秒来调用 Handler 设置别名
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
-                    break;
-                default:
-                    logs = "Failed with errorCode = " + code + ",alias:" + alias;
-                    Log.e(TAG, logs);
-            }
-        }
-    };
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {
@@ -83,7 +62,30 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
-    SplashMvpPresenter<WalletModel, SplashMvpView> mSplashMvpPresenter;
+    SplashMvpPresenter<AppModel, SplashMvpView> mSplashMvpPresenter;
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success:" + alias;
+                    Log.i(TAG, logs);
+                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                    getMvpPresenter().setAliasSeted(true);
+                    break;
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.:" + alias;
+                    Log.i(TAG, logs);
+                    // 延迟 60 秒来调用 Handler 设置别名
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+                default:
+                    logs = "Failed with errorCode = " + code + ",alias:" + alias;
+                    Log.e(TAG, logs);
+            }
+        }
+    };
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
@@ -95,7 +97,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
-
+        getMvpPresenter().initLanguage();
         getMvpPresenter().hasWallet();
         getMvpPresenter().getExchangeRate();
         getApp().setContactKey(getMvpPresenter().getContactKey());
@@ -161,8 +163,10 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
     // 这是来自 JPush Example 的设置别名的 Activity 里的代码。一般 App 的设置的调用入口，在任何方便的地方调用都可以。
     private void setAlias() {
+        if (!getMvpPresenter().isAliasSeted()) {
+            // 调用 Handler 来异步设置别名
+            mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, DeviceUtil.getDeviceId()));
+        }
 
-        // 调用 Handler 来异步设置别名
-        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, DeviceUtil.getDeviceId()));
     }
 }

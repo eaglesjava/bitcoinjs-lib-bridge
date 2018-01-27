@@ -82,7 +82,7 @@ public class SendAmountActivity extends BaseToolbarActivity {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_send_amount);
     }
 
     @Override

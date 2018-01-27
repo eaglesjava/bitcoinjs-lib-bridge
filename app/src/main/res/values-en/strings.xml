@@ -23,6 +23,7 @@
     <string name="dialog_btn_cancel">Cancel</string>
     <string name="dialog_btn_comfirm">Confirm</string>
     <string name="dialog_msg_request_permissions">Scanning the qr code requires the ability to open the camera and the astigmatic light.</string>
+    <string name="msg_dailog_input_2_confirm">Please enter wallet password to confirm.</string>
 
     <!--socket message-->
     <string name="connect">Socket connected</string>
@@ -209,6 +210,15 @@
     <string name="msg_balance_not_enough">Not enough balance</string>
     <!--send confirm activity-->
     <string name="title_activity_send_confirm">Send confirm</string>
+    <string name="title_content_send_amount">Sending amount</string>
+    <string name="title_content_receiver_address">Address of receiver</string>
+    <string name="title_content_fees">Fee</string>
+    <string name="hint_confirm_time_and_fees">Average confirmation time %1$s costs %2$s.</string>
+    <string name="hint_time_days">days</string>
+    <string name="hint_time_hours">hours</string>
+    <string name="hint_time_minutes">minutes</string>
+    <string name="title_content_send_wallet">Sending wallet</string>
+    <string name="hint_remark_20_character">Remarks (in 20 characters)</string>
     <string name="btn_confirm_send">Send confirm</string>
     <string name="dialog_title_wallet_pwd">Wallet password</string>
     <string name="title_activity_send_success">Send successfully</string>
@@ -216,6 +226,7 @@
     <string name="hint_send_success">Add the address as the frequent contact for the next transaction</string>
     <string name="fail_send_transaction">Send failed</string>
     <string name="fail_refresh_change_address">Failed to generate change address, please try again.</string>
+    <string name="msg_dialog_amount_not_enough">The balance is not enough, please return to reselect.</string>
 
     <!--scan qrcode-->
     <string name="title_activity_scan_qrcode">Scan</string>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseFragmentActivity;
 import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
@@ -23,6 +24,12 @@ public class WalletSettingActivity extends BaseFragmentActivity {
     public static void start(Context context) {
         Intent starter = new Intent(context, WalletSettingActivity.class);
         context.startActivity(starter);
+    }
+
+    @Override
+    public void onBeforeSetContentLayout() {
+        super.onBeforeSetContentLayout();
+        setTitle(R.string.title_activity_wallet_setting);
     }
 
     @Override

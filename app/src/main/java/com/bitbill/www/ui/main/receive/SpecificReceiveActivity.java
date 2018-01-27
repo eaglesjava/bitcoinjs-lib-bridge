@@ -52,7 +52,7 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_specific_receive);
     }
 
     @Override

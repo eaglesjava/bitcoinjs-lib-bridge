@@ -98,7 +98,7 @@ public class ImportWalletActivity extends BaseToolbarActivity<ImportWalletMvpPre
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_import_wallet);
     }
 
     @Override

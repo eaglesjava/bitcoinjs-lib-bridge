@@ -30,6 +30,7 @@
     <string name="dialog_btn_cancel">取消</string>
     <string name="dialog_btn_comfirm">确定</string>
     <string name="dialog_msg_request_permissions">扫描二维码需要打开相机和散光灯的权限</string>
+    <string name="msg_dailog_input_2_confirm">请输入密码以确认</string>
 
     <!--guide-->
     <string name="btn_create_wallet">创建钱包</string>
@@ -210,6 +211,15 @@
     <string name="msg_balance_not_enough">余额不足</string>
     <!--send confirm activity-->
     <string name="title_activity_send_confirm">确认发送</string>
+    <string name="title_content_send_amount">发送金额</string>
+    <string name="title_content_receiver_address">接收方地址</string>
+    <string name="title_content_fees">推荐手续费</string>
+    <string name="hint_confirm_time_and_fees">平均确认时间%1$s，需耗费%2$s</string>
+    <string name="hint_time_days">天</string>
+    <string name="hint_time_hours">小时</string>
+    <string name="hint_time_minutes">分钟</string>
+    <string name="title_content_send_wallet">发出钱包</string>
+    <string name="hint_remark_20_character">备注（20字内）</string>
     <string name="btn_confirm_send">确认发送</string>
     <string name="dialog_title_wallet_pwd">钱包密码</string>
     <string name="title_activity_send_success">发送成功</string>
@@ -217,6 +227,7 @@
     <string name="hint_send_success">推荐你添加该地址到新联系人以便下次交易</string>
     <string name="fail_send_transaction">发送交易失败</string>
     <string name="fail_refresh_change_address">生成找零地址失败，请重试</string>
+    <string name="msg_dialog_amount_not_enough">余额不足，请返回重新选择</string>
 
     <!--scan qrcode-->
     <string name="title_activity_scan_qrcode">扫一扫</string>

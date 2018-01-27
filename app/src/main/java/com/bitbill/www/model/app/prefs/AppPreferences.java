@@ -19,6 +19,7 @@ public interface AppPreferences extends Prefs {
     String SELECTED_CURRENCY = "selected_currency";
     String CONTACTKEY = "contactkey";
     String SELECTED_LOCALE = "selected_locale";
+    String IS_ALIAS_SETED = "is_alias_seted";
 
     void setReceiveRemindDialogShown();
 
@@ -43,6 +44,10 @@ public interface AppPreferences extends Prefs {
     Locale getSelectedLocale();
 
     void setSelectedLocale(Locale locale);
+
+    boolean isAliasSeted();
+
+    void setAliasSeted(boolean isSeted);
 
     enum SelectedCurrency {
         CNY,

@@ -147,8 +147,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    SplashMvpPresenter<WalletModel, SplashMvpView> provideSplashPresenter(
-            SplashPresenter<WalletModel, SplashMvpView> presenter) {
+    SplashMvpPresenter<AppModel, SplashMvpView> provideSplashPresenter(
+            SplashPresenter<AppModel, SplashMvpView> presenter) {
         return presenter;
     }
 

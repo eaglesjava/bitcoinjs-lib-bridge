@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseFragment;
@@ -42,7 +43,7 @@ public class AddContactByAddressActivity extends BaseTabsActivity {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_add_contact_by_address);
     }
 
     @Override

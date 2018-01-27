@@ -39,7 +39,7 @@ public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMv
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_add_contact_by_id);
     }
 
     @Override

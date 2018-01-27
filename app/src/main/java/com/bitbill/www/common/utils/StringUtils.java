@@ -569,17 +569,6 @@ public class StringUtils {
         return df.format(feeDecimal.divide(new BigDecimal(AppConstants.SATOSHI)));
     }
 
-    public static String formatTime(int time) {
-        if (time > 24 * 60) {
-            return time / (24 * 60) + "天";
-        } else if (time > 60) {
-            return time / 60 + "小时";
-        } else {
-            return time + "分钟";
-        }
-
-    }
-
     public static Date getDate(String date) {
         //get date by string
         Date parse = null;

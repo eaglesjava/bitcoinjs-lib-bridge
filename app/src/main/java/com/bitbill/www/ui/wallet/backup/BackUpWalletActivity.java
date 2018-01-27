@@ -62,7 +62,7 @@ public class BackUpWalletActivity extends ScreenShotObserverActivity<BackupWalle
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_backup_wallet);
     }
 
     @Override

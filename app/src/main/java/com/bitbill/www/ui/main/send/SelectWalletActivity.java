@@ -66,7 +66,7 @@ public class SelectWalletActivity extends BaseToolbarActivity {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_select_wallet);
         if (mWalletList == null) {
             mWalletList = new ArrayList<>();
         }

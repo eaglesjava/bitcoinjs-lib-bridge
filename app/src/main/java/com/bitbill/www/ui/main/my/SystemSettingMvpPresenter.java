@@ -24,5 +24,5 @@ public interface SystemSettingMvpPresenter<M extends AppModel, V extends SystemS
 
     void setSelectedLocale(Locale locale);
 
-    void updateLocale(Locale newUserLocale);
+    boolean needUpdateLocale(Locale newUserLocale);
 }

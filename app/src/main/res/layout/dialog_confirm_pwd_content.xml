@@ -21,6 +21,6 @@
         style="@style/EditText.ConfirmPwd"
         android:layout_width="match_parent"
         android:layout_margin="@dimen/dialog_confirm_padding"
-        android:hint="请输入密码以确认"
+        android:hint="@string/msg_dailog_input_2_confirm"
         android:theme="@style/AppTheme.ConfrimEditText" />
 </LinearLayout>

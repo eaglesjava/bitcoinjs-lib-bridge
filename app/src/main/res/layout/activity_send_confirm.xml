@@ -21,7 +21,7 @@
             <TextView
                 style="@style/Text.Title.Confirm"
                 android:layout_marginTop="30dp"
-                android:text="发送金额" />
+                android:text="@string/title_content_send_amount"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             <TextView
                 style="@style/Text.White.Action"
                 android:layout_marginTop="40dp"
-                android:text="推荐手续费" />
+                android:text="@string/title_content_fees"/>
 
             <SeekBar
                 android:id="@+id/sb_send_fee"
@@ -59,12 +59,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="平均出块时间30分钟，需耗费0.002BTC" />
+                android:text="@string/hint_confirm_time_and_fees"/>
 
             <TextView
                 style="@style/Text.Title.Confirm"
                 android:layout_marginTop="30dp"
-                android:text="接收方地址" />
+                android:text="@string/title_content_receiver_address"/>
 
             <TextView
                 android:id="@+id/tv_send_address"
@@ -77,13 +77,12 @@
             <TextView
                 style="@style/Text.Title.Confirm"
                 android:layout_marginTop="30dp"
-                android:text="发出钱包" />
+                android:text="@string/title_content_send_wallet"/>
 
             <TextView
                 android:id="@+id/tv_send_contact"
                 style="@style/Text.White"
                 android:layout_marginTop="10dp"
-                android:text="王涵洋"
                 android:textSize="16sp" />
 
             <EditText
@@ -92,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:hint="备注（20字内）"
+                android:hint="@string/hint_remark_20_character"
                 android:maxLength="20"/>
 
             <Button

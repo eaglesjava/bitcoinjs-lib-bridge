@@ -5,8 +5,17 @@
 package com.bitbill.www.model.app;
 
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
+import android.os.LocaleList;
+import android.util.DisplayMetrics;
+
 import com.bitbill.www.common.base.model.ModelManager;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
+import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.app.network.AppApi;
 import com.bitbill.www.model.app.prefs.AppPreferences;
 
@@ -24,11 +33,13 @@ public class AppModelManager extends ModelManager implements AppModel {
 
     private final AppApi mAppApi;
     private final AppPreferences mAppPreferences;
+    private final Context mContext;
 
     @Inject
-    public AppModelManager(AppPreferences appPreferences, AppApi appApi) {
+    public AppModelManager(@ApplicationContext Context context, AppPreferences appPreferences, AppApi appApi) {
         mAppApi = appApi;
         mAppPreferences = appPreferences;
+        mContext = context;
     }
 
 
@@ -100,5 +111,84 @@ public class AppModelManager extends ModelManager implements AppModel {
     @Override
     public void setSelectedLocale(Locale locale) {
         mAppPreferences.setSelectedLocale(locale);
+    }
+
+    /**
+     * 获取当前的Locale
+     *
+     * @return Locale
+     */
+    @Override
+    public Locale getCurrentLocale() {
+        Locale locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //7.0有多语言设置获取顶部的语言
+            locale = mContext.getResources().getConfiguration().getLocales().get(0);
+        } else {
+            locale = mContext.getResources().getConfiguration().locale;
+        }
+        return locale;
+    }
+
+    /**
+     * 更新Locale
+     */
+    @Override
+    public void updateLocale(Context context) {
+        updateLocale(context, null);
+    }
+
+    /**
+     * 更新Locale
+     */
+    @Override
+    public void updateLocale(Context context, Configuration newConfig) {
+        Locale selectedLocale = getSelectedLocale();
+        if (selectedLocale == null) {
+            return;
+        }
+        Locale.setDefault(selectedLocale);
+        Configuration configuration = newConfig != null ? new Configuration(newConfig) : mContext.getResources().getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            LocaleList localeList = new LocaleList(selectedLocale);
+            LocaleList.setDefault(localeList);
+            configuration.setLocales(localeList);
+            context.createConfigurationContext(configuration);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            configuration.setLocale(selectedLocale);
+        } else {
+            configuration.locale = selectedLocale;
+        }
+        DisplayMetrics _DisplayMetrics = context.getResources().getDisplayMetrics();
+        context.getResources().updateConfiguration(configuration, _DisplayMetrics);
+    }
+
+    @Override
+    public Context attachBaseContext(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return updateResources(context);
+        } else {
+            return context;
+        }
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.N)
+    private Context updateResources(Context context) {
+        Resources resources = context.getResources();
+        Locale locale = getSelectedLocale();
+        Configuration configuration = resources.getConfiguration();
+        configuration.setLocale(locale);
+        configuration.setLocales(new LocaleList(locale));
+        return context.createConfigurationContext(configuration);
+    }
+
+    @Override
+    public boolean isAliasSeted() {
+        return mAppPreferences.isAliasSeted();
+    }
+
+    @Override
+    public void setAliasSeted(boolean isSeted) {
+        mAppPreferences.setAliasSeted(isSeted);
     }
 }

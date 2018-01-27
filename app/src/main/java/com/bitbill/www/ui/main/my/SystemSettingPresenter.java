@@ -1,8 +1,5 @@
 package com.bitbill.www.ui.main.my;
 
-import android.content.res.Configuration;
-import android.util.DisplayMetrics;
-
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.scope.PerActivity;
@@ -44,6 +41,7 @@ public class SystemSettingPresenter<M extends AppModel, V extends SystemSettingM
     @Override
     public void setSelectedCurrency(AppPreferences.SelectedCurrency selectedCurrency) {
         getModelManager().setSelectedCurrency(selectedCurrency);
+        getApp().setSelectedCurrency(selectedCurrency);
     }
 
     @Override
@@ -57,28 +55,13 @@ public class SystemSettingPresenter<M extends AppModel, V extends SystemSettingM
     }
 
     /**
-     * 更新Locale
-     *
-     * @param newUserLocale New User Locale
-     */
-    @Override
-    public void updateLocale(Locale newUserLocale) {
-        if (needUpdateLocale(newUserLocale)) {
-            Configuration configuration = getApp().getResources().getConfiguration();
-            configuration.setLocale(newUserLocale);
-            DisplayMetrics displayMetrics = getApp().getResources().getDisplayMetrics();
-            getApp().getResources().updateConfiguration(configuration, displayMetrics);
-            setSelectedLocale(newUserLocale);
-        }
-    }
-
-    /**
      * 判断需不需要更新
      *
      * @param newUserLocale New User Locale
      * @return true / false
      */
+    @Override
     public boolean needUpdateLocale(Locale newUserLocale) {
-        return newUserLocale != null && !getSelectedLocale().equals(newUserLocale);
+        return newUserLocale != null && !newUserLocale.equals(getSelectedLocale());
     }
 }

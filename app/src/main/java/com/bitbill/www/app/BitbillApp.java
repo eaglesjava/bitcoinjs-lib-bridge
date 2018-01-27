@@ -2,7 +2,6 @@ package com.bitbill.www.app;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Notification;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +11,6 @@ import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.www.BuildConfig;
 import com.bitbill.www.R;
-import com.bitbill.www.common.utils.LocaleUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.di.component.ApplicationComponent;
@@ -25,11 +23,9 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
-import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
@@ -49,7 +45,8 @@ public class BitbillApp extends Application {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
             //强制修改应用语言
-            LocaleUtils.updateLocale(activity, LocaleUtils.getUserLocale(activity));
+            mAppModel.updateLocale(activity);
+            mAppModel.updateLocale(getApplicationContext());
         }
 
         @Override
@@ -115,32 +112,17 @@ public class BitbillApp extends Application {
         mWallets = new ArrayList<>();
 
         registerActivityLifecycleCallbacks(callbacks);
-        LocaleUtils.updateLocale(this, LocaleUtils.getUserLocale(this));
+        mAppModel.updateLocale(this);
 
         JPushInterface.setDebugMode(BuildConfig.DEBUG);
         JPushInterface.init(this);
-        BasicPushNotificationBuilder builder = new BasicPushNotificationBuilder(this);
-        builder.statusBarDrawable = R.drawable.ic_logo;
-        builder.notificationFlags = Notification.FLAG_AUTO_CANCEL
-                | Notification.FLAG_SHOW_LIGHTS;  //设置为自动消失和呼吸灯闪烁
-        builder.notificationDefaults = Notification.DEFAULT_SOUND
-                | Notification.DEFAULT_VIBRATE
-                | Notification.DEFAULT_LIGHTS;// 设置为铃声、震动、呼吸灯闪烁都要
-        JPushInterface.setPushNotificationBuilder(1, builder);
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Locale _UserLocale = LocaleUtils.getUserLocale(this);
         //系统语言改变了应用保持之前设置的语言
-        if (_UserLocale != null) {
-            Locale.setDefault(_UserLocale);
-            Configuration _Configuration = new Configuration(newConfig);
-            _Configuration.setLocale(_UserLocale);
-            getResources().updateConfiguration(_Configuration, getResources().getDisplayMetrics());
-        }
-
+        mAppModel.updateLocale(this, newConfig);
     }
 
     public ApplicationComponent getComponent() {

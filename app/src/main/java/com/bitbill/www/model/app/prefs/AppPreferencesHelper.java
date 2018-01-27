@@ -7,6 +7,7 @@ package com.bitbill.www.model.app.prefs;
 import android.content.Context;
 
 import com.bitbill.www.common.base.model.prefs.PreferencesHelper;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.di.qualifier.PrefersAppInfo;
 
@@ -65,7 +66,12 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
 
     @Override
     public SelectedCurrency getSelectedCurrency() {
-        return SelectedCurrency.valueOf(mPrefs.getString(SELECTED_CURRENCY, SelectedCurrency.CNY.name()));
+        try {
+            return SelectedCurrency.valueOf(mPrefs.getString(SELECTED_CURRENCY, ""));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -86,11 +92,30 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
 
     @Override
     public Locale getSelectedLocale() {
-        return new Locale(mPrefs.getString(SELECTED_LOCALE, Locale.CHINESE.getLanguage()));
+
+        String language = mPrefs.getString(SELECTED_LOCALE, null);
+        if (StringUtils.isNotEmpty(language)) {
+            return new Locale(language);
+        }
+        return null;
+
     }
 
     @Override
     public void setSelectedLocale(Locale locale) {
+        if (locale == null) {
+            return;
+        }
         mPrefs.edit().putString(SELECTED_LOCALE, locale.getLanguage()).apply();
+    }
+
+    @Override
+    public boolean isAliasSeted() {
+        return mPrefs.getBoolean(IS_ALIAS_SETED, false);
+    }
+
+    @Override
+    public void setAliasSeted(boolean isSeted) {
+        mPrefs.edit().putBoolean(IS_ALIAS_SETED, isSeted).apply();
     }
 }

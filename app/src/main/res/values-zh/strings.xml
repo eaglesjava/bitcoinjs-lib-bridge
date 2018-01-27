@@ -29,6 +29,9 @@
     <!--dialog -->
     <string name="dialog_btn_cancel">取消</string>
     <string name="dialog_btn_comfirm">确定</string>
+    <string name="dialog_msg_request_permissions">扫描二维码需要打开相机和散光灯的权限</string>
+    <string name="msg_dailog_input_2_confirm">请输入密码以确认</string>
+
 
     <!--guide-->
     <string name="btn_create_wallet">创建钱包</string>
@@ -209,6 +212,15 @@
     <string name="msg_balance_not_enough">余额不足</string>
     <!--send confirm activity-->
     <string name="title_activity_send_confirm">确认发送</string>
+    <string name="title_content_send_amount">发送金额</string>
+    <string name="title_content_receiver_address">接收方地址</string>
+    <string name="title_content_fees">推荐手续费</string>
+    <string name="hint_confirm_time_and_fees">平均确认时间%1$s，需耗费%2$s</string>
+    <string name="hint_time_days">天</string>
+    <string name="hint_time_hours">小时</string>
+    <string name="hint_time_minutes">分钟</string>
+    <string name="title_content_send_wallet">发出钱包</string>
+    <string name="hint_remark_20_character">备注（20字内）</string>
     <string name="btn_confirm_send">确认发送</string>
     <string name="dialog_title_wallet_pwd">钱包密码</string>
     <string name="title_activity_send_success">发送成功</string>
@@ -216,6 +228,7 @@
     <string name="hint_send_success">推荐你添加该地址到新联系人以便下次交易</string>
     <string name="fail_send_transaction">发送交易失败</string>
     <string name="fail_refresh_change_address">生成找零地址失败，请重试</string>
+    <string name="msg_dialog_amount_not_enough">余额不足，请返回重新选择</string>
 
     <!--scan qrcode-->
     <string name="title_activity_scan_qrcode">扫一扫</string>
@@ -324,6 +337,5 @@
     <!--use rule-->
     <string name="title_activity_use_rule">使用条款</string>
     <string name="html_use_rule"><![CDATA[<body ondragstart=\'return false\' onselectstart =\'return false\' onselect=\'return false\' oncopy=\'return false\' onbeforecopy=\'return false\' onmouseup=\'return false\'> <div class=\"container\">     <p>本协议由 BITBILL PTY LTD (以下简称 “Bitbill” 或“我们”)和用户（以下简称“你”或“用户”）签订。</p>     <p>除非你已阅读并接受本协议所有条款，否则你无权下载、安装或使用本软件及相关服务。你使用本软件即视为你已阅读并同意本协议的约束。</p>     <p class=\"tit\">1、提供的服务</p>     <p>你能够使用 Bitbill 创建或导入钱包，可以对于 Bitbill 所支持的数字资产进行存储与钱包管理； Bitbill 可以创建多个钱包，每个钱包均可以存储管理 Bitbill 所支持的多个数字资产，每个钱包均有单独的钱包ID和单独的助记词；</p>     <p>你可以使用 Bitbill 的接收、发送功能进行数字资产的转账，实际的转账行为均在相关区块链系统（而非 Bitbill ）上发生，你知悉基于区块链系统交易“不可撤销”的属性，Bitbill 不能为你暂停或撤销转账交易等操作；另，发送行为需密码确认，若你忘记密码，可通过已备份的助记词恢复钱包而重设密码；</p>     <p>你可以使用 Bitbill 添加联系人，Bitbill 联系人与钱包ID或地址相关联，方便于你与联系人进行数字资产的传输；请备份你联系人的 recovery key（联系人恢复密钥），你可以通过联系人的 recovery key 恢复联系人列表；</p>     <p>我们将通过区块链系统拷贝你全部或部分的交易记录。但交易记录以区块链系统的记载为准。</p>     <p> Bitbill 建议你在使用 Bitbill 软件之前学习数字资产的基础知识，建议只有当你熟悉数字资产后再使用 Bitbill 钱包。</p>     <p class=\"tit\">2、私钥掌握在你手里</p>     <p> Bitbill 秉承着区块链的去中心化特点，并为了保护用户的数字资产安全，Bitbill 提供的是去中心化服务，大大区别于银行业金融机构。</p>     <p><b> Bitbill 不提供如下服务：</b>存储用户的钱包密码和助记词；找回用户的钱包密码、助记词；冻结钱包；挂失钱包；恢复钱包；交易回滚；由于 Bitbill 不提供以上服务，因此用户应当自行保管 Bitbill 各钱包的助记词；</p>     <p>如果你丢失访问你的 Bitbill 钱包路径，而且你没有备份存储你的钱包相应的助记词或遗失你已备份的助记词，则你承认并同意，你与该钱包相关的任何数字资产都会变得无法访问。 Bitbill 无法还原你的钱包或找回钱包密码、助记词； Bitbill 不承担你因此造成的任何损失。</p>     <p>所有的交易请求都是不可撤销的，如用户进行交易时误操作（包含但不限于发送给错误的联系人、发送给错误的交易地址以及错误的金额等），Bitbill 无法取消交易也不承担你误操作的任何后果。</p>     <p>如果你不理解以上段落的内容，Bitbill 建议你在使用 Bitbill 钱包之前更多的了解加密数字货币的相关知识。</p>     <p class=\"tit\">3、用户的义务与责任</p>     <p>用户必须是具备完全民事行为能力的自然人。若你为18周岁以下的未成年人，需要在你父母或监护人的指导下阅读并接受 Bitbill 协议、及使用 Bitbill 。无民事行为能力人使用 Bitbill 或限制民事行为能力人超过其民事权利或行为能力范围从事交易的，造成的一切后果，Bitbill 有权要求你及你的父母或监护人负责；</p>     <p>你对你拥有的数字资产负责任；</p>     <p>你需妥善保管你的助记词、联系人 recovery key；</p>     <p>你添加联系人时请确保所添加的联系人准确无误，避免后续交易不可撤销造成的不可挽回的损失；</p>     <p>确保你使用 Bitbill 符合澳大利亚当地法律；</p>     <p>你不应该存放数字资产到 Bitbill 不支持的数字资产的地址；</p>     <p>你不应该做出可能会干扰其他 Bitbill 用户或服务器的行为，例如过度 API 调用或网络垃圾邮件等；</p>     <p>你不应该做出使用 Bitbill 违反澳大利亚或你当地法律的行为；</p>     <p class=\"tit\">4、无法控制区块链</p>     <p>对于任何 Bitbill 允许你使用的数字资产，Bitbill 不是创造者也没有任何控制，你应全权负责你对数字资产的选择和使用。</p>     <p class=\"tit\">5、第三方应用集成</p>     <p> Bitbill 会集成第三方应用。尽管 Bitbill 使得与集成的第三方应用接洽更容易，但 Bitbill 对你使用第三方应用服务不承担任何后果，如果你需要帮助，你应该联系集成的第三方组织。</p>     <p class=\"tit\">6、交易</p>     <p>只有真实记录在区块链上的数字资产交易才构成成功有效的区块链交易。</p>     <p> Bitbill 提供允许你发送数字资产交易的指令，但不保证你使用 Bitbill 的交易行为一定会被存储在某个区块链中。你必须确保你的交易符合 Bitbill 软件适用的规则（特别是像 ETH 这样的智能合约系统）。</p>     <p> Bitbill 暂时不向你收取任何形式的服务费或手续费，将来需对某些服务进行收费时将另行约定或公布规则; </p>     <p>有的交易可能会有交易费用（如矿工费），这取决于你拥有的相关数字资产本身体系的要求；由于你不适当地交易费用设置（过高或过低）所造成的损失，Bitbill 不承担任何责任。</p>     <p class=\"tit\">7、免责申明</p>     <p> Bitbill 对以下情形不承担责任：</p>     <p>因用户遗失移动设备、删除且未备份 Bitbill 、删除且未备份钱包助记词、钱包被盗或遗忘钱包密码、助记词、而导致的数字资产丢失；</p>     <p>因用户自行泄露钱包密码、私钥、助记词，或借用、转让或授权他人使用自己的移动设备或 Bitbill 钱包，或未通过 Bitbill 官方渠道下载 Bitbill 应用程序或其他不安全的方式使用 Bitbill 应用程序导致的数字资产丢失；</p>     <p>因用户误操作（包括但不限于你输错转账地址、发错联系人、输错金额）导致的数字资产丢失；</p>     <p>因用户不理解区块链技术的性质而进行误操作导致的数字资产丢失；</p>     <p>因时间滞后、区块链系统不稳定等原因导致 Bitbill 拷贝用户在区块链上的交易记录发生偏差；</p>     <p>用户在第三方应用上操作产生的风险和后果；</p>     <p>虽然本软件已经过 beta 测试，并且继续得到来自开源用户和开发者社区反馈的改进，但我们无法保证软件中不会有错误，你承认并接受你使用本软件的行为是由你自行决定并承担可能出现的任何后果；</p>     <p class=\"tit\">8、隐私条款</p>     <p>请你知悉，我们收集你的以下信息是出于满足你在 Bitbill 服务需要的目的，且我们十分重视对你隐私的保护。</p>     <p>我们所收集信息如下：我们将收集你的移动设备信息、操作记录、交易记录、钱包 ID 、钱包地址、联系人等个人信息。</p>     <p>在法律法规允许的范围内，Bitbill 可能会在以下情形中收集并使用你的个人信息无需征得你的授权同意：与国家安全、国防安全有关的；与公共安全、公共卫生、重大公共利益有关的；与犯罪侦查、起诉、审判和判决执行等有关的；所收集的个人信息是你自行向社会公众公开的；从合法公开披露的信息中收集你的个人信息，如合法的新闻报道，政府信息公开等渠道；用于维护服务的安全和合规所必需的，例如发现、处理产品和服务的故障；法律法规规定的其他情形。</p>     <p>我们如何使用你的信息：</p>     <p>a、我们通过你移动设备的唯一序列号，确认你与你的钱包联系人的对应关系。</p>     <p>b、我们将向你及时发送重要通知，如软件更新、服务协议的变更。</p>     <p>c、依照本协议及 Bitbill 其他有关规定，Bitbill 将利用用户信息对用户的使用行为进行管理及处理。</p>     <p>d、法律法规规定及与监管机构配合的要求。</p>     <p class=\"tit\">9、知识产权</p>     <p>BITBILL PTY LTD 是本软件的知识产权权利人。本软件一切著作权、商标权、专利权、商业秘密等知识产权，以及与本软件相关的所有信息内容（包括但不限于 Bitbill 的所有品牌、标志和商标、本协议、文字、视频、音频、图片、图表、界面设计、版面框架、代码）的知识产权归 Bitbill 所有。用户仅可为持有和管理数字资产之目的使用 Bitbill 应用程序及其中的内容。未经 Bitbill 事先书面同意，任何人不得擅自使用、修改、反向编译、复制、公开传播、改变、散布、发行或公开发表上述应用程序及内容。</p>     <p>你承担使用本软件相关的任何风险，我们保留随时修改本协议的权利。对于本协议未尽事宜，你需遵守 Bitbill 不定时更新的公告及相关规则。</p>     <p class=\"ltd\">BITBILL PTY LTD</p>     <p class=\"ver\">版本 20180104</p> </div> </body>]]></string>
-
 
 </resources>
