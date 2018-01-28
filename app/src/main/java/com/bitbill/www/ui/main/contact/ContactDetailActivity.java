@@ -66,7 +66,7 @@ public class ContactDetailActivity extends BaseToolbarActivity {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_contact_detail);
     }
 
     @Override
@@ -81,14 +81,14 @@ public class ContactDetailActivity extends BaseToolbarActivity {
 
     @Override
     public void initData() {
-        if (mContact == null || StringUtils.isEmpty(mContact.getContactName()) || StringUtils.isEmpty(StringUtils.getNameLabel(mContact.getContactName()))) {
-            showMessage("加载联系人信息失败");
+        if (mContact == null || StringUtils.isEmpty(mContact.getContactName()) || StringUtils.isEmpty(StringUtils.getNameLabel(mContact.getContactName().trim()))) {
+            showMessage(R.string.fail_load_contact_info);
             return;
         }
         mTvContactLabel.setText(StringUtils.getNameLabel(mContact.getContactName()));
         mTvContactName.setText(mContact.getContactName());
 
-        mTvWalletRemark.setText(StringUtils.isEmpty(mContact.getRemark()) ? "无" : mContact.getRemark());
+        mTvWalletRemark.setText(StringUtils.isEmpty(mContact.getRemark()) ? getString(R.string.hint_remark_none) : mContact.getRemark());
         if (StringUtils.isEmpty(mContact.getWalletId())) {
             mLLWalletId.setVisibility(View.GONE);
             if (StringUtils.isEmpty(mContact.getAddress())) {

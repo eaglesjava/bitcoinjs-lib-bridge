@@ -237,6 +237,8 @@
     <string name="title_activity_contact_detail">Contact details</string>
     <string name="action_contact_edit">Edit</string>
     <string name="action_contact_add">Add</string>
+    <string name="fail_load_contact_info">Failed to load contact information.</string>
+    <string name="hint_remark_none">none</string>
     <string name="title_activity_add_contact_by_id">Via wallet ID</string>
     <string name="hint_search_wallet_id">Search wallet ID</string>
     <string name="btn_add_now">Add now</string>

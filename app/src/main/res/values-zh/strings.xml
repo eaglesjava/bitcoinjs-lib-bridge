@@ -239,6 +239,8 @@
     <string name="title_activity_contact_detail">联系人详情</string>
     <string name="action_contact_edit">编辑</string>
     <string name="action_contact_add">添加</string>
+    <string name="fail_load_contact_info">加载联系人信息失败</string>
+    <string name="hint_remark_none">无</string>
     <string name="title_activity_scan_result">扫描结果</string>
     <string name="title_activity_add_contact_by_id">通过 ID 添加</string>
     <string name="hint_search_wallet_id">搜索对方 ID</string>
