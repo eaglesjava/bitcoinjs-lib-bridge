@@ -29,10 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
-        
-        print(BILSettingManager.currentLanguage)
-//        BILSettingManager.currentLanguage = .zh_cn
-//        print(BILSettingManager.currentLanguage)
 		
 		BILAppStartUpManager.shared.startSetup()
 		BILWalletManager.shared.appDelegate = self

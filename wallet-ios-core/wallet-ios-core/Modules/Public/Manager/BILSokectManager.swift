@@ -66,7 +66,7 @@ class BILSokectManager: NSObject {
             debugPrint(data)
         }
         socket.on(.bil_socket_event_unconfirm) { (data, emitter) in
-            debugPrint(data)
+            debugPrint("bil_socket_event_unconfirm \(data)")
             let jsonStr = data.first as? String ?? ""
             var json = JSON(parseJSON: jsonStr)["context"]
             let amount = json["amount"].int64Value
