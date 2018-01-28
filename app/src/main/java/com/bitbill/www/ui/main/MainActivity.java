@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.BottomSheetBehavior;
@@ -166,11 +165,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         intent.putExtra(AppConstants.EXTRA_CONTACT, sendContact);
         intent.putExtra(AppConstants.EXTRA_ADDRESS, address);
         context.startActivity(intent);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -597,6 +591,13 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         //重新加载钱包信息
         if (mSendFragment != null) {
             mSendFragment.sendSuccess();
+        }
+        //切换到资产页面并刷新未确认列表
+        if (mViewPager != null) {
+            mViewPager.setCurrentItem(INDEX_ASSET);
+        }
+        if (getMvpPresenter() != null) {
+            getMvpPresenter().listUnconfirm();
         }
     }
 
