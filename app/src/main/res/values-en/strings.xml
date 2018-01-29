@@ -9,8 +9,8 @@
 
     <!--App Message-->
     <string name="error_api_retry">Please try again</string>
-    <string name="error_api_default">error</string>
-    <string name="some_error">error</string>
+    <string name="error_api_default">Error occurred.</string>
+    <string name="some_error">Error occurred.</string>
     <string name="error_connection">Network connection failed</string>
     <string name="error_api_server">The request failed</string>
     <string name="error_server_busy">Server is busy. Please try again later.</string>
@@ -22,11 +22,11 @@
     <!--dialog -->
     <string name="dialog_btn_cancel">Cancel</string>
     <string name="dialog_btn_comfirm">Confirm</string>
-    <string name="dialog_msg_request_permissions">Scanning the qr code requires the ability to open the camera and the astigmatic light.</string>
+    <string name="dialog_msg_request_permissions">Scanning QR code requires the permission to open camera and astigmatic light.</string>
     <string name="msg_dailog_input_2_confirm">Please enter wallet password to confirm.</string>
 
     <!--socket message-->
-    <string name="connect">Socket connected</string>
+    <string name="connect">Connected</string>
     <string name="disconnect">Disconnect. Check your network connection.</string>
     <string name="error_connect">Connect failed</string>
     <!--JPush-->
@@ -46,7 +46,7 @@
     <string name="hint_click_input_please">Click to enter</string>
     <string name="hint_only_support_bip39">Supports BIP39 mnemonic words only</string>
     <string name="btn_next">Next</string>
-    <string name="fail_input_menemonic">Please fill in the mnemonic word correctly.</string>
+    <string name="fail_input_menemonic">Please enter the mnemonic words correctly.</string>
     <string name="fail_import_wallet">Failed to import the wallet, please try again.</string>
     <string name="title_activity_create_wallet">Create wallet</string>
     <string name="dialog_btn_known">Get it</string>
@@ -98,12 +98,12 @@
     <string name="title_send">Send</string>
     <string name="navigation_drawer_open">Open navigation</string>
     <string name="navigation_drawer_close">Close navigation</string>
-    <string name="fail_parse_tx_item">Parsing the transaction list information failed.</string>
+    <string name="fail_parse_tx_item">Failed to parse the transaction list.</string>
     <string name="menu_create_wallet">Create Wallet</string>
     <string name="menu_import_wallet">Import Wallet</string>
     <!--scan qrcode -->
-    <string name="fail_open_camera">The camera failed to open, please check permissions.</string>
-    <string name="fail_parse_scan_result">Parsing the scan results failed</string>
+    <string name="fail_open_camera">Failed to open the camera, please check the permission.</string>
+    <string name="fail_parse_scan_result">Failed to parse the scan result.</string>
     <string name="tip_qrcode_scan">Put the QR code into the box,it will automatically scan.</string>
 
     <!--asset fragment-->
@@ -136,11 +136,11 @@
     <string name="hint_bak_wallet_success">Succeed to back up</string>
     <string name="hint_keep_mnemonic">Please keep your mnemonic words carefully</string>
     <string name="btn_complete">Complete</string>
-    <string name="fail_load_mnemonic">Load mnemonic failed.</string>
+    <string name="fail_load_mnemonic">Failed to load mnemonic words.</string>
     <string name="fail_get_confirm_pwd">Get the confirmation password failed, please retype it.</string>
     <string name="hint_bak_wallet_click">Please click the below words in the correct order</string>
     <string name="title_dialog_backup_fail">Fail to back up</string>
-    <string name="msg_dailog_check_mnemonic">Please review your mnemonic words correctly.</string>
+    <string name="msg_dailog_check_mnemonic">Please recheck your mnemonic words.</string>
     <string name="btn_backup_now">Back up</string>
     <string name="action_empty_mnemonic">Clear</string>
 
@@ -151,10 +151,10 @@
     <string name="status_item_send">Sent</string>
     <string name="status_item_unconfirm">Unconfirmed</string>
     <string name="status_item_transfer">Transferred</string>
-    <string name="fail_get_tx_record">Failed to obtain transaction records.</string>
+    <string name="fail_get_tx_record">Failed to load transaction details, please try again.</string>
 
     <!--transfer details-->
-    <string name="title_activity_transfer_details">Transfer details</string>
+    <string name="title_activity_transfer_details">Transaction details</string>
     <string name="fail_load_transfer_details">Failed to load transfer details, please return to retry.</string>
     <string name="status_transfer_success">Transaction is confirmed</string>
     <string name="status_transfer_unconfirm">Unconfirmed</string>
@@ -181,20 +181,20 @@
     <string name="msg_copy_address_success">Address copied</string>
     <string name="fail_load_address">Load address failed</string>
     <string name="fail_reach_address_index_limit">Can\'t generate more addresses</string>
-    <string name="fail_create_address_qrcode">Generate address qr code failed.</string>
+    <string name="fail_create_address_qrcode">Failed to generate address QR code.</string>
     <string name="fail_refresh_address">Refresh address failed</string>
     <string name="msg_refreshed_address">Address refreshed</string>
     <string name="title_back_up_now">Back up wallet now</string>
     <string name="title_activity_specific_receive">Receive specific amount</string>
     <string name="title_activity_scan_pay">Receive specific amount</string>
-    <string name="fail_create_pay_qrcode">Failed to generate the collection qr code, please return to retry.</string>
+    <string name="fail_create_pay_qrcode">Failed to generate receiving QR code, please try again.</string>
     <string name="title_scan_pay_me">Scan to pay</string>
 
     <!--send fragment-->
     <string name="action_send_scan">Scan</string>
     <string name="hint_receiver_address">Receiver</string>
     <string name="fail_get_contact_last_address">Failed to get the contact\'s latest address.</string>
-    <string name="fail_get_contact_info">Failed to obtain contact information.</string>
+    <string name="fail_get_contact_info">Failed to retrieve contact information.</string>
     <string name="fail_invalid_address">The address is invalid</string>
     <string name="fail_send_address_null">Address cannot be empty</string>
     <string name="msg_coming_soon">comming soon</string>
@@ -213,12 +213,13 @@
     <string name="title_content_send_amount">Sending amount</string>
     <string name="title_content_receiver_address">Address of receiver</string>
     <string name="title_content_fees">Fee</string>
-    <string name="hint_confirm_time_and_fees">Average confirmation time %1$s costs %2$s.</string>
+    <string name="hint_confirm_time_and_fees">Average confirmation time %1$s\nFee %2$s</string>
     <string name="hint_time_days">days</string>
     <string name="hint_time_hours">hours</string>
     <string name="hint_time_minutes">minutes</string>
     <string name="title_content_send_wallet">Sending wallet</string>
-    <string name="hint_remark_20_character">Remarks (in 20 characters)</string>
+    <string name="title_content_send_remark">Remarks</string>
+    <string name="hint_remark_20_character">Within 20 words</string>
     <string name="btn_confirm_send">Send confirm</string>
     <string name="dialog_title_wallet_pwd">Wallet password</string>
     <string name="title_activity_send_success">Send successfully</string>
@@ -226,7 +227,7 @@
     <string name="hint_send_success">Add the address as the frequent contact for the next transaction</string>
     <string name="fail_send_transaction">Send failed</string>
     <string name="fail_refresh_change_address">Failed to generate change address, please try again.</string>
-    <string name="msg_dialog_amount_not_enough">The balance is not enough, please return to reselect.</string>
+    <string name="msg_dialog_amount_not_enough">Not enough balance, please return to reselect.</string>
 
     <!--scan qrcode-->
     <string name="title_activity_scan_qrcode">Scan</string>
@@ -242,7 +243,7 @@
     <string name="title_activity_add_contact_by_id">Via wallet ID</string>
     <string name="hint_search_wallet_id">Search wallet ID</string>
     <string name="btn_add_now">Add now</string>
-    <string name="hint_no_contact">You don\'t have a contact yet.</string>
+    <string name="hint_no_contact">You don\'t have any contacts yet.</string>
     <string name="input_contact_name">Name</string>
     <string name="input_contact_remark">Remarks</string>
     <string name="btn_confirm_add">Add to contacts</string>
@@ -255,7 +256,7 @@
     <string name="action_contact_save">Save</string>
     <string name="msg_contact_is_exsist">Contact already exists</string>
     <string name="error_contact_name_required">Name cannot be empty</string>
-    <string name="error_contact_address_required">Please enter your wallet address.</string>
+    <string name="error_contact_address_required">Please enter the address.</string>
     <string name="title_activity_contact_select">Contacts</string>
     <string name="title_activity_edit_contact">Edit contact</string>
     <string name="dialog_title_tips">Tip</string>
@@ -268,11 +269,11 @@
     <string name="btn_save">Save</string>
     <string name="btn_delete">Delete</string>
     <string name="text_require_contact_name">Please enter the contact name.</string>
-    <string name="msg_get_contact_info_fail">The contact information failed. Please return to try again.</string>
+    <string name="msg_get_contact_info_fail">Failed to get contact information, please try again.</string>
     <string name="msg_contact_info_no_edit">Nothing has been changed</string>
-    <string name="msg_delete_contact_success">Delete contact successfully.</string>
+    <string name="msg_delete_contact_success">Contact deleted successfully.</string>
     <string name="msg_delete_contact_fail">Delete contact failed.</string>
-    <string name="msg_update_contact_success">Update contact successfully</string>
+    <string name="msg_update_contact_success">Contact updated successfully</string>
     <string name="msg_update_contact_fail">Update contact failed</string>
 
     <!--setting-->

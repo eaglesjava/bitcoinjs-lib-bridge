@@ -139,7 +139,10 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
             getMvpView().amountNoEnough();
             return;
         }
-
+        //check mini fee
+        if (fee < CryptoConstants.BTC_MIN_FEE) {
+            fee = CryptoConstants.BTC_MIN_FEE;
+        }
         //组装交易
         List<Transaction.Input> inputs = new ArrayList<>();
         String inAddress = "";
@@ -298,7 +301,10 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
             getMvpView().amountNoEnough();
             return;
         }
-
+        //check mini fee
+        if (fee < CryptoConstants.BTC_MIN_FEE) {
+            fee = CryptoConstants.BTC_MIN_FEE;
+        }
         getMvpView().compteFee(fee);
 
     }

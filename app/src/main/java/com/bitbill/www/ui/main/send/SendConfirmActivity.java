@@ -352,7 +352,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void compteFee(long fee) {
-        if (StringUtils.isEmpty(mFees)) {
+        if (fee <= 0) {
             return;
         }
         refreshFeeHintLayout(StringUtils.satoshi2btc(fee));

@@ -454,14 +454,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
         mWalletList.clear();
         mWalletList.addAll(wallets);
-        if (mSelectWalletAdapter != null) {
-            mSelectWalletAdapter.notifyDataSetChanged();
-        }
         //设置全局钱包列表对象
         BitbillApp.get().setWallets(wallets);
-
         reloadWalletInfo();
-
         //获取钱包余额
         getMvpPresenter().getBalance();
         //加载未确认交易
@@ -469,12 +464,27 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     private void reloadWalletInfo() {
+        //设置钱包总资产 未确认的金额累加
+        long totalAmount = 0;
+        for (Wallet wallet : mWalletList) {
+            totalAmount += wallet.getBalance();
+            totalAmount += wallet.getUnconfirm();
+        }
+
+        //设置btc总额
+        if (mAssetFragment != null) {
+            mAssetFragment.setBtcTotalAmount(totalAmount);
+        }
         //重新加载钱包信息
         if (mAssetFragment != null) {
             mAssetFragment.lazyData();
         }
         if (mReceiveFragment != null) {
             mReceiveFragment.lazyData();
+        }
+        //通知钱包选择界面数据刷新
+        if (mSelectWalletAdapter != null) {
+            mSelectWalletAdapter.notifyDataSetChanged();
         }
     }
 
@@ -501,11 +511,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void getBalanceSuccess(List<Wallet> wallets, Long totalAmount) {
         BitbillApp.get().setWallets(wallets);
-
-        //设置btc总额
-        if (mAssetFragment != null) {
-            mAssetFragment.setBtcTotalAmount(totalAmount);
-        }
+        mWalletList.clear();
+        mWalletList.addAll(wallets);
         reloadWalletInfo();
     }
 

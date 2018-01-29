@@ -48,7 +48,6 @@ public final class AppConstants {
      * btc about
      */
     public static final String SCHEME_BITCOIN = "bitcoin";
-    public static final long SATOSHI = 100000000;
     /**
      * socket event
      */

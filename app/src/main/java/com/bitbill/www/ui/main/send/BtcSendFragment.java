@@ -2,6 +2,7 @@ package com.bitbill.www.ui.main.send;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,6 +11,7 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.presenter.ValidateAddressMvpPresenter;
 import com.bitbill.www.common.presenter.ValidateAddressMvpView;
+import com.bitbill.www.common.utils.KeyboardStatusDetector;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.DrawableEditText;
 import com.bitbill.www.model.address.AddressModel;
@@ -35,6 +37,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     @Inject
     ValidateAddressMvpPresenter<AddressModel, ValidateAddressMvpView> mValidateAddressMvpPresenter;
     private Contact mSendContact;
+    private KeyboardStatusDetector mKeyboardStatusDetector;
 
     public static BtcSendFragment newInstance() {
 
@@ -75,6 +78,31 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mKeyboardStatusDetector = new KeyboardStatusDetector();
+        mKeyboardStatusDetector.registerFragment(this);
+        mKeyboardStatusDetector.setKeyboardVisibilityListener(new KeyboardStatusDetector.KeyboardVisibilityListener() {
+            @Override
+            public void onVisibilityChanged(boolean keyboardVisible) {
+
+                //清除之前的选择内容
+                if (etSendAddress != null) {
+                    if (keyboardVisible) {
+                        etSendAddress.requestFocus();
+                        if (StringUtils.isNotEmpty(etSendAddress.getText().toString())) {
+                            etSendAddress.setText("");
+                            mSendContact = null;
+                        }
+                    } else {
+                        etSendAddress.clearFocus();
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
     public void initData() {
 
     }
@@ -109,11 +137,6 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return etSendAddress.getText().toString();
     }
 
-    public void setSendAddress(String sendAddress) {
-
-        etSendAddress.setText(sendAddress);
-    }
-
     public void setSendAddress(Contact sendContact) {
         mSendContact = sendContact;
         if (sendContact != null) {
@@ -121,6 +144,11 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
             setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? sendContact.getAddress() : walletId) + ")");
 
         }
+    }
+
+    public void setSendAddress(String sendAddress) {
+
+        etSendAddress.setText(sendAddress);
     }
 
     public void sendSuccess() {
@@ -181,5 +209,13 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     public void requireWalletId() {
         showMessage(R.string.fail_get_contact_info);
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mKeyboardStatusDetector != null) {
+            mKeyboardStatusDetector.unRegisterFragment(this);
+        }
     }
 }

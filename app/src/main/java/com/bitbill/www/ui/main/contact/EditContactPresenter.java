@@ -29,7 +29,7 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
 
     @Override
     public void updateContact() {
-        if (isValidContact() && isValidContactName() && !isValidEdit()) {
+        if (!isValidContact() || !isValidContactName() || !isValidEdit()) {
             return;
         }
         getMvpView().showLoading();

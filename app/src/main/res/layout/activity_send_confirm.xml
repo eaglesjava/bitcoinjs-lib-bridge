@@ -21,7 +21,19 @@
             <TextView
                 style="@style/Text.Title.Confirm"
                 android:layout_marginTop="30dp"
-                android:text="@string/title_content_send_amount"/>
+                android:text="@string/title_content_receiver_address" />
+
+            <TextView
+                android:id="@+id/tv_send_address"
+                style="@style/Text.Address"
+                android:layout_marginTop="10dp"
+                android:text="ac1qpd8dc42nrefsvwx7udf5km34905hv8354yvdrj"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/Text.Title.Confirm"
+                android:layout_marginTop="30dp"
+                android:text="@string/title_content_send_amount" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +56,7 @@
             <TextView
                 style="@style/Text.White.Action"
                 android:layout_marginTop="40dp"
-                android:text="@string/title_content_fees"/>
+                android:text="@string/title_content_fees" />
 
             <SeekBar
                 android:id="@+id/sb_send_fee"
@@ -59,25 +71,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/hint_confirm_time_and_fees"/>
+                android:text="@string/hint_confirm_time_and_fees" />
+
 
             <TextView
                 style="@style/Text.Title.Confirm"
                 android:layout_marginTop="30dp"
-                android:text="@string/title_content_receiver_address"/>
-
-            <TextView
-                android:id="@+id/tv_send_address"
-                style="@style/Text.Address"
-                android:layout_marginTop="10dp"
-                android:minLines="2"
-                android:text="ac1qpd8dc42nrefsvwx7udf5km34905hv8354yvdrj"
-                android:textSize="16sp" />
-
-            <TextView
-                style="@style/Text.Title.Confirm"
-                android:layout_marginTop="30dp"
-                android:text="@string/title_content_send_wallet"/>
+                android:text="@string/title_content_send_wallet" />
 
             <TextView
                 android:id="@+id/tv_send_contact"
@@ -85,14 +85,19 @@
                 android:layout_marginTop="10dp"
                 android:textSize="16sp" />
 
+            <TextView
+                style="@style/Text.Title.Confirm"
+                android:layout_marginTop="30dp"
+                android:text="@string/title_content_send_remark" />
+
             <EditText
                 android:id="@+id/et_send_mark"
                 style="@style/EditText.Normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/hint_remark_20_character"
-                android:maxLength="20"/>
+                android:maxLength="20" />
 
             <Button
                 android:id="@+id/btn_next"

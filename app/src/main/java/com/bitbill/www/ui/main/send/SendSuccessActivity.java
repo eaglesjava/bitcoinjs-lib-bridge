@@ -76,7 +76,7 @@ public class SendSuccessActivity extends BaseCompleteActivity {
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_send_success);
     }
 
     @Override

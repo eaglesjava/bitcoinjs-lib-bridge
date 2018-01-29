@@ -1,5 +1,7 @@
 package com.mcxtzhang.indexlib.IndexBar.helper;
 
+import android.text.TextUtils;
+
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.mcxtzhang.indexlib.IndexBar.bean.BaseIndexPinyinBean;
 
@@ -70,10 +72,16 @@ public class IndexBarDataHelperImpl implements IIndexBarDataHelper {
             BaseIndexPinyinBean indexPinyinBean = datas.get(i);
             if (indexPinyinBean.isNeedToPinyin()) {
                 //以下代码设置城市拼音首字母
-                String tagString = indexPinyinBean.getBaseIndexPinyin().toString().substring(0, 1);
-                if (tagString.matches("[A-Z]")) {//如果是A-Z字母开头
-                    indexPinyinBean.setBaseIndexTag(tagString);
-                } else {//特殊字母这里统一用#处理
+
+                String indexPinyin = indexPinyinBean.getBaseIndexPinyin().toString();
+                if (!TextUtils.isEmpty(indexPinyin)) {
+                    String tagString = indexPinyin.substring(0, 1);
+                    if (tagString.matches("[A-Z]")) {//如果是A-Z字母开头
+                        indexPinyinBean.setBaseIndexTag(tagString);
+                    } else {//特殊字母这里统一用#处理
+                        indexPinyinBean.setBaseIndexTag("#");
+                    }
+                } else {
                     indexPinyinBean.setBaseIndexTag("#");
                 }
             }

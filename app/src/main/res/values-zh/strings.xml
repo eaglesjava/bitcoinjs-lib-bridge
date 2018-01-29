@@ -157,8 +157,8 @@
     <string name="fail_get_tx_record">获取交易记录失败</string>
 
     <!--transfer details-->
-    <string name="title_activity_transfer_details">转账详情</string>
-    <string name="fail_load_transfer_details">加载转账详情失败，请返回重试</string>
+    <string name="title_activity_transfer_details">交易详情</string>
+    <string name="fail_load_transfer_details">加载交易详情失败，请返回重试</string>
     <string name="status_transfer_success">交易成功</string>
     <string name="status_transfer_unconfirm">待确认</string>
     <string name="title_tx_hash">交易hash</string>
@@ -214,13 +214,14 @@
     <string name="title_activity_send_confirm">确认发送</string>
     <string name="title_content_send_amount">发送金额</string>
     <string name="title_content_receiver_address">接收方地址</string>
-    <string name="title_content_fees">推荐手续费</string>
-    <string name="hint_confirm_time_and_fees">平均确认时间%1$s，需耗费%2$s</string>
+    <string name="title_content_fees">手续费</string>
+    <string name="hint_confirm_time_and_fees">平均确认时间%1$s\n需耗费%2$s</string>
     <string name="hint_time_days">天</string>
     <string name="hint_time_hours">小时</string>
     <string name="hint_time_minutes">分钟</string>
     <string name="title_content_send_wallet">发出钱包</string>
-    <string name="hint_remark_20_character">备注（20字内）</string>
+    <string name="title_content_send_remark">备注</string>
+    <string name="hint_remark_20_character">20字内</string>
     <string name="btn_confirm_send">确认发送</string>
     <string name="dialog_title_wallet_pwd">钱包密码</string>
     <string name="title_activity_send_success">发送成功</string>
@@ -258,7 +259,7 @@
     <string name="action_contact_save">保存</string>
     <string name="msg_contact_is_exsist">联系人已存在</string>
     <string name="error_contact_name_required">名称不能为空</string>
-    <string name="error_contact_address_required">请输入钱包地址</string>
+    <string name="error_contact_address_required">请输入地址</string>
     <string name="title_activity_contact_select">联系人</string>
     <string name="title_activity_edit_contact">编辑联系人</string>
     <string name="dialog_title_tips">提示</string>

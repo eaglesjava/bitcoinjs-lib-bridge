@@ -8,6 +8,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
 import java.io.Serializable;
@@ -37,15 +38,16 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
     private String remark;
 
     @Property(nameInDb = "contact_name")
+    @NotNull
     private String contactName;
 
     @Property(nameInDb = "coin_type")
     private String coinType;//默认"BTC"
 
 
-    @Generated(hash = 185153410)
+    @Generated(hash = 773915021)
     public Contact(Long id, String walletId, String address, String remark,
-                   String contactName, String coinType) {
+                   @NotNull String contactName, String coinType) {
         this.id = id;
         this.walletId = walletId;
         this.address = address;

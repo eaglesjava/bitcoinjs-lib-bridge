@@ -9,7 +9,7 @@ import android.webkit.URLUtil;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.crypto.CryptoConstants;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -541,7 +541,7 @@ public class StringUtils {
         if (sendAmount == null) return 0;
         //8位小数
         BigDecimal amount = new BigDecimal(sendAmount);
-        BigDecimal satoshi = new BigDecimal(AppConstants.SATOSHI);
+        BigDecimal satoshi = new BigDecimal(CryptoConstants.SATOSHI);
         return amount.multiply(satoshi).longValue();
     }
 
@@ -566,7 +566,7 @@ public class StringUtils {
         BigDecimal feeDecimal = new BigDecimal(fee);
         //8位小数
         DecimalFormat df = new DecimalFormat("#.########");
-        return df.format(feeDecimal.divide(new BigDecimal(AppConstants.SATOSHI)));
+        return df.format(feeDecimal.divide(new BigDecimal(CryptoConstants.SATOSHI)));
     }
 
     public static Date getDate(String date) {
