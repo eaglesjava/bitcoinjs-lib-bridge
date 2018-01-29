@@ -16,25 +16,12 @@ func BTCFormatString(btc: Int64) -> String {
     if btc == 0 {
         return "0.00"
     }
-    let str = String(btc % BTC_SATOSHI)
     let d = Double(btc) / Double(BTC_SATOSHI)
-    if str == "0" {
-        return String(format: "%.2f", d)
-    }
-    if str.count > 2 {
-        return "\(d)"
-    }
-    var count = 0
-    for char in str.reversed() {
-        if char == "0" {
-            count += 1
-        }
-        else
-        {
-            break
-        }
-    }
-    return String(format: "%.\(8 - count)f", d)
+    var str = String(format: "%.8f", d)
+	while str.hasSuffix("0") {
+		str.removeLast()
+	}
+    return str
 }
 
 enum BitcoinAddressType {

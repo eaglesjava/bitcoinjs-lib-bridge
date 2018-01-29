@@ -276,6 +276,7 @@ class BILSendConfirmController: BILBaseViewController {
         cont.sendModel = sendModel
         self.bil_dismissHUD()
         present(cont, animated: true) {
+			BILControllerManager.shared.mainTabBarController?.selectedIndex = 0
             self.navigationController?.popToRootViewController(animated: false)
         }
     }
