@@ -12,9 +12,9 @@ class BILAboutUsViewController: BILBaseViewController {
 
     @IBOutlet weak var versionLabel: UILabel!
     
-    let titles = [String.meAboutUs_agreement, String.meAboutUs_contactUs]
-	let subTitles = ["", "hi@bitbill.com"]
-    let segues = ["BILAboutUsToAgreementSegue"]
+    let titles = [String.meAboutUs_agreement, String.meAboutUs_contactUs, "Feedback".bil_ui_localized]
+	let subTitles = ["", "hi@bitbill.com", ""]
+    let segues = ["BILAboutUsToAgreementSegue", "", "BILAboutUsToFeedbackSegue"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +72,12 @@ extension BILAboutUsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0:
-            let segue = segues[indexPath.row]
-            performSegue(withIdentifier: segue, sender: nil)
         case 1:
             emailAction(nil)
         default:
-            ()
+            let segue = segues[indexPath.row]
+            guard !segue.isEmpty else { return }
+            performSegue(withIdentifier: segue, sender: nil)
         }
     }
     

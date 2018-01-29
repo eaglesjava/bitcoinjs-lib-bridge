@@ -26,12 +26,14 @@ extension UIViewController {
         SVProgressHUD.show(withStatus: status)
     }
     
-    func bil_showSuccess(status: String? = nil) {
+    func bil_showSuccess(status: String? = nil, delay: Double = 1.5, complete: SVProgressHUDDismissCompletion? = nil) {
         SVProgressHUD.showSuccess(withStatus: status)
+        SVProgressHUD.dismiss(withDelay: delay, completion: complete)
     }
     
-    func bil_showError(status: String) {
+    func bil_showError(status: String, delay: Double = 1.5, complete: SVProgressHUDDismissCompletion? = nil) {
         SVProgressHUD.showError(withStatus: status)
+        SVProgressHUD.dismiss(withDelay: delay, completion: complete)
     }
     
     func bil_dismissHUD(delay: Double = 0, complete: SVProgressHUDDismissCompletion? = nil) {

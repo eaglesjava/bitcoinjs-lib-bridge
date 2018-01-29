@@ -64,6 +64,8 @@ enum Router: URLRequestConvertible {
                 return (.bil_get_exchange_Rate, [:])
             case .getBlockHeightAndWalletVersion(let hashes):
                 return (.bil_get_blockHeight_WalletVersion, ["extendedKeysHash": hashes])
+            case .feedback(let content, let contact):
+                return (.bil_feedback, ["context": content, "contact": contact])
             }
         }()
         
@@ -105,10 +107,12 @@ enum Router: URLRequestConvertible {
     case getExchangeRate
     case getBlockHeightAndWalletVersion(hashes: String)
     
+    case feedback(content: String, contact: String)
+    
 }
 
 extension String {
-//    static let bil_base_url = "http://192.168.1.15:8086/"
+//    static let bil_base_url = "http://192.168.1.31:8086/"
     static let bil_base_host = "walletservice.bitbill.com"
     static let bil_base_url = "https://" + bil_base_host + "/"
     static let bil_path = "bitbill/bitcoin/"
@@ -136,6 +140,8 @@ extension String {
     
     static let bil_get_exchange_Rate = bil_path + "get_exchange_rate"
     static let bil_get_blockHeight_WalletVersion = bil_wallet_path + "getCacheVersion"
+    
+    static let bil_feedback = bil_path + "feed_back"
 }
 
 extension String {

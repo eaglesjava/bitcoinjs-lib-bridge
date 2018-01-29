@@ -117,3 +117,9 @@
 "-41" = "Wallet not exists.";
 
 "Address of change" = "Change addresses";
+
+"Feedback" = "Feedback";
+"ContactTypeTitle" = "Contact (optional)";
+"ContactTypePlaceHolder" = "E-mail, Cell-phone, WeChat";
+"Too much words" = "Too much words";
+"Can not be empty" = "Can not be empty";

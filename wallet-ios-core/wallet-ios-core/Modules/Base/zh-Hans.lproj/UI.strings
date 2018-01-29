@@ -117,3 +117,9 @@
 "-41" = "钱包不存在";
 
 "Address of change" = "找零地址";
+
+"Feedback" = "意见反馈";
+"ContactTypeTitle" = "联系方式（选填）";
+"ContactTypePlaceHolder" = "请输入邮箱/手机/微信";
+"Too much words" = "太多字了";
+"Can not be empty" = "不能为空";

@@ -195,7 +195,7 @@ class BTCTransactionBuilder: NSObject {
     }
     
     func fee(perByte: Int) throws -> Int64 {
-        
+        let minFee = Int64(0.00001 * Double(BTC_SATOSHI))
         if isSendAll {
 			var totalSatoshis: Int64 = 0
 			for utxo in utxos {
@@ -206,7 +206,7 @@ class BTCTransactionBuilder: NSObject {
 			{
 				throw TransactionBuildError.notEnoughBalance
 			}
-            return fee
+            return max(minFee, fee)
         }
         
 		var outputSatoshiSum: Int64 = 0
@@ -229,7 +229,7 @@ class BTCTransactionBuilder: NSObject {
         if !enough {
             throw TransactionBuildError.notEnoughBalance
         }
-        return feeFor(inCount: inputCount, outCount: outputCount, feePerByte: perByte)
+        return max(feeFor(inCount: inputCount, outCount: outputCount, feePerByte: perByte), minFee)
     }
     
     private func maxFeeFor(inCount: Int, outCount: Int) -> Int64 {
@@ -279,7 +279,7 @@ class BTCTransactionBuilder: NSObject {
             for utxo in utxos {
                 inputSatoshiSum += utxo.satoshiAmount
                 addInput(input: utxo.toInput())
-                if (inputSatoshiSum < outputSatoshiSum + maxFeeFor(inCount: inputs.count, outCount: outputCount)) {
+                if (inputSatoshiSum < outputSatoshiSum + feeFor(inCount: inputs.count, outCount: outputCount, feePerByte: feePerByte)) {
                     continue
                 }
                 enough = true
