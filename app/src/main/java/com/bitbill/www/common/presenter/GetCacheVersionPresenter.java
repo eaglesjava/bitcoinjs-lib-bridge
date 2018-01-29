@@ -63,6 +63,9 @@ public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheV
                     @Override
                     public void onNext(CombineCacheResponse combineCacheResponse) {
                         super.onNext(combineCacheResponse);
+                        if (!isViewAttached()) {
+                            return;
+                        }
                         if (combineCacheResponse != null) {
                             ApiResponse jsonObjectApiResponse = combineCacheResponse.getJsonObjectApiResponse();
                             List<Wallet> wallets = combineCacheResponse.getWallets();
@@ -71,7 +74,9 @@ public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheV
                                     JSONObject data = new JSONObject(String.valueOf(jsonObjectApiResponse.getData()));
                                     jsonObjectApiResponse.getData();
                                     if (data != null && !StringUtils.isEmpty(wallets)) {
-                                        getApp().setBlockHeight(data.getLong("blockheight"));
+                                        long blockheight = data.getLong("blockheight");
+                                        getApp().setBlockHeight(blockheight);
+                                        getMvpView().getBlockHeight(blockheight);
                                         // TODO: 2018/1/6 缓存blockheight
                                         List<Wallet> tmpWalletList = new ArrayList<>();
                                         for (Wallet wallet : wallets) {

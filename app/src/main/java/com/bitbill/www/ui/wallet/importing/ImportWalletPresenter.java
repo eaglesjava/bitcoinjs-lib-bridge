@@ -119,6 +119,8 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
                         wallet.setInternalPublicKey(internalPublicKey);
                         wallet.setMnemonicHash(mnemonicHash);
                         wallet.setMnemonic(handleMnemonic());
+                        //不需要备份
+                        wallet.setIsBackuped(true);
                         wallet.setSeedHex(seedHex);
                         getCompositeDisposable().add(getModelManager()
                                 .getWalletId(new GetWalletIdRequest(extendedKeysHash))

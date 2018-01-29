@@ -30,6 +30,7 @@ import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.backup.BackupWalletConfirmActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import com.bitbill.www.ui.wallet.info.BtcRecordFragment;
+import com.bitbill.www.ui.wallet.info.transfer.TransferDetailFragment;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
 import com.bitbill.www.ui.wallet.init.InitWalletActivity;
 
@@ -94,4 +95,6 @@ public interface ActivityComponent {
     void inject(BtcRecordFragment btcRecordFragment);
 
     void inject(WalletAddressFragment walletAddressFragment);
+
+    void inject(TransferDetailFragment transferDetailFragment);
 }

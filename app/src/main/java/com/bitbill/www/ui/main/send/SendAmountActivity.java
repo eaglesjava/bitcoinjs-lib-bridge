@@ -31,6 +31,10 @@ public class SendAmountActivity extends BaseToolbarActivity {
     Button btnNext;
     @BindView(R.id.tv_btc_value)
     TextView tvBtcValue;
+    @BindView(R.id.ll_receiver_address)
+    View mAddressLayout;
+    @BindView(R.id.tv_send_address)
+    TextView mSendAddressTextView;
 
     private String mAddress;
     private String mAmount;
@@ -110,6 +114,12 @@ public class SendAmountActivity extends BaseToolbarActivity {
                 updateCnyValue();
             }
         });
+        if (hasAmount() && StringUtils.isNotEmpty(mAddress)) {
+            mAddressLayout.setVisibility(View.VISIBLE);
+            mSendAddressTextView.setText(mAddress);
+        } else {
+            mAddressLayout.setVisibility(View.GONE);
+        }
     }
 
     private boolean hasAmount() {

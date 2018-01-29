@@ -161,6 +161,7 @@
     <string name="title_tx_hash">Transaction hash</string>
     <string name="title_tx_receive_address">Address of receiver</string>
     <string name="title_tx_send_address">Address of sender</string>
+    <string name="title_tx_fee">Fee</string>
     <string name="title_tx_confirm">Confirmation</string>
     <string name="title_tx_remark">Remarks</string>
     <string name="title_tx_date">Transaction date</string>

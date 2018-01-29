@@ -12,16 +12,23 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.model.entity.TitleItem;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseListFragment;
+import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
+import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.bitbill.www.model.transaction.db.entity.Input;
 import com.bitbill.www.model.transaction.db.entity.Output;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,8 +37,10 @@ import butterknife.ButterKnife;
  * Created by isanwenyu on 2018/1/9.
  */
 
-public class TransferDetailFragment extends BaseListFragment<TitleItem, MvpPresenter> {
+public class TransferDetailFragment extends BaseListFragment<TitleItem, GetCacheVersionMvpPresenter> implements GetCacheVersionMvpView {
 
+    @Inject
+    GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     private TxRecord mTxRecord;
     private HeaderViewHolder mHeaderViewHolder;
     private FooterViewHolder mFooterViewHolder;
@@ -46,13 +55,13 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, MvpPrese
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public GetCacheVersionMvpPresenter getMvpPresenter() {
+        return mGetCacheVersionMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -69,6 +78,10 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, MvpPrese
 
     @Override
     public void initData() {
+        if (getApp().getBlockHeight() <= 0) {
+            //重新获取高度
+            getMvpPresenter().getCacheVersion();
+        }
         mTxRecord = ((TxRecord) getArguments().getSerializable(AppConstants.ARG_TX_ITEM));
         if (mTxRecord == null) {
             showMessage(R.string.fail_load_transfer_details);
@@ -89,6 +102,7 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, MvpPrese
             e.printStackTrace();
         }
 
+        mDatas.add(new TransferFeeItem(mTxRecord.getFee()).setTitle(getString(R.string.title_tx_fee)));
         long height = mTxRecord.getHeight();
         if (height != -1) {
             //非待确认状态
@@ -197,6 +211,11 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, MvpPrese
             holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(receiveItem.getAmount()) + " BTC");
             holder.setVisible(R.id.tv_tx_right, true);
 
+        } else if (titleItem instanceof TransferFeeItem) {
+            holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_fee));
+            holder.setText(R.id.tv_tx_left, StringUtils.satoshi2btc(((TransferFeeItem) titleItem).getFee()) + " BTC");
+            holder.setVisible(R.id.tv_tx_right, false);
+
         } else if (titleItem instanceof TransferConfirmItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_confirm));
             holder.setText(R.id.tv_tx_left, getConfirmCount((TransferConfirmItem) titleItem));
@@ -236,6 +255,20 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, MvpPrese
     @Override
     public int getLayoutId() {
         return R.layout.fragment_transfer_details;
+    }
+
+    @Override
+    public void getResponseAddressIndex(long indexNo, long changeIndexNo, Wallet wallet) {
+    }
+
+    @Override
+    public void getDiffVersionWallets(List<Wallet> tmpWalletList) {
+
+    }
+
+    @Override
+    public void getBlockHeight(long blockheight) {
+        mAdapter.notifyDataSetChanged();
     }
 
     static class HeaderViewHolder {

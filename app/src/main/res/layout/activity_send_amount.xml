@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_padding"
-    android:paddingRight="@dimen/activity_padding"
-    tools:context="com.bitbill.www.ui.main.send.SendAmountActivity">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:paddingLeft="@dimen/activity_padding"
+             android:paddingRight="@dimen/activity_padding"
+             tools:context="com.bitbill.www.ui.main.send.SendAmountActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,14 +15,14 @@
             android:id="@+id/et_send_amount"
             style="@style/EditText.Amount"
             android:layout_width="match_parent"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="40dp"/>
 
         <TextView
             style="@style/Text.Crypto"
             android:layout_alignBottom="@id/et_send_amount"
             android:layout_alignParentRight="true"
             android:text="btc"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/tv_btc_value"
@@ -30,7 +30,28 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/et_send_amount"
             android:layout_marginTop="22dp"
-            android:text="@string/text_btc_cny_value" />
+            android:text="@string/text_btc_cny_value"/>
+
+        <LinearLayout
+            android:id="@+id/ll_receiver_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_btc_value"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/Text.Title.Confirm"
+                android:layout_marginTop="30dp"
+                android:text="@string/title_content_receiver_address"/>
+
+            <TextView
+                android:id="@+id/tv_send_address"
+                style="@style/Text.Address"
+                android:layout_marginTop="10dp"
+                android:text="ac1qpd8dc42nrefsvwx7udf5km34905hv8354yvdrj"
+                android:textSize="16sp"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
@@ -47,6 +68,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
-            android:text="@string/btn_next" />
+            android:text="@string/btn_next"/>
     </LinearLayout>
 </FrameLayout>

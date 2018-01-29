@@ -66,12 +66,8 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
 
     @Override
     public SelectedCurrency getSelectedCurrency() {
-        try {
-            return SelectedCurrency.valueOf(mPrefs.getString(SELECTED_CURRENCY, ""));
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return SelectedCurrency.valueOf(mPrefs.getString(SELECTED_CURRENCY, SelectedCurrency.CNY.name()));
+
     }
 
     @Override

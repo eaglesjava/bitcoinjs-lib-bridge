@@ -160,6 +160,9 @@ public class BitbillApp extends Application {
         return defaultWallet;
     }
 
+    public boolean hasBtcRate() {
+        return getBtcCnyValue() > 0 && getBtcUsdValue() > 0;
+    }
 
     public double getBtcCnyValue() {
         return mBtcCnyValue;

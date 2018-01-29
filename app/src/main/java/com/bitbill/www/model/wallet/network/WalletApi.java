@@ -10,7 +10,6 @@ import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
 import com.bitbill.www.model.wallet.network.entity.GetConfigResponse;
-import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
@@ -87,13 +86,6 @@ public interface WalletApi extends Api {
      */
     Observable<ApiResponse<GetTxInfoResponse>> getTxInfo(GetTxInfoRequest getTxInfoRequest);
 
-
-    /**
-     * 获取交易详情
-     *
-     * @return
-     */
-    Observable<ApiResponse<GetExchangeRateResponse>> getExchangeRate();
 
     /**
      * 获取钱包缓存版本号

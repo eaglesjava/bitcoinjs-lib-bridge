@@ -11,20 +11,26 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
-import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.AmountEditText;
+import com.bitbill.www.model.app.AppModel;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SpecificReceiveActivity extends BaseToolbarActivity {
+public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRateMvpPresenter> implements GetExchangeRateMvpView {
 
     @BindView(R.id.et_input_amount)
     AmountEditText etInputAmount;
     @BindView(R.id.tv_btc_value)
     TextView tvBtcCny;
+    @Inject
+    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
     private String mReceiveAddress;
 
     public static void start(Context context, String address) {
@@ -41,8 +47,8 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
     }
 
     @Override
-    public MvpPresenter getMvpPresenter() {
-        return null;
+    public GetExchangeRateMvpPresenter getMvpPresenter() {
+        return mGetExchangeRateMvpPresenter;
     }
 
     @Override
@@ -62,7 +68,6 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
 
     @Override
     public void initView() {
-        tvBtcCny.setText(BitbillApp.get().getBtcValue(getReceiveAmount()));
         etInputAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -77,14 +82,23 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                tvBtcCny.setText(BitbillApp.get().getBtcValue(getReceiveAmount()));
+                updateBtcValue();
             }
         });
 
     }
 
+    private void updateBtcValue() {
+        tvBtcCny.setText(BitbillApp.get().getBtcValue(getReceiveAmount()));
+    }
+
     @Override
     public void initData() {
+        if (getApp().hasBtcRate()) {
+            updateBtcValue();
+        } else {
+            getMvpPresenter().getExchangeRate();
+        }
 
     }
 
@@ -120,5 +134,10 @@ public class SpecificReceiveActivity extends BaseToolbarActivity {
 
     public String getReceiveAddress() {
         return mReceiveAddress;
+    }
+
+    @Override
+    public void getBtcRateSuccess(double cnyRate, double usdRate) {
+        updateBtcValue();
     }
 }

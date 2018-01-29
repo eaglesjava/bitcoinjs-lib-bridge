@@ -108,7 +108,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
     SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
-
     @Inject
     BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
 
@@ -226,6 +225,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (mBoundService == null) {
             bindService(new Intent(MainActivity.this, SocketServiceProvider.class), socketConnection, Context.BIND_AUTO_CREATE);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(socketConnection);
     }
 
     @Override
@@ -720,6 +725,11 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                 mBtcRecordMvpPresenter.requestTxRecord(wallet);
             }
         }
+
+    }
+
+    @Override
+    public void getBlockHeight(long blockheight) {
 
     }
 

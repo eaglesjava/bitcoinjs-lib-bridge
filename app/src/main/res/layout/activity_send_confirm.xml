@@ -27,7 +27,6 @@
                 android:id="@+id/tv_send_address"
                 style="@style/Text.Address"
                 android:layout_marginTop="10dp"
-                android:text="ac1qpd8dc42nrefsvwx7udf5km34905hv8354yvdrj"
                 android:textSize="16sp" />
 
             <TextView

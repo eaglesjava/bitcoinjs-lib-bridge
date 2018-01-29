@@ -13,7 +13,6 @@ import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
 import com.bitbill.www.model.wallet.network.entity.GetConfigResponse;
-import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
@@ -146,15 +145,6 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
                 .addApplicationJsonBody(getTxInfoRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<GetTxInfoResponse>>() {
-                });
-    }
-
-    @Override
-    public Observable<ApiResponse<GetExchangeRateResponse>> getExchangeRate() {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_EXCHANGE_RATE)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<GetExchangeRateResponse>>() {
                 });
     }
 

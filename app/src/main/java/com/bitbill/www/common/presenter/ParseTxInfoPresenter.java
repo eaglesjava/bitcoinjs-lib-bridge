@@ -44,8 +44,9 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         List<TxElement.InputsBean> inputs = txElement.getInputs();
 
                         List<Long> inWalletIdList = new ArrayList<>();
-
+                        long inputValues = 0;
                         for (TxElement.InputsBean input : inputs) {
+                            inputValues += input.getValue();
                             Address addressByName = mAddressModel.getAddressByName(input.getAddress());
                             if (addressByName != null) {
                                 Long walletId = addressByName.getWalletId();
@@ -57,7 +58,9 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         List<Long> outWalletIdList = new ArrayList<>();
                         List<TxElement.OutputsBean> outputs = txElement.getOutputs();
                         int foundAddressCount = 0;
+                        long outputValues = 0;
                         for (TxElement.OutputsBean output : outputs) {
+                            outputValues += output.getValue();
                             Address addressByName = mAddressModel.getAddressByName(output.getAddress());
                             if (addressByName != null) {
                                 foundAddressCount++;
@@ -71,7 +74,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
 
                         boolean isContainIn = inWalletIdList.size() > 0;
                         boolean isAllOut = outWalletIdList.size() == 1 && foundAddressCount == outputs.size();
-
+                        long fee = inputValues - outputValues;
                         //for in wallet
                         for (Long inWalletId : inWalletIdList) {
                             TxRecord inTxRecord = new TxRecord();
@@ -102,6 +105,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                             inTxRecord.setCreatedTime(StringUtils.getDate(txElement.getCreatedTime()));
                             inTxRecord.setRemark(txElement.getRemark());
                             inTxRecord.setElementId(txElement.getId());
+                            inTxRecord.setFee(fee);
                             getModelManager().insertTxRecordAndInputsOutputs(inTxRecord, inputs, outputs);
                             txRecords.add(inTxRecord);
                         }
@@ -134,6 +138,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                             outTxRecord.setCreatedTime(StringUtils.getDate(txElement.getCreatedTime()));
                             outTxRecord.setRemark(txElement.getRemark());
                             outTxRecord.setElementId(txElement.getId());
+                            outTxRecord.setFee(fee);
                             getModelManager().insertTxRecordAndInputsOutputs(outTxRecord, inputs, outputs);
                             txRecords.add(outTxRecord);
 

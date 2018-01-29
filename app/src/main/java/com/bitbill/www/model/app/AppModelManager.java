@@ -15,14 +15,18 @@ import android.util.DisplayMetrics;
 
 import com.bitbill.www.common.base.model.ModelManager;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.app.network.AppApi;
 import com.bitbill.www.model.app.prefs.AppPreferences;
+import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 
 import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.Observable;
 
 /**
  * Created by isanwenyu@163.com on 2017/7/25.
@@ -190,5 +194,15 @@ public class AppModelManager extends ModelManager implements AppModel {
     @Override
     public void setAliasSeted(boolean isSeted) {
         mAppPreferences.setAliasSeted(isSeted);
+    }
+
+    /**
+     * 获取btc兑换比例
+     *
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<GetExchangeRateResponse>> getExchangeRate() {
+        return mAppApi.getExchangeRate();
     }
 }

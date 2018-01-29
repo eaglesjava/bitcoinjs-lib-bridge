@@ -10,11 +10,14 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseLazyListFragment;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.transaction.TxModel;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.TxElement;
@@ -33,7 +36,7 @@ import butterknife.BindView;
  * Activities containing this fragment MUST implement the {@link OnTransactionRecordItemClickListener}
  * interface.
  */
-public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordMvpPresenter> implements BtcRecordMvpView, ParseTxInfoMvpView {
+public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordMvpPresenter> implements BtcRecordMvpView, ParseTxInfoMvpView, GetExchangeRateMvpView {
 
     @BindView(R.id.tv_amount)
     TextView tvAmount;
@@ -47,6 +50,8 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
     @Inject
     ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
+    @Inject
+    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
     private OnTransactionRecordItemClickListener mListener;
     private Wallet mWalelt;
 
@@ -91,6 +96,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     public void injectComponent() {
         getActivityComponent().inject(this);
         addPresenter(mViewParseTxInfoMvpPresenter);
+        addPresenter(mGetExchangeRateMvpPresenter);
     }
 
     @Override
@@ -209,8 +215,16 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
             }
 
         }
-        tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBalance())));
+        if (getApp().hasBtcRate()) {
+            setBtcValue();
+        } else {
+            mGetExchangeRateMvpPresenter.getExchangeRate();
+        }
         getMvpPresenter().loadTxRecord(getWallet());
+    }
+
+    private void setBtcValue() {
+        tvBtcCny.setText(BitbillApp.get().getBtcValue(StringUtils.satoshi2btc(mWalelt.getBalance())));
     }
 
     public Wallet getWallet() {
@@ -260,6 +274,11 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     public void parsedTxItemListFail() {
         showMessage(R.string.fail_parse_tx_item);
         setRefresh(false);
+    }
+
+    @Override
+    public void getBtcRateSuccess(double cnyRate, double usdRate) {
+        setBtcValue();
     }
 
     /**

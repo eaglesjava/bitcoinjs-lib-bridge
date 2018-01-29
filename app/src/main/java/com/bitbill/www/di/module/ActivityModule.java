@@ -13,6 +13,9 @@ import com.bitbill.www.common.presenter.BtcAddressPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.presenter.GetCacheVersionPresenter;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
+import com.bitbill.www.common.presenter.GetExchangeRatePresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.presenter.ParseTxInfoPresenter;
@@ -324,6 +327,13 @@ public class ActivityModule {
     @PerActivity
     SystemSettingMvpPresenter<AppModel, SystemSettingMvpView> provideSystemSettingPresenter(
             SystemSettingPresenter<AppModel, SystemSettingMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> provideGetExchangeRatePresenter(
+            GetExchangeRatePresenter<AppModel, GetExchangeRateMvpView> presenter) {
         return presenter;
     }
 

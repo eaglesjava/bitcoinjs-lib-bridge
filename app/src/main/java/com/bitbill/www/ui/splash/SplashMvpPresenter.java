@@ -12,8 +12,6 @@ public interface SplashMvpPresenter<M extends AppModel, V extends SplashMvpView>
      */
     void hasWallet();
 
-    void getExchangeRate();
-
     String getContactKey();
 
     boolean isAliasSeted();

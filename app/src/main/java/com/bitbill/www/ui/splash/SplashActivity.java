@@ -9,6 +9,8 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.utils.DeviceUtil;
@@ -37,28 +39,10 @@ import cn.jpush.android.api.TagAliasCallback;
 
 import static com.bitbill.www.app.AppConstants.PLATFORM;
 
-public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, GetCacheVersionMvpView, SyncAddressMvpView {
+public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, GetCacheVersionMvpView, SyncAddressMvpView, GetExchangeRateMvpView {
 
     private static final String TAG = "SplashActivity";
     private static final int MSG_SET_ALIAS = 1001;
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
@@ -86,8 +70,28 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
             }
         }
     };
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
+    @Inject
+    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
     @Inject
     SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
     private boolean mHasWallet;
@@ -99,7 +103,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         ButterKnife.bind(this);
         getMvpPresenter().initLanguage();
         getMvpPresenter().hasWallet();
-        getMvpPresenter().getExchangeRate();
+        mGetExchangeRateMvpPresenter.getExchangeRate();
         getApp().setContactKey(getMvpPresenter().getContactKey());
 
         startSocketService();
@@ -121,6 +125,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     public void injectComponent() {
         getActivityComponent().inject(this);
         addPresenter(mGetCacheVersionMvpPresenter);
+        addPresenter(mGetExchangeRateMvpPresenter);
     }
 
     @Override
@@ -161,12 +166,22 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
     }
 
+    @Override
+    public void getBlockHeight(long blockheight) {
+
+    }
+
     // 这是来自 JPush Example 的设置别名的 Activity 里的代码。一般 App 的设置的调用入口，在任何方便的地方调用都可以。
     private void setAlias() {
         if (!getMvpPresenter().isAliasSeted()) {
             // 调用 Handler 来异步设置别名
             mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, DeviceUtil.getDeviceId()));
         }
+
+    }
+
+    @Override
+    public void getBtcRateSuccess(double cnyRate, double usdRate) {
 
     }
 }

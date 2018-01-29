@@ -87,9 +87,6 @@ public class WalletDetailActivity extends BaseToolbarActivity<WalletDetailMvpPre
             mTvWalletId.setText(mWallet.getName());
             setTitle(mWallet.getName());
             mTvWalletAddTime.setText(StringUtils.formatDate(mWallet.getCreatedAt()));
-            if (mWallet.getIsBackuped()) {
-                mBtnBackup.setVisibility(View.GONE);
-            }
         }
         mPwdDialogFragment = PwdDialogFragment.newInstance(getString(R.string.title_delete_wallet), getString(R.string.msg_delete_wallet), mWallet, false);
         mPwdDialogFragment.setOnPwdValidatedListener(new PwdDialogFragment.OnPwdValidatedListener() {
