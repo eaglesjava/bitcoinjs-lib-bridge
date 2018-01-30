@@ -24,7 +24,7 @@ class BILSpecificVolumeReceiveController: BILBaseViewController {
 		if let r = receiveModel {
 			addressLabel.text = r.address
 			qrCodeImageView.image = BILQRCodeHelper.generateQRCode(msg: r.urlString)
-			amountLabel.text = "\(r.amount) \(r.coinType.name)"
+			amountLabel.text = "\(r.bitcoinAmount) \(r.coinType.name)"
 		}
     }
     

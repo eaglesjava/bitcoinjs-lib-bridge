@@ -17,21 +17,4 @@ class BILSendModel: BILReceiveModel {
     var isContactAddress = false
     
     var transaction: BTCTransaction?
-    
-    var bitcoinAmount: String {
-        get {
-            guard let amount = Double(self.amount) else {
-                return "0.00"
-            }
-            return String(amount)
-        }
-    }
-    
-    var bitcoinSatoshiAmount: Int64 {
-        get {
-            guard let amount = Double(self.bitcoinAmount) else { return 0 }
-            let satoshi = Int64(amount * Double(BTC_SATOSHI))
-            return satoshi
-        }
-    }
 }
