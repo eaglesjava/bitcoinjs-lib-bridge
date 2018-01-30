@@ -4,6 +4,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
+import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * Created by isanwenyu on 2018/1/10.
@@ -23,6 +24,10 @@ public class Input extends com.bitbill.www.common.base.model.entity.Entity {
     private long value;//unit satoshi
     private int txIndex;
     private String txHash;
+    @Transient
+    private boolean isMine;
+    @Transient
+    private boolean isInternal;
 
     @Generated(hash = 1232612677)
     public Input(Long id, Long txId, Long walletId, String address, long value, int txIndex,
@@ -94,5 +99,21 @@ public class Input extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setWalletId(Long walletId) {
         this.walletId = walletId;
+    }
+
+    public boolean isMine() {
+        return isMine;
+    }
+
+    public void setMine(boolean isMine) {
+        this.isMine = isMine;
+    }
+
+    public boolean isInternal() {
+        return isInternal;
+    }
+
+    public void setInternal(boolean internal) {
+        isInternal = internal;
     }
 }

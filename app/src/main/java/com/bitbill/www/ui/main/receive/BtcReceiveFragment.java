@@ -138,6 +138,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void refreshAddress(Wallet selectedWallet) {
         mSelectedWallet = selectedWallet;
         if (mBtcAddressMvpPresentder != null) {
+            showLoading();
             mBtcAddressMvpPresentder.refreshAddress(1, 0);
 
         }
@@ -185,11 +186,13 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
 
     @Override
     public void refreshAddressFail(boolean isInternal) {
+        hideLoading();
         showMessage(R.string.fail_refresh_address);
     }
 
     @Override
     public void refreshAddressSuccess(String lastAddress, boolean isInternal) {
+        hideLoading();
         showMessage(R.string.msg_refreshed_address);
         getMvpPresenter().createAddressQrcode(lastAddress);
         setReceiveAddress(lastAddress);

@@ -11,6 +11,7 @@ public class ApiResponse<T> {
     public static final int STATUS_INVALID_PARAM_TYPE = -32;//	无效的参数类型
     public static final int STATUS_WALLET_ID_EXSIST = -40;//钱包id已存在
     public static final int STATUS_WALLET_NO_EXSIST = -41;//钱包id已存在
+    public static final int STATUS_IP_REACH_LIMIT = -88;//您的IP超过了规定限制
     /**
      * data : null
      * errorLog : null

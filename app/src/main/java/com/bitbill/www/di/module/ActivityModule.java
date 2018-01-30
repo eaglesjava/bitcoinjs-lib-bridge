@@ -103,6 +103,9 @@ import com.bitbill.www.ui.wallet.importing.ImportWalletPresenter;
 import com.bitbill.www.ui.wallet.info.BtcRecordMvpPresenter;
 import com.bitbill.www.ui.wallet.info.BtcRecordMvpView;
 import com.bitbill.www.ui.wallet.info.BtcRecordPresenter;
+import com.bitbill.www.ui.wallet.info.transfer.TransferDetailMvpPresenter;
+import com.bitbill.www.ui.wallet.info.transfer.TransferDetailMvpView;
+import com.bitbill.www.ui.wallet.info.transfer.TransferDetailPresenter;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdMvpPresenter;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdMvpView;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdPresenter;
@@ -262,8 +265,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    ScanPayMvpPresenter<ScanPayMvpView> provideScanPayPresenter(
-            ScanPayPresenter<ScanPayMvpView> presenter) {
+    ScanPayMvpPresenter<TxModel, ScanPayMvpView> provideScanPayPresenter(
+            ScanPayPresenter<TxModel, ScanPayMvpView> presenter) {
         return presenter;
     }
 
@@ -362,6 +365,13 @@ public class ActivityModule {
     @PerActivity
     WalletAddressMvpPresenter<TxModel, WalletAddressMvpView> provideWalletAddressPresenter(
             WalletAddressPresenter<TxModel, WalletAddressMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    TransferDetailMvpPresenter<AddressModel, TransferDetailMvpView> provideTransferDetailPresenter(
+            TransferDetailPresenter<AddressModel, TransferDetailMvpView> presenter) {
         return presenter;
     }
 

@@ -77,8 +77,8 @@ public final class AppConstants {
     /**
      * socket event
      */
-    public static final String TYPE_RECEIVE = "TYPE_RECEIVE";
-    public static final String TYPE_SEND = "TYPE_SEND";
+    public static final String TYPE_RECEIVE = "RECEIVE";
+    public static final String TYPE_SEND = "SEND";
 
     private AppConstants() {
         // This utility class is not publicly instantiable

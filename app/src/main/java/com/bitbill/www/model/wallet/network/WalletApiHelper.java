@@ -5,8 +5,6 @@ import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiHelper;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
-import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
-import com.bitbill.www.model.transaction.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
@@ -135,18 +133,6 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
                 });
     }
 
-    /**
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<GetTxInfoResponse>> getTxInfo(GetTxInfoRequest getTxInfoRequest) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_TXINFO)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(getTxInfoRequest)
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<GetTxInfoResponse>>() {
-                });
-    }
 
     @Override
     public Observable<ApiResponse> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest) {

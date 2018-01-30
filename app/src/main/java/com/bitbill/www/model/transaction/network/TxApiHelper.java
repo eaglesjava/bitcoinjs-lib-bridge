@@ -7,11 +7,13 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
 import com.bitbill.www.model.transaction.network.entity.GetTxElement;
 import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
 import com.bitbill.www.model.transaction.network.entity.GetTxListRequest;
 import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.transaction.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionResponse;
+import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.google.gson.reflect.TypeToken;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -79,6 +81,19 @@ public class TxApiHelper extends ApiHelper implements TxApi {
                 .addApplicationJsonBody(listUnconfirmRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse<ListTxElementResponse>>() {
+                });
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<TxElement>> getTxInfo(GetTxInfoRequest getTxInfoRequest) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.GET_TXINFO)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addApplicationJsonBody(getTxInfoRequest)
+                .build()
+                .getParseObservable(new TypeToken<ApiResponse<TxElement>>() {
                 });
     }
 }

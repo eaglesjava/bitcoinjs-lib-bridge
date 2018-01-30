@@ -39,7 +39,7 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
         getCompositeDisposable().add(getModelManager()
                 .updateContacts(new UpdateContactsRequest(contact.getWalletId()
                         , getApp().getContactKey()
-                        , contact.getAddress()
+                        , (StringUtils.isEmpty(contact.getWalletId()) ? contact.getAddress() : null)
                         , contact.getRemark()
                         , contact.getContactName()
                         , contact.getCoinType()))
@@ -122,7 +122,7 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
         getCompositeDisposable().add(getModelManager()
                 .deleteContacts(new DeleteContactsRequest(contact.getWalletId()
                         , getApp().getContactKey()
-                        , contact.getAddress()))
+                        , (StringUtils.isEmpty(contact.getWalletId()) ? contact.getAddress() : null)))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<Void>>() {
                     @Override

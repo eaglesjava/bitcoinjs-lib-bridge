@@ -7,8 +7,13 @@
     <TextView
         android:id="@+id/tv_address_title"
         style="@style/Content.Title.White80"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white_10"
+        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/activity_padding"
+        android:paddingTop="8dp"
         android:text="@string/title_address_balance"
         android:visibility="gone" />
 
@@ -16,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 

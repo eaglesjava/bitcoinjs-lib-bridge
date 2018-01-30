@@ -18,6 +18,7 @@
     <string name="error_invalid_param_type">无效的参数类型</string>
     <string name="error_wallet_id_exsist">钱包id已存在</string>
     <string name="error_wallet_no_exsist">钱包不存在</string>
+    <string name="error_ip">您的IP超过了规定限制</string>
 
     <!--socket message-->
     <string name="connect">已连接</string>
@@ -122,8 +123,8 @@
     <string name="menu_import_wallet">导入钱包</string>
 
     <!--unconfirm fragment-->
-    <string name="text_in_progress_count">正在进行中 %d个</string>
-    <string name="text_unconfirm_transaction">未确认的交易</string>
+    <string name="text_in_progress_count">未确认交易 %d个</string>
+    <string name="text_unconfirm_transaction">未确认交易</string>
 
     <!--backup wallet-->
     <string name="title_activity_backup_wallet">备份钱包</string>
@@ -167,6 +168,7 @@
     <string name="title_tx_fee">手续费</string>
     <string name="title_tx_confirm">确认</string>
     <string name="title_tx_remark">备注</string>
+    <string name="tx_my_address">我的地址&#160;</string>
     <string name="copy_send_address">发送地址已复制</string>
     <string name="copy_receive_address">接收地址已复制</string>
     <string name="copy_remark">备注已复制</string>

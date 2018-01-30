@@ -2,8 +2,6 @@ package com.bitbill.www.model.wallet.network;
 
 import com.bitbill.www.common.base.model.network.api.Api;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
-import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
-import com.bitbill.www.model.transaction.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.network.entity.CheckWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
@@ -77,14 +75,6 @@ public interface WalletApi extends Api {
      * @return
      */
     Observable<ApiResponse<GetConfigResponse>> getConfig();
-
-    /**
-     * 获取交易详情
-     *
-     * @param getTxInfoRequest
-     * @return
-     */
-    Observable<ApiResponse<GetTxInfoResponse>> getTxInfo(GetTxInfoRequest getTxInfoRequest);
 
 
     /**

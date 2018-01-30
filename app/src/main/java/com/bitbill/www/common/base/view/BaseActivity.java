@@ -159,6 +159,7 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         super.onPause();
         JPushInterface.onPause(this);
     }
+
     @Override
     public void showLoading() {
         if (mProgressDialog == null) {
@@ -182,6 +183,7 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         } else {
             showMessage(getString(R.string.some_error));
         }
+        hideLoading();
     }
 
     @Override

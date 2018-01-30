@@ -4,11 +4,13 @@ import com.bitbill.www.common.base.model.network.api.Api;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.model.transaction.network.entity.GetTxElement;
 import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
 import com.bitbill.www.model.transaction.network.entity.GetTxListRequest;
 import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.transaction.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionResponse;
+import com.bitbill.www.model.transaction.network.entity.TxElement;
 
 import io.reactivex.Observable;
 
@@ -49,4 +51,13 @@ public interface TxApi extends Api {
      * @return
      */
     Observable<ApiResponse<ListTxElementResponse>> listUnconfirm(ListUnconfirmRequest listUnconfirmRequest);
+
+    /**
+     * 获取交易详情
+     *
+     * @param getTxInfoRequest
+     * @return
+     */
+    Observable<ApiResponse<TxElement>> getTxInfo(GetTxInfoRequest getTxInfoRequest);
+
 }

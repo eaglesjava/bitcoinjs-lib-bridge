@@ -15,7 +15,9 @@ import com.bitbill.www.common.utils.SoundUtils;
 import com.bitbill.www.di.component.DaggerServiceComponent;
 import com.bitbill.www.di.component.ServiceComponent;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.eventbus.AppBackgroundEvent;
 import com.bitbill.www.model.eventbus.ConfirmedEvent;
+import com.bitbill.www.model.eventbus.ReceiveAmountEvent;
 import com.bitbill.www.model.eventbus.RegisterEvent;
 import com.bitbill.www.model.eventbus.SocketServerStateEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
@@ -93,6 +95,8 @@ public class SocketServiceProvider extends Service {
                         // 播放声音
                         SoundUtils.playSound(R.raw.diaoluo_da);
                     }
+
+                    EventBus.getDefault().post(new ReceiveAmountEvent().setData(unConfirmed));
                 }
             }
             //  获取未确认列表
@@ -166,6 +170,7 @@ public class SocketServiceProvider extends Service {
         mServiceComponent.inject(this);
         initSocket();
         EventBus.getDefault().register(this);
+
         Log.d(TAG, "onCreate() called");
     }
 
@@ -194,6 +199,15 @@ public class SocketServiceProvider extends Service {
     public void onSocketServerStateEvent(RegisterEvent socketServerStateEvent) {
         Register register = (Register) socketServerStateEvent.getData();
         registerWallet(register);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onAppBackgroundEvent(AppBackgroundEvent appBackgroundEvent) {
+        if (appBackgroundEvent.isBackground()) {
+            disconnectConnection();
+        } else {
+            connectConnection();
+        }
     }
 
     public void registerWallet(Register register) {

@@ -13,14 +13,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_tx_left"
             style="@style/Content"
             android:layout_width="0dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
             android:layout_weight="2"
             android:text="ac1qpd8dc42nrefsvwx7udf5km34905hv8354yvdrj" />
 
@@ -28,8 +28,6 @@
             android:id="@+id/tv_tx_right"
             style="@style/Content"
             android:layout_width="0dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:gravity="right"
             android:text="0.5 BTC" />

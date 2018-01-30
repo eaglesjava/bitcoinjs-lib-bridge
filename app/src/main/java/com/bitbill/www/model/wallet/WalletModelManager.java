@@ -11,8 +11,6 @@ import com.bitbill.www.common.base.model.ModelManager;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.ApplicationContext;
-import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
-import com.bitbill.www.model.transaction.network.entity.GetTxInfoResponse;
 import com.bitbill.www.model.wallet.db.WalletDb;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.WalletApi;
@@ -176,10 +174,6 @@ public class WalletModelManager extends ModelManager implements WalletModel {
         return mWalletApi.getConfig();
     }
 
-    @Override
-    public Observable<ApiResponse<GetTxInfoResponse>> getTxInfo(GetTxInfoRequest getTxInfoRequest) {
-        return mWalletApi.getTxInfo(getTxInfoRequest);
-    }
 
     @Override
     public Observable<ApiResponse> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest) {

@@ -3,6 +3,7 @@ package com.bitbill.www.ui.wallet.info.transfer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
+import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.transaction.db.entity.Input;
 import com.bitbill.www.model.transaction.db.entity.Output;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
@@ -37,10 +39,12 @@ import butterknife.ButterKnife;
  * Created by isanwenyu on 2018/1/9.
  */
 
-public class TransferDetailFragment extends BaseListFragment<TitleItem, GetCacheVersionMvpPresenter> implements GetCacheVersionMvpView {
+public class TransferDetailFragment extends BaseListFragment<TitleItem, TransferDetailMvpPresenter> implements TransferDetailMvpView, GetCacheVersionMvpView {
 
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
+    @Inject
+    TransferDetailMvpPresenter<AddressModel, TransferDetailMvpView> mTransferDetailMvpPresenter;
     private TxRecord mTxRecord;
     private HeaderViewHolder mHeaderViewHolder;
     private FooterViewHolder mFooterViewHolder;
@@ -55,13 +59,14 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, GetCache
     }
 
     @Override
-    public GetCacheVersionMvpPresenter getMvpPresenter() {
-        return mGetCacheVersionMvpPresenter;
+    public TransferDetailMvpPresenter getMvpPresenter() {
+        return mTransferDetailMvpPresenter;
     }
 
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
+        addPresenter(mGetCacheVersionMvpPresenter);
     }
 
     @Override
@@ -80,7 +85,7 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, GetCache
     public void initData() {
         if (getApp().getBlockHeight() <= 0) {
             //重新获取高度
-            getMvpPresenter().getCacheVersion();
+            mGetCacheVersionMvpPresenter.getCacheVersion();
         }
         mTxRecord = ((TxRecord) getArguments().getSerializable(AppConstants.ARG_TX_ITEM));
         if (mTxRecord == null) {
@@ -89,28 +94,7 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, GetCache
         }
         mTxRecord.__setDaoSession(getApp().getDaoSession());
         //构造列表数据
-        mDatas.clear();
-        mDatas.add(new TransferHashItem().setHash(mTxRecord.getTxHash()).setTitle(getString(R.string.title_tx_hash)));
-        try {
-            for (Input inputsBean : mTxRecord.getInputs()) {
-                mDatas.add(new TransferSendItem().setAddress(inputsBean.getAddress()).setAmount(inputsBean.getValue()).setTitle(getString(R.string.title_tx_send_address)));
-            }
-            for (Output outputsBean : mTxRecord.getOutputs()) {
-                mDatas.add(new TransferReceiveItem().setAddress(outputsBean.getAddress()).setAmount(outputsBean.getValue()).setTitle(getString(R.string.title_tx_receive_address)));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        mDatas.add(new TransferFeeItem(mTxRecord.getFee()).setTitle(getString(R.string.title_tx_fee)));
-        long height = mTxRecord.getHeight();
-        if (height != -1) {
-            //非待确认状态
-            mDatas.add(new TransferConfirmItem(height).setTitle(getString(R.string.title_tx_confirm)));
-        }
-        mDatas.add(new TransferRemarkItem().setRemark(mTxRecord.getRemark()).setTitle(getString(R.string.title_tx_remark)));
-        mDatas.add(new TransferDateItem().setDate(StringUtils.formatDateTime(mTxRecord.getCreatedTime())).setTitle(getString(R.string.title_tx_date)));
-        mAdapter.notifyDataSetChanged();
+        getMvpPresenter().buidTransferData();
 
         if (mHeaderViewHolder != null) {
 
@@ -200,14 +184,28 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, GetCache
         } else if (titleItem instanceof TransferSendItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_send_address));
             TransferSendItem sendItem = (TransferSendItem) titleItem;
-            holder.setText(R.id.tv_tx_left, sendItem.getAddress());
+            StringBuilder addressBuider = new StringBuilder();
+            if (sendItem.isMine()) {
+                addressBuider.append("<b>")
+                        .append(getString(R.string.tx_my_address))
+                        .append("</b>");
+            }
+            addressBuider.append(sendItem.getAddress());
+            ((TextView) holder.getView(R.id.tv_tx_left)).setText(Html.fromHtml(addressBuider.toString()));
             holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(sendItem.getAmount()) + " BTC");
             holder.setVisible(R.id.tv_tx_right, true);
 
         } else if (titleItem instanceof TransferReceiveItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_receive_address));
             TransferReceiveItem receiveItem = (TransferReceiveItem) titleItem;
-            holder.setText(R.id.tv_tx_left, receiveItem.getAddress());
+            StringBuilder addressBuider = new StringBuilder();
+            if (receiveItem.isMine()) {
+                addressBuider.append("<b>")
+                        .append(getString(R.string.tx_my_address))
+                        .append("</b>");
+            }
+            addressBuider.append(receiveItem.getAddress());
+            ((TextView) holder.getView(R.id.tv_tx_left)).setText(Html.fromHtml(addressBuider.toString()));
             holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(receiveItem.getAmount()) + " BTC");
             holder.setVisible(R.id.tv_tx_right, true);
 
@@ -269,6 +267,47 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, GetCache
     @Override
     public void getBlockHeight(long blockheight) {
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public TxRecord getTxRecord() {
+        return mTxRecord;
+    }
+
+    @Override
+    public void buildDataSuccess(TxRecord txRecord) {
+        mTxRecord = txRecord;
+        buildData();
+    }
+
+    private void buildData() {
+        mDatas.clear();
+        mDatas.add(new TransferHashItem().setHash(mTxRecord.getTxHash()).setTitle(getString(R.string.title_tx_hash)));
+        try {
+            for (Input inputsBean : mTxRecord.getInputs()) {
+                mDatas.add(new TransferSendItem(inputsBean.getAddress(), inputsBean.getValue(), inputsBean.isMine(), inputsBean.isInternal()).setTitle(getString(R.string.title_tx_send_address)));
+            }
+            for (Output outputsBean : mTxRecord.getOutputs()) {
+                mDatas.add(new TransferReceiveItem(outputsBean.getAddress(), outputsBean.getValue(), outputsBean.isMine(), outputsBean.isInternal()).setTitle(getString(R.string.title_tx_receive_address)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mDatas.add(new TransferFeeItem(mTxRecord.getFee()).setTitle(getString(R.string.title_tx_fee)));
+        long height = mTxRecord.getHeight();
+        if (height != -1) {
+            //非待确认状态
+            mDatas.add(new TransferConfirmItem(height).setTitle(getString(R.string.title_tx_confirm)));
+        }
+        mDatas.add(new TransferRemarkItem().setRemark(mTxRecord.getRemark()).setTitle(getString(R.string.title_tx_remark)));
+        mDatas.add(new TransferDateItem().setDate(StringUtils.formatDateTime(mTxRecord.getCreatedTime())).setTitle(getString(R.string.title_tx_date)));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void buildDataFail() {
+        showMessage(R.string.fail_load_transfer_details);
     }
 
     static class HeaderViewHolder {

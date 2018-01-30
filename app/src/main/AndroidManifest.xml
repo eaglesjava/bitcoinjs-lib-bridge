@@ -66,7 +66,7 @@
             android:name=".ui.main.receive.SpecificReceiveActivity"
             android:label="@string/title_activity_specific_receive"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".ui.main.send.SendSuccessActivity"
             android:label="@string/title_activity_send_success"

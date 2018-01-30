@@ -444,8 +444,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void OnTransactionRecordItemClick(TxRecord item) {
-        //跳转到确认交易详情
-        TransferDetailsActivity.start(MainActivity.this, item);
+        //跳转到未确认交易详情
+        TransferDetailsActivity.start(MainActivity.this, item, TAG);
     }
 
     @Override

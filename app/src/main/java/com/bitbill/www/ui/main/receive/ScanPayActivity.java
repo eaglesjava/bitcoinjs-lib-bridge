@@ -10,12 +10,29 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
+import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
+import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
+import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.eventbus.ReceiveAmountEvent;
+import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.transaction.network.entity.TxElement;
+import com.bitbill.www.model.wallet.network.socket.ContextBean;
+import com.bitbill.www.model.wallet.network.socket.UnConfirmed;
+import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> implements ScanPayMvpView {
+public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> implements ScanPayMvpView, ParseTxInfoMvpView {
+    public static final String TAG = "ScanPayActivity";
     @BindView(R.id.tv_address)
     TextView tvAddress;
     @BindView(R.id.iv_qrcode)
@@ -23,9 +40,12 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     @BindView(R.id.tv_receive_amount)
     TextView tvReceiveAmount;
     @Inject
-    ScanPayMvpPresenter<ScanPayMvpView> mScanPayMvpPresenter;
+    ScanPayMvpPresenter<TxModel, ScanPayMvpView> mScanPayMvpPresenter;
+    @Inject
+    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
     private String mReceiveAddress;
     private String mReceiveAmount;
+    private String mTxHash;
 
     public static void start(Context context, String receiveAddress, String receiveAmount) {
         Intent starter = new Intent(context, ScanPayActivity.class);
@@ -49,11 +69,12 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
+        addPresenter(mViewParseTxInfoMvpPresenter);
     }
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_scan_pay);
     }
 
     @Override
@@ -97,5 +118,74 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     @Override
     public String getReceiveAmount() {
         return mReceiveAmount;
+    }
+
+    @Override
+    public String getTxHash() {
+        return mTxHash;
+    }
+
+    @Override
+    public void getTxHashFail() {
+
+    }
+
+    @Override
+    public void addressMatchTx(boolean match, TxElement txElement) {
+        if (match && txElement != null) {
+            //地址匹配交易解析交易
+            List<TxElement> txElements = new ArrayList<>();
+            txElements.add(txElement);
+            mViewParseTxInfoMvpPresenter.parseTxInfo(txElements);
+        }
+
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReceiveAmountEvent(ReceiveAmountEvent receiveAmountEvent) {
+        //重新加载联系人信息
+        if (receiveAmountEvent != null) {
+            UnConfirmed unConfirmed = (UnConfirmed) receiveAmountEvent.getData();
+            ContextBean context = unConfirmed.getContext();
+            if (context != null) {
+                try {
+                    double unConfirmedAmount = Double.parseDouble(context.getAmount());
+                    double receiveAmount = Double.parseDouble(getReceiveAmount());
+                    if (unConfirmedAmount > 0 && receiveAmount > 0 && unConfirmedAmount >= receiveAmount) {
+                        //金额匹配
+                        mTxHash = context.getTxHash();
+                        getMvpPresenter().getTxInfo();
+                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void requireTxInfoList() {
+
+    }
+
+    @Override
+    public void getTxInfoListFail() {
+
+    }
+
+    @Override
+    public void parsedTxItemList(List<TxRecord> txRecords) {
+        if (StringUtils.isEmpty(txRecords)) {
+            return;
+        }
+        //打开交易详情
+        TransferDetailsActivity.start(ScanPayActivity.this, txRecords.get(0), TAG);
+        finish();
+    }
+
+    @Override
+    public void parsedTxItemListFail() {
+
     }
 }

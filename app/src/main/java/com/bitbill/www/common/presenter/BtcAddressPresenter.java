@@ -123,7 +123,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         getCompositeDisposable().add(getModelManager()
                 .refreshAddress(new RefreshAddressRequest(xPublicKeyHash, refreshIndex, refreshChangeIndex))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<RefreshAddressResponse>>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<ApiResponse<RefreshAddressResponse>>() {
                     @Override
                     public void onNext(ApiResponse<RefreshAddressResponse> refreshAddressResponseApiResponse) {
                         super.onNext(refreshAddressResponseApiResponse);
@@ -212,7 +212,6 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
     }
 
     public void getBitcoinAddressByMasterXPublicKey(long index, Wallet wallet, boolean isInternal) {
-        getMvpView().showLoading();
         String publicKey = isInternal ? wallet.getInternalPublicKey() : wallet.getExtentedPublicKey();
         BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(publicKey, index, new BitcoinJsWrapper.Callback() {
             @Override
@@ -220,7 +219,6 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                 if (!isViewAttached()) {
                     return;
                 }
-                getMvpView().hideLoading();
                 if (StringUtils.isEmpty(jsResult)) {
                     getMvpView().refreshAddressFail(isInternal);
                     return;
@@ -265,7 +263,6 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
     }
 
     public void getBitcoinContinuousAddress(long fromIndex, long toIndex, Wallet wallet, boolean isInternal) {
-        getMvpView().showLoading();
         String publicKey = isInternal ? wallet.getInternalPublicKey() : wallet.getExtentedPublicKey();
         BitcoinJsWrapper.getInstance().getBitcoinContinuousAddressByMasterXPublicKey(publicKey, fromIndex, toIndex, new BitcoinJsWrapper.Callback() {
             @Override
@@ -274,7 +271,6 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                 if (!isViewAttached()) {
                     return;
                 }
-                getMvpView().hideLoading();
                 if (StringUtils.isEmpty(jsResult)) {
                     getMvpView().refreshAddressFail(isInternal);
                     return;
@@ -329,7 +325,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         getCompositeDisposable().add(getModelManager()
                 .insertAddressListAndUpdatWallet(addressList, wallet)
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);

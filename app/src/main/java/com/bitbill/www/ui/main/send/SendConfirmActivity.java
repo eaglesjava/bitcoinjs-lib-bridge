@@ -123,7 +123,8 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
             @Override
             public void onPwdCnfirmed(String confirmPwd) {
                 mTradePwd = confirmPwd;
-                // TODO: 2017/12/14 发送交易
+                //  发送交易
+                showLoading();
                 if (isSendAll) {
                     getMvpPresenter().buildTransaction();
                 } else {
@@ -185,6 +186,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     private void sendSuccess() {
+        hideLoading();
         //发送发送成功的事件
         EventBus.getDefault().postSticky(new SendSuccessEvent());
         //关闭相关流程
@@ -195,6 +197,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void sendTransactionFail(String message) {
+        hideLoading();
         if (StringUtils.isEmpty(message)) {
             showMessage(R.string.fail_send_transaction);
         } else {
@@ -378,6 +381,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void amountNoEnough() {
+        hideLoading();
         MessageConfirmDialog.newInstance(getString(R.string.msg_dialog_amount_not_enough), true)
                 .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
                     @Override
@@ -395,6 +399,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     @Override
     public void refreshAddressFail(boolean isInternal) {
         sendTransactionFail(getString(R.string.fail_refresh_change_address));
+        hideLoading();
     }
 
     @Override
@@ -422,6 +427,10 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     }
 
+    @Override
+    public void hideLoading() {
+        super.hideLoading();
+    }
 
     public int getBestTime() {
         for (GetTxElementResponse.FeesBean fee : mFees) {

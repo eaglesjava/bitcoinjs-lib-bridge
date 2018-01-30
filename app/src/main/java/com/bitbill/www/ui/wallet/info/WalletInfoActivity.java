@@ -15,6 +15,7 @@ import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
 
 public class WalletInfoActivity extends BaseTabsActivity implements BtcRecordFragment.OnTransactionRecordItemClickListener {
 
+    private static final String TAG = "WalletInfoActivity";
     private Wallet mWallet;
 
     public static void start(Context context, Wallet wallet) {
@@ -26,7 +27,7 @@ public class WalletInfoActivity extends BaseTabsActivity implements BtcRecordFra
     @Override
     public void OnTransactionRecordItemClick(TxRecord item) {
         //跳转到转账详情页面
-        TransferDetailsActivity.start(WalletInfoActivity.this, item);
+        TransferDetailsActivity.start(WalletInfoActivity.this, item, TAG);
     }
 
     @Override

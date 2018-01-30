@@ -53,7 +53,7 @@ public class WalletAddressActivity extends BaseTabsActivity {
 
     @Override
     protected boolean isBlue() {
-        return false;
+        return true;
     }
 
     @Override

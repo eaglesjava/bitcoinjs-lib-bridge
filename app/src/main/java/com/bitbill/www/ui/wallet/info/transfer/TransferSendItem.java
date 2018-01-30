@@ -8,8 +8,17 @@ import com.bitbill.www.common.base.model.entity.TitleItem;
 
 public class TransferSendItem extends TitleItem {
 
-    String address;
-    long amount;
+    private String address;
+    private long amount;
+    private boolean isMine;
+    private boolean isInternal;
+
+    public TransferSendItem(String address, long amount, boolean isMine, boolean isInternal) {
+        this.address = address;
+        this.amount = amount;
+        this.isMine = isMine;
+        this.isInternal = isInternal;
+    }
 
     public String getAddress() {
         return address;
@@ -27,5 +36,21 @@ public class TransferSendItem extends TitleItem {
     public TransferSendItem setAmount(long amount) {
         this.amount = amount;
         return this;
+    }
+
+    public boolean isMine() {
+        return isMine;
+    }
+
+    public void setMine(boolean mine) {
+        isMine = mine;
+    }
+
+    public boolean isInternal() {
+        return isInternal;
+    }
+
+    public void setInternal(boolean internal) {
+        isInternal = internal;
     }
 }

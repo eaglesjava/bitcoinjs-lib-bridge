@@ -81,7 +81,9 @@ public class SplashPresenter<M extends AppModel, V extends SplashMvpView> extend
     public void initLanguage() {
         if (getModelManager().getSelectedLocale() == null) {
             //选取当前的语言设置币种
-            getModelManager().setSelectedCurrency(Locale.CHINESE.getLanguage().equals(getModelManager().getCurrentLocale().getLanguage()) ? AppPreferences.SelectedCurrency.CNY : AppPreferences.SelectedCurrency.USD);
+            AppPreferences.SelectedCurrency selectedCurrency = Locale.CHINESE.getLanguage().equals(getModelManager().getCurrentLocale().getLanguage()) ? AppPreferences.SelectedCurrency.CNY : AppPreferences.SelectedCurrency.USD;
+            getModelManager().setSelectedCurrency(selectedCurrency);
+            getApp().setSelectedCurrency(selectedCurrency);
             getModelManager().setSelectedLocale(getModelManager().getCurrentLocale());
         }
     }

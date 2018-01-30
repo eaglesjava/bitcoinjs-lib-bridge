@@ -11,6 +11,7 @@ import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.TxApi;
 import com.bitbill.www.model.transaction.network.entity.GetTxElement;
 import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
 import com.bitbill.www.model.transaction.network.entity.GetTxListRequest;
 import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
 import com.bitbill.www.model.transaction.network.entity.ListUnconfirmRequest;
@@ -90,6 +91,11 @@ public class TxModelManager extends ModelManager implements TxModel {
     @Override
     public Observable<List<TxRecord>> getUnConfirmedTxRecord() {
         return mTxDb.getUnConfirmedTxRecord();
+    }
+
+    @Override
+    public Observable<ApiResponse<TxElement>> getTxInfo(GetTxInfoRequest getTxInfoRequest) {
+        return mTxApi.getTxInfo(getTxInfoRequest);
     }
 
 }

@@ -23,7 +23,7 @@
     <string name="dialog_btn_cancel">Cancel</string>
     <string name="dialog_btn_comfirm">Confirm</string>
     <string name="dialog_msg_request_permissions">Scanning QR code requires the permission to open camera and astigmatic light.</string>
-    <string name="msg_dailog_input_2_confirm">Please enter wallet password to confirm.</string>
+    <string name="msg_dailog_input_2_confirm">Please input password and confirm.</string>
 
     <!--socket message-->
     <string name="connect">Connected</string>
@@ -41,7 +41,7 @@
 
     <!--create or import wallet-->
     <string name="title_activity_import_wallet">Import wallet</string>
-    <string name="text_mnemonic">Mnemonic</string>
+    <string name="text_mnemonic">Mnemonic words</string>
     <string name="hint_input_mnemonic">normally 12 words</string>
     <string name="hint_click_input_please">Click to enter</string>
     <string name="hint_only_support_bip39">Supports BIP39 mnemonic words only</string>
@@ -99,8 +99,8 @@
     <string name="navigation_drawer_open">Open navigation</string>
     <string name="navigation_drawer_close">Close navigation</string>
     <string name="fail_parse_tx_item">Failed to parse the transaction list.</string>
-    <string name="menu_create_wallet">Create Wallet</string>
-    <string name="menu_import_wallet">Import Wallet</string>
+    <string name="menu_create_wallet">Create</string>
+    <string name="menu_import_wallet">Import</string>
     <!--scan qrcode -->
     <string name="fail_open_camera">Failed to open the camera, please check the permission.</string>
     <string name="fail_parse_scan_result">Failed to parse the scan result.</string>
@@ -121,8 +121,8 @@
     <string name="title_asset_my_wallet">My wallets</string>
 
     <!--unconfirm fragment-->
-    <string name="text_in_progress_count">Unconfirmed: %d </string>
-    <string name="text_unconfirm_transaction">Unconfirmed transaction</string>
+    <string name="text_in_progress_count">Unconfirmed transaction: %d </string>
+    <string name="text_unconfirm_transaction">Unconfirmed</string>
 
     <!--backup wallet-->
     <string name="title_activity_backup_wallet">Back up wallet</string>
@@ -165,6 +165,7 @@
     <string name="title_tx_confirm">Confirmation</string>
     <string name="title_tx_remark">Remarks</string>
     <string name="title_tx_date">Transaction date</string>
+    <string name="tx_my_address">My_address&#160;</string>
     <string name="copy_send_address">Copied</string>
     <string name="copy_receive_address">Copied</string>
     <string name="copy_remark">Copied</string>
@@ -186,8 +187,8 @@
     <string name="fail_refresh_address">Refresh address failed</string>
     <string name="msg_refreshed_address">Address refreshed</string>
     <string name="title_back_up_now">Back up wallet now</string>
-    <string name="title_activity_specific_receive">Receive specific amount</string>
-    <string name="title_activity_scan_pay">Receive specific amount</string>
+    <string name="title_activity_specific_receive">Amount</string>
+    <string name="title_activity_scan_pay">Receive</string>
     <string name="fail_create_pay_qrcode">Failed to generate receiving QR code, please try again.</string>
     <string name="title_scan_pay_me">Scan to pay</string>
 
@@ -199,12 +200,12 @@
     <string name="fail_invalid_address">The address is invalid</string>
     <string name="fail_send_address_null">Address cannot be empty</string>
     <string name="msg_coming_soon">comming soon</string>
-    <string name="title_activity_send_amount">Send amount</string>
+    <string name="title_activity_send_amount">Amount</string>
     <string name="title_activity_scan_result">Scan results</string>
     <string name="msg_input_send_amount">Please input amount</string>
     <string name="msg_input_gt_zero_amount">Amount must be larger than 0</string>
     <string name="msg_input_specifc_amount">Please enter a specific amount.</string>
-    <string name="action_send_all_amount">Send total balance</string>
+    <string name="action_send_all_amount">Total balance</string>
     <string name="text_btc_cny_value">%1$s %2$s</string>
     <string name="title_activity_select_wallet">Choose wallet</string>
     <string name="msg_please_select_wallet">Please choose a wallet</string>
@@ -240,7 +241,7 @@
     <string name="action_contact_edit">Edit</string>
     <string name="action_contact_add">Add</string>
     <string name="fail_load_contact_info">Failed to load contact information.</string>
-    <string name="hint_remark_none">none</string>
+    <string name="hint_remark_none">-</string>
     <string name="title_activity_add_contact_by_id">Via wallet ID</string>
     <string name="hint_search_wallet_id">Search wallet ID</string>
     <string name="btn_add_now">Add now</string>
@@ -279,13 +280,13 @@
 
     <!--setting-->
     <string name="bitbill_wallet">Bitbill Wallet</string>
-    <string name="title_prefer_setting">Prefer setting</string>
+    <string name="title_prefer_setting">Preference setting</string>
     <string name="setting_short_cut">Shortcuts</string>
     <string name="title_main_shortcut">Main shortcut</string>
     <string name="title_account_info">Account info</string>
     <string name="title_security">Security</string>
     <string name="title_wallet_manage">Wallet</string>
-    <string name="title_contact">Contact</string>
+    <string name="title_contact">Contacts</string>
     <string name="title_sys_setting">Settings</string>
     <string name="title_other">Other</string>
     <string name="title_about_us">About us</string>
@@ -308,7 +309,7 @@
     <string name="title_activity_wallet_address">Wallet address</string>
     <string name="btn_scan_address">Scan address</string>
     <string name="fail_create_qrcode">Generate wallet ID qr code failed.</string>
-    <string name="title_address_balance">Addresses and balancees</string>
+    <string name="title_address_balance">Addresses and balances</string>
     <string name="title_change_address">Change addresses</string>
     <string name="copy_address">Address copied</string>
     <string name="copy_confim_count">Confirmation number copied</string>

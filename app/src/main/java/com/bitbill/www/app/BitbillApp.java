@@ -1,10 +1,13 @@
 package com.bitbill.www.app;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
@@ -18,8 +21,11 @@ import com.bitbill.www.di.component.DaggerApplicationComponent;
 import com.bitbill.www.di.module.ApplicationModule;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.prefs.AppPreferences;
+import com.bitbill.www.model.eventbus.AppBackgroundEvent;
 import com.bitbill.www.model.wallet.db.WalletDbHelper;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +47,14 @@ public class BitbillApp extends Application {
     WalletDbHelper mWalletDbHelper;
     @Inject
     AppModel mAppModel;
+    private ApplicationComponent mApplicationComponent;
+    private List<Wallet> mWallets;
+    private double mBtcCnyValue;
+    private double mBtcUsdValue;
+    private AppPreferences.SelectedCurrency mSelectedCurrency;
+    private long mBlockHeight;
+    private String mContactKey;
+    private boolean isBackGround;
     ActivityLifecycleCallbacks callbacks = new ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -51,7 +65,11 @@ public class BitbillApp extends Application {
 
         @Override
         public void onActivityStarted(Activity activity) {
-
+            if (isBackGround) {
+                isBackGround = false;
+                //通知SocketServiceProvider
+                EventBus.getDefault().post(new AppBackgroundEvent(isBackGround));
+            }
         }
 
         @Override
@@ -80,13 +98,6 @@ public class BitbillApp extends Application {
         }
         //Activity 其它生命周期的回调
     };
-    private ApplicationComponent mApplicationComponent;
-    private List<Wallet> mWallets;
-    private double mBtcCnyValue;
-    private double mBtcUsdValue;
-    private AppPreferences.SelectedCurrency mSelectedCurrency = AppPreferences.SelectedCurrency.CNY;
-    private long mBlockHeight;
-    private String mContactKey;
 
     public static BitbillApp get() {
         return sInstance;
@@ -181,6 +192,10 @@ public class BitbillApp extends Application {
     }
 
     public String getBtcValue(String btcAmount) {
+
+        if (mSelectedCurrency == null) {
+            mSelectedCurrency = mAppModel.getSelectedCurrency();
+        }
         if (mSelectedCurrency == null) {
             return "0.00";
         }
@@ -219,5 +234,33 @@ public class BitbillApp extends Application {
     public void setContactKey(String contactKey) {
         mContactKey = contactKey;
     }
+
+    public boolean isRunningForeground() {
+        ActivityManager activityManager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcessInfos = activityManager.getRunningAppProcesses();
+        // 枚举进程
+        for (ActivityManager.RunningAppProcessInfo appProcessInfo : appProcessInfos) {
+            if (appProcessInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                if (appProcessInfo.processName.equals(this.getApplicationInfo().processName)) {
+                    Log.d(TAG, "isRunningForeGround");
+                    return true;
+                }
+            }
+        }
+        Log.d(TAG, "isRunningBackGround");
+        return false;
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        if (level == TRIM_MEMORY_UI_HIDDEN) {
+            isBackGround = true;
+            //通知SocketServiceProvider
+            EventBus.getDefault().post(new AppBackgroundEvent(isBackGround));
+            Log.d(TAG, "APP遁入后台");
+        }
+    }
+
 }
 

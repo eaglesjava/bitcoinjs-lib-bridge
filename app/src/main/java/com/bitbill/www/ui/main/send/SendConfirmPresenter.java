@@ -174,7 +174,6 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         String finalInAddress = inAddress;
         String finalOutAddress = outAddress;
 
-        getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().buildTransaction(seedHex, txJson, new BitcoinJsWrapper.Callback() {
             @Override
             public void call(String key, String jsResult) {
@@ -182,7 +181,6 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
                 if (!isViewAttached()) {
                     return;
                 }
-                getMvpView().hideLoading();
                 if (StringUtils.isEmpty(jsResult)) {
                     getMvpView().sendTransactionFail(null);
                     return;
@@ -233,7 +231,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         getCompositeDisposable().add(getModelManager()
                 .sendTransaction(new SendTransactionRequest(extendedKeysHash, inAddress, outAddress, outAmount, txHash, txHex, getMvpView().getRemark()))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<SendTransactionResponse>>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<ApiResponse<SendTransactionResponse>>() {
                     @Override
                     public void onNext(ApiResponse<SendTransactionResponse> sendTransactionResponseApiResponse) {
                         super.onNext(sendTransactionResponseApiResponse);
@@ -245,7 +243,6 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
                         } else {
                             getMvpView().sendTransactionFail(sendTransactionResponseApiResponse.getMessage());
                         }
-
                     }
 
                     @Override

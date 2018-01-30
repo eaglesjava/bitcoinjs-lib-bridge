@@ -3,11 +3,17 @@ package com.bitbill.www.ui.main.receive;
 import android.graphics.Bitmap;
 
 import com.bitbill.www.app.AppConstants;
-import com.bitbill.www.common.base.presenter.BasePresenter;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
+import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
+import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
+import com.bitbill.www.model.transaction.network.entity.TxElement;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,11 +25,11 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu on 2017/12/25.
  */
 @PerActivity
-public class ScanPayPresenter<V extends ScanPayMvpView> extends BasePresenter<V> implements ScanPayMvpPresenter<V> {
+public class ScanPayPresenter<M extends TxModel, V extends ScanPayMvpView> extends ModelPresenter<M, V> implements ScanPayMvpPresenter<M, V> {
 
     @Inject
-    public ScanPayPresenter(SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
-        super(schedulerProvider, compositeDisposable);
+    public ScanPayPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+        super(model, schedulerProvider, compositeDisposable);
     }
 
     @Override
@@ -70,9 +76,54 @@ public class ScanPayPresenter<V extends ScanPayMvpView> extends BasePresenter<V>
                 }));
     }
 
+    @Override
+    public void getTxInfo() {
+        if (!isValidTxHash() && isValidBtcAddress()) {
+            return;
+        }
+        getCompositeDisposable().add(getModelManager()
+                .getTxInfo(new GetTxInfoRequest(getMvpView().getTxHash()))
+                .compose(applyScheduler())
+                .subscribeWith(new BaseSubcriber<ApiResponse<TxElement>>(getMvpView()) {
+                    @Override
+                    public void onNext(ApiResponse<TxElement> getTxInfoResponseApiResponse) {
+                        super.onNext(getTxInfoResponseApiResponse);
+                        if (!isValidMvpView()) {
+                            return;
+                        }
+                        if (getTxInfoResponseApiResponse != null && getTxInfoResponseApiResponse.isSuccess()) {
+                            TxElement data = getTxInfoResponseApiResponse.getData();
+                            if (data != null) {
+                                List<TxElement.OutputsBean> outputs = data.getOutputs();
+                                if (!StringUtils.isEmpty(outputs)) {
+                                    for (TxElement.OutputsBean output : outputs) {
+                                        if (getMvpView().getReceiveAddress().equalsIgnoreCase(output.getAddress())) {
+                                            getMvpView().addressMatchTx(true, data);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                }));
+    }
+
     private boolean isValidBtcAddress() {
         if (StringUtils.isEmpty(getMvpView().getReceiveAddress())) {
             getMvpView().createReceiveQrcodeFail();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidTxHash() {
+        if (StringUtils.isEmpty(getMvpView().getTxHash())) {
+            getMvpView().getTxHashFail();
             return false;
         }
         return true;
