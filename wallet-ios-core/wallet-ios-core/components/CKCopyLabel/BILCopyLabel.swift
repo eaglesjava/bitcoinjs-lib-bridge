@@ -46,6 +46,10 @@ class BILCopyLabel: UILabel {
         super.init(coder: aDecoder)
         setupGesture()
     }
+	
+	func textForCopy() -> String {
+		return text ?? ""
+	}
     
     func setupGesture() {
         isUserInteractionEnabled = true
@@ -56,7 +60,7 @@ class BILCopyLabel: UILabel {
     
     @objc
     func tapAction(gesture: UITapGestureRecognizer) {
-        UIPasteboard.general.string = text
+        UIPasteboard.general.string = textForCopy()
         bil_makeToast(msg: "\(valueTitle ?? "")\(String.contact_detail_copied)")
     }
     
@@ -77,6 +81,10 @@ final class BILAddressLabel: BILCopyLabel {
         }
         set {}
     }
+	
+	override func textForCopy() -> String {
+		return super.textForCopy().replacingOccurrences(of: "My address".bil_ui_localized, with: "")
+	}
 }
 
 final class BILTXHashLabel: BILCopyLabel {

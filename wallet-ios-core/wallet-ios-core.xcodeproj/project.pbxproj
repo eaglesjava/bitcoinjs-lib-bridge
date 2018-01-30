@@ -303,7 +303,6 @@
 		CC64079C1FFE21F00068153A /* BILAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BILAddressCell.swift; sourceTree = "<group>"; };
 		CC6407A52001ED6A0068153A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HomeC.strings"; sourceTree = "<group>"; };
 		CC6407A72001ED6B0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HomeC.strings; sourceTree = "<group>"; };
-		CC6407A82001F1DE0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/HomeC.strings; sourceTree = "<group>"; };
 		CC6407A92001F1E30068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Public.strings; sourceTree = "<group>"; };
 		CC6407AD2001FA6C0068153A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Receive.storyboard; sourceTree = "<group>"; };
 		CC6407B42001FB1B0068153A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ReceiveC.strings; sourceTree = "<group>"; };
@@ -1639,7 +1638,6 @@
 			children = (
 				CC6407A52001ED6A0068153A /* zh-Hans */,
 				CC6407A72001ED6B0068153A /* en */,
-				CC6407A82001F1DE0068153A /* Base */,
 			);
 			name = HomeC.strings;
 			sourceTree = "<group>";

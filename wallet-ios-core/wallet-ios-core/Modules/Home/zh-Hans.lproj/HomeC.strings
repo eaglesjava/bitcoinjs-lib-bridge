@@ -8,12 +8,12 @@
 
 "HomeC.home.section.shortcut" = "快捷方式";
 "HomeC.home.section.asset" = "总资产";
-"HomeC.home.section.unconfirm" = "进行中的交易";
+"HomeC.home.section.unconfirm" = "未确认交易";
 "HomeC.home.section.wallet" = "我的钱包";
 
 "HomeC.home.section.subtitle.shortcut" = "前往设置自定义";
 "HomeC.home.section.subtitle.asset" = "当前币种";
-"HomeC.home.section.subtitle.unconfirm" = "正在进行中";
+"HomeC.home.section.subtitle.unconfirm" = "未确认交易";
 "HomeC.home.section.subtitle.wallet" = "当前钱包";
 "HomeC.home.section.subtitle.unit.ge" = "个";
 

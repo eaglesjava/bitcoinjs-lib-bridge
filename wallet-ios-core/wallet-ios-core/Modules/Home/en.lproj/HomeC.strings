@@ -13,7 +13,7 @@
 
 "HomeC.home.section.subtitle.shortcut" = "Config on settings";
 "HomeC.home.section.subtitle.asset" = "Current currencies: ";
-"HomeC.home.section.subtitle.unconfirm" = "Ongoing transactions: ";
+"HomeC.home.section.subtitle.unconfirm" = "Unconfirmed transactions: ";
 "HomeC.home.section.subtitle.wallet" = "Current wallets: ";
 "HomeC.home.section.subtitle.unit.ge" = "";
 

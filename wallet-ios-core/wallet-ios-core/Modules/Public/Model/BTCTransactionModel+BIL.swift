@@ -332,16 +332,17 @@ extension BTCTransactionModel {
 		debugPrint("--- 1 \(targetSatoshi)")
         for add in outputs! {
             let tx = add as! BTCTXAddressModel
+			let isMine = w.contain(btcAddress: tx.address!)
             switch type {
             case .send:
-                if !w.contain(btcAddress: tx.address!) {
+                if !isMine {
                     self.addToTargets(tx)
                     targetSatoshi += tx.satoshi
 					debugPrint("--- 2 \(targetSatoshi)")
                 }
             case .transfer: fallthrough
             case .receive:
-                if w.contain(btcAddress: tx.address!) {
+                if isMine {
                     self.addToTargets(tx)
                     targetSatoshi += tx.satoshi
 					debugPrint("--- 3 \(targetSatoshi)")

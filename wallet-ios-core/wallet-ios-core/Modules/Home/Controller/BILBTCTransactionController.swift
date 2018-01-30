@@ -100,7 +100,15 @@ extension BILBTCTransactionController: UITableViewDelegate, UITableViewDataSourc
 			c.valueLabel?.valueTitle = element.key
 		case "BILAddressCell":
 			let c = cell as! BILAddressCell
-			c.addressLabel.text = element.key
+			if let isMine = transaction?.wallet?.wallet?.contain(btcAddress: element.key), isMine {
+				let att = NSMutableAttributedString(string: "My address".bil_ui_localized, attributes: [.font: UIFont.boldSystemFont(ofSize: 15), .foregroundColor: UIColor.white])
+				att.append(NSAttributedString(string: element.key))
+				c.addressLabel.attributedText = att
+			}
+			else
+			{
+				c.addressLabel.text = element.key
+			}
 			c.amountLabel.text = element.value
 		default:
 			()

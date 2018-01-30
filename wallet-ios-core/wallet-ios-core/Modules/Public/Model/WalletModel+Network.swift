@@ -36,7 +36,7 @@ extension WalletModel {
         let changeIndex = json["changeIndexNo"].int64Value
 		let serverVersion = json["version"].int64Value
 		func handleChangeAddress(changeIndex: Int64) {
-			if lastBTCChangeAddressIndex < changeIndex {
+			if lastBTCChangeAddressIndex < changeIndex || changeIndex == 0 {
 				generateAddresses(type: .change, from: lastBTCChangeAddressIndex, to: changeIndex, success: { (addresses) in
 					self.bitcoinWallet?.needLoadServer = true
 					loadTXs(version: serverVersion)
@@ -46,7 +46,7 @@ extension WalletModel {
 			}
 		}
 		debugPrint("---- \(addressIndex), \(lastBTCAddressIndex), \(changeIndex), \(lastBTCChangeAddressIndex)")
-        if lastBTCAddressIndex < addressIndex {
+		if lastBTCAddressIndex < addressIndex || addressIndex == 0 {
             generateAddresses(from: lastBTCAddressIndex, to: addressIndex, success: { (addresses) in
                 if self.lastBTCChangeAddressIndex < changeIndex {
                     handleChangeAddress(changeIndex: changeIndex)
@@ -61,7 +61,7 @@ extension WalletModel {
             })
 			return
         }
-        else if lastBTCChangeAddressIndex < changeIndex
+        else if lastBTCChangeAddressIndex < changeIndex || changeIndex == 0
         {
             handleChangeAddress(changeIndex: changeIndex)
 			return

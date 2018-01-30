@@ -63,10 +63,10 @@
     </entity>
     <elements>
         <element name="BCHTransactionModel" positionX="-54" positionY="36" width="128" height="45"/>
-        <element name="BitcoinWalletModel" positionX="-162" positionY="-9" width="128" height="30"/>
+        <element name="BitcoinWalletModel" positionX="-162" positionY="-9" width="128" height="195"/>
         <element name="BTCTransactionModel" positionX="27" positionY="-162" width="128" height="240"/>
-        <element name="BTCTXAddressModel" positionX="-182" positionY="-162" width="128" height="88"/>
-        <element name="BTCWalletAddressModel" positionX="198" positionY="108" width="128" height="30"/>
+        <element name="BTCTXAddressModel" positionX="-182" positionY="-162" width="128" height="90"/>
+        <element name="BTCWalletAddressModel" positionX="198" positionY="108" width="128" height="120"/>
         <element name="ContactModel" positionX="-369" positionY="18" width="128" height="135"/>
         <element name="WalletCoinModel" positionX="-162" positionY="0" width="128" height="30"/>
         <element name="WalletModel" positionX="-182" positionY="-24" width="128" height="195"/>
