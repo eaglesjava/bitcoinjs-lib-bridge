@@ -21,6 +21,9 @@ func BTCFormatString(btc: Int64) -> String {
 	while str.hasSuffix("0") {
 		str.removeLast()
 	}
+	if str.hasSuffix(".") {
+		str += "00"
+	}
     return str
 }
 
