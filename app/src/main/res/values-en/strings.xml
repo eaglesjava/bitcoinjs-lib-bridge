@@ -165,7 +165,7 @@
     <string name="title_tx_confirm">Confirmation</string>
     <string name="title_tx_remark">Remarks</string>
     <string name="title_tx_date">Transaction date</string>
-    <string name="tx_my_address">My_address&#160;</string>
+    <string name="tx_my_address">My&#160;address&#160;</string>
     <string name="copy_send_address">Copied</string>
     <string name="copy_receive_address">Copied</string>
     <string name="copy_remark">Copied</string>

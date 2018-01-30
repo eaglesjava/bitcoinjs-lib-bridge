@@ -34,6 +34,8 @@ public interface AddressDb extends Db {
 
     Address getAddressByName(String address);
 
+    Address getAddressByNameAndWalletId(String address, Long walletId);
+
     List<Wallet> getWalletsByAddresses(List<String> addressList);
 
 }

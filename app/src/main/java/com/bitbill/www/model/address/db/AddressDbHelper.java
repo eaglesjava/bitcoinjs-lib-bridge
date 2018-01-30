@@ -102,6 +102,11 @@ public class AddressDbHelper extends DbHelper implements AddressDb {
     }
 
     @Override
+    public Address getAddressByNameAndWalletId(String address, Long walletId) {
+        return mAddressDao.queryBuilder().where(AddressDao.Properties.Name.eq(address), AddressDao.Properties.WalletId.eq(walletId)).unique();
+    }
+
+    @Override
     public List<Wallet> getWalletsByAddresses(List<String> addressList) {
         List<Address> addresses = mAddressDao.queryBuilder().where(AddressDao.Properties.Name.in(addressList)).list();
         List<Wallet> wallets = new ArrayList<>();

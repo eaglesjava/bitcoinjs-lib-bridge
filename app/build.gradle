@@ -27,7 +27,7 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "BASE_URL", "\"https://walletservice.bitbill.com\"")
-            buildConfigField("String", "SOCKET_URL", "\"http://192.168.1.2:3000\"")
+            buildConfigField("String", "SOCKET_URL", "\"http://walletservice.bitbill.com:8088\"")
             buildConfigField("String", "ENCRYPTED_DB_SECRECT", "\"bitbill-debug\"")
             buildConfigField("String", "API_KEY", "\"TEST\"")
         }

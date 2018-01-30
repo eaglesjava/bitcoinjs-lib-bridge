@@ -84,6 +84,11 @@ public class AddressModelManager extends ModelManager implements AddressModel {
     }
 
     @Override
+    public Address getAddressByNameAndWalletId(String address, Long walletId) {
+        return mAddressDb.getAddressByNameAndWalletId(address, walletId);
+    }
+
+    @Override
     public List<Wallet> getWalletsByAddresses(List<String> addressList) {
         return mAddressDb.getWalletsByAddresses(addressList);
     }

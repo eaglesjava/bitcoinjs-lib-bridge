@@ -46,11 +46,13 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     private String mReceiveAddress;
     private String mReceiveAmount;
     private String mTxHash;
+    private Long mWalletId;
 
-    public static void start(Context context, String receiveAddress, String receiveAmount) {
+    public static void start(Context context, String receiveAddress, String receiveAmount, Long walletId) {
         Intent starter = new Intent(context, ScanPayActivity.class);
         starter.putExtra(AppConstants.EXTRA_RECEIVE_ADDRESS, receiveAddress);
         starter.putExtra(AppConstants.EXTRA_RECEIVE_AMOUNT, receiveAmount);
+        starter.putExtra(AppConstants.EXTRA_WALLET_ID, walletId);
         context.startActivity(starter);
     }
 
@@ -59,6 +61,7 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
         super.handleIntent(intent);
         mReceiveAddress = getIntent().getStringExtra(AppConstants.EXTRA_RECEIVE_ADDRESS);
         mReceiveAmount = getIntent().getStringExtra(AppConstants.EXTRA_RECEIVE_AMOUNT);
+        mWalletId = getIntent().getLongExtra(AppConstants.EXTRA_WALLET_ID, -1);
     }
 
     @Override
@@ -179,9 +182,15 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
         if (StringUtils.isEmpty(txRecords)) {
             return;
         }
-        //打开交易详情
-        TransferDetailsActivity.start(ScanPayActivity.this, txRecords.get(0), TAG);
-        finish();
+        //筛选相关的交易
+        for (TxRecord txRecord : txRecords) {
+            if (mWalletId != null && mWalletId > 0l && mWalletId.equals(txRecord.getWalletId())) {
+                //找到交易记录并打开交易详情
+                TransferDetailsActivity.start(ScanPayActivity.this, txRecord, TAG);
+                finish();
+                break;
+            }
+        }
     }
 
     @Override

@@ -32,11 +32,12 @@ public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRate
     @Inject
     GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
     private String mReceiveAddress;
+    private Long mWalletId;
 
-    public static void start(Context context, String address) {
+    public static void start(Context context, String address, Long walletId) {
         Intent intent = new Intent(context, SpecificReceiveActivity.class);
         intent.putExtra(AppConstants.EXTRA_RECEIVE_ADDRESS, address);
-
+        intent.putExtra(AppConstants.EXTRA_WALLET_ID, walletId);
         context.startActivity(intent);
     }
 
@@ -44,6 +45,7 @@ public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRate
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         mReceiveAddress = intent.getStringExtra(AppConstants.EXTRA_RECEIVE_ADDRESS);
+        mWalletId = getIntent().getLongExtra(AppConstants.EXTRA_WALLET_ID, -1l);
     }
 
     @Override
@@ -113,7 +115,7 @@ public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRate
         if (!isValidAmount()) {
             return;
         }
-        ScanPayActivity.start(SpecificReceiveActivity.this, getReceiveAddress(), getReceiveAmount());
+        ScanPayActivity.start(SpecificReceiveActivity.this, getReceiveAddress(), getReceiveAmount(), mWalletId);
     }
 
     private boolean isValidAmount() {

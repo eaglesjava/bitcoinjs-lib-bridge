@@ -38,14 +38,14 @@ public class TransferDetailPresenter<M extends AddressModel, V extends TransferD
                     public TxRecord apply(TxRecord txRecord) throws Exception {
                         for (Input inputsBean : txRecord.getInputs()) {
                             //解析地址
-                            Address addressByName = getModelManager().getAddressByName(inputsBean.getAddress());
+                            Address addressByName = getModelManager().getAddressByNameAndWalletId(inputsBean.getAddress(), txRecord.getWalletId());
                             if (addressByName != null) {
                                 inputsBean.setMine(true);
                                 inputsBean.setInternal(addressByName.getIsInternal());
                             }
                         }
                         for (Output outputsBean : txRecord.getOutputs()) { //解析地址
-                            Address addressByName = getModelManager().getAddressByName(outputsBean.getAddress());
+                            Address addressByName = getModelManager().getAddressByNameAndWalletId(outputsBean.getAddress(), txRecord.getWalletId());
                             if (addressByName != null) {
                                 outputsBean.setMine(true);
                                 outputsBean.setInternal(addressByName.getIsInternal());

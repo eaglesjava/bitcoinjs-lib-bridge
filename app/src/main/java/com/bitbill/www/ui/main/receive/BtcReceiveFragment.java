@@ -95,7 +95,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
             @Override
             public void onClick(View v) {
                 //跳转到特定金额接收界面
-                SpecificReceiveActivity.start(getBaseActivity(), getCurrentAddress());
+                SpecificReceiveActivity.start(getBaseActivity(), getCurrentAddress(), mSelectedWallet == null ? null : mSelectedWallet.getId());
             }
         });
         mRefreshItem = getBaseActivity().findViewById(R.id.action_refresh);
