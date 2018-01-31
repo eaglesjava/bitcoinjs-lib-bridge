@@ -3,6 +3,7 @@ package com.bitbill.www.ui.main;
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -32,12 +33,18 @@ import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
+import com.bitbill.www.common.presenter.UpdateMvpPresenter;
+import com.bitbill.www.common.presenter.UpdateMvpView;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.utils.AnimationUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.Decoration;
+import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
+import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
+import com.bitbill.www.common.widget.dialog.UpdateAppDialog;
 import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ConfirmedEvent;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
@@ -89,7 +96,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcRecordMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcRecordMvpView, UpdateMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
@@ -110,6 +117,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
     @Inject
     BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
+    @Inject
+    UpdateMvpPresenter<AppModel, UpdateMvpView> mUpdateMvpPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -153,6 +162,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             mBoundService = null;
         }
     };
+    private UpdateAppDialog mUpdateAppDialog;
+    private MessageConfirmDialog mMessageConfirmDialog;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -206,6 +217,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         addPresenter(mParseTxInfoMvpPresenter);
         addPresenter(mGetCacheVersionMvpPresenter);
         addPresenter(mBtcRecordMvpPresenter);
+        addPresenter(mUpdateMvpPresenter);
     }
 
     @Override
@@ -402,6 +414,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void initData() {
+
+        mUpdateMvpPresenter.checkUpdate();
         if (!StringUtils.isEmpty(getApp().getWallets())) {
             loadWalletsSuccess(getApp().getWallets());
         } else {
@@ -735,6 +749,11 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void showLoading() {
+        if (mMessageConfirmDialog != null) {
+            if (mMessageConfirmDialog.isShowing()) {
+                return;
+            }
+        }
         if (mAssetFragment != null) {
             mAssetFragment.showLoading();
         }
@@ -766,6 +785,50 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void loadTxRecordSuccess(List<TxRecord> txRecordList) {
+
+    }
+
+    @Override
+    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion) {
+        if (needUpdate) {
+            //弹出更新提示框
+            if (mMessageConfirmDialog == null) {
+                mMessageConfirmDialog = MessageConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), getString(R.string.dialog_msg_latest_version) + updateVersion, getString(R.string.dialog_btn_update), needForce);
+                mMessageConfirmDialog
+                        .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == BaseConfirmDialog.DIALOG_BTN_POSITIVE) {
+                                    mViewPager.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            //弹出下载对话框
+                                            if (mUpdateAppDialog == null) {
+                                                mUpdateAppDialog = UpdateAppDialog.newInstance(getString(R.string.dialog_title_download_app));
+                                            }
+                                            mUpdateAppDialog
+                                                    .show(getSupportFragmentManager());
+                                        }
+                                    }, 500);
+
+                                }
+                            }
+                        });
+            }
+
+            mMessageConfirmDialog.show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
+        }
+
+    }
+
+    @Override
+    public void getConfigSuccess(String aversion, String aforceVersion) {
+
+    }
+
+    @Override
+    public void getConfigFail() {
 
     }
 }

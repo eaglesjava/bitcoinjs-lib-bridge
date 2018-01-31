@@ -13,13 +13,17 @@ import android.os.Build;
 import android.os.LocaleList;
 import android.util.DisplayMetrics;
 
+import com.androidnetworking.interfaces.DownloadListener;
+import com.androidnetworking.interfaces.DownloadProgressListener;
 import com.bitbill.www.common.base.model.ModelManager;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.app.network.AppApi;
+import com.bitbill.www.model.app.network.entity.FeeBackRequest;
+import com.bitbill.www.model.app.network.entity.GetConfigResponse;
+import com.bitbill.www.model.app.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.app.prefs.AppPreferences;
-import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
 
 import java.util.Locale;
 
@@ -196,6 +200,26 @@ public class AppModelManager extends ModelManager implements AppModel {
         mAppPreferences.setAliasSeted(isSeted);
     }
 
+    @Override
+    public String getForceVersion() {
+        return mAppPreferences.getForceVersion();
+    }
+
+    @Override
+    public void setForceVersion(String aforceVersion) {
+        mAppPreferences.setForceVersion(aforceVersion);
+    }
+
+    @Override
+    public String getUpdateVersion() {
+        return mAppPreferences.getUpdateVersion();
+    }
+
+    @Override
+    public void setUpdateVersion(String aversion) {
+        mAppPreferences.setUpdateVersion(aversion);
+    }
+
     /**
      * 获取btc兑换比例
      *
@@ -204,5 +228,25 @@ public class AppModelManager extends ModelManager implements AppModel {
     @Override
     public Observable<ApiResponse<GetExchangeRateResponse>> getExchangeRate() {
         return mAppApi.getExchangeRate();
+    }
+
+    /**
+     * 获取配置信息
+     *
+     * @return
+     */
+    @Override
+    public Observable<ApiResponse<GetConfigResponse>> getConfig() {
+        return mAppApi.getConfig();
+    }
+
+    @Override
+    public Observable<ApiResponse> feeBack(FeeBackRequest feeBackRequest) {
+        return mAppApi.feeBack(feeBackRequest);
+    }
+
+    @Override
+    public void downloadFile(String url, String dirPath, String fileName, DownloadProgressListener downloadProgressListener, DownloadListener downloadListener) {
+        mAppApi.downloadFile(url, dirPath, fileName, downloadProgressListener, downloadListener);
     }
 }

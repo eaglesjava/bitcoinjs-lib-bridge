@@ -119,7 +119,9 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity) getBaseActivity()).initData();
+                if (getBaseActivity() != null) {
+                    ((MainActivity) getBaseActivity()).initData();
+                }
             }
         });
         mWalletMenu = new PopupWalletMenu(getBaseActivity());

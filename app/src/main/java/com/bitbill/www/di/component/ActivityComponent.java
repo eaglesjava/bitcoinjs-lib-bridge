@@ -4,6 +4,7 @@
 
 package com.bitbill.www.di.component;
 
+import com.bitbill.www.common.widget.dialog.UpdateAppDialog;
 import com.bitbill.www.di.module.ActivityModule;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.ui.guide.GuideActivity;
@@ -14,6 +15,7 @@ import com.bitbill.www.ui.main.contact.AddContactByIdActivity;
 import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.contact.EditContactActivity;
 import com.bitbill.www.ui.main.contact.SearchContactResultActivity;
+import com.bitbill.www.ui.main.my.AboutUsActivity;
 import com.bitbill.www.ui.main.my.ContactSettingActivity;
 import com.bitbill.www.ui.main.my.ShortCutSettingActivity;
 import com.bitbill.www.ui.main.my.SystemSettingActivity;
@@ -97,4 +99,8 @@ public interface ActivityComponent {
     void inject(WalletAddressFragment walletAddressFragment);
 
     void inject(TransferDetailFragment transferDetailFragment);
+
+    void inject(UpdateAppDialog udpateAppDialog);
+
+    void inject(AboutUsActivity aboutUsActivity);
 }

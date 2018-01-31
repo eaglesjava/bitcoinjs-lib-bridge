@@ -19,7 +19,6 @@ import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
-import com.bitbill.www.model.wallet.network.entity.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
@@ -163,17 +162,6 @@ public class WalletModelManager extends ModelManager implements WalletModel {
     public Observable<ApiResponse> getBalance(GetBalanceRequest getBalanceRequest) {
         return mWalletApi.getBalance(getBalanceRequest);
     }
-
-    /**
-     * 获取配置信息
-     *
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<GetConfigResponse>> getConfig() {
-        return mWalletApi.getConfig();
-    }
-
 
     @Override
     public Observable<ApiResponse> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest) {

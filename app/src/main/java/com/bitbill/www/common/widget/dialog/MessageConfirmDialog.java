@@ -1,6 +1,7 @@
 package com.bitbill.www.common.widget.dialog;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
@@ -74,4 +75,7 @@ public class MessageConfirmDialog extends BaseConfirmDialog {
         return R.layout.dialog_confirm_message;
     }
 
+    public void show(FragmentManager supportFragmentManager) {
+        show(supportFragmentManager, TAG);
+    }
 }

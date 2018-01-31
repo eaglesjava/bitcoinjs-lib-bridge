@@ -13,6 +13,8 @@ import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
 import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
+import com.bitbill.www.common.presenter.UpdateMvpPresenter;
+import com.bitbill.www.common.presenter.UpdateMvpView;
 import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.address.AddressModel;
@@ -39,10 +41,28 @@ import cn.jpush.android.api.TagAliasCallback;
 
 import static com.bitbill.www.app.AppConstants.PLATFORM;
 
-public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, GetCacheVersionMvpView, SyncAddressMvpView, GetExchangeRateMvpView {
+public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, GetCacheVersionMvpView, SyncAddressMvpView, GetExchangeRateMvpView, UpdateMvpView {
 
     private static final String TAG = "SplashActivity";
     private static final int MSG_SET_ALIAS = 1001;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
@@ -70,24 +90,8 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
             }
         }
     };
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
+    @Inject
+    UpdateMvpPresenter<AppModel, UpdateMvpView> mUpdateMvpPresenter;
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
@@ -102,6 +106,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         getMvpPresenter().initLanguage();
+        mUpdateMvpPresenter.getConfig();
         getMvpPresenter().hasWallet();
         mGetExchangeRateMvpPresenter.getExchangeRate();
         getApp().setContactKey(getMvpPresenter().getContactKey());
@@ -126,6 +131,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         getActivityComponent().inject(this);
         addPresenter(mGetCacheVersionMvpPresenter);
         addPresenter(mGetExchangeRateMvpPresenter);
+        addPresenter(mUpdateMvpPresenter);
     }
 
     @Override
@@ -182,6 +188,21 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
     @Override
     public void getBtcRateSuccess(double cnyRate, double usdRate) {
+
+    }
+
+    @Override
+    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion) {
+
+    }
+
+    @Override
+    public void getConfigSuccess(String aversion, String aforceVersion) {
+
+    }
+
+    @Override
+    public void getConfigFail() {
 
     }
 }

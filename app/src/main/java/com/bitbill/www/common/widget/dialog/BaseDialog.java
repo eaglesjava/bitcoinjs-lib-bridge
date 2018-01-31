@@ -60,14 +60,13 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
     public void onError(String message) {
         if (mActivity != null) {
             mActivity.onError(message);
+            hideLoading();
         }
     }
 
     @Override
     public void onError(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.onError(resId);
-        }
+        onError(getString(resId));
     }
 
     @Override
@@ -79,9 +78,7 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
 
     @Override
     public void showMessage(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.showMessage(resId);
-        }
+        showMessage(getString(resId));
     }
 
     @Override
@@ -187,4 +184,9 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
         }
         super.onDestroy();
     }
+
+    public boolean isShowing() {
+        return getDialog() != null && getDialog().isShowing();
+    }
+
 }

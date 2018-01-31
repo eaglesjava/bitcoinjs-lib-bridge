@@ -20,6 +20,8 @@ public interface AppPreferences extends Prefs {
     String CONTACTKEY = "contactkey";
     String SELECTED_LOCALE = "selected_locale";
     String IS_ALIAS_SETED = "is_alias_seted";
+    String FORCE_VERSION = "force_version";
+    String UPDATE_VERSION = "update_version";
 
     void setReceiveRemindDialogShown();
 
@@ -49,9 +51,16 @@ public interface AppPreferences extends Prefs {
 
     void setAliasSeted(boolean isSeted);
 
+    String getForceVersion();
+
+    void setForceVersion(String aforceVersion);
+
+    String getUpdateVersion();
+
+    void setUpdateVersion(String aversion);
+
     enum SelectedCurrency {
         CNY,
         USD
     }
-
 }

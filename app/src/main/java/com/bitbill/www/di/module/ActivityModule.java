@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
 import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.presenter.BtcAddressPresenter;
+import com.bitbill.www.common.presenter.DownloadMvpPresenter;
+import com.bitbill.www.common.presenter.DownloadMvpView;
+import com.bitbill.www.common.presenter.DownloadPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.presenter.GetCacheVersionPresenter;
@@ -22,6 +25,9 @@ import com.bitbill.www.common.presenter.ParseTxInfoPresenter;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.presenter.SyncAddressPresenter;
+import com.bitbill.www.common.presenter.UpdateMvpPresenter;
+import com.bitbill.www.common.presenter.UpdateMvpView;
+import com.bitbill.www.common.presenter.UpdatePresenter;
 import com.bitbill.www.common.presenter.ValidateAddressMvpPresenter;
 import com.bitbill.www.common.presenter.ValidateAddressMvpView;
 import com.bitbill.www.common.presenter.ValidateAddressPresenter;
@@ -372,6 +378,20 @@ public class ActivityModule {
     @PerActivity
     TransferDetailMvpPresenter<AddressModel, TransferDetailMvpView> provideTransferDetailPresenter(
             TransferDetailPresenter<AddressModel, TransferDetailMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    UpdateMvpPresenter<AppModel, UpdateMvpView> provideUpdatePresenter(
+            UpdatePresenter<AppModel, UpdateMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    DownloadMvpPresenter<AppModel, DownloadMvpView> provideDownloadPresenter(
+            DownloadPresenter<AppModel, DownloadMvpView> presenter) {
         return presenter;
     }
 

@@ -142,13 +142,12 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
         if (mActivity != null) {
             mActivity.onError(message);
         }
+        hideLoading();
     }
 
     @Override
     public void onError(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.onError(resId);
-        }
+        onError(getString(resId));
     }
 
     @Override
@@ -160,9 +159,7 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
 
     @Override
     public void showMessage(@StringRes int resId) {
-        if (mActivity != null) {
-            mActivity.showMessage(resId);
-        }
+        showMessage(getString(resId));
     }
 
     @Override

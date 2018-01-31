@@ -4,6 +4,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
@@ -13,6 +15,8 @@ import com.bitbill.www.ui.main.contact.AddContactByAddressActivity;
 import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.contact.SearchContactResultActivity;
 import com.bitbill.www.ui.main.send.SendAmountActivity;
+
+import java.io.File;
 
 import static com.bitbill.www.common.utils.StringUtils.isEmpty;
 import static com.bitbill.www.common.utils.StringUtils.isNotEmpty;
@@ -102,5 +106,29 @@ public class UIHelper {
         Uri content_url = Uri.parse("mailto:" + email);
         intent.setData(content_url);
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.text_chose_email)));
+    }
+
+
+    public static void installApk(Context context, File file) {
+
+        if (context == null || file == null || !file.exists()) {
+            return;
+        }
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        //判读版本是否在7.0以上
+        if (Build.VERSION.SDK_INT >= 24) {
+            //provider authorities
+            Uri apkUri = FileProvider.getUriForFile(context, "com.bitbill.www.fileProvider", file);
+            //Granting Temporary Permissions to a URI
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        }
+
+        context.startActivity(intent);
     }
 }

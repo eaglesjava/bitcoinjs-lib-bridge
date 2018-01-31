@@ -2,13 +2,18 @@ package com.bitbill.www.ui.main.my;
 
 import android.graphics.Bitmap;
 
+import com.androidnetworking.error.ANError;
 import com.bitbill.www.app.AppConstants;
+import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
+import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 
 import javax.inject.Inject;
 
@@ -80,6 +85,45 @@ public class WalletDetailPresenter<M extends WalletModel, V extends WalletDetail
 
     @Override
     public void deleteWallet() {
+        if (!isValidWallet() || !isValidPublicKey()) {
+            return;
+        }
+        String extentedPublicKey = getMvpView().getWallet().getExtentedPublicKey();
+        String extendedKeysHash = EncryptUtils.encryptMD5ToString(extentedPublicKey);
+        getCompositeDisposable().add(getModelManager()
+                .deleteWallet(new DeleteWalletRequest(extendedKeysHash, DeviceUtil.getDeviceId()))
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<ApiResponse>(getMvpView()) {
+                    @Override
+                    public void onNext(ApiResponse apiResponse) {
+                        super.onNext(apiResponse);
+                        if (handleApiResponse(apiResponse)) {
+                            return;
+                        }
+
+                        if (apiResponse.isSuccess()) {
+                            deleteLocalWallet();
+                        } else {
+                            getMvpView().deleteWalletFail();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (e instanceof ANError) {
+                            handleApiError(((ANError) e));
+                        } else {
+                            getMvpView().deleteWalletFail();
+                        }
+                    }
+                }));
+    }
+
+    public void deleteLocalWallet() {
         if (!isValidWallet()) {
             return;
         }
@@ -121,6 +165,14 @@ public class WalletDetailPresenter<M extends WalletModel, V extends WalletDetail
 
     public boolean isValidWallet() {
         if (getMvpView().getWallet() == null) {
+            getMvpView().getWalletInfoFail();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidPublicKey() {
+        if (StringUtils.isEmpty(getMvpView().getWallet().getExtentedPublicKey())) {
             getMvpView().getWalletInfoFail();
             return false;
         }

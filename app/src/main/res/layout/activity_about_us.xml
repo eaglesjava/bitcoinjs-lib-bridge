@@ -37,4 +37,11 @@
         android:layout_height="wrap_content"
         app:leftString="@string/text_contact_us"
         app:rightResource="@drawable/ic_right_arrow" />
+
+    <com.bitbill.www.common.widget.SettingView
+        android:id="@+id/sv_check_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftString="@string/text_check_version"
+        app:rightResource="@drawable/ic_right_arrow" />
 </LinearLayout>

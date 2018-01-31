@@ -1,4 +1,4 @@
-package com.bitbill.www.model.wallet.network.entity;
+package com.bitbill.www.model.app.network.entity;
 
 /**
  * Created by isanwenyu on 2017/12/29.

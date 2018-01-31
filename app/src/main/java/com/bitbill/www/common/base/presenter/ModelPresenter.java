@@ -75,8 +75,7 @@ public class ModelPresenter<M extends Model, V extends MvpView> extends BasePres
             getMvpView().onError(apiResponse.getMessage());
             return true;
         } else {
-            getMvpView().onError(R.string.error_api_default);
-            return true;
+            return false;
         }
     }
 

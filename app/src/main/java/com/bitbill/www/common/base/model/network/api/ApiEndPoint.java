@@ -11,7 +11,6 @@ import com.bitbill.www.BuildConfig;
  */
 
 public final class ApiEndPoint {
-    public static final String A = "http://192.168.1.11:8086/a";
     private static final String BITBILL_BITCOIN = "/bitbill/bitcoin";
     public static final String WALLET_CREATE = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/create";
@@ -27,7 +26,6 @@ public final class ApiEndPoint {
             + "/wallet/refreshAddress";
     public static final String GET_TX_ELEMENT = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/getTxElement";
-
     public static final String SEND_TRANSACTION = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/sendTransaction";
     public static final String GET_BALANCE = BuildConfig.BASE_URL + BITBILL_BITCOIN
@@ -56,7 +54,8 @@ public final class ApiEndPoint {
             + "/get_exchange_rate";
     public static final String GET_CACHE_VERSION = BuildConfig.BASE_URL + BITBILL_BITCOIN
             + "/wallet/getCacheVersion";
-
+    public static final String FEED_BACK = BuildConfig.BASE_URL + BITBILL_BITCOIN
+            + "/feed_back";
     private ApiEndPoint() {
         // This class is not publicly instantiable
     }

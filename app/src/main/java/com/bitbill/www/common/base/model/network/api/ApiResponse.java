@@ -12,6 +12,7 @@ public class ApiResponse<T> {
     public static final int STATUS_WALLET_ID_EXSIST = -40;//钱包id已存在
     public static final int STATUS_WALLET_NO_EXSIST = -41;//钱包id已存在
     public static final int STATUS_IP_REACH_LIMIT = -88;//您的IP超过了规定限制
+    public static final int STATUS_SERVER_ERROR = 500;//服务器异常
     /**
      * data : null
      * errorLog : null

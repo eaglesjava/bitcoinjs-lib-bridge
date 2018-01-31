@@ -11,13 +11,25 @@ package com.bitbill.www.app;
 public final class AppConstants {
 
 
+    /**
+     * download apk url
+     */
+    public static final String DOWNLOAD_APK_URL = "http://192.168.1.2:8000/QQ_776.apk";
+
     public static final int API_STATUS_CODE_LOCAL_ERROR = 0;
     public static final int API_STATUS_CODE_SERVER_ERROR = 500;
+
     public static final String DB_NAME = "bitbill_database.db";
     public static final String PREF_APP_NAME = "bitbill_app_pref";
     public static final String PREF_WALLET_NAME = "bitbill_wallet_pref";
+
     public static final long NULL_INDEX = -1L;
+
     public static final String TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
+
+    /**
+     * extra constant key
+     */
     public static final String EXTRA_WALLET = "extra_wallet";
     public static final String EXTRA_MNEMONIC = "etra_mnemonic";
     public static final String EXTRA_IS_CREATE_WALLET = "is_create_wallet";
@@ -44,6 +56,7 @@ public final class AppConstants {
     public static final String ARG_IS_SELECT = "is_select";
     public static final String ARG_TX_ITEM = "arg_tx_item";
     public static final String ARG_ADDRESS = "arg_address";
+    public static final String ARG_TITLE = "arg_title";
     /**
      * btc about
      */
@@ -79,6 +92,7 @@ public final class AppConstants {
      */
     public static final String TYPE_RECEIVE = "RECEIVE";
     public static final String TYPE_SEND = "SEND";
+
 
     private AppConstants() {
         // This utility class is not publicly instantiable

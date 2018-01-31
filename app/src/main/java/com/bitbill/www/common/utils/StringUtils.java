@@ -566,6 +566,7 @@ public class StringUtils {
         BigDecimal feeDecimal = new BigDecimal(fee);
         //8位小数
         DecimalFormat df = new DecimalFormat("#.########");
+        df.setMinimumFractionDigits(2);
         return df.format(feeDecimal.divide(new BigDecimal(CryptoConstants.SATOSHI)));
     }
 

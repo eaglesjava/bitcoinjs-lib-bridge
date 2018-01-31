@@ -10,7 +10,6 @@ import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.DeleteWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.GetBalanceRequest;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
-import com.bitbill.www.model.wallet.network.entity.GetConfigResponse;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
@@ -118,21 +117,6 @@ public class WalletApiHelper extends ApiHelper implements WalletApi {
                 .getParseObservable(new TypeToken<ApiResponse>() {
                 });
     }
-
-    /**
-     * 获取配置信息
-     *
-     * @return
-     */
-    @Override
-    public Observable<ApiResponse<GetConfigResponse>> getConfig() {
-        return Rx2AndroidNetworking.post(ApiEndPoint.GET_CONFIG)
-                .addHeaders(mApiHeader.getPublicApiHeader())
-                .build()
-                .getParseObservable(new TypeToken<ApiResponse<GetConfigResponse>>() {
-                });
-    }
-
 
     @Override
     public Observable<ApiResponse> getCacheVersion(GetCacheVersionRequest getCacheVersionRequest) {

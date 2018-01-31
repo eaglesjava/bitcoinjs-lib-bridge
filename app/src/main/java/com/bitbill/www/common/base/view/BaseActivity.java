@@ -62,14 +62,12 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         super.onCreate(savedInstanceState);
         mApp = BitbillApp.get();
         setScreenOrientation();
+        mInflater = getLayoutInflater();
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((BitbillApp) getApplication()).getComponent())
                 .build();
         injectComponent();
-        AppManager.get().addActivity(this);
-        handleIntent(getIntent());
-        mInflater = getLayoutInflater();
         addPresenter(mMvpPresenter = getMvpPresenter());
         if (!StringUtils.isEmpty(getPresenters())) {
             for (MvpPresenter mvpPresenter : getPresenters()) {
@@ -79,6 +77,9 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
                 }
             }
         }
+        AppManager.get().addActivity(this);
+        handleIntent(getIntent());
+
     }
 
     public BitbillApp getApp() {

@@ -40,7 +40,7 @@
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".ui.wallet.importing.ImportWalletActivity"
             android:label="@string/title_activity_import_wallet"
@@ -172,6 +172,15 @@
                 <category android:name="com.bitbill.www" />
             </intent-filter>
         </receiver>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.bitbill.www.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

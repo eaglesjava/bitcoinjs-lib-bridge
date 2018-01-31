@@ -6,7 +6,7 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
-import com.bitbill.www.model.wallet.network.entity.GetExchangeRateResponse;
+import com.bitbill.www.model.app.network.entity.GetExchangeRateResponse;
 
 import javax.inject.Inject;
 

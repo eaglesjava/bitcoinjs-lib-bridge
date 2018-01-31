@@ -114,4 +114,24 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     public void setAliasSeted(boolean isSeted) {
         mPrefs.edit().putBoolean(IS_ALIAS_SETED, isSeted).apply();
     }
+
+    @Override
+    public String getForceVersion() {
+        return mPrefs.getString(FORCE_VERSION, "0.0");
+    }
+
+    @Override
+    public void setForceVersion(String aforceVersion) {
+        mPrefs.edit().putString(FORCE_VERSION, aforceVersion).apply();
+    }
+
+    @Override
+    public String getUpdateVersion() {
+        return mPrefs.getString(UPDATE_VERSION, "0.0");
+    }
+
+    @Override
+    public void setUpdateVersion(String aversion) {
+        mPrefs.edit().putString(UPDATE_VERSION, aversion).apply();
+    }
 }
