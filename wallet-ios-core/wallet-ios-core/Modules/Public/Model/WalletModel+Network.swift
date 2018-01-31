@@ -162,7 +162,7 @@ extension WalletModel {
             let json = JSON(result)
             let datas = json["list"].arrayValue
             for json in datas {
-                let model = BTCTransactionModel.newTxIfNeeded(json: json, outWallet: self)
+                let model = BTCTransactionModel.newTxAfterDelete(txHash: json["txHash"].stringValue)
                 model.setProperties(json: json, inWallet: self)
             }
             do {
