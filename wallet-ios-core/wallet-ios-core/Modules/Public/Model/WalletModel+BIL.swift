@@ -117,7 +117,7 @@ extension WalletModel {
                 BitcoinJSBridge.shared.getXPublicKeys(seed: s, success: { (result) in
                     wallet.mainExtPublicKey = result.mainPubkey
                     wallet.changeExtPublicKey = result.changePubkey
-                    if wallet.checkPassword(pwd: pwd) {
+                    if wallet.checkPassword(pwd: pwd), wallet.mainExtPublicKey != nil, wallet.changeExtPublicKey != nil, !result.mainPubkey.isEmpty, !result.changePubkey.isEmpty {
                         do {
                             if needSave {
                                 try BILWalletManager.shared.saveWallets()
