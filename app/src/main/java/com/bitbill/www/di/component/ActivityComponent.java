@@ -17,6 +17,7 @@ import com.bitbill.www.ui.main.contact.EditContactActivity;
 import com.bitbill.www.ui.main.contact.SearchContactResultActivity;
 import com.bitbill.www.ui.main.my.AboutUsActivity;
 import com.bitbill.www.ui.main.my.ContactSettingActivity;
+import com.bitbill.www.ui.main.my.FeebackActivity;
 import com.bitbill.www.ui.main.my.ShortCutSettingActivity;
 import com.bitbill.www.ui.main.my.SystemSettingActivity;
 import com.bitbill.www.ui.main.my.WalletAddressFragment;
@@ -103,4 +104,6 @@ public interface ActivityComponent {
     void inject(UpdateAppDialog udpateAppDialog);
 
     void inject(AboutUsActivity aboutUsActivity);
+
+    void inject(FeebackActivity feebackActivity);
 }

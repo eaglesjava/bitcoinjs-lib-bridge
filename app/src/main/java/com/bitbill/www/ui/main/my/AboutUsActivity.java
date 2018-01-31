@@ -81,7 +81,7 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
         return R.layout.activity_about_us;
     }
 
-    @OnClick({R.id.sv_use_rule, R.id.sv_contact_us})
+    @OnClick({R.id.sv_use_rule, R.id.sv_contact_us, R.id.sv_check_version})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sv_use_rule:
@@ -93,8 +93,7 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
                 break;
             case R.id.sv_check_version:
                 //检查版本
-                showLoading();
-                getMvpPresenter().getConfig();
+                getMvpPresenter().checkUpdate();
                 break;
         }
     }
@@ -127,12 +126,9 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
     @Override
     public void getConfigSuccess(String aversion, String aforceVersion) {
         mSvCheckVersion.setRightText(getString(R.string.text_latest_version) + aversion);
-        getMvpPresenter().checkUpdate();
-        hideLoading();
     }
 
     @Override
     public void getConfigFail() {
-        hideLoading();
     }
 }

@@ -67,6 +67,9 @@ import com.bitbill.www.ui.main.contact.SearchContactResultPresenter;
 import com.bitbill.www.ui.main.my.ContactSettingMvpPresenter;
 import com.bitbill.www.ui.main.my.ContactSettingMvpView;
 import com.bitbill.www.ui.main.my.ContactSettingPresenter;
+import com.bitbill.www.ui.main.my.FeebackMvpPresenter;
+import com.bitbill.www.ui.main.my.FeebackMvpView;
+import com.bitbill.www.ui.main.my.FeebackPresenter;
 import com.bitbill.www.ui.main.my.ShortCutSettingMvpPresenter;
 import com.bitbill.www.ui.main.my.ShortCutSettingMvpView;
 import com.bitbill.www.ui.main.my.ShortCutSettingPresenter;
@@ -392,6 +395,13 @@ public class ActivityModule {
     @PerActivity
     DownloadMvpPresenter<AppModel, DownloadMvpView> provideDownloadPresenter(
             DownloadPresenter<AppModel, DownloadMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    FeebackMvpPresenter<AppModel, FeebackMvpView> provideFeebackPresenter(
+            FeebackPresenter<AppModel, FeebackMvpView> presenter) {
         return presenter;
     }
 

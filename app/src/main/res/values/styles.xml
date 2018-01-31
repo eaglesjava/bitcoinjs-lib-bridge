@@ -138,7 +138,7 @@
         <item name="android:textColorHint">@color/white_40</item>
         <item name="android:background">@drawable/bg_input_mnemonic</item>
         <item name="android:gravity">left</item>
-        <item name="android:minLines">2</item>
+        <item name="android:minLines">3</item>
         <item name="android:padding">25dp</item>
         <item name="android:textCursorDrawable">@null</item>
     </style>

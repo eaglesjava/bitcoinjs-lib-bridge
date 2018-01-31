@@ -68,6 +68,7 @@ import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.my.AboutUsActivity;
 import com.bitbill.www.ui.main.my.ContactSettingActivity;
+import com.bitbill.www.ui.main.my.FeebackActivity;
 import com.bitbill.www.ui.main.my.ShortCutSettingActivity;
 import com.bitbill.www.ui.main.my.SystemSettingActivity;
 import com.bitbill.www.ui.main.my.WalletSettingActivity;
@@ -450,6 +451,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         } else if (id == R.id.nav_about_us) {
             // 切换到关于我们界面
             AboutUsActivity.start(this);
+        } else if (id == R.id.nav_fee_back) {
+            // 切换到关于我们界面
+            FeebackActivity.start(this);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
