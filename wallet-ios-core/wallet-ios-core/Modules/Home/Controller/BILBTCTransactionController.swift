@@ -71,6 +71,14 @@ class BILBTCTransactionController: BILLightBlueBaseController {
         }
     }
     
+    func setupRightItemForPresent() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done".bil_ui_localized, style: .done, target: self, action: #selector(txDoneAction))
+    }
+    
+    @objc func txDoneAction(_ sender: Any) {
+        BILControllerManager.shared.mainTabBarController?.dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

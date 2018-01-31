@@ -24,6 +24,6 @@ extension Notification.Name {
     static let networkStatusDidChanged = NSNotification.Name("networkStatusDidChanged")
 	static let shortcutScanQRCode = NSNotification.Name("shortcutScanQRCode")
 	static let shortcutAddContact = NSNotification.Name("shortcutAddContact")
-    
+    static let transactionReceived = NSNotification.Name("transactionReceived")
     static let exchangeRateDidChanged = NSNotification.Name("exchangeRateDidChanged")
 }

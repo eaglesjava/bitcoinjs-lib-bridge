@@ -435,11 +435,20 @@
                         <outlet property="doneItem" destination="MGW-M2-LOt" id="w6A-5m-75R"/>
                         <outlet property="payLabel" destination="XWN-KL-CfM" id="evg-pP-Ial"/>
                         <outlet property="qrCodeImageView" destination="lwc-Am-58G" id="Ygc-Eg-Z5j"/>
+                        <segue destination="GPG-Xc-evM" kind="presentation" identifier="BILSpecificToTxDetailSegue" id="fLM-g3-1XN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2CT-Hy-NhH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2598" y="114"/>
+        </scene>
+        <!--BILBTCTransactionController-->
+        <scene sceneID="FZP-IB-uPa">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="BILBTCTransactionController" id="GPG-Xc-evM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3r5-BF-7qa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3274" y="113"/>
         </scene>
         <!--接收-->
         <scene sceneID="gsA-3J-HfX">

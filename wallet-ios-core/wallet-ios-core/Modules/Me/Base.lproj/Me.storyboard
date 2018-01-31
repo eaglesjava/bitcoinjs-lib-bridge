@@ -295,7 +295,6 @@
                     <connections>
                         <outlet property="versionLabel" destination="ORw-9w-Dyp" id="AYN-QD-mNr"/>
                         <segue destination="po9-Ut-ykE" kind="show" identifier="BILAboutUsToAgreementSegue" id="VA9-5z-DJo"/>
-                        <segue destination="gK0-hO-CIO" kind="show" identifier="BILAboutUsToFeedbackSegue" id="Opo-ZX-UbO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nzi-n8-lMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -542,7 +541,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atb-oJ-Qeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2429.5999999999999" y="1572.4137931034484"/>
+            <point key="canvasLocation" x="1612" y="2285"/>
         </scene>
         <!--使用条款-->
         <scene sceneID="35T-UU-YiI">
@@ -926,6 +925,7 @@ EOmSseWMhUlEA
                         <segue destination="l6X-KQ-GhR" kind="show" identifier="BILMeToWalletDetailSegue" id="f8h-ZQ-496"/>
                         <segue destination="RhM-oC-9eX" kind="show" identifier="BILMeToAboutUsSegue" id="9Wy-yd-irq"/>
                         <segue destination="X6e-Xx-U2V" kind="show" identifier="BILMeToSettingSegue" id="JJ3-jr-lZh"/>
+                        <segue destination="gK0-hO-CIO" kind="show" identifier="BILMeToFeedbackSegue" id="e0g-g4-BaI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9SR-sA-SVN" userLabel="First Responder" sceneMemberID="firstResponder"/>

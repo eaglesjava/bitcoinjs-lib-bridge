@@ -33,6 +33,7 @@ class BILFeedbackViewController: BILBaseViewController, UITextViewDelegate, BILI
         contactInputView.updateTitleString("ContactTypeTitle".bil_ui_localized)
         contactInputView.textField.placeholder = "ContactTypePlaceHolder".bil_ui_localized
         contentTextView.placeholder = "Please input".bil_ui_localized
+        sendItem.title = "Send".bil_ui_localized
     }
 
     override func didReceiveMemoryWarning() {

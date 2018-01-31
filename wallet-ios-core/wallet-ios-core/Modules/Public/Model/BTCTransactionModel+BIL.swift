@@ -241,10 +241,12 @@ extension BTCTransactionModel {
         clearSatoshi()
         height = json["height"].int64Value
         serverID = json["id"].int64Value
+        txHash = json["txHash"].stringValue
         var inAddresses = [String]()
         for j in json["inputs"].arrayValue {
             let add = j["address"].stringValue
             let tx = newAddressModelIfNeeded(add, index: inAddresses.count)
+            tx.txHash = txHash
             tx.satoshi = j["value"].int64Value
             inAddresses.append(add)
             inSatoshi += tx.satoshi
@@ -252,16 +254,15 @@ extension BTCTransactionModel {
         }
         var outAddresses = [String]()
         for j in json["outputs"].arrayValue {
-            debugPrint(j["address"])
             let add = j["address"].stringValue
             let tx = newAddressModelIfNeeded(add, index: outAddresses.count, isInput: false)
+            tx.txHash = txHash
             tx.satoshi = j["value"].int64Value
             outAddresses.append(add)
             outSatoshi += tx.satoshi
             self.addToOutputs(tx)
         }
         remark = json["remark"].stringValue
-        txHash = json["txHash"].stringValue
         createdDate = Date(dateString: json["createdTime"].stringValue, format: "yyyy-MM-dd HH:mm:ss")
         
         var wallet: WalletModel?
@@ -329,6 +330,10 @@ extension BTCTransactionModel {
             return
         }
 		
+        let canAdd = w.btc_transactionArray.filter({
+            $0.txHash == self.txHash
+        }).count == 0
+        
 		debugPrint("--- 1 \(targetSatoshi)")
         for add in outputs! {
             let tx = add as! BTCTXAddressModel
@@ -348,13 +353,14 @@ extension BTCTransactionModel {
 					debugPrint("--- 3 \(targetSatoshi)")
                 }
             }
+            if canAdd {
+                BILTransactionManager.shared.addressWillAdd(address: tx.address!, in: self)
+            }
         }
 		debugPrint("--- 4 \(targetSatoshi)")
         
-		if w.btc_transactionArray.filter({
-			$0.txHash == self.txHash
-		}).count == 0 {
-			w.bitcoinWallet?.addToTransactions(self)
-		}
+        if canAdd {
+            w.bitcoinWallet?.addToTransactions(self)
+        }
     }
 }

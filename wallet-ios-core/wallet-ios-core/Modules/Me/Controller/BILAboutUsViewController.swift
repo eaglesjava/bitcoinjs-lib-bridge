@@ -12,9 +12,9 @@ class BILAboutUsViewController: BILBaseViewController {
 
     @IBOutlet weak var versionLabel: UILabel!
     
-    let titles = [String.meAboutUs_agreement, String.meAboutUs_contactUs, "Feedback".bil_ui_localized]
-	let subTitles = ["", "hi@bitbill.com", ""]
-    let segues = ["BILAboutUsToAgreementSegue", "", "BILAboutUsToFeedbackSegue"]
+    let titles = [String.meAboutUs_agreement, String.meAboutUs_contactUs]
+	let subTitles = ["", "hi@bitbill.com"]
+    let segues = ["BILAboutUsToAgreementSegue", ""]
     
     override func viewDidLoad() {
         super.viewDidLoad()

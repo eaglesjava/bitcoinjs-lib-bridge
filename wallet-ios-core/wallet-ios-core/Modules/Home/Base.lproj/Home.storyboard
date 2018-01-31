@@ -593,7 +593,7 @@
         <!--Transaction Controller-->
         <scene sceneID="sRc-fY-fio">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="TqK-OB-58a" customClass="BILBTCTransactionController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BILBTCTransactionController" hidesBottomBarWhenPushed="YES" id="TqK-OB-58a" customClass="BILBTCTransactionController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bdt-wf-2Nm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -887,7 +887,7 @@
         <image name="pic_transaction_success" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x97-tA-LLC"/>
+        <segue reference="q7A-8l-BQ7"/>
         <segue reference="uYk-8g-9ar"/>
     </inferredMetricsTieBreakers>
 </document>

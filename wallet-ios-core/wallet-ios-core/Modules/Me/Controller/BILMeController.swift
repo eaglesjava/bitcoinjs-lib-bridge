@@ -13,6 +13,7 @@ extension String {
 	static var bil_meToWalletDetailSegue: String { return "BILMeToWalletDetailSegue" }
     static var bil_meToSettingSegue: String { return "BILMeToSettingSegue" }
     static var bil_meToAboutUsSegue: String { return "BILMeToAboutUsSegue" }
+    static var bil_meToFeedbackSegue: String { return "BILMeToFeedbackSegue" }
 }
 
 class BILMeController: BILBaseViewController {
@@ -65,7 +66,7 @@ class BILMeController: BILBaseViewController {
             case .system:
                 return [String.meMe_meCell_system]
             case .other:
-                return [String.meMe_meCell_aboutUs]
+                return [String.meMe_meCell_aboutUs, "Feedback".bil_ui_localized]
             }
         }
         
@@ -282,7 +283,14 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
         case .system:
             performSegue(withIdentifier: .bil_meToSettingSegue, sender: nil)
         case .other:
-            performSegue(withIdentifier: .bil_meToAboutUsSegue, sender: nil)
+            switch indexPath.row {
+            case 0:
+                performSegue(withIdentifier: .bil_meToAboutUsSegue, sender: nil)
+            case 1:
+                performSegue(withIdentifier: .bil_meToFeedbackSegue, sender: nil)
+            default:
+                ()
+            }
 		default:
 			()
 		}

@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		BILWalletManager.shared.appDelegate = self
         
         UNUserNotificationCenter.current().delegate = self
-		
+        
 		let results = BILWalletManager.shared.wallets
 		debugPrint(results)
 		
