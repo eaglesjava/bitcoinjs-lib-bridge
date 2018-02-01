@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -37,7 +36,14 @@
         app:qrcv_tipTextColor="@android:color/white"
         app:qrcv_tipTextSize="12sp"
         app:qrcv_toolbarHeight="?actionBarSize"
-        app:qrcv_topOffset="50dp"
-        />
+        app:qrcv_topOffset="50dp" />
 
+    <CheckBox
+        android:id="@+id/cb_flash"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="80dp"
+        android:button="@drawable/flash_selector"
+        app:layout_anchor="@+id/zxingview"
+        app:layout_anchorGravity="bottom|center" />
 </android.support.design.widget.CoordinatorLayout>

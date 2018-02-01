@@ -637,7 +637,7 @@ public class StringUtils {
         if (isEmpty(name)) {
             return "";
         }
-        return String.valueOf(name.trim().charAt(0));
+        return String.valueOf(name.trim().toUpperCase().charAt(0));
     }
 
     public static boolean isZero(String amount) {

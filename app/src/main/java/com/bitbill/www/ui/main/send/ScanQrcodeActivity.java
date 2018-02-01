@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
@@ -22,6 +24,8 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
     private static final int REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY = 666;
     @BindView(R.id.zxingview)
     QRCodeView mQRCodeView;
+    @BindView(R.id.cb_flash)
+    CheckBox mFlashCheckBox;
     private String mFromTag;
 
     public static void start(Context context, String fromTag) {
@@ -91,6 +95,16 @@ public class ScanQrcodeActivity extends BaseToolbarActivity implements QRCodeVie
     @Override
     public void initView() {
         mQRCodeView.setDelegate(this);
+        mFlashCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mQRCodeView.openFlashlight();
+                } else {
+                    mQRCodeView.closeFlashlight();
+                }
+            }
+        });
     }
 
     @Override
