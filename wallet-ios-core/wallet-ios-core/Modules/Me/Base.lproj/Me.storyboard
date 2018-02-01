@@ -631,10 +631,13 @@
                                 <rect key="frame" x="25" y="170" width="325" height="60"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kb1-BY-mIR">
-                                        <rect key="frame" x="231" y="15" width="94" height="30"/>
+                                        <rect key="frame" x="231" y="14" width="94" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="ZKo-vA-kev"/>
+                                        </constraints>
                                         <state key="normal" title="    扫描地址    ">
-                                            <color key="titleColor" red="0.24313725490196078" green="0.49411764705882355" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.22352941176470587" green="0.43137254901960786" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
