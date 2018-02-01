@@ -39,6 +39,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>需要使用相机扫描二维码</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要使用照片扫描二维码</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>需要使用你的面容 ID 进行授权</string>
 	<key>UILaunchStoryboardName</key>

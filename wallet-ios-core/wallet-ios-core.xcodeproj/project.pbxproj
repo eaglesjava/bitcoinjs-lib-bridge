@@ -52,6 +52,7 @@
 		BA415FCD200F40E10057790B /* diaoluo_da.caf in Resources */ = {isa = PBXBuildFile; fileRef = BA415FCB200F40E10057790B /* diaoluo_da.caf */; };
 		BA415FCE200F40E10057790B /* diaoluo_xiao.caf in Resources */ = {isa = PBXBuildFile; fileRef = BA415FCC200F40E10057790B /* diaoluo_xiao.caf */; };
 		BA43EF522023053F00A62347 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43EF512023053F00A62347 /* UIImage+QRCode.swift */; };
+		BA43EF5B20231B4000A62347 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA43EF5920231A5A00A62347 /* InfoPlist.strings */; };
 		BA45EF112011A8A100C76D64 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA45EF132011A8A100C76D64 /* Localizable.strings */; };
 		BA4646191FD78FB500680D33 /* Receive.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA4646181FD78FB500680D33 /* Receive.xcassets */; };
 		BA46461B1FD78FC400680D33 /* Contact.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA46461A1FD78FC400680D33 /* Contact.xcassets */; };
@@ -246,6 +247,8 @@
 		BA415FCB200F40E10057790B /* diaoluo_da.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = diaoluo_da.caf; sourceTree = "<group>"; };
 		BA415FCC200F40E10057790B /* diaoluo_xiao.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = diaoluo_xiao.caf; sourceTree = "<group>"; };
 		BA43EF512023053F00A62347 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
+		BA43EF5820231A5A00A62347 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BA43EF5A20231A5B00A62347 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BA45EF122011A8A100C76D64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BA45EF142011A8A200C76D64 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BA4646181FD78FB500680D33 /* Receive.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Receive.xcassets; sourceTree = "<group>"; };
@@ -1037,6 +1040,7 @@
 				CCEC67601FB18C3A004CC6C5 /* Assets.xcassets */,
 				CCEC67621FB18C3A004CC6C5 /* LaunchScreen.storyboard */,
 				CCEC67651FB18C3A004CC6C5 /* Info.plist */,
+				BA43EF5920231A5A00A62347 /* InfoPlist.strings */,
 			);
 			path = "wallet-ios-core";
 			sourceTree = "<group>";
@@ -1282,6 +1286,7 @@
 				CC6407DB2002315A0068153A /* BILSupportedCoinsPopupController.xib in Resources */,
 				BA415FCD200F40E10057790B /* diaoluo_da.caf in Resources */,
 				CC6407F0200231970068153A /* BILGuideContactView.xib in Resources */,
+				BA43EF5B20231B4000A62347 /* InfoPlist.strings in Resources */,
 				CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */,
 				BA5894001FF36540008C96C4 /* service.html in Resources */,
 				BA4646191FD78FB500680D33 /* Receive.xcassets in Resources */,
@@ -1604,6 +1609,15 @@
 				BA12AC591FEA715C00812F38 /* Base */,
 			);
 			name = Home.storyboard;
+			sourceTree = "<group>";
+		};
+		BA43EF5920231A5A00A62347 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA43EF5820231A5A00A62347 /* en */,
+				BA43EF5A20231A5B00A62347 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		BA45EF132011A8A100C76D64 /* Localizable.strings */ = {
