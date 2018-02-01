@@ -193,18 +193,16 @@ extension WalletModel {
             var localChangeIndex = self.lastBTCChangeAddressIndex
             localIndex = min(localIndex, serverIndex)
             localChangeIndex = min(localChangeIndex, serverChangeIndex)
-            self.lastBTCAddressIndex = serverIndex
-            self.lastBTCChangeAddressIndex = serverChangeIndex
             if index > serverIndex {
                 failure(.publicWalletNoMoreAddress)
                 return
             }
-            self.generateAddresses(from: localIndex, to: self.lastBTCAddressIndex, success: { (models) in
+            self.generateAddresses(from: localIndex, to: serverIndex, success: { (models) in
                 if self.lastBTCChangeAddressIndex == -1 {
                     success(models, [])
                     return
                 }
-                self.generateAddresses(type: .change, from: localChangeIndex, to: self.lastBTCChangeAddressIndex, success: { (changeModels) in
+                self.generateAddresses(type: .change, from: localChangeIndex, to: serverChangeIndex, success: { (changeModels) in
                     success(models, changeModels)
                 }, failure: { (msg, code) in
                     failure("change: \(msg)")
@@ -257,6 +255,12 @@ extension WalletModel {
             failure(.publicWalletIndexError, -1)
             return
         }
+        guard let isBusy = self.bitcoinWallet?.isGeneratingAddresses, !isBusy else {
+            failure("Try later", -1)
+            return
+        }
+        
+        bitcoinWallet?.isGeneratingAddresses = true
 		let beginDate = Date()
         BitcoinJSBridge.shared.getAddresses(xpub: type == .normal ? mainExtPublicKey! : changeExtPublicKey!, fromIndex: from, toIndex: to, success: { (result) in
             debugPrint(result)
@@ -292,9 +296,11 @@ extension WalletModel {
             } catch {
                 failure(error.localizedDescription, -2)
             }
+            self.bitcoinWallet?.isGeneratingAddresses = false
         }) { (error) in
             debugPrint(error)
             failure(error.localizedDescription, -2)
+            self.bitcoinWallet?.isGeneratingAddresses = false
         }
     }
 	

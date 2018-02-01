@@ -136,5 +136,9 @@ class BitcoinJSBridge: NSObject, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         canCallJSFunction = false
     }
+    
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        webView.reload()
+    }
 	
 }
