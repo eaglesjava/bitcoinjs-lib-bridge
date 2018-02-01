@@ -53,6 +53,29 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func testLangWith(string:String) -> String?{
+        let tagSchemes = [NSLinguisticTagScheme.language]
+        let tagger = NSLinguisticTagger(tagSchemes: tagSchemes, options: 0)
+        tagger.string = string
+        let lang = tagger.tag(at: 0, scheme: NSLinguisticTagScheme.language, tokenRange: nil, sentenceRange: nil)
+        return lang.map { $0.rawValue }
+    }
+    
+    func isEnglish(str: String) -> Bool {
+        return isLanguage(str: str, target: "en")
+    }
+    
+    func isChinese(str: String) -> Bool {
+        return isLanguage(str: str, target: "zh")
+    }
+    
+    func isLanguage(str: String, target: String) -> Bool {
+        guard let result = testLangWith(string: str)?.hasPrefix(target) else {
+            return false
+        }
+        return result
+    }
+    
     func normalized(mnemonic: String) -> String? {
         var trimmedString = mnemonic.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: "\n", with: "")
         do {
@@ -74,18 +97,25 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
         let alertTitle = String.newWallet_import_failed
         let alertMsg = String.newWallet_import_checkAgain
         
-        guard let text = textView.text, !text.isEmpty else {
+        guard var text = textView.text, !text.isEmpty else {
             self.textView.becomeFirstResponder()
             self.mnemonicView.layer.borderColor = UIColor(hex: 0xFD6D73).cgColor
             return
         }
         
-        guard textView.text.contains(" ") else {
+        if isChinese(str: text) {
+            text = text.replacingOccurrences(of: " ", with: "")
+            text = text.flatMap({ (char) -> String? in
+                return String(char)
+            }).joined(separator: " ")
+        }
+        
+        guard text.contains(" ") else {
             showTipAlert(title: alertTitle, msg: .newWallet_import_spaceTip, dismissed: nil)
             return
         }
         
-        guard let mnemonic = normalized(mnemonic: textView.text) else {
+        guard let mnemonic = normalized(mnemonic: text) else {
             showTipAlert(title: alertTitle, msg: alertMsg, dismissed: nil)
             return
         }
