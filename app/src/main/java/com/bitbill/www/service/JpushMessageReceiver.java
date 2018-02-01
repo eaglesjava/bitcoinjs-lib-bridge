@@ -9,9 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -32,8 +29,8 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class JpushMessageReceiver extends BroadcastReceiver {
     private static final String TAG = "JpushMessageReceiver";
-    private static final int NOTIFICATION_SHOW_AT_MOST = 6;
-    private static final String NOTIFICATION_JPUSH_CHANNEL_ID = "jpush_channel";
+    private static final int NOTIFICATION_SHOW_AT_MOST = 8;
+    private static final String NOTIFICATION_JPUSH_CHANNEL_ID = "jpush_channel_id";
 
     private NotificationManager nm;
 
@@ -112,19 +109,20 @@ public class JpushMessageReceiver extends BroadcastReceiver {
         mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, mIntent, 0);
 
-        Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.diaoluo_da);
+//        Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.diaoluo_da);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             Notification.Builder notification = new Notification.Builder(context, NOTIFICATION_JPUSH_CHANNEL_ID);
-            NotificationChannel channelbody = new NotificationChannel(NOTIFICATION_JPUSH_CHANNEL_ID, "消息推送", NotificationManager.IMPORTANCE_DEFAULT);
-            //AudioAttributes是一个封装音频各种属性的类
-            AudioAttributes.Builder attrBuilder = new AudioAttributes.Builder();
-            //设置音频流的合适属性
-            attrBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC);
-            channelbody.setSound(sound, attrBuilder.build());
-            channelbody.enableVibration(true);
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_JPUSH_CHANNEL_ID, "消息推送", NotificationManager.IMPORTANCE_DEFAULT);
+//            //AudioAttributes是一个封装音频各种属性的类
+//            AudioAttributes.Builder attrBuilder = new AudioAttributes.Builder();
+//            //设置音频流的合适属性
+//            attrBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC);
+            channel.setSound(null, null);
+            channel.enableLights(true);
+            channel.enableVibration(true);
             notification.setCategory(Notification.CATEGORY_MESSAGE)
                     .setContentIntent(pendingIntent)
                     .setContentText(msg)
@@ -133,7 +131,7 @@ public class JpushMessageReceiver extends BroadcastReceiver {
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setLargeIcon(bitmap)
                     .setNumber(NOTIFICATION_SHOW_AT_MOST);
-            notificationManager.createNotificationChannel(channelbody);
+            notificationManager.createNotificationChannel(channel);
             notificationManager.notify(NOTIFICATION_SHOW_AT_MOST, notification.build());  //id随意，正好使用定义的常量做id，0除外，0为默认的Notification
 
         } else {
@@ -146,8 +144,7 @@ public class JpushMessageReceiver extends BroadcastReceiver {
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setLargeIcon(bitmap)
                     .setNumber(NOTIFICATION_SHOW_AT_MOST)
-                    .setDefaults(NotificationCompat.DEFAULT_VIBRATE)
-                    .setSound(sound);
+                    .setDefaults(NotificationCompat.DEFAULT_VIBRATE | NotificationCompat.DEFAULT_LIGHTS);
             notificationManager.notify(NOTIFICATION_SHOW_AT_MOST, notification.build());  //id随意，正好使用定义的常量做id，0除外，0为默认的Notification
         }
 

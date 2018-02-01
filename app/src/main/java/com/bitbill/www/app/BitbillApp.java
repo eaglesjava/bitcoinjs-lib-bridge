@@ -21,11 +21,8 @@ import com.bitbill.www.di.component.DaggerApplicationComponent;
 import com.bitbill.www.di.module.ApplicationModule;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.prefs.AppPreferences;
-import com.bitbill.www.model.eventbus.AppBackgroundEvent;
 import com.bitbill.www.model.wallet.db.WalletDbHelper;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +44,6 @@ public class BitbillApp extends Application {
     WalletDbHelper mWalletDbHelper;
     @Inject
     AppModel mAppModel;
-    private ApplicationComponent mApplicationComponent;
-    private List<Wallet> mWallets;
-    private double mBtcCnyValue;
-    private double mBtcUsdValue;
-    private AppPreferences.SelectedCurrency mSelectedCurrency;
-    private long mBlockHeight;
-    private String mContactKey;
-    private boolean isBackGround;
     ActivityLifecycleCallbacks callbacks = new ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -65,11 +54,11 @@ public class BitbillApp extends Application {
 
         @Override
         public void onActivityStarted(Activity activity) {
-            if (isBackGround) {
-                isBackGround = false;
-                //通知SocketServiceProvider
-                EventBus.getDefault().post(new AppBackgroundEvent(isBackGround));
-            }
+//            if (isBackGround) {
+//                isBackGround = false;
+//                //通知SocketServiceProvider
+//                EventBus.getDefault().post(new AppBackgroundEvent(isBackGround));
+//            }
         }
 
         @Override
@@ -98,6 +87,14 @@ public class BitbillApp extends Application {
         }
         //Activity 其它生命周期的回调
     };
+    private ApplicationComponent mApplicationComponent;
+    private List<Wallet> mWallets;
+    private double mBtcCnyValue;
+    private double mBtcUsdValue;
+    private AppPreferences.SelectedCurrency mSelectedCurrency;
+    private long mBlockHeight;
+    private String mContactKey;
+    private boolean isBackGround;
 
     public static BitbillApp get() {
         return sInstance;
@@ -254,12 +251,12 @@ public class BitbillApp extends Application {
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        if (level == TRIM_MEMORY_UI_HIDDEN) {
-            isBackGround = true;
-            //通知SocketServiceProvider
-            EventBus.getDefault().post(new AppBackgroundEvent(isBackGround));
-            Log.d(TAG, "APP遁入后台");
-        }
+//        if (level == TRIM_MEMORY_UI_HIDDEN) {
+//            isBackGround = true;
+//            //通知SocketServiceProvider
+//            EventBus.getDefault().post(new AppBackgroundEvent(isBackGround));
+//            Log.d(TAG, "APP遁入后台");
+//        }
     }
 
 }

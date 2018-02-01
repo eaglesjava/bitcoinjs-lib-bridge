@@ -415,8 +415,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void initData() {
-
-        mUpdateMvpPresenter.checkUpdate();
+        // TODO: 2018/2/1 for test no check
+//        mUpdateMvpPresenter.checkUpdate();
         if (!StringUtils.isEmpty(getApp().getWallets())) {
             loadWalletsSuccess(getApp().getWallets());
         } else {

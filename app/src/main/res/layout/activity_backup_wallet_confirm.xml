@@ -1,49 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_padding"
-    tools:context="com.bitbill.www.ui.wallet.backup.BackupWalletConfirmActivity">
+    android:scrollbars="none">
 
-    <TextView
-        style="@style/Text.White"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="33dp"
-        android:text="@string/hint_bak_confirm_mnemonic_correct"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp">
-
-        <GridView
-            android:id="@+id/gv_mnemonic_confirm"
-            style="@style/GridView.Mnemonic"
-            android:layout_width="wrap_content"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_padding"
+        tools:context="com.bitbill.www.ui.wallet.backup.BackupWalletConfirmActivity">
 
         <TextView
-            android:id="@+id/tv_hint_click"
-            style="@style/Text.InputHint"
-            android:layout_gravity="center"
-            android:text="@string/hint_bak_wallet_click"/>
+            style="@style/Text.White"
+            android:layout_width="match_parent"
+            android:layout_marginTop="33dp"
+            android:text="@string/hint_bak_confirm_mnemonic_correct" />
 
-    </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
 
-    <GridView
-        android:id="@+id/gv_mnemonic"
-        style="@style/GridView.Mnemonic"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginTop="15dp"
-        android:choiceMode="multipleChoice"/>
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/fl_mnemonic_confirm"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_mnemonic_normal"
+                android:padding="20dp"
+                app:max_select="0" />
 
-    <Button
-        android:id="@+id/btn_confirm"
-        style="@style/Button.Blue"
-        android:layout_width="match_parent"
-        android:text="@string/btn_confirm"/>
-</LinearLayout>
+            <TextView
+                android:id="@+id/tv_hint_click"
+                style="@style/Text.InputHint"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:text="@string/hint_bak_wallet_click" />
+
+        </FrameLayout>
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/fl_mnemonic"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_padding"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_input_mnemonic_normal"
+            android:padding="20dp"
+            app:max_select="-1" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            style="@style/Button.Blue"
+            android:layout_width="match_parent"
+            android:text="@string/btn_confirm" />
+    </LinearLayout>
+
+</ScrollView>

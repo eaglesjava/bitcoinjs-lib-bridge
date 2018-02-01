@@ -359,5 +359,4 @@
     <string name="fail_too_much_words">Too much words</string>
     <string name="action_send">Send</string>
     <string name="content_not_empty">Please input comments.</string>
-    <string name="contact_not_empty">Please enter contact information.</string>
 </resources>

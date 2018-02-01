@@ -100,12 +100,6 @@ public class FeebackActivity extends BaseToolbarActivity<FeebackMvpPresenter> im
     }
 
     @Override
-    public void requireContact() {
-        showMessage(R.string.contact_not_empty);
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.feeback_menu, menu);
         return super.onCreateOptionsMenu(menu);

@@ -4,45 +4,43 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.widget.FocusedCheckedTextView;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalletConfirmMvpPresenter> implements BackupWalletConfirmMvpView {
 
-    @BindView(R.id.gv_mnemonic_confirm)
-    GridView gvMnemonicConfirm;
-    @BindView(R.id.gv_mnemonic)
-    GridView gvMnemonic;
+    @BindView(R.id.fl_mnemonic_confirm)
+    TagFlowLayout mFlMnemonicConfirm;
+    @BindView(R.id.fl_mnemonic)
+    TagFlowLayout mFlMnemonic;
     @BindView(R.id.tv_hint_click)
     TextView tvHintClick;
     @Inject
@@ -52,8 +50,8 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
     private String[] mMnemonicArray;
     private List<String> mMnemonicList;
     private List<String> mMnemonicConfirmList;
-    private GridViewAdapter mMnemonicAdapter;
-    private GridViewAdapter mMnemonicConfrimAdapter;
+    private TagAdapter<String> mMnemonicAdapter;
+    private TagAdapter<String> mMnemonicConfrimAdapter;
     private Wallet mWallet;
     private boolean isFromSetting;
 
@@ -91,11 +89,11 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
         if (id == R.id.action_cancel_mnemonic) {
             //清空助记词
             mMnemonicConfirmList.clear();
-            mMnemonicConfrimAdapter.notifyDataSetChanged();
+            mMnemonicConfrimAdapter.notifyDataChanged();
             //重置提示布局
             tvHintClick.setVisibility(mMnemonicConfirmList.size() > 0 ? View.GONE : View.VISIBLE);
-            for (int i = 0; i < gvMnemonic.getChildCount(); i++) {
-                gvMnemonic.setItemChecked(i, false);
+            for (int i = 0; i < mFlMnemonic.getChildCount(); i++) {
+                mMnemonicAdapter.setSelectedList(new HashSet<>());
             }
             return true;
         }
@@ -140,57 +138,56 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
 
         // 助记词确定框
         mMnemonicConfirmList = new ArrayList<>();
-        mMnemonicConfrimAdapter = new GridViewAdapter(this, mMnemonicConfirmList);
-        gvMnemonicConfirm.setAdapter(mMnemonicConfrimAdapter);
-        //助记词点击框
-        mMnemonicAdapter = new GridViewAdapter(this, mMnemonicList);
-        gvMnemonic.setAdapter(mMnemonicAdapter);
-        gvMnemonic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            /**
-             * Callback method to be invoked when an item in this AdapterView has
-             * been clicked.
-             * <p>
-             * Implementers can call getItemAtPosition(position) if they need
-             * to access the data associated with the selected item.
-             *
-             * @param parent   The AdapterView where the click happened.
-             * @param view     The view within the AdapterView that was clicked (this
-             *                 will be a view provided by the adapter)
-             * @param position The position of the view in the adapter.
-             * @param id       The row id of the item that was clicked.
-             */
+        mMnemonicConfrimAdapter = new TagAdapter<String>(mMnemonicConfirmList) {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //检查重复
-                String item = mMnemonicList.get(position);
-                if (mMnemonicConfirmList.contains(item)) {
-                    mMnemonicConfirmList.remove(item);
-                } else if (mMnemonicConfirmList.size() < mMnemonicList.size()) {
-                    mMnemonicConfirmList.add(item);
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView mnemonicView = (TextView) mInflater.inflate(R.layout.item_mnemonic_confirm_text, null);
+                mnemonicView.setText(s);
+                return mnemonicView;
+            }
+        };
+        mFlMnemonicConfirm.setAdapter(mMnemonicConfrimAdapter);
+        //助记词点击框
+        mMnemonicAdapter = new TagAdapter<String>(mMnemonicList) {
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                CheckedTextView mnemonicView = (CheckedTextView) mInflater.inflate(R.layout.item_mnemonic_text, null);
+                mnemonicView.setText(s);
+                return mnemonicView;
+            }
+        };
+        mFlMnemonic.setAdapter(mMnemonicAdapter);
+        mFlMnemonic.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                String clickItem = mMnemonicList.get(position);
+                if (mMnemonicConfirmList.contains(clickItem)) {
+                    mMnemonicConfirmList.remove(clickItem);
+                } else {
+                    mMnemonicConfirmList.add(clickItem);
                 }
-                mMnemonicConfrimAdapter.notifyDataSetChanged();
+                mMnemonicConfrimAdapter.notifyDataChanged();
                 tvHintClick.setVisibility(mMnemonicConfirmList.size() > 0 ? View.GONE : View.VISIBLE);
-
+                return true;
             }
         });
         //设置确定对话框布局高度
-        gvMnemonicConfirm.getViewTreeObserver().addOnGlobalLayoutListener(
+        mFlMnemonicConfirm.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
 
                     @Override
                     public void onGlobalLayout() {
                         if (Build.VERSION.SDK_INT >= 16) {
-                            gvMnemonicConfirm.getViewTreeObserver()
+                            mFlMnemonicConfirm.getViewTreeObserver()
                                     .removeOnGlobalLayoutListener(this);
                         } else {
-                            gvMnemonicConfirm.getViewTreeObserver()
+                            mFlMnemonicConfirm.getViewTreeObserver()
                                     .removeGlobalOnLayoutListener(this);
                         }
-                        gvMnemonicConfirm.getLayoutParams().height = gvMnemonic.getMeasuredHeight();
-                        gvMnemonicConfirm.requestLayout();
+                        mFlMnemonicConfirm.getLayoutParams().height = mFlMnemonic.getMeasuredHeight();
+                        mFlMnemonicConfirm.requestLayout();
                     }
                 });
-//        gvMnemonic.setNumColumns(mMnemonicArray.length / 2);
     }
 
     @Override
@@ -234,87 +231,4 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
 
     }
 
-    public static class GridViewAdapter extends BaseAdapter {
-        private List<String> mList;
-        private LayoutInflater mInflater;
-
-        public GridViewAdapter(Context context, List<String> list) {
-            mList = list;
-            mInflater = LayoutInflater.from(context);
-        }
-
-        /**
-         * How many items are in the data set represented by this Adapter.
-         *
-         * @return Count of items.
-         */
-        @Override
-        public int getCount() {
-            return mList.size();
-        }
-
-        /**
-         * Get the data item associated with the specified position in the data set.
-         *
-         * @param position Position of the item whose data we want within the adapter's
-         *                 data set.
-         * @return The data at the specified position.
-         */
-        @Override
-        public String getItem(int position) {
-            return mList.get(position);
-        }
-
-        /**
-         * Get the row id associated with the specified position in the list.
-         *
-         * @param position The position of the item within the adapter's data set whose row id we want.
-         * @return The id of the item at the specified position.
-         */
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        /**
-         * Get a View that displays the data at the specified position in the data set. You can either
-         * create a View manually or inflate it from an XML layout file. When the View is inflated, the
-         * parent View (GridView, ListView...) will apply default layout parameters unless you use
-         * {@link LayoutInflater#inflate(int, ViewGroup, boolean)}
-         * to specify a root view and to prevent attachment to the root.
-         *
-         * @param position    The position of the item within the adapter's data set of the item whose view
-         *                    we want.
-         * @param convertView The old view to reuse, if possible. Note: You should check that this view
-         *                    is non-null and of an appropriate type before using. If it is not possible to convert
-         *                    this view to display the correct data, this method can create a new view.
-         *                    Heterogeneous lists can specify their number of view types, so that this View is
-         *                    always of the right type (see {@link #getViewTypeCount()} and
-         *                    {@link #getItemViewType(int)}).
-         * @param parent      The parent that this view will eventually be attached to
-         * @return A View corresponding to the data at the specified position.
-         */
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = null;
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.item_mnemonic_text, null);
-                holder = new ViewHolder(convertView);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            holder.tvMnemonic.setText(getItem(position));
-            return convertView;
-        }
-
-        static class ViewHolder {
-            @BindView(R.id.tv_mnemonic)
-            FocusedCheckedTextView tvMnemonic;
-
-            ViewHolder(View view) {
-                ButterKnife.bind(this, view);
-            }
-        }
-    }
 }

@@ -26,7 +26,7 @@ public class FeebackPresenter<M extends AppModel, V extends FeebackMvpView> exte
 
     @Override
     public void sendFeeback() {
-        if (!isValidContent() || !isValidContact()) {
+        if (!isValidContent()) {
             return;
         }
         getCompositeDisposable().add(getModelManager()
@@ -71,15 +71,4 @@ public class FeebackPresenter<M extends AppModel, V extends FeebackMvpView> exte
         return true;
     }
 
-    public boolean isValidContact() {
-        if (StringUtils.isEmpty(getMvpView().getContact())) {
-            getMvpView().requireContact();
-            return false;
-        }
-        if (getMvpView().getContact().length() > 200) {
-            getMvpView().tooMuchWords();
-            return false;
-        }
-        return true;
-    }
 }

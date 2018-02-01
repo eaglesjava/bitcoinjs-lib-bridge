@@ -13,6 +13,7 @@ import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.presenter.UpdateMvpPresenter;
 import com.bitbill.www.common.presenter.UpdateMvpView;
 import com.bitbill.www.common.utils.DeviceUtil;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.SettingView;
 import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
@@ -125,7 +126,10 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
 
     @Override
     public void getConfigSuccess(String aversion, String aforceVersion) {
-        mSvCheckVersion.setRightText(getString(R.string.text_latest_version) + aversion);
+        if (StringUtils.isNotEmpty(aversion)) {
+            mSvCheckVersion.setRightText(getString(R.string.text_latest_version) + aversion);
+
+        }
     }
 
     @Override

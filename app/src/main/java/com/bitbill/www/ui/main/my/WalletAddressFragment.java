@@ -183,6 +183,8 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
             for (Address address : mAddressList) {
                 if (address.getIndex() == addressIndex) {
                     address.setBalance(sumOutAmount);
+                } else {
+                    address.setBalance(0l);
                 }
             }
 

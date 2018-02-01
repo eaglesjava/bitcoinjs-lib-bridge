@@ -361,5 +361,4 @@
     <string name="fail_too_much_words">太多字了</string>
     <string name="action_send">发送</string>
     <string name="content_not_empty">请输入意见内容</string>
-    <string name="contact_not_empty">请输入联系方式</string>
 </resources>

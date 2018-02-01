@@ -18,6 +18,4 @@ public interface FeebackMvpView extends MvpView {
     void requireContent();
 
     void tooMuchWords();
-
-    void requireContact();
 }
