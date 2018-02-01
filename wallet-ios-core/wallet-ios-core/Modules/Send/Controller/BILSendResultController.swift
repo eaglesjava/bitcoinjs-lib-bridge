@@ -8,7 +8,6 @@
 
 import UIKit
 import SafariServices
-import SVProgressHUD
 
 class BILSendResultController: BILBaseViewController {
 

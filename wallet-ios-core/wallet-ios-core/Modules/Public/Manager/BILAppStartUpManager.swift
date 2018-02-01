@@ -10,7 +10,7 @@ import UIKit
 import PopupDialog
 import IQKeyboardManagerSwift
 import Foundation
-import SVProgressHUD
+import KVNProgress
 import CoreGraphics
 import UserNotifications
 import Toast_Swift
@@ -35,7 +35,7 @@ class BILAppStartUpManager: NSObject {
 		snapshotNavBackgroundImage()
 		setupTextFieldAppearance()
 		setupTextViewAppearance()
-		setupSVProgressHUD()
+		setupProgressHUD()
         setupPushService()
         setupToast()
         clearBadge()
@@ -83,11 +83,17 @@ class BILAppStartUpManager: NSObject {
 		return image.snapshotSubImage(rect: rect)
 	}
 	
-	private func setupSVProgressHUD() {
-        SVProgressHUD.setDefaultStyle(.dark)
-		SVProgressHUD.setMinimumDismissTimeInterval(0.5)
-        SVProgressHUD.setDefaultMaskType(.black)
-//        SVProgressHUD.setMinimumSize(.init(width: 280, height: 128))
+	private func setupProgressHUD() {
+        let config = KVNProgressConfiguration()
+        config.isFullScreen = true
+        config.backgroundTintColor = UIColor(white: 0.0, alpha: 0.8)
+        config.lineWidth = 3
+        config.circleSize = 60
+        config.circleStrokeForegroundColor = UIColor.white
+        config.successColor = UIColor.white
+        config.errorColor = UIColor.white
+        config.statusColor = UIColor.white
+        KVNProgress.setConfiguration(config)
 	}
 	
 	private func setupTextFieldAppearance() {

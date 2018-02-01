@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 import CoreData
 import CryptoSwift
 import SwiftyJSON

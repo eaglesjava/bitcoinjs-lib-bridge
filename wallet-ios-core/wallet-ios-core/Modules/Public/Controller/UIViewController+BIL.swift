@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import SVProgressHUD
+import KVNProgress
 
 extension UIViewController {
 	
@@ -23,21 +23,21 @@ extension UIViewController {
 	}
     
     func bil_showLoading(status: String? = nil) {
-        SVProgressHUD.show(withStatus: status)
+        KVNProgress.show(withStatus: status)
     }
     
-    func bil_showSuccess(status: String? = nil, delay: Double = 1.5, complete: SVProgressHUDDismissCompletion? = nil) {
-        SVProgressHUD.showSuccess(withStatus: status)
-        SVProgressHUD.dismiss(withDelay: delay, completion: complete)
+    func bil_showSuccess(status: String? = nil, complete: KVNCompletionBlock? = nil) {
+        KVNProgress.showSuccess(withStatus: status, completion: complete)
     }
     
-    func bil_showError(status: String, delay: Double = 1.5, complete: SVProgressHUDDismissCompletion? = nil) {
-        SVProgressHUD.showError(withStatus: status)
-        SVProgressHUD.dismiss(withDelay: delay, completion: complete)
+    func bil_showError(status: String? = nil, complete: KVNCompletionBlock? = nil) {
+        KVNProgress.showError(withStatus: status, completion: complete)
     }
     
-    func bil_dismissHUD(delay: Double = 0, complete: SVProgressHUDDismissCompletion? = nil) {
-        SVProgressHUD.dismiss(withDelay: delay, completion: complete)
+    func bil_dismissHUD(delay: Double = 0, complete: KVNCompletionBlock? = nil) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(Int(delay * 1000))) {
+            KVNProgress.dismiss(completion: complete)
+        }
     }
     
     func showTipAlert(title: String? = nil, msg: String? = nil, actionTitle: String = .publicAlertActionTitle, dismissed: (() -> Void)? = nil) {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 class BILAddContactByAddressController: BILLightBlueBaseController {
 

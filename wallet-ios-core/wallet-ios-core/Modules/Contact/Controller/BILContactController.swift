@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 extension String {
     static var bil_contactsToAddByIDSegue: String { return "BILContactsToAddByIDSegue" }

@@ -14,7 +14,7 @@ target 'wallet-ios-core' do
   pod 'SnapKit'
   pod 'DZNEmptyDataSet'
   pod 'SwiftyJSON'
-  pod 'SVProgressHUD'
+  pod 'KVNProgress'
   pod 'Socket.IO-Client-Swift'
   pod 'CryptoSwift'
   pod 'PopupDialog'
