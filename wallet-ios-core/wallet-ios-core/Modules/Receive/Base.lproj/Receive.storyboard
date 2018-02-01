@@ -308,7 +308,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="ppK-i7-fS1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
                                 <connections>
                                     <segue destination="z6H-Hj-0bh" kind="show" identifier="BILVolumeToQRCodeSegue" id="3L5-os-RKe"/>

@@ -109,7 +109,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="备份钱包">
-                                    <color key="titleColor" red="0.23529411764705882" green="0.46274509803921571" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.22352941176470587" green="0.43137254901960786" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -965,6 +965,6 @@ EOmSseWMhUlEA
         <image name="logo" width="165" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WfD-od-GeW"/>
+        <segue reference="ibQ-sv-EQr"/>
     </inferredMetricsTieBreakers>
 </document>

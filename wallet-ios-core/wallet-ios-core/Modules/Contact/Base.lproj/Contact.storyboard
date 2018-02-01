@@ -193,7 +193,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="JdK-pN-5qh"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="发送"/>
                                 <connections>
                                     <action selector="sendAction:" destination="vgU-MN-TiQ" eventType="touchUpInside" id="thB-JF-V11"/>
@@ -532,7 +532,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="VII-Lc-zSw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="添加到联系人"/>
                                 <connections>
                                     <action selector="addAction:" destination="iat-7s-W7J" eventType="touchUpInside" id="Ii8-rc-cXN"/>

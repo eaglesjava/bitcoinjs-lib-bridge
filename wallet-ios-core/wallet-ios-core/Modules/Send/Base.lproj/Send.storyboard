@@ -136,7 +136,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="iCX-dj-nSc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
                                 <connections>
                                     <action selector="nextAction:" destination="1bf-2n-T7s" eventType="touchUpInside" id="DKJ-Wx-82v"/>
@@ -237,7 +237,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="9HR-PO-jzt"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
                                 <connections>
                                     <segue destination="baX-2R-0kn" kind="show" identifier="BILScanResultToChooseWallet" id="OJD-0X-kpj"/>
@@ -314,7 +314,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="0FU-c6-uMV"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
                                 <connections>
                                     <segue destination="baX-2R-0kn" kind="show" identifier="BILInputToChooseWalletSegue" id="wL4-ft-O7m"/>
@@ -377,7 +377,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="w6q-jI-UW1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
                                 <connections>
                                     <action selector="nextAction:" destination="baX-2R-0kn" eventType="touchUpInside" id="rMN-9P-crU"/>
@@ -644,7 +644,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="6Ri-fo-Pas"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="下一步"/>
                                 <connections>
                                     <action selector="nextAction:" destination="OMj-P2-5SR" eventType="touchUpInside" id="49n-nX-d3c"/>
