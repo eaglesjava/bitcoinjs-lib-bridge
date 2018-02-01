@@ -236,18 +236,19 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Override
     public void createWalletSuccess(Wallet wallet) {
-        if (!isCreateWallet) {
-            // 优化检查最新地址索引逻辑
-            mSyncAddressMvpPresentder.syncLastAddressIndex(mIndexNo, mChangeIndexNo, getWallet());
-        }
         //跳转到穿件钱包成功界面
         InitWalletSuccessActivity.start(InitWalletActivity.this, mWallet, isCreateWallet, false);
+
         if (AssetFragment.TAG.equals(mFromTag)) {
             //从主页进入才通知钱包刷新
             EventBus.getDefault().postSticky(new WalletUpdateEvent());
         }
         //注册钱包
         EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", DeviceUtil.getDeviceId(), PLATFORM)));
+        if (!isCreateWallet) {
+            // 优化检查最新地址索引逻辑
+            mSyncAddressMvpPresentder.syncLastAddressIndex(mIndexNo, mChangeIndexNo, getWallet());
+        }
     }
 
     @Override

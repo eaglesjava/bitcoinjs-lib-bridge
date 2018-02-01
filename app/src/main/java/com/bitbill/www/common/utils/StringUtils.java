@@ -9,6 +9,7 @@ import android.webkit.URLUtil;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.crypto.CryptoConstants;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -652,5 +653,18 @@ public class StringUtils {
             return null;
         }
         return new ArrayList(new HashSet(list));
+    }
+
+    /**
+     * 是否为空 包含"无"
+     *
+     * @param s
+     * @return
+     */
+    public static boolean isNone(String s) {
+        if (isEmpty(s)) {
+            return true;
+        }
+        return s.trim().equals(AppConstants.NONE);
     }
 }

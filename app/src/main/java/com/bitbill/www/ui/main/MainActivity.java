@@ -68,11 +68,12 @@ import com.bitbill.www.ui.main.asset.BtcUnconfirmFragment;
 import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.my.AboutUsActivity;
 import com.bitbill.www.ui.main.my.ContactSettingActivity;
-import com.bitbill.www.ui.main.my.FeebackActivity;
+import com.bitbill.www.ui.main.my.FeedbackActivity;
 import com.bitbill.www.ui.main.my.ShortCutSettingActivity;
 import com.bitbill.www.ui.main.my.SystemSettingActivity;
 import com.bitbill.www.ui.main.my.WalletSettingActivity;
 import com.bitbill.www.ui.main.receive.ReceiveFragment;
+import com.bitbill.www.ui.main.receive.ScanPayActivity;
 import com.bitbill.www.ui.main.send.SendFragment;
 import com.bitbill.www.ui.wallet.info.BtcRecordMvpPresenter;
 import com.bitbill.www.ui.wallet.info.BtcRecordMvpView;
@@ -165,9 +166,18 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     };
     private UpdateAppDialog mUpdateAppDialog;
     private MessageConfirmDialog mMessageConfirmDialog;
+    private String mFromTag;
+    private boolean isListUnconfirm;
+    private Wallet mSelectedWallet;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
+    }
+
+    public static void start(Context context, String fromTag) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(AppConstants.EXTRA_FROM_TAG, fromTag);
+        context.startActivity(intent);
     }
 
     public static void start(Context context, Contact sendContact, String address) {
@@ -182,27 +192,32 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         mSendContact = ((Contact) intent.getSerializableExtra(AppConstants.EXTRA_CONTACT));
-        if (mSendContact != null) {
+        mAddress = intent.getStringExtra(AppConstants.EXTRA_ADDRESS);
+        isListUnconfirm = intent.getBooleanExtra(AppConstants.EXTRA_LIST_UNCONFIRM, false);
+        mFromTag = intent.getStringExtra(AppConstants.EXTRA_FROM_TAG);
+
+        if (ScanPayActivity.TAG.equals(mFromTag)) {
+            //切回资产页面
+            if (mViewPager != null) {
+                mViewPager.setCurrentItem(INDEX_ASSET, false);
+            }
+        } else if (mSendContact != null) {
             //切换到发送联系人界面
             mViewPager.setCurrentItem(INDEX_SEND, false);
             if (mSendFragment != null) {
                 mSendFragment.setSendAddress(mSendContact);
             }
-        } else {
-
-            mAddress = intent.getStringExtra(AppConstants.EXTRA_ADDRESS);
-            if (StringUtils.isNotEmpty(mAddress)) {
-                //切换到发送界面
-                mViewPager.setCurrentItem(INDEX_SEND, false);
-                mSendFragment.setSendAddress(mAddress);
-            }
+        } else if (StringUtils.isNotEmpty(mAddress)) {
+            //切换到发送界面
+            mViewPager.setCurrentItem(INDEX_SEND, false);
+            mSendFragment.setSendAddress(mAddress);
         }
-        boolean listConfirm = intent.getBooleanExtra(AppConstants.EXTRA_LIST_UNCONFIRM, false);
-        if (listConfirm) {
+        if (isListUnconfirm) {
             //获取未确认列表
             getMvpPresenter().listUnconfirm();
 
         }
+
     }
 
     @Override
@@ -376,6 +391,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                         //设置新Item的勾选状态
                         mSelectedPosition = position;
                         mWalletList.get(mSelectedPosition).setSelected(true);
+                        mSelectedWallet = wallet;
                         holder.setChecked(R.id.rb_selector, wallet.isSelected());
                         if (mReceiveFragment != null) {
                             mReceiveFragment.setSelectedWallet(wallet);
@@ -423,6 +439,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             mWalletPresenter.loadWallets();
         }
         mGetCacheVersionMvpPresenter.getCacheVersion();
+        if (mBoundService != null) {
+            setSocketStatus(mBoundService.getSocketStatus());
+        }
     }
 
     @Override
@@ -453,7 +472,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             AboutUsActivity.start(this);
         } else if (id == R.id.nav_fee_back) {
             // 切换到关于我们界面
-            FeebackActivity.start(this);
+            FeedbackActivity.start(this);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -475,18 +494,44 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             //结束主界面
             finish();
         }
-        mWalletList.clear();
-        mWalletList.addAll(wallets);
-        //设置全局钱包列表对象
-        BitbillApp.get().setWallets(wallets);
-        reloadWalletInfo();
+        reloadWalletInfo(wallets);
         //获取钱包余额
         getMvpPresenter().getBalance();
         //加载未确认交易
         getMvpPresenter().listUnconfirm();
     }
 
-    private void reloadWalletInfo() {
+    private void reloadWalletInfo(List<Wallet> wallets) {
+        //设置全局钱包列表对象
+        getApp().setWallets(wallets);
+        mWalletList.clear();
+        mWalletList.addAll(wallets);
+
+        //重置钱包选择postion
+        if (mSelectedPosition == -1 || mSelectedPosition > mWalletList.size() - 1) {
+            // 选择默认的钱包对象作为选中的
+            mSelectedWallet = BitbillApp.get().getDefaultWallet();
+            mSelectedPosition = mWalletList.indexOf(mSelectedWallet);
+        } else {
+            mSelectedWallet = mWalletList.get(mSelectedPosition);
+        }
+        if (mSelectedWallet != null) {
+            //重置单选select对象
+            for (Wallet wallet : mWalletList) {
+                if (wallet.equals(mSelectedWallet)) {
+                    wallet.setSelected(true);
+                } else {
+                    wallet.setSelected(false);
+                }
+            }
+            if (mReceiveFragment != null) {
+                mReceiveFragment.setSelectedWallet(mSelectedWallet);
+            }
+        }
+        if (mSelectWalletAdapter != null) {
+            mSelectWalletAdapter.notifyDataSetChanged();
+        }
+
         //设置钱包总资产 未确认的金额累加
         long totalAmount = 0;
         for (Wallet wallet : mWalletList) {
@@ -533,10 +578,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void getBalanceSuccess(List<Wallet> wallets, Long totalAmount) {
-        BitbillApp.get().setWallets(wallets);
-        mWalletList.clear();
-        mWalletList.addAll(wallets);
-        reloadWalletInfo();
+
+        reloadWalletInfo(wallets);
     }
 
     @Override
@@ -700,8 +743,14 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onSocketServerStateEvent(SocketServerStateEvent socketServerStateEvent) {
-        if (socketServerStateEvent != null && mAssetFragment != null) {
-            mAssetFragment.setSocketStatus(socketServerStateEvent.getState().equals(SocketServerStateEvent.ServerState.connected));
+        if (socketServerStateEvent != null) {
+            setSocketStatus(socketServerStateEvent.getState());
+        }
+    }
+
+    private void setSocketStatus(SocketServerStateEvent.ServerState socketStatus) {
+        if (mAssetFragment != null && socketStatus != null) {
+            mAssetFragment.setSocketStatus(socketStatus.equals(SocketServerStateEvent.ServerState.connected));
         }
     }
 
@@ -755,6 +804,11 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void showLoading() {
         if (mMessageConfirmDialog != null) {
             if (mMessageConfirmDialog.isShowing()) {
+                return;
+            }
+        }
+        if (mUpdateAppDialog != null) {
+            if (mUpdateAppDialog.isShowing()) {
                 return;
             }
         }

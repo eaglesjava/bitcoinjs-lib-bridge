@@ -177,20 +177,29 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
     @Override
     public void getTxElementSuccess(List<GetTxElementResponse.UtxoBean> unspentList, List<GetTxElementResponse.FeesBean> fees) {
         mUnspentList = unspentList;
+        if (StringUtils.isEmpty(mAddressList)) {
+            return;
+        }
+        //重置余额
+        for (Address address : mAddressList) {
+            address.setBalance(0l);
+        }
         for (GetTxElementResponse.UtxoBean utxoBean : mUnspentList) {
-            long addressIndex = utxoBean.getAddressIndex();
+            String addressTxt = utxoBean.getAddressTxt();
             long sumOutAmount = utxoBean.getSumOutAmount();
+
             for (Address address : mAddressList) {
-                if (address.getIndex() == addressIndex) {
+                if (StringUtils.isNotEmpty(address.getName()) && address.getName().equals(addressTxt)) {
                     address.setBalance(sumOutAmount);
-                } else {
-                    address.setBalance(0l);
                 }
             }
 
         }
-        buildData();
+        if (StringUtils.isEmpty(mAddressList)) {
+            return;
+        }
         getMvpPresenter().updateAddressBalance(mAddressList);
+        buildData();
 
     }
 

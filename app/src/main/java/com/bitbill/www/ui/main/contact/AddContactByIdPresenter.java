@@ -38,11 +38,10 @@ public class AddContactByIdPresenter<M extends ContactModel, V extends AddContac
                     @Override
                     public void onNext(ApiResponse<SearchWalletIdResponse> searchWalletIdResponseApiResponse) {
                         super.onNext(searchWalletIdResponseApiResponse);
-                        if (!isViewAttached()) {
+                        if (handleApiResponse(searchWalletIdResponseApiResponse)) {
                             return;
                         }
-                        if (searchWalletIdResponseApiResponse != null && searchWalletIdResponseApiResponse.isSuccess()) {
-                            SearchWalletIdResponse data = searchWalletIdResponseApiResponse.getData();
+                        if (searchWalletIdResponseApiResponse.isSuccess()) {
                             getMvpView().searchWalletIdSuccess();
                         } else {
                             getMvpView().searchWalletIdFail();
@@ -58,7 +57,6 @@ public class AddContactByIdPresenter<M extends ContactModel, V extends AddContac
                         if (e instanceof ANError) {
                             handleApiError(((ANError) e));
                         } else {
-
                             getMvpView().searchWalletIdFail();
                         }
 

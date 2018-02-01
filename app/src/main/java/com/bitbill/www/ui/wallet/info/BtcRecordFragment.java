@@ -120,7 +120,7 @@ public class BtcRecordFragment extends BaseLazyListFragment<TxRecord, BtcRecordM
     @Override
     protected void itemConvert(ViewHolder holder, TxRecord txRecord, int position) {
         String inOutString = txRecord.getInOut() == TxRecord.InOut.TRANSFER ? "" : (txRecord.getInOut() == TxRecord.InOut.IN ? "+" : "-");
-        holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txRecord.getSumAmount()) + " btc");
+        holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txRecord.getSumAmount()) + " " + AppConstants.BTC_COIN_TYPE);
 
 
         holder.setText(R.id.tv_date, StringUtils.formatDateTime(txRecord.getCreatedTime()));

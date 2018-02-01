@@ -85,7 +85,7 @@
             android:name=".ui.main.send.SendAmountActivity"
             android:label="@string/title_activity_send_amount"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".ui.main.receive.ScanPayActivity"
             android:label="@string/title_activity_scan_pay"
@@ -155,8 +155,8 @@
             android:label="@string/title_activity_wallet_address"
             android:theme="@style/AppTheme.Blue"></activity>
         <activity
-            android:name=".ui.main.my.FeebackActivity"
-            android:label="@string/title_activity_feeback"
+            android:name=".ui.main.my.FeedbackActivity"
+            android:label="@string/title_activity_feedback"
             android:theme="@style/AppTheme"></activity>
 
         <service

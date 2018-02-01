@@ -92,7 +92,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                                 inOut = TxRecord.InOut.OUT;
                                 for (TxElement.OutputsBean output : outputs) {
                                     Address addressByName = mAddressModel.getAddressByName(output.getAddress());
-                                    if (addressByName == null || !inWalletId.equals(addressByName.getWalletId()) || !addressByName.getIsInternal()) {
+                                    if (addressByName == null || !inWalletId.equals(addressByName.getWalletId())) {
                                         amount += output.getValue();
                                     }
                                 }

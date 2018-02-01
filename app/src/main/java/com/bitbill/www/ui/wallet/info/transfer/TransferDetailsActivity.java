@@ -45,7 +45,7 @@ public class TransferDetailsActivity extends BaseFragmentActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (ScanPayActivity.TAG.equals(mFromTag)) {
-            MainActivity.start(TransferDetailsActivity.this);
+            MainActivity.start(TransferDetailsActivity.this, mFromTag);
         }
     }
 }

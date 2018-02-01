@@ -222,7 +222,7 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
         } else if (titleItem instanceof TransferRemarkItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_remark));
             TransferRemarkItem remarkItem = (TransferRemarkItem) titleItem;
-            holder.setText(R.id.tv_tx_left, remarkItem.getRemark());
+            holder.setText(R.id.tv_tx_left, StringUtils.isNone(remarkItem.getRemark()) ? getString(R.string.hint_remark_none) : remarkItem.getRemark());
             holder.setVisible(R.id.tv_tx_right, false);
 
         } else if (titleItem instanceof TransferDateItem) {

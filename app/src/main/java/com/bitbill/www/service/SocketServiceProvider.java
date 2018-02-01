@@ -242,6 +242,10 @@ public class SocketServiceProvider extends Service {
         Log.d(TAG, "onDestroy() called");
     }
 
+    public SocketServerStateEvent.ServerState getSocketStatus() {
+        return mSocket != null && mSocket.connected() ? SocketServerStateEvent.ServerState.connected : SocketServerStateEvent.ServerState.disConnect;
+    }
+
     public class LocalBinder extends Binder {
         public SocketServiceProvider getService() {
             return SocketServiceProvider.this;

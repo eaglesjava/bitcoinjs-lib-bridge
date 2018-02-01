@@ -92,6 +92,7 @@ public final class AppConstants {
      */
     public static final String TYPE_RECEIVE = "RECEIVE";
     public static final String TYPE_SEND = "SEND";
+    public static final String NONE = "无";
 
 
     private AppConstants() {

@@ -19,8 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:inputHint="@string/hint_feeback_contact"
+        app:inputHint="@string/hint_feedback_contact"
         app:inputPaddingBottom="10dp"
-        app:inputTitle="@string/title_feeback_contact"/>
+        app:inputTitle="@string/title_feedback_contact" />
 
 </LinearLayout>

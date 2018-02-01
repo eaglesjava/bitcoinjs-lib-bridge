@@ -120,7 +120,7 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
         getCompositeDisposable().add(getModelManager()
                 .insertAddressListAndUpdatWallet(addressList, wallet)
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);

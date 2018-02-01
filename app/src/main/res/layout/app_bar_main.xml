@@ -30,25 +30,25 @@
                 android:id="@+id/tab_asset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_menu_asset" />
+                android:icon="@drawable/tab_asset" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_menu_contact" />
+                android:icon="@drawable/tab_contact" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab_receive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_menu_receive" />
+                android:icon="@drawable/tab_receive" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_menu_send" />
+                android:icon="@drawable/tab_send" />
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bitbill.www.R;
-import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.BaseTabsLazyFragment;
 import com.bitbill.www.common.widget.SelectWalletView;
@@ -17,9 +16,6 @@ import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -38,9 +34,7 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
     @Inject
     ReceiveMvpPresenter<AppModel, ReceiveMvpView> mReceiveMvpPresenter;
     private BtcReceiveFragment mBtcReceiveFragment;
-    private List<Wallet> mWalletList = new ArrayList<>();
     private Wallet mSelectedWallet;
-    private int mSelectedPosition = -1;
 
     public ReceiveFragment() {
         // Required empty public constructor
@@ -145,37 +139,6 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
      */
     @Override
     public void lazyData() {
-        if (mWalletList == null) {
-            mWalletList = new ArrayList<>();
-        }
-        mWalletList.clear();
-        mWalletList.addAll(BitbillApp.get().getWallets());
-        //重置选中的钱包对象
-        if (mSelectedPosition == -1 || mSelectedPosition > mWalletList.size() - 1) {
-            // 选择默认的钱包对象作为选中的
-            mSelectedWallet = BitbillApp.get().getDefaultWallet();
-            mSelectedPosition = mWalletList.indexOf(mSelectedWallet);
-        } else {
-            mSelectedWallet = mWalletList.get(mSelectedPosition);
-        }
-        if (selectWalletView == null) {
-            return;
-        }
-        if (mSelectedWallet != null) {
-            //重置单选select对象
-            for (Wallet wallet : mWalletList) {
-                if (wallet.equals(mSelectedWallet)) {
-                    wallet.setSelected(true);
-                } else {
-                    wallet.setSelected(false);
-                }
-            }
-            selectWalletView.setWallet(mSelectedWallet);
-            selectWalletView.setVisibility(View.VISIBLE);
-            loadBtcAddress();
-        } else {
-            selectWalletView.setVisibility(View.GONE);
-        }
 
     }
 
@@ -214,9 +177,15 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
     }
 
     public void setSelectedWallet(Wallet wallet) {
-        mSelectedWallet = wallet;
-        //刷新选择布局
-        selectWalletView.setWallet(wallet);
-        loadBtcAddress();
+        if (selectWalletView != null) {
+            selectWalletView.setVisibility(wallet == null ? View.VISIBLE : View.VISIBLE);
+            if (wallet == null) {
+                return;
+            }
+            mSelectedWallet = wallet;
+            //刷新选择布局
+            selectWalletView.setWallet(wallet);
+            loadBtcAddress();
+        }
     }
 }

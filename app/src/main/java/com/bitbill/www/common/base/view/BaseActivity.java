@@ -124,6 +124,7 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
         handleIntent(intent);
     }
 

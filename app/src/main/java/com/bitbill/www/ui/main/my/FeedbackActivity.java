@@ -19,7 +19,7 @@ import butterknife.BindView;
 /**
  * Created by isanwenyu@163.com on 2018/1/31.
  */
-public class FeebackActivity extends BaseToolbarActivity<FeebackMvpPresenter> implements FeebackMvpView {
+public class FeedbackActivity extends BaseToolbarActivity<FeebackMvpPresenter> implements FeebackMvpView {
     @Inject
     FeebackMvpPresenter<AppModel, FeebackMvpView> mFeebackMvpPresenter;
     @BindView(R.id.et_feeback_content)
@@ -28,7 +28,7 @@ public class FeebackActivity extends BaseToolbarActivity<FeebackMvpPresenter> im
     EditTextWapper etwFeebackContact;
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, FeebackActivity.class);
+        Intent starter = new Intent(context, FeedbackActivity.class);
         context.startActivity(starter);
     }
 
@@ -44,7 +44,7 @@ public class FeebackActivity extends BaseToolbarActivity<FeebackMvpPresenter> im
 
     @Override
     public void onBeforeSetContentLayout() {
-
+        setTitle(R.string.title_activity_feedback);
     }
 
     @Override
@@ -79,14 +79,14 @@ public class FeebackActivity extends BaseToolbarActivity<FeebackMvpPresenter> im
 
     @Override
     public void sendFeebackSuccess() {
-        showMessage(R.string.success_send_feeback);
+        showMessage(R.string.success_send_feedback);
         finish();
     }
 
     @Override
     public void sendFeebackFail() {
 
-        showMessage(R.string.fail_send_feeback);
+        showMessage(R.string.fail_send_feedback);
     }
 
     @Override
