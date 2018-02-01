@@ -82,7 +82,7 @@ class BILReceiveController: BILBaseViewController {
         if let w = currentWallet {
             currentWalletIDLabel.text = w.id
             currentWalletBalanceLabel.text = w.btc_balanceString + " BTC"
-            currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")"
+            currentWalletShortIDLabel.text = "\(w.id?.first ?? "B")".uppercased()
             
             backupViewHeight.constant = w.isNeedBackup ? 40 : 0
 			guard let add = w.btc_addressModels.last else {

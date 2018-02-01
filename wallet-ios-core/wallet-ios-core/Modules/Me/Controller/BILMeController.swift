@@ -243,7 +243,7 @@ extension BILMeController: UITableViewDataSource, UITableViewDelegate {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BILTableViewHeaderFooterView") as! BILTableViewHeaderFooterView
         headerView.titleLabel.text = sectionType.sectionTitle
         headerView.titleLabel.textColor = UIColor(white: 1, alpha: 0.3)
-        headerView.bil_backgroundView.backgroundColor = UIColor(white: 1.0, alpha: 0.04)
+        headerView.bil_backgroundView.backgroundColor = UIColor(hex: 0x1c1c1c)
         return headerView
     }
 	
