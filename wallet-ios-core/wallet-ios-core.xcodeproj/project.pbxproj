@@ -228,7 +228,6 @@
 		BA12AC381FEA1FB200812F38 /* ContactModel+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactModel+Network.swift"; sourceTree = "<group>"; };
 		BA12AC3A1FEA3A2A00812F38 /* BILSearchWalletIDController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILSearchWalletIDController.swift; sourceTree = "<group>"; };
 		BA12AC3E1FEA5D2B00812F38 /* BILSearchWalletIDResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BILSearchWalletIDResultController.swift; sourceTree = "<group>"; };
-		BA12AC461FEA672600812F38 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		BA12AC4D1FEA67BC00812F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Send.storyboard; sourceTree = "<group>"; };
 		BA12AC591FEA715C00812F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		BA12AC5A1FEA73D700812F38 /* BILAddContactByAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAddContactByAddressController.swift; sourceTree = "<group>"; };
@@ -1782,7 +1781,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CCEC67631FB18C3A004CC6C5 /* Base */,
-				BA12AC461FEA672600812F38 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

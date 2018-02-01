@@ -54,7 +54,7 @@ class BILImportWalletController: BILBaseViewController, UITextViewDelegate {
     }
     
     func normalized(mnemonic: String) -> String? {
-        var trimmedString = mnemonic.trimmingCharacters(in: .whitespaces)
+        var trimmedString = mnemonic.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: "\n", with: "")
         do {
             let regex = try NSRegularExpression(pattern: "  +", options: .caseInsensitive)
             let str = NSMutableString(string: trimmedString)
