@@ -291,8 +291,6 @@
 		BAEFFD461FEBB7F700C6EAB3 /* BILAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAudioPlayer.swift; sourceTree = "<group>"; };
 		BAEFFD481FEBC69800C6EAB3 /* BILMeWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMeWalletCell.swift; sourceTree = "<group>"; };
 		BAEFFD4B1FEBCE9F00C6EAB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BAEFFD4C1FEBCEC000C6EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		BAEFFD4D1FEBCEC400C6EAB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		CC4417001FBEAC7F00C4B158 /* WalletModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletModel+BIL.swift"; sourceTree = "<group>"; };
 		CC4417021FBEAD8800C4B158 /* BILAESHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILAESHelper.swift; sourceTree = "<group>"; };
 		CC4417041FBEB25C00C4B158 /* BILControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILControllerManager.swift; sourceTree = "<group>"; };
@@ -1771,8 +1769,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				BAEFFD4B1FEBCE9F00C6EAB3 /* Base */,
-				BAEFFD4C1FEBCEC000C6EAB3 /* zh-Hans */,
-				BAEFFD4D1FEBCEC400C6EAB3 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

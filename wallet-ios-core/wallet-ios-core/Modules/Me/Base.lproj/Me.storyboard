@@ -936,7 +936,9 @@ EOmSseWMhUlEA
         <scene sceneID="pj1-mt-ETC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FHp-J5-Gub" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="icon_me" selectedImage="icon_me_h" id="dFI-W1-AfE"/>
+                    <tabBarItem key="tabBarItem" title="我" image="icon_me" selectedImage="icon_me_h" id="dFI-W1-AfE">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="0xA-JJ-HPR">

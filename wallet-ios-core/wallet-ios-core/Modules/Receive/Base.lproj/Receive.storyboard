@@ -454,7 +454,9 @@
         <scene sceneID="gsA-3J-HfX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oZT-mc-NTx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="接收" image="icon_receive" selectedImage="icon_receive_h" id="ic5-jT-iGX"/>
+                    <tabBarItem key="tabBarItem" title="接收" image="icon_receive" selectedImage="icon_receive_h" id="ic5-jT-iGX">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jLe-d4-iH5">

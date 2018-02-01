@@ -823,7 +823,10 @@
         <scene sceneID="Hdn-X3-w7g">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YFK-rB-t1O" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="资产" image="icon_home" selectedImage="icon_home_h" id="skP-T0-JsY"/>
+                    <tabBarItem key="tabBarItem" title="资产" image="icon_home" selectedImage="icon_home_h" id="skP-T0-JsY">
+                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kX5-GD-Jkf">
