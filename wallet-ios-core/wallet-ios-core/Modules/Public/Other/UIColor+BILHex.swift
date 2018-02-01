@@ -27,8 +27,10 @@ extension UIColor {
 	static var bil_gradient_shadow_color: UIColor { get { return UIColor(hex: 0xB4EC51) } }
 	static var bil_black_30_color: UIColor { get { return self.bil_black_color(alpha: 0.3) } }
 	static var bil_black_70_color: UIColor { get { return self.bil_black_color(alpha: 0.7) } }
-	static var bil_deep_blue_start_bgcolor: UIColor{ get { return UIColor(hex: 0x1C1C1C) } }
-	static var bil_deep_blue_end_bgcolor: UIColor{ get { return UIColor(hex: 0x070707) } }
+//    static var bil_deep_blue_start_bgcolor: UIColor{ get { return UIColor(hex: 0x1C1C1C) } }
+//    static var bil_deep_blue_end_bgcolor: UIColor{ get { return UIColor(hex: 0x070707) } }
+    static var bil_deep_blue_start_bgcolor: UIColor{ get { return UIColor.black } }
+    static var bil_deep_blue_end_bgcolor: UIColor{ get { return UIColor.black } }
 	
 	static var bil_white_40_color: UIColor { get { return UIColor(white: 1.0, alpha: 0.4) } }
 	static var bil_white_60_color: UIColor { get { return UIColor(white: 1.0, alpha: 0.4) } }

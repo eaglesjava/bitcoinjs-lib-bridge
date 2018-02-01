@@ -52,6 +52,11 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		NotificationCenter.default.removeObserver(self, name: .shortcutScanQRCode, object: nil)
+        if tabBarController?.selectedIndex != 3 {
+            addressInputView.textField.text = ""
+            sendModel = nil
+            contact = nil
+        }
 	}
     
     deinit {

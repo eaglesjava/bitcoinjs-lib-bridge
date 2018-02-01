@@ -100,7 +100,6 @@ class BILMeController: BILBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        scrollViewDidScroll(tableView)
     }
 	
 	override func languageDidChanged() {
@@ -194,23 +193,6 @@ class BILMeController: BILBaseViewController {
 // MARK: - Table view data source
 
 extension BILMeController: UITableViewDataSource, UITableViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let section = tableView.indexPathsForVisibleRows?.first?.section else { return }
-        
-        for i in 0...numberOfSections(in: tableView) {
-            guard let header = tableView.headerView(forSection: i) as? BILTableViewHeaderFooterView  else { continue }
-            if i == section {
-                let headerRect = view.convert(header.frame, from: tableView)
-
-                header.bgImageView.image = backgroundImage?.snapshotSubImage(rect: headerRect)
-            }
-            else
-            {
-                header.bgImageView.image = nil
-            }
-        }
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
