@@ -166,6 +166,7 @@ extension WalletModel {
             }
             do {
                 try BILWalletManager.shared.saveWallets()
+                NotificationCenter.default.post(name: .transactionDidChanged, object: nil)
                 success(self.btc_transactionArray)
             } catch {
                 failure(error.localizedDescription, -2)

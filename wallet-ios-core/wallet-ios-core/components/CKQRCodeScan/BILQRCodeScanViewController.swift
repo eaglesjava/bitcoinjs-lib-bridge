@@ -23,7 +23,9 @@ class BILQRCodeScanViewController: BILBaseViewController {
     var scanSession: AVCaptureSession?
     var previewLayer: AVCaptureVideoPreviewLayer?
     var output: AVCaptureMetadataOutput?
+    var device: AVCaptureDevice?
 
+    @IBOutlet weak var flashButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var scanFrame: UIImageView!
     let scanLine = UIImageView(image: UIImage(named: "pic_scan_qr_line"))
@@ -45,19 +47,32 @@ class BILQRCodeScanViewController: BILBaseViewController {
         }
         
         setupSession()
-        startScanAnimation()
         
         scanFrame.addSubview(scanLine)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    @objc func showAlbum() {
+        let picker = UIImagePickerController()
+        picker.navigationBar.isTranslucent = false
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
     }
     
     override func languageDidChanged() {
         super.languageDidChanged()
         tipLabel.text = "Align within frame to scan".bil_ui_localized
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Album".bil_ui_localized, style: .plain, target: self, action: #selector(showAlbum))
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scanSession?.startRunning()
+        startScanAnimation()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -68,6 +83,13 @@ class BILQRCodeScanViewController: BILBaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupLayers()
+        view.bringSubview(toFront: flashButton)
+    }
+    @IBAction func openOrCloseFlash(_ sender: Any) {
+        guard let d = self.device else { return }
+        guard d.isTorchAvailable else { return }
+        _ = setTorchModel(device: d, mode: d.isTorchActive ? .off : .on)
+        flashButton.setImage(d.isTorchActive ? UIImage(named: "btn_flash_close") : UIImage(named: "btn_flash_open"), for: .normal)
     }
     
     func setupLayers() {
@@ -94,12 +116,25 @@ class BILQRCodeScanViewController: BILBaseViewController {
         previewLayer?.frame = UIScreen.main.bounds
     }
     
+    func setTorchModel(device: AVCaptureDevice, mode: AVCaptureDevice.TorchMode) -> Bool {
+        do {
+            try device.lockForConfiguration()
+            device.torchMode = mode
+            device.unlockForConfiguration()
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
+        }
+        return true
+    }
+    
     func setupSession() {
         guard scanSession == nil else {
             return
         }
         do {
             guard let device = AVCaptureDevice.default(for: .video) else { return }
+            self.device = device
             
             let input = try AVCaptureDeviceInput(device: device)
             
@@ -183,7 +218,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
 //MARK: AVCaptureMetadataOutputObjects Delegate
 
 //扫描捕捉完成
-extension BILQRCodeScanViewController : AVCaptureMetadataOutputObjectsDelegate
+extension BILQRCodeScanViewController: AVCaptureMetadataOutputObjectsDelegate
 {
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
@@ -199,6 +234,22 @@ extension BILQRCodeScanViewController : AVCaptureMetadataOutputObjectsDelegate
                         self.resultClosure = nil
                     }
                 }
+            }
+        }
+    }
+}
+
+extension BILQRCodeScanViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        debugPrint(info)
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+        guard let msg = image.toQRCodeString() else {
+            return
+        }
+        dismiss(animated: true) {
+            DispatchQueue.main.async {
+                self.resultClosure?(msg)
+                self.resultClosure = nil
             }
         }
     }

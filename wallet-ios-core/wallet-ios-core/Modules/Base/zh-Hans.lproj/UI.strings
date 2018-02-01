@@ -107,6 +107,7 @@
 "Verify words" = "验证助记词";
 
 "Align within frame to scan" = "放入框内，自动扫描";
+"Album" = "相册";
 
 "Currencies supported currently" = "目前支持以下币种";
 
@@ -115,6 +116,7 @@
 "-32" = "无效的参数类型";
 "-40" = "钱包id已存在";
 "-41" = "钱包不存在";
+"-88" = "您的IP超过了规定限制";
 
 "Address of change" = "找零地址";
 

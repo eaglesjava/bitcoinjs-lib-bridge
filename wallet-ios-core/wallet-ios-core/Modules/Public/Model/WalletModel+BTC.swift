@@ -302,6 +302,9 @@ extension WalletModel {
         for add in btc_addressModels {
             add.satoshi = 0
         }
+        for add in btc_changeAddressModels {
+            add.satoshi = 0
+        }
         for utxo in utxos {
             let add = utxo.address
             let model = bil_btc_wallet_addressManager.newModelIfNeeded(key: "address", value: add)

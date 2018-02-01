@@ -143,6 +143,8 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 			return
 		}
 		
+        view.endEditing(true)
+        
 		getMnemonic { (m) in
             func cleanUp(wallet: WalletModel?, error: String) {
                 self.bil_showError(status: error)

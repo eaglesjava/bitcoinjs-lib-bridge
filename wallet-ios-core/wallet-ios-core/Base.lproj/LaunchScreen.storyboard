@@ -50,7 +50,7 @@
     </scenes>
     <resources>
         <image name="Launch" width="562" height="1218"/>
-        <image name="conner" width="34" height="34"/>
+        <image name="conner" width="17" height="17"/>
         <image name="pic_launch_logo" width="142" height="56"/>
     </resources>
 </document>

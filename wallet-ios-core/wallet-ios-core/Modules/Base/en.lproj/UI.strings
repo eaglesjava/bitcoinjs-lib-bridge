@@ -107,6 +107,7 @@
 "Verify words" = "Verify words";
 
 "Align within frame to scan" = "Put the QR code into the box, it will automatically scan.";
+"Album" = "Album";
 
 "Currencies supported currently" = "Currencies supported currently";
 
@@ -115,6 +116,7 @@
 "-32" = "Invalid parameter type.";
 "-40" = "Wallet ID already exists.";
 "-41" = "Wallet not exists.";
+"-88" = "IP adress limit exceeded";
 
 "Address of change" = "Change addresses";
 

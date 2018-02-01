@@ -14,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BILQRCodeScanViewController" customModule="wallet_ios_core" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="emW-aN-CQS" id="Ol2-Ze-sDC"/>
+                <outlet property="flashButton" destination="WnY-9f-m5H" id="V9m-Xe-Bxr"/>
                 <outlet property="scanFrame" destination="h0G-5i-PJB" id="kUU-QT-tBA"/>
                 <outlet property="tipLabel" destination="DmR-Ih-AaW" id="9pk-6a-FTI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -50,19 +51,29 @@
                         <constraint firstItem="DmR-Ih-AaW" firstAttribute="centerX" secondItem="emW-aN-CQS" secondAttribute="centerX" id="nDm-Jq-JmI"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnY-9f-m5H">
+                    <rect key="frame" x="166" y="600" width="42" height="42"/>
+                    <state key="normal" image="btn_flash_close"/>
+                    <connections>
+                        <action selector="openOrCloseFlash:" destination="-1" eventType="touchUpInside" id="SQS-pG-eXW"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="emW-aN-CQS" secondAttribute="trailing" id="6vA-ty-3hF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="emW-aN-CQS" secondAttribute="bottom" id="DSw-eP-8e7"/>
                 <constraint firstItem="emW-aN-CQS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Sim-jb-ciq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="WnY-9f-m5H" secondAttribute="bottom" constant="25" id="Xgr-cM-U8B"/>
                 <constraint firstItem="emW-aN-CQS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iuL-F1-C4B"/>
+                <constraint firstItem="WnY-9f-m5H" firstAttribute="centerX" secondItem="emW-aN-CQS" secondAttribute="centerX" id="zTR-If-2yG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="34.5" y="54.5"/>
         </view>
     </objects>
     <resources>
+        <image name="btn_flash_close" width="42" height="42"/>
         <image name="pic_scan_qr" width="25" height="25"/>
     </resources>
 </document>

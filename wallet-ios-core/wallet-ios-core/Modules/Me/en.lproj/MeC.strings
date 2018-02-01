@@ -9,8 +9,8 @@
 "MeC.agreementName" = "service";
 
 "MeC.meSection_preference" = "Assets";
-"MeC.meSection_contacts" = "Contact";
-"MeC.meSection_wallet" = "Wallet";
+"MeC.meSection_contacts" = "Contacts";
+"MeC.meSection_wallet" = "Wallets";
 "MeC.meSection_system" = "Settings";
 "MeC.meSection_other" = "Other";
 
@@ -26,7 +26,7 @@
 "MeC.contact_authFailed" = "Authentication failed. Can't read your contact passphrase.";
 "MeC.contact_inputKey" = "Please input passphrase";
 "MeC.contact_keyEmpty" = "Passphrase can't be empty";
-"MeC.contact_noMore" = "No new contact";
+"MeC.contact_noMore" = "No new contacts";
 "MeC.contact_recovered" = "You restored";
 "MeC.contact_contact" = "contacts";
 
