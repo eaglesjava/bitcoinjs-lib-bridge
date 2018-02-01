@@ -119,7 +119,7 @@
                                     <constraint firstAttribute="width" secondItem="DZI-H4-dgr" secondAttribute="height" multiplier="1:1" id="FRp-lH-yI3"/>
                                     <constraint firstAttribute="width" constant="60" id="qea-Ib-B0d"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                 <color key="textColor" red="0.25882352939999997" green="0.55294117649999996" blue="0.79215686269999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>

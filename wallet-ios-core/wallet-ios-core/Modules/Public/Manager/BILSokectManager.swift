@@ -44,7 +44,7 @@ class BILSokectManager: NSObject {
     
     func connect(urlString: String = .bil_socket_base_url) {
         guard let url = URL(string: urlString) else { return }
-        let manager = SocketManager(socketURL: url, config: [.log(true), .compress])
+        let manager = SocketManager(socketURL: url, config: [.log(false), .compress])
         let socket = manager.defaultSocket
         self.manager = manager
         self.socket = socket

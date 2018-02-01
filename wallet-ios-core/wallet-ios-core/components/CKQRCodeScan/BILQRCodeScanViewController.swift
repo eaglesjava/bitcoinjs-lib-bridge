@@ -15,6 +15,8 @@ class BILQRCodeScanViewController: BILBaseViewController {
     fileprivate let scanDuration = 3.0
     @IBOutlet weak var tipLabel: UILabel!
     
+    fileprivate var layerSetuped = false
+    
     typealias BILScanResultClosure = (String) -> Void
     
     var resultClosure: BILScanResultClosure?
@@ -58,6 +60,7 @@ class BILQRCodeScanViewController: BILBaseViewController {
     @objc func showAlbum() {
         let picker = UIImagePickerController()
         picker.navigationBar.isTranslucent = false
+        picker.navigationBar.setBackgroundImage(BILAppStartUpManager.shared.navBackgroundImage, for: .default)
         picker.sourceType = .photoLibrary
         picker.delegate = self
         present(picker, animated: true, completion: nil)
@@ -93,6 +96,9 @@ class BILQRCodeScanViewController: BILBaseViewController {
     }
     
     func setupLayers() {
+        guard !layerSetuped else {
+            return
+        }
         let maskLayer = CALayer()
         var frame = UIScreen.main.bounds
         frame.size.height += 200
@@ -114,6 +120,8 @@ class BILQRCodeScanViewController: BILBaseViewController {
         
         containerView.layer.insertSublayer(maskLayer, above: previewLayer)
         previewLayer?.frame = UIScreen.main.bounds
+        
+        layerSetuped = true
     }
     
     func setTorchModel(device: AVCaptureDevice, mode: AVCaptureDevice.TorchMode) -> Bool {
@@ -242,15 +250,21 @@ extension BILQRCodeScanViewController: AVCaptureMetadataOutputObjectsDelegate
 extension BILQRCodeScanViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         debugPrint(info)
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-        guard let msg = image.toQRCodeString() else {
-            return
-        }
         dismiss(animated: true) {
-            DispatchQueue.main.async {
-                self.resultClosure?(msg)
-                self.resultClosure = nil
+            self.bil_showLoading()
+            guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+            guard let msg = image.toQRCodeString() else {
+                self.bil_dismissHUD(complete: {
+                    self.bil_makeToast(msg: "No QRCodes".bil_ui_localized, completion: nil)
+                })
+                return
             }
+            self.bil_dismissHUD(complete: {
+                DispatchQueue.main.async {
+                    self.resultClosure?(msg)
+                    self.resultClosure = nil
+                }
+            })
         }
     }
 }

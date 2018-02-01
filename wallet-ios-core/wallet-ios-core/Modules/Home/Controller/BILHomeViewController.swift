@@ -176,7 +176,6 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         NotificationCenter.default.removeObserver(self, name: .receivedUnconfirmTransaction, object: nil)
         NotificationCenter.default.removeObserver(self, name: .unconfirmTransactionBeenConfirmed, object: nil)
         NotificationCenter.default.removeObserver(self, name: .walletCountDidChanged, object: nil)
-        
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -229,7 +228,6 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
         }
 		loadBalance()
         WalletModel.getUnconfirmTransactionFromSever(wallets: wallets, success: { (txs)  in
-            BILTransactionManager.shared.recnetRecords = txs
             loadEnd()
         }) { (msg, code) in
             loadEnd()

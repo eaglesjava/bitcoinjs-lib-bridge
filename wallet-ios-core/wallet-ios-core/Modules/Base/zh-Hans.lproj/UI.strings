@@ -108,6 +108,7 @@
 
 "Align within frame to scan" = "放入框内，自动扫描";
 "Album" = "相册";
+"No QRCodes" = "没有识别到二维码";
 
 "Currencies supported currently" = "目前支持以下币种";
 

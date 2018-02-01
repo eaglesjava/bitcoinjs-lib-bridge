@@ -108,6 +108,7 @@
 
 "Align within frame to scan" = "Put the QR code into the box, it will automatically scan.";
 "Album" = "Album";
+"No QRCodes" = "No QRCodes";
 
 "Currencies supported currently" = "Currencies supported currently";
 

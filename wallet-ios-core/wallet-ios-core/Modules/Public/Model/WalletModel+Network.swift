@@ -17,6 +17,7 @@ extension WalletModel {
 			let unconfirm = WalletModel.allUnconfirmBTCTransactions()
             getTransactionHistoryFromSever(page: 0, size: (bitcoinWallet?.transactions?.count)! + 1000, success: { (txs) in
 				let newUnconfirm = WalletModel.allUnconfirmBTCTransactions()
+                BILTransactionManager.shared.recnetRecords = newUnconfirm
 				if unconfirm != newUnconfirm {
 					NotificationCenter.default.post(name: .receivedUnconfirmTransaction, object: nil)
 				}
@@ -158,7 +159,7 @@ extension WalletModel {
         }
         success(btc_transactionArray)
         BILNetworkManager.request(request: .getTransactionHistory(extendedKeyHash: extKey.md5(), id: id, page: page, size: size), success: { (result) in
-            debugPrint(result)
+            debugPrint("getTransactionHistoryFromSever \(result)")
             let json = JSON(result)
             let datas = json["list"].arrayValue
             for json in datas {
@@ -240,7 +241,7 @@ extension WalletModel {
         }
 		
         BILNetworkManager.request(request: .getUnconfirmTransaction(wallets: wallets), success: { (result) in
-            debugPrint(result)
+            debugPrint("getUnconfirmTransactionFromSever \(result)")
             let json = JSON(result)
             var txDatas = [JSON]()
 			for j in json["list"].arrayValue {
@@ -263,7 +264,7 @@ extension WalletModel {
 				utx.sort(by: { (lhs, rhs) -> Bool in
 					rhs.createdDate!.isEarlier(than: lhs.createdDate!)
 				})
-                
+                BILTransactionManager.shared.recnetRecords = utx
                 success(utx)
             } catch {
                 failure(error.localizedDescription, -2)
