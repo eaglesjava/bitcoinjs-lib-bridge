@@ -25,6 +25,8 @@ class BILFeedbackViewController: BILBaseViewController, UITextViewDelegate, BILI
         containerView.layer.cornerRadius = 2.0
         
         contactInputView.delegate = self
+        
+        contentTextView.becomeFirstResponder()
     }
     
     override func languageDidChanged() {

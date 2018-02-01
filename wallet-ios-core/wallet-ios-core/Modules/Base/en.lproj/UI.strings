@@ -120,7 +120,7 @@
 
 "Feedback" = "Feedback";
 "ContactTypeTitle" = "Contact (optional)";
-"ContactTypePlaceHolder" = "E-mail, Mobile, WeChat";
+"ContactTypePlaceHolder" = "E-mail / Mobile / WeChat";
 "Too much words" = "Too much words";
 "Can not be empty" = "Feedback can not be empty";
 
