@@ -162,8 +162,7 @@ extension WalletModel {
             let json = JSON(result)
             let datas = json["list"].arrayValue
             for json in datas {
-                let model = BTCTransactionModel.newTxAfterDelete(txHash: json["txHash"].stringValue)
-                model.setProperties(json: json, inWallet: self)
+                BTCTransactionModel.handle(json: json)
             }
             do {
                 try BILWalletManager.shared.saveWallets()
@@ -251,8 +250,7 @@ extension WalletModel {
 				}
 			}
             for json in txDatas {
-                let model = BTCTransactionModel.newTxAfterDelete(txHash: json["txHash"].stringValue)
-                model.setProperties(json: json)
+                BTCTransactionModel.handle(json: json)
             }
             do {
                 try BILWalletManager.shared.saveWallets()

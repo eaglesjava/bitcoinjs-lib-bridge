@@ -35,6 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().delegate = self
         
+//        let adds = ["1BKX9k466UAyhEY5waJ43wvGBJ9Rgk3vB", "1Pg1kWkuxE3o1WJvyyb7MWBK6s5Dqsb9aW"]
+//        debugPrint(WalletModel.fetchWallets(by: adds))
+        
 		let results = BILWalletManager.shared.wallets
 		debugPrint(results)
 		
@@ -192,7 +195,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .badge, .sound])
+        completionHandler([.alert, .badge])
     }
 }
 

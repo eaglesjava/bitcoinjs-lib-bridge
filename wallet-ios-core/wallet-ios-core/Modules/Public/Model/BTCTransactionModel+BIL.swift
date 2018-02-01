@@ -189,9 +189,6 @@ extension BTCTransactionModel {
         inSatoshi = 0
         outSatoshi = 0
         targetSatoshi = 0
-		removeFromOutputs(outputs!)
-		removeFromInputs(inputs!)
-		removeFromTargets(targets!)
     }
     
     func newAddressModelIfNeeded(_ address: String, index: Int, isInput: Bool = true) -> BTCTXAddressModel {
@@ -213,14 +210,15 @@ extension BTCTransactionModel {
         return tx
     }
     
-    private func insertReceiveTX(json: JSON, inWallet: WalletModel, outWallet: WalletModel) {
-        let tx = BTCTransactionModel.newTxIfNeeded(json: json, outWallet: outWallet)
-        tx.setProperties(json: json, inWallet: inWallet, outWallet: outWallet)
-    }
-    
     static func newTxIfNeeded(json: JSON, outWallet: WalletModel) -> BTCTransactionModel {
         let txs = bil_btc_transactionManager.fetchAll(keyValues: [(key: "txHash", value: json["txHash"].stringValue)])
-        let filterd = txs.filter { $0.wallet?.wallet?.id == outWallet.id }
+        let filterd = txs.filter { $0.wallet?.wallet?.id == outWallet.id && ($0.type == .receive || $0.type == .transfer) }
+        return filterd.first ?? bil_btc_transactionManager.newModel()
+    }
+    
+    static func newTxIfNeeded(json: JSON, inWallet: WalletModel) -> BTCTransactionModel {
+        let txs = bil_btc_transactionManager.fetchAll(keyValues: [(key: "txHash", value: json["txHash"].stringValue)])
+        let filterd = txs.filter { $0.wallet?.wallet?.id == inWallet.id && ($0.type == .send || $0.type == .transfer) }
         return filterd.first ?? bil_btc_transactionManager.newModel()
     }
 	
@@ -237,7 +235,71 @@ extension BTCTransactionModel {
 		return bil_btc_transactionManager.newModel()
 	}
     
-    func setProperties(json: JSON, inWallet: WalletModel? = nil, outWallet: WalletModel? = nil) {
+    static func handle(json: JSON) {
+        let txHash = json["txHash"].stringValue
+        var inSatoshi: Int64 = 0
+        var outSatoshi: Int64 = 0
+        var inAddresses = [String]()
+        for j in json["inputs"].arrayValue {
+            let add = j["address"].stringValue
+            inAddresses.append(add)
+            inSatoshi += j["value"].int64Value
+        }
+        var outAddresses = [String]()
+        for j in json["outputs"].arrayValue {
+            let add = j["address"].stringValue
+            outAddresses.append(add)
+            outSatoshi += j["value"].int64Value
+        }
+        
+        let outWallets = WalletModel.fetchWallets(by: outAddresses)
+        let inWallet = WalletModel.fetch(by: inAddresses, isAll: true)
+        
+        var type: BILTransactionType = .receive
+        
+        if inWallet != nil {
+            if outWallets.filter({ (w) -> Bool in
+                return w.id == inWallet!.id
+            }).count == outAddresses.count {
+                type = .transfer
+            }
+            else
+            {
+                type = .send
+            }
+        }
+        
+        for oWallet in outWallets {
+            if let inw = inWallet {
+                guard inw.id != oWallet.id else {
+                    continue
+                }
+            }
+            let tx = newTxIfNeeded(json: json, outWallet: oWallet)
+            tx.type = type == .transfer ? type : .receive
+            let canAdd = oWallet.btc_transactionArray.filter({
+                $0.txHash == txHash
+            }).count == 0
+            tx.setProperties(json: json, wallet: oWallet)
+            if canAdd {
+                oWallet.bitcoinWallet?.addToTransactions(tx)
+            }
+        }
+        
+        if let iWallet = inWallet {
+            let tx = newTxIfNeeded(json: json, inWallet: iWallet)
+            tx.type = type == .transfer ? type : .send
+            let canAdd = iWallet.btc_transactionArray.filter({
+                $0.txHash == txHash
+            }).count == 0
+            tx.setProperties(json: json, wallet: iWallet)
+            if canAdd {
+                iWallet.bitcoinWallet?.addToTransactions(tx)
+            }
+        }
+    }
+    
+    func setProperties(json: JSON, wallet: WalletModel) {
         clearSatoshi()
         height = json["height"].int64Value
         serverID = json["id"].int64Value
@@ -265,79 +327,14 @@ extension BTCTransactionModel {
         remark = json["remark"].stringValue
         createdDate = Date(dateString: json["createdTime"].stringValue, format: "yyyy-MM-dd HH:mm:ss")
         
-        var wallet: WalletModel?
-        if inWallet == nil {
-            if let inw = WalletModel.fetch(by: inAddresses, isAll: false) {
-                let outAllWallets = WalletModel.fetchWallets(by: outAddresses)
-                if outAllWallets.count == 1, let transferWallet = WalletModel.fetch(by: outAddresses, isAll: true), transferWallet.id! == inw.id! {
-                    typeRawValue = BILTransactionType.transfer.rawValue
-                    wallet = transferWallet
-                }
-                else
-                {
-                    for outw in outAllWallets {
-                        if outw.id != inw.id {
-                            insertReceiveTX(json: json, inWallet: inw, outWallet: outw)
-                        }
-                    }
-                    wallet = inw
-                    typeRawValue = BILTransactionType.send.rawValue
-                }
-            }
-            else
-            {
-                if let outw = WalletModel.fetch(by: outAddresses, isAll: false) {
-                    wallet = outw
-                    typeRawValue = BILTransactionType.receive.rawValue
-                }
-            }
-        }
-        else
-        {
-            if outWallet == nil {
-                if inWallet!.contain(btcAddresses: inAddresses, isAll: false) {
-                    if inWallet!.contain(btcAddresses: outAddresses, isAll: true) {
-                        wallet = inWallet
-                        typeRawValue = BILTransactionType.transfer.rawValue
-                    }
-                    else
-                    {
-                        wallet = inWallet
-                        typeRawValue = BILTransactionType.send.rawValue
-                    }
-                }
-                else
-                {
-                    if inWallet!.contain(btcAddresses: outAddresses, isAll: false) {
-                        wallet = inWallet
-                        typeRawValue = BILTransactionType.receive.rawValue
-                    }
-                }
-            }
-            else
-            {
-                wallet = outWallet
-                typeRawValue = BILTransactionType.receive.rawValue
-            }
-        }
-        
-        guard let w = wallet else {
-            do {
-                try bil_btc_transactionManager.remove(model: self)
-            } catch {
-                debugPrint(error.localizedDescription)
-            }
-            return
-        }
-		
-        let canAdd = w.btc_transactionArray.filter({
+        let canAdd = wallet.btc_transactionArray.filter({
             $0.txHash == self.txHash
         }).count == 0
         
 		debugPrint("--- 1 \(targetSatoshi)")
         for add in outputs! {
             let tx = add as! BTCTXAddressModel
-			let isMine = w.contain(btcAddress: tx.address!)
+			let isMine = wallet.contain(btcAddress: tx.address!)
             switch type {
             case .send:
                 if !isMine {
@@ -358,9 +355,5 @@ extension BTCTransactionModel {
             }
         }
 		debugPrint("--- 4 \(targetSatoshi)")
-        
-        if canAdd {
-            w.bitcoinWallet?.addToTransactions(self)
-        }
     }
 }
