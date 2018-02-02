@@ -287,6 +287,7 @@ extension WalletModel {
             case .change:
                 self.lastBTCChangeAddressIndex = to
             }
+            self.bitcoinWallet?.isGeneratingAddresses = false
             do {
                 try BILWalletManager.shared.saveWallets()
 				
@@ -296,7 +297,6 @@ extension WalletModel {
             } catch {
                 failure(error.localizedDescription, -2)
             }
-            self.bitcoinWallet?.isGeneratingAddresses = false
         }) { (error) in
             debugPrint(error)
             failure(error.localizedDescription, -2)
