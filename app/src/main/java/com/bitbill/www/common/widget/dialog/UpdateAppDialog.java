@@ -127,7 +127,7 @@ public class UpdateAppDialog extends BaseDialog implements UpdateAppMvpView, Dow
     @Override
     public void downloadFileComplete(File file) {
         //安装apk
-        UIHelper.installApk(getContext(), file);
+        UIHelper.installApk(getApp(), file);
         //关闭当前对话框
         dismissDialog(TAG);
     }

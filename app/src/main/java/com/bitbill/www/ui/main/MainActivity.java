@@ -743,6 +743,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onSocketServerStateEvent(SocketServerStateEvent socketServerStateEvent) {
+        EventBus.getDefault().removeStickyEvent(SocketServerStateEvent.class);
         if (socketServerStateEvent != null) {
             setSocketStatus(socketServerStateEvent.getState());
         }

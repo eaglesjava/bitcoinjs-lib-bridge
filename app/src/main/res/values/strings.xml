@@ -299,7 +299,7 @@
     <string name="title_sys_setting">系统设置</string>
     <string name="title_other">其他</string>
     <string name="title_about_us">关于我们</string>
-    <string name="title_fee_back">意见反馈</string>
+    <string name="title_feed_back">意见反馈</string>
     <string name="title_activity_shorcut_setting">快捷方式设置</string>
     <!--wallet setting-->
     <string name="hint_back_up_now">立即备份</string>

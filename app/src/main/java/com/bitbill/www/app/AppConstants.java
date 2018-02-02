@@ -14,7 +14,7 @@ public final class AppConstants {
     /**
      * download apk url
      */
-    public static final String DOWNLOAD_APK_URL = "http://192.168.1.2:8000/QQ_776.apk";
+    public static final String DOWNLOAD_APK_URL = "http://192.168.1.2:8000/app-release.apk";
 
     public static final int API_STATUS_CODE_LOCAL_ERROR = 0;
     public static final int API_STATUS_CODE_SERVER_ERROR = 500;

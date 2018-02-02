@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 
+import com.bitbill.www.BuildConfig;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.ui.main.MainActivity;
@@ -115,20 +116,20 @@ public class UIHelper {
             return;
         }
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        //判读版本是否在7.0以上
-        if (Build.VERSION.SDK_INT >= 24) {
-            //provider authorities
-            Uri apkUri = FileProvider.getUriForFile(context, "com.bitbill.www.fileProvider", file);
-            //Granting Temporary Permissions to a URI
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
-        } else {
+        Intent intent = new Intent();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            intent.setAction(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+        } else {
+            // 声明需要的零时权限
+            intent.setAction(Intent.ACTION_INSTALL_PACKAGE);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            // 第二个参数，即第一步中配置的authorities
+            Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileprovider", file);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
         }
-
         context.startActivity(intent);
+
     }
 }

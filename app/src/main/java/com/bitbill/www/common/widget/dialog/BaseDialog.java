@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
 
+import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.di.component.ActivityComponent;
 
@@ -31,15 +32,21 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
 
     private BaseActivity mActivity;
     private Unbinder mUnBinder;
+    private BitbillApp mApp;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof BaseActivity) {
+            mApp = BitbillApp.get();
             BaseActivity mActivity = (BaseActivity) context;
             this.mActivity = mActivity;
             mActivity.onFragmentAttached();
         }
+    }
+
+    public BitbillApp getApp() {
+        return mApp;
     }
 
     @Override

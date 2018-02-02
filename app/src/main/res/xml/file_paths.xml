@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <files-path
-        name="files"
-        path="bitbill" />
-    <cache-path
-        name="cache"
-        path="." />
-    <external-path
-        name="external"
-        path="." />
     <external-files-path
         name="external_files"
-        path="bitbill" />
-    <external-cache-path
-        name="external_cache"
         path="." />
-
+    <files-path
+        name="files"
+        path="." />
 </paths>

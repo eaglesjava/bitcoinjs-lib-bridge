@@ -37,8 +37,8 @@
                 android:title="@string/title_about_us" />
             <item
                 android:id="@+id/nav_fee_back"
-                android:icon="@drawable/ic_menu_feeback"
-                android:title="@string/title_fee_back" />
+                android:icon="@drawable/ic_menu_feedback"
+                android:title="@string/title_feed_back" />
         </menu>
     </item>
 

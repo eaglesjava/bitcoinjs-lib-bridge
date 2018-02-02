@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.bitbill.www">
+    package="com.bitbill.www">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name=".app.BitbillApp"
@@ -25,62 +25,62 @@
             android:configChanges="orientation|keyboardHidden|locale"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.guide.GuideActivity"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".ui.wallet.init.InitWalletActivity"/>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.wallet.init.InitWalletActivity" />
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|locale"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".ui.wallet.importing.ImportWalletActivity"
             android:label="@string/title_activity_import_wallet"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.wallet.init.InitWalletSuccessActivity"
             android:label="@string/title_activity_create_wallet"
-            android:theme="@style/AppTheme.PopupBottom"/>
+            android:theme="@style/AppTheme.PopupBottom" />
         <activity
             android:name=".ui.wallet.backup.BackUpWalletActivity"
-            android:label="@string/title_activity_backup_wallet"/>
+            android:label="@string/title_activity_backup_wallet" />
         <activity
             android:name=".ui.wallet.backup.BackupWalletConfirmActivity"
-            android:label="@string/title_activity_backup_wallet"/>
+            android:label="@string/title_activity_backup_wallet" />
         <activity
             android:name=".ui.wallet.backup.BackupWalletSuccessActivity"
             android:label="@string/title_activity_backup_wallet"
-            android:theme="@style/AppTheme.PopupBottom"/>
+            android:theme="@style/AppTheme.PopupBottom" />
         <activity
             android:name=".ui.wallet.info.WalletInfoActivity"
-            android:theme="@style/AppTheme.Blue"/>
+            android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.receive.SpecificReceiveActivity"
             android:label="@string/title_activity_specific_receive"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".ui.main.send.SendSuccessActivity"
             android:label="@string/title_activity_send_success"
-            android:theme="@style/AppTheme.PopupBottom"/>
+            android:theme="@style/AppTheme.PopupBottom" />
         <activity
             android:name=".ui.wallet.init.CreateWalletIdActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.send.SendConfirmActivity"
             android:label="@string/title_activity_send_confirm"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.send.SelectWalletActivity"
-            android:label="@string/title_activity_select_wallet"/>
+            android:label="@string/title_activity_select_wallet" />
         <activity
             android:name=".ui.main.send.SendAmountActivity"
             android:label="@string/title_activity_send_amount"
@@ -89,67 +89,67 @@
         <activity
             android:name=".ui.main.receive.ScanPayActivity"
             android:label="@string/title_activity_scan_pay"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.send.ScanQrcodeActivity"
             android:label="@string/title_activity_scan_qrcode"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.contact.ContactDetailActivity"
             android:label="@string/title_activity_contact_detail"
-            android:theme="@style/AppTheme.Blue"/>
+            android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.contact.AddContactByIdActivity"
             android:label="@string/title_activity_add_contact_by_id"
             android:theme="@style/AppTheme.Blue"
-            android:windowSoftInputMode="stateAlwaysVisible"/>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".ui.main.contact.SearchContactResultActivity"
-            android:theme="@style/AppTheme.Blue"/>
+            android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.contact.AddContactByAddressActivity"
             android:label="@string/title_activity_add_contact_by_address"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme.Blue"/>
+            android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.my.WalletSettingActivity"
             android:label="@string/title_activity_wallet_setting"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.my.WalletDetailActivity"
-            android:theme="@style/AppTheme.Blue"/>
+            android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.send.ContactSelectActivity"
             android:label="@string/title_activity_contact_select"
-            android:theme="@style/AppTheme.Blue"/>
+            android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.my.ContactSettingActivity"
             android:label="@string/title_activity_contact_setting"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.my.ShortCutSettingActivity"
             android:label="@string/title_activity_shorcut_setting"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.contact.EditContactActivity"
             android:label="@string/title_activity_edit_contact"
-            android:theme="@style/AppTheme.Blue"/>
+            android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.my.SystemSettingActivity"
             android:label="@string/title_activity_system_setting"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.my.AboutUsActivity"
             android:label="@string/title_activity_about_us"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.my.UseRuleActivity"
             android:label="@string/title_activity_use_rule"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.wallet.info.transfer.TransferDetailsActivity"
             android:label="@string/title_activity_transfer_details"
-            android:theme="@style/AppTheme.Blue"/>
+            android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".ui.main.my.WalletAddressActivity"
             android:label="@string/title_activity_wallet_address"
@@ -161,29 +161,29 @@
 
         <service
             android:name=".service.SocketServiceProvider"
-            android:exported="false"/>
+            android:exported="false" />
         <receiver
             android:name=".service.JpushMessageReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTRATION"/>
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/>
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/>
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION"/>
-                <action android:name="cn.jpush.android.intent.CONNECTION"/>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
 
-                <category android:name="com.bitbill.www"/>
+                <category android:name="com.bitbill.www" />
             </intent-filter>
         </receiver>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.bitbill.www.fileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 

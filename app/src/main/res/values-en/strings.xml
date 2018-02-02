@@ -298,7 +298,7 @@
     <string name="title_sys_setting">Settings</string>
     <string name="title_other">Other</string>
     <string name="title_about_us">About us</string>
-    <string name="title_fee_back">Feeback</string>
+    <string name="title_feed_back">Feedback</string>
     <string name="title_activity_shorcut_setting">Shortcuts</string>
     <!--wallet setting-->
     <string name="hint_back_up_now">Back up</string>
@@ -306,7 +306,7 @@
     <string name="title_activity_wallet_setting">Wallet</string>
     <!--wallet detail-->
     <string name="text_wallet_id">Wallet ID</string>
-    <string name="text_wallet_add_time">Add date</string>
+    <string name="text_wallet_add_time">Add time</string>
     <string name="btn_wallet_address">Wallet address</string>
     <string name="btn_delete_wallet">Delete wallet</string>
     <string name="msg_delete_wallet">Please be cautious about this operation, confirm that your wallet has been backed up before deleting, or the digital assets cannot be found.</string>

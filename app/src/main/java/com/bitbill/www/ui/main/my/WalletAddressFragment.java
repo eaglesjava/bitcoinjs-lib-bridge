@@ -190,7 +190,7 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
 
             for (Address address : mAddressList) {
                 if (StringUtils.isNotEmpty(address.getName()) && address.getName().equals(addressTxt)) {
-                    address.setBalance(sumOutAmount);
+                    address.setBalance(address.getBalance() + sumOutAmount);
                 }
             }
 

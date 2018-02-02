@@ -1,5 +1,7 @@
 package com.bitbill.www.common.presenter;
 
+import android.util.Log;
+
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.DownloadListener;
 import com.androidnetworking.interfaces.DownloadProgressListener;
@@ -48,6 +50,7 @@ public class DownloadPresenter<M extends AppModel, V extends DownloadMvpView> ex
                 }
                 File file = new File(rootDirPath + File.separator + fileName);
                 if (file.exists()) {
+                    Log.d(TAG, "onDownloadComplete() called file:" + file.getAbsolutePath());
                     getMvpView().downloadFileComplete(file);
                 } else {
                     getMvpView().downloadFileFail();
