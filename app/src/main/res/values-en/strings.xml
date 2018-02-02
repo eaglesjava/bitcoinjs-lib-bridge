@@ -18,6 +18,7 @@
     <string name="error_invalid_param_type">Invalid parameter type.</string>
     <string name="error_wallet_id_exsist">Wallet ID already exists.</string>
     <string name="error_wallet_no_exsist">Wallet not exists.</string>
+    <string name="error_ip_exceed_limit">IP address limit exceeded</string>
 
     <!--dialog -->
     <string name="dialog_btn_cancel">Cancel</string>
@@ -110,6 +111,8 @@
     <string name="fail_open_camera">Failed to open the camera, please check the permission.</string>
     <string name="fail_parse_scan_result">Failed to parse the scan result.</string>
     <string name="tip_qrcode_scan">Put the QR code into the box,it will automatically scan.</string>
+    <string name="action_select_photo">Album</string>
+    <string name="fail_not_found_qrcode">No QRCode is found.</string>
 
     <!--asset fragment-->
     <string name="title_shortcut">Shortcuts</string>
