@@ -16,15 +16,8 @@ func BTCFormatString(btc: Int64) -> String {
     if btc == 0 {
         return "0.00"
     }
-    let d = Double(btc) / Double(BTC_SATOSHI)
-    var str = String(format: "%.8f", d)
-	while str.hasSuffix("0") {
-		str.removeLast()
-	}
-	if str.hasSuffix(".") {
-		str += "00"
-	}
-    return str
+	let d = NSDecimalNumber(value: btc).dividing(by: NSDecimalNumber(value: BTC_SATOSHI))
+    return d.stringValue
 }
 
 enum BitcoinAddressType {

@@ -258,9 +258,8 @@ extension BTCTransactionModel {
         var type: BILTransactionType = .receive
         
         if inWallet != nil {
-            if outWallets.filter({ (w) -> Bool in
-                return w.id == inWallet!.id
-            }).count == outAddresses.count {
+			
+            if outWallets.count == 1, let oWallet = WalletModel.fetch(by: outAddresses, isAll: true), oWallet.id == inWallet?.id {
                 type = .transfer
             }
             else
@@ -300,6 +299,7 @@ extension BTCTransactionModel {
     }
     
     func setProperties(json: JSON, wallet: WalletModel) {
+		let beginDate = Date()
         clearSatoshi()
         height = json["height"].int64Value
         serverID = json["id"].int64Value
@@ -355,5 +355,7 @@ extension BTCTransactionModel {
             }
         }
 		debugPrint("--- 4 \(targetSatoshi)")
+		let endDate = Date()
+		debugPrint("解析交易用时：\(endDate.seconds(from: beginDate))s")
     }
 }

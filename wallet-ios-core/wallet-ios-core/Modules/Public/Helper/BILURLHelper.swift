@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class BILURLHelper: NSObject {
 	static func transferContactURL(urlString: String) -> String? {
@@ -30,7 +31,7 @@ class BILURLHelper: NSObject {
 		
 		return nil
 	}
-    static func transferBitCoinURL(urlString: String) -> (address: String, amount: Double)? {
+    static func transferBitCoinURL(urlString: String) -> (address: String, amount: Decimal)? {
         let coinType = CoinType.btc
         if urlString.lowercased().starts(with: coinType.scheme) {
             let arr = urlString.components(separatedBy: ":")
@@ -40,8 +41,9 @@ class BILURLHelper: NSObject {
             
             if addressString.contains("?") {
                 let infoArr = addressString.components(separatedBy: "?")
-                if infoArr.count >= 2, let amount = Double(infoArr[1].replacingOccurrences(of: "amount=", with: "")) {
-                    return (infoArr[0], amount)
+                if infoArr.count >= 2 {
+					let amount = infoArr[1].replacingOccurrences(of: "amount=", with: "")
+					return (infoArr[0], Decimal(string: amount) ?? -1)
                 }
             }
             else

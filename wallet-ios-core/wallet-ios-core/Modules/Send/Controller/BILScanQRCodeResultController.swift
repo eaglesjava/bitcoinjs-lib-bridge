@@ -27,7 +27,7 @@ class BILScanQRCodeResultController: BILBaseViewController {
         addressLabel.text = model.address
         coinNameLabel.text = model.coinType.name
         amountTextField.text = model.amount
-        cnyLabel.btcValue = Double(model.amount)
+        cnyLabel.btcValue = Decimal(string: model.amount)
     }
 	
 	override func languageDidChanged() {

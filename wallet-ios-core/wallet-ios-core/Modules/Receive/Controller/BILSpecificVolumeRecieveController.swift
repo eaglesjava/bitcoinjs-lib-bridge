@@ -52,7 +52,7 @@ class BILSpecificVolumeReceiveController: BILBaseViewController {
     @objc func txReceived(notification: Notification) {
         guard let tx = notification.object as? BTCTransactionModel else { return }
         let adds = tx.outputAddressModels.filter { (model) -> Bool in
-            model.satoshi >= self.receiveModel!.bitcoinSatoshiAmount
+            return model.address! == self.receiveModel!.address && model.satoshi >= self.receiveModel!.bitcoinSatoshiAmount
         }
         guard adds.count > 0 else { return }
         let cont = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "BILBTCTransactionController") as! BILBTCTransactionController

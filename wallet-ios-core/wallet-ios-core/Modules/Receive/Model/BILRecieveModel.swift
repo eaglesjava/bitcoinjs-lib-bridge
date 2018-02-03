@@ -50,18 +50,14 @@ class BILReceiveModel: NSObject {
 	
 	var bitcoinAmount: String {
 		get {
-			guard let amount = Double(self.amount) else {
-				return "0.00"
-			}
-			return BTCFormatString(btc: Int64(amount * Double(BTC_SATOSHI)))
+			return BTCFormatString(btc: bitcoinSatoshiAmount)
 		}
 	}
 	
 	var bitcoinSatoshiAmount: Int64 {
 		get {
-			guard let amount = Double(self.bitcoinAmount) else { return 0 }
-			let satoshi = Int64(amount * Double(BTC_SATOSHI))
-			return satoshi
+			let amount = Decimal(string: self.amount) ?? 0
+			return ((amount * Decimal.bitcoinSatoshiNumber) as NSDecimalNumber).int64Value
 		}
 	}
 }
