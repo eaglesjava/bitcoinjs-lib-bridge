@@ -112,14 +112,12 @@ class BILSendInputAmountController: BILBaseViewController, UITextFieldDelegate {
 		
 		if text.count == 0 {
 			cnyLabel.btcValue = 0
+		} else {
+			cnyLabel.btcValue = NSDecimalNumber(string: text)
 		}
         
         if text.count > 30 {
             return false
-        }
-        
-        if let coinAmount = Double(text) {
-            cnyLabel.btcValue = coinAmount
         }
         
         if text.contains(".") {

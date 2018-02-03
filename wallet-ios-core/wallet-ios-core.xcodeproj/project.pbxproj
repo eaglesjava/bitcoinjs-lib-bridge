@@ -139,6 +139,7 @@
 		CC94E0C11FBD84BA0098E730 /* BILMnemonicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */; };
 		CC94E0C31FBD86D30098E730 /* BILMnemonicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC94E0C21FBD86D30098E730 /* BILMnemonicCell.xib */; };
 		CC94E0C51FBD87D70098E730 /* BILMnemonicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC94E0C41FBD87D70098E730 /* BILMnemonicCell.swift */; };
+		CC9B72C92025B554003EFDB3 /* NSDecimalNumber+BIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B72C82025B554003EFDB3 /* NSDecimalNumber+BIL.swift */; };
 		CCC6B7701FECF74300EE7A32 /* String+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B76F1FECF74300EE7A32 /* String+QRCode.swift */; };
 		CCC6B7731FF2979800EE7A32 /* ContactModel+Getters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B7721FF2979800EE7A32 /* ContactModel+Getters.swift */; };
 		CCC6B7751FF2A09900EE7A32 /* BILCoreDataModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6B7741FF2A09900EE7A32 /* BILCoreDataModelManager.swift */; };
@@ -348,6 +349,7 @@
 		CC94E0C01FBD84BA0098E730 /* BILMnemonicView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicView.xib; sourceTree = "<group>"; };
 		CC94E0C21FBD86D30098E730 /* BILMnemonicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BILMnemonicCell.xib; sourceTree = "<group>"; };
 		CC94E0C41FBD87D70098E730 /* BILMnemonicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILMnemonicCell.swift; sourceTree = "<group>"; };
+		CC9B72C82025B554003EFDB3 /* NSDecimalNumber+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+BIL.swift"; sourceTree = "<group>"; };
 		CCC6B76F1FECF74300EE7A32 /* String+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+QRCode.swift"; sourceTree = "<group>"; };
 		CCC6B7721FF2979800EE7A32 /* ContactModel+Getters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactModel+Getters.swift"; sourceTree = "<group>"; };
 		CCC6B7741FF2A09900EE7A32 /* BILCoreDataModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILCoreDataModelManager.swift; sourceTree = "<group>"; };
@@ -771,6 +773,7 @@
 				BA05EAF21FE7D1D700B43B95 /* UIImage+Snapshot.swift */,
 				BA43EF512023053F00A62347 /* UIImage+QRCode.swift */,
 				BA7068EA200DBC0100359FC3 /* Array+Shuffle.swift */,
+				CC9B72C82025B554003EFDB3 /* NSDecimalNumber+BIL.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1513,6 +1516,7 @@
 				CCED05621FDBAA4000689498 /* BILChooseWalletController.swift in Sources */,
 				BA05EAE71FE4F85800B43B95 /* BILSokectManager.swift in Sources */,
 				CC94E0591FBA99160098E730 /* BILInputView.swift in Sources */,
+				CC9B72C92025B554003EFDB3 /* NSDecimalNumber+BIL.swift in Sources */,
 				BA5893FA1FF343EF008C96C4 /* BILContactEditController.swift in Sources */,
 				BA12AC5B1FEA73D700812F38 /* BILAddContactByAddressController.swift in Sources */,
 				CCED055C1FDA6D2E00689498 /* BILSpecificVolumeRecieveInputController.swift in Sources */,
