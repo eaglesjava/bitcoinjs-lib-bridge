@@ -428,6 +428,11 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     @Override
+    public void limitAddress(boolean limit) {
+
+    }
+
+    @Override
     public void hideLoading() {
         super.hideLoading();
     }

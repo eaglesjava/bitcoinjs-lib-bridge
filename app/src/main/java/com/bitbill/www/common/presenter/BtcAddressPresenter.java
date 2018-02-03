@@ -97,6 +97,45 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
     }
 
     @Override
+    public void checkAddressUsed() {
+        if (!isValidWallet()) {
+            return;
+        }
+        Wallet wallet = getMvpView().getWallet();
+        getCompositeDisposable().add(getModelManager().getExtenalAddressLimitByWalletId(wallet.getId(), AppConstants.BTC_USED_ADDRESS_GAP)
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<List<Address>>() {
+                    @Override
+                    public void onNext(List<Address> addresses) {
+                        super.onNext(addresses);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        if (!StringUtils.isEmpty(addresses)) {
+
+                            for (Address address : addresses) {
+                                if (address.getIsUsed()) {
+                                    getMvpView().limitAddress(false);
+                                    return;
+                                }
+                            }
+                        }
+                        getMvpView().limitAddress(true);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        getMvpView().limitAddress(false);
+                    }
+                })
+        );
+    }
+
+    @Override
     public void refreshAddress(int refreshCount, int option) {
         if (!isValidWallet() || !isValidPublicKey() || refreshCount <= 0) {
             return;
@@ -320,7 +359,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         for (int i = 0; i < addressArray.length; i++) {
             //构造address列表
             long index = wallet.getLastAddressIndex() - (addressArray.length - 1) + i;
-            addressList.add(new Address(null, addressArray[i], wallet.getId(), index, AppConstants.BTC_COIN_TYPE, new Date(), 0l, isInternal));
+            addressList.add(new Address(null, addressArray[i], wallet.getId(), index, AppConstants.BTC_COIN_TYPE, new Date(), 0l, isInternal, false));
         }
         getCompositeDisposable().add(getModelManager()
                 .insertAddressListAndUpdatWallet(addressList, wallet)

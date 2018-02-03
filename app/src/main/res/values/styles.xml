@@ -293,6 +293,7 @@
         <item name="android:textSize">@dimen/title_small</item>
         <item name="android:textColor">@color/blue</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="Text.Wallet.Name" parent="Text.Wallet">

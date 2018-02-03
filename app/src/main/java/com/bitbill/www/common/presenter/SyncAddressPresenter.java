@@ -115,7 +115,7 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
         for (int i = 0; i < addressArray.length; i++) {
             //构造address列表
             long index = (isInternal ? wallet.getLastChangeAddressIndex() : wallet.getLastAddressIndex()) - (addressArray.length - 1) + i;
-            addressList.add(new Address(null, addressArray[i], wallet.getId(), index, AppConstants.BTC_COIN_TYPE, new Date(), 0l, isInternal));
+            addressList.add(new Address(null, addressArray[i], wallet.getId(), index, AppConstants.BTC_COIN_TYPE, new Date(), 0l, isInternal, false));
         }
         getCompositeDisposable().add(getModelManager()
                 .insertAddressListAndUpdatWallet(addressList, wallet)

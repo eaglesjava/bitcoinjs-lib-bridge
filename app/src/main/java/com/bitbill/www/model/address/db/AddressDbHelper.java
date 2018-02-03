@@ -97,6 +97,11 @@ public class AddressDbHelper extends DbHelper implements AddressDb {
     }
 
     @Override
+    public Observable<List<Address>> getExtenalAddressLimitByWalletId(Long walletId, int limit) {
+        return Observable.fromCallable(() -> mAddressDao.queryBuilder().where(AddressDao.Properties.WalletId.eq(walletId), AddressDao.Properties.IsInternal.eq(false)).orderDesc(AddressDao.Properties.Index).limit(limit).list());
+    }
+
+    @Override
     public Address getAddressByName(String address) {
         return mAddressDao.queryBuilder().where(AddressDao.Properties.Name.eq(address)).unique();
     }

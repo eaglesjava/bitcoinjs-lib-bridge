@@ -49,6 +49,9 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     @Property(nameInDb = "is_internal")
     private Boolean isInternal;
 
+    @Property(nameInDb = "is_used")
+    private Boolean isUsed;
+
     /**
      * Used to resolve relations
      */
@@ -64,9 +67,9 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     @Generated(hash = 1885063144)
     private transient Long wallet__resolvedKey;
 
-    @Generated(hash = 2060081352)
+    @Generated(hash = 40652152)
     public Address(Long id, String name, @NotNull Long walletId, Long index, String coinType,
-                   Date createdAt, Long balance, Boolean isInternal) {
+                   Date createdAt, Long balance, Boolean isInternal, Boolean isUsed) {
         this.id = id;
         this.name = name;
         this.walletId = walletId;
@@ -75,6 +78,7 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
         this.createdAt = createdAt;
         this.balance = balance;
         this.isInternal = isInternal;
+        this.isUsed = isUsed;
     }
 
     @Generated(hash = 388317431)
@@ -225,5 +229,13 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
 
     public void setIsInternal(Boolean isInternal) {
         this.isInternal = isInternal;
+    }
+
+    public Boolean getIsUsed() {
+        return this.isUsed;
+    }
+
+    public void setIsUsed(Boolean isUsed) {
+        this.isUsed = isUsed;
     }
 }

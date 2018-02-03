@@ -79,6 +79,11 @@ public class AddressModelManager extends ModelManager implements AddressModel {
     }
 
     @Override
+    public Observable<List<Address>> getExtenalAddressLimitByWalletId(Long walletId, int limit) {
+        return mAddressDb.getExtenalAddressLimitByWalletId(walletId, limit);
+    }
+
+    @Override
     public Address getAddressByName(String address) {
         return mAddressDb.getAddressByName(address);
     }

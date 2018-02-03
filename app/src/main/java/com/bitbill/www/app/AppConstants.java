@@ -61,6 +61,7 @@ public final class AppConstants {
      * btc about
      */
     public static final String SCHEME_BITCOIN = "bitcoin";
+    public static final int BTC_USED_ADDRESS_GAP = 20;
     /**
      * socket event
      */
@@ -73,7 +74,6 @@ public final class AppConstants {
      * cointype
      */
     public static final String BTC_COIN_TYPE = "BTC";
-
     /**
      * bitbill h5
      */

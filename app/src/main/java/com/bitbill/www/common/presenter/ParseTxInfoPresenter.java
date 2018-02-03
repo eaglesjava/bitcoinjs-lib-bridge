@@ -40,9 +40,9 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
         getCompositeDisposable().add(Observable.just(StringUtils.removeDuplicateList(txInfoList))
                 .concatMap(txInfos -> {
                     List<TxRecord> txRecords = new ArrayList<>();
+                    List<Address> usedAddressList = new ArrayList<>();
                     for (TxElement txElement : txInfos) {
                         List<TxElement.InputsBean> inputs = txElement.getInputs();
-
                         List<Long> inWalletIdList = new ArrayList<>();
                         long inputValues = 0;
                         for (TxElement.InputsBean input : inputs) {
@@ -53,6 +53,8 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                                 if (!inWalletIdList.contains(walletId)) {
                                     inWalletIdList.add(walletId);
                                 }
+                                addressByName.setIsUsed(true);
+                                usedAddressList.add(addressByName);
                             }
                         }
                         List<Long> outWalletIdList = new ArrayList<>();
@@ -69,6 +71,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                                 if (!outWalletIdList.contains(walletId)) {
                                     outWalletIdList.add(walletId);
                                 }
+                                addressByName.setIsUsed(true);
                             }
                         }
 
@@ -144,6 +147,8 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
 
                         }
                     }
+                    //更新已经使用地址
+                    mAddressModel.updateAddressList(usedAddressList);
                     return Observable.just(txRecords);
                 })
                 .compose(this.applyScheduler())

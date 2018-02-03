@@ -32,10 +32,11 @@ public interface AddressDb extends Db {
 
     Observable<List<Address>> getAddressByWalletId(Long walletId);
 
+    Observable<List<Address>> getExtenalAddressLimitByWalletId(Long walletId, int limit);
+
     Address getAddressByName(String address);
 
     Address getAddressByNameAndWalletId(String address, Long walletId);
 
     List<Wallet> getWalletsByAddresses(List<String> addressList);
-
 }

@@ -175,6 +175,11 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
     }
 
     @Override
+    public void limitAddress(boolean limit) {
+
+    }
+
+    @Override
     public void getTxElementSuccess(List<GetTxElementResponse.UtxoBean> unspentList, List<GetTxElementResponse.FeesBean> fees) {
         mUnspentList = unspentList;
         if (StringUtils.isEmpty(mAddressList)) {
