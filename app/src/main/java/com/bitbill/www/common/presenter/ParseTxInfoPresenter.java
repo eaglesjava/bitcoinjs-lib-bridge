@@ -104,7 +104,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                             inTxRecord.setSumAmount(amount);
                             inTxRecord.setInOut(inOut);
                             inTxRecord.setTxHash(txElement.getTxHash());
-                            inTxRecord.setHeight(txElement.getHeight());
+                            inTxRecord.setHeight(Long.valueOf(txElement.getHeight()));
                             inTxRecord.setCreatedTime(StringUtils.getDate(txElement.getCreatedTime()));
                             inTxRecord.setRemark(txElement.getRemark());
                             inTxRecord.setElementId(txElement.getId());
@@ -137,7 +137,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                             outTxRecord.setSumAmount(outAmount);
                             outTxRecord.setInOut(inout);
                             outTxRecord.setTxHash(txElement.getTxHash());
-                            outTxRecord.setHeight(txElement.getHeight());
+                            outTxRecord.setHeight(Long.valueOf(txElement.getHeight()));
                             outTxRecord.setCreatedTime(StringUtils.getDate(txElement.getCreatedTime()));
                             outTxRecord.setRemark(txElement.getRemark());
                             outTxRecord.setElementId(txElement.getId());

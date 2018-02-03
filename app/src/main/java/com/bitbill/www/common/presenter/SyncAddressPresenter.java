@@ -11,8 +11,11 @@ import com.bitbill.www.crypto.JsResult;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.address.db.entity.Address;
+import com.bitbill.www.model.eventbus.SyncAddressEvent;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.google.gson.JsonSyntaxException;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -124,7 +127,8 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);
-                        //本地index更新成功
+                        //本地index更新成功 通知地址同步成功
+                        EventBus.getDefault().post(new SyncAddressEvent(wallet, isInternal));
                     }
 
                     @Override

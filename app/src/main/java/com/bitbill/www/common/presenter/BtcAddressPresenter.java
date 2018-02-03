@@ -118,7 +118,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                             }
 
                             for (Address address : addresses) {
-                                if (address.getIsUsed()) {
+                                if (address.getIsUsed() != null && address.getIsUsed()) {
                                     getMvpView().limitAddress(false);
                                     return;
                                 }

@@ -9,14 +9,19 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.BaseTabsActivity;
+import com.bitbill.www.model.eventbus.SyncAddressEvent;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class WalletInfoActivity extends BaseTabsActivity implements BtcRecordFragment.OnTransactionRecordItemClickListener {
 
     private static final String TAG = "WalletInfoActivity";
     private Wallet mWallet;
+    private BtcRecordFragment mBtcRecordFragment;
 
     public static void start(Context context, Wallet wallet) {
         Intent intent = new Intent(context, WalletInfoActivity.class);
@@ -62,7 +67,8 @@ public class WalletInfoActivity extends BaseTabsActivity implements BtcRecordFra
 
     @Override
     protected BaseFragment getBtcFragment() {
-        return BtcRecordFragment.newInstance(mWallet);
+        mBtcRecordFragment = BtcRecordFragment.newInstance(mWallet);
+        return mBtcRecordFragment;
     }
 
 
@@ -71,4 +77,23 @@ public class WalletInfoActivity extends BaseTabsActivity implements BtcRecordFra
         setTitle(String.format(getString(R.string.text_someone_wallet), mWallet.getName()));
     }
 
+    public Wallet getWallet() {
+        return mWallet;
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onSyncAddressEvent(SyncAddressEvent syncAddressEvent) {
+        if (syncAddressEvent != null) {
+            Wallet wallet = syncAddressEvent.getWallet();
+            if (wallet == null || getWallet() == null) {
+                return;
+            }
+            if (!wallet.equals(getWallet())) {
+                return;
+            }
+            if (mBtcRecordFragment != null) {
+                mBtcRecordFragment.requestRecord();
+            }
+        }
+    }
 }

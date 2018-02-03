@@ -563,7 +563,10 @@ public class StringUtils {
         }
     }
 
-    public static String satoshi2btc(long fee) {
+    public static String satoshi2btc(Long fee) {
+        if (fee == null) {
+            return "0.00";
+        }
         BigDecimal feeDecimal = new BigDecimal(fee);
         //8位小数
         DecimalFormat df = new DecimalFormat("#.########");

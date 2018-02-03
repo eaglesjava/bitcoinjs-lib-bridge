@@ -42,10 +42,10 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private String mnemonicHash;
 
     @Property(nameInDb = "last_address_index")
-    private long lastAddressIndex;
+    private Long lastAddressIndex;
 
     @Property(nameInDb = "last_change_address_index")
-    private long lastChangeAddressIndex;
+    private Long lastChangeAddressIndex;
 
     @Property(nameInDb = "last_address")
     private String lastAddress;
@@ -60,16 +60,16 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private String seedHexHash;
 
     @Property(nameInDb = "is_backuped")
-    private boolean isBackuped;
+    private Boolean isBackuped;
 
     @Property(nameInDb = "created_at")
-    private long createdAt;
+    private Long createdAt;
 
     @Property(nameInDb = "updated_at")
-    private long updatedAt;
+    private Long updatedAt;
 
     @Property(nameInDb = "is_default")
-    private boolean isDefault;
+    private Boolean isDefault;
 
     @Property(nameInDb = "extented_public_key")
     private String extentedPublicKey;//十六进制字符串
@@ -78,15 +78,15 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private String internalPublicKey;//十六进制字符串
 
     @Property(nameInDb = "balance")
-    private long balance;//unit Satoshi  1 BTC = 100000000 Satoshi
+    private Long balance;//unit Satoshi  1 BTC = 100000000 Satoshi
     @Property(nameInDb = "unconfirm")
-    private long unconfirm;//unit Satoshi  1 BTC = 100000000 Satoshi
+    private Long unconfirm;//unit Satoshi  1 BTC = 100000000 Satoshi
 
     @Property(nameInDb = "coin_type")
     private String coinType;//默认"BTC"
 
     @Property(nameInDb = "version")
-    private long version;
+    private Long version;
 
     @ToMany(referencedJoinProperty = "walletId")
     @OrderBy("isInternal ASC,index ASC")
@@ -117,11 +117,11 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     @Generated(hash = 741381941)
     private transient WalletDao myDao;
 
-    @Generated(hash = 645191502)
-    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash, long lastAddressIndex,
-                  long lastChangeAddressIndex, String lastAddress, String lastChangeAddress, String encryptSeed, String seedHexHash,
-                  boolean isBackuped, long createdAt, long updatedAt, boolean isDefault, String extentedPublicKey, String internalPublicKey,
-                  long balance, long unconfirm, String coinType, long version) {
+    @Generated(hash = 1691628326)
+    public Wallet(Long id, String name, String encryptMnemonic, String mnemonicHash, Long lastAddressIndex, Long lastChangeAddressIndex,
+                  String lastAddress, String lastChangeAddress, String encryptSeed, String seedHexHash, Boolean isBackuped, Long createdAt,
+                  Long updatedAt, Boolean isDefault, String extentedPublicKey, String internalPublicKey, Long balance, Long unconfirm,
+                  String coinType, Long version) {
         this.id = id;
         this.name = name;
         this.encryptMnemonic = encryptMnemonic;
@@ -181,11 +181,11 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.encryptSeed = encryptSeed;
     }
 
-    public long getCreatedAt() {
+    public Long getCreatedAt() {
         return this.createdAt;
     }
 
-    public void setCreatedAt(long createdAt) {
+    public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -193,7 +193,7 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         return this.updatedAt;
     }
 
-    public void setUpdatedAt(long updatedAt) {
+    public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -221,27 +221,36 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         this.seedHexHash = seedHexHash;
     }
 
-    public long getBalance() {
+    public Long getBalance() {
+        if (balance == null) {
+            return 0l;
+        }
         return balance;
     }
 
-    public void setBalance(long balance) {
+    public void setBalance(Long balance) {
         this.balance = balance;
     }
 
-    public long getLastAddressIndex() {
+    public Long getLastAddressIndex() {
+        if (lastAddressIndex == null) {
+            return 0l;
+        }
         return this.lastAddressIndex;
     }
 
-    public void setLastAddressIndex(long lastAddressIndex) {
+    public void setLastAddressIndex(Long lastAddressIndex) {
         this.lastAddressIndex = lastAddressIndex;
     }
 
-    public long getLastChangeAddressIndex() {
+    public Long getLastChangeAddressIndex() {
+        if (lastChangeAddressIndex == null) {
+            return 0l;
+        }
         return lastChangeAddressIndex;
     }
 
-    public void setLastChangeAddressIndex(long lastChangeAddressIndex) {
+    public void setLastChangeAddressIndex(Long lastChangeAddressIndex) {
         this.lastChangeAddressIndex = lastChangeAddressIndex;
     }
 
@@ -272,19 +281,22 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         return this;
     }
 
-    public boolean getIsDefault() {
+    public Boolean getIsDefault() {
         return this.isDefault;
     }
 
-    public void setIsDefault(boolean isDefault) {
+    public void setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
     }
 
-    public boolean getIsBackuped() {
+    public Boolean getIsBackuped() {
+        if (isBackuped == null) {
+            return false;
+        }
         return this.isBackuped;
     }
 
-    public void setIsBackuped(boolean isBackuped) {
+    public void setIsBackuped(Boolean isBackuped) {
         this.isBackuped = isBackuped;
     }
 
@@ -314,11 +326,14 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         return this;
     }
 
-    public long getUnconfirm() {
+    public Long getUnconfirm() {
+        if (unconfirm == null) {
+            return 0l;
+        }
         return this.unconfirm;
     }
 
-    public void setUnconfirm(long unconfirm) {
+    public void setUnconfirm(Long unconfirm) {
         this.unconfirm = unconfirm;
     }
 
@@ -342,7 +357,6 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     public int hashCode() {
         return id.hashCode() + name.hashCode();
     }
-
 
     public String getCoinType() {
         return this.coinType;
@@ -427,11 +441,14 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
         myDao = daoSession != null ? daoSession.getWalletDao() : null;
     }
 
-    public long getVersion() {
+    public Long getVersion() {
+        if (version == null) {
+            return 0l;
+        }
         return this.version;
     }
 
-    public void setVersion(long version) {
+    public void setVersion(Long version) {
         this.version = version;
     }
 

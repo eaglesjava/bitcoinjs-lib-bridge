@@ -42,8 +42,6 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
         List<TxRecord> txRecordList = wallet.getTxRecordList();
         if (!StringUtils.isEmpty(txRecordList)) {
             getMvpView().loadTxRecordSuccess(txRecordList);
-        } else {
-            requestTxRecord(wallet);
         }
     }
 

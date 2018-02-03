@@ -43,8 +43,8 @@ public class TxRecord extends Entity {
     private String txHash;
     @Convert(converter = InOutConverter.class, columnType = Integer.class)
     private InOut inOut = InOut.IN;//0: 转移,1：in（接收）,2：out(发送)
-    private long sumAmount;
-    private long height;
+    private Long sumAmount;
+    private Long height;
     private Date createdTime;
     @ToMany(referencedJoinProperty = "txId")
     @OrderBy("id ASC")
@@ -69,9 +69,9 @@ public class TxRecord extends Entity {
     @Generated(hash = 1885063144)
     private transient Long wallet__resolvedKey;
 
-    @Generated(hash = 1096549690)
-    public TxRecord(Long id, @NotNull Long walletId, @NotNull String txHash, InOut inOut,
-                    long sumAmount, long height, Date createdTime, String mRemark, Long elementId, Long fee) {
+    @Generated(hash = 835338750)
+    public TxRecord(Long id, @NotNull Long walletId, @NotNull String txHash, InOut inOut, Long sumAmount,
+                    Long height, Date createdTime, String mRemark, Long elementId, Long fee) {
         this.id = id;
         this.walletId = walletId;
         this.txHash = txHash;
@@ -97,11 +97,11 @@ public class TxRecord extends Entity {
         return this;
     }
 
-    public long getSumAmount() {
+    public Long getSumAmount() {
         return sumAmount;
     }
 
-    public TxRecord setSumAmount(long sumAmount) {
+    public TxRecord setSumAmount(Long sumAmount) {
         this.sumAmount = sumAmount;
         return this;
     }
@@ -115,15 +115,14 @@ public class TxRecord extends Entity {
         return this;
     }
 
-    public long getHeight() {
+    public Long getHeight() {
+        if (height == null) {
+            return -1l;
+        }
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setHeight(long height) {
+    public void setHeight(Long height) {
         this.height = height;
     }
 

@@ -21,17 +21,17 @@ public class Output extends com.bitbill.www.common.base.model.entity.Entity {
     private Long txId;
     private Long walletId;
     private String address;
-    private long value;//unit satoshi
-    private int txIndex;
+    private Long value;//unit satoshi
+    private Integer txIndex;
     private String txHash;
     @Transient
     private boolean isMine;
     @Transient
     private boolean isInternal;
 
-    @Generated(hash = 1192166948)
-    public Output(Long id, Long txId, Long walletId, String address, long value, int txIndex,
-                  String txHash) {
+    @Generated(hash = 1884505402)
+    public Output(Long id, Long txId, Long walletId, String address, Long value,
+                  Integer txIndex, String txHash) {
         this.id = id;
         this.txId = txId;
         this.walletId = walletId;
@@ -43,12 +43,6 @@ public class Output extends com.bitbill.www.common.base.model.entity.Entity {
 
     @Generated(hash = 1780391644)
     public Output() {
-    }
-
-    public Output(Long txId, String address, long value) {
-        this.txId = txId;
-        this.address = address;
-        this.value = value;
     }
 
     public Long getId() {
@@ -75,19 +69,19 @@ public class Output extends com.bitbill.www.common.base.model.entity.Entity {
         this.address = address;
     }
 
-    public long getValue() {
+    public Long getValue() {
         return this.value;
     }
 
-    public void setValue(long value) {
+    public void setValue(Long value) {
         this.value = value;
     }
 
-    public int getTxIndex() {
+    public Integer getTxIndex() {
         return this.txIndex;
     }
 
-    public void setTxIndex(int txIndex) {
+    public void setTxIndex(Integer txIndex) {
         this.txIndex = txIndex;
     }
 

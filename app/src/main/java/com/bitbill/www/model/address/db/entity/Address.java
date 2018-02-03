@@ -224,6 +224,9 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     }
 
     public Boolean getIsInternal() {
+        if (isInternal == null) {
+            return false;
+        }
         return this.isInternal;
     }
 
@@ -232,6 +235,9 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     }
 
     public Boolean getIsUsed() {
+        if (isUsed == null) {
+            return false;
+        }
         return this.isUsed;
     }
 
