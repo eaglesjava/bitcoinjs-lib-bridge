@@ -10,7 +10,6 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
@@ -134,7 +133,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             return;
         }
 
-        getCompositeDisposable().add(getModelManager().createWallet(new CreateWalletRequest(mWallet.getName(), mWallet.getExtentedPublicKey(), mWallet.getInternalPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
+        getCompositeDisposable().add(getModelManager().createWallet(new CreateWalletRequest(mWallet.getName(), mWallet.getExtentedPublicKey(), mWallet.getInternalPublicKey(), getApp().getUUIDMD5(), getDeviceToken()))
                 .compose(applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse>(getMvpView()) {
                     @Override
@@ -183,7 +182,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             return;
         }
         getCompositeDisposable().add(getModelManager()
-                .importWallet(new ImportWalletRequest(mWallet.getName(), mWallet.getExtentedPublicKey(), mWallet.getInternalPublicKey(), DeviceUtil.getDeviceId(), getDeviceToken()))
+                .importWallet(new ImportWalletRequest(mWallet.getName(), mWallet.getExtentedPublicKey(), mWallet.getInternalPublicKey(), getApp().getUUIDMD5(), getDeviceToken()))
                 .compose(applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<ImportWalletResponse>>(getMvpView()) {
                     @Override

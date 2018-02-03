@@ -18,6 +18,7 @@ public interface AppPreferences extends Prefs {
     String IS_SOUND_ENABLED = "is_sound_enabled";
     String SELECTED_CURRENCY = "selected_currency";
     String CONTACTKEY = "contactkey";
+    String UUID_MD5 = "uuid_md5";
     String SELECTED_LOCALE = "selected_locale";
     String IS_ALIAS_SETED = "is_alias_seted";
     String FORCE_VERSION = "force_version";
@@ -42,6 +43,10 @@ public interface AppPreferences extends Prefs {
     String getContactKey();
 
     void setContactkey(String contactKey);
+
+    String getUUIDMD5();
+
+    void setUUIDMD5(String uuidmd5);
 
     Locale getSelectedLocale();
 

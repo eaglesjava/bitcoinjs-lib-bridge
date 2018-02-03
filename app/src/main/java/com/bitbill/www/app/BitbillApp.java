@@ -232,6 +232,16 @@ public class BitbillApp extends Application {
         mContactKey = contactKey;
     }
 
+    public String getUUIDMD5() {
+
+        String uuidmd5 = mAppModel.getUUIDMD5();
+        if (StringUtils.isEmpty(uuidmd5)) {
+            uuidmd5 = StringUtils.getUUIDMD5();
+            mAppModel.setUUIDMD5(uuidmd5);
+        }
+        return uuidmd5;
+    }
+
     public boolean isRunningForeground() {
         ActivityManager activityManager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> appProcessInfos = activityManager.getRunningAppProcesses();

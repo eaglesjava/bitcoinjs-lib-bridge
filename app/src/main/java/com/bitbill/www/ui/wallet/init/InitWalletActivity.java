@@ -14,7 +14,6 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
-import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.model.address.AddressModel;
@@ -244,7 +243,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
             EventBus.getDefault().postSticky(new WalletUpdateEvent());
         }
         //注册钱包
-        EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", DeviceUtil.getDeviceId(), PLATFORM)));
+        EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", getApp().getUUIDMD5(), PLATFORM)));
         if (!isCreateWallet) {
             // 优化检查最新地址索引逻辑
             mSyncAddressMvpPresentder.syncLastAddressIndex(mIndexNo, mChangeIndexNo, getWallet());

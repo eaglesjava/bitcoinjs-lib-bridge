@@ -112,6 +112,16 @@ public class AppModelManager extends ModelManager implements AppModel {
     }
 
     @Override
+    public String getUUIDMD5() {
+        return mAppPreferences.getUUIDMD5();
+    }
+
+    @Override
+    public void setUUIDMD5(String uuidmd5) {
+        mAppPreferences.setUUIDMD5(uuidmd5);
+    }
+
+    @Override
     public Locale getSelectedLocale() {
         return mAppPreferences.getSelectedLocale();
     }

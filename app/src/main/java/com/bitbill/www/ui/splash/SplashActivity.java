@@ -15,7 +15,6 @@ import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.presenter.UpdateMvpPresenter;
 import com.bitbill.www.common.presenter.UpdateMvpView;
-import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
@@ -45,24 +44,6 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
     private static final String TAG = "SplashActivity";
     private static final int MSG_SET_ALIAS = 1001;
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
@@ -87,6 +68,24 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
                 default:
                     logs = "Failed with errorCode = " + code + ",alias:" + alias;
                     Log.e(TAG, logs);
+            }
+        }
+    };
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
             }
         }
     };
@@ -139,7 +138,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         if (mHasWallet = !StringUtils.isEmpty(walletList)) {
             for (Wallet wallet : walletList) {
                 //注册钱包
-                EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", DeviceUtil.getDeviceId(), PLATFORM)));
+                EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", getApp().getUUIDMD5(), PLATFORM)));
             }
         }
         mGetCacheVersionMvpPresenter.getCacheVersion();
@@ -181,7 +180,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     private void setAlias() {
         if (!getMvpPresenter().isAliasSeted()) {
             // 调用 Handler 来异步设置别名
-            mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, DeviceUtil.getDeviceId()));
+            mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, getApp().getUUIDMD5()));
         }
 
     }

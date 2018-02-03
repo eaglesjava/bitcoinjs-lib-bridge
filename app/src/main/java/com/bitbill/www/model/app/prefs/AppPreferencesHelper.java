@@ -87,6 +87,16 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     }
 
     @Override
+    public String getUUIDMD5() {
+        return mPrefs.getString(UUID_MD5, null);
+    }
+
+    @Override
+    public void setUUIDMD5(String uuidmd5) {
+        mPrefs.edit().putString(UUID_MD5, uuidmd5).apply();
+    }
+
+    @Override
     public Locale getSelectedLocale() {
 
         String language = mPrefs.getString(SELECTED_LOCALE, null);

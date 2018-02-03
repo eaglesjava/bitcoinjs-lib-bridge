@@ -8,7 +8,6 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.DeviceUtil;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
@@ -91,7 +90,7 @@ public class WalletDetailPresenter<M extends WalletModel, V extends WalletDetail
         String extentedPublicKey = getMvpView().getWallet().getExtentedPublicKey();
         String extendedKeysHash = EncryptUtils.encryptMD5ToString(extentedPublicKey);
         getCompositeDisposable().add(getModelManager()
-                .deleteWallet(new DeleteWalletRequest(extendedKeysHash, DeviceUtil.getDeviceId()))
+                .deleteWallet(new DeleteWalletRequest(extendedKeysHash, getApp().getUUIDMD5()))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse>(getMvpView()) {
                     @Override

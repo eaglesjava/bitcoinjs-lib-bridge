@@ -632,6 +632,15 @@ public class StringUtils {
         return EncryptUtils.encryptMD5ToString(DeviceUtil.getUUID()).substring(0, 10);
     }
 
+    /**
+     * 设备id 随机取UUID md5
+     *
+     * @return
+     */
+    public static String getUUIDMD5() {
+        return EncryptUtils.encryptMD5ToString(DeviceUtil.getUUID());
+    }
+
     public static String getNameLabel(String name) {
 
         if (isEmpty(name)) {
