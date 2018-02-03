@@ -112,6 +112,10 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                             return;
                         }
                         if (!StringUtils.isEmpty(addresses)) {
+                            if (addresses.size() < AppConstants.BTC_USED_ADDRESS_GAP) {
+                                getMvpView().limitAddress(false);
+                                return;
+                            }
 
                             for (Address address : addresses) {
                                 if (address.getIsUsed()) {
@@ -119,8 +123,11 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                                     return;
                                 }
                             }
+                            getMvpView().limitAddress(true);
+                        } else {
+                            getMvpView().limitAddress(false);
                         }
-                        getMvpView().limitAddress(true);
+
                     }
 
                     @Override
