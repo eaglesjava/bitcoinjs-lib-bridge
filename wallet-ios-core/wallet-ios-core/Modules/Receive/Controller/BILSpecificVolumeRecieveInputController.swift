@@ -101,7 +101,7 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
 		if text.count == 0 {
 			cnyLabel.btcValue = 0
 		} else {
-			cnyLabel.btcValue = NSDecimalNumber(string: text)
+			cnyLabel.btcValue = Decimal(string: text)
 		}
         
         if text.count > 30 {

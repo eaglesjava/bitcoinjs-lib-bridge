@@ -8,24 +8,24 @@
 
 import UIKit
 
-func getCurrency(btcValue: NSDecimalNumber) -> String {
+func getCurrency(btcValue: Decimal) -> String {
     let currencyType = BILSettingManager.currencyType
-	let price = btcValue.multiplying(by: NSDecimalNumber(value: currencyType.rate))
+	let price = btcValue * Decimal(currencyType.rate)
 	let formatter = NumberFormatter()
 	print(formatter.positiveFormat)
 	formatter.numberStyle = NumberFormatter.Style.decimal
 	formatter.positiveFormat = "#,##0.00"
-	let formatString = formatter.string(from: price);
+	let formatString = formatter.string(from: price as NSDecimalNumber);
     return (formatString ?? "0.00") + " " + currencyType.symbolName
 }
 
 func getCurrency(btcValue: Int64) -> String {
-    return getCurrency(btcValue: NSDecimalNumber.convertBTCSatoshi(satoshi: btcValue))
+    return getCurrency(btcValue: Decimal.convertBTCSatoshi(satoshi: btcValue))
 }
 
 class BILExchangeRateLabel: UILabel {
     
-    var btcValue: NSDecimalNumber? = 0 {
+    var btcValue: Decimal? = 0 {
         didSet {
             rateDidChanged()
         }

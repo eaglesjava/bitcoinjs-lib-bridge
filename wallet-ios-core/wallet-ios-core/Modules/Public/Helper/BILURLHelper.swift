@@ -31,7 +31,7 @@ class BILURLHelper: NSObject {
 		
 		return nil
 	}
-    static func transferBitCoinURL(urlString: String) -> (address: String, amount: NSDecimalNumber)? {
+    static func transferBitCoinURL(urlString: String) -> (address: String, amount: Decimal)? {
         let coinType = CoinType.btc
         if urlString.lowercased().starts(with: coinType.scheme) {
             let arr = urlString.components(separatedBy: ":")
@@ -43,7 +43,7 @@ class BILURLHelper: NSObject {
                 let infoArr = addressString.components(separatedBy: "?")
                 if infoArr.count >= 2 {
 					let amount = infoArr[1].replacingOccurrences(of: "amount=", with: "")
-					return (infoArr[0], NSDecimalNumber(string: amount))
+					return (infoArr[0], Decimal(string: amount) ?? -1)
                 }
             }
             else

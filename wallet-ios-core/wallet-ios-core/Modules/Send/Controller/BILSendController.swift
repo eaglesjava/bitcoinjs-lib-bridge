@@ -108,7 +108,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
             if let result = BILURLHelper.transferBitCoinURL(urlString: qrString) {
                 debugPrint(result)
 				unownedSelf.sendModel = BILSendModel(address: result.address, amount: String(describing: result.amount))
-				if result.amount.compare(0) == .orderedAscending {
+				if result.amount < 0 {
                     unownedSelf.setAddress(address: result.address)
                     unownedSelf.navigationController?.popViewController(animated: true)
                 }
