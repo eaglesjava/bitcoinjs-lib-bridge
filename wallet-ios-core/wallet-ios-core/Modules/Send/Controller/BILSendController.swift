@@ -54,8 +54,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
 		NotificationCenter.default.removeObserver(self, name: .shortcutScanQRCode, object: nil)
         if tabBarController?.selectedIndex != 3 {
             addressInputView.textField.text = ""
-            sendModel = nil
-            contact = nil
+			cleanModels()
         }
 	}
     
@@ -63,7 +62,12 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: .transactionSended, object: nil)
         NotificationCenter.default.removeObserver(self, name: .sendBTCToContact, object: nil)
     }
-    
+	
+	func cleanModels() {
+		sendModel = nil
+		contact = nil
+	}
+	
     @objc
     func transactionDidSend(notification: Notification) {
         addressInputView.textField.text = ""
@@ -95,6 +99,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     }
     
     func didChooseContact(contact: ContactModel) {
+		cleanModels()
         loadViewIfNeeded()
         self.contact = contact
 		addressInputView.textField.text = "\(contact.name ?? "")( \(contact.detail) )"
@@ -107,6 +112,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
         let cont = BILQRCodeScanViewController.controller { (qrString) in
             if let result = BILURLHelper.transferBitCoinURL(urlString: qrString) {
                 debugPrint(result)
+				unownedSelf.cleanModels()
 				unownedSelf.sendModel = BILSendModel(address: result.address, amount: String(describing: result.amount))
 				if result.amount < 0 {
                     unownedSelf.setAddress(address: result.address)
@@ -128,8 +134,7 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text = ""
-        sendModel = nil
-        contact = nil
+        cleanModels()
     }
     
     @IBAction func nextAction(_ sender: Any) {
