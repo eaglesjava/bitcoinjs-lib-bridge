@@ -17,7 +17,5 @@ public interface WalletAddressMvpView extends MvpView {
 
     void getTxElementSuccess(List<GetTxElementResponse.UtxoBean> unspentList, List<GetTxElementResponse.FeesBean> fees);
 
-    void amountNoEnough();
-
     void getTxElementFail();
 }

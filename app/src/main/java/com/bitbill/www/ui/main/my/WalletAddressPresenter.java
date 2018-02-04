@@ -55,12 +55,8 @@ public class WalletAddressPresenter<M extends TxModel, V extends WalletAddressMv
                             GetTxElementResponse data = listUnspentResponseApiResponse.getData();
                             if (data != null) {
                                 List<GetTxElementResponse.UtxoBean> unspentList = data.getUtxo();
-                                if (!StringUtils.isEmpty(unspentList)) {
-                                    //获取utxo成功
-                                    getMvpView().getTxElementSuccess(unspentList, data.getFees());
-                                } else {
-                                    getMvpView().amountNoEnough();
-                                }
+                                //获取utxo成功
+                                getMvpView().getTxElementSuccess(unspentList, data.getFees());
                             } else {
                                 getMvpView().getTxElementFail();
                             }

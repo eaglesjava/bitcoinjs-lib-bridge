@@ -189,27 +189,25 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
         for (Address address : mAddressList) {
             address.setBalance(0l);
         }
-        for (GetTxElementResponse.UtxoBean utxoBean : mUnspentList) {
-            String addressTxt = utxoBean.getAddressTxt();
-            long sumOutAmount = utxoBean.getSumOutAmount();
 
-            for (Address address : mAddressList) {
-                if (StringUtils.isNotEmpty(address.getName()) && address.getName().equals(addressTxt)) {
-                    address.setBalance(address.getBalance() + sumOutAmount);
+        if (!StringUtils.isEmpty(unspentList)) {
+            for (GetTxElementResponse.UtxoBean utxoBean : mUnspentList) {
+                String addressTxt = utxoBean.getAddressTxt();
+                long sumOutAmount = utxoBean.getSumOutAmount();
+
+                for (Address address : mAddressList) {
+                    if (StringUtils.isNotEmpty(address.getName()) && address.getName().equals(addressTxt)) {
+                        address.setBalance(address.getBalance() + sumOutAmount);
+                    }
                 }
-            }
 
+            }
         }
         if (StringUtils.isEmpty(mAddressList)) {
             return;
         }
         getMvpPresenter().updateAddressBalance(mAddressList);
         buildData();
-
-    }
-
-    @Override
-    public void amountNoEnough() {
 
     }
 

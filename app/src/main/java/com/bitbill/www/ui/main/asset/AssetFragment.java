@@ -255,17 +255,21 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
         if (!isAdded()) {
             return;
         }
-        if (StringUtils.isEmpty(unconfirmList)) {
-            //如果加载不到未确认列表 移除BtcUnconfirmFragment
-            Fragment fragment = getChildFragmentManager().findFragmentByTag(BtcUnconfirmFragment.TAG);
-            if (fragment != null && fragment.isAdded()) {
-                getChildFragmentManager().beginTransaction().remove(fragment).commit();
+        try {
+            if (StringUtils.isEmpty(unconfirmList)) {
+                //如果加载不到未确认列表 移除BtcUnconfirmFragment
+                Fragment fragment = getChildFragmentManager().findFragmentByTag(BtcUnconfirmFragment.TAG);
+                if (fragment != null && fragment.isAdded()) {
+                    getChildFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
+                }
+            } else {
+                getChildFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<TxRecord>) unconfirmList), BtcUnconfirmFragment.TAG)
+                        .commitAllowingStateLoss();
             }
-        } else {
-            getChildFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<TxRecord>) unconfirmList), BtcUnconfirmFragment.TAG)
-                    .commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
