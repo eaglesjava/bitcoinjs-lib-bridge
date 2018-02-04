@@ -20,6 +20,7 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.PopupWalletMenu;
 import com.bitbill.www.common.widget.WalletView;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.eventbus.SocketServerStateEvent;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.main.MainActivity;
@@ -30,6 +31,10 @@ import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
 import com.bitbill.www.ui.wallet.importing.ImportWalletActivity;
 import com.bitbill.www.ui.wallet.info.WalletInfoActivity;
 import com.bitbill.www.ui.wallet.init.CreateWalletIdActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,6 +157,14 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
     }
 
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onSocketServerStateEvent(SocketServerStateEvent socketServerStateEvent) {
+        EventBus.getDefault().removeStickyEvent(SocketServerStateEvent.class);
+        if (socketServerStateEvent != null) {
+            setSocketStatus(SocketServerStateEvent.ServerState.connected.equals(socketServerStateEvent.getState()));
+        }
+    }
+
     public void setSocketStatus(boolean connected) {
         if (ivSocketStatus != null) {
             ivSocketStatus.setChecked(connected);
@@ -239,6 +252,9 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     }
 
     public void loadUnconfirm(List<TxRecord> unconfirmList) {
+        if (!isAdded()) {
+            return;
+        }
         if (StringUtils.isEmpty(unconfirmList)) {
             //如果加载不到未确认列表 移除BtcUnconfirmFragment
             Fragment fragment = getChildFragmentManager().findFragmentByTag(BtcUnconfirmFragment.TAG);
@@ -246,13 +262,10 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
                 getChildFragmentManager().beginTransaction().remove(fragment).commit();
             }
         } else {
-            if (isAdded()) {
-
-                getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<TxRecord>) unconfirmList), BtcUnconfirmFragment.TAG)
-                        .commit();
-            }
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fl_btc_unconfirm, BtcUnconfirmFragment.newInstance((ArrayList<TxRecord>) unconfirmList), BtcUnconfirmFragment.TAG)
+                    .commit();
         }
     }
 

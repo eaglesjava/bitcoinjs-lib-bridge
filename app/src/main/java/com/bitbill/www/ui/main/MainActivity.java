@@ -592,7 +592,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     private void loadUnconfirmList(List<TxRecord> data) {
-        if (mAssetFragment != null) {
+        if (mAssetFragment != null && mAssetFragment.isAdded()) {
             mAssetFragment.loadUnconfirm(data);
         }
     }
@@ -741,17 +741,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mWalletPresenter.loadWallets();
     }
 
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onSocketServerStateEvent(SocketServerStateEvent socketServerStateEvent) {
-        EventBus.getDefault().removeStickyEvent(SocketServerStateEvent.class);
-        if (socketServerStateEvent != null) {
-            setSocketStatus(socketServerStateEvent.getState());
-        }
-    }
-
     private void setSocketStatus(SocketServerStateEvent.ServerState socketStatus) {
         if (mAssetFragment != null && socketStatus != null) {
-            mAssetFragment.setSocketStatus(socketStatus.equals(SocketServerStateEvent.ServerState.connected));
+            mAssetFragment.setSocketStatus(SocketServerStateEvent.ServerState.connected.equals(socketStatus));
         }
     }
 

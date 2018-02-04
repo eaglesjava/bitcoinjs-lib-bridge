@@ -27,7 +27,7 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "BASE_URL", "\"https://walletservice.bitbill.com\"")
-            buildConfigField("String", "SOCKET_URL", "\"http://walletservice.bitbill.com:8088\"")
+            buildConfigField("String", "SOCKET_URL", "\"http://walletsocket.bitbill.com:8088\"")
             buildConfigField("String", "ENCRYPTED_DB_SECRECT", "\"bitbill-debug\"")
             buildConfigField("String", "API_KEY", "\"TEST\"")
         }
@@ -35,7 +35,7 @@ android {
 //            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"http://walletservice.bitbill.com\"")
-            buildConfigField("String", "SOCKET_URL", "\"https://socket.bitbill.com/v1\"")
+            buildConfigField("String", "SOCKET_URL", "\"http://walletsocket.bitbill.com/\"")
             buildConfigField("String", "ENCRYPTED_DB_SECRECT", "\"bitbill-release\"")
             buildConfigField("String", "API_KEY", "\"TEST\"")
         }
@@ -98,7 +98,6 @@ dependencies {
     //geendao
     compile 'org.greenrobot:greendao:3.2.2'
     compile 'net.zetetic:android-database-sqlcipher:3.5.8@aar'
-    compile 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v2.0.2'
 
     //event
     compile 'org.greenrobot:eventbus:3.1.1'

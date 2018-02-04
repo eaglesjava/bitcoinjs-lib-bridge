@@ -143,6 +143,11 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         if (fee < CryptoConstants.BTC_MIN_FEE) {
             fee = CryptoConstants.BTC_MIN_FEE;
         }
+        //check send amount
+        if (amount - fee <= 0) {
+            getMvpView().amountNoEnough();
+            return;
+        }
         //组装交易
         List<Transaction.Input> inputs = new ArrayList<>();
         String inAddress = "";
@@ -301,6 +306,11 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
         //check mini fee
         if (fee < CryptoConstants.BTC_MIN_FEE) {
             fee = CryptoConstants.BTC_MIN_FEE;
+        }
+        //check send amount
+        if (amount - fee <= 0) {
+            getMvpView().amountNoEnough();
+            return;
         }
         getMvpView().compteFee(fee);
 

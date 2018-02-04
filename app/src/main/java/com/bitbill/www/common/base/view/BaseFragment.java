@@ -19,6 +19,11 @@ import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.utils.DialogUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.component.ActivityComponent;
+import com.bitbill.www.model.eventbus.NetWorkChangedEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +56,18 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
     @Override
     public BitbillApp getApp() {
         return mApp;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -221,6 +238,22 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
         super.onDestroy();
     }
 
+    /**
+     * <pre>
+     *  This method will be called when a NetWorkChangedEvent is posted.
+     *  Refresh the interface after the main thread runs the network changes.
+     * </pre>
+     *
+     * @param event
+     */
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onNetWorkChangedEvent(NetWorkChangedEvent event) {
+        event = EventBus.getDefault().removeStickyEvent(NetWorkChangedEvent.class);
+        if (event != null) {
+            showMessage(event.getMsg());
+        }
+    }
+    
     public interface Callback {
 
         void onFragmentAttached();

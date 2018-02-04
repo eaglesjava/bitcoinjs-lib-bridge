@@ -282,6 +282,9 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     }
 
     public Boolean getIsDefault() {
+        if (isDefault == null) {
+            return false;
+        }
         return this.isDefault;
     }
 
