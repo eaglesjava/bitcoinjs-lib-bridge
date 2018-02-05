@@ -12,6 +12,7 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.JsResult;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -356,6 +357,96 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         });
 
     }
+
+    /**
+     * 一、密码长度:
+     * 5 分: 小于等于 4 个字符;10 分: 5 到 7 字符;25 分: 大于 等于 8 个字符
+     * 二、字母:
+     * 0 分: 没有字母
+     * 10 分: 全都是小(大)写字 母;20 分: 大小写混合字母 三、数字:
+     * 0分: 没有数字;10分: 1 个数 字;20分: 大于等于 3个数字 四、符号:
+     * 0分: 没有符号;10分: 1个符 号;25分: 大于1个符号 五、奖励:
+     * 2分: 字母和数字
+     * 3分: 字母、数字和符号;5分: 大小写字母、数字和符号 规则:
+     * >= 60: 高
+     * >= 50: 中
+     * >= 0: 低
+     *
+     * @param pwd
+     */
+    @Override
+    public void complutePwdStrongLevel(String pwd) {
+        if (!isViewAttached()) {
+            return;
+        }
+        if (StringUtils.isEmpty(pwd)) {
+            getMvpView().setPwdStrongLevel(PwdStatusView.StrongLevel.DEFAULT);
+            return;
+        }
+
+        int score = 0;
+
+        //length
+        int length = pwd.length();
+        //too long
+        if (length > 20) return;
+
+        if (length >= 8) {
+            score = 25;
+        } else if (length > 4 && length < 8) {
+            score = 10;
+        } else {
+            score = 5;
+        }
+        //count type
+        int[] counts = StringUtils.countType(pwd);
+        if (counts == null) {
+            return;
+        }
+        int numberCount = counts[0];
+        int upperCount = counts[1];
+        int lowerCount = counts[2];
+        int specialCount = counts[3];
+
+        //character
+        boolean isUpper = upperCount == length;
+        boolean isLower = lowerCount == length;
+        if (isUpper || isLower) {
+            score += 10;
+        } else if (lowerCount > 0 && upperCount > 0) {
+            score += 20;
+        }
+        //number
+        if (numberCount >= 3) {
+            score += 20;
+        } else if (numberCount > 0) {
+            score += 10;
+        }
+        //special
+        if (specialCount > 1) {
+            score += 25;
+        } else if (specialCount == 1) {
+            score += 10;
+        }
+        //reward
+        if (numberCount > 0 && +lowerCount > 0 && upperCount > 0 && specialCount > 0) {
+            score += 5;
+        } else if (lowerCount + upperCount > 0 && numberCount > 0 && specialCount > 0) {
+            score += 3;
+        } else if (lowerCount + upperCount > 0 && numberCount > 0) {
+            score += 2;
+        }
+        Log.d(TAG, "complutePwdStrongLevel() called with: pwd = [" + pwd + "]" + ",score:" + score + ",upperCount:" + upperCount + ",lowerCount:" + lowerCount + ",numberCount:" + numberCount + ",specialCount:" + specialCount);
+
+        if (score >= 60) {
+            getMvpView().setPwdStrongLevel(PwdStatusView.StrongLevel.STRONG);
+        } else if (score >= 50) {
+            getMvpView().setPwdStrongLevel(PwdStatusView.StrongLevel.WEAK);
+        } else {
+            getMvpView().setPwdStrongLevel(PwdStatusView.StrongLevel.DANGEROUS);
+        }
+    }
+
 
     private boolean isValidWalletId() {
         // Check for a valid wallet id.

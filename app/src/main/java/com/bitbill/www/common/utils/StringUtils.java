@@ -37,8 +37,6 @@ public class StringUtils {
 
     public static final Pattern IS_CHINESE_CHAR = Pattern.compile("[\u4e00-\u9fa5]");
     public static final Pattern IS_ENGLISH_CHAR = Pattern.compile("[a-zA-Z]");
-    public static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("[!@#$%^&*_]*.*[a-zA-Z][!@#$%^&*_]*.*[0-9][!@#$%^&*_]*|[!@#$%^&*_]*.*[0-9][!@#$%^&*_]*.*[a-zA-Z][!@#$%^&*_]*");
     public final static SimpleDateFormat yyyyMMddHHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final static Pattern PHONE_NUM = Pattern
             .compile("\\d{11}");// 手机号码11位
@@ -52,6 +50,12 @@ public class StringUtils {
             .compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
     private final static Pattern NUMBER_STR = Pattern
             .compile("^[0-9]*$");
+    private final static Pattern LOWER_STR = Pattern
+            .compile("^[a-z]*$");
+    private final static Pattern UPPER_STR = Pattern
+            .compile("^[A-Z]*$");
+    private final static Pattern SPECIAL_STR = Pattern
+            .compile("^[^A-Za-z0-9]*$");
 
     /**
      * 判断全文都是否为中文
@@ -115,16 +119,31 @@ public class StringUtils {
     }
 
     /**
-     * 是否是数字字符串
+     * 数字字符串长度
      *
      * @param string
      * @return
      */
-    public static boolean isNumber(String string) {
-        if (!isNotEmpty(string)) {
-            return false;
+    public static int[] countType(String string) {
+        int[] counts = null;
+        if (isEmpty(string)) {
+            return counts;
         }
-        return NUMBER_STR.matcher(string).matches();
+        int numberCount = 0;
+        int upperCount = 0;
+        int lowerCount = 0;
+        int specialCount = 0;
+
+        char[] chars = string.toCharArray();
+        for (char aChar : chars) {
+            if (NUMBER_STR.matcher(String.valueOf(aChar)).matches()) numberCount++;
+            if (UPPER_STR.matcher(String.valueOf(aChar)).matches()) upperCount++;
+            if (LOWER_STR.matcher(String.valueOf(aChar)).matches()) lowerCount++;
+            if (SPECIAL_STR.matcher(String.valueOf(aChar)).matches()) specialCount++;
+
+        }
+        counts = new int[]{numberCount, upperCount, lowerCount, specialCount};
+        return counts;
     }
 
     /**

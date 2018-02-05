@@ -12,24 +12,29 @@ import android.view.View;
 
 import com.bitbill.www.R;
 
+
 /**
  * 密码强度状态控件
  */
 public class PwdStatusView extends View {
-    public static final int DANGER_LEVEL = 0;
-    public static final int WEAK_LEVEL = 1;
-    public static final int NORMAL_LEVEL = 2;
+    public static final int DEFAULT_LEVEL = 0;
+    public static final int DANGEROUS_LEVEL = 1;
+    public static final int WEAK_LEVEL = 2;
     public static final int STRONG_LEVEL = 3;
     private static final int DEFAULT_COLOR_ID = R.color.white;
-    private static final int STRONG_COLOR_ID = R.color.green;
-    private StrongLevel mStrongLevel = StrongLevel.DANGER;
+    private static final int DANGEROUS_COLOR_ID = R.color.red_weak;
+    private static final int WEAK_COLOR_ID = R.color.yellow_normal;
+    private static final int STRONG_COLOR_ID = R.color.green_strong;
+    private StrongLevel mStrongLevel = StrongLevel.DEFAULT;
     private float mStatusItemHeight = 0;
     private float mStatusItemWidth = 0;
     private float mStatusItemGap = 0;
     private TextPaint mDefaultTextPaint;
-    private TextPaint mStrongTextPaint;
+    private TextPaint mLevelTextPaint;
     private int mDefaultColor;
     private int mStrongColor;
+    private int mDangerousColor;
+    private int mWeakColor;
 
     public PwdStatusView(Context context) {
         super(context);
@@ -53,6 +58,10 @@ public class PwdStatusView extends View {
 
         mDefaultColor = a.getColor(
                 R.styleable.PwdStatusView_defaultColor, getResources().getColor(DEFAULT_COLOR_ID));
+        mDangerousColor = a.getColor(
+                R.styleable.PwdStatusView_dangerousColor, getResources().getColor(DANGEROUS_COLOR_ID));
+        mWeakColor = a.getColor(
+                R.styleable.PwdStatusView_weakColor, getResources().getColor(WEAK_COLOR_ID));
         mStrongColor = a.getColor(
                 R.styleable.PwdStatusView_strongColor,
                 getResources().getColor(STRONG_COLOR_ID));
@@ -77,9 +86,9 @@ public class PwdStatusView extends View {
         mDefaultTextPaint.setColor(mDefaultColor);
 
         // Set up a strong TextPaint object
-        mStrongTextPaint = new TextPaint();
-        mStrongTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mStrongTextPaint.setColor(mStrongColor);
+        mLevelTextPaint = new TextPaint();
+        mLevelTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        mLevelTextPaint.setColor(mDangerousColor);
 
         // Update TextPaint and text measurements from attributes
         invalidateTextPaintAndMeasurements();
@@ -127,8 +136,24 @@ public class PwdStatusView extends View {
         rectF.right = mStatusItemWidth * (index + 1) + mStatusItemGap * index;
         rectF.bottom = mStatusItemHeight;
         // Draw round rect.
-        canvas.drawRoundRect(rectF, 10, 10, (mStrongLevel != null && (mStrongLevel.getLevel() > index))
-                ? mStrongTextPaint : mDefaultTextPaint);
+
+        switch (mStrongLevel) {
+            case DEFAULT:
+                mLevelTextPaint.setColor(mDefaultColor);
+                break;
+            case DANGEROUS:
+                mLevelTextPaint.setColor(mDangerousColor);
+                break;
+            case WEAK:
+                mLevelTextPaint.setColor(mWeakColor);
+                break;
+            case STRONG:
+                mLevelTextPaint.setColor(mStrongColor);
+                break;
+        }
+        TextPaint textPaint = (mStrongLevel != null && (mStrongLevel.getLevel() > index))
+                ? mLevelTextPaint : mDefaultTextPaint;
+        canvas.drawRoundRect(rectF, 10, 10, textPaint);
     }
 
     public void setStrongLevel(StrongLevel level) {
@@ -140,9 +165,9 @@ public class PwdStatusView extends View {
      * 密码强度枚举
      */
     public enum StrongLevel {
-        DANGER(DANGER_LEVEL),
+        DEFAULT(DEFAULT_LEVEL),
+        DANGEROUS(DANGEROUS_LEVEL),
         WEAK(WEAK_LEVEL),
-        NORMAL(NORMAL_LEVEL),
         STRONG(STRONG_LEVEL);
 
         private final int mLevel;

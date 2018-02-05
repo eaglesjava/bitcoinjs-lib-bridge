@@ -1,6 +1,7 @@
 package com.bitbill.www.ui.wallet.init;
 
 import com.bitbill.www.common.base.view.MvpView;
+import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 /**
@@ -41,4 +42,6 @@ public interface InitWalletMvpView extends MvpView {
     void resetPwdSuccess();
 
     void resetPwdFail();
+
+    void setPwdStrongLevel(PwdStatusView.StrongLevel level);
 }

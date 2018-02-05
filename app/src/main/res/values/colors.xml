@@ -41,5 +41,9 @@
     <color name="txt_gray">#bbb</color>
     <color name="wallet_menu_text">#2F333E</color>
     <color name="toast">#262933</color>
+    <!--pwd staus view-->
+    <color name="red_weak">#F64048</color>
+    <color name="yellow_normal">#FFFFFF00</color>
+    <color name="green_strong">#ABE64D</color>
 
 </resources>

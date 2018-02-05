@@ -17,6 +17,7 @@ import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.eventbus.PwdEditEvent;
 import com.bitbill.www.model.eventbus.RegisterEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
@@ -26,11 +27,12 @@ import com.bitbill.www.ui.main.asset.AssetFragment;
 import com.bitbill.www.ui.main.my.UseRuleActivity;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.bitbill.www.app.AppConstants.PLATFORM;
@@ -115,18 +117,20 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
                 if (s == null) {
                     return;
                 }
-                // TODO: 2017/11/17 强度算法计算密码强度
-                if (s.length() > 10) {
-                    etwTradePwd.setStrongLevel(PwdStatusView.StrongLevel.STRONG);
-                } else if (s.length() > 6) {
-                    etwTradePwd.setStrongLevel(PwdStatusView.StrongLevel.NORMAL);
-                } else if (s.length() > 2) {
-                    etwTradePwd.setStrongLevel(PwdStatusView.StrongLevel.WEAK);
-                } else {
-                    etwTradePwd.setStrongLevel(PwdStatusView.StrongLevel.DANGER);
-                }
+                EventBus.getDefault().post(new PwdEditEvent(s.toString()));
             }
         });
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onWalletDeleteSuccess(PwdEditEvent pwdEditEvent) {
+        if (pwdEditEvent == null) {
+            return;
+        }
+        String s = pwdEditEvent.getS();
+        // 强度算法计算密码强度
+        getMvpPresenter().complutePwdStrongLevel(s);
 
     }
 
@@ -303,10 +307,10 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void setPwdStrongLevel(PwdStatusView.StrongLevel level) {
+        if (etwTradePwd != null) {
+            etwTradePwd.setStrongLevel(level);
+        }
     }
 
 }
