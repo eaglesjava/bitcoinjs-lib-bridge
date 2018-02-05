@@ -140,14 +140,12 @@ class BILSettingManager: NSObject {
             }
             if str.hasPrefix(BILLanguageType.zh_cn.rawValue) {
                 str = BILLanguageType.zh_cn.rawValue
-            }
-            if str.hasPrefix(BILLanguageType.en.rawValue) {
+            } else {
                 str = BILLanguageType.en.rawValue
             }
             if let type = BILLanguageType(rawValue: str) {
                 return type
             }
-            self.currentLanguage = .en
             return .en
         }
     }

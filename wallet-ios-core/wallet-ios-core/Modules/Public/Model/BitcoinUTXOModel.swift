@@ -38,7 +38,7 @@ class BitcoinUTXOModel: NSObject, Comparable {
         bip39Index = jsonData["addressIndex"].intValue
         requiredSignatureCount = jsonData["reqSings"].intValue
         satoshiAmount = jsonData["sumOutAmount"].int64Value
-        amount = Double(satoshiAmount) / Double(BTC_SATOSHI)
+		amount = Decimal.convertBTCSatoshi(satoshi: satoshiAmount).doubleValue
         availableforspending = jsonData["availableforspending"].boolValue
         address = jsonData["addressTxt"].stringValue
         isChange = jsonData["addressType"].boolValue

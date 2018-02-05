@@ -100,14 +100,12 @@ class BILSpecificVolumeReceiveInputController: BILBaseViewController, UITextFiel
 		
 		if text.count == 0 {
 			cnyLabel.btcValue = 0
+		} else {
+			cnyLabel.btcValue = Decimal(string: text)
 		}
         
         if text.count > 30 {
             return false
-        }
-        
-        if let coinAmount = Double(text) {
-            cnyLabel.btcValue = coinAmount
         }
         
         if text.contains(".") {
