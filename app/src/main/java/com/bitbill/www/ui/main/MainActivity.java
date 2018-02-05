@@ -27,6 +27,8 @@ import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
+import com.bitbill.www.common.presenter.BalanceMvpPresenter;
+import com.bitbill.www.common.presenter.BalanceMvpView;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
@@ -98,7 +100,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcRecordMvpView, UpdateMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, BalanceMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcRecordMvpView, UpdateMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
@@ -108,7 +110,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private static final int INDEX_SEND = 3;
 
     @Inject
-    MainMvpPresenter<WalletModel, MainMvpView> mMainMvpPresenter;
+    MainMvpPresenter<TxModel, MainMvpView> mMainMvpPresenter;
+    @Inject
+    BalanceMvpPresenter<WalletModel, BalanceMvpView> mBalanceMvpPresenter;
     @Inject
     WalletMvpPresenter<WalletModel, WalletMvpView> mWalletPresenter;
     @Inject
@@ -204,12 +208,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         } else if (mSendContact != null) {
             //切换到发送联系人界面
             mViewPager.setCurrentItem(INDEX_SEND, false);
-            if (mSendFragment != null) {
-                mSendFragment.setSendAddress(mSendContact);
-            }
         } else if (StringUtils.isNotEmpty(mAddress)) {
             //切换到发送界面
             mViewPager.setCurrentItem(INDEX_SEND, false);
+        }
+        if (mSendFragment != null) {
+            mSendFragment.setSendAddress(mSendContact);
             mSendFragment.setSendAddress(mAddress);
         }
         if (isListUnconfirm) {
@@ -229,6 +233,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void injectComponent() {
         //inject activity
         getActivityComponent().inject(this);
+        addPresenter(mBalanceMvpPresenter);
         addPresenter(mWalletPresenter);
         addPresenter(mParseTxInfoMvpPresenter);
         addPresenter(mGetCacheVersionMvpPresenter);
@@ -337,6 +342,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                         break;
 
                 }
+                //清空临时数据
+                if (mSendFragment != null) {
+                    mSendFragment.clearData();
+                }
             }
         });
     }
@@ -433,11 +442,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void initData() {
         // TODO: 2018/2/1 for test no check
 //        mUpdateMvpPresenter.checkUpdate();
-        if (!StringUtils.isEmpty(getApp().getWallets())) {
-            loadWalletsSuccess(getApp().getWallets());
-        } else {
-            mWalletPresenter.loadWallets();
-        }
+        mWalletPresenter.loadWallets();
         mGetCacheVersionMvpPresenter.getCacheVersion();
         if (mBoundService != null) {
             setSocketStatus(mBoundService.getSocketStatus());
@@ -496,7 +501,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
         reloadWalletInfo(wallets);
         //获取钱包余额
-        getMvpPresenter().getBalance();
+        mBalanceMvpPresenter.getBalance();
         //加载未确认交易
         getMvpPresenter().listUnconfirm();
     }

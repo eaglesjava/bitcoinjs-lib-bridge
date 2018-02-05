@@ -160,6 +160,7 @@
     <string name="status_item_unconfirm">Unconfirmed</string>
     <string name="status_item_transfer">Transferred</string>
     <string name="fail_get_tx_record">Failed to load transaction details, please try again.</string>
+    <string name="fail_load_balance">Failed to load balance</string>
 
     <!--transfer details-->
     <string name="title_activity_transfer_details">Transaction details</string>

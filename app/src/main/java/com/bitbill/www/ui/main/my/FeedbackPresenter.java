@@ -18,9 +18,9 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2018/1/31.
  */
 @PerActivity
-public class FeebackPresenter<M extends AppModel, V extends FeebackMvpView> extends ModelPresenter<M, V> implements FeebackMvpPresenter<M, V> {
+public class FeedbackPresenter<M extends AppModel, V extends FeedbackMvpView> extends ModelPresenter<M, V> implements FeedbackMvpPresenter<M, V> {
     @Inject
-    public FeebackPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+    public FeedbackPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);
     }
 

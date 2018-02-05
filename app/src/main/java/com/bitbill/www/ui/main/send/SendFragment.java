@@ -119,13 +119,19 @@ public class SendFragment extends BaseTabsLazyFragment {
 
     public void setSendAddress(Contact sendContact) {
         if (mBtcSendFrg != null) {
-            mBtcSendFrg.setSendAddress(sendContact);
+            mBtcSendFrg.setSendContact(sendContact);
         }
     }
 
     public void setSendAddress(String sendAddress) {
         if (mBtcSendFrg != null) {
             mBtcSendFrg.setSendAddress(sendAddress);
+        }
+    }
+
+    public void clearData() {
+        if (mBtcSendFrg != null) {
+            mBtcSendFrg.clearData();
         }
     }
 }

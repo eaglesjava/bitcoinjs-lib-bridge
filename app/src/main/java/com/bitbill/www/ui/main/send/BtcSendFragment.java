@@ -137,15 +137,6 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return etSendAddress.getText().toString();
     }
 
-    public void setSendAddress(Contact sendContact) {
-        mSendContact = sendContact;
-        if (sendContact != null) {
-            String walletId = sendContact.getWalletId();
-            setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? sendContact.getAddress() : walletId) + ")");
-
-        }
-    }
-
     public void setSendAddress(String sendAddress) {
 
         etSendAddress.setText(sendAddress);
@@ -180,11 +171,20 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         return mSendContact;
     }
 
+    public void setSendContact(Contact sendContact) {
+        mSendContact = sendContact;
+        if (sendContact != null) {
+            String walletId = sendContact.getWalletId();
+            setSendAddress(sendContact.getContactName() + "(" + (StringUtils.isEmpty(walletId) ? sendContact.getAddress() : walletId) + ")");
+
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ContactSelectActivity.REQUEST_SELECT_CONTACT_CODE && resultCode == ContactSelectActivity.RESULT_SELECT_CONTACT_CODE && data != null) {
             Contact contact = (Contact) data.getSerializableExtra(AppConstants.EXTRA_CONTACT);
-            setSendAddress(contact);
+            setSendContact(contact);
         }
     }
 
@@ -217,5 +217,10 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         if (mKeyboardStatusDetector != null) {
             mKeyboardStatusDetector.unRegisterFragment(this);
         }
+    }
+
+    public void clearData() {
+        setSendAddress(null);
+        setSendContact(null);
     }
 }

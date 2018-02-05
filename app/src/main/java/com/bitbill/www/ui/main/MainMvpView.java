@@ -39,10 +39,6 @@ public interface MainMvpView extends MvpView {
 
     void getWalletsFail();
 
-    void getBalanceFail();
-
-    void getBalanceSuccess(List<Wallet> wallets, Long allAmount);
-
     void listUnconfirmSuccess(List<TxElement> data);
 
     void listUnconfirmFail();

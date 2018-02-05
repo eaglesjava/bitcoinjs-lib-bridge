@@ -5,7 +5,7 @@ import com.bitbill.www.common.base.view.MvpView;
 /**
  * Created by isanwenyu@163.com on 2018/1/31.
  */
-public interface FeebackMvpView extends MvpView {
+public interface FeedbackMvpView extends MvpView {
 
     String getContent();
 

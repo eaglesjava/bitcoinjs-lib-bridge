@@ -127,7 +127,7 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
 
     @Override
     public String getForceVersion() {
-        return mPrefs.getString(FORCE_VERSION, "0.0");
+        return mPrefs.getString(FORCE_VERSION, "0.0.1");
     }
 
     @Override
@@ -137,11 +137,43 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
 
     @Override
     public String getUpdateVersion() {
-        return mPrefs.getString(UPDATE_VERSION, "0.0");
+        return mPrefs.getString(UPDATE_VERSION, "0.0.1");
     }
 
     @Override
     public void setUpdateVersion(String aversion) {
         mPrefs.edit().putString(UPDATE_VERSION, aversion).apply();
+    }
+
+    @Override
+    public double getBtcCnyValue() {
+        try {
+            return Double.parseDouble(mPrefs.getString(BTC_CNY_VALUE, "0.00"));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0.00;
+    }
+
+    @Override
+    public void setBtcCnyValue(double btcCnyValue) {
+        mPrefs.edit().putString(BTC_CNY_VALUE, String.valueOf(btcCnyValue)).apply();
+    }
+
+    @Override
+    public double getBtcUsdValue() {
+
+        try {
+            return Double.parseDouble(mPrefs.getString(BTC_USD_VALUE, "0.00"));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return 0.00;
+    }
+
+    @Override
+    public void setBtcUsdValue(double btcUsdValue) {
+
+        mPrefs.edit().putString(BTC_USD_VALUE, String.valueOf(btcUsdValue)).apply();
     }
 }

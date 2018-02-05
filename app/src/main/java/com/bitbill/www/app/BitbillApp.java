@@ -89,8 +89,6 @@ public class BitbillApp extends Application {
     };
     private ApplicationComponent mApplicationComponent;
     private List<Wallet> mWallets;
-    private double mBtcCnyValue;
-    private double mBtcUsdValue;
     private AppPreferences.SelectedCurrency mSelectedCurrency;
     private long mBlockHeight;
     private String mContactKey;
@@ -173,19 +171,19 @@ public class BitbillApp extends Application {
     }
 
     public double getBtcCnyValue() {
-        return mBtcCnyValue;
+        return mAppModel.getBtcCnyValue();
     }
 
     public void setBtcCnyValue(double btcCnyValue) {
-        mBtcCnyValue = btcCnyValue;
+        mAppModel.setBtcCnyValue(btcCnyValue);
     }
 
     public double getBtcUsdValue() {
-        return mBtcUsdValue;
+        return mAppModel.getBtcUsdValue();
     }
 
     public void setBtcUsdValue(double btcUsdValue) {
-        mBtcUsdValue = btcUsdValue;
+        mAppModel.setBtcUsdValue(btcUsdValue);
     }
 
     public String getBtcValue(String btcAmount) {

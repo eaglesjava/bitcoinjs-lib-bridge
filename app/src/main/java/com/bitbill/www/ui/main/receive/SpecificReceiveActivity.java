@@ -55,7 +55,7 @@ public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRate
 
     @Override
     public void injectComponent() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override

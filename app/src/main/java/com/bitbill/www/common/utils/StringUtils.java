@@ -458,6 +458,31 @@ public class StringUtils {
         return decrypt;
     }
 
+    /**
+     * 通过钱包构建ExtendedKeysHash
+     *
+     * @param wallets
+     * @return
+     */
+    public static String buildExtendedKeysHash(List<Wallet> wallets) {
+        String extendedKeysHash = "";
+        if (isEmpty(wallets)) {
+            return extendedKeysHash;
+        }
+        for (int i = 0; i < wallets.size(); i++) {
+            String extentedPublicKey = wallets.get(i).getExtentedPublicKey();
+            // check xpubkey
+            if (StringUtils.isEmpty(extentedPublicKey)) {
+                continue;
+            }
+            extendedKeysHash += EncryptUtils.encryptMD5ToString(extentedPublicKey);
+            if (i < wallets.size() - 1) {
+                extendedKeysHash += "|";
+            }
+        }
+        return extendedKeysHash;
+    }
+
     public static boolean isEmpty(List list) {
         if (list == null) {
             return true;

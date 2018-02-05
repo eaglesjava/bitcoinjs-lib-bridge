@@ -7,6 +7,9 @@ package com.bitbill.www.di.module;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import com.bitbill.www.common.presenter.BalanceMvpPresenter;
+import com.bitbill.www.common.presenter.BalanceMvpView;
+import com.bitbill.www.common.presenter.BalancePresenter;
 import com.bitbill.www.common.presenter.BtcAddressMvpPresentder;
 import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.presenter.BtcAddressPresenter;
@@ -67,9 +70,9 @@ import com.bitbill.www.ui.main.contact.SearchContactResultPresenter;
 import com.bitbill.www.ui.main.my.ContactSettingMvpPresenter;
 import com.bitbill.www.ui.main.my.ContactSettingMvpView;
 import com.bitbill.www.ui.main.my.ContactSettingPresenter;
-import com.bitbill.www.ui.main.my.FeebackMvpPresenter;
-import com.bitbill.www.ui.main.my.FeebackMvpView;
-import com.bitbill.www.ui.main.my.FeebackPresenter;
+import com.bitbill.www.ui.main.my.FeedbackMvpPresenter;
+import com.bitbill.www.ui.main.my.FeedbackMvpView;
+import com.bitbill.www.ui.main.my.FeedbackPresenter;
 import com.bitbill.www.ui.main.my.ShortCutSettingMvpPresenter;
 import com.bitbill.www.ui.main.my.ShortCutSettingMvpView;
 import com.bitbill.www.ui.main.my.ShortCutSettingPresenter;
@@ -176,8 +179,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    MainMvpPresenter<WalletModel, MainMvpView> provideMainPresenter(
-            MainPresenter<WalletModel, MainMvpView> presenter) {
+    MainMvpPresenter<TxModel, MainMvpView> provideMainPresenter(
+            MainPresenter<TxModel, MainMvpView> presenter) {
         return presenter;
     }
 
@@ -400,8 +403,15 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    FeebackMvpPresenter<AppModel, FeebackMvpView> provideFeebackPresenter(
-            FeebackPresenter<AppModel, FeebackMvpView> presenter) {
+    FeedbackMvpPresenter<AppModel, FeedbackMvpView> provideFeedbackPresenter(
+            FeedbackPresenter<AppModel, FeedbackMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    BalanceMvpPresenter<WalletModel, BalanceMvpView> provideBalancePresenter(
+            BalancePresenter<WalletModel, BalanceMvpView> presenter) {
         return presenter;
     }
 

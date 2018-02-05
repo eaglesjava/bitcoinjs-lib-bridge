@@ -6,7 +6,7 @@ import com.bitbill.www.model.app.AppModel;
 /**
  * Created by isanwenyu@163.com on 2018/1/31.
  */
-public interface FeebackMvpPresenter<M extends AppModel, V extends FeebackMvpView> extends MvpPresenter<V> {
+public interface FeedbackMvpPresenter<M extends AppModel, V extends FeedbackMvpView> extends MvpPresenter<V> {
 
     void sendFeeback();
 }

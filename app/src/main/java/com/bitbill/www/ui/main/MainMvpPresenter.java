@@ -25,18 +25,14 @@ package com.bitbill.www.ui.main;
 
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.wallet.WalletModel;
+import com.bitbill.www.model.transaction.TxModel;
 
 /**
  * Created by isanwenyu@163.com on 2017/07/17.
  */
 
 @PerActivity
-public interface MainMvpPresenter<M extends WalletModel, V extends MainMvpView> extends MvpPresenter<V> {
-
-    void getBalance();
-
-    void loadBalance();
+public interface MainMvpPresenter<M extends TxModel, V extends MainMvpView> extends MvpPresenter<V> {
 
     void listUnconfirm();
 

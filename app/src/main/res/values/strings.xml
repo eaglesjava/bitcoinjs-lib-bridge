@@ -162,6 +162,7 @@
     <string name="status_item_unconfirm">待确认</string>
     <string name="status_item_transfer">已转移</string>
     <string name="fail_get_tx_record">获取交易记录失败</string>
+    <string name="fail_load_balance">加载钱包余额失败</string>
 
     <!--transfer details-->
     <string name="title_activity_transfer_details">交易详情</string>

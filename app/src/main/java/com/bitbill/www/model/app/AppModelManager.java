@@ -230,6 +230,26 @@ public class AppModelManager extends ModelManager implements AppModel {
         mAppPreferences.setUpdateVersion(aversion);
     }
 
+    @Override
+    public double getBtcCnyValue() {
+        return mAppPreferences.getBtcCnyValue();
+    }
+
+    @Override
+    public void setBtcCnyValue(double btcCnyValue) {
+        mAppPreferences.setBtcCnyValue(btcCnyValue);
+    }
+
+    @Override
+    public double getBtcUsdValue() {
+        return mAppPreferences.getBtcUsdValue();
+    }
+
+    @Override
+    public void setBtcUsdValue(double btcUsdValue) {
+        mAppPreferences.setBtcUsdValue(btcUsdValue);
+    }
+
     /**
      * 获取btc兑换比例
      *

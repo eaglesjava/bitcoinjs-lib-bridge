@@ -19,9 +19,9 @@ import butterknife.BindView;
 /**
  * Created by isanwenyu@163.com on 2018/1/31.
  */
-public class FeedbackActivity extends BaseToolbarActivity<FeebackMvpPresenter> implements FeebackMvpView {
+public class FeedbackActivity extends BaseToolbarActivity<FeedbackMvpPresenter> implements FeedbackMvpView {
     @Inject
-    FeebackMvpPresenter<AppModel, FeebackMvpView> mFeebackMvpPresenter;
+    FeedbackMvpPresenter<AppModel, FeedbackMvpView> mFeedbackMvpPresenter;
     @BindView(R.id.et_feeback_content)
     EditText etFeebackContent;
     @BindView(R.id.etw_feeback_contact)
@@ -33,8 +33,8 @@ public class FeedbackActivity extends BaseToolbarActivity<FeebackMvpPresenter> i
     }
 
     @Override
-    public FeebackMvpPresenter getMvpPresenter() {
-        return mFeebackMvpPresenter;
+    public FeedbackMvpPresenter getMvpPresenter() {
+        return mFeedbackMvpPresenter;
     }
 
     @Override
