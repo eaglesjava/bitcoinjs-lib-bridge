@@ -8,6 +8,7 @@ import com.androidnetworking.interfaces.DownloadProgressListener;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.FileUitls;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
 
@@ -32,7 +33,10 @@ public class DownloadPresenter<M extends AppModel, V extends DownloadMvpView> ex
 
     @Override
     public void downloadFile(String url, String fileName) {
-
+        if (!StringUtils.isUrl(url)) {
+            getMvpView().inValidUrl();
+            return;
+        }
         String rootDirPath = FileUitls.getRootDirPath(getApp());
         getModelManager().downloadFile(url, rootDirPath, fileName, new DownloadProgressListener() {
             @Override

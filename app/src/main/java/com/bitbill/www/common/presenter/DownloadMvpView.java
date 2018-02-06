@@ -14,4 +14,6 @@ public interface DownloadMvpView extends MvpView {
     void downloadFileComplete(File file);
 
     void downloadFileFail();
+
+    void inValidUrl();
 }

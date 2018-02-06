@@ -118,6 +118,10 @@ public class StringUtils {
         return URLUtil.isValidUrl(str);
     }
 
+    public static boolean isApkUrl(String apkUrl) {
+        return isUrl(apkUrl) && apkUrl.toLowerCase().endsWith(".apk");
+    }
+
     /**
      * 数字字符串长度
      *

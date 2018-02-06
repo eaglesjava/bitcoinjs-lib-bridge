@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,11 +51,13 @@ public class UpdateAppDialog extends BaseDialog implements UpdateAppMvpView, Dow
     DownloadMvpPresenter<AppModel, DownloadMvpView> mPresenter;
     private String mTitle;
     private ProgressDialog mProgressDialog;
+    private String mApkUrl;
 
-    public static UpdateAppDialog newInstance(String title) {
+    public static UpdateAppDialog newInstance(String title, String downloadUrl) {
 
         Bundle args = new Bundle();
         args.putString(AppConstants.ARG_TITLE, title);
+        args.putString(AppConstants.ARG_APK_URL, downloadUrl);
         UpdateAppDialog fragment = new UpdateAppDialog();
         fragment.setArguments(args);
         return fragment;
@@ -72,6 +75,7 @@ public class UpdateAppDialog extends BaseDialog implements UpdateAppMvpView, Dow
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTitle = getArguments().getString(AppConstants.ARG_TITLE);
+        mApkUrl = getArguments().getString(AppConstants.ARG_APK_URL);
     }
 
     @Nullable
@@ -101,8 +105,14 @@ public class UpdateAppDialog extends BaseDialog implements UpdateAppMvpView, Dow
             @Override
             public void onShow(DialogInterface dialog) {
                 if (getMvpPresenter() != null) {
-                    getMvpPresenter().downloadFile(AppConstants.DOWNLOAD_APK_URL, "bitbill.apk");
+                    getMvpPresenter().downloadFile(mApkUrl, "bitbill.apk");
                 }
+            }
+        });
+        mProgressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                return keyCode == KeyEvent.KEYCODE_SEARCH || keyCode == KeyEvent.KEYCODE_BACK;
             }
         });
         return mProgressDialog;
@@ -130,11 +140,21 @@ public class UpdateAppDialog extends BaseDialog implements UpdateAppMvpView, Dow
         UIHelper.installApk(getApp(), file);
         //关闭当前对话框
         dismissDialog(TAG);
+        if (getBaseActivity() != null) {
+            getBaseActivity().finish();
+        }
     }
 
     @Override
     public void downloadFileFail() {
         onError(R.string.fail_update_install_apk);
+        //关闭当前对话框
+        dismissDialog(TAG);
+    }
+
+    @Override
+    public void inValidUrl() {
+        onError(R.string.fail_invalid_apk_url);
         //关闭当前对话框
         dismissDialog(TAG);
     }

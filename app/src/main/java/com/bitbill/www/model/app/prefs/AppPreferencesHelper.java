@@ -176,4 +176,14 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
 
         mPrefs.edit().putString(BTC_USD_VALUE, String.valueOf(btcUsdValue)).apply();
     }
+
+    @Override
+    public String getApkUrl() {
+        return mPrefs.getString(APK_URL, "");
+    }
+
+    @Override
+    public void setApkUrl(String apkUrl) {
+        mPrefs.edit().putString(APK_URL, apkUrl).apply();
+    }
 }

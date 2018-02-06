@@ -41,6 +41,7 @@ import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.utils.AnimationUtils;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
@@ -169,7 +170,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
     };
     private UpdateAppDialog mUpdateAppDialog;
-    private MessageConfirmDialog mMessageConfirmDialog;
+    private MessageConfirmDialog mUpdateMsgConfirmDialog;
     private String mFromTag;
     private boolean isListUnconfirm;
     private Wallet mSelectedWallet;
@@ -445,8 +446,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void initData() {
-        // TODO: 2018/2/1 for test no check
-//        mUpdateMvpPresenter.checkUpdate();
+        mUpdateMvpPresenter.checkUpdate();
         mWalletPresenter.loadWallets();
         mGetCacheVersionMvpPresenter.getCacheVersion();
         if (mBoundService != null) {
@@ -805,8 +805,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void showLoading() {
-        if (mMessageConfirmDialog != null) {
-            if (mMessageConfirmDialog.isShowing()) {
+        if (mUpdateMsgConfirmDialog != null) {
+            if (mUpdateMsgConfirmDialog.isShowing()) {
                 return;
             }
         }
@@ -850,12 +850,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion) {
+    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl) {
         if (needUpdate) {
             //弹出更新提示框
-            if (mMessageConfirmDialog == null) {
-                mMessageConfirmDialog = MessageConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), getString(R.string.dialog_msg_latest_version) + updateVersion, getString(R.string.dialog_btn_update), needForce);
-                mMessageConfirmDialog
+            if (mUpdateMsgConfirmDialog == null) {
+                mUpdateMsgConfirmDialog = MessageConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), getString(R.string.dialog_msg_latest_version) + updateVersion, getString(R.string.dialog_btn_update), needForce, false);
+                mUpdateMsgConfirmDialog
                         .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -863,13 +863,17 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                                     mViewPager.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-
-                                            //弹出下载对话框
-                                            if (mUpdateAppDialog == null) {
-                                                mUpdateAppDialog = UpdateAppDialog.newInstance(getString(R.string.dialog_title_download_app));
+                                            //根据url类型跳转
+                                            if (!StringUtils.isApkUrl(apkUrl)) {
+                                                //跳转到官网
+                                                UIHelper.openBrower(MainActivity.this, apkUrl);
+                                                if (needForce) finish();
+                                            } else {
+                                                //弹出下载对话框
+                                                mUpdateAppDialog = UpdateAppDialog.newInstance(getString(R.string.dialog_title_download_app), apkUrl);
+                                                mUpdateAppDialog
+                                                        .show(getSupportFragmentManager());
                                             }
-                                            mUpdateAppDialog
-                                                    .show(getSupportFragmentManager());
                                         }
                                     }, 500);
 
@@ -878,7 +882,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                         });
             }
 
-            mMessageConfirmDialog.show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
+            mUpdateMsgConfirmDialog.show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
         }
 
     }

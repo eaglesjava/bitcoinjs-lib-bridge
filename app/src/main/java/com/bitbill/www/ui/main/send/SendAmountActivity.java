@@ -35,8 +35,6 @@ public class SendAmountActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
     Button btnNext;
     @BindView(R.id.tv_btc_value)
     TextView tvBtcValue;
-    @BindView(R.id.ll_receiver_address)
-    View mAddressLayout;
     @Inject
     GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
 

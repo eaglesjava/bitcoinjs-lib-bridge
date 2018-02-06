@@ -100,10 +100,10 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
     }
 
     @Override
-    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion) {
+    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl) {
         if (needUpdate) {
             //弹出更新提示框
-            MessageConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), getString(R.string.dialog_msg_latest_version) + updateVersion, getString(R.string.dialog_btn_update), needForce)
+            MessageConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), getString(R.string.dialog_msg_latest_version) + updateVersion, getString(R.string.dialog_btn_update), needForce, false)
                     .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -111,10 +111,16 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
                                 mSvCheckVersion.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-
-                                        //弹出下载对话框
-                                        UpdateAppDialog.newInstance(getString(R.string.dialog_title_download_app))
-                                                .show(getSupportFragmentManager());
+                                        //根据url类型跳转
+                                        if (!StringUtils.isApkUrl(apkUrl)) {
+                                            //跳转到官网
+                                            UIHelper.openBrower(AboutUsActivity.this, apkUrl);
+                                            if (needForce) finish();
+                                        } else {
+                                            //弹出下载对话框
+                                            UpdateAppDialog.newInstance(getString(R.string.dialog_title_download_app), apkUrl)
+                                                    .show(getSupportFragmentManager());
+                                        }
                                     }
                                 }, 300);
                             }

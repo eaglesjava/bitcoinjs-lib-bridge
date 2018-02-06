@@ -250,6 +250,16 @@ public class AppModelManager extends ModelManager implements AppModel {
         mAppPreferences.setBtcUsdValue(btcUsdValue);
     }
 
+    @Override
+    public String getApkUrl() {
+        return mAppPreferences.getApkUrl();
+    }
+
+    @Override
+    public void setApkUrl(String apkUrl) {
+        mAppPreferences.setApkUrl(apkUrl);
+    }
+
     /**
      * 获取btc兑换比例
      *

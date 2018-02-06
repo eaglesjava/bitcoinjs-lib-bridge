@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -157,7 +158,7 @@ public class SelectWalletView extends FrameLayout implements View.OnClickListene
         this.setWalletName(StringUtils.cutWalletName(wallet.getName()))
                 .setWalletLabel(String.valueOf(wallet.getName().charAt(0)))
                 // TODO: 2017/11/28 从后台获余额
-                .setWalletAmount(StringUtils.satoshi2btc(wallet.getBalance()) + " btc")
+                .setWalletAmount(StringUtils.satoshi2btc(wallet.getBalance()) + " " + AppConstants.BTC_COIN_TYPE)
                 .setBackuped(wallet.getIsBackuped());
         return this;
     }

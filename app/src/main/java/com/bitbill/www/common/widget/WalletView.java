@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -139,6 +140,7 @@ public class WalletView extends LinearLayout implements View.OnClickListener {
         refreshLayout();
         return this;
     }
+
     private void refreshLayout() {
         if (!backuped) {
             btnBackupNow.setVisibility(VISIBLE);
@@ -166,7 +168,7 @@ public class WalletView extends LinearLayout implements View.OnClickListener {
         this.setWalletName(StringUtils.cutWalletName(wallet.getName()))
                 .setWalletLabel(String.valueOf(wallet.getName().charAt(0)))
                 // TODO: 2017/11/28 从后台获余额
-                .setWalletAmount(StringUtils.satoshi2btc(wallet.getBalance()) + " btc")
+                .setWalletAmount(StringUtils.satoshi2btc(wallet.getBalance()) + " " + AppConstants.BTC_COIN_TYPE)
                 .setBackuped(wallet.getIsBackuped());
         return this;
     }
@@ -175,6 +177,7 @@ public class WalletView extends LinearLayout implements View.OnClickListener {
         mOnWalletClickListener = onWalletClickListener;
         return this;
     }
+
     /**
      * Called when a view has been clicked.
      *

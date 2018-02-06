@@ -37,6 +37,7 @@
     <string name="dialog_title_download_app">下载安装包</string>
     <string name="dialog_msg_latest_version">最新版本为:v</string>
     <string name="dialog_btn_update">更新</string>
+    <string name="fail_invalid_apk_url">下载地址有误，请稍后重试</string>
 
 
     <!--guide-->

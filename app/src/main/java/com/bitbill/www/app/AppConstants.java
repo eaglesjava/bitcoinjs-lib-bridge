@@ -12,9 +12,9 @@ public final class AppConstants {
 
 
     /**
-     * download apk url
+     * bitbill website
      */
-    public static final String DOWNLOAD_APK_URL = "http://192.168.1.2:8000/app-release.apk";
+    public static final String BITBILL_WEBS_SITE = "https://www.bitbill.com";
 
     public static final int API_STATUS_CODE_LOCAL_ERROR = 0;
     public static final int API_STATUS_CODE_SERVER_ERROR = 500;
@@ -57,6 +57,7 @@ public final class AppConstants {
     public static final String ARG_TX_ITEM = "arg_tx_item";
     public static final String ARG_ADDRESS = "arg_address";
     public static final String ARG_TITLE = "arg_title";
+    public static final String ARG_APK_URL = "apk_url";
     /**
      * btc about
      */

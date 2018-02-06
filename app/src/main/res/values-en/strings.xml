@@ -30,6 +30,7 @@
     <string name="dialog_title_download_app">Download the installation package</string>
     <string name="dialog_msg_latest_version">The latest version is :v</string>
     <string name="dialog_btn_update">Update</string>
+    <string name="fail_invalid_apk_url">The download address is wrong, please try again later.</string>
 
     <!--socket message-->
     <string name="connect">Connected</string>
