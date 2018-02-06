@@ -32,7 +32,7 @@ android {
             buildConfigField("String", "API_KEY", "\"TEST\"")
         }
         release {
-            minifyEnabled true
+//            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"https://walletservice.bitbill.com\"")
             buildConfigField("String", "SOCKET_URL", "\"http://walletsocket.bitbill.com:8088\"")
