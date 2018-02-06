@@ -15,7 +15,7 @@ import com.bitbill.www.ui.main.contact.AddBtcContactByAddressFragment;
 import com.bitbill.www.ui.main.contact.AddContactByAddressActivity;
 import com.bitbill.www.ui.main.contact.ContactFragment;
 import com.bitbill.www.ui.main.contact.SearchContactResultActivity;
-import com.bitbill.www.ui.main.send.SendAmountActivity;
+import com.bitbill.www.ui.main.send.ScanResultActivity;
 
 import java.io.File;
 
@@ -75,7 +75,7 @@ public class UIHelper {
             if (AddBtcContactByAddressFragment.TAG.equals(fromTag) || ContactFragment.TAG.equals(fromTag)) {
                 AddContactByAddressActivity.start(context, address);
             } else if (StringUtils.isNotEmpty(amount)) {
-                SendAmountActivity.start(context, address, amount, null);
+                ScanResultActivity.start(context, address, amount);
             } else {
                 MainActivity.start(context, null, address);
             }

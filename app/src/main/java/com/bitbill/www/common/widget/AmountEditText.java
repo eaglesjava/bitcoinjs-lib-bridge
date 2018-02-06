@@ -36,6 +36,9 @@ public class AmountEditText extends android.support.v7.widget.AppCompatEditText 
             if (dest.toString().contains(".") && source.equals(".")) {
                 return "";
             }
+            if (dest.length() == 1 && dest.toString().contains("0") && source.equals("0")) {
+                return "";
+            }
             String dValue = dest.toString();
             String[] splitArray = dValue.split("\\.");
             if (splitArray.length > 1) {

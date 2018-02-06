@@ -25,10 +25,15 @@
         return JSON.stringify(result)
     }
 
-    function generateMnemonicCNRetrunSeedHexAndXPublicKey(){
+    function generateMnemonicRetrunSeedHexAndXPublicKey(isCN){
        var result={};
        try {
-            var mnemonic = bridge.generateMnemonicRandomCN(128)
+            var mnemonic;
+            if(isCN==1){
+                mnemonic= bridge.generateMnemonicRandomCN(128)
+            }else{
+                mnemonic= bridge.generateMnemonicRandom(128)
+            }
             var seedHex = bridge.mnemonicToSeedHex(mnemonic,'')
             var publicKeys = bridge.getBitcoinXPublicKeys(seedHex)
             result.status=0
@@ -96,6 +101,8 @@
         }
        return JSON.stringify(result)
     }
+
+
 
 </script>
 </body>

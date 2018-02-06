@@ -205,17 +205,22 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             if (mViewPager != null) {
                 mViewPager.setCurrentItem(INDEX_ASSET, false);
             }
-        } else if (mSendContact != null) {
+            return;
+        }
+        if (mSendContact != null) {
             //切换到发送联系人界面
             mViewPager.setCurrentItem(INDEX_SEND, false);
+            if (mSendFragment != null) {
+                mSendFragment.setSendAddress(mSendContact);
+            }
         } else if (StringUtils.isNotEmpty(mAddress)) {
             //切换到发送界面
             mViewPager.setCurrentItem(INDEX_SEND, false);
+            if (mSendFragment != null) {
+                mSendFragment.setSendAddress(mAddress);
+            }
         }
-        if (mSendFragment != null) {
-            mSendFragment.setSendAddress(mSendContact);
-            mSendFragment.setSendAddress(mAddress);
-        }
+
         if (isListUnconfirm) {
             //获取未确认列表
             getMvpPresenter().listUnconfirm();

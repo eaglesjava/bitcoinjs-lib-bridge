@@ -282,14 +282,17 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     private void refreshSeekBar() {
         sbSendFee.setMax(100);
-        int feeRange = getMaxFeeByte() - getMinFeeByte();
+        final int maxFeeByte = getMaxFeeByte();
+        final int minFeeByte = getMinFeeByte();
+        int feeRange = maxFeeByte - minFeeByte;
         if (feeRange != 0) {
-            sbSendFee.setProgress(getBestFeeByte() * 100 / feeRange);
+            int bestFeeByte = getBestFeeByte();
+            sbSendFee.setProgress((bestFeeByte - minFeeByte) * 100 / feeRange);
         }
         sbSendFee.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                int seekFee = (int) ((progress * (getMaxFeeByte() - getMinFeeByte()) * 1.0 / 100) + getMinFeeByte());
+                int seekFee = (int) ((progress * (maxFeeByte - minFeeByte) * 1.0 / 100) + minFeeByte);
                 updateFeeLayout(seekFee);
 
             }

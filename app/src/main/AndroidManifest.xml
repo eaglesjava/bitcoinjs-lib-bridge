@@ -66,7 +66,7 @@
             android:name=".ui.main.receive.SpecificReceiveActivity"
             android:label="@string/title_activity_specific_receive"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".ui.main.send.SendSuccessActivity"
             android:label="@string/title_activity_send_success"
@@ -86,6 +86,11 @@
             android:label="@string/title_activity_send_amount"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name=".ui.main.send.ScanResultActivity"
+            android:label="@string/title_activity_scan_result"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.main.receive.ScanPayActivity"
             android:label="@string/title_activity_scan_pay"

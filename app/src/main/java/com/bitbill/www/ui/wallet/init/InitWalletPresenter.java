@@ -15,12 +15,15 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.JsResult;
+import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
 import com.google.gson.JsonSyntaxException;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -32,6 +35,8 @@ import io.reactivex.disposables.CompositeDisposable;
 public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpView> extends ModelPresenter<W, V> implements InitWalletMvpPresenter<W, V> {
 
     private static final String TAG = "InitWalletPresenter";
+    @Inject
+    AppModel mAppModel;
     private Wallet mWallet;
 
     @Inject
@@ -84,7 +89,8 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             return;
         }
         try {
-            BitcoinJsWrapper.getInstance().generateMnemonicCNRetrunSeedHexAndXPublicKey(new BitcoinJsWrapper.Callback() {
+            int isCN = mAppModel.getCurrentLocale() != null && mAppModel.getCurrentLocale().getLanguage().equals(Locale.ENGLISH.getLanguage()) ? 0 : 1;
+            BitcoinJsWrapper.getInstance().generateMnemonicRetrunSeedHexAndXPublicKey(isCN, new BitcoinJsWrapper.Callback() {
                 @Override
                 public void call(String key, String jsResult) {
                     if (!isViewAttached()) {
@@ -103,7 +109,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     if (result.status == JsResult.STATUS_SUCCESS) {
                         String[] data = result.getData();
                         if (data != null && data.length == 4) {
-                            Log.d(TAG, "generateMnemonicCNRetrunSeedHexAndXPublicKey: key = [" + key + "], Mnemonic = [" + data[0] + "], seedhex = [" + data[1] + "], extendedPublicKey = [" + data[2] + "], internalPublicKey = [" + data[3] + "]");
+                            Log.d(TAG, "generateMnemonicRetrunSeedHexAndXPublicKey: key = [" + key + "], Mnemonic = [" + data[0] + "], seedhex = [" + data[1] + "], extendedPublicKey = [" + data[2] + "], internalPublicKey = [" + data[3] + "]");
                             StringUtils.encryptMnemonicAndSeedHex(data[0], data[1], data[2], data[3], getMvpView().getTradePwd(), mWallet);
                             //调用后台创建钱包接口
                             createWallet();

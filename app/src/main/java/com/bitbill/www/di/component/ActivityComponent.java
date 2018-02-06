@@ -28,6 +28,8 @@ import com.bitbill.www.ui.main.receive.ReceiveFragment;
 import com.bitbill.www.ui.main.receive.ScanPayActivity;
 import com.bitbill.www.ui.main.receive.SpecificReceiveActivity;
 import com.bitbill.www.ui.main.send.BtcSendFragment;
+import com.bitbill.www.ui.main.send.ScanResultActivity;
+import com.bitbill.www.ui.main.send.SendAmountActivity;
 import com.bitbill.www.ui.main.send.SendConfirmActivity;
 import com.bitbill.www.ui.splash.SplashActivity;
 import com.bitbill.www.ui.wallet.backup.BackUpWalletActivity;
@@ -109,4 +111,8 @@ public interface ActivityComponent {
     void inject(FeedbackActivity feedbackActivity);
 
     void inject(SpecificReceiveActivity specificReceiveActivity);
+
+    void inject(ScanResultActivity scanResultActivity);
+
+    void inject(SendAmountActivity sendAmountActivity);
 }

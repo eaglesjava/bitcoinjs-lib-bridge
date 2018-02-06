@@ -143,14 +143,15 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
 
     @Override
     public void showLoading() {
-        hideLoading();
-        mProgressDialog = DialogUtils.showLoadingDialog(this.getContext());
+        if (mActivity != null) {
+            mActivity.showLoading();
+        }
     }
 
     @Override
     public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+        if (mActivity != null) {
+            mActivity.hideLoading();
         }
     }
 
@@ -253,7 +254,7 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
             showMessage(event.getMsg());
         }
     }
-    
+
     public interface Callback {
 
         void onFragmentAttached();

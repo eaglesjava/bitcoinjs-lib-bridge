@@ -29,10 +29,12 @@ public class ValidateAddressPresenter<M extends AddressModel, V extends Validate
         if (!isValidAddress()) {
             return;
         }
+        getMvpView().showLoading();
         BitcoinJsWrapper.getInstance().validateAddress(getMvpView().getAddress(), (key, jsResult) -> {
             if (!isViewAttached()) {
                 return;
             }
+            getMvpView().hideLoading();
             if (StringUtils.isEmpty(jsResult)) {
                 getMvpView().validateAddress(false);
                 return;

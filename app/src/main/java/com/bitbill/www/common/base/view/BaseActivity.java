@@ -12,6 +12,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +51,7 @@ import cn.jpush.android.api.JPushInterface;
 public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActivity
         implements MvpView, BaseFragment.Callback, BaseInjectControl<P> {
 
+    private static final int DISMISS = 0x43;
     protected LayoutInflater mInflater;
     private ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
@@ -56,6 +59,16 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     private P mMvpPresenter;
     private List<MvpPresenter> mPresenters = new ArrayList<>();
     private BitbillApp mApp;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == DISMISS) {
+                if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -174,7 +187,7 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
     @Override
     public void hideLoading() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+            mHandler.sendEmptyMessageDelayed(DISMISS, 500);
         }
     }
 

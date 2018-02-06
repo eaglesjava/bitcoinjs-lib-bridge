@@ -77,8 +77,8 @@ public class BitcoinJsWrapper {
 
     }
 
-    public void generateMnemonicCNRetrunSeedHexAndXPublicKey(Callback callback) {
-        executeJS("generateMnemonicCNRetrunSeedHexAndXPublicKey()", callback);
+    public void generateMnemonicRetrunSeedHexAndXPublicKey(int isCN, Callback callback) {
+        executeJS("generateMnemonicRetrunSeedHexAndXPublicKey(" + isCN + ")", callback);
     }
 
     public void validateMnemonicReturnSeedHexAndXPublicKey(String nemonic, Callback callback) {

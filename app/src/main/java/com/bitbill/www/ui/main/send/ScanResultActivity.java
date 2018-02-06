@@ -3,10 +3,6 @@ package com.bitbill.www.ui.main.send;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,14 +16,13 @@ import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.AmountEditText;
 import com.bitbill.www.model.app.AppModel;
-import com.bitbill.www.model.contact.db.entity.Contact;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SendAmountActivity extends BaseToolbarActivity<GetExchangeRateMvpPresenter> implements GetExchangeRateMvpView {
+public class ScanResultActivity extends BaseToolbarActivity<GetExchangeRateMvpPresenter> implements GetExchangeRateMvpView {
 
     @BindView(R.id.et_send_amount)
     AmountEditText etSendAmount;
@@ -37,16 +32,18 @@ public class SendAmountActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
     TextView tvBtcValue;
     @BindView(R.id.ll_receiver_address)
     View mAddressLayout;
+    @BindView(R.id.tv_send_address)
+    TextView mSendAddressTextView;
     @Inject
     GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
 
     private String mAddress;
-    private Contact mSendContact;
+    private String mAmount;
 
-    public static void start(Context context, String address, Contact sendContact) {
-        Intent starter = new Intent(context, SendAmountActivity.class);
+    public static void start(Context context, String address, String amount) {
+        Intent starter = new Intent(context, ScanResultActivity.class);
         starter.putExtra(AppConstants.EXTRA_SEND_ADDRESS, address);
-        starter.putExtra(AppConstants.EXTRA_SEND_CONTACT, sendContact);
+        starter.putExtra(AppConstants.EXTRA_SEND_AMOUNT, amount);
         context.startActivity(starter);
     }
 
@@ -54,23 +51,13 @@ public class SendAmountActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         mAddress = getIntent().getStringExtra(AppConstants.EXTRA_SEND_ADDRESS);
-        mSendContact = (Contact) getIntent().getSerializableExtra(AppConstants.EXTRA_SEND_CONTACT);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.send_amount_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_send_all_amount:
-                sendAllAmount();
-                break;
+        mAmount = getIntent().getStringExtra(AppConstants.EXTRA_SEND_AMOUNT);
+        try {
+            mAmount = StringUtils.satoshi2btc(StringUtils.btc2Satoshi(mAmount));
+        } catch (Exception e) {
+            e.printStackTrace();
+            mAmount = "0.00";
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -95,26 +82,18 @@ public class SendAmountActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
 
     @Override
     public void initView() {
-        etSendAmount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updateBtcValue();
-            }
-        });
+        etSendAmount.setText(mAmount);
+        StringUtils.setEditable(etSendAmount, false);
+        if (hasAmount() && StringUtils.isNotEmpty(mAddress)) {
+            mAddressLayout.setVisibility(View.VISIBLE);
+            mSendAddressTextView.setText(mAddress);
+        } else {
+            mAddressLayout.setVisibility(View.GONE);
+        }
     }
 
-    private void updateBtcValue() {
-        tvBtcValue.setText(BitbillApp.get().getBtcValue(getSendAmount()));
+    private boolean hasAmount() {
+        return !StringUtils.isEmpty(mAmount);
     }
 
     @Override
@@ -127,9 +106,13 @@ public class SendAmountActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
 
     }
 
+    private void updateBtcValue() {
+        tvBtcValue.setText(BitbillApp.get().getBtcValue(getSendAmount()));
+    }
+
     @Override
     public int getLayoutId() {
-        return R.layout.activity_send_amount;
+        return R.layout.activity_scan_result;
     }
 
 
@@ -137,33 +120,10 @@ public class SendAmountActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_next:
-                if (!isValidAmount()) {
-                    return;
-                }
                 //跳转到发送确认界面
-                SelectWalletActivity.start(SendAmountActivity.this, mAddress, getSendAmount(), false, mSendContact);
+                SelectWalletActivity.start(ScanResultActivity.this, mAddress, getSendAmount(), false, null);
                 break;
         }
-    }
-
-    private boolean isValidAmount() {
-        if (StringUtils.isEmpty(getSendAmount())) {
-            showMessage(R.string.msg_input_send_amount);
-            return false;
-        }
-        if (StringUtils.isZero(getSendAmount())) {
-            showMessage(R.string.msg_input_gt_zero_amount);
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * 发送全部余额
-     */
-    private void sendAllAmount() {
-        //跳转到发送确认界面
-        SelectWalletActivity.start(SendAmountActivity.this, mAddress, null, true, mSendContact);
     }
 
     public String getSendAmount() {
@@ -172,6 +132,6 @@ public class SendAmountActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
 
     @Override
     public void getBtcRateSuccess(double cnyRate, double usdRate) {
-
+        updateBtcValue();
     }
 }
