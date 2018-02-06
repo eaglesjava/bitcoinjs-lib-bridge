@@ -1,6 +1,7 @@
 package com.bitbill.www.ui.main.receive;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
@@ -27,6 +28,8 @@ import io.reactivex.disposables.CompositeDisposable;
 @PerActivity
 public class ScanPayPresenter<M extends TxModel, V extends ScanPayMvpView> extends ModelPresenter<M, V> implements ScanPayMvpPresenter<M, V> {
 
+    private static final String TAG = "ScanPayPresenter";
+
     @Inject
     public ScanPayPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);
@@ -46,6 +49,7 @@ public class ScanPayPresenter<M extends TxModel, V extends ScanPayMvpView> exten
                 .append(address)
                 .append("?amount=")
                 .append(getMvpView().getReceiveAmount()).toString();
+        Log.d(TAG, "createReceiveQrcode() called,receiveQrcodeStr:" + receiveQrcodeStr);
 
         getCompositeDisposable().add(Observable.just(
                 //生成地址二维码

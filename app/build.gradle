@@ -32,12 +32,12 @@ android {
             buildConfigField("String", "API_KEY", "\"TEST\"")
         }
         release {
-//            minifyEnabled true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"http://walletservice.bitbill.com\"")
-            buildConfigField("String", "SOCKET_URL", "\"http://walletsocket.bitbill.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://walletservice.bitbill.com\"")
+            buildConfigField("String", "SOCKET_URL", "\"http://walletsocket.bitbill.com:8088\"")
             buildConfigField("String", "ENCRYPTED_DB_SECRECT", "\"bitbill-release\"")
-            buildConfigField("String", "API_KEY", "\"TEST\"")
+            buildConfigField("String", "API_KEY", "\"RELEASE\"")
         }
     }
     lintOptions {
@@ -93,7 +93,7 @@ dependencies {
 
     //rxandroid
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.5'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.8'
 
     //geendao
     compile 'org.greenrobot:greendao:3.2.2'
@@ -111,9 +111,6 @@ dependencies {
     //bitmap
     implementation 'com.github.bumptech.glide:glide:4.5.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
-
-    //tab
-    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
 
     //adapter
     compile 'com.zhy:base-rvadapter:3.0.3'

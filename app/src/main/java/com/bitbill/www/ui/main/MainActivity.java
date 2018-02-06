@@ -689,6 +689,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         UnConfirmEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
         //加载未确认交易
         getMvpPresenter().listUnconfirm();
+        mBalanceMvpPresenter.getBalance();
 
         UnConfirmed unConfirmed = (UnConfirmed) unConfirmEvent.getData();
         if (unConfirmed != null && unConfirmed.getContext() != null) {
@@ -705,6 +706,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
         //加载未确认交易
         getMvpPresenter().listUnconfirm();
+        mBalanceMvpPresenter.getBalance();
 
         Confirmed confirmed = (Confirmed) confirmedEvent.getData();
         if (confirmed != null && confirmed.getContext() != null) {

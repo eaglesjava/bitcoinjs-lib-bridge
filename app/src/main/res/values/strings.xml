@@ -103,7 +103,6 @@
     <string name="title_asset">资产</string>
     <string name="title_receive">接收</string>
     <string name="title_send">发送</string>
-    <string name="title_my">我</string>
     <string name="navigation_drawer_open">打开导航页</string>
     <string name="navigation_drawer_close">关闭导航页</string>
     <string name="fail_parse_tx_item">解析交易列表信息失败</string>
@@ -147,7 +146,6 @@
     <string name="hint_keep_mnemonic">请妥善保管你的助记词</string>
     <string name="btn_complete">完成</string>
     <string name="fail_load_mnemonic">加载助记词失败</string>
-    <string name="error_get_wallet_info_fail">获取钱包信息失败,请返回重试</string>
     <string name="fail_get_confirm_pwd">获取确认密码失败，请重新输入</string>
     <string name="hint_bak_wallet_click">请按顺序点击下方文字</string>
     <string name="title_dialog_backup_fail">备份失败</string>
