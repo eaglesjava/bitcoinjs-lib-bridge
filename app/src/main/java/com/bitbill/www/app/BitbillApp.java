@@ -2,8 +2,11 @@ package com.bitbill.www.app;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +17,8 @@ import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.www.BuildConfig;
 import com.bitbill.www.R;
+import com.bitbill.www.common.app.AppManager;
+import com.bitbill.www.common.app.CrashHandler;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.di.component.ApplicationComponent;
@@ -23,6 +28,11 @@ import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.prefs.AppPreferences;
 import com.bitbill.www.model.wallet.db.WalletDbHelper;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.service.NetWorkService;
+import com.bitbill.www.service.SocketServiceProvider;
+import com.bitbill.www.ui.splash.SplashActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +101,6 @@ public class BitbillApp extends Application {
     private List<Wallet> mWallets;
     private AppPreferences.SelectedCurrency mSelectedCurrency;
     private long mBlockHeight;
-    private String mContactKey;
     private boolean isBackGround;
 
     public static BitbillApp get() {
@@ -115,6 +124,13 @@ public class BitbillApp extends Application {
             AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
 
         }
+        if (!BuildConfig.DEBUG) {
+            //如果是release模式 初始化崩溃处理
+            CrashHandler.getSingleCrash().init(this);
+        }
+        //设置Eventbus默认实例 不使用继承
+        EventBus.builder().eventInheritance(false).throwSubscriberException(BuildConfig.DEBUG).installDefaultEventBus();
+
         mWallets = new ArrayList<>();
 
         registerActivityLifecycleCallbacks(callbacks);
@@ -223,11 +239,12 @@ public class BitbillApp extends Application {
     }
 
     public String getContactKey() {
-        return mContactKey;
-    }
-
-    public void setContactKey(String contactKey) {
-        mContactKey = contactKey;
+        String contactKey = mAppModel.getContactKey();
+        if (StringUtils.isEmpty(contactKey)) {
+            contactKey = StringUtils.getContactKey();
+            mAppModel.setContactkey(contactKey);
+        }
+        return contactKey;
     }
 
     public String getUUIDMD5() {
@@ -265,6 +282,35 @@ public class BitbillApp extends Application {
 //            EventBus.getDefault().post(new AppBackgroundEvent(isBackGround));
 //            Log.d(TAG, "APP遁入后台");
 //        }
+    }
+
+    /**
+     * 退出程序的方法
+     */
+    public void appExit() {
+        // 停止服务
+        stopService(new Intent(this, NetWorkService.class));
+        stopService(new Intent(this, SocketServiceProvider.class));
+        //移除堆栈所有activity
+        AppManager.get().appExit(this);
+
+    }
+
+    /**
+     * 重启程序，当程序崩溃时，将程序先退出再进行重启
+     */
+    public void restartApp() {
+        Intent intent = new Intent(this, SplashActivity.class);
+        PendingIntent resIntent = PendingIntent.getActivity(this, 0,
+                intent, PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager manager = (AlarmManager) this
+                .getSystemService(ALARM_SERVICE);
+        // 1秒后重新启动
+        manager.set(AlarmManager.RTC, System.currentTimeMillis() + 1000,
+                resIntent);
+
+        appExit();
+
     }
 
 }

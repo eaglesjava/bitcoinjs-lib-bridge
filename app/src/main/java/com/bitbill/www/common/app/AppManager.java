@@ -146,7 +146,7 @@ public class AppManager {
     /**
      * application exit
      */
-    public void AppExit(Context context) {
+    public void appExit(Context context) {
         try {
             finishAllActivity();
             // kill process
