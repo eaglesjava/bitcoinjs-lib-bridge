@@ -14,16 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:inputHint="@string/hint_input_please"
-        app:inputPaddingBottom="10dp"
+        app:inputPaddingBottom="@dimen/dp_10"
         app:inputTitle="@string/input_contact_name" />
 
     <com.bitbill.www.common.widget.EditTextWapper
         android:id="@+id/etw_contact_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/dp_20"
         app:inputHint="@string/hint_input_please"
-        app:inputPaddingBottom="10dp"
+        app:inputPaddingBottom="@dimen/dp_10"
         app:inputTitle="@string/input_contact_address"
         app:rightDrawable="@drawable/ic_contact_scan" />
 
@@ -32,9 +32,9 @@
         android:id="@+id/etw_contact_remark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/dp_20"
         app:inputHint="@string/hint_input_please"
-        app:inputPaddingBottom="10dp"
+        app:inputPaddingBottom="@dimen/dp_10"
         app:inputTitle="@string/input_contact_remark" />
 
 </LinearLayout>

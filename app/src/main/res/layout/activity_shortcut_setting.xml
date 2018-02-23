@@ -13,8 +13,8 @@
         <TextView
             style="@style/Text.Setting.White"
             android:layout_width="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
             android:text="@string/setting_short_cut" />
 
         <Switch

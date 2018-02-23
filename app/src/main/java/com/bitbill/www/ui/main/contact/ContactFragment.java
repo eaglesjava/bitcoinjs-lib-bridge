@@ -18,7 +18,6 @@ import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.bitbill.www.common.widget.dialog.ListSelectDialog;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
-import com.bitbill.www.ui.main.send.ContactSelectActivity;
 import com.bitbill.www.ui.main.send.ScanQrcodeActivity;
 import com.mcxtzhang.indexlib.IndexBar.utils.IndexHelper;
 import com.zhy.adapter.recyclerview.base.ViewHolder;

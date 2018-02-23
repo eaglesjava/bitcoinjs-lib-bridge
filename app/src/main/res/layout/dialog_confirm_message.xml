@@ -8,10 +8,10 @@
         android:id="@+id/dialog_message"
         style="@style/ConfirmDialog.Message"
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/dialog_confirm_padding"
-        android:layout_marginLeft="@dimen/dialog_confirm_padding"
-        android:layout_marginRight="@dimen/dialog_confirm_padding"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="@dimen/dp_25"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
         android:gravity="center"
         android:minLines="1"/>
 </FrameLayout>

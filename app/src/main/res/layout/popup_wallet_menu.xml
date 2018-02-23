@@ -7,13 +7,13 @@
     <TextView
         android:id="@+id/tv_menu_create_wallet"
         style="@style/Text.Wallet.Menu"
-        android:elevation="10dp"
+        android:elevation="@dimen/dp_10"
         android:text="@string/menu_create_wallet" />
 
     <TextView
         android:id="@+id/tv_menu_import_wallet"
         style="@style/Text.Wallet.Menu"
-        android:layout_marginTop="10dp"
-        android:elevation="10dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:elevation="@dimen/dp_10"
         android:text="@string/menu_import_wallet" />
 </LinearLayout>

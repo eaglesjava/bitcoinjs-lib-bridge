@@ -16,27 +16,27 @@
         <TextView
             style="@style/Text.White"
             android:layout_width="match_parent"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="@dimen/dp_33"
             android:text="@string/hint_bak_confirm_mnemonic_correct" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="@dimen/dp_25">
 
             <com.zhy.view.flowlayout.TagFlowLayout
                 android:id="@+id/fl_mnemonic_confirm"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input_mnemonic_normal"
-                android:padding="20dp"
+                android:padding="@dimen/dp_20"
                 app:max_select="0" />
 
             <TextView
                 android:id="@+id/tv_hint_click"
                 style="@style/Text.InputHint"
                 android:layout_gravity="center"
-                android:padding="20dp"
+                android:padding="@dimen/dp_20"
                 android:text="@string/hint_bak_wallet_click" />
 
         </FrameLayout>
@@ -46,9 +46,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_padding"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/dp_15"
             android:background="@drawable/bg_input_mnemonic_normal"
-            android:padding="20dp"
+            android:padding="@dimen/dp_20"
             app:max_select="-1" />
 
         <Button

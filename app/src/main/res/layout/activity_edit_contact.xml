@@ -28,22 +28,22 @@
             <TextView
                 android:id="@+id/tv_top_title"
                 style="@style/Text.White"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/dp_30"
                 android:text="@string/text_contact_wallet_id"/>
 
             <TextView
                 android:id="@+id/tv_top_content"
                 style="@style/Text.White.Big"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="@dimen/dp_8" />
         </LinearLayout>
 
         <com.bitbill.www.common.widget.EditTextWapper
             android:id="@+id/etw_contact_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             app:inputHint="@string/hint_input_please"
-            app:inputPaddingBottom="10dp"
+            app:inputPaddingBottom="@dimen/dp_10"
             app:inputTitle="@string/input_contact_name"/>
 
 
@@ -51,9 +51,9 @@
             android:id="@+id/etw_contact_remark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             app:inputHint="@string/hint_input_please"
-            app:inputPaddingBottom="10dp"
+            app:inputPaddingBottom="@dimen/dp_10"
             app:inputTitle="@string/input_contact_remark"/>
 
     </LinearLayout>
@@ -76,7 +76,7 @@
             android:id="@+id/btn_delete"
             style="@style/Button.Transparent.White60"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="@string/btn_delete"
             />
     </LinearLayout>

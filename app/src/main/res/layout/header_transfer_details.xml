@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_transfer_status"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/dp_55"
+        android:layout_height="@dimen/dp_55"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_transfer_unconfirm" />
 
@@ -17,18 +17,17 @@
         android:id="@+id/tv_transfer_status"
         style="@style/Content.Title.White80"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_20"
         android:text="@string/status_transfer_unconfirm" />
 
     <TextView
         android:id="@+id/tv_transfer_amount"
         style="@style/Text.White"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="33dp"
-        android:text="+2.5001 BTC"
+        android:layout_marginBottom="@dimen/dp_33"
         android:textAllCaps="true"
-        android:textSize="40sp" />
+        android:textSize="@dimen/sp_40" />
 
 
 </LinearLayout>

@@ -12,8 +12,8 @@
         style="@style/RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="105dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="@dimen/dp_105"
+        android:layout_marginTop="@dimen/dp_20"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.bitbill.www.ui.main.send.SelectWalletActivity"
         tools:listitem="@layout/item_wallet_select_corner"/>
@@ -27,7 +27,6 @@
             android:id="@+id/btn_next"
             style="@style/Button.Blue"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_padding"
             android:text="@string/btn_next"/>
     </FrameLayout>

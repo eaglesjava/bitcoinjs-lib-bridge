@@ -1,4 +1,4 @@
-package com.bitbill.www.ui.main.send;
+package com.bitbill.www.ui.main.contact;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,6 @@ import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.BaseFragmentActivity;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
-import com.bitbill.www.ui.main.contact.ContactFragment;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

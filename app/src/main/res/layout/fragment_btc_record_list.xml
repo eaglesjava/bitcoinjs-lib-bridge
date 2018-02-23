@@ -21,7 +21,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dp_5"
                 android:layout_marginRight="@dimen/activity_padding"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_padding">
@@ -29,8 +29,7 @@
                 <TextView
                     android:id="@+id/tv_amount"
                     style="@style/Text.Wallet.Amount.Big"
-                    android:paddingRight="10dp"
-                    android:text="22.770128" />
+                    android:paddingRight="@dimen/dp_10" />
 
                 <TextView
                     android:id="@+id/tv_amount_label"
@@ -48,7 +47,7 @@
                 android:layout_marginRight="@dimen/activity_padding"
                 android:text="@string/text_btc_cny_value"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textSize="@dimen/sp_15" />
 
             <TextView
                 android:id="@+id/tv_btc_unconfirm"
@@ -59,10 +58,10 @@
                 android:layout_marginRight="@dimen/activity_padding"
                 android:background="@drawable/bg_white_30_corner"
                 android:gravity="center"
-                android:padding="20dp"
+                android:padding="@dimen/dp_20"
                 android:text="@string/text_btc_unconfirm"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="@dimen/sp_15"
                 android:visibility="gone" />
 
 
@@ -71,13 +70,13 @@
         <TextView
             style="@style/Text"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="@dimen/dp_36"
             android:background="@color/white_10"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/activity_padding"
             android:text="@string/text_tx_record"
             android:textColor="@color/white_60"
-            android:textSize="12sp" />
+            android:textSize="@dimen/sp_12" />
     </android.support.design.widget.AppBarLayout>
 
 

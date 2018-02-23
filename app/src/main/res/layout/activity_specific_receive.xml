@@ -19,7 +19,7 @@
             android:id="@+id/et_input_amount"
             style="@style/EditText.Amount"
             android:layout_width="match_parent"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="@dimen/dp_40" />
 
         <TextView
             style="@style/Text.White.Action"
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_input_amount"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="@dimen/dp_22"
             android:text="@string/text_btc_cny_value"/>
     </RelativeLayout>
 
@@ -43,7 +43,7 @@
         style="@style/Button.Blue"
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
         android:text="@string/btn_next"/>
 </FrameLayout>

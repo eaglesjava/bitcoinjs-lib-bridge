@@ -12,8 +12,8 @@
         style="@style/Text.Setting.White"
         android:layout_width="match_parent"
         android:drawableRight="@drawable/ic_right_arrow"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
+        android:paddingBottom="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20"
         android:text="@string/setting_backup_contact" />
 
     <View style="@style/Line.Horizontal" />
@@ -23,7 +23,7 @@
         style="@style/Text.Setting.White"
         android:layout_width="match_parent"
         android:drawableRight="@drawable/ic_right_arrow"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
+        android:paddingBottom="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20"
         android:text="@string/setting_recover_contact" />
 </LinearLayout>

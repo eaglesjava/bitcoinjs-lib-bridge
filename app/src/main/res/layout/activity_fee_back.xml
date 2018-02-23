@@ -14,17 +14,17 @@
             android:id="@+id/et_feeback_content"
             style="@style/EditText.Mnemonic"
             android:layout_width="match_parent"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_25"
             android:hint="@string/hint_input_please" />
 
         <com.bitbill.www.common.widget.EditTextWapper
             android:id="@+id/etw_feeback_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             app:inputHint="@string/hint_feedback_contact"
-            app:inputPaddingBottom="10dp"
+            app:inputPaddingBottom="@dimen/dp_10"
             app:inputTitle="@string/title_feedback_contact" />
 
     </LinearLayout>

@@ -7,9 +7,7 @@
 
     <TextView
         android:id="@+id/guide_label"
-        style="@style/Text.Title.Big"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="80dp"
+        style="@style/Title.Guide"
         android:text="@string/guide_section_one"/>
 
     <RelativeLayout
@@ -20,17 +18,14 @@
 
         <ImageView
             android:id="@+id/wallet"
-            android:layout_width="87dp"
-            android:layout_height="125dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            style="@style/GuideWallet" />
 
         <ImageView
             android:id="@+id/guide_item_xrp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="9dp"
+            android:layout_marginEnd="@dimen/dp_9"
             android:layout_toStartOf="@+id/wallet"
             android:src="@drawable/ic_guide_xrp"/>
 
@@ -40,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/guide_item_xrp"
             android:layout_alignEnd="@+id/guide_item_xrp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="@dimen/dp_24"
+            android:layout_marginEnd="@dimen/dp_28"
             android:src="@drawable/ic_guide_btc"/>
 
         <ImageView
@@ -49,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/guide_item_btc"
-            android:layout_marginBottom="-10dp"
+            android:layout_marginBottom="@dimen/dp_m_10"
             android:layout_toEndOf="@+id/guide_item_btc"
             android:src="@drawable/ic_guide_ltc"/>
 
@@ -59,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/guide_item_eos"
             android:layout_alignEnd="@+id/guide_item_neo"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="@dimen/dp_25"
             android:src="@drawable/ic_guide_eth"/>
 
 
@@ -69,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/guide_item_xrp"
             android:layout_alignStart="@+id/guide_item_neo"
-            android:layout_marginStart="31dp"
+            android:layout_marginStart="@dimen/dp_31"
             android:src="@drawable/ic_guide_eos"/>
 
         <ImageView
@@ -77,8 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/wallet"
-            android:layout_marginBottom="13dp"
-            android:layout_marginStart="14dp"
+            android:layout_marginBottom="@dimen/dp_13"
+            android:layout_marginStart="@dimen/dp_14"
             android:layout_toEndOf="@+id/wallet"
             android:src="@drawable/ic_guide_dcr" />
     </RelativeLayout>

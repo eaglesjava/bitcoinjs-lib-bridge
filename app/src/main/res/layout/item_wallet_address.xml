@@ -8,22 +8,22 @@
         android:id="@+id/tv_address_title"
         style="@style/Content.Title.White80"
         android:layout_width="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
         android:background="@color/white_10"
-        android:paddingBottom="8dp"
+        android:paddingBottom="@dimen/dp_8"
         android:paddingLeft="@dimen/activity_padding"
-        android:paddingTop="8dp"
+        android:paddingTop="@dimen/dp_8"
         android:text="@string/title_address_balance"
         android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/dp_5"
         android:layout_marginLeft="@dimen/activity_padding"
         android:layout_marginRight="@dimen/activity_padding"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:orientation="horizontal">
 
         <TextView

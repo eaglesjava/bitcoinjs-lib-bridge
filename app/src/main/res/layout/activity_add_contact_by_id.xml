@@ -13,9 +13,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:drawablePadding="10dp"
+        android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@drawable/ic_search"
         android:hint="@string/hint_search_wallet_id"
-        android:paddingRight="10dp" />
+        android:paddingRight="@dimen/dp_10" />
 
 </LinearLayout>

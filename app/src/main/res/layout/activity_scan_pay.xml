@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_scan_pay_me"
     android:layout_width="match_parent"
@@ -15,24 +14,24 @@
         style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="@dimen/dp_45"
         android:text="@string/title_scan_pay_me" />
 
     <TextView
         android:id="@+id/tv_address"
         style="@style/Text.Address"
         android:layout_width="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp"
-        android:textSize="15sp"/>
+        android:layout_marginBottom="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:textSize="@dimen/sp_15" />
 
     <ImageView
         android:id="@+id/iv_qrcode"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="@dimen/dp_180"
+        android:layout_height="@dimen/dp_180"
         android:layout_gravity="center_horizontal"
         android:background="@color/white"
-        android:padding="1dp"
+        android:padding="@dimen/dp_1"
         android:scaleType="centerCrop" />
 
     <TextView
@@ -40,7 +39,7 @@
         style="@style/Text.White"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:textSize="26sp"/>
+        android:layout_marginTop="@dimen/dp_30"
+        android:textSize="@dimen/sp_26" />
 
 </LinearLayout>

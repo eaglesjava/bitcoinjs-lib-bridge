@@ -17,9 +17,9 @@
             android:id="@+id/etw_contact_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             app:inputHint="@string/hint_input_please"
-            app:inputPaddingBottom="10dp"
+            app:inputPaddingBottom="@dimen/dp_10"
             app:inputTitle="@string/input_contact_name" />
 
 
@@ -27,9 +27,9 @@
             android:id="@+id/etw_contact_remark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/dp_20"
             app:inputHint="@string/hint_input_please"
-            app:inputPaddingBottom="10dp"
+            app:inputPaddingBottom="@dimen/dp_10"
             app:inputTitle="@string/input_contact_remark" />
 
     </LinearLayout>

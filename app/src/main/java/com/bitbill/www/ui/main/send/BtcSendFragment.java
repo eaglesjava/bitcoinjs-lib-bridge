@@ -17,6 +17,7 @@ import com.bitbill.www.common.widget.DrawableEditText;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
+import com.bitbill.www.ui.main.contact.ContactSelectActivity;
 
 import javax.inject.Inject;
 

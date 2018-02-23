@@ -11,7 +11,7 @@
         style="@style/RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
+        android:layout_margin="@dimen/dp_40"
         android:background="@color/white"
         app:layoutManager="LinearLayoutManager"
         tools:context=".common.widget.dialog.ListSelectDialog"
