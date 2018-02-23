@@ -161,10 +161,10 @@ public class BackupWalletConfirmActivity extends BaseToolbarActivity<BackupWalle
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 String clickItem = mMnemonicList.get(position);
-                if (mMnemonicConfirmList.contains(clickItem)) {
-                    mMnemonicConfirmList.remove(clickItem);
-                } else {
+                if (mFlMnemonic.getSelectedList().contains(position)) {
                     mMnemonicConfirmList.add(clickItem);
+                } else {
+                    mMnemonicConfirmList.remove(clickItem);
                 }
                 mMnemonicConfrimAdapter.notifyDataChanged();
                 tvHintClick.setVisibility(mMnemonicConfirmList.size() > 0 ? View.GONE : View.VISIBLE);
