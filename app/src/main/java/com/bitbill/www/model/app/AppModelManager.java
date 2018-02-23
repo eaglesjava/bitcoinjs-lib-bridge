@@ -20,7 +20,7 @@ import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.app.network.AppApi;
-import com.bitbill.www.model.app.network.entity.FeeBackRequest;
+import com.bitbill.www.model.app.network.entity.FeedBackRequest;
 import com.bitbill.www.model.app.network.entity.GetConfigResponse;
 import com.bitbill.www.model.app.network.entity.GetExchangeRateResponse;
 import com.bitbill.www.model.app.prefs.AppPreferences;
@@ -281,8 +281,8 @@ public class AppModelManager extends ModelManager implements AppModel {
     }
 
     @Override
-    public Observable<ApiResponse> feeBack(FeeBackRequest feeBackRequest) {
-        return mAppApi.feeBack(feeBackRequest);
+    public Observable<ApiResponse> feeBack(FeedBackRequest feedBackRequest) {
+        return mAppApi.feeBack(feedBackRequest);
     }
 
     @Override

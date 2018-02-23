@@ -12,7 +12,7 @@ import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.api.ApiHelper;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
-import com.bitbill.www.model.app.network.entity.FeeBackRequest;
+import com.bitbill.www.model.app.network.entity.FeedBackRequest;
 import com.bitbill.www.model.app.network.entity.GetConfigResponse;
 import com.bitbill.www.model.app.network.entity.GetExchangeRateResponse;
 import com.google.gson.reflect.TypeToken;
@@ -59,10 +59,10 @@ public class AppApiHelper extends ApiHelper implements AppApi {
     }
 
     @Override
-    public Observable<ApiResponse> feeBack(FeeBackRequest feeBackRequest) {
+    public Observable<ApiResponse> feeBack(FeedBackRequest feedBackRequest) {
         return Rx2AndroidNetworking.post(ApiEndPoint.FEED_BACK)
                 .addHeaders(mApiHeader.getPublicApiHeader())
-                .addApplicationJsonBody(feeBackRequest)
+                .addApplicationJsonBody(feedBackRequest)
                 .build()
                 .getParseObservable(new TypeToken<ApiResponse>() {
                 });

@@ -8,7 +8,7 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
-import com.bitbill.www.model.app.network.entity.FeeBackRequest;
+import com.bitbill.www.model.app.network.entity.FeedBackRequest;
 
 import javax.inject.Inject;
 
@@ -30,7 +30,7 @@ public class FeedbackPresenter<M extends AppModel, V extends FeedbackMvpView> ex
             return;
         }
         getCompositeDisposable().add(getModelManager()
-                .feeBack(new FeeBackRequest(getMvpView().getContent(), getMvpView().getContact()))
+                .feeBack(new FeedBackRequest(getMvpView().getContent(), getMvpView().getContact()))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse>(getMvpView()) {
                     @Override

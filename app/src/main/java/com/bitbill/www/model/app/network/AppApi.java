@@ -8,7 +8,7 @@ import com.androidnetworking.interfaces.DownloadListener;
 import com.androidnetworking.interfaces.DownloadProgressListener;
 import com.bitbill.www.common.base.model.network.api.Api;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
-import com.bitbill.www.model.app.network.entity.FeeBackRequest;
+import com.bitbill.www.model.app.network.entity.FeedBackRequest;
 import com.bitbill.www.model.app.network.entity.GetConfigResponse;
 import com.bitbill.www.model.app.network.entity.GetExchangeRateResponse;
 
@@ -39,7 +39,7 @@ public interface AppApi extends Api {
      *
      * @return
      */
-    Observable<ApiResponse> feeBack(FeeBackRequest feeBackRequest);
+    Observable<ApiResponse> feeBack(FeedBackRequest feedBackRequest);
 
     /**
      * 下载文件
