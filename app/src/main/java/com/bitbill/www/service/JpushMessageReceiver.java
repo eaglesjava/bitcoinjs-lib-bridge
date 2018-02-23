@@ -100,7 +100,7 @@ public class JpushMessageReceiver extends BroadcastReceiver {
         msg = String.format(context.getString(R.string.msg_push_receive_amount), amount);
 
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
-        String contentTitle = StringUtils.isEmpty(title) ? "Bitbill消息" : title;
+        String contentTitle = StringUtils.isEmpty(title) ? "BitBill" : title;
 
         Intent mIntent = new Intent(context, MainActivity.class);
         // 刷新未确认列表
@@ -126,8 +126,8 @@ public class JpushMessageReceiver extends BroadcastReceiver {
             notification.setCategory(Notification.CATEGORY_MESSAGE)
                     .setContentIntent(pendingIntent)
                     .setContentText(msg)
-                    .setTicker(contentTitle)
-//                    .setContentTitle(contentTitle)
+                    .setTicker(msg)
+                    .setContentTitle(contentTitle)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setLargeIcon(bitmap)
                     .setNumber(NOTIFICATION_SHOW_AT_MOST);
@@ -139,8 +139,8 @@ public class JpushMessageReceiver extends BroadcastReceiver {
             notification.setContentIntent(pendingIntent)
                     .setAutoCancel(true)
                     .setContentText(msg)
-                    .setTicker(contentTitle)
-//                    .setContentTitle(contentTitle)
+                    .setTicker(msg)
+                    .setContentTitle(contentTitle)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setLargeIcon(bitmap)
                     .setNumber(NOTIFICATION_SHOW_AT_MOST)

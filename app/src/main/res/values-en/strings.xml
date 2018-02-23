@@ -19,6 +19,7 @@
     <string name="error_wallet_id_exsist">Wallet ID already exists.</string>
     <string name="error_wallet_no_exsist">Wallet not exists.</string>
     <string name="error_ip_exceed_limit">IP address limit exceeded</string>
+    <string name="error_app_exception">The application is abnormal and is about to restart.</string>
 
     <!--dialog -->
     <string name="dialog_btn_cancel">Cancel</string>

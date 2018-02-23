@@ -12,7 +12,7 @@ public interface SplashMvpPresenter<M extends AppModel, V extends SplashMvpView>
      */
     void hasWallet();
 
-    String getContactKey();
+    void setContactKey();
 
     boolean isAliasSeted();
 
