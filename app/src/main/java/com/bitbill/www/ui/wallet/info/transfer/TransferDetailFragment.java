@@ -284,9 +284,11 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
         mDatas.clear();
         mDatas.add(new TransferHashItem().setHash(mTxRecord.getTxHash()).setTitle(getString(R.string.title_tx_hash)));
         try {
+            mTxRecord.resetInputs();
             for (Input inputsBean : mTxRecord.getInputs()) {
                 mDatas.add(new TransferSendItem(inputsBean.getAddress(), inputsBean.getValue(), inputsBean.isMine(), inputsBean.isInternal()).setTitle(getString(R.string.title_tx_send_address)));
             }
+            mTxRecord.resetOutputs();
             for (Output outputsBean : mTxRecord.getOutputs()) {
                 mDatas.add(new TransferReceiveItem(outputsBean.getAddress(), outputsBean.getValue(), outputsBean.isMine(), outputsBean.isInternal()).setTitle(getString(R.string.title_tx_receive_address)));
             }

@@ -54,6 +54,7 @@ import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.eventbus.SocketServerStateEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
+import com.bitbill.www.model.eventbus.UnConfirmedListEvent;
 import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.transaction.TxModel;
@@ -715,6 +716,16 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             updateLocalCache(context);
 
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUnConfirmedListEvent(UnConfirmedListEvent unConfirmedListEvent) {
+        if (unConfirmedListEvent == null) {
+            return;
+        }
+        //加载未确认交易
+        List<TxRecord> data = (List<TxRecord>) unConfirmedListEvent.getData();
+        loadUnconfirmList(data);
     }
 
     private void updateLocalCache(ContextBean context) {

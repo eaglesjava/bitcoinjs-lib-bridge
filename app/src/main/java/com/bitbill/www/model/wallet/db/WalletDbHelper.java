@@ -105,7 +105,9 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
         return Observable.fromCallable(() -> {
             List<TxRecord> txRecordList = wallet.getTxRecordList();
             for (TxRecord txRecord : txRecordList) {
+                txRecord.resetInputs();
                 mInputDao.deleteInTx(txRecord.getInputs());
+                txRecord.resetOutputs();
                 mOutputDao.deleteInTx(txRecord.getOutputs());
             }
             mTxRecordDao.deleteInTx(txRecordList);

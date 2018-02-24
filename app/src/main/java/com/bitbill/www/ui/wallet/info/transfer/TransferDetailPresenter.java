@@ -36,6 +36,7 @@ public class TransferDetailPresenter<M extends AddressModel, V extends TransferD
                 .map(new Function<TxRecord, TxRecord>() {
                     @Override
                     public TxRecord apply(TxRecord txRecord) throws Exception {
+                        txRecord.resetInputs();
                         for (Input inputsBean : txRecord.getInputs()) {
                             //解析地址
                             Address addressByName = getModelManager().getAddressByNameAndWalletId(inputsBean.getAddress(), txRecord.getWalletId());
@@ -44,6 +45,7 @@ public class TransferDetailPresenter<M extends AddressModel, V extends TransferD
                                 inputsBean.setInternal(addressByName.getIsInternal());
                             }
                         }
+                        txRecord.resetOutputs();
                         for (Output outputsBean : txRecord.getOutputs()) { //解析地址
                             Address addressByName = getModelManager().getAddressByNameAndWalletId(outputsBean.getAddress(), txRecord.getWalletId());
                             if (addressByName != null) {
