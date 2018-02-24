@@ -9,7 +9,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
+import com.google.gson.JsonSyntaxException;
 
 
 /**
@@ -68,7 +70,16 @@ public class BitcoinJsWrapper {
             public void onReceiveValue(String value) {
                 Log.d(TAG, "onReceiveValue() called with: value = [" + value + "]");
                 if (callback != null) {
-                    callback.call(functionName, StringUtils.isNotEmpty(value) ? value.substring(1, value.length() - 1).replace("\\", "") : null);
+                    JsResult jsResult = null;
+                    if (StringUtils.isNotEmpty(value)) {
+                        value = value.substring(1, value.length() - 1).replace("\\", "");
+                        try {
+                            jsResult = JsonUtils.deserialize(value, JsResult.class);
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    callback.call(functionName, jsResult);
 
                 }
 
@@ -102,7 +113,7 @@ public class BitcoinJsWrapper {
     }
 
     public interface Callback {
-        void call(String key, String jsResult);
+        void call(String key, JsResult result);
     }
 
     //静态内部类确保了在首次调用getInstance()的时候才会初始化SingletonHolder，从而导致实例被创建。

@@ -9,7 +9,6 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
@@ -20,7 +19,6 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
-import com.google.gson.JsonSyntaxException;
 
 import java.util.Locale;
 
@@ -91,19 +89,9 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             int isCN = mAppModel.getCurrentLocale() != null && mAppModel.getCurrentLocale().getLanguage().equals(Locale.ENGLISH.getLanguage()) ? 0 : 1;
             BitcoinJsWrapper.getInstance().generateMnemonicRetrunSeedHexAndXPublicKey(isCN, new BitcoinJsWrapper.Callback() {
                 @Override
-                public void call(String key, String jsResult) {
+                public void call(String key, JsResult result) {
                     if (!isViewAttached()) {
                         return;
-                    }
-                    if (StringUtils.isEmpty(jsResult)) {
-                        getMvpView().hideLoading();
-                        return;
-                    }
-                    JsResult result = null;
-                    try {
-                        result = JsonUtils.deserialize(jsResult, JsResult.class);
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
                     }
                     if (result.status == JsResult.STATUS_SUCCESS) {
                         String[] data = result.getData();
@@ -277,20 +265,9 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
         // 校验助记词是否正确
         BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(mnemonic, new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String jsResult) {
+            public void call(String key, JsResult result) {
                 if (!isViewAttached()) {
                     return;
-                }
-                if (StringUtils.isEmpty(jsResult)) {
-                    getMvpView().resetPwdFail();
-                    getMvpView().hideLoading();
-                    return;
-                }
-                JsResult result = null;
-                try {
-                    result = JsonUtils.deserialize(jsResult, JsResult.class);
-                } catch (JsonSyntaxException e) {
-                    e.printStackTrace();
                 }
                 if (result == null) {
                     getMvpView().resetPwdFail();

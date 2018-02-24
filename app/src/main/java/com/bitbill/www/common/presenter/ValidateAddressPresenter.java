@@ -2,13 +2,11 @@ package com.bitbill.www.common.presenter;
 
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.JsResult;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
-import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
 
@@ -30,21 +28,11 @@ public class ValidateAddressPresenter<M extends AddressModel, V extends Validate
             return;
         }
         getMvpView().showLoading();
-        BitcoinJsWrapper.getInstance().validateAddress(getMvpView().getAddress(), (key, jsResult) -> {
+        BitcoinJsWrapper.getInstance().validateAddress(getMvpView().getAddress(), (key, result) -> {
             if (!isViewAttached()) {
                 return;
             }
             getMvpView().hideLoading();
-            if (StringUtils.isEmpty(jsResult)) {
-                getMvpView().validateAddress(false);
-                return;
-            }
-            JsResult result = null;
-            try {
-                result = JsonUtils.deserialize(jsResult, JsResult.class);
-            } catch (JsonSyntaxException e) {
-                e.printStackTrace();
-            }
             if (result == null) {
                 getMvpView().validateAddress(false);
                 return;
