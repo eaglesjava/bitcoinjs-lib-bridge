@@ -48,10 +48,10 @@ public class ContactSettingPresenter<M extends ContactModel, V extends ContactSe
                             @Override
                             public void onNext(ApiResponse<RecoverContactsResponse> recoverContactsResponseApiResponse) {
                                 super.onNext(recoverContactsResponseApiResponse);
-                                if (!isViewAttached()) {
+                                if (handleApiResponse(recoverContactsResponseApiResponse)) {
                                     return;
                                 }
-                                if (recoverContactsResponseApiResponse != null && recoverContactsResponseApiResponse.isSuccess()) {
+                                if (recoverContactsResponseApiResponse.isSuccess()) {
                                     if (recoverContactsResponseApiResponse.getData() != null) {
                                         List<RecoverContactsResponse.ContactsBean> contacts = recoverContactsResponseApiResponse.getData().getContacts();
                                         if (!StringUtils.isEmpty(contacts)) {
@@ -94,7 +94,7 @@ public class ContactSettingPresenter<M extends ContactModel, V extends ContactSe
         }
         getCompositeDisposable().add(getModelManager().insertContacts(contactList)
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>() {
+                .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {
                     @Override
                     public void onNext(Boolean aboolean) {
                         super.onNext(aboolean);

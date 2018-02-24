@@ -32,7 +32,6 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
         if (!isValidContact() || !isValidContactName() || !isValidEdit()) {
             return;
         }
-        getMvpView().showLoading();
         Contact contact = getMvpView().getContact();
         contact.setContactName(getMvpView().getContactName());
         contact.setRemark(getMvpView().getRemark());
@@ -44,21 +43,17 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                         , contact.getContactName()
                         , contact.getCoinType()))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<Void>>() {
+                .subscribeWith(new BaseSubcriber<ApiResponse<Void>>(getMvpView()) {
                     @Override
                     public void onNext(ApiResponse<Void> voidApiResponse) {
                         super.onNext(voidApiResponse);
-                        if (voidApiResponse != null) {
-                            if (voidApiResponse.isSuccess()) {
-                                updateLocalContact();
-                            } else {
-                                getMvpView().updateContactFail(voidApiResponse.getMessage());
-                                getMvpView().hideLoading();
-                            }
+                        if (handleApiResponse(voidApiResponse)) {
+                            return;
+                        }
+                        if (voidApiResponse.isSuccess()) {
+                            updateLocalContact();
                         } else {
-
-                            getMvpView().updateContactFail(null);
-                            getMvpView().hideLoading();
+                            getMvpView().updateContactFail(voidApiResponse.getMessage());
                         }
                     }
 
@@ -83,7 +78,7 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                 .add(getModelManager()
                         .updateContact(contact)
                         .compose(this.applyScheduler())
-                        .subscribeWith(new BaseSubcriber<Boolean>() {
+                        .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {
                             @Override
                             public void onNext(Boolean aBoolean) {
                                 super.onNext(aBoolean);
@@ -91,12 +86,10 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                                     return;
                                 }
                                 if (aBoolean) {
-
                                     getMvpView().updateContactSuccess();
                                 } else {
                                     getMvpView().updateContactFail(null);
                                 }
-                                getMvpView().hideLoading();
                             }
 
                             @Override
@@ -106,7 +99,6 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                                     return;
                                 }
                                 getMvpView().updateContactFail(null);
-                                getMvpView().hideLoading();
                             }
                         }));
     }
@@ -116,7 +108,6 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
         if (!isValidContact()) {
             return;
         }
-        getMvpView().showLoading();
         Contact contact = getMvpView().getContact();
 
         getCompositeDisposable().add(getModelManager()
@@ -124,24 +115,19 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                         , getApp().getContactKey()
                         , (StringUtils.isEmpty(contact.getWalletId()) ? contact.getAddress() : null)))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<Void>>() {
+                .subscribeWith(new BaseSubcriber<ApiResponse<Void>>(getMvpView()) {
                     @Override
                     public void onNext(ApiResponse<Void> voidApiResponse) {
                         super.onNext(voidApiResponse);
-                        if (!isViewAttached()) {
+                        if (handleApiResponse(voidApiResponse)) {
                             return;
                         }
-                        if (voidApiResponse != null) {
-                            if (voidApiResponse.isSuccess()) {
-                                deleteLocalContact();
-                            } else {
-                                getMvpView().deleteContactFail(voidApiResponse.getMessage());
-                                getMvpView().hideLoading();
-                            }
+                        if (voidApiResponse.isSuccess()) {
+                            deleteLocalContact();
                         } else {
-                            getMvpView().deleteContactFail(null);
-                            getMvpView().hideLoading();
+                            getMvpView().deleteContactFail(voidApiResponse.getMessage());
                         }
+
                     }
 
                     @Override
@@ -155,7 +141,6 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                         } else {
                             getMvpView().deleteContactFail(null);
                         }
-                        getMvpView().hideLoading();
                     }
                 }));
     }
@@ -165,7 +150,7 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
         Contact contact = getMvpView().getContact();
         getCompositeDisposable().add(getModelManager().deleteContact(contact)
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>() {
+                .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);
@@ -173,12 +158,10 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                             return;
                         }
                         if (aBoolean) {
-
                             getMvpView().deleteContactSuccess();
                         } else {
                             getMvpView().deleteContactFail(null);
                         }
-                        getMvpView().hideLoading();
                     }
 
                     @Override
@@ -188,7 +171,6 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                             return;
                         }
                         getMvpView().deleteContactFail(null);
-                        getMvpView().hideLoading();
                     }
                 }));
     }

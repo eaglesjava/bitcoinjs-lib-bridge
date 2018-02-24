@@ -75,11 +75,10 @@ public class MainPresenter<M extends TxModel, V extends MainMvpView> extends Mod
                     @Override
                     public void onNext(ApiResponse<ListTxElementResponse> listApiResponse) {
                         super.onNext(listApiResponse);
-                        if (!isViewAttached()) {
+                        if (handleApiResponse(listApiResponse)) {
                             return;
                         }
-                        if (listApiResponse != null && listApiResponse.isSuccess()) {
-
+                        if (listApiResponse.isSuccess()) {
                             ListTxElementResponse data = listApiResponse.getData();
                             if (data != null) {
                                 getMvpView().listUnconfirmSuccess(StringUtils.removeDuplicateList(data.getList()));

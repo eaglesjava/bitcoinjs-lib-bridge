@@ -4,7 +4,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.androidnetworking.error.ANError;
-import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
@@ -146,19 +145,11 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     @Override
                     public void onNext(ApiResponse stringApiResponse) {
                         super.onNext(stringApiResponse);
-                        if (!isViewAttached()) {
+                        if (handleApiResponse(stringApiResponse)) {
                             return;
                         }
-                        Log.d(TAG, "onNext() called with: stringApiResponse = [" + stringApiResponse + "]");
-                        if (stringApiResponse != null) {
-                            int status = stringApiResponse.getStatus();
-                            if (status == ApiResponse.STATUS_CODE_SUCCESS) {
-                                insertWallet();
-                            } else if (status == ApiResponse.STATUS_WALLET_ID_EXSIST) {
-                                getMvpView().showMessage(getApp().getString(R.string.error_wallet_id_exsist));
-                            } else {
-                                getMvpView().createWalletFail();
-                            }
+                        if (stringApiResponse.isSuccess()) {
+                            insertWallet();
                         } else {
                             getMvpView().createWalletFail();
                         }

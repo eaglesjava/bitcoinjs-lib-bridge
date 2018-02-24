@@ -38,12 +38,11 @@ public class BtcSendPresenter<M extends ContactModel, V extends BtcSendMvpView> 
                     @Override
                     public void onNext(ApiResponse<GetLastAddressResponse> getLastAddressResponseApiResponse) {
                         super.onNext(getLastAddressResponseApiResponse);
-                        if (!isViewAttached()) {
+                        if (handleApiResponse(getLastAddressResponseApiResponse)) {
                             return;
                         }
-                        if (getLastAddressResponseApiResponse != null && getLastAddressResponseApiResponse.isSuccess() && getLastAddressResponseApiResponse.getData() != null) {
+                        if (getLastAddressResponseApiResponse.isSuccess() && getLastAddressResponseApiResponse.getData() != null) {
                             getMvpView().getLastAddressSuccess(getLastAddressResponseApiResponse.getData().getAddress());
-
                         } else {
                             getMvpView().getLastAddressFail();
                         }

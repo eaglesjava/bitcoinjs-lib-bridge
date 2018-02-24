@@ -69,43 +69,28 @@ public class AddContactByAddressPresenter<M extends ContactModel, V extends AddC
                 , getMvpView().getContactName()
                 , AppConstants.BTC_COIN_TYPE);
         getCompositeDisposable().add(getModelManager()
-                .insertContact(contact)
-                .concatMap(aLong -> getModelManager()
-                        .addContacts(new AddContactsRequest(contact.getWalletId(), getApp().getContactKey(), contact.getAddress(), contact.getRemark(), contact.getContactName(), contact.getCoinType())))
+                .addContacts(new AddContactsRequest(contact.getWalletId(), getApp().getContactKey(), contact.getAddress(), contact.getRemark(), contact.getContactName(), contact.getCoinType()))
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<ApiResponse<AddContactsResponse>>(getMvpView()) {
                     @Override
                     public void onNext(ApiResponse<AddContactsResponse> addContactsResponseApiResponse) {
                         super.onNext(addContactsResponseApiResponse);
-                        if (addContactsResponseApiResponse != null) {
-                            if (addContactsResponseApiResponse.isSuccess()) {
-                                if (!isViewAttached()) {
-                                    return;
-                                }
-                                getMvpView().addContactSuccess();
-                            } else {
-                                removeContact(contact);
-                                if (!isViewAttached()) {
-                                    return;
-                                }
-                                getMvpView().addContactFail(addContactsResponseApiResponse.getMessage());
-
-                            }
-                        } else {
-                            removeContact(contact);
-                            if (!isViewAttached()) {
-                                return;
-                            }
-
-                            getMvpView().addContactFail(null);
+                        if (handleApiResponse(addContactsResponseApiResponse)) {
+                            return;
                         }
+                        if (addContactsResponseApiResponse.isSuccess()) {
+                            insertContact(contact);
+                        } else {
+                            getMvpView().addContactFail(addContactsResponseApiResponse.getMessage());
+
+                        }
+
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        removeContact(contact);
                         if (!isViewAttached()) {
                             return;
                         }
@@ -119,22 +104,30 @@ public class AddContactByAddressPresenter<M extends ContactModel, V extends AddC
 
     }
 
-    private void removeContact(Contact contact) {
+    private void insertContact(Contact contact) {
         if (contact == null) {
             return;
         }
         getCompositeDisposable().add(getModelManager()
                 .deleteContact(contact)
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Boolean>() {
+                .subscribeWith(new BaseSubcriber<Boolean>(getMvpView()) {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        getMvpView().addContactSuccess();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        getMvpView().addContactFail(null);
                     }
                 })
         );

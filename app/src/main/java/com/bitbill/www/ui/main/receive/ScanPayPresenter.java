@@ -92,10 +92,10 @@ public class ScanPayPresenter<M extends TxModel, V extends ScanPayMvpView> exten
                     @Override
                     public void onNext(ApiResponse<TxElement> getTxInfoResponseApiResponse) {
                         super.onNext(getTxInfoResponseApiResponse);
-                        if (!isValidMvpView()) {
+                        if (handleApiResponse(getTxInfoResponseApiResponse)) {
                             return;
                         }
-                        if (getTxInfoResponseApiResponse != null && getTxInfoResponseApiResponse.isSuccess()) {
+                        if (getTxInfoResponseApiResponse.isSuccess()) {
                             TxElement data = getTxInfoResponseApiResponse.getData();
                             if (data != null) {
                                 List<TxElement.OutputsBean> outputs = data.getOutputs();
