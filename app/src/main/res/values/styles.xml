@@ -63,11 +63,11 @@
     <!-- toolbar标题样式 -->
     <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/sp_20</item>
+        <!--<item name="android:textSize">@dimen/sp_20</item>-->
     </style>
 
     <style name="Navigation" parent="Widget.Design.NavigationView">
-        <item name="android:textSize">@dimen/sp_16</item>
+        <!--<item name="android:textSize">@dimen/sp_16</item>-->
     </style>
 
     <style name="Button" parent="Widget.AppCompat.Button.Borderless">
