@@ -57,7 +57,7 @@
     </style>
     <!-- toolbar菜单文字尺寸 -->
     <style name="ToolbarMenuTextSize" parent="@style/TextAppearance.AppCompat.Menu">
-        <item name="android:textSize">@dimen/sp_16</item>
+        <!--<item name="android:textSize">@dimen/sp_16</item>-->
     </style>
 
     <!-- toolbar标题样式 -->
