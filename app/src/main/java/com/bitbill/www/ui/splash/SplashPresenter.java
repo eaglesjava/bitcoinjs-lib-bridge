@@ -59,8 +59,11 @@ public class SplashPresenter<M extends AppModel, V extends SplashMvpView> extend
     @Override
     public void setContactKey() {
 
-        String contactKey = StringUtils.getContactKey();
-        getModelManager().setContactkey(contactKey);
+        String contactKey = getModelManager().getContactKey();
+        if (StringUtils.isEmpty(contactKey)) {
+            contactKey = StringUtils.getContactKey();
+            getModelManager().setContactkey(contactKey);
+        }
     }
 
     @Override
