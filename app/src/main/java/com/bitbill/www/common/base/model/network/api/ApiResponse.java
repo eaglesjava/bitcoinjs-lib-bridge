@@ -10,7 +10,7 @@ public class ApiResponse<T> {
     public static final int STATUS_LACK_MADATORY_PARAMS = -31;//缺少必要的参数
     public static final int STATUS_INVALID_PARAM_TYPE = -32;//	无效的参数类型
     public static final int STATUS_WALLET_ID_EXSIST = -40;//钱包id已存在
-    public static final int STATUS_WALLET_NO_EXSIST = -41;//钱包id已存在
+    public static final int STATUS_WALLET_NO_EXSIST = -41;//钱包id存在
     public static final int STATUS_IP_EXCEED_LIMIT = -88;//您的IP超过了规定限制
     public static final int STATUS_SERVER_ERROR = 500;//服务器异常
     /**

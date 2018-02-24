@@ -69,6 +69,12 @@ public class ModelPresenter<M extends Model, V extends MvpView> extends BasePres
             case ApiResponse.STATUS_WALLET_NO_EXSIST:
                 getMvpView().onError(R.string.error_wallet_no_exsist);
                 return true;
+            case ApiResponse.STATUS_IP_EXCEED_LIMIT:
+                getMvpView().onError(R.string.error_ip_exceed_limit);
+                return true;
+            case ApiResponse.STATUS_SERVER_ERROR:
+                getMvpView().onError(R.string.error_api_server);
+                return true;
 
         }
         if (StringUtils.isNotEmpty(apiResponse.getMessage())) {

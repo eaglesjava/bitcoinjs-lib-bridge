@@ -55,7 +55,7 @@ public class TransferDetailPresenter<M extends AddressModel, V extends TransferD
                     }
                 })
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<TxRecord>() {
+                .subscribeWith(new BaseSubcriber<TxRecord>(getMvpView()) {
                     @Override
                     public void onNext(TxRecord txRecord) {
                         super.onNext(txRecord);

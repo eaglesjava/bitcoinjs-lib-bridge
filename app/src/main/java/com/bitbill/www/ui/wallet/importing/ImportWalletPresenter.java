@@ -129,18 +129,16 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
                                     @Override
                                     public void onNext(ApiResponse<GetWalletIdResponse> apiResponse) {
                                         super.onNext(apiResponse);
-                                        if (!isViewAttached()) {
+                                        if (handleApiResponse(apiResponse)) {
                                             return;
                                         }
-                                        if (apiResponse != null) {
-                                            if (apiResponse.getStatus() == ApiResponse.STATUS_CODE_SUCCESS) {
-                                                if (apiResponse.getData() != null && StringUtils.isNotEmpty(apiResponse.getData().getWalletId())) {
-                                                    wallet.setName(apiResponse.getData().getWalletId());
-                                                }
-                                                getMvpView().importWalletSuccess(wallet);
-                                            } else {
-                                                getMvpView().importWalletFail();
+                                        if (apiResponse.isSuccess()) {
+                                            if (apiResponse.getData() != null && StringUtils.isNotEmpty(apiResponse.getData().getWalletId())) {
+                                                wallet.setName(apiResponse.getData().getWalletId());
                                             }
+                                            getMvpView().importWalletSuccess(wallet);
+                                        } else {
+                                            getMvpView().importWalletFail();
                                         }
                                         getMvpView().hideLoading();
                                     }

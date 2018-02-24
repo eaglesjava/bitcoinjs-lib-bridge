@@ -69,17 +69,13 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
                     @Override
                     public void onNext(ApiResponse<ListTxElementResponse> listTxElementResponseApiResponse) {
                         super.onNext(listTxElementResponseApiResponse);
-                        if (!isViewAttached()) {
+                        if (handleApiResponse(listTxElementResponseApiResponse)) {
                             return;
                         }
-                        if (listTxElementResponseApiResponse != null) {
-                            ListTxElementResponse data = listTxElementResponseApiResponse.getData();
-                            if (data != null) {
-                                List<TxElement> list = data.getList();
-                                getMvpView().getTxRecordSuccess(list);
-                            } else {
-                                getMvpView().getTxRecordFail();
-                            }
+                        ListTxElementResponse data = listTxElementResponseApiResponse.getData();
+                        if (data != null) {
+                            List<TxElement> list = data.getList();
+                            getMvpView().getTxRecordSuccess(list);
                         } else {
                             getMvpView().getTxRecordFail();
                         }

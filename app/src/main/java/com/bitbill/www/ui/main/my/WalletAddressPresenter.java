@@ -48,10 +48,10 @@ public class WalletAddressPresenter<M extends TxModel, V extends WalletAddressMv
                     @Override
                     public void onNext(ApiResponse<GetTxElementResponse> listUnspentResponseApiResponse) {
                         super.onNext(listUnspentResponseApiResponse);
-                        if (!isViewAttached()) {
+                        if (handleApiResponse(listUnspentResponseApiResponse)) {
                             return;
                         }
-                        if (listUnspentResponseApiResponse != null && listUnspentResponseApiResponse.isSuccess()) {
+                        if (listUnspentResponseApiResponse.isSuccess()) {
                             GetTxElementResponse data = listUnspentResponseApiResponse.getData();
                             if (data != null) {
                                 List<GetTxElementResponse.UtxoBean> unspentList = data.getUtxo();
