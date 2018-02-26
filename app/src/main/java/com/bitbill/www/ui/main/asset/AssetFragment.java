@@ -193,7 +193,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     }
 
     private void addWalletView(Wallet wallet) {
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.wallet_bottom_margin);
 
         llWalletContainer.addView(
