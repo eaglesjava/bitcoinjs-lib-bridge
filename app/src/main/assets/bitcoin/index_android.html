@@ -19,7 +19,7 @@
                result.data=[validate,seedHex,publicKeys[0],publicKeys[1]]
            }catch(e){
                result.data=[]
-               result.message=e.message
+               result.message=e.stack
                result.status=-1
            }
         return JSON.stringify(result)
@@ -40,7 +40,7 @@
             result.data=[mnemonic,seedHex,publicKeys[0],publicKeys[1]]
        }catch(e){
             result.data=[]
-            result.message=e.message
+            result.message=e.stack
             result.status=-1
        }
        return JSON.stringify(result)
@@ -54,7 +54,7 @@
             result.data=[address]
         }catch(e){
             result.data=[]
-            result.message=e.message
+            result.message=e.stack
             result.status=-1
         }
        return JSON.stringify(result)
@@ -68,7 +68,7 @@
             result.data=[txbHex]
         }catch(e){
             result.data=[]
-            result.message=e.message
+            result.message=e.stack
             result.status=-1
         }
        return JSON.stringify(result)
@@ -82,7 +82,7 @@
             result.data=[validate]
         }catch(e){
             result.data=[]
-            result.message=e.message
+            result.message=e.stack
             result.status=-1
         }
        return JSON.stringify(result)
@@ -96,7 +96,7 @@
             result.data=addresses
         }catch(e){
             result.data=[]
-            result.message=e.message
+            result.message=e.stack
             result.status=-1
         }
        return JSON.stringify(result)
