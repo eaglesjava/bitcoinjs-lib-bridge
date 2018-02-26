@@ -23,7 +23,6 @@ import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionRequest;
 import com.bitbill.www.model.transaction.network.entity.SendTransactionResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -181,20 +180,10 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
 
         BitcoinJsWrapper.getInstance().buildTransaction(seedHex, txJson, new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String jsResult) {
+            public void call(String key, JsResult result) {
 
                 if (!isViewAttached()) {
                     return;
-                }
-                if (StringUtils.isEmpty(jsResult)) {
-                    getMvpView().sendTransactionFail(null);
-                    return;
-                }
-                JsResult result = null;
-                try {
-                    result = JsonUtils.deserialize(jsResult, JsResult.class);
-                } catch (JsonSyntaxException e) {
-                    e.printStackTrace();
                 }
                 if (result == null) {
                     getMvpView().sendTransactionFail(null);
@@ -204,7 +193,7 @@ public class SendConfirmPresenter<M extends TxModel, V extends SendConfirmMvpVie
                     String[] data = result.getData();
                     if (data != null && data.length > 0) {
                         String txHex = data[0];
-                        Log.d(TAG, "buildTransaction() called with: key = [" + key + "], jsResult = [" + jsResult + "]");
+                        Log.d(TAG, "buildTransaction() called with: key = [" + key + "], jsResult = [" + result + "]");
                         byte[] hashData = EncryptUtils.encryptSHA256(EncryptUtils.encryptSHA256(ConvertUtils.hexString2Bytes(txHex)));
                         //反转字节数组
                         ConvertUtils.reverse(hashData);

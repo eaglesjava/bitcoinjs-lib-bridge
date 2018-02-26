@@ -6,7 +6,6 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.JsResult;
@@ -17,7 +16,6 @@ import com.bitbill.www.model.address.db.entity.Address;
 import com.bitbill.www.model.address.network.entity.RefreshAddressRequest;
 import com.bitbill.www.model.address.network.entity.RefreshAddressResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,19 +54,9 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         }
         BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(wallet.getExtentedPublicKey(), wallet.getLastAddressIndex(), new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String jsResult) {
+            public void call(String key, JsResult result) {
                 if (!isViewAttached()) {
                     return;
-                }
-                if (StringUtils.isEmpty(jsResult)) {
-                    getMvpView().loadAddressFail();
-                    return;
-                }
-                JsResult result = null;
-                try {
-                    result = JsonUtils.deserialize(jsResult, JsResult.class);
-                } catch (JsonSyntaxException e) {
-                    e.printStackTrace();
                 }
                 if (result == null) {
                     getMvpView().loadAddressFail();
@@ -261,19 +249,9 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         String publicKey = isInternal ? wallet.getInternalPublicKey() : wallet.getExtentedPublicKey();
         BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(publicKey, index, new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String jsResult) {
+            public void call(String key, JsResult result) {
                 if (!isViewAttached()) {
                     return;
-                }
-                if (StringUtils.isEmpty(jsResult)) {
-                    getMvpView().refreshAddressFail(isInternal);
-                    return;
-                }
-                JsResult result = null;
-                try {
-                    result = JsonUtils.deserialize(jsResult, JsResult.class);
-                } catch (JsonSyntaxException e) {
-                    e.printStackTrace();
                 }
                 if (result == null) {
                     getMvpView().refreshAddressFail(isInternal);
@@ -312,20 +290,10 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         String publicKey = isInternal ? wallet.getInternalPublicKey() : wallet.getExtentedPublicKey();
         BitcoinJsWrapper.getInstance().getBitcoinContinuousAddressByMasterXPublicKey(publicKey, fromIndex, toIndex, new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String jsResult) {
+            public void call(String key, JsResult result) {
 
                 if (!isViewAttached()) {
                     return;
-                }
-                if (StringUtils.isEmpty(jsResult)) {
-                    getMvpView().refreshAddressFail(isInternal);
-                    return;
-                }
-                JsResult result = null;
-                try {
-                    result = JsonUtils.deserialize(jsResult, JsResult.class);
-                } catch (JsonSyntaxException e) {
-                    e.printStackTrace();
                 }
                 if (result == null) {
                     getMvpView().refreshAddressFail(isInternal);

@@ -5,7 +5,6 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.JsResult;
@@ -14,7 +13,6 @@ import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdRequest;
 import com.bitbill.www.model.wallet.network.entity.GetWalletIdResponse;
-import com.google.gson.JsonSyntaxException;
 
 import javax.inject.Inject;
 
@@ -84,21 +82,9 @@ public class ImportWalletPresenter<M extends WalletModel, V extends ImportWallet
         // 校验助记词是否正确
         BitcoinJsWrapper.getInstance().validateMnemonicReturnSeedHexAndXPublicKey(handleMnemonic(), new BitcoinJsWrapper.Callback() {
             @Override
-            public void call(String key, String jsResult) {
+            public void call(String key, JsResult result) {
                 if (!isViewAttached()) {
                     return;
-                }
-                if (StringUtils.isEmpty(jsResult)) {
-                    getMvpView().inputMnemonicError();
-                    getMvpView().hideLoading();
-                    return;
-                }
-
-                JsResult result = null;
-                try {
-                    result = JsonUtils.deserialize(jsResult, JsResult.class);
-                } catch (JsonSyntaxException e) {
-                    e.printStackTrace();
                 }
                 if (result == null) {
                     getMvpView().inputMnemonicError();
