@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -44,6 +45,9 @@ public class PopupWalletMenu extends PopupWindow implements View.OnClickListener
         mWalletView.findViewById(R.id.tv_menu_import_wallet).setOnClickListener(this);
         //设置PopupWalletMenu的View
         this.setContentView(mWalletView);
+        //设置宽高
+        this.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         //设置PopupWalletMenu弹出窗体可点击
         this.setFocusable(true);
         //设置PopupWalletMenu弹出窗体动画效果
