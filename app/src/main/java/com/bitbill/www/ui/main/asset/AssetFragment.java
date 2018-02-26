@@ -3,7 +3,6 @@ package com.bitbill.www.ui.main.asset;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -54,7 +53,6 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
 
     public static final String TAG = "AssetFragment";
-    private static final int BOTTOM_MARGIN = 15;//unit dp
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.tv_btc_amount)
@@ -196,7 +194,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
     private void addWalletView(Wallet wallet) {
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.bottomMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, BOTTOM_MARGIN, getResources().getDisplayMetrics());
+        layoutParams.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.wallet_bottom_margin);
 
         llWalletContainer.addView(
                 new WalletView(getBaseActivity())

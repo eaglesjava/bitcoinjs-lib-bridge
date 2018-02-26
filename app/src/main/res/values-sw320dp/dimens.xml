@@ -3,6 +3,7 @@
 	<dimen name="activity_horizontal_margin">12.4878dp</dimen>
 	<dimen name="activity_vertical_margin">12.4878dp</dimen>
 	<dimen name="activity_padding">19.5122dp</dimen>
+    <dimen name="wallet_bottom_margin">11.7073dp</dimen>
 	<dimen name="btn_height">42.9268dp</dimen>
 	<dimen name="btn_text_size">12.4878sp</dimen>
 	<dimen name="title_guide">21.8537sp</dimen>
