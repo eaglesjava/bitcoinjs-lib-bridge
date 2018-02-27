@@ -52,7 +52,6 @@ import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ConfirmedEvent;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
-import com.bitbill.www.model.eventbus.SocketServerStateEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
 import com.bitbill.www.model.eventbus.UnConfirmedListEvent;
 import com.bitbill.www.model.eventbus.WalletDeleteEvent;
@@ -163,6 +162,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mBoundService = ((SocketServiceProvider.LocalBinder) service).getService();
+            if (mBoundService != null) {
+                mBoundService.postSocketStatusEvent();
+            }
         }
 
         @Override
@@ -450,9 +452,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mUpdateMvpPresenter.checkUpdate();
         mWalletPresenter.loadWallets();
         mGetCacheVersionMvpPresenter.getCacheVersion();
-        if (mBoundService != null) {
-            setSocketStatus(mBoundService.getSocketStatus());
-        }
     }
 
     @Override
@@ -664,14 +663,14 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onWalletUpdateSuccess(WalletUpdateEvent walletUpdateEvent) {
-        WalletUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletUpdateEvent.class);
+        EventBus.getDefault().removeStickyEvent(WalletUpdateEvent.class);
         //重新加载钱包信息
         mWalletPresenter.loadWallets();
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onSendSuccess(SendSuccessEvent sendSuccessEvent) {
-        SendSuccessEvent stickyEvent = EventBus.getDefault().removeStickyEvent(SendSuccessEvent.class);
+        EventBus.getDefault().removeStickyEvent(SendSuccessEvent.class);
         //重新加载钱包信息
         if (mSendFragment != null) {
             mSendFragment.sendSuccess();
@@ -687,7 +686,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onUnConfirmReceive(UnConfirmEvent unConfirmEvent) {
-        UnConfirmEvent stickyEvent = EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
+        if (unConfirmEvent == null) {
+            return;
+        }
+        unConfirmEvent = EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
         //加载未确认交易
         getMvpPresenter().listUnconfirm();
         mBalanceMvpPresenter.getBalance();
@@ -704,7 +706,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onConfirmedEvent(ConfirmedEvent confirmedEvent) {
-        EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
+        if (confirmedEvent == null) {
+            return;
+        }
+        confirmedEvent = EventBus.getDefault().removeStickyEvent(ConfirmedEvent.class);
         //加载未确认交易
         getMvpPresenter().listUnconfirm();
         mBalanceMvpPresenter.getBalance();
@@ -718,7 +723,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 100)
     public void onUnConfirmedListEvent(UnConfirmedListEvent unConfirmedListEvent) {
         if (unConfirmedListEvent == null) {
             return;
@@ -749,7 +754,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onUpdateContactEvent(ContactUpdateEvent contactUpdateEvent) {
-        ContactUpdateEvent stickyEvent = EventBus.getDefault().removeStickyEvent(ContactUpdateEvent.class);
+        if (contactUpdateEvent == null) {
+            return;
+        }
+        EventBus.getDefault().removeStickyEvent(ContactUpdateEvent.class);
         //重新加载联系人信息
         if (mContactFragment != null) {
             mContactFragment.initData();
@@ -758,16 +766,13 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onWalletDeleteSuccess(WalletDeleteEvent walletDeleteEvent) {
-        WalletDeleteEvent stickyEvent = EventBus.getDefault().removeStickyEvent(WalletDeleteEvent.class);
+        if (walletDeleteEvent == null) {
+            return;
+        }
+        walletDeleteEvent = EventBus.getDefault().removeStickyEvent(WalletDeleteEvent.class);
         Wallet wallet = walletDeleteEvent.getWallet();
         // TODO: 2017/12/28 优化 重新加载钱包信息
         mWalletPresenter.loadWallets();
-    }
-
-    private void setSocketStatus(SocketServerStateEvent.ServerState socketStatus) {
-        if (mAssetFragment != null && socketStatus != null) {
-            mAssetFragment.setSocketStatus(SocketServerStateEvent.ServerState.connected.equals(socketStatus));
-        }
     }
 
     public void addContact() {

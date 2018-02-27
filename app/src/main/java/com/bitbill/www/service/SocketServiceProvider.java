@@ -246,6 +246,10 @@ public class SocketServiceProvider extends Service {
         return mSocket != null && mSocket.connected() ? SocketServerStateEvent.ServerState.connected : SocketServerStateEvent.ServerState.disConnect;
     }
 
+    public void postSocketStatusEvent() {
+        EventBus.getDefault().postSticky(new SocketServerStateEvent(getSocketStatus()));
+    }
+
     public class LocalBinder extends Binder {
         public SocketServiceProvider getService() {
             return SocketServiceProvider.this;
