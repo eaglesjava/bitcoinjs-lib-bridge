@@ -655,7 +655,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @AfterPermissionGranted(REQUEST_CODE_QRCODE_PERMISSIONS)
     private void requestCodeQRCodePermissions() {
-        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.VIBRATE};
+        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.VIBRATE};
         if (!EasyPermissions.hasPermissions(this, perms)) {
             EasyPermissions.requestPermissions(this, getString(R.string.dialog_msg_request_permissions), REQUEST_CODE_QRCODE_PERMISSIONS, perms);
         }
