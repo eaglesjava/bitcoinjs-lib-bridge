@@ -89,6 +89,7 @@ class BILReceiveController: BILBaseViewController {
 				w.lastBTCAddress(success: { (address) in
 					self.setAddress(address: address)
 				}, failure: { (msg) in
+                    self.cleanAddress()
 					self.showTipAlert(msg: msg)
 				})
 				return
@@ -105,6 +106,11 @@ class BILReceiveController: BILBaseViewController {
 				setAddress(address: add.address!)
 			}
         }
+    }
+    
+    func cleanAddress() {
+        addressLabel.text = nil
+        qrCodeImageView.image = nil
     }
 	
 	func setAddress(address: String) {

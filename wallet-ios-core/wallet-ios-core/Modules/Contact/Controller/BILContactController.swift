@@ -275,7 +275,7 @@ extension BILContactController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BILContactCell", for: indexPath) as! BILContactCell
         cell.contact = contacts[letter(of: indexPath.section)]![indexPath.row]
-        cell.seletedButton.isHidden = didSelectContactClosure == nil
+//        cell.seletedButton.isHidden = didSelectContactClosure == nil
         return cell
     }
     
