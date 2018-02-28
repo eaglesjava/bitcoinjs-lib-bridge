@@ -22,52 +22,52 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     var sendModel: BILSendModel?
     var contact: ContactModel?
     
-	@IBOutlet weak var scanItem: UIBarButtonItem!
-	@IBOutlet weak var nextButton: BILGradientButton!
-	override func viewDidLoad() {
+    @IBOutlet weak var scanItem: UIBarButtonItem!
+    @IBOutlet weak var nextButton: BILGradientButton!
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-	
-	override func languageDidChanged() {
-		super.languageDidChanged()
-		title = "Send".bil_ui_localized
-		scanItem.title = "Scan".bil_ui_localized
-		nextButton.setTitle("Next".bil_ui_localized, for: .normal)
-		addressInputView.textField.placeholder = "Receiver".bil_ui_localized
-	}
+    
+    override func languageDidChanged() {
+        super.languageDidChanged()
+        title = "Send".bil_ui_localized
+        scanItem.title = "Scan".bil_ui_localized
+        nextButton.setTitle("Next".bil_ui_localized, for: .normal)
+        addressInputView.textField.placeholder = "Receiver".bil_ui_localized
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         NotificationCenter.default.addObserver(self, selector: #selector(transactionDidSend(notification:)), name: .transactionSended, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sendBTCToContact(notification:)), name: .sendBTCToContact, object: nil)
     }
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		NotificationCenter.default.addObserver(self, selector: #selector(scanQRCodeAction(_:)), name: .shortcutScanQRCode, object: nil)
-	}
-	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		NotificationCenter.default.removeObserver(self, name: .shortcutScanQRCode, object: nil)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(scanQRCodeAction(_:)), name: .shortcutScanQRCode, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .shortcutScanQRCode, object: nil)
         if tabBarController?.selectedIndex != 3 {
             addressInputView.textField.text = ""
-			cleanModels()
+            cleanModels()
         }
-	}
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .transactionSended, object: nil)
         NotificationCenter.default.removeObserver(self, name: .sendBTCToContact, object: nil)
     }
-	
-	func cleanModels() {
-		sendModel = nil
-		contact = nil
-	}
-	
+    
+    func cleanModels() {
+        sendModel = nil
+        contact = nil
+    }
+    
     @objc
     func transactionDidSend(notification: Notification) {
         addressInputView.textField.text = ""
@@ -99,22 +99,22 @@ class BILSendController: BILBaseViewController, UITextFieldDelegate {
     }
     
     func didChooseContact(contact: ContactModel) {
-		cleanModels()
+        cleanModels()
         loadViewIfNeeded()
         self.contact = contact
-		addressInputView.textField.text = "\(contact.name ?? "")( \(contact.detail) )"
+        addressInputView.textField.text = "\(contact.name ?? "")( \(contact.detail) )"
     }
     
     // MARK: - Actions
-	@objc
+    @objc
     @IBAction func scanQRCodeAction(_ sender: Any) {
         unowned let unownedSelf = self
         let cont = BILQRCodeScanViewController.controller { (qrString) in
             if let result = BILURLHelper.transferBitCoinURL(urlString: qrString) {
                 debugPrint(result)
-				unownedSelf.cleanModels()
-				unownedSelf.sendModel = BILSendModel(address: result.address, amount: String(describing: result.amount))
-				if result.amount < 0 {
+                unownedSelf.cleanModels()
+                unownedSelf.sendModel = BILSendModel(address: result.address, amount: String(describing: result.amount))
+                if result.amount < 0 {
                     unownedSelf.setAddress(address: result.address)
                     unownedSelf.navigationController?.popViewController(animated: true)
                 }

@@ -12,7 +12,7 @@ extension String {
     static var bil_contactsToAddByIDSegue: String { return "BILContactsToAddByIDSegue" }
     static var bil_showContactDetailSegue: String { return "BILShowContactDetailSegue" }
     static var bil_contactsToAddByAddressSegue: String { return "bil_contactsToAddByAddressSegue" }
-	static var bil_contactsToResultSegue: String { return "BILContactsToResultSegue" }
+    static var bil_contactsToResultSegue: String { return "BILContactsToResultSegue" }
 }
 
 class BILContactController: BILLightBlueBaseController {
@@ -25,7 +25,7 @@ class BILContactController: BILLightBlueBaseController {
     var showTableViewIndexes: Bool = false
     
     var didSelectContactClosure: DidSelectContactClosure?
-	
+    
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var newItem: UIBarButtonItem!
@@ -41,7 +41,7 @@ class BILContactController: BILLightBlueBaseController {
         NotificationCenter.default.addObserver(self, selector: #selector(loadContacts), name: .contactDidChanged, object: nil)
         
         firstLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".map{ String($0) }
-		loadContacts()
+        loadContacts()
     }
     
     override func languageDidChanged() {
@@ -50,18 +50,18 @@ class BILContactController: BILLightBlueBaseController {
         emptyLabel.text = "No contacts".bil_ui_localized
         newItem.title = "Add".bil_ui_localized
         newButton.setTitle("Add now".bil_ui_localized, for: .normal)
-		tableView.reloadData()
+        tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-		NotificationCenter.default.addObserver(self, selector: #selector(newContactAction(_:)), name: .shortcutAddContact, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newContactAction(_:)), name: .shortcutAddContact, object: nil)
     }
-	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		NotificationCenter.default.removeObserver(self, name: .shortcutAddContact, object: nil)
-	}
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .shortcutAddContact, object: nil)
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .contactDidChanged, object: nil)
@@ -72,7 +72,7 @@ class BILContactController: BILLightBlueBaseController {
         // Dispose of any resources that can be recreated.
     }
 
-	@objc
+    @objc
     @IBAction func newContactAction(_ sender: Any) {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         sheet.addAction(UIAlertAction(title: .contact_contact_addByID, style: .default, handler: { (action) in
@@ -82,7 +82,7 @@ class BILContactController: BILLightBlueBaseController {
             self.performSegue(withIdentifier: .bil_contactsToAddByAddressSegue, sender: sender)
         }))
         sheet.addAction(UIAlertAction(title: .contact_contact_scanCode, style: .default, handler: { (action) in
-			self.addContactByScanQRCode()
+            self.addContactByScanQRCode()
         }))
         
         sheet.addAction(UIAlertAction(title: .contact_contact_cancel, style: .cancel, handler: { (action) in
@@ -90,15 +90,15 @@ class BILContactController: BILLightBlueBaseController {
         }))
         present(sheet, animated: true, completion: nil)
     }
-	
-	func addContactByScanQRCode() {
-		unowned let unownedSelf = self
-		let cont = BILQRCodeScanViewController.controller { (qrString) in
-			if let result = BILURLHelper.transferContactURL(urlString: qrString) {
-				unownedSelf.navigationController?.popViewController(animated: true)
-				unownedSelf.checkID(id: result)
+    
+    func addContactByScanQRCode() {
+        unowned let unownedSelf = self
+        let cont = BILQRCodeScanViewController.controller { (qrString) in
+            if let result = BILURLHelper.transferContactURL(urlString: qrString) {
+                unownedSelf.navigationController?.popViewController(animated: true)
+                unownedSelf.checkID(id: result)
                 return
-			}
+            }
             if let address = BILURLHelper.transferBitCoinURL(urlString: qrString)?.address {
                 debugPrint(address)
                 unownedSelf.navigationController?.popViewController(animated: true)
@@ -122,31 +122,31 @@ class BILContactController: BILLightBlueBaseController {
                     unownedSelf.showTipAlert(msg: error.localizedDescription)
                 })
             }
-		}
-		show(cont, sender: nil)
-	}
-	
-	func checkID(id: String) {
+        }
+        show(cont, sender: nil)
+    }
+    
+    func checkID(id: String) {
         guard !ContactModel.isWalletIDExits(walletID: id) else {
             bil_makeToast(msg: "ID 已存在")
             return
         }
-		self.bil_showLoading()
-		ContactModel.getContactFromServer(by: id, success: { (id) in
-			DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(350), execute: {
-				self.bil_dismissHUD()
-				self.showResult(id: id)
-			})
-		}) { (msg, code) in
-			self.bil_makeToast(msg: msg)
-			self.bil_dismissHUD()
-		}
-	}
-	
-	func showResult(id: String) {
-		performSegue(withIdentifier: .bil_contactsToResultSegue, sender: id)
-	}
-	
+        self.bil_showLoading()
+        ContactModel.getContactFromServer(by: id, success: { (id) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(350), execute: {
+                self.bil_dismissHUD()
+                self.showResult(id: id)
+            })
+        }) { (msg, code) in
+            self.bil_makeToast(msg: msg)
+            self.bil_dismissHUD()
+        }
+    }
+    
+    func showResult(id: String) {
+        performSegue(withIdentifier: .bil_contactsToResultSegue, sender: id)
+    }
+    
     // MARK: - Navigation
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -169,10 +169,10 @@ class BILContactController: BILLightBlueBaseController {
             if let contact = sender as? ContactModel {
                 cont.contact = contact
             }
-		case String.bil_contactsToResultSegue:
-			guard let walletID = sender as? String else { return }
-			let cont = segue.destination as! BILSearchWalletIDResultController
-			cont.walletID = walletID
+        case String.bil_contactsToResultSegue:
+            guard let walletID = sender as? String else { return }
+            let cont = segue.destination as! BILSearchWalletIDResultController
+            cont.walletID = walletID
         case String.bil_contactsToAddByAddressSegue:
             guard let address = sender as? String else { return }
             let cont = segue.destination as! BILAddContactByAddressController
@@ -187,21 +187,21 @@ class BILContactController: BILLightBlueBaseController {
 
 extension BILContactController {
 
-	@objc
-	func loadContacts() {
-		let models = bil_contactManager.models
-		let isEmpty = models.count == 0
-		tableView.isHidden = isEmpty
-		emptyView.isHidden = !isEmpty
-		handleContacts(datas: models)
-		tableView.reloadData()
-	}
-	
+    @objc
+    func loadContacts() {
+        let models = bil_contactManager.models
+        let isEmpty = models.count == 0
+        tableView.isHidden = isEmpty
+        emptyView.isHidden = !isEmpty
+        handleContacts(datas: models)
+        tableView.reloadData()
+    }
+    
     func handleContacts(datas: [ContactModel]) {
         contacts.removeAll()
         for contact in datas {
             let firstLetter = contact.firstNameLetter
-			debugPrint("\(firstLetter), \(contact.name ?? "")")
+            debugPrint("\(firstLetter), \(contact.name ?? "")")
             var array = contacts[firstLetter]
             if array == nil {
                 array = [ContactModel]()
