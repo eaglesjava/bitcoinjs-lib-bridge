@@ -72,9 +72,6 @@ dependencies {
     // network
     compile 'com.amitshekhar.android:rx2-android-networking:1.0.0'
 
-    //tabview
-    compile 'com.isanwenyu.tabview:tabview:1.2.2'
-
     //ViewPager indicator view
     compile 'com.romandanylyk:pageindicatorview:0.2.0'
 
