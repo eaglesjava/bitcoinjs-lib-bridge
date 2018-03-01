@@ -19,6 +19,7 @@ import com.bitbill.www.common.widget.SettingView;
 import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.UpdateAppDialog;
+import com.bitbill.www.common.widget.dialog.UpdateConfirmDialog;
 import com.bitbill.www.model.app.AppModel;
 
 import javax.inject.Inject;
@@ -100,10 +101,11 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
     }
 
     @Override
-    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl) {
+    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl, String updateLog) {
         if (needUpdate) {
             //弹出更新提示框
-            MessageConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), getString(R.string.dialog_msg_latest_version) + updateVersion, getString(R.string.dialog_btn_update), needForce, false)
+            String msg = StringUtils.isNotEmpty(updateLog) ? updateLog : getString(R.string.dialog_msg_latest_version) + updateVersion;
+            UpdateConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), msg, getString(R.string.dialog_btn_update), needForce, false)
                     .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

@@ -46,6 +46,7 @@ import com.bitbill.www.common.widget.Decoration;
 import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.UpdateAppDialog;
+import com.bitbill.www.common.widget.dialog.UpdateConfirmDialog;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
@@ -173,7 +174,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
     };
     private UpdateAppDialog mUpdateAppDialog;
-    private MessageConfirmDialog mUpdateMsgConfirmDialog;
+    private UpdateConfirmDialog mUpdateMsgConfirmDialog;
     private String mFromTag;
     private boolean isListUnconfirm;
     private Wallet mSelectedWallet;
@@ -868,11 +869,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl) {
+    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl, String updateLog) {
         if (needUpdate) {
             //弹出更新提示框
             if (mUpdateMsgConfirmDialog == null) {
-                mUpdateMsgConfirmDialog = MessageConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), getString(R.string.dialog_msg_latest_version) + updateVersion, getString(R.string.dialog_btn_update), needForce, false);
+                String msg = StringUtils.isNotEmpty(updateLog) ? updateLog : getString(R.string.dialog_msg_latest_version) + updateVersion;
+                mUpdateMsgConfirmDialog = UpdateConfirmDialog.newInstance(getString(R.string.dialog_title_update_app), msg, getString(R.string.dialog_btn_update), needForce, false);
                 mUpdateMsgConfirmDialog
                         .setConfirmDialogClickListener(new BaseConfirmDialog.ConfirmDialogClickListener() {
                             @Override

@@ -231,6 +231,16 @@ public class AppModelManager extends ModelManager implements AppModel {
     }
 
     @Override
+    public String getUpdateLog() {
+        return mAppPreferences.getUpdateLog();
+    }
+
+    @Override
+    public void setUpdateLog(String updateLog) {
+        mAppPreferences.setUpdateLog(updateLog);
+    }
+
+    @Override
     public double getBtcCnyValue() {
         return mAppPreferences.getBtcCnyValue();
     }

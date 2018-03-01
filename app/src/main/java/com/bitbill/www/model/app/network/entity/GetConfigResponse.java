@@ -18,6 +18,7 @@ public class GetConfigResponse {
     private String iforceVersion;
     private String iversion;
     private String apkUrl;
+    private String updateLog;
 
     public String getAversion() {
         return aversion;
@@ -57,5 +58,13 @@ public class GetConfigResponse {
 
     public void setApkUrl(String apkUrl) {
         this.apkUrl = apkUrl;
+    }
+
+    public String getUpdateLog() {
+        return updateLog;
+    }
+
+    public void setUpdateLog(String updateLog) {
+        this.updateLog = updateLog;
     }
 }

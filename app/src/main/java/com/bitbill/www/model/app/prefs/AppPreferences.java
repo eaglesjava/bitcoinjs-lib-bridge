@@ -23,6 +23,7 @@ public interface AppPreferences extends Prefs {
     String IS_ALIAS_SETED = "is_alias_seted";
     String FORCE_VERSION = "force_version";
     String UPDATE_VERSION = "update_version";
+    String UPDATE_LOG = "update_log";
     String APK_URL = "apk_url";
     String BTC_CNY_VALUE = "btc_cny_value";
     String BTC_USD_VALUE = "btc_usd_value";
@@ -66,6 +67,10 @@ public interface AppPreferences extends Prefs {
     String getUpdateVersion();
 
     void setUpdateVersion(String aversion);
+
+    String getUpdateLog();
+
+    void setUpdateLog(String updateLog);
 
     double getBtcCnyValue();
 

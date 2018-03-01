@@ -146,6 +146,17 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     }
 
     @Override
+    public String getUpdateLog() {
+        return mPrefs.getString(UPDATE_LOG, "");
+    }
+
+    @Override
+    public void setUpdateLog(String updateLog) {
+        mPrefs.edit().putString(UPDATE_LOG, updateLog).apply();
+
+    }
+
+    @Override
     public double getBtcCnyValue() {
         try {
             return Double.parseDouble(mPrefs.getString(BTC_CNY_VALUE, "0.00"));

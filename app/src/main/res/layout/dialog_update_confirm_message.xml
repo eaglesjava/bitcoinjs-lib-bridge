@@ -11,6 +11,5 @@
         android:layout_marginLeft="@dimen/dp_25"
         android:layout_marginRight="@dimen/dp_25"
         android:layout_marginTop="@dimen/dp_15"
-        android:gravity="center"
-        android:minLines="1" />
+        android:lineSpacingMultiplier="1.2" />
 </FrameLayout>

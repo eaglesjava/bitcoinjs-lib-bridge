@@ -45,6 +45,7 @@ public class UpdatePresenter<M extends AppModel, V extends UpdateMvpView> extend
                                 getModelManager().setForceVersion(aforceVersion);
                                 String aversion = data.getAversion();
                                 getModelManager().setUpdateVersion(aversion);
+                                getModelManager().setUpdateLog(data.getUpdateLog());
                                 getMvpView().getConfigSuccess(aversion, aforceVersion);
                                 getModelManager().setApkUrl(data.getApkUrl());
                             }
@@ -67,16 +68,17 @@ public class UpdatePresenter<M extends AppModel, V extends UpdateMvpView> extend
 
     @Override
     public void checkUpdate() {
-        String forceVersion = getModelManager().getForceVersion();
         String updateVersion = getModelManager().getUpdateVersion();
         String apkUrl = getModelManager().getApkUrl();
         if (!StringUtils.isUrl(apkUrl) || StringUtils.isEmpty(updateVersion)) {
             return;
         }
         boolean needUpdate = StringUtils.needUpdate(DeviceUtil.getAppVersion(), updateVersion);
+        String forceVersion = getModelManager().getForceVersion();
         boolean needForce = StringUtils.needUpdate(DeviceUtil.getAppVersion(), forceVersion);
         if (needUpdate || needForce) {
-            getMvpView().needUpdateApp(needUpdate, needForce, updateVersion, apkUrl);
+            String updateLog = getModelManager().getUpdateLog();
+            getMvpView().needUpdateApp(needUpdate, needForce, updateVersion, apkUrl, updateLog);
         }
     }
 }
