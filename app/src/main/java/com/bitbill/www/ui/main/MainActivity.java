@@ -724,14 +724,14 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 100)
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onUnConfirmedListEvent(UnConfirmedListEvent unConfirmedListEvent) {
         if (unConfirmedListEvent == null) {
             return;
         }
-        //加载未确认交易
-        List<TxRecord> data = (List<TxRecord>) unConfirmedListEvent.getData();
-        loadUnconfirmList(data);
+        EventBus.getDefault().removeStickyEvent(UnConfirmedListEvent.class);
+        //加载本地未确认交易
+        getMvpPresenter().loadUnConfirmedList();
     }
 
     private void updateLocalCache(ContextBean context) {
