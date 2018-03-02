@@ -156,18 +156,18 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
 
     @Override
     public void createAddressQrcodeFail() {
-        showMessage(R.string.fail_create_address_qrcode);
+        onError(R.string.fail_create_address_qrcode);
     }
 
     @Override
     public void getSelectedWalletFail() {
 
-        showMessage(R.string.fail_get_wallet_info);
+        onError(R.string.fail_get_wallet_info);
     }
 
     @Override
     public void loadAddressFail() {
-        showMessage(R.string.fail_load_address);
+        onError(R.string.fail_load_address);
     }
 
     @Override
@@ -191,13 +191,12 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
 
     @Override
     public void getWalletFail() {
-        showMessage(R.string.fail_get_wallet_info);
+        onError(R.string.fail_get_wallet_info);
     }
 
     @Override
     public void refreshAddressFail(boolean isInternal) {
-        hideLoading();
-        showMessage(R.string.fail_refresh_address);
+        onError(R.string.fail_refresh_address);
     }
 
     @Override
@@ -211,8 +210,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
 
     @Override
     public void reachAddressIndexLimit() {
-        showMessage(R.string.fail_reach_address_index_limit);
-        hideLoading();
+        onError(R.string.fail_reach_address_index_limit);
     }
 
     @Override

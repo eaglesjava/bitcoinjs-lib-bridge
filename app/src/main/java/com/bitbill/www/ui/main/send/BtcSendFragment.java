@@ -122,6 +122,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
                 if (mSendContact == null || StringUtils.isEmpty(mSendContact.getWalletId())) {
                     mValidateAddressMvpPresenter.validateBtcAddress();
                 } else {
+                    showLoading();
                     //请求最新联系人关联walletid地址
                     getMvpPresenter().getLastAddress();
                 }
@@ -152,13 +153,13 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
         if (validate) {
             SendAmountActivity.start(getBaseActivity(), getSendAddress(), mSendContact);
         } else {
-            showMessage(R.string.fail_invalid_address);
+            onError(R.string.fail_invalid_address);
         }
     }
 
     @Override
     public void requireAddress() {
-        showMessage(R.string.fail_send_address_null);
+        onError(R.string.fail_send_address_null);
 
     }
 
@@ -203,12 +204,12 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
 
     @Override
     public void getLastAddressFail() {
-        showMessage(R.string.fail_get_contact_last_address);
+        onError(R.string.fail_get_contact_last_address);
     }
 
     @Override
     public void requireWalletId() {
-        showMessage(R.string.fail_get_contact_info);
+        onError(R.string.fail_get_contact_info);
 
     }
 

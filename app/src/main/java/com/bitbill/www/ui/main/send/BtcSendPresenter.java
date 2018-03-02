@@ -34,7 +34,7 @@ public class BtcSendPresenter<M extends ContactModel, V extends BtcSendMvpView> 
         getCompositeDisposable().add(getModelManager()
                 .getLastAddress(new GetLastAddressRequest(getMvpView().getWalletId()))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<GetLastAddressResponse>>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<ApiResponse<GetLastAddressResponse>>() {
                     @Override
                     public void onNext(ApiResponse<GetLastAddressResponse> getLastAddressResponseApiResponse) {
                         super.onNext(getLastAddressResponseApiResponse);

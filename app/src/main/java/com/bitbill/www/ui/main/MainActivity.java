@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -333,6 +334,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
                 index = tab.getPosition();
+                Log.d(TAG, "onTabSelected() called with: tab = [" + tab + "],index = [" + index + "]");
                 switch (tab.getPosition()) {
                     case INDEX_ASSET:
                         setTitle(R.string.title_asset);
@@ -834,8 +836,12 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                 return;
             }
         }
-        if (mAssetFragment != null) {
-            mAssetFragment.showLoading();
+        if (index == INDEX_ASSET) {
+            if (mAssetFragment != null) {
+                mAssetFragment.showLoading();
+            }
+        } else {
+            super.showLoading();
         }
     }
 
@@ -844,6 +850,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (mAssetFragment != null) {
             mAssetFragment.hideLoading();
         }
+        super.hideLoading();
     }
 
     @Override

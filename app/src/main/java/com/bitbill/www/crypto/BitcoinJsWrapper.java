@@ -68,7 +68,7 @@ public class BitcoinJsWrapper {
         mWebView.evaluateJavascript(jsFunction, new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String value) {
-                Log.d(TAG, "onReceiveValue() called with: value = [" + value + "]");
+                Log.d(TAG, "onReceiveValue() called with:jsFunction = [" + jsFunction + "], value = [" + value + "]");
                 if (callback != null) {
                     JsResult jsResult = null;
                     if (StringUtils.isNotEmpty(value)) {
