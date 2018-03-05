@@ -89,7 +89,7 @@ extension WalletModel {
                 success()
             }
         }
-        handleChangeAddress(changeIndex: targetChangeIndex)
+        handleAddress(index: targetAddressIndex)
     }
     
     func createWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
