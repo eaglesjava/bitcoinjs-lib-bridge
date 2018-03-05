@@ -12,7 +12,7 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.PwdStatusView;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
-import com.bitbill.www.crypto.JsResult;
+import com.bitbill.www.crypto.entity.JsResult;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -174,11 +174,11 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
                     @Override
                     public void onNext(ApiResponse<ImportWalletResponse> importWalletResponseApiResponse) {
                         super.onNext(importWalletResponseApiResponse);
-                        if (!isViewAttached()) {
+                        if (handleApiResponse(importWalletResponseApiResponse)) {
                             return;
                         }
                         Log.d(TAG, "onNext() called with: importWalletResponseApiResponse = [" + importWalletResponseApiResponse + "]");
-                        if (importWalletResponseApiResponse != null && importWalletResponseApiResponse.isSuccess()) {
+                        if (importWalletResponseApiResponse.isSuccess()) {
                             //完善wallet相关属性
                             StringUtils.encryptMnemonicAndSeedHex(mWallet.getMnemonic(), mWallet.getSeedHex(), mWallet.getExtentedPublicKey(), mWallet.getInternalPublicKey(), getMvpView().getTradePwd(), mWallet);
                             insertWallet();

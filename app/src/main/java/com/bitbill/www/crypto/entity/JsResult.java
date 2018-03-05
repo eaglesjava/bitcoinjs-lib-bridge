@@ -1,4 +1,4 @@
-package com.bitbill.www.crypto;
+package com.bitbill.www.crypto.entity;
 
 import com.bitbill.www.common.base.model.entity.Entity;
 

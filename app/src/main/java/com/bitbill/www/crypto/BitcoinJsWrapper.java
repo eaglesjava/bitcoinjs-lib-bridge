@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.crypto.entity.JsResult;
 import com.google.gson.JsonSyntaxException;
 import com.tencent.smtt.export.external.interfaces.ConsoleMessage;
 import com.tencent.smtt.sdk.ValueCallback;

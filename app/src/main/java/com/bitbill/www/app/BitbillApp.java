@@ -118,7 +118,6 @@ public class BitbillApp extends Application {
 
         mApplicationComponent.inject(this);
 
-
         //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
 
         QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {

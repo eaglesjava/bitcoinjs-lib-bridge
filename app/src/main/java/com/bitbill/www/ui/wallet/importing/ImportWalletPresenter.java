@@ -7,7 +7,7 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
-import com.bitbill.www.crypto.JsResult;
+import com.bitbill.www.crypto.entity.JsResult;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;

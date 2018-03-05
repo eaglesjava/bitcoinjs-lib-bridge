@@ -108,10 +108,7 @@ public class ApplicationModule {
     @Provides
     @DatabaseInfo
     DaoSession provideDaoSession(DbOpenHelper dbOpenHelper) {
-        //release 使用加密数据库
-        return new DaoMaster(BuildConfig.DEBUG
-                ? dbOpenHelper.getWritableDb()
-                : dbOpenHelper.getEncryptedWritableDb(BuildConfig.ENCRYPTED_DB_SECRECT))
+        return new DaoMaster(dbOpenHelper.getWritableDb())
                 .newSession();
     }
 

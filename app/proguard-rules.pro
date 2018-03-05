@@ -54,6 +54,7 @@
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }
+-keep public class * implements java.io.Serializable {*;}
 
 -keepclassmembers class **.R$* {
     public static <fields>;
@@ -107,6 +108,7 @@ public static java.lang.String TABLENAME;
     public static void dropTable(org.greenrobot.greendao.database.Database, boolean);
     public static void createTable(org.greenrobot.greendao.database.Database, boolean);
 }
+#-keep class net.sqlcipher.** { *; }
 
 ### jpush
 -dontoptimize
@@ -143,4 +145,26 @@ public static java.lang.String TABLENAME;
 -dontwarn android.databinding.**
 #butterknife
 -keep class butterknife.** {*;}
+
+#tencent x5
+-dontwarn com.tencent.smtt.**
+-keep public class com.tencent.smtt.**{*;}
+
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+
+#Js
+-keepattributes *Annotation*
+-keepattributes *JavascriptInterface*
+-keep class * extends android.webkit.WebView {*;}
+-keepclassmembers class * extends android.webkit.WebViewClient {
+     public void *(android.webkit.webView, jav.lang.String);
+ }
+
+#entity
+-keep class com.bitbill.www.common.base.model.network.api.ApiResponse {*;}
+-keep class com.bitbill.www.common.widget.** {*;}
+-keep class com.bitbill.www.crypto.entity.** {*;}
+-keep class com.bitbill.www.model.** {*;}
+-keep class com.bitbill.www.service.** {*;}
 

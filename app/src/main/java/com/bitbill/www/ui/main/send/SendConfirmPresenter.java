@@ -12,7 +12,7 @@ import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.CryptoConstants;
-import com.bitbill.www.crypto.JsResult;
+import com.bitbill.www.crypto.entity.JsResult;
 import com.bitbill.www.crypto.entity.Transaction;
 import com.bitbill.www.crypto.utils.ConvertUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;

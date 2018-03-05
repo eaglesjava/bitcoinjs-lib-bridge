@@ -4,7 +4,7 @@ import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
-import com.bitbill.www.crypto.JsResult;
+import com.bitbill.www.crypto.entity.JsResult;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
 

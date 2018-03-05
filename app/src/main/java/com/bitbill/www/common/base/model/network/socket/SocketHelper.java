@@ -5,11 +5,14 @@
 package com.bitbill.www.common.base.model.network.socket;
 
 
+import android.util.Log;
+
 import com.bitbill.www.di.qualifier.SocketUrlInfo;
 
 import java.net.URISyntaxException;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -18,6 +21,7 @@ import io.socket.engineio.client.transports.WebSocket;
 /**
  * Created by isanwenyu@163.com on 2017/8/1.
  */
+@Singleton
 public class SocketHelper implements SocketControl {
     public static final int SOCKET_TIME_OUT = 20000;
     private static final String TAG = "SocketHelper";
@@ -31,6 +35,7 @@ public class SocketHelper implements SocketControl {
             opts.transports = new String[]{WebSocket.NAME};
             opts.timeout = SOCKET_TIME_OUT;
             mSocket = IO.socket(socketUrl, opts);
+            Log.d(TAG, "SocketHelper() called with:mSocket = [" + mSocket + "], socketUrl = [" + socketUrl + "]");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
