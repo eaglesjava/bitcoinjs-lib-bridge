@@ -837,7 +837,7 @@
         <!--发送-->
         <scene sceneID="K4I-Pn-CzS">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wp5-hk-BhU" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wp5-hk-BhU" customClass="BaseNavigationController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="发送" image="icon_send" selectedImage="icon_send_h" id="5MS-kJ-Ypl">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>

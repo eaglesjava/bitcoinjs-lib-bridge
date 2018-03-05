@@ -59,8 +59,6 @@ class BILQRCodeScanViewController: BILBaseViewController {
     
     @objc func showAlbum() {
         let picker = UIImagePickerController()
-        picker.navigationBar.isTranslucent = false
-        picker.navigationBar.setBackgroundImage(BILAppStartUpManager.shared.navBackgroundImage, for: .default)
         picker.sourceType = .photoLibrary
         picker.delegate = self
         present(picker, animated: true, completion: nil)

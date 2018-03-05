@@ -122,11 +122,12 @@ class BILAppStartUpManager: NSObject {
 	}
 	
 	private func setupNavigationBarAppearance() {
+        return
 		let appearance = UINavigationBar.appearance()
-		appearance.setBackgroundImage(UIImage(), for: .default)
-		appearance.shadowImage = UIImage()
-		appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-		appearance.tintColor = UIColor.white
+        appearance.setBackgroundImage(UIImage(), for: .default)
+        appearance.shadowImage = UIImage()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.tintColor = UIColor.white
 		if #available(iOS 11.0, *) {
 			appearance.prefersLargeTitles = !isSmallScreen
 			appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]

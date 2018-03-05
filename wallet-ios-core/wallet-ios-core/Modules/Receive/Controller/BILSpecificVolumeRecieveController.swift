@@ -57,7 +57,7 @@ class BILSpecificVolumeReceiveController: BILBaseViewController {
         guard adds.count > 0 else { return }
         let cont = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "BILBTCTransactionController") as! BILBTCTransactionController
         cont.transaction = tx
-        let nav = UINavigationController(rootViewController: cont)
+        let nav = BaseNavigationController(rootViewController: cont)
         cont.setupRightItemForPresent()
         BILControllerManager.shared.mainTabBarController?.present(nav, animated: true, completion: {
             self.navigationController?.popToRootViewController(animated: false)

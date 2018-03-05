@@ -453,7 +453,7 @@
         <!--接收-->
         <scene sceneID="gsA-3J-HfX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oZT-mc-NTx" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oZT-mc-NTx" customClass="BaseNavigationController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="接收" image="icon_receive" selectedImage="icon_receive_h" id="ic5-jT-iGX">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>

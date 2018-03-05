@@ -938,7 +938,7 @@ EOmSseWMhUlEA
         <!--我-->
         <scene sceneID="pj1-mt-ETC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FHp-J5-Gub" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FHp-J5-Gub" customClass="BaseNavigationController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="我" image="icon_me" selectedImage="icon_me_h" id="dFI-W1-AfE">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>

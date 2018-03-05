@@ -823,7 +823,7 @@
         <!--资产-->
         <scene sceneID="Hdn-X3-w7g">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YFK-rB-t1O" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YFK-rB-t1O" customClass="BaseNavigationController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="资产" image="icon_home" selectedImage="icon_home_h" id="skP-T0-JsY">
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
@@ -843,10 +843,10 @@
             </objects>
             <point key="canvasLocation" x="-690" y="192"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Base Navigation Controller-->
         <scene sceneID="be0-fQ-KdG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="umR-fX-gdo" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="umR-fX-gdo" customClass="BaseNavigationController" customModule="wallet_ios_core" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lRI-Wv-eaQ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
