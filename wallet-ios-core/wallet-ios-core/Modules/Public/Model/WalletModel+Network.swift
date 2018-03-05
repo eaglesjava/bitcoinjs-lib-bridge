@@ -36,42 +36,60 @@ extension WalletModel {
         let addressIndex = json["indexNo"].int64Value
         let changeIndex = json["changeIndexNo"].int64Value
 		let serverVersion = json["version"].int64Value
-		func handleChangeAddress(changeIndex: Int64) {
-			if lastBTCChangeAddressIndex < changeIndex || changeIndex == 0 {
-				generateAddresses(type: .change, from: lastBTCChangeAddressIndex, to: changeIndex, success: { (addresses) in
-					self.bitcoinWallet?.needLoadServer = true
-					loadTXs(version: serverVersion)
-				}, failure: { (msg, code) in
-					debugPrint(msg)
-				})
-			}
-		}
-		debugPrint("---- \(addressIndex), \(lastBTCAddressIndex), \(changeIndex), \(lastBTCChangeAddressIndex)")
-		if lastBTCAddressIndex < addressIndex || addressIndex == 0 {
-            generateAddresses(from: lastBTCAddressIndex, to: addressIndex, success: { (addresses) in
-                if self.lastBTCChangeAddressIndex < changeIndex {
-                    handleChangeAddress(changeIndex: changeIndex)
-                }
-                else
-                {
-                    self.bitcoinWallet?.needLoadServer = true
-                    loadTXs(version: serverVersion)
-                }
-            }, failure: { (msg, code) in
-                debugPrint(msg)
-            })
-			return
-        }
-        else if lastBTCChangeAddressIndex < changeIndex || changeIndex == 0
-        {
-            handleChangeAddress(changeIndex: changeIndex)
-			return
-        }
 		
+        syncAddress(targetAddressIndex: addressIndex, targetChangeIndex: changeIndex, success: {
+            loadTXs(version: serverVersion)
+        }) { (msg, code) in
+            debugPrint(msg)
+        }
+        
         bitcoinWallet?.needLoadServer = (bitcoinWallet?.version)! < serverVersion
         if (bitcoinWallet?.needLoadServer)! {
 			loadTXs(version: serverVersion)
         }
+    }
+    
+    func syncAddress(targetAddressIndex: Int64, targetChangeIndex: Int64, success: @escaping () -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
+        func handleChangeAddress(changeIndex: Int64) {
+            if lastBTCChangeAddressIndex < changeIndex || changeIndex == 0 {
+                generateAddresses(type: .change, from: lastBTCChangeAddressIndex, to: min(changeIndex, lastBTCChangeAddressIndex + 50), success: { (addresses) in
+                    if self.lastBTCChangeAddressIndex < targetChangeIndex {
+                        handleChangeAddress(changeIndex: targetChangeIndex)
+                    } else {
+                        self.bitcoinWallet?.needLoadServer = true
+                        success()
+                    }
+                }, failure: { (msg, code) in
+                    failure(msg, code)
+                })
+            }
+        }
+        debugPrint("---- \(targetAddressIndex), \(lastBTCAddressIndex), \(targetChangeIndex), \(lastBTCChangeAddressIndex)")
+        func handleAddress(index: Int64) {
+            if lastBTCAddressIndex < targetAddressIndex || targetAddressIndex == 0 {
+                generateAddresses(from: lastBTCAddressIndex, to: min(targetAddressIndex, lastBTCAddressIndex + 50), success: { (addresses) in
+                    if self.lastBTCAddressIndex < index {
+                        handleAddress(index: index)
+                    } else {
+                        if self.lastBTCChangeAddressIndex < targetChangeIndex || targetChangeIndex == 0 {
+                            handleChangeAddress(changeIndex: targetChangeIndex)
+                        } else {
+                            self.bitcoinWallet?.needLoadServer = true
+                            success()
+                        }
+                    }
+                }, failure: { (msg, code) in
+                    failure(msg, code)
+                })
+                return
+            } else if lastBTCChangeAddressIndex < targetChangeIndex || targetChangeIndex == 0 {
+                handleChangeAddress(changeIndex: targetChangeIndex)
+                return
+            } else {
+                success()
+            }
+        }
+        handleChangeAddress(changeIndex: targetChangeIndex)
     }
     
     func createWalletToServer(success: @escaping ([String: JSON]) -> Void, failure: @escaping (_ message: String, _ code: Int) -> Void) {
