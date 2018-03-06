@@ -108,7 +108,7 @@ public static java.lang.String TABLENAME;
     public static void dropTable(org.greenrobot.greendao.database.Database, boolean);
     public static void createTable(org.greenrobot.greendao.database.Database, boolean);
 }
-#-keep class net.sqlcipher.** { *; }
+-keep class net.sqlcipher.** { *; }
 
 ### jpush
 -dontoptimize
