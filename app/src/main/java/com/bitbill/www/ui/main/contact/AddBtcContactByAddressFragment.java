@@ -138,7 +138,7 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
     @Override
     public void isExsistContact(boolean isExsist) {
         if (isExsist) {
-            showMessage(R.string.msg_contact_is_exsist);
+            onError(R.string.msg_contact_is_exsist);
         } else {
             mValidateAddressMvpPresenter.validateBtcAddress();
         }
@@ -172,7 +172,7 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
         if (validate) {
             getMvpPresenter().addContact();
         } else {
-            showMessage(R.string.fail_invalid_address);
+            onError(R.string.fail_invalid_address);
         }
     }
 
@@ -197,6 +197,6 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
 
     @Override
     public void addContactFail(String message) {
-        showMessage(StringUtils.isEmpty(message) ? getString(R.string.fail_add_contact) : message);
+        onError(StringUtils.isEmpty(message) ? getString(R.string.fail_add_contact) : message);
     }
 }

@@ -89,11 +89,11 @@ public class AddContactByIdActivity extends BaseToolbarActivity<AddContactByIdMv
 
     @Override
     public void searchWalletIdFail() {
-        MessageConfirmDialog.newInstance("钱包不存在", true).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
+        MessageConfirmDialog.newInstance(getString(R.string.error_wallet_no_exsist), true).show(getSupportFragmentManager(), MessageConfirmDialog.TAG);
     }
 
     @Override
     public void requireWalletId() {
-        showMessage("ID不能为空");
+        showMessage(R.string.fail_get_wallet_id);
     }
 }

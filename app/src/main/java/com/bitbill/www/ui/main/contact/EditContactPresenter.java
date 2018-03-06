@@ -60,12 +60,14 @@ public class EditContactPresenter<M extends ContactModel, V extends EditContactM
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
+                        if (!isViewAttached()) {
+                            return;
+                        }
                         if (e instanceof ANError) {
                             handleApiError(((ANError) e));
                         } else {
                             getMvpView().updateContactFail(null);
                         }
-                        getMvpView().hideLoading();
                     }
                 }));
 

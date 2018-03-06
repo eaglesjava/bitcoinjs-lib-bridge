@@ -120,7 +120,7 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
     @Override
     public void updateContactFail(String message) {
 
-        showMessage(StringUtils.isEmpty(message) ? getString(R.string.msg_update_contact_fail) : message);
+        onError(StringUtils.isEmpty(message) ? getString(R.string.msg_update_contact_fail) : message);
     }
 
     @Override
@@ -160,7 +160,7 @@ public class EditContactActivity extends BaseToolbarActivity<EditContactMvpPrese
 
     @Override
     public void deleteContactFail(String message) {
-        showMessage(StringUtils.isEmpty(message) ? getString(R.string.msg_delete_contact_fail) : message);
+        onError(StringUtils.isEmpty(message) ? getString(R.string.msg_delete_contact_fail) : message);
     }
 
     @OnClick({R.id.btn_save, R.id.btn_delete})
