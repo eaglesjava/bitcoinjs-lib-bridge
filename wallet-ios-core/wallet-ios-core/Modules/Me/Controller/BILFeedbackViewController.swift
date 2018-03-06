@@ -25,7 +25,10 @@ class BILFeedbackViewController: BILBaseViewController, UITextViewDelegate, BILI
         containerView.layer.cornerRadius = 2.0
         
         contactInputView.delegate = self
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         contentTextView.becomeFirstResponder()
     }
     
