@@ -5,8 +5,6 @@ var BITCOIN_MAINNET_PATH = "m/44'/0'/0'/0";
 var BITCOIN_MAINNET_CHANGE_PATH = "m/44'/0'/0'/1";
 var BITCOIN_TESTNET_PATH = "m/44'/1'/0'/0";
 
-var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0";
-
 // 随机生成中文助记词，entropy： 长度， wordlist：
 function generateMnemonicRandom(entropy, wordlist) {
     // Generate a random mnemonic (uses crypto.randomBytes under the hood), defaults to 128-bits of entropy
