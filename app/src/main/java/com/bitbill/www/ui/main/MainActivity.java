@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -381,6 +382,17 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             hideSelectWallet();
         });
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetView);
+        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (BottomSheetBehavior.STATE_COLLAPSED == newState) hideMaskView();
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
         Decoration decor = new Decoration(this, Decoration.VERTICAL);
         mRecyclerView.addItemDecoration(decor);
 
@@ -434,6 +446,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (mBottomSheetBehavior != null) {
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
+        hideMaskView();
+    }
+
+    private void hideMaskView() {
         if (mMaskView != null) {
             AnimationUtils.getAlphaAnimation(1.0f, 0.0f, 200).start();
             mMaskView.setVisibility(View.GONE);
