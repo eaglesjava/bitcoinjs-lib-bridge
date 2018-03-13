@@ -1,5 +1,7 @@
 var util = require('ethereumjs-util');
 var hdkey = require('ethereumjs-wallet/hdkey');
+var Web3 = require('web3');
+var web3 = new Web3();
 
 // jaxx path
 var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0/0";
@@ -31,12 +33,25 @@ function isValidChecksumAddress(address) {
 	return util.isValidChecksumAddress(address)
 }
 
+function createTokenData (amount, address) {
+    //send max for tokens issue use big number library to parse value amount
+    var ABI = web3.toBigNumber(amount, 10).toString(16); //amount;//parseInt(amount).toString(16);
+    while (ABI.length < 64)
+        ABI = '0' + ABI;
+    address = address.substr(2);
+    while (address.length < 64)
+        address = '0' + address;
+    var ethData = address + ABI;
+    return '0xa9059cbb' + ethData;
+}
+
 module.exports = {
     mnemonicToSeed: mnemonicToSeed,
     seedToAddress: seedToAddress,
     seedHexToAddress: seedHexToAddress,
     isValidAddress: isValidAddress,
-    isValidChecksumAddress: isValidChecksumAddress
+    isValidChecksumAddress: isValidChecksumAddress,
+    createTokenData: createTokenData
 };
 
 // for test
