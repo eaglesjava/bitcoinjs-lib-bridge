@@ -144,6 +144,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 		}
 		
         view.endEditing(true)
+        self.bil_showLoading()
         
 		getMnemonic { (m) in
             func cleanUp(wallet: WalletModel?, error: String) {
@@ -161,7 +162,6 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
                 self.bil_showError(status: .newWallet_create_pwdEmpty)
                 return
             }
-            self.bil_showLoading()
             
             var localWallet = WalletModel.fetch(mnemonicHash: m.md5())
             
