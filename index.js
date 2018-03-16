@@ -10,30 +10,30 @@ var ETHEREUM_TESTNET_PATH = "m/44'/1'/0'/0";
 var bip39 = require('bip39');
 
 function mnemonicToSeed(mnemonic) {
-	var seed = bip39.mnemonicToSeed(mnemonic);
-	return seed;
+    var seed = bip39.mnemonicToSeed(mnemonic);
+    return seed;
 }
 
 function seedToAddress(seed) {
-	var hd = hdkey.fromMasterSeed(seed);
-	var wallet = hd.derivePath(ETHEREUM_MAINNET_PATH).getWallet();
-	return wallet.getChecksumAddressString();
+    var hd = hdkey.fromMasterSeed(seed);
+    var wallet = hd.derivePath(ETHEREUM_MAINNET_PATH).getWallet();
+    return wallet.getChecksumAddressString();
 }
 
 function seedHexToAddress(seedHex) {
-	var seed = Buffer.from(seedHex, 'hex');
-	return seedToAddress(seed);
+    var seed = Buffer.from(seedHex, 'hex');
+    return seedToAddress(seed);
 }
 
 function isValidAddress(address) {
-	return util.isValidAddress(address)
+    return util.isValidAddress(address)
 }
 
 function isValidChecksumAddress(address) {
-	return util.isValidChecksumAddress(address)
+    return util.isValidChecksumAddress(address)
 }
 
-function createTokenData (amount, address) {
+function createTokenData(amount, address) {
     //send max for tokens issue use big number library to parse value amount
     var ABI = web3.toBigNumber(amount, 10).toString(16); //amount;//parseInt(amount).toString(16);
     while (ABI.length < 64)
