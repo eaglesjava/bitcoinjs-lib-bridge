@@ -219,7 +219,7 @@
                         <viewLayoutGuide key="safeArea" id="0KD-nE-XL3"/>
                     </view>
                     <navigationItem key="navigationItem" title="联系人详情" id="fmK-w8-sle">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="oUc-Ld-WB7">
+                        <barButtonItem key="rightBarButtonItem" title="编辑" id="oUc-Ld-WB7">
                             <connections>
                                 <segue destination="Cyi-S6-jxX" kind="show" identifier="BILContactDetailToEditSegue" id="Hqm-dx-YrB"/>
                             </connections>
@@ -228,6 +228,7 @@
                     <connections>
                         <outlet property="contactTypeLabel" destination="PFb-n2-MGB" id="Nf8-8h-3Kr"/>
                         <outlet property="contactTypeStringLabel" destination="8wa-9V-3e2" id="AuW-Jp-flJ"/>
+                        <outlet property="editItem" destination="oUc-Ld-WB7" id="BbF-2H-ex6"/>
                         <outlet property="nameFirstWordLabel" destination="DZI-H4-dgr" id="cbw-94-Tep"/>
                         <outlet property="nameLabel" destination="LFc-uK-qH9" id="eNn-eI-ESV"/>
                         <outlet property="remarkLabel" destination="nTG-6c-hbZ" id="lK3-aw-xHk"/>
@@ -418,7 +419,7 @@
                         <viewLayoutGuide key="safeArea" id="KKg-sS-mXJ"/>
                     </view>
                     <navigationItem key="navigationItem" title="编辑联系人" id="loc-Av-3sV">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="5np-aa-mS5">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="5np-aa-mS5">
                             <connections>
                                 <action selector="saveAction:" destination="Cyi-S6-jxX" id="pFm-M0-3Ui"/>
                             </connections>
@@ -430,6 +431,7 @@
                         <outlet property="deleteButton" destination="0ze-rm-y8b" id="k5s-yo-BLR"/>
                         <outlet property="nameInputView" destination="Xsc-59-xfp" id="36r-td-SOd"/>
                         <outlet property="remarkInputView" destination="HHF-xq-Ino" id="uy2-O4-xQK"/>
+                        <outlet property="saveItem" destination="5np-aa-mS5" id="X3o-k1-AsQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKa-sD-RvE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -949,7 +951,7 @@
                         <viewLayoutGuide key="safeArea" id="dhu-hR-iVw"/>
                     </view>
                     <navigationItem key="navigationItem" title="通过地址添加" id="hoi-GI-4Yo">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="eLz-vP-Xi5">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="eLz-vP-Xi5">
                             <connections>
                                 <action selector="addAction:" destination="QiL-YC-s9A" id="3gt-hl-kZR"/>
                             </connections>
@@ -959,6 +961,7 @@
                         <outlet property="addressInputView" destination="yX6-JW-MfI" id="w3C-z3-hvI"/>
                         <outlet property="nameInputView" destination="waG-Dy-t0J" id="Ajv-Kz-iD2"/>
                         <outlet property="remarkInputView" destination="FEA-o8-7yq" id="sKJ-Gp-3Ff"/>
+                        <outlet property="saveItem" destination="eLz-vP-Xi5" id="YMf-Jl-4yN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YX2-AF-Kby" userLabel="First Responder" sceneMemberID="firstResponder"/>

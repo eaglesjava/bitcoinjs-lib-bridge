@@ -17,6 +17,7 @@ class BILContactDetailController: BILLightBlueBaseController {
     @IBOutlet weak var remarkLabel: UILabel!
     @IBOutlet weak var remarkTitleLabel: UILabel!
     @IBOutlet weak var sendButton: BILWhiteBorderButton!
+    @IBOutlet weak var editItem: UIBarButtonItem!
     
     var contact: ContactModel?
     
@@ -33,6 +34,7 @@ class BILContactDetailController: BILLightBlueBaseController {
         guard let c = contact else { return }
         contactTypeLabel.text = c.additionType == .walletID ? .contact_detail_walletID : (.contact_detail_walletAddress + " (\(c.coinType.name))")
         sendButton.setTitle("Send".bil_ui_localized, for: .normal)
+        editItem.title = "Edit".bil_ui_localized
     }
     
     override func viewWillAppear(_ animated: Bool) {

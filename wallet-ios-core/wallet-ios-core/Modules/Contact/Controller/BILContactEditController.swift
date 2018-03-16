@@ -17,6 +17,7 @@ class BILContactEditController: BILLightBlueBaseController {
     @IBOutlet weak var contactTypeLabel: UILabel!
     @IBOutlet weak var contactTypeStringLabel: BILCopyLabel!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var saveItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class BILContactEditController: BILLightBlueBaseController {
         guard let c = contact else { return }
         contactTypeLabel.text = c.additionType == .walletID ? .contact_detail_walletID : (.contact_detail_walletAddress + " (\(c.coinType.name))")
         deleteButton.setTitle("Delete contact".bil_ui_localized, for: .normal)
+        saveItem.title = "Save".bil_ui_localized
     }
 
     override func didReceiveMemoryWarning() {
