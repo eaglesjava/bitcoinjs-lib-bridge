@@ -255,7 +255,7 @@ extension WalletModel {
         
         bitcoinWallet?.isGeneratingAddresses = true
 		let beginDate = Date()
-        BitcoinJSBridge.shared.getAddresses(xpub: type == .normal ? mainExtPublicKey! : changeExtPublicKey!, fromIndex: from, toIndex: to, success: { (result) in
+        BitcoinJSBridge.shared.getAddresses(xpub: (type == .normal ? mainExtPublicKey : changeExtPublicKey) ?? "", fromIndex: from, toIndex: to, success: { (result) in
             debugPrint(result)
             guard let array = result as? [String] else {
                 failure(.publicWalletGenerateAddressError, -1)
