@@ -133,6 +133,8 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
 	var headerBGImage: UIImage?
     
     var totalBTCBalance = "0.00"
+    
+    var popMenu: BILPopMenu?
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -252,6 +254,13 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
             })
         }
 	}
+    
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        popMenu?.dismissAnimate {
+            
+        }
+        return popMenu == nil
+    }
 	
 	// MARK: - Header view delegate
 	func actionButtonTapped(headerView: BILHomeTableHeaderView) {
@@ -278,10 +287,12 @@ class BILHomeViewController: BILBaseViewController, UITableViewDelegate, UITable
                 self.performSegue(withIdentifier: "BILHomeToImportWalletSegue", sender: nil)
             }))
             menu.show(in: view.window!, focusPoint: point, willDismiss: {
+                self.popMenu = nil
                 UIView.animate(withDuration: 0.35, animations: {
                     button.transform = CGAffineTransform(rotationAngle: 0)
                 })
             })
+            popMenu = menu
 		}
 	}
 	
