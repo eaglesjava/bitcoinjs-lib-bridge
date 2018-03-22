@@ -13,10 +13,10 @@ import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
 import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
+import com.bitbill.www.model.btc.network.entity.TxElement;
 import com.bitbill.www.model.eventbus.ReceiveAmountEvent;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.network.socket.ContextBean;
 import com.bitbill.www.model.wallet.network.socket.UnConfirmed;
 import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
@@ -40,9 +40,9 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     @BindView(R.id.tv_receive_amount)
     TextView tvReceiveAmount;
     @Inject
-    ScanPayMvpPresenter<TxModel, ScanPayMvpView> mScanPayMvpPresenter;
+    ScanPayMvpPresenter<BtcModel, ScanPayMvpView> mScanPayMvpPresenter;
     @Inject
-    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
+    ParseTxInfoMvpPresenter<BtcModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
     private String mReceiveAddress;
     private String mReceiveAmount;
     private String mTxHash;

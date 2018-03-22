@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseFragmentActivity;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
 import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.main.receive.ScanPayActivity;
 

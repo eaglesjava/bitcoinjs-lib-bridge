@@ -18,11 +18,10 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.PwdDialogFragment;
-import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import org.greenrobot.eventbus.EventBus;
@@ -51,9 +50,9 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     @BindView(R.id.et_send_mark)
     EditText etSendMark;
     @Inject
-    SendConfirmMvpPresenter<TxModel, SendConfirmMvpView> mSendConfirmMvpPresenter;
+    SendConfirmMvpPresenter<BtcModel, SendConfirmMvpView> mSendConfirmMvpPresenter;
     @Inject
-    BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
+    BtcAddressMvpPresentder<BtcModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
     private String mSendAddress;
     private String mSendAmount;
     private PwdDialogFragment mPwdDialogFragment;

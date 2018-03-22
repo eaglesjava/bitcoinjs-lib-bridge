@@ -49,8 +49,10 @@ import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.UpdateAppDialog;
 import com.bitbill.www.common.widget.dialog.UpdateConfirmDialog;
-import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
+import com.bitbill.www.model.btc.network.entity.TxElement;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ConfirmedEvent;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
@@ -59,9 +61,6 @@ import com.bitbill.www.model.eventbus.UnConfirmEvent;
 import com.bitbill.www.model.eventbus.UnConfirmedListEvent;
 import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.socket.Confirmed;
@@ -114,19 +113,19 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private static final int INDEX_SEND = 3;
 
     @Inject
-    MainMvpPresenter<TxModel, MainMvpView> mMainMvpPresenter;
+    MainMvpPresenter<BtcModel, MainMvpView> mMainMvpPresenter;
     @Inject
     BalanceMvpPresenter<WalletModel, BalanceMvpView> mBalanceMvpPresenter;
     @Inject
     WalletMvpPresenter<WalletModel, WalletMvpView> mWalletPresenter;
     @Inject
-    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mParseTxInfoMvpPresenter;
+    ParseTxInfoMvpPresenter<BtcModel, ParseTxInfoMvpView> mParseTxInfoMvpPresenter;
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
-    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
+    SyncAddressMvpPresentder<BtcModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
     @Inject
-    BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
+    BtcRecordMvpPresenter<BtcModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
     @Inject
     UpdateMvpPresenter<AppModel, UpdateMvpView> mUpdateMvpPresenter;
 

@@ -6,7 +6,7 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.entity.JsResult;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.btc.BtcModel;
 
 import javax.inject.Inject;
 
@@ -16,7 +16,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu on 2017/12/26.
  */
 @PerActivity
-public class ValidateAddressPresenter<M extends AddressModel, V extends ValidateAddressMvpView> extends ModelPresenter<M, V> implements ValidateAddressMvpPresenter<M, V> {
+public class ValidateAddressPresenter<M extends BtcModel, V extends ValidateAddressMvpView> extends ModelPresenter<M, V> implements ValidateAddressMvpPresenter<M, V> {
     @Inject
     public ValidateAddressPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);

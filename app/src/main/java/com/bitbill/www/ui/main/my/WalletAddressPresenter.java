@@ -8,11 +8,10 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.network.entity.GetTxElement;
-import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.Address;
+import com.bitbill.www.model.btc.network.entity.GetTxElement;
+import com.bitbill.www.model.btc.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
@@ -25,9 +24,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu on 2018/1/13.
  */
 @PerActivity
-public class WalletAddressPresenter<M extends TxModel, V extends WalletAddressMvpView> extends ModelPresenter<M, V> implements WalletAddressMvpPresenter<M, V> {
-    @Inject
-    AddressModel mAddressModel;
+public class WalletAddressPresenter<M extends BtcModel, V extends WalletAddressMvpView> extends ModelPresenter<M, V> implements WalletAddressMvpPresenter<M, V> {
 
     @Inject
     public WalletAddressPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
@@ -86,7 +83,7 @@ public class WalletAddressPresenter<M extends TxModel, V extends WalletAddressMv
         if (StringUtils.isEmpty(addressList)) {
             return;
         }
-        getCompositeDisposable().add(mAddressModel.updateAddressList(addressList)
+        getCompositeDisposable().add(getModelManager().updateAddressList(addressList)
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override

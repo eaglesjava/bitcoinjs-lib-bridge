@@ -14,7 +14,7 @@ import com.bitbill.www.common.presenter.ValidateAddressMvpView;
 import com.bitbill.www.common.utils.KeyboardStatusDetector;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.DrawableEditText;
-import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.btc.BtcModel;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.ui.main.contact.ContactSelectActivity;
@@ -36,7 +36,7 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     @Inject
     BtcSendMvpPresenter<ContactModel, BtcSendMvpView> mBtcSendMvpPresenter;
     @Inject
-    ValidateAddressMvpPresenter<AddressModel, ValidateAddressMvpView> mValidateAddressMvpPresenter;
+    ValidateAddressMvpPresenter<BtcModel, ValidateAddressMvpView> mValidateAddressMvpPresenter;
     private Contact mSendContact;
     private KeyboardStatusDetector mKeyboardStatusDetector;
 

@@ -6,8 +6,8 @@ import com.bitbill.model.db.dao.AddressDao;
 import com.bitbill.model.db.dao.DaoSession;
 import com.bitbill.model.db.dao.TxRecordDao;
 import com.bitbill.model.db.dao.WalletDao;
-import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.btc.db.entity.Address;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
 
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;

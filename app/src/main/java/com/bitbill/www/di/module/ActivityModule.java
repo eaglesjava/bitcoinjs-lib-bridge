@@ -41,10 +41,9 @@ import com.bitbill.www.common.rx.AppSchedulerProvider;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.qualifier.ActivityContext;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.btc.BtcModel;
 import com.bitbill.www.model.contact.ContactModel;
-import com.bitbill.www.model.transaction.TxModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.ui.guide.GuideMvpPresenter;
 import com.bitbill.www.ui.guide.GuideMvpView;
@@ -179,8 +178,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    MainMvpPresenter<TxModel, MainMvpView> provideMainPresenter(
-            MainPresenter<TxModel, MainMvpView> presenter) {
+    MainMvpPresenter<BtcModel, MainMvpView> provideMainPresenter(
+            MainPresenter<BtcModel, MainMvpView> presenter) {
         return presenter;
     }
 
@@ -235,22 +234,22 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    SendConfirmMvpPresenter<TxModel, SendConfirmMvpView> provideSendConfrimPresenter(
-            SendConfirmPresenter<TxModel, SendConfirmMvpView> presenter) {
+    SendConfirmMvpPresenter<BtcModel, SendConfirmMvpView> provideSendConfrimPresenter(
+            SendConfirmPresenter<BtcModel, SendConfirmMvpView> presenter) {
         return presenter;
     }
 
     @Provides
     @PerActivity
-    BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> provideBtcAddressPresenter(
-            BtcAddressPresenter<AddressModel, BtcAddressMvpView> presenter) {
+    BtcAddressMvpPresentder<BtcModel, BtcAddressMvpView> provideBtcAddressPresenter(
+            BtcAddressPresenter<BtcModel, BtcAddressMvpView> presenter) {
         return presenter;
     }
 
     @Provides
     @PerActivity
-    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> provideSyncAddressPresenter(
-            SyncAddressPresenter<AddressModel, SyncAddressMvpView> presenter) {
+    SyncAddressMvpPresentder<BtcModel, SyncAddressMvpView> provideSyncAddressPresenter(
+            SyncAddressPresenter<BtcModel, SyncAddressMvpView> presenter) {
         return presenter;
     }
 
@@ -277,8 +276,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    ScanPayMvpPresenter<TxModel, ScanPayMvpView> provideScanPayPresenter(
-            ScanPayPresenter<TxModel, ScanPayMvpView> presenter) {
+    ScanPayMvpPresenter<BtcModel, ScanPayMvpView> provideScanPayPresenter(
+            ScanPayPresenter<BtcModel, ScanPayMvpView> presenter) {
         return presenter;
     }
 
@@ -305,8 +304,8 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    ValidateAddressMvpPresenter<AddressModel, ValidateAddressMvpView> provideGetLastAddressPresenter(
-            ValidateAddressPresenter<AddressModel, ValidateAddressMvpView> presenter) {
+    ValidateAddressMvpPresenter<BtcModel, ValidateAddressMvpView> provideGetLastAddressPresenter(
+            ValidateAddressPresenter<BtcModel, ValidateAddressMvpView> presenter) {
         return presenter;
     }
 
@@ -361,29 +360,29 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> provideParseTxInfoPresenter(
-            ParseTxInfoPresenter<TxModel, ParseTxInfoMvpView> presenter) {
+    ParseTxInfoMvpPresenter<BtcModel, ParseTxInfoMvpView> provideParseTxInfoPresenter(
+            ParseTxInfoPresenter<BtcModel, ParseTxInfoMvpView> presenter) {
         return presenter;
     }
 
     @Provides
     @PerActivity
-    BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> provideBtcRecordPresenter(
-            BtcRecordPresenter<TxModel, BtcRecordMvpView> presenter) {
+    BtcRecordMvpPresenter<BtcModel, BtcRecordMvpView> provideBtcRecordPresenter(
+            BtcRecordPresenter<BtcModel, BtcRecordMvpView> presenter) {
         return presenter;
     }
 
     @Provides
     @PerActivity
-    WalletAddressMvpPresenter<TxModel, WalletAddressMvpView> provideWalletAddressPresenter(
-            WalletAddressPresenter<TxModel, WalletAddressMvpView> presenter) {
+    WalletAddressMvpPresenter<BtcModel, WalletAddressMvpView> provideWalletAddressPresenter(
+            WalletAddressPresenter<BtcModel, WalletAddressMvpView> presenter) {
         return presenter;
     }
 
     @Provides
     @PerActivity
-    TransferDetailMvpPresenter<AddressModel, TransferDetailMvpView> provideTransferDetailPresenter(
-            TransferDetailPresenter<AddressModel, TransferDetailMvpView> presenter) {
+    TransferDetailMvpPresenter<BtcModel, TransferDetailMvpView> provideTransferDetailPresenter(
+            TransferDetailPresenter<BtcModel, TransferDetailMvpView> presenter) {
         return presenter;
     }
 

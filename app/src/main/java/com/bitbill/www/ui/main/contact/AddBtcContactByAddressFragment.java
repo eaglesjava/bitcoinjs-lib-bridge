@@ -15,7 +15,7 @@ import com.bitbill.www.common.presenter.ValidateAddressMvpPresenter;
 import com.bitbill.www.common.presenter.ValidateAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.EditTextWapper;
-import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.btc.BtcModel;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
 import com.bitbill.www.ui.main.send.ScanQrcodeActivity;
@@ -41,7 +41,7 @@ public class AddBtcContactByAddressFragment extends BaseLazyFragment<AddContactB
     @Inject
     AddContactByAddressMvpPresenter<ContactModel, AddContactByAddressMvpView> mAddContactByAddressMvpPresenter;
     @Inject
-    ValidateAddressMvpPresenter<AddressModel, ValidateAddressMvpView> mValidateAddressMvpPresenter;
+    ValidateAddressMvpPresenter<BtcModel, ValidateAddressMvpView> mValidateAddressMvpPresenter;
     private boolean cancel;
     private View focusView;
 

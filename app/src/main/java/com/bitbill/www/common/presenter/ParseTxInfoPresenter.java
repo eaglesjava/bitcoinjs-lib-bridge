@@ -5,11 +5,10 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.transaction.network.entity.TxElement;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.Address;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
+import com.bitbill.www.model.btc.network.entity.TxElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +22,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2018/1/6.
  */
 @PerActivity
-public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpView> extends ModelPresenter<M, V> implements ParseTxInfoMvpPresenter<M, V> {
-    @Inject
-    AddressModel mAddressModel;
+public class ParseTxInfoPresenter<M extends BtcModel, V extends ParseTxInfoMvpView> extends ModelPresenter<M, V> implements ParseTxInfoMvpPresenter<M, V> {
 
     @Inject
     public ParseTxInfoPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
@@ -47,7 +44,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         long inputValues = 0;
                         for (TxElement.InputsBean input : inputs) {
                             inputValues += input.getValue();
-                            Address addressByName = mAddressModel.getAddressByName(input.getAddress());
+                            Address addressByName = getModelManager().getAddressByName(input.getAddress());
                             if (addressByName != null) {
                                 Long walletId = addressByName.getWalletId();
                                 if (!inWalletIdList.contains(walletId)) {
@@ -63,7 +60,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         long outputValues = 0;
                         for (TxElement.OutputsBean output : outputs) {
                             outputValues += output.getValue();
-                            Address addressByName = mAddressModel.getAddressByName(output.getAddress());
+                            Address addressByName = getModelManager().getAddressByName(output.getAddress());
                             if (addressByName != null) {
                                 foundAddressCount++;
                                 Long walletId = addressByName.getWalletId();
@@ -94,7 +91,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                                 //发送
                                 inOut = TxRecord.InOut.OUT;
                                 for (TxElement.OutputsBean output : outputs) {
-                                    Address addressByName = mAddressModel.getAddressByName(output.getAddress());
+                                    Address addressByName = getModelManager().getAddressByName(output.getAddress());
                                     if (addressByName == null || !inWalletId.equals(addressByName.getWalletId())) {
                                         amount += output.getValue();
                                     }
@@ -128,7 +125,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                             //接收
                             inout = TxRecord.InOut.IN;
                             for (TxElement.OutputsBean output : outputs) {
-                                Address addressByName = mAddressModel.getAddressByName(output.getAddress());
+                                Address addressByName = getModelManager().getAddressByName(output.getAddress());
                                 if (addressByName != null && outWalletId.equals(addressByName.getWalletId())) {
                                     outAmount += output.getValue();
                                 }
@@ -148,7 +145,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         }
                     }
                     //更新已经使用地址
-                    mAddressModel.updateAddressList(usedAddressList);
+                    getModelManager().updateAddressList(usedAddressList);
                     return Observable.just(txRecords);
                 })
                 .compose(this.applyScheduler())

@@ -7,7 +7,6 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.entity.GetCacheVersionRequest;
@@ -29,8 +28,6 @@ import io.reactivex.disposables.CompositeDisposable;
 
 @PerActivity
 public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheVersionMvpView> extends ModelPresenter<M, V> implements GetCacheVersionMvpPresenter<M, V> {
-    @Inject
-    AddressModel mAddressModel;
 
     @Inject
     public GetCacheVersionPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {

@@ -9,8 +9,8 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseFragment;
 import com.bitbill.www.common.base.view.BaseTabsActivity;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
 import com.bitbill.www.model.eventbus.SyncAddressEvent;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
 

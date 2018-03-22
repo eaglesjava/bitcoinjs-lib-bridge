@@ -9,7 +9,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseListFragment;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 

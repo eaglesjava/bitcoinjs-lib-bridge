@@ -10,9 +10,9 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.network.entity.GetTxInfoRequest;
-import com.bitbill.www.model.transaction.network.entity.TxElement;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.network.entity.GetTxInfoRequest;
+import com.bitbill.www.model.btc.network.entity.TxElement;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu on 2017/12/25.
  */
 @PerActivity
-public class ScanPayPresenter<M extends TxModel, V extends ScanPayMvpView> extends ModelPresenter<M, V> implements ScanPayMvpPresenter<M, V> {
+public class ScanPayPresenter<M extends BtcModel, V extends ScanPayMvpView> extends ModelPresenter<M, V> implements ScanPayMvpPresenter<M, V> {
 
     private static final String TAG = "ScanPayPresenter";
 

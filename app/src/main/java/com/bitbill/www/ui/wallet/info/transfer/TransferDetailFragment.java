@@ -19,10 +19,10 @@ import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.transaction.db.entity.Input;
-import com.bitbill.www.model.transaction.db.entity.Output;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.Input;
+import com.bitbill.www.model.btc.db.entity.Output;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
@@ -44,7 +44,7 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
-    TransferDetailMvpPresenter<AddressModel, TransferDetailMvpView> mTransferDetailMvpPresenter;
+    TransferDetailMvpPresenter<BtcModel, TransferDetailMvpView> mTransferDetailMvpPresenter;
     private TxRecord mTxRecord;
     private HeaderViewHolder mHeaderViewHolder;
     private FooterViewHolder mFooterViewHolder;

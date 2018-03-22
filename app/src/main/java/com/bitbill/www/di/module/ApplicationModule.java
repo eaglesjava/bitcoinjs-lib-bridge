@@ -21,30 +21,24 @@ import com.bitbill.www.di.qualifier.DatabaseInfo;
 import com.bitbill.www.di.qualifier.PrefersAppInfo;
 import com.bitbill.www.di.qualifier.PrefersWalletInfo;
 import com.bitbill.www.di.qualifier.SocketUrlInfo;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.address.AddressModelManager;
-import com.bitbill.www.model.address.db.AddressDb;
-import com.bitbill.www.model.address.db.AddressDbHelper;
-import com.bitbill.www.model.address.network.AddressApi;
-import com.bitbill.www.model.address.network.AddressApiHelper;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.AppModelManager;
 import com.bitbill.www.model.app.network.AppApi;
 import com.bitbill.www.model.app.network.AppApiHelper;
 import com.bitbill.www.model.app.prefs.AppPreferences;
 import com.bitbill.www.model.app.prefs.AppPreferencesHelper;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.BtcModelManager;
+import com.bitbill.www.model.btc.db.BtcDb;
+import com.bitbill.www.model.btc.db.BtcDbHelper;
+import com.bitbill.www.model.btc.network.BtcApi;
+import com.bitbill.www.model.btc.network.BtcApiHelper;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.ContactModelManager;
 import com.bitbill.www.model.contact.db.ContactDb;
 import com.bitbill.www.model.contact.db.ContactDbHelper;
 import com.bitbill.www.model.contact.network.ContactApi;
 import com.bitbill.www.model.contact.network.ContactApiHelper;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.TxModelManager;
-import com.bitbill.www.model.transaction.db.TxDb;
-import com.bitbill.www.model.transaction.db.TxDbHelper;
-import com.bitbill.www.model.transaction.network.TxApi;
-import com.bitbill.www.model.transaction.network.TxApiHelper;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.WalletModelManager;
 import com.bitbill.www.model.wallet.db.WalletDb;
@@ -277,38 +271,20 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    AddressModel provideAddressModuleManager(AddressModelManager addressModelManager) {
-        return addressModelManager;
+    BtcModel provideBtcModelManager(BtcModelManager btcModelManager) {
+        return btcModelManager;
     }
 
     @Provides
     @Singleton
-    AddressDb provideAddressDbHelper(AddressDbHelper addressDbHelper) {
-        return addressDbHelper;
+    BtcDb provideBtcDbHelper(BtcDbHelper btcDbHelper) {
+        return btcDbHelper;
     }
 
     @Provides
     @Singleton
-    AddressApi provideAddressApiHelper(AddressApiHelper addressApiHelper) {
-        return addressApiHelper;
-    }
-
-    @Provides
-    @Singleton
-    TxModel provideTxModuleManager(TxModelManager txModelManager) {
-        return txModelManager;
-    }
-
-    @Provides
-    @Singleton
-    TxDb provideTxDbHelper(TxDbHelper txDbHelper) {
-        return txDbHelper;
-    }
-
-    @Provides
-    @Singleton
-    TxApi provideTxApiHelper(TxApiHelper txApiHelper) {
-        return txApiHelper;
+    BtcApi provideBtcApiHelper(BtcApiHelper btcApiHelper) {
+        return btcApiHelper;
     }
 
 }

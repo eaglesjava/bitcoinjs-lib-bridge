@@ -11,10 +11,10 @@ import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.entity.JsResult;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.address.network.entity.RefreshAddressRequest;
-import com.bitbill.www.model.address.network.entity.RefreshAddressResponse;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.Address;
+import com.bitbill.www.model.btc.network.entity.RefreshAddressRequest;
+import com.bitbill.www.model.btc.network.entity.RefreshAddressResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2017/12/15.
  */
 @PerActivity
-public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvpView> extends ModelPresenter<M, V> implements BtcAddressMvpPresentder<M, V> {
+public class BtcAddressPresenter<M extends BtcModel, V extends BtcAddressMvpView> extends ModelPresenter<M, V> implements BtcAddressMvpPresentder<M, V> {
 
     @Inject
     public BtcAddressPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {

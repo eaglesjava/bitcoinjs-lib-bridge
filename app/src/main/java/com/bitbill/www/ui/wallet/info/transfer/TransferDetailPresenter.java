@@ -4,11 +4,11 @@ import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.transaction.db.entity.Input;
-import com.bitbill.www.model.transaction.db.entity.Output;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.Address;
+import com.bitbill.www.model.btc.db.entity.Input;
+import com.bitbill.www.model.btc.db.entity.Output;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
 
 import javax.inject.Inject;
 
@@ -20,7 +20,7 @@ import io.reactivex.functions.Function;
  * Created by isanwenyu on 2018/1/30.
  */
 @PerActivity
-public class TransferDetailPresenter<M extends AddressModel, V extends TransferDetailMvpView> extends ModelPresenter<M, V> implements TransferDetailMvpPresenter<M, V> {
+public class TransferDetailPresenter<M extends BtcModel, V extends TransferDetailMvpView> extends ModelPresenter<M, V> implements TransferDetailMvpPresenter<M, V> {
     @Inject
     public TransferDetailPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);

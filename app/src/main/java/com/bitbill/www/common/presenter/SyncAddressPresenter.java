@@ -8,8 +8,8 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.entity.JsResult;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.address.db.entity.Address;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.Address;
 import com.bitbill.www.model.eventbus.SyncAddressEvent;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
@@ -27,7 +27,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2017/12/15.
  */
 @PerActivity
-public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressMvpView> extends ModelPresenter<M, V> implements SyncAddressMvpPresentder<M, V> {
+public class SyncAddressPresenter<M extends BtcModel, V extends SyncAddressMvpView> extends ModelPresenter<M, V> implements SyncAddressMvpPresentder<M, V> {
 
     @Inject
     public SyncAddressPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {

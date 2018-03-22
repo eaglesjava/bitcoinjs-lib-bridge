@@ -1,7 +1,7 @@
 package com.bitbill.www.ui.main.send;
 
 import com.bitbill.www.common.base.view.MvpView;
-import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.btc.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;

@@ -16,7 +16,7 @@ import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.common.widget.PwdStatusView;
-import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.btc.BtcModel;
 import com.bitbill.www.model.eventbus.PwdEditEvent;
 import com.bitbill.www.model.eventbus.RegisterEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
@@ -55,7 +55,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     @Inject
     InitWalletMvpPresenter<WalletModel, InitWalletMvpView> initWalletMvpPresenter;
     @Inject
-    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
+    SyncAddressMvpPresentder<BtcModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
     private boolean isCreateWallet = true;
     private EditTextWapper focusView;
     private boolean cancel;

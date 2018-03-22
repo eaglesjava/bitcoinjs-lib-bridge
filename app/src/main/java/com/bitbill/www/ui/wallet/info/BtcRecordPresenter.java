@@ -8,11 +8,11 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.transaction.network.entity.GetTxListRequest;
-import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
-import com.bitbill.www.model.transaction.network.entity.TxElement;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
+import com.bitbill.www.model.btc.network.entity.GetTxListRequest;
+import com.bitbill.www.model.btc.network.entity.ListTxElementResponse;
+import com.bitbill.www.model.btc.network.entity.TxElement;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2018/1/6.
  */
 @PerActivity
-public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> extends ModelPresenter<M, V> implements BtcRecordMvpPresenter<M, V> {
+public class BtcRecordPresenter<M extends BtcModel, V extends BtcRecordMvpView> extends ModelPresenter<M, V> implements BtcRecordMvpPresenter<M, V> {
     @Inject
     public BtcRecordPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);

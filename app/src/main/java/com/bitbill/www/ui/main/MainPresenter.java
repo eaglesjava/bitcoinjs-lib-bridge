@@ -29,10 +29,10 @@ import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
-import com.bitbill.www.model.transaction.network.entity.ListUnconfirmRequest;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
+import com.bitbill.www.model.btc.network.entity.ListTxElementResponse;
+import com.bitbill.www.model.btc.network.entity.ListUnconfirmRequest;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
@@ -45,7 +45,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2017/07/17.
  */
 
-public class MainPresenter<M extends TxModel, V extends MainMvpView> extends ModelPresenter<M, V>
+public class MainPresenter<M extends BtcModel, V extends MainMvpView> extends ModelPresenter<M, V>
         implements MainMvpPresenter<M, V> {
 
     private static final String TAG = "MainPresenter";

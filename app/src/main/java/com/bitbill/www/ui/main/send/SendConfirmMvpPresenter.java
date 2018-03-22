@@ -1,13 +1,13 @@
 package com.bitbill.www.ui.main.send;
 
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.btc.BtcModel;
 
 /**
  * Created by isanwenyu on 2017/12/18.
  */
 
-public interface SendConfirmMvpPresenter<M extends TxModel, V extends SendConfirmMvpView> extends MvpPresenter<V> {
+public interface SendConfirmMvpPresenter<M extends BtcModel, V extends SendConfirmMvpView> extends MvpPresenter<V> {
 
     /**
      * 获取utxo

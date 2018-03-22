@@ -1,7 +1,7 @@
 package com.bitbill.www.common.presenter;
 
 import com.bitbill.www.common.base.view.MvpView;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
 
 import java.util.List;
 

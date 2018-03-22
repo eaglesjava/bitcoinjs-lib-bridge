@@ -25,14 +25,14 @@ package com.bitbill.www.ui.main;
 
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.di.scope.PerActivity;
-import com.bitbill.www.model.transaction.TxModel;
+import com.bitbill.www.model.btc.BtcModel;
 
 /**
  * Created by isanwenyu@163.com on 2017/07/17.
  */
 
 @PerActivity
-public interface MainMvpPresenter<M extends TxModel, V extends MainMvpView> extends MvpPresenter<V> {
+public interface MainMvpPresenter<M extends BtcModel, V extends MainMvpView> extends MvpPresenter<V> {
 
     void listUnconfirm();
 

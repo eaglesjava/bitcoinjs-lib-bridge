@@ -12,10 +12,9 @@ import com.bitbill.www.common.presenter.BtcAddressMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
-import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.transaction.TxModel;
-import com.bitbill.www.model.transaction.network.entity.GetTxElementResponse;
+import com.bitbill.www.model.btc.BtcModel;
+import com.bitbill.www.model.btc.db.entity.Address;
+import com.bitbill.www.model.btc.network.entity.GetTxElementResponse;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -38,9 +37,9 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
     @BindView(R.id.tv_scan_address)
     TextView mTvScanAddress;
     @Inject
-    WalletAddressMvpPresenter<TxModel, WalletAddressMvpView> mWalletAddressMvpPresenter;
+    WalletAddressMvpPresenter<BtcModel, WalletAddressMvpView> mWalletAddressMvpPresenter;
     @Inject
-    BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
+    BtcAddressMvpPresentder<BtcModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
     private Wallet mWallet;
     private List<Address> mAddressList;
     private List<GetTxElementResponse.UtxoBean> mUnspentList;

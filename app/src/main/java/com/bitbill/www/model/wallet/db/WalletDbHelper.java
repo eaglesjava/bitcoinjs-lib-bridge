@@ -31,7 +31,7 @@ import com.bitbill.model.db.dao.TxRecordDao;
 import com.bitbill.model.db.dao.WalletDao;
 import com.bitbill.www.common.base.model.db.DbHelper;
 import com.bitbill.www.di.qualifier.DatabaseInfo;
-import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.btc.db.entity.TxRecord;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
