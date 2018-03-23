@@ -96,17 +96,18 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
                         wallet.setLastAddress(address);
                     }
                     //更新地址index
-                    updateAddressIndex(wallet, data, isInternal);
+                    Long lastIndex = isInternal ? wallet.getLastChangeAddressIndex() : wallet.getLastAddressIndex();
+                    updateAddressIndex(wallet, data, lastIndex, isInternal);
                 }
             }
         });
     }
 
-    public void updateAddressIndex(Wallet wallet, String[] addressArray, boolean isInternal) {
+    public void updateAddressIndex(Wallet wallet, String[] addressArray, Long lastIndex, boolean isInternal) {
         List<Address> addressList = new ArrayList<>();
         for (int i = 0; i < addressArray.length; i++) {
             //构造address列表
-            long index = (isInternal ? wallet.getLastChangeAddressIndex() : wallet.getLastAddressIndex()) - (addressArray.length - 1) + i;
+            long index = lastIndex - (addressArray.length - 1) + i;
             addressList.add(new Address(null, addressArray[i], wallet.getId(), index, AppConstants.BTC_COIN_TYPE, new Date(), 0l, isInternal, false));
         }
         getCompositeDisposable().add(getModelManager()

@@ -10,6 +10,7 @@ import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseListFragment;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
+import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -95,12 +96,12 @@ public class BtcUnconfirmFragment extends BaseListFragment<TxRecord, MvpPresente
     protected void itemConvert(ViewHolder holder, TxRecord txRecord, int position) {
         String inOutString = txRecord.getInOut() == TxRecord.InOut.TRANSFER ? "" : (txRecord.getInOut() == TxRecord.InOut.IN ? "+" : "-");
         holder.setText(R.id.tv_amount, inOutString + StringUtils.satoshi2btc(txRecord.getSumAmount()) + " btc");
-        try {
-            txRecord.__setDaoSession(getApp().getDaoSession());
-            holder.setText(R.id.tv_wallet_id, txRecord.getWallet().getName());
-        } catch (Exception e) {
-            e.printStackTrace();
+        txRecord.__setDaoSession(getApp().getDaoSession());
+        Wallet wallet = txRecord.getWallet();
+        if (wallet == null) {
+            return;
         }
+        holder.setText(R.id.tv_wallet_id, wallet.getName());
         holder.setText(R.id.tv_date, StringUtils.formatDateTime(txRecord.getCreatedTime()));
         if (txRecord.getHeight() == -1) {
             holder.setImageResource(R.id.iv_status, R.drawable.ic_item_unconfirm);

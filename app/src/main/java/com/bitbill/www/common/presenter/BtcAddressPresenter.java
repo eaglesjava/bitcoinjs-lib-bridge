@@ -52,7 +52,8 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         if (!isValidPublicKey()) {
             return;
         }
-        BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(wallet.getExtentedPublicKey(), wallet.getLastAddressIndex(), new BitcoinJsWrapper.Callback() {
+        final Long lastAddressIndex = wallet.getLastAddressIndex();
+        BitcoinJsWrapper.getInstance().getBitcoinAddressByMasterXPublicKey(wallet.getExtentedPublicKey(), lastAddressIndex, new BitcoinJsWrapper.Callback() {
             @Override
             public void call(String key, JsResult result) {
                 if (!isViewAttached()) {
@@ -76,7 +77,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                     }
                     wallet.setLastAddress(address);
 
-                    updateAddressIndex(wallet, new String[]{address}, true, false);
+                    updateAddressIndex(wallet, new String[]{address}, lastAddressIndex, true, false);
                 } else {
                     getMvpView().loadAddressFail();
                 }
@@ -277,7 +278,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                         wallet.setLastAddressIndex(index);
                     }
                     //更新地址index
-                    updateAddressIndex(wallet, data, false, isInternal);
+                    updateAddressIndex(wallet, data, index, false, isInternal);
                 } else {
                     getMvpView().refreshAddressFail(isInternal);
                 }
@@ -320,7 +321,7 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
                         wallet.setLastAddressIndex(toIndex);
                     }
                     //更新地址index
-                    updateAddressIndex(wallet, data, false, isInternal);
+                    updateAddressIndex(wallet, data, wallet.getLastAddressIndex(), false, isInternal);
                 } else {
                     getMvpView().refreshAddressFail(isInternal);
                 }
@@ -329,11 +330,11 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
         });
     }
 
-    public void updateAddressIndex(Wallet wallet, String[] addressArray, boolean isLoad, boolean isInternal) {
+    public void updateAddressIndex(Wallet wallet, String[] addressArray, Long lastAddressIndex, boolean isLoad, boolean isInternal) {
         List<Address> addressList = new ArrayList<>();
         for (int i = 0; i < addressArray.length; i++) {
             //构造address列表
-            long index = wallet.getLastAddressIndex() - (addressArray.length - 1) + i;
+            long index = lastAddressIndex - (addressArray.length - 1) + i;
             addressList.add(new Address(null, addressArray[i], wallet.getId(), index, AppConstants.BTC_COIN_TYPE, new Date(), 0l, isInternal, false));
         }
         getCompositeDisposable().add(getModelManager()
