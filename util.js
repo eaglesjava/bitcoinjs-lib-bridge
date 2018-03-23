@@ -16,7 +16,7 @@ var createTokenData = function(web3, amount, address) {
     return '0xa9059cbb' + ethData;
 };
 
-var mapEthTransaction = function (web3, addressTo, amount, nonce, gasPrice, gasLimit, data) {
+var mapEthTransaction = function(web3, addressTo, amount, nonce, gasPrice, gasLimit, data) {
     return {
         nonce: web3.toHex(nonce),
         gasPrice: web3.toHex(gasPrice),

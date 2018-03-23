@@ -37,7 +37,7 @@ function isValidChecksumAddress(address) {
 	return ethereumjsUtil.isValidChecksumAddress(address)
 }
 
-function buildEthTransaction (amountWei, addressTo, nonce, privateKey, gasPrice, gasLimit, customData) {
+function buildEthTransaction(amountWei, addressTo, nonce, privateKey, gasPrice, gasLimit, customData) {
     var transaction = new EthereumTx({
         nonce: web3.toHex(nonce),
         gasPrice: web3.toHex(gasPrice),
@@ -60,7 +60,7 @@ function buildEthTransaction (amountWei, addressTo, nonce, privateKey, gasPrice,
     };
 }
 
-function buildTokenTransaction (amountWei, addressTo, nonce, privateKey, contractAddress, gasLimit, gasPrice, customData) {
+function buildTokenTransaction(amountWei, addressTo, nonce, privateKey, contractAddress, gasLimit, gasPrice, customData) {
     var data = util.createTokenData(web3, amountWei, addressTo);
     if (customData) {
         console.error('User supplied custom data which is being ignored!');
