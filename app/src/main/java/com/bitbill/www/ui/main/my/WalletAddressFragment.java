@@ -105,7 +105,7 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
         }
         holder.setText(R.id.tv_address, addressItem.getAddress());
         Long balance = addressItem.getBalance();
-        holder.setText(R.id.tv_amount, StringUtils.satoshi2btc(balance) + " BTC");
+        holder.setText(R.id.tv_amount, StringUtils.satoshi2btc(balance) + " ic_coin_btc");
         holder.setAlpha(R.id.tv_amount, balance > 0 ? 1.0f : 0.6f);
 
 

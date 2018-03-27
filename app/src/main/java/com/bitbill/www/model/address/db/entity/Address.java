@@ -38,7 +38,7 @@ public class Address extends com.bitbill.www.common.base.model.entity.Entity {
     private Long index;
 
     @Property(nameInDb = "coin_type")
-    private String coinType;//默认"BTC"
+    private String coinType;//默认"ic_coin_btc"
 
     @Property(nameInDb = "created_at")
     private Date createdAt;

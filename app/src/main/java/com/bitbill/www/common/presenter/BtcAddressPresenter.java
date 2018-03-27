@@ -39,6 +39,9 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
 
     @Override
     public void loadAddress() {
+        if (!isViewAttached()) {
+            return;
+        }
         if (!isValidWallet()) {
             return;
         }
@@ -86,6 +89,9 @@ public class BtcAddressPresenter<M extends AddressModel, V extends BtcAddressMvp
 
     @Override
     public void checkAddressUsed() {
+        if (!isViewAttached()) {
+            return;
+        }
         if (!isValidWallet()) {
             return;
         }

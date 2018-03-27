@@ -37,13 +37,4 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         return fragments.get(position);
     }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        if (titles != null && position < titles.size()) {
-            return titles.get(position);
-        } else {
-            return null;
-        }
-    }
 }

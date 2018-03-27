@@ -98,12 +98,6 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
     }
 
     @Override
-    protected boolean isBlue() {
-        return false;
-    }
-
-
-    @Override
     protected BaseFragment getBtcFragment() {
         return mBtcReceiveFragment = BtcReceiveFragment.newInstance();
     }

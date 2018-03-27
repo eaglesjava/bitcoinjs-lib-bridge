@@ -84,12 +84,6 @@ public class SendFragment extends BaseTabsLazyFragment {
 
     }
 
-
-    @Override
-    protected boolean isBlue() {
-        return false;
-    }
-
     @Override
     protected BaseFragment getBtcFragment() {
         return mBtcSendFrg = BtcSendFragment.newInstance();

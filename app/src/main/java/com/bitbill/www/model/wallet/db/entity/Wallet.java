@@ -78,12 +78,12 @@ public class Wallet extends com.bitbill.www.common.base.model.entity.Entity {
     private String internalPublicKey;//十六进制字符串
 
     @Property(nameInDb = "balance")
-    private Long balance;//unit Satoshi  1 BTC = 100000000 Satoshi
+    private Long balance;//unit Satoshi  1 ic_coin_btc = 100000000 Satoshi
     @Property(nameInDb = "unconfirm")
-    private Long unconfirm;//unit Satoshi  1 BTC = 100000000 Satoshi
+    private Long unconfirm;//unit Satoshi  1 ic_coin_btc = 100000000 Satoshi
 
     @Property(nameInDb = "coin_type")
-    private String coinType;//默认"BTC"
+    private String coinType;//默认"ic_coin_btc"
 
     @Property(nameInDb = "version")
     private Long version;

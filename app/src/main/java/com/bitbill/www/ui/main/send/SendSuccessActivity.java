@@ -87,7 +87,7 @@ public class SendSuccessActivity extends BaseCompleteActivity {
     @Override
     public void initView() {
         tvSendAddress.setText(mSendAddress);
-        tvSendAmount.setText(mSendAmount + " BTC");
+        tvSendAmount.setText(mSendAmount + " ic_coin_btc");
         if (mSendContact == null) {
             llAddContact.setVisibility(View.VISIBLE);
             btnCreateContact.setOnClickListener(v -> {

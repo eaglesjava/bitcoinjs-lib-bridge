@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bitbill.www.R;
+import com.bitbill.www.common.base.model.entity.TabItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,9 +25,10 @@ public class EthInfoFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @return A new instance of fragment EthInfoFragment.
+     * @param tabItem
      */
     // TODO: Rename and change types and number of parameters
-    public static EthInfoFragment newInstance() {
+    public static EthInfoFragment newInstance(TabItem tabItem) {
         EthInfoFragment fragment = new EthInfoFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);

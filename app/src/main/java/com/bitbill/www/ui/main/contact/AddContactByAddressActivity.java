@@ -52,11 +52,6 @@ public class AddContactByAddressActivity extends BaseTabsActivity {
     }
 
     @Override
-    protected boolean isBlue() {
-        return true;
-    }
-
-    @Override
     protected BaseFragment getBtcFragment() {
         mAddBtcContactByAddressFragment = AddBtcContactByAddressFragment.newInstance(mAddress);
         return mAddBtcContactByAddressFragment;

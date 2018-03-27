@@ -192,7 +192,7 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
             }
             addressBuider.append(sendItem.getAddress());
             ((TextView) holder.getView(R.id.tv_tx_left)).setText(Html.fromHtml(addressBuider.toString()));
-            holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(sendItem.getAmount()) + " BTC");
+            holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(sendItem.getAmount()) + " ic_coin_btc");
             holder.setVisible(R.id.tv_tx_right, true);
 
         } else if (titleItem instanceof TransferReceiveItem) {
@@ -206,12 +206,12 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
             }
             addressBuider.append(receiveItem.getAddress());
             ((TextView) holder.getView(R.id.tv_tx_left)).setText(Html.fromHtml(addressBuider.toString()));
-            holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(receiveItem.getAmount()) + " BTC");
+            holder.setText(R.id.tv_tx_right, StringUtils.satoshi2btc(receiveItem.getAmount()) + " ic_coin_btc");
             holder.setVisible(R.id.tv_tx_right, true);
 
         } else if (titleItem instanceof TransferFeeItem) {
             holder.setText(R.id.tv_tx_title, getString(R.string.title_tx_fee));
-            holder.setText(R.id.tv_tx_left, StringUtils.satoshi2btc(((TransferFeeItem) titleItem).getFee()) + " BTC");
+            holder.setText(R.id.tv_tx_left, StringUtils.satoshi2btc(((TransferFeeItem) titleItem).getFee()) + " ic_coin_btc");
             holder.setVisible(R.id.tv_tx_right, false);
 
         } else if (titleItem instanceof TransferConfirmItem) {

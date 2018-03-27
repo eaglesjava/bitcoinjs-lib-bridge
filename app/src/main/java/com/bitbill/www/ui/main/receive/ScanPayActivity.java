@@ -88,7 +88,7 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     @Override
     public void initView() {
         tvAddress.setText(getReceiveAddress());
-        tvReceiveAmount.setText(getReceiveAmount() + " BTC");
+        tvReceiveAmount.setText(getReceiveAmount() + " ic_coin_btc");
     }
 
     @Override

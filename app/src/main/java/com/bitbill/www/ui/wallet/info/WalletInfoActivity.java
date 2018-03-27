@@ -61,11 +61,6 @@ public class WalletInfoActivity extends BaseTabsActivity implements BtcRecordFra
     }
 
     @Override
-    protected boolean isBlue() {
-        return true;
-    }
-
-    @Override
     protected BaseFragment getBtcFragment() {
         mBtcRecordFragment = BtcRecordFragment.newInstance(mWallet);
         return mBtcRecordFragment;

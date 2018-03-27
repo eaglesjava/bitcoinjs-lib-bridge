@@ -3,71 +3,136 @@ package com.bitbill.www.common.base.view;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bitbill.www.R;
+import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.adapter.FragmentAdapter;
+import com.bitbill.www.common.base.model.entity.TabItem;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.ui.wallet.info.BchInfoFragment;
+import com.bitbill.www.common.presenter.TabsMvpView;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.ui.wallet.info.EthInfoFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public abstract class BaseTabsFragment<P extends MvpPresenter> extends BaseFragment<P> {
+public abstract class BaseTabsFragment<P extends MvpPresenter> extends BaseFragment<P> implements TabsMvpView {
 
+    public static final int TAB_SIZE_LARGE = 3;
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    ViewPager mViewPager;
+    @BindView(R.id.iv_tab_left_arrow)
+    ImageView mIvTabLeftArrow;
+    @BindView(R.id.iv_tab_right_arrow)
+    ImageView mIvTabRightArrow;
+    @BindView(R.id.iv_tab_menu)
+    ImageView mIvTabMenu;
     private FragmentAdapter mFragmentAdapter;
-
-    @Override
-    public void initView() {
-        setupViewPager();
-
-    }
-
-    private void setupViewPager() {
-        mFragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-        mFragmentAdapter.addItem("btc", getBtcFragment());
-        mFragmentAdapter.addItem("bch", BchInfoFragment.newInstance());
-        mFragmentAdapter.addItem("eth", EthInfoFragment.newInstance());
-        viewPager.setAdapter(mFragmentAdapter);
-        tabs.setTabTextColors(getResources().getColor(R.color.white_50), getResources().getColor(isBlue() ? R.color.blue_tab : R.color.black));
-        tabs.setupWithViewPager(viewPager);
-        //禁止tab选择
-        LinearLayout tabStrip = (LinearLayout) tabs.getChildAt(0);
-        for (int i = 0; i < tabStrip.getChildCount(); i++) {
-            View tabView = tabStrip.getChildAt(i);
-            if (i > 0 &&
-                    tabView != null) {
-                tabView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_UP) {
-                            showMessage(R.string.msg_coming_soon);
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-            }
-        }
-    }
-
-    protected abstract boolean isBlue();
 
     protected abstract BaseFragment getBtcFragment();
 
+    @Override
+    public void initView() {
+        // TODO: 2018/3/27 for test
+        List<TabItem> tabItems = new ArrayList<>();
+        tabItems.add(new TabItem(AppConstants.BTC_COIN_TYPE, "btc", R.drawable.ic_coin_btc, null));
+        tabItems.add(new TabItem("ETH", "eth", R.drawable.ic_coin_eth, null));
+        tabItems.add(new TabItem("DGD", "dgd", R.drawable.ic_coin_dgd, null));
+        tabItems.add(new TabItem("MKR", "mkr", R.drawable.ic_coin_mkr, null));
+        tabItems.add(new TabItem("REP", "rep", R.drawable.ic_coin_rep, null));
+        tabItems.add(new TabItem("AE", "ae", R.drawable.ic_coin_ae, null));
+        tabItems.add(new TabItem("ZRX", "zrx", R.drawable.ic_coin_zrx, null));
+        tabItems.add(new TabItem("GNT", "gnt", R.drawable.ic_coin_gnt, null));
+        tabItems.add(new TabItem("ENG", "eng", R.drawable.ic_coin_eng, null));
+        tabItems.add(new TabItem("BAT", "bat", R.drawable.ic_coin_bat, null));
+        tabItems.add(new TabItem("SNT", "snt", R.drawable.ic_coin_snt, null));
+        tabItems.add(new TabItem("PAY", "pay", R.drawable.ic_coin_pay, null));
+        tabItems.add(new TabItem("LRC", "lrc", R.drawable.ic_coin_lrc, null));
+        loadTabsSuccess(tabItems);
+    }
+
+    @Override
+    public void loadTabsSuccess(List<TabItem> tabItems) {
+        if (StringUtils.isEmpty(tabItems)) {
+            return;
+        }
+        if (tabItems.size() < TAB_SIZE_LARGE) {
+            //隐藏左右滑动按钮
+            mIvTabLeftArrow.setVisibility(View.GONE);
+            mIvTabRightArrow.setVisibility(View.GONE);
+        }
+        mFragmentAdapter = new FragmentAdapter(getChildFragmentManager());
+        for (int i = 0; i < tabItems.size(); i++) {
+
+            TabItem tabItem = tabItems.get(i);
+            View customView = getCustomView(tabItem);
+            if (i > 0) {
+                customView.setAlpha(0.3f);
+            }
+            tabs.addTab(tabs.newTab().setCustomView(customView));
+            if (AppConstants.BTC_COIN_TYPE.equals(tabItem.getCoinId())) {
+                mFragmentAdapter.addItem(tabItem.getText(), getBtcFragment());
+            } else {
+                mFragmentAdapter.addItem(tabItem.getText(), EthInfoFragment.newInstance(tabItem));
+            }
+        }
+        mViewPager.setAdapter(mFragmentAdapter);
+        //Tablayout自定义view绑定ViewPager
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+        tabs.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                tab.getCustomView().setAlpha(1.0f);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                super.onTabUnselected(tab);
+                tab.getCustomView().setAlpha(0.3f);
+            }
+        });
+    }
+
+    private View getCustomView(TabItem tabItem) {
+        View newtab = LayoutInflater.from(getBaseActivity()).inflate(R.layout.layout_custom_tab, null);
+        TextView tv = newtab.findViewById(R.id.tv_text);
+        tv.setText(tabItem.getText());
+        ImageView im = newtab.findViewById(R.id.iv_tab);
+        im.setImageResource(tabItem.getIconId());
+        return newtab;
+    }
 
     @Override
     public int getLayoutId() {
         return R.layout.fragment_base_tabs;
+    }
+
+
+    @OnClick({R.id.iv_tab_left_arrow, R.id.iv_tab_right_arrow, R.id.iv_tab_menu})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_tab_left_arrow:
+                tabs.pageScroll(View.FOCUS_LEFT);
+                break;
+            case R.id.iv_tab_right_arrow:
+                tabs.pageScroll(View.FOCUS_RIGHT);
+                break;
+            case R.id.iv_tab_menu:
+                break;
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.bitbill.www.ui.main.receive;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.MenuItem;
+import android.support.v7.view.menu.ActionMenuItemView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +41,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     @Inject
     BtcAddressMvpPresentder<AddressModel, BtcAddressMvpView> mBtcAddressMvpPresentder;
 
-    private MenuItem mRefreshItem;
+    private ActionMenuItemView mRefreshItem;
     private Wallet mSelectedWallet;
 
     public BtcReceiveFragment() {

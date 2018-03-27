@@ -368,7 +368,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     private void refreshFeeHintLayout(String feeBtc) {
-        tvFeeHint.setText(String.format(getString(R.string.hint_confirm_time_and_fees), formatTime(mFeeTime), feeBtc + " BTC"));
+        tvFeeHint.setText(String.format(getString(R.string.hint_confirm_time_and_fees), formatTime(mFeeTime), feeBtc + " ic_coin_btc"));
     }
 
     public String formatTime(int time) {

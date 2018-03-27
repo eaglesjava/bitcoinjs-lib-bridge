@@ -52,11 +52,6 @@ public class WalletAddressActivity extends BaseTabsActivity {
     }
 
     @Override
-    protected boolean isBlue() {
-        return true;
-    }
-
-    @Override
     protected BaseFragment getBtcFragment() {
         return WalletAddressFragment.newInstance(mWallet);
     }

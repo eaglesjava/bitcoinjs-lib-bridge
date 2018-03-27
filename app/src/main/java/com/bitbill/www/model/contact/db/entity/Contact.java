@@ -42,7 +42,7 @@ public class Contact extends BaseIndexPinyinBean implements Serializable {
     private String contactName;
 
     @Property(nameInDb = "coin_type")
-    private String coinType;//默认"BTC"
+    private String coinType;//默认"ic_coin_btc"
 
 
     @Generated(hash = 773915021)
