@@ -1,5 +1,11 @@
-var util = require('ethereumjs-util');
+var ethereumjsUtil = require('ethereumjs-util');
 var hdkey = require('ethereumjs-wallet/hdkey');
+var EthereumTx = require('ethereumjs-tx');
+
+var Web3 = require('web3');
+var web3 = new Web3();
+
+var util = require('./util');
 
 // jaxx path
 var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0/0";
@@ -24,11 +30,56 @@ function seedHexToAddress(seedHex) {
 }
 
 function isValidAddress(address) {
-	return util.isValidAddress(address)
+	return ethereumjsUtil.isValidAddress(address)
 }
 
 function isValidChecksumAddress(address) {
-	return util.isValidChecksumAddress(address)
+	return ethereumjsUtil.isValidChecksumAddress(address)
+}
+
+function buildEthTransaction(amountWei, addressTo, nonce, privateKey, gasPrice, gasLimit, customData) {
+    var transaction = new EthereumTx({
+        nonce: web3.toHex(nonce),
+        gasPrice: web3.toHex(gasPrice),
+        gasLimit: web3.toHex(gasLimit),
+        to: addressTo,
+        value: web3.toHex(amountWei),
+        data: (customData && customData.length > 5) ? customData : null
+    });
+    if (customData && customData.length)
+        transaction.data = customData;
+    transaction.sign(privateKey);
+    var txid = ('0x' + transaction.hash().toString('hex'));
+    var serializedTx = transaction.serialize().toString('hex');
+
+    return {
+        txid: txid,
+        serializedTx: serializedTx,
+        addressTo: addressTo,
+        transactionEth: transaction,
+    };
+}
+
+function buildTokenTransaction(amountWei, addressTo, nonce, privateKey, contractAddress, gasLimit, gasPrice, customData) {
+    var data = util.createTokenData(web3, amountWei, addressTo);
+    if (customData) {
+        console.error('User supplied custom data which is being ignored!');
+        console.log('Custom Data', customData);
+    }
+    //  console.log('Data', data);
+    var raw = util.mapEthTransaction(web3, contractAddress, '0', nonce, gasPrice, gasLimit, data);
+    // console.log(raw);
+    var transaction = new EthereumTx(raw);
+    //console.log(transaction);
+    transaction.sign(privateKey);
+    var serializedTx = transaction.serialize().toString('hex');
+    var txid = ('0x' + transaction.hash().toString('hex'));
+    return {
+        txid: txid,
+        serializedTx: serializedTx,
+        addressTo: addressTo,
+        transactionEth: transaction,
+    };
 }
 
 module.exports = {
@@ -36,7 +87,9 @@ module.exports = {
     seedToAddress: seedToAddress,
     seedHexToAddress: seedHexToAddress,
     isValidAddress: isValidAddress,
-    isValidChecksumAddress: isValidChecksumAddress
+    isValidChecksumAddress: isValidChecksumAddress,
+    buildEthTransaction: buildEthTransaction,
+    buildTokenTransaction: buildTokenTransaction,
 };
 
 // for test
