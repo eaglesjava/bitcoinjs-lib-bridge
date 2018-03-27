@@ -60,10 +60,10 @@ function buildEthTransaction(amountWei, addressTo, nonce, privateKey, gasPrice, 
     };
 }
 
-function buildTokenTransaction(amountWei, addressTo, nonce, privateKey, contractAddress, gasLimit, gasPrice, customData) {
+function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice, customData, privateKey) {
     var data = util.createTokenData(web3, amountWei, addressTo);
     if (customData) {
-        console.error('User supplied custom data which is being ignored!');
+        // console.error('User supplied custom data which is being ignored!');
         console.log('Custom Data', customData);
     }
     //  console.log('Data', data);
@@ -82,6 +82,31 @@ function buildTokenTransaction(amountWei, addressTo, nonce, privateKey, contract
     };
 }
 
+function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, gasPrice, customData, privateKey) {
+    var data = util.getTxData('register', ['string'], [eosPublicKey]);
+    if (customData) {
+        // console.error('User supplied custom data which is being ignored!');
+        console.log('Custom Data', customData);
+    }
+    //  console.log('Data', data);
+    var raw = util.mapEthTransaction(web3, contractAddress, '0', nonce, gasPrice, gasLimit, data);
+    // console.log(raw);
+    var transaction = new EthereumTx(raw);
+    //console.log(transaction);
+    transaction.sign(privateKey);
+    var serializedTx = transaction.serialize().toString('hex');
+    var txid = ('0x' + transaction.hash().toString('hex'));
+    return {
+        txid: txid,
+        serializedTx: serializedTx,
+        transactionEth: transaction,
+    };
+}
+
+function generateEosKeyPair() {
+    return util.generateEosKeyPair();
+}
+
 module.exports = {
     mnemonicToSeed: mnemonicToSeed,
     seedToAddress: seedToAddress,
@@ -90,6 +115,8 @@ module.exports = {
     isValidChecksumAddress: isValidChecksumAddress,
     buildEthTransaction: buildEthTransaction,
     buildTokenTransaction: buildTokenTransaction,
+    buildMapEosTransaction: buildMapEosTransaction,
+    generateEosKeyPair: generateEosKeyPair,
 };
 
 // for test

@@ -3,7 +3,9 @@
  *
  */
 
+var abi = require('ethereumjs-abi')
 
+// create erc20 token data
 var createTokenData = function(web3, amount, address) {
     //send max for tokens issue use big number library to parse value amount
     var ABI = web3.toBigNumber(amount, 10).toString(16); //amount;//parseInt(amount).toString(16);
@@ -27,7 +29,31 @@ var mapEthTransaction = function(web3, addressTo, amount, nonce, gasPrice, gasLi
     };
 };
 
+/**
+ * generate a private and public key pair for the EOS chain
+ *
+ * @returns {Array}
+ */
+var generateEosKeyPair = function() {
+
+};
+
+/**
+ * get tx data
+ *
+ * @param {string} funcName
+ * @param {Array<string>} types, a array of func params type, eg:[ 'uint', 'uint32[]', 'bytes10', 'bytes' ]
+ * @param {Array<type>} values, a array of func params value, eg: [ 0x123, [ 0x456, 0x789 ], '1234567890', 'Hello, world!' ]
+ * @returns {string}
+ */
+var getTxData = function(funcName, types, values) {
+    return '0x' + abi.methodID(funcName, types).toString('hex')
+        + abi.rawEncode(types, values).toString('hex');
+};
+
 module.exports = {
     createTokenData: createTokenData,
     mapEthTransaction: mapEthTransaction,
+    getTxData: getTxData,
+    generateEosKeyPair: generateEosKeyPair,
 };
