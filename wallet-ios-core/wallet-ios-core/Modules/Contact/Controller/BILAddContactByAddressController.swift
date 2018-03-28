@@ -13,6 +13,7 @@ class BILAddContactByAddressController: BILLightBlueBaseController {
     @IBOutlet weak var nameInputView: BILInputView!
     @IBOutlet weak var addressInputView: BILInputView!
     @IBOutlet weak var remarkInputView: BILInputView!
+    @IBOutlet weak var saveItem: UIBarButtonItem!
     
     var address: String?
     
@@ -36,6 +37,7 @@ class BILAddContactByAddressController: BILLightBlueBaseController {
         nameInputView.textField.placeholder = "Please input".bil_ui_localized
         addressInputView.textField.placeholder = "Please input".bil_ui_localized
         remarkInputView.textField.placeholder = "Please input".bil_ui_localized
+        saveItem.title = "Save".bil_ui_localized
     }
 
     override func didReceiveMemoryWarning() {

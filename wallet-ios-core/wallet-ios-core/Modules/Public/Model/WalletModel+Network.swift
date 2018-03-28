@@ -38,7 +38,9 @@ extension WalletModel {
 		let serverVersion = json["version"].int64Value
 		
         syncAddress(targetAddressIndex: addressIndex, targetChangeIndex: changeIndex, success: {
-            loadTXs(version: serverVersion)
+            if let needLoad = self.bitcoinWallet?.needLoadServer, needLoad {
+                loadTXs(version: serverVersion)
+            }
         }) { (msg, code) in
             debugPrint(msg)
         }

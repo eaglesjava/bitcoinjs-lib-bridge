@@ -16,9 +16,9 @@ enum Router: URLRequestConvertible {
             case .root:
                 return (.bil_base_url, nil)
             case .createWallet(let wallet):
-                return (.bil_wallet_create, ["walletId": wallet.id!, "extendedKeys": wallet.mainExtPublicKey!, "extendedChangeKeys": wallet.changeExtPublicKey!, "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? ""])
+                return (.bil_wallet_create, ["walletId": wallet.id!, "extendedKeys": wallet.mainExtPublicKey ?? "", "extendedChangeKeys": wallet.changeExtPublicKey ?? "", "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? ""])
             case .importWallet(let wallet):
-                return (.bil_wallet_import, ["walletId": wallet.id!, "extendedKeys": wallet.mainExtPublicKey!, "extendedChangeKeys": wallet.changeExtPublicKey!, "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? ""])
+                return (.bil_wallet_import, ["walletId": wallet.id!, "extendedKeys": wallet.mainExtPublicKey ?? "", "extendedChangeKeys": wallet.changeExtPublicKey ?? "", "clientId": BILDeviceManager.shared.deviceID, "deviceToken": BILAppStartUpManager.shared.deviceToken ?? ""])
             case .deleteWallet(let extendedKeyHash):
                 return (.bil_wallet_delete, ["extendedKeysHash": extendedKeyHash, "clientId": BILDeviceManager.shared.deviceID])
             case .checkWalletID(let walletID):
