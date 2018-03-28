@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -726,5 +727,13 @@ public class StringUtils {
             return true;
         }
         return s.trim().equals(AppConstants.NONE);
+    }
+
+    public static boolean equals(Locale currentLocale, Locale compareLocale) {
+        if (currentLocale == null || compareLocale == null) {
+            return false;
+        }
+        return currentLocale.getLanguage().equals(compareLocale.getLanguage())
+                && currentLocale.getCountry().equals(compareLocale.getCountry());
     }
 }

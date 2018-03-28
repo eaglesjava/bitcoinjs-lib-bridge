@@ -1,0 +1,371 @@
+<resources>
+    <string name="app_name">BitBill</string>
+
+    <!--network state tip-->
+    <string name="toast_using_network_type">正在使用 %1$s 網絡</string>
+    <string name="toast_switch_network_type">切換為 %1$s 網絡</string>
+    <string name="toast_network_available">網絡可用</string>
+    <string name="toast_network_no_connection">網絡未連接</string>
+
+    <!--App Message-->
+    <string name="error_api_retry">請重試</string>
+    <string name="error_api_default">出錯了</string>
+    <string name="some_error">出錯了</string>
+    <string name="error_connection">網絡連接失敗</string>
+    <string name="error_api_server">請求失敗</string>
+    <string name="error_server_busy">服務器忙請稍後再試!</string>
+    <string name="error_lack_madatory_params">缺少必要的參數</string>
+    <string name="error_invalid_param_type">無效的參數類型</string>
+    <string name="error_wallet_id_exsist">錢包id已存在</string>
+    <string name="error_wallet_no_exsist">錢包不存在</string>
+    <string name="error_ip_exceed_limit">您的IP超過了規定限制</string>
+    <string name="error_app_exception">應用出現異常，即將重啟</string>
+
+    <!--socket message-->
+    <string name="connect">已連接</string>
+    <string name="disconnect">斷開連接，請檢查妳的網絡連接</string>
+    <string name="error_connect">連接失敗</string>
+    <!--JPush-->
+    <string name="msg_push_receive_amount">"妳收到了 %s BTC"</string>
+
+    <!--dialog -->
+    <string name="dialog_btn_cancel">取消</string>
+    <string name="dialog_btn_comfirm">確定</string>
+    <string name="dialog_msg_request_permissions">掃描二維碼需要打開相機和散光燈的權限</string>
+    <string name="msg_dailog_input_2_confirm">請輸入密碼以確認</string>
+    <string name="fail_update_install_apk">更新安裝包失敗，請稍後重試</string>
+    <string name="dialog_title_update_app">更新安裝包</string>
+    <string name="dialog_title_download_app">下載安裝包</string>
+    <string name="dialog_msg_latest_version">最新版本為:v</string>
+    <string name="dialog_btn_update">更新</string>
+    <string name="fail_invalid_apk_url">下載地址有誤，請稍後重試</string>
+
+    <!--guide-->
+    <string name="btn_create_wallet">創建錢包</string>
+    <string name="btn_import_wallet">導入錢包</string>
+    <string name="guide_section_one">數字資產 All in one</string>
+    <string name="guide_section_two">私鑰掌握在妳自己手裏</string>
+    <string name="guide_section_three">添加聯系人 壹鍵轉賬</string>
+
+    <!--create or import wallet-->
+    <string name="title_activity_import_wallet">導入錢包</string>
+    <string name="text_mnemonic">助記詞</string>
+    <string name="hint_input_mnemonic">通常十二個字</string>
+    <string name="hint_click_input_please">請點擊輸入</string>
+    <string name="hint_only_support_bip39">僅支持符合BIP39標準的助記詞</string>
+    <string name="btn_next">下壹步</string>
+    <string name="fail_input_menemonic">請正確填寫助記詞</string>
+    <string name="fail_import_wallet">導入錢包失敗，請重試</string>
+    <string name="title_activity_create_wallet">創建錢包</string>
+    <string name="dialog_btn_known">我知道了</string>
+    <string name="dialog_title_support_coin_type">目前支持以下幣種</string>
+    <string name="hint_bottom_wallet_id">設定妳的錢包ID，它可以關聯妳的聯系人，支持字母、數字和下劃線，僅能以字母開頭，壹旦設定不可修改。</string>
+    <string name="hint_input_please">請輸入</string>
+    <string name="hint_input_wallet_id">請輸入6-20位，以字母開頭</string>
+    <string name="hint_trade_pwd">請輸入6-20位字符</string>
+    <string name="input_wallet_id">錢包ID</string>
+    <string name="input_trade_pwd">創建錢包密碼</string>
+    <string name="input_trade_pwd_confirm">確認錢包密碼</string>
+    <string name="btn_start_import">開始導入</string>
+    <string name="btn_start_create">開始創建</string>
+    <string name="error_wallet_id_required">請輸入錢包ID，6-20位，以字母開頭</string>
+    <string name="error_wallet_id_length_required">錢包ID支持6-20位字符</string>
+    <string name="error_invalid_wallet_id_start">ID僅能以字母開頭</string>
+    <string name="error_invalid_wallet_id">以字母開頭，支持字母、數字和下劃線</string>
+    <string name="error_wallet_id_check_fail">檢查錢包ID失敗</string>
+    <string name="error_trade_pwd_required">密碼不能為空</string>
+    <string name="error_invalid_trade_pwd">密碼支持6-20位字符</string>
+    <string name="error_confirm_trade_pwd_required">請輸入確認錢包密碼</string>
+    <string name="error_trade_pwd_inconsistent">密碼不壹致</string>
+    <string name="hint_back_up_pwd">請牢記您的密碼！Bitbill不存儲用戶密碼，無法提供找回或重置的功能</string>
+    <string name="text_complete_agree">完成即表示妳已同意</string>
+    <string name="text_bibill_server_rule"><u>《Bitbill服務條款》</u></string>
+    <string name="fail_init_wallet">初始化錢包失敗，請重試</string>
+    <string name="fail_get_wallet_info">獲取錢包信息失敗，請重試</string>
+    <string name="fail_reset_wallet_pwd">重置密碼失敗，請重試</string>
+    <string name="fail_create_wallet">錢包創建失敗，請重試</string>
+
+    <!--reset wallet pwd-->
+    <string name="title_activity_reset_pwd">重置錢包</string>
+    <string name="hint_reset_pwd_success">錢包密碼重置成功，請妳務必保管好助記詞和密碼</string>
+    <string name="title_reset_pwd_success">重置成功</string>
+
+    <!--init wallet success-->
+    <string name="title_wallet_create_success">創建成功</string>
+    <string name="title_wallet_import_success">導入成功</string>
+    <string name="hint_create_wallet_success">錢包創建成功，請妳務必保管好助記詞和密碼</string>
+    <string name="hint_import_wallet_success">錢包導入成功，請妳務必保管好助記詞和密碼</string>
+    <string name="btn_backup_wallet">備份錢包</string>
+    <string name="btn_backup_wallet_delay">稍後備份</string>
+    <string name="close">完成</string>
+
+    <!--main activity-->
+    <string name="title_activity_main">資產</string>
+    <string name="title_asset">資產</string>
+    <string name="title_receive">接收</string>
+    <string name="title_send">發送</string>
+    <string name="navigation_drawer_open">打開導航頁</string>
+    <string name="navigation_drawer_close">關閉導航頁</string>
+    <string name="fail_parse_tx_item">解析交易列表信息失敗</string>
+    <!--scan qrcode -->
+    <string name="fail_open_camera">相機打開失敗，請檢查權限</string>
+    <string name="fail_parse_scan_result">解析掃描結果失敗</string>
+    <string name="tip_qrcode_scan">將二維碼放入框內，即可自動掃描</string>
+    <string name="action_select_photo">相冊</string>
+    <string name="fail_not_found_qrcode">未發現二維碼</string>
+
+    <!--asset fragment-->
+    <string name="title_shortcut">快捷方式</string>
+    <string name="text_go_to_setting_custom">前往設置自定義</string>
+    <string name="text_short_cut_scan">掃壹掃</string>
+    <string name="text_short_cut_contact">添加聯系人</string>
+    <string name="text_current_currency_type">當前幣種1個</string>
+    <string name="title_total_assets">總資產</string>
+    <string name="text_asset_btc">BTC</string>
+    <string name="text_default_amount">0</string>
+    <string name="text_asset_eth">eth</string>
+    <string name="text_asset_bch">bch</string>
+    <string name="text_asset_current_wallet">當前錢包 %1$d個</string>
+    <string name="title_asset_my_wallet">我的錢包</string>
+    <string name="menu_create_wallet">創建錢包</string>
+    <string name="menu_import_wallet">導入錢包</string>
+
+    <!--unconfirm fragment-->
+    <string name="text_in_progress_count">未確認交易 %d個</string>
+    <string name="text_unconfirm_transaction">未確認交易</string>
+
+    <!--backup wallet-->
+    <string name="title_activity_backup_wallet">備份錢包</string>
+    <string name="title_dialog_bakup_wallet">備份錢包</string>
+    <string name="msg_dialg_input_correct_pwd">請輸入正確的密碼</string>
+    <string name="hint_bak_wallet_environment_safe">請確認妳所在的環境是安全隱私的，任何人拿到妳的助記詞都可以轉移妳的數字資產！</string>
+    <string name="hint_bak_wallet_ban_screenshots">截圖是不安全的，妳的圖片可能被別的應用使用。請抄寫如下助記詞，並妥善保存，我們會在下個屏幕上確認！</string>
+    <string name="btn_written_mnemonic_in_order">已按順序記下助記詞</string>
+    <string name="btn_confirm">確定</string>
+    <string name="hint_bak_confirm_mnemonic_correct">按順序點擊助記詞，確認妳的助記詞備份正確</string>
+    <string name="hint_bak_wallet_success">備份成功</string>
+    <string name="hint_keep_mnemonic">請妥善保管妳的助記詞</string>
+    <string name="btn_complete">完成</string>
+    <string name="fail_load_mnemonic">加載助記詞失敗</string>
+    <string name="fail_get_confirm_pwd">獲取確認密碼失敗，請重新輸入</string>
+    <string name="hint_bak_wallet_click">請按順序點擊下方文字</string>
+    <string name="title_dialog_backup_fail">備份失敗</string>
+    <string name="msg_dailog_check_mnemonic">請重新檢查妳的助記詞是否正確</string>
+    <string name="btn_backup_now">馬上備份</string>
+    <string name="action_empty_mnemonic">清空</string>
+
+    <!--tx record -->
+    <string name="text_btc_unconfirm">+ %s BTC 未確認</string>
+    <string name="text_tx_record">交易記錄</string>
+    <string name="status_item_receive">已接收</string>
+    <string name="status_item_send">已發送</string>
+    <string name="status_item_unconfirm">待確認</string>
+    <string name="status_item_transfer">已轉移</string>
+    <string name="fail_get_tx_record">獲取交易記錄失敗</string>
+    <string name="fail_load_balance">加載錢包余額失敗</string>
+
+    <!--transfer details-->
+    <string name="title_activity_transfer_details">交易詳情</string>
+    <string name="fail_load_transfer_details">加載交易詳情失敗，請返回重試</string>
+    <string name="status_transfer_success">交易成功</string>
+    <string name="status_transfer_unconfirm">待確認</string>
+    <string name="title_tx_hash">交易hash</string>
+    <string name="title_tx_receive_address">接收地址</string>
+    <string name="title_tx_send_address">發送地址</string>
+    <string name="title_tx_date">交易時間</string>
+    <string name="title_tx_fee">手續費</string>
+    <string name="title_tx_confirm">確認</string>
+    <string name="title_tx_remark">備註</string>
+    <string name="tx_my_address">我的地址&#160;</string>
+    <string name="copy_send_address">發送地址已復制</string>
+    <string name="copy_receive_address">接收地址已復制</string>
+    <string name="copy_remark">備註已復制</string>
+    <string name="copy_tx_date">交易時間已復制</string>
+    <string name="copy_tx_hash">交易hash已復制</string>
+    <string name="text_view_tx_in_blockchain"><u>去 Blockchain.info 查看交易</u></string>
+    <string name="text_chose_browser">請選擇瀏覽器</string>
+    <string name="text_chose_email">請選擇郵箱</string>
+
+    <!--receive fragment-->
+    <string name="text_receive_specific_amount"><u>特定金額接收</u></string>
+    <string name="title_receive_address_refresh">刷新地址</string>
+    <string name="dialog_title_friendly_remind">友情提醒</string>
+    <string name="dialog_msg_change_address">為保護妳的隱私，每次轉入操作時，都將使用新地址，已使用的舊地址仍然可用</string>
+    <string name="msg_copy_address_success">地址已復制</string>
+    <string name="fail_load_address">加載地址失敗</string>
+    <string name="fail_reach_address_index_limit">暫時無法生成更多的地址了</string>
+    <string name="fail_create_address_qrcode">生成地址二維碼失敗</string>
+    <string name="fail_refresh_address">刷新地址失敗</string>
+    <string name="msg_refreshed_address">地址已刷新</string>
+    <string name="title_back_up_now">當前錢包未備份，馬上備份</string>
+    <string name="title_activity_specific_receive">特定金額接收</string>
+    <string name="title_activity_scan_pay">特定金額接收</string>
+    <string name="fail_create_pay_qrcode">生成收款二維碼失敗，請返回重試</string>
+    <string name="title_scan_pay_me">掃碼向我支付</string>
+
+    <!--send fragment-->
+    <string name="action_send_scan">掃碼</string>
+    <string name="hint_receiver_address">接收方地址</string>
+    <string name="fail_get_contact_last_address">獲取聯系人最新地址失敗</string>
+    <string name="fail_get_contact_info">獲取聯系人信息失敗</string>
+    <string name="fail_invalid_address">地址不合法</string>
+    <string name="fail_send_address_null">請輸入地址</string>
+    <string name="msg_coming_soon">即將支持，敬請期待</string>
+    <string name="title_activity_send_amount">發送金額</string>
+    <string name="msg_input_send_amount">請輸入發送金額</string>
+    <string name="msg_input_gt_zero_amount">請輸入大於0的金額</string>
+    <string name="msg_input_specifc_amount">請輸入特定金額</string>
+    <string name="action_send_all_amount">發送全部余額</string>
+    <string name="text_btc_cny_value">%1$s %2$s</string>
+    <string name="title_activity_select_wallet">選擇錢包</string>
+    <string name="msg_please_select_wallet">請選擇錢包</string>
+    <string name="msg_balance_not_enough">余額不足</string>
+    <!--send confirm activity-->
+    <string name="title_activity_send_confirm">確認發送</string>
+    <string name="title_content_send_amount">發送金額</string>
+    <string name="title_content_receiver_address">接收方地址</string>
+    <string name="title_content_fees">手續費</string>
+    <string name="hint_confirm_time_and_fees">平均確認時間%1$s\n需耗費%2$s</string>
+    <string name="hint_time_days">天</string>
+    <string name="hint_time_hours">小時</string>
+    <string name="hint_time_minutes">分鐘</string>
+    <string name="title_content_send_wallet">發出錢包</string>
+    <string name="title_content_send_remark">備註</string>
+    <string name="hint_remark_20_character">20字內</string>
+    <string name="btn_confirm_send">確認發送</string>
+    <string name="dialog_title_wallet_pwd">錢包密碼</string>
+    <string name="title_activity_send_success">發送成功</string>
+    <string name="btn_create_contact_now">快速創建聯系人</string>
+    <string name="hint_send_success">推薦妳添加該地址到新聯系人以便下次交易</string>
+    <string name="fail_send_transaction">發送交易失敗</string>
+    <string name="fail_refresh_change_address">生成找零地址失敗，請重試</string>
+    <string name="msg_dialog_amount_not_enough">余額不足，請返回重新選擇</string>
+
+    <!--scan qrcode-->
+    <string name="title_activity_scan_qrcode">掃壹掃</string>
+    <string name="action_complete">完成</string>
+
+    <!--contact-->
+    <string name="title_activity_contact">聯系人</string>
+    <string name="title_activity_contact_detail">聯系人詳情</string>
+    <string name="action_contact_edit">編輯</string>
+    <string name="action_contact_add">添加</string>
+    <string name="hint_remark_none">無</string>
+    <string name="fail_load_contact_info">加載聯系人信息失敗</string>
+    <string name="title_activity_scan_result">掃描結果</string>
+    <string name="title_activity_add_contact_by_id">通過 ID 添加</string>
+    <string name="hint_search_wallet_id">搜索對方 ID</string>
+    <string name="btn_add_now">立即添加</string>
+    <string name="hint_no_contact">妳還沒有聯系人</string>
+    <string name="input_contact_name">名稱</string>
+    <string name="input_contact_remark">備註</string>
+    <string name="btn_confirm_add">確定添加</string>
+    <string name="fail_add_contact">添加聯系人失敗</string>
+    <string name="fail_get_wallet_id">錢包 ID 不能為空</string>
+    <string name="msg_input_contact_name">請輸入聯系人名稱</string>
+    <string name="fail_load_contact">加載聯系人失敗</string>
+    <string name="title_activity_add_contact_by_address">通過地址添加</string>
+    <string name="input_contact_address">數字資產地址</string>
+    <string name="action_contact_save">保存</string>
+    <string name="msg_contact_is_exsist">聯系人已存在</string>
+    <string name="error_contact_name_required">名稱不能為空</string>
+    <string name="error_contact_address_required">請輸入地址</string>
+    <string name="title_activity_contact_select">聯系人</string>
+    <string name="title_activity_edit_contact">編輯聯系人</string>
+    <string name="dialog_title_tips">提示</string>
+    <string name="dialog_msg_delete_contact">確定要刪除該聯系人嗎？</string>
+    <string name="dialog_btn_delete">刪除</string>
+    <string name="text_contact_wallet_id">錢包ID</string>
+    <string name="text_contact_address">錢包地址</string>
+    <string name="text_remark">備註</string>
+    <string name="btn_send">發送</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_delete">刪除</string>
+    <string name="text_require_contact_name">請輸入聯系人名稱</string>
+    <string name="msg_get_contact_info_fail">聯系人信息獲取失敗，請返回重試</string>
+    <string name="msg_contact_info_no_edit">聯系人信息沒有修改</string>
+    <string name="msg_delete_contact_success">刪除聯系人信息成功</string>
+    <string name="msg_delete_contact_fail">刪除聯系人信息失敗</string>
+    <string name="msg_update_contact_success">更新聯系人信息成功</string>
+    <string name="msg_update_contact_fail">更新聯系人信息失敗</string>
+    <!--setting-->
+    <string name="bitbill_wallet">Bitbill錢包</string>
+    <string name="title_prefer_setting">偏好設置</string>
+    <string name="setting_short_cut">主頁快捷功能</string>
+    <string name="title_main_shortcut">快捷方式</string>
+    <string name="title_account_info">賬戶信息</string>
+    <string name="title_security">安全設置</string>
+    <string name="title_wallet_manage">錢包集成</string>
+    <string name="title_contact">聯系人</string>
+    <string name="title_sys_setting">系統設置</string>
+    <string name="title_other">其他</string>
+    <string name="title_about_us">關於我們</string>
+    <string name="title_feed_back">意見反饋</string>
+    <string name="title_activity_shorcut_setting">快捷方式設置</string>
+    <!--wallet setting-->
+    <string name="hint_back_up_now">立即備份</string>
+    <string name="text_someone_wallet">%s 的錢包</string>
+    <string name="title_activity_wallet_setting">錢包集成</string>
+    <!--wallet detail-->
+    <string name="text_wallet_id">錢包ID</string>
+    <string name="text_wallet_add_time">添加時間</string>
+    <string name="btn_wallet_address">錢包地址</string>
+    <string name="btn_delete_wallet">刪除錢包</string>
+    <string name="msg_delete_wallet">請謹慎使用此操作，刪除前確認妳的錢包已備份，否則數字資產將無法找回！</string>
+    <string name="title_delete_wallet">刪除錢包</string>
+    <string name="msg_delete_wallet_success">刪除錢包成功</string>
+    <string name="msg_delete_wallet_fail">刪除錢包失敗，請重試</string>
+    <string name="msg_get_wallet_info_fail">獲取錢包信息失敗，請返回重試</string>
+    <!--wallet address-->
+    <string name="title_activity_wallet_address">錢包地址</string>
+    <string name="btn_scan_address">掃描地址</string>
+    <string name="fail_create_qrcode">生成錢包ID二維碼失敗</string>
+    <string name="title_address_balance">地址與余額</string>
+    <string name="title_change_address">找零地址</string>
+    <string name="copy_address">地址已復制</string>
+    <string name="copy_confim_count">確認數已復制</string>
+    <string name="successs_address_refresh">地址刷新成功</string>
+    <!--contact setting-->
+    <string name="title_activity_contact_setting">聯系人設置</string>
+    <string name="setting_backup_contact">備份聯系人</string>
+    <string name="setting_recover_contact">恢復聯系人</string>
+    <string name="msg_input_defualt_wallet_pwd">請輸入%s的錢包密碼以確認</string>
+    <string name="hint_contact_key">請輸入聯系人密鑰</string>
+    <string name="positive_copy_contact_key">復制聯系人密鑰</string>
+    <string name="msg_contact_key_copied">聯系人密鑰已復制</string>
+    <string name="msg_recover_contact_success">恢復了%d個聯系人</string>
+    <string name="msg_recover_fail">恢復聯系人失敗</string>
+    <string name="msg_no_contact_recover">您沒有新增的聯系人</string>
+    <!--system setting-->
+    <string name="title_activity_system_setting">系統設置</string>
+    <string name="setting_sound">音效</string>
+    <string name="setting_currency">貨幣</string>
+    <string name="setting_languge">當前語言</string>
+    <string name="languge_simplified_chinese">簡體中文</string>
+    <string name="text_usd">USD</string>
+    <string name="text_cny">CNY</string>
+    <!--about us-->
+    <string name="title_activity_about_us">關於我們</string>
+    <string name="text_use_rule">使用條款</string>
+    <string name="text_contact_us">聯系我們</string>
+    <string name="left_check_version">檢查更新</string>
+    <string name="text_latest_version">最新版本：v</string>
+    <string name="app_bitbill_email">hi@bitbill.com</string>
+
+    <!--use rule-->
+    <string name="title_activity_use_rule">使用條款</string>
+    <string name="html_use_rule"><![CDATA[<body ondragstart=\'return false\' onselectstart =\'return false\' onselect=\'return false\' oncopy=\'return false\' onbeforecopy=\'return false\' onmouseup=\'return false\'> <div class=\"container\">     <p>本協議由 BITBILL PTY LTD (以下簡稱 “Bitbill” 或“我們”)和用戶（以下簡稱“妳”或“用戶”）簽訂。</p>     <p>除非妳已閱讀並接受本協議所有條款，否則妳無權下載、安裝或使用本軟件及相關服務。妳使用本軟件即視為妳已閱讀並同意本協議的約束。</p>     <p class=\"tit\">1、提供的服務</p>     <p>妳能夠使用 Bitbill 創建或導入錢包，可以對於 Bitbill 所支持的數字資產進行存儲與錢包管理； Bitbill 可以創建多個錢包，每個錢包均可以存儲管理 Bitbill 所支持的多個數字資產，每個錢包均有單獨的錢包ID和單獨的助記詞；</p>     <p>妳可以使用 Bitbill 的接收、發送功能進行數字資產的轉賬，實際的轉賬行為均在相關區塊鏈系統（而非 Bitbill ）上發生，妳知悉基於區塊鏈系統交易“不可撤銷”的屬性，Bitbill 不能為妳暫停或撤銷轉賬交易等操作；另，發送行為需密碼確認，若妳忘記密碼，可通過已備份的助記詞恢復錢包而重設密碼；</p>     <p>妳可以使用 Bitbill 添加聯系人，Bitbill 聯系人與錢包ID或地址相關聯，方便於妳與聯系人進行數字資產的傳輸；請備份妳聯系人的 recovery key（聯系人恢復密鑰），妳可以通過聯系人的 recovery key 恢復聯系人列表；</p>     <p>我們將通過區塊鏈系統拷貝妳全部或部分的交易記錄。但交易記錄以區塊鏈系統的記載為準。</p>     <p> Bitbill 建議妳在使用 Bitbill 軟件之前學習數字資產的基礎知識，建議只有當妳熟悉數字資產後再使用 Bitbill 錢包。</p>     <p class=\"tit\">2、私鑰掌握在妳手裏</p>     <p> Bitbill 秉承著區塊鏈的去中心化特點，並為了保護用戶的數字資產安全，Bitbill 提供的是去中心化服務，大大區別於銀行業金融機構。</p>     <p><b> Bitbill 不提供如下服務：</b>存儲用戶的錢包密碼和助記詞；找回用戶的錢包密碼、助記詞；凍結錢包；掛失錢包；恢復錢包；交易回滾；由於 Bitbill 不提供以上服務，因此用戶應當自行保管 Bitbill 各錢包的助記詞；</p>     <p>如果妳丟失訪問妳的 Bitbill 錢包路徑，而且妳沒有備份存儲妳的錢包相應的助記詞或遺失妳已備份的助記詞，則妳承認並同意，妳與該錢包相關的任何數字資產都會變得無法訪問。 Bitbill 無法還原妳的錢包或找回錢包密碼、助記詞； Bitbill 不承擔妳因此造成的任何損失。</p>     <p>所有的交易請求都是不可撤銷的，如用戶進行交易時誤操作（包含但不限於發送給錯誤的聯系人、發送給錯誤的交易地址以及錯誤的金額等），Bitbill 無法取消交易也不承擔妳誤操作的任何後果。</p>     <p>如果妳不理解以上段落的內容，Bitbill 建議妳在使用 Bitbill 錢包之前更多的了解加密數字貨幣的相關知識。</p>     <p class=\"tit\">3、用戶的義務與責任</p>     <p>用戶必須是具備完全民事行為能力的自然人。若妳為18周歲以下的未成年人，需要在妳父母或監護人的指導下閱讀並接受 Bitbill 協議、及使用 Bitbill 。無民事行為能力人使用 Bitbill 或限制民事行為能力人超過其民事權利或行為能力範圍從事交易的，造成的壹切後果，Bitbill 有權要求妳及妳的父母或監護人負責；</p>     <p>妳對妳擁有的數字資產負責任；</p>     <p>妳需妥善保管妳的助記詞、聯系人 recovery key；</p>     <p>妳添加聯系人時請確保所添加的聯系人準確無誤，避免後續交易不可撤銷造成的不可挽回的損失；</p>     <p>確保妳使用 Bitbill 符合澳大利亞當地法律；</p>     <p>妳不應該存放數字資產到 Bitbill 不支持的數字資產的地址；</p>     <p>妳不應該做出可能會幹擾其他 Bitbill 用戶或服務器的行為，例如過度 API 調用或網絡垃圾郵件等；</p>     <p>妳不應該做出使用 Bitbill 違反澳大利亞或妳當地法律的行為；</p>     <p class=\"tit\">4、無法控制區塊鏈</p>     <p>對於任何 Bitbill 允許妳使用的數字資產，Bitbill 不是創造者也沒有任何控制，妳應全權負責妳對數字資產的選擇和使用。</p>     <p class=\"tit\">5、第三方應用集成</p>     <p> Bitbill 會集成第三方應用。盡管 Bitbill 使得與集成的第三方應用接洽更容易，但 Bitbill 對妳使用第三方應用服務不承擔任何後果，如果妳需要幫助，妳應該聯系集成的第三方組織。</p>     <p class=\"tit\">6、交易</p>     <p>只有真實記錄在區塊鏈上的數字資產交易才構成成功有效的區塊鏈交易。</p>     <p> Bitbill 提供允許妳發送數字資產交易的指令，但不保證妳使用 Bitbill 的交易行為壹定會被存儲在某個區塊鏈中。妳必須確保妳的交易符合 Bitbill 軟件適用的規則（特別是像 ETH 這樣的智能合約系統）。</p>     <p> Bitbill 暫時不向妳收取任何形式的服務費或手續費，將來需對某些服務進行收費時將另行約定或公布規則; </p>     <p>有的交易可能會有交易費用（如礦工費），這取決於妳擁有的相關數字資產本身體系的要求；由於妳不適當地交易費用設置（過高或過低）所造成的損失，Bitbill 不承擔任何責任。</p>     <p class=\"tit\">7、免責申明</p>     <p> Bitbill 對以下情形不承擔責任：</p>     <p>因用戶遺失移動設備、刪除且未備份 Bitbill 、刪除且未備份錢包助記詞、錢包被盜或遺忘錢包密碼、助記詞、而導致的數字資產丟失；</p>     <p>因用戶自行泄露錢包密碼、私鑰、助記詞，或借用、轉讓或授權他人使用自己的移動設備或 Bitbill 錢包，或未通過 Bitbill 官方渠道下載 Bitbill 應用程序或其他不安全的方式使用 Bitbill 應用程序導致的數字資產丟失；</p>     <p>因用戶誤操作（包括但不限於妳輸錯轉賬地址、發錯聯系人、輸錯金額）導致的數字資產丟失；</p>     <p>因用戶不理解區塊鏈技術的性質而進行誤操作導致的數字資產丟失；</p>     <p>因時間滯後、區塊鏈系統不穩定等原因導致 Bitbill 拷貝用戶在區塊鏈上的交易記錄發生偏差；</p>     <p>用戶在第三方應用上操作產生的風險和後果；</p>     <p>雖然本軟件已經過 beta 測試，並且繼續得到來自開源用戶和開發者社區反饋的改進，但我們無法保證軟件中不會有錯誤，妳承認並接受妳使用本軟件的行為是由妳自行決定並承擔可能出現的任何後果；</p>     <p class=\"tit\">8、隱私條款</p>     <p>請妳知悉，我們收集妳的以下信息是出於滿足妳在 Bitbill 服務需要的目的，且我們十分重視對妳隱私的保護。</p>     <p>我們所收集信息如下：我們將收集妳的移動設備信息、操作記錄、交易記錄、錢包 ID 、錢包地址、聯系人等個人信息。</p>     <p>在法律法規允許的範圍內，Bitbill 可能會在以下情形中收集並使用妳的個人信息無需征得妳的授權同意：與國家安全、國防安全有關的；與公共安全、公共衛生、重大公共利益有關的；與犯罪偵查、起訴、審判和判決執行等有關的；所收集的個人信息是妳自行向社會公眾公開的；從合法公開披露的信息中收集妳的個人信息，如合法的新聞報道，政府信息公開等渠道；用於維護服務的安全和合規所必需的，例如發現、處理產品和服務的故障；法律法規規定的其他情形。</p>     <p>我們如何使用妳的信息：</p>     <p>a、我們通過妳移動設備的唯壹序列號，確認妳與妳的錢包聯系人的對應關系。</p>     <p>b、我們將向妳及時發送重要通知，如軟件更新、服務協議的變更。</p>     <p>c、依照本協議及 Bitbill 其他有關規定，Bitbill 將利用用戶信息對用戶的使用行為進行管理及處理。</p>     <p>d、法律法規規定及與監管機構配合的要求。</p>     <p class=\"tit\">9、知識產權</p>     <p>BITBILL PTY LTD 是本軟件的知識產權權利人。本軟件壹切著作權、商標權、專利權、商業秘密等知識產權，以及與本軟件相關的所有信息內容（包括但不限於 Bitbill 的所有品牌、標誌和商標、本協議、文字、視頻、音頻、圖片、圖表、界面設計、版面框架、代碼）的知識產權歸 Bitbill 所有。用戶僅可為持有和管理數字資產之目的使用 Bitbill 應用程序及其中的內容。未經 Bitbill 事先書面同意，任何人不得擅自使用、修改、反向編譯、復制、公開傳播、改變、散布、發行或公開發表上述應用程序及內容。</p>     <p>妳承擔使用本軟件相關的任何風險，我們保留隨時修改本協議的權利。對於本協議未盡事宜，妳需遵守 Bitbill 不定時更新的公告及相關規則。</p>     <p class=\"ltd\">BITBILL PTY LTD</p>     <p class=\"ver\">版本 20180104</p> </div> </body>]]></string>
+    <!--feeback-->
+    <string name="title_activity_feedback">意見反饋</string>
+    <string name="title_feedback_contact">聯系方式（選填）</string>
+    <string name="hint_feedback_contact">請輸入郵箱/手機/微信</string>
+    <string name="success_send_feedback">發送成功</string>
+    <string name="fail_send_feedback">發送失敗</string>
+    <string name="msg_not_empty">不能為空</string>
+    <string name="fail_too_much_words">太多字了</string>
+    <string name="action_send">發送</string>
+    <string name="content_not_empty">請輸入意見內容</string>
+
+
+</resources>
+

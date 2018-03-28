@@ -99,9 +99,9 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     @Override
     public Locale getSelectedLocale() {
 
-        String language = mPrefs.getString(SELECTED_LOCALE, null);
-        if (StringUtils.isNotEmpty(language)) {
-            return new Locale(language);
+        String LanguageTag = mPrefs.getString(SELECTED_LOCALE, null);
+        if (StringUtils.isNotEmpty(LanguageTag)) {
+            return Locale.forLanguageTag(LanguageTag);
         }
         return null;
 
@@ -112,7 +112,7 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
         if (locale == null) {
             return;
         }
-        mPrefs.edit().putString(SELECTED_LOCALE, locale.getLanguage()).apply();
+        mPrefs.edit().putString(SELECTED_LOCALE, locale.toLanguageTag()).apply();
     }
 
     @Override

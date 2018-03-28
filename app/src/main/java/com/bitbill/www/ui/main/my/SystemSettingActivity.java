@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
 import com.bitbill.www.common.utils.SoundUtils;
+import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.SettingView;
 import com.bitbill.www.common.widget.dialog.ListSelectDialog;
 import com.bitbill.www.model.app.AppModel;
@@ -85,7 +86,18 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
         mLangugeSelectDialog = ListSelectDialog.newInstance(mLanguageArray);
         mLangugeSelectDialog.setOnListSelectItemClickListener(position -> {
             mSvLanguge.setRightText(mLanguageArray[position]);
-            Locale locale = (position == 0 ? Locale.CHINESE : Locale.ENGLISH);
+            Locale locale = null;
+            switch (position) {
+                case 0:
+                    locale = Locale.SIMPLIFIED_CHINESE;
+                    break;
+                case 1:
+                    locale = Locale.TRADITIONAL_CHINESE;
+                    break;
+                case 2:
+                    locale = Locale.ENGLISH;
+                    break;
+            }
             if (getMvpPresenter().needUpdateLocale(locale)) {
                 getMvpPresenter().setSelectedLocale(locale);
                 restartAct();
@@ -99,7 +111,17 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
     @Override
     public void initData() {
         mSvCurrency.setRightText(AppPreferences.SelectedCurrency.CNY.equals(getMvpPresenter().getSelectedCurrency()) ? mCurrencyArray[0] : mCurrencyArray[1]);
-        mSvLanguge.setRightText(Locale.CHINESE.getLanguage().equals(getMvpPresenter().getSelectedLocale().getLanguage()) ? mLanguageArray[0] : mLanguageArray[1]);
+        String language = null;
+        Locale selectedLocale = getMvpPresenter().getSelectedLocale();
+        if (StringUtils.equals(Locale.SIMPLIFIED_CHINESE, selectedLocale)) {
+            language = mLanguageArray[0];
+        } else if (StringUtils.equals(Locale.TRADITIONAL_CHINESE.getLanguage(), selectedLocale.getLanguage())) {
+            language = mLanguageArray[1];
+        } else {
+            language = mLanguageArray[2];
+        }
+
+        mSvLanguge.setRightText(language);
 
     }
 

@@ -86,7 +86,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             return;
         }
         try {
-            int isCN = mAppModel.getCurrentLocale() != null && mAppModel.getCurrentLocale().getLanguage().equals(Locale.ENGLISH.getLanguage()) ? 0 : 1;
+            int isCN = StringUtils.equals(Locale.SIMPLIFIED_CHINESE, mAppModel.getCurrentLocale()) ? 1 : 0;
             BitcoinJsWrapper.getInstance().generateMnemonicRetrunSeedHexAndXPublicKey(isCN, new BitcoinJsWrapper.Callback() {
                 @Override
                 public void call(String key, JsResult result) {
