@@ -28,7 +28,7 @@ public class WalletPresenter<M extends WalletModel, V extends WalletMvpView> ext
     public void loadWallets() {
         getCompositeDisposable().add(getModelManager().getAllWallets()
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<List<Wallet>>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<List<Wallet>>() {
                     @Override
                     protected void onStart() {
                         super.onStart();

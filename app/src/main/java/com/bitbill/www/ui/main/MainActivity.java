@@ -180,6 +180,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     private String mFromTag;
     private boolean isListUnconfirm;
     private Wallet mSelectedWallet;
+    private boolean isFirstLoading = true;//第一次加载
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -428,6 +429,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                         holder.setChecked(R.id.rb_selector, wallet.isSelected());
                         if (mReceiveFragment != null) {
                             mReceiveFragment.setSelectedWallet(wallet);
+                            mReceiveFragment.lazyData();
                         }
                     }
                     // dismiss
@@ -575,9 +577,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         //重新加载钱包信息
         if (mAssetFragment != null) {
             mAssetFragment.lazyData();
-        }
-        if (mReceiveFragment != null) {
-            mReceiveFragment.lazyData();
         }
         //通知钱包选择界面数据刷新
         if (mSelectWalletAdapter != null) {
@@ -842,6 +841,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
     @Override
     public void showLoading() {
+        if (isFirstLoading) {
+            isFirstLoading = false;
+            return;
+        }
         if (mUpdateMsgConfirmDialog != null) {
             if (mUpdateMsgConfirmDialog.isShowing()) {
                 return;
@@ -852,21 +855,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                 return;
             }
         }
-        if (index == INDEX_ASSET) {
-            if (mAssetFragment != null) {
-                mAssetFragment.showLoading();
-            }
-        } else {
-            super.showLoading();
-        }
-    }
-
-    @Override
-    public void hideLoading() {
-        if (mAssetFragment != null) {
-            mAssetFragment.hideLoading();
-        }
-        super.hideLoading();
+        super.showLoading();
     }
 
     @Override

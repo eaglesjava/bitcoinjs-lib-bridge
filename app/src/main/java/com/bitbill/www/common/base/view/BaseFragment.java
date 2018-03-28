@@ -4,7 +4,6 @@
 
 package com.bitbill.www.common.base.view;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
-import com.bitbill.www.common.utils.DialogUtils;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.di.component.ActivityComponent;
 import com.bitbill.www.model.eventbus.NetWorkChangedEvent;
@@ -43,7 +41,6 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
     private List<MvpPresenter> mPresenters = new ArrayList<>();
     private BaseActivity<MvpPresenter> mActivity;
     private Unbinder mUnBinder;
-    private ProgressDialog mProgressDialog;
     private BitbillApp mApp;
 
     @Override
@@ -143,6 +140,9 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
 
     @Override
     public void showLoading() {
+        if (!isAdded()) {
+            return;
+        }
         if (mActivity != null) {
             mActivity.showLoading();
         }
@@ -235,7 +235,6 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
-        DialogUtils.close(mProgressDialog);
         super.onDestroy();
     }
 

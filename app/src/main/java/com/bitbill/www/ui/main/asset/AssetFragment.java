@@ -77,7 +77,6 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
     ShortCutSettingMvpPresenter<AppModel, ShortCutSettingMvpView> mShortCutSettingMvpPresenter;
     private PopupWalletMenu mWalletMenu;
     private int mWalletCount;
-    private boolean isFirstLoading = true;//第一次加载
     private List<Wallet> mWalletList;
 
     public AssetFragment() {
@@ -171,8 +170,7 @@ public class AssetFragment extends BaseLazyFragment implements WalletView.OnWall
 
     @Override
     public void showLoading() {
-        if (isFirstLoading) {
-            isFirstLoading = false;
+        if (!isAdded()) {
             return;
         }
         if (mSwipeRefreshLayout != null) {

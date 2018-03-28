@@ -139,7 +139,7 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
      */
     @Override
     public void lazyData() {
-
+        loadBtcAddress();
     }
 
     @Override
@@ -185,7 +185,6 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
             mSelectedWallet = wallet;
             //刷新选择布局
             selectWalletView.setWallet(wallet);
-            loadBtcAddress();
         }
     }
 }
