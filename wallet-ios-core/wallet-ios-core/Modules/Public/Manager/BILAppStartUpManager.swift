@@ -54,9 +54,9 @@ class BILAppStartUpManager: NSObject {
             let iVersion = json["iversion"].stringValue
             let iForceVersion = json["iforceVersion"].stringValue
             guard !log.isEmpty else { return }
-            let alert = UIAlertController(title: "更新提示", message: log, preferredStyle: .alert)
+            let alert = UIAlertController(title: "What's New".bil_ui_localized, message: log, preferredStyle: .alert)
             if iForceVersion.isNewer(than: localVersion) {
-                alert.addAction(UIAlertAction(title: "更新", style: .default, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "Update".bil_ui_localized, style: .default, handler: { (action) in
                     UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
                         
                     })
@@ -72,12 +72,12 @@ class BILAppStartUpManager: NSObject {
             let lastAlertDate = Date(timeIntervalSince1970: lastAlertDateTimeInterval)
             let isTipOver = lastAlertDate.hoursEarlier(than: Date()) < 24
             if iVersion.isNewer(than: localVersion) && !isTipOver {
-                alert.addAction(UIAlertAction(title: "更新", style: .default, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "Update".bil_ui_localized, style: .default, handler: { (action) in
                     UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
                         
                     })
                 }))
-                alert.addAction(UIAlertAction(title: "暂不更新", style: .cancel, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "Not now".bil_ui_localized, style: .cancel, handler: { (action) in
                     
                 }))
                 

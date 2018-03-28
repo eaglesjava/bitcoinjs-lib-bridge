@@ -216,7 +216,7 @@ class BILCreateWalletViewController: BILBaseViewController, BILInputViewDelegate
 			complete(m)
 		}
 		else {
-            let lan: BitcoinJSBridge.Language = (BILSettingManager.currentLanguage == .en) ? .english : .chinese
+            let lan: BitcoinJSBridge.Language = (BILSettingManager.currentLanguage == .zh_cn) ? .chinese : .english
 			BitcoinJSBridge.shared.generateMnemonic(language: lan, success: { (mnemonic) in
                 let str = mnemonic as! String
                 self.mnemonic = str
