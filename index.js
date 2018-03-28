@@ -103,8 +103,8 @@ function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, 
     };
 }
 
-function generateEosKeyPair() {
-    return util.generateEosKeyPair();
+function generateEosKeyPair(cb) {
+    return util.generateEosKeyPair(cb);
 }
 
 module.exports = {
