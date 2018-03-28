@@ -14,6 +14,7 @@ import KVNProgress
 import CoreGraphics
 import UserNotifications
 import Toast_Swift
+import SwiftyJSON
 
 class BILAppStartUpManager: NSObject {
 	
@@ -29,6 +30,7 @@ class BILAppStartUpManager: NSObject {
     var deviceToken: String?
     
 	func startSetup() {
+        loadConfig()
 		setupPopupDialog()
 		setupIQKeyboard()
 		loadJS()
@@ -41,6 +43,26 @@ class BILAppStartUpManager: NSObject {
         clearBadge()
         debugPrint(BILDeviceManager.shared.deviceID)
 	}
+    
+    func loadConfig() {
+        
+        func compareVersion(l: String, r: String) {
+            
+        }
+        
+        BILNetworkManager.request(request: Router.getConfig, success: { (result) in
+            let json = JSON(result)
+            let localVersion = BILDeviceManager.shared.appVersion
+//            let iVersion = json["iversion"].stringValue
+//            let iForceVersion = json["iforceVersion"].stringValue
+            let iVersion = "1.1.0"
+            let iForceVersion = "1.1.2"
+            debugPrint(localVersion.compare(iVersion).rawValue)
+            debugPrint(localVersion.compare(iForceVersion).rawValue)
+        }) { (error, code) in
+            debugPrint(error)
+        }
+    }
     
     func clearBadge() {
         UIApplication.shared.applicationIconBadgeNumber = 0

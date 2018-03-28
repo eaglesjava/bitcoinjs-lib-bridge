@@ -20,9 +20,7 @@ class BILAboutUsViewController: BILBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        if let version = Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String {
-            versionLabel.text = version
-        }
+        versionLabel.text = BILDeviceManager.shared.appVersion
     }
 	
 	override func languageDidChanged() {

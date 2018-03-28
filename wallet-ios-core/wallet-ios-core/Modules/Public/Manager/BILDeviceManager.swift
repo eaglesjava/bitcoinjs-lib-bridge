@@ -30,4 +30,11 @@ class BILDeviceManager: NSObject {
     static let shared = {
         return BILDeviceManager()
     }()
+    
+    lazy var appVersion: String = {
+        if let version = Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String {
+            return version
+        }
+        return ""
+    }()
 }
