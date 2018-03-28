@@ -1,0 +1,11 @@
+/*
+ InfoPlist.strings
+ wallet-ios-core
+ 
+ Created by 仇弘揚 on 2018/2/1.
+ Copyright © 2018年 BitBill. All rights reserved.
+ */
+
+"NSCameraUsageDescription" = "需要使用相機掃描二維碼";
+"NSPhotoLibraryUsageDescription" = "需要使用照片掃描二維碼";
+"NSFaceIDUsageDescription" = "使用妳的面容 ID 進行授權";

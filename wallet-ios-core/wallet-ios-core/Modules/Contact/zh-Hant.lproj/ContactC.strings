@@ -1,0 +1,36 @@
+/*
+ ContactC.strings
+ wallet-ios-core
+ 
+ Created by 仇弘揚 on 2018/1/7.
+ Copyright © 2018年 BitBill. All rights reserved.
+ */
+
+"ContactC.contact_addByID" = "通過 ID 添加";
+"ContactC.contact_addByAddress" = "通過 地址 添加";
+"ContactC.contact_scanCode" = "掃碼添加";
+"ContactC.contact_cancel" = "取消";
+"ContactC.contact_addressExits" = "地址已存在";
+"ContactC.contact_addressInvalid" = "妳輸入的是無效地址";
+"ContactC.contact_IDExits" = "聯系人已存在";
+
+"ContactC.detail_walletID" = "錢包ID";
+"ContactC.detail_walletAddress" = "錢包地址";
+"ContactC.detail_id" = "ID";
+"ContactC.detail_address" = "地址";
+"ContactC.detail_error" = "數據錯誤";
+
+"ContactC.detail_copied" = "已復制";
+
+"ContactC.search_empty" = "錢包 ID 不能為空";
+"ContactC.search_tooLong" = "錢包 ID 支持 6-20 位字符";
+
+"ContactC.searchResult_name" = "名稱";
+"ContactC.searchResult_remark" = "備註";
+"ContactC.searchResult_input" = "請輸入";
+"ContactC.searchResult_surport" = "支持";
+"ContactC.searchResult_wei" = "位";
+"ContactC.searchResult_nameEmpty" = "名稱不能為空";
+"ContactC.searchResult_success" = "添加成功";
+
+

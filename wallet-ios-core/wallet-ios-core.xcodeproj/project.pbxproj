@@ -267,6 +267,18 @@
 		BA558A6A1FF75B8800BC0DFD /* BILBTCTransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILBTCTransactionController.swift; sourceTree = "<group>"; };
 		BA558A6C1FF7758800BC0DFD /* BILTXDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILTXDetailCell.swift; sourceTree = "<group>"; };
 		BA56FD3A206B594600246E14 /* String+CompareVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CompareVersion.swift"; sourceTree = "<group>"; };
+		BA56FD3C206B6E1500246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
+		BA56FD3D206B6E1600246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Public.strings"; sourceTree = "<group>"; };
+		BA56FD3E206B6E1600246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BA56FD3F206B6E1600246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/HomeC.strings"; sourceTree = "<group>"; };
+		BA56FD40206B6E1600246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ReceiveC.strings"; sourceTree = "<group>"; };
+		BA56FD41206B6E1600246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ContactC.strings"; sourceTree = "<group>"; };
+		BA56FD42206B6E1600246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SendC.strings"; sourceTree = "<group>"; };
+		BA56FD43206B6E1600246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MeC.strings"; sourceTree = "<group>"; };
+		BA56FD44206B6E1700246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/NewWalletC.strings"; sourceTree = "<group>"; };
+		BA56FD45206B6E1700246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BA56FD46206B6E6400246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/BackupWalletC.strings"; sourceTree = "<group>"; };
+		BA56FD47206B6E9000246E14 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/BILAuthenticator.strings"; sourceTree = "<group>"; };
 		BA5893F91FF343EF008C96C4 /* BILContactEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BILContactEditController.swift; sourceTree = "<group>"; };
 		BA5893FB1FF35CFE008C96C4 /* ContactModel+BIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactModel+BIL.swift"; sourceTree = "<group>"; };
 		BA5893FD1FF3653F008C96C4 /* service_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = service_cn.html; sourceTree = "<group>"; };
@@ -1235,6 +1247,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = CCEC674B1FB18C3A004CC6C5;
 			productRefGroup = CCEC67551FB18C3A004CC6C5 /* Products */;
@@ -1603,6 +1616,7 @@
 			children = (
 				BA0EA97620088FD3005161A7 /* en */,
 				BA0EA97820088FD6005161A7 /* zh-Hans */,
+				BA56FD3C206B6E1500246E14 /* zh-Hant */,
 			);
 			name = UI.strings;
 			sourceTree = "<group>";
@@ -1628,6 +1642,7 @@
 			children = (
 				BA43EF5820231A5A00A62347 /* en */,
 				BA43EF5A20231A5B00A62347 /* zh-Hans */,
+				BA56FD45206B6E1700246E14 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1637,6 +1652,7 @@
 			children = (
 				BA45EF122011A8A100C76D64 /* en */,
 				BA45EF142011A8A200C76D64 /* zh-Hans */,
+				BA56FD3E206B6E1600246E14 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1647,6 +1663,7 @@
 				BA8E66741FFF658E00F2539D /* en */,
 				BA8E66761FFF658F00F2539D /* zh-Hans */,
 				CC6407A92001F1E30068153A /* Base */,
+				BA56FD3D206B6E1600246E14 /* zh-Hant */,
 			);
 			name = Public.strings;
 			sourceTree = "<group>";
@@ -1656,6 +1673,7 @@
 			children = (
 				BAB749211FF24F2800E85607 /* zh-Hans */,
 				BAB749231FF24F2C00E85607 /* Base */,
+				BA56FD47206B6E9000246E14 /* zh-Hant */,
 			);
 			name = BILAuthenticator.strings;
 			sourceTree = "<group>";
@@ -1665,6 +1683,7 @@
 			children = (
 				CC6407A52001ED6A0068153A /* zh-Hans */,
 				CC6407A72001ED6B0068153A /* en */,
+				BA56FD3F206B6E1600246E14 /* zh-Hant */,
 			);
 			name = HomeC.strings;
 			sourceTree = "<group>";
@@ -1682,6 +1701,7 @@
 			children = (
 				CC6407B42001FB1B0068153A /* en */,
 				CC6407B62001FB1C0068153A /* zh-Hans */,
+				BA56FD40206B6E1600246E14 /* zh-Hant */,
 			);
 			name = ReceiveC.strings;
 			sourceTree = "<group>";
@@ -1691,6 +1711,7 @@
 			children = (
 				CC6407BE200207310068153A /* en */,
 				CC6407C0200207330068153A /* zh-Hans */,
+				BA56FD42206B6E1600246E14 /* zh-Hant */,
 			);
 			name = SendC.strings;
 			sourceTree = "<group>";
@@ -1708,6 +1729,7 @@
 			children = (
 				CC6407CB200213EC0068153A /* en */,
 				CC6407CD200214060068153A /* zh-Hans */,
+				BA56FD43206B6E1600246E14 /* zh-Hant */,
 			);
 			name = MeC.strings;
 			sourceTree = "<group>";
@@ -1725,6 +1747,7 @@
 			children = (
 				CC6407D8200229020068153A /* en */,
 				CC6407DA200229030068153A /* zh-Hans */,
+				BA56FD44206B6E1700246E14 /* zh-Hant */,
 			);
 			name = NewWalletC.strings;
 			sourceTree = "<group>";
@@ -1774,6 +1797,7 @@
 			children = (
 				CC640803200231D20068153A /* zh-Hans */,
 				CC64080D200235CD0068153A /* en */,
+				BA56FD46206B6E6400246E14 /* zh-Hant */,
 			);
 			name = BackupWalletC.strings;
 			sourceTree = "<group>";
@@ -1791,6 +1815,7 @@
 			children = (
 				CC640811200235F40068153A /* zh-Hans */,
 				CC64081320023C240068153A /* en */,
+				BA56FD41206B6E1600246E14 /* zh-Hant */,
 			);
 			name = ContactC.strings;
 			sourceTree = "<group>";

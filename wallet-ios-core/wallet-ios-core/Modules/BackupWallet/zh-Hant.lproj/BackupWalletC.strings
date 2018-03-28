@@ -1,0 +1,22 @@
+/*
+ BackupWalletC.strings
+ wallet-ios-core
+ 
+ Created by 仇弘揚 on 2018/1/7.
+ Copyright © 2018年 BitBill. All rights reserved.
+ */
+
+"BackupWalletC.mnmonic_emptyTitle" = "請輸入密碼解鎖助記詞";
+"BackupWalletC.mnmonic_snapshotTip" = "截圖是不安全的，妳的圖片可能被別的應用使用。請抄寫如下助記詞，並妥善保存，我們會在下個屏幕上確認";
+"BackupWalletC.mnmonic_tryLater" = "請稍後再試";
+"BackupWalletC.mnmonic_failed" = "備份失敗";
+"BackupWalletC.mnmonic_backupWallet" = "備份錢包";
+"BackupWalletC.mnmonic_inputPwd" = "請輸入密碼以確認";
+"BackupWalletC.mnmonic_getWalletFailed" = "獲取錢包數據失敗";
+"BackupWalletC.mnmonic_decodeWalletFailed" = "解密錢包數據失敗";
+"BackupWalletC.mnmonic_confirm" = "確認";
+"BackupWalletC.mnmonic_cancel" = "取消";
+
+"BackupWalletC.verify_emptyTitle" = "請按順序點擊下方文字";
+
+

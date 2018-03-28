@@ -1,0 +1,36 @@
+/*
+ Public.strings
+ wallet-ios-core
+ 
+ Created by 仇弘揚 on 2018/1/5.
+ Copyright © 2018年 BitBill. All rights reserved.
+ */
+"Public.currency.name.cny" = "人民幣";
+"Public.currency.name.usd" = "美元";
+"Public.keyboard.hide" = "收起鍵盤";
+"Public.wallet.fetch.failed" = "查詢錢包失敗";
+"Public.network.connect.sever.failed" = "連接服務器失敗";
+
+"Public.wallet.error.extKey" = "擴展公鑰不能為空";
+"Public.wallet.error.id" = "ID不能為空";
+"Public.wallet.error.data" = "數據錯誤";
+"Public.wallet.error.address" = "獲取地址失敗";
+"Public.wallet.error.address.dont.need.refresh" = "index 小於或等於當前地址，不需要刷新";
+"Public.wallet.error.address.nomore" = "暫時無法生成更多的地址了";
+"Public.wallet.error.address.generate" = "生成地址失敗";
+"Public.wallet.error.address.index" = "index 錯誤";
+
+"Public.transaction.status.unconfirm" = "待確認";
+"Public.transaction.status.success" = "交易成功";
+"Public.transaction.status.failure" = "交易失敗";
+"Public.transaction.status.confirmed" = "確認";
+
+"Public.transaction.type.receive" = "已接收";
+"Public.transaction.type.send" = "已發送";
+"Public.transaction.type.transfer" = "已轉移";
+
+"Public.transaction.remark.none" = "無";
+
+"Public.alert.action.title" = "我知道了";
+
+"Public.toast.comingSoon" = "即將支持，敬請期待";

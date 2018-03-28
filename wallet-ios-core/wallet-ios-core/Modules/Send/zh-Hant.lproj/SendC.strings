@@ -1,0 +1,41 @@
+/*
+ SendC.strings
+ wallet-ios-core
+ 
+ Created by 仇弘揚 on 2018/1/7.
+ Copyright © 2018年 BitBill. All rights reserved.
+ */
+
+"SendC.send.address.invalid" = "妳輸入的是無效地址";
+"SendC.send.address.empty" = "地址不能為空";
+"SendC.send.address.invalid.title" = "地址不正確";
+"SendC.send.address.error" = "出現了錯誤";
+
+"SendC.amount.check.amount.tip.title" = "提示";
+"SendC.amount.check.amount.tip.msg.empty" = "請輸入金額";
+"SendC.amount.check.amount.tip.msg.zero" = "請輸入大於 0 的金額";
+"SendC.amount.check.amount.tip.msg.notEnough" = "余額不足";
+
+"SendC.confirm.minute" = "分鐘";
+"SendC.confirm.hour" = "小時";
+"SendC.confirm.day" = "天";
+"SendC.confirm.averageTime" = "平均確認時間";
+"SendC.confirm.needSpend" = "需耗費";
+"SendC.confirm.notEnoughBalace" = "余額不足以支付手續費";
+"SendC.confirm.cannotFindChangeAddress" = "未能生成找零地址";
+"SendC.confirm.remarkTooLong" = "請輸入20字以內字符";
+"SendC.confirm.sendFailed" = "發送失敗";
+"SendC.confirm.passwordTitle" = "輸入錢包密碼";
+"SendC.confirm.passwordMessageEmpty" = "密碼不能為空";
+"SendC.confirm.passwordMessageWrong" = "密碼輸入錯誤";
+"SendC.confirm.cancel" = "取消";
+"SendC.confirm.confirm" = "確認";
+"SendC.confirm.passwordPlaceholder" = "請輸入密碼以確認";
+"SendC.confirm.buildTxFailed" = "創建交易失敗";
+"SendC.confirm.seedFailed" = "解密 Seed 失敗";
+"SendC.confirm.tryLater" = "請稍後再試";
+
+"SendC.result.input" = "輸入";
+"SendC.result.inputName" = "的名稱";
+"SendC.result.inputNamePlaceholder" = "請輸入聯系人名稱";
+"SendC.result.addSuccess" = "添加成功";

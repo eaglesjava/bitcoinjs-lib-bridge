@@ -1,0 +1,32 @@
+/* 
+  HomeC.strings
+  wallet-ios-core
+
+  Created by 仇弘扬 on 2018/1/7.
+  Copyright © 2018年 BitBill. All rights reserved.
+*/
+
+"HomeC.home.section.shortcut" = "快捷方式";
+"HomeC.home.section.asset" = "總資產";
+"HomeC.home.section.unconfirm" = "未確認交易";
+"HomeC.home.section.wallet" = "我的錢包";
+
+"HomeC.home.pop.wallet.new" = "創建錢包";
+"HomeC.home.pop.wallet.import" = "導入錢包";
+
+"HomeC.home.section.subtitle.shortcut" = "前往设置自定义";
+"HomeC.home.section.subtitle.asset" = "当前币种";
+"HomeC.home.section.subtitle.unconfirm" = "未确认交易";
+"HomeC.home.section.subtitle.wallet" = "当前钱包";
+"HomeC.home.section.subtitle.unit.ge" = "个";
+
+"HomeC.tx.detail.cell.hash" = "交易 hash ";
+"HomeC.tx.detail.cell.address.receive" = "接收地址";
+"HomeC.tx.detail.cell.address.send" = "發送地址";
+"HomeC.tx.detail.cell.fee" = "手續費";
+"HomeC.tx.detail.cell.confirm" = "確認";
+"HomeC.tx.detail.cell.remark" = "備註";
+"HomeC.tx.detail.cell.date" = "交易時間";
+"HomeC.tx.detail.noTx" = "無交易記錄";
+"HomeC.tx.detail.tx" = "交易記錄";
+"HomeC.tx.detail.blockchain" = "去 Blockchain.info 查看交易";

@@ -1,0 +1,133 @@
+/*
+ UI.strings
+ wallet-ios-core
+ 
+ Created by 仇弘揚 on 2018/1/12.
+ Copyright © 2018年 BitBill. All rights reserved.
+ */
+
+"Unconfirmed" = "未確認";
+"Back up" = "馬上備份";
+"Add contact" = "添加聯系人";
+"Assets" = "資產主頁";
+"Scan" = "掃碼";
+"Address" = "地址";
+
+"Refresh address" = "刷新地址";
+"Back up wallet now" = "當前錢包未備份，馬上備份";
+"Receive specific amount" = "特定金額接收";
+"Choose wallet" = "選擇錢包";
+"Receive amount" = "接收數量";
+"Scan to pay" = "掃碼，向我支付";
+"Enter amount" = "輸入數量";
+"Receive" = "接收";
+"Done" = "完成";
+
+"Delete contact" = "刪除聯系人";
+"Please input" = "請輸入";
+"No contacts" = "妳還沒有聯系人";
+"Wallet ID" = "錢包 ID";
+"Remarks" = "備註";
+"Address of digital asset" = "數字資產地址";
+"Add" = "添加";
+"Add via ID" = "通過 ID 添加";
+"Name" = "名稱";
+"Add now" = "立即添加";
+"Add to contact" = "添加到聯系人";
+"Contact details" = "聯系人詳情";
+"Add via address" = "通過地址添加";
+"Contacts" = "聯系人";
+"Search wallet ID" = "搜索對方錢包 ID";
+"Send" = "發送";
+"Edit contact" = "編輯聯系人";
+"Search results" = "搜索結果";
+"Cancel" = "取消";
+"Delete" = "刪除";
+"Tip" = "提示";
+"Nothing has been changed" = "妳沒有做任何修改";
+"Updated successfully" = "更新成功";
+"Are you sure to delete this contact?" = "確定要刪除該聯系人嗎？";
+
+"Receiver" = "接收方";
+"Send amount" = "發送金額";
+"Total balance" = "選擇全部余額";
+"Next" = "下壹步";
+"Scan results" = "掃描結果";
+"Address of receiver" = "接收方地址";
+"Sending amount" = "發送金額";
+"Fee" = "手續費";
+"Sending wallet" = "發出錢包";
+"Within 20 words" = "20字以內";
+"Complete" = "完成";
+"Send successfully" = "發送成功";
+"Add the address as the frequent contact for the next transaction" = "添加地址為常用聯系人可以方便下次交易";
+"Quickly create contacts" = "快速創建聯系人";
+
+"Me" = "我";
+"Wallet address" = "錢包地址";
+"General" = "通用";
+"Wallet ID" = "錢包 ID";
+"Usage terms" = "使用條款";
+"    Scan address    " = "    掃描地址    ";
+"Back up wallet" = "備份錢包";
+"Add time" = "添加時間";
+"Delete wallet" = "刪除錢包";
+"About us" = "關於我們";
+
+"Input wallet ID" = "輸入錢包ID";
+"Confirm the wallet password" = "確認錢包密碼";
+"Create wallet" = "創建錢包";
+"Import wallet" = "導入錢包";
+"Create successfully" = "創建成功";
+"Wallet ID tip" = "設定妳的錢包ID，它可以關聯妳的聯系人，支持字母、數字和下劃線，僅能以字母開頭，壹旦設定不可修改。";
+"6-20 characters, begin with letter." = "請輸入6-20位字符，以字母開頭";
+"Create wallet password" = "創建錢包密碼";
+"Create success tip" = "錢包創建成功，請在使用前將助記詞儲存到安全地方做好錢包備份。";
+"Confirm" = "確定";
+"Input mnemonic words" = "輸入助記詞";
+"Back up later" = "稍後備份";
+"Password tip" = "請牢記妳的密碼！Bitbill 不存儲用戶密碼，無法提供找回或重置功能";
+"Please input 6-20 characters" = "請輸入6-20位字符";
+"Supports BIP39 mnemonic words only" = "僅支持符合 BIP39 標準的助記詞";
+"Complete means agreed" = "完成即表示妳已同意 ";
+
+"Digital assets all in one" = "數字資產 All in one";
+"Own your private keys" = "私鑰掌握在妳自己手裏";
+"Send coins by contacts" = "添加聯系人 壹鍵轉賬";
+
+"Clear" = "清空";
+"Succeed to back up" = "備份成功";
+"Congratulations" = "恭喜！";
+"Snapshot tip" = "截圖是不安全的，妳的圖片可能被別的應用使用。請抄寫如下助記詞，並妥善保存，我們會在下個屏幕上確認！";
+"Please keep your mnemonic words carefully" = "請妥善保管妳的助記詞";
+"Save words" = "記下助記詞";
+"Mnemonic tip" = "請確認妳所在的環境是安全隱私的，任何人拿到妳的助記詞都可以轉走妳的數字資產！";
+"I have saved them orderly" = "已按順序記下助記詞";
+"Click on the mnemonic words orderly to confirm whether your backup is right." = "按順序點擊助記詞，確認妳的助記詞備份正確";
+"Verify words" = "驗證助記詞";
+
+"Align within frame to scan" = "放入框內，自動掃描";
+"Album" = "相冊";
+"No QRCodes" = "沒有識別到二維碼";
+
+"Currencies supported currently" = "目前支持以下幣種";
+
+"-30" = "服務器忙請稍後再試!";
+"-31" = "缺少必要的參數";
+"-32" = "無效的參數類型";
+"-40" = "錢包id已存在";
+"-41" = "錢包不存在";
+"-88" = "您的IP超過了規定限制";
+
+"Address of change" = "找零地址";
+
+"Feedback" = "意見反饋";
+"ContactTypeTitle" = "聯系方式（選填）";
+"ContactTypePlaceHolder" = "請輸入郵箱/手機/微信";
+"Too much words" = "太多字了";
+"Can not be empty" = "不能為空";
+
+"My address" = "我的地址 · ";
+
+"Edit" = "編輯";
+"Save" = "保存";

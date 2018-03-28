@@ -1,0 +1,15 @@
+/*
+ BILAuthenticator.strings
+ wallet-ios-core
+ 
+ Created by 仇弘揚 on 2017/12/26.
+ Copyright © 2017年 BitBill. All rights reserved.
+ */
+
+"kFaceIdAuthenticationReason" = "使用妳的面容 ID 進行授權";
+"kFaceIdPasscodeAuthenticationReason" = "面容 ID 已經鎖定，因為錯誤次數太多，請輸入密碼";
+"kTouchIdAuthenticationReason" = "使用妳的指紋 ID 進行授權";
+"kTouchIdPasscodeAuthenticationReason" = "指紋 ID 已經鎖定，因為錯誤次數太多，請輸入密碼";
+"kPasscodeAuthenticationReason" = "請輸入妳的 iPhone 密碼進行授權";
+
+

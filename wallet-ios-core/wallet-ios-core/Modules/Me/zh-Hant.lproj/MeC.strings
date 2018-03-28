@@ -1,0 +1,57 @@
+/*
+ MeC.strings
+ wallet-ios-core
+ 
+ Created by 仇弘揚 on 2018/1/7.
+ Copyright © 2018年 BitBill. All rights reserved.
+ */
+
+"MeC.agreementName" = "service_cn";
+
+"MeC.meSection_preference" = "資產設置";
+"MeC.meSection_contacts" = "聯系人設置";
+"MeC.meSection_wallet" = "錢包集成";
+"MeC.meSection_system" = "系統設置";
+"MeC.meSection_other" = "其它";
+
+"MeC.meCell_shortcut" = "快捷功能";
+"MeC.meCell_contactBackup" = "備份聯系人";
+"MeC.meCell_contactRecover" = "恢復聯系人";
+"MeC.meCell_system" = "通用";
+"MeC.meCell_aboutUs" = "關於我們";
+
+"MeC.contact_yourKey" = "妳的聯系人密鑰";
+"MeC.contact_copyKey" = "復制密鑰";
+"MeC.contact_keyCopied" = "密鑰已復制";
+"MeC.contact_authFailed" = "授權失敗，無法查看妳的聯系人密鑰";
+"MeC.contact_inputKey" = "請輸入密鑰以確認";
+"MeC.contact_keyEmpty" = "密鑰不能為空";
+"MeC.contact_noMore" = "妳沒有新增的聯系人";
+"MeC.contact_recovered" = "妳恢復了";
+"MeC.contact_contact" = "個聯系人";
+
+"MeC.confirm" = "確認";
+"MeC.cancel" = "取消";
+
+"MeC.wallet_deleteFailed" = "刪除錢包失敗";
+"MeC.wallet_delete" = "刪除錢包";
+"MeC.wallet_deleteMessage" = "請謹慎使用此操作，刪除前確認妳的錢包已備份，否則數字資產將無法找回！";
+"MeC.wallet_passwordEmpty" = "密碼不能為空";
+"MeC.wallet_passwordError" = "密碼輸入錯誤";
+"MeC.wallet_inputPassword" = "請輸入密碼以確認";
+"MeC.wallet_tryLater" = "請稍後再試";
+"MeC.wallet_failed" = "操作失敗";
+"MeC.wallet_backupNow" = "立即備份";
+
+"MeC.walletAddress_addressAndBalance" = "地址與余額";
+
+"MeC.aboutUs_agreement" = "使用條款";
+"MeC.aboutUs_contactUs" = "聯系我們";
+
+"MeC.appSetting_sound" = "音效";
+"MeC.appSetting_currency" = "貨幣";
+"MeC.appSetting_language" = "多語言";
+"MeC.appSetting_cellSound" = "音效";
+"MeC.appSetting_cellCurrency" = "當前幣種";
+"MeC.appSetting_cellLanguage" = "當前語言";
+"MeC.appSetting_saved" = "已保存";
