@@ -11,11 +11,11 @@
 "HomeC.home.section.unconfirm" = "未确认交易";
 "HomeC.home.section.wallet" = "我的钱包";
 
-"HomeC.home.section.subtitle.shortcut" = "前往設置自定義";
-"HomeC.home.section.subtitle.asset" = "當前幣種";
-"HomeC.home.section.subtitle.unconfirm" = "未確認交易";
-"HomeC.home.section.subtitle.wallet" = "當前錢包";
-"HomeC.home.section.subtitle.unit.ge" = "個";
+"HomeC.home.section.subtitle.shortcut" = "前往设置自定义";
+"HomeC.home.section.subtitle.asset" = "当前币种";
+"HomeC.home.section.subtitle.unconfirm" = "未确认交易";
+"HomeC.home.section.subtitle.wallet" = "当前钱包";
+"HomeC.home.section.subtitle.unit.ge" = "个";
 
 "HomeC.home.pop.wallet.new" = "创建钱包";
 "HomeC.home.pop.wallet.import" = "导入钱包";

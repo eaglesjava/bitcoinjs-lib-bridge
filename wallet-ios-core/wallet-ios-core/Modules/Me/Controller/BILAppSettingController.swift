@@ -151,6 +151,9 @@ class BILAppSettingController: BILBaseViewController, UITableViewDelegate, UITab
         sheet.addAction(UIAlertAction(title: BILLanguageType.zh_cn.name, style: .default, handler: { (action) in
             change(language: .zh_cn)
         }))
+        sheet.addAction(UIAlertAction(title: BILLanguageType.zh_ft.name, style: .default, handler: { (action) in
+            change(language: .zh_ft)
+        }))
         
         sheet.addAction(UIAlertAction(title: .meMe_cancel, style: .cancel, handler: { (action) in
             

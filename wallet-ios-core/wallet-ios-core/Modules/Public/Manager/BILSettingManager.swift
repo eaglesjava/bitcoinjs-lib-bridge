@@ -69,6 +69,7 @@ enum CurrencyType: Int {
 
 enum BILLanguageType: String {
     case zh_cn = "zh-Hans"
+    case zh_ft = "zh-Hant"
     case en = "en"
     
     var name: String {
@@ -76,6 +77,8 @@ enum BILLanguageType: String {
             switch self {
             case .zh_cn:
                 return "简体中文"
+            case .zh_ft:
+                return "繁体中文"
             case .en:
                 return "English"
             }
@@ -140,6 +143,8 @@ class BILSettingManager: NSObject {
             }
             if str.hasPrefix(BILLanguageType.zh_cn.rawValue) {
                 str = BILLanguageType.zh_cn.rawValue
+            } else if str.hasPrefix(BILLanguageType.zh_ft.rawValue) {
+                str = BILLanguageType.zh_ft.rawValue
             } else {
                 str = BILLanguageType.en.rawValue
             }
