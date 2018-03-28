@@ -4,6 +4,6 @@
         android:angle="0"
         android:endColor="@color/blue_dark"
         android:startColor="@color/blue"
-        android:type="linear"/>
-    <corners android:radius="@dimen/dp_50" />
+        android:type="linear" />
+    <corners android:radius="@dimen/dp_15" />
 </shape>

@@ -15,6 +15,7 @@ import com.bitbill.www.common.base.model.entity.TabItem;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.presenter.TabsMvpView;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.dialog.CoinSortDialog;
 import com.bitbill.www.ui.wallet.info.EthInfoFragment;
 
 import java.util.ArrayList;
@@ -41,27 +42,28 @@ public abstract class BaseTabsFragment<P extends MvpPresenter> extends BaseFragm
     @BindView(R.id.iv_tab_menu)
     ImageView mIvTabMenu;
     private FragmentAdapter mFragmentAdapter;
+    private List<TabItem> mTabItems;
 
     protected abstract BaseFragment getBtcFragment();
 
     @Override
     public void initView() {
         // TODO: 2018/3/27 for test
-        List<TabItem> tabItems = new ArrayList<>();
-        tabItems.add(new TabItem(AppConstants.BTC_COIN_TYPE, "btc", R.drawable.ic_coin_btc, null));
-        tabItems.add(new TabItem("ETH", "eth", R.drawable.ic_coin_eth, null));
-        tabItems.add(new TabItem("DGD", "dgd", R.drawable.ic_coin_dgd, null));
-        tabItems.add(new TabItem("MKR", "mkr", R.drawable.ic_coin_mkr, null));
-        tabItems.add(new TabItem("REP", "rep", R.drawable.ic_coin_rep, null));
-        tabItems.add(new TabItem("AE", "ae", R.drawable.ic_coin_ae, null));
-        tabItems.add(new TabItem("ZRX", "zrx", R.drawable.ic_coin_zrx, null));
-        tabItems.add(new TabItem("GNT", "gnt", R.drawable.ic_coin_gnt, null));
-        tabItems.add(new TabItem("ENG", "eng", R.drawable.ic_coin_eng, null));
-        tabItems.add(new TabItem("BAT", "bat", R.drawable.ic_coin_bat, null));
-        tabItems.add(new TabItem("SNT", "snt", R.drawable.ic_coin_snt, null));
-        tabItems.add(new TabItem("PAY", "pay", R.drawable.ic_coin_pay, null));
-        tabItems.add(new TabItem("LRC", "lrc", R.drawable.ic_coin_lrc, null));
-        loadTabsSuccess(tabItems);
+        mTabItems = new ArrayList<>();
+        mTabItems.add(new TabItem(AppConstants.BTC_COIN_TYPE, "btc", R.drawable.ic_coin_btc, null));
+        mTabItems.add(new TabItem("ETH", "eth", R.drawable.ic_coin_eth, null));
+        mTabItems.add(new TabItem("DGD", "dgd", R.drawable.ic_coin_dgd, null));
+        mTabItems.add(new TabItem("MKR", "mkr", R.drawable.ic_coin_mkr, null));
+        mTabItems.add(new TabItem("REP", "rep", R.drawable.ic_coin_rep, null));
+        mTabItems.add(new TabItem("AE", "ae", R.drawable.ic_coin_ae, null));
+        mTabItems.add(new TabItem("ZRX", "zrx", R.drawable.ic_coin_zrx, null));
+        mTabItems.add(new TabItem("GNT", "gnt", R.drawable.ic_coin_gnt, null));
+        mTabItems.add(new TabItem("ENG", "eng", R.drawable.ic_coin_eng, null));
+        mTabItems.add(new TabItem("BAT", "bat", R.drawable.ic_coin_bat, null));
+        mTabItems.add(new TabItem("SNT", "snt", R.drawable.ic_coin_snt, null));
+        mTabItems.add(new TabItem("PAY", "pay", R.drawable.ic_coin_pay, null));
+        mTabItems.add(new TabItem("LRC", "lrc", R.drawable.ic_coin_lrc, null));
+        loadTabsSuccess(mTabItems);
     }
 
     @Override
@@ -84,9 +86,9 @@ public abstract class BaseTabsFragment<P extends MvpPresenter> extends BaseFragm
             }
             tabs.addTab(tabs.newTab().setCustomView(customView));
             if (AppConstants.BTC_COIN_TYPE.equals(tabItem.getCoinId())) {
-                mFragmentAdapter.addItem(tabItem.getText(), getBtcFragment());
+                mFragmentAdapter.addItem(tabItem.getSymbol(), getBtcFragment());
             } else {
-                mFragmentAdapter.addItem(tabItem.getText(), EthInfoFragment.newInstance(tabItem));
+                mFragmentAdapter.addItem(tabItem.getSymbol(), EthInfoFragment.newInstance(tabItem));
             }
         }
         mViewPager.setAdapter(mFragmentAdapter);
@@ -110,7 +112,7 @@ public abstract class BaseTabsFragment<P extends MvpPresenter> extends BaseFragm
     private View getCustomView(TabItem tabItem) {
         View newtab = LayoutInflater.from(getBaseActivity()).inflate(R.layout.layout_custom_tab, null);
         TextView tv = newtab.findViewById(R.id.tv_text);
-        tv.setText(tabItem.getText());
+        tv.setText(tabItem.getSymbol());
         ImageView im = newtab.findViewById(R.id.iv_tab);
         im.setImageResource(tabItem.getIconId());
         return newtab;
@@ -132,6 +134,7 @@ public abstract class BaseTabsFragment<P extends MvpPresenter> extends BaseFragm
                 tabs.pageScroll(View.FOCUS_RIGHT);
                 break;
             case R.id.iv_tab_menu:
+                CoinSortDialog.newInstance(mTabItems).show(getChildFragmentManager());
                 break;
         }
     }
