@@ -47,14 +47,40 @@ class BILAppStartUpManager: NSObject {
     
     func loadConfig() {
         
+        enum UpdateLogLanguage: Int {
+            case en = 0
+            case zh_cn
+            case zh_ft
+        }
+        
+        func getLocalizedLog(logs: [Substring]) -> String {
+            var result: Substring = ""
+            var index = 0
+            switch BILSettingManager.currentLanguage {
+            case .en:
+                index = UpdateLogLanguage.en.rawValue
+            case .zh_cn:
+                index = UpdateLogLanguage.zh_cn.rawValue
+            case .zh_ft:
+                index = UpdateLogLanguage.zh_ft.rawValue
+            }
+            if logs.count > index {
+                result = logs[index]
+            } else if logs.count >= 1 {
+                result = logs[0]
+            }
+            return String(result).replacingOccurrences(of: "\\n", with: "\n")
+        }
+        
         func showUpdateAlert(json: JSON) {
             let localVersion = BILDeviceManager.shared.appVersion
-            let log = json["iosUpdateLog"].stringValue
+            let logs = json["iosUpdateLog"].stringValue.split(separator: "|")
             guard let url = URL(string: json["iosUrl"].stringValue) else { return }
             let iVersion = json["iversion"].stringValue
             let iForceVersion = json["iforceVersion"].stringValue
+            let log = getLocalizedLog(logs: logs)
             guard !log.isEmpty else { return }
-            let alert = UIAlertController(title: "What's New".bil_ui_localized, message: log, preferredStyle: .alert)
+            let alert = UIAlertController(title: "Update Tip".bil_ui_localized, message: log, preferredStyle: .alert)
             if iForceVersion.isNewer(than: localVersion) {
                 alert.addAction(UIAlertAction(title: "Update".bil_ui_localized, style: .default, handler: { (action) in
                     UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
