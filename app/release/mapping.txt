@@ -26518,11 +26518,12 @@ com.bitbill.www.app.BitbillApp -> com.bitbill.www.app.BitbillApp:
     okhttp3.OkHttpClient mOkhttpClient -> a
     com.bitbill.www.model.wallet.db.WalletDbHelper mWalletDbHelper -> b
     com.bitbill.www.model.app.AppModel mAppModel -> c
-    android.app.Application$ActivityLifecycleCallbacks callbacks -> d
     com.bitbill.www.di.component.ApplicationComponent mApplicationComponent -> f
     java.util.List mWallets -> g
     com.bitbill.www.model.app.prefs.AppPreferences$SelectedCurrency mSelectedCurrency -> h
     long mBlockHeight -> i
+    boolean isBackGround -> j
+    android.app.Application$ActivityLifecycleCallbacks callbacks -> d
     void <init>() -> <init>
     com.bitbill.www.app.BitbillApp get() -> a
     void onCreate() -> onCreate
@@ -26546,6 +26547,8 @@ com.bitbill.www.app.BitbillApp -> com.bitbill.www.app.BitbillApp:
     void onTrimMemory(int) -> onTrimMemory
     void appExit() -> l
     void restartApp() -> m
+    boolean access$000(com.bitbill.www.app.BitbillApp) -> a
+    boolean access$002(com.bitbill.www.app.BitbillApp,boolean) -> a
 com.bitbill.www.app.BitbillApp$1 -> com.bitbill.www.app.BitbillApp$1:
     com.bitbill.www.app.BitbillApp this$0 -> a
     void <init>(com.bitbill.www.app.BitbillApp) -> <init>
@@ -26575,7 +26578,29 @@ com.bitbill.www.common.app.AppManager -> com.bitbill.www.common.a.a:
     void finishActivity(java.lang.Class) -> a
     void finishAllActivity() -> b
     void appExit(android.content.Context) -> a
-com.bitbill.www.common.app.CrashHandler -> com.bitbill.www.common.a.b:
+com.bitbill.www.common.app.BaseService -> com.bitbill.www.common.a.b:
+    io.reactivex.disposables.CompositeDisposable mCompositeDisposable -> mCompositeDisposable
+    com.bitbill.www.common.rx.SchedulerProvider mSchedulerProvider -> mSchedulerProvider
+    com.bitbill.www.app.BitbillApp mBitbillApp -> mBitbillApp
+    com.bitbill.www.di.component.ServiceComponent mServiceComponent -> mServiceComponent
+    void <init>() -> <init>
+    android.os.IBinder onBind(android.content.Intent) -> onBind
+    void onCreate() -> onCreate
+    com.bitbill.www.app.BitbillApp getApp() -> getApp
+    com.bitbill.www.di.component.ServiceComponent getServiceComponent() -> getServiceComponent
+    io.reactivex.disposables.CompositeDisposable getCompositeDisposable() -> getCompositeDisposable
+    com.bitbill.www.common.rx.SchedulerProvider getSchedulerProvider() -> getSchedulerProvider
+    void onDestroy() -> onDestroy
+    io.reactivex.ObservableTransformer applyScheduler() -> applyScheduler
+com.bitbill.www.common.app.BaseService$1 -> com.bitbill.www.common.a.b$1:
+    com.bitbill.www.common.app.BaseService this$0 -> a
+    void <init>(com.bitbill.www.common.app.BaseService) -> <init>
+    io.reactivex.Observable apply(io.reactivex.Observable) -> a
+    io.reactivex.ObservableSource apply(io.reactivex.Observable) -> b
+com.bitbill.www.common.app.BaseService_MembersInjector -> com.bitbill.www.common.a.c:
+    void injectMCompositeDisposable(com.bitbill.www.common.app.BaseService,io.reactivex.disposables.CompositeDisposable) -> a
+    void injectMSchedulerProvider(com.bitbill.www.common.app.BaseService,com.bitbill.www.common.rx.SchedulerProvider) -> a
+com.bitbill.www.common.app.CrashHandler -> com.bitbill.www.common.a.d:
     com.bitbill.www.common.app.CrashHandler crash -> a
     java.lang.Thread$UncaughtExceptionHandler mHandler -> b
     android.content.Context context -> c
@@ -26587,11 +26612,11 @@ com.bitbill.www.common.app.CrashHandler -> com.bitbill.www.common.a.b:
     boolean handlException(java.lang.Throwable) -> a
     void collectDeviceInfo() -> c
     android.content.Context access$000() -> b
-com.bitbill.www.common.app.CrashHandler$1 -> com.bitbill.www.common.a.b$1:
+com.bitbill.www.common.app.CrashHandler$1 -> com.bitbill.www.common.a.d$1:
     com.bitbill.www.common.app.CrashHandler this$0 -> a
     void <init>(com.bitbill.www.common.app.CrashHandler) -> <init>
     void run() -> run
-com.bitbill.www.common.app.ScreenshotContentObserver -> com.bitbill.www.common.a.c:
+com.bitbill.www.common.app.ScreenshotContentObserver -> com.bitbill.www.common.a.e:
     android.content.Context mContext -> a
     int imageNum -> b
     com.bitbill.www.common.app.ScreenshotContentObserver$OnScreenShotChangeListener mOnScreenShotChangeListener -> c
@@ -26606,7 +26631,7 @@ com.bitbill.www.common.app.ScreenshotContentObserver -> com.bitbill.www.common.a
     boolean matchPath(java.lang.String) -> b
     void doReport(java.lang.String) -> c
     void setOnScreenShotChangeListener(com.bitbill.www.common.app.ScreenshotContentObserver$OnScreenShotChangeListener) -> a
-com.bitbill.www.common.app.ScreenshotContentObserver$OnScreenShotChangeListener -> com.bitbill.www.common.a.c$a:
+com.bitbill.www.common.app.ScreenshotContentObserver$OnScreenShotChangeListener -> com.bitbill.www.common.a.e$a:
     void onScreenShot(java.io.File) -> a
 com.bitbill.www.common.base.adapter.FragmentAdapter -> com.bitbill.www.common.base.a.a:
     java.util.List fragments -> a
@@ -26827,8 +26852,7 @@ com.bitbill.www.common.base.view.BaseFragment -> com.bitbill.www.common.base.vie
     java.util.List mPresenters -> d
     com.bitbill.www.common.base.view.BaseActivity mActivity -> e
     butterknife.Unbinder mUnBinder -> f
-    android.app.ProgressDialog mProgressDialog -> g
-    com.bitbill.www.app.BitbillApp mApp -> h
+    com.bitbill.www.app.BitbillApp mApp -> g
     void <init>() -> <init>
     void onCreate(android.os.Bundle) -> onCreate
     com.bitbill.www.app.BitbillApp getApp() -> a
@@ -27117,13 +27141,14 @@ com.bitbill.www.common.presenter.BtcAddressPresenter -> com.bitbill.www.common.b
     void checkLastAddressIndex(long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> a
     void getBitcoinAddressByMasterXPublicKey(long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> b
     void getBitcoinContinuousAddress(long,long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> a
-    void updateAddressIndex(com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.String[],boolean,boolean) -> a
+    void updateAddressIndex(com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.String[],java.lang.Long,boolean,boolean) -> a
     boolean isValidWallet() -> j
     boolean isValidPublicKey() -> i
 com.bitbill.www.common.presenter.BtcAddressPresenter$1 -> com.bitbill.www.common.b.g$1:
     com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> a
-    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> b
-    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,com.bitbill.www.model.wallet.db.entity.Wallet) -> <init>
+    java.lang.Long val$lastAddressIndex -> b
+    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> c
+    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.Long) -> <init>
     void call(java.lang.String,com.bitbill.www.crypto.entity.JsResult) -> a
 com.bitbill.www.common.presenter.BtcAddressPresenter$2 -> com.bitbill.www.common.b.g$2:
     com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> a
@@ -27316,7 +27341,7 @@ com.bitbill.www.common.presenter.SyncAddressPresenter -> com.bitbill.www.common.
     void onDetach() -> b
     void syncLastAddressIndex(long,long,com.bitbill.www.model.wallet.db.entity.Wallet) -> a
     void getBitcoinContinuousAddress(long,long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> a
-    void updateAddressIndex(com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.String[],boolean) -> a
+    void updateAddressIndex(com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.String[],java.lang.Long,boolean) -> a
     boolean isValidBtcAddress(java.lang.String) -> a
     void onAttach(com.bitbill.www.common.base.view.MvpView) -> a
     boolean access$000(com.bitbill.www.common.presenter.SyncAddressPresenter,java.lang.String) -> a
@@ -27402,8 +27427,8 @@ com.bitbill.www.common.presenter.WalletPresenter -> com.bitbill.www.common.b.as:
     void loadWallets() -> k_
 com.bitbill.www.common.presenter.WalletPresenter$1 -> com.bitbill.www.common.b.as$1:
     com.bitbill.www.common.presenter.WalletPresenter this$0 -> a
-    void <init>(com.bitbill.www.common.presenter.WalletPresenter,com.bitbill.www.common.base.view.MvpView) -> <init>
-    void onStart() -> a
+    void <init>(com.bitbill.www.common.presenter.WalletPresenter) -> <init>
+    void onStart() -> onStart
     void onNext(java.util.List) -> a
     void onError(java.lang.Throwable) -> onError
     void onNext(java.lang.Object) -> onNext
@@ -27420,14 +27445,15 @@ com.bitbill.www.common.rx.AppSchedulerProvider -> com.bitbill.www.common.c.a:
     io.reactivex.Scheduler ui() -> a
     io.reactivex.Scheduler io() -> b
 com.bitbill.www.common.rx.BaseSubcriber -> com.bitbill.www.common.c.b:
-    com.bitbill.www.common.base.view.MvpView mMvpView -> a
+    com.bitbill.www.common.base.view.MvpView mMvpView -> mMvpView
     void <init>() -> <init>
     void <init>(com.bitbill.www.common.base.view.MvpView) -> <init>
-    void onStart() -> a
+    void onStart() -> onStart
     void onNext(java.lang.Object) -> onNext
     void onError(java.lang.Throwable) -> onError
     void onComplete() -> onComplete
-    boolean isValidMvpView() -> b
+    boolean isValidMvpView() -> isValidMvpView
+    com.bitbill.www.common.base.view.MvpView getSubcriberMvpView() -> getSubcriberMvpView
 com.bitbill.www.common.rx.SchedulerProvider -> com.bitbill.www.common.c.c:
     io.reactivex.Scheduler ui() -> a
     io.reactivex.Scheduler io() -> b
@@ -27542,6 +27568,7 @@ com.bitbill.www.common.utils.StringUtils -> com.bitbill.www.common.d.k:
     boolean isZero(java.lang.String) -> p
     java.util.List removeDuplicateList(java.util.List) -> c
     boolean isNone(java.lang.String) -> q
+    boolean equals(java.util.Locale,java.util.Locale) -> a
     void <clinit>() -> <clinit>
 com.bitbill.www.common.utils.UIHelper -> com.bitbill.www.common.d.l:
     void openBrower(android.content.Context,java.lang.String) -> a
@@ -28401,16 +28428,18 @@ com.bitbill.www.di.component.ActivityComponent -> com.bitbill.www.a.a.a:
     void inject(com.bitbill.www.ui.main.send.SendAmountActivity) -> a
 com.bitbill.www.di.component.ApplicationComponent -> com.bitbill.www.a.a.b:
     void inject(com.bitbill.www.app.BitbillApp) -> a
-    com.bitbill.www.model.app.AppModel getAppModel() -> a
-    com.bitbill.www.model.wallet.WalletModel getWalletModel() -> b
-    com.bitbill.www.model.contact.ContactModel getContactModel() -> c
-    com.bitbill.www.model.address.AddressModel getAddressModel() -> d
-    com.bitbill.www.model.transaction.TxModel getTxModel() -> e
-    io.socket.client.Socket getSocket() -> f
+    io.reactivex.disposables.CompositeDisposable getDisposable() -> a
+    com.bitbill.www.common.rx.SchedulerProvider getScheduler() -> b
+    com.bitbill.www.model.app.AppModel getAppModel() -> c
+    com.bitbill.www.model.wallet.WalletModel getWalletModel() -> d
+    com.bitbill.www.model.contact.ContactModel getContactModel() -> e
+    com.bitbill.www.model.address.AddressModel getAddressModel() -> f
+    com.bitbill.www.model.transaction.TxModel getTxModel() -> g
+    io.socket.client.Socket getSocket() -> h
 com.bitbill.www.di.component.DaggerActivityComponent -> com.bitbill.www.a.a.c:
     javax.inject.Provider getTxModelProvider -> a
-    javax.inject.Provider provideSchedulerProvider -> b
-    javax.inject.Provider provideCompositeDisposableProvider -> c
+    javax.inject.Provider getSchedulerProvider -> b
+    javax.inject.Provider getDisposableProvider -> c
     javax.inject.Provider mainPresenterProvider -> d
     javax.inject.Provider provideMainPresenterProvider -> e
     javax.inject.Provider getWalletModelProvider -> f
@@ -28435,58 +28464,57 @@ com.bitbill.www.di.component.DaggerActivityComponent -> com.bitbill.www.a.a.c:
     javax.inject.Provider importWalletPresenterProvider -> y
     javax.inject.Provider provideImportWalletPresenterProvider -> z
     com.bitbill.www.di.component.ApplicationComponent applicationComponent -> A
-    com.bitbill.www.di.module.ActivityModule activityModule -> B
-    javax.inject.Provider backupWalletConfirmPresenterProvider -> C
-    javax.inject.Provider provideBackupWalletConfirmPresenterProvider -> D
-    javax.inject.Provider shortCutSettingPresenterProvider -> E
-    javax.inject.Provider provideShortCutSettingPresenterProvider -> F
-    javax.inject.Provider guidePresenterProvider -> G
-    javax.inject.Provider provideGuidePresenterProvider -> H
-    javax.inject.Provider splashPresenterProvider -> I
-    javax.inject.Provider provideSplashPresenterProvider -> J
-    javax.inject.Provider getExchangeRatePresenterProvider -> K
-    javax.inject.Provider provideGetExchangeRatePresenterProvider -> L
-    javax.inject.Provider receivePresenterProvider -> M
-    javax.inject.Provider provideReceivePresenterProvider -> N
-    javax.inject.Provider createWalletIdPresenterProvider -> O
-    javax.inject.Provider provideCreateWalletIdPresenterProvider -> P
-    javax.inject.Provider btcReceivePresenterProvider -> Q
-    javax.inject.Provider provideBtcReceivePresenterProvider -> R
-    javax.inject.Provider btcAddressPresenterProvider -> S
-    javax.inject.Provider provideBtcAddressPresenterProvider -> T
-    javax.inject.Provider sendConfirmPresenterProvider -> U
-    javax.inject.Provider provideSendConfrimPresenterProvider -> V
-    javax.inject.Provider getContactModelProvider -> W
-    javax.inject.Provider btcSendPresenterProvider -> X
-    javax.inject.Provider provideBtcSendPresenterProvider -> Y
-    javax.inject.Provider validateAddressPresenterProvider -> Z
-    javax.inject.Provider provideGetLastAddressPresenterProvider -> aa
-    javax.inject.Provider scanPayPresenterProvider -> ab
-    javax.inject.Provider provideScanPayPresenterProvider -> ac
-    javax.inject.Provider addContactByIdPresenterProvider -> ad
-    javax.inject.Provider provideAddContactByIdPresenterProvider -> ae
-    javax.inject.Provider searchContactResultPresenterProvider -> af
-    javax.inject.Provider provideSearchContactResultPresenterProvider -> ag
-    javax.inject.Provider contactPresenterProvider -> ah
-    javax.inject.Provider provideContactPresenterProvider -> ai
-    javax.inject.Provider addContactByAddressPresenterProvider -> aj
-    javax.inject.Provider provideAddContactByAddressPresenterProvider -> ak
-    javax.inject.Provider walletDetailPresenterProvider -> al
-    javax.inject.Provider provideWalletDetailPresenterProvider -> am
-    javax.inject.Provider contactSettingPresenterProvider -> an
-    javax.inject.Provider provideContactSettingPresenterProvider -> ao
-    javax.inject.Provider editContactPresenterProvider -> ap
-    javax.inject.Provider provideEditContactPresenterProvider -> aq
-    javax.inject.Provider systemSettingPresenterProvider -> ar
-    javax.inject.Provider provideSystemSettingPresenterProvider -> as
-    javax.inject.Provider walletAddressPresenterProvider -> at
-    javax.inject.Provider provideWalletAddressPresenterProvider -> au
-    javax.inject.Provider transferDetailPresenterProvider -> av
-    javax.inject.Provider provideTransferDetailPresenterProvider -> aw
-    javax.inject.Provider downloadPresenterProvider -> ax
-    javax.inject.Provider provideDownloadPresenterProvider -> ay
-    javax.inject.Provider feedbackPresenterProvider -> az
-    javax.inject.Provider provideFeedbackPresenterProvider -> aA
+    javax.inject.Provider backupWalletConfirmPresenterProvider -> B
+    javax.inject.Provider provideBackupWalletConfirmPresenterProvider -> C
+    javax.inject.Provider shortCutSettingPresenterProvider -> D
+    javax.inject.Provider provideShortCutSettingPresenterProvider -> E
+    javax.inject.Provider guidePresenterProvider -> F
+    javax.inject.Provider provideGuidePresenterProvider -> G
+    javax.inject.Provider splashPresenterProvider -> H
+    javax.inject.Provider provideSplashPresenterProvider -> I
+    javax.inject.Provider getExchangeRatePresenterProvider -> J
+    javax.inject.Provider provideGetExchangeRatePresenterProvider -> K
+    javax.inject.Provider receivePresenterProvider -> L
+    javax.inject.Provider provideReceivePresenterProvider -> M
+    javax.inject.Provider createWalletIdPresenterProvider -> N
+    javax.inject.Provider provideCreateWalletIdPresenterProvider -> O
+    javax.inject.Provider btcReceivePresenterProvider -> P
+    javax.inject.Provider provideBtcReceivePresenterProvider -> Q
+    javax.inject.Provider btcAddressPresenterProvider -> R
+    javax.inject.Provider provideBtcAddressPresenterProvider -> S
+    javax.inject.Provider sendConfirmPresenterProvider -> T
+    javax.inject.Provider provideSendConfrimPresenterProvider -> U
+    javax.inject.Provider getContactModelProvider -> V
+    javax.inject.Provider btcSendPresenterProvider -> W
+    javax.inject.Provider provideBtcSendPresenterProvider -> X
+    javax.inject.Provider validateAddressPresenterProvider -> Y
+    javax.inject.Provider provideGetLastAddressPresenterProvider -> Z
+    javax.inject.Provider scanPayPresenterProvider -> aa
+    javax.inject.Provider provideScanPayPresenterProvider -> ab
+    javax.inject.Provider addContactByIdPresenterProvider -> ac
+    javax.inject.Provider provideAddContactByIdPresenterProvider -> ad
+    javax.inject.Provider searchContactResultPresenterProvider -> ae
+    javax.inject.Provider provideSearchContactResultPresenterProvider -> af
+    javax.inject.Provider contactPresenterProvider -> ag
+    javax.inject.Provider provideContactPresenterProvider -> ah
+    javax.inject.Provider addContactByAddressPresenterProvider -> ai
+    javax.inject.Provider provideAddContactByAddressPresenterProvider -> aj
+    javax.inject.Provider walletDetailPresenterProvider -> ak
+    javax.inject.Provider provideWalletDetailPresenterProvider -> al
+    javax.inject.Provider contactSettingPresenterProvider -> am
+    javax.inject.Provider provideContactSettingPresenterProvider -> an
+    javax.inject.Provider editContactPresenterProvider -> ao
+    javax.inject.Provider provideEditContactPresenterProvider -> ap
+    javax.inject.Provider systemSettingPresenterProvider -> aq
+    javax.inject.Provider provideSystemSettingPresenterProvider -> ar
+    javax.inject.Provider walletAddressPresenterProvider -> as
+    javax.inject.Provider provideWalletAddressPresenterProvider -> at
+    javax.inject.Provider transferDetailPresenterProvider -> au
+    javax.inject.Provider provideTransferDetailPresenterProvider -> av
+    javax.inject.Provider downloadPresenterProvider -> aw
+    javax.inject.Provider provideDownloadPresenterProvider -> ax
+    javax.inject.Provider feedbackPresenterProvider -> ay
+    javax.inject.Provider provideFeedbackPresenterProvider -> az
     void <init>(com.bitbill.www.di.component.DaggerActivityComponent$Builder) -> <init>
     com.bitbill.www.di.component.DaggerActivityComponent$Builder builder() -> a
     com.bitbill.www.ui.wallet.backup.BackupWalletPresenter getBackupWalletPresenterOfWalletModelAndBackupWalletMvpView() -> b
@@ -28584,12 +28612,22 @@ com.bitbill.www.di.component.DaggerActivityComponent$com_bitbill_www_di_componen
     void <init>(com.bitbill.www.di.component.ApplicationComponent) -> <init>
     com.bitbill.www.model.contact.ContactModel get() -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.component.DaggerActivityComponent$com_bitbill_www_di_component_ApplicationComponent_getTxModel -> com.bitbill.www.a.a.c$e:
+com.bitbill.www.di.component.DaggerActivityComponent$com_bitbill_www_di_component_ApplicationComponent_getDisposable -> com.bitbill.www.a.a.c$e:
+    com.bitbill.www.di.component.ApplicationComponent applicationComponent -> a
+    void <init>(com.bitbill.www.di.component.ApplicationComponent) -> <init>
+    io.reactivex.disposables.CompositeDisposable get() -> a
+    java.lang.Object get() -> get
+com.bitbill.www.di.component.DaggerActivityComponent$com_bitbill_www_di_component_ApplicationComponent_getScheduler -> com.bitbill.www.a.a.c$f:
+    com.bitbill.www.di.component.ApplicationComponent applicationComponent -> a
+    void <init>(com.bitbill.www.di.component.ApplicationComponent) -> <init>
+    com.bitbill.www.common.rx.SchedulerProvider get() -> a
+    java.lang.Object get() -> get
+com.bitbill.www.di.component.DaggerActivityComponent$com_bitbill_www_di_component_ApplicationComponent_getTxModel -> com.bitbill.www.a.a.c$g:
     com.bitbill.www.di.component.ApplicationComponent applicationComponent -> a
     void <init>(com.bitbill.www.di.component.ApplicationComponent) -> <init>
     com.bitbill.www.model.transaction.TxModel get() -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.component.DaggerActivityComponent$com_bitbill_www_di_component_ApplicationComponent_getWalletModel -> com.bitbill.www.a.a.c$f:
+com.bitbill.www.di.component.DaggerActivityComponent$com_bitbill_www_di_component_ApplicationComponent_getWalletModel -> com.bitbill.www.a.a.c$h:
     com.bitbill.www.di.component.ApplicationComponent applicationComponent -> a
     void <init>(com.bitbill.www.di.component.ApplicationComponent) -> <init>
     com.bitbill.www.model.wallet.WalletModel get() -> a
@@ -28641,15 +28679,17 @@ com.bitbill.www.di.component.DaggerApplicationComponent -> com.bitbill.www.a.a.d
     javax.inject.Provider socketHelperProvider -> R
     javax.inject.Provider provideSocketIoProvider -> S
     void <init>(com.bitbill.www.di.component.DaggerApplicationComponent$Builder) -> <init>
-    com.bitbill.www.di.component.DaggerApplicationComponent$Builder builder() -> g
+    com.bitbill.www.di.component.DaggerApplicationComponent$Builder builder() -> i
     void initialize(com.bitbill.www.di.component.DaggerApplicationComponent$Builder) -> a
     void inject(com.bitbill.www.app.BitbillApp) -> a
-    com.bitbill.www.model.app.AppModel getAppModel() -> a
-    com.bitbill.www.model.wallet.WalletModel getWalletModel() -> b
-    com.bitbill.www.model.contact.ContactModel getContactModel() -> c
-    com.bitbill.www.model.address.AddressModel getAddressModel() -> d
-    com.bitbill.www.model.transaction.TxModel getTxModel() -> e
-    io.socket.client.Socket getSocket() -> f
+    io.reactivex.disposables.CompositeDisposable getDisposable() -> a
+    com.bitbill.www.common.rx.SchedulerProvider getScheduler() -> b
+    com.bitbill.www.model.app.AppModel getAppModel() -> c
+    com.bitbill.www.model.wallet.WalletModel getWalletModel() -> d
+    com.bitbill.www.model.contact.ContactModel getContactModel() -> e
+    com.bitbill.www.model.address.AddressModel getAddressModel() -> f
+    com.bitbill.www.model.transaction.TxModel getTxModel() -> g
+    io.socket.client.Socket getSocket() -> h
     com.bitbill.www.app.BitbillApp injectBitbillApp(com.bitbill.www.app.BitbillApp) -> b
     void <init>(com.bitbill.www.di.component.DaggerApplicationComponent$Builder,com.bitbill.www.di.component.DaggerApplicationComponent$1) -> <init>
 com.bitbill.www.di.component.DaggerApplicationComponent$1 -> com.bitbill.www.a.a.d$1:
@@ -28666,7 +28706,9 @@ com.bitbill.www.di.component.DaggerServiceComponent -> com.bitbill.www.a.a.e:
     com.bitbill.www.di.component.DaggerServiceComponent$Builder builder() -> a
     void initialize(com.bitbill.www.di.component.DaggerServiceComponent$Builder) -> a
     void inject(com.bitbill.www.service.SocketServiceProvider) -> a
+    void inject(com.bitbill.www.service.SyncService) -> a
     com.bitbill.www.service.SocketServiceProvider injectSocketServiceProvider(com.bitbill.www.service.SocketServiceProvider) -> b
+    com.bitbill.www.service.SyncService injectSyncService(com.bitbill.www.service.SyncService) -> b
     void <init>(com.bitbill.www.di.component.DaggerServiceComponent$Builder,com.bitbill.www.di.component.DaggerServiceComponent$1) -> <init>
 com.bitbill.www.di.component.DaggerServiceComponent$1 -> com.bitbill.www.a.a.e$1:
 com.bitbill.www.di.component.DaggerServiceComponent$Builder -> com.bitbill.www.a.a.e$a:
@@ -28678,11 +28720,10 @@ com.bitbill.www.di.component.DaggerServiceComponent$Builder -> com.bitbill.www.a
     com.bitbill.www.di.component.ApplicationComponent access$100(com.bitbill.www.di.component.DaggerServiceComponent$Builder) -> a
 com.bitbill.www.di.component.ServiceComponent -> com.bitbill.www.a.a.f:
     void inject(com.bitbill.www.service.SocketServiceProvider) -> a
+    void inject(com.bitbill.www.service.SyncService) -> a
 com.bitbill.www.di.module.ActivityModule -> com.bitbill.www.a.b.a:
     android.support.v7.app.AppCompatActivity mActivity -> a
     void <init>(android.support.v7.app.AppCompatActivity) -> <init>
-    io.reactivex.disposables.CompositeDisposable provideCompositeDisposable() -> a
-    com.bitbill.www.common.rx.SchedulerProvider provideSchedulerProvider() -> b
     com.bitbill.www.ui.splash.SplashMvpPresenter provideSplashPresenter(com.bitbill.www.ui.splash.SplashPresenter) -> a
     com.bitbill.www.ui.guide.GuideMvpPresenter provideGuidePresenter(com.bitbill.www.ui.guide.GuidePresenter) -> a
     com.bitbill.www.ui.main.MainMvpPresenter provideMainPresenter(com.bitbill.www.ui.main.MainPresenter) -> a
@@ -28774,219 +28815,207 @@ com.bitbill.www.di.module.ActivityModule_ProvideBtcSendPresenterFactory -> com.b
     com.bitbill.www.ui.main.send.BtcSendMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideCompositeDisposableFactory -> com.bitbill.www.a.b.j:
-    com.bitbill.www.di.module.ActivityModule module -> a
-    void <init>(com.bitbill.www.di.module.ActivityModule) -> <init>
-    io.reactivex.disposables.CompositeDisposable get() -> a
-    dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule) -> a
-    io.reactivex.disposables.CompositeDisposable proxyProvideCompositeDisposable(com.bitbill.www.di.module.ActivityModule) -> b
-    java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideContactPresenterFactory -> com.bitbill.www.a.b.k:
+com.bitbill.www.di.module.ActivityModule_ProvideContactPresenterFactory -> com.bitbill.www.a.b.j:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.contact.ContactMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideContactSettingPresenterFactory -> com.bitbill.www.a.b.l:
+com.bitbill.www.di.module.ActivityModule_ProvideContactSettingPresenterFactory -> com.bitbill.www.a.b.k:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.my.ContactSettingMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideCreateWalletIdPresenterFactory -> com.bitbill.www.a.b.m:
+com.bitbill.www.di.module.ActivityModule_ProvideCreateWalletIdPresenterFactory -> com.bitbill.www.a.b.l:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.wallet.init.CreateWalletIdMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideDownloadPresenterFactory -> com.bitbill.www.a.b.n:
+com.bitbill.www.di.module.ActivityModule_ProvideDownloadPresenterFactory -> com.bitbill.www.a.b.m:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.presenter.DownloadMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideEditContactPresenterFactory -> com.bitbill.www.a.b.o:
+com.bitbill.www.di.module.ActivityModule_ProvideEditContactPresenterFactory -> com.bitbill.www.a.b.n:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.contact.EditContactMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideFeedbackPresenterFactory -> com.bitbill.www.a.b.p:
+com.bitbill.www.di.module.ActivityModule_ProvideFeedbackPresenterFactory -> com.bitbill.www.a.b.o:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.my.FeedbackMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideGetCacheVersionPresenterFactory -> com.bitbill.www.a.b.q:
+com.bitbill.www.di.module.ActivityModule_ProvideGetCacheVersionPresenterFactory -> com.bitbill.www.a.b.p:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideGetExchangeRatePresenterFactory -> com.bitbill.www.a.b.r:
+com.bitbill.www.di.module.ActivityModule_ProvideGetExchangeRatePresenterFactory -> com.bitbill.www.a.b.q:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideGetLastAddressPresenterFactory -> com.bitbill.www.a.b.s:
+com.bitbill.www.di.module.ActivityModule_ProvideGetLastAddressPresenterFactory -> com.bitbill.www.a.b.r:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.presenter.ValidateAddressMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideGuidePresenterFactory -> com.bitbill.www.a.b.t:
+com.bitbill.www.di.module.ActivityModule_ProvideGuidePresenterFactory -> com.bitbill.www.a.b.s:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.guide.GuideMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideImportWalletPresenterFactory -> com.bitbill.www.a.b.u:
+com.bitbill.www.di.module.ActivityModule_ProvideImportWalletPresenterFactory -> com.bitbill.www.a.b.t:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.wallet.importing.ImportWalletMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideInitWalletPresenterFactory -> com.bitbill.www.a.b.v:
+com.bitbill.www.di.module.ActivityModule_ProvideInitWalletPresenterFactory -> com.bitbill.www.a.b.u:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.wallet.init.InitWalletMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideMainPresenterFactory -> com.bitbill.www.a.b.w:
+com.bitbill.www.di.module.ActivityModule_ProvideMainPresenterFactory -> com.bitbill.www.a.b.v:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.MainMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideParseTxInfoPresenterFactory -> com.bitbill.www.a.b.x:
+com.bitbill.www.di.module.ActivityModule_ProvideParseTxInfoPresenterFactory -> com.bitbill.www.a.b.w:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideReceivePresenterFactory -> com.bitbill.www.a.b.y:
+com.bitbill.www.di.module.ActivityModule_ProvideReceivePresenterFactory -> com.bitbill.www.a.b.x:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.receive.ReceiveMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideScanPayPresenterFactory -> com.bitbill.www.a.b.z:
+com.bitbill.www.di.module.ActivityModule_ProvideScanPayPresenterFactory -> com.bitbill.www.a.b.y:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.receive.ScanPayMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideSchedulerProviderFactory -> com.bitbill.www.a.b.aa:
-    com.bitbill.www.di.module.ActivityModule module -> a
-    void <init>(com.bitbill.www.di.module.ActivityModule) -> <init>
-    com.bitbill.www.common.rx.SchedulerProvider get() -> a
-    dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule) -> a
-    com.bitbill.www.common.rx.SchedulerProvider proxyProvideSchedulerProvider(com.bitbill.www.di.module.ActivityModule) -> b
-    java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideSearchContactResultPresenterFactory -> com.bitbill.www.a.b.ab:
+com.bitbill.www.di.module.ActivityModule_ProvideSearchContactResultPresenterFactory -> com.bitbill.www.a.b.z:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.contact.SearchContactResultMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideSendConfrimPresenterFactory -> com.bitbill.www.a.b.ac:
+com.bitbill.www.di.module.ActivityModule_ProvideSendConfrimPresenterFactory -> com.bitbill.www.a.b.aa:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.send.SendConfirmMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideShortCutSettingPresenterFactory -> com.bitbill.www.a.b.ad:
+com.bitbill.www.di.module.ActivityModule_ProvideShortCutSettingPresenterFactory -> com.bitbill.www.a.b.ab:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.my.ShortCutSettingMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideSplashPresenterFactory -> com.bitbill.www.a.b.ae:
+com.bitbill.www.di.module.ActivityModule_ProvideSplashPresenterFactory -> com.bitbill.www.a.b.ac:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.splash.SplashMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideSyncAddressPresenterFactory -> com.bitbill.www.a.b.af:
+com.bitbill.www.di.module.ActivityModule_ProvideSyncAddressPresenterFactory -> com.bitbill.www.a.b.ad:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.presenter.SyncAddressMvpPresentder get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideSystemSettingPresenterFactory -> com.bitbill.www.a.b.ag:
+com.bitbill.www.di.module.ActivityModule_ProvideSystemSettingPresenterFactory -> com.bitbill.www.a.b.ae:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.my.SystemSettingMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideTransferDetailPresenterFactory -> com.bitbill.www.a.b.ah:
+com.bitbill.www.di.module.ActivityModule_ProvideTransferDetailPresenterFactory -> com.bitbill.www.a.b.af:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.wallet.info.transfer.TransferDetailMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideUpdatePresenterFactory -> com.bitbill.www.a.b.ai:
+com.bitbill.www.di.module.ActivityModule_ProvideUpdatePresenterFactory -> com.bitbill.www.a.b.ag:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.presenter.UpdateMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideWalletAddressPresenterFactory -> com.bitbill.www.a.b.aj:
+com.bitbill.www.di.module.ActivityModule_ProvideWalletAddressPresenterFactory -> com.bitbill.www.a.b.ah:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.my.WalletAddressMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideWalletDetailPresenterFactory -> com.bitbill.www.a.b.ak:
+com.bitbill.www.di.module.ActivityModule_ProvideWalletDetailPresenterFactory -> com.bitbill.www.a.b.ai:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.ui.main.my.WalletDetailMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ActivityModule_ProvideWalletPresenterFactory -> com.bitbill.www.a.b.al:
+com.bitbill.www.di.module.ActivityModule_ProvideWalletPresenterFactory -> com.bitbill.www.a.b.aj:
     com.bitbill.www.di.module.ActivityModule module -> a
     javax.inject.Provider presenterProvider -> b
     void <init>(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.presenter.WalletMvpPresenter get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ActivityModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule -> com.bitbill.www.a.b.am:
+com.bitbill.www.di.module.ApplicationModule -> com.bitbill.www.a.b.ak:
     android.app.Application mApplication -> a
     void <init>(android.app.Application) -> <init>
     android.content.Context provideContext() -> a
-    java.lang.String provideDatabaseName() -> b
+    io.reactivex.disposables.CompositeDisposable provideCompositeDisposable() -> b
+    com.bitbill.www.common.rx.SchedulerProvider provideSchedulerProvider() -> c
+    java.lang.String provideDatabaseName() -> d
     com.bitbill.model.db.dao.DaoSession provideDaoSession(com.bitbill.www.common.base.model.db.DbOpenHelper) -> a
-    java.lang.String provideApiKey() -> c
-    java.lang.String provideBaseUrl() -> d
-    java.lang.String provideSocketUrl() -> e
-    java.lang.String provideAppPreferenceName() -> f
+    java.lang.String provideApiKey() -> e
+    java.lang.String provideBaseUrl() -> f
+    java.lang.String provideSocketUrl() -> g
+    java.lang.String provideAppPreferenceName() -> h
     com.bitbill.www.model.app.AppModel provideAppModuleManager(com.bitbill.www.model.app.AppModelManager) -> a
     com.bitbill.www.model.app.prefs.AppPreferences provideAppPreferencesHelper(com.bitbill.www.model.app.prefs.AppPreferencesHelper) -> a
     com.bitbill.www.model.app.network.AppApi provideAppApiHelper(com.bitbill.www.model.app.network.AppApiHelper) -> a
@@ -29005,123 +29034,133 @@ com.bitbill.www.di.module.ApplicationModule -> com.bitbill.www.a.b.am:
     com.bitbill.www.model.transaction.TxModel provideTxModuleManager(com.bitbill.www.model.transaction.TxModelManager) -> a
     com.bitbill.www.model.transaction.db.TxDb provideTxDbHelper(com.bitbill.www.model.transaction.db.TxDbHelper) -> a
     com.bitbill.www.model.transaction.network.TxApi provideTxApiHelper(com.bitbill.www.model.transaction.network.TxApiHelper) -> a
-com.bitbill.www.di.module.ApplicationModule$1 -> com.bitbill.www.a.b.am$1:
+com.bitbill.www.di.module.ApplicationModule$1 -> com.bitbill.www.a.b.ak$1:
     com.bitbill.www.di.module.ApplicationModule this$0 -> a
     void <init>(com.bitbill.www.di.module.ApplicationModule) -> <init>
     boolean verify(java.lang.String,javax.net.ssl.SSLSession) -> verify
-com.bitbill.www.di.module.ApplicationModule_ProvideAddressApiHelperFactory -> com.bitbill.www.a.b.an:
+com.bitbill.www.di.module.ApplicationModule_ProvideAddressApiHelperFactory -> com.bitbill.www.a.b.al:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider addressApiHelperProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.address.network.AddressApi get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideAddressDbHelperFactory -> com.bitbill.www.a.b.ao:
+com.bitbill.www.di.module.ApplicationModule_ProvideAddressDbHelperFactory -> com.bitbill.www.a.b.am:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider addressDbHelperProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.address.db.AddressDb get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideAddressModuleManagerFactory -> com.bitbill.www.a.b.ap:
+com.bitbill.www.di.module.ApplicationModule_ProvideAddressModuleManagerFactory -> com.bitbill.www.a.b.an:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider addressModelManagerProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.address.AddressModel get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideApiKeyFactory -> com.bitbill.www.a.b.aq:
+com.bitbill.www.di.module.ApplicationModule_ProvideApiKeyFactory -> com.bitbill.www.a.b.ao:
     com.bitbill.www.di.module.ApplicationModule module -> a
     void <init>(com.bitbill.www.di.module.ApplicationModule) -> <init>
     java.lang.String get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideAppApiHelperFactory -> com.bitbill.www.a.b.ar:
+com.bitbill.www.di.module.ApplicationModule_ProvideAppApiHelperFactory -> com.bitbill.www.a.b.ap:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider appApiHelperProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.app.network.AppApi get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideAppModuleManagerFactory -> com.bitbill.www.a.b.as:
+com.bitbill.www.di.module.ApplicationModule_ProvideAppModuleManagerFactory -> com.bitbill.www.a.b.aq:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider appModelManagerProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.app.AppModel get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideAppPreferenceNameFactory -> com.bitbill.www.a.b.at:
+com.bitbill.www.di.module.ApplicationModule_ProvideAppPreferenceNameFactory -> com.bitbill.www.a.b.ar:
     com.bitbill.www.di.module.ApplicationModule module -> a
     void <init>(com.bitbill.www.di.module.ApplicationModule) -> <init>
     java.lang.String get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideAppPreferencesHelperFactory -> com.bitbill.www.a.b.au:
+com.bitbill.www.di.module.ApplicationModule_ProvideAppPreferencesHelperFactory -> com.bitbill.www.a.b.as:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider appPreferencesHelperProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.app.prefs.AppPreferences get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideBaseUrlFactory -> com.bitbill.www.a.b.av:
+com.bitbill.www.di.module.ApplicationModule_ProvideBaseUrlFactory -> com.bitbill.www.a.b.at:
     com.bitbill.www.di.module.ApplicationModule module -> a
     void <init>(com.bitbill.www.di.module.ApplicationModule) -> <init>
     java.lang.String get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideContactApiHelperFactory -> com.bitbill.www.a.b.aw:
+com.bitbill.www.di.module.ApplicationModule_ProvideCompositeDisposableFactory -> com.bitbill.www.a.b.au:
+    com.bitbill.www.di.module.ApplicationModule module -> a
+    io.reactivex.disposables.CompositeDisposable get() -> a
+    io.reactivex.disposables.CompositeDisposable proxyProvideCompositeDisposable(com.bitbill.www.di.module.ApplicationModule) -> a
+    java.lang.Object get() -> get
+com.bitbill.www.di.module.ApplicationModule_ProvideContactApiHelperFactory -> com.bitbill.www.a.b.av:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider contactApiHelperProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.contact.network.ContactApi get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideContactDbHelperFactory -> com.bitbill.www.a.b.ax:
+com.bitbill.www.di.module.ApplicationModule_ProvideContactDbHelperFactory -> com.bitbill.www.a.b.aw:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider contactDbHelperProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.contact.db.ContactDb get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideContactModuleManagerFactory -> com.bitbill.www.a.b.ay:
+com.bitbill.www.di.module.ApplicationModule_ProvideContactModuleManagerFactory -> com.bitbill.www.a.b.ax:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider contactModelManagerProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.model.contact.ContactModel get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideContextFactory -> com.bitbill.www.a.b.az:
+com.bitbill.www.di.module.ApplicationModule_ProvideContextFactory -> com.bitbill.www.a.b.ay:
     com.bitbill.www.di.module.ApplicationModule module -> a
     void <init>(com.bitbill.www.di.module.ApplicationModule) -> <init>
     android.content.Context get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideDaoSessionFactory -> com.bitbill.www.a.b.ba:
+com.bitbill.www.di.module.ApplicationModule_ProvideDaoSessionFactory -> com.bitbill.www.a.b.az:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider dbOpenHelperProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.model.db.dao.DaoSession get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideDatabaseNameFactory -> com.bitbill.www.a.b.bb:
+com.bitbill.www.di.module.ApplicationModule_ProvideDatabaseNameFactory -> com.bitbill.www.a.b.ba:
     com.bitbill.www.di.module.ApplicationModule module -> a
     void <init>(com.bitbill.www.di.module.ApplicationModule) -> <init>
     java.lang.String get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideOkhttpClientFactory -> com.bitbill.www.a.b.bc:
+com.bitbill.www.di.module.ApplicationModule_ProvideOkhttpClientFactory -> com.bitbill.www.a.b.bb:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider contextProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     okhttp3.OkHttpClient get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
     java.lang.Object get() -> get
-com.bitbill.www.di.module.ApplicationModule_ProvideProtectedApiHeaderFactory -> com.bitbill.www.a.b.bd:
+com.bitbill.www.di.module.ApplicationModule_ProvideProtectedApiHeaderFactory -> com.bitbill.www.a.b.bc:
     com.bitbill.www.di.module.ApplicationModule module -> a
     javax.inject.Provider apiKeyProvider -> b
     void <init>(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> <init>
     com.bitbill.www.common.base.model.network.api.ApiHeader$ProtectedApiHeader get() -> a
     dagger.internal.Factory create(com.bitbill.www.di.module.ApplicationModule,javax.inject.Provider) -> a
+    java.lang.Object get() -> get
+com.bitbill.www.di.module.ApplicationModule_ProvideSchedulerProviderFactory -> com.bitbill.www.a.b.bd:
+    com.bitbill.www.di.module.ApplicationModule module -> a
+    com.bitbill.www.common.rx.SchedulerProvider get() -> a
+    com.bitbill.www.common.rx.SchedulerProvider proxyProvideSchedulerProvider(com.bitbill.www.di.module.ApplicationModule) -> a
     java.lang.Object get() -> get
 com.bitbill.www.di.module.ApplicationModule_ProvideSocketIoFactory -> com.bitbill.www.a.b.be:
     com.bitbill.www.di.module.ApplicationModule module -> a
@@ -29859,6 +29898,10 @@ com.bitbill.www.model.eventbus.PwdEditEvent -> com.bitbill.www.model.eventbus.Pw
     void setS(java.lang.String) -> setS
 com.bitbill.www.model.eventbus.ReceiveAmountEvent -> com.bitbill.www.model.eventbus.ReceiveAmountEvent:
     void <init>() -> <init>
+com.bitbill.www.model.eventbus.RefreshExchangeRateEvent -> com.bitbill.www.model.eventbus.RefreshExchangeRateEvent:
+    double mCnyrate -> mCnyrate
+    double mUsdrate -> mUsdrate
+    void <init>(double,double) -> <init>
 com.bitbill.www.model.eventbus.RegisterEvent -> com.bitbill.www.model.eventbus.RegisterEvent:
     void <init>() -> <init>
 com.bitbill.www.model.eventbus.SendSuccessEvent -> com.bitbill.www.model.eventbus.SendSuccessEvent:
@@ -30773,7 +30816,6 @@ com.bitbill.www.service.SocketServiceProvider -> com.bitbill.www.service.SocketS
     void initSocket() -> initSocket
     int onStartCommand(android.content.Intent,int,int) -> onStartCommand
     void onSocketServerStateEvent(com.bitbill.www.model.eventbus.RegisterEvent) -> onSocketServerStateEvent
-    void onAppBackgroundEvent(com.bitbill.www.model.eventbus.AppBackgroundEvent) -> onAppBackgroundEvent
     void registerWallet(com.bitbill.www.model.wallet.network.socket.Register) -> registerWallet
     void connectConnection() -> connectConnection
     void disconnectConnection() -> disconnectConnection
@@ -30814,13 +30856,51 @@ com.bitbill.www.service.SocketServiceProvider$LocalBinder -> com.bitbill.www.ser
     void <init>(com.bitbill.www.service.SocketServiceProvider) -> <init>
     com.bitbill.www.service.SocketServiceProvider getService() -> getService
 com.bitbill.www.service.SocketServiceProvider_MembersInjector -> com.bitbill.www.service.SocketServiceProvider_MembersInjector:
+    javax.inject.Provider mCompositeDisposableProvider -> mCompositeDisposableProvider
+    javax.inject.Provider mSchedulerProvider -> mSchedulerProvider
     javax.inject.Provider mSocketProvider -> mSocketProvider
     javax.inject.Provider mAppModelProvider -> mAppModelProvider
-    void <init>(javax.inject.Provider,javax.inject.Provider) -> <init>
-    dagger.MembersInjector create(javax.inject.Provider,javax.inject.Provider) -> create
+    void <init>(javax.inject.Provider,javax.inject.Provider,javax.inject.Provider,javax.inject.Provider) -> <init>
+    dagger.MembersInjector create(javax.inject.Provider,javax.inject.Provider,javax.inject.Provider,javax.inject.Provider) -> create
     void injectMembers(com.bitbill.www.service.SocketServiceProvider) -> injectMembers
     void injectMSocket(com.bitbill.www.service.SocketServiceProvider,io.socket.client.Socket) -> injectMSocket
     void injectMAppModel(com.bitbill.www.service.SocketServiceProvider,com.bitbill.www.model.app.AppModel) -> injectMAppModel
+    void injectMembers(java.lang.Object) -> injectMembers
+com.bitbill.www.service.SyncService -> com.bitbill.www.service.SyncService:
+    java.lang.String TAG -> TAG
+    com.bitbill.www.model.app.AppModel mAppModel -> mAppModel
+    boolean isAppBackground -> isAppBackground
+    void <init>() -> <init>
+    void start(android.content.Context) -> start
+    void onCreate() -> onCreate
+    void refreshExchangeRate() -> refreshExchangeRate
+    void onAppBackgroundEvent(com.bitbill.www.model.eventbus.AppBackgroundEvent) -> onAppBackgroundEvent
+    android.os.IBinder onBind(android.content.Intent) -> onBind
+    void onDestroy() -> onDestroy
+    io.reactivex.ObservableSource lambda$refreshExchangeRate$1$SyncService(java.lang.Long) -> lambda$refreshExchangeRate$1$SyncService
+    boolean lambda$refreshExchangeRate$0$SyncService(java.lang.Long) -> lambda$refreshExchangeRate$0$SyncService
+com.bitbill.www.service.SyncService$$Lambda$0 -> com.bitbill.www.service.SyncService$$Lambda$0:
+    com.bitbill.www.service.SyncService arg$1 -> arg$1
+    void <init>(com.bitbill.www.service.SyncService) -> <init>
+    boolean test(java.lang.Object) -> test
+com.bitbill.www.service.SyncService$$Lambda$1 -> com.bitbill.www.service.SyncService$$Lambda$1:
+    com.bitbill.www.service.SyncService arg$1 -> arg$1
+    void <init>(com.bitbill.www.service.SyncService) -> <init>
+    java.lang.Object apply(java.lang.Object) -> apply
+com.bitbill.www.service.SyncService$1 -> com.bitbill.www.service.SyncService$1:
+    com.bitbill.www.service.SyncService this$0 -> this$0
+    void <init>(com.bitbill.www.service.SyncService) -> <init>
+    void onNext(com.bitbill.www.common.base.model.network.api.ApiResponse) -> onNext
+    void onError(java.lang.Throwable) -> onError
+    void onNext(java.lang.Object) -> onNext
+com.bitbill.www.service.SyncService_MembersInjector -> com.bitbill.www.service.SyncService_MembersInjector:
+    javax.inject.Provider mCompositeDisposableProvider -> mCompositeDisposableProvider
+    javax.inject.Provider mSchedulerProvider -> mSchedulerProvider
+    javax.inject.Provider mAppModelProvider -> mAppModelProvider
+    void <init>(javax.inject.Provider,javax.inject.Provider,javax.inject.Provider) -> <init>
+    dagger.MembersInjector create(javax.inject.Provider,javax.inject.Provider,javax.inject.Provider) -> create
+    void injectMembers(com.bitbill.www.service.SyncService) -> injectMembers
+    void injectMAppModel(com.bitbill.www.service.SyncService,com.bitbill.www.model.app.AppModel) -> injectMAppModel
     void injectMembers(java.lang.Object) -> injectMembers
 com.bitbill.www.ui.guide.BaseGuideFragment -> com.bitbill.www.ui.guide.a:
     void <init>() -> <init>
@@ -30946,6 +31026,7 @@ com.bitbill.www.ui.main.MainActivity -> com.bitbill.www.ui.main.MainActivity:
     java.lang.String mFromTag -> L
     boolean isListUnconfirm -> M
     com.bitbill.www.model.wallet.db.entity.Wallet mSelectedWallet -> N
+    boolean isFirstLoading -> O
     void <init>() -> <init>
     void start(android.content.Context) -> a
     void start(android.content.Context,java.lang.String) -> a
@@ -30964,6 +31045,7 @@ com.bitbill.www.ui.main.MainActivity -> com.bitbill.www.ui.main.MainActivity:
     void changeThemeColor(boolean) -> b
     void setupBottomSheet() -> B
     void hideSelectWallet() -> C
+    void hideMaskView() -> D
     void showSelectWallet() -> q
     void initData() -> initData
     int getLayoutId() -> getLayoutId
@@ -31004,7 +31086,6 @@ com.bitbill.www.ui.main.MainActivity -> com.bitbill.www.ui.main.MainActivity:
     void getDiffVersionWallets(java.util.List) -> a
     void getBlockHeight(long) -> a
     void showLoading() -> showLoading
-    void hideLoading() -> hideLoading
     void getWalletFail() -> w
     void getTxRecordSuccess(java.util.List) -> f
     void getTxRecordFail() -> D_
@@ -31021,14 +31102,15 @@ com.bitbill.www.ui.main.MainActivity -> com.bitbill.www.ui.main.MainActivity:
     int access$100(com.bitbill.www.ui.main.MainActivity) -> b
     void access$200(com.bitbill.www.ui.main.MainActivity,boolean) -> a
     com.bitbill.www.ui.main.send.SendFragment access$300(com.bitbill.www.ui.main.MainActivity) -> c
-    int access$400(com.bitbill.www.ui.main.MainActivity) -> d
-    int access$402(com.bitbill.www.ui.main.MainActivity,int) -> b
-    java.util.List access$500(com.bitbill.www.ui.main.MainActivity) -> e
-    com.bitbill.www.model.wallet.db.entity.Wallet access$602(com.bitbill.www.ui.main.MainActivity,com.bitbill.www.model.wallet.db.entity.Wallet) -> a
-    com.bitbill.www.ui.main.receive.ReceiveFragment access$700(com.bitbill.www.ui.main.MainActivity) -> f
-    void access$800(com.bitbill.www.ui.main.MainActivity) -> g
-    com.bitbill.www.common.widget.dialog.UpdateAppDialog access$902(com.bitbill.www.ui.main.MainActivity,com.bitbill.www.common.widget.dialog.UpdateAppDialog) -> a
-    com.bitbill.www.common.widget.dialog.UpdateAppDialog access$900(com.bitbill.www.ui.main.MainActivity) -> h
+    void access$400(com.bitbill.www.ui.main.MainActivity) -> d
+    int access$500(com.bitbill.www.ui.main.MainActivity) -> e
+    int access$502(com.bitbill.www.ui.main.MainActivity,int) -> b
+    java.util.List access$600(com.bitbill.www.ui.main.MainActivity) -> f
+    com.bitbill.www.model.wallet.db.entity.Wallet access$702(com.bitbill.www.ui.main.MainActivity,com.bitbill.www.model.wallet.db.entity.Wallet) -> a
+    com.bitbill.www.ui.main.receive.ReceiveFragment access$800(com.bitbill.www.ui.main.MainActivity) -> g
+    void access$900(com.bitbill.www.ui.main.MainActivity) -> h
+    com.bitbill.www.common.widget.dialog.UpdateAppDialog access$1002(com.bitbill.www.ui.main.MainActivity,com.bitbill.www.common.widget.dialog.UpdateAppDialog) -> a
+    com.bitbill.www.common.widget.dialog.UpdateAppDialog access$1000(com.bitbill.www.ui.main.MainActivity) -> i
 com.bitbill.www.ui.main.MainActivity$$Lambda$0 -> com.bitbill.www.ui.main.a:
     com.bitbill.www.ui.main.MainActivity arg$1 -> a
     void <init>(com.bitbill.www.ui.main.MainActivity) -> <init>
@@ -31052,26 +31134,31 @@ com.bitbill.www.ui.main.MainActivity$3 -> com.bitbill.www.ui.main.MainActivity$3
     void onTabSelected(android.support.design.widget.TabLayout$Tab) -> a
 com.bitbill.www.ui.main.MainActivity$4 -> com.bitbill.www.ui.main.MainActivity$4:
     com.bitbill.www.ui.main.MainActivity this$0 -> a
+    void <init>(com.bitbill.www.ui.main.MainActivity) -> <init>
+    void onStateChanged(android.view.View,int) -> onStateChanged
+    void onSlide(android.view.View,float) -> onSlide
+com.bitbill.www.ui.main.MainActivity$5 -> com.bitbill.www.ui.main.MainActivity$5:
+    com.bitbill.www.ui.main.MainActivity this$0 -> a
     void <init>(com.bitbill.www.ui.main.MainActivity,android.content.Context,int,java.util.List) -> <init>
     void convert(com.zhy.adapter.recyclerview.base.ViewHolder,com.bitbill.www.model.wallet.db.entity.Wallet,int) -> a
     void convert(com.zhy.adapter.recyclerview.base.ViewHolder,java.lang.Object,int) -> convert
-    void lambda$convert$0$MainActivity$4(int,com.bitbill.www.model.wallet.db.entity.Wallet,com.zhy.adapter.recyclerview.base.ViewHolder,android.view.View) -> a
-com.bitbill.www.ui.main.MainActivity$4$$Lambda$0 -> com.bitbill.www.ui.main.c:
-    com.bitbill.www.ui.main.MainActivity$4 arg$1 -> a
+    void lambda$convert$0$MainActivity$5(int,com.bitbill.www.model.wallet.db.entity.Wallet,com.zhy.adapter.recyclerview.base.ViewHolder,android.view.View) -> a
+com.bitbill.www.ui.main.MainActivity$5$$Lambda$0 -> com.bitbill.www.ui.main.c:
+    com.bitbill.www.ui.main.MainActivity$5 arg$1 -> a
     int arg$2 -> b
     com.bitbill.www.model.wallet.db.entity.Wallet arg$3 -> c
     com.zhy.adapter.recyclerview.base.ViewHolder arg$4 -> d
-    void <init>(com.bitbill.www.ui.main.MainActivity$4,int,com.bitbill.www.model.wallet.db.entity.Wallet,com.zhy.adapter.recyclerview.base.ViewHolder) -> <init>
+    void <init>(com.bitbill.www.ui.main.MainActivity$5,int,com.bitbill.www.model.wallet.db.entity.Wallet,com.zhy.adapter.recyclerview.base.ViewHolder) -> <init>
     void onClick(android.view.View) -> onClick
-com.bitbill.www.ui.main.MainActivity$5 -> com.bitbill.www.ui.main.MainActivity$5:
+com.bitbill.www.ui.main.MainActivity$6 -> com.bitbill.www.ui.main.MainActivity$6:
     java.lang.String val$apkUrl -> a
     boolean val$needForce -> b
     com.bitbill.www.ui.main.MainActivity this$0 -> c
     void <init>(com.bitbill.www.ui.main.MainActivity,java.lang.String,boolean) -> <init>
     void onClick(android.content.DialogInterface,int) -> onClick
-com.bitbill.www.ui.main.MainActivity$5$1 -> com.bitbill.www.ui.main.MainActivity$5$1:
-    com.bitbill.www.ui.main.MainActivity$5 this$1 -> a
-    void <init>(com.bitbill.www.ui.main.MainActivity$5) -> <init>
+com.bitbill.www.ui.main.MainActivity$6$1 -> com.bitbill.www.ui.main.MainActivity$6$1:
+    com.bitbill.www.ui.main.MainActivity$6 this$1 -> a
+    void <init>(com.bitbill.www.ui.main.MainActivity$6) -> <init>
     void run() -> run
 com.bitbill.www.ui.main.MainActivity_MembersInjector -> com.bitbill.www.ui.main.d:
     void injectMMainMvpPresenter(com.bitbill.www.ui.main.MainActivity,com.bitbill.www.ui.main.MainMvpPresenter) -> a
@@ -31134,8 +31221,7 @@ com.bitbill.www.ui.main.asset.AssetFragment -> com.bitbill.www.ui.main.asset.Ass
     android.widget.ImageView mIvPlus -> mIvPlus
     com.bitbill.www.ui.main.my.ShortCutSettingMvpPresenter mShortCutSettingMvpPresenter -> d
     com.bitbill.www.common.widget.PopupWalletMenu mWalletMenu -> e
-    boolean isFirstLoading -> f
-    java.util.List mWalletList -> g
+    java.util.List mWalletList -> f
     void <init>() -> <init>
     com.bitbill.www.ui.main.asset.AssetFragment newInstance() -> m
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
@@ -32510,6 +32596,7 @@ com.bitbill.www.ui.main.receive.SpecificReceiveActivity -> com.bitbill.www.ui.ma
     java.lang.String getReceiveAmount() -> y
     java.lang.String getReceiveAddress() -> t
     void getBtcRateSuccess(double,double) -> a
+    void onRefreshExchangeRateEvent(com.bitbill.www.model.eventbus.RefreshExchangeRateEvent) -> onRefreshExchangeRateEvent
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
     void access$000(com.bitbill.www.ui.main.receive.SpecificReceiveActivity) -> a
 com.bitbill.www.ui.main.receive.SpecificReceiveActivity$1 -> com.bitbill.www.ui.main.receive.SpecificReceiveActivity$1:
@@ -32685,6 +32772,7 @@ com.bitbill.www.ui.main.send.ScanResultActivity -> com.bitbill.www.ui.main.send.
     void onViewClicked(android.view.View) -> onViewClicked
     java.lang.String getSendAmount() -> t
     void getBtcRateSuccess(double,double) -> a
+    void onRefreshExchangeRateEvent(com.bitbill.www.model.eventbus.RefreshExchangeRateEvent) -> onRefreshExchangeRateEvent
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
 com.bitbill.www.ui.main.send.ScanResultActivity_MembersInjector -> com.bitbill.www.ui.main.send.g:
     void injectMGetExchangeRateMvpPresenter(com.bitbill.www.ui.main.send.ScanResultActivity,com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter) -> a
@@ -32774,6 +32862,7 @@ com.bitbill.www.ui.main.send.SendAmountActivity -> com.bitbill.www.ui.main.send.
     void sendAllAmount() -> y
     java.lang.String getSendAmount() -> t
     void getBtcRateSuccess(double,double) -> a
+    void onRefreshExchangeRateEvent(com.bitbill.www.model.eventbus.RefreshExchangeRateEvent) -> onRefreshExchangeRateEvent
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
     void access$000(com.bitbill.www.ui.main.send.SendAmountActivity) -> a
 com.bitbill.www.ui.main.send.SendAmountActivity$1 -> com.bitbill.www.ui.main.send.SendAmountActivity$1:
@@ -33043,10 +33132,10 @@ com.bitbill.www.ui.main.send.SendSuccessActivity_ViewBinding$2 -> com.bitbill.ww
     void <init>(com.bitbill.www.ui.main.send.SendSuccessActivity_ViewBinding,com.bitbill.www.ui.main.send.SendSuccessActivity) -> <init>
     void doClick(android.view.View) -> doClick
 com.bitbill.www.ui.splash.SplashActivity -> com.bitbill.www.ui.splash.SplashActivity:
-    android.os.Handler mHandler -> s
     android.view.View flContent -> flContent
     com.bitbill.www.ui.splash.SplashMvpPresenter mSplashMvpPresenter -> n
-    cn.jpush.android.api.TagAliasCallback mAliasCallback -> t
+    cn.jpush.android.api.TagAliasCallback mAliasCallback -> s
+    android.os.Handler mHandler -> t
     com.bitbill.www.common.presenter.UpdateMvpPresenter mUpdateMvpPresenter -> o
     com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter mGetCacheVersionMvpPresenter -> p
     com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter mGetExchangeRateMvpPresenter -> q
@@ -33054,7 +33143,7 @@ com.bitbill.www.ui.splash.SplashActivity -> com.bitbill.www.ui.splash.SplashActi
     boolean mHasWallet -> u
     void <init>() -> <init>
     void onCreate(android.os.Bundle) -> onCreate
-    void startSocketService() -> q
+    void startService() -> q
     com.bitbill.www.ui.splash.SplashMvpPresenter getMvpPresenter() -> p
     void injectComponent() -> s
     void hasWallet(java.util.List) -> b
@@ -33068,17 +33157,17 @@ com.bitbill.www.ui.splash.SplashActivity -> com.bitbill.www.ui.splash.SplashActi
     void getConfigSuccess(java.lang.String,java.lang.String) -> a
     void getConfigFail() -> a
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
-    cn.jpush.android.api.TagAliasCallback access$000(com.bitbill.www.ui.splash.SplashActivity) -> a
-    android.os.Handler access$100(com.bitbill.www.ui.splash.SplashActivity) -> b
+    android.os.Handler access$000(com.bitbill.www.ui.splash.SplashActivity) -> a
+    cn.jpush.android.api.TagAliasCallback access$100(com.bitbill.www.ui.splash.SplashActivity) -> b
     void access$200(com.bitbill.www.ui.splash.SplashActivity) -> c
 com.bitbill.www.ui.splash.SplashActivity$1 -> com.bitbill.www.ui.splash.SplashActivity$1:
     com.bitbill.www.ui.splash.SplashActivity this$0 -> a
     void <init>(com.bitbill.www.ui.splash.SplashActivity) -> <init>
-    void handleMessage(android.os.Message) -> handleMessage
+    void gotResult(int,java.lang.String,java.util.Set) -> gotResult
 com.bitbill.www.ui.splash.SplashActivity$2 -> com.bitbill.www.ui.splash.SplashActivity$2:
     com.bitbill.www.ui.splash.SplashActivity this$0 -> a
     void <init>(com.bitbill.www.ui.splash.SplashActivity) -> <init>
-    void gotResult(int,java.lang.String,java.util.Set) -> gotResult
+    void handleMessage(android.os.Message) -> handleMessage
 com.bitbill.www.ui.splash.SplashActivity$3 -> com.bitbill.www.ui.splash.SplashActivity$3:
     com.bitbill.www.ui.splash.SplashActivity this$0 -> a
     void <init>(com.bitbill.www.ui.splash.SplashActivity) -> <init>
@@ -33454,6 +33543,7 @@ com.bitbill.www.ui.wallet.info.BtcRecordFragment -> com.bitbill.www.ui.wallet.in
     void getBalanceSuccess(java.util.List,java.lang.Long) -> a
     void onUnConfirmReceive(com.bitbill.www.model.eventbus.UnConfirmEvent) -> onUnConfirmReceive
     void onConfirmedEvent(com.bitbill.www.model.eventbus.ConfirmedEvent) -> onConfirmedEvent
+    void onRefreshExchangeRateEvent(com.bitbill.www.model.eventbus.RefreshExchangeRateEvent) -> onRefreshExchangeRateEvent
     void itemConvert(com.zhy.adapter.recyclerview.base.ViewHolder,java.io.Serializable,int) -> a
     void onListItemClick(java.io.Serializable,int) -> a
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
@@ -47059,6 +47149,7 @@ io.reactivex.Observable -> io.reactivex.f:
     int bufferSize() -> a
     io.reactivex.Observable empty() -> b
     io.reactivex.Observable fromCallable(java.util.concurrent.Callable) -> a
+    io.reactivex.Observable interval(long,long,java.util.concurrent.TimeUnit,io.reactivex.Scheduler) -> a
     io.reactivex.Observable just(java.lang.Object) -> a
     io.reactivex.Observable wrap(io.reactivex.ObservableSource) -> a
     io.reactivex.Observable zip(io.reactivex.ObservableSource,io.reactivex.ObservableSource,io.reactivex.functions.BiFunction) -> a
@@ -47066,6 +47157,7 @@ io.reactivex.Observable -> io.reactivex.f:
     io.reactivex.Observable compose(io.reactivex.ObservableTransformer) -> a
     io.reactivex.Observable concatMap(io.reactivex.functions.Function) -> a
     io.reactivex.Observable concatMap(io.reactivex.functions.Function,int) -> a
+    io.reactivex.Observable filter(io.reactivex.functions.Predicate) -> a
     io.reactivex.Observable map(io.reactivex.functions.Function) -> b
     io.reactivex.Observable observeOn(io.reactivex.Scheduler) -> a
     io.reactivex.Observable observeOn(io.reactivex.Scheduler,boolean,int) -> a
@@ -47089,6 +47181,7 @@ io.reactivex.Scheduler -> io.reactivex.j:
     void start() -> b
     io.reactivex.disposables.Disposable scheduleDirect(java.lang.Runnable) -> a
     io.reactivex.disposables.Disposable scheduleDirect(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
+    io.reactivex.disposables.Disposable schedulePeriodicallyDirect(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit) -> a
     void <clinit>() -> <clinit>
 io.reactivex.Scheduler$DisposeTask -> io.reactivex.j$a:
     java.lang.Runnable decoratedRun -> a
@@ -47097,11 +47190,29 @@ io.reactivex.Scheduler$DisposeTask -> io.reactivex.j$a:
     void <init>(java.lang.Runnable,io.reactivex.Scheduler$Worker) -> <init>
     void run() -> run
     void dispose() -> dispose
-io.reactivex.Scheduler$Worker -> io.reactivex.j$b:
+io.reactivex.Scheduler$PeriodicDirectTask -> io.reactivex.j$b:
+    java.lang.Runnable run -> a
+    io.reactivex.Scheduler$Worker worker -> b
+    boolean disposed -> c
+    void <init>(java.lang.Runnable,io.reactivex.Scheduler$Worker) -> <init>
+    void run() -> run
+    void dispose() -> dispose
+io.reactivex.Scheduler$Worker -> io.reactivex.j$c:
     void <init>() -> <init>
     io.reactivex.disposables.Disposable schedule(java.lang.Runnable) -> a
     io.reactivex.disposables.Disposable schedule(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
+    io.reactivex.disposables.Disposable schedulePeriodically(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit) -> a
     long now(java.util.concurrent.TimeUnit) -> a
+io.reactivex.Scheduler$Worker$PeriodicTask -> io.reactivex.j$c$a:
+    java.lang.Runnable decoratedRun -> a
+    io.reactivex.internal.disposables.SequentialDisposable sd -> b
+    long periodInNanoseconds -> c
+    long count -> d
+    long lastNowNanoseconds -> e
+    long startInNanoseconds -> f
+    io.reactivex.Scheduler$Worker this$0 -> g
+    void <init>(io.reactivex.Scheduler$Worker,long,java.lang.Runnable,long,io.reactivex.internal.disposables.SequentialDisposable,long) -> <init>
+    void run() -> run
 io.reactivex.SingleObserver -> io.reactivex.k:
     void onSubscribe(io.reactivex.disposables.Disposable) -> onSubscribe
     void onError(java.lang.Throwable) -> onError
@@ -47246,7 +47357,7 @@ io.reactivex.functions.Function -> io.reactivex.d.g:
     java.lang.Object apply(java.lang.Object) -> apply
 io.reactivex.functions.LongConsumer -> io.reactivex.d.h:
 io.reactivex.functions.Predicate -> io.reactivex.d.i:
-    boolean test(java.lang.Object) -> a
+    boolean test(java.lang.Object) -> test
 io.reactivex.internal.disposables.ArrayCompositeDisposable -> io.reactivex.internal.disposables.ArrayCompositeDisposable:
     long serialVersionUID -> serialVersionUID
     void <init>(int) -> <init>
@@ -47360,7 +47471,7 @@ io.reactivex.internal.functions.Functions$ErrorConsumer -> io.reactivex.internal
     void accept(java.lang.Object) -> accept
 io.reactivex.internal.functions.Functions$FalsePredicate -> io.reactivex.internal.a.a$g:
     void <init>() -> <init>
-    boolean test(java.lang.Object) -> a
+    boolean test(java.lang.Object) -> test
 io.reactivex.internal.functions.Functions$Identity -> io.reactivex.internal.a.a$h:
     void <init>() -> <init>
     java.lang.Object apply(java.lang.Object) -> apply
@@ -47381,7 +47492,7 @@ io.reactivex.internal.functions.Functions$OnErrorMissingConsumer -> io.reactivex
     void accept(java.lang.Object) -> accept
 io.reactivex.internal.functions.Functions$TruePredicate -> io.reactivex.internal.a.a$m:
     void <init>() -> <init>
-    boolean test(java.lang.Object) -> a
+    boolean test(java.lang.Object) -> test
 io.reactivex.internal.functions.ObjectHelper -> io.reactivex.internal.a.b:
     io.reactivex.functions.BiPredicate EQUALS -> a
     java.lang.Object requireNonNull(java.lang.Object,java.lang.String) -> a
@@ -47739,12 +47850,22 @@ io.reactivex.internal.operators.observable.ObservableEmpty -> io.reactivex.inter
     void subscribeActual(io.reactivex.Observer) -> a
     java.lang.Object call() -> call
     void <clinit>() -> <clinit>
-io.reactivex.internal.operators.observable.ObservableFromCallable -> io.reactivex.internal.operators.observable.d:
+io.reactivex.internal.operators.observable.ObservableFilter -> io.reactivex.internal.operators.observable.d:
+    io.reactivex.functions.Predicate predicate -> b
+    void <init>(io.reactivex.ObservableSource,io.reactivex.functions.Predicate) -> <init>
+    void subscribeActual(io.reactivex.Observer) -> a
+io.reactivex.internal.operators.observable.ObservableFilter$FilterObserver -> io.reactivex.internal.operators.observable.d$a:
+    io.reactivex.functions.Predicate filter -> f
+    void <init>(io.reactivex.Observer,io.reactivex.functions.Predicate) -> <init>
+    void onNext(java.lang.Object) -> onNext
+    int requestFusion(int) -> requestFusion
+    java.lang.Object poll() -> poll
+io.reactivex.internal.operators.observable.ObservableFromCallable -> io.reactivex.internal.operators.observable.e:
     java.util.concurrent.Callable callable -> a
     void <init>(java.util.concurrent.Callable) -> <init>
     void subscribeActual(io.reactivex.Observer) -> a
     java.lang.Object call() -> call
-io.reactivex.internal.operators.observable.ObservableFromUnsafeSource -> io.reactivex.internal.operators.observable.e:
+io.reactivex.internal.operators.observable.ObservableFromUnsafeSource -> io.reactivex.internal.operators.observable.f:
     io.reactivex.ObservableSource source -> a
     void <init>(io.reactivex.ObservableSource) -> <init>
     void subscribeActual(io.reactivex.Observer) -> a
@@ -47800,28 +47921,42 @@ io.reactivex.internal.operators.observable.ObservableGroupBy$State -> io.reactiv
     void onComplete() -> a
     void drain() -> b
     boolean checkTerminated(boolean,boolean,io.reactivex.Observer,boolean) -> a
-io.reactivex.internal.operators.observable.ObservableJust -> io.reactivex.internal.operators.observable.f:
+io.reactivex.internal.operators.observable.ObservableInterval -> io.reactivex.internal.operators.observable.g:
+    io.reactivex.Scheduler scheduler -> a
+    long initialDelay -> b
+    long period -> c
+    java.util.concurrent.TimeUnit unit -> d
+    void <init>(long,long,java.util.concurrent.TimeUnit,io.reactivex.Scheduler) -> <init>
+    void subscribeActual(io.reactivex.Observer) -> a
+io.reactivex.internal.operators.observable.ObservableInterval$IntervalObserver -> io.reactivex.internal.operators.observable.g$a:
+    io.reactivex.Observer actual -> a
+    long count -> b
+    void <init>(io.reactivex.Observer) -> <init>
+    void dispose() -> dispose
+    void run() -> run
+    void setResource(io.reactivex.disposables.Disposable) -> a
+io.reactivex.internal.operators.observable.ObservableJust -> io.reactivex.internal.operators.observable.h:
     java.lang.Object value -> a
     void <init>(java.lang.Object) -> <init>
     void subscribeActual(io.reactivex.Observer) -> a
     java.lang.Object call() -> call
-io.reactivex.internal.operators.observable.ObservableMap -> io.reactivex.internal.operators.observable.g:
+io.reactivex.internal.operators.observable.ObservableMap -> io.reactivex.internal.operators.observable.i:
     io.reactivex.functions.Function function -> b
     void <init>(io.reactivex.ObservableSource,io.reactivex.functions.Function) -> <init>
     void subscribeActual(io.reactivex.Observer) -> a
-io.reactivex.internal.operators.observable.ObservableMap$MapObserver -> io.reactivex.internal.operators.observable.g$a:
+io.reactivex.internal.operators.observable.ObservableMap$MapObserver -> io.reactivex.internal.operators.observable.i$a:
     io.reactivex.functions.Function mapper -> f
     void <init>(io.reactivex.Observer,io.reactivex.functions.Function) -> <init>
     void onNext(java.lang.Object) -> onNext
     int requestFusion(int) -> requestFusion
     java.lang.Object poll() -> poll
-io.reactivex.internal.operators.observable.ObservableObserveOn -> io.reactivex.internal.operators.observable.h:
+io.reactivex.internal.operators.observable.ObservableObserveOn -> io.reactivex.internal.operators.observable.j:
     io.reactivex.Scheduler scheduler -> b
     boolean delayError -> c
     int bufferSize -> d
     void <init>(io.reactivex.ObservableSource,io.reactivex.Scheduler,boolean,int) -> <init>
     void subscribeActual(io.reactivex.Observer) -> a
-io.reactivex.internal.operators.observable.ObservableObserveOn$ObserveOnObserver -> io.reactivex.internal.operators.observable.h$a:
+io.reactivex.internal.operators.observable.ObservableObserveOn$ObserveOnObserver -> io.reactivex.internal.operators.observable.j$a:
     io.reactivex.Observer actual -> a
     io.reactivex.Scheduler$Worker worker -> b
     boolean delayError -> c
@@ -47874,11 +48009,11 @@ io.reactivex.internal.operators.observable.ObservableScalarXMap$ScalarXMapObserv
     io.reactivex.functions.Function mapper -> b
     void <init>(java.lang.Object,io.reactivex.functions.Function) -> <init>
     void subscribeActual(io.reactivex.Observer) -> a
-io.reactivex.internal.operators.observable.ObservableSubscribeOn -> io.reactivex.internal.operators.observable.i:
+io.reactivex.internal.operators.observable.ObservableSubscribeOn -> io.reactivex.internal.operators.observable.k:
     io.reactivex.Scheduler scheduler -> b
     void <init>(io.reactivex.ObservableSource,io.reactivex.Scheduler) -> <init>
     void subscribeActual(io.reactivex.Observer) -> a
-io.reactivex.internal.operators.observable.ObservableSubscribeOn$SubscribeOnObserver -> io.reactivex.internal.operators.observable.i$a:
+io.reactivex.internal.operators.observable.ObservableSubscribeOn$SubscribeOnObserver -> io.reactivex.internal.operators.observable.k$a:
     io.reactivex.Observer actual -> a
     java.util.concurrent.atomic.AtomicReference s -> b
     void <init>(io.reactivex.Observer) -> <init>
@@ -47888,12 +48023,12 @@ io.reactivex.internal.operators.observable.ObservableSubscribeOn$SubscribeOnObse
     void onComplete() -> onComplete
     void dispose() -> dispose
     void setDisposable(io.reactivex.disposables.Disposable) -> a
-io.reactivex.internal.operators.observable.ObservableSubscribeOn$SubscribeTask -> io.reactivex.internal.operators.observable.i$b:
+io.reactivex.internal.operators.observable.ObservableSubscribeOn$SubscribeTask -> io.reactivex.internal.operators.observable.k$b:
     io.reactivex.internal.operators.observable.ObservableSubscribeOn$SubscribeOnObserver parent -> b
     io.reactivex.internal.operators.observable.ObservableSubscribeOn this$0 -> a
     void <init>(io.reactivex.internal.operators.observable.ObservableSubscribeOn,io.reactivex.internal.operators.observable.ObservableSubscribeOn$SubscribeOnObserver) -> <init>
     void run() -> run
-io.reactivex.internal.operators.observable.ObservableZip -> io.reactivex.internal.operators.observable.j:
+io.reactivex.internal.operators.observable.ObservableZip -> io.reactivex.internal.operators.observable.l:
     io.reactivex.ObservableSource[] sources -> a
     java.lang.Iterable sourcesIterable -> b
     io.reactivex.functions.Function zipper -> c
@@ -47901,7 +48036,7 @@ io.reactivex.internal.operators.observable.ObservableZip -> io.reactivex.interna
     boolean delayError -> e
     void <init>(io.reactivex.ObservableSource[],java.lang.Iterable,io.reactivex.functions.Function,int,boolean) -> <init>
     void subscribeActual(io.reactivex.Observer) -> a
-io.reactivex.internal.operators.observable.ObservableZip$ZipCoordinator -> io.reactivex.internal.operators.observable.j$a:
+io.reactivex.internal.operators.observable.ObservableZip$ZipCoordinator -> io.reactivex.internal.operators.observable.l$a:
     io.reactivex.Observer actual -> a
     io.reactivex.functions.Function zipper -> b
     io.reactivex.internal.operators.observable.ObservableZip$ZipObserver[] observers -> c
@@ -47916,7 +48051,7 @@ io.reactivex.internal.operators.observable.ObservableZip$ZipCoordinator -> io.re
     void clear() -> c
     void drain() -> d
     boolean checkTerminated(boolean,boolean,io.reactivex.Observer,boolean,io.reactivex.internal.operators.observable.ObservableZip$ZipObserver) -> a
-io.reactivex.internal.operators.observable.ObservableZip$ZipObserver -> io.reactivex.internal.operators.observable.j$b:
+io.reactivex.internal.operators.observable.ObservableZip$ZipObserver -> io.reactivex.internal.operators.observable.l$b:
     io.reactivex.internal.operators.observable.ObservableZip$ZipCoordinator parent -> a
     io.reactivex.internal.queue.SpscLinkedArrayQueue queue -> b
     boolean done -> c
@@ -48018,6 +48153,7 @@ io.reactivex.internal.schedulers.ComputationScheduler -> io.reactivex.internal.s
     void <init>(java.util.concurrent.ThreadFactory) -> <init>
     io.reactivex.Scheduler$Worker createWorker() -> a
     io.reactivex.disposables.Disposable scheduleDirect(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
+    io.reactivex.disposables.Disposable schedulePeriodicallyDirect(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit) -> a
     void start() -> b
     void <clinit>() -> <clinit>
 io.reactivex.internal.schedulers.ComputationScheduler$EventLoopWorker -> io.reactivex.internal.schedulers.b$a:
@@ -48039,7 +48175,21 @@ io.reactivex.internal.schedulers.ComputationScheduler$FixedSchedulerPool -> io.r
     void shutdown() -> b
 io.reactivex.internal.schedulers.ComputationScheduler$PoolWorker -> io.reactivex.internal.schedulers.b$c:
     void <init>(java.util.concurrent.ThreadFactory) -> <init>
-io.reactivex.internal.schedulers.IoScheduler -> io.reactivex.internal.schedulers.c:
+io.reactivex.internal.schedulers.InstantPeriodicTask -> io.reactivex.internal.schedulers.c:
+    java.lang.Runnable task -> a
+    java.util.concurrent.atomic.AtomicReference rest -> b
+    java.util.concurrent.atomic.AtomicReference first -> c
+    java.util.concurrent.ExecutorService executor -> d
+    java.lang.Thread runner -> e
+    java.util.concurrent.FutureTask CANCELLED -> f
+    void <init>(java.lang.Runnable,java.util.concurrent.ExecutorService) -> <init>
+    java.lang.Void call() -> a
+    void dispose() -> dispose
+    void setFirst(java.util.concurrent.Future) -> a
+    void setRest(java.util.concurrent.Future) -> b
+    java.lang.Object call() -> call
+    void <clinit>() -> <clinit>
+io.reactivex.internal.schedulers.IoScheduler -> io.reactivex.internal.schedulers.d:
     io.reactivex.internal.schedulers.RxThreadFactory WORKER_THREAD_FACTORY -> b
     io.reactivex.internal.schedulers.RxThreadFactory EVICTOR_THREAD_FACTORY -> c
     java.util.concurrent.TimeUnit KEEP_ALIVE_UNIT -> h
@@ -48052,7 +48202,7 @@ io.reactivex.internal.schedulers.IoScheduler -> io.reactivex.internal.schedulers
     void start() -> b
     io.reactivex.Scheduler$Worker createWorker() -> a
     void <clinit>() -> <clinit>
-io.reactivex.internal.schedulers.IoScheduler$CachedWorkerPool -> io.reactivex.internal.schedulers.c$a:
+io.reactivex.internal.schedulers.IoScheduler$CachedWorkerPool -> io.reactivex.internal.schedulers.d$a:
     long keepAliveTime -> b
     java.util.concurrent.ConcurrentLinkedQueue expiringWorkerQueue -> c
     io.reactivex.disposables.CompositeDisposable allWorkers -> a
@@ -48066,7 +48216,7 @@ io.reactivex.internal.schedulers.IoScheduler$CachedWorkerPool -> io.reactivex.in
     void evictExpiredWorkers() -> b
     long now() -> c
     void shutdown() -> d
-io.reactivex.internal.schedulers.IoScheduler$EventLoopWorker -> io.reactivex.internal.schedulers.c$b:
+io.reactivex.internal.schedulers.IoScheduler$EventLoopWorker -> io.reactivex.internal.schedulers.d$b:
     io.reactivex.disposables.CompositeDisposable tasks -> b
     io.reactivex.internal.schedulers.IoScheduler$CachedWorkerPool pool -> c
     io.reactivex.internal.schedulers.IoScheduler$ThreadWorker threadWorker -> d
@@ -48074,25 +48224,26 @@ io.reactivex.internal.schedulers.IoScheduler$EventLoopWorker -> io.reactivex.int
     void <init>(io.reactivex.internal.schedulers.IoScheduler$CachedWorkerPool) -> <init>
     void dispose() -> dispose
     io.reactivex.disposables.Disposable schedule(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
-io.reactivex.internal.schedulers.IoScheduler$ThreadWorker -> io.reactivex.internal.schedulers.c$c:
+io.reactivex.internal.schedulers.IoScheduler$ThreadWorker -> io.reactivex.internal.schedulers.d$c:
     long expirationTime -> b
     void <init>(java.util.concurrent.ThreadFactory) -> <init>
     long getExpirationTime() -> a
     void setExpirationTime(long) -> a
-io.reactivex.internal.schedulers.NewThreadScheduler -> io.reactivex.internal.schedulers.d:
+io.reactivex.internal.schedulers.NewThreadScheduler -> io.reactivex.internal.schedulers.e:
     java.util.concurrent.ThreadFactory threadFactory -> b
     io.reactivex.internal.schedulers.RxThreadFactory THREAD_FACTORY -> c
     void <init>() -> <init>
     void <init>(java.util.concurrent.ThreadFactory) -> <init>
     io.reactivex.Scheduler$Worker createWorker() -> a
     void <clinit>() -> <clinit>
-io.reactivex.internal.schedulers.NewThreadWorker -> io.reactivex.internal.schedulers.e:
+io.reactivex.internal.schedulers.NewThreadWorker -> io.reactivex.internal.schedulers.f:
     java.util.concurrent.ScheduledExecutorService executor -> b
     boolean disposed -> a
     void <init>(java.util.concurrent.ThreadFactory) -> <init>
     io.reactivex.disposables.Disposable schedule(java.lang.Runnable) -> a
     io.reactivex.disposables.Disposable schedule(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
     io.reactivex.disposables.Disposable scheduleDirect(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> b
+    io.reactivex.disposables.Disposable schedulePeriodicallyDirect(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit) -> b
     io.reactivex.internal.schedulers.ScheduledRunnable scheduleActual(java.lang.Runnable,long,java.util.concurrent.TimeUnit,io.reactivex.internal.disposables.DisposableContainer) -> a
     void dispose() -> dispose
     void shutdown() -> b
@@ -48136,7 +48287,7 @@ io.reactivex.internal.schedulers.ScheduledRunnable -> io.reactivex.internal.sche
     void dispose() -> dispose
     boolean isDisposed() -> isDisposed
     void <clinit>() -> <clinit>
-io.reactivex.internal.schedulers.SchedulerPoolFactory -> io.reactivex.internal.schedulers.f:
+io.reactivex.internal.schedulers.SchedulerPoolFactory -> io.reactivex.internal.schedulers.g:
     boolean PURGE_ENABLED -> a
     int PURGE_PERIOD_SECONDS -> b
     java.util.concurrent.atomic.AtomicReference PURGE_THREAD -> c
@@ -48144,10 +48295,10 @@ io.reactivex.internal.schedulers.SchedulerPoolFactory -> io.reactivex.internal.s
     void start() -> a
     java.util.concurrent.ScheduledExecutorService create(java.util.concurrent.ThreadFactory) -> a
     void <clinit>() -> <clinit>
-io.reactivex.internal.schedulers.SchedulerPoolFactory$ScheduledTask -> io.reactivex.internal.schedulers.f$a:
+io.reactivex.internal.schedulers.SchedulerPoolFactory$ScheduledTask -> io.reactivex.internal.schedulers.g$a:
     void <init>() -> <init>
     void run() -> run
-io.reactivex.internal.schedulers.SingleScheduler -> io.reactivex.internal.schedulers.g:
+io.reactivex.internal.schedulers.SingleScheduler -> io.reactivex.internal.schedulers.h:
     java.util.concurrent.ThreadFactory threadFactory -> b
     java.util.concurrent.atomic.AtomicReference executor -> c
     io.reactivex.internal.schedulers.RxThreadFactory SINGLE_THREAD_FACTORY -> d
@@ -48158,15 +48309,16 @@ io.reactivex.internal.schedulers.SingleScheduler -> io.reactivex.internal.schedu
     void start() -> b
     io.reactivex.Scheduler$Worker createWorker() -> a
     io.reactivex.disposables.Disposable scheduleDirect(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
+    io.reactivex.disposables.Disposable schedulePeriodicallyDirect(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit) -> a
     void <clinit>() -> <clinit>
-io.reactivex.internal.schedulers.SingleScheduler$ScheduledWorker -> io.reactivex.internal.schedulers.g$a:
+io.reactivex.internal.schedulers.SingleScheduler$ScheduledWorker -> io.reactivex.internal.schedulers.h$a:
     java.util.concurrent.ScheduledExecutorService executor -> a
     io.reactivex.disposables.CompositeDisposable tasks -> b
     boolean disposed -> c
     void <init>(java.util.concurrent.ScheduledExecutorService) -> <init>
     io.reactivex.disposables.Disposable schedule(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
     void dispose() -> dispose
-io.reactivex.internal.schedulers.TrampolineScheduler -> io.reactivex.internal.schedulers.h:
+io.reactivex.internal.schedulers.TrampolineScheduler -> io.reactivex.internal.schedulers.i:
     io.reactivex.internal.schedulers.TrampolineScheduler INSTANCE -> b
     io.reactivex.internal.schedulers.TrampolineScheduler instance() -> c
     io.reactivex.Scheduler$Worker createWorker() -> a
@@ -48174,13 +48326,13 @@ io.reactivex.internal.schedulers.TrampolineScheduler -> io.reactivex.internal.sc
     io.reactivex.disposables.Disposable scheduleDirect(java.lang.Runnable) -> a
     io.reactivex.disposables.Disposable scheduleDirect(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
     void <clinit>() -> <clinit>
-io.reactivex.internal.schedulers.TrampolineScheduler$SleepingRunnable -> io.reactivex.internal.schedulers.h$a:
+io.reactivex.internal.schedulers.TrampolineScheduler$SleepingRunnable -> io.reactivex.internal.schedulers.i$a:
     java.lang.Runnable run -> a
     io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker worker -> b
     long execTime -> c
     void <init>(java.lang.Runnable,io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker,long) -> <init>
     void run() -> run
-io.reactivex.internal.schedulers.TrampolineScheduler$TimedRunnable -> io.reactivex.internal.schedulers.h$b:
+io.reactivex.internal.schedulers.TrampolineScheduler$TimedRunnable -> io.reactivex.internal.schedulers.i$b:
     java.lang.Runnable run -> a
     long execTime -> b
     int count -> c
@@ -48188,7 +48340,7 @@ io.reactivex.internal.schedulers.TrampolineScheduler$TimedRunnable -> io.reactiv
     void <init>(java.lang.Runnable,java.lang.Long,int) -> <init>
     int compareTo(io.reactivex.internal.schedulers.TrampolineScheduler$TimedRunnable) -> a
     int compareTo(java.lang.Object) -> compareTo
-io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker -> io.reactivex.internal.schedulers.h$c:
+io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker -> io.reactivex.internal.schedulers.i$c:
     java.util.concurrent.PriorityBlockingQueue queue -> a
     java.util.concurrent.atomic.AtomicInteger wip -> d
     java.util.concurrent.atomic.AtomicInteger counter -> b
@@ -48198,7 +48350,7 @@ io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker -> io.reac
     io.reactivex.disposables.Disposable schedule(java.lang.Runnable,long,java.util.concurrent.TimeUnit) -> a
     io.reactivex.disposables.Disposable enqueue(java.lang.Runnable,long) -> a
     void dispose() -> dispose
-io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker$AppendToQueueTask -> io.reactivex.internal.schedulers.h$c$a:
+io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker$AppendToQueueTask -> io.reactivex.internal.schedulers.i$c$a:
     io.reactivex.internal.schedulers.TrampolineScheduler$TimedRunnable timedRunnable -> a
     io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker this$0 -> b
     void <init>(io.reactivex.internal.schedulers.TrampolineScheduler$TrampolineWorker,io.reactivex.internal.schedulers.TrampolineScheduler$TimedRunnable) -> <init>
@@ -48679,10 +48831,11 @@ io.reactivex.observers.BaseTestConsumer$TestWaitStrategy$6 -> io.reactivex.obser
     void <init>(java.lang.String,int) -> <init>
     void run() -> run
 io.reactivex.observers.DisposableObserver -> io.reactivex.observers.a:
-    java.util.concurrent.atomic.AtomicReference s -> e
+    java.util.concurrent.atomic.AtomicReference s -> s
     void <init>() -> <init>
     void onSubscribe(io.reactivex.disposables.Disposable) -> onSubscribe
-    void onStart() -> a
+    void onStart() -> onStart
+    boolean isDisposed() -> isDisposed
     void dispose() -> dispose
 io.reactivex.observers.SerializedObserver -> io.reactivex.observers.b:
     io.reactivex.Observer actual -> a
@@ -48743,6 +48896,7 @@ io.reactivex.schedulers.Schedulers -> io.reactivex.g.a:
     io.reactivex.Scheduler TRAMPOLINE -> d
     io.reactivex.Scheduler NEW_THREAD -> e
     io.reactivex.Scheduler io() -> a
+    io.reactivex.Scheduler trampoline() -> b
     void <clinit>() -> <clinit>
 io.reactivex.schedulers.Schedulers$ComputationHolder -> io.reactivex.g.a$a:
     io.reactivex.Scheduler DEFAULT -> a
