@@ -1,6 +1,5 @@
 package com.bitbill.www.service;
 
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
@@ -10,12 +9,11 @@ import android.util.Log;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
+import com.bitbill.www.common.app.BaseService;
 import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.SoundUtils;
-import com.bitbill.www.di.component.DaggerServiceComponent;
 import com.bitbill.www.di.component.ServiceComponent;
 import com.bitbill.www.model.app.AppModel;
-import com.bitbill.www.model.eventbus.AppBackgroundEvent;
 import com.bitbill.www.model.eventbus.ConfirmedEvent;
 import com.bitbill.www.model.eventbus.ReceiveAmountEvent;
 import com.bitbill.www.model.eventbus.RegisterEvent;
@@ -41,7 +39,7 @@ import static com.bitbill.www.app.AppConstants.EVENT_CONFIRM;
 import static com.bitbill.www.app.AppConstants.EVENT_REGISTER;
 import static com.bitbill.www.app.AppConstants.EVENT_UNCONFIRM;
 
-public class SocketServiceProvider extends Service {
+public class SocketServiceProvider extends BaseService {
     private static final String TAG = "SocketServiceProvider";
     public static SocketServiceProvider instance = null;
     private final IBinder myBinder = new LocalBinder();
@@ -164,10 +162,7 @@ public class SocketServiceProvider extends Service {
             return;
         }
         super.onCreate();
-        mBitbillApp = BitbillApp.get();
-        mServiceComponent = DaggerServiceComponent.builder().applicationComponent(mBitbillApp.getComponent())
-                .build();
-        mServiceComponent.inject(this);
+        getServiceComponent().inject(this);
         initSocket();
         EventBus.getDefault().register(this);
 
@@ -199,15 +194,6 @@ public class SocketServiceProvider extends Service {
     public void onSocketServerStateEvent(RegisterEvent socketServerStateEvent) {
         Register register = (Register) socketServerStateEvent.getData();
         registerWallet(register);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onAppBackgroundEvent(AppBackgroundEvent appBackgroundEvent) {
-        if (appBackgroundEvent.isBackground()) {
-            disconnectConnection();
-        } else {
-            connectConnection();
-        }
     }
 
     public void registerWallet(Register register) {

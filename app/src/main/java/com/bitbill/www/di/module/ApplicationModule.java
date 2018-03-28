@@ -14,6 +14,8 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.model.db.DbOpenHelper;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.socket.SocketHelper;
+import com.bitbill.www.common.rx.AppSchedulerProvider;
+import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.qualifier.ApiInfo;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.di.qualifier.BaseUrlInfo;
@@ -72,6 +74,7 @@ import javax.net.ssl.TrustManagerFactory;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 import io.socket.client.Socket;
 import okhttp3.OkHttpClient;
 
@@ -97,6 +100,16 @@ public class ApplicationModule {
     @Provides
     Application provideApplication() {
         return mApplication;
+    }
+
+    @Provides
+    CompositeDisposable provideCompositeDisposable() {
+        return new CompositeDisposable();
+    }
+
+    @Provides
+    SchedulerProvider provideSchedulerProvider() {
+        return new AppSchedulerProvider();
     }
 
     @Provides

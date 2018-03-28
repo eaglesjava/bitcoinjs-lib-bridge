@@ -37,8 +37,6 @@ import com.bitbill.www.common.presenter.ValidateAddressPresenter;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
 import com.bitbill.www.common.presenter.WalletMvpView;
 import com.bitbill.www.common.presenter.WalletPresenter;
-import com.bitbill.www.common.rx.AppSchedulerProvider;
-import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.qualifier.ActivityContext;
 import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.address.AddressModel;
@@ -127,7 +125,6 @@ import com.bitbill.www.ui.wallet.init.InitWalletPresenter;
 
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by isanwenyu@163.com on 2017/07/17.
@@ -152,17 +149,6 @@ public class ActivityModule {
     AppCompatActivity provideActivity() {
         return mActivity;
     }
-
-    @Provides
-    CompositeDisposable provideCompositeDisposable() {
-        return new CompositeDisposable();
-    }
-
-    @Provides
-    SchedulerProvider provideSchedulerProvider() {
-        return new AppSchedulerProvider();
-    }
-
     @Provides
     @PerActivity
     SplashMvpPresenter<AppModel, SplashMvpView> provideSplashPresenter(

@@ -8,6 +8,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.bitbill.www.app.BitbillApp;
+import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.module.ApplicationModule;
 import com.bitbill.www.di.qualifier.ApplicationContext;
 import com.bitbill.www.model.address.AddressModel;
@@ -19,6 +20,7 @@ import com.bitbill.www.model.wallet.WalletModel;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import io.reactivex.disposables.CompositeDisposable;
 import io.socket.client.Socket;
 
 /**
@@ -35,6 +37,10 @@ public interface ApplicationComponent {
     Context context();
 
     Application application();
+
+    CompositeDisposable getDisposable();
+
+    SchedulerProvider getScheduler();
 
     AppModel getAppModel();
 

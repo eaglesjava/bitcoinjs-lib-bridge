@@ -17,6 +17,10 @@ import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.AmountEditText;
 import com.bitbill.www.model.app.AppModel;
+import com.bitbill.www.model.eventbus.RefreshExchangeRateEvent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -141,5 +145,13 @@ public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRate
     @Override
     public void getBtcRateSuccess(double cnyRate, double usdRate) {
         updateBtcValue();
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRefreshExchangeRateEvent(RefreshExchangeRateEvent event) {
+        if (event != null) {
+            updateBtcValue();
+        }
     }
 }

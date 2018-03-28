@@ -8,6 +8,7 @@ import com.bitbill.www.di.module.ServiceModule;
 import com.bitbill.www.di.scope.PerService;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.service.SocketServiceProvider;
+import com.bitbill.www.service.SyncService;
 
 import dagger.Component;
 import io.socket.client.Socket;
@@ -24,4 +25,6 @@ public interface ServiceComponent {
     Socket getSocket();
 
     void inject(SocketServiceProvider socketServiceProvider);
+
+    void inject(SyncService syncService);
 }

@@ -169,6 +169,9 @@
         <service
             android:name=".service.SocketServiceProvider"
             android:exported="false" />
+        <service
+            android:name=".service.SyncService"
+            android:exported="false" />
         <receiver
             android:name=".service.JpushMessageReceiver"
             android:enabled="true">
