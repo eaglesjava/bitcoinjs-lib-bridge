@@ -11,9 +11,9 @@ import CoreData
 import SwiftyJSON
 
 class BILWalletManager {
-	static let shared = {
-		return BILWalletManager()
-	}()
+    static let shared = {
+        return BILWalletManager()
+    }()
     
     weak var appDelegate: AppDelegate?
     
@@ -67,29 +67,11 @@ class BILWalletManager {
     }()
     
     init() {
-        loadExchangeRateTimer = Timer(timeInterval: 30, target: self, selector: #selector(loadExchangeRate), userInfo: nil, repeats: true)
-        applicationDidBecomeActive()
+        loadExchangeRateTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(loadExchangeRate), userInfo: nil, repeats: true)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: .UIApplicationWillResignActive, object: nil)
+        loadExchangeRateTimer.fire()
         
         loadBlockHeightAndWalletVersion()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
-    }
-    
-    @objc
-    func applicationDidBecomeActive() {
-        RunLoop.current.add(loadExchangeRateTimer, forMode: .defaultRunLoopMode)
-        loadExchangeRateTimer.fire()
-    }
-    
-    @objc
-    func applicationWillResignActive() {
-        loadExchangeRateTimer.invalidate()
     }
     
     @objc
@@ -107,9 +89,9 @@ class BILWalletManager {
     @objc
     func loadBlockHeightAndWalletVersion() {
         let hashes = WalletModel.getKeyHash(wallets: wallets)
-		guard !hashes.isEmpty else {
-			return
-		}
+        guard !hashes.isEmpty else {
+            return
+        }
         BILNetworkManager.request(request: .getBlockHeightAndWalletVersion(hashes: hashes), success: { (result) in
             let json = JSON(result)
             for wallet in self.wallets {
@@ -117,37 +99,37 @@ class BILWalletManager {
                 wallet.syncWallet(json: subJson)
             }
             self.btcBlockHeight = json["blockheight"].intValue
-            NotificationCenter.default.post(name: .exchangeRateDidChanged, object: nil)
         }) { (msg, code) in
             debugPrint(msg)
         }
     }
     
-	func newWallet() -> WalletModel {
-		let context = coreDataContext
-		let wallet = NSEntityDescription.insertNewObject(forEntityName: "WalletModel", into: context) as! WalletModel
+    func newWallet() -> WalletModel {
+        let context = coreDataContext
+        let wallet = NSEntityDescription.insertNewObject(forEntityName: "WalletModel", into: context) as! WalletModel
         wallet.bitcoinWallet = bil_btc_walletManager.newModel()
-		return wallet
-	}
+        return wallet
+    }
     
     func remove(wallet: WalletModel) throws {
         let context = coreDataContext
         context.delete(wallet)
-		do {
-			try context.save()
-			NotificationCenter.default.post(name: .walletDidChanged, object: nil)
-		} catch {
-			throw error
-		}
+        do {
+            try context.save()
+            NotificationCenter.default.post(name: .walletDidChanged, object: nil)
+        } catch {
+            throw error
+        }
     }
-	
-	func saveWallets() throws {
-		let context = coreDataContext
-		guard context.hasChanges else {
-			return
-		}
-		NotificationCenter.default.post(name: .walletDidChanged, object: nil)
-		try context.save()
-	}
-	
+    
+    func saveWallets() throws {
+        let context = coreDataContext
+        guard context.hasChanges else {
+            return
+        }
+        NotificationCenter.default.post(name: .walletDidChanged, object: nil)
+        try context.save()
+    }
+    
 }
+
