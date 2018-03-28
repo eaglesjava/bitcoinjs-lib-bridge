@@ -15,6 +15,7 @@ import CoreGraphics
 import UserNotifications
 import Toast_Swift
 import SwiftyJSON
+import DateToolsSwift
 
 class BILAppStartUpManager: NSObject {
 	
@@ -46,19 +47,51 @@ class BILAppStartUpManager: NSObject {
     
     func loadConfig() {
         
-        func compareVersion(l: String, r: String) {
-            
+        func showUpdateAlert(json: JSON) {
+            let localVersion = BILDeviceManager.shared.appVersion
+            let log = json["iupdateLog"].stringValue
+            guard let url = URL(string: json["iurl"].stringValue) else { return }
+            let iVersion = json["iversion"].stringValue
+            let iForceVersion = json["iforceVersion"].stringValue
+            guard !log.isEmpty else { return }
+            let alert = UIAlertController(title: "更新提示", message: log, preferredStyle: .alert)
+            if iForceVersion.isNewer(than: localVersion) {
+                alert.addAction(UIAlertAction(title: "更新", style: .default, handler: { (action) in
+                    UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
+                        
+                    })
+                    showUpdateAlert(json: json)
+                }))
+                BILControllerManager.shared.mainTabBarController?.present(alert, animated: true, completion: {
+                    
+                })
+                return
+            }
+            let key = "BILLastUpdateAlertDate"
+            let lastAlertDateTimeInterval = UserDefaults.standard.double(forKey: key)
+            let lastAlertDate = Date(timeIntervalSince1970: lastAlertDateTimeInterval)
+            let isTipOver = lastAlertDate.hoursEarlier(than: Date()) < 24
+            if iVersion.isNewer(than: localVersion) && !isTipOver {
+                alert.addAction(UIAlertAction(title: "更新", style: .default, handler: { (action) in
+                    UIApplication.shared.open(url, options: [:], completionHandler: { (result) in
+                        
+                    })
+                }))
+                alert.addAction(UIAlertAction(title: "暂不更新", style: .cancel, handler: { (action) in
+                    
+                }))
+                
+                UIApplication.shared.keyWindow?.currentViewController()?.present(alert, animated: true, completion: {
+                    UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: key)
+                    debugPrint(UserDefaults.standard.double(forKey: key))
+                })
+                return
+            }
         }
         
         BILNetworkManager.request(request: Router.getConfig, success: { (result) in
             let json = JSON(result)
-            let localVersion = BILDeviceManager.shared.appVersion
-//            let iVersion = json["iversion"].stringValue
-//            let iForceVersion = json["iforceVersion"].stringValue
-            let iVersion = "1.1.0"
-            let iForceVersion = "1.1.2"
-            debugPrint(localVersion.compare(iVersion).rawValue)
-            debugPrint(localVersion.compare(iForceVersion).rawValue)
+            showUpdateAlert(json: json)
         }) { (error, code) in
             debugPrint(error)
         }
