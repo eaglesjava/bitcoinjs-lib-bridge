@@ -49,8 +49,8 @@ class BILAppStartUpManager: NSObject {
         
         func showUpdateAlert(json: JSON) {
             let localVersion = BILDeviceManager.shared.appVersion
-            let log = json["iupdateLog"].stringValue
-            guard let url = URL(string: json["iurl"].stringValue) else { return }
+            let log = json["iosUpdateLog"].stringValue
+            guard let url = URL(string: json["iosUrl"].stringValue) else { return }
             let iVersion = json["iversion"].stringValue
             let iForceVersion = json["iforceVersion"].stringValue
             guard !log.isEmpty else { return }
