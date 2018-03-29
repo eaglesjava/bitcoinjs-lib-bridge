@@ -113,9 +113,9 @@ public class SystemSettingActivity extends BaseToolbarActivity<SystemSettingMvpP
         mSvCurrency.setRightText(AppPreferences.SelectedCurrency.CNY.equals(getMvpPresenter().getSelectedCurrency()) ? mCurrencyArray[0] : mCurrencyArray[1]);
         String language = null;
         Locale selectedLocale = getMvpPresenter().getSelectedLocale();
-        if (StringUtils.equals(Locale.SIMPLIFIED_CHINESE, selectedLocale)) {
+        if (StringUtils.isZhCN(selectedLocale)) {
             language = mLanguageArray[0];
-        } else if (StringUtils.equals(Locale.TRADITIONAL_CHINESE.getLanguage(), selectedLocale.getLanguage())) {
+        } else if (StringUtils.equals(Locale.TRADITIONAL_CHINESE.getCountry(), selectedLocale.getCountry())) {
             language = mLanguageArray[1];
         } else {
             language = mLanguageArray[2];

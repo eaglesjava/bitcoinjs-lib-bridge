@@ -11,7 +11,6 @@ import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -80,7 +79,7 @@ public class SplashPresenter<M extends AppModel, V extends SplashMvpView> extend
     public void initLanguage() {
         if (getModelManager().getSelectedLocale() == null) {
             //选取当前的语言设置币种
-            AppPreferences.SelectedCurrency selectedCurrency = StringUtils.equals(Locale.SIMPLIFIED_CHINESE, getModelManager().getCurrentLocale()) ? AppPreferences.SelectedCurrency.CNY : AppPreferences.SelectedCurrency.USD;
+            AppPreferences.SelectedCurrency selectedCurrency = StringUtils.isZhCN(getModelManager().getCurrentLocale()) ? AppPreferences.SelectedCurrency.CNY : AppPreferences.SelectedCurrency.USD;
             getModelManager().setSelectedCurrency(selectedCurrency);
             getApp().setSelectedCurrency(selectedCurrency);
             getModelManager().setSelectedLocale(getModelManager().getCurrentLocale());

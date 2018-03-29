@@ -733,7 +733,22 @@ public class StringUtils {
         if (currentLocale == null || compareLocale == null) {
             return false;
         }
-        return currentLocale.getLanguage().equals(compareLocale.getLanguage())
-                && currentLocale.getCountry().equals(compareLocale.getCountry());
+        String currentLocaleLanguage = currentLocale.getLanguage();
+        String compareLocaleLanguage = compareLocale.getLanguage();
+        String currentLocaleCountry = currentLocale.getCountry();
+        String compareLocaleCountry = compareLocale.getCountry();
+        return equals(currentLocaleLanguage, compareLocaleLanguage)
+                && equals(currentLocaleCountry, compareLocaleCountry);
+    }
+
+    public static boolean isZhCN(Locale locale) {
+        if (locale == null) {
+            return false;
+        }
+        String language = locale.getLanguage();
+        String country = locale.getCountry();
+        return isEmpty(country)
+                ? equals(language, Locale.SIMPLIFIED_CHINESE.getLanguage())
+                : (equals(language, Locale.SIMPLIFIED_CHINESE.getLanguage()) && equals(country, Locale.SIMPLIFIED_CHINESE.getCountry()));
     }
 }

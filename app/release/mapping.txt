@@ -6414,10 +6414,10 @@ android.support.v4.app.FragmentActivity -> android.support.v4.app.h:
     void onStart() -> onStart
     void onStop() -> onStop
     java.lang.Object onRetainCustomNonConfigurationInstance() -> b_
-    void supportInvalidateOptionsMenu() -> p_
+    void supportInvalidateOptionsMenu() -> q_
     void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> dump
     void doReallyStop(boolean) -> a
-    void onReallyStop() -> s_
+    void onReallyStop() -> t_
     void onAttachFragment(android.support.v4.app.Fragment) -> a
     android.support.v4.app.FragmentManager getSupportFragmentManager() -> e
     void startActivityForResult(android.content.Intent,int) -> startActivityForResult
@@ -7335,7 +7335,7 @@ android.support.v4.app.TaskStackBuilder -> android.support.v4.app.ag:
     void startActivities(android.os.Bundle) -> a
     void <clinit>() -> <clinit>
 android.support.v4.app.TaskStackBuilder$SupportParentable -> android.support.v4.app.ag$a:
-    android.content.Intent getSupportParentActivityIntent() -> q_
+    android.content.Intent getSupportParentActivityIntent() -> r_
 android.support.v4.app.TaskStackBuilder$TaskStackBuilderApi16Impl -> android.support.v4.app.ag$b:
     void <init>() -> <init>
 android.support.v4.app.TaskStackBuilder$TaskStackBuilderBaseImpl -> android.support.v4.app.ag$c:
@@ -11270,7 +11270,7 @@ android.support.v7.app.AppCompatActivity -> android.support.v7.app.e:
     boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
     void onDestroy() -> onDestroy
     void onTitleChanged(java.lang.CharSequence,int) -> onTitleChanged
-    void supportInvalidateOptionsMenu() -> p_
+    void supportInvalidateOptionsMenu() -> q_
     void invalidateOptionsMenu() -> invalidateOptionsMenu
     void onSupportActionModeStarted(android.support.v7.view.ActionMode) -> onSupportActionModeStarted
     void onSupportActionModeFinished(android.support.v7.view.ActionMode) -> onSupportActionModeFinished
@@ -11278,11 +11278,11 @@ android.support.v7.app.AppCompatActivity -> android.support.v7.app.e:
     void onCreateSupportNavigateUpTaskStack(android.support.v4.app.TaskStackBuilder) -> a
     void onPrepareSupportNavigateUpTaskStack(android.support.v4.app.TaskStackBuilder) -> b
     boolean onSupportNavigateUp() -> g
-    android.content.Intent getSupportParentActivityIntent() -> q_
+    android.content.Intent getSupportParentActivityIntent() -> r_
     boolean supportShouldUpRecreateTask(android.content.Intent) -> a
     void supportNavigateUpTo(android.content.Intent) -> b
     void onContentChanged() -> onContentChanged
-    void onSupportContentChanged() -> r_
+    void onSupportContentChanged() -> s_
     android.support.v7.app.ActionBarDrawerToggle$Delegate getDrawerToggleDelegate() -> b
     boolean onMenuOpened(int,android.view.Menu) -> onMenuOpened
     void onPanelClosed(int,android.view.Menu) -> onPanelClosed
@@ -26772,10 +26772,10 @@ com.bitbill.www.common.base.presenter.BasePresenter -> com.bitbill.www.common.ba
     com.bitbill.www.common.base.view.MvpView mMvpView -> c
     com.bitbill.www.app.BitbillApp mApp -> d
     void <init>(com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
-    com.bitbill.www.app.BitbillApp getApp() -> w_
+    com.bitbill.www.app.BitbillApp getApp() -> x_
     void onAttach(com.bitbill.www.common.base.view.MvpView) -> a
     void onDetach() -> b
-    boolean isViewAttached() -> f_
+    boolean isViewAttached() -> j_
     com.bitbill.www.common.base.view.MvpView getMvpView() -> B_
     com.bitbill.www.common.rx.SchedulerProvider getSchedulerProvider() -> e
     io.reactivex.disposables.CompositeDisposable getCompositeDisposable() -> f
@@ -26870,7 +26870,7 @@ com.bitbill.www.common.base.view.BaseFragment -> com.bitbill.www.common.base.vie
     void showMessage(java.lang.String) -> a_
     void showMessage(int) -> a
     void onDetach() -> onDetach
-    void hideKeyboard() -> v_
+    void hideKeyboard() -> w_
     void onTokenExpire() -> onTokenExpire
     com.bitbill.www.di.component.ActivityComponent getActivityComponent() -> d
     com.bitbill.www.common.base.view.BaseActivity getBaseActivity() -> e
@@ -26957,7 +26957,7 @@ com.bitbill.www.common.base.view.BaseListFragment -> com.bitbill.www.common.base
     android.support.v7.widget.RecyclerView$Adapter getAdapter() -> u
     void setAdapter(android.support.v7.widget.RecyclerView$Adapter) -> a
     void clearData() -> v
-    void notifyDataSetChanged() -> F_
+    void notifyDataSetChanged() -> w
     void notifyItemChanged(int) -> b
     void notifyItemRemoved(int) -> c
     int getItemCount() -> f
@@ -27082,9 +27082,9 @@ com.bitbill.www.common.base.view.ScreenShotObserverActivity -> com.bitbill.www.c
 com.bitbill.www.common.presenter.BalanceMvpPresenter -> com.bitbill.www.common.b.a:
     void getBalance() -> d_
 com.bitbill.www.common.presenter.BalanceMvpView -> com.bitbill.www.common.b.b:
-    java.util.List getWallets() -> l_
+    java.util.List getWallets() -> m_
     void getWalletsFail() -> c
-    void getBalanceFail() -> E_
+    void getBalanceFail() -> F_
     void getBalanceSuccess(java.util.List,java.lang.Long) -> a
 com.bitbill.www.common.presenter.BalancePresenter -> com.bitbill.www.common.b.c:
     void <init>(com.bitbill.www.model.wallet.WalletModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
@@ -27122,69 +27122,82 @@ com.bitbill.www.common.presenter.BalancePresenter_Factory -> com.bitbill.www.com
     java.lang.Object get() -> get
 com.bitbill.www.common.presenter.BtcAddressMvpPresentder -> com.bitbill.www.common.b.e:
     void loadAddress() -> e_
-    void checkAddressUsed() -> c
-    void refreshAddress(int,int) -> a
+    void refreshAddress(boolean) -> a
+    void refreshAddress(int,int,boolean) -> a
 com.bitbill.www.common.presenter.BtcAddressMvpView -> com.bitbill.www.common.b.f:
-    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> y_
+    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> z_
     void getWalletFail() -> c
-    void refreshAddressFail(boolean) -> b_
-    void refreshAddressSuccess(java.lang.String,boolean) -> a
-    void reachAddressIndexLimit() -> z_
+    void refreshAddressFail(boolean,boolean) -> a
+    void refreshAddressSuccess(java.lang.String,boolean,boolean) -> a
+    void reachAddressIndexLimit(boolean) -> b_
     void loadAddressSuccess(java.lang.String) -> a
     void loadAddressFail() -> A_
-    void limitAddress(boolean) -> b
 com.bitbill.www.common.presenter.BtcAddressPresenter -> com.bitbill.www.common.b.g:
     void <init>(com.bitbill.www.model.address.AddressModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
     void loadAddress() -> e_
-    void checkAddressUsed() -> c
-    void refreshAddress(int,int) -> a
-    void checkLastAddressIndex(long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> a
-    void getBitcoinAddressByMasterXPublicKey(long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> b
-    void getBitcoinContinuousAddress(long,long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> a
-    void updateAddressIndex(com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.String[],java.lang.Long,boolean,boolean) -> a
+    void loadAddressByIndex(com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.Long) -> a
+    void refreshAddress(boolean) -> a
+    void refreshAddress(int,int,boolean) -> a
+    void checkLastAddressIndex(long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean,boolean) -> a
+    void getBitcoinAddressByMasterXPublicKey(long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean,boolean) -> b
+    void getBitcoinContinuousAddress(long,long,com.bitbill.www.model.wallet.db.entity.Wallet,boolean,boolean) -> a
+    void updateAddressIndex(com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.String[],java.lang.Long,boolean,boolean,boolean) -> a
     boolean isValidWallet() -> j
     boolean isValidPublicKey() -> i
+    void access$000(com.bitbill.www.common.presenter.BtcAddressPresenter,com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.Long) -> a
 com.bitbill.www.common.presenter.BtcAddressPresenter$1 -> com.bitbill.www.common.b.g$1:
+    com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> a
+    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> b
+    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,com.bitbill.www.model.wallet.db.entity.Wallet) -> <init>
+    void onNext(java.lang.Boolean) -> a
+    void onError(java.lang.Throwable) -> onError
+    void onNext(java.lang.Object) -> onNext
+com.bitbill.www.common.presenter.BtcAddressPresenter$2 -> com.bitbill.www.common.b.g$2:
     com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> a
     java.lang.Long val$lastAddressIndex -> b
     com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> c
     void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,com.bitbill.www.model.wallet.db.entity.Wallet,java.lang.Long) -> <init>
     void call(java.lang.String,com.bitbill.www.crypto.entity.JsResult) -> a
-com.bitbill.www.common.presenter.BtcAddressPresenter$2 -> com.bitbill.www.common.b.g$2:
-    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> a
-    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter) -> <init>
+com.bitbill.www.common.presenter.BtcAddressPresenter$3 -> com.bitbill.www.common.b.g$3:
+    boolean val$silence -> a
+    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> b
+    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,boolean) -> <init>
     void onNext(java.util.List) -> a
     void onError(java.lang.Throwable) -> onError
     void onNext(java.lang.Object) -> onNext
-com.bitbill.www.common.presenter.BtcAddressPresenter$3 -> com.bitbill.www.common.b.g$3:
+com.bitbill.www.common.presenter.BtcAddressPresenter$4 -> com.bitbill.www.common.b.g$4:
     int val$option -> a
     com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> b
-    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> c
-    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,int,com.bitbill.www.model.wallet.db.entity.Wallet) -> <init>
+    boolean val$silence -> c
+    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> d
+    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,int,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> <init>
     void onNext(com.bitbill.www.common.base.model.network.api.ApiResponse) -> a
     void onError(java.lang.Throwable) -> onError
     void onNext(java.lang.Object) -> onNext
-com.bitbill.www.common.presenter.BtcAddressPresenter$4 -> com.bitbill.www.common.b.g$4:
-    boolean val$isInternal -> a
-    com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> b
-    long val$index -> c
-    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> d
-    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,boolean,com.bitbill.www.model.wallet.db.entity.Wallet,long) -> <init>
-    void call(java.lang.String,com.bitbill.www.crypto.entity.JsResult) -> a
 com.bitbill.www.common.presenter.BtcAddressPresenter$5 -> com.bitbill.www.common.b.g$5:
     boolean val$isInternal -> a
-    long val$toIndex -> b
-    long val$fromIndex -> c
-    com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> d
+    boolean val$silence -> b
+    com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> c
+    long val$index -> d
     com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> e
-    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,boolean,long,long,com.bitbill.www.model.wallet.db.entity.Wallet) -> <init>
+    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,boolean,boolean,com.bitbill.www.model.wallet.db.entity.Wallet,long) -> <init>
     void call(java.lang.String,com.bitbill.www.crypto.entity.JsResult) -> a
 com.bitbill.www.common.presenter.BtcAddressPresenter$6 -> com.bitbill.www.common.b.g$6:
+    boolean val$isInternal -> a
+    boolean val$silence -> b
+    long val$toIndex -> c
+    long val$fromIndex -> d
+    com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> e
+    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> f
+    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,boolean,boolean,long,long,com.bitbill.www.model.wallet.db.entity.Wallet) -> <init>
+    void call(java.lang.String,com.bitbill.www.crypto.entity.JsResult) -> a
+com.bitbill.www.common.presenter.BtcAddressPresenter$7 -> com.bitbill.www.common.b.g$7:
     boolean val$isLoad -> a
     com.bitbill.www.model.wallet.db.entity.Wallet val$wallet -> b
     boolean val$isInternal -> c
-    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> d
-    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,boolean,com.bitbill.www.model.wallet.db.entity.Wallet,boolean) -> <init>
+    boolean val$silence -> d
+    com.bitbill.www.common.presenter.BtcAddressPresenter this$0 -> e
+    void <init>(com.bitbill.www.common.presenter.BtcAddressPresenter,boolean,com.bitbill.www.model.wallet.db.entity.Wallet,boolean,boolean) -> <init>
     void onNext(java.lang.Boolean) -> a
     void onError(java.lang.Throwable) -> onError
     void onNext(java.lang.Object) -> onNext
@@ -27226,7 +27239,7 @@ com.bitbill.www.common.presenter.DownloadPresenter_Factory -> com.bitbill.www.co
     dagger.internal.Factory create(javax.inject.Provider,javax.inject.Provider,javax.inject.Provider) -> a
     java.lang.Object get() -> get
 com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter -> com.bitbill.www.common.b.m:
-    void getCacheVersion() -> g_
+    void getCacheVersion() -> f_
 com.bitbill.www.common.presenter.GetCacheVersionMvpView -> com.bitbill.www.common.b.n:
     void getResponseAddressIndex(long,long,com.bitbill.www.model.wallet.db.entity.Wallet) -> a
     void getDiffVersionWallets(java.util.List) -> a
@@ -27234,7 +27247,7 @@ com.bitbill.www.common.presenter.GetCacheVersionMvpView -> com.bitbill.www.commo
 com.bitbill.www.common.presenter.GetCacheVersionPresenter -> com.bitbill.www.common.b.o:
     com.bitbill.www.model.address.AddressModel mAddressModel -> a
     void <init>(com.bitbill.www.model.wallet.WalletModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
-    void getCacheVersion() -> g_
+    void getCacheVersion() -> f_
     void updateWalletList(java.util.List) -> b
     io.reactivex.ObservableSource lambda$getCacheVersion$1$GetCacheVersionPresenter(java.util.List) -> a
     com.bitbill.www.common.presenter.GetCacheVersionPresenter$CombineCacheResponse lambda$null$0$GetCacheVersionPresenter(com.bitbill.www.common.base.model.network.api.ApiResponse,java.util.List) -> a
@@ -27278,12 +27291,12 @@ com.bitbill.www.common.presenter.GetCacheVersionPresenter_Factory -> com.bitbill
 com.bitbill.www.common.presenter.GetCacheVersionPresenter_MembersInjector -> com.bitbill.www.common.b.s:
     void injectMAddressModel(com.bitbill.www.common.presenter.GetCacheVersionPresenter,com.bitbill.www.model.address.AddressModel) -> a
 com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter -> com.bitbill.www.common.b.t:
-    void getExchangeRate() -> h_
+    void getExchangeRate() -> g_
 com.bitbill.www.common.presenter.GetExchangeRateMvpView -> com.bitbill.www.common.b.u:
     void getBtcRateSuccess(double,double) -> a
 com.bitbill.www.common.presenter.GetExchangeRatePresenter -> com.bitbill.www.common.b.v:
     void <init>(com.bitbill.www.model.app.AppModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
-    void getExchangeRate() -> h_
+    void getExchangeRate() -> g_
 com.bitbill.www.common.presenter.GetExchangeRatePresenter$1 -> com.bitbill.www.common.b.v$1:
     com.bitbill.www.common.presenter.GetExchangeRatePresenter this$0 -> a
     void <init>(com.bitbill.www.common.presenter.GetExchangeRatePresenter) -> <init>
@@ -27301,14 +27314,15 @@ com.bitbill.www.common.presenter.GetExchangeRatePresenter_Factory -> com.bitbill
 com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter -> com.bitbill.www.common.b.x:
     void parseTxInfo(java.util.List) -> a
 com.bitbill.www.common.presenter.ParseTxInfoMvpView -> com.bitbill.www.common.b.y:
-    void requireTxInfoList() -> m_
-    void getTxInfoListFail() -> n_
+    void requireTxInfoList() -> n_
+    void getTxInfoListFail() -> o_
     void parsedTxItemList(java.util.List) -> b
-    void parsedTxItemListFail() -> o_
+    void parsedTxItemListFail() -> p_
 com.bitbill.www.common.presenter.ParseTxInfoPresenter -> com.bitbill.www.common.b.z:
     com.bitbill.www.model.address.AddressModel mAddressModel -> a
     void <init>(com.bitbill.www.model.transaction.TxModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
     void parseTxInfo(java.util.List) -> a
+    void updateAddressList(java.util.List) -> d
     boolean isValidTxInfoList(java.util.List) -> b
     io.reactivex.ObservableSource lambda$parseTxInfo$0$ParseTxInfoPresenter(java.util.List) -> c
 com.bitbill.www.common.presenter.ParseTxInfoPresenter$$Lambda$0 -> com.bitbill.www.common.b.aa:
@@ -27319,6 +27333,12 @@ com.bitbill.www.common.presenter.ParseTxInfoPresenter$1 -> com.bitbill.www.commo
     com.bitbill.www.common.presenter.ParseTxInfoPresenter this$0 -> a
     void <init>(com.bitbill.www.common.presenter.ParseTxInfoPresenter) -> <init>
     void onNext(java.util.List) -> a
+    void onError(java.lang.Throwable) -> onError
+    void onNext(java.lang.Object) -> onNext
+com.bitbill.www.common.presenter.ParseTxInfoPresenter$2 -> com.bitbill.www.common.b.z$2:
+    com.bitbill.www.common.presenter.ParseTxInfoPresenter this$0 -> a
+    void <init>(com.bitbill.www.common.presenter.ParseTxInfoPresenter) -> <init>
+    void onNext(java.lang.Boolean) -> a
     void onError(java.lang.Throwable) -> onError
     void onNext(java.lang.Object) -> onNext
 com.bitbill.www.common.presenter.ParseTxInfoPresenter_Factory -> com.bitbill.www.common.b.ab:
@@ -27370,16 +27390,18 @@ com.bitbill.www.common.presenter.SyncAddressPresenter_Factory -> com.bitbill.www
     dagger.internal.Factory create(javax.inject.Provider,javax.inject.Provider,javax.inject.Provider) -> a
     java.lang.Object get() -> get
 com.bitbill.www.common.presenter.UpdateMvpPresenter -> com.bitbill.www.common.b.ah:
-    void getConfig() -> i_
+    void getConfig() -> h_
     void checkUpdate() -> c
+    void setUpdateCancelTime() -> i_
 com.bitbill.www.common.presenter.UpdateMvpView -> com.bitbill.www.common.b.ai:
     void needUpdateApp(boolean,boolean,java.lang.String,java.lang.String,java.lang.String) -> a
     void getConfigSuccess(java.lang.String,java.lang.String) -> a
     void getConfigFail() -> a
 com.bitbill.www.common.presenter.UpdatePresenter -> com.bitbill.www.common.b.aj:
     void <init>(com.bitbill.www.model.app.AppModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
-    void getConfig() -> i_
+    void getConfig() -> h_
     void checkUpdate() -> c
+    void setUpdateCancelTime() -> i_
 com.bitbill.www.common.presenter.UpdatePresenter$1 -> com.bitbill.www.common.b.aj$1:
     com.bitbill.www.common.presenter.UpdatePresenter this$0 -> a
     void <init>(com.bitbill.www.common.presenter.UpdatePresenter) -> <init>
@@ -27395,14 +27417,14 @@ com.bitbill.www.common.presenter.UpdatePresenter_Factory -> com.bitbill.www.comm
     dagger.internal.Factory create(javax.inject.Provider,javax.inject.Provider,javax.inject.Provider) -> a
     java.lang.Object get() -> get
 com.bitbill.www.common.presenter.ValidateAddressMvpPresenter -> com.bitbill.www.common.b.al:
-    void validateBtcAddress() -> j_
+    void validateBtcAddress() -> k_
 com.bitbill.www.common.presenter.ValidateAddressMvpView -> com.bitbill.www.common.b.am:
     void validateAddress(boolean) -> a
-    void requireAddress() -> u_
+    void requireAddress() -> v_
     java.lang.String getAddress() -> c
 com.bitbill.www.common.presenter.ValidateAddressPresenter -> com.bitbill.www.common.b.an:
     void <init>(com.bitbill.www.model.address.AddressModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
-    void validateBtcAddress() -> j_
+    void validateBtcAddress() -> k_
     boolean isValidAddress() -> i
     void lambda$validateBtcAddress$0$ValidateAddressPresenter(java.lang.String,com.bitbill.www.crypto.entity.JsResult) -> a
 com.bitbill.www.common.presenter.ValidateAddressPresenter$$Lambda$0 -> com.bitbill.www.common.b.ao:
@@ -27418,13 +27440,13 @@ com.bitbill.www.common.presenter.ValidateAddressPresenter_Factory -> com.bitbill
     dagger.internal.Factory create(javax.inject.Provider,javax.inject.Provider,javax.inject.Provider) -> a
     java.lang.Object get() -> get
 com.bitbill.www.common.presenter.WalletMvpPresenter -> com.bitbill.www.common.b.aq:
-    void loadWallets() -> k_
+    void loadWallets() -> l_
 com.bitbill.www.common.presenter.WalletMvpView -> com.bitbill.www.common.b.ar:
     void loadWalletsSuccess(java.util.List) -> c
     void loadWalletsFail() -> h
 com.bitbill.www.common.presenter.WalletPresenter -> com.bitbill.www.common.b.as:
     void <init>(com.bitbill.www.model.wallet.WalletModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
-    void loadWallets() -> k_
+    void loadWallets() -> l_
 com.bitbill.www.common.presenter.WalletPresenter$1 -> com.bitbill.www.common.b.as$1:
     com.bitbill.www.common.presenter.WalletPresenter this$0 -> a
     void <init>(com.bitbill.www.common.presenter.WalletPresenter) -> <init>
@@ -27568,7 +27590,7 @@ com.bitbill.www.common.utils.StringUtils -> com.bitbill.www.common.d.k:
     boolean isZero(java.lang.String) -> p
     java.util.List removeDuplicateList(java.util.List) -> c
     boolean isNone(java.lang.String) -> q
-    boolean equals(java.util.Locale,java.util.Locale) -> a
+    boolean isZhCN(java.util.Locale) -> a
     void <clinit>() -> <clinit>
 com.bitbill.www.common.utils.UIHelper -> com.bitbill.www.common.d.l:
     void openBrower(android.content.Context,java.lang.String) -> a
@@ -28279,10 +28301,7 @@ com.bitbill.www.common.widget.dialog.UpdateConfirmDialog -> com.bitbill.www.comm
     java.lang.String CONFIRM_CANCEL -> CONFIRM_CANCEL
     android.widget.TextView dialogMessage -> dialogMessage
     void <init>() -> <init>
-    com.bitbill.www.common.widget.dialog.UpdateConfirmDialog newInstance(java.lang.String,java.lang.String,boolean) -> newInstance
-    com.bitbill.www.common.widget.dialog.UpdateConfirmDialog newInstance(java.lang.String,java.lang.String,java.lang.String,boolean) -> newInstance
     com.bitbill.www.common.widget.dialog.UpdateConfirmDialog newInstance(java.lang.String,java.lang.String,java.lang.String,boolean,boolean) -> newInstance
-    com.bitbill.www.common.widget.dialog.UpdateConfirmDialog newInstance(java.lang.String,boolean) -> newInstance
     void onBeforeSetContentLayout() -> onBeforeSetContentLayout
     void init(android.os.Bundle) -> init
     void initView() -> initView
@@ -29235,6 +29254,7 @@ com.bitbill.www.model.address.AddressModelManager -> com.bitbill.www.model.addre
     com.bitbill.www.model.address.db.entity.Address getAddressByName(java.lang.String) -> getAddressByName
     com.bitbill.www.model.address.db.entity.Address getAddressByNameAndWalletId(java.lang.String,java.lang.Long) -> getAddressByNameAndWalletId
     java.util.List getWalletsByAddresses(java.util.List) -> getWalletsByAddresses
+    io.reactivex.Observable checkAddressIsUsed(java.lang.String) -> checkAddressIsUsed
     com.bitbill.www.common.base.model.network.api.ApiHeader getApiHeader() -> getApiHeader
     io.reactivex.Observable refreshAddress(com.bitbill.www.model.address.network.entity.RefreshAddressRequest) -> refreshAddress
 com.bitbill.www.model.address.AddressModelManager_Factory -> com.bitbill.www.model.address.AddressModelManager_Factory:
@@ -29258,6 +29278,7 @@ com.bitbill.www.model.address.db.AddressDb -> com.bitbill.www.model.address.db.A
     com.bitbill.www.model.address.db.entity.Address getAddressByName(java.lang.String) -> getAddressByName
     com.bitbill.www.model.address.db.entity.Address getAddressByNameAndWalletId(java.lang.String,java.lang.Long) -> getAddressByNameAndWalletId
     java.util.List getWalletsByAddresses(java.util.List) -> getWalletsByAddresses
+    io.reactivex.Observable checkAddressIsUsed(java.lang.String) -> checkAddressIsUsed
 com.bitbill.www.model.address.db.AddressDbHelper -> com.bitbill.www.model.address.db.AddressDbHelper:
     com.bitbill.model.db.dao.AddressDao mAddressDao -> mAddressDao
     com.bitbill.model.db.dao.WalletDao mWalletDao -> mWalletDao
@@ -29275,6 +29296,8 @@ com.bitbill.www.model.address.db.AddressDbHelper -> com.bitbill.www.model.addres
     com.bitbill.www.model.address.db.entity.Address getAddressByName(java.lang.String) -> getAddressByName
     com.bitbill.www.model.address.db.entity.Address getAddressByNameAndWalletId(java.lang.String,java.lang.Long) -> getAddressByNameAndWalletId
     java.util.List getWalletsByAddresses(java.util.List) -> getWalletsByAddresses
+    io.reactivex.Observable checkAddressIsUsed(java.lang.String) -> checkAddressIsUsed
+    java.lang.Boolean lambda$checkAddressIsUsed$11$AddressDbHelper(java.lang.String) -> lambda$checkAddressIsUsed$11$AddressDbHelper
     java.util.List lambda$getExtenalAddressLimitByWalletId$10$AddressDbHelper(java.lang.Long,int) -> lambda$getExtenalAddressLimitByWalletId$10$AddressDbHelper
     java.util.List lambda$getAddressByWalletId$9$AddressDbHelper(java.lang.Long) -> lambda$getAddressByWalletId$9$AddressDbHelper
     java.util.List lambda$getAddressById$8$AddressDbHelper(java.lang.Long) -> lambda$getAddressById$8$AddressDbHelper
@@ -29297,6 +29320,11 @@ com.bitbill.www.model.address.db.AddressDbHelper$$Lambda$1 -> com.bitbill.www.mo
     void <init>(com.bitbill.www.model.address.db.AddressDbHelper,java.util.List) -> <init>
     java.lang.Object call() -> call
 com.bitbill.www.model.address.db.AddressDbHelper$$Lambda$10 -> com.bitbill.www.model.address.db.AddressDbHelper$$Lambda$10:
+    com.bitbill.www.model.address.db.AddressDbHelper arg$1 -> arg$1
+    java.lang.String arg$2 -> arg$2
+    void <init>(com.bitbill.www.model.address.db.AddressDbHelper,java.lang.String) -> <init>
+    java.lang.Object call() -> call
+com.bitbill.www.model.address.db.AddressDbHelper$$Lambda$11 -> com.bitbill.www.model.address.db.AddressDbHelper$$Lambda$11:
     com.bitbill.www.model.address.db.AddressDbHelper arg$1 -> arg$1
     java.util.List arg$2 -> arg$2
     com.bitbill.www.model.wallet.db.entity.Wallet arg$3 -> arg$3
@@ -29462,6 +29490,8 @@ com.bitbill.www.model.app.AppModelManager -> com.bitbill.www.model.app.AppModelM
     void setUpdateVersion(java.lang.String) -> setUpdateVersion
     java.lang.String getUpdateLog() -> getUpdateLog
     void setUpdateLog(java.lang.String) -> setUpdateLog
+    long getUpdateCancelTime() -> getUpdateCancelTime
+    void setUpdateCancelTime(long) -> setUpdateCancelTime
     double getBtcCnyValue() -> getBtcCnyValue
     void setBtcCnyValue(double) -> setBtcCnyValue
     double getBtcUsdValue() -> getBtcUsdValue
@@ -29551,6 +29581,7 @@ com.bitbill.www.model.app.prefs.AppPreferences -> com.bitbill.www.model.app.pref
     java.lang.String FORCE_VERSION -> FORCE_VERSION
     java.lang.String UPDATE_VERSION -> UPDATE_VERSION
     java.lang.String UPDATE_LOG -> UPDATE_LOG
+    java.lang.String UPDATE_CANCEL_TIME -> UPDATE_CANCEL_TIME
     java.lang.String APK_URL -> APK_URL
     java.lang.String BTC_CNY_VALUE -> BTC_CNY_VALUE
     java.lang.String BTC_USD_VALUE -> BTC_USD_VALUE
@@ -29576,6 +29607,8 @@ com.bitbill.www.model.app.prefs.AppPreferences -> com.bitbill.www.model.app.pref
     void setUpdateVersion(java.lang.String) -> setUpdateVersion
     java.lang.String getUpdateLog() -> getUpdateLog
     void setUpdateLog(java.lang.String) -> setUpdateLog
+    long getUpdateCancelTime() -> getUpdateCancelTime
+    void setUpdateCancelTime(long) -> setUpdateCancelTime
     double getBtcCnyValue() -> getBtcCnyValue
     void setBtcCnyValue(double) -> setBtcCnyValue
     double getBtcUsdValue() -> getBtcUsdValue
@@ -29614,6 +29647,8 @@ com.bitbill.www.model.app.prefs.AppPreferencesHelper -> com.bitbill.www.model.ap
     void setUpdateVersion(java.lang.String) -> setUpdateVersion
     java.lang.String getUpdateLog() -> getUpdateLog
     void setUpdateLog(java.lang.String) -> setUpdateLog
+    long getUpdateCancelTime() -> getUpdateCancelTime
+    void setUpdateCancelTime(long) -> setUpdateCancelTime
     double getBtcCnyValue() -> getBtcCnyValue
     void setBtcCnyValue(double) -> setBtcCnyValue
     double getBtcUsdValue() -> getBtcUsdValue
@@ -31035,34 +31070,36 @@ com.bitbill.www.ui.main.MainActivity -> com.bitbill.www.ui.main.MainActivity:
     com.bitbill.www.ui.main.MainMvpPresenter getMvpPresenter() -> p
     void injectComponent() -> s
     void onCreate(android.os.Bundle) -> onCreate
-    void doBindService() -> y
+    void doBindService() -> z
     void onDestroy() -> onDestroy
     void onBeforeSetContentLayout() -> onBeforeSetContentLayout
     void init(android.os.Bundle) -> init
     void initView() -> initView
-    void setUpDrawerLayout() -> z
-    void setUpViewpager() -> A
+    void setUpDrawerLayout() -> A
+    void setUpViewpager() -> B
+    int getIndex() -> q
     void changeThemeColor(boolean) -> b
-    void setupBottomSheet() -> B
-    void hideSelectWallet() -> C
-    void hideMaskView() -> D
-    void showSelectWallet() -> q
+    void setupBottomSheet() -> C
+    void hideSelectWallet() -> D
+    void hideMaskView() -> E
+    void showSelectWallet() -> t
     void initData() -> initData
     int getLayoutId() -> getLayoutId
     boolean onNavigationItemSelected(android.view.MenuItem) -> a
     void OnTransactionRecordItemClick(com.bitbill.www.model.transaction.db.entity.TxRecord) -> a
     void loadWalletsSuccess(java.util.List) -> c
     void reloadWalletInfo(java.util.List) -> h
+    void loadAssetWalletInfo() -> F
     void loadWalletsFail() -> h
-    java.util.List getWallets() -> l_
+    java.util.List getWallets() -> m_
     void getWalletsFail() -> c
-    void getBalanceFail() -> E_
+    void getBalanceFail() -> F_
     void getBalanceSuccess(java.util.List,java.lang.Long) -> a
     void listUnconfirmSuccess(java.util.List) -> d
     void loadUnconfirmList(java.util.List) -> i
-    void listUnconfirmFail() -> t
+    void listUnconfirmFail() -> u
     void loadUnconfirmSuccess(java.util.List) -> e
-    void loadUnconfirmFail() -> u
+    void loadUnconfirmFail() -> v
     void onBackPressed() -> onBackPressed
     void onStart() -> onStart
     void onRequestPermissionsResult(int,java.lang.String[],int[]) -> onRequestPermissionsResult
@@ -31077,18 +31114,18 @@ com.bitbill.www.ui.main.MainActivity -> com.bitbill.www.ui.main.MainActivity:
     void updateLocalCache(com.bitbill.www.model.wallet.network.socket.ContextBean) -> a
     void onUpdateContactEvent(com.bitbill.www.model.eventbus.ContactUpdateEvent) -> onUpdateContactEvent
     void onWalletDeleteSuccess(com.bitbill.www.model.eventbus.WalletDeleteEvent) -> onWalletDeleteSuccess
-    void addContact() -> v
-    void requireTxInfoList() -> m_
-    void getTxInfoListFail() -> n_
+    void addContact() -> w
+    void requireTxInfoList() -> n_
+    void getTxInfoListFail() -> o_
     void parsedTxItemList(java.util.List) -> b
-    void parsedTxItemListFail() -> o_
+    void parsedTxItemListFail() -> p_
     void getResponseAddressIndex(long,long,com.bitbill.www.model.wallet.db.entity.Wallet) -> a
     void getDiffVersionWallets(java.util.List) -> a
     void getBlockHeight(long) -> a
     void showLoading() -> showLoading
-    void getWalletFail() -> w
+    void getWalletFail() -> D_
     void getTxRecordSuccess(java.util.List) -> f
-    void getTxRecordFail() -> D_
+    void getTxRecordFail() -> E_
     void loadTxRecordSuccess(java.util.List) -> g
     void needUpdateApp(boolean,boolean,java.lang.String,java.lang.String,java.lang.String) -> a
     void getConfigSuccess(java.lang.String,java.lang.String) -> a
@@ -31101,13 +31138,13 @@ com.bitbill.www.ui.main.MainActivity -> com.bitbill.www.ui.main.MainActivity:
     int access$102(com.bitbill.www.ui.main.MainActivity,int) -> a
     int access$100(com.bitbill.www.ui.main.MainActivity) -> b
     void access$200(com.bitbill.www.ui.main.MainActivity,boolean) -> a
-    com.bitbill.www.ui.main.send.SendFragment access$300(com.bitbill.www.ui.main.MainActivity) -> c
-    void access$400(com.bitbill.www.ui.main.MainActivity) -> d
-    int access$500(com.bitbill.www.ui.main.MainActivity) -> e
-    int access$502(com.bitbill.www.ui.main.MainActivity,int) -> b
-    java.util.List access$600(com.bitbill.www.ui.main.MainActivity) -> f
-    com.bitbill.www.model.wallet.db.entity.Wallet access$702(com.bitbill.www.ui.main.MainActivity,com.bitbill.www.model.wallet.db.entity.Wallet) -> a
-    com.bitbill.www.ui.main.receive.ReceiveFragment access$800(com.bitbill.www.ui.main.MainActivity) -> g
+    com.bitbill.www.ui.main.receive.ReceiveFragment access$300(com.bitbill.www.ui.main.MainActivity) -> c
+    com.bitbill.www.ui.main.send.SendFragment access$400(com.bitbill.www.ui.main.MainActivity) -> d
+    void access$500(com.bitbill.www.ui.main.MainActivity) -> e
+    int access$600(com.bitbill.www.ui.main.MainActivity) -> f
+    int access$602(com.bitbill.www.ui.main.MainActivity,int) -> b
+    java.util.List access$700(com.bitbill.www.ui.main.MainActivity) -> g
+    com.bitbill.www.model.wallet.db.entity.Wallet access$802(com.bitbill.www.ui.main.MainActivity,com.bitbill.www.model.wallet.db.entity.Wallet) -> a
     void access$900(com.bitbill.www.ui.main.MainActivity) -> h
     com.bitbill.www.common.widget.dialog.UpdateAppDialog access$1002(com.bitbill.www.ui.main.MainActivity,com.bitbill.www.common.widget.dialog.UpdateAppDialog) -> a
     com.bitbill.www.common.widget.dialog.UpdateAppDialog access$1000(com.bitbill.www.ui.main.MainActivity) -> i
@@ -31174,18 +31211,18 @@ com.bitbill.www.ui.main.MainActivity_ViewBinding -> com.bitbill.www.ui.main.Main
     void <init>(com.bitbill.www.ui.main.MainActivity,android.view.View) -> <init>
     void unbind() -> unbind
 com.bitbill.www.ui.main.MainMvpPresenter -> com.bitbill.www.ui.main.e:
-    void listUnconfirm() -> t_
+    void listUnconfirm() -> u_
     void loadUnConfirmedList() -> c
 com.bitbill.www.ui.main.MainMvpView -> com.bitbill.www.ui.main.f:
-    java.util.List getWallets() -> l_
+    java.util.List getWallets() -> m_
     void getWalletsFail() -> c
     void listUnconfirmSuccess(java.util.List) -> d
-    void listUnconfirmFail() -> t
+    void listUnconfirmFail() -> u
     void loadUnconfirmSuccess(java.util.List) -> e
-    void loadUnconfirmFail() -> u
+    void loadUnconfirmFail() -> v
 com.bitbill.www.ui.main.MainPresenter -> com.bitbill.www.ui.main.g:
     void <init>(com.bitbill.www.model.transaction.TxModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
-    void listUnconfirm() -> t_
+    void listUnconfirm() -> u_
     void loadUnConfirmedList() -> c
     boolean isValidWallets() -> i
 com.bitbill.www.ui.main.MainPresenter$1 -> com.bitbill.www.ui.main.g$1:
@@ -31344,7 +31381,7 @@ com.bitbill.www.ui.main.contact.AddBtcContactByAddressFragment -> com.bitbill.ww
     java.lang.String getContactName() -> n
     void requireContactName() -> o
     void validateAddress(boolean) -> a
-    void requireAddress() -> u_
+    void requireAddress() -> v_
     java.lang.String getRemark() -> p
     void addContactSuccess() -> q
     void addContactFail(java.lang.String) -> d
@@ -31382,7 +31419,7 @@ com.bitbill.www.ui.main.contact.AddContactByAddressMvpView -> com.bitbill.www.ui
     java.lang.String getAddress() -> c
     java.lang.String getContactName() -> n
     void requireContactName() -> o
-    void requireAddress() -> u_
+    void requireAddress() -> v_
     java.lang.String getRemark() -> p
     void addContactSuccess() -> q
     void addContactFail(java.lang.String) -> d
@@ -32095,7 +32132,7 @@ com.bitbill.www.ui.main.my.SystemSettingMvpPresenter -> com.bitbill.www.ui.main.
     void setSoundEnabled(boolean) -> a
     com.bitbill.www.model.app.prefs.AppPreferences$SelectedCurrency getSelectedCurrency() -> c
     void setSelectedCurrency(com.bitbill.www.model.app.prefs.AppPreferences$SelectedCurrency) -> a
-    java.util.Locale getSelectedLocale() -> x_
+    java.util.Locale getSelectedLocale() -> y_
     void setSelectedLocale(java.util.Locale) -> a
     boolean needUpdateLocale(java.util.Locale) -> b
 com.bitbill.www.ui.main.my.SystemSettingMvpView -> com.bitbill.www.ui.main.my.y:
@@ -32105,7 +32142,7 @@ com.bitbill.www.ui.main.my.SystemSettingPresenter -> com.bitbill.www.ui.main.my.
     void setSoundEnabled(boolean) -> a
     com.bitbill.www.model.app.prefs.AppPreferences$SelectedCurrency getSelectedCurrency() -> c
     void setSelectedCurrency(com.bitbill.www.model.app.prefs.AppPreferences$SelectedCurrency) -> a
-    java.util.Locale getSelectedLocale() -> x_
+    java.util.Locale getSelectedLocale() -> y_
     void setSelectedLocale(java.util.Locale) -> a
     boolean needUpdateLocale(java.util.Locale) -> b
 com.bitbill.www.ui.main.my.SystemSettingPresenter_Factory -> com.bitbill.www.ui.main.my.aa:
@@ -32162,14 +32199,13 @@ com.bitbill.www.ui.main.my.WalletAddressFragment -> com.bitbill.www.ui.main.my.W
     int getItemLayoutId() -> m
     com.bitbill.www.common.widget.decoration.DividerDecoration getDecoration() -> q
     int getLayoutId() -> getLayoutId
-    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> y_
+    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> z_
     void getWalletFail() -> c
-    void refreshAddressFail(boolean) -> b_
-    void refreshAddressSuccess(java.lang.String,boolean) -> a
-    void reachAddressIndexLimit() -> z_
+    void refreshAddressFail(boolean,boolean) -> a
+    void refreshAddressSuccess(java.lang.String,boolean,boolean) -> a
+    void reachAddressIndexLimit(boolean) -> b_
     void loadAddressSuccess(java.lang.String) -> a
     void loadAddressFail() -> A_
-    void limitAddress(boolean) -> b
     void getTxElementSuccess(java.util.List,java.util.List) -> a
     void getTxElementFail() -> g
     void onViewClicked() -> onViewClicked
@@ -32193,7 +32229,7 @@ com.bitbill.www.ui.main.my.WalletAddressMvpPresenter -> com.bitbill.www.ui.main.
     void requestListUnspent() -> a
     void updateAddressBalance(java.util.List) -> a
 com.bitbill.www.ui.main.my.WalletAddressMvpView -> com.bitbill.www.ui.main.my.ad:
-    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> y_
+    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> z_
     void getWalletFail() -> c
     void getTxElementSuccess(java.util.List,java.util.List) -> a
     void getTxElementFail() -> g
@@ -32390,14 +32426,14 @@ com.bitbill.www.ui.main.receive.BtcReceiveFragment -> com.bitbill.www.ui.main.re
     void createAddressQrcodeSuccess(android.graphics.Bitmap) -> a
     void createAddressQrcodeFail() -> o
     void loadAddressFail() -> A_
-    void limitAddress(boolean) -> b
     java.lang.String getCurrentAddress() -> p
-    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> y_
+    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> z_
     void getWalletFail() -> c
-    void refreshAddressFail(boolean) -> b_
-    void refreshAddressSuccess(java.lang.String,boolean) -> a
-    void reachAddressIndexLimit() -> z_
+    void refreshAddressFail(boolean,boolean) -> a
+    void refreshAddressSuccess(java.lang.String,boolean,boolean) -> a
+    void reachAddressIndexLimit(boolean) -> b_
     void loadAddressSuccess(java.lang.String) -> a
+    void showLoading() -> showLoading
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
     com.bitbill.www.model.wallet.db.entity.Wallet access$000(com.bitbill.www.ui.main.receive.BtcReceiveFragment) -> a
 com.bitbill.www.ui.main.receive.BtcReceiveFragment$1 -> com.bitbill.www.ui.main.receive.BtcReceiveFragment$1:
@@ -32435,7 +32471,7 @@ com.bitbill.www.ui.main.receive.BtcReceivePresenter -> com.bitbill.www.ui.main.r
     boolean isValidBtcAddress(java.lang.String) -> b
 com.bitbill.www.ui.main.receive.BtcReceivePresenter$1 -> com.bitbill.www.ui.main.receive.d$1:
     com.bitbill.www.ui.main.receive.BtcReceivePresenter this$0 -> a
-    void <init>(com.bitbill.www.ui.main.receive.BtcReceivePresenter,com.bitbill.www.common.base.view.MvpView) -> <init>
+    void <init>(com.bitbill.www.ui.main.receive.BtcReceivePresenter) -> <init>
     void onNext(android.graphics.Bitmap) -> a
     void onError(java.lang.Throwable) -> onError
     void onNext(java.lang.Object) -> onNext
@@ -32467,8 +32503,8 @@ com.bitbill.www.ui.main.receive.ReceiveFragment -> com.bitbill.www.ui.main.recei
     void lazyData() -> c_
     void onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    void refreshBtcAddress() -> q
-    void loadBtcAddress() -> t
+    void refreshBtcAddress() -> t
+    void loadBtcAddress() -> q
     void setSelectedWallet(com.bitbill.www.model.wallet.db.entity.Wallet) -> a
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
 com.bitbill.www.ui.main.receive.ReceiveFragment$1 -> com.bitbill.www.ui.main.receive.ReceiveFragment$1:
@@ -32525,10 +32561,10 @@ com.bitbill.www.ui.main.receive.ScanPayActivity -> com.bitbill.www.ui.main.recei
     void getTxHashFail() -> z
     void addressMatchTx(boolean,com.bitbill.www.model.transaction.network.entity.TxElement) -> a
     void onReceiveAmountEvent(com.bitbill.www.model.eventbus.ReceiveAmountEvent) -> onReceiveAmountEvent
-    void requireTxInfoList() -> m_
-    void getTxInfoListFail() -> n_
+    void requireTxInfoList() -> n_
+    void getTxInfoListFail() -> o_
     void parsedTxItemList(java.util.List) -> b
-    void parsedTxItemListFail() -> o_
+    void parsedTxItemListFail() -> p_
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
 com.bitbill.www.ui.main.receive.ScanPayActivity_MembersInjector -> com.bitbill.www.ui.main.receive.j:
     void injectMScanPayMvpPresenter(com.bitbill.www.ui.main.receive.ScanPayActivity,com.bitbill.www.ui.main.receive.ScanPayMvpPresenter) -> a
@@ -32639,7 +32675,7 @@ com.bitbill.www.ui.main.send.BtcSendFragment -> com.bitbill.www.ui.main.send.Btc
     void setSendAddress(java.lang.String) -> b
     void sendSuccess() -> i
     void validateAddress(boolean) -> a
-    void requireAddress() -> u_
+    void requireAddress() -> v_
     java.lang.String getAddress() -> c
     com.bitbill.www.model.contact.db.entity.Contact getSendContact() -> j
     void setSendContact(com.bitbill.www.model.contact.db.entity.Contact) -> a
@@ -32650,6 +32686,7 @@ com.bitbill.www.ui.main.send.BtcSendFragment -> com.bitbill.www.ui.main.send.Btc
     void requireWalletId() -> m
     void onDestroyView() -> onDestroyView
     void clearData() -> n
+    void showLoading() -> showLoading
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> r
     void lambda$initView$0$BtcSendFragment(android.view.View) -> a
     com.bitbill.www.model.contact.db.entity.Contact access$002(com.bitbill.www.ui.main.send.BtcSendFragment,com.bitbill.www.model.contact.db.entity.Contact) -> a
@@ -32917,7 +32954,7 @@ com.bitbill.www.ui.main.send.SendConfirmActivity -> com.bitbill.www.ui.main.send
     void setTvSendAmount(java.lang.String) -> e
     int getLayoutId() -> getLayoutId
     void onViewClicked() -> onViewClicked
-    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> y_
+    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> z_
     void sendTransactionSuccess(java.lang.String) -> c
     void sendSuccess() -> M
     void sendTransactionFail(java.lang.String) -> d
@@ -32942,12 +32979,11 @@ com.bitbill.www.ui.main.send.SendConfirmActivity -> com.bitbill.www.ui.main.send
     java.lang.String formatTime(int) -> d
     void amountNoEnough() -> H
     java.lang.String getRemark() -> I
-    void refreshAddressFail(boolean) -> b_
-    void refreshAddressSuccess(java.lang.String,boolean) -> a
-    void reachAddressIndexLimit() -> z_
+    void refreshAddressFail(boolean,boolean) -> a
+    void refreshAddressSuccess(java.lang.String,boolean,boolean) -> a
+    void reachAddressIndexLimit(boolean) -> b_
     void loadAddressSuccess(java.lang.String) -> a
     void loadAddressFail() -> A_
-    void limitAddress(boolean) -> b
     void hideLoading() -> hideLoading
     int getBestTime() -> J
     int getBestFeeByte() -> K
@@ -32996,7 +33032,7 @@ com.bitbill.www.ui.main.send.SendConfirmMvpPresenter -> com.bitbill.www.ui.main.
     void buildTransaction() -> c
     void computeFee() -> d
 com.bitbill.www.ui.main.send.SendConfirmMvpView -> com.bitbill.www.ui.main.send.l:
-    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> y_
+    com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> z_
     void sendTransactionFail(java.lang.String) -> d
     void sendTransactionSuccess(java.lang.String) -> c
     boolean isSendAll() -> t
@@ -33527,19 +33563,19 @@ com.bitbill.www.ui.wallet.info.BtcRecordFragment -> com.bitbill.www.ui.wallet.in
     void refreshBalanceLayout() -> D
     void setBtcValue() -> E
     com.bitbill.www.model.wallet.db.entity.Wallet getWallet() -> B
-    void getWalletFail() -> w
+    void getWalletFail() -> D_
     void getTxRecordSuccess(java.util.List) -> f
-    void getTxRecordFail() -> D_
+    void getTxRecordFail() -> E_
     void loadTxRecordSuccess(java.util.List) -> g
-    void requireTxInfoList() -> m_
-    void getTxInfoListFail() -> n_
+    void requireTxInfoList() -> n_
+    void getTxInfoListFail() -> o_
     void parsedTxItemList(java.util.List) -> b
-    void parsedTxItemListFail() -> o_
+    void parsedTxItemListFail() -> p_
     void getBtcRateSuccess(double,double) -> a
     void requestRecord() -> C
-    java.util.List getWallets() -> l_
+    java.util.List getWallets() -> m_
     void getWalletsFail() -> c
-    void getBalanceFail() -> E_
+    void getBalanceFail() -> F_
     void getBalanceSuccess(java.util.List,java.lang.Long) -> a
     void onUnConfirmReceive(com.bitbill.www.model.eventbus.UnConfirmEvent) -> onUnConfirmReceive
     void onConfirmedEvent(com.bitbill.www.model.eventbus.ConfirmedEvent) -> onConfirmedEvent
@@ -33565,9 +33601,9 @@ com.bitbill.www.ui.wallet.info.BtcRecordMvpPresenter -> com.bitbill.www.ui.walle
     void loadTxRecord(com.bitbill.www.model.wallet.db.entity.Wallet) -> a
     void requestTxRecord(com.bitbill.www.model.wallet.db.entity.Wallet) -> b
 com.bitbill.www.ui.wallet.info.BtcRecordMvpView -> com.bitbill.www.ui.wallet.info.d:
-    void getWalletFail() -> w
+    void getWalletFail() -> D_
     void getTxRecordSuccess(java.util.List) -> f
-    void getTxRecordFail() -> D_
+    void getTxRecordFail() -> E_
     void loadTxRecordSuccess(java.util.List) -> g
 com.bitbill.www.ui.wallet.info.BtcRecordPresenter -> com.bitbill.www.ui.wallet.info.e:
     void <init>(com.bitbill.www.model.transaction.TxModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
@@ -33588,7 +33624,7 @@ com.bitbill.www.ui.wallet.info.BtcRecordPresenter$$Lambda$1 -> com.bitbill.www.u
     java.lang.Object apply(java.lang.Object) -> apply
 com.bitbill.www.ui.wallet.info.BtcRecordPresenter$1 -> com.bitbill.www.ui.wallet.info.e$1:
     com.bitbill.www.ui.wallet.info.BtcRecordPresenter this$0 -> a
-    void <init>(com.bitbill.www.ui.wallet.info.BtcRecordPresenter,com.bitbill.www.common.base.view.MvpView) -> <init>
+    void <init>(com.bitbill.www.ui.wallet.info.BtcRecordPresenter) -> <init>
     void onNext(com.bitbill.www.common.base.model.network.api.ApiResponse) -> a
     void onError(java.lang.Throwable) -> onError
     void onNext(java.lang.Object) -> onNext

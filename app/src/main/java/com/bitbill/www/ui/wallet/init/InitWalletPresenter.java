@@ -20,8 +20,6 @@ import com.bitbill.www.model.wallet.network.entity.CreateWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletRequest;
 import com.bitbill.www.model.wallet.network.entity.ImportWalletResponse;
 
-import java.util.Locale;
-
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -86,7 +84,7 @@ public class InitWalletPresenter<W extends WalletModel, V extends InitWalletMvpV
             return;
         }
         try {
-            int isCN = StringUtils.equals(Locale.SIMPLIFIED_CHINESE, mAppModel.getCurrentLocale()) ? 1 : 0;
+            int isCN = StringUtils.isZhCN(mAppModel.getCurrentLocale()) ? 1 : 0;
             BitcoinJsWrapper.getInstance().generateMnemonicRetrunSeedHexAndXPublicKey(isCN, new BitcoinJsWrapper.Callback() {
                 @Override
                 public void call(String key, JsResult result) {
