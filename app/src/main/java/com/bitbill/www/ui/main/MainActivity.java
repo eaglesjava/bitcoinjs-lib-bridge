@@ -106,13 +106,12 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends BaseActivity<MainMvpPresenter>
         implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, BalanceMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcRecordMvpView, UpdateMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
+    public static final int INDEX_ASSET = 0;
+    public static final int INDEX_CONTACT = 1;
+    public static final int INDEX_RECEIVE = 2;
+    public static final int INDEX_SEND = 3;
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
-    private static final int INDEX_ASSET = 0;
-    private static final int INDEX_CONTACT = 1;
-    private static final int INDEX_RECEIVE = 2;
-    private static final int INDEX_SEND = 3;
-
     @Inject
     MainMvpPresenter<TxModel, MainMvpView> mMainMvpPresenter;
     @Inject
@@ -364,6 +363,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         });
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     private void changeThemeColor(boolean isBlue) {
         if (isBlue) {
             getWindow().setBackgroundDrawableResource(R.drawable.bg_blue);
@@ -429,7 +432,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                         holder.setChecked(R.id.rb_selector, wallet.isSelected());
                         if (mReceiveFragment != null) {
                             mReceiveFragment.setSelectedWallet(wallet);
-                            mReceiveFragment.lazyData();
                         }
                     }
                     // dismiss
@@ -539,7 +541,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mWalletList.addAll(wallets);
 
         //重置钱包选择postion
-        if (mSelectedPosition == -1 || mSelectedPosition > mWalletList.size() - 1) {
+        if (mSelectedWallet == null || mSelectedPosition == -1 || mSelectedPosition > mWalletList.size() - 1) {
             // 选择默认的钱包对象作为选中的
             mSelectedWallet = BitbillApp.get().getDefaultWallet();
             mSelectedPosition = mWalletList.indexOf(mSelectedWallet);

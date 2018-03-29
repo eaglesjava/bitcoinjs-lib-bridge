@@ -17,6 +17,7 @@ import com.bitbill.www.common.widget.DrawableEditText;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.contact.ContactModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
+import com.bitbill.www.ui.main.MainActivity;
 import com.bitbill.www.ui.main.contact.ContactSelectActivity;
 
 import javax.inject.Inject;
@@ -224,5 +225,15 @@ public class BtcSendFragment extends BaseFragment<BtcSendMvpPresenter> implement
     public void clearData() {
         setSendAddress(null);
         setSendContact(null);
+    }
+
+
+    @Override
+    public void showLoading() {
+        if (getBaseActivity() != null) {
+            if (MainActivity.INDEX_SEND == ((MainActivity) getActivity()).getIndex()) {
+                super.showLoading();
+            }
+        }
     }
 }

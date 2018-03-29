@@ -65,7 +65,7 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
         })
                 .concatMap(aLong -> getModelManager().getTxList(new GetTxListRequest(xPublicKeyHash, aLong)))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<ListTxElementResponse>>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<ApiResponse<ListTxElementResponse>>() {
                     @Override
                     public void onNext(ApiResponse<ListTxElementResponse> listTxElementResponseApiResponse) {
                         super.onNext(listTxElementResponseApiResponse);

@@ -16,6 +16,7 @@ import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
+import com.bitbill.www.ui.main.MainActivity;
 
 import javax.inject.Inject;
 
@@ -217,5 +218,14 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void loadAddressSuccess(String lastAddress) {
         getMvpPresenter().createAddressQrcode(lastAddress);
         setReceiveAddress(lastAddress);
+    }
+
+    @Override
+    public void showLoading() {
+        if (getBaseActivity() != null) {
+            if (MainActivity.INDEX_RECEIVE == ((MainActivity) getActivity()).getIndex()) {
+                super.showLoading();
+            }
+        }
     }
 }
