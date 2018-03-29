@@ -534,6 +534,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         getApp().setWallets(wallets);
         mWalletList.clear();
         mWalletList.addAll(wallets);
+        loadAssetWalletInfo();
         //获取钱包余额
         mBalanceMvpPresenter.getBalance();
         //加载未确认交易
@@ -566,7 +567,16 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (mSelectWalletAdapter != null) {
             mSelectWalletAdapter.notifyDataSetChanged();
         }
+        loadAssetWalletInfo();
 
+
+        //通知钱包选择界面数据刷新
+        if (mSelectWalletAdapter != null) {
+            mSelectWalletAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void loadAssetWalletInfo() {
         //设置钱包总资产 未确认的金额累加
         long totalAmount = 0;
         for (Wallet wallet : mWalletList) {
@@ -581,10 +591,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         //重新加载钱包信息
         if (mAssetFragment != null) {
             mAssetFragment.lazyData();
-        }
-        //通知钱包选择界面数据刷新
-        if (mSelectWalletAdapter != null) {
-            mSelectWalletAdapter.notifyDataSetChanged();
         }
     }
 
@@ -914,6 +920,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                                         }
                                     }, 500);
 
+                                } else {
+                                    mUpdateMvpPresenter.setUpdateCancelTime();
                                 }
                             }
                         });

@@ -12,4 +12,6 @@ public interface UpdateMvpPresenter<M extends AppModel, V extends UpdateMvpView>
     void getConfig();
 
     void checkUpdate();
+
+    void setUpdateCancelTime();
 }

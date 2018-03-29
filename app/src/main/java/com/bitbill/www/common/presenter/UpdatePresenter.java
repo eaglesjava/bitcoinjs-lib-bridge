@@ -76,9 +76,19 @@ public class UpdatePresenter<M extends AppModel, V extends UpdateMvpView> extend
         boolean needUpdate = StringUtils.needUpdate(DeviceUtil.getAppVersion(), updateVersion);
         String forceVersion = getModelManager().getForceVersion();
         boolean needForce = StringUtils.needUpdate(DeviceUtil.getAppVersion(), forceVersion);
+        long updateCancelTime = getModelManager().getUpdateCancelTime();
+        if (!needForce && System.currentTimeMillis() - updateCancelTime < 24 * 60 * 60 * 1000) {
+            //二十四小时内不更新
+            needUpdate = false;
+        }
         if (needUpdate || needForce) {
             String updateLog = getModelManager().getUpdateLog();
             getMvpView().needUpdateApp(needUpdate, needForce, updateVersion, apkUrl, updateLog);
         }
+    }
+
+    @Override
+    public void setUpdateCancelTime() {
+        getModelManager().setUpdateCancelTime(System.currentTimeMillis());
     }
 }

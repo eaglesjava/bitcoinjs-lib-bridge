@@ -241,6 +241,16 @@ public class AppModelManager extends ModelManager implements AppModel {
     }
 
     @Override
+    public long getUpdateCancelTime() {
+        return mAppPreferences.getUpdateCancelTime();
+    }
+
+    @Override
+    public void setUpdateCancelTime(long currentTime) {
+        mAppPreferences.setUpdateCancelTime(currentTime);
+    }
+
+    @Override
     public double getBtcCnyValue() {
         return mAppPreferences.getBtcCnyValue();
     }

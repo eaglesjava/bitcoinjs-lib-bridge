@@ -125,6 +125,8 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
                                         }
                                     }
                                 }, 300);
+                            } else {
+                                mUpdateMvpPresenter.setUpdateCancelTime();
                             }
                         }
                     })

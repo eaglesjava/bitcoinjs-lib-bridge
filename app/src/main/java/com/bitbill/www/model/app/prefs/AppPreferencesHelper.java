@@ -157,6 +157,16 @@ public class AppPreferencesHelper extends PreferencesHelper implements AppPrefer
     }
 
     @Override
+    public long getUpdateCancelTime() {
+        return mPrefs.getLong(UPDATE_CANCEL_TIME, 0);
+    }
+
+    @Override
+    public void setUpdateCancelTime(long currentTime) {
+        mPrefs.edit().putLong(UPDATE_CANCEL_TIME, currentTime).apply();
+    }
+
+    @Override
     public double getBtcCnyValue() {
         try {
             return Double.parseDouble(mPrefs.getString(BTC_CNY_VALUE, "0.00"));

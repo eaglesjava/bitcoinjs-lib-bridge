@@ -22,29 +22,6 @@ public class UpdateConfirmDialog extends BaseConfirmDialog {
     @BindView(R.id.dialog_message)
     TextView dialogMessage;
 
-    public static UpdateConfirmDialog newInstance(String title, String msg, boolean isOnlyPositiveBtn) {
-
-        Bundle args = new Bundle();
-        args.putString(CONFIRM_TITLE, title);
-        args.putString(CONFIRM_MESSAGE, msg);
-        args.putBoolean(CONFIRM_ONLY_POSITIVE_BTN, isOnlyPositiveBtn);
-        UpdateConfirmDialog fragment = new UpdateConfirmDialog();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public static UpdateConfirmDialog newInstance(String title, String msg, String positiveText, boolean isOnlyPositiveBtn) {
-
-        Bundle args = new Bundle();
-        args.putString(CONFIRM_TITLE, title);
-        args.putString(CONFIRM_MESSAGE, msg);
-        args.putString(CONFIRM_POSITIVE_BTN_TEXT, positiveText);
-        args.putBoolean(CONFIRM_ONLY_POSITIVE_BTN, isOnlyPositiveBtn);
-        UpdateConfirmDialog fragment = new UpdateConfirmDialog();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     public static UpdateConfirmDialog newInstance(String title, String msg, String positiveText, boolean isOnlyPositiveBtn, boolean cancel) {
 
         Bundle args = new Bundle();
@@ -57,17 +34,6 @@ public class UpdateConfirmDialog extends BaseConfirmDialog {
         fragment.setArguments(args);
         return fragment;
     }
-
-    public static UpdateConfirmDialog newInstance(String msg, boolean isOnlyPositiveBtn) {
-
-        Bundle args = new Bundle();
-        args.putString(CONFIRM_MESSAGE, msg);
-        args.putBoolean(CONFIRM_ONLY_POSITIVE_BTN, isOnlyPositiveBtn);
-        UpdateConfirmDialog fragment = new UpdateConfirmDialog();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onBeforeSetContentLayout() {
 
