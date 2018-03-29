@@ -348,6 +348,9 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
                     case INDEX_RECEIVE:
                         setTitle(R.string.title_receive);
                         changeThemeColor(false);
+                        if (mReceiveFragment != null) {
+                            mReceiveFragment.loadBtcAddress();
+                        }
                         break;
                     case INDEX_SEND:
                         setTitle(R.string.title_send);
@@ -527,7 +530,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             //结束主界面
             finish();
         }
-        reloadWalletInfo(wallets);
+        //设置全局钱包列表对象
+        getApp().setWallets(wallets);
+        mWalletList.clear();
+        mWalletList.addAll(wallets);
         //获取钱包余额
         mBalanceMvpPresenter.getBalance();
         //加载未确认交易
@@ -535,10 +541,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     private void reloadWalletInfo(List<Wallet> wallets) {
-        //设置全局钱包列表对象
-        getApp().setWallets(wallets);
-        mWalletList.clear();
-        mWalletList.addAll(wallets);
 
         //重置钱包选择postion
         if (mSelectedWallet == null || mSelectedPosition == -1 || mSelectedPosition > mWalletList.size() - 1) {
@@ -604,6 +606,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     @Override
     public void getBalanceFail() {
 
+        reloadWalletInfo(mWalletList);
     }
 
     @Override

@@ -13,15 +13,14 @@ public interface BtcAddressMvpView extends MvpView {
 
     void getWalletFail();
 
-    void refreshAddressFail(boolean isInternal);
+    void refreshAddressFail(boolean isInternal, boolean silence);
 
-    void refreshAddressSuccess(String lastAddress, boolean isInternal);
+    void refreshAddressSuccess(String lastAddress, boolean isInternal, boolean silence);
 
-    void reachAddressIndexLimit();
+    void reachAddressIndexLimit(boolean silence);
 
     void loadAddressSuccess(String lastAddress);
 
     void loadAddressFail();
 
-    void limitAddress(boolean limit);
 }

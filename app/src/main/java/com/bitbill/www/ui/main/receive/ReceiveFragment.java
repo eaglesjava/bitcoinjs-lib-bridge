@@ -169,7 +169,7 @@ public class ReceiveFragment extends BaseTabsLazyFragment<ReceiveMvpPresenter> {
         }
     }
 
-    private void loadBtcAddress() {
+    public void loadBtcAddress() {
         if (mBtcReceiveFragment != null) {
             mBtcReceiveFragment.loadAddress(mSelectedWallet);
         }

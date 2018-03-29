@@ -138,13 +138,13 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
     }
 
     @Override
-    public void refreshAddressFail(boolean isInternal) {
+    public void refreshAddressFail(boolean isInternal, boolean silence) {
 
         hideKeyboard();
     }
 
     @Override
-    public void refreshAddressSuccess(String lastAddress, boolean isInternal) {
+    public void refreshAddressSuccess(String lastAddress, boolean isInternal, boolean silence) {
         hideKeyboard();
         mWallet.resetAddressList();
         if (mAddressList == null) {
@@ -157,7 +157,7 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
     }
 
     @Override
-    public void reachAddressIndexLimit() {
+    public void reachAddressIndexLimit(boolean silence) {
 
         showMessage(R.string.fail_reach_address_index_limit);
         hideKeyboard();
@@ -171,11 +171,6 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
 
     @Override
     public void loadAddressFail() {
-
-    }
-
-    @Override
-    public void limitAddress(boolean limit) {
 
     }
 
@@ -219,7 +214,7 @@ public class WalletAddressFragment extends BaseListFragment<AddressItem, WalletA
     @OnClick(R.id.tv_scan_address)
     public void onViewClicked() {
         showLoading();
-        mBtcAddressMvpPresentder.refreshAddress(10, -1);
+        mBtcAddressMvpPresentder.refreshAddress(10, -1, false);
     }
 
 }

@@ -34,7 +34,7 @@ public class BtcReceivePresenter<M extends WalletModel, V extends BtcReceiveMvpV
                 //生成地址二维码
                 QRCodeEncoder.syncEncodeQRCode(address, 360))
                 .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Bitmap>(getMvpView()) {
+                .subscribeWith(new BaseSubcriber<Bitmap>() {
                     @Override
                     public void onNext(Bitmap bitmap) {
                         super.onNext(bitmap);

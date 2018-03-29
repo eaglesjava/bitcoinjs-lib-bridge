@@ -128,7 +128,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
                 if (isSendAll) {
                     getMvpPresenter().buildTransaction();
                 } else {
-                    mBtcAddressMvpPresentder.refreshAddress(1, 1);
+                    mBtcAddressMvpPresentder.refreshAddress(1, 1, false);
                 }
             }
 
@@ -192,6 +192,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
         //关闭相关流程
         AppManager.get().finishActivity(SelectWalletActivity.class);
         AppManager.get().finishActivity(SendAmountActivity.class);
+        AppManager.get().finishActivity(ScanResultActivity.class);
         finish();
     }
 
@@ -400,23 +401,23 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
     }
 
     @Override
-    public void refreshAddressFail(boolean isInternal) {
+    public void refreshAddressFail(boolean isInternal, boolean silence) {
         sendTransactionFail(getString(R.string.fail_refresh_change_address));
         hideLoading();
     }
 
     @Override
-    public void refreshAddressSuccess(String lastAddress, boolean isInternal) {
+    public void refreshAddressSuccess(String lastAddress, boolean isInternal, boolean silence) {
         if (isInternal) {
             mLastAddress = lastAddress;
             getMvpPresenter().buildTransaction();
         } else {
-            refreshAddressFail(isInternal);
+            refreshAddressFail(isInternal, silence);
         }
     }
 
     @Override
-    public void reachAddressIndexLimit() {
+    public void reachAddressIndexLimit(boolean silence) {
         showMessage(R.string.fail_reach_address_index_limit);
     }
 
@@ -427,11 +428,6 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     @Override
     public void loadAddressFail() {
-
-    }
-
-    @Override
-    public void limitAddress(boolean limit) {
 
     }
 

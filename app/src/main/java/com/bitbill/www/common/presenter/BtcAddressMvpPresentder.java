@@ -11,14 +11,17 @@ public interface BtcAddressMvpPresentder<M extends AddressModel, V extends BtcAd
 
     void loadAddress();
 
-    void checkAddressUsed();
+    /**
+     * @param silence true 静默刷新
+     */
+    void refreshAddress(boolean silence);
 
     /**
      * 刷新地址
-     *
-     * @param refreshCount
+     *  @param refreshCount
      * @param option       -1 外部地址找零地址都刷新 0 外部地址刷新 1 找零地址刷新
+     * @param silence
      */
-    void refreshAddress(int refreshCount, int option);
+    void refreshAddress(int refreshCount, int option, boolean silence);
 
 }

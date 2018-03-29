@@ -39,4 +39,7 @@ public interface AddressDb extends Db {
     Address getAddressByNameAndWalletId(String address, Long walletId);
 
     List<Wallet> getWalletsByAddresses(List<String> addressList);
+
+    Observable<Boolean> checkAddressIsUsed(String address);
+
 }

@@ -72,6 +72,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                                     outWalletIdList.add(walletId);
                                 }
                                 addressByName.setIsUsed(true);
+                                usedAddressList.add(addressByName);
                             }
                         }
 
@@ -147,8 +148,8 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
 
                         }
                     }
-                    //更新已经使用地址
-                    mAddressModel.updateAddressList(usedAddressList);
+                    updateAddressList(usedAddressList);
+
                     return Observable.just(txRecords);
                 })
                 .compose(this.applyScheduler())
@@ -173,6 +174,23 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                 }));
 
 
+    }
+
+    private void updateAddressList(List<Address> usedAddressList) {
+        //更新已经使用地址
+        getCompositeDisposable().add(mAddressModel.updateAddressList(usedAddressList)
+                .compose(this.applyScheduler())
+                .subscribeWith(new BaseSubcriber<Boolean>() {
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        super.onNext(aBoolean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
+                }));
     }
 
 

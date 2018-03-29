@@ -130,7 +130,6 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     public void loadAddress(Wallet selectedWallet) {
         mSelectedWallet = selectedWallet;
         if (mReceiveMvpPresenter != null) {
-            showLoading();
             mBtcAddressMvpPresentder.loadAddress();
 
         }
@@ -141,7 +140,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
         mSelectedWallet = selectedWallet;
         if (mBtcAddressMvpPresentder != null) {
             showLoading();
-            mBtcAddressMvpPresentder.checkAddressUsed();
+            mBtcAddressMvpPresentder.refreshAddress(false);
 
         }
 
@@ -154,6 +153,7 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     @Override
     public void createAddressQrcodeSuccess(Bitmap qrcodeBitmap) {
         ivQrcode.setImageBitmap(qrcodeBitmap);
+        hideLoading();
     }
 
     @Override
@@ -172,16 +172,6 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
         onError(R.string.fail_load_address);
     }
 
-    @Override
-    public void limitAddress(boolean limit) {
-        if (limit) {
-            reachAddressIndexLimit();
-        } else if (mBtcAddressMvpPresentder != null) {
-            mBtcAddressMvpPresentder.refreshAddress(1, 0);
-
-        }
-    }
-
     public String getCurrentAddress() {
         return tvAddress.getText().toString();
     }
@@ -197,21 +187,23 @@ public class BtcReceiveFragment extends BaseLazyFragment<BtcReceiveMvpPresenter>
     }
 
     @Override
-    public void refreshAddressFail(boolean isInternal) {
+    public void refreshAddressFail(boolean isInternal, boolean silence) {
         onError(R.string.fail_refresh_address);
     }
 
     @Override
-    public void refreshAddressSuccess(String lastAddress, boolean isInternal) {
-        showMessage(R.string.msg_refreshed_address);
+    public void refreshAddressSuccess(String lastAddress, boolean isInternal, boolean silence) {
+        if (!silence) {
+            showMessage(R.string.msg_refreshed_address);
+        }
         getMvpPresenter().createAddressQrcode(lastAddress);
         setReceiveAddress(lastAddress);
 
     }
 
     @Override
-    public void reachAddressIndexLimit() {
-        onError(R.string.fail_reach_address_index_limit);
+    public void reachAddressIndexLimit(boolean silence) {
+        if (!silence) onError(R.string.fail_reach_address_index_limit);
     }
 
     @Override

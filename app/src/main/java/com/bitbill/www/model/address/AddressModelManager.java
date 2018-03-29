@@ -99,6 +99,11 @@ public class AddressModelManager extends ModelManager implements AddressModel {
     }
 
     @Override
+    public Observable<Boolean> checkAddressIsUsed(String address) {
+        return mAddressDb.checkAddressIsUsed(address);
+    }
+
+    @Override
     public ApiHeader getApiHeader() {
         return mAddressApi.getApiHeader();
     }

@@ -50,7 +50,11 @@ public class AddressDbHelper extends DbHelper implements AddressDb {
     @Override
     public Observable<Boolean> insertAddressListAndUpdatWallet(List<Address> addressList, Wallet wallet) {
         return Observable.fromCallable(() -> mDaoSession.callInTxNoException(() -> {
-            mAddressDao.insertOrReplaceInTx(addressList);
+            for (Address address : addressList) {
+                if (mAddressDao.queryBuilder().where(AddressDao.Properties.Name.eq(address.getName())).unique() == null) {
+                    mAddressDao.insert(address);
+                }
+            }
             mWalletDao.update(wallet);
             return true;
         }));
@@ -121,5 +125,13 @@ public class AddressDbHelper extends DbHelper implements AddressDb {
             }
         }
         return wallets;
+    }
+
+    @Override
+    public Observable<Boolean> checkAddressIsUsed(String address) {
+        return Observable.fromCallable(() -> {
+            Address uniqueAddress = mAddressDao.queryBuilder().where(AddressDao.Properties.Name.eq(address)).unique();
+            return uniqueAddress == null ? false : uniqueAddress.getIsUsed();
+        });
     }
 }
