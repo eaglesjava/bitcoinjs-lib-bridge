@@ -103,6 +103,8 @@ public class WalletDbHelper extends DbHelper implements WalletDb {
     @Override
     public Observable<Boolean> deleteWallet(Wallet wallet) {
         return Observable.fromCallable(() -> {
+            wallet.__setDaoSession(getDaoSession());
+            wallet.resetTxRecordList();
             List<TxRecord> txRecordList = wallet.getTxRecordList();
             for (TxRecord txRecord : txRecordList) {
                 txRecord.resetInputs();

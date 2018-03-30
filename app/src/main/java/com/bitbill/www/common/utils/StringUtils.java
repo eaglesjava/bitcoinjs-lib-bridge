@@ -638,7 +638,7 @@ public class StringUtils {
         //format date by local
         try {
             Date parse = yyyyMMddHHmmss.parse(date);
-            return formatDateTime(parse.getTime());
+            return formatDateTime(parse);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -649,12 +649,7 @@ public class StringUtils {
         if (date == null) {
             return "-- -- --";
         }
-        return formatDateTime(date.getTime());
-    }
-
-
-    public static String formatDateTime(long dateTime) {
-        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM).format(new Date(dateTime));
+        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM).format(date);
     }
 
     /**
