@@ -27581,8 +27581,7 @@ com.bitbill.www.common.utils.StringUtils -> com.bitbill.www.common.d.k:
     java.lang.String satoshi2btc(java.lang.Long) -> a
     java.util.Date getDate(java.lang.String) -> n
     java.lang.String formatDateTime(java.util.Date) -> a
-    java.lang.String formatDateTime(long) -> a
-    java.lang.String formatDate(long) -> b
+    java.lang.String formatDate(long) -> a
     void setEditable(android.widget.EditText,boolean) -> a
     java.lang.String getContactKey() -> a
     java.lang.String getUUIDMD5() -> b
@@ -33609,14 +33608,15 @@ com.bitbill.www.ui.wallet.info.BtcRecordPresenter -> com.bitbill.www.ui.wallet.i
     void <init>(com.bitbill.www.model.transaction.TxModel,com.bitbill.www.common.rx.SchedulerProvider,io.reactivex.disposables.CompositeDisposable) -> <init>
     void loadTxRecord(com.bitbill.www.model.wallet.db.entity.Wallet) -> a
     void requestTxRecord(com.bitbill.www.model.wallet.db.entity.Wallet) -> b
-    boolean isValidWallet(com.bitbill.www.model.wallet.db.entity.Wallet) -> e
+    boolean isValidWallet(com.bitbill.www.model.wallet.db.entity.Wallet) -> d
     boolean isValidXPublicKey(com.bitbill.www.model.wallet.db.entity.Wallet) -> c
     io.reactivex.ObservableSource lambda$requestTxRecord$1$BtcRecordPresenter(java.lang.String,java.lang.Long) -> a
-    java.lang.Long lambda$requestTxRecord$0$BtcRecordPresenter(com.bitbill.www.model.wallet.db.entity.Wallet) -> d
+    java.lang.Long lambda$requestTxRecord$0$BtcRecordPresenter() -> i
 com.bitbill.www.ui.wallet.info.BtcRecordPresenter$$Lambda$0 -> com.bitbill.www.ui.wallet.info.f:
-    com.bitbill.www.model.wallet.db.entity.Wallet arg$1 -> a
-    void <init>(com.bitbill.www.model.wallet.db.entity.Wallet) -> <init>
+    java.util.concurrent.Callable $instance -> a
+    void <init>() -> <init>
     java.lang.Object call() -> call
+    void <clinit>() -> <clinit>
 com.bitbill.www.ui.wallet.info.BtcRecordPresenter$$Lambda$1 -> com.bitbill.www.ui.wallet.info.g:
     com.bitbill.www.ui.wallet.info.BtcRecordPresenter arg$1 -> a
     java.lang.String arg$2 -> b

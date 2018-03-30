@@ -52,20 +52,22 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
         }
         String xPublicKeyHash = EncryptUtils.encryptMD5ToString(wallet.getExtentedPublicKey());
         getCompositeDisposable().add(Observable.fromCallable(() -> {
-            wallet.resetTxRecordList();
-            List<TxRecord> txRecordList = wallet.getTxRecordList();
-            if (StringUtils.isEmpty(txRecordList)) {
-                return 0l;
-            }
-            Long elementId = txRecordList.get(0).getElementId();
-            for (int i = txRecordList.size() - 1; i >= 0; i--) {
-                if (txRecordList.get(i).getHeight() == -1l) {
-                    int i1 = i + 1;
-                    elementId = txRecordList.get(i1 > txRecordList.size() - 1 ? txRecordList.size() - 1 : i1).getElementId();
-                    break;
-                }
-            }
-            return elementId;
+//            wallet.resetTxRecordList();
+//            List<TxRecord> txRecordList = wallet.getTxRecordList();
+//            if (StringUtils.isEmpty(txRecordList)) {
+//                return 0l;
+//            }
+//            Long elementId = txRecordList.get(0).getElementId();
+//            for (int i = txRecordList.size() - 1; i >= 0; i--) {
+//                if (txRecordList.get(i).getHeight() == -1l) {
+//                    int i1 = i + 1;
+//                    elementId = txRecordList.get(i1 > txRecordList.size() - 1 ? txRecordList.size() - 1 : i1).getElementId();
+//                    break;
+//                }
+//            }
+//            return elementId;
+            // TODO: 2018/3/30 优化获取交易记录
+            return 0l;
         })
                 .concatMap(aLong -> getModelManager().getTxList(new GetTxListRequest(xPublicKeyHash, aLong)))
                 .compose(this.applyScheduler())
