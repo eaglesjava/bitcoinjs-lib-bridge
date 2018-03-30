@@ -81,13 +81,7 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
 
         injectComponent();
         addPresenter(mMvpPresenter = getMvpPresenter());
-        if (!StringUtils.isEmpty(getPresenters())) {
-            for (MvpPresenter mvpPresenter : getPresenters()) {
-                if (mvpPresenter != null) {
-                    mvpPresenter.onAttach(this);
-                }
-            }
-        }
+        attachPresenters();
         onBeforeSetContentLayout();
         init(savedInstanceState);
         if (mView == null) {
@@ -108,23 +102,44 @@ public abstract class BaseFragment<P extends MvpPresenter> extends Fragment impl
     }
 
 
-    public List<MvpPresenter> getPresenters() {
-        return mPresenters;
-    }
+    @Override
+    public void attachPresenters() {
+        if (!StringUtils.isEmpty(getPresenters())) {
+            for (MvpPresenter mvpPresenter : getPresenters()) {
+                if (mMvpPresenter != null) {
+                    mvpPresenter.onAttach(this);
 
-    protected void addPresenter(MvpPresenter mvpPresenter) {
-        mPresenters.add(mvpPresenter);
+                }
+            }
+        }
     }
 
     @Override
-    public void onDestroyView() {
+    public void detachPresenters() {
         if (!StringUtils.isEmpty(getPresenters())) {
             for (MvpPresenter mvpPresenter : getPresenters()) {
                 if (mvpPresenter != null) {
                     mvpPresenter.onDetach();
+
                 }
             }
         }
+    }
+
+
+    @Override
+    public void addPresenter(MvpPresenter mvpPresenter) {
+        mPresenters.add(mvpPresenter);
+    }
+
+    @Override
+    public List<MvpPresenter> getPresenters() {
+        return mPresenters;
+    }
+
+    @Override
+    public void onDestroyView() {
+        detachPresenters();
         super.onDestroyView();
     }
 

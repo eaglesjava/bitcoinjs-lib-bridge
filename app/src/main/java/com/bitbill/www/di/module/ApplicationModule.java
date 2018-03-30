@@ -14,6 +14,9 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.model.db.DbOpenHelper;
 import com.bitbill.www.common.base.model.network.api.ApiHeader;
 import com.bitbill.www.common.base.model.network.socket.SocketHelper;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
+import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
+import com.bitbill.www.common.presenter.GetExchangeRatePresenter;
 import com.bitbill.www.common.rx.AppSchedulerProvider;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.qualifier.ApiInfo;
@@ -322,6 +325,13 @@ public class ApplicationModule {
     @Singleton
     TxApi provideTxApiHelper(TxApiHelper txApiHelper) {
         return txApiHelper;
+    }
+
+    @Provides
+    @Singleton
+    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> provideGetExchangeRatePresenter(
+            GetExchangeRatePresenter<AppModel, GetExchangeRateMvpView> presenter) {
+        return presenter;
     }
 
 }

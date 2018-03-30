@@ -10,6 +10,7 @@ import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.app.BaseService;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.SoundUtils;
 import com.bitbill.www.di.component.ServiceComponent;
@@ -162,7 +163,6 @@ public class SocketServiceProvider extends BaseService {
             return;
         }
         super.onCreate();
-        getServiceComponent().inject(this);
         initSocket();
         EventBus.getDefault().register(this);
 
@@ -234,6 +234,16 @@ public class SocketServiceProvider extends BaseService {
 
     public void postSocketStatusEvent() {
         EventBus.getDefault().postSticky(new SocketServerStateEvent(getSocketStatus()));
+    }
+
+    @Override
+    public MvpPresenter getMvpPresenter() {
+        return null;
+    }
+
+    @Override
+    public void injectComponent() {
+        getServiceComponent().inject(this);
     }
 
     public class LocalBinder extends Binder {

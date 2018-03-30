@@ -4,18 +4,18 @@ import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
-import com.bitbill.www.di.scope.PerActivity;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.app.network.entity.GetExchangeRateResponse;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by isanwenyu@163.com on 2018/1/29.
  */
-@PerActivity
+@Singleton
 public class GetExchangeRatePresenter<M extends AppModel, V extends GetExchangeRateMvpView> extends ModelPresenter<M, V> implements GetExchangeRateMvpPresenter<M, V> {
 
     @Inject

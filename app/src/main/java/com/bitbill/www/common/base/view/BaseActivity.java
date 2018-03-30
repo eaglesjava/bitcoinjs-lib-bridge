@@ -82,6 +82,14 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
                 .build();
         injectComponent();
         addPresenter(mMvpPresenter = getMvpPresenter());
+        attachPresenters();
+        AppManager.get().addActivity(this);
+        handleIntent(getIntent());
+
+    }
+
+    @Override
+    public void attachPresenters() {
         if (!StringUtils.isEmpty(getPresenters())) {
             for (MvpPresenter mvpPresenter : getPresenters()) {
                 if (mMvpPresenter != null) {
@@ -90,20 +98,19 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
                 }
             }
         }
-        AppManager.get().addActivity(this);
-        handleIntent(getIntent());
-
     }
 
     public BitbillApp getApp() {
         return mApp;
     }
 
-    protected List<MvpPresenter> getPresenters() {
+    @Override
+    public List<MvpPresenter> getPresenters() {
         return mPresenters;
     }
 
-    protected void addPresenter(MvpPresenter mvpPresenter) {
+    @Override
+    public void addPresenter(MvpPresenter mvpPresenter) {
         mPresenters.add(mvpPresenter);
     }
 
@@ -271,6 +278,13 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
         }
         DialogUtils.close(mProgressDialog);
         AppManager.get().finishActivity(this);
+        detachPresenters();
+        SingleToast.clear();
+        super.onDestroy();
+    }
+
+    @Override
+    public void detachPresenters() {
         if (!StringUtils.isEmpty(getPresenters())) {
             for (MvpPresenter mvpPresenter : getPresenters()) {
                 if (mvpPresenter != null) {
@@ -279,8 +293,6 @@ public abstract class BaseActivity<P extends MvpPresenter> extends AppCompatActi
                 }
             }
         }
-        SingleToast.clear();
-        super.onDestroy();
     }
 
     /**
