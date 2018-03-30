@@ -289,6 +289,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
         if (feeRange != 0) {
             int bestFeeByte = getBestFeeByte();
             sbSendFee.setProgress((bestFeeByte - minFeeByte) * 100 / feeRange);
+            updateFeeLayout(bestFeeByte);
         }
         sbSendFee.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
