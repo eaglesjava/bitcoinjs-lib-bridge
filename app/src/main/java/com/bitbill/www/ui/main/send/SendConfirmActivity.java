@@ -223,12 +223,12 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
     public int getMaxFeeByte() {
         if (StringUtils.isEmpty(mFees)) return 0;
-        return mFees.get(mFees.size() - 1).getFee();
+        return mFees.get(0).getFee();
     }
 
     public int getMinFeeByte() {
         if (StringUtils.isEmpty(mFees)) return 0;
-        return mFees.get(0).getFee();
+        return mFees.get(mFees.size() - 1).getFee();
     }
 
     @Override
@@ -271,7 +271,7 @@ public class SendConfirmActivity extends BaseToolbarActivity<SendConfirmMvpPrese
 
         if (!StringUtils.isEmpty(mFees)) {
             //按时间正序排列
-            Collections.sort(mFees, (o1, o2) -> o1.getFee() - o2.getFee());
+            Collections.sort(mFees, (o1, o2) -> o1.getTime() - o2.getTime());
             mFeeByte = getBestFeeByte();
             mFeeTime = getBestTime();
             refreshSeekBar();
