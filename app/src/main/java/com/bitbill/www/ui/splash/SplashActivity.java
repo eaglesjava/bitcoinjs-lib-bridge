@@ -9,7 +9,6 @@ import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
 import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
-import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
 import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
 import com.bitbill.www.common.presenter.SyncAddressMvpView;
@@ -45,6 +44,24 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
     private static final String TAG = "SplashActivity";
     private static final int MSG_SET_ALIAS = 1001;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
@@ -72,30 +89,10 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
             }
         }
     };
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
     @Inject
     UpdateMvpPresenter<AppModel, UpdateMvpView> mUpdateMvpPresenter;
     @Inject
     GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
-    @Inject
-    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
     @Inject
     SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
     private boolean mHasWallet;
@@ -109,7 +106,6 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         getMvpPresenter().setContactKey();
         mUpdateMvpPresenter.getConfig();
         getMvpPresenter().hasWallet();
-        mGetExchangeRateMvpPresenter.getExchangeRate();
 
         startService();
 
@@ -131,7 +127,6 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     public void injectComponent() {
         getActivityComponent().inject(this);
         addPresenter(mGetCacheVersionMvpPresenter);
-        addPresenter(mGetExchangeRateMvpPresenter);
         addPresenter(mUpdateMvpPresenter);
     }
 

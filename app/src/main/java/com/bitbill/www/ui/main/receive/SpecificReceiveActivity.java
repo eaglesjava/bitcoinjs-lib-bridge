@@ -11,30 +11,25 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
 import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.AmountEditText;
-import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.eventbus.RefreshExchangeRateEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRateMvpPresenter> implements GetExchangeRateMvpView {
+public class SpecificReceiveActivity extends BaseToolbarActivity implements GetExchangeRateMvpView {
 
     @BindView(R.id.et_input_amount)
     AmountEditText etInputAmount;
     @BindView(R.id.tv_btc_value)
     TextView tvBtcCny;
-    @Inject
-    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
     private String mReceiveAddress;
     private Long mWalletId;
 
@@ -53,8 +48,8 @@ public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRate
     }
 
     @Override
-    public GetExchangeRateMvpPresenter getMvpPresenter() {
-        return mGetExchangeRateMvpPresenter;
+    public MvpPresenter getMvpPresenter() {
+        return null;
     }
 
     @Override
@@ -102,8 +97,6 @@ public class SpecificReceiveActivity extends BaseToolbarActivity<GetExchangeRate
     public void initData() {
         if (getApp().hasBtcRate()) {
             updateBtcValue();
-        } else {
-            getMvpPresenter().getExchangeRate();
         }
 
     }

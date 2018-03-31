@@ -13,7 +13,6 @@ import android.util.Log;
 import com.bitbill.www.common.app.BaseService;
 import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
 import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
-import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.eventbus.AppBackgroundEvent;
 import com.bitbill.www.model.eventbus.RefreshExchangeRateEvent;
@@ -22,12 +21,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
-
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by isanwenyu@163.com on 2017/07/17.
@@ -38,7 +32,6 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
 
     @Inject
     GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
-    private volatile boolean isAppBackground;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SyncService.class);
@@ -51,27 +44,8 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
         super.onCreate();
         Log.d(TAG, "onCreate() called");
         //每30秒刷新汇率
-        refreshExchangeRate();
+        getMvpPresenter().refreshExchangeRate();
         EventBus.getDefault().register(this);
-    }
-
-    private void refreshExchangeRate() {
-        getCompositeDisposable().add(Observable.interval(0, 30, TimeUnit.SECONDS, Schedulers.trampoline())
-                .filter(aLong -> !isAppBackground)
-                .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<Long>() {
-                    @Override
-                    public void onNext(Long aLong) {
-                        super.onNext(aLong);
-                        getMvpPresenter().getExchangeRate();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
-                }))
-        ;
     }
 
     @Override
@@ -86,7 +60,10 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAppBackgroundEvent(AppBackgroundEvent appBackgroundEvent) {
-        isAppBackground = appBackgroundEvent.isBackground();
+        if (appBackgroundEvent == null) {
+            return;
+        }
+        getMvpPresenter().setAppBackground(appBackgroundEvent.isBackground());
     }
 
     @Nullable

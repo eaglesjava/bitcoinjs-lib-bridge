@@ -8,12 +8,10 @@ import android.util.Log;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
-import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.app.BaseService;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.utils.JsonUtils;
 import com.bitbill.www.common.utils.SoundUtils;
-import com.bitbill.www.di.component.ServiceComponent;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.eventbus.ConfirmedEvent;
 import com.bitbill.www.model.eventbus.ReceiveAmountEvent;
@@ -48,8 +46,6 @@ public class SocketServiceProvider extends BaseService {
     Socket mSocket;
     @Inject
     AppModel mAppModel;
-    private BitbillApp mBitbillApp;
-    private ServiceComponent mServiceComponent;
     private Emitter.Listener onRegister = new Emitter.Listener() {
         @Override
         public void call(Object... args) {

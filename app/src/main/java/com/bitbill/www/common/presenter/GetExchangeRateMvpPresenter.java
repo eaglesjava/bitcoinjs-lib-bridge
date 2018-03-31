@@ -8,4 +8,8 @@ import com.bitbill.www.model.app.AppModel;
  */
 public interface GetExchangeRateMvpPresenter<M extends AppModel, V extends GetExchangeRateMvpView> extends MvpPresenter<V> {
     void getExchangeRate();
+
+    void refreshExchangeRate();
+
+    void setAppBackground(boolean appBackground);
 }

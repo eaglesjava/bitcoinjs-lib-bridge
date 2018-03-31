@@ -6,7 +6,6 @@ package com.bitbill.www.di.component;
 
 import com.bitbill.www.di.module.ServiceModule;
 import com.bitbill.www.di.scope.PerService;
-import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.service.SocketServiceProvider;
 import com.bitbill.www.service.SyncService;
 
@@ -20,7 +19,6 @@ import io.socket.client.Socket;
 @PerService
 @Component(dependencies = ApplicationComponent.class, modules = ServiceModule.class)
 public interface ServiceComponent {
-    AppModel getAppModel();
 
     Socket getSocket();
 

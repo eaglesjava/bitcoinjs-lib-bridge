@@ -8,8 +8,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.bitbill.www.app.BitbillApp;
-import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
-import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.di.module.ApplicationModule;
 import com.bitbill.www.di.qualifier.ApplicationContext;
@@ -56,5 +54,4 @@ public interface ApplicationComponent {
 
     Socket getSocket();
 
-    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> getExchangeRateMvpPresenter();
 }

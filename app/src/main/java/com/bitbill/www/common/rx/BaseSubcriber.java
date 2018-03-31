@@ -57,6 +57,9 @@ public class BaseSubcriber<T> extends DisposableObserver<T> {
      */
     @Override
     public void onError(Throwable e) {
+        if (e != null) {
+            e.printStackTrace();
+        }
         if (isValidMvpView()) {
             mMvpView.hideLoading();
         } else {

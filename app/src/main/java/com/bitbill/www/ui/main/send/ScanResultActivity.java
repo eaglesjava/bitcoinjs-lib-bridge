@@ -10,23 +10,20 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
+import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.presenter.GetExchangeRateMvpPresenter;
 import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.widget.AmountEditText;
-import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.eventbus.RefreshExchangeRateEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ScanResultActivity extends BaseToolbarActivity<GetExchangeRateMvpPresenter> implements GetExchangeRateMvpView {
+public class ScanResultActivity extends BaseToolbarActivity implements GetExchangeRateMvpView {
 
     @BindView(R.id.et_send_amount)
     AmountEditText etSendAmount;
@@ -38,8 +35,6 @@ public class ScanResultActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
     View mAddressLayout;
     @BindView(R.id.tv_send_address)
     TextView mSendAddressTextView;
-    @Inject
-    GetExchangeRateMvpPresenter<AppModel, GetExchangeRateMvpView> mGetExchangeRateMvpPresenter;
 
     private String mAddress;
     private String mAmount;
@@ -65,8 +60,8 @@ public class ScanResultActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
     }
 
     @Override
-    public GetExchangeRateMvpPresenter getMvpPresenter() {
-        return mGetExchangeRateMvpPresenter;
+    public MvpPresenter getMvpPresenter() {
+        return null;
     }
 
     @Override
@@ -104,8 +99,6 @@ public class ScanResultActivity extends BaseToolbarActivity<GetExchangeRateMvpPr
     public void initData() {
         if (getApp().hasBtcRate()) {
             updateBtcValue();
-        } else {
-            getMvpPresenter().getExchangeRate();
         }
 
     }
