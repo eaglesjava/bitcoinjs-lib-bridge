@@ -10,12 +10,14 @@ import java.util.List;
  */
 public class TxElementsParseEvent extends MessageEvent {
 
+    private String mTag;
     private Long mWalletId;
     private List<TxElement> mTxElements;
 
-    public TxElementsParseEvent(List<TxElement> txElements, Long walletId) {
+    public TxElementsParseEvent(List<TxElement> txElements, Long walletId, String tag) {
         mTxElements = txElements;
         mWalletId = walletId;
+        mTag = tag;
     }
 
     public List<TxElement> getTxElements() {
@@ -33,6 +35,15 @@ public class TxElementsParseEvent extends MessageEvent {
 
     public TxElementsParseEvent setWalletId(Long walletId) {
         mWalletId = walletId;
+        return this;
+    }
+
+    public String getTag() {
+        return mTag;
+    }
+
+    public TxElementsParseEvent setTag(String tag) {
+        mTag = tag;
         return this;
     }
 }

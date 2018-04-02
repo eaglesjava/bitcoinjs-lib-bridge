@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface ParseTxInfoMvpView extends MvpView {
 
-    void getTxInfoListFail(Long walletId);
+    void getTxInfoListFail(Long walletId, String TAG);
 
-    void parsedTxItemList(List<TxRecord> txRecords, Long walletId);
+    void parsedTxItemList(List<TxRecord> txRecords, Long walletId, String TAG);
 
-    void parsedTxItemListFail(Long walletId);
+    void parsedTxItemListFail(Long walletId, String TAG);
 }

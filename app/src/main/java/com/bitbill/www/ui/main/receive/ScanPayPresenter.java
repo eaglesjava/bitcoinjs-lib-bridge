@@ -103,6 +103,7 @@ public class ScanPayPresenter<M extends TxModel, V extends ScanPayMvpView> exten
                                     for (TxElement.OutputsBean output : outputs) {
                                         if (getMvpView().getReceiveAddress().equalsIgnoreCase(output.getAddress())) {
                                             getMvpView().addressMatchTx(true, data);
+                                            break;
                                         }
                                     }
                                 }

@@ -159,7 +159,7 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
     public void getTxRecordSuccess(List<TxElement> list, Long walletId) {
         Log.d(TAG, "getTxRecordSuccess() called with: list = [" + list + "], walletId = [" + walletId + "]");
         if (!StringUtils.isEmpty(list)) {
-            mParseTxInfoMvpPresenter.parseTxInfo(list, walletId);
+            mParseTxInfoMvpPresenter.parseTxInfo(list, walletId, TAG);
         }
 
     }
@@ -169,22 +169,22 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
     }
 
     @Override
-    public void getTxInfoListFail(Long walletId) {
-        Log.d(TAG, "getTxInfoListFail() called with: walletId = [" + walletId + "]");
-        EventBus.getDefault().post(new ParsedTxEvent(null, walletId));
+    public void getTxInfoListFail(Long walletId, String TAG) {
+        Log.d(this.TAG, "getTxInfoListFail() called with: walletId = [" + walletId + "]");
+        EventBus.getDefault().post(new ParsedTxEvent(null, walletId, TAG));
     }
 
     @Override
-    public void parsedTxItemList(List<TxRecord> txRecords, Long walletId) {
-        Log.d(TAG, "parsedTxItemList() called with: txRecords = [" + txRecords + "], walletId = [" + walletId + "]");
+    public void parsedTxItemList(List<TxRecord> txRecords, Long walletId, String TAG) {
+        Log.d(this.TAG, "parsedTxItemList() called with: txRecords = [" + txRecords + "], walletId = [" + walletId + "]");
         //通知界面解析交易成功
-        EventBus.getDefault().post(new ParsedTxEvent(txRecords, walletId));
+        EventBus.getDefault().post(new ParsedTxEvent(txRecords, walletId, TAG));
     }
 
     @Override
-    public void parsedTxItemListFail(Long walletId) {
-        Log.d(TAG, "parsedTxItemListFail() called with: walletId = [" + walletId + "]");
-        EventBus.getDefault().post(new ParsedTxEvent(null, walletId));
+    public void parsedTxItemListFail(Long walletId, String TAG) {
+        Log.d(this.TAG, "parsedTxItemListFail() called with: walletId = [" + walletId + "]");
+        EventBus.getDefault().post(new ParsedTxEvent(null, walletId, TAG));
     }
 
 
@@ -207,7 +207,7 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
     @Override
     public void listUnconfirmSuccess(List<TxElement> data) {
         Log.d(TAG, "listUnconfirmSuccess() called with: data = [" + data + "]");
-        mParseTxInfoMvpPresenter.parseTxInfo(data, null);
+        mParseTxInfoMvpPresenter.parseTxInfo(data, null, TAG);
     }
 
     @Override
@@ -263,7 +263,10 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
         if (txElementsParseEvent == null) {
             return;
         }
-        getTxRecordSuccess(txElementsParseEvent.getTxElements(), txElementsParseEvent.getWalletId());
+        if (mParseTxInfoMvpPresenter != null) {
+            mParseTxInfoMvpPresenter.parseTxInfo(txElementsParseEvent.getTxElements(), txElementsParseEvent.getWalletId(), txElementsParseEvent.getTag());
+
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

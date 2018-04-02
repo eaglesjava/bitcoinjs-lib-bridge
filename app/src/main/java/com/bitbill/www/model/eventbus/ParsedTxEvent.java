@@ -9,12 +9,14 @@ import java.util.List;
  */
 public class ParsedTxEvent {
 
+    private String mTag;
     private Long mWalletId;
     private List<TxRecord> mTxRecords;
 
-    public ParsedTxEvent(List<TxRecord> txRecords, Long walletId) {
+    public ParsedTxEvent(List<TxRecord> txRecords, Long walletId, String TAG) {
         mTxRecords = txRecords;
         mWalletId = walletId;
+        mTag = TAG;
     }
 
     public List<TxRecord> getTxRecords() {
@@ -32,6 +34,15 @@ public class ParsedTxEvent {
 
     public ParsedTxEvent setWalletId(Long walletId) {
         mWalletId = walletId;
+        return this;
+    }
+
+    public String getTag() {
+        return mTag;
+    }
+
+    public ParsedTxEvent setTag(String tag) {
+        mTag = tag;
         return this;
     }
 }

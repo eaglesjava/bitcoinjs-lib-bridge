@@ -33,8 +33,8 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
     }
 
     @Override
-    public void parseTxInfo(List<TxElement> txInfoList, Long wId) {
-        if (!isValidTxInfoList(txInfoList, wId)) {
+    public void parseTxInfo(List<TxElement> txInfoList, Long wId, String TAG) {
+        if (!isValidTxInfoList(txInfoList, wId, TAG)) {
             return;
         }
         getCompositeDisposable().add(Observable.just(StringUtils.removeDuplicateList(txInfoList))
@@ -160,7 +160,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().parsedTxItemList(txRecords, wId);
+                        getMvpView().parsedTxItemList(txRecords, wId, TAG);
                     }
 
                     @Override
@@ -169,7 +169,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().parsedTxItemListFail(wId);
+                        getMvpView().parsedTxItemListFail(wId, TAG);
                     }
                 }));
 
@@ -194,21 +194,21 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
     }
 
 
-    public boolean isValidTxInfoList(List<TxElement> txInfoList, Long walletId) {
+    public boolean isValidTxInfoList(List<TxElement> txInfoList, Long walletId, String TAG) {
         if (StringUtils.isEmpty(txInfoList)) {
-            getMvpView().getTxInfoListFail(walletId);
+            getMvpView().getTxInfoListFail(walletId, TAG);
             return false;
         }
 
         for (TxElement txInfo : txInfoList) {
             List<TxElement.InputsBean> inputs = txInfo.getInputs();
             if (StringUtils.isEmpty(inputs)) {
-                getMvpView().getTxInfoListFail(walletId);
+                getMvpView().getTxInfoListFail(walletId, TAG);
                 return false;
             }
             List<TxElement.OutputsBean> outputs = txInfo.getOutputs();
             if (StringUtils.isEmpty(outputs)) {
-                getMvpView().getTxInfoListFail(walletId);
+                getMvpView().getTxInfoListFail(walletId, TAG);
                 return false;
             }
         }

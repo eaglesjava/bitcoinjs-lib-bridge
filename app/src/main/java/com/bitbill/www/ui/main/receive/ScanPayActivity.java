@@ -46,6 +46,7 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     private String mReceiveAmount;
     private String mTxHash;
     private Long mWalletId;
+    private List<TxElement> mTxElements;
 
     public static void start(Context context, String receiveAddress, String receiveAmount, Long walletId) {
         Intent starter = new Intent(context, ScanPayActivity.class);
@@ -137,7 +138,7 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
             //地址匹配交易解析交易
             List<TxElement> txElements = new ArrayList<>();
             txElements.add(txElement);
-            EventBus.getDefault().post(new TxElementsParseEvent(txElements, mWalletId));
+            EventBus.getDefault().post(new TxElementsParseEvent(txElements, mWalletId, TAG));
         }
 
     }
@@ -167,7 +168,8 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onParsedTxEvent(ParsedTxEvent parsedTxEvent) {
-        if (parsedTxEvent != null && mWalletId != null && mWalletId.equals(parsedTxEvent.getWalletId())) {
+
+        if (parsedTxEvent != null && TAG.equals(parsedTxEvent.getTag()) && mWalletId != null && mWalletId.equals(parsedTxEvent.getWalletId())) {
             List<TxRecord> txRecords = parsedTxEvent.getTxRecords();
             if (StringUtils.isEmpty(txRecords)) {
                 return;
