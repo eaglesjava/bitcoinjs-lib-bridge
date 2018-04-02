@@ -8,11 +8,9 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
  */
 public class SyncAddressEvent extends MessageEvent {
     private Wallet mWallet;
-    private boolean isInternal;
 
-    public SyncAddressEvent(Wallet wallet, boolean isInternal) {
+    public SyncAddressEvent(Wallet wallet) {
         mWallet = wallet;
-        this.isInternal = isInternal;
     }
 
     public Wallet getWallet() {
@@ -21,15 +19,6 @@ public class SyncAddressEvent extends MessageEvent {
 
     public SyncAddressEvent setWallet(Wallet wallet) {
         mWallet = wallet;
-        return this;
-    }
-
-    public boolean isInternal() {
-        return isInternal;
-    }
-
-    public SyncAddressEvent setInternal(boolean internal) {
-        isInternal = internal;
         return this;
     }
 }

@@ -26,6 +26,9 @@ import io.reactivex.disposables.CompositeDisposable;
 @PerService
 public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressMvpView> extends ModelPresenter<M, V> implements SyncAddressMvpPresentder<M, V> {
 
+    private boolean finishIndex;
+    private boolean finishLastIndex;
+
     @Inject
     public SyncAddressPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);
@@ -41,16 +44,27 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
         if (wallet == null) {
             return;
         }
+        //reset finish state
+        finishLastIndex = false;
+        finishIndex = false;
+
         wallet.__setDaoSession(getApp().getDaoSession());
         long lastIndex = wallet.getLastAddressIndex();
         if (indexNo > lastIndex) {
             //批量生成地址
             getBitcoinContinuousAddress(lastIndex, indexNo, wallet, false);
+        } else {
+            finishIndex = true;
         }
         long lastChangeAddressIndex = wallet.getLastChangeAddressIndex();
         if (changeIndexNo > lastChangeAddressIndex) {
             //批量生成地址
             getBitcoinContinuousAddress(lastChangeAddressIndex, changeIndexNo, wallet, true);
+        } else {
+            finishLastIndex = true;
+        }
+        if (finishIndex && finishLastIndex) {
+            getMvpView().syncAddressSuccess(wallet);
         }
     }
 
@@ -108,9 +122,15 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
                         if (!isViewAttached()) {
                             return;
                         }
-                        // TODO: 2018/4/1 优化顺序执行
+                        if (isInternal) {
+                            finishLastIndex = true;
+                        } else {
+                            finishIndex = true;
+                        }
                         //找零地址生成完成 同步地址完成
-                        getMvpView().syncAddressSuccess(wallet, isInternal);
+                        if (finishIndex && finishLastIndex) {
+                            getMvpView().syncAddressSuccess(wallet);
+                        }
                     }
 
                     @Override

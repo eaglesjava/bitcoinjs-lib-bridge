@@ -37,7 +37,8 @@ public class BtcRecordPresenter<M extends TxModel, V extends BtcRecordMvpView> e
         if (!isValidWallet(wallet)) {
             return;
         }
-        // TODO: 2018/1/25 在当前线程执行 需要优化
+        // 在当前线程执行 需要优化
+        wallet.__setDaoSession(getApp().getDaoSession());
         wallet.resetTxRecordList();
         List<TxRecord> txRecordList = wallet.getTxRecordList();
         if (!StringUtils.isEmpty(txRecordList)) {

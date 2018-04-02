@@ -38,7 +38,14 @@ public class StringUtils {
 
     public static final Pattern IS_CHINESE_CHAR = Pattern.compile("[\u4e00-\u9fa5]");
     public static final Pattern IS_ENGLISH_CHAR = Pattern.compile("[a-zA-Z]");
-    public final static SimpleDateFormat yyyyMMddHHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    private static final ThreadLocal<DateFormat> sdf = new ThreadLocal<DateFormat>() {
+        @Override
+        protected DateFormat initialValue() {
+            //SimpleDateFormat是线程不安全的 防止多线程访问异常
+            return new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
+        }
+    };
     private final static Pattern PHONE_NUM = Pattern
             .compile("\\d{11}");// 手机号码11位
     private final static Pattern WALLET_ID = Pattern
@@ -627,7 +634,7 @@ public class StringUtils {
         //get date by string
         Date parse = null;
         try {
-            parse = yyyyMMddHHmmss.parse(date);
+            parse = sdf.get().parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -637,7 +644,7 @@ public class StringUtils {
     public static String formatDateTime(String date) {
         //format date by local
         try {
-            Date parse = yyyyMMddHHmmss.parse(date);
+            Date parse = sdf.get().parse(date);
             return formatDateTime(parse);
         } catch (ParseException e) {
             e.printStackTrace();

@@ -47,6 +47,7 @@ import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ConfirmedEvent;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
+import com.bitbill.www.model.eventbus.GetCacheVersionEvent;
 import com.bitbill.www.model.eventbus.ListUnconfirmEvent;
 import com.bitbill.www.model.eventbus.ParsedTxEvent;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
@@ -464,6 +465,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void initData() {
         mUpdateMvpPresenter.checkUpdate();
         mWalletPresenter.loadWallets();
+        EventBus.getDefault().post(new GetCacheVersionEvent());
     }
 
     @Override

@@ -18,8 +18,8 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.bitbill.www.model.address.AddressModel;
-import com.bitbill.www.model.eventbus.GetBlockHeightEvent;
 import com.bitbill.www.model.eventbus.GetBlockHeightResultEvent;
+import com.bitbill.www.model.eventbus.GetCacheVersionEvent;
 import com.bitbill.www.model.transaction.db.entity.Input;
 import com.bitbill.www.model.transaction.db.entity.Output;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
@@ -82,7 +82,7 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
     public void initData() {
         if (getApp().getBlockHeight() <= 0) {
             //重新获取高度
-            EventBus.getDefault().post(new GetBlockHeightEvent());
+            EventBus.getDefault().post(new GetCacheVersionEvent());
         }
         mTxRecord = ((TxRecord) getArguments().getSerializable(AppConstants.ARG_TX_ITEM));
         if (mTxRecord == null) {

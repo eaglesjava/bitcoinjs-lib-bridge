@@ -25,8 +25,8 @@ import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.eventbus.AppBackgroundEvent;
-import com.bitbill.www.model.eventbus.GetBlockHeightEvent;
 import com.bitbill.www.model.eventbus.GetBlockHeightResultEvent;
+import com.bitbill.www.model.eventbus.GetCacheVersionEvent;
 import com.bitbill.www.model.eventbus.ListUnconfirmEvent;
 import com.bitbill.www.model.eventbus.ParsedTxEvent;
 import com.bitbill.www.model.eventbus.RefreshExchangeRateEvent;
@@ -96,6 +96,8 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
         getServiceComponent().inject(this);
         addPresenter(mParseTxInfoMvpPresenter);
         addPresenter(mGetCacheVersionMvpPresenter);
+        addPresenter(mSyncAddressMvpPresentder);
+        addPresenter(mBtcTxMvpPresenter);
     }
 
 
@@ -117,18 +119,20 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
 
     @Override
     public void getBtcRateSuccess(double cnyRate, double usdRate) {
-
+        Log.d(TAG, "getBtcRateSuccess() called with: cnyRate = [" + cnyRate + "], usdRate = [" + usdRate + "]");
         //通知界面已更新
         EventBus.getDefault().post(new RefreshExchangeRateEvent(cnyRate, usdRate));
     }
 
     @Override
     public void getResponseAddressIndex(long indexNo, long changeIndexNo, Wallet wallet) {
+        Log.d(TAG, "getResponseAddressIndex() called with: indexNo = [" + indexNo + "], changeIndexNo = [" + changeIndexNo + "], wallet = [" + wallet + "]");
         mSyncAddressMvpPresentder.syncLastAddressIndex(indexNo, changeIndexNo, wallet);
     }
 
     @Override
     public void getDiffVersionWallets(List<Wallet> tmpWalletList) {
+        Log.d(TAG, "getDiffVersionWallets() called with: tmpWalletList = [" + tmpWalletList + "]");
         if (!StringUtils.isEmpty(tmpWalletList)) {
             for (Wallet wallet : tmpWalletList) {
                 // 只更新更改的wallet的交易记录
@@ -140,6 +144,7 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
 
     @Override
     public void getBlockHeight(long blockheight) {
+        Log.d(TAG, "getBlockHeight() called with: blockheight = [" + blockheight + "]");
         getApp().setBlockHeight(blockheight);
         EventBus.getDefault().post(new GetBlockHeightResultEvent(blockheight));
     }
@@ -151,6 +156,7 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
 
     @Override
     public void getTxRecordSuccess(List<TxElement> list, Long walletId) {
+        Log.d(TAG, "getTxRecordSuccess() called with: list = [" + list + "], walletId = [" + walletId + "]");
         if (!StringUtils.isEmpty(list)) {
             mParseTxInfoMvpPresenter.parseTxInfo(list, walletId);
         }
@@ -163,32 +169,34 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
 
     @Override
     public void getTxInfoListFail(Long walletId) {
-
+        Log.d(TAG, "getTxInfoListFail() called with: walletId = [" + walletId + "]");
         EventBus.getDefault().post(new ParsedTxEvent(null, walletId));
     }
 
     @Override
     public void parsedTxItemList(List<TxRecord> txRecords, Long walletId) {
-        // TODO: 2018/4/1 通知界面解析交易成功
+        Log.d(TAG, "parsedTxItemList() called with: txRecords = [" + txRecords + "], walletId = [" + walletId + "]");
+        //通知界面解析交易成功
         EventBus.getDefault().post(new ParsedTxEvent(txRecords, walletId));
     }
 
     @Override
     public void parsedTxItemListFail(Long walletId) {
+        Log.d(TAG, "parsedTxItemListFail() called with: walletId = [" + walletId + "]");
         EventBus.getDefault().post(new ParsedTxEvent(null, walletId));
     }
 
 
     @Override
-    public void syncAddressSuccess(Wallet wallet, boolean isInternal) {
+    public void syncAddressSuccess(Wallet wallet) {
+        Log.d(TAG, "syncAddressSuccess() called with: wallet = [" + wallet + "]");
         //本地index更新成功 重新刷新交易记录
-        if (isInternal) {
-            requestTxRecord(wallet);
-            EventBus.getDefault().post(new SyncAddressEvent(wallet, isInternal));
-        }
+        requestTxRecord(wallet);
+        EventBus.getDefault().post(new SyncAddressEvent(wallet));
     }
 
     private void requestTxRecord(Wallet wallet) {
+        Log.d(TAG, "requestTxRecord() called with: wallet = [" + wallet + "]");
         if (mBtcTxMvpPresenter != null) {
             mBtcTxMvpPresenter.requestTxRecord(wallet);
         }
@@ -197,6 +205,7 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
 
     @Override
     public void listUnconfirmSuccess(List<TxElement> data) {
+        Log.d(TAG, "listUnconfirmSuccess() called with: data = [" + data + "]");
         mParseTxInfoMvpPresenter.parseTxInfo(data, null);
     }
 
@@ -257,8 +266,8 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetBlockHeightEvent(GetBlockHeightEvent getBlockHeightEvent) {
-        if (getBlockHeightEvent == null) {
+    public void onGetBlockHeightEvent(GetCacheVersionEvent getCacheVersionEvent) {
+        if (getCacheVersionEvent == null) {
             return;
         }
         getCacheVersion();

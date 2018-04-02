@@ -8,5 +8,5 @@ import com.bitbill.www.model.wallet.db.entity.Wallet;
  */
 
 public interface SyncAddressMvpView extends MvpView {
-    void syncAddressSuccess(Wallet wallet, boolean isInternal);
+    void syncAddressSuccess(Wallet wallet);
 }
