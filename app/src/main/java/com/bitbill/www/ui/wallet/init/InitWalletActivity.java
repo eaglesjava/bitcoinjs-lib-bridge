@@ -12,13 +12,11 @@ import android.widget.LinearLayout;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
-import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.widget.EditTextWapper;
 import com.bitbill.www.common.widget.PwdStatusView;
-import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.eventbus.PwdEditEvent;
 import com.bitbill.www.model.eventbus.RegisterEvent;
+import com.bitbill.www.model.eventbus.SyncLastAddressIndexEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -41,7 +39,7 @@ import static com.bitbill.www.app.AppConstants.PLATFORM;
  * 导入钱包
  * Created by isanwenyu@163.com on 2017/11/14.
  */
-public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresenter> implements InitWalletMvpView, SyncAddressMvpView {
+public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresenter> implements InitWalletMvpView {
 
     @BindView(R.id.etw_trade_pwd)
     EditTextWapper etwTradePwd;
@@ -54,8 +52,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
 
     @Inject
     InitWalletMvpPresenter<WalletModel, InitWalletMvpView> initWalletMvpPresenter;
-    @Inject
-    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
     private boolean isCreateWallet = true;
     private EditTextWapper focusView;
     private boolean cancel;
@@ -86,7 +82,6 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
     public void injectComponent() {
         //inject activity
         getActivityComponent().inject(this);
-        addPresenter(mSyncAddressMvpPresentder);
     }
 
     @Override
@@ -250,7 +245,7 @@ public class InitWalletActivity extends BaseToolbarActivity<InitWalletMvpPresent
         EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", getApp().getUUIDMD5(), PLATFORM)));
         if (!isCreateWallet) {
             // 优化检查最新地址索引逻辑
-            mSyncAddressMvpPresentder.syncLastAddressIndex(mIndexNo, mChangeIndexNo, getWallet());
+            EventBus.getDefault().post(new SyncLastAddressIndexEvent(mIndexNo, mChangeIndexNo, getWallet()));
         }
     }
 

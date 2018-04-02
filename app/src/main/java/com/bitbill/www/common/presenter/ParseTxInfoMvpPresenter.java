@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface ParseTxInfoMvpPresenter<M extends TxModel, V extends ParseTxInfoMvpView> extends MvpPresenter<V> {
 
-    void parseTxInfo(List<TxElement> list);
+    void parseTxInfo(List<TxElement> list, Long walletId);
 }

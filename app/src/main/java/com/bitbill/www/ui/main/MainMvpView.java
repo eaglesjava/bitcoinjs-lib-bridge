@@ -24,7 +24,6 @@ package com.bitbill.www.ui.main;
 
 import com.bitbill.www.common.base.view.MvpView;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
@@ -38,10 +37,6 @@ public interface MainMvpView extends MvpView {
     List<Wallet> getWallets();
 
     void getWalletsFail();
-
-    void listUnconfirmSuccess(List<TxElement> data);
-
-    void listUnconfirmFail();
 
     void loadUnconfirmSuccess(List<TxRecord> txRecords);
 

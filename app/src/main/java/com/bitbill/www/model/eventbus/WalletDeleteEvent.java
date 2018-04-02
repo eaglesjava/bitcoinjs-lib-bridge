@@ -1,12 +1,13 @@
 package com.bitbill.www.model.eventbus;
 
+import com.bitbill.www.common.base.model.entity.eventbus.MessageEvent;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 /**
  * Created by isanwenyu on 2017/12/28.
  */
 
-public class WalletDeleteEvent {
+public class WalletDeleteEvent extends MessageEvent {
 
     private Wallet mWallet;
 

@@ -16,15 +16,6 @@ import com.bitbill.www.common.presenter.BtcAddressPresenter;
 import com.bitbill.www.common.presenter.DownloadMvpPresenter;
 import com.bitbill.www.common.presenter.DownloadMvpView;
 import com.bitbill.www.common.presenter.DownloadPresenter;
-import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
-import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
-import com.bitbill.www.common.presenter.GetCacheVersionPresenter;
-import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
-import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
-import com.bitbill.www.common.presenter.ParseTxInfoPresenter;
-import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
-import com.bitbill.www.common.presenter.SyncAddressMvpView;
-import com.bitbill.www.common.presenter.SyncAddressPresenter;
 import com.bitbill.www.common.presenter.UpdateMvpPresenter;
 import com.bitbill.www.common.presenter.UpdateMvpView;
 import com.bitbill.www.common.presenter.UpdatePresenter;
@@ -233,13 +224,6 @@ public class ActivityModule {
 
     @Provides
     @PerActivity
-    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> provideSyncAddressPresenter(
-            SyncAddressPresenter<AddressModel, SyncAddressMvpView> presenter) {
-        return presenter;
-    }
-
-    @Provides
-    @PerActivity
     BtcSendMvpPresenter<ContactModel, BtcSendMvpView> provideBtcSendPresenter(
             BtcSendPresenter<ContactModel, BtcSendMvpView> presenter) {
         return presenter;
@@ -326,20 +310,6 @@ public class ActivityModule {
     @PerActivity
     SystemSettingMvpPresenter<AppModel, SystemSettingMvpView> provideSystemSettingPresenter(
             SystemSettingPresenter<AppModel, SystemSettingMvpView> presenter) {
-        return presenter;
-    }
-
-    @Provides
-    @PerActivity
-    GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> provideGetCacheVersionPresenter(
-            GetCacheVersionPresenter<WalletModel, GetCacheVersionMvpView> presenter) {
-        return presenter;
-    }
-
-    @Provides
-    @PerActivity
-    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> provideParseTxInfoPresenter(
-            ParseTxInfoPresenter<TxModel, ParseTxInfoMvpView> presenter) {
         return presenter;
     }
 

@@ -31,12 +31,6 @@ import com.bitbill.www.common.base.view.BaseActivity;
 import com.bitbill.www.common.base.view.BaseViewControl;
 import com.bitbill.www.common.presenter.BalanceMvpPresenter;
 import com.bitbill.www.common.presenter.BalanceMvpView;
-import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
-import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
-import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
-import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
-import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
-import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.presenter.UpdateMvpPresenter;
 import com.bitbill.www.common.presenter.UpdateMvpView;
 import com.bitbill.www.common.presenter.WalletMvpPresenter;
@@ -49,19 +43,20 @@ import com.bitbill.www.common.widget.dialog.BaseConfirmDialog;
 import com.bitbill.www.common.widget.dialog.MessageConfirmDialog;
 import com.bitbill.www.common.widget.dialog.UpdateAppDialog;
 import com.bitbill.www.common.widget.dialog.UpdateConfirmDialog;
-import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.contact.db.entity.Contact;
 import com.bitbill.www.model.eventbus.ConfirmedEvent;
 import com.bitbill.www.model.eventbus.ContactUpdateEvent;
+import com.bitbill.www.model.eventbus.ListUnconfirmEvent;
+import com.bitbill.www.model.eventbus.ParsedTxEvent;
 import com.bitbill.www.model.eventbus.SendSuccessEvent;
 import com.bitbill.www.model.eventbus.UnConfirmEvent;
 import com.bitbill.www.model.eventbus.UnConfirmedListEvent;
+import com.bitbill.www.model.eventbus.UpdateConfirmEvent;
 import com.bitbill.www.model.eventbus.WalletDeleteEvent;
 import com.bitbill.www.model.eventbus.WalletUpdateEvent;
 import com.bitbill.www.model.transaction.TxModel;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.transaction.network.entity.TxElement;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.socket.Confirmed;
@@ -104,7 +99,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainMvpPresenter>
-        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, BalanceMvpView, WalletMvpView, ParseTxInfoMvpView, GetCacheVersionMvpView, SyncAddressMvpView, BtcRecordMvpView, UpdateMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
+        implements BaseViewControl, NavigationView.OnNavigationItemSelectedListener, MainMvpView, BalanceMvpView, WalletMvpView, UpdateMvpView, BtcUnconfirmFragment.OnTransactionRecordItemClickListener, EasyPermissions.PermissionCallbacks {
 
     public static final int INDEX_ASSET = 0;
     public static final int INDEX_CONTACT = 1;
@@ -118,12 +113,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     BalanceMvpPresenter<WalletModel, BalanceMvpView> mBalanceMvpPresenter;
     @Inject
     WalletMvpPresenter<WalletModel, WalletMvpView> mWalletPresenter;
-    @Inject
-    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mParseTxInfoMvpPresenter;
-    @Inject
-    GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
-    @Inject
-    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
     @Inject
     BtcRecordMvpPresenter<TxModel, BtcRecordMvpView> mBtcRecordMvpPresenter;
     @Inject
@@ -230,7 +219,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
         if (isListUnconfirm) {
             //获取未确认列表
-            getMvpPresenter().listUnconfirm();
+            EventBus.getDefault().post(new ListUnconfirmEvent());
 
         }
 
@@ -247,8 +236,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         getActivityComponent().inject(this);
         addPresenter(mBalanceMvpPresenter);
         addPresenter(mWalletPresenter);
-        addPresenter(mParseTxInfoMvpPresenter);
-        addPresenter(mGetCacheVersionMvpPresenter);
         addPresenter(mBtcRecordMvpPresenter);
         addPresenter(mUpdateMvpPresenter);
     }
@@ -477,7 +464,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     public void initData() {
         mUpdateMvpPresenter.checkUpdate();
         mWalletPresenter.loadWallets();
-        mGetCacheVersionMvpPresenter.getCacheVersion();
     }
 
     @Override
@@ -538,7 +524,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         //获取钱包余额
         mBalanceMvpPresenter.getBalance();
         //加载未确认交易
-        getMvpPresenter().listUnconfirm();
+        EventBus.getDefault().post(new ListUnconfirmEvent());
     }
 
     private void reloadWalletInfo(List<Wallet> wallets) {
@@ -621,23 +607,10 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         reloadWalletInfo(wallets);
     }
 
-    @Override
-    public void listUnconfirmSuccess(List<TxElement> data) {
-        if (StringUtils.isEmpty(data)) {
-            loadUnconfirmList(null);
-        } else {
-            mParseTxInfoMvpPresenter.parseTxInfo(data);
-        }
-    }
-
     private void loadUnconfirmList(List<TxRecord> data) {
         if (mAssetFragment != null && mAssetFragment.isAdded()) {
             mAssetFragment.loadUnconfirm(data);
         }
-    }
-
-    @Override
-    public void listUnconfirmFail() {
     }
 
     @Override
@@ -708,9 +681,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         if (mViewPager != null) {
             mViewPager.setCurrentItem(INDEX_ASSET);
         }
-        if (getMvpPresenter() != null) {
-            getMvpPresenter().listUnconfirm();
-        }
+        EventBus.getDefault().post(new ListUnconfirmEvent());
+
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -720,7 +692,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
         unConfirmEvent = EventBus.getDefault().removeStickyEvent(UnConfirmEvent.class);
         //加载未确认交易
-        getMvpPresenter().listUnconfirm();
+        EventBus.getDefault().post(new ListUnconfirmEvent());
         mBalanceMvpPresenter.getBalance();
 
         UnConfirmed unConfirmed = (UnConfirmed) unConfirmEvent.getData();
@@ -728,7 +700,7 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
 
             ContextBean context = unConfirmed.getContext();
 
-            updateLocalCache(context);
+            EventBus.getDefault().post(new UpdateConfirmEvent(context, mWalletList));
 
         }
     }
@@ -740,14 +712,14 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         }
         confirmedEvent = EventBus.getDefault().removeStickyEvent(ConfirmedEvent.class);
         //加载未确认交易
-        getMvpPresenter().listUnconfirm();
+        EventBus.getDefault().post(new ListUnconfirmEvent());
         mBalanceMvpPresenter.getBalance();
 
         Confirmed confirmed = (Confirmed) confirmedEvent.getData();
         if (confirmed != null && confirmed.getContext() != null) {
 
             ContextBean context = confirmed.getContext();
-            updateLocalCache(context);
+            EventBus.getDefault().post(new UpdateConfirmEvent(context, mWalletList));
 
         }
     }
@@ -760,25 +732,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         EventBus.getDefault().removeStickyEvent(UnConfirmedListEvent.class);
         //加载本地未确认交易
         getMvpPresenter().loadUnConfirmedList();
-    }
-
-    private void updateLocalCache(ContextBean context) {
-        if (!StringUtils.isEmpty(mWalletList)) {
-            for (Wallet wallet : mWalletList) {
-                if (wallet.getName().equals(context.getWalletId())) {
-                    getResponseAddressIndex(context.getIndexNo(), context.getChangeIndexNo(), wallet);
-                    if (wallet.getVersion() != context.getVersion()) {
-                        List<Wallet> tmpWalletList = new ArrayList<>();
-                        tmpWalletList.add(wallet);
-                        //重新获取交易列表
-                        getDiffVersionWallets(tmpWalletList);
-                    }
-                }
-            }
-        }
-        if (context.getHeight() > 0) {
-            getApp().setBlockHeight(context.getHeight());
-        }
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -804,50 +757,17 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
         mWalletPresenter.loadWallets();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onParsedTxEvent(ParsedTxEvent parsedTxEvent) {
+        if (parsedTxEvent != null) {
+            getMvpPresenter().loadUnConfirmedList();
+
+        }
+    }
+
     public void addContact() {
         mViewPager.setCurrentItem(1, true);
         mContactFragment.showSelectDialog();
-    }
-
-    @Override
-    public void requireTxInfoList() {
-    }
-
-    @Override
-    public void getTxInfoListFail() {
-    }
-
-    @Override
-    public void parsedTxItemList(List<TxRecord> txRecords) {
-        //移除heigh不为-1的交易记录
-        getMvpPresenter().loadUnConfirmedList();
-    }
-
-    @Override
-    public void parsedTxItemListFail() {
-        showMessage(R.string.fail_parse_tx_item);
-    }
-
-    @Override
-    public void getResponseAddressIndex(long indexNo, long changeIndexNo, Wallet wallet) {
-        mSyncAddressMvpPresentder.syncLastAddressIndex(indexNo, changeIndexNo, wallet);
-    }
-
-    @Override
-    public void getDiffVersionWallets(List<Wallet> tmpWalletList) {
-        if (!StringUtils.isEmpty(tmpWalletList)) {
-            for (Wallet wallet : tmpWalletList) {
-
-                // 只更新更改的wallet的交易记录
-                mBtcRecordMvpPresenter.requestTxRecord(wallet);
-            }
-        }
-
-    }
-
-    @Override
-    public void getBlockHeight(long blockheight) {
-
     }
 
     @Override
@@ -867,28 +787,6 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
             }
         }
         super.showLoading();
-    }
-
-    @Override
-    public void getWalletFail() {
-
-    }
-
-    @Override
-    public void getTxRecordSuccess(List<TxElement> list) {
-        if (!StringUtils.isEmpty(list)) {
-            mParseTxInfoMvpPresenter.parseTxInfo(list);
-        }
-    }
-
-    @Override
-    public void getTxRecordFail() {
-
-    }
-
-    @Override
-    public void loadTxRecordSuccess(List<TxRecord> txRecordList) {
-
     }
 
     @Override

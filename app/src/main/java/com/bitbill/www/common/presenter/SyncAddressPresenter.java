@@ -7,13 +7,10 @@ import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.BitcoinJsWrapper;
 import com.bitbill.www.crypto.entity.JsResult;
-import com.bitbill.www.di.scope.PerActivity;
+import com.bitbill.www.di.scope.PerService;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.address.db.entity.Address;
-import com.bitbill.www.model.eventbus.SyncAddressEvent;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,22 +23,12 @@ import io.reactivex.disposables.CompositeDisposable;
 /**
  * Created by isanwenyu@163.com on 2017/12/15.
  */
-@PerActivity
+@PerService
 public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressMvpView> extends ModelPresenter<M, V> implements SyncAddressMvpPresentder<M, V> {
 
     @Inject
     public SyncAddressPresenter(M model, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(model, schedulerProvider, compositeDisposable);
-    }
-
-    @Override
-    public void onAttach(V mvpView) {
-        //do nothing
-    }
-
-    @Override
-    public void onDetach() {
-        //do nothing
     }
 
     @Override
@@ -54,6 +41,7 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
         if (wallet == null) {
             return;
         }
+        wallet.__setDaoSession(getApp().getDaoSession());
         long lastIndex = wallet.getLastAddressIndex();
         if (indexNo > lastIndex) {
             //批量生成地址
@@ -117,8 +105,12 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);
-                        //本地index更新成功 通知地址同步成功
-                        EventBus.getDefault().post(new SyncAddressEvent(wallet, isInternal));
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        // TODO: 2018/4/1 优化顺序执行
+                        //找零地址生成完成 同步地址完成
+                        getMvpView().syncAddressSuccess(wallet, isInternal);
                     }
 
                     @Override

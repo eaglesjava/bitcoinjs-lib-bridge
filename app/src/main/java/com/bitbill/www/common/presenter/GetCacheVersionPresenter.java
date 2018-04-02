@@ -6,7 +6,7 @@ import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.crypto.utils.EncryptUtils;
-import com.bitbill.www.di.scope.PerActivity;
+import com.bitbill.www.di.scope.PerService;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
@@ -27,7 +27,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by isanwenyu@163.com on 2018/1/6.
  */
 
-@PerActivity
+@PerService
 public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheVersionMvpView> extends ModelPresenter<M, V> implements GetCacheVersionMvpPresenter<M, V> {
     @Inject
     AddressModel mAddressModel;
@@ -75,9 +75,9 @@ public class GetCacheVersionPresenter<M extends WalletModel, V extends GetCacheV
                                     jsonObjectApiResponse.getData();
                                     if (data != null && !StringUtils.isEmpty(wallets)) {
                                         long blockheight = data.getLong("blockheight");
+                                        //  缓存blockheight
                                         getApp().setBlockHeight(blockheight);
                                         getMvpView().getBlockHeight(blockheight);
-                                        // TODO: 2018/1/6 缓存blockheight
                                         List<Wallet> tmpWalletList = new ArrayList<>();
                                         for (Wallet wallet : wallets) {
                                             JSONObject amountJsonObj = data.optJSONObject(wallet.getName());

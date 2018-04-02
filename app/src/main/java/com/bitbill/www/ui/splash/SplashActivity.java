@@ -7,18 +7,11 @@ import android.view.View;
 
 import com.bitbill.www.R;
 import com.bitbill.www.common.base.view.BaseActivity;
-import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
-import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
-import com.bitbill.www.common.presenter.GetExchangeRateMvpView;
-import com.bitbill.www.common.presenter.SyncAddressMvpPresentder;
-import com.bitbill.www.common.presenter.SyncAddressMvpView;
 import com.bitbill.www.common.presenter.UpdateMvpPresenter;
 import com.bitbill.www.common.presenter.UpdateMvpView;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.eventbus.RegisterEvent;
-import com.bitbill.www.model.wallet.WalletModel;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.socket.Register;
 import com.bitbill.www.service.SocketServiceProvider;
@@ -40,28 +33,10 @@ import cn.jpush.android.api.TagAliasCallback;
 
 import static com.bitbill.www.app.AppConstants.PLATFORM;
 
-public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, GetCacheVersionMvpView, SyncAddressMvpView, GetExchangeRateMvpView, UpdateMvpView {
+public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements SplashMvpView, UpdateMvpView {
 
     private static final String TAG = "SplashActivity";
     private static final int MSG_SET_ALIAS = 1001;
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
@@ -89,12 +64,26 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
             }
         }
     };
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
     @Inject
     UpdateMvpPresenter<AppModel, UpdateMvpView> mUpdateMvpPresenter;
-    @Inject
-    GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
-    @Inject
-    SyncAddressMvpPresentder<AddressModel, SyncAddressMvpView> mSyncAddressMvpPresentder;
     private boolean mHasWallet;
 
     @Override
@@ -126,7 +115,6 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
-        addPresenter(mGetCacheVersionMvpPresenter);
         addPresenter(mUpdateMvpPresenter);
     }
 
@@ -138,7 +126,6 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
                 EventBus.getDefault().post(new RegisterEvent().setData(new Register(wallet.getName(), "", getApp().getUUIDMD5(), PLATFORM)));
             }
         }
-        mGetCacheVersionMvpPresenter.getCacheVersion();
         flContent.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -158,32 +145,12 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         finish();
     }
 
-    @Override
-    public void getResponseAddressIndex(long indexNo, long changeIndexNo, Wallet wallet) {
-        mSyncAddressMvpPresentder.syncLastAddressIndex(indexNo, changeIndexNo, wallet);
-    }
-
-    @Override
-    public void getDiffVersionWallets(List<Wallet> tmpWalletList) {
-
-    }
-
-    @Override
-    public void getBlockHeight(long blockheight) {
-
-    }
-
     // 这是来自 JPush Example 的设置别名的 Activity 里的代码。一般 App 的设置的调用入口，在任何方便的地方调用都可以。
     private void setAlias() {
         if (!getMvpPresenter().isAliasSeted()) {
             // 调用 Handler 来异步设置别名
             mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, getApp().getUUIDMD5()));
         }
-
-    }
-
-    @Override
-    public void getBtcRateSuccess(double cnyRate, double usdRate) {
 
     }
 

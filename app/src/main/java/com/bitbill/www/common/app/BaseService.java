@@ -4,12 +4,16 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 
+import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.presenter.MvpPresenter;
 import com.bitbill.www.common.base.view.BaseInjectControl;
 import com.bitbill.www.common.base.view.MvpView;
+import com.bitbill.www.common.utils.NetworkUtils;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.common.widget.SingleToast;
 import com.bitbill.www.di.component.DaggerServiceComponent;
 import com.bitbill.www.di.component.ServiceComponent;
 import com.bitbill.www.di.module.ServiceModule;
@@ -58,6 +62,7 @@ public abstract class BaseService<P extends MvpPresenter> extends Service implem
     public void onDestroy() {
         super.onDestroy();
         detachPresenters();
+        SingleToast.clear();
     }
 
     @Override
@@ -115,29 +120,39 @@ public abstract class BaseService<P extends MvpPresenter> extends Service implem
     }
 
     @Override
-    public void onError(int resId) {
-
+    public void onError(String message) {
+        if (message != null) {
+            showMessage(message);
+        } else {
+            showMessage(getString(R.string.some_error));
+        }
+        hideLoading();
     }
 
     @Override
-    public void onError(String message) {
-
+    public void onError(@StringRes int resId) {
+        onError(getString(resId));
     }
 
     @Override
     public void showMessage(String message) {
-
+        if (message != null) {
+            SingleToast.show(message, this);
+        } else {
+            SingleToast.show(getString(R.string.some_error), this);
+        }
     }
 
     @Override
-    public void showMessage(int resId) {
-
+    public void showMessage(@StringRes int resId) {
+        showMessage(getString(resId));
     }
 
     @Override
     public boolean isNetworkConnected() {
-        return false;
+        return NetworkUtils.isNetworkConnected(getApplicationContext());
     }
+
 
     @Override
     public void hideKeyboard() {

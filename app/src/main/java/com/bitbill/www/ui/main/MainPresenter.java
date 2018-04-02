@@ -23,17 +23,12 @@
 package com.bitbill.www.ui.main;
 
 
-import com.androidnetworking.error.ANError;
-import com.bitbill.www.common.base.model.network.api.ApiResponse;
 import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.model.transaction.TxModel;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.transaction.network.entity.ListTxElementResponse;
-import com.bitbill.www.model.transaction.network.entity.ListUnconfirmRequest;
-import com.bitbill.www.model.wallet.db.entity.Wallet;
 
 import java.util.List;
 
@@ -54,60 +49,6 @@ public class MainPresenter<M extends TxModel, V extends MainMvpView> extends Mod
     public MainPresenter(M appModel, SchedulerProvider schedulerProvider,
                          CompositeDisposable compositeDisposable) {
         super(appModel, schedulerProvider, compositeDisposable);
-    }
-
-    @Override
-    public void listUnconfirm() {
-
-        if (!isValidWallets()) {
-            return;
-        }
-        List<Wallet> wallets = getMvpView().getWallets();
-        String extendedKeysHash = StringUtils.buildExtendedKeysHash(wallets);
-        if (StringUtils.isEmpty(extendedKeysHash)) {
-            getMvpView().getWalletsFail();
-            return;
-        }
-        getCompositeDisposable().add(getModelManager()
-                .listUnconfirm(new ListUnconfirmRequest(extendedKeysHash))
-                .compose(this.applyScheduler())
-                .subscribeWith(new BaseSubcriber<ApiResponse<ListTxElementResponse>>() {
-                    @Override
-                    public void onNext(ApiResponse<ListTxElementResponse> listApiResponse) {
-                        super.onNext(listApiResponse);
-                        if (handleApiResponse(listApiResponse)) {
-                            return;
-                        }
-                        if (listApiResponse.isSuccess()) {
-                            ListTxElementResponse data = listApiResponse.getData();
-                            if (data != null) {
-                                getMvpView().listUnconfirmSuccess(StringUtils.removeDuplicateList(data.getList()));
-                            } else {
-                                getMvpView().listUnconfirmFail();
-                            }
-
-                        } else {
-                            getMvpView().listUnconfirmFail();
-                        }
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        if (!isViewAttached()) {
-                            return;
-                        }
-                        if (e instanceof ANError) {
-                            handleApiError(((ANError) e));
-                        } else {
-                            getMvpView().listUnconfirmFail();
-                        }
-
-                    }
-                })
-        );
-
     }
 
     @Override

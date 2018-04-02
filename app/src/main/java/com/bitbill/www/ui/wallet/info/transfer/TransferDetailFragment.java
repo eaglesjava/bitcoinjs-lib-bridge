@@ -14,21 +14,21 @@ import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.app.BitbillApp;
 import com.bitbill.www.common.base.model.entity.TitleItem;
 import com.bitbill.www.common.base.view.BaseListFragment;
-import com.bitbill.www.common.presenter.GetCacheVersionMvpPresenter;
-import com.bitbill.www.common.presenter.GetCacheVersionMvpView;
 import com.bitbill.www.common.utils.StringUtils;
 import com.bitbill.www.common.utils.UIHelper;
 import com.bitbill.www.common.widget.decoration.DividerDecoration;
 import com.bitbill.www.model.address.AddressModel;
+import com.bitbill.www.model.eventbus.GetBlockHeightEvent;
+import com.bitbill.www.model.eventbus.GetBlockHeightResultEvent;
 import com.bitbill.www.model.transaction.db.entity.Input;
 import com.bitbill.www.model.transaction.db.entity.Output;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
-import com.bitbill.www.model.wallet.WalletModel;
-import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
 
-import java.util.List;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -39,10 +39,8 @@ import butterknife.ButterKnife;
  * Created by isanwenyu on 2018/1/9.
  */
 
-public class TransferDetailFragment extends BaseListFragment<TitleItem, TransferDetailMvpPresenter> implements TransferDetailMvpView, GetCacheVersionMvpView {
+public class TransferDetailFragment extends BaseListFragment<TitleItem, TransferDetailMvpPresenter> implements TransferDetailMvpView {
 
-    @Inject
-    GetCacheVersionMvpPresenter<WalletModel, GetCacheVersionMvpView> mGetCacheVersionMvpPresenter;
     @Inject
     TransferDetailMvpPresenter<AddressModel, TransferDetailMvpView> mTransferDetailMvpPresenter;
     private TxRecord mTxRecord;
@@ -66,7 +64,6 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
-        addPresenter(mGetCacheVersionMvpPresenter);
     }
 
     @Override
@@ -85,7 +82,7 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
     public void initData() {
         if (getApp().getBlockHeight() <= 0) {
             //重新获取高度
-            mGetCacheVersionMvpPresenter.getCacheVersion();
+            EventBus.getDefault().post(new GetBlockHeightEvent());
         }
         mTxRecord = ((TxRecord) getArguments().getSerializable(AppConstants.ARG_TX_ITEM));
         if (mTxRecord == null) {
@@ -255,18 +252,12 @@ public class TransferDetailFragment extends BaseListFragment<TitleItem, Transfer
         return R.layout.fragment_transfer_details;
     }
 
-    @Override
-    public void getResponseAddressIndex(long indexNo, long changeIndexNo, Wallet wallet) {
-    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onParsedTxEvent(GetBlockHeightResultEvent getBlockHeightResultEvent) {
+        if (getBlockHeightResultEvent != null) {
+            mAdapter.notifyDataSetChanged();
 
-    @Override
-    public void getDiffVersionWallets(List<Wallet> tmpWalletList) {
-
-    }
-
-    @Override
-    public void getBlockHeight(long blockheight) {
-        mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

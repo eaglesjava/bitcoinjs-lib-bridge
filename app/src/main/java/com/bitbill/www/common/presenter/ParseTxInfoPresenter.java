@@ -4,7 +4,7 @@ import com.bitbill.www.common.base.presenter.ModelPresenter;
 import com.bitbill.www.common.rx.BaseSubcriber;
 import com.bitbill.www.common.rx.SchedulerProvider;
 import com.bitbill.www.common.utils.StringUtils;
-import com.bitbill.www.di.scope.PerActivity;
+import com.bitbill.www.di.scope.PerService;
 import com.bitbill.www.model.address.AddressModel;
 import com.bitbill.www.model.address.db.entity.Address;
 import com.bitbill.www.model.transaction.TxModel;
@@ -22,7 +22,7 @@ import io.reactivex.disposables.CompositeDisposable;
 /**
  * Created by isanwenyu@163.com on 2018/1/6.
  */
-@PerActivity
+@PerService
 public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpView> extends ModelPresenter<M, V> implements ParseTxInfoMvpPresenter<M, V> {
     @Inject
     AddressModel mAddressModel;
@@ -33,8 +33,8 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
     }
 
     @Override
-    public void parseTxInfo(List<TxElement> txInfoList) {
-        if (!isValidTxInfoList(txInfoList)) {
+    public void parseTxInfo(List<TxElement> txInfoList, Long wId) {
+        if (!isValidTxInfoList(txInfoList, wId)) {
             return;
         }
         getCompositeDisposable().add(Observable.just(StringUtils.removeDuplicateList(txInfoList))
@@ -160,7 +160,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().parsedTxItemList(txRecords);
+                        getMvpView().parsedTxItemList(txRecords, wId);
                     }
 
                     @Override
@@ -169,7 +169,7 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
                         if (!isViewAttached()) {
                             return;
                         }
-                        getMvpView().parsedTxItemListFail();
+                        getMvpView().parsedTxItemListFail(wId);
                     }
                 }));
 
@@ -194,21 +194,21 @@ public class ParseTxInfoPresenter<M extends TxModel, V extends ParseTxInfoMvpVie
     }
 
 
-    public boolean isValidTxInfoList(List<TxElement> txInfoList) {
+    public boolean isValidTxInfoList(List<TxElement> txInfoList, Long walletId) {
         if (StringUtils.isEmpty(txInfoList)) {
-            getMvpView().requireTxInfoList();
+            getMvpView().getTxInfoListFail(walletId);
             return false;
         }
 
         for (TxElement txInfo : txInfoList) {
             List<TxElement.InputsBean> inputs = txInfo.getInputs();
             if (StringUtils.isEmpty(inputs)) {
-                getMvpView().getTxInfoListFail();
+                getMvpView().getTxInfoListFail(walletId);
                 return false;
             }
             List<TxElement.OutputsBean> outputs = txInfo.getOutputs();
             if (StringUtils.isEmpty(outputs)) {
-                getMvpView().getTxInfoListFail();
+                getMvpView().getTxInfoListFail(walletId);
                 return false;
             }
         }

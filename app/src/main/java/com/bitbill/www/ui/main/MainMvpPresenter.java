@@ -34,7 +34,5 @@ import com.bitbill.www.model.transaction.TxModel;
 @PerActivity
 public interface MainMvpPresenter<M extends TxModel, V extends MainMvpView> extends MvpPresenter<V> {
 
-    void listUnconfirm();
-
     void loadUnConfirmedList();
 }

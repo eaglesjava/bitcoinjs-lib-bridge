@@ -10,10 +10,10 @@ import android.widget.TextView;
 import com.bitbill.www.R;
 import com.bitbill.www.app.AppConstants;
 import com.bitbill.www.common.base.view.BaseToolbarActivity;
-import com.bitbill.www.common.presenter.ParseTxInfoMvpPresenter;
-import com.bitbill.www.common.presenter.ParseTxInfoMvpView;
 import com.bitbill.www.common.utils.StringUtils;
+import com.bitbill.www.model.eventbus.ParsedTxEvent;
 import com.bitbill.www.model.eventbus.ReceiveAmountEvent;
+import com.bitbill.www.model.eventbus.TxElementsParseEvent;
 import com.bitbill.www.model.transaction.TxModel;
 import com.bitbill.www.model.transaction.db.entity.TxRecord;
 import com.bitbill.www.model.transaction.network.entity.TxElement;
@@ -21,6 +21,7 @@ import com.bitbill.www.model.wallet.network.socket.ContextBean;
 import com.bitbill.www.model.wallet.network.socket.UnConfirmed;
 import com.bitbill.www.ui.wallet.info.transfer.TransferDetailsActivity;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -31,7 +32,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> implements ScanPayMvpView, ParseTxInfoMvpView {
+public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> implements ScanPayMvpView {
     public static final String TAG = "ScanPayActivity";
     @BindView(R.id.tv_address)
     TextView tvAddress;
@@ -41,8 +42,6 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     TextView tvReceiveAmount;
     @Inject
     ScanPayMvpPresenter<TxModel, ScanPayMvpView> mScanPayMvpPresenter;
-    @Inject
-    ParseTxInfoMvpPresenter<TxModel, ParseTxInfoMvpView> mViewParseTxInfoMvpPresenter;
     private String mReceiveAddress;
     private String mReceiveAmount;
     private String mTxHash;
@@ -72,7 +71,6 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
     @Override
     public void injectComponent() {
         getActivityComponent().inject(this);
-        addPresenter(mViewParseTxInfoMvpPresenter);
     }
 
     @Override
@@ -139,7 +137,7 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
             //地址匹配交易解析交易
             List<TxElement> txElements = new ArrayList<>();
             txElements.add(txElement);
-            mViewParseTxInfoMvpPresenter.parseTxInfo(txElements);
+            EventBus.getDefault().post(new TxElementsParseEvent(txElements, mWalletId));
         }
 
     }
@@ -167,34 +165,22 @@ public class ScanPayActivity extends BaseToolbarActivity<ScanPayMvpPresenter> im
         }
     }
 
-    @Override
-    public void requireTxInfoList() {
-
-    }
-
-    @Override
-    public void getTxInfoListFail() {
-
-    }
-
-    @Override
-    public void parsedTxItemList(List<TxRecord> txRecords) {
-        if (StringUtils.isEmpty(txRecords)) {
-            return;
-        }
-        //筛选相关的交易
-        for (TxRecord txRecord : txRecords) {
-            if (mWalletId != null && mWalletId > 0l && mWalletId.equals(txRecord.getWalletId())) {
-                //找到交易记录并打开交易详情
-                TransferDetailsActivity.start(ScanPayActivity.this, txRecord, TAG);
-                finish();
-                break;
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onParsedTxEvent(ParsedTxEvent parsedTxEvent) {
+        if (parsedTxEvent != null && mWalletId != null && mWalletId.equals(parsedTxEvent.getWalletId())) {
+            List<TxRecord> txRecords = parsedTxEvent.getTxRecords();
+            if (StringUtils.isEmpty(txRecords)) {
+                return;
+            }
+            //筛选相关的交易
+            for (TxRecord txRecord : txRecords) {
+                if (mWalletId != null && mWalletId > 0l && mWalletId.equals(txRecord.getWalletId())) {
+                    //找到交易记录并打开交易详情
+                    TransferDetailsActivity.start(ScanPayActivity.this, txRecord, TAG);
+                    finish();
+                    break;
+                }
             }
         }
-    }
-
-    @Override
-    public void parsedTxItemListFail() {
-
     }
 }
