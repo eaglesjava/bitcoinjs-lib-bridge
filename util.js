@@ -3,7 +3,6 @@
  *
  */
 
-require('es6-promise/auto');
 const abi = require('ethereumjs-abi');
 const eos_ecc = require('eosjs-ecc');
 
@@ -40,7 +39,7 @@ let generateEosKeyPair = function(cb) {
     eos_ecc.randomKey().then(privateKey => {
         let publicKey = eos_ecc.privateToPublic(privateKey)
 
-        console.log(privateKey + ': ' + publicKey)
+        // console.log(privateKey + ': ' + publicKey)
         let eosKeyPair = {
             publicKey,
             privateKey,

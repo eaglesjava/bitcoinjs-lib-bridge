@@ -7,7 +7,9 @@ var web3 = new Web3();
 
 var util = require('./util');
 
-var icap = require('ethereumjs-icap')
+var icap = require('ethereumjs-icap');
+
+var keythereum = require('keythereum');
 
 // jaxx path
 var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0/0";
@@ -123,6 +125,11 @@ function generateEosKeyPair(cb) {
     return util.generateEosKeyPair(cb);
 }
 
+function getPrivateKeyFromKeystore (password, keystoreContent) {
+    var keyObject = JSON.parse(keystoreContent);
+    return keythereum.recover(password, keyObject).toString('hex');
+}
+
 module.exports = {
     mnemonicToSeed: mnemonicToSeed,
     seedToAddress: seedToAddress,
@@ -136,6 +143,7 @@ module.exports = {
     generateEosKeyPair: generateEosKeyPair,
     ibanToAddress: ibanToAddress,
     addressToIban: addressToIban,
+    getPrivateKeyFromKeystore: getPrivateKeyFromKeystore,
 };
 
 // for test
