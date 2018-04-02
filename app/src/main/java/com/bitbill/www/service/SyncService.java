@@ -114,6 +114,7 @@ public class SyncService extends BaseService<GetExchangeRateMvpPresenter> implem
     }
 
     private void getCacheVersion() {
+        Log.d(TAG, "getCacheVersion() called");
         mGetCacheVersionMvpPresenter.getCacheVersion();
     }
 

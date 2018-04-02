@@ -65,8 +65,7 @@ public class BalancePresenter<M extends WalletModel, V extends BalanceMvpView> e
                                     wallet.setUnconfirm(amountJsonObj.getLong("unconfirm"));
                                     totalAmount += balance;
                                 }
-                                updateWallets(wallets);
-                                getMvpView().getBalanceSuccess(wallets, totalAmount);
+                                updateWallets(wallets, totalAmount);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 loadBalance();
@@ -93,18 +92,25 @@ public class BalancePresenter<M extends WalletModel, V extends BalanceMvpView> e
         );
     }
 
-    private void updateWallets(List<Wallet> wallets) {
+    private void updateWallets(List<Wallet> wallets, long totalAmount) {
         getCompositeDisposable().add(getModelManager().updateWallets(wallets)
                 .compose(this.applyScheduler())
                 .subscribeWith(new BaseSubcriber<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         super.onNext(aBoolean);
+                        if (aBoolean) {
+                            getMvpView().getBalanceSuccess(wallets, totalAmount);
+                        } else {
+                            loadBalance();
+                        }
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
+                        loadBalance();
                     }
                 }));
     }
