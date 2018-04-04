@@ -7,7 +7,9 @@ var web3 = new Web3();
 
 var util = require('./util');
 
-var icap = require('ethereumjs-icap')
+var icap = require('ethereumjs-icap');
+
+var keythereum = require('keythereum');
 
 // jaxx path
 var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0/0";
@@ -76,10 +78,10 @@ function buildEthTransaction(amountWei, addressTo, nonce, privateKey, gasPrice, 
     };
 }
 
-function buildTokenTransaction(amountWei, addressTo, nonce, privateKey, contractAddress, gasLimit, gasPrice, customData) {
+function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice, customData, privateKey) {
     var data = util.createTokenData(web3, amountWei, addressTo);
     if (customData) {
-        console.error('User supplied custom data which is being ignored!');
+        // console.error('User supplied custom data which is being ignored!');
         console.log('Custom Data', customData);
     }
     //  console.log('Data', data);
@@ -98,6 +100,36 @@ function buildTokenTransaction(amountWei, addressTo, nonce, privateKey, contract
     };
 }
 
+function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, gasPrice, customData, privateKey) {
+    var data = util.getTxData('register', ['string'], [eosPublicKey]);
+    if (customData) {
+        // console.error('User supplied custom data which is being ignored!');
+        console.log('Custom Data', customData);
+    }
+    //  console.log('Data', data);
+    var raw = util.mapEthTransaction(web3, contractAddress, '0', nonce, gasPrice, gasLimit, data);
+    // console.log(raw);
+    var transaction = new EthereumTx(raw);
+    //console.log(transaction);
+    transaction.sign(privateKey);
+    var serializedTx = transaction.serialize().toString('hex');
+    var txid = ('0x' + transaction.hash().toString('hex'));
+    return {
+        txid: txid,
+        serializedTx: serializedTx,
+        transactionEth: transaction,
+    };
+}
+
+function generateEosKeyPair(cb) {
+    return util.generateEosKeyPair(cb);
+}
+
+function getPrivateKeyFromKeystore (password, keystoreContent) {
+    var keyObject = JSON.parse(keystoreContent);
+    return keythereum.recover(password, keyObject).toString('hex');
+}
+
 module.exports = {
     mnemonicToSeed: mnemonicToSeed,
     seedToAddress: seedToAddress,
@@ -107,8 +139,11 @@ module.exports = {
     isValidChecksumAddress: isValidChecksumAddress,
     buildEthTransaction: buildEthTransaction,
     buildTokenTransaction: buildTokenTransaction,
-    ibanToAddress,
-    addressToIban
+    buildMapEosTransaction: buildMapEosTransaction,
+    generateEosKeyPair: generateEosKeyPair,
+    ibanToAddress: ibanToAddress,
+    addressToIban: addressToIban,
+    getPrivateKeyFromKeystore: getPrivateKeyFromKeystore,
 };
 
 // for test
@@ -116,10 +151,14 @@ module.exports = {
 // console.log(address)
 // var add = seedToAddress(mnemonicToSeed('favorite grape end strategy item horse first source popular cactus shine child'))
 // console.log(add)
-
+//
 // console.log(isValidAddress(address))
 // console.log(isValidChecksumAddress(address))
 // console.log(isValidAddress('address'))
+//
+// console.log(ibanToAddress('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS'))
+// console.log(addressToIban(address))
+// console.log(addressToIban(add))
 
 //  console.log(ibanToAddress('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS'))
  // console.log(addressToIban(address))

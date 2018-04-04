@@ -1,0 +1,220 @@
+[
+    {
+        "name": "bitcoin",
+        "name_cn": "比特币",
+        "name_en": "BitCoin",
+        "icon": "BTC",
+        "decimal": 8,
+        "name_zh_ft": "比特幣",
+        "coinTypeRawValue": 0,
+        "symbol": "BTC"
+    },
+    {
+        "name": "ethereum",
+        "name_cn": "以太坊",
+        "name_en": "Ethereum",
+        "icon": "ETH",
+        "decimal": 18,
+        "name_zh_ft": "以太坊",
+        "coinTypeRawValue": 1,
+        "symbol": "ETH"
+    },
+    {
+        "name": "eos",
+        "name_cn": "EOS",
+        "name_en": "EOS",
+        "icon": "EOS",
+        "decimal": 18,
+        "name_zh_ft": "EOS",
+        "coinTypeRawValue": 2,
+        "address": "0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0",
+        "symbol": "EOS"
+    },
+    {
+        "name": "aeternity",
+        "name_cn": "Aeternity",
+        "name_en": "Aeternity",
+        "icon": "AE",
+        "decimal": 18,
+        "name_zh_ft": "Aeternity",
+        "coinTypeRawValue": 2,
+        "address": "0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d",
+        "symbol": "AE"
+    },
+    {
+        "name": "0x",
+        "name_cn": "0x",
+        "name_en": "0x",
+        "icon": "0x",
+        "decimal": 18,
+        "name_zh_ft": "0x",
+        "coinTypeRawValue": 2,
+        "address": "0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d",
+        "symbol": "ZRX"
+    },
+    {
+        "name": "maker",
+        "name_cn": "Maker",
+        "name_en": "Maker",
+        "icon": "MKR",
+        "decimal": 18,
+        "name_zh_ft": "Maker",
+        "coinTypeRawValue": 2,
+        "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+        "symbol": "MKR"
+    },
+    {
+        "name": "digixdao",
+        "name_cn": "DigixDAO",
+        "name_en": "DigixDAO",
+        "icon": "DGD",
+        "decimal": 18,
+        "name_zh_ft": "DigixDAO",
+        "coinTypeRawValue": 2,
+        "address": "0xe0b7927c4af23765cb51314a0e0521a9645f0e2a",
+        "symbol": "DGD"
+    },
+    {
+        "name": "augur",
+        "name_cn": "Augur",
+        "name_en": "Augur",
+        "icon": "REP",
+        "decimal": 18,
+        "name_zh_ft": "Augur",
+        "coinTypeRawValue": 2,
+        "address": "0xe94327d07fc17907b4db788e5adf2ed424addff6",
+        "symbol": "REP"
+    },
+    {
+        "name": "golem-network-tokens",
+        "name_cn": "Golem",
+        "name_en": "Golem",
+        "icon": "GNT",
+        "decimal": 18,
+        "name_zh_ft": "Golem",
+        "coinTypeRawValue": 2,
+        "address": "0xe41d2489571d322189246dafa5ebde1f4699f498",
+        "symbol": "GNT"
+    },
+    {
+        "name": "enigma-project",
+        "name_cn": "Enigma",
+        "name_en": "Enigma",
+        "icon": "ENG",
+        "decimal": 8,
+        "name_zh_ft": "Enigma",
+        "coinTypeRawValue": 2,
+        "address": "0xf0ee6b27b759c9893ce4f094b49ad28fd15a23e4",
+        "symbol": "ENG"
+    },
+    {
+        "name": "basic-attention-token",
+        "name_cn": "注意力币",
+        "name_en": "Basic Attention Token",
+        "icon": "BAT",
+        "decimal": 18,
+        "name_zh_ft": "註意力幣",
+        "coinTypeRawValue": 2,
+        "address": "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
+        "symbol": "BAT"
+    },
+    {
+        "name": "status",
+        "name_cn": "Status",
+        "name_en": "Status",
+        "icon": "SNT",
+        "decimal": 18,
+        "name_zh_ft": "Status",
+        "coinTypeRawValue": 2,
+        "address": "0x744d70fdbe2ba4cf95131626614a1763df805b9e",
+        "symbol": "SNT"
+    },
+    {
+        "name": "tenx",
+        "name_cn": "TenX",
+        "name_en": "TenX",
+        "icon": "PAY",
+        "decimal": 18,
+        "name_zh_ft": "TenX",
+        "coinTypeRawValue": 2,
+        "address": "0xB97048628DB6B661D4C2aA833e95Dbe1A905B280",
+        "symbol": "PAY"
+    },
+    {
+        "name": "bancor",
+        "name_cn": "Bancor",
+        "name_en": "Bancor",
+        "icon": "BNT",
+        "decimal": 18,
+        "name_zh_ft": "Bancor",
+        "coinTypeRawValue": 2,
+        "address": "0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c",
+        "symbol": "BNT"
+    },
+    {
+        "name": "loopring",
+        "name_cn": "路印",
+        "name_en": "Loopring",
+        "icon": "LRC",
+        "decimal": 18,
+        "name_zh_ft": "路印",
+        "coinTypeRawValue": 2,
+        "address": "0xEF68e7C694F40c8202821eDF525dE3782458639f",
+        "symbol": "LRC"
+    },
+    {
+        "name": "bytom",
+        "name_cn": "比原链",
+        "name_en": "Bytom",
+        "icon": "BTM",
+        "decimal": 8,
+        "name_zh_ft": "比原鏈",
+        "coinTypeRawValue": 2,
+        "address": "0xcb97e65f07da24d46bcdd078ebebd7c6e6e3d750",
+        "symbol": "BTM"
+    },
+    {
+        "name": "power-ledger",
+        "name_cn": "Power Ledger",
+        "name_en": "Power Ledger",
+        "icon": "POWER",
+        "decimal": 18,
+        "name_zh_ft": "Power Ledger",
+        "coinTypeRawValue": 2,
+        "address": "0x595832f8fc6bf59c85c527fec3740a1b7a361269",
+        "symbol": "POWR"
+    },
+    {
+        "name": "kyber-network",
+        "name_cn": "Kyber Network",
+        "name_en": "Kyber Network",
+        "icon": "KNC",
+        "decimal": 18,
+        "name_zh_ft": "Kyber Network",
+        "coinTypeRawValue": 2,
+        "address": "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
+        "symbol": "KNC"
+    },
+    {
+        "name": "storj",
+        "name_cn": "Storj",
+        "name_en": "Storj",
+        "icon": "STORJ",
+        "decimal": 8,
+        "name_zh_ft": "Storj",
+        "coinTypeRawValue": 2,
+        "address": "0xb64ef51c888972c908cfacf59b47c1afbc0ab8ac",
+        "symbol": "STORJ"
+    },
+    {
+        "name": "high-performance-blockchain",
+        "name_cn": "芯链",
+        "name_en": "High Performance Blockchain",
+        "icon": "HPB",
+        "decimal": 18,
+        "name_zh_ft": "芯鏈",
+        "coinTypeRawValue": 2,
+        "address": "0x38c6a68304cdefb9bec48bbfaaba5c5b47818bb2",
+        "symbol": "HPB"
+    }
+]
