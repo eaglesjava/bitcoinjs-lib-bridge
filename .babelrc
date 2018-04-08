@@ -8,13 +8,10 @@
         ],
         "uglify": true
       },
-      "modules": false
+      "modules": false,
+      "useBuiltIns": true,
+      "debug": false
     }
-  ],["minify", {
-    "mangle": {
-      "exclude": ["BigInteger","ECPair","Point"]
-    },
-    "keepFnName": true
-  }]],
+  ]],
   "comments": false
 }
