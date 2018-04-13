@@ -1,5 +1,6 @@
 var bitcoin = require('bitcoinjs-lib');
 var bip39 = require('bip39');
+var wif = require('wif')
 
 var BITCOIN_MAINNET_PATH = "m/44'/0'/0'/0";
 var BITCOIN_MAINNET_CHANGE_PATH = "m/44'/0'/0'/1";
@@ -111,6 +112,30 @@ function buildTransaction(seedHex, data) {
     return txb.build().toHex();
 }
 
+function getPublicKeyFromPrivateKey(privateKey) {
+    var keyPair = ecpairFromPrivateKey(privateKey)
+    var pubKeyBuffer = keyPair.getPublicKeyBuffer()
+    return pubKeyBuffer.toString('hex')
+}
+
+function getAddressFromPublicKey(publicKey) {
+    var pubKeyBuffer = new Buffer(publicKey, 'hex')
+    var keyPair = bitcoin.ECPair.fromPublicKeyBuffer(pubKeyBuffer)
+    return keyPair.getAddress()
+}
+
+function getAddressFromPrivateKey(privateKey) {
+    var keyPair = ecpairFromPrivateKey(privateKey)
+    return keyPair.getAddress()
+}
+
+function ecpairFromPrivateKey(privateKey) {
+    var prvKey = new Buffer(privateKey, 'hex')
+    var key = wif.encode(128, prvKey, true)
+    var keyPair = bitcoin.ECPair.fromWIF(key)
+    return keyPair
+}
+
 module.exports = {
     generateMnemonicRandom: generateMnemonicRandom,
     generateMnemonicRandomCN: generateMnemonicRandomCN,
@@ -124,5 +149,8 @@ module.exports = {
     buildTransaction: buildTransaction,
     getBitcoinChangeXPublicKey: getBitcoinChangeXPublicKey,
     getBitcoinXPublicKeys: getBitcoinXPublicKeys,
-    bip39: bip39
+    bip39: bip39,
+    getPublicKeyFromPrivateKey: getPublicKeyFromPrivateKey,
+    getAddressFromPrivateKey: getAddressFromPrivateKey,
+    getAddressFromPublicKey: getAddressFromPublicKey
 };
