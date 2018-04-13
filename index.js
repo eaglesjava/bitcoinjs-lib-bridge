@@ -15,6 +15,7 @@ var keythereum = require('keythereum');
 var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0/0";
 var ETHEREUM_TESTNET_PATH = "m/44'/1'/0'/0";
 
+var secp256k1 = require('secp256k1');
 var bip39 = require('bip39');
 
 function mnemonicToSeed(mnemonic) {
@@ -130,6 +131,32 @@ function getPrivateKeyFromKeystore (password, keystoreContent) {
     return keythereum.recover(password, keyObject).toString('hex');
 }
 
+/**
+ * Derive Ethereum publicKey from private key.
+ * @param {buffer|string} privateKey ECDSA private key.
+ * @return {string} Hex-encoded Ethereum publicKey.
+ */
+function privateToPublic(privateKey) {
+    var privateKeyBuffer;
+    privateKeyBuffer = Buffer.from(privateKey, 'hex');
+    if (privateKeyBuffer.length < 32) {
+        privateKeyBuffer = Buffer.concat([
+            Buffer.alloc(32 - privateKeyBuffer.length, 0),
+            privateKeyBuffer
+        ]);
+    }
+   return secp256k1.publicKeyCreate(privateKeyBuffer, false).slice(1).toString("hex");
+}
+
+/**
+ * Derive Ethereum address from private key.
+ * @param {buffer|string} privateKey ECDSA private key.
+ * @return {string} Hex-encoded Ethereum address.
+ */
+function privateToAddress(privateKey) {
+    return keythereum.privateKeyToAddress(privateKey);
+}
+
 module.exports = {
     mnemonicToSeed: mnemonicToSeed,
     seedToAddress: seedToAddress,
@@ -144,23 +171,7 @@ module.exports = {
     ibanToAddress: ibanToAddress,
     addressToIban: addressToIban,
     getPrivateKeyFromKeystore: getPrivateKeyFromKeystore,
+    privateToPublic: privateToPublic,
+    privateToAddress: privateToAddress,
 };
-
-// for test
-// var address = seedHexToAddress('6fc2a047d00e5e9d883231023c92b8353085042915947d44a4ca239c9f1f7ab24cdb340dfc536430abb766f348e484bc776d120fd729292f0cdd39b2e8dc54a4')
-// console.log(address)
-// var add = seedToAddress(mnemonicToSeed('favorite grape end strategy item horse first source popular cactus shine child'))
-// console.log(add)
-//
-// console.log(isValidAddress(address))
-// console.log(isValidChecksumAddress(address))
-// console.log(isValidAddress('address'))
-//
-// console.log(ibanToAddress('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS'))
-// console.log(addressToIban(address))
-// console.log(addressToIban(add))
-
-//  console.log(ibanToAddress('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS'))
- // console.log(addressToIban(address))
- // console.log(addressToIban(add))
 
