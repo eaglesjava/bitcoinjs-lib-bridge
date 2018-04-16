@@ -131,7 +131,7 @@ function getAddressFromPrivateKey(privateKey) {
 
 function ecpairFromPrivateKey(privateKey) {
     var prvKey = new Buffer(privateKey, 'hex')
-    var key = wif.encode(128, prvKey, true)
+    var key = wif.encode(128, prvKey, false)
     var keyPair = bitcoin.ECPair.fromWIF(key)
     return keyPair
 }
