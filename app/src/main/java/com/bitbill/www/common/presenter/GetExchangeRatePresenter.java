@@ -14,7 +14,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by isanwenyu@163.com on 2018/1/29.
@@ -64,7 +63,7 @@ public class GetExchangeRatePresenter<M extends AppModel, V extends GetExchangeR
     @Override
     public void refreshExchangeRate() {
 
-        getCompositeDisposable().add(Observable.interval(10, 30, TimeUnit.SECONDS, Schedulers.trampoline())
+        getCompositeDisposable().add(Observable.interval(10, 30, TimeUnit.SECONDS)
                 .filter(aLong -> !isAppBackground)
                 .concatMap(aLong -> getModelManager().getExchangeRate())
                 .compose(this.applyScheduler())

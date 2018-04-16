@@ -63,9 +63,6 @@ public class SyncAddressPresenter<M extends AddressModel, V extends SyncAddressM
         } else {
             finishLastIndex = true;
         }
-        if (finishIndex && finishLastIndex) {
-            getMvpView().syncAddressSuccess(wallet);
-        }
     }
 
     public void getBitcoinContinuousAddress(long fromIndex, long toIndex, Wallet wallet, boolean isInternal) {

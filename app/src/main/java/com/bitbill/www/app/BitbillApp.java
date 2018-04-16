@@ -31,6 +31,7 @@ import com.bitbill.www.model.wallet.db.WalletDbHelper;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.service.NetWorkService;
 import com.bitbill.www.service.SocketServiceProvider;
+import com.bitbill.www.service.SyncService;
 import com.bitbill.www.ui.splash.SplashActivity;
 import com.tencent.smtt.sdk.QbSdk;
 
@@ -73,8 +74,11 @@ public class BitbillApp extends Application {
         public void onActivityStarted(Activity activity) {
             if (isBackGround) {
                 isBackGround = false;
+                startService();
                 //通知服务
                 EventBus.getDefault().post(new AppBackgroundEvent(isBackGround));
+                Log.d(TAG, "onActivityStarted() called with: activity = [" + activity + "],isBackGround = [" + isBackGround + "]");
+
             }
         }
 
@@ -334,5 +338,9 @@ public class BitbillApp extends Application {
 
     }
 
+    public void startService() {
+        SocketServiceProvider.start(this);
+        SyncService.start(this);
+    }
 }
 

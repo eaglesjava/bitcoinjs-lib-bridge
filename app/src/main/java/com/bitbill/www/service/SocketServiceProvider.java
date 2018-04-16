@@ -162,7 +162,6 @@ public class SocketServiceProvider extends BaseService {
         initSocket();
         EventBus.getDefault().register(this);
 
-        Log.d(TAG, "onCreate() called");
     }
 
     private void initSocket() {
@@ -221,7 +220,6 @@ public class SocketServiceProvider extends BaseService {
 
         disconnectConnection();
         EventBus.getDefault().unregister(this);
-        Log.d(TAG, "onDestroy() called");
     }
 
     public SocketServerStateEvent.ServerState getSocketStatus() {

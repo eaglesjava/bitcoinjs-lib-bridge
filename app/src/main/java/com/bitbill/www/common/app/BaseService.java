@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.util.Log;
 
 import com.bitbill.www.R;
 import com.bitbill.www.app.BitbillApp;
@@ -41,6 +42,7 @@ public abstract class BaseService<P extends MvpPresenter> extends Service implem
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(this.toString(), "onCreate() called");
         mBitbillApp = BitbillApp.get();
         mServiceComponent = DaggerServiceComponent.builder().serviceModule(new ServiceModule(this)).applicationComponent(mBitbillApp.getComponent())
                 .build();
@@ -61,6 +63,7 @@ public abstract class BaseService<P extends MvpPresenter> extends Service implem
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.d(this.toString(), "onDestroy() called");
         detachPresenters();
         SingleToast.clear();
     }

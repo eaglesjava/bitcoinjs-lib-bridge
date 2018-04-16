@@ -14,8 +14,6 @@ import com.bitbill.www.model.app.AppModel;
 import com.bitbill.www.model.eventbus.RegisterEvent;
 import com.bitbill.www.model.wallet.db.entity.Wallet;
 import com.bitbill.www.model.wallet.network.socket.Register;
-import com.bitbill.www.service.SocketServiceProvider;
-import com.bitbill.www.service.SyncService;
 import com.bitbill.www.ui.guide.GuideActivity;
 import com.bitbill.www.ui.main.MainActivity;
 
@@ -37,6 +35,24 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
     private static final String TAG = "SplashActivity";
     private static final int MSG_SET_ALIAS = 1001;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
@@ -64,24 +80,6 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
             }
         }
     };
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
     @Inject
     UpdateMvpPresenter<AppModel, UpdateMvpView> mUpdateMvpPresenter;
     private boolean mHasWallet;
@@ -96,15 +94,10 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
         mUpdateMvpPresenter.getConfig();
         getMvpPresenter().hasWallet();
 
-        startService();
+        getApp().startService();
 
         setAlias();
 
-    }
-
-    private void startService() {
-        SocketServiceProvider.start(SplashActivity.this);
-        SyncService.start(SplashActivity.this);
     }
 
     @Override
