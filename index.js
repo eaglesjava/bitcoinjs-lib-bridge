@@ -129,6 +129,10 @@ function getAddressFromPrivateKey(privateKey) {
     return keyPair.getAddress()
 }
 
+function getPublicKeyAndArressFormPrivateKey(privateKey) {
+    return [getPublicKeyFromPrivateKey(privateKey), getAddressFromPrivateKey(privateKey)]
+}
+
 function ecpairFromPrivateKey(privateKey) {
     var prvKey = new Buffer(privateKey, 'hex')
     var key = wif.encode(128, prvKey, false)
@@ -152,5 +156,7 @@ module.exports = {
     bip39: bip39,
     getPublicKeyFromPrivateKey: getPublicKeyFromPrivateKey,
     getAddressFromPrivateKey: getAddressFromPrivateKey,
-    getAddressFromPublicKey: getAddressFromPublicKey
+    getAddressFromPublicKey: getAddressFromPublicKey,
+    getPublicKeyAndArressFormPrivateKey: getPublicKeyAndArressFormPrivateKey
 };
+
