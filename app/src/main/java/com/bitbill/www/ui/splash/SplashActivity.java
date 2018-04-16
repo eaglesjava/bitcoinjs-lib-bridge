@@ -35,24 +35,6 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
 
     private static final String TAG = "SplashActivity";
     private static final int MSG_SET_ALIAS = 1001;
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
     @BindView(R.id.fl_content)
     View flContent;
     @Inject
@@ -77,6 +59,24 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
                 default:
                     logs = "Failed with errorCode = " + code + ",alias:" + alias;
                     Log.e(TAG, logs);
+            }
+        }
+    };
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
             }
         }
     };
@@ -148,7 +148,7 @@ public class SplashActivity extends BaseActivity<SplashMvpPresenter> implements 
     }
 
     @Override
-    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl, String updateLog) {
+    public void needUpdateApp(boolean needUpdate, boolean needForce, boolean inTwentyFourHour, String updateVersion, String apkUrl, String updateLog) {
 
     }
 

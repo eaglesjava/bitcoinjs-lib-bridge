@@ -101,7 +101,7 @@ public class AboutUsActivity extends BaseToolbarActivity<UpdateMvpPresenter> imp
     }
 
     @Override
-    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl, String updateLog) {
+    public void needUpdateApp(boolean needUpdate, boolean needForce, boolean inTwentyFourHour, String updateVersion, String apkUrl, String updateLog) {
         if (needUpdate) {
             //弹出更新提示框
             String msg = StringUtils.isNotEmpty(updateLog) ? updateLog : getString(R.string.dialog_msg_latest_version) + updateVersion;

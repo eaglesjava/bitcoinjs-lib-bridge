@@ -7,7 +7,7 @@ import com.bitbill.www.common.base.view.MvpView;
  */
 
 public interface UpdateMvpView extends MvpView {
-    void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl, String updateLog);
+    void needUpdateApp(boolean needUpdate, boolean needForce, boolean inTwentyFourHour, String updateVersion, String apkUrl, String updateLog);
 
     void getConfigSuccess(String aversion, String aforceVersion);
 

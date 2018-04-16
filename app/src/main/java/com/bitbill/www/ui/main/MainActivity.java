@@ -792,8 +792,8 @@ public class MainActivity extends BaseActivity<MainMvpPresenter>
     }
 
     @Override
-    public void needUpdateApp(boolean needUpdate, boolean needForce, String updateVersion, String apkUrl, String updateLog) {
-        if (needUpdate) {
+    public void needUpdateApp(boolean needUpdate, boolean needForce, boolean inTwentyFourHour, String updateVersion, String apkUrl, String updateLog) {
+        if (needUpdate && !inTwentyFourHour) {
             //弹出更新提示框
             if (mUpdateMsgConfirmDialog == null) {
                 String msg = StringUtils.isNotEmpty(updateLog) ? updateLog : getString(R.string.dialog_msg_latest_version) + updateVersion;
