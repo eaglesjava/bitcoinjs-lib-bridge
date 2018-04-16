@@ -122,40 +122,88 @@ function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, 
     };
 }
 
+/**
+ * Generate eos keyPair.
+ * @param {string} cb Callback function.
+ */
 function generateEosKeyPair(cb) {
-    return util.generateEosKeyPair(cb);
-}
-
-function getPrivateKeyFromKeystore (password, keystoreContent) {
-    var keyObject = JSON.parse(keystoreContent);
-    return keythereum.recover(password, keyObject).toString('hex');
+    util.generateEosKeyPair(cb);
 }
 
 /**
- * Derive Ethereum publicKey from private key.
- * @param {buffer|string} privateKey ECDSA private key.
- * @return {string} Hex-encoded Ethereum publicKey.
+ * Recover plaintext private key from secret-storage key object.
+ * @param {string} password.
+ * @param {string} Keystore content.
+ * @return {Buffer} Plaintext private key.
+ */
+function getPrivateKeyFromKeystore (password, keystoreContent) {
+    var keyObject = JSON.parse(keystoreContent);
+    return keythereum.recover(password, keyObject);
+}
+
+/**
+ * Returns the ethereum public key of a given private key
+ * @param {Buffer} privateKey A private key must be 256 bits wide
+ * @return {Buffer}
  */
 function privateToPublic(privateKey) {
-    var privateKeyBuffer;
-    privateKeyBuffer = Buffer.from(privateKey, 'hex');
+    return ethereumjsUtil.privateToPublic(privateKey);
+}
+
+/**
+ * Returns the ethereum address of a given public key.
+ * Accepts "Ethereum public keys" and SEC1 encoded keys.
+ * @param {Buffer} pubKey The two points of an uncompressed key, unless sanitize is enabled
+ * @param {Boolean} [sanitize=false] Accept public keys in other formats
+ * @return {Buffer}
+ */
+function publicToAddress(pubKey, sanitize) {
+    return ethereumjsUtil.publicToAddress(pubKey, sanitize);
+}
+
+/**
+ * Returns the ethereum address of a given private key
+ * @param {Buffer} privateKey A private key must be 256 bits wide
+ * @return {Buffer}
+ */
+function privateToAddress(privateKey) {
+    return ethereumjsUtil.privateToAddress(privateKey);
+}
+
+/**
+ * Get privateKey&publicKey&address from secret-storage keystore file.
+ * @param {string} Password.
+ * @param {string} Keystore content.
+ * @return {Array} [privateKey, publicKey, address].
+ */
+function getKeyPairAddrFromKeystore (password, keystoreContent) {
+    var privateKey = getPrivateKeyFromKeystore(password, keystoreContent);
+    var publicKey = privateToPublic(privateKey);
+    var address = "0x" + privateToAddress(privateKey).toString('hex');
+
+    return [privateKey.toString('hex'), publicKey.toString('hex'), address]
+}
+
+/**
+ * Get publicKey&address from privateKey.
+ * @param {String|Buffer} privateKey ECDSA private key.
+ * @return {Array} [publicKey, address].
+ */
+function getPubAddrFromPrivate(privateKey) {
+    var privateKeyBuffer = keythereum.str2buf(privateKey);
     if (privateKeyBuffer.length < 32) {
         privateKeyBuffer = Buffer.concat([
             Buffer.alloc(32 - privateKeyBuffer.length, 0),
             privateKeyBuffer
         ]);
     }
-   return secp256k1.publicKeyCreate(privateKeyBuffer, false).slice(1).toString("hex");
+
+    var publicKey = privateToPublic(privateKeyBuffer);
+    var address = "0x" + privateToAddress(privateKeyBuffer).toString('hex');
+
+    return [publicKey.toString('hex'), address]
 }
 
-/**
- * Derive Ethereum address from private key.
- * @param {buffer|string} privateKey ECDSA private key.
- * @return {string} Hex-encoded Ethereum address.
- */
-function privateToAddress(privateKey) {
-    return keythereum.privateKeyToAddress(privateKey);
-}
 
 module.exports = {
     mnemonicToSeed: mnemonicToSeed,
@@ -172,6 +220,9 @@ module.exports = {
     addressToIban: addressToIban,
     getPrivateKeyFromKeystore: getPrivateKeyFromKeystore,
     privateToPublic: privateToPublic,
+    publicToAddress: publicToAddress,
     privateToAddress: privateToAddress,
+    getKeyPairAddrFromKeystore: getKeyPairAddrFromKeystore,
+    getPubAddrFromPrivate: getPubAddrFromPrivate,
 };
 
