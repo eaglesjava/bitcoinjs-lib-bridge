@@ -25554,24 +25554,24 @@ com.bitbill.model.db.dao.DaoMaster$OpenHelper -> com.bitbill.model.db.dao.a$a:
     void <init>(android.content.Context,java.lang.String) -> <init>
     void onCreate(org.greenrobot.greendao.database.Database) -> a
 com.bitbill.model.db.dao.DaoSession -> com.bitbill.model.db.dao.b:
-    org.greenrobot.greendao.internal.DaoConfig outputDaoConfig -> a
-    org.greenrobot.greendao.internal.DaoConfig inputDaoConfig -> b
-    org.greenrobot.greendao.internal.DaoConfig txRecordDaoConfig -> c
-    org.greenrobot.greendao.internal.DaoConfig contactDaoConfig -> d
-    org.greenrobot.greendao.internal.DaoConfig addressDaoConfig -> e
+    org.greenrobot.greendao.internal.DaoConfig addressDaoConfig -> a
+    org.greenrobot.greendao.internal.DaoConfig contactDaoConfig -> b
+    org.greenrobot.greendao.internal.DaoConfig inputDaoConfig -> c
+    org.greenrobot.greendao.internal.DaoConfig outputDaoConfig -> d
+    org.greenrobot.greendao.internal.DaoConfig txRecordDaoConfig -> e
     org.greenrobot.greendao.internal.DaoConfig walletDaoConfig -> f
-    com.bitbill.model.db.dao.OutputDao outputDao -> g
-    com.bitbill.model.db.dao.InputDao inputDao -> h
-    com.bitbill.model.db.dao.TxRecordDao txRecordDao -> i
-    com.bitbill.model.db.dao.ContactDao contactDao -> j
-    com.bitbill.model.db.dao.AddressDao addressDao -> k
+    com.bitbill.model.db.dao.AddressDao addressDao -> g
+    com.bitbill.model.db.dao.ContactDao contactDao -> h
+    com.bitbill.model.db.dao.InputDao inputDao -> i
+    com.bitbill.model.db.dao.OutputDao outputDao -> j
+    com.bitbill.model.db.dao.TxRecordDao txRecordDao -> k
     com.bitbill.model.db.dao.WalletDao walletDao -> l
     void <init>(org.greenrobot.greendao.database.Database,org.greenrobot.greendao.identityscope.IdentityScopeType,java.util.Map) -> <init>
-    com.bitbill.model.db.dao.OutputDao getOutputDao() -> a
-    com.bitbill.model.db.dao.InputDao getInputDao() -> b
-    com.bitbill.model.db.dao.TxRecordDao getTxRecordDao() -> c
-    com.bitbill.model.db.dao.ContactDao getContactDao() -> d
-    com.bitbill.model.db.dao.AddressDao getAddressDao() -> e
+    com.bitbill.model.db.dao.AddressDao getAddressDao() -> a
+    com.bitbill.model.db.dao.ContactDao getContactDao() -> b
+    com.bitbill.model.db.dao.InputDao getInputDao() -> c
+    com.bitbill.model.db.dao.OutputDao getOutputDao() -> d
+    com.bitbill.model.db.dao.TxRecordDao getTxRecordDao() -> e
     com.bitbill.model.db.dao.WalletDao getWalletDao() -> f
 com.bitbill.model.db.dao.InputDao -> com.bitbill.model.db.dao.InputDao:
     java.lang.String TABLENAME -> TABLENAME
@@ -26547,6 +26547,7 @@ com.bitbill.www.app.BitbillApp -> com.bitbill.www.app.BitbillApp:
     void onTrimMemory(int) -> onTrimMemory
     void appExit() -> l
     void restartApp() -> m
+    void startService() -> n
     boolean access$000(com.bitbill.www.app.BitbillApp) -> a
     boolean access$002(com.bitbill.www.app.BitbillApp,boolean) -> a
 com.bitbill.www.app.BitbillApp$1 -> com.bitbill.www.app.BitbillApp$1:
@@ -33315,35 +33316,34 @@ com.bitbill.www.ui.main.send.SendSuccessActivity_ViewBinding$2 -> com.bitbill.ww
     void <init>(com.bitbill.www.ui.main.send.SendSuccessActivity_ViewBinding,com.bitbill.www.ui.main.send.SendSuccessActivity) -> <init>
     void doClick(android.view.View) -> doClick
 com.bitbill.www.ui.splash.SplashActivity -> com.bitbill.www.ui.splash.SplashActivity:
+    android.os.Handler mHandler -> p
     android.view.View flContent -> flContent
     com.bitbill.www.ui.splash.SplashMvpPresenter mSplashMvpPresenter -> n
-    cn.jpush.android.api.TagAliasCallback mAliasCallback -> p
-    android.os.Handler mHandler -> q
+    cn.jpush.android.api.TagAliasCallback mAliasCallback -> q
     com.bitbill.www.common.presenter.UpdateMvpPresenter mUpdateMvpPresenter -> o
     boolean mHasWallet -> r
     void <init>() -> <init>
     void onCreate(android.os.Bundle) -> onCreate
-    void startService() -> s
     com.bitbill.www.ui.splash.SplashMvpPresenter getMvpPresenter() -> r
     void injectComponent() -> injectComponent
     void hasWallet(java.util.List) -> a
-    void jumpNext() -> t
-    void setAlias() -> u
+    void jumpNext() -> s
+    void setAlias() -> t
     void needUpdateApp(boolean,boolean,java.lang.String,java.lang.String,java.lang.String) -> a
     void getConfigSuccess(java.lang.String,java.lang.String) -> a
     void getConfigFail() -> a
     com.bitbill.www.common.base.presenter.MvpPresenter getMvpPresenter() -> getMvpPresenter
-    android.os.Handler access$000(com.bitbill.www.ui.splash.SplashActivity) -> a
-    cn.jpush.android.api.TagAliasCallback access$100(com.bitbill.www.ui.splash.SplashActivity) -> b
+    cn.jpush.android.api.TagAliasCallback access$000(com.bitbill.www.ui.splash.SplashActivity) -> a
+    android.os.Handler access$100(com.bitbill.www.ui.splash.SplashActivity) -> b
     void access$200(com.bitbill.www.ui.splash.SplashActivity) -> c
 com.bitbill.www.ui.splash.SplashActivity$1 -> com.bitbill.www.ui.splash.SplashActivity$1:
     com.bitbill.www.ui.splash.SplashActivity this$0 -> a
     void <init>(com.bitbill.www.ui.splash.SplashActivity) -> <init>
-    void gotResult(int,java.lang.String,java.util.Set) -> gotResult
+    void handleMessage(android.os.Message) -> handleMessage
 com.bitbill.www.ui.splash.SplashActivity$2 -> com.bitbill.www.ui.splash.SplashActivity$2:
     com.bitbill.www.ui.splash.SplashActivity this$0 -> a
     void <init>(com.bitbill.www.ui.splash.SplashActivity) -> <init>
-    void handleMessage(android.os.Message) -> handleMessage
+    void gotResult(int,java.lang.String,java.util.Set) -> gotResult
 com.bitbill.www.ui.splash.SplashActivity$3 -> com.bitbill.www.ui.splash.SplashActivity$3:
     com.bitbill.www.ui.splash.SplashActivity this$0 -> a
     void <init>(com.bitbill.www.ui.splash.SplashActivity) -> <init>
@@ -47310,6 +47310,7 @@ io.reactivex.Observable -> io.reactivex.f:
     int bufferSize() -> a
     io.reactivex.Observable empty() -> b
     io.reactivex.Observable fromCallable(java.util.concurrent.Callable) -> a
+    io.reactivex.Observable interval(long,long,java.util.concurrent.TimeUnit) -> a
     io.reactivex.Observable interval(long,long,java.util.concurrent.TimeUnit,io.reactivex.Scheduler) -> a
     io.reactivex.Observable just(java.lang.Object) -> a
     io.reactivex.Observable wrap(io.reactivex.ObservableSource) -> a
@@ -49031,17 +49032,19 @@ io.reactivex.plugins.RxJavaPlugins -> io.reactivex.f.a:
     io.reactivex.functions.Function onInitSingleHandler -> d
     io.reactivex.functions.Function onInitIoHandler -> e
     io.reactivex.functions.Function onInitNewThreadHandler -> f
-    io.reactivex.functions.Function onIoHandler -> g
-    io.reactivex.functions.Function onObservableAssembly -> h
-    io.reactivex.functions.BiFunction onObservableSubscribe -> i
+    io.reactivex.functions.Function onComputationHandler -> g
+    io.reactivex.functions.Function onIoHandler -> h
+    io.reactivex.functions.Function onObservableAssembly -> i
+    io.reactivex.functions.BiFunction onObservableSubscribe -> j
     io.reactivex.Scheduler initComputationScheduler(java.util.concurrent.Callable) -> a
     io.reactivex.Scheduler initIoScheduler(java.util.concurrent.Callable) -> b
     io.reactivex.Scheduler initNewThreadScheduler(java.util.concurrent.Callable) -> c
     io.reactivex.Scheduler initSingleScheduler(java.util.concurrent.Callable) -> d
+    io.reactivex.Scheduler onComputationScheduler(io.reactivex.Scheduler) -> a
     void onError(java.lang.Throwable) -> a
     boolean isBug(java.lang.Throwable) -> b
     void uncaught(java.lang.Throwable) -> c
-    io.reactivex.Scheduler onIoScheduler(io.reactivex.Scheduler) -> a
+    io.reactivex.Scheduler onIoScheduler(io.reactivex.Scheduler) -> b
     java.lang.Runnable onSchedule(java.lang.Runnable) -> a
     io.reactivex.Observer onSubscribe(io.reactivex.Observable,io.reactivex.Observer) -> a
     io.reactivex.Observable onAssembly(io.reactivex.Observable) -> a
@@ -49055,8 +49058,8 @@ io.reactivex.schedulers.Schedulers -> io.reactivex.g.a:
     io.reactivex.Scheduler IO -> c
     io.reactivex.Scheduler TRAMPOLINE -> d
     io.reactivex.Scheduler NEW_THREAD -> e
-    io.reactivex.Scheduler io() -> a
-    io.reactivex.Scheduler trampoline() -> b
+    io.reactivex.Scheduler computation() -> a
+    io.reactivex.Scheduler io() -> b
     void <clinit>() -> <clinit>
 io.reactivex.schedulers.Schedulers$ComputationHolder -> io.reactivex.g.a$a:
     io.reactivex.Scheduler DEFAULT -> a
