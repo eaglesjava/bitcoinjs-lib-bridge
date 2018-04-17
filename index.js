@@ -15,7 +15,6 @@ var keythereum = require('keythereum');
 var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0/0";
 var ETHEREUM_TESTNET_PATH = "m/44'/1'/0'/0";
 
-var secp256k1 = require('secp256k1');
 var bip39 = require('bip39');
 
 function mnemonicToSeed(mnemonic) {
@@ -38,6 +37,15 @@ function seedToChecksumAddress(seed) {
 function seedHexToAddress(seedHex) {
 	var seed = Buffer.from(seedHex, 'hex');
 	return seedToChecksumAddress(seed);
+}
+
+function seedHexToPubAddr(seedHex) {
+    var seed = Buffer.from(seedHex, 'hex');
+    var hd = hdkey.fromMasterSeed(seed);
+    var wallet = hd.derivePath(ETHEREUM_MAINNET_PATH).getWallet();
+    var publicKey = wallet.getPublicKey().toString('hex');
+    var address = wallet.getChecksumAddressString();
+    return [publicKey, address];
 }
 
 function isValidAddress(address) {
@@ -210,6 +218,7 @@ module.exports = {
     seedToAddress: seedToAddress,
     seedToChecksumAddress: seedToChecksumAddress,
     seedHexToAddress: seedHexToAddress,
+    seedHexToPubAddr: seedHexToPubAddr,
     isValidAddress: isValidAddress,
     isValidChecksumAddress: isValidChecksumAddress,
     buildEthTransaction: buildEthTransaction,
