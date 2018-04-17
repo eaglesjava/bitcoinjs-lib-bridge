@@ -6,6 +6,7 @@
 
 var address = bridge.seedHexToAddress('6fc2a047d00e5e9d883231023c92b8353085042915947d44a4ca239c9f1f7ab24cdb340dfc536430abb766f348e484bc776d120fd729292f0cdd39b2e8dc54a4')
 console.log(address)
+console.log('seedToPubAddr: ' + JSON.stringify(bridge.seedHexToPubAddr('6fc2a047d00e5e9d883231023c92b8353085042915947d44a4ca239c9f1f7ab24cdb340dfc536430abb766f348e484bc776d120fd729292f0cdd39b2e8dc54a4')))
 var add = bridge.seedToAddress(bridge.mnemonicToSeed('favorite grape end strategy item horse first source popular cactus shine child'))
 console.log(add)
 
