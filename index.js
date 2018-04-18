@@ -129,10 +129,11 @@ function addressToIban(address) {
  * @param {Number} gasPrice
  * @param {Number} gasLimit
  * @param {String} customData
- * @param {Buffer} privateKey
+ * @param {String} privateKey: Hex-encoded
  * @return {Object}
  */
 function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, gasLimit, customData) {
+    privateKey = Buffer.from(privateKey, 'hex');
     var transaction = new EthereumTx({
         nonce: web3.toHex(nonce),
         gasPrice: web3.toHex(gasPrice),
@@ -171,7 +172,7 @@ function buildEthTxBySeedHex(seedHex, amountWei, addressTo, nonce, gasPrice, gas
 
 /**
  * build a token transaction
- * @param {Buffer} privateKey
+ * @param {String} privateKey: Hex-encoded
  * @param {Number} amountWei
  * @param {String} addressTo
  * @param {Number} nonce
@@ -181,6 +182,7 @@ function buildEthTxBySeedHex(seedHex, amountWei, addressTo, nonce, gasPrice, gas
  * @return {Object}
  */
 function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice, privateKey) {
+    privateKey = Buffer.from(privateKey, 'hex');
     var data = util.createTokenData(web3, amountWei, addressTo);
     //  console.log('Data', data);
     var raw = util.mapEthTransaction(web3, contractAddress, '0', nonce, gasPrice, gasLimit, data);
@@ -216,7 +218,7 @@ function buildTokenTxBySeedHex(seedHex, amountWei, addressTo, nonce, contractAdd
 
 /**
  * build a eos map transaction
- * @param {Buffer} privateKey
+ * @param {String} privateKey: Hex-encoded
  * @param {String} eosPublicKey
  * @param {Number} nonce
  * @param {Number} gasPrice
@@ -225,6 +227,7 @@ function buildTokenTxBySeedHex(seedHex, amountWei, addressTo, nonce, contractAdd
  * @return {Object}
  */
 function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, gasPrice, privateKey) {
+    privateKey = Buffer.from(privateKey, 'hex');
     var data = util.getTxData('register', ['string'], [eosPublicKey]);
     //  console.log('Data', data);
     var raw = util.mapEthTransaction(web3, contractAddress, '0', nonce, gasPrice, gasLimit, data);
