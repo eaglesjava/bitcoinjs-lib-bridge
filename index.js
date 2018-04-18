@@ -130,7 +130,7 @@ function addressToIban(address) {
  * @param {Number} gasLimit
  * @param {String} customData
  * @param {String} privateKey: Hex-encoded
- * @return {Object}
+ * @return {Array} [txid, serializedTx]
  */
 function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, gasLimit, customData) {
     privateKey = Buffer.from(privateKey, 'hex');
@@ -146,12 +146,7 @@ function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, 
     var txid = ('0x' + transaction.hash().toString('hex'));
     var serializedTx = transaction.serialize().toString('hex');
 
-    return {
-        txid: txid,
-        serializedTx: serializedTx,
-        addressTo: addressTo,
-        transactionEth: transaction,
-    };
+    return [txid, serializedTx];
 }
 
 /**
@@ -163,7 +158,7 @@ function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, 
  * @param {Number} gasPrice
  * @param {Number} gasLimit
  * @param {String} customData
- * @return {Object}
+ * @return {Array} [txid, serializedTx]
  */
 function buildEthTxBySeedHex(seedHex, amountWei, addressTo, nonce, gasPrice, gasLimit, customData) {
     var privateKey = seedHexToPrivate(seedHex);
@@ -179,7 +174,7 @@ function buildEthTxBySeedHex(seedHex, amountWei, addressTo, nonce, gasPrice, gas
  * @param {Number} gasPrice
  * @param {Number} gasLimit
  * @param {String} contractAddress
- * @return {Object}
+ * @return {Array} [txid, serializedTx]
  */
 function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice, privateKey) {
     privateKey = Buffer.from(privateKey, 'hex');
@@ -192,12 +187,7 @@ function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gas
     transaction.sign(privateKey);
     var serializedTx = transaction.serialize().toString('hex');
     var txid = ('0x' + transaction.hash().toString('hex'));
-    return {
-        txid: txid,
-        serializedTx: serializedTx,
-        addressTo: addressTo,
-        transactionEth: transaction,
-    };
+    return [txid, serializedTx];
 }
 
 /**
@@ -209,7 +199,7 @@ function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gas
  * @param {Number} gasPrice
  * @param {Number} gasLimit
  * @param {String} contractAddress
- * @return {Object}
+ * @return {Array} [txid, serializedTx]
  */
 function buildTokenTxBySeedHex(seedHex, amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice) {
     var privateKey = seedHexToPrivate(seedHex);
@@ -224,7 +214,7 @@ function buildTokenTxBySeedHex(seedHex, amountWei, addressTo, nonce, contractAdd
  * @param {Number} gasPrice
  * @param {Number} gasLimit
  * @param {String} contractAddress
- * @return {Object}
+ * @return {Array} [txid, serializedTx]
  */
 function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, gasPrice, privateKey) {
     privateKey = Buffer.from(privateKey, 'hex');
@@ -237,11 +227,7 @@ function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, 
     transaction.sign(privateKey);
     var serializedTx = transaction.serialize().toString('hex');
     var txid = ('0x' + transaction.hash().toString('hex'));
-    return {
-        txid: txid,
-        serializedTx: serializedTx,
-        transactionEth: transaction,
-    };
+    return [txid, serializedTx];
 }
 
 /**
@@ -252,7 +238,7 @@ function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, 
  * @param {Number} gasPrice
  * @param {Number} gasLimit
  * @param {String} contractAddress
- * @return {Object}
+ * @return {Array} [txid, serializedTx]
  */
 function buildMapEosTxBySeedHex(seedHex, eosPublicKey, nonce, contractAddress, gasLimit, gasPrice) {
     var privateKey = seedHexToPrivate(seedHex);
