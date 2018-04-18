@@ -17,28 +17,53 @@ var ETHEREUM_TESTNET_PATH = "m/44'/1'/0'/0";
 
 var bip39 = require('bip39');
 
+/**
+ * Mnemonic to seed
+ * @param {String} mnemonic
+ * @return {Buffer} seed
+ */
 function mnemonicToSeed(mnemonic) {
 	var seed = bip39.mnemonicToSeed(mnemonic);
 	return seed;
 }
 
+/**
+ * Seed to address
+ * @param {Buffer} seed
+ * @return {String} address
+ */
 function seedToAddress(seed) {
 	var hd = hdkey.fromMasterSeed(seed);
 	var wallet = hd.derivePath(ETHEREUM_MAINNET_PATH).getWallet();
 	return ethereumjsUtil.bufferToHex(wallet.getAddress());
 }
 
+/**
+ * Seed to checksum address
+ * @param {Buffer} seed
+ * @return {String} checksum address
+ */
 function seedToChecksumAddress(seed) {
     var hd = hdkey.fromMasterSeed(seed);
     var wallet = hd.derivePath(ETHEREUM_MAINNET_PATH).getWallet();
     return wallet.getChecksumAddressString();
 }
 
+/**
+ * Hex-encoded seed to checksum address
+ * @param {String} seedHex: Hex-encoded seed
+ * @return {String} checksum address
+ */
 function seedHexToAddress(seedHex) {
 	var seed = Buffer.from(seedHex, 'hex');
 	return seedToChecksumAddress(seed);
 }
 
+/**
+ * Hex-encoded seed to [publicKey, address]
+ * @param {String} seedHex: Hex-encoded seed
+ * @return {Object} [String, String]
+ */
 function seedHexToPubAddr(seedHex) {
     var seed = Buffer.from(seedHex, 'hex');
     var hd = hdkey.fromMasterSeed(seed);
@@ -48,33 +73,74 @@ function seedHexToPubAddr(seedHex) {
     return [publicKey, address];
 }
 
+/**
+ * Hex-encoded seed to privateKey
+ * @param {String} seedHex: Hex-encoded seed
+ * @return {Buffer} privateKey
+ */
+function seedHexToPrivate(seedHex) {
+    var seed = Buffer.from(seedHex, 'hex');
+    var hd = hdkey.fromMasterSeed(seed);
+    var wallet = hd.derivePath(ETHEREUM_MAINNET_PATH).getWallet();
+    return wallet.getPrivateKey();
+}
+
+/**
+ * verify address
+ * @param {String} address
+ * @return {Boolean}
+ */
 function isValidAddress(address) {
 	return ethereumjsUtil.isValidAddress(address)
 }
 
+/**
+ * verify checksum address
+ * @param {String} address
+ * @return {Boolean}
+ */
 function isValidChecksumAddress(address) {
 	return ethereumjsUtil.isValidChecksumAddress(address)
 }
 
+/**
+ * iban to address
+ * @param {String} iban
+ * @return {String} address
+ */
 function ibanToAddress(iban) {
     return icap.toAddress(iban)
 }
 
+/**
+ * address to iban
+ * @param {String} address
+ * @return {String} iban
+ */
 function addressToIban(address) {
     return icap.fromAddress(address, false, true)
 }
 
-function buildEthTransaction(amountWei, addressTo, nonce, privateKey, gasPrice, gasLimit, customData) {
+/**
+ * build a eth transaction
+ * @param {Number} amountWei
+ * @param {String} addressTo
+ * @param {Number} nonce
+ * @param {Number} gasPrice
+ * @param {Number} gasLimit
+ * @param {String} customData
+ * @param {Buffer} privateKey
+ * @return {Object}
+ */
+function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, gasLimit, customData) {
     var transaction = new EthereumTx({
         nonce: web3.toHex(nonce),
         gasPrice: web3.toHex(gasPrice),
         gasLimit: web3.toHex(gasLimit),
         to: addressTo,
         value: web3.toHex(amountWei),
-        data: (customData && customData.length > 5) ? customData : null
+        data: (customData && customData.length > 0) ? customData : '0x'
     });
-    if (customData && customData.length)
-        transaction.data = customData;
     transaction.sign(privateKey);
     var txid = ('0x' + transaction.hash().toString('hex'));
     var serializedTx = transaction.serialize().toString('hex');
@@ -87,12 +153,35 @@ function buildEthTransaction(amountWei, addressTo, nonce, privateKey, gasPrice, 
     };
 }
 
-function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice, customData, privateKey) {
+/**
+ * build a eth transaction by Hex-encoded seed
+ * @param {String} seedHex: Hex-encoded seed
+ * @param {Number} amountWei
+ * @param {String} addressTo
+ * @param {Number} nonce
+ * @param {Number} gasPrice
+ * @param {Number} gasLimit
+ * @param {String} customData
+ * @return {Object}
+ */
+function buildEthTxBySeedHex(seedHex, amountWei, addressTo, nonce, gasPrice, gasLimit, customData) {
+    var privateKey = seedHexToPrivate(seedHex);
+    return buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, gasLimit, customData)
+}
+
+/**
+ * build a token transaction
+ * @param {Buffer} privateKey
+ * @param {Number} amountWei
+ * @param {String} addressTo
+ * @param {Number} nonce
+ * @param {Number} gasPrice
+ * @param {Number} gasLimit
+ * @param {String} contractAddress
+ * @return {Object}
+ */
+function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice, privateKey) {
     var data = util.createTokenData(web3, amountWei, addressTo);
-    if (customData) {
-        // console.error('User supplied custom data which is being ignored!');
-        console.log('Custom Data', customData);
-    }
     //  console.log('Data', data);
     var raw = util.mapEthTransaction(web3, contractAddress, '0', nonce, gasPrice, gasLimit, data);
     // console.log(raw);
@@ -109,12 +198,34 @@ function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gas
     };
 }
 
-function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, gasPrice, customData, privateKey) {
+/**
+ * build a token transaction by Hex-encoded seed
+ * @param {String} seedHex: Hex-encoded seed
+ * @param {Number} amountWei
+ * @param {String} addressTo
+ * @param {Number} nonce
+ * @param {Number} gasPrice
+ * @param {Number} gasLimit
+ * @param {String} contractAddress
+ * @return {Object}
+ */
+function buildTokenTxBySeedHex(seedHex, amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice) {
+    var privateKey = seedHexToPrivate(seedHex);
+    return buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gasLimit, gasPrice, privateKey)
+}
+
+/**
+ * build a eos map transaction
+ * @param {Buffer} privateKey
+ * @param {String} eosPublicKey
+ * @param {Number} nonce
+ * @param {Number} gasPrice
+ * @param {Number} gasLimit
+ * @param {String} contractAddress
+ * @return {Object}
+ */
+function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, gasPrice, privateKey) {
     var data = util.getTxData('register', ['string'], [eosPublicKey]);
-    if (customData) {
-        // console.error('User supplied custom data which is being ignored!');
-        console.log('Custom Data', customData);
-    }
     //  console.log('Data', data);
     var raw = util.mapEthTransaction(web3, contractAddress, '0', nonce, gasPrice, gasLimit, data);
     // console.log(raw);
@@ -128,6 +239,21 @@ function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, 
         serializedTx: serializedTx,
         transactionEth: transaction,
     };
+}
+
+/**
+ * build a eos map transaction by Hex-encoded seed
+ * @param {String} seedHex: Hex-encoded seed
+ * @param {String} eosPublicKey
+ * @param {Number} nonce
+ * @param {Number} gasPrice
+ * @param {Number} gasLimit
+ * @param {String} contractAddress
+ * @return {Object}
+ */
+function buildMapEosTxBySeedHex(seedHex, eosPublicKey, nonce, contractAddress, gasLimit, gasPrice) {
+    var privateKey = seedHexToPrivate(seedHex);
+    return buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, gasPrice, privateKey)
 }
 
 /**
@@ -141,7 +267,7 @@ function generateEosKeyPair(cb) {
 /**
  * Recover plaintext private key from secret-storage key object.
  * @param {string} password.
- * @param {string} Keystore content.
+ * @param {string} keystoreContent: keystore file content.
  * @return {Buffer} Plaintext private key.
  */
 function getPrivateKeyFromKeystore (password, keystoreContent) {
@@ -180,8 +306,8 @@ function privateToAddress(privateKey) {
 
 /**
  * Get privateKey&publicKey&address from secret-storage keystore file.
- * @param {string} Password.
- * @param {string} Keystore content.
+ * @param {string} password.
+ * @param {string} keystoreContent: keystore file content.
  * @return {Array} [privateKey, publicKey, address].
  */
 function getKeyPairAddrFromKeystore (password, keystoreContent) {
@@ -219,11 +345,15 @@ module.exports = {
     seedToChecksumAddress: seedToChecksumAddress,
     seedHexToAddress: seedHexToAddress,
     seedHexToPubAddr: seedHexToPubAddr,
+    seedHexToPrivate: seedHexToPrivate,
     isValidAddress: isValidAddress,
     isValidChecksumAddress: isValidChecksumAddress,
     buildEthTransaction: buildEthTransaction,
+    buildEthTxBySeedHex: buildEthTxBySeedHex,
     buildTokenTransaction: buildTokenTransaction,
+    buildTokenTxBySeedHex: buildTokenTxBySeedHex,
     buildMapEosTransaction: buildMapEosTransaction,
+    buildMapEosTxBySeedHex: buildMapEosTxBySeedHex,
     generateEosKeyPair: generateEosKeyPair,
     ibanToAddress: ibanToAddress,
     addressToIban: addressToIban,
