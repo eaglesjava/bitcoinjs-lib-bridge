@@ -43,4 +43,4 @@ console.log('getPubAddrFromPrivate: ' + JSON.stringify(bridge.getPubAddrFromPriv
 
 
 // build tx
-console.log('buildEthTransaction:' + JSON.stringify(bridge.buildEthTransaction(privateKey, 2441406250, '0xd46e8dd67c5d32be8058bb8eb970870f07244567', 0, 10e12, 30400)))
+console.log('buildEthTransaction:' + JSON.stringify(bridge.buildEthTransaction(privateKey.toString('hex'), 2441406250, '0xd46e8dd67c5d32be8058bb8eb970870f07244567', 0, 10e12, 30400)))
