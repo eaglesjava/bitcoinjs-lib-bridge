@@ -144,7 +144,7 @@ function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, 
     });
     transaction.sign(privateKey);
     var txid = ('0x' + transaction.hash().toString('hex'));
-    var serializedTx = transaction.serialize().toString('hex');
+    var serializedTx = ('0x' + transaction.serialize().toString('hex'));
 
     return [txid, serializedTx];
 }
@@ -185,7 +185,7 @@ function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gas
     var transaction = new EthereumTx(raw);
     //console.log(transaction);
     transaction.sign(privateKey);
-    var serializedTx = transaction.serialize().toString('hex');
+    var serializedTx = ('0x' + transaction.serialize().toString('hex'));
     var txid = ('0x' + transaction.hash().toString('hex'));
     return [txid, serializedTx];
 }
@@ -225,7 +225,7 @@ function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, 
     var transaction = new EthereumTx(raw);
     //console.log(transaction);
     transaction.sign(privateKey);
-    var serializedTx = transaction.serialize().toString('hex');
+    var serializedTx = ('0x' + transaction.serialize().toString('hex'));
     var txid = ('0x' + transaction.hash().toString('hex'));
     return [txid, serializedTx];
 }
