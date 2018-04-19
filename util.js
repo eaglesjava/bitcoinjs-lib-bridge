@@ -45,7 +45,6 @@ let generateEosKeyPair = function(cb) {
             privateKey,
         }
         cb && cb(eosKeyPair)
-        return eosKeyPair
     })
 };
 
