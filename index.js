@@ -87,28 +87,55 @@ function buildTransaction(seedHex, data) {
     data = JSON.parse(data);
     var inputs = data["inputs"];
     var outputs = data["outputs"];
-
+    
     var keychain = generateBitcoinMainnetMasterKeychain(seedHex);
     var changeKeychain = generateBitcoinMainnetChangeKeychain(seedHex);
     var txb = new bitcoin.TransactionBuilder();
     var ecPairs = [];
-
+    
     for (var i = 0; i < inputs.length; i++) {
         var input = inputs[i];
         txb.addInput(input["txHash"], input["index"]);
         var isChange = input["isChange"];
         ecPairs[i] = (isChange ? changeKeychain : keychain).derive(input["bip39Index"]);
     }
-
+    
     for (var _i = 0; _i < outputs.length; _i++) {
         var output = outputs[_i];
         txb.addOutput(output["address"], output["amount"]);
     }
-
+    
     for (var _i2 = ecPairs.length - 1; _i2 >= 0; _i2--) {
         txb.sign(_i2, ecPairs[_i2]);
     }
+    
+    return txb.build().toHex();
+}
 
+function buildTransactionWithOnePrivateKey(privateKey, data) {
+    data = JSON.parse(data);
+    var inputs = data["inputs"];
+    var outputs = data["outputs"];
+    
+    var txb = new bitcoin.TransactionBuilder();
+    
+    var ecPair = ecpairFromPrivateKey(privateKey)
+    
+    for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        txb.addInput(input["txHash"], input["index"]);
+        var isChange = input["isChange"];
+    }
+    
+    for (var _i = 0; _i < outputs.length; _i++) {
+        var output = outputs[_i];
+        txb.addOutput(output["address"], output["amount"]);
+    }
+    
+    for (var _i2 = inputs.length - 1; _i2 >= 0; _i2--) {
+        txb.sign(_i2, ecPair);
+    }
+    
     return txb.build().toHex();
 }
 
@@ -151,6 +178,7 @@ module.exports = {
     getBitcoinContinuousAddressByMasterXPublicKey: getBitcoinContinuousAddressByMasterXPublicKey,
     getBitcoinMasterXPublicKey: getBitcoinMasterXPublicKey,
     buildTransaction: buildTransaction,
+    buildTransactionWithOnePrivateKey: buildTransactionWithOnePrivateKey,
     getBitcoinChangeXPublicKey: getBitcoinChangeXPublicKey,
     getBitcoinXPublicKeys: getBitcoinXPublicKeys,
     bip39: bip39,
@@ -159,4 +187,3 @@ module.exports = {
     getAddressFromPublicKey: getAddressFromPublicKey,
     getPublicKeyAndArressFormPrivateKey: getPublicKeyAndArressFormPrivateKey
 };
-
