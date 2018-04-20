@@ -102,6 +102,20 @@
        return JSON.stringify(result)
     }
 
+    function getPublicKeyAndArressFormPrivateKey(privateKey){
+        var result={};
+        try {
+            var result=bridge.getPublicKeyAndArressFormPrivateKey(privateKey)
+            result.status=0
+            result.data=result
+        }catch(e){
+            result.data=[]
+            result.message=e.stack
+            result.status=-1
+        }
+       return JSON.stringify(result)
+    }
+
 
 
 </script>
