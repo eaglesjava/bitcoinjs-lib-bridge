@@ -104,6 +104,17 @@ function isValidChecksumAddress(address) {
 }
 
 /**
+ * Checks if the given string is an address
+ *
+ * @method isAddress
+ * @param {String} address the given HEX adress
+ * @return {Boolean}
+ */
+function isAddress(address) {
+    return web3.isAddress(address)
+}
+
+/**
  * iban to address
  * @param {String} iban
  * @return {String} address
@@ -303,6 +314,7 @@ function getKeyPairAddrFromKeystore (password, keystoreContent) {
     var privateKey = getPrivateKeyFromKeystore(password, keystoreContent);
     var publicKey = privateToPublic(privateKey);
     var address = "0x" + privateToAddress(privateKey).toString('hex');
+    address = ethereumjsUtil.toChecksumAddress(address);
 
     return [privateKey.toString('hex'), publicKey.toString('hex'), address]
 }
@@ -323,6 +335,7 @@ function getPubAddrFromPrivate(privateKey) {
 
     var publicKey = privateToPublic(privateKeyBuffer);
     var address = "0x" + privateToAddress(privateKeyBuffer).toString('hex');
+    address = ethereumjsUtil.toChecksumAddress(address);
 
     return [publicKey.toString('hex'), address]
 }
@@ -337,6 +350,7 @@ module.exports = {
     seedHexToPrivate: seedHexToPrivate,
     isValidAddress: isValidAddress,
     isValidChecksumAddress: isValidChecksumAddress,
+    isAddress: isAddress,
     buildEthTransaction: buildEthTransaction,
     buildEthTxBySeedHex: buildEthTxBySeedHex,
     buildTokenTransaction: buildTokenTransaction,
