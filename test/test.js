@@ -15,6 +15,12 @@ console.log('isValidAddress: ' + bridge.isValidAddress(address))
 console.log('isValidChecksumAddress: ' + bridge.isValidChecksumAddress(address))
 console.log('isValidAddress: ' + bridge.isValidAddress('address'))
 
+console.log('isAddress: ' + bridge.isAddress('0x8617E340B3D01FA5F11F306F4090FD50E238070D'))
+console.log('isAddress: ' + bridge.isAddress('0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed'))
+console.log('isAddress: ' + bridge.isAddress('0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359'))
+console.log('isAddress: ' + bridge.isAddress('0xdbF03B407c01E7cD3CBea99509d93f8DDDC8C6FB'))
+console.log('isAddress: ' + bridge.isAddress('0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb'))
+
 console.log('ibanToAddress: ' + bridge.ibanToAddress('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS'))
 console.log('addressToIban: ' + bridge.addressToIban(address))
 console.log('addressToIban: ' + bridge.addressToIban(add))
