@@ -25,7 +25,7 @@ function seedHexToAddress(seedHex){
 function seedHexToPubAddr(seedHex){
     var result={};
     try {
-        var data=bridge.seedHexToAddress(seedHex)
+        var data=bridge.seedHexToPubAddr(seedHex)
         result.status=0
         result.data=data
     }catch(e){
