@@ -105,9 +105,9 @@
     function getPublicKeyAndArressFormPrivateKey(privateKey){
         var result={};
         try {
-            var result=bridge.getPublicKeyAndArressFormPrivateKey(privateKey)
+            var data=bridge.getPublicKeyAndArressFormPrivateKey(privateKey)
             result.status=0
-            result.data=result
+            result.data=data
         }catch(e){
             result.data=[]
             result.message=e.stack
