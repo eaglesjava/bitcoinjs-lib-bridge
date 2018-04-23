@@ -134,11 +134,11 @@ function addressToIban(address) {
 
 /**
  * build a eth transaction
- * @param {Number} amountWei
+ * @param {Number|String} amountWei
  * @param {String} addressTo
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} customData
  * @param {String} privateKey: Hex-encoded
  * @return {Array} [txid, serializedTx]
@@ -151,11 +151,14 @@ function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, 
         gasLimit: web3.toHex(gasLimit),
         to: addressTo,
         value: web3.toHex(amountWei),
-        data: (customData && customData.length > 0) ? customData : '0x'
+        data: (customData && customData.length > 0) ? customData : '0x',
+        chainId: 1
     });
     transaction.sign(privateKey);
     var txid = ('0x' + transaction.hash().toString('hex'));
     var serializedTx = ('0x' + transaction.serialize().toString('hex'));
+
+    console.log(JSON.stringify(transaction));
 
     return [txid, serializedTx];
 }
@@ -163,11 +166,11 @@ function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, 
 /**
  * build a eth transaction by Hex-encoded seed
  * @param {String} seedHex: Hex-encoded seed
- * @param {Number} amountWei
+ * @param {Number|String} amountWei
  * @param {String} addressTo
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} customData
  * @return {Array} [txid, serializedTx]
  */
@@ -179,11 +182,11 @@ function buildEthTxBySeedHex(seedHex, amountWei, addressTo, nonce, gasPrice, gas
 /**
  * build a token transaction
  * @param {String} privateKey: Hex-encoded
- * @param {Number} amountWei
+ * @param {Number|String} amountWei
  * @param {String} addressTo
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} contractAddress
  * @return {Array} [txid, serializedTx]
  */
@@ -204,11 +207,11 @@ function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gas
 /**
  * build a token transaction by Hex-encoded seed
  * @param {String} seedHex: Hex-encoded seed
- * @param {Number} amountWei
+ * @param {Number|String} amountWei
  * @param {String} addressTo
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} contractAddress
  * @return {Array} [txid, serializedTx]
  */
@@ -221,9 +224,9 @@ function buildTokenTxBySeedHex(seedHex, amountWei, addressTo, nonce, contractAdd
  * build a eos map transaction
  * @param {String} privateKey: Hex-encoded
  * @param {String} eosPublicKey
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} contractAddress
  * @return {Array} [txid, serializedTx]
  */
@@ -245,9 +248,9 @@ function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, 
  * build a eos map transaction by Hex-encoded seed
  * @param {String} seedHex: Hex-encoded seed
  * @param {String} eosPublicKey
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} contractAddress
  * @return {Array} [txid, serializedTx]
  */
@@ -258,7 +261,7 @@ function buildMapEosTxBySeedHex(seedHex, eosPublicKey, nonce, contractAddress, g
 
 /**
  * Generate eos keyPair.
- * @param {string} cb Callback function.
+ * @param {Function} cb is a Callback function, function params is {publicKey, privateKey}.
  */
 function generateEosKeyPair(cb) {
     util.generateEosKeyPair(cb);

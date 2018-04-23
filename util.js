@@ -26,14 +26,15 @@ let mapEthTransaction = function(web3, addressTo, amount, nonce, gasPrice, gasLi
         gasLimit: web3.toHex(gasLimit),
         to: addressTo,
         value: web3.toHex(amount),
-        data: data
+        data: data,
+        chainId: 1
     };
 };
 
 /**
  * generate a private and public key pair for the EOS chain
  *
- * @returns {Object}
+ * @param {Function} cb is a Callback function, function params is {publicKey, privateKey}.
  */
 let generateEosKeyPair = function(cb) {
     eos_ecc.randomKey().then(privateKey => {
