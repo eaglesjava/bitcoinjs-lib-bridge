@@ -101,7 +101,7 @@ describe('verify address', function() {
 
 describe('iban', function() {
     it('ibanToAddress', function() {
-        expect(bridge.ibanToAddress('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS')).to.be.equal('0x00c5496aee77c1ba1f0854206a26dda82a81d6d8');
+        expect(bridge.ibanToAddress('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS')).to.be.equal('0x00c5496aEe77C1bA1f0854206A26DdA82a81D6D8');
     });
 
     it('ibanToAddress', function() {
