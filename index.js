@@ -120,7 +120,7 @@ function isAddress(address) {
  * @return {String} address
  */
 function ibanToAddress(iban) {
-    return icap.toAddress(iban)
+    return ethereumjsUtil.toChecksumAddress(icap.toAddress(iban))
 }
 
 /**
