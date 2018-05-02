@@ -343,6 +343,15 @@ function getPubAddrFromPrivate(privateKey) {
     return [publicKey.toString('hex'), address]
 }
 
+/**
+ * Returns a checksummed address
+ * @param {String} address
+ * @return {String}
+ */
+function toChecksumAddress(address) {
+    return ethereumjsUtil.toChecksumAddress(address);
+}
+
 
 module.exports = {
     mnemonicToSeed: mnemonicToSeed,
@@ -369,5 +378,6 @@ module.exports = {
     privateToAddress: privateToAddress,
     getKeyPairAddrFromKeystore: getKeyPairAddrFromKeystore,
     getPubAddrFromPrivate: getPubAddrFromPrivate,
+    toChecksumAddress: toChecksumAddress
 };
 

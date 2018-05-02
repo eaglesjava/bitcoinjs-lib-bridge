@@ -104,7 +104,7 @@ describe('iban', function() {
         expect(bridge.ibanToAddress('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS')).to.be.equal('0x00c5496aEe77C1bA1f0854206A26DdA82a81D6D8');
     });
 
-    it('ibanToAddress', function() {
+    it('addressToIban', function() {
         expect(bridge.addressToIban('0x00c5496aee77c1ba1f0854206a26dda82a81d6d8')).to.be.equal('XE7338O073KYGTWWZN0F2WZ0R8PX5ZPPZS');
     });
 });
@@ -134,5 +134,12 @@ describe('publicKey and privateKey', function() {
 
     it('getPubAddrFromPrivate', function() {
         expect(JSON.stringify(bridge.getPubAddrFromPrivate(privateKey.toString('hex')))).to.be.equal('["18ad4ff97d0337b6434826daa2142137afac8cb39c28485414bb77289b26dd54de8a73efd888d904267d36fc42ebe6b10db2a337a5ceb3e7972aa532cd58a817","0x2a055947dA8bA17Ac751f2Aa2EA5EcfEe3Db8C33"]');
+    });
+});
+
+describe('checksum address', function() {
+    it('toChecksumAddress', function() {
+        expect(bridge.toChecksumAddress('0x9124bae940c2321ded56f89b7e185b8785942303')).to.be.equal('0x9124bae940c2321DEd56f89B7e185b8785942303');
+        expect(bridge.toChecksumAddress('9124bae940c2321ded56f89b7e185b8785942303')).to.be.equal('0x9124bae940c2321DEd56f89B7e185b8785942303');
     });
 });
