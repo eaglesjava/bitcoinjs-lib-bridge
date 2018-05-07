@@ -74,6 +74,20 @@
        return JSON.stringify(result)
     }
 
+    function buildTransactionWithOnePrivateKey(privateKey, datas){
+        var result={};
+        try {
+            var txbHex=bridge.buildTransactionWithOnePrivateKey(privateKey,datas)
+            result.status=0
+            result.data=[txbHex]
+        }catch(e){
+            result.data=[]
+            result.message=e.stack
+            result.status=-1
+        }
+       return JSON.stringify(result)
+    }
+
     function validateAddress(address){
         var result={};
         try {
