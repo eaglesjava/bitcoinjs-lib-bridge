@@ -155,10 +155,10 @@ function buildMapEosTxBySeedHex(seedHex, eosPublicKey, nonce, contractAddress, g
     }
     return JSON.stringify(result)
 }
-function generateEosKeyPair(cb){
+function generateEosKeyPair(){
     var result={};
     try {
-        var data= bridge.generateEosKeyPair(cb)
+        var data= bridge.generateEosKeyPair(generateEosKeyPairCallback)
         result.status=0
         result.data=data
     }catch(e){
@@ -167,6 +167,21 @@ function generateEosKeyPair(cb){
         result.status=-1
     }
     return JSON.stringify(result)
+}
+
+function generateEosKeyPairCallback(eosKeyPair){
+    var result={};
+    try {
+        var data= [eosKeyPair.publicKey,eosKeyPair.privateKey]
+        result.status=0
+        result.data=data
+    }catch(e){
+        result.data=[]
+        result.message=e.stack
+        result.status=-1
+    }
+    var jsonResult= JSON.stringify(result)
+    android.generateEosKeyPairCallback(jsonResult)
 }
 
 function getKeyPairAddrFromKeystore(password, keystoreContent){
@@ -195,6 +210,8 @@ function getPubAddrFromPrivate(privateKey){
     }
     return JSON.stringify(result)
 }
+
+
 </script>
 </body>
 </html>
