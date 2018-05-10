@@ -104,12 +104,23 @@ function isValidChecksumAddress(address) {
 }
 
 /**
+ * Checks if the given string is an address
+ *
+ * @method isAddress
+ * @param {String} address the given HEX adress
+ * @return {Boolean}
+ */
+function isAddress(address) {
+    return web3.isAddress(address)
+}
+
+/**
  * iban to address
  * @param {String} iban
  * @return {String} address
  */
 function ibanToAddress(iban) {
-    return icap.toAddress(iban)
+    return ethereumjsUtil.toChecksumAddress(icap.toAddress(iban))
 }
 
 /**
@@ -123,11 +134,11 @@ function addressToIban(address) {
 
 /**
  * build a eth transaction
- * @param {Number} amountWei
+ * @param {Number|String} amountWei
  * @param {String} addressTo
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} customData
  * @param {String} privateKey: Hex-encoded
  * @return {Array} [txid, serializedTx]
@@ -140,11 +151,14 @@ function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, 
         gasLimit: web3.toHex(gasLimit),
         to: addressTo,
         value: web3.toHex(amountWei),
-        data: (customData && customData.length > 0) ? customData : '0x'
+        data: (customData && customData.length > 0) ? customData : '0x',
+        chainId: 1
     });
     transaction.sign(privateKey);
     var txid = ('0x' + transaction.hash().toString('hex'));
     var serializedTx = ('0x' + transaction.serialize().toString('hex'));
+
+    console.log(JSON.stringify(transaction));
 
     return [txid, serializedTx];
 }
@@ -152,11 +166,11 @@ function buildEthTransaction(privateKey, amountWei, addressTo, nonce, gasPrice, 
 /**
  * build a eth transaction by Hex-encoded seed
  * @param {String} seedHex: Hex-encoded seed
- * @param {Number} amountWei
+ * @param {Number|String} amountWei
  * @param {String} addressTo
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} customData
  * @return {Array} [txid, serializedTx]
  */
@@ -168,11 +182,11 @@ function buildEthTxBySeedHex(seedHex, amountWei, addressTo, nonce, gasPrice, gas
 /**
  * build a token transaction
  * @param {String} privateKey: Hex-encoded
- * @param {Number} amountWei
+ * @param {Number|String} amountWei
  * @param {String} addressTo
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} contractAddress
  * @return {Array} [txid, serializedTx]
  */
@@ -193,11 +207,11 @@ function buildTokenTransaction(amountWei, addressTo, nonce, contractAddress, gas
 /**
  * build a token transaction by Hex-encoded seed
  * @param {String} seedHex: Hex-encoded seed
- * @param {Number} amountWei
+ * @param {Number|String} amountWei
  * @param {String} addressTo
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} contractAddress
  * @return {Array} [txid, serializedTx]
  */
@@ -210,9 +224,9 @@ function buildTokenTxBySeedHex(seedHex, amountWei, addressTo, nonce, contractAdd
  * build a eos map transaction
  * @param {String} privateKey: Hex-encoded
  * @param {String} eosPublicKey
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} contractAddress
  * @return {Array} [txid, serializedTx]
  */
@@ -234,9 +248,9 @@ function buildMapEosTransaction(eosPublicKey, nonce, contractAddress, gasLimit, 
  * build a eos map transaction by Hex-encoded seed
  * @param {String} seedHex: Hex-encoded seed
  * @param {String} eosPublicKey
- * @param {Number} nonce
- * @param {Number} gasPrice
- * @param {Number} gasLimit
+ * @param {Number|String} nonce
+ * @param {Number|String} gasPrice
+ * @param {Number|String} gasLimit
  * @param {String} contractAddress
  * @return {Array} [txid, serializedTx]
  */
@@ -247,7 +261,7 @@ function buildMapEosTxBySeedHex(seedHex, eosPublicKey, nonce, contractAddress, g
 
 /**
  * Generate eos keyPair.
- * @param {string} cb Callback function.
+ * @param {Function} cb is a Callback function, function params is {publicKey, privateKey}.
  */
 function generateEosKeyPair(cb) {
     util.generateEosKeyPair(cb);
@@ -303,6 +317,7 @@ function getKeyPairAddrFromKeystore (password, keystoreContent) {
     var privateKey = getPrivateKeyFromKeystore(password, keystoreContent);
     var publicKey = privateToPublic(privateKey);
     var address = "0x" + privateToAddress(privateKey).toString('hex');
+    address = ethereumjsUtil.toChecksumAddress(address);
 
     return [privateKey.toString('hex'), publicKey.toString('hex'), address]
 }
@@ -323,8 +338,18 @@ function getPubAddrFromPrivate(privateKey) {
 
     var publicKey = privateToPublic(privateKeyBuffer);
     var address = "0x" + privateToAddress(privateKeyBuffer).toString('hex');
+    address = ethereumjsUtil.toChecksumAddress(address);
 
     return [publicKey.toString('hex'), address]
+}
+
+/**
+ * Returns a checksummed address
+ * @param {String} address
+ * @return {String}
+ */
+function toChecksumAddress(address) {
+    return ethereumjsUtil.toChecksumAddress(address);
 }
 
 
@@ -337,6 +362,7 @@ module.exports = {
     seedHexToPrivate: seedHexToPrivate,
     isValidAddress: isValidAddress,
     isValidChecksumAddress: isValidChecksumAddress,
+    isAddress: isAddress,
     buildEthTransaction: buildEthTransaction,
     buildEthTxBySeedHex: buildEthTxBySeedHex,
     buildTokenTransaction: buildTokenTransaction,
@@ -352,5 +378,6 @@ module.exports = {
     privateToAddress: privateToAddress,
     getKeyPairAddrFromKeystore: getKeyPairAddrFromKeystore,
     getPubAddrFromPrivate: getPubAddrFromPrivate,
+    toChecksumAddress: toChecksumAddress
 };
 

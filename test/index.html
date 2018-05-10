@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ethereumjs lib bridge</title>
-	<meta charset="UTF-8">
+    <meta charset="utf-8">
+    <title>Ethereumjs lib bridge tests</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
 </head>
 <body>
-
-<script type="text/javascript" src="../ethereumjs-lib-app.min.js"></script>
-<script type="text/javascript" src="test.js"></script>
-
+<div id="mocha"></div>
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/chai/chai.js"></script>
+<script src="../ethereumjs-lib-app.min.js"></script>
+<script>mocha.setup("bdd")</script>
+<script src="./test.js"></script>
+<script>mocha.run();</script>
 </body>
 </html>
