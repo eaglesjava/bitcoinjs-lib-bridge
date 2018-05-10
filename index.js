@@ -11,9 +11,8 @@ var icap = require('ethereumjs-icap');
 
 var keythereum = require('keythereum');
 
-// jaxx path
-var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0/0";
-var ETHEREUM_TESTNET_PATH = "m/44'/1'/0'/0";
+var ETHEREUM_MAINNET_PATH = "m/44'/60'/0'/0/0"; // ETH coin type is 60
+var ETHEREUM_TESTNET_PATH = "m/44'/1'/0'/0"; // Testnet (all coins) coin type is 1
 
 var bip39 = require('bip39');
 
